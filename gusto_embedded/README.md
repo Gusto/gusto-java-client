@@ -47,15 +47,15 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'org.openapis:openapi:0.0.2'
+implementation 'com.gusto:embedded-api:0.0.3'
 ```
 
 Maven:
 ```xml
 <dependency>
-    <groupId>org.openapis</groupId>
-    <artifactId>openapi</artifactId>
-    <version>0.0.2</version>
+    <groupId>com.gusto</groupId>
+    <artifactId>embedded-api</artifactId>
+    <version>0.0.3</version>
 </dependency>
 ```
 
@@ -82,16 +82,16 @@ gradlew.bat publishToMavenLocal -Pskip.signing
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1TokenInfoResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetV1TokenInfoResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -122,16 +122,16 @@ To authenticate with the API the `companyAccessAuth` parameter must be set when 
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1TokenInfoResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetV1TokenInfoResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -152,21 +152,21 @@ Some operations in this SDK require the security scheme to be specified at the r
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.Company;
+import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesResponse;
+import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesSecurity;
+import com.gusto.embedded_api.models.operations.User;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.Company;
-import org.openapis.openapi.models.operations.PostV1PartnerManagedCompaniesRequestBody;
-import org.openapis.openapi.models.operations.PostV1PartnerManagedCompaniesResponse;
-import org.openapis.openapi.models.operations.PostV1PartnerManagedCompaniesSecurity;
-import org.openapis.openapi.models.operations.User;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
 
         PostV1PartnerManagedCompaniesResponse res = sdk.companies().createPartnerManaged()
@@ -445,6 +445,7 @@ public class Application {
 
 * [get](docs/sdks/generateddocuments/README.md#get) - Get a generated document
 
+
 ### [historicalEmployees()](docs/sdks/historicalemployees/README.md)
 
 * [update](docs/sdks/historicalemployees/README.md#update) - Update a historical employee
@@ -553,7 +554,6 @@ public class Application {
 * [get](docs/sdks/reports/README.md#get) - Get a report
 * [getTemplate](docs/sdks/reports/README.md#gettemplate) - Get a report template
 
-
 ### [signatories()](docs/sdks/signatories/README.md)
 
 * [create](docs/sdks/signatories/README.md#create) - Create a signatory
@@ -616,21 +616,21 @@ By default, an API error will throw a `models/errors/APIException` exception. Wh
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.Company;
+import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesResponse;
+import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesSecurity;
+import com.gusto.embedded_api.models.operations.User;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.Company;
-import org.openapis.openapi.models.operations.PostV1PartnerManagedCompaniesRequestBody;
-import org.openapis.openapi.models.operations.PostV1PartnerManagedCompaniesResponse;
-import org.openapis.openapi.models.operations.PostV1PartnerManagedCompaniesSecurity;
-import org.openapis.openapi.models.operations.User;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
 
         PostV1PartnerManagedCompaniesResponse res = sdk.companies().createPartnerManaged()
@@ -679,17 +679,17 @@ You can override the default server globally using the `.server(AvailableServers
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1TokenInfoResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetV1TokenInfoResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
-                .server(SDK.AvailableServers.PROD)
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .server(GustoEmbedded.AvailableServers.PROD)
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -710,16 +710,16 @@ The default server can also be overridden globally using the `.serverURL(String 
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1TokenInfoResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetV1TokenInfoResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .serverURL("https://api.gusto-demo.com")
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();

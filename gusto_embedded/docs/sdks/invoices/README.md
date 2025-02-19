@@ -22,18 +22,18 @@ scope: `invoices:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.GetInvoicesInvoicePeriodRequest;
+import com.gusto.embedded_api.models.operations.GetInvoicesInvoicePeriodResponse;
+import com.gusto.embedded_api.models.operations.GetInvoicesInvoicePeriodSecurity;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.GetInvoicesInvoicePeriodRequest;
-import org.openapis.openapi.models.operations.GetInvoicesInvoicePeriodResponse;
-import org.openapis.openapi.models.operations.GetInvoicesInvoicePeriodSecurity;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
 
         GetInvoicesInvoicePeriodRequest req = GetInvoicesInvoicePeriodRequest.builder()
@@ -56,10 +56,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                              | Type                                                                                                                                   | Required                                                                                                                               | Description                                                                                                                            |
-| -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                                              | [GetInvoicesInvoicePeriodRequest](../../models/operations/GetInvoicesInvoicePeriodRequest.md)                                          | :heavy_check_mark:                                                                                                                     | The request object to use for the request.                                                                                             |
-| `security`                                                                                                                             | [org.openapis.openapi.models.operations.GetInvoicesInvoicePeriodSecurity](../../models/operations/GetInvoicesInvoicePeriodSecurity.md) | :heavy_check_mark:                                                                                                                     | The security requirements to use for the request.                                                                                      |
+| Parameter                                                                                                                                | Type                                                                                                                                     | Required                                                                                                                                 | Description                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                | [GetInvoicesInvoicePeriodRequest](../../models/operations/GetInvoicesInvoicePeriodRequest.md)                                            | :heavy_check_mark:                                                                                                                       | The request object to use for the request.                                                                                               |
+| `security`                                                                                                                               | [com.gusto.embedded_api.models.operations.GetInvoicesInvoicePeriodSecurity](../../models/operations/GetInvoicesInvoicePeriodSecurity.md) | :heavy_check_mark:                                                                                                                       | The security requirements to use for the request.                                                                                        |
 
 ### Response
 

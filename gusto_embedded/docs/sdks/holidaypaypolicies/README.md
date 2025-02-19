@@ -24,16 +24,16 @@ scope: `holiday_pay_policies:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidHolidayPayPolicyResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetCompaniesCompanyUuidHolidayPayPolicyResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -77,25 +77,25 @@ scope: `holiday_pay_policies:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.ChristmasDay;
+import com.gusto.embedded_api.models.operations.FederalHolidays;
+import com.gusto.embedded_api.models.operations.IndependenceDay;
+import com.gusto.embedded_api.models.operations.MemorialDay;
+import com.gusto.embedded_api.models.operations.MlkDay;
+import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidHolidayPayPolicyRequestBody;
+import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidHolidayPayPolicyResponse;
+import com.gusto.embedded_api.models.operations.Thanksgiving;
+import com.gusto.embedded_api.models.operations.VeteransDay;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.ChristmasDay;
-import org.openapis.openapi.models.operations.FederalHolidays;
-import org.openapis.openapi.models.operations.IndependenceDay;
-import org.openapis.openapi.models.operations.MemorialDay;
-import org.openapis.openapi.models.operations.MlkDay;
-import org.openapis.openapi.models.operations.PostCompaniesCompanyUuidHolidayPayPolicyRequestBody;
-import org.openapis.openapi.models.operations.PostCompaniesCompanyUuidHolidayPayPolicyResponse;
-import org.openapis.openapi.models.operations.Thanksgiving;
-import org.openapis.openapi.models.operations.VeteransDay;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -163,25 +163,25 @@ scope: `holiday_pay_policies:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyMlkDay;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyRequestBody;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyResponse;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyMlkDay;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyRequestBody;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyResponse;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -250,17 +250,17 @@ scope: `holiday_pay_policies:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.DeleteCompaniesCompanyUuidHolidayPayPolicyResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.DeleteCompaniesCompanyUuidHolidayPayPolicyResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -303,20 +303,20 @@ scope: `holiday_pay_policies:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyAddEmployees;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyAddRequestBody;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyAddResponse;
 import java.lang.Exception;
 import java.util.List;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyAddEmployees;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyAddRequestBody;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyAddResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -372,20 +372,20 @@ scope: `holiday_pay_policies:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody;
+import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse;
 import java.lang.Exception;
 import java.util.List;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody;
-import org.openapis.openapi.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -441,18 +441,18 @@ scope: `holiday_pay_policies:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidPaidHolidaysRequestBody;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidPaidHolidaysResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.GetCompaniesCompanyUuidPaidHolidaysRequestBody;
-import org.openapis.openapi.models.operations.GetCompaniesCompanyUuidPaidHolidaysResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
