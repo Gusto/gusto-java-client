@@ -34,18 +34,18 @@ scope: `payrolls:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody;
-import org.openapis.openapi.models.operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -100,16 +100,16 @@ scope: `time_off_policies:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetTimeOffPoliciesTimeOffPolicyUuidResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetTimeOffPoliciesTimeOffPolicyUuidResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -153,19 +153,19 @@ scope: `time_off_policies:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.AccrualMethod;
+import com.gusto.embedded_api.models.operations.PutTimeOffPoliciesTimeOffPolicyUuidRequestBody;
+import com.gusto.embedded_api.models.operations.PutTimeOffPoliciesTimeOffPolicyUuidResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.AccrualMethod;
-import org.openapis.openapi.models.operations.PutTimeOffPoliciesTimeOffPolicyUuidRequestBody;
-import org.openapis.openapi.models.operations.PutTimeOffPoliciesTimeOffPolicyUuidResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -222,16 +222,16 @@ scope: `time_off_policies:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidTimeOffPoliciesResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetCompaniesCompanyUuidTimeOffPoliciesResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -275,19 +275,19 @@ scope: `time_off_policies:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod;
+import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidTimeOffPoliciesRequestBody;
+import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidTimeOffPoliciesResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod;
-import org.openapis.openapi.models.operations.PostCompaniesCompanyUuidTimeOffPoliciesRequestBody;
-import org.openapis.openapi.models.operations.PostCompaniesCompanyUuidTimeOffPoliciesResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -338,18 +338,18 @@ scope: `time_off_policies:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody;
+import com.gusto.embedded_api.models.operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody;
-import org.openapis.openapi.models.operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -397,18 +397,18 @@ scope: `time_off_policies:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody;
-import org.openapis.openapi.models.operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -456,18 +456,18 @@ scope: `time_off_policies:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody;
+import com.gusto.embedded_api.models.operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody;
-import org.openapis.openapi.models.operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -515,17 +515,17 @@ scope: `time_off_policies:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 

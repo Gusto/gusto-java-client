@@ -26,18 +26,18 @@ scope: `external_payrolls:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1ExternalPayrollRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1ExternalPayrollResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PostV1ExternalPayrollRequestBody;
-import org.openapis.openapi.models.operations.PostV1ExternalPayrollResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -88,16 +88,16 @@ scope: `external_payrolls:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1CompanyExternalPayrollsResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetV1CompanyExternalPayrollsResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -141,16 +141,16 @@ scope: `external_payrolls:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1ExternalPayrollResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetV1ExternalPayrollResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -196,16 +196,16 @@ scope: `external_payrolls:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.DeleteV1ExternalPayrollResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.DeleteV1ExternalPayrollResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -249,24 +249,24 @@ scope: `external_payrolls:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.Benefits;
+import com.gusto.embedded_api.models.operations.EarningType;
+import com.gusto.embedded_api.models.operations.Earnings;
+import com.gusto.embedded_api.models.operations.ExternalPayrollItems;
+import com.gusto.embedded_api.models.operations.PutV1ExternalPayrollRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1ExternalPayrollResponse;
+import com.gusto.embedded_api.models.operations.Taxes;
 import java.lang.Exception;
 import java.util.List;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.Benefits;
-import org.openapis.openapi.models.operations.EarningType;
-import org.openapis.openapi.models.operations.Earnings;
-import org.openapis.openapi.models.operations.ExternalPayrollItems;
-import org.openapis.openapi.models.operations.PutV1ExternalPayrollRequestBody;
-import org.openapis.openapi.models.operations.PutV1ExternalPayrollResponse;
-import org.openapis.openapi.models.operations.Taxes;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -356,16 +356,16 @@ scope: `external_payrolls:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1ExternalPayrollCalculateTaxesResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetV1ExternalPayrollCalculateTaxesResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -411,16 +411,16 @@ scope: `external_payrolls:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1TaxLiabilitiesResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetV1TaxLiabilitiesResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -464,21 +464,21 @@ scope: `external_payrolls:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.LiabilitySelections;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesResponse;
 import java.lang.Exception;
 import java.util.List;
 import java.util.Optional;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.LiabilitySelections;
-import org.openapis.openapi.models.operations.PutV1TaxLiabilitiesRequestBody;
-import org.openapis.openapi.models.operations.PutV1TaxLiabilitiesResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -542,17 +542,17 @@ scope: `external_payrolls:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesFinishResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PutV1TaxLiabilitiesFinishResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 

@@ -22,18 +22,18 @@ scope: `events:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.SortOrder;
+import com.gusto.embedded_api.models.operations.GetEventsRequest;
+import com.gusto.embedded_api.models.operations.GetEventsResponse;
+import com.gusto.embedded_api.models.operations.GetEventsSecurity;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.SortOrder;
-import org.openapis.openapi.models.operations.GetEventsRequest;
-import org.openapis.openapi.models.operations.GetEventsResponse;
-import org.openapis.openapi.models.operations.GetEventsSecurity;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
 
         GetEventsRequest req = GetEventsRequest.builder()
@@ -56,10 +56,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                | [GetEventsRequest](../../models/operations/GetEventsRequest.md)                                          | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
-| `security`                                                                                               | [org.openapis.openapi.models.operations.GetEventsSecurity](../../models/operations/GetEventsSecurity.md) | :heavy_check_mark:                                                                                       | The security requirements to use for the request.                                                        |
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                  | [GetEventsRequest](../../models/operations/GetEventsRequest.md)                                            | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `security`                                                                                                 | [com.gusto.embedded_api.models.operations.GetEventsSecurity](../../models/operations/GetEventsSecurity.md) | :heavy_check_mark:                                                                                         | The security requirements to use for the request.                                                          |
 
 ### Response
 

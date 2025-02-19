@@ -24,19 +24,19 @@ scope: `signatories:manage`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.HomeAddress;
+import com.gusto.embedded_api.models.operations.PostV1CompanySignatoriesRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1CompanySignatoriesResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.HomeAddress;
-import org.openapis.openapi.models.operations.PostV1CompanySignatoriesRequestBody;
-import org.openapis.openapi.models.operations.PostV1CompanySignatoriesResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -97,16 +97,16 @@ scope: `signatories:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidSignatoriesResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetV1CompaniesCompanyUuidSignatoriesResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -148,18 +148,18 @@ Create a signatory with minimal information. This signatory can be invited to pr
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidSignatoriesInviteResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody;
-import org.openapis.openapi.models.operations.PostV1CompaniesCompanyUuidSignatoriesInviteResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -208,18 +208,18 @@ scope: `signatories:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody;
-import org.openapis.openapi.models.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -269,16 +269,16 @@ scope: `signatories:manage`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 

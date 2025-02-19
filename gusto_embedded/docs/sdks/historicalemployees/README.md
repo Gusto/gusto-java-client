@@ -18,24 +18,24 @@ scope: `employees:manage`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.EmployeeStateTaxes;
+import com.gusto.embedded_api.models.operations.Job;
+import com.gusto.embedded_api.models.operations.PutV1HistoricalEmployeesHomeAddress;
+import com.gusto.embedded_api.models.operations.PutV1HistoricalEmployeesRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1HistoricalEmployeesResponse;
+import com.gusto.embedded_api.models.operations.Termination;
+import com.gusto.embedded_api.models.operations.WorkAddress;
 import java.lang.Exception;
 import java.time.LocalDate;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.EmployeeStateTaxes;
-import org.openapis.openapi.models.operations.Job;
-import org.openapis.openapi.models.operations.PutV1HistoricalEmployeesHomeAddress;
-import org.openapis.openapi.models.operations.PutV1HistoricalEmployeesRequestBody;
-import org.openapis.openapi.models.operations.PutV1HistoricalEmployeesResponse;
-import org.openapis.openapi.models.operations.Termination;
-import org.openapis.openapi.models.operations.WorkAddress;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 

@@ -23,21 +23,21 @@ scope: `payrolls:run`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.ContractorPayments;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsResponse;
 import java.lang.Exception;
 import java.time.LocalDate;
 import java.util.List;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.ContractorPayments;
-import org.openapis.openapi.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody;
-import org.openapis.openapi.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -94,16 +94,16 @@ scope: `payrolls:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdContractorPaymentGroupsRequest;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdContractorPaymentGroupsResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.operations.GetV1CompaniesCompanyIdContractorPaymentGroupsRequest;
-import org.openapis.openapi.models.operations.GetV1CompaniesCompanyIdContractorPaymentGroupsResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -151,21 +151,21 @@ scope: `payrolls:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse;
 import java.lang.Exception;
 import java.time.LocalDate;
 import java.util.List;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments;
-import org.openapis.openapi.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody;
-import org.openapis.openapi.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -222,16 +222,16 @@ scope: `payrolls:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -275,17 +275,17 @@ scope: `payrolls:run`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -332,17 +332,17 @@ scope: `payrolls:run`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 

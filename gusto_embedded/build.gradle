@@ -41,7 +41,7 @@ model {
 jar {
     dependsOn(":generatePomFileForMavenPublication")
 
-    into("META-INF/maven/org.openapis/openapi") {
+    into("META-INF/maven/com.gusto/embedded-api") {
         from("$buildDir/pom.xml")
     }
 }
@@ -60,15 +60,15 @@ tasks.withType(Javadoc) {
   options.addStringOption('Xdoclint:none', '-quiet')
 }
 
-group = "org.openapis"
-version = "0.0.2"
+group = "com.gusto"
+version = "0.0.3"
 
 sourcesJar {
-    archiveBaseName = "openapi"
+    archiveBaseName = "embedded-api"
 }
 
 javadocJar {
-    archiveBaseName = "openapi"
+    archiveBaseName = "embedded-api"
 }
 
 
@@ -76,9 +76,9 @@ publishing {
 
     publications {
         maven(MavenPublication) {
-            groupId = 'org.openapis'
-            artifactId = 'openapi'
-            version = '0.0.2'
+            groupId = 'com.gusto'
+            artifactId = 'embedded-api'
+            version = '0.0.3'
 
             from components.java
 

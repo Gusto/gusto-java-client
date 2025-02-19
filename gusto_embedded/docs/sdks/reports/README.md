@@ -20,23 +20,23 @@ scope: `company_reports:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.Columns;
+import com.gusto.embedded_api.models.operations.FileType;
+import com.gusto.embedded_api.models.operations.Groupings;
+import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidReportsRequestBody;
+import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidReportsResponse;
 import java.lang.Exception;
 import java.time.LocalDate;
 import java.util.List;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.errors.UnprocessableEntityErrorObject;
-import org.openapis.openapi.models.operations.Columns;
-import org.openapis.openapi.models.operations.FileType;
-import org.openapis.openapi.models.operations.Groupings;
-import org.openapis.openapi.models.operations.PostCompaniesCompanyUuidReportsRequestBody;
-import org.openapis.openapi.models.operations.PostCompaniesCompanyUuidReportsResponse;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -95,16 +95,16 @@ scope: `company_reports:read`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetReportsReportUuidResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetReportsReportUuidResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
@@ -148,16 +148,16 @@ scope: `company_reports:write`
 ```java
 package hello.world;
 
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidReportTemplatesReportTypeResponse;
 import java.lang.Exception;
-import org.openapis.openapi.SDK;
-import org.openapis.openapi.models.components.VersionHeader;
-import org.openapis.openapi.models.operations.GetCompaniesCompanyUuidReportTemplatesReportTypeResponse;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        SDK sdk = SDK.builder()
+        GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
