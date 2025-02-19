@@ -1,0 +1,25 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    GustoEmbedded-OAS:
+        inputs:
+            - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2024-04-01.embedded.yaml
+              authHeader: Authorization
+              authSecret: $openapi_doc_auth_token
+        overlays:
+            - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/.speakeasy/speakeasy-modifications-overlay.yaml
+              authHeader: Authorization
+              authSecret: $openapi_doc_auth_token
+        registry:
+            location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
+targets:
+    gusto-embedded:
+        target: java
+        source: GustoEmbedded-OAS
+        output: ./gusto_embedded
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-java-code-samples
+            labelOverride:
+                fixedValue: Java (SDK)
+            blocking: false

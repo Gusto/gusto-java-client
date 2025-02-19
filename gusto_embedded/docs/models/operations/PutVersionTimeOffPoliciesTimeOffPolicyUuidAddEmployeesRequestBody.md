@@ -1,0 +1,10 @@
+# PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody
+
+A list of employee objects containing the employee uuid
+
+
+## Fields
+
+| Field                                                                                                                                                                | Type                                                                                                                                                                 | Required                                                                                                                                                             | Description                                                                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `employees`                                                                                                                                                          | List\<[PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees](../../models/operations/PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesEmployees.md)> | :heavy_minus_sign:                                                                                                                                                   | N/A                                                                                                                                                                  |

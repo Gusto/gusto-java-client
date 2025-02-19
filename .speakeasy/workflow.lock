@@ -1,0 +1,43 @@
+speakeasyVersion: 1.496.0
+sources:
+    GustoEmbedded-OAS:
+        sourceNamespace: gusto-embedded-oas
+        sourceRevisionDigest: sha256:66a7d261bee261018b6d817811e80ed4318c3330a068cbd9e3ad380f45a6e9f6
+        sourceBlobDigest: sha256:86bc8edd2981e365de5738558d2ea2380fcbe10888897c5e35ca5a46ff902b86
+        tags:
+            - latest
+            - "2024-04-01"
+targets:
+    gusto-embedded:
+        source: GustoEmbedded-OAS
+        sourceNamespace: gusto-embedded-oas
+        sourceRevisionDigest: sha256:66a7d261bee261018b6d817811e80ed4318c3330a068cbd9e3ad380f45a6e9f6
+        sourceBlobDigest: sha256:86bc8edd2981e365de5738558d2ea2380fcbe10888897c5e35ca5a46ff902b86
+        codeSamplesNamespace: gusto-embedded-oas-java-code-samples
+        codeSamplesRevisionDigest: sha256:22cf40f34e17a912688b8ad82eb98a80b11ad826954c585d3b28bcb9ed1756b5
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        GustoEmbedded-OAS:
+            inputs:
+                - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2024-04-01.embedded.yaml
+                  authHeader: Authorization
+                  authSecret: $openapi_doc_auth_token
+            overlays:
+                - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/.speakeasy/speakeasy-modifications-overlay.yaml
+                  authHeader: Authorization
+                  authSecret: $openapi_doc_auth_token
+            registry:
+                location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
+    targets:
+        gusto-embedded:
+            target: java
+            source: GustoEmbedded-OAS
+            output: ./gusto_embedded
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-java-code-samples
+                labelOverride:
+                    fixedValue: Java (SDK)
+                blocking: false
