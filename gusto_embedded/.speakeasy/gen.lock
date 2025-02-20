@@ -3,10 +3,12 @@ id: 5d57a1bf-31fa-4bb7-8d47-6fe0473a6fda
 management:
   docChecksum: 29c0a68ff8e4c6ee1ad5406dff3c5929
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.496.0
+  speakeasyVersion: 1.497.0
   generationVersion: 2.517.3
-  releaseVersion: 0.0.3
-  configChecksum: 6c8990165d4848181818b44e592eb7ea
+  releaseVersion: 0.0.4
+  configChecksum: fa446fd729a683c06a78bd93dcebd7c2
+  repoURL: https://github.com/Gusto/gusto-java-client.git
+  repoSubDirectory: gusto_embedded
 features:
   java:
     additionalDependencies: 0.1.0
