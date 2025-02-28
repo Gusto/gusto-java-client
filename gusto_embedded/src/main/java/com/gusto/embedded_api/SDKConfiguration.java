@@ -29,11 +29,11 @@ class SDKConfiguration {
     public String server;
     private static final String LANGUAGE = "java";
     public static final String OPENAPI_DOC_VERSION = "2024-04-01";
-    public static final String SDK_VERSION = "0.0.3";
-    public static final String GEN_VERSION = "2.517.3";
+    public static final String SDK_VERSION = "0.0.4";
+    public static final String GEN_VERSION = "2.533.0";
     private static final String BASE_PACKAGE = "com.gusto.embedded_api";
     public static final String USER_AGENT = 
-            String.format("speakeasy-sdk/%s %s %s %s %s", 
+            String.format("speakeasy-sdk/%s %s %s %s %s",
                 LANGUAGE, SDK_VERSION, GEN_VERSION, OPENAPI_DOC_VERSION, BASE_PACKAGE);
 
     private Hooks _hooks = createHooks();
