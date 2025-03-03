@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
-import java.lang.Double;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -28,13 +28,13 @@ public class GetV1CompaniesCompanyIdLocationsRequest {
      * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=page")
-    private Optional<Double> page;
+    private Optional<Long> page;
 
     /**
      * Number of objects per page. For majority of endpoints will default to 25
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=per")
-    private Optional<Double> per;
+    private Optional<Long> per;
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -45,8 +45,8 @@ public class GetV1CompaniesCompanyIdLocationsRequest {
     @JsonCreator
     public GetV1CompaniesCompanyIdLocationsRequest(
             String companyId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) {
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(page, "page");
@@ -75,7 +75,7 @@ public class GetV1CompaniesCompanyIdLocationsRequest {
      * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      */
     @JsonIgnore
-    public Optional<Double> page() {
+    public Optional<Long> page() {
         return page;
     }
 
@@ -83,7 +83,7 @@ public class GetV1CompaniesCompanyIdLocationsRequest {
      * Number of objects per page. For majority of endpoints will default to 25
      */
     @JsonIgnore
-    public Optional<Double> per() {
+    public Optional<Long> per() {
         return per;
     }
 
@@ -112,7 +112,7 @@ public class GetV1CompaniesCompanyIdLocationsRequest {
     /**
      * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      */
-    public GetV1CompaniesCompanyIdLocationsRequest withPage(double page) {
+    public GetV1CompaniesCompanyIdLocationsRequest withPage(long page) {
         Utils.checkNotNull(page, "page");
         this.page = Optional.ofNullable(page);
         return this;
@@ -121,7 +121,7 @@ public class GetV1CompaniesCompanyIdLocationsRequest {
     /**
      * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      */
-    public GetV1CompaniesCompanyIdLocationsRequest withPage(Optional<Double> page) {
+    public GetV1CompaniesCompanyIdLocationsRequest withPage(Optional<Long> page) {
         Utils.checkNotNull(page, "page");
         this.page = page;
         return this;
@@ -130,7 +130,7 @@ public class GetV1CompaniesCompanyIdLocationsRequest {
     /**
      * Number of objects per page. For majority of endpoints will default to 25
      */
-    public GetV1CompaniesCompanyIdLocationsRequest withPer(double per) {
+    public GetV1CompaniesCompanyIdLocationsRequest withPer(long per) {
         Utils.checkNotNull(per, "per");
         this.per = Optional.ofNullable(per);
         return this;
@@ -139,7 +139,7 @@ public class GetV1CompaniesCompanyIdLocationsRequest {
     /**
      * Number of objects per page. For majority of endpoints will default to 25
      */
-    public GetV1CompaniesCompanyIdLocationsRequest withPer(Optional<Double> per) {
+    public GetV1CompaniesCompanyIdLocationsRequest withPer(Optional<Long> per) {
         Utils.checkNotNull(per, "per");
         this.per = per;
         return this;
@@ -201,9 +201,9 @@ public class GetV1CompaniesCompanyIdLocationsRequest {
  
         private String companyId;
  
-        private Optional<Double> page = Optional.empty();
+        private Optional<Long> page = Optional.empty();
  
-        private Optional<Double> per = Optional.empty();
+        private Optional<Long> per = Optional.empty();
  
         private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();  
         
@@ -223,7 +223,7 @@ public class GetV1CompaniesCompanyIdLocationsRequest {
         /**
          * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
          */
-        public Builder page(double page) {
+        public Builder page(long page) {
             Utils.checkNotNull(page, "page");
             this.page = Optional.ofNullable(page);
             return this;
@@ -232,7 +232,7 @@ public class GetV1CompaniesCompanyIdLocationsRequest {
         /**
          * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
          */
-        public Builder page(Optional<Double> page) {
+        public Builder page(Optional<Long> page) {
             Utils.checkNotNull(page, "page");
             this.page = page;
             return this;
@@ -241,7 +241,7 @@ public class GetV1CompaniesCompanyIdLocationsRequest {
         /**
          * Number of objects per page. For majority of endpoints will default to 25
          */
-        public Builder per(double per) {
+        public Builder per(long per) {
             Utils.checkNotNull(per, "per");
             this.per = Optional.ofNullable(per);
             return this;
@@ -250,7 +250,7 @@ public class GetV1CompaniesCompanyIdLocationsRequest {
         /**
          * Number of objects per page. For majority of endpoints will default to 25
          */
-        public Builder per(Optional<Double> per) {
+        public Builder per(Optional<Long> per) {
             Utils.checkNotNull(per, "per");
             this.per = per;
             return this;

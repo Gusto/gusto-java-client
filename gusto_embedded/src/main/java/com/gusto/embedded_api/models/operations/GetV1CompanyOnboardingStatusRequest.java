@@ -24,6 +24,12 @@ public class GetV1CompanyOnboardingStatusRequest {
     private String companyUuid;
 
     /**
+     * Comma delimited string indicating whether to include any additional steps of onboarding. Currently only supports the value "external_payroll".
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=additional_steps")
+    private Optional<String> additionalSteps;
+
+    /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
@@ -32,16 +38,19 @@ public class GetV1CompanyOnboardingStatusRequest {
     @JsonCreator
     public GetV1CompanyOnboardingStatusRequest(
             String companyUuid,
+            Optional<String> additionalSteps,
             Optional<? extends VersionHeader> xGustoAPIVersion) {
         Utils.checkNotNull(companyUuid, "companyUuid");
+        Utils.checkNotNull(additionalSteps, "additionalSteps");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.companyUuid = companyUuid;
+        this.additionalSteps = additionalSteps;
         this.xGustoAPIVersion = xGustoAPIVersion;
     }
     
     public GetV1CompanyOnboardingStatusRequest(
             String companyUuid) {
-        this(companyUuid, Optional.empty());
+        this(companyUuid, Optional.empty(), Optional.empty());
     }
 
     /**
@@ -50,6 +59,14 @@ public class GetV1CompanyOnboardingStatusRequest {
     @JsonIgnore
     public String companyUuid() {
         return companyUuid;
+    }
+
+    /**
+     * Comma delimited string indicating whether to include any additional steps of onboarding. Currently only supports the value "external_payroll".
+     */
+    @JsonIgnore
+    public Optional<String> additionalSteps() {
+        return additionalSteps;
     }
 
     /**
@@ -71,6 +88,24 @@ public class GetV1CompanyOnboardingStatusRequest {
     public GetV1CompanyOnboardingStatusRequest withCompanyUuid(String companyUuid) {
         Utils.checkNotNull(companyUuid, "companyUuid");
         this.companyUuid = companyUuid;
+        return this;
+    }
+
+    /**
+     * Comma delimited string indicating whether to include any additional steps of onboarding. Currently only supports the value "external_payroll".
+     */
+    public GetV1CompanyOnboardingStatusRequest withAdditionalSteps(String additionalSteps) {
+        Utils.checkNotNull(additionalSteps, "additionalSteps");
+        this.additionalSteps = Optional.ofNullable(additionalSteps);
+        return this;
+    }
+
+    /**
+     * Comma delimited string indicating whether to include any additional steps of onboarding. Currently only supports the value "external_payroll".
+     */
+    public GetV1CompanyOnboardingStatusRequest withAdditionalSteps(Optional<String> additionalSteps) {
+        Utils.checkNotNull(additionalSteps, "additionalSteps");
+        this.additionalSteps = additionalSteps;
         return this;
     }
 
@@ -103,6 +138,7 @@ public class GetV1CompanyOnboardingStatusRequest {
         GetV1CompanyOnboardingStatusRequest other = (GetV1CompanyOnboardingStatusRequest) o;
         return 
             Objects.deepEquals(this.companyUuid, other.companyUuid) &&
+            Objects.deepEquals(this.additionalSteps, other.additionalSteps) &&
             Objects.deepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
     }
     
@@ -110,6 +146,7 @@ public class GetV1CompanyOnboardingStatusRequest {
     public int hashCode() {
         return Objects.hash(
             companyUuid,
+            additionalSteps,
             xGustoAPIVersion);
     }
     
@@ -117,12 +154,15 @@ public class GetV1CompanyOnboardingStatusRequest {
     public String toString() {
         return Utils.toString(GetV1CompanyOnboardingStatusRequest.class,
                 "companyUuid", companyUuid,
+                "additionalSteps", additionalSteps,
                 "xGustoAPIVersion", xGustoAPIVersion);
     }
     
     public final static class Builder {
  
         private String companyUuid;
+ 
+        private Optional<String> additionalSteps = Optional.empty();
  
         private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();  
         
@@ -136,6 +176,24 @@ public class GetV1CompanyOnboardingStatusRequest {
         public Builder companyUuid(String companyUuid) {
             Utils.checkNotNull(companyUuid, "companyUuid");
             this.companyUuid = companyUuid;
+            return this;
+        }
+
+        /**
+         * Comma delimited string indicating whether to include any additional steps of onboarding. Currently only supports the value "external_payroll".
+         */
+        public Builder additionalSteps(String additionalSteps) {
+            Utils.checkNotNull(additionalSteps, "additionalSteps");
+            this.additionalSteps = Optional.ofNullable(additionalSteps);
+            return this;
+        }
+
+        /**
+         * Comma delimited string indicating whether to include any additional steps of onboarding. Currently only supports the value "external_payroll".
+         */
+        public Builder additionalSteps(Optional<String> additionalSteps) {
+            Utils.checkNotNull(additionalSteps, "additionalSteps");
+            this.additionalSteps = additionalSteps;
             return this;
         }
 
@@ -160,6 +218,7 @@ public class GetV1CompanyOnboardingStatusRequest {
         public GetV1CompanyOnboardingStatusRequest build() {
             return new GetV1CompanyOnboardingStatusRequest(
                 companyUuid,
+                additionalSteps,
                 xGustoAPIVersion);
         }
     }

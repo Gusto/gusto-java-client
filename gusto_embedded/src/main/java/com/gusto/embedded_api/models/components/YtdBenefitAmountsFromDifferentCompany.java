@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
-import java.lang.Double;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -28,7 +28,7 @@ public class YtdBenefitAmountsFromDifferentCompany {
      * The benefit type supported by Gusto. See [Benefit Types](https://docs.gusto.com/embedded-payroll/reference/get-v1-benefits) for more information.
      */
     @JsonProperty("benefit_type")
-    private double benefitType;
+    private long benefitType;
 
     /**
      * The year-to-date employee deduction made outside the current company.
@@ -45,7 +45,7 @@ public class YtdBenefitAmountsFromDifferentCompany {
     @JsonCreator
     public YtdBenefitAmountsFromDifferentCompany(
             @JsonProperty("uuid") String uuid,
-            @JsonProperty("benefit_type") double benefitType,
+            @JsonProperty("benefit_type") long benefitType,
             @JsonProperty("ytd_employee_deduction_amount") String ytdEmployeeDeductionAmount,
             @JsonProperty("ytd_company_contribution_amount") String ytdCompanyContributionAmount) {
         Utils.checkNotNull(uuid, "uuid");
@@ -70,7 +70,7 @@ public class YtdBenefitAmountsFromDifferentCompany {
      * The benefit type supported by Gusto. See [Benefit Types](https://docs.gusto.com/embedded-payroll/reference/get-v1-benefits) for more information.
      */
     @JsonIgnore
-    public double benefitType() {
+    public long benefitType() {
         return benefitType;
     }
 
@@ -106,7 +106,7 @@ public class YtdBenefitAmountsFromDifferentCompany {
     /**
      * The benefit type supported by Gusto. See [Benefit Types](https://docs.gusto.com/embedded-payroll/reference/get-v1-benefits) for more information.
      */
-    public YtdBenefitAmountsFromDifferentCompany withBenefitType(double benefitType) {
+    public YtdBenefitAmountsFromDifferentCompany withBenefitType(long benefitType) {
         Utils.checkNotNull(benefitType, "benefitType");
         this.benefitType = benefitType;
         return this;
@@ -168,7 +168,7 @@ public class YtdBenefitAmountsFromDifferentCompany {
  
         private String uuid;
  
-        private Double benefitType;
+        private Long benefitType;
  
         private String ytdEmployeeDeductionAmount;
  
@@ -190,7 +190,7 @@ public class YtdBenefitAmountsFromDifferentCompany {
         /**
          * The benefit type supported by Gusto. See [Benefit Types](https://docs.gusto.com/embedded-payroll/reference/get-v1-benefits) for more information.
          */
-        public Builder benefitType(double benefitType) {
+        public Builder benefitType(long benefitType) {
             Utils.checkNotNull(benefitType, "benefitType");
             this.benefitType = benefitType;
             return this;

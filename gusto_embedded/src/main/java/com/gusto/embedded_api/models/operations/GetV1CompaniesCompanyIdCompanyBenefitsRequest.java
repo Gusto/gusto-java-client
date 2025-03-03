@@ -25,6 +25,12 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsRequest {
     private String companyId;
 
     /**
+     * Whether the benefit is currently active
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=active")
+    private Optional<Boolean> active;
+
+    /**
      * Whether to return employee enrollment count
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=enrollment_count")
@@ -39,19 +45,22 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsRequest {
     @JsonCreator
     public GetV1CompaniesCompanyIdCompanyBenefitsRequest(
             String companyId,
+            Optional<Boolean> active,
             Optional<Boolean> enrollmentCount,
             Optional<? extends VersionHeader> xGustoAPIVersion) {
         Utils.checkNotNull(companyId, "companyId");
+        Utils.checkNotNull(active, "active");
         Utils.checkNotNull(enrollmentCount, "enrollmentCount");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.companyId = companyId;
+        this.active = active;
         this.enrollmentCount = enrollmentCount;
         this.xGustoAPIVersion = xGustoAPIVersion;
     }
     
     public GetV1CompaniesCompanyIdCompanyBenefitsRequest(
             String companyId) {
-        this(companyId, Optional.empty(), Optional.empty());
+        this(companyId, Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -60,6 +69,14 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsRequest {
     @JsonIgnore
     public String companyId() {
         return companyId;
+    }
+
+    /**
+     * Whether the benefit is currently active
+     */
+    @JsonIgnore
+    public Optional<Boolean> active() {
+        return active;
     }
 
     /**
@@ -89,6 +106,24 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsRequest {
     public GetV1CompaniesCompanyIdCompanyBenefitsRequest withCompanyId(String companyId) {
         Utils.checkNotNull(companyId, "companyId");
         this.companyId = companyId;
+        return this;
+    }
+
+    /**
+     * Whether the benefit is currently active
+     */
+    public GetV1CompaniesCompanyIdCompanyBenefitsRequest withActive(boolean active) {
+        Utils.checkNotNull(active, "active");
+        this.active = Optional.ofNullable(active);
+        return this;
+    }
+
+    /**
+     * Whether the benefit is currently active
+     */
+    public GetV1CompaniesCompanyIdCompanyBenefitsRequest withActive(Optional<Boolean> active) {
+        Utils.checkNotNull(active, "active");
+        this.active = active;
         return this;
     }
 
@@ -139,6 +174,7 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsRequest {
         GetV1CompaniesCompanyIdCompanyBenefitsRequest other = (GetV1CompaniesCompanyIdCompanyBenefitsRequest) o;
         return 
             Objects.deepEquals(this.companyId, other.companyId) &&
+            Objects.deepEquals(this.active, other.active) &&
             Objects.deepEquals(this.enrollmentCount, other.enrollmentCount) &&
             Objects.deepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
     }
@@ -147,6 +183,7 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsRequest {
     public int hashCode() {
         return Objects.hash(
             companyId,
+            active,
             enrollmentCount,
             xGustoAPIVersion);
     }
@@ -155,6 +192,7 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsRequest {
     public String toString() {
         return Utils.toString(GetV1CompaniesCompanyIdCompanyBenefitsRequest.class,
                 "companyId", companyId,
+                "active", active,
                 "enrollmentCount", enrollmentCount,
                 "xGustoAPIVersion", xGustoAPIVersion);
     }
@@ -162,6 +200,8 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsRequest {
     public final static class Builder {
  
         private String companyId;
+ 
+        private Optional<Boolean> active = Optional.empty();
  
         private Optional<Boolean> enrollmentCount = Optional.empty();
  
@@ -177,6 +217,24 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsRequest {
         public Builder companyId(String companyId) {
             Utils.checkNotNull(companyId, "companyId");
             this.companyId = companyId;
+            return this;
+        }
+
+        /**
+         * Whether the benefit is currently active
+         */
+        public Builder active(boolean active) {
+            Utils.checkNotNull(active, "active");
+            this.active = Optional.ofNullable(active);
+            return this;
+        }
+
+        /**
+         * Whether the benefit is currently active
+         */
+        public Builder active(Optional<Boolean> active) {
+            Utils.checkNotNull(active, "active");
+            this.active = active;
             return this;
         }
 
@@ -219,6 +277,7 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsRequest {
         public GetV1CompaniesCompanyIdCompanyBenefitsRequest build() {
             return new GetV1CompaniesCompanyIdCompanyBenefitsRequest(
                 companyId,
+                active,
                 enrollmentCount,
                 xGustoAPIVersion);
         }

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
-import java.lang.Double;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -28,13 +28,13 @@ public class GetV1EmployeesEmployeeIdJobsRequest {
      * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=page")
-    private Optional<Double> page;
+    private Optional<Long> page;
 
     /**
      * Number of objects per page. For majority of endpoints will default to 25
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=per")
-    private Optional<Double> per;
+    private Optional<Long> per;
 
     /**
      * Available options:
@@ -52,8 +52,8 @@ public class GetV1EmployeesEmployeeIdJobsRequest {
     @JsonCreator
     public GetV1EmployeesEmployeeIdJobsRequest(
             String employeeId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends GetV1EmployeesEmployeeIdJobsQueryParamInclude> include,
             Optional<? extends VersionHeader> xGustoAPIVersion) {
         Utils.checkNotNull(employeeId, "employeeId");
@@ -85,7 +85,7 @@ public class GetV1EmployeesEmployeeIdJobsRequest {
      * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      */
     @JsonIgnore
-    public Optional<Double> page() {
+    public Optional<Long> page() {
         return page;
     }
 
@@ -93,7 +93,7 @@ public class GetV1EmployeesEmployeeIdJobsRequest {
      * Number of objects per page. For majority of endpoints will default to 25
      */
     @JsonIgnore
-    public Optional<Double> per() {
+    public Optional<Long> per() {
         return per;
     }
 
@@ -132,7 +132,7 @@ public class GetV1EmployeesEmployeeIdJobsRequest {
     /**
      * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      */
-    public GetV1EmployeesEmployeeIdJobsRequest withPage(double page) {
+    public GetV1EmployeesEmployeeIdJobsRequest withPage(long page) {
         Utils.checkNotNull(page, "page");
         this.page = Optional.ofNullable(page);
         return this;
@@ -141,7 +141,7 @@ public class GetV1EmployeesEmployeeIdJobsRequest {
     /**
      * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      */
-    public GetV1EmployeesEmployeeIdJobsRequest withPage(Optional<Double> page) {
+    public GetV1EmployeesEmployeeIdJobsRequest withPage(Optional<Long> page) {
         Utils.checkNotNull(page, "page");
         this.page = page;
         return this;
@@ -150,7 +150,7 @@ public class GetV1EmployeesEmployeeIdJobsRequest {
     /**
      * Number of objects per page. For majority of endpoints will default to 25
      */
-    public GetV1EmployeesEmployeeIdJobsRequest withPer(double per) {
+    public GetV1EmployeesEmployeeIdJobsRequest withPer(long per) {
         Utils.checkNotNull(per, "per");
         this.per = Optional.ofNullable(per);
         return this;
@@ -159,7 +159,7 @@ public class GetV1EmployeesEmployeeIdJobsRequest {
     /**
      * Number of objects per page. For majority of endpoints will default to 25
      */
-    public GetV1EmployeesEmployeeIdJobsRequest withPer(Optional<Double> per) {
+    public GetV1EmployeesEmployeeIdJobsRequest withPer(Optional<Long> per) {
         Utils.checkNotNull(per, "per");
         this.per = per;
         return this;
@@ -244,9 +244,9 @@ public class GetV1EmployeesEmployeeIdJobsRequest {
  
         private String employeeId;
  
-        private Optional<Double> page = Optional.empty();
+        private Optional<Long> page = Optional.empty();
  
-        private Optional<Double> per = Optional.empty();
+        private Optional<Long> per = Optional.empty();
  
         private Optional<? extends GetV1EmployeesEmployeeIdJobsQueryParamInclude> include = Optional.empty();
  
@@ -268,7 +268,7 @@ public class GetV1EmployeesEmployeeIdJobsRequest {
         /**
          * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
          */
-        public Builder page(double page) {
+        public Builder page(long page) {
             Utils.checkNotNull(page, "page");
             this.page = Optional.ofNullable(page);
             return this;
@@ -277,7 +277,7 @@ public class GetV1EmployeesEmployeeIdJobsRequest {
         /**
          * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
          */
-        public Builder page(Optional<Double> page) {
+        public Builder page(Optional<Long> page) {
             Utils.checkNotNull(page, "page");
             this.page = page;
             return this;
@@ -286,7 +286,7 @@ public class GetV1EmployeesEmployeeIdJobsRequest {
         /**
          * Number of objects per page. For majority of endpoints will default to 25
          */
-        public Builder per(double per) {
+        public Builder per(long per) {
             Utils.checkNotNull(per, "per");
             this.per = Optional.ofNullable(per);
             return this;
@@ -295,7 +295,7 @@ public class GetV1EmployeesEmployeeIdJobsRequest {
         /**
          * Number of objects per page. For majority of endpoints will default to 25
          */
-        public Builder per(Optional<Double> per) {
+        public Builder per(Optional<Long> per) {
             Utils.checkNotNull(per, "per");
             this.per = per;
             return this;

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 5d57a1bf-31fa-4bb7-8d47-6fe0473a6fda
 management:
-  docChecksum: 697b4d10d5cf07f835aaf0ae283a81de
+  docChecksum: 45aa06ce799ca7606394b8d0261c8cf4
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.507.0
-  generationVersion: 2.533.0
-  releaseVersion: 0.0.4
-  configChecksum: fa446fd729a683c06a78bd93dcebd7c2
+  speakeasyVersion: 1.508.1
+  generationVersion: 2.536.0
+  releaseVersion: 0.0.5
+  configChecksum: 50e6ed351c498ea9495e7167061a193c
   repoURL: https://github.com/Gusto/gusto-java-client.git
   repoSubDirectory: gusto_embedded
 features:
@@ -2884,6 +2884,8 @@ examples:
       parameters:
         path:
           company_uuid: "<id>"
+        query:
+          additional_steps: "external_payroll"
         header: {}
       responses:
         "200":
@@ -6680,7 +6682,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 549807, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
+          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 857478, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
     Hourly Vacation Policy:
       parameters:
         path:
@@ -6762,7 +6764,7 @@ examples:
         application/json: {"name": "<value>", "policy_type": "<value>", "accrual_method": "per_anniversary_year"}
       responses:
         "201":
-          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 898841, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
+          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 486589, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
     Hourly Vacation Policy:
       parameters:
         path:
@@ -7443,7 +7445,7 @@ examples:
         application/json: {"active": true, "description": "yuck vice between gee ugh ha"}
       responses:
         "201":
-          application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "benefit_type": 1, "active": true, "description": "Kaiser Permanente", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false}
+          application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "company_uuid": "881ce3f2-e3e1-49c9-8ad4-0bcf515f5618", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "benefit_type": 1, "active": true, "description": "Kaiser Permanente", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false}
     Basic:
       parameters:
         path:
@@ -7483,7 +7485,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "benefit_type": 1, "active": true, "description": "Kaiser Permanente", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false}]
+          application/json: [{"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "company_uuid": "528cc543-8a41-497e-b479-23a4c5ec77ac", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "benefit_type": 1, "active": true, "description": "Kaiser Permanente", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false}]
   get-v1-company_benefits-company_benefit_id:
     Example:
       parameters:
@@ -7504,7 +7506,7 @@ examples:
         application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "active": false}
       responses:
         "200":
-          application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "benefit_type": 1, "active": true, "description": "Kaiser Permanente", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false}
+          application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "company_uuid": "881ce3f2-e3e1-49c9-8ad4-0bcf515f5618", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "benefit_type": 1, "active": true, "description": "Kaiser Permanente", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false}
     Basic:
       parameters:
         path:
