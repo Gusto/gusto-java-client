@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Double;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -25,7 +26,7 @@ public class PostEmployeeYtdBenefitAmountsFromDifferentCompany {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("benefit_type")
-    private Optional<Double> benefitType;
+    private Optional<Long> benefitType;
 
     /**
      * The tax year for which this amount applies.
@@ -49,7 +50,7 @@ public class PostEmployeeYtdBenefitAmountsFromDifferentCompany {
 
     @JsonCreator
     public PostEmployeeYtdBenefitAmountsFromDifferentCompany(
-            @JsonProperty("benefit_type") Optional<Double> benefitType,
+            @JsonProperty("benefit_type") Optional<Long> benefitType,
             @JsonProperty("tax_year") double taxYear,
             @JsonProperty("ytd_employee_deduction_amount") Optional<String> ytdEmployeeDeductionAmount,
             @JsonProperty("ytd_company_contribution_amount") Optional<String> ytdCompanyContributionAmount) {
@@ -72,7 +73,7 @@ public class PostEmployeeYtdBenefitAmountsFromDifferentCompany {
      * The benefit type supported by Gusto.
      */
     @JsonIgnore
-    public Optional<Double> benefitType() {
+    public Optional<Long> benefitType() {
         return benefitType;
     }
 
@@ -107,7 +108,7 @@ public class PostEmployeeYtdBenefitAmountsFromDifferentCompany {
     /**
      * The benefit type supported by Gusto.
      */
-    public PostEmployeeYtdBenefitAmountsFromDifferentCompany withBenefitType(double benefitType) {
+    public PostEmployeeYtdBenefitAmountsFromDifferentCompany withBenefitType(long benefitType) {
         Utils.checkNotNull(benefitType, "benefitType");
         this.benefitType = Optional.ofNullable(benefitType);
         return this;
@@ -116,7 +117,7 @@ public class PostEmployeeYtdBenefitAmountsFromDifferentCompany {
     /**
      * The benefit type supported by Gusto.
      */
-    public PostEmployeeYtdBenefitAmountsFromDifferentCompany withBenefitType(Optional<Double> benefitType) {
+    public PostEmployeeYtdBenefitAmountsFromDifferentCompany withBenefitType(Optional<Long> benefitType) {
         Utils.checkNotNull(benefitType, "benefitType");
         this.benefitType = benefitType;
         return this;
@@ -203,7 +204,7 @@ public class PostEmployeeYtdBenefitAmountsFromDifferentCompany {
     
     public final static class Builder {
  
-        private Optional<Double> benefitType = Optional.empty();
+        private Optional<Long> benefitType = Optional.empty();
  
         private Double taxYear;
  
@@ -218,7 +219,7 @@ public class PostEmployeeYtdBenefitAmountsFromDifferentCompany {
         /**
          * The benefit type supported by Gusto.
          */
-        public Builder benefitType(double benefitType) {
+        public Builder benefitType(long benefitType) {
             Utils.checkNotNull(benefitType, "benefitType");
             this.benefitType = Optional.ofNullable(benefitType);
             return this;
@@ -227,7 +228,7 @@ public class PostEmployeeYtdBenefitAmountsFromDifferentCompany {
         /**
          * The benefit type supported by Gusto.
          */
-        public Builder benefitType(Optional<Double> benefitType) {
+        public Builder benefitType(Optional<Long> benefitType) {
             Utils.checkNotNull(benefitType, "benefitType");
             this.benefitType = benefitType;
             return this;

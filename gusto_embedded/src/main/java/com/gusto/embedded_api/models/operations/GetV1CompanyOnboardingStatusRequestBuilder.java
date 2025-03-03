@@ -12,6 +12,7 @@ import java.util.Optional;
 public class GetV1CompanyOnboardingStatusRequestBuilder {
 
     private String companyUuid;
+    private Optional<String> additionalSteps = Optional.empty();
     private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetV1CompanyOnboardingStatus sdk;
 
@@ -22,6 +23,18 @@ public class GetV1CompanyOnboardingStatusRequestBuilder {
     public GetV1CompanyOnboardingStatusRequestBuilder companyUuid(String companyUuid) {
         Utils.checkNotNull(companyUuid, "companyUuid");
         this.companyUuid = companyUuid;
+        return this;
+    }
+                
+    public GetV1CompanyOnboardingStatusRequestBuilder additionalSteps(String additionalSteps) {
+        Utils.checkNotNull(additionalSteps, "additionalSteps");
+        this.additionalSteps = Optional.of(additionalSteps);
+        return this;
+    }
+
+    public GetV1CompanyOnboardingStatusRequestBuilder additionalSteps(Optional<String> additionalSteps) {
+        Utils.checkNotNull(additionalSteps, "additionalSteps");
+        this.additionalSteps = additionalSteps;
         return this;
     }
                 
@@ -41,6 +54,7 @@ public class GetV1CompanyOnboardingStatusRequestBuilder {
 
         return sdk.getOnboardingStatus(
             companyUuid,
+            additionalSteps,
             xGustoAPIVersion);
     }
 }

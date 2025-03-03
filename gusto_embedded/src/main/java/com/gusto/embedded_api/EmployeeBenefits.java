@@ -44,7 +44,6 @@ import com.gusto.embedded_api.utils.SerializedBody;
 import com.gusto.embedded_api.utils.Utils.JsonShape;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
-import java.lang.Double;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.Object;
@@ -307,8 +306,8 @@ public class EmployeeBenefits implements
      */
     public GetV1EmployeesEmployeeIdEmployeeBenefitsResponse get(
             String employeeId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
         GetV1EmployeesEmployeeIdEmployeeBenefitsRequest request =
             GetV1EmployeesEmployeeIdEmployeeBenefitsRequest

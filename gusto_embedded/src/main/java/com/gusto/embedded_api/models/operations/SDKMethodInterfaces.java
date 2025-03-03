@@ -11,7 +11,6 @@ import com.gusto.embedded_api.models.components.PostEmployeeYtdBenefitAmountsFro
 import com.gusto.embedded_api.models.components.RehireBody;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import java.lang.Boolean;
-import java.lang.Double;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
@@ -92,8 +91,8 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1CompaniesCompanyIdAdmins {
         GetV1CompaniesCompanyIdAdminsResponse listAdmins(
             String companyId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
 
@@ -101,6 +100,7 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1CompanyOnboardingStatus {
         GetV1CompanyOnboardingStatusResponse getOnboardingStatus(
             String companyUuid,
+            Optional<String> additionalSteps,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
 
@@ -115,8 +115,8 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1CompaniesCompanyIdCustomFields {
         GetV1CompaniesCompanyIdCustomFieldsResponse getCustomFields(
             String companyId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
 
@@ -248,8 +248,8 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1CompaniesCompanyIdLocations {
         GetV1CompaniesCompanyIdLocationsResponse get(
             String companyId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
 
@@ -404,8 +404,8 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1CompaniesCompanyIdPaySchedules {
         GetV1CompaniesCompanyIdPaySchedulesResponse getAll(
             String companyId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
 
@@ -517,8 +517,8 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1EmployeesEmployeeIdCustomFields {
         GetV1EmployeesEmployeeIdCustomFieldsResponse getCustomFields(
             String employeeId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
 
@@ -830,8 +830,8 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1EmployeesEmployeeIdBankAccounts {
         GetV1EmployeesEmployeeIdBankAccountsResponse getBankAccounts(
             String employeeId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
 
@@ -1209,8 +1209,8 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1CompaniesCompanyIdPayrollReversals {
         GetV1CompaniesCompanyIdPayrollReversalsResponse getApprovedReversals(
             String companyId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
 
@@ -1531,6 +1531,7 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1CompaniesCompanyIdCompanyBenefits {
         GetV1CompaniesCompanyIdCompanyBenefitsResponse list(
             String companyId,
+            Optional<Boolean> active,
             Optional<Boolean> enrollmentCount,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
@@ -1581,8 +1582,8 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefits {
         GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse getEmployeeBenefits(
             String companyBenefitId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
 
@@ -1613,8 +1614,8 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1EmployeesEmployeeIdEmployeeBenefits {
         GetV1EmployeesEmployeeIdEmployeeBenefitsResponse get(
             String employeeId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
 
@@ -1668,8 +1669,8 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1EmployeesEmployeeIdGarnishments {
         GetV1EmployeesEmployeeIdGarnishmentsResponse list(
             String employeeId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
 

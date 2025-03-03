@@ -13,7 +13,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -26,7 +26,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("benefit_type")
-    private Optional<Double> benefitType;
+    private Optional<Long> benefitType;
 
     /**
      * Whether this benefit is active for employee participation.
@@ -57,7 +57,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
 
     @JsonCreator
     public PostV1CompaniesCompanyIdCompanyBenefitsRequestBody(
-            @JsonProperty("benefit_type") Optional<Double> benefitType,
+            @JsonProperty("benefit_type") Optional<Long> benefitType,
             @JsonProperty("active") Optional<Boolean> active,
             @JsonProperty("description") String description,
             @JsonProperty("responsible_for_employer_taxes") Optional<Boolean> responsibleForEmployerTaxes,
@@ -83,7 +83,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
      * The ID of the benefit to which the company benefit belongs.
      */
     @JsonIgnore
-    public Optional<Double> benefitType() {
+    public Optional<Long> benefitType() {
         return benefitType;
     }
 
@@ -126,7 +126,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
     /**
      * The ID of the benefit to which the company benefit belongs.
      */
-    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBody withBenefitType(double benefitType) {
+    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBody withBenefitType(long benefitType) {
         Utils.checkNotNull(benefitType, "benefitType");
         this.benefitType = Optional.ofNullable(benefitType);
         return this;
@@ -135,7 +135,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
     /**
      * The ID of the benefit to which the company benefit belongs.
      */
-    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBody withBenefitType(Optional<Double> benefitType) {
+    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBody withBenefitType(Optional<Long> benefitType) {
         Utils.checkNotNull(benefitType, "benefitType");
         this.benefitType = benefitType;
         return this;
@@ -243,7 +243,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
     
     public final static class Builder {
  
-        private Optional<Double> benefitType = Optional.empty();
+        private Optional<Long> benefitType = Optional.empty();
  
         private Optional<Boolean> active;
  
@@ -260,7 +260,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
         /**
          * The ID of the benefit to which the company benefit belongs.
          */
-        public Builder benefitType(double benefitType) {
+        public Builder benefitType(long benefitType) {
             Utils.checkNotNull(benefitType, "benefitType");
             this.benefitType = Optional.ofNullable(benefitType);
             return this;
@@ -269,7 +269,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
         /**
          * The ID of the benefit to which the company benefit belongs.
          */
-        public Builder benefitType(Optional<Double> benefitType) {
+        public Builder benefitType(Optional<Long> benefitType) {
             Utils.checkNotNull(benefitType, "benefitType");
             this.benefitType = benefitType;
             return this;

@@ -66,8 +66,8 @@ import com.gusto.embedded_api.utils.SerializedBody;
 import com.gusto.embedded_api.utils.Utils.JsonShape;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
-import java.lang.Double;
 import java.lang.Exception;
+import java.lang.Long;
 import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
@@ -1451,8 +1451,8 @@ public class Companies implements
      */
     public GetV1CompaniesCompanyIdAdminsResponse listAdmins(
             String companyId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
         GetV1CompaniesCompanyIdAdminsRequest request =
             GetV1CompaniesCompanyIdAdminsRequest
@@ -1601,7 +1601,7 @@ public class Companies implements
      */
     public GetV1CompanyOnboardingStatusResponse getOnboardingStatus(
             String companyUuid) throws Exception {
-        return getOnboardingStatus(companyUuid, Optional.empty());
+        return getOnboardingStatus(companyUuid, Optional.empty(), Optional.empty());
     }
     
     /**
@@ -1611,17 +1611,20 @@ public class Companies implements
      * 
      * scope: `company_onboarding_status:read`
      * @param companyUuid The UUID of the company
+     * @param additionalSteps Comma delimited string indicating whether to include any additional steps of onboarding. Currently only supports the value "external_payroll".
      * @param xGustoAPIVersion
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetV1CompanyOnboardingStatusResponse getOnboardingStatus(
             String companyUuid,
+            Optional<String> additionalSteps,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
         GetV1CompanyOnboardingStatusRequest request =
             GetV1CompanyOnboardingStatusRequest
                 .builder()
                 .companyUuid(companyUuid)
+                .additionalSteps(additionalSteps)
                 .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         
@@ -1636,6 +1639,11 @@ public class Companies implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                GetV1CompanyOnboardingStatusRequest.class,
+                request, 
+                null));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
         
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
@@ -1977,8 +1985,8 @@ public class Companies implements
      */
     public GetV1CompaniesCompanyIdCustomFieldsResponse getCustomFields(
             String companyId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
         GetV1CompaniesCompanyIdCustomFieldsRequest request =
             GetV1CompaniesCompanyIdCustomFieldsRequest

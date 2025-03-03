@@ -6,15 +6,15 @@ package com.gusto.embedded_api.models.operations;
 
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.Utils;
-import java.lang.Double;
+import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
 
 public class GetV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder {
 
     private String employeeId;
-    private Optional<Double> page = Optional.empty();
-    private Optional<Double> per = Optional.empty();
+    private Optional<Long> page = Optional.empty();
+    private Optional<Long> per = Optional.empty();
     private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetV1EmployeesEmployeeIdEmployeeBenefits sdk;
 
@@ -28,25 +28,25 @@ public class GetV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder {
         return this;
     }
                 
-    public GetV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder page(double page) {
+    public GetV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder page(long page) {
         Utils.checkNotNull(page, "page");
         this.page = Optional.of(page);
         return this;
     }
 
-    public GetV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder page(Optional<Double> page) {
+    public GetV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder page(Optional<Long> page) {
         Utils.checkNotNull(page, "page");
         this.page = page;
         return this;
     }
                 
-    public GetV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder per(double per) {
+    public GetV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder per(long per) {
         Utils.checkNotNull(per, "per");
         this.per = Optional.of(per);
         return this;
     }
 
-    public GetV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder per(Optional<Double> per) {
+    public GetV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder per(Optional<Long> per) {
         Utils.checkNotNull(per, "per");
         this.per = per;
         return this;

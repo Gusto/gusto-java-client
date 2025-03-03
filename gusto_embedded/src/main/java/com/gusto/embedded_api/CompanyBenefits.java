@@ -62,8 +62,8 @@ import com.gusto.embedded_api.utils.Utils.JsonShape;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
 import java.lang.Boolean;
-import java.lang.Double;
 import java.lang.Exception;
+import java.lang.Long;
 import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
@@ -313,7 +313,7 @@ public class CompanyBenefits implements
      */
     public GetV1CompaniesCompanyIdCompanyBenefitsResponse list(
             String companyId) throws Exception {
-        return list(companyId, Optional.empty(), Optional.empty());
+        return list(companyId, Optional.empty(), Optional.empty(), Optional.empty());
     }
     
     /**
@@ -326,6 +326,7 @@ public class CompanyBenefits implements
      * 
      * scope: `company_benefits:read`
      * @param companyId The UUID of the company
+     * @param active Whether the benefit is currently active
      * @param enrollmentCount Whether to return employee enrollment count
      * @param xGustoAPIVersion
      * @return The response from the API call
@@ -333,12 +334,14 @@ public class CompanyBenefits implements
      */
     public GetV1CompaniesCompanyIdCompanyBenefitsResponse list(
             String companyId,
+            Optional<Boolean> active,
             Optional<Boolean> enrollmentCount,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
         GetV1CompaniesCompanyIdCompanyBenefitsRequest request =
             GetV1CompaniesCompanyIdCompanyBenefitsRequest
                 .builder()
                 .companyId(companyId)
+                .active(active)
                 .enrollmentCount(enrollmentCount)
                 .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
@@ -1495,8 +1498,8 @@ public class CompanyBenefits implements
      */
     public GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse getEmployeeBenefits(
             String companyBenefitId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
         GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest request =
             GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest

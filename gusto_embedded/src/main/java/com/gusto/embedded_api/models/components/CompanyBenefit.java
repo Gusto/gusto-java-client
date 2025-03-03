@@ -13,7 +13,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -32,6 +32,20 @@ public class CompanyBenefit {
     private Optional<String> version;
 
     /**
+     * The number of employees enrolled in the benefit, only returned when enrollment_count query param is set to true.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("enrollment_count")
+    private Optional<Long> enrollmentCount;
+
+    /**
+     * The UUID of the company.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("company_uuid")
+    private Optional<String> companyUuid;
+
+    /**
      * The UUID of the company benefit.
      */
     @JsonProperty("uuid")
@@ -42,7 +56,7 @@ public class CompanyBenefit {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("benefit_type")
-    private Optional<Double> benefitType;
+    private Optional<Long> benefitType;
 
     /**
      * Whether this benefit is active for employee participation. Company benefits may only be deactivated if no employees are actively participating.
@@ -89,8 +103,10 @@ public class CompanyBenefit {
     @JsonCreator
     public CompanyBenefit(
             @JsonProperty("version") Optional<String> version,
+            @JsonProperty("enrollment_count") Optional<Long> enrollmentCount,
+            @JsonProperty("company_uuid") Optional<String> companyUuid,
             @JsonProperty("uuid") String uuid,
-            @JsonProperty("benefit_type") Optional<Double> benefitType,
+            @JsonProperty("benefit_type") Optional<Long> benefitType,
             @JsonProperty("active") Optional<Boolean> active,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("deletable") Optional<Boolean> deletable,
@@ -98,6 +114,8 @@ public class CompanyBenefit {
             @JsonProperty("responsible_for_employer_taxes") Optional<Boolean> responsibleForEmployerTaxes,
             @JsonProperty("responsible_for_employee_w2") Optional<Boolean> responsibleForEmployeeW2) {
         Utils.checkNotNull(version, "version");
+        Utils.checkNotNull(enrollmentCount, "enrollmentCount");
+        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(benefitType, "benefitType");
         Utils.checkNotNull(active, "active");
@@ -107,6 +125,8 @@ public class CompanyBenefit {
         Utils.checkNotNull(responsibleForEmployerTaxes, "responsibleForEmployerTaxes");
         Utils.checkNotNull(responsibleForEmployeeW2, "responsibleForEmployeeW2");
         this.version = version;
+        this.enrollmentCount = enrollmentCount;
+        this.companyUuid = companyUuid;
         this.uuid = uuid;
         this.benefitType = benefitType;
         this.active = active;
@@ -119,7 +139,7 @@ public class CompanyBenefit {
     
     public CompanyBenefit(
             String uuid) {
-        this(Optional.empty(), uuid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(), uuid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -128,6 +148,22 @@ public class CompanyBenefit {
     @JsonIgnore
     public Optional<String> version() {
         return version;
+    }
+
+    /**
+     * The number of employees enrolled in the benefit, only returned when enrollment_count query param is set to true.
+     */
+    @JsonIgnore
+    public Optional<Long> enrollmentCount() {
+        return enrollmentCount;
+    }
+
+    /**
+     * The UUID of the company.
+     */
+    @JsonIgnore
+    public Optional<String> companyUuid() {
+        return companyUuid;
     }
 
     /**
@@ -142,7 +178,7 @@ public class CompanyBenefit {
      * The type of the benefit to which the company benefit belongs.
      */
     @JsonIgnore
-    public Optional<Double> benefitType() {
+    public Optional<Long> benefitType() {
         return benefitType;
     }
 
@@ -217,6 +253,42 @@ public class CompanyBenefit {
     }
 
     /**
+     * The number of employees enrolled in the benefit, only returned when enrollment_count query param is set to true.
+     */
+    public CompanyBenefit withEnrollmentCount(long enrollmentCount) {
+        Utils.checkNotNull(enrollmentCount, "enrollmentCount");
+        this.enrollmentCount = Optional.ofNullable(enrollmentCount);
+        return this;
+    }
+
+    /**
+     * The number of employees enrolled in the benefit, only returned when enrollment_count query param is set to true.
+     */
+    public CompanyBenefit withEnrollmentCount(Optional<Long> enrollmentCount) {
+        Utils.checkNotNull(enrollmentCount, "enrollmentCount");
+        this.enrollmentCount = enrollmentCount;
+        return this;
+    }
+
+    /**
+     * The UUID of the company.
+     */
+    public CompanyBenefit withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = Optional.ofNullable(companyUuid);
+        return this;
+    }
+
+    /**
+     * The UUID of the company.
+     */
+    public CompanyBenefit withCompanyUuid(Optional<String> companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
+    /**
      * The UUID of the company benefit.
      */
     public CompanyBenefit withUuid(String uuid) {
@@ -228,7 +300,7 @@ public class CompanyBenefit {
     /**
      * The type of the benefit to which the company benefit belongs.
      */
-    public CompanyBenefit withBenefitType(double benefitType) {
+    public CompanyBenefit withBenefitType(long benefitType) {
         Utils.checkNotNull(benefitType, "benefitType");
         this.benefitType = Optional.ofNullable(benefitType);
         return this;
@@ -237,7 +309,7 @@ public class CompanyBenefit {
     /**
      * The type of the benefit to which the company benefit belongs.
      */
-    public CompanyBenefit withBenefitType(Optional<Double> benefitType) {
+    public CompanyBenefit withBenefitType(Optional<Long> benefitType) {
         Utils.checkNotNull(benefitType, "benefitType");
         this.benefitType = benefitType;
         return this;
@@ -362,6 +434,8 @@ public class CompanyBenefit {
         CompanyBenefit other = (CompanyBenefit) o;
         return 
             Objects.deepEquals(this.version, other.version) &&
+            Objects.deepEquals(this.enrollmentCount, other.enrollmentCount) &&
+            Objects.deepEquals(this.companyUuid, other.companyUuid) &&
             Objects.deepEquals(this.uuid, other.uuid) &&
             Objects.deepEquals(this.benefitType, other.benefitType) &&
             Objects.deepEquals(this.active, other.active) &&
@@ -376,6 +450,8 @@ public class CompanyBenefit {
     public int hashCode() {
         return Objects.hash(
             version,
+            enrollmentCount,
+            companyUuid,
             uuid,
             benefitType,
             active,
@@ -390,6 +466,8 @@ public class CompanyBenefit {
     public String toString() {
         return Utils.toString(CompanyBenefit.class,
                 "version", version,
+                "enrollmentCount", enrollmentCount,
+                "companyUuid", companyUuid,
                 "uuid", uuid,
                 "benefitType", benefitType,
                 "active", active,
@@ -404,9 +482,13 @@ public class CompanyBenefit {
  
         private Optional<String> version = Optional.empty();
  
+        private Optional<Long> enrollmentCount = Optional.empty();
+ 
+        private Optional<String> companyUuid = Optional.empty();
+ 
         private String uuid;
  
-        private Optional<Double> benefitType = Optional.empty();
+        private Optional<Long> benefitType = Optional.empty();
  
         private Optional<Boolean> active;
  
@@ -443,6 +525,42 @@ public class CompanyBenefit {
         }
 
         /**
+         * The number of employees enrolled in the benefit, only returned when enrollment_count query param is set to true.
+         */
+        public Builder enrollmentCount(long enrollmentCount) {
+            Utils.checkNotNull(enrollmentCount, "enrollmentCount");
+            this.enrollmentCount = Optional.ofNullable(enrollmentCount);
+            return this;
+        }
+
+        /**
+         * The number of employees enrolled in the benefit, only returned when enrollment_count query param is set to true.
+         */
+        public Builder enrollmentCount(Optional<Long> enrollmentCount) {
+            Utils.checkNotNull(enrollmentCount, "enrollmentCount");
+            this.enrollmentCount = enrollmentCount;
+            return this;
+        }
+
+        /**
+         * The UUID of the company.
+         */
+        public Builder companyUuid(String companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = Optional.ofNullable(companyUuid);
+            return this;
+        }
+
+        /**
+         * The UUID of the company.
+         */
+        public Builder companyUuid(Optional<String> companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = companyUuid;
+            return this;
+        }
+
+        /**
          * The UUID of the company benefit.
          */
         public Builder uuid(String uuid) {
@@ -454,7 +572,7 @@ public class CompanyBenefit {
         /**
          * The type of the benefit to which the company benefit belongs.
          */
-        public Builder benefitType(double benefitType) {
+        public Builder benefitType(long benefitType) {
             Utils.checkNotNull(benefitType, "benefitType");
             this.benefitType = Optional.ofNullable(benefitType);
             return this;
@@ -463,7 +581,7 @@ public class CompanyBenefit {
         /**
          * The type of the benefit to which the company benefit belongs.
          */
-        public Builder benefitType(Optional<Double> benefitType) {
+        public Builder benefitType(Optional<Long> benefitType) {
             Utils.checkNotNull(benefitType, "benefitType");
             this.benefitType = benefitType;
             return this;
@@ -582,6 +700,8 @@ public class CompanyBenefit {
                 active = _SINGLETON_VALUE_Active.value();
             }            return new CompanyBenefit(
                 version,
+                enrollmentCount,
+                companyUuid,
                 uuid,
                 benefitType,
                 active,

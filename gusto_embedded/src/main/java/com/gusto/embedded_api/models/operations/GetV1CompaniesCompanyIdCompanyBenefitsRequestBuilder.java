@@ -13,6 +13,7 @@ import java.util.Optional;
 public class GetV1CompaniesCompanyIdCompanyBenefitsRequestBuilder {
 
     private String companyId;
+    private Optional<Boolean> active = Optional.empty();
     private Optional<Boolean> enrollmentCount = Optional.empty();
     private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetV1CompaniesCompanyIdCompanyBenefits sdk;
@@ -24,6 +25,18 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsRequestBuilder {
     public GetV1CompaniesCompanyIdCompanyBenefitsRequestBuilder companyId(String companyId) {
         Utils.checkNotNull(companyId, "companyId");
         this.companyId = companyId;
+        return this;
+    }
+                
+    public GetV1CompaniesCompanyIdCompanyBenefitsRequestBuilder active(boolean active) {
+        Utils.checkNotNull(active, "active");
+        this.active = Optional.of(active);
+        return this;
+    }
+
+    public GetV1CompaniesCompanyIdCompanyBenefitsRequestBuilder active(Optional<Boolean> active) {
+        Utils.checkNotNull(active, "active");
+        this.active = active;
         return this;
     }
                 
@@ -55,6 +68,7 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsRequestBuilder {
 
         return sdk.list(
             companyId,
+            active,
             enrollmentCount,
             xGustoAPIVersion);
     }

@@ -37,8 +37,8 @@ import com.gusto.embedded_api.utils.SerializedBody;
 import com.gusto.embedded_api.utils.Utils.JsonShape;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
-import java.lang.Double;
 import java.lang.Exception;
+import java.lang.Long;
 import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
@@ -285,8 +285,8 @@ public class Garnishments implements
      */
     public GetV1EmployeesEmployeeIdGarnishmentsResponse list(
             String employeeId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
         GetV1EmployeesEmployeeIdGarnishmentsRequest request =
             GetV1EmployeesEmployeeIdGarnishmentsRequest

@@ -19,8 +19,8 @@ import com.gusto.embedded_api.utils.Hook.AfterSuccessContextImpl;
 import com.gusto.embedded_api.utils.Hook.BeforeRequestContextImpl;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
-import java.lang.Double;
 import java.lang.Exception;
+import java.lang.Long;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -76,8 +76,8 @@ public class EmployeePaymentMethods implements
      */
     public GetV1EmployeesEmployeeIdBankAccountsResponse getBankAccounts(
             String employeeId,
-            Optional<Double> page,
-            Optional<Double> per,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
         GetV1EmployeesEmployeeIdBankAccountsRequest request =
             GetV1EmployeesEmployeeIdBankAccountsRequest

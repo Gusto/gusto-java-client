@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -27,7 +27,7 @@ public class SupportedBenefit {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("benefit_type")
-    private Optional<Double> benefitType;
+    private Optional<Long> benefitType;
 
     /**
      * The name of the benefit.
@@ -94,7 +94,7 @@ public class SupportedBenefit {
 
     @JsonCreator
     public SupportedBenefit(
-            @JsonProperty("benefit_type") Optional<Double> benefitType,
+            @JsonProperty("benefit_type") Optional<Long> benefitType,
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("pretax") Optional<Boolean> pretax,
@@ -134,7 +134,7 @@ public class SupportedBenefit {
      * The benefit type in Gusto.
      */
     @JsonIgnore
-    public Optional<Double> benefitType() {
+    public Optional<Long> benefitType() {
         return benefitType;
     }
 
@@ -217,7 +217,7 @@ public class SupportedBenefit {
     /**
      * The benefit type in Gusto.
      */
-    public SupportedBenefit withBenefitType(double benefitType) {
+    public SupportedBenefit withBenefitType(long benefitType) {
         Utils.checkNotNull(benefitType, "benefitType");
         this.benefitType = Optional.ofNullable(benefitType);
         return this;
@@ -226,7 +226,7 @@ public class SupportedBenefit {
     /**
      * The benefit type in Gusto.
      */
-    public SupportedBenefit withBenefitType(Optional<Double> benefitType) {
+    public SupportedBenefit withBenefitType(Optional<Long> benefitType) {
         Utils.checkNotNull(benefitType, "benefitType");
         this.benefitType = benefitType;
         return this;
@@ -448,7 +448,7 @@ public class SupportedBenefit {
     
     public final static class Builder {
  
-        private Optional<Double> benefitType = Optional.empty();
+        private Optional<Long> benefitType = Optional.empty();
  
         private Optional<String> name = Optional.empty();
  
@@ -475,7 +475,7 @@ public class SupportedBenefit {
         /**
          * The benefit type in Gusto.
          */
-        public Builder benefitType(double benefitType) {
+        public Builder benefitType(long benefitType) {
             Utils.checkNotNull(benefitType, "benefitType");
             this.benefitType = Optional.ofNullable(benefitType);
             return this;
@@ -484,7 +484,7 @@ public class SupportedBenefit {
         /**
          * The benefit type in Gusto.
          */
-        public Builder benefitType(Optional<Double> benefitType) {
+        public Builder benefitType(Optional<Long> benefitType) {
             Utils.checkNotNull(benefitType, "benefitType");
             this.benefitType = benefitType;
             return this;

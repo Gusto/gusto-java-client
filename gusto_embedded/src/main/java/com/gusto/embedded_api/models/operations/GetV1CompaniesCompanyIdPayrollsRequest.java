@@ -10,6 +10,7 @@ import com.gusto.embedded_api.models.components.SortOrder;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -62,6 +63,18 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
     private Optional<? extends SortOrder> sortOrder;
 
     /**
+     * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=page")
+    private Optional<Long> page;
+
+    /**
+     * Number of objects per page. For majority of endpoints will default to 25
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=per")
+    private Optional<Long> per;
+
+    /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
@@ -76,6 +89,8 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
             Optional<String> startDate,
             Optional<String> endDate,
             Optional<? extends SortOrder> sortOrder,
+            Optional<Long> page,
+            Optional<Long> per,
             Optional<? extends VersionHeader> xGustoAPIVersion) {
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(processingStatuses, "processingStatuses");
@@ -84,6 +99,8 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
         Utils.checkNotNull(startDate, "startDate");
         Utils.checkNotNull(endDate, "endDate");
         Utils.checkNotNull(sortOrder, "sortOrder");
+        Utils.checkNotNull(page, "page");
+        Utils.checkNotNull(per, "per");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.companyId = companyId;
         this.processingStatuses = processingStatuses;
@@ -92,12 +109,14 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
         this.startDate = startDate;
         this.endDate = endDate;
         this.sortOrder = sortOrder;
+        this.page = page;
+        this.per = per;
         this.xGustoAPIVersion = xGustoAPIVersion;
     }
     
     public GetV1CompaniesCompanyIdPayrollsRequest(
             String companyId) {
-        this(companyId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(companyId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -158,6 +177,22 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
     @JsonIgnore
     public Optional<SortOrder> sortOrder() {
         return (Optional<SortOrder>) sortOrder;
+    }
+
+    /**
+     * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     */
+    @JsonIgnore
+    public Optional<Long> page() {
+        return page;
+    }
+
+    /**
+     * Number of objects per page. For majority of endpoints will default to 25
+     */
+    @JsonIgnore
+    public Optional<Long> per() {
+        return per;
     }
 
     /**
@@ -291,6 +326,42 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
     }
 
     /**
+     * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     */
+    public GetV1CompaniesCompanyIdPayrollsRequest withPage(long page) {
+        Utils.checkNotNull(page, "page");
+        this.page = Optional.ofNullable(page);
+        return this;
+    }
+
+    /**
+     * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     */
+    public GetV1CompaniesCompanyIdPayrollsRequest withPage(Optional<Long> page) {
+        Utils.checkNotNull(page, "page");
+        this.page = page;
+        return this;
+    }
+
+    /**
+     * Number of objects per page. For majority of endpoints will default to 25
+     */
+    public GetV1CompaniesCompanyIdPayrollsRequest withPer(long per) {
+        Utils.checkNotNull(per, "per");
+        this.per = Optional.ofNullable(per);
+        return this;
+    }
+
+    /**
+     * Number of objects per page. For majority of endpoints will default to 25
+     */
+    public GetV1CompaniesCompanyIdPayrollsRequest withPer(Optional<Long> per) {
+        Utils.checkNotNull(per, "per");
+        this.per = per;
+        return this;
+    }
+
+    /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     public GetV1CompaniesCompanyIdPayrollsRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
@@ -325,6 +396,8 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
             Objects.deepEquals(this.startDate, other.startDate) &&
             Objects.deepEquals(this.endDate, other.endDate) &&
             Objects.deepEquals(this.sortOrder, other.sortOrder) &&
+            Objects.deepEquals(this.page, other.page) &&
+            Objects.deepEquals(this.per, other.per) &&
             Objects.deepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
     }
     
@@ -338,6 +411,8 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
             startDate,
             endDate,
             sortOrder,
+            page,
+            per,
             xGustoAPIVersion);
     }
     
@@ -351,6 +426,8 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
                 "startDate", startDate,
                 "endDate", endDate,
                 "sortOrder", sortOrder,
+                "page", page,
+                "per", per,
                 "xGustoAPIVersion", xGustoAPIVersion);
     }
     
@@ -369,6 +446,10 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
         private Optional<String> endDate = Optional.empty();
  
         private Optional<? extends SortOrder> sortOrder = Optional.empty();
+ 
+        private Optional<Long> page = Optional.empty();
+ 
+        private Optional<Long> per = Optional.empty();
  
         private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();  
         
@@ -494,6 +575,42 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
         }
 
         /**
+         * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+         */
+        public Builder page(long page) {
+            Utils.checkNotNull(page, "page");
+            this.page = Optional.ofNullable(page);
+            return this;
+        }
+
+        /**
+         * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+         */
+        public Builder page(Optional<Long> page) {
+            Utils.checkNotNull(page, "page");
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Number of objects per page. For majority of endpoints will default to 25
+         */
+        public Builder per(long per) {
+            Utils.checkNotNull(per, "per");
+            this.per = Optional.ofNullable(per);
+            return this;
+        }
+
+        /**
+         * Number of objects per page. For majority of endpoints will default to 25
+         */
+        public Builder per(Optional<Long> per) {
+            Utils.checkNotNull(per, "per");
+            this.per = per;
+            return this;
+        }
+
+        /**
          * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
         public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
@@ -520,6 +637,8 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
                 startDate,
                 endDate,
                 sortOrder,
+                page,
+                per,
                 xGustoAPIVersion);
         }
     }
