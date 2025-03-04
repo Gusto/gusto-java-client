@@ -4,7 +4,9 @@
 
 package com.gusto.embedded_api.models.operations;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
@@ -12,7 +14,10 @@ import java.util.Optional;
 public class DeleteV1WorkAddressesWorkAddressUuidRequestBuilder {
 
     private String workAddressUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();
+    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+                            "xGustoAPIVersion",
+                            "\"2024-04-01\"",
+                            new TypeReference<Optional<? extends VersionHeader>>() {});
     private final SDKMethodInterfaces.MethodCallDeleteV1WorkAddressesWorkAddressUuid sdk;
 
     public DeleteV1WorkAddressesWorkAddressUuidRequestBuilder(SDKMethodInterfaces.MethodCallDeleteV1WorkAddressesWorkAddressUuid sdk) {
@@ -38,9 +43,17 @@ public class DeleteV1WorkAddressesWorkAddressUuidRequestBuilder {
     }
 
     public DeleteV1WorkAddressesWorkAddressUuidResponse call() throws Exception {
-
+        if (xGustoAPIVersion == null) {
+            xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
+        }
         return sdk.deleteWorkAddress(
             workAddressUuid,
             xGustoAPIVersion);
     }
+
+    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+            new LazySingletonValue<>(
+                    "xGustoAPIVersion",
+                    "\"2024-04-01\"",
+                    new TypeReference<Optional<? extends VersionHeader>>() {});
 }

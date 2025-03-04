@@ -4,14 +4,19 @@
 
 package com.gusto.embedded_api.models.operations;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.util.Optional;
 
 public class PostV1PartnerManagedCompaniesRequestBuilder {
 
     private PostV1PartnerManagedCompaniesSecurity security;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();
+    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+                            "xGustoAPIVersion",
+                            "\"2024-04-01\"",
+                            new TypeReference<Optional<? extends VersionHeader>>() {});
     private PostV1PartnerManagedCompaniesRequestBody requestBody;
     private final SDKMethodInterfaces.MethodCallPostV1PartnerManagedCompanies sdk;
 
@@ -44,10 +49,18 @@ public class PostV1PartnerManagedCompaniesRequestBuilder {
     }
 
     public PostV1PartnerManagedCompaniesResponse call() throws Exception {
-
+        if (xGustoAPIVersion == null) {
+            xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
+        }
         return sdk.createPartnerManaged(
             security,
             xGustoAPIVersion,
             requestBody);
     }
+
+    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+            new LazySingletonValue<>(
+                    "xGustoAPIVersion",
+                    "\"2024-04-01\"",
+                    new TypeReference<Optional<? extends VersionHeader>>() {});
 }

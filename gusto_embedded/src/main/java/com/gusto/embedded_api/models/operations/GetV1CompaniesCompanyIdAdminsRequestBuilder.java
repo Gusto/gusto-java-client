@@ -4,7 +4,9 @@
 
 package com.gusto.embedded_api.models.operations;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
@@ -15,7 +17,10 @@ public class GetV1CompaniesCompanyIdAdminsRequestBuilder {
     private String companyId;
     private Optional<Long> page = Optional.empty();
     private Optional<Long> per = Optional.empty();
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();
+    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+                            "xGustoAPIVersion",
+                            "\"2024-04-01\"",
+                            new TypeReference<Optional<? extends VersionHeader>>() {});
     private final SDKMethodInterfaces.MethodCallGetV1CompaniesCompanyIdAdmins sdk;
 
     public GetV1CompaniesCompanyIdAdminsRequestBuilder(SDKMethodInterfaces.MethodCallGetV1CompaniesCompanyIdAdmins sdk) {
@@ -65,11 +70,19 @@ public class GetV1CompaniesCompanyIdAdminsRequestBuilder {
     }
 
     public GetV1CompaniesCompanyIdAdminsResponse call() throws Exception {
-
+        if (xGustoAPIVersion == null) {
+            xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
+        }
         return sdk.listAdmins(
             companyId,
             page,
             per,
             xGustoAPIVersion);
     }
+
+    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+            new LazySingletonValue<>(
+                    "xGustoAPIVersion",
+                    "\"2024-04-01\"",
+                    new TypeReference<Optional<? extends VersionHeader>>() {});
 }

@@ -61,7 +61,7 @@ tasks.withType(Javadoc) {
 }
 
 group = "com.gusto"
-version = "0.0.5"
+version = "0.0.6"
 
 sourcesJar {
     archiveBaseName = "embedded-api"
@@ -78,7 +78,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'com.gusto'
             artifactId = 'embedded-api'
-            version = '0.0.5'
+            version = '0.0.6'
 
             from components.java
 

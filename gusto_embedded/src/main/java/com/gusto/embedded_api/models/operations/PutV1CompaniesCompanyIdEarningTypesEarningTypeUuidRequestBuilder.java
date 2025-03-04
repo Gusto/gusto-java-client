@@ -4,7 +4,9 @@
 
 package com.gusto.embedded_api.models.operations;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
@@ -13,7 +15,10 @@ public class PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder {
 
     private String companyId;
     private String earningTypeUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();
+    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+                            "xGustoAPIVersion",
+                            "\"2024-04-01\"",
+                            new TypeReference<Optional<? extends VersionHeader>>() {});
     private PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody requestBody;
     private final SDKMethodInterfaces.MethodCallPutV1CompaniesCompanyIdEarningTypesEarningTypeUuid sdk;
 
@@ -52,11 +57,19 @@ public class PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder {
     }
 
     public PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse call() throws Exception {
-
+        if (xGustoAPIVersion == null) {
+            xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
+        }
         return sdk.update(
             companyId,
             earningTypeUuid,
             xGustoAPIVersion,
             requestBody);
     }
+
+    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+            new LazySingletonValue<>(
+                    "xGustoAPIVersion",
+                    "\"2024-04-01\"",
+                    new TypeReference<Optional<? extends VersionHeader>>() {});
 }
