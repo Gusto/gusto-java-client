@@ -6,8 +6,10 @@
 package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.models.components.PayScheduleAssignmentBody;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
@@ -146,7 +148,7 @@ public class PostV1CompaniesCompanyIdPaySchedulesAssignRequest {
  
         private String companyId;
  
-        private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();
+        private Optional<? extends VersionHeader> xGustoAPIVersion;
  
         private PayScheduleAssignmentBody payScheduleAssignmentBody;  
         
@@ -188,11 +190,19 @@ public class PostV1CompaniesCompanyIdPaySchedulesAssignRequest {
         }
         
         public PostV1CompaniesCompanyIdPaySchedulesAssignRequest build() {
-            return new PostV1CompaniesCompanyIdPaySchedulesAssignRequest(
+            if (xGustoAPIVersion == null) {
+                xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
+            }            return new PostV1CompaniesCompanyIdPaySchedulesAssignRequest(
                 companyId,
                 xGustoAPIVersion,
                 payScheduleAssignmentBody);
         }
+
+        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+                new LazySingletonValue<>(
+                        "X-Gusto-API-Version",
+                        "\"2024-04-01\"",
+                        new TypeReference<Optional<? extends VersionHeader>>() {});
     }
 }
 

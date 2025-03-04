@@ -6,7 +6,9 @@
 package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Long;
@@ -245,7 +247,7 @@ public class GetInvoicesInvoicePeriodRequest {
  
         private Optional<String> companyUuids = Optional.empty();
  
-        private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();  
+        private Optional<? extends VersionHeader> xGustoAPIVersion;  
         
         private Builder() {
           // force use of static builder() method
@@ -333,13 +335,21 @@ public class GetInvoicesInvoicePeriodRequest {
         }
         
         public GetInvoicesInvoicePeriodRequest build() {
-            return new GetInvoicesInvoicePeriodRequest(
+            if (xGustoAPIVersion == null) {
+                xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
+            }            return new GetInvoicesInvoicePeriodRequest(
                 invoicePeriod,
                 page,
                 per,
                 companyUuids,
                 xGustoAPIVersion);
         }
+
+        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+                new LazySingletonValue<>(
+                        "X-Gusto-API-Version",
+                        "\"2024-04-01\"",
+                        new TypeReference<Optional<? extends VersionHeader>>() {});
     }
 }
 

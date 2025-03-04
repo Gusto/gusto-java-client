@@ -6,7 +6,9 @@
 package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
@@ -154,7 +156,7 @@ public class PutV1JobsJobIdRequest {
  
         private String jobId;
  
-        private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();
+        private Optional<? extends VersionHeader> xGustoAPIVersion;
  
         private PutV1JobsJobIdRequestBody requestBody;  
         
@@ -199,11 +201,19 @@ public class PutV1JobsJobIdRequest {
         }
         
         public PutV1JobsJobIdRequest build() {
-            return new PutV1JobsJobIdRequest(
+            if (xGustoAPIVersion == null) {
+                xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
+            }            return new PutV1JobsJobIdRequest(
                 jobId,
                 xGustoAPIVersion,
                 requestBody);
         }
+
+        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+                new LazySingletonValue<>(
+                        "X-Gusto-API-Version",
+                        "\"2024-04-01\"",
+                        new TypeReference<Optional<? extends VersionHeader>>() {});
     }
 }
 

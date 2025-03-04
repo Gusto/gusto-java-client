@@ -6,7 +6,9 @@
 package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Long;
@@ -205,7 +207,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest {
  
         private Optional<Long> per = Optional.empty();
  
-        private Optional<? extends VersionHeader> xGustoAPIVersion = Optional.empty();  
+        private Optional<? extends VersionHeader> xGustoAPIVersion;  
         
         private Builder() {
           // force use of static builder() method
@@ -275,12 +277,20 @@ public class GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest {
         }
         
         public GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest build() {
-            return new GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest(
+            if (xGustoAPIVersion == null) {
+                xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
+            }            return new GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest(
                 companyBenefitId,
                 page,
                 per,
                 xGustoAPIVersion);
         }
+
+        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+                new LazySingletonValue<>(
+                        "X-Gusto-API-Version",
+                        "\"2024-04-01\"",
+                        new TypeReference<Optional<? extends VersionHeader>>() {});
     }
 }
 
