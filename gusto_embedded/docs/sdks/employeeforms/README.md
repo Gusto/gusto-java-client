@@ -251,8 +251,8 @@ scope: `employee_forms:sign`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1EmployeeFormSignRequest;
 import com.gusto.embedded_api.models.operations.PutV1EmployeeFormSignRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1EmployeeFormSignResponse;
 import java.lang.Exception;
@@ -265,15 +265,18 @@ public class Application {
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
-        PutV1EmployeeFormSignResponse res = sdk.employeeForms().sign()
+        PutV1EmployeeFormSignRequest req = PutV1EmployeeFormSignRequest.builder()
                 .employeeId("<id>")
                 .formId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
                 .requestBody(PutV1EmployeeFormSignRequestBody.builder()
                     .signatureText("Jane Smith")
                     .agree(true)
                     .signedByIpAddress("192.168.0.1")
                     .build())
+                .build();
+
+        PutV1EmployeeFormSignResponse res = sdk.employeeForms().sign()
+                .request(req)
                 .call();
 
         if (res.form().isPresent()) {
@@ -285,12 +288,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `employeeId`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
-| `formId`                                                                                                                                                                                                                     | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the form                                                                                                                                                                                                         |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PutV1EmployeeFormSignRequestBody](../../models/operations/PutV1EmployeeFormSignRequestBody.md)                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `request`                                                                               | [PutV1EmployeeFormSignRequest](../../models/operations/PutV1EmployeeFormSignRequest.md) | :heavy_check_mark:                                                                      | The request object to use for the request.                                              |
 
 ### Response
 

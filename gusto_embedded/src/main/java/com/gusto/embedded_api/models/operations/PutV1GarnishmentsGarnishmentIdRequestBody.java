@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.GarnishmentChildSupportInput;
+import com.gusto.embedded_api.models.components.GarnishmentChildSupport;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
@@ -99,7 +99,7 @@ public class PutV1GarnishmentsGarnishmentIdRequestBody {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("child_support")
-    private JsonNullable<? extends GarnishmentChildSupportInput> childSupport;
+    private JsonNullable<? extends GarnishmentChildSupport> childSupport;
 
     /**
      * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
@@ -119,7 +119,7 @@ public class PutV1GarnishmentsGarnishmentIdRequestBody {
             @JsonProperty("pay_period_maximum") JsonNullable<String> payPeriodMaximum,
             @JsonProperty("deduct_as_percentage") Optional<Boolean> deductAsPercentage,
             @JsonProperty("total_amount") Optional<String> totalAmount,
-            @JsonProperty("child_support") JsonNullable<? extends GarnishmentChildSupportInput> childSupport,
+            @JsonProperty("child_support") JsonNullable<? extends GarnishmentChildSupport> childSupport,
             @JsonProperty("version") String version) {
         Utils.checkNotNull(active, "active");
         Utils.checkNotNull(amount, "amount");
@@ -237,8 +237,8 @@ public class PutV1GarnishmentsGarnishmentIdRequestBody {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<GarnishmentChildSupportInput> childSupport() {
-        return (JsonNullable<GarnishmentChildSupportInput>) childSupport;
+    public JsonNullable<GarnishmentChildSupport> childSupport() {
+        return (JsonNullable<GarnishmentChildSupport>) childSupport;
     }
 
     /**
@@ -436,7 +436,7 @@ public class PutV1GarnishmentsGarnishmentIdRequestBody {
     /**
      * Additional child support order details
      */
-    public PutV1GarnishmentsGarnishmentIdRequestBody withChildSupport(GarnishmentChildSupportInput childSupport) {
+    public PutV1GarnishmentsGarnishmentIdRequestBody withChildSupport(GarnishmentChildSupport childSupport) {
         Utils.checkNotNull(childSupport, "childSupport");
         this.childSupport = JsonNullable.of(childSupport);
         return this;
@@ -445,7 +445,7 @@ public class PutV1GarnishmentsGarnishmentIdRequestBody {
     /**
      * Additional child support order details
      */
-    public PutV1GarnishmentsGarnishmentIdRequestBody withChildSupport(JsonNullable<? extends GarnishmentChildSupportInput> childSupport) {
+    public PutV1GarnishmentsGarnishmentIdRequestBody withChildSupport(JsonNullable<? extends GarnishmentChildSupport> childSupport) {
         Utils.checkNotNull(childSupport, "childSupport");
         this.childSupport = childSupport;
         return this;
@@ -540,7 +540,7 @@ public class PutV1GarnishmentsGarnishmentIdRequestBody {
  
         private Optional<String> totalAmount = Optional.empty();
  
-        private JsonNullable<? extends GarnishmentChildSupportInput> childSupport = JsonNullable.undefined();
+        private JsonNullable<? extends GarnishmentChildSupport> childSupport = JsonNullable.undefined();
  
         private String version;  
         
@@ -731,7 +731,7 @@ public class PutV1GarnishmentsGarnishmentIdRequestBody {
         /**
          * Additional child support order details
          */
-        public Builder childSupport(GarnishmentChildSupportInput childSupport) {
+        public Builder childSupport(GarnishmentChildSupport childSupport) {
             Utils.checkNotNull(childSupport, "childSupport");
             this.childSupport = JsonNullable.of(childSupport);
             return this;
@@ -740,7 +740,7 @@ public class PutV1GarnishmentsGarnishmentIdRequestBody {
         /**
          * Additional child support order details
          */
-        public Builder childSupport(JsonNullable<? extends GarnishmentChildSupportInput> childSupport) {
+        public Builder childSupport(JsonNullable<? extends GarnishmentChildSupport> childSupport) {
             Utils.checkNotNull(childSupport, "childSupport");
             this.childSupport = childSupport;
             return this;

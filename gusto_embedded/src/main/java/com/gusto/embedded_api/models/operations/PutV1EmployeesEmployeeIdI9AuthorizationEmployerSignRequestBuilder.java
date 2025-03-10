@@ -14,6 +14,7 @@ import java.util.Optional;
 public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder {
 
     private String employeeId;
+    private Optional<String> xGustoClientIp = Optional.empty();
     private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2024-04-01\"",
@@ -28,6 +29,18 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder {
     public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder employeeId(String employeeId) {
         Utils.checkNotNull(employeeId, "employeeId");
         this.employeeId = employeeId;
+        return this;
+    }
+                
+    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder xGustoClientIp(String xGustoClientIp) {
+        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+        this.xGustoClientIp = Optional.of(xGustoClientIp);
+        return this;
+    }
+
+    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder xGustoClientIp(Optional<String> xGustoClientIp) {
+        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+        this.xGustoClientIp = xGustoClientIp;
         return this;
     }
                 
@@ -55,6 +68,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder {
         }
         return sdk.employerSign(
             employeeId,
+            xGustoClientIp,
             xGustoAPIVersion,
             requestBody);
     }

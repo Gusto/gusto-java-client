@@ -1148,6 +1148,7 @@ public class SDKMethodInterfaces {
     public interface MethodCallPutV1ContractorDocumentSign {
         PutV1ContractorDocumentSignResponse sign(
             String documentUuid,
+            Optional<String> xGustoClientIp,
             Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1ContractorDocumentSignRequestBody requestBody) throws Exception;
     }
@@ -1185,10 +1186,7 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallPutV1EmployeeFormSign {
         PutV1EmployeeFormSignResponse sign(
-            String employeeId,
-            String formId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1EmployeeFormSignRequestBody requestBody) throws Exception;
+            PutV1EmployeeFormSignRequest request) throws Exception;
     }
 
 
@@ -1484,6 +1482,7 @@ public class SDKMethodInterfaces {
     public interface MethodCallPutV1CompanyFormSign {
         PutV1CompanyFormSignResponse sign(
             String formId,
+            Optional<String> xGustoClientIp,
             Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1CompanyFormSignRequestBody requestBody) throws Exception;
     }
@@ -1744,6 +1743,7 @@ public class SDKMethodInterfaces {
     public interface MethodCallPutV1EmployeesEmployeeIdI9AuthorizationEmployerSign {
         PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse employerSign(
             String employeeId,
+            Optional<String> xGustoClientIp,
             Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody) throws Exception;
     }

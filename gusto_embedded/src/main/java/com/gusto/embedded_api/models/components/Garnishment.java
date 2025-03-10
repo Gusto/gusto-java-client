@@ -96,6 +96,13 @@ public class Garnishment {
     private JsonNullable<String> annualMaximum;
 
     /**
+     * A maximum total deduction for the lifetime of this garnishment. A null value indicates no maximum.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("total_amount")
+    private JsonNullable<String> totalAmount;
+
+    /**
      * The maximum deduction per pay period. A null value indicates no maximum. Represented as a float, e.g. "16.00".
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -135,6 +142,7 @@ public class Garnishment {
             @JsonProperty("times") JsonNullable<Long> times,
             @JsonProperty("recurring") Optional<Boolean> recurring,
             @JsonProperty("annual_maximum") JsonNullable<String> annualMaximum,
+            @JsonProperty("total_amount") JsonNullable<String> totalAmount,
             @JsonProperty("pay_period_maximum") JsonNullable<String> payPeriodMaximum,
             @JsonProperty("deduct_as_percentage") Optional<Boolean> deductAsPercentage,
             @JsonProperty("garnishment_type") JsonNullable<? extends GarnishmentType> garnishmentType,
@@ -149,6 +157,7 @@ public class Garnishment {
         Utils.checkNotNull(times, "times");
         Utils.checkNotNull(recurring, "recurring");
         Utils.checkNotNull(annualMaximum, "annualMaximum");
+        Utils.checkNotNull(totalAmount, "totalAmount");
         Utils.checkNotNull(payPeriodMaximum, "payPeriodMaximum");
         Utils.checkNotNull(deductAsPercentage, "deductAsPercentage");
         Utils.checkNotNull(garnishmentType, "garnishmentType");
@@ -163,6 +172,7 @@ public class Garnishment {
         this.times = times;
         this.recurring = recurring;
         this.annualMaximum = annualMaximum;
+        this.totalAmount = totalAmount;
         this.payPeriodMaximum = payPeriodMaximum;
         this.deductAsPercentage = deductAsPercentage;
         this.garnishmentType = garnishmentType;
@@ -171,7 +181,7 @@ public class Garnishment {
     
     public Garnishment(
             String uuid) {
-        this(uuid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined());
+        this(uuid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
@@ -252,6 +262,14 @@ public class Garnishment {
     @JsonIgnore
     public JsonNullable<String> annualMaximum() {
         return annualMaximum;
+    }
+
+    /**
+     * A maximum total deduction for the lifetime of this garnishment. A null value indicates no maximum.
+     */
+    @JsonIgnore
+    public JsonNullable<String> totalAmount() {
+        return totalAmount;
     }
 
     /**
@@ -464,6 +482,24 @@ public class Garnishment {
     }
 
     /**
+     * A maximum total deduction for the lifetime of this garnishment. A null value indicates no maximum.
+     */
+    public Garnishment withTotalAmount(String totalAmount) {
+        Utils.checkNotNull(totalAmount, "totalAmount");
+        this.totalAmount = JsonNullable.of(totalAmount);
+        return this;
+    }
+
+    /**
+     * A maximum total deduction for the lifetime of this garnishment. A null value indicates no maximum.
+     */
+    public Garnishment withTotalAmount(JsonNullable<String> totalAmount) {
+        Utils.checkNotNull(totalAmount, "totalAmount");
+        this.totalAmount = totalAmount;
+        return this;
+    }
+
+    /**
      * The maximum deduction per pay period. A null value indicates no maximum. Represented as a float, e.g. "16.00".
      */
     public Garnishment withPayPeriodMaximum(String payPeriodMaximum) {
@@ -555,6 +591,7 @@ public class Garnishment {
             Objects.deepEquals(this.times, other.times) &&
             Objects.deepEquals(this.recurring, other.recurring) &&
             Objects.deepEquals(this.annualMaximum, other.annualMaximum) &&
+            Objects.deepEquals(this.totalAmount, other.totalAmount) &&
             Objects.deepEquals(this.payPeriodMaximum, other.payPeriodMaximum) &&
             Objects.deepEquals(this.deductAsPercentage, other.deductAsPercentage) &&
             Objects.deepEquals(this.garnishmentType, other.garnishmentType) &&
@@ -574,6 +611,7 @@ public class Garnishment {
             times,
             recurring,
             annualMaximum,
+            totalAmount,
             payPeriodMaximum,
             deductAsPercentage,
             garnishmentType,
@@ -593,6 +631,7 @@ public class Garnishment {
                 "times", times,
                 "recurring", recurring,
                 "annualMaximum", annualMaximum,
+                "totalAmount", totalAmount,
                 "payPeriodMaximum", payPeriodMaximum,
                 "deductAsPercentage", deductAsPercentage,
                 "garnishmentType", garnishmentType,
@@ -620,6 +659,8 @@ public class Garnishment {
         private Optional<Boolean> recurring;
  
         private JsonNullable<String> annualMaximum;
+ 
+        private JsonNullable<String> totalAmount;
  
         private JsonNullable<String> payPeriodMaximum;
  
@@ -805,6 +846,24 @@ public class Garnishment {
         }
 
         /**
+         * A maximum total deduction for the lifetime of this garnishment. A null value indicates no maximum.
+         */
+        public Builder totalAmount(String totalAmount) {
+            Utils.checkNotNull(totalAmount, "totalAmount");
+            this.totalAmount = JsonNullable.of(totalAmount);
+            return this;
+        }
+
+        /**
+         * A maximum total deduction for the lifetime of this garnishment. A null value indicates no maximum.
+         */
+        public Builder totalAmount(JsonNullable<String> totalAmount) {
+            Utils.checkNotNull(totalAmount, "totalAmount");
+            this.totalAmount = totalAmount;
+            return this;
+        }
+
+        /**
          * The maximum deduction per pay period. A null value indicates no maximum. Represented as a float, e.g. "16.00".
          */
         public Builder payPeriodMaximum(String payPeriodMaximum) {
@@ -889,6 +948,9 @@ public class Garnishment {
             if (annualMaximum == null) {
                 annualMaximum = _SINGLETON_VALUE_AnnualMaximum.value();
             }
+            if (totalAmount == null) {
+                totalAmount = _SINGLETON_VALUE_TotalAmount.value();
+            }
             if (payPeriodMaximum == null) {
                 payPeriodMaximum = _SINGLETON_VALUE_PayPeriodMaximum.value();
             }
@@ -905,6 +967,7 @@ public class Garnishment {
                 times,
                 recurring,
                 annualMaximum,
+                totalAmount,
                 payPeriodMaximum,
                 deductAsPercentage,
                 garnishmentType,
@@ -932,6 +995,12 @@ public class Garnishment {
         private static final LazySingletonValue<JsonNullable<String>> _SINGLETON_VALUE_AnnualMaximum =
                 new LazySingletonValue<>(
                         "annual_maximum",
+                        "null",
+                        new TypeReference<JsonNullable<String>>() {});
+
+        private static final LazySingletonValue<JsonNullable<String>> _SINGLETON_VALUE_TotalAmount =
+                new LazySingletonValue<>(
+                        "total_amount",
                         "null",
                         new TypeReference<JsonNullable<String>>() {});
 

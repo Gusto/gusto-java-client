@@ -14,6 +14,7 @@ import java.util.Optional;
 public class PutV1ContractorDocumentSignRequestBuilder {
 
     private String documentUuid;
+    private Optional<String> xGustoClientIp = Optional.empty();
     private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2024-04-01\"",
@@ -28,6 +29,18 @@ public class PutV1ContractorDocumentSignRequestBuilder {
     public PutV1ContractorDocumentSignRequestBuilder documentUuid(String documentUuid) {
         Utils.checkNotNull(documentUuid, "documentUuid");
         this.documentUuid = documentUuid;
+        return this;
+    }
+                
+    public PutV1ContractorDocumentSignRequestBuilder xGustoClientIp(String xGustoClientIp) {
+        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+        this.xGustoClientIp = Optional.of(xGustoClientIp);
+        return this;
+    }
+
+    public PutV1ContractorDocumentSignRequestBuilder xGustoClientIp(Optional<String> xGustoClientIp) {
+        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+        this.xGustoClientIp = xGustoClientIp;
         return this;
     }
                 
@@ -55,6 +68,7 @@ public class PutV1ContractorDocumentSignRequestBuilder {
         }
         return sdk.sign(
             documentUuid,
+            xGustoClientIp,
             xGustoAPIVersion,
             requestBody);
     }

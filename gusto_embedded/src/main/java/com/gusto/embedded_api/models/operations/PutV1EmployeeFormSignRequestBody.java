@@ -31,10 +31,11 @@ public class PutV1EmployeeFormSignRequestBody {
     private boolean agree;
 
     /**
-     * The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported.
+     * The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("signed_by_ip_address")
-    private String signedByIpAddress;
+    private Optional<String> signedByIpAddress;
 
     /**
      * Whether there is a preparer
@@ -208,7 +209,7 @@ public class PutV1EmployeeFormSignRequestBody {
     public PutV1EmployeeFormSignRequestBody(
             @JsonProperty("signature_text") String signatureText,
             @JsonProperty("agree") boolean agree,
-            @JsonProperty("signed_by_ip_address") String signedByIpAddress,
+            @JsonProperty("signed_by_ip_address") Optional<String> signedByIpAddress,
             @JsonProperty("preparer") Optional<Boolean> preparer,
             @JsonProperty("preparer_first_name") Optional<String> preparerFirstName,
             @JsonProperty("preparer_last_name") Optional<String> preparerLastName,
@@ -327,9 +328,8 @@ public class PutV1EmployeeFormSignRequestBody {
     
     public PutV1EmployeeFormSignRequestBody(
             String signatureText,
-            boolean agree,
-            String signedByIpAddress) {
-        this(signatureText, agree, signedByIpAddress, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+            boolean agree) {
+        this(signatureText, agree, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -349,10 +349,10 @@ public class PutV1EmployeeFormSignRequestBody {
     }
 
     /**
-     * The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported.
+     * The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
      */
     @JsonIgnore
-    public String signedByIpAddress() {
+    public Optional<String> signedByIpAddress() {
         return signedByIpAddress;
     }
 
@@ -583,9 +583,18 @@ public class PutV1EmployeeFormSignRequestBody {
     }
 
     /**
-     * The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported.
+     * The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
      */
     public PutV1EmployeeFormSignRequestBody withSignedByIpAddress(String signedByIpAddress) {
+        Utils.checkNotNull(signedByIpAddress, "signedByIpAddress");
+        this.signedByIpAddress = Optional.ofNullable(signedByIpAddress);
+        return this;
+    }
+
+    /**
+     * The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
+     */
+    public PutV1EmployeeFormSignRequestBody withSignedByIpAddress(Optional<String> signedByIpAddress) {
         Utils.checkNotNull(signedByIpAddress, "signedByIpAddress");
         this.signedByIpAddress = signedByIpAddress;
         return this;
@@ -1216,7 +1225,7 @@ public class PutV1EmployeeFormSignRequestBody {
  
         private Boolean agree;
  
-        private String signedByIpAddress;
+        private Optional<String> signedByIpAddress = Optional.empty();
  
         private Optional<Boolean> preparer = Optional.empty();
  
@@ -1313,9 +1322,18 @@ public class PutV1EmployeeFormSignRequestBody {
         }
 
         /**
-         * The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported.
+         * The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
          */
         public Builder signedByIpAddress(String signedByIpAddress) {
+            Utils.checkNotNull(signedByIpAddress, "signedByIpAddress");
+            this.signedByIpAddress = Optional.ofNullable(signedByIpAddress);
+            return this;
+        }
+
+        /**
+         * The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
+         */
+        public Builder signedByIpAddress(Optional<String> signedByIpAddress) {
             Utils.checkNotNull(signedByIpAddress, "signedByIpAddress");
             this.signedByIpAddress = signedByIpAddress;
             return this;

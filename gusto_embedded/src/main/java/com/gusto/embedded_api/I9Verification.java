@@ -1156,7 +1156,7 @@ public class I9Verification implements
     public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse employerSign(
             String employeeId,
             PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody) throws Exception {
-        return employerSign(employeeId, Optional.empty(), requestBody);
+        return employerSign(employeeId, Optional.empty(), Optional.empty(), requestBody);
     }
     
     /**
@@ -1165,6 +1165,7 @@ public class I9Verification implements
      * 
      * scope: `i9_authorizations:manage`
      * @param employeeId The UUID of the employee
+     * @param xGustoClientIp Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
      * @param xGustoAPIVersion
      * @param requestBody
      * @return The response from the API call
@@ -1172,12 +1173,14 @@ public class I9Verification implements
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse employerSign(
             String employeeId,
+            Optional<String> xGustoClientIp,
             Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody) throws Exception {
         PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest request =
             PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest
                 .builder()
                 .employeeId(employeeId)
+                .xGustoClientIp(xGustoClientIp)
                 .xGustoAPIVersion(xGustoAPIVersion)
                 .requestBody(requestBody)
                 .build();
