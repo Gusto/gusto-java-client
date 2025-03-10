@@ -22,16 +22,14 @@ public class EntityErrorObject {
     /**
      * Specifies where the error occurs. Typically this key identifies the attribute/parameter related to the error.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("error_key")
-    private Optional<String> errorKey;
+    private String errorKey;
 
     /**
      * Specifies the type of error. The category provides error groupings and can be used to build custom error handling in your integration. If category is `nested_errors`, the object will contain a nested `errors` property with entity errors.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("category")
-    private Optional<String> category;
+    private String category;
 
     /**
      * Provides details about the error - generally this message can be surfaced to an end user.
@@ -52,15 +50,15 @@ public class EntityErrorObject {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("errors")
-    private Optional<? extends List<Errors>> errors;
+    private Optional<? extends List<EntityErrorObject>> errors;
 
     @JsonCreator
     public EntityErrorObject(
-            @JsonProperty("error_key") Optional<String> errorKey,
-            @JsonProperty("category") Optional<String> category,
+            @JsonProperty("error_key") String errorKey,
+            @JsonProperty("category") String category,
             @JsonProperty("message") Optional<String> message,
             @JsonProperty("metadata") Optional<? extends Metadata> metadata,
-            @JsonProperty("errors") Optional<? extends List<Errors>> errors) {
+            @JsonProperty("errors") Optional<? extends List<EntityErrorObject>> errors) {
         Utils.checkNotNull(errorKey, "errorKey");
         Utils.checkNotNull(category, "category");
         Utils.checkNotNull(message, "message");
@@ -73,15 +71,17 @@ public class EntityErrorObject {
         this.errors = errors;
     }
     
-    public EntityErrorObject() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public EntityErrorObject(
+            String errorKey,
+            String category) {
+        this(errorKey, category, Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
      * Specifies where the error occurs. Typically this key identifies the attribute/parameter related to the error.
      */
     @JsonIgnore
-    public Optional<String> errorKey() {
+    public String errorKey() {
         return errorKey;
     }
 
@@ -89,7 +89,7 @@ public class EntityErrorObject {
      * Specifies the type of error. The category provides error groupings and can be used to build custom error handling in your integration. If category is `nested_errors`, the object will contain a nested `errors` property with entity errors.
      */
     @JsonIgnore
-    public Optional<String> category() {
+    public String category() {
         return category;
     }
 
@@ -115,8 +115,8 @@ public class EntityErrorObject {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Errors>> errors() {
-        return (Optional<List<Errors>>) errors;
+    public Optional<List<EntityErrorObject>> errors() {
+        return (Optional<List<EntityErrorObject>>) errors;
     }
 
     public final static Builder builder() {
@@ -128,15 +128,6 @@ public class EntityErrorObject {
      */
     public EntityErrorObject withErrorKey(String errorKey) {
         Utils.checkNotNull(errorKey, "errorKey");
-        this.errorKey = Optional.ofNullable(errorKey);
-        return this;
-    }
-
-    /**
-     * Specifies where the error occurs. Typically this key identifies the attribute/parameter related to the error.
-     */
-    public EntityErrorObject withErrorKey(Optional<String> errorKey) {
-        Utils.checkNotNull(errorKey, "errorKey");
         this.errorKey = errorKey;
         return this;
     }
@@ -145,15 +136,6 @@ public class EntityErrorObject {
      * Specifies the type of error. The category provides error groupings and can be used to build custom error handling in your integration. If category is `nested_errors`, the object will contain a nested `errors` property with entity errors.
      */
     public EntityErrorObject withCategory(String category) {
-        Utils.checkNotNull(category, "category");
-        this.category = Optional.ofNullable(category);
-        return this;
-    }
-
-    /**
-     * Specifies the type of error. The category provides error groupings and can be used to build custom error handling in your integration. If category is `nested_errors`, the object will contain a nested `errors` property with entity errors.
-     */
-    public EntityErrorObject withCategory(Optional<String> category) {
         Utils.checkNotNull(category, "category");
         this.category = category;
         return this;
@@ -198,7 +180,7 @@ public class EntityErrorObject {
     /**
      * Will only exist if category is `nested_errors`. It is possible to have multiple levels of nested errors.
      */
-    public EntityErrorObject withErrors(List<Errors> errors) {
+    public EntityErrorObject withErrors(List<EntityErrorObject> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = Optional.ofNullable(errors);
         return this;
@@ -207,7 +189,7 @@ public class EntityErrorObject {
     /**
      * Will only exist if category is `nested_errors`. It is possible to have multiple levels of nested errors.
      */
-    public EntityErrorObject withErrors(Optional<? extends List<Errors>> errors) {
+    public EntityErrorObject withErrors(Optional<? extends List<EntityErrorObject>> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = errors;
         return this;
@@ -252,15 +234,15 @@ public class EntityErrorObject {
     
     public final static class Builder {
  
-        private Optional<String> errorKey = Optional.empty();
+        private String errorKey;
  
-        private Optional<String> category = Optional.empty();
+        private String category;
  
         private Optional<String> message = Optional.empty();
  
         private Optional<? extends Metadata> metadata = Optional.empty();
  
-        private Optional<? extends List<Errors>> errors = Optional.empty();  
+        private Optional<? extends List<EntityErrorObject>> errors = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -271,15 +253,6 @@ public class EntityErrorObject {
          */
         public Builder errorKey(String errorKey) {
             Utils.checkNotNull(errorKey, "errorKey");
-            this.errorKey = Optional.ofNullable(errorKey);
-            return this;
-        }
-
-        /**
-         * Specifies where the error occurs. Typically this key identifies the attribute/parameter related to the error.
-         */
-        public Builder errorKey(Optional<String> errorKey) {
-            Utils.checkNotNull(errorKey, "errorKey");
             this.errorKey = errorKey;
             return this;
         }
@@ -288,15 +261,6 @@ public class EntityErrorObject {
          * Specifies the type of error. The category provides error groupings and can be used to build custom error handling in your integration. If category is `nested_errors`, the object will contain a nested `errors` property with entity errors.
          */
         public Builder category(String category) {
-            Utils.checkNotNull(category, "category");
-            this.category = Optional.ofNullable(category);
-            return this;
-        }
-
-        /**
-         * Specifies the type of error. The category provides error groupings and can be used to build custom error handling in your integration. If category is `nested_errors`, the object will contain a nested `errors` property with entity errors.
-         */
-        public Builder category(Optional<String> category) {
             Utils.checkNotNull(category, "category");
             this.category = category;
             return this;
@@ -341,7 +305,7 @@ public class EntityErrorObject {
         /**
          * Will only exist if category is `nested_errors`. It is possible to have multiple levels of nested errors.
          */
-        public Builder errors(List<Errors> errors) {
+        public Builder errors(List<EntityErrorObject> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = Optional.ofNullable(errors);
             return this;
@@ -350,7 +314,7 @@ public class EntityErrorObject {
         /**
          * Will only exist if category is `nested_errors`. It is possible to have multiple levels of nested errors.
          */
-        public Builder errors(Optional<? extends List<Errors>> errors) {
+        public Builder errors(Optional<? extends List<EntityErrorObject>> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = errors;
             return this;

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.GarnishmentChildSupportInput;
+import com.gusto.embedded_api.models.components.GarnishmentChildSupport;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
@@ -104,7 +104,7 @@ public class PostV1EmployeesEmployeeIdGarnishmentsRequestBody {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("child_support")
-    private JsonNullable<? extends GarnishmentChildSupportInput> childSupport;
+    private JsonNullable<? extends GarnishmentChildSupport> childSupport;
 
     @JsonCreator
     public PostV1EmployeesEmployeeIdGarnishmentsRequestBody(
@@ -119,7 +119,7 @@ public class PostV1EmployeesEmployeeIdGarnishmentsRequestBody {
             @JsonProperty("pay_period_maximum") JsonNullable<String> payPeriodMaximum,
             @JsonProperty("deduct_as_percentage") Optional<Boolean> deductAsPercentage,
             @JsonProperty("total_amount") Optional<String> totalAmount,
-            @JsonProperty("child_support") JsonNullable<? extends GarnishmentChildSupportInput> childSupport) {
+            @JsonProperty("child_support") JsonNullable<? extends GarnishmentChildSupport> childSupport) {
         Utils.checkNotNull(active, "active");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(description, "description");
@@ -246,8 +246,8 @@ public class PostV1EmployeesEmployeeIdGarnishmentsRequestBody {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<GarnishmentChildSupportInput> childSupport() {
-        return (JsonNullable<GarnishmentChildSupportInput>) childSupport;
+    public JsonNullable<GarnishmentChildSupport> childSupport() {
+        return (JsonNullable<GarnishmentChildSupport>) childSupport;
     }
 
     public final static Builder builder() {
@@ -437,7 +437,7 @@ public class PostV1EmployeesEmployeeIdGarnishmentsRequestBody {
     /**
      * Additional child support order details
      */
-    public PostV1EmployeesEmployeeIdGarnishmentsRequestBody withChildSupport(GarnishmentChildSupportInput childSupport) {
+    public PostV1EmployeesEmployeeIdGarnishmentsRequestBody withChildSupport(GarnishmentChildSupport childSupport) {
         Utils.checkNotNull(childSupport, "childSupport");
         this.childSupport = JsonNullable.of(childSupport);
         return this;
@@ -446,7 +446,7 @@ public class PostV1EmployeesEmployeeIdGarnishmentsRequestBody {
     /**
      * Additional child support order details
      */
-    public PostV1EmployeesEmployeeIdGarnishmentsRequestBody withChildSupport(JsonNullable<? extends GarnishmentChildSupportInput> childSupport) {
+    public PostV1EmployeesEmployeeIdGarnishmentsRequestBody withChildSupport(JsonNullable<? extends GarnishmentChildSupport> childSupport) {
         Utils.checkNotNull(childSupport, "childSupport");
         this.childSupport = childSupport;
         return this;
@@ -534,7 +534,7 @@ public class PostV1EmployeesEmployeeIdGarnishmentsRequestBody {
  
         private Optional<String> totalAmount = Optional.empty();
  
-        private JsonNullable<? extends GarnishmentChildSupportInput> childSupport = JsonNullable.undefined();  
+        private JsonNullable<? extends GarnishmentChildSupport> childSupport = JsonNullable.undefined();  
         
         private Builder() {
           // force use of static builder() method
@@ -723,7 +723,7 @@ public class PostV1EmployeesEmployeeIdGarnishmentsRequestBody {
         /**
          * Additional child support order details
          */
-        public Builder childSupport(GarnishmentChildSupportInput childSupport) {
+        public Builder childSupport(GarnishmentChildSupport childSupport) {
             Utils.checkNotNull(childSupport, "childSupport");
             this.childSupport = JsonNullable.of(childSupport);
             return this;
@@ -732,7 +732,7 @@ public class PostV1EmployeesEmployeeIdGarnishmentsRequestBody {
         /**
          * Additional child support order details
          */
-        public Builder childSupport(JsonNullable<? extends GarnishmentChildSupportInput> childSupport) {
+        public Builder childSupport(JsonNullable<? extends GarnishmentChildSupport> childSupport) {
             Utils.checkNotNull(childSupport, "childSupport");
             this.childSupport = childSupport;
             return this;

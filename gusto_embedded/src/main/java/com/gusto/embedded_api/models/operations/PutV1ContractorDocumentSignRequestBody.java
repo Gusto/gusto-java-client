@@ -6,6 +6,8 @@
 package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
@@ -13,6 +15,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class PutV1ContractorDocumentSignRequestBody {
 
@@ -29,22 +32,29 @@ public class PutV1ContractorDocumentSignRequestBody {
     private boolean agree;
 
     /**
-     * The IP address of the signatory who signed the form.
+     * The IP address of the signatory who signed the form. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("signed_by_ip_address")
-    private String signedByIpAddress;
+    private Optional<String> signedByIpAddress;
 
     @JsonCreator
     public PutV1ContractorDocumentSignRequestBody(
             @JsonProperty("fields") List<Fields> fields,
             @JsonProperty("agree") boolean agree,
-            @JsonProperty("signed_by_ip_address") String signedByIpAddress) {
+            @JsonProperty("signed_by_ip_address") Optional<String> signedByIpAddress) {
         Utils.checkNotNull(fields, "fields");
         Utils.checkNotNull(agree, "agree");
         Utils.checkNotNull(signedByIpAddress, "signedByIpAddress");
         this.fields = fields;
         this.agree = agree;
         this.signedByIpAddress = signedByIpAddress;
+    }
+    
+    public PutV1ContractorDocumentSignRequestBody(
+            List<Fields> fields,
+            boolean agree) {
+        this(fields, agree, Optional.empty());
     }
 
     /**
@@ -64,10 +74,10 @@ public class PutV1ContractorDocumentSignRequestBody {
     }
 
     /**
-     * The IP address of the signatory who signed the form.
+     * The IP address of the signatory who signed the form. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
      */
     @JsonIgnore
-    public String signedByIpAddress() {
+    public Optional<String> signedByIpAddress() {
         return signedByIpAddress;
     }
 
@@ -94,9 +104,18 @@ public class PutV1ContractorDocumentSignRequestBody {
     }
 
     /**
-     * The IP address of the signatory who signed the form.
+     * The IP address of the signatory who signed the form. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
      */
     public PutV1ContractorDocumentSignRequestBody withSignedByIpAddress(String signedByIpAddress) {
+        Utils.checkNotNull(signedByIpAddress, "signedByIpAddress");
+        this.signedByIpAddress = Optional.ofNullable(signedByIpAddress);
+        return this;
+    }
+
+    /**
+     * The IP address of the signatory who signed the form. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
+     */
+    public PutV1ContractorDocumentSignRequestBody withSignedByIpAddress(Optional<String> signedByIpAddress) {
         Utils.checkNotNull(signedByIpAddress, "signedByIpAddress");
         this.signedByIpAddress = signedByIpAddress;
         return this;
@@ -139,7 +158,7 @@ public class PutV1ContractorDocumentSignRequestBody {
  
         private Boolean agree;
  
-        private String signedByIpAddress;  
+        private Optional<String> signedByIpAddress = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -164,9 +183,18 @@ public class PutV1ContractorDocumentSignRequestBody {
         }
 
         /**
-         * The IP address of the signatory who signed the form.
+         * The IP address of the signatory who signed the form. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
          */
         public Builder signedByIpAddress(String signedByIpAddress) {
+            Utils.checkNotNull(signedByIpAddress, "signedByIpAddress");
+            this.signedByIpAddress = Optional.ofNullable(signedByIpAddress);
+            return this;
+        }
+
+        /**
+         * The IP address of the signatory who signed the form. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
+         */
+        public Builder signedByIpAddress(Optional<String> signedByIpAddress) {
             Utils.checkNotNull(signedByIpAddress, "signedByIpAddress");
             this.signedByIpAddress = signedByIpAddress;
             return this;

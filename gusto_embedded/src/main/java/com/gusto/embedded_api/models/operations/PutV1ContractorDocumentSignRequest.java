@@ -26,6 +26,12 @@ public class PutV1ContractorDocumentSignRequest {
     private String documentUuid;
 
     /**
+     * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=x-gusto-client-ip")
+    private Optional<String> xGustoClientIp;
+
+    /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
@@ -37,12 +43,15 @@ public class PutV1ContractorDocumentSignRequest {
     @JsonCreator
     public PutV1ContractorDocumentSignRequest(
             String documentUuid,
+            Optional<String> xGustoClientIp,
             Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1ContractorDocumentSignRequestBody requestBody) {
         Utils.checkNotNull(documentUuid, "documentUuid");
+        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(requestBody, "requestBody");
         this.documentUuid = documentUuid;
+        this.xGustoClientIp = xGustoClientIp;
         this.xGustoAPIVersion = xGustoAPIVersion;
         this.requestBody = requestBody;
     }
@@ -50,7 +59,7 @@ public class PutV1ContractorDocumentSignRequest {
     public PutV1ContractorDocumentSignRequest(
             String documentUuid,
             PutV1ContractorDocumentSignRequestBody requestBody) {
-        this(documentUuid, Optional.empty(), requestBody);
+        this(documentUuid, Optional.empty(), Optional.empty(), requestBody);
     }
 
     /**
@@ -59,6 +68,14 @@ public class PutV1ContractorDocumentSignRequest {
     @JsonIgnore
     public String documentUuid() {
         return documentUuid;
+    }
+
+    /**
+     * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+     */
+    @JsonIgnore
+    public Optional<String> xGustoClientIp() {
+        return xGustoClientIp;
     }
 
     /**
@@ -85,6 +102,24 @@ public class PutV1ContractorDocumentSignRequest {
     public PutV1ContractorDocumentSignRequest withDocumentUuid(String documentUuid) {
         Utils.checkNotNull(documentUuid, "documentUuid");
         this.documentUuid = documentUuid;
+        return this;
+    }
+
+    /**
+     * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+     */
+    public PutV1ContractorDocumentSignRequest withXGustoClientIp(String xGustoClientIp) {
+        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+        this.xGustoClientIp = Optional.ofNullable(xGustoClientIp);
+        return this;
+    }
+
+    /**
+     * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+     */
+    public PutV1ContractorDocumentSignRequest withXGustoClientIp(Optional<String> xGustoClientIp) {
+        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+        this.xGustoClientIp = xGustoClientIp;
         return this;
     }
 
@@ -123,6 +158,7 @@ public class PutV1ContractorDocumentSignRequest {
         PutV1ContractorDocumentSignRequest other = (PutV1ContractorDocumentSignRequest) o;
         return 
             Objects.deepEquals(this.documentUuid, other.documentUuid) &&
+            Objects.deepEquals(this.xGustoClientIp, other.xGustoClientIp) &&
             Objects.deepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Objects.deepEquals(this.requestBody, other.requestBody);
     }
@@ -131,6 +167,7 @@ public class PutV1ContractorDocumentSignRequest {
     public int hashCode() {
         return Objects.hash(
             documentUuid,
+            xGustoClientIp,
             xGustoAPIVersion,
             requestBody);
     }
@@ -139,6 +176,7 @@ public class PutV1ContractorDocumentSignRequest {
     public String toString() {
         return Utils.toString(PutV1ContractorDocumentSignRequest.class,
                 "documentUuid", documentUuid,
+                "xGustoClientIp", xGustoClientIp,
                 "xGustoAPIVersion", xGustoAPIVersion,
                 "requestBody", requestBody);
     }
@@ -146,6 +184,8 @@ public class PutV1ContractorDocumentSignRequest {
     public final static class Builder {
  
         private String documentUuid;
+ 
+        private Optional<String> xGustoClientIp = Optional.empty();
  
         private Optional<? extends VersionHeader> xGustoAPIVersion;
  
@@ -161,6 +201,24 @@ public class PutV1ContractorDocumentSignRequest {
         public Builder documentUuid(String documentUuid) {
             Utils.checkNotNull(documentUuid, "documentUuid");
             this.documentUuid = documentUuid;
+            return this;
+        }
+
+        /**
+         * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+         */
+        public Builder xGustoClientIp(String xGustoClientIp) {
+            Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+            this.xGustoClientIp = Optional.ofNullable(xGustoClientIp);
+            return this;
+        }
+
+        /**
+         * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+         */
+        public Builder xGustoClientIp(Optional<String> xGustoClientIp) {
+            Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+            this.xGustoClientIp = xGustoClientIp;
             return this;
         }
 
@@ -193,6 +251,7 @@ public class PutV1ContractorDocumentSignRequest {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }            return new PutV1ContractorDocumentSignRequest(
                 documentUuid,
+                xGustoClientIp,
                 xGustoAPIVersion,
                 requestBody);
         }
