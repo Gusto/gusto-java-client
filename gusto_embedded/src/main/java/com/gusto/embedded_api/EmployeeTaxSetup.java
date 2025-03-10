@@ -738,7 +738,21 @@ public class EmployeeTaxSetup implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "422", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<UnprocessableEntityErrorObject>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 

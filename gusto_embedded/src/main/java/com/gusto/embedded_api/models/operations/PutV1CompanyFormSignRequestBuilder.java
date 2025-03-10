@@ -14,6 +14,7 @@ import java.util.Optional;
 public class PutV1CompanyFormSignRequestBuilder {
 
     private String formId;
+    private Optional<String> xGustoClientIp = Optional.empty();
     private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2024-04-01\"",
@@ -28,6 +29,18 @@ public class PutV1CompanyFormSignRequestBuilder {
     public PutV1CompanyFormSignRequestBuilder formId(String formId) {
         Utils.checkNotNull(formId, "formId");
         this.formId = formId;
+        return this;
+    }
+                
+    public PutV1CompanyFormSignRequestBuilder xGustoClientIp(String xGustoClientIp) {
+        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+        this.xGustoClientIp = Optional.of(xGustoClientIp);
+        return this;
+    }
+
+    public PutV1CompanyFormSignRequestBuilder xGustoClientIp(Optional<String> xGustoClientIp) {
+        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+        this.xGustoClientIp = xGustoClientIp;
         return this;
     }
                 
@@ -55,6 +68,7 @@ public class PutV1CompanyFormSignRequestBuilder {
         }
         return sdk.sign(
             formId,
+            xGustoClientIp,
             xGustoAPIVersion,
             requestBody);
     }

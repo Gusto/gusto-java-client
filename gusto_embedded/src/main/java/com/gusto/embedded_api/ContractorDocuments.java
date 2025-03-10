@@ -541,7 +541,7 @@ public class ContractorDocuments implements
     public PutV1ContractorDocumentSignResponse sign(
             String documentUuid,
             PutV1ContractorDocumentSignRequestBody requestBody) throws Exception {
-        return sign(documentUuid, Optional.empty(), requestBody);
+        return sign(documentUuid, Optional.empty(), Optional.empty(), requestBody);
     }
     
     /**
@@ -550,6 +550,7 @@ public class ContractorDocuments implements
      * 
      * scope: `contractor_documents:write`
      * @param documentUuid The ID or UUID of the document
+     * @param xGustoClientIp Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
      * @param xGustoAPIVersion
      * @param requestBody
      * @return The response from the API call
@@ -557,12 +558,14 @@ public class ContractorDocuments implements
      */
     public PutV1ContractorDocumentSignResponse sign(
             String documentUuid,
+            Optional<String> xGustoClientIp,
             Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1ContractorDocumentSignRequestBody requestBody) throws Exception {
         PutV1ContractorDocumentSignRequest request =
             PutV1ContractorDocumentSignRequest
                 .builder()
                 .documentUuid(documentUuid)
+                .xGustoClientIp(xGustoClientIp)
                 .xGustoAPIVersion(xGustoAPIVersion)
                 .requestBody(requestBody)
                 .build();

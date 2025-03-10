@@ -26,6 +26,12 @@ public class PutV1CompanyFormSignRequest {
     private String formId;
 
     /**
+     * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=x-gusto-client-ip")
+    private Optional<String> xGustoClientIp;
+
+    /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
@@ -37,12 +43,15 @@ public class PutV1CompanyFormSignRequest {
     @JsonCreator
     public PutV1CompanyFormSignRequest(
             String formId,
+            Optional<String> xGustoClientIp,
             Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1CompanyFormSignRequestBody requestBody) {
         Utils.checkNotNull(formId, "formId");
+        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(requestBody, "requestBody");
         this.formId = formId;
+        this.xGustoClientIp = xGustoClientIp;
         this.xGustoAPIVersion = xGustoAPIVersion;
         this.requestBody = requestBody;
     }
@@ -50,7 +59,7 @@ public class PutV1CompanyFormSignRequest {
     public PutV1CompanyFormSignRequest(
             String formId,
             PutV1CompanyFormSignRequestBody requestBody) {
-        this(formId, Optional.empty(), requestBody);
+        this(formId, Optional.empty(), Optional.empty(), requestBody);
     }
 
     /**
@@ -59,6 +68,14 @@ public class PutV1CompanyFormSignRequest {
     @JsonIgnore
     public String formId() {
         return formId;
+    }
+
+    /**
+     * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+     */
+    @JsonIgnore
+    public Optional<String> xGustoClientIp() {
+        return xGustoClientIp;
     }
 
     /**
@@ -85,6 +102,24 @@ public class PutV1CompanyFormSignRequest {
     public PutV1CompanyFormSignRequest withFormId(String formId) {
         Utils.checkNotNull(formId, "formId");
         this.formId = formId;
+        return this;
+    }
+
+    /**
+     * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+     */
+    public PutV1CompanyFormSignRequest withXGustoClientIp(String xGustoClientIp) {
+        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+        this.xGustoClientIp = Optional.ofNullable(xGustoClientIp);
+        return this;
+    }
+
+    /**
+     * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+     */
+    public PutV1CompanyFormSignRequest withXGustoClientIp(Optional<String> xGustoClientIp) {
+        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+        this.xGustoClientIp = xGustoClientIp;
         return this;
     }
 
@@ -123,6 +158,7 @@ public class PutV1CompanyFormSignRequest {
         PutV1CompanyFormSignRequest other = (PutV1CompanyFormSignRequest) o;
         return 
             Objects.deepEquals(this.formId, other.formId) &&
+            Objects.deepEquals(this.xGustoClientIp, other.xGustoClientIp) &&
             Objects.deepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Objects.deepEquals(this.requestBody, other.requestBody);
     }
@@ -131,6 +167,7 @@ public class PutV1CompanyFormSignRequest {
     public int hashCode() {
         return Objects.hash(
             formId,
+            xGustoClientIp,
             xGustoAPIVersion,
             requestBody);
     }
@@ -139,6 +176,7 @@ public class PutV1CompanyFormSignRequest {
     public String toString() {
         return Utils.toString(PutV1CompanyFormSignRequest.class,
                 "formId", formId,
+                "xGustoClientIp", xGustoClientIp,
                 "xGustoAPIVersion", xGustoAPIVersion,
                 "requestBody", requestBody);
     }
@@ -146,6 +184,8 @@ public class PutV1CompanyFormSignRequest {
     public final static class Builder {
  
         private String formId;
+ 
+        private Optional<String> xGustoClientIp = Optional.empty();
  
         private Optional<? extends VersionHeader> xGustoAPIVersion;
  
@@ -161,6 +201,24 @@ public class PutV1CompanyFormSignRequest {
         public Builder formId(String formId) {
             Utils.checkNotNull(formId, "formId");
             this.formId = formId;
+            return this;
+        }
+
+        /**
+         * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+         */
+        public Builder xGustoClientIp(String xGustoClientIp) {
+            Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+            this.xGustoClientIp = Optional.ofNullable(xGustoClientIp);
+            return this;
+        }
+
+        /**
+         * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+         */
+        public Builder xGustoClientIp(Optional<String> xGustoClientIp) {
+            Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+            this.xGustoClientIp = xGustoClientIp;
             return this;
         }
 
@@ -193,6 +251,7 @@ public class PutV1CompanyFormSignRequest {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }            return new PutV1CompanyFormSignRequest(
                 formId,
+                xGustoClientIp,
                 xGustoAPIVersion,
                 requestBody);
         }

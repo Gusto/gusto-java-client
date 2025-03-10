@@ -47,7 +47,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.gusto:embedded-api:0.0.6'
+implementation 'com.gusto:embedded-api:0.1.0'
 ```
 
 Maven:
@@ -55,7 +55,7 @@ Maven:
 <dependency>
     <groupId>com.gusto</groupId>
     <artifactId>embedded-api</artifactId>
-    <version>0.0.6</version>
+    <version>0.1.0</version>
 </dependency>
 ```
 

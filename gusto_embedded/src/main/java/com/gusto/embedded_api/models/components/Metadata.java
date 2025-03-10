@@ -4,26 +4,63 @@
 
 
 package com.gusto.embedded_api.models.components;
-import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.gusto.embedded_api.utils.OneOfDeserializer;
+import com.gusto.embedded_api.utils.TypedObject;
+import com.gusto.embedded_api.utils.Utils.JsonShape;
+import com.gusto.embedded_api.utils.Utils.TypeReferenceWithShape;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
 /**
  * Metadata - Contains relevant data to identify the resource in question when applicable. For example, to identify an entity `entity_type` and `entity_uuid` will be provided.
  */
 
+@JsonDeserialize(using = Metadata._Deserializer.class)
 public class Metadata {
 
-    @JsonCreator
-    public Metadata() {
-        
-        
+    @JsonValue
+    private TypedObject value;
+    
+    private Metadata(TypedObject value) {
+        this.value = value;
     }
 
-    public final static Builder builder() {
-        return new Builder();
+    public static Metadata of(MetadataWithMultipleEntities value) {
+        Utils.checkNotNull(value, "value");
+        return new Metadata(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<MetadataWithMultipleEntities>(){}));
     }
+
+    public static Metadata of(MetadataWithOneEntity value) {
+        Utils.checkNotNull(value, "value");
+        return new Metadata(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<MetadataWithOneEntity>(){}));
+    }
+    
+    /**
+     * Returns an instance of one of these types:
+     * <ul>
+     * <li>{@code com.gusto.embedded_api.models.components.MetadataWithMultipleEntities}</li>
+     * <li>{@code com.gusto.embedded_api.models.components.MetadataWithOneEntity}</li>
+     * </ul>
+     * 
+     * <p>Use {@code instanceof} to determine what type is returned. For example:
+     * 
+     * <pre>
+     * if (obj.value() instanceof String) {
+     *     String answer = (String) obj.value();
+     *     System.out.println("answer=" + answer);
+     * }
+     * </pre>
+     * 
+     * @return value of oneOf type
+     **/ 
+    public java.lang.Object value() {
+        return value.value();
+    }    
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -33,30 +70,29 @@ public class Metadata {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        return true;
+        Metadata other = (Metadata) o;
+        return Objects.deepEquals(this.value.value(), other.value.value()); 
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            );
+        return Objects.hash(value.value());
+    }
+    
+    @SuppressWarnings("serial")
+    public static final class _Deserializer extends OneOfDeserializer<Metadata> {
+
+        public _Deserializer() {
+            super(Metadata.class, false,
+                  TypeReferenceWithShape.of(new TypeReference<MetadataWithOneEntity>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<MetadataWithMultipleEntities>() {}, JsonShape.DEFAULT));
+        }
     }
     
     @Override
     public String toString() {
-        return Utils.toString(Metadata.class);
+        return Utils.toString(Metadata.class,
+                "value", value);
     }
-    
-    public final static class Builder {  
-        
-        private Builder() {
-          // force use of static builder() method
-        }
-        
-        public Metadata build() {
-            return new Metadata(
-                );
-        }
-    }
+ 
 }
-

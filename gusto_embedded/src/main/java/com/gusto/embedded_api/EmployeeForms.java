@@ -25,7 +25,6 @@ import com.gusto.embedded_api.models.operations.PostV1SandboxGenerateW2RequestBo
 import com.gusto.embedded_api.models.operations.PostV1SandboxGenerateW2RequestBuilder;
 import com.gusto.embedded_api.models.operations.PostV1SandboxGenerateW2Response;
 import com.gusto.embedded_api.models.operations.PutV1EmployeeFormSignRequest;
-import com.gusto.embedded_api.models.operations.PutV1EmployeeFormSignRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1EmployeeFormSignRequestBuilder;
 import com.gusto.embedded_api.models.operations.PutV1EmployeeFormSignResponse;
 import com.gusto.embedded_api.models.operations.SDKMethodInterfaces.*;
@@ -745,48 +744,12 @@ public class EmployeeForms implements
      * first name, last name, street address, city, state, and zip for that preparer are all required.
      * 
      * scope: `employee_forms:sign`
-     * @param employeeId The UUID of the employee
-     * @param formId The UUID of the form
-     * @param requestBody
+     * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public PutV1EmployeeFormSignResponse sign(
-            String employeeId,
-            String formId,
-            PutV1EmployeeFormSignRequestBody requestBody) throws Exception {
-        return sign(employeeId, formId, Optional.empty(), requestBody);
-    }
-    
-    /**
-     * Sign an employee form
-     * Sign an employee form.
-     * 
-     * The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
-     * first name, last name, street address, city, state, and zip for that preparer are all required.
-     * 
-     * scope: `employee_forms:sign`
-     * @param employeeId The UUID of the employee
-     * @param formId The UUID of the form
-     * @param xGustoAPIVersion
-     * @param requestBody
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public PutV1EmployeeFormSignResponse sign(
-            String employeeId,
-            String formId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1EmployeeFormSignRequestBody requestBody) throws Exception {
-        PutV1EmployeeFormSignRequest request =
-            PutV1EmployeeFormSignRequest
-                .builder()
-                .employeeId(employeeId)
-                .formId(formId)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
-                .build();
-        
+            PutV1EmployeeFormSignRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 PutV1EmployeeFormSignRequest.class,
@@ -798,7 +761,7 @@ public class EmployeeForms implements
         Object _convertedRequest = Utils.convertToShape(
                 request, 
                 JsonShape.DEFAULT,
-                new TypeReference<Object>() {});
+                new TypeReference<PutV1EmployeeFormSignRequest>() {});
         SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
                 _convertedRequest, 
                 "requestBody",

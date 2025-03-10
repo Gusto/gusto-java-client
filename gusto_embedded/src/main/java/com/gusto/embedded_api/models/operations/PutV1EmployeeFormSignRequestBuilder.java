@@ -4,72 +4,26 @@
 
 package com.gusto.embedded_api.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
-import java.lang.String;
-import java.util.Optional;
 
 public class PutV1EmployeeFormSignRequestBuilder {
 
-    private String employeeId;
-    private String formId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
-                            "xGustoAPIVersion",
-                            "\"2024-04-01\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PutV1EmployeeFormSignRequestBody requestBody;
+    private PutV1EmployeeFormSignRequest request;
     private final SDKMethodInterfaces.MethodCallPutV1EmployeeFormSign sdk;
 
     public PutV1EmployeeFormSignRequestBuilder(SDKMethodInterfaces.MethodCallPutV1EmployeeFormSign sdk) {
         this.sdk = sdk;
     }
 
-    public PutV1EmployeeFormSignRequestBuilder employeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
-    }
-
-    public PutV1EmployeeFormSignRequestBuilder formId(String formId) {
-        Utils.checkNotNull(formId, "formId");
-        this.formId = formId;
-        return this;
-    }
-                
-    public PutV1EmployeeFormSignRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
-
-    public PutV1EmployeeFormSignRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PutV1EmployeeFormSignRequestBuilder requestBody(PutV1EmployeeFormSignRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1EmployeeFormSignRequestBuilder request(PutV1EmployeeFormSignRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
     }
 
     public PutV1EmployeeFormSignResponse call() throws Exception {
-        if (xGustoAPIVersion == null) {
-            xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
-        }
-        return sdk.sign(
-            employeeId,
-            formId,
-            xGustoAPIVersion,
-            requestBody);
-    }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
-            new LazySingletonValue<>(
-                    "xGustoAPIVersion",
-                    "\"2024-04-01\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+        return sdk.sign(
+            request);
+    }
 }

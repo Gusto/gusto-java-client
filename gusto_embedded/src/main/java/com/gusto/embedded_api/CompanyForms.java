@@ -540,7 +540,7 @@ public class CompanyForms implements
     public PutV1CompanyFormSignResponse sign(
             String formId,
             PutV1CompanyFormSignRequestBody requestBody) throws Exception {
-        return sign(formId, Optional.empty(), requestBody);
+        return sign(formId, Optional.empty(), Optional.empty(), requestBody);
     }
     
     /**
@@ -549,6 +549,7 @@ public class CompanyForms implements
      * 
      * scope: `company_forms:sign`
      * @param formId The UUID of the form
+     * @param xGustoClientIp Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
      * @param xGustoAPIVersion
      * @param requestBody
      * @return The response from the API call
@@ -556,12 +557,14 @@ public class CompanyForms implements
      */
     public PutV1CompanyFormSignResponse sign(
             String formId,
+            Optional<String> xGustoClientIp,
             Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1CompanyFormSignRequestBody requestBody) throws Exception {
         PutV1CompanyFormSignRequest request =
             PutV1CompanyFormSignRequest
                 .builder()
                 .formId(formId)
+                .xGustoClientIp(xGustoClientIp)
                 .xGustoAPIVersion(xGustoAPIVersion)
                 .requestBody(requestBody)
                 .build();
