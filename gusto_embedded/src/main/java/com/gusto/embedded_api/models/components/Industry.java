@@ -18,7 +18,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * Industry - Example response
+ * Industry
+ * 
+ * <p>Example response
  */
 
 public class Industry {

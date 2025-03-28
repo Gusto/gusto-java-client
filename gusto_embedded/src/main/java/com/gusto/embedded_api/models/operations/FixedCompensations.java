@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * FixedCompensations - An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.
+ * FixedCompensations
+ * 
+ * <p>An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.
  */
 
 public class FixedCompensations {

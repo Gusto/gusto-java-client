@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * I9AuthorizationDocument - An employee's I-9 verification document
+ * I9AuthorizationDocument
+ * 
+ * <p>An employee's I-9 verification document
  */
 
 public class I9AuthorizationDocument {

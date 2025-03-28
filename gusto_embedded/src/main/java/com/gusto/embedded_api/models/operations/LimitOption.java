@@ -9,12 +9,14 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * LimitOption - Some benefits require additional information to determine
+ * LimitOption
+ * 
+ * <p>Some benefits require additional information to determine
  * their limit.
  * 
- * `Family` or `Individual`: Applicable to HSA benefit.
+ * <p>`Family` or `Individual`: Applicable to HSA benefit.
  * 
- * `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
+ * <p>`Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
  */
 public enum LimitOption {
     FAMILY("Family"),

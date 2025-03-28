@@ -93,11 +93,13 @@ public class CompanyBenefits implements
 
     /**
      * Create a company benefit
-     * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Note that company benefits can be deactivated only when no employees are enrolled.
+     * <p>Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * scope: `company_benefits:write`
+     * <p>Note that company benefits can be deactivated only when no employees are enrolled.
+     * 
+     * <p>scope: `company_benefits:write`
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder create() {
@@ -106,13 +108,15 @@ public class CompanyBenefits implements
 
     /**
      * Create a company benefit
-     * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Note that company benefits can be deactivated only when no employees are enrolled.
+     * <p>Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * scope: `company_benefits:write`
+     * <p>Note that company benefits can be deactivated only when no employees are enrolled.
+     * 
+     * <p>scope: `company_benefits:write`
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -124,14 +128,16 @@ public class CompanyBenefits implements
     
     /**
      * Create a company benefit
-     * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Note that company benefits can be deactivated only when no employees are enrolled.
+     * <p>Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * scope: `company_benefits:write`
+     * <p>Note that company benefits can be deactivated only when no employees are enrolled.
+     * 
+     * <p>scope: `company_benefits:write`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -181,6 +187,7 @@ public class CompanyBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_id-company_benefits", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -192,6 +199,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-company_benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -201,6 +209,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-company_benefits",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -210,6 +219,7 @@ public class CompanyBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-company_benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -285,13 +295,15 @@ public class CompanyBenefits implements
 
     /**
      * Get benefits for a company
-     * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Note that company benefits can be deactivated only when no employees are enrolled.
+     * <p>Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+     * <p>Note that company benefits can be deactivated only when no employees are enrolled.
      * 
-     * scope: `company_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+     * 
+     * <p>scope: `company_benefits:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdCompanyBenefitsRequestBuilder list() {
@@ -300,13 +312,15 @@ public class CompanyBenefits implements
 
     /**
      * Get benefits for a company
-     * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Note that company benefits can be deactivated only when no employees are enrolled.
+     * <p>Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+     * <p>Note that company benefits can be deactivated only when no employees are enrolled.
      * 
-     * scope: `company_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+     * 
+     * <p>scope: `company_benefits:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -318,17 +332,19 @@ public class CompanyBenefits implements
     
     /**
      * Get benefits for a company
-     * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Note that company benefits can be deactivated only when no employees are enrolled.
+     * <p>Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+     * <p>Note that company benefits can be deactivated only when no employees are enrolled.
      * 
-     * scope: `company_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+     * 
+     * <p>scope: `company_benefits:read`
+     * 
      * @param companyId The UUID of the company
      * @param active Whether the benefit is currently active
      * @param enrollmentCount Whether to return employee enrollment count
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -372,6 +388,7 @@ public class CompanyBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-company_benefits", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -383,6 +400,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-company_benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -392,6 +410,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-company_benefits",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -401,6 +420,7 @@ public class CompanyBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-company_benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -462,13 +482,15 @@ public class CompanyBenefits implements
 
     /**
      * Get a company benefit
-     * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Note that company benefits can be deactivated only when no employees are enrolled.
+     * <p>Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * When with_employee_benefits parameter with true value is passed, employee_benefits:read scope is required to return employee_benefits.
+     * <p>Note that company benefits can be deactivated only when no employees are enrolled.
      * 
-     * scope: `company_benefits:read`
+     * <p>When with_employee_benefits parameter with true value is passed, employee_benefits:read scope is required to return employee_benefits.
+     * 
+     * <p>scope: `company_benefits:read`
+     * 
      * @return The call builder
      */
     public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder get() {
@@ -477,13 +499,15 @@ public class CompanyBenefits implements
 
     /**
      * Get a company benefit
-     * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Note that company benefits can be deactivated only when no employees are enrolled.
+     * <p>Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * When with_employee_benefits parameter with true value is passed, employee_benefits:read scope is required to return employee_benefits.
+     * <p>Note that company benefits can be deactivated only when no employees are enrolled.
      * 
-     * scope: `company_benefits:read`
+     * <p>When with_employee_benefits parameter with true value is passed, employee_benefits:read scope is required to return employee_benefits.
+     * 
+     * <p>scope: `company_benefits:read`
+     * 
      * @param companyBenefitId The UUID of the company benefit
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -495,16 +519,18 @@ public class CompanyBenefits implements
     
     /**
      * Get a company benefit
-     * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Note that company benefits can be deactivated only when no employees are enrolled.
+     * <p>Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * When with_employee_benefits parameter with true value is passed, employee_benefits:read scope is required to return employee_benefits.
+     * <p>Note that company benefits can be deactivated only when no employees are enrolled.
      * 
-     * scope: `company_benefits:read`
+     * <p>When with_employee_benefits parameter with true value is passed, employee_benefits:read scope is required to return employee_benefits.
+     * 
+     * <p>scope: `company_benefits:read`
+     * 
      * @param companyBenefitId The UUID of the company benefit
      * @param withEmployeeBenefits Whether to return employee benefits associated with the benefit
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -546,6 +572,7 @@ public class CompanyBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-company_benefits-company_benefit_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -557,6 +584,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company_benefits-company_benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -566,6 +594,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-company_benefits-company_benefit_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -575,6 +604,7 @@ public class CompanyBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company_benefits-company_benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -636,11 +666,13 @@ public class CompanyBenefits implements
 
     /**
      * Update a company benefit
-     * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Note that company benefits can be deactivated only when no employees are enrolled.
+     * <p>Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * scope: `company_benefits:write`
+     * <p>Note that company benefits can be deactivated only when no employees are enrolled.
+     * 
+     * <p>scope: `company_benefits:write`
+     * 
      * @return The call builder
      */
     public PutV1CompanyBenefitsCompanyBenefitIdRequestBuilder update() {
@@ -649,13 +681,15 @@ public class CompanyBenefits implements
 
     /**
      * Update a company benefit
-     * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Note that company benefits can be deactivated only when no employees are enrolled.
+     * <p>Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * scope: `company_benefits:write`
+     * <p>Note that company benefits can be deactivated only when no employees are enrolled.
+     * 
+     * <p>scope: `company_benefits:write`
+     * 
      * @param companyBenefitId The UUID of the company benefit
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -667,14 +701,16 @@ public class CompanyBenefits implements
     
     /**
      * Update a company benefit
-     * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * Note that company benefits can be deactivated only when no employees are enrolled.
+     * <p>Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      * 
-     * scope: `company_benefits:write`
+     * <p>Note that company benefits can be deactivated only when no employees are enrolled.
+     * 
+     * <p>scope: `company_benefits:write`
+     * 
      * @param companyBenefitId The UUID of the company benefit
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -724,6 +760,7 @@ public class CompanyBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-company_benefits-company_benefit_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -735,6 +772,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-company_benefits-company_benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -744,6 +782,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-company_benefits-company_benefit_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -753,6 +792,7 @@ public class CompanyBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-company_benefits-company_benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -828,12 +868,14 @@ public class CompanyBenefits implements
 
     /**
      * Delete a company benefit
-     * The following must be true in order to delete a company benefit
+     * 
+     * <p>The following must be true in order to delete a company benefit
      *   - There are no employee benefits associated with the company benefit
      *   - There are no payroll items associated with the company benefit
      *   - The benefit is not managed by a Partner or by Gusto (type must be 'External')
      * 
-     * scope: `company_benefits:write`
+     * <p>scope: `company_benefits:write`
+     * 
      * @return The call builder
      */
     public DeleteV1CompanyBenefitsCompanyBenefitIdRequestBuilder delete() {
@@ -842,12 +884,14 @@ public class CompanyBenefits implements
 
     /**
      * Delete a company benefit
-     * The following must be true in order to delete a company benefit
+     * 
+     * <p>The following must be true in order to delete a company benefit
      *   - There are no employee benefits associated with the company benefit
      *   - There are no payroll items associated with the company benefit
      *   - The benefit is not managed by a Partner or by Gusto (type must be 'External')
      * 
-     * scope: `company_benefits:write`
+     * <p>scope: `company_benefits:write`
+     * 
      * @param companyBenefitId The UUID of the company benefit
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -859,14 +903,16 @@ public class CompanyBenefits implements
     
     /**
      * Delete a company benefit
-     * The following must be true in order to delete a company benefit
+     * 
+     * <p>The following must be true in order to delete a company benefit
      *   - There are no employee benefits associated with the company benefit
      *   - There are no payroll items associated with the company benefit
      *   - The benefit is not managed by a Partner or by Gusto (type must be 'External')
      * 
-     * scope: `company_benefits:write`
+     * <p>scope: `company_benefits:write`
+     * 
      * @param companyBenefitId The UUID of the company benefit
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -901,6 +947,7 @@ public class CompanyBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-company_benefits-company_benefit_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -912,6 +959,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-company_benefits-company_benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -921,6 +969,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-company_benefits-company_benefit_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -930,6 +979,7 @@ public class CompanyBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-company_benefits-company_benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -996,11 +1046,13 @@ public class CompanyBenefits implements
 
     /**
      * Get all benefits supported by Gusto
-     * Returns all benefits supported by Gusto.
      * 
-     * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+     * <p>Returns all benefits supported by Gusto.
      * 
-     * scope: `benefits:read`
+     * <p>The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+     * 
+     * <p>scope: `benefits:read`
+     * 
      * @return The call builder
      */
     public GetV1BenefitsRequestBuilder getAll() {
@@ -1009,11 +1061,13 @@ public class CompanyBenefits implements
 
     /**
      * Get all benefits supported by Gusto
-     * Returns all benefits supported by Gusto.
      * 
-     * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+     * <p>Returns all benefits supported by Gusto.
      * 
-     * scope: `benefits:read`
+     * <p>The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+     * 
+     * <p>scope: `benefits:read`
+     * 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1023,12 +1077,14 @@ public class CompanyBenefits implements
     
     /**
      * Get all benefits supported by Gusto
-     * Returns all benefits supported by Gusto.
      * 
-     * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+     * <p>Returns all benefits supported by Gusto.
      * 
-     * scope: `benefits:read`
-     * @param xGustoAPIVersion
+     * <p>The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+     * 
+     * <p>scope: `benefits:read`
+     * 
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1059,6 +1115,7 @@ public class CompanyBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-benefits", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1070,6 +1127,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1079,6 +1137,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-benefits",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1088,6 +1147,7 @@ public class CompanyBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1149,11 +1209,13 @@ public class CompanyBenefits implements
 
     /**
      * Get a supported benefit by ID
-     * Returns a benefit supported by Gusto.
      * 
-     * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+     * <p>Returns a benefit supported by Gusto.
      * 
-     * scope: `benefits:read`
+     * <p>The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+     * 
+     * <p>scope: `benefits:read`
+     * 
      * @return The call builder
      */
     public GetV1BenefitsBenefitIdRequestBuilder getSupported() {
@@ -1162,11 +1224,13 @@ public class CompanyBenefits implements
 
     /**
      * Get a supported benefit by ID
-     * Returns a benefit supported by Gusto.
      * 
-     * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+     * <p>Returns a benefit supported by Gusto.
      * 
-     * scope: `benefits:read`
+     * <p>The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+     * 
+     * <p>scope: `benefits:read`
+     * 
      * @param benefitId The benefit type in Gusto.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1178,13 +1242,15 @@ public class CompanyBenefits implements
     
     /**
      * Get a supported benefit by ID
-     * Returns a benefit supported by Gusto.
      * 
-     * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+     * <p>Returns a benefit supported by Gusto.
      * 
-     * scope: `benefits:read`
+     * <p>The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+     * 
+     * <p>scope: `benefits:read`
+     * 
      * @param benefitId The benefit type in Gusto.
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1219,6 +1285,7 @@ public class CompanyBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-benefits-benefit_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1230,6 +1297,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-benefits-benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1239,6 +1307,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-benefits-benefit_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1248,6 +1317,7 @@ public class CompanyBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-benefits-benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1309,11 +1379,13 @@ public class CompanyBenefits implements
 
     /**
      * Get company benefit summary by company benefit id.
-     * Returns summary benefit data for the requested company benefit id.
      * 
-     * Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+     * <p>Returns summary benefit data for the requested company benefit id.
      * 
-     * scope: `company_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+     * 
+     * <p>scope: `company_benefits:read`
+     * 
      * @return The call builder
      */
     public GetV1BenefitsCompanyBenefitIdSummaryRequestBuilder getSummary() {
@@ -1322,11 +1394,13 @@ public class CompanyBenefits implements
 
     /**
      * Get company benefit summary by company benefit id.
-     * Returns summary benefit data for the requested company benefit id.
      * 
-     * Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+     * <p>Returns summary benefit data for the requested company benefit id.
      * 
-     * scope: `company_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+     * 
+     * <p>scope: `company_benefits:read`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1359,6 +1433,7 @@ public class CompanyBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-benefits-company_benefit_id-summary", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1370,6 +1445,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-benefits-company_benefit_id-summary",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1379,6 +1455,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-benefits-company_benefit_id-summary",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1388,6 +1465,7 @@ public class CompanyBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-benefits-company_benefit_id-summary",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1449,13 +1527,15 @@ public class CompanyBenefits implements
 
     /**
      * Get all employee benefits for a company benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Returns an array of all employee benefits enrolled for this company benefit.
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * <p>Returns an array of all employee benefits enrolled for this company benefit.
      * 
-     * scope: `employee_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * 
+     * <p>scope: `employee_benefits:read`
+     * 
      * @return The call builder
      */
     public GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBuilder getEmployeeBenefits() {
@@ -1464,13 +1544,15 @@ public class CompanyBenefits implements
 
     /**
      * Get all employee benefits for a company benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Returns an array of all employee benefits enrolled for this company benefit.
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * <p>Returns an array of all employee benefits enrolled for this company benefit.
      * 
-     * scope: `employee_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * 
+     * <p>scope: `employee_benefits:read`
+     * 
      * @param companyBenefitId The UUID of the company benefit
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1482,17 +1564,19 @@ public class CompanyBenefits implements
     
     /**
      * Get all employee benefits for a company benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Returns an array of all employee benefits enrolled for this company benefit.
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * <p>Returns an array of all employee benefits enrolled for this company benefit.
      * 
-     * scope: `employee_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * 
+     * <p>scope: `employee_benefits:read`
+     * 
      * @param companyBenefitId The UUID of the company benefit
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1536,6 +1620,7 @@ public class CompanyBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-company_benefits-company_benefit_id-employee_benefits", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1547,6 +1632,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company_benefits-company_benefit_id-employee_benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1556,6 +1642,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-company_benefits-company_benefit_id-employee_benefits",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1565,6 +1652,7 @@ public class CompanyBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company_benefits-company_benefit_id-employee_benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1626,13 +1714,15 @@ public class CompanyBenefits implements
 
     /**
      * Bulk update employee benefits for a company benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Create or update(if the employee is already enrolled in the company benefit previously) an employee benefit for the company benefit.
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * <p>Create or update(if the employee is already enrolled in the company benefit previously) an employee benefit for the company benefit.
      * 
-     * scope: `employee_benefits:write`
+     * <p>Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @return The call builder
      */
     public PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBuilder updateEmployeeBenefits() {
@@ -1641,15 +1731,17 @@ public class CompanyBenefits implements
 
     /**
      * Bulk update employee benefits for a company benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Create or update(if the employee is already enrolled in the company benefit previously) an employee benefit for the company benefit.
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * <p>Create or update(if the employee is already enrolled in the company benefit previously) an employee benefit for the company benefit.
      * 
-     * scope: `employee_benefits:write`
+     * <p>Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @param companyBenefitId The UUID of the company benefit
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1661,16 +1753,18 @@ public class CompanyBenefits implements
     
     /**
      * Bulk update employee benefits for a company benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Create or update(if the employee is already enrolled in the company benefit previously) an employee benefit for the company benefit.
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * <p>Create or update(if the employee is already enrolled in the company benefit previously) an employee benefit for the company benefit.
      * 
-     * scope: `employee_benefits:write`
+     * <p>Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @param companyBenefitId The UUID of the company benefit
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1720,6 +1814,7 @@ public class CompanyBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-company_benefits-company_benefit_id-employee_benefits", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1731,6 +1826,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-company_benefits-company_benefit_id-employee_benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1740,6 +1836,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-company_benefits-company_benefit_id-employee_benefits",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1749,6 +1846,7 @@ public class CompanyBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-company_benefits-company_benefit_id-employee_benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1824,9 +1922,11 @@ public class CompanyBenefits implements
 
     /**
      * Get benefit fields requirements by ID
-     * Returns field requirements for the requested benefit type.
      * 
-     * scope: `benefits:read`
+     * <p>Returns field requirements for the requested benefit type.
+     * 
+     * <p>scope: `benefits:read`
+     * 
      * @return The call builder
      */
     public GetV1BenefitsBenefitsIdRequirementsRequestBuilder getRequirements() {
@@ -1835,9 +1935,11 @@ public class CompanyBenefits implements
 
     /**
      * Get benefit fields requirements by ID
-     * Returns field requirements for the requested benefit type.
      * 
-     * scope: `benefits:read`
+     * <p>Returns field requirements for the requested benefit type.
+     * 
+     * <p>scope: `benefits:read`
+     * 
      * @param benefitId The benefit type in Gusto.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1849,11 +1951,13 @@ public class CompanyBenefits implements
     
     /**
      * Get benefit fields requirements by ID
-     * Returns field requirements for the requested benefit type.
      * 
-     * scope: `benefits:read`
+     * <p>Returns field requirements for the requested benefit type.
+     * 
+     * <p>scope: `benefits:read`
+     * 
      * @param benefitId The benefit type in Gusto.
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1888,6 +1992,7 @@ public class CompanyBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-benefits-benefits_id-requirements", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1899,6 +2004,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-benefits-benefits_id-requirements",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1908,6 +2014,7 @@ public class CompanyBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-benefits-benefits_id-requirements",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1917,6 +2024,7 @@ public class CompanyBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-benefits-benefits_id-requirements",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

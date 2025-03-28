@@ -71,9 +71,11 @@ public class EmployeeBenefits implements
 
     /**
      * Create an employee benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * scope: `employee_benefits:write`
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @return The call builder
      */
     public PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder create() {
@@ -82,11 +84,13 @@ public class EmployeeBenefits implements
 
     /**
      * Create an employee benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * scope: `employee_benefits:write`
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -98,12 +102,14 @@ public class EmployeeBenefits implements
     
     /**
      * Create an employee benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * scope: `employee_benefits:write`
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -153,6 +159,7 @@ public class EmployeeBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-employees-employee_id-employee_benefits", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -164,6 +171,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-employee_benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -173,6 +181,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-employee_benefits",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -182,6 +191,7 @@ public class EmployeeBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-employee_benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -257,13 +267,15 @@ public class EmployeeBenefits implements
 
     /**
      * Get all benefits for an employee
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Returns an array of all employee benefits for this employee
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * <p>Returns an array of all employee benefits for this employee
      * 
-     * scope: `employee_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * 
+     * <p>scope: `employee_benefits:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder get() {
@@ -272,13 +284,15 @@ public class EmployeeBenefits implements
 
     /**
      * Get all benefits for an employee
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Returns an array of all employee benefits for this employee
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * <p>Returns an array of all employee benefits for this employee
      * 
-     * scope: `employee_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * 
+     * <p>scope: `employee_benefits:read`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -290,17 +304,19 @@ public class EmployeeBenefits implements
     
     /**
      * Get all benefits for an employee
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Returns an array of all employee benefits for this employee
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * <p>Returns an array of all employee benefits for this employee
      * 
-     * scope: `employee_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * 
+     * <p>scope: `employee_benefits:read`
+     * 
      * @param employeeId The UUID of the employee
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -344,6 +360,7 @@ public class EmployeeBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-employee_benefits", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -355,6 +372,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-employee_benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -364,6 +382,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-employee_benefits",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -373,6 +392,7 @@ public class EmployeeBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-employee_benefits",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -434,11 +454,13 @@ public class EmployeeBenefits implements
 
     /**
      * Get an employee benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * scope: `employee_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * 
+     * <p>scope: `employee_benefits:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder retrieve() {
@@ -447,11 +469,13 @@ public class EmployeeBenefits implements
 
     /**
      * Get an employee benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * scope: `employee_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * 
+     * <p>scope: `employee_benefits:read`
+     * 
      * @param employeeBenefitId The UUID of the employee benefit.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -463,13 +487,15 @@ public class EmployeeBenefits implements
     
     /**
      * Get an employee benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * scope: `employee_benefits:read`
+     * <p>Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+     * 
+     * <p>scope: `employee_benefits:read`
+     * 
      * @param employeeBenefitId The UUID of the employee benefit.
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -504,6 +530,7 @@ public class EmployeeBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employee_benefits-employee_benefit_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -515,6 +542,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employee_benefits-employee_benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -524,6 +552,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employee_benefits-employee_benefit_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -533,6 +562,7 @@ public class EmployeeBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employee_benefits-employee_benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -594,9 +624,11 @@ public class EmployeeBenefits implements
 
     /**
      * Update an employee benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * scope: `employee_benefits:write`
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @return The call builder
      */
     public PutV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder update() {
@@ -605,11 +637,13 @@ public class EmployeeBenefits implements
 
     /**
      * Update an employee benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * scope: `employee_benefits:write`
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @param employeeBenefitId The UUID of the employee benefit.
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -621,12 +655,14 @@ public class EmployeeBenefits implements
     
     /**
      * Update an employee benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * scope: `employee_benefits:write`
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @param employeeBenefitId The UUID of the employee benefit.
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -676,6 +712,7 @@ public class EmployeeBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-employee_benefits-employee_benefit_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -687,6 +724,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employee_benefits-employee_benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -696,6 +734,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-employee_benefits-employee_benefit_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -705,6 +744,7 @@ public class EmployeeBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employee_benefits-employee_benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -780,9 +820,11 @@ public class EmployeeBenefits implements
 
     /**
      * Delete an employee benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * scope: `employee_benefits:write`
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @return The call builder
      */
     public DeleteV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder delete() {
@@ -791,9 +833,11 @@ public class EmployeeBenefits implements
 
     /**
      * Delete an employee benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * scope: `employee_benefits:write`
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @param employeeBenefitId The UUID of the employee benefit.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -805,11 +849,13 @@ public class EmployeeBenefits implements
     
     /**
      * Delete an employee benefit
-     * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      * 
-     * scope: `employee_benefits:write`
+     * <p>Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @param employeeBenefitId The UUID of the employee benefit.
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -844,6 +890,7 @@ public class EmployeeBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-employee_benefits-employee_benefit_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -855,6 +902,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-employee_benefits-employee_benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -864,6 +912,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-employee_benefits-employee_benefit_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -873,6 +922,7 @@ public class EmployeeBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-employee_benefits-employee_benefit_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -923,12 +973,14 @@ public class EmployeeBenefits implements
 
     /**
      * Get year-to-date benefit amounts from a different company
-     * Retrieves year-to-date benefit amounts that were contributed at a different company for the specified employee.
+     * 
+     * <p>Retrieves year-to-date benefit amounts that were contributed at a different company for the specified employee.
      * Returns benefit amounts for the requested tax year (defaults to current year if not specified).
      * 
-     * This endpoint only supports retrieving outside contributions for 401(k) benefits.
+     * <p>This endpoint only supports retrieving outside contributions for 401(k) benefits.
      * 
-     * scope: `employee_benefits:read`
+     * <p>scope: `employee_benefits:read`
+     * 
      * @return The call builder
      */
     public GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequestBuilder getYtdBenefitAmountsFromDifferentCompany() {
@@ -937,12 +989,14 @@ public class EmployeeBenefits implements
 
     /**
      * Get year-to-date benefit amounts from a different company
-     * Retrieves year-to-date benefit amounts that were contributed at a different company for the specified employee.
+     * 
+     * <p>Retrieves year-to-date benefit amounts that were contributed at a different company for the specified employee.
      * Returns benefit amounts for the requested tax year (defaults to current year if not specified).
      * 
-     * This endpoint only supports retrieving outside contributions for 401(k) benefits.
+     * <p>This endpoint only supports retrieving outside contributions for 401(k) benefits.
      * 
-     * scope: `employee_benefits:read`
+     * <p>scope: `employee_benefits:read`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -954,15 +1008,17 @@ public class EmployeeBenefits implements
     
     /**
      * Get year-to-date benefit amounts from a different company
-     * Retrieves year-to-date benefit amounts that were contributed at a different company for the specified employee.
+     * 
+     * <p>Retrieves year-to-date benefit amounts that were contributed at a different company for the specified employee.
      * Returns benefit amounts for the requested tax year (defaults to current year if not specified).
      * 
-     * This endpoint only supports retrieving outside contributions for 401(k) benefits.
+     * <p>This endpoint only supports retrieving outside contributions for 401(k) benefits.
      * 
-     * scope: `employee_benefits:read`
+     * <p>scope: `employee_benefits:read`
+     * 
      * @param employeeId The UUID of the employee
      * @param taxYear The tax year for which to retrieve YTD benefit amounts. Defaults to current year if not specified.
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1004,6 +1060,7 @@ public class EmployeeBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-employee-ytd-benefit-amounts-from-different-company", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1015,6 +1072,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-employee-ytd-benefit-amounts-from-different-company",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1024,6 +1082,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-employee-ytd-benefit-amounts-from-different-company",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1033,6 +1092,7 @@ public class EmployeeBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-employee-ytd-benefit-amounts-from-different-company",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1094,11 +1154,13 @@ public class EmployeeBenefits implements
 
     /**
      * Create year-to-date benefit amounts from a different company
-     * Year-to-date benefit amounts from a different company represents the amount of money added to an employee's plan during a current year, made outside of the current contribution when they were employed at a different company.
      * 
-     * This endpoint only supports passing outside contributions for 401(k) benefits.
+     * <p>Year-to-date benefit amounts from a different company represents the amount of money added to an employee's plan during a current year, made outside of the current contribution when they were employed at a different company.
      * 
-     * scope: `employee_benefits:write`
+     * <p>This endpoint only supports passing outside contributions for 401(k) benefits.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @return The call builder
      */
     public PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequestBuilder createYtdBenefitAmountsFromDifferentCompany() {
@@ -1107,13 +1169,15 @@ public class EmployeeBenefits implements
 
     /**
      * Create year-to-date benefit amounts from a different company
-     * Year-to-date benefit amounts from a different company represents the amount of money added to an employee's plan during a current year, made outside of the current contribution when they were employed at a different company.
      * 
-     * This endpoint only supports passing outside contributions for 401(k) benefits.
+     * <p>Year-to-date benefit amounts from a different company represents the amount of money added to an employee's plan during a current year, made outside of the current contribution when they were employed at a different company.
      * 
-     * scope: `employee_benefits:write`
+     * <p>This endpoint only supports passing outside contributions for 401(k) benefits.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param postEmployeeYtdBenefitAmountsFromDifferentCompany
+     * @param postEmployeeYtdBenefitAmountsFromDifferentCompany 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1125,14 +1189,16 @@ public class EmployeeBenefits implements
     
     /**
      * Create year-to-date benefit amounts from a different company
-     * Year-to-date benefit amounts from a different company represents the amount of money added to an employee's plan during a current year, made outside of the current contribution when they were employed at a different company.
      * 
-     * This endpoint only supports passing outside contributions for 401(k) benefits.
+     * <p>Year-to-date benefit amounts from a different company represents the amount of money added to an employee's plan during a current year, made outside of the current contribution when they were employed at a different company.
      * 
-     * scope: `employee_benefits:write`
+     * <p>This endpoint only supports passing outside contributions for 401(k) benefits.
+     * 
+     * <p>scope: `employee_benefits:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param postEmployeeYtdBenefitAmountsFromDifferentCompany
+     * @param xGustoAPIVersion 
+     * @param postEmployeeYtdBenefitAmountsFromDifferentCompany 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1182,6 +1248,7 @@ public class EmployeeBenefits implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-employee-ytd-benefit-amounts-from-different-company", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1193,6 +1260,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-employee-ytd-benefit-amounts-from-different-company",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1202,6 +1270,7 @@ public class EmployeeBenefits implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-employee-ytd-benefit-amounts-from-different-company",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1211,6 +1280,7 @@ public class EmployeeBenefits implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-employee-ytd-benefit-amounts-from-different-company",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

@@ -53,11 +53,12 @@ public class TaxRequirements implements
 
     /**
      * Get State Tax Requirements
-     * Get all tax requirements for a given state.
      * 
-     * ### Metadata Examples
+     * <p>Get all tax requirements for a given state.
      * 
-     * ```json select
+     * <p>### Metadata Examples
+     * 
+     * <p>```json select
      * {
      *   "type": "select",
      *   "options": [
@@ -94,7 +95,7 @@ public class TaxRequirements implements
      * }
      * ```
      * 
-     * scope: `company_tax_requirements:read`
+     * <p>scope: `company_tax_requirements:read`
      * 
      * @return The call builder
      */
@@ -104,11 +105,12 @@ public class TaxRequirements implements
 
     /**
      * Get State Tax Requirements
-     * Get all tax requirements for a given state.
      * 
-     * ### Metadata Examples
+     * <p>Get all tax requirements for a given state.
      * 
-     * ```json select
+     * <p>### Metadata Examples
+     * 
+     * <p>```json select
      * {
      *   "type": "select",
      *   "options": [
@@ -145,7 +147,7 @@ public class TaxRequirements implements
      * }
      * ```
      * 
-     * scope: `company_tax_requirements:read`
+     * <p>scope: `company_tax_requirements:read`
      * 
      * @param companyUuid The UUID of the company
      * @param state 2-letter US state abbreviation
@@ -160,11 +162,12 @@ public class TaxRequirements implements
     
     /**
      * Get State Tax Requirements
-     * Get all tax requirements for a given state.
      * 
-     * ### Metadata Examples
+     * <p>Get all tax requirements for a given state.
      * 
-     * ```json select
+     * <p>### Metadata Examples
+     * 
+     * <p>```json select
      * {
      *   "type": "select",
      *   "options": [
@@ -201,12 +204,12 @@ public class TaxRequirements implements
      * }
      * ```
      * 
-     * scope: `company_tax_requirements:read`
+     * <p>scope: `company_tax_requirements:read`
      * 
      * @param companyUuid The UUID of the company
      * @param state 2-letter US state abbreviation
      * @param scheduling When true, return "new" requirement sets with valid `effective_from` dates that are available to save new effective dated values.
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -250,6 +253,7 @@ public class TaxRequirements implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_uuid-tax_requirements-state", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -261,6 +265,7 @@ public class TaxRequirements implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_uuid-tax_requirements-state",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -270,6 +275,7 @@ public class TaxRequirements implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_uuid-tax_requirements-state",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -279,6 +285,7 @@ public class TaxRequirements implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_uuid-tax_requirements-state",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -340,9 +347,11 @@ public class TaxRequirements implements
 
     /**
      * Update State Tax Requirements
-     * Update State Tax Requirements
      * 
-     * scope: `company_tax_requirements:write`
+     * <p>Update State Tax Requirements
+     * 
+     * <p>scope: `company_tax_requirements:write`
+     * 
      * @return The call builder
      */
     public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder updateState() {
@@ -351,12 +360,14 @@ public class TaxRequirements implements
 
     /**
      * Update State Tax Requirements
-     * Update State Tax Requirements
      * 
-     * scope: `company_tax_requirements:write`
+     * <p>Update State Tax Requirements
+     * 
+     * <p>scope: `company_tax_requirements:write`
+     * 
      * @param companyUuid The UUID of the company
      * @param state 2-letter US state abbreviation
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -369,13 +380,15 @@ public class TaxRequirements implements
     
     /**
      * Update State Tax Requirements
-     * Update State Tax Requirements
      * 
-     * scope: `company_tax_requirements:write`
+     * <p>Update State Tax Requirements
+     * 
+     * <p>scope: `company_tax_requirements:write`
+     * 
      * @param companyUuid The UUID of the company
      * @param state 2-letter US state abbreviation
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -427,6 +440,7 @@ public class TaxRequirements implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-companies-company_uuid-tax_requirements-state", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -438,6 +452,7 @@ public class TaxRequirements implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_uuid-tax_requirements-state",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -447,6 +462,7 @@ public class TaxRequirements implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_uuid-tax_requirements-state",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -456,6 +472,7 @@ public class TaxRequirements implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_uuid-tax_requirements-state",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -520,9 +537,11 @@ public class TaxRequirements implements
 
     /**
      * Get All Tax Requirement States
-     * Returns objects describing the states that have tax requirements for the company
      * 
-     * scope: `company_tax_requirements:read`
+     * <p>Returns objects describing the states that have tax requirements for the company
+     * 
+     * <p>scope: `company_tax_requirements:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder getAll() {
@@ -531,9 +550,11 @@ public class TaxRequirements implements
 
     /**
      * Get All Tax Requirement States
-     * Returns objects describing the states that have tax requirements for the company
      * 
-     * scope: `company_tax_requirements:read`
+     * <p>Returns objects describing the states that have tax requirements for the company
+     * 
+     * <p>scope: `company_tax_requirements:read`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -545,11 +566,13 @@ public class TaxRequirements implements
     
     /**
      * Get All Tax Requirement States
-     * Returns objects describing the states that have tax requirements for the company
      * 
-     * scope: `company_tax_requirements:read`
+     * <p>Returns objects describing the states that have tax requirements for the company
+     * 
+     * <p>scope: `company_tax_requirements:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -584,6 +607,7 @@ public class TaxRequirements implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_uuid-tax_requirements", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -595,6 +619,7 @@ public class TaxRequirements implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_uuid-tax_requirements",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -604,6 +629,7 @@ public class TaxRequirements implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_uuid-tax_requirements",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -613,6 +639,7 @@ public class TaxRequirements implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_uuid-tax_requirements",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

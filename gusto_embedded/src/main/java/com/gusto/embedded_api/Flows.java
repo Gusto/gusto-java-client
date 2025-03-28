@@ -43,9 +43,11 @@ public class Flows implements
 
     /**
      * Create a flow
-     * Generate a link to access a pre-built workflow in Gusto white-label UI. For security, all generated flows will expire within 1 hour of inactivity or 24 hours from creation time, whichever comes first.
      * 
-     * scope: `flows:write`
+     * <p>Generate a link to access a pre-built workflow in Gusto white-label UI. For security, all generated flows will expire within 1 hour of inactivity or 24 hours from creation time, whichever comes first.
+     * 
+     * <p>scope: `flows:write`
+     * 
      * @return The call builder
      */
     public PostV1CompanyFlowsRequestBuilder create() {
@@ -54,11 +56,13 @@ public class Flows implements
 
     /**
      * Create a flow
-     * Generate a link to access a pre-built workflow in Gusto white-label UI. For security, all generated flows will expire within 1 hour of inactivity or 24 hours from creation time, whichever comes first.
      * 
-     * scope: `flows:write`
+     * <p>Generate a link to access a pre-built workflow in Gusto white-label UI. For security, all generated flows will expire within 1 hour of inactivity or 24 hours from creation time, whichever comes first.
+     * 
+     * <p>scope: `flows:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -70,12 +74,14 @@ public class Flows implements
     
     /**
      * Create a flow
-     * Generate a link to access a pre-built workflow in Gusto white-label UI. For security, all generated flows will expire within 1 hour of inactivity or 24 hours from creation time, whichever comes first.
      * 
-     * scope: `flows:write`
+     * <p>Generate a link to access a pre-built workflow in Gusto white-label UI. For security, all generated flows will expire within 1 hour of inactivity or 24 hours from creation time, whichever comes first.
+     * 
+     * <p>scope: `flows:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -125,6 +131,7 @@ public class Flows implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-company-flows", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -136,6 +143,7 @@ public class Flows implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-company-flows",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -145,6 +153,7 @@ public class Flows implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-company-flows",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -154,6 +163,7 @@ public class Flows implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-company-flows",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

@@ -18,7 +18,9 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
 /**
- * TaxRequirementMetadataValue - The actual value to be submitted
+ * TaxRequirementMetadataValue
+ * 
+ * <p>The actual value to be submitted
  */
 
 @JsonDeserialize(using = TaxRequirementMetadataValue._Deserializer.class)

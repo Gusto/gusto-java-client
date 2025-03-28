@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TaxPayerType - What type of tax entity the company is
+ * TaxPayerType
+ * 
+ * <p>What type of tax entity the company is
  */
 public enum TaxPayerType {
     C_CORPORATION("C-Corporation"),

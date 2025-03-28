@@ -16,7 +16,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ExternalPayrollMetadata - Stores metadata of the external payroll.
+ * ExternalPayrollMetadata
+ * 
+ * <p>Stores metadata of the external payroll.
  */
 
 public class ExternalPayrollMetadata {

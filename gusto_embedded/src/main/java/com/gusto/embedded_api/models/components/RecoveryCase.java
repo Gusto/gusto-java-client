@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * RecoveryCase - Representation of a recovery case
+ * RecoveryCase
+ * 
+ * <p>Representation of a recovery case
  */
 
 public class RecoveryCase {

@@ -39,9 +39,11 @@ public class EmployeePaymentMethods implements
 
     /**
      * Get all employee bank accounts
-     * Returns all employee bank accounts.
      * 
-     * scope: `employee_payment_methods:read`
+     * <p>Returns all employee bank accounts.
+     * 
+     * <p>scope: `employee_payment_methods:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdBankAccountsRequestBuilder getBankAccounts() {
@@ -50,9 +52,11 @@ public class EmployeePaymentMethods implements
 
     /**
      * Get all employee bank accounts
-     * Returns all employee bank accounts.
      * 
-     * scope: `employee_payment_methods:read`
+     * <p>Returns all employee bank accounts.
+     * 
+     * <p>scope: `employee_payment_methods:read`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -64,13 +68,15 @@ public class EmployeePaymentMethods implements
     
     /**
      * Get all employee bank accounts
-     * Returns all employee bank accounts.
      * 
-     * scope: `employee_payment_methods:read`
+     * <p>Returns all employee bank accounts.
+     * 
+     * <p>scope: `employee_payment_methods:read`
+     * 
      * @param employeeId The UUID of the employee
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -114,6 +120,7 @@ public class EmployeePaymentMethods implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-bank_accounts", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -125,6 +132,7 @@ public class EmployeePaymentMethods implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-bank_accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -134,6 +142,7 @@ public class EmployeePaymentMethods implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-bank_accounts",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -143,6 +152,7 @@ public class EmployeePaymentMethods implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-bank_accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

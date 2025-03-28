@@ -46,9 +46,11 @@ public class FederalTaxDetails implements
 
     /**
      * Get Federal Tax Details
-     * Fetches attributes relevant for a company's federal taxes.
      * 
-     * scope: `company_federal_taxes:read`
+     * <p>Fetches attributes relevant for a company's federal taxes.
+     * 
+     * <p>scope: `company_federal_taxes:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder get() {
@@ -57,9 +59,11 @@ public class FederalTaxDetails implements
 
     /**
      * Get Federal Tax Details
-     * Fetches attributes relevant for a company's federal taxes.
      * 
-     * scope: `company_federal_taxes:read`
+     * <p>Fetches attributes relevant for a company's federal taxes.
+     * 
+     * <p>scope: `company_federal_taxes:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -71,11 +75,13 @@ public class FederalTaxDetails implements
     
     /**
      * Get Federal Tax Details
-     * Fetches attributes relevant for a company's federal taxes.
      * 
-     * scope: `company_federal_taxes:read`
+     * <p>Fetches attributes relevant for a company's federal taxes.
+     * 
+     * <p>scope: `company_federal_taxes:read`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -110,6 +116,7 @@ public class FederalTaxDetails implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-federal_tax_details", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -121,6 +128,7 @@ public class FederalTaxDetails implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-federal_tax_details",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -130,6 +138,7 @@ public class FederalTaxDetails implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-federal_tax_details",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -139,6 +148,7 @@ public class FederalTaxDetails implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-federal_tax_details",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -200,10 +210,12 @@ public class FederalTaxDetails implements
 
     /**
      * Update Federal Tax Details
-     * Updates attributes relevant for a company's federal taxes.
+     * 
+     * <p>Updates attributes relevant for a company's federal taxes.
      * This information is required is to onboard a company for use with Gusto Embedded Payroll.
      * 
-     * scope: `company_federal_taxes:write`
+     * <p>scope: `company_federal_taxes:write`
+     * 
      * @return The call builder
      */
     public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder update() {
@@ -212,10 +224,12 @@ public class FederalTaxDetails implements
 
     /**
      * Update Federal Tax Details
-     * Updates attributes relevant for a company's federal taxes.
+     * 
+     * <p>Updates attributes relevant for a company's federal taxes.
      * This information is required is to onboard a company for use with Gusto Embedded Payroll.
      * 
-     * scope: `company_federal_taxes:write`
+     * <p>scope: `company_federal_taxes:write`
+     * 
      * @param companyId The UUID of the company
      * @param requestBody Attributes related to federal tax details that can be updated via this endpoint include:
      * @return The response from the API call
@@ -229,12 +243,14 @@ public class FederalTaxDetails implements
     
     /**
      * Update Federal Tax Details
-     * Updates attributes relevant for a company's federal taxes.
+     * 
+     * <p>Updates attributes relevant for a company's federal taxes.
      * This information is required is to onboard a company for use with Gusto Embedded Payroll.
      * 
-     * scope: `company_federal_taxes:write`
+     * <p>scope: `company_federal_taxes:write`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody Attributes related to federal tax details that can be updated via this endpoint include:
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -285,6 +301,7 @@ public class FederalTaxDetails implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-companies-company_id-federal_tax_details", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -296,6 +313,7 @@ public class FederalTaxDetails implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-federal_tax_details",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -305,6 +323,7 @@ public class FederalTaxDetails implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-federal_tax_details",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -314,6 +333,7 @@ public class FederalTaxDetails implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-federal_tax_details",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

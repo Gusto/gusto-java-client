@@ -17,9 +17,11 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
 /**
- * EmployeeBenefitValue - For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
+ * EmployeeBenefitValue
  * 
- * For the `tiered` contribution type, an array of tiers.
+ * <p>For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
+ * 
+ * <p>For the `tiered` contribution type, an array of tiers.
  */
 
 @JsonDeserialize(using = EmployeeBenefitValue._Deserializer.class)

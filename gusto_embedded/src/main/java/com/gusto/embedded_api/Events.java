@@ -38,13 +38,15 @@ public class Events implements
 
     /**
      * Get all events
-     * Fetch all events, going back up to 30 days, that your partner application has the required scopes for. Note that a partner does NOT have to have verified webhook subscriptions in order to utilize this endpoint.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Fetch all events, going back up to 30 days, that your partner application has the required scopes for. Note that a partner does NOT have to have verified webhook subscriptions in order to utilize this endpoint.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `events:read`
+     * <p>scope: `events:read`
+     * 
      * @return The call builder
      */
     public GetEventsRequestBuilder get() {
@@ -53,13 +55,15 @@ public class Events implements
 
     /**
      * Get all events
-     * Fetch all events, going back up to 30 days, that your partner application has the required scopes for. Note that a partner does NOT have to have verified webhook subscriptions in order to utilize this endpoint.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Fetch all events, going back up to 30 days, that your partner application has the required scopes for. Note that a partner does NOT have to have verified webhook subscriptions in order to utilize this endpoint.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `events:read`
+     * <p>scope: `events:read`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @param security The security details to use for authentication.
      * @return The response from the API call
@@ -83,17 +87,16 @@ public class Events implements
                 request, 
                 null));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+
+        // hooks will be passed method level security only
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(SecuritySource.of(security));
         Utils.configureSecurity(_req, security);
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-events", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -105,6 +108,7 @@ public class Events implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-events",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -114,6 +118,7 @@ public class Events implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-events",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -123,6 +128,7 @@ public class Events implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-events",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

@@ -82,9 +82,9 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
      * Some benefits require additional information to determine
      * their limit.
      * 
-     * `Family` or `Individual`: Applicable to HSA benefit.
+     * <p>`Family` or `Individual`: Applicable to HSA benefit.
      * 
-     * `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
+     * <p>`Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("limit_option")
@@ -120,6 +120,7 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
 
     /**
      * The amount to be paid, per pay period, by the company.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -129,6 +130,7 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
 
     /**
      * Whether the company contribution amount should be treated as a percentage to be deducted from each payroll.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -259,9 +261,9 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
      * Some benefits require additional information to determine
      * their limit.
      * 
-     * `Family` or `Individual`: Applicable to HSA benefit.
+     * <p>`Family` or `Individual`: Applicable to HSA benefit.
      * 
-     * `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
+     * <p>`Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -304,6 +306,7 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
 
     /**
      * The amount to be paid, per pay period, by the company.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -314,6 +317,7 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
 
     /**
      * Whether the company contribution amount should be treated as a percentage to be deducted from each payroll.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -465,9 +469,9 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
      * Some benefits require additional information to determine
      * their limit.
      * 
-     * `Family` or `Individual`: Applicable to HSA benefit.
+     * <p>`Family` or `Individual`: Applicable to HSA benefit.
      * 
-     * `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
+     * <p>`Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
      */
     public PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody withLimitOption(LimitOption limitOption) {
         Utils.checkNotNull(limitOption, "limitOption");
@@ -479,9 +483,9 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
      * Some benefits require additional information to determine
      * their limit.
      * 
-     * `Family` or `Individual`: Applicable to HSA benefit.
+     * <p>`Family` or `Individual`: Applicable to HSA benefit.
      * 
-     * `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
+     * <p>`Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
      */
     public PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody withLimitOption(JsonNullable<? extends LimitOption> limitOption) {
         Utils.checkNotNull(limitOption, "limitOption");
@@ -563,6 +567,7 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
 
     /**
      * The amount to be paid, per pay period, by the company.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -574,6 +579,7 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
 
     /**
      * The amount to be paid, per pay period, by the company.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -585,6 +591,7 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
 
     /**
      * Whether the company contribution amount should be treated as a percentage to be deducted from each payroll.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -596,6 +603,7 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
 
     /**
      * Whether the company contribution amount should be treated as a percentage to be deducted from each payroll.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -849,9 +857,9 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
          * Some benefits require additional information to determine
          * their limit.
          * 
-         * `Family` or `Individual`: Applicable to HSA benefit.
+         * <p>`Family` or `Individual`: Applicable to HSA benefit.
          * 
-         * `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
+         * <p>`Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
          */
         public Builder limitOption(LimitOption limitOption) {
             Utils.checkNotNull(limitOption, "limitOption");
@@ -863,9 +871,9 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
          * Some benefits require additional information to determine
          * their limit.
          * 
-         * `Family` or `Individual`: Applicable to HSA benefit.
+         * <p>`Family` or `Individual`: Applicable to HSA benefit.
          * 
-         * `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
+         * <p>`Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
          */
         public Builder limitOption(JsonNullable<? extends LimitOption> limitOption) {
             Utils.checkNotNull(limitOption, "limitOption");
@@ -947,6 +955,7 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
 
         /**
          * The amount to be paid, per pay period, by the company.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated
@@ -958,6 +967,7 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
 
         /**
          * The amount to be paid, per pay period, by the company.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated
@@ -969,6 +979,7 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
 
         /**
          * Whether the company contribution amount should be treated as a percentage to be deducted from each payroll.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated
@@ -980,6 +991,7 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody {
 
         /**
          * Whether the company contribution amount should be treated as a percentage to be deducted from each payroll.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated

@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EmployeePayStub - The representation of an employee pay stub information.
+ * EmployeePayStub
+ * 
+ * <p>The representation of an employee pay stub information.
  */
 
 public class EmployeePayStub {

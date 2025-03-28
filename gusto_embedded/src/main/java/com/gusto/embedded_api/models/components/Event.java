@@ -17,7 +17,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Event - Representation of an Event
+ * Event
+ * 
+ * <p>Representation of an Event
  */
 
 public class Event {

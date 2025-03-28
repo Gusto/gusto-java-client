@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayrollCreditBlockersTypeStatus - The status of the credit blocker
+ * PayrollCreditBlockersTypeStatus
+ * 
+ * <p>The status of the credit blocker
  */
 public enum PayrollCreditBlockersTypeStatus {
     UNRESOLVED("unresolved"),

@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayrollTotalsType - The subtotals for the payroll.
+ * PayrollTotalsType
+ * 
+ * <p>The subtotals for the payroll.
  */
 
 public class PayrollTotalsType {

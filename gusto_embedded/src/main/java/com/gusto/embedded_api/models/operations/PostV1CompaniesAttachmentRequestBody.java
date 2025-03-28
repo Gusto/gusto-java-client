@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * PostV1CompaniesAttachmentRequestBody - The binary payload of the file and the company attachment category.
+ * PostV1CompaniesAttachmentRequestBody
+ * 
+ * <p>The binary payload of the file and the company attachment category.
  */
 
 public class PostV1CompaniesAttachmentRequestBody {

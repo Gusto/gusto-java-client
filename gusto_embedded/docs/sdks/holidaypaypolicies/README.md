@@ -39,7 +39,7 @@ public class Application {
 
         GetCompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().get()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.holidayPayPolicy().isPresent()) {
@@ -80,15 +80,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.ChristmasDay;
-import com.gusto.embedded_api.models.operations.FederalHolidays;
-import com.gusto.embedded_api.models.operations.IndependenceDay;
-import com.gusto.embedded_api.models.operations.MemorialDay;
-import com.gusto.embedded_api.models.operations.MlkDay;
-import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidHolidayPayPolicyRequestBody;
-import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidHolidayPayPolicyResponse;
-import com.gusto.embedded_api.models.operations.Thanksgiving;
-import com.gusto.embedded_api.models.operations.VeteransDay;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -101,7 +93,7 @@ public class Application {
 
         PostCompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().create()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostCompaniesCompanyUuidHolidayPayPolicyRequestBody.builder()
                     .federalHolidays(FederalHolidays.builder()
                         .mlkDay(MlkDay.builder()
@@ -166,15 +158,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyMlkDay;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyRequestBody;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyResponse;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -187,7 +171,7 @@ public class Application {
 
         PutCompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().update()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutCompaniesCompanyUuidHolidayPayPolicyRequestBody.builder()
                     .version("1b37938b017c7fd7116bada007072290")
                     .federalHolidays(PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays.builder()
@@ -266,7 +250,7 @@ public class Application {
 
         DeleteCompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().delete()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -306,9 +290,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyAddEmployees;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyAddRequestBody;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyAddResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
@@ -322,7 +304,7 @@ public class Application {
 
         PutCompaniesCompanyUuidHolidayPayPolicyAddResponse res = sdk.holidayPayPolicies().addEmployees()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutCompaniesCompanyUuidHolidayPayPolicyAddRequestBody.builder()
                     .version("1b37938b017c7fd7116bada007072290")
                     .employees(List.of(
@@ -375,9 +357,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody;
-import com.gusto.embedded_api.models.operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
@@ -391,7 +371,7 @@ public class Application {
 
         PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse res = sdk.holidayPayPolicies().removeEmployees()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody.builder()
                     .version("1b37938b017c7fd7116bada007072290")
                     .employees(List.of(
@@ -458,7 +438,7 @@ public class Application {
 
         GetCompaniesCompanyUuidPaidHolidaysResponse res = sdk.holidayPayPolicies().previewPaidHolidays()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(GetCompaniesCompanyUuidPaidHolidaysRequestBody.builder()
                     .year("2023")
                     .build())

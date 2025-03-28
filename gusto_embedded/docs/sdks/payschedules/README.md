@@ -34,9 +34,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.Frequency;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPaySchedulesRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPaySchedulesResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -49,7 +47,7 @@ public class Application {
 
         PostV1CompaniesCompanyIdPaySchedulesResponse res = sdk.paySchedules().create()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyIdPaySchedulesRequestBody.builder()
                     .frequency(Frequency.TWICE_PER_MONTH)
                     .anchorPayDate("2021-10-15")
@@ -114,7 +112,7 @@ public class Application {
                 .companyId("<id>")
                 .page(461008L)
                 .per(59215L)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.payScheduleList().isPresent()) {
@@ -155,9 +153,7 @@ scope: `pay_schedules:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdPaySchedulesPreviewRequest;
-import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponse;
-import com.gusto.embedded_api.models.operations.QueryParamFrequency;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -229,10 +225,10 @@ public class Application {
         GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse res = sdk.paySchedules().get()
                 .companyId("<id>")
                 .payScheduleId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
-        if (res.paySchedule().isPresent()) {
+        if (res.payScheduleObject().isPresent()) {
             // handle response
         }
     }
@@ -271,9 +267,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -287,7 +281,7 @@ public class Application {
         PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse res = sdk.paySchedules().update()
                 .companyId("<id>")
                 .payScheduleId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody.builder()
                     .version("68934a3e9455fa72420237eb05902327")
                     .frequency(PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency.TWICE_PER_MONTH)
@@ -416,7 +410,7 @@ public class Application {
 
         GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse res = sdk.paySchedules().getUnprocessedTerminationPeriods()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.unprocessedTerminationPayPeriodList().isPresent()) {
@@ -469,7 +463,7 @@ public class Application {
 
         GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse res = sdk.paySchedules().getAssignments()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.payScheduleAssignment().isPresent()) {
@@ -508,10 +502,7 @@ scope: `pay_schedules:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.Employees;
-import com.gusto.embedded_api.models.components.PayScheduleAssignmentBody;
-import com.gusto.embedded_api.models.components.PayScheduleAssignmentBodyType;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.*;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse;
 import java.lang.Exception;
@@ -527,7 +518,7 @@ public class Application {
 
         PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse res = sdk.paySchedules().previewAssignment()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .payScheduleAssignmentBody(PayScheduleAssignmentBody.builder()
                     .type(PayScheduleAssignmentBodyType.BY_EMPLOYEE)
                     .employees(List.of(
@@ -577,10 +568,7 @@ scope: `pay_schedules:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.Employees;
-import com.gusto.embedded_api.models.components.PayScheduleAssignmentBody;
-import com.gusto.embedded_api.models.components.PayScheduleAssignmentBodyType;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.*;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPaySchedulesAssignResponse;
 import java.lang.Exception;
@@ -596,7 +584,7 @@ public class Application {
 
         PostV1CompaniesCompanyIdPaySchedulesAssignResponse res = sdk.paySchedules().assign()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .payScheduleAssignmentBody(PayScheduleAssignmentBody.builder()
                     .type(PayScheduleAssignmentBodyType.BY_EMPLOYEE)
                     .employees(List.of(

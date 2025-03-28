@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EmploymentStatus - The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
+ * EmploymentStatus
+ * 
+ * <p>The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
  */
 public enum EmploymentStatus {
     PART_TIME("part_time"),

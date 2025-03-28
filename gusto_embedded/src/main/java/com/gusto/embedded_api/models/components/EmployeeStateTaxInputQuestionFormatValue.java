@@ -19,7 +19,9 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
 /**
- * EmployeeStateTaxInputQuestionFormatValue - An allowed value to answer the question
+ * EmployeeStateTaxInputQuestionFormatValue
+ * 
+ * <p>An allowed value to answer the question
  */
 
 @JsonDeserialize(using = EmployeeStateTaxInputQuestionFormatValue._Deserializer.class)

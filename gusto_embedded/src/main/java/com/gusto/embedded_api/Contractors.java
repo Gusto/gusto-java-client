@@ -80,9 +80,11 @@ public class Contractors implements
 
     /**
      * Create a contractor
-     * Create an individual or business contractor.
      * 
-     * scope: `contractors:manage`
+     * <p>Create an individual or business contractor.
+     * 
+     * <p>scope: `contractors:manage`
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyUuidContractorsRequestBuilder create() {
@@ -91,9 +93,11 @@ public class Contractors implements
 
     /**
      * Create a contractor
-     * Create an individual or business contractor.
      * 
-     * scope: `contractors:manage`
+     * <p>Create an individual or business contractor.
+     * 
+     * <p>scope: `contractors:manage`
+     * 
      * @param companyUuid The UUID of the company
      * @param requestBody Create an individual or business contractor.
      * @return The response from the API call
@@ -107,11 +111,13 @@ public class Contractors implements
     
     /**
      * Create a contractor
-     * Create an individual or business contractor.
      * 
-     * scope: `contractors:manage`
+     * <p>Create an individual or business contractor.
+     * 
+     * <p>scope: `contractors:manage`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody Create an individual or business contractor.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -162,6 +168,7 @@ public class Contractors implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_uuid-contractors", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -173,6 +180,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_uuid-contractors",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -182,6 +190,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_uuid-contractors",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -191,6 +200,7 @@ public class Contractors implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_uuid-contractors",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -266,9 +276,11 @@ public class Contractors implements
 
     /**
      * Get contractors of a company
-     * Get all contractors, active and inactive, individual and business, for a company.
      * 
-     * scope: `contractors:read`
+     * <p>Get all contractors, active and inactive, individual and business, for a company.
+     * 
+     * <p>scope: `contractors:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyUuidContractorsRequestBuilder list() {
@@ -277,9 +289,11 @@ public class Contractors implements
 
     /**
      * Get contractors of a company
-     * Get all contractors, active and inactive, individual and business, for a company.
      * 
-     * scope: `contractors:read`
+     * <p>Get all contractors, active and inactive, individual and business, for a company.
+     * 
+     * <p>scope: `contractors:read`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -312,6 +326,7 @@ public class Contractors implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_uuid-contractors", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -323,6 +338,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_uuid-contractors",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -332,6 +348,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_uuid-contractors",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -341,6 +358,7 @@ public class Contractors implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_uuid-contractors",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -402,9 +420,11 @@ public class Contractors implements
 
     /**
      * Get a contractor
-     * Get a contractor.
      * 
-     * scope: `contractors:read`
+     * <p>Get a contractor.
+     * 
+     * <p>scope: `contractors:read`
+     * 
      * @return The call builder
      */
     public GetV1ContractorsContractorUuidRequestBuilder get() {
@@ -413,9 +433,11 @@ public class Contractors implements
 
     /**
      * Get a contractor
-     * Get a contractor.
      * 
-     * scope: `contractors:read`
+     * <p>Get a contractor.
+     * 
+     * <p>scope: `contractors:read`
+     * 
      * @param contractorUuid The UUID of the contractor
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -427,11 +449,13 @@ public class Contractors implements
     
     /**
      * Get a contractor
-     * Get a contractor.
      * 
-     * scope: `contractors:read`
+     * <p>Get a contractor.
+     * 
+     * <p>scope: `contractors:read`
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -466,6 +490,7 @@ public class Contractors implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractors-contractor_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -477,6 +502,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -486,6 +512,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -495,6 +522,7 @@ public class Contractors implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -556,13 +584,15 @@ public class Contractors implements
 
     /**
      * Update a contractor
-     * Update a contractor.
      * 
-     * scope: `contractors:write`
+     * <p>Update a contractor.
      * 
-     * &gt; 🚧 Warning
+     * <p>scope: `contractors:write`
+     * 
+     * <p>&gt; 🚧 Warning
      * &gt;
      * &gt; Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won’t recognize and file two separate 1099s if they simply change from business to individual
+     * 
      * @return The call builder
      */
     public PutV1ContractorsContractorUuidRequestBuilder update() {
@@ -571,15 +601,17 @@ public class Contractors implements
 
     /**
      * Update a contractor
-     * Update a contractor.
      * 
-     * scope: `contractors:write`
+     * <p>Update a contractor.
      * 
-     * &gt; 🚧 Warning
+     * <p>scope: `contractors:write`
+     * 
+     * <p>&gt; 🚧 Warning
      * &gt;
      * &gt; Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won’t recognize and file two separate 1099s if they simply change from business to individual
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -591,16 +623,18 @@ public class Contractors implements
     
     /**
      * Update a contractor
-     * Update a contractor.
      * 
-     * scope: `contractors:write`
+     * <p>Update a contractor.
      * 
-     * &gt; 🚧 Warning
+     * <p>scope: `contractors:write`
+     * 
+     * <p>&gt; 🚧 Warning
      * &gt;
      * &gt; Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won’t recognize and file two separate 1099s if they simply change from business to individual
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -650,6 +684,7 @@ public class Contractors implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-contractors-contractor_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -661,6 +696,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-contractors-contractor_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -670,6 +706,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-contractors-contractor_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -679,6 +716,7 @@ public class Contractors implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-contractors-contractor_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -754,9 +792,11 @@ public class Contractors implements
 
     /**
      * Delete a contractor
-     * A contractor can only be deleted when there are no contractor payments.
      * 
-     * scope: `contractors:manage`
+     * <p>A contractor can only be deleted when there are no contractor payments.
+     * 
+     * <p>scope: `contractors:manage`
+     * 
      * @return The call builder
      */
     public DeleteV1ContractorsContractorUuidRequestBuilder delete() {
@@ -765,9 +805,11 @@ public class Contractors implements
 
     /**
      * Delete a contractor
-     * A contractor can only be deleted when there are no contractor payments.
      * 
-     * scope: `contractors:manage`
+     * <p>A contractor can only be deleted when there are no contractor payments.
+     * 
+     * <p>scope: `contractors:manage`
+     * 
      * @param contractorUuid The UUID of the contractor
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -779,11 +821,13 @@ public class Contractors implements
     
     /**
      * Delete a contractor
-     * A contractor can only be deleted when there are no contractor payments.
      * 
-     * scope: `contractors:manage`
+     * <p>A contractor can only be deleted when there are no contractor payments.
+     * 
+     * <p>scope: `contractors:manage`
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -818,6 +862,7 @@ public class Contractors implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-contractors-contractor_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -829,6 +874,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-contractors-contractor_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -838,6 +884,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-contractors-contractor_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -847,6 +894,7 @@ public class Contractors implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-contractors-contractor_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -897,22 +945,23 @@ public class Contractors implements
 
     /**
      * Get the contractor's onboarding status
-     * Retrieves a contractor's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
      * 
-     * scope: `contractors:read`
+     * <p>Retrieves a contractor's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
      * 
-     * ## onboarding_status
+     * <p>scope: `contractors:read`
      * 
-     * ### Admin-facilitated onboarding
+     * <p>## onboarding_status
+     * 
+     * <p>### Admin-facilitated onboarding
      * | onboarding_status | Description |
      * |:------------------|------------:|
      * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the contractor. |
      * | `admin_onboarding_review` | All information has been completed and admin needs to confirm onboarding. |
      * | `onboarding_completed` | Contractor has been fully onboarded and verified. |
      * 
-     * ### Contractor self-onboarding
+     * <p>### Contractor self-onboarding
      * 
-     * | onboarding_status | Description |
+     * <p>| onboarding_status | Description |
      * | --- | ----------- |
      * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the contractor. |
      * | `self_onboarding_not_invited` | Admin has the intention to invite the contractor to self-onboard (e.g., marking a checkbox), but the system has not yet sent the invitation. |
@@ -921,9 +970,9 @@ public class Contractors implements
      * | `self_onboarding_review` | Admin needs to review contractors's entered information and confirm onboarding. |
      * | `onboarding_completed` | Contractor has been fully onboarded and verified. |
      * 
-     * ## onboarding_steps
+     * <p>## onboarding_steps
      * 
-     * | onboarding_steps | Requirement(s) to be completed |
+     * <p>| onboarding_steps | Requirement(s) to be completed |
      * |:-----------------|-------------------------------:|
      * | `basic_details` | Add individual contractor's first name, last name, social security number or Business name and EIN depending on the contractor type |
      * | `add_address` | Add contractor address. |
@@ -931,6 +980,7 @@ public class Contractors implements
      * | `payment_details` | Set up contractor's direct deposit or set to check. |
      * | `sign_documents` | Contractor forms (e.g., W9) are generated &amp; signed. |
      * | `file_new_hire_report` | Contractor new hire report is generated. |
+     * 
      * @return The call builder
      */
     public GetV1ContractorsContractorUuidOnboardingStatusRequestBuilder getOnboardingStatus() {
@@ -939,22 +989,23 @@ public class Contractors implements
 
     /**
      * Get the contractor's onboarding status
-     * Retrieves a contractor's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
      * 
-     * scope: `contractors:read`
+     * <p>Retrieves a contractor's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
      * 
-     * ## onboarding_status
+     * <p>scope: `contractors:read`
      * 
-     * ### Admin-facilitated onboarding
+     * <p>## onboarding_status
+     * 
+     * <p>### Admin-facilitated onboarding
      * | onboarding_status | Description |
      * |:------------------|------------:|
      * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the contractor. |
      * | `admin_onboarding_review` | All information has been completed and admin needs to confirm onboarding. |
      * | `onboarding_completed` | Contractor has been fully onboarded and verified. |
      * 
-     * ### Contractor self-onboarding
+     * <p>### Contractor self-onboarding
      * 
-     * | onboarding_status | Description |
+     * <p>| onboarding_status | Description |
      * | --- | ----------- |
      * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the contractor. |
      * | `self_onboarding_not_invited` | Admin has the intention to invite the contractor to self-onboard (e.g., marking a checkbox), but the system has not yet sent the invitation. |
@@ -963,9 +1014,9 @@ public class Contractors implements
      * | `self_onboarding_review` | Admin needs to review contractors's entered information and confirm onboarding. |
      * | `onboarding_completed` | Contractor has been fully onboarded and verified. |
      * 
-     * ## onboarding_steps
+     * <p>## onboarding_steps
      * 
-     * | onboarding_steps | Requirement(s) to be completed |
+     * <p>| onboarding_steps | Requirement(s) to be completed |
      * |:-----------------|-------------------------------:|
      * | `basic_details` | Add individual contractor's first name, last name, social security number or Business name and EIN depending on the contractor type |
      * | `add_address` | Add contractor address. |
@@ -973,6 +1024,7 @@ public class Contractors implements
      * | `payment_details` | Set up contractor's direct deposit or set to check. |
      * | `sign_documents` | Contractor forms (e.g., W9) are generated &amp; signed. |
      * | `file_new_hire_report` | Contractor new hire report is generated. |
+     * 
      * @param contractorUuid The UUID of the contractor
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -984,22 +1036,23 @@ public class Contractors implements
     
     /**
      * Get the contractor's onboarding status
-     * Retrieves a contractor's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
      * 
-     * scope: `contractors:read`
+     * <p>Retrieves a contractor's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
      * 
-     * ## onboarding_status
+     * <p>scope: `contractors:read`
      * 
-     * ### Admin-facilitated onboarding
+     * <p>## onboarding_status
+     * 
+     * <p>### Admin-facilitated onboarding
      * | onboarding_status | Description |
      * |:------------------|------------:|
      * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the contractor. |
      * | `admin_onboarding_review` | All information has been completed and admin needs to confirm onboarding. |
      * | `onboarding_completed` | Contractor has been fully onboarded and verified. |
      * 
-     * ### Contractor self-onboarding
+     * <p>### Contractor self-onboarding
      * 
-     * | onboarding_status | Description |
+     * <p>| onboarding_status | Description |
      * | --- | ----------- |
      * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the contractor. |
      * | `self_onboarding_not_invited` | Admin has the intention to invite the contractor to self-onboard (e.g., marking a checkbox), but the system has not yet sent the invitation. |
@@ -1008,9 +1061,9 @@ public class Contractors implements
      * | `self_onboarding_review` | Admin needs to review contractors's entered information and confirm onboarding. |
      * | `onboarding_completed` | Contractor has been fully onboarded and verified. |
      * 
-     * ## onboarding_steps
+     * <p>## onboarding_steps
      * 
-     * | onboarding_steps | Requirement(s) to be completed |
+     * <p>| onboarding_steps | Requirement(s) to be completed |
      * |:-----------------|-------------------------------:|
      * | `basic_details` | Add individual contractor's first name, last name, social security number or Business name and EIN depending on the contractor type |
      * | `add_address` | Add contractor address. |
@@ -1018,8 +1071,9 @@ public class Contractors implements
      * | `payment_details` | Set up contractor's direct deposit or set to check. |
      * | `sign_documents` | Contractor forms (e.g., W9) are generated &amp; signed. |
      * | `file_new_hire_report` | Contractor new hire report is generated. |
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1054,6 +1108,7 @@ public class Contractors implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractors-contractor_uuid-onboarding_status", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1065,6 +1120,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid-onboarding_status",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1074,6 +1130,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid-onboarding_status",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1083,6 +1140,7 @@ public class Contractors implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid-onboarding_status",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1144,19 +1202,21 @@ public class Contractors implements
 
     /**
      * Change the contractor's onboarding status
-     * Updates a contractor's onboarding status.
      * 
-     * scope: `contractors:write`
+     * <p>Updates a contractor's onboarding status.
      * 
-     * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the contractor.
+     * <p>scope: `contractors:write`
      * 
-     * | Action | current onboarding_status | new onboarding_status |
+     * <p>Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the contractor.
+     * 
+     * <p>| Action | current onboarding_status | new onboarding_status |
      * |:------------------|:------------:|----------:|
      * | Mark a contractor as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_not_invited` |
      * | Invite a contractor to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_not_invited` | `self_onboarding_invited` |
      * | Cancel a contractor's self-onboarding | `self_onboarding_invited` or `self_onboarding_not_invited` | `admin_onboarding_incomplete` |
      * | Review a contractor's self-onboarded info | `self_onboarding_started` | `self_onboarding_review` |
      * | Finish a contractor's onboarding | `admin_onboarding_review` or `self_onboarding_review` | `onboarding_completed` |
+     * 
      * @return The call builder
      */
     public PutV1ContractorsContractorUuidOnboardingStatusRequestBuilder updateOnboardingStatus() {
@@ -1165,21 +1225,23 @@ public class Contractors implements
 
     /**
      * Change the contractor's onboarding status
-     * Updates a contractor's onboarding status.
      * 
-     * scope: `contractors:write`
+     * <p>Updates a contractor's onboarding status.
      * 
-     * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the contractor.
+     * <p>scope: `contractors:write`
      * 
-     * | Action | current onboarding_status | new onboarding_status |
+     * <p>Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the contractor.
+     * 
+     * <p>| Action | current onboarding_status | new onboarding_status |
      * |:------------------|:------------:|----------:|
      * | Mark a contractor as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_not_invited` |
      * | Invite a contractor to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_not_invited` | `self_onboarding_invited` |
      * | Cancel a contractor's self-onboarding | `self_onboarding_invited` or `self_onboarding_not_invited` | `admin_onboarding_incomplete` |
      * | Review a contractor's self-onboarded info | `self_onboarding_started` | `self_onboarding_review` |
      * | Finish a contractor's onboarding | `admin_onboarding_review` or `self_onboarding_review` | `onboarding_completed` |
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1191,22 +1253,24 @@ public class Contractors implements
     
     /**
      * Change the contractor's onboarding status
-     * Updates a contractor's onboarding status.
      * 
-     * scope: `contractors:write`
+     * <p>Updates a contractor's onboarding status.
      * 
-     * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the contractor.
+     * <p>scope: `contractors:write`
      * 
-     * | Action | current onboarding_status | new onboarding_status |
+     * <p>Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the contractor.
+     * 
+     * <p>| Action | current onboarding_status | new onboarding_status |
      * |:------------------|:------------:|----------:|
      * | Mark a contractor as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_not_invited` |
      * | Invite a contractor to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_not_invited` | `self_onboarding_invited` |
      * | Cancel a contractor's self-onboarding | `self_onboarding_invited` or `self_onboarding_not_invited` | `admin_onboarding_incomplete` |
      * | Review a contractor's self-onboarded info | `self_onboarding_started` | `self_onboarding_review` |
      * | Finish a contractor's onboarding | `admin_onboarding_review` or `self_onboarding_review` | `onboarding_completed` |
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1256,6 +1320,7 @@ public class Contractors implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-contractors-contractor_uuid-onboarding_status", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1267,6 +1332,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-contractors-contractor_uuid-onboarding_status",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1276,6 +1342,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-contractors-contractor_uuid-onboarding_status",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1285,6 +1352,7 @@ public class Contractors implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-contractors-contractor_uuid-onboarding_status",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1360,9 +1428,11 @@ public class Contractors implements
 
     /**
      * Get a contractor address
-     * The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `contractors:read`
+     * <p>The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+     * 
+     * <p>scope: `contractors:read`
+     * 
      * @return The call builder
      */
     public GetV1ContractorsContractorUuidAddressRequestBuilder getAddress() {
@@ -1371,9 +1441,11 @@ public class Contractors implements
 
     /**
      * Get a contractor address
-     * The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `contractors:read`
+     * <p>The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+     * 
+     * <p>scope: `contractors:read`
+     * 
      * @param contractorUuid The UUID of the contractor
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1385,11 +1457,13 @@ public class Contractors implements
     
     /**
      * Get a contractor address
-     * The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `contractors:read`
+     * <p>The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+     * 
+     * <p>scope: `contractors:read`
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1424,6 +1498,7 @@ public class Contractors implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractors-contractor_uuid-address", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1435,6 +1510,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid-address",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1444,6 +1520,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid-address",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1453,6 +1530,7 @@ public class Contractors implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid-address",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1514,9 +1592,11 @@ public class Contractors implements
 
     /**
      * Update a contractor's address
-     * The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `contractors:write`
+     * <p>The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+     * 
+     * <p>scope: `contractors:write`
+     * 
      * @return The call builder
      */
     public PutV1ContractorsContractorUuidAddressRequestBuilder updateAddress() {
@@ -1525,11 +1605,13 @@ public class Contractors implements
 
     /**
      * Update a contractor's address
-     * The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `contractors:write`
+     * <p>The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+     * 
+     * <p>scope: `contractors:write`
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1541,12 +1623,14 @@ public class Contractors implements
     
     /**
      * Update a contractor's address
-     * The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `contractors:write`
+     * <p>The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+     * 
+     * <p>scope: `contractors:write`
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1596,6 +1680,7 @@ public class Contractors implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-contractors-contractor_uuid-address", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1607,6 +1692,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-contractors-contractor_uuid-address",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1616,6 +1702,7 @@ public class Contractors implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-contractors-contractor_uuid-address",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1625,6 +1712,7 @@ public class Contractors implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-contractors-contractor_uuid-address",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

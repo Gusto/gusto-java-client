@@ -19,10 +19,12 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * PaySchedule - The representation of a pay schedule.
+ * PayScheduleList
+ * 
+ * <p>The representation of a pay schedule.
  */
 
-public class PaySchedule {
+public class PayScheduleList {
 
     /**
      * The unique identifier of the pay schedule in Gusto.
@@ -93,8 +95,14 @@ public class PaySchedule {
     @JsonProperty("active")
     private Optional<Boolean> active;
 
+    /**
+     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+     */
+    @JsonProperty("version")
+    private String version;
+
     @JsonCreator
-    public PaySchedule(
+    public PayScheduleList(
             @JsonProperty("uuid") String uuid,
             @JsonProperty("frequency") Optional<? extends PayScheduleFrequency> frequency,
             @JsonProperty("anchor_pay_date") Optional<String> anchorPayDate,
@@ -104,7 +112,8 @@ public class PaySchedule {
             @JsonProperty("name") JsonNullable<String> name,
             @JsonProperty("custom_name") Optional<String> customName,
             @JsonProperty("auto_pilot") Optional<Boolean> autoPilot,
-            @JsonProperty("active") Optional<Boolean> active) {
+            @JsonProperty("active") Optional<Boolean> active,
+            @JsonProperty("version") String version) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(frequency, "frequency");
         Utils.checkNotNull(anchorPayDate, "anchorPayDate");
@@ -115,6 +124,7 @@ public class PaySchedule {
         Utils.checkNotNull(customName, "customName");
         Utils.checkNotNull(autoPilot, "autoPilot");
         Utils.checkNotNull(active, "active");
+        Utils.checkNotNull(version, "version");
         this.uuid = uuid;
         this.frequency = frequency;
         this.anchorPayDate = anchorPayDate;
@@ -125,11 +135,13 @@ public class PaySchedule {
         this.customName = customName;
         this.autoPilot = autoPilot;
         this.active = active;
+        this.version = version;
     }
     
-    public PaySchedule(
-            String uuid) {
-        this(uuid, Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty());
+    public PayScheduleList(
+            String uuid,
+            String version) {
+        this(uuid, Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty(), version);
     }
 
     /**
@@ -213,6 +225,14 @@ public class PaySchedule {
         return active;
     }
 
+    /**
+     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+     */
+    @JsonIgnore
+    public String version() {
+        return version;
+    }
+
     public final static Builder builder() {
         return new Builder();
     }
@@ -220,7 +240,7 @@ public class PaySchedule {
     /**
      * The unique identifier of the pay schedule in Gusto.
      */
-    public PaySchedule withUuid(String uuid) {
+    public PayScheduleList withUuid(String uuid) {
         Utils.checkNotNull(uuid, "uuid");
         this.uuid = uuid;
         return this;
@@ -229,7 +249,7 @@ public class PaySchedule {
     /**
      * The frequency that employees on this pay schedule are paid with Gusto.
      */
-    public PaySchedule withFrequency(PayScheduleFrequency frequency) {
+    public PayScheduleList withFrequency(PayScheduleFrequency frequency) {
         Utils.checkNotNull(frequency, "frequency");
         this.frequency = Optional.ofNullable(frequency);
         return this;
@@ -238,7 +258,7 @@ public class PaySchedule {
     /**
      * The frequency that employees on this pay schedule are paid with Gusto.
      */
-    public PaySchedule withFrequency(Optional<? extends PayScheduleFrequency> frequency) {
+    public PayScheduleList withFrequency(Optional<? extends PayScheduleFrequency> frequency) {
         Utils.checkNotNull(frequency, "frequency");
         this.frequency = frequency;
         return this;
@@ -247,7 +267,7 @@ public class PaySchedule {
     /**
      * The first date that employees on this pay schedule are paid with Gusto.
      */
-    public PaySchedule withAnchorPayDate(String anchorPayDate) {
+    public PayScheduleList withAnchorPayDate(String anchorPayDate) {
         Utils.checkNotNull(anchorPayDate, "anchorPayDate");
         this.anchorPayDate = Optional.ofNullable(anchorPayDate);
         return this;
@@ -256,7 +276,7 @@ public class PaySchedule {
     /**
      * The first date that employees on this pay schedule are paid with Gusto.
      */
-    public PaySchedule withAnchorPayDate(Optional<String> anchorPayDate) {
+    public PayScheduleList withAnchorPayDate(Optional<String> anchorPayDate) {
         Utils.checkNotNull(anchorPayDate, "anchorPayDate");
         this.anchorPayDate = anchorPayDate;
         return this;
@@ -265,7 +285,7 @@ public class PaySchedule {
     /**
      * The last date of the first pay period. This can be the same date as the anchor pay date.
      */
-    public PaySchedule withAnchorEndOfPayPeriod(String anchorEndOfPayPeriod) {
+    public PayScheduleList withAnchorEndOfPayPeriod(String anchorEndOfPayPeriod) {
         Utils.checkNotNull(anchorEndOfPayPeriod, "anchorEndOfPayPeriod");
         this.anchorEndOfPayPeriod = Optional.ofNullable(anchorEndOfPayPeriod);
         return this;
@@ -274,7 +294,7 @@ public class PaySchedule {
     /**
      * The last date of the first pay period. This can be the same date as the anchor pay date.
      */
-    public PaySchedule withAnchorEndOfPayPeriod(Optional<String> anchorEndOfPayPeriod) {
+    public PayScheduleList withAnchorEndOfPayPeriod(Optional<String> anchorEndOfPayPeriod) {
         Utils.checkNotNull(anchorEndOfPayPeriod, "anchorEndOfPayPeriod");
         this.anchorEndOfPayPeriod = anchorEndOfPayPeriod;
         return this;
@@ -283,7 +303,7 @@ public class PaySchedule {
     /**
      * An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It will be null for pay schedules with other frequencies.
      */
-    public PaySchedule withDay1(long day1) {
+    public PayScheduleList withDay1(long day1) {
         Utils.checkNotNull(day1, "day1");
         this.day1 = JsonNullable.of(day1);
         return this;
@@ -292,7 +312,7 @@ public class PaySchedule {
     /**
      * An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It will be null for pay schedules with other frequencies.
      */
-    public PaySchedule withDay1(JsonNullable<Long> day1) {
+    public PayScheduleList withDay1(JsonNullable<Long> day1) {
         Utils.checkNotNull(day1, "day1");
         this.day1 = day1;
         return this;
@@ -301,7 +321,7 @@ public class PaySchedule {
     /**
      * An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the "Twice per month" frequency. For semi-monthly pay schedules, this field should be set to 31. For months shorter than 31 days, we will set the second pay date to the last day of the month. It will be null for pay schedules with other frequencies.
      */
-    public PaySchedule withDay2(long day2) {
+    public PayScheduleList withDay2(long day2) {
         Utils.checkNotNull(day2, "day2");
         this.day2 = JsonNullable.of(day2);
         return this;
@@ -310,7 +330,7 @@ public class PaySchedule {
     /**
      * An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the "Twice per month" frequency. For semi-monthly pay schedules, this field should be set to 31. For months shorter than 31 days, we will set the second pay date to the last day of the month. It will be null for pay schedules with other frequencies.
      */
-    public PaySchedule withDay2(JsonNullable<Long> day2) {
+    public PayScheduleList withDay2(JsonNullable<Long> day2) {
         Utils.checkNotNull(day2, "day2");
         this.day2 = day2;
         return this;
@@ -319,7 +339,7 @@ public class PaySchedule {
     /**
      * This field will be hourly when the pay schedule is for hourly employees, salaried when the pay schedule is for salaried employees, the department name if pay schedule is by department, and null when the pay schedule is for all employees.
      */
-    public PaySchedule withName(String name) {
+    public PayScheduleList withName(String name) {
         Utils.checkNotNull(name, "name");
         this.name = JsonNullable.of(name);
         return this;
@@ -328,7 +348,7 @@ public class PaySchedule {
     /**
      * This field will be hourly when the pay schedule is for hourly employees, salaried when the pay schedule is for salaried employees, the department name if pay schedule is by department, and null when the pay schedule is for all employees.
      */
-    public PaySchedule withName(JsonNullable<String> name) {
+    public PayScheduleList withName(JsonNullable<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
@@ -337,7 +357,7 @@ public class PaySchedule {
     /**
      * A custom name for a pay schedule, defaults to the pay frequency description.
      */
-    public PaySchedule withCustomName(String customName) {
+    public PayScheduleList withCustomName(String customName) {
         Utils.checkNotNull(customName, "customName");
         this.customName = Optional.ofNullable(customName);
         return this;
@@ -346,7 +366,7 @@ public class PaySchedule {
     /**
      * A custom name for a pay schedule, defaults to the pay frequency description.
      */
-    public PaySchedule withCustomName(Optional<String> customName) {
+    public PayScheduleList withCustomName(Optional<String> customName) {
         Utils.checkNotNull(customName, "customName");
         this.customName = customName;
         return this;
@@ -355,7 +375,7 @@ public class PaySchedule {
     /**
      * With Autopilot® enabled, payroll will run automatically one day before your payroll deadlines.
      */
-    public PaySchedule withAutoPilot(boolean autoPilot) {
+    public PayScheduleList withAutoPilot(boolean autoPilot) {
         Utils.checkNotNull(autoPilot, "autoPilot");
         this.autoPilot = Optional.ofNullable(autoPilot);
         return this;
@@ -364,7 +384,7 @@ public class PaySchedule {
     /**
      * With Autopilot® enabled, payroll will run automatically one day before your payroll deadlines.
      */
-    public PaySchedule withAutoPilot(Optional<Boolean> autoPilot) {
+    public PayScheduleList withAutoPilot(Optional<Boolean> autoPilot) {
         Utils.checkNotNull(autoPilot, "autoPilot");
         this.autoPilot = autoPilot;
         return this;
@@ -373,7 +393,7 @@ public class PaySchedule {
     /**
      * Whether this pay schedule is associated with any employees. A pay schedule is inactive when it's unassigned.
      */
-    public PaySchedule withActive(boolean active) {
+    public PayScheduleList withActive(boolean active) {
         Utils.checkNotNull(active, "active");
         this.active = Optional.ofNullable(active);
         return this;
@@ -382,9 +402,18 @@ public class PaySchedule {
     /**
      * Whether this pay schedule is associated with any employees. A pay schedule is inactive when it's unassigned.
      */
-    public PaySchedule withActive(Optional<Boolean> active) {
+    public PayScheduleList withActive(Optional<Boolean> active) {
         Utils.checkNotNull(active, "active");
         this.active = active;
+        return this;
+    }
+
+    /**
+     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+     */
+    public PayScheduleList withVersion(String version) {
+        Utils.checkNotNull(version, "version");
+        this.version = version;
         return this;
     }
     
@@ -396,7 +425,7 @@ public class PaySchedule {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PaySchedule other = (PaySchedule) o;
+        PayScheduleList other = (PayScheduleList) o;
         return 
             Objects.deepEquals(this.uuid, other.uuid) &&
             Objects.deepEquals(this.frequency, other.frequency) &&
@@ -407,7 +436,8 @@ public class PaySchedule {
             Objects.deepEquals(this.name, other.name) &&
             Objects.deepEquals(this.customName, other.customName) &&
             Objects.deepEquals(this.autoPilot, other.autoPilot) &&
-            Objects.deepEquals(this.active, other.active);
+            Objects.deepEquals(this.active, other.active) &&
+            Objects.deepEquals(this.version, other.version);
     }
     
     @Override
@@ -422,12 +452,13 @@ public class PaySchedule {
             name,
             customName,
             autoPilot,
-            active);
+            active,
+            version);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(PaySchedule.class,
+        return Utils.toString(PayScheduleList.class,
                 "uuid", uuid,
                 "frequency", frequency,
                 "anchorPayDate", anchorPayDate,
@@ -437,7 +468,8 @@ public class PaySchedule {
                 "name", name,
                 "customName", customName,
                 "autoPilot", autoPilot,
-                "active", active);
+                "active", active,
+                "version", version);
     }
     
     public final static class Builder {
@@ -460,7 +492,9 @@ public class PaySchedule {
  
         private Optional<Boolean> autoPilot = Optional.empty();
  
-        private Optional<Boolean> active = Optional.empty();  
+        private Optional<Boolean> active = Optional.empty();
+ 
+        private String version;  
         
         private Builder() {
           // force use of static builder() method
@@ -636,9 +670,18 @@ public class PaySchedule {
             this.active = active;
             return this;
         }
+
+        /**
+         * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+         */
+        public Builder version(String version) {
+            Utils.checkNotNull(version, "version");
+            this.version = version;
+            return this;
+        }
         
-        public PaySchedule build() {
-            return new PaySchedule(
+        public PayScheduleList build() {
+            return new PayScheduleList(
                 uuid,
                 frequency,
                 anchorPayDate,
@@ -648,7 +691,8 @@ public class PaySchedule {
                 name,
                 customName,
                 autoPilot,
-                active);
+                active,
+                version);
         }
     }
 }

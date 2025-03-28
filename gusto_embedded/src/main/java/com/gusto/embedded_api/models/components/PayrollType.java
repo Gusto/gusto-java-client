@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayrollType - Whether it is regular pay period or transition pay period.
+ * PayrollType
+ * 
+ * <p>Whether it is regular pay period or transition pay period.
  */
 public enum PayrollType {
     REGULAR("regular"),

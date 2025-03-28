@@ -35,7 +35,7 @@ public class Application {
                 .employeeId("<id>")
                 .page(791208L)
                 .per(144106L)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeeBankAccountList().isPresent()) {

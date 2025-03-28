@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayrollPaymentSpeedChangedType - Only applicable when a payroll is moved to four day processing instead of fast ach.
+ * PayrollPaymentSpeedChangedType
+ * 
+ * <p>Only applicable when a payroll is moved to four day processing instead of fast ach.
  */
 
 public class PayrollPaymentSpeedChangedType {

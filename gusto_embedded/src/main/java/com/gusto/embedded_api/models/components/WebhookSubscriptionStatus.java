@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * WebhookSubscriptionStatus - The status of the webhook subscription.
+ * WebhookSubscriptionStatus
+ * 
+ * <p>The status of the webhook subscription.
  */
 public enum WebhookSubscriptionStatus {
     PENDING("pending"),

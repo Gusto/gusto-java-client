@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody - Pay schedule preview
+ * GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody
+ * 
+ * <p>Pay schedule preview
  */
 
 public class GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody {

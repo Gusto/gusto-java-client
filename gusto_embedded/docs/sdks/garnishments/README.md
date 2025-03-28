@@ -39,7 +39,7 @@ public class Application {
 
         PostV1EmployeesEmployeeIdGarnishmentsResponse res = sdk.garnishments().create()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1EmployeesEmployeeIdGarnishmentsRequestBody.builder()
                     .amount("150.00")
                     .courtOrdered(true)
@@ -101,7 +101,7 @@ public class Application {
                 .employeeId("<id>")
                 .page(768578L)
                 .per(547272L)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.garnishmentList().isPresent()) {
@@ -156,7 +156,7 @@ public class Application {
 
         GetV1GarnishmentsGarnishmentIdResponse res = sdk.garnishments().get()
                 .garnishmentId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.garnishment().isPresent()) {
@@ -211,7 +211,7 @@ public class Application {
 
         PutV1GarnishmentsGarnishmentIdResponse res = sdk.garnishments().update()
                 .garnishmentId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1GarnishmentsGarnishmentIdRequestBody.builder()
                     .version("52b7c567242cb7452e89ba2bc02cb476")
                     .build())
@@ -268,7 +268,7 @@ public class Application {
             .build();
 
         GetV1GarnishmentsChildSupportResponse res = sdk.garnishments().getChildSupportData()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.childSupportData().isPresent()) {

@@ -6,11 +6,12 @@ package com.gusto.embedded_api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.models.components.PayPeriod;
-import com.gusto.embedded_api.models.components.PaySchedule;
 import com.gusto.embedded_api.models.components.PayScheduleAssignment;
 import com.gusto.embedded_api.models.components.PayScheduleAssignmentBody;
 import com.gusto.embedded_api.models.components.PayScheduleAssignmentPreview;
 import com.gusto.embedded_api.models.components.PayScheduleCreateUpdate;
+import com.gusto.embedded_api.models.components.PayScheduleList;
+import com.gusto.embedded_api.models.components.PayScheduleObject;
 import com.gusto.embedded_api.models.components.UnprocessedTerminationPayPeriod;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.APIException;
@@ -88,13 +89,15 @@ public class PaySchedules implements
 
     /**
      * Create a new pay schedule
-     * If a company does not have any pay schedules, this endpoint will create a single pay schedule and assign it to all employees. This is a common use case during company onboarding.
      * 
-     * If a company has an existing active pay schedule and want to support multiple pay schedules, this endpoint will create a pay schedule that is not assigned to any employee.
+     * <p>If a company does not have any pay schedules, this endpoint will create a single pay schedule and assign it to all employees. This is a common use case during company onboarding.
      * 
-     * Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)** to know what schedule is right for your customers.
+     * <p>If a company has an existing active pay schedule and want to support multiple pay schedules, this endpoint will create a pay schedule that is not assigned to any employee.
      * 
-     * scope: `pay_schedules:write`
+     * <p>Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)** to know what schedule is right for your customers.
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdPaySchedulesRequestBuilder create() {
@@ -103,15 +106,17 @@ public class PaySchedules implements
 
     /**
      * Create a new pay schedule
-     * If a company does not have any pay schedules, this endpoint will create a single pay schedule and assign it to all employees. This is a common use case during company onboarding.
      * 
-     * If a company has an existing active pay schedule and want to support multiple pay schedules, this endpoint will create a pay schedule that is not assigned to any employee.
+     * <p>If a company does not have any pay schedules, this endpoint will create a single pay schedule and assign it to all employees. This is a common use case during company onboarding.
      * 
-     * Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)** to know what schedule is right for your customers.
+     * <p>If a company has an existing active pay schedule and want to support multiple pay schedules, this endpoint will create a pay schedule that is not assigned to any employee.
      * 
-     * scope: `pay_schedules:write`
+     * <p>Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)** to know what schedule is right for your customers.
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -123,16 +128,18 @@ public class PaySchedules implements
     
     /**
      * Create a new pay schedule
-     * If a company does not have any pay schedules, this endpoint will create a single pay schedule and assign it to all employees. This is a common use case during company onboarding.
      * 
-     * If a company has an existing active pay schedule and want to support multiple pay schedules, this endpoint will create a pay schedule that is not assigned to any employee.
+     * <p>If a company does not have any pay schedules, this endpoint will create a single pay schedule and assign it to all employees. This is a common use case during company onboarding.
      * 
-     * Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)** to know what schedule is right for your customers.
+     * <p>If a company has an existing active pay schedule and want to support multiple pay schedules, this endpoint will create a pay schedule that is not assigned to any employee.
      * 
-     * scope: `pay_schedules:write`
+     * <p>Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)** to know what schedule is right for your customers.
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -182,6 +189,7 @@ public class PaySchedules implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_id-pay_schedules", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -193,6 +201,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-pay_schedules",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -202,6 +211,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-pay_schedules",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -211,6 +221,7 @@ public class PaySchedules implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-pay_schedules",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -286,9 +297,11 @@ public class PaySchedules implements
 
     /**
      * Get the pay schedules for a company
-     * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
      * 
-     * scope: `pay_schedules:read`
+     * <p>The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdPaySchedulesRequestBuilder getAll() {
@@ -297,9 +310,11 @@ public class PaySchedules implements
 
     /**
      * Get the pay schedules for a company
-     * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
      * 
-     * scope: `pay_schedules:read`
+     * <p>The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -311,13 +326,15 @@ public class PaySchedules implements
     
     /**
      * Get the pay schedules for a company
-     * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
      * 
-     * scope: `pay_schedules:read`
+     * <p>The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
      * @param companyId The UUID of the company
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -361,6 +378,7 @@ public class PaySchedules implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-pay_schedules", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -372,6 +390,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_schedules",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -381,6 +400,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_schedules",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -390,6 +410,7 @@ public class PaySchedules implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_schedules",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -411,9 +432,9 @@ public class PaySchedules implements
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<PaySchedule> _out = Utils.mapper().readValue(
+                List<PayScheduleList> _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<PaySchedule>>() {});
+                    new TypeReference<List<PayScheduleList>>() {});
                 _res.withPayScheduleList(Optional.ofNullable(_out));
                 return _res;
             } else {
@@ -451,9 +472,11 @@ public class PaySchedules implements
 
     /**
      * Preview pay schedule dates
-     * Provides a preview of a pay schedule with the specified parameters for the next 18 months.
      * 
-     * scope: `pay_schedules:write`
+     * <p>Provides a preview of a pay schedule with the specified parameters for the next 18 months.
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdPaySchedulesPreviewRequestBuilder getPreview() {
@@ -462,9 +485,11 @@ public class PaySchedules implements
 
     /**
      * Preview pay schedule dates
-     * Provides a preview of a pay schedule with the specified parameters for the next 18 months.
      * 
-     * scope: `pay_schedules:write`
+     * <p>Provides a preview of a pay schedule with the specified parameters for the next 18 months.
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -497,6 +522,7 @@ public class PaySchedules implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-pay_schedules-preview", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -508,6 +534,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_schedules-preview",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -517,6 +544,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_schedules-preview",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -526,6 +554,7 @@ public class PaySchedules implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_schedules-preview",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -587,9 +616,11 @@ public class PaySchedules implements
 
     /**
      * Get a pay schedule
-     * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
      * 
-     * scope: `pay_schedules:read`
+     * <p>The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder get() {
@@ -598,9 +629,11 @@ public class PaySchedules implements
 
     /**
      * Get a pay schedule
-     * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
      * 
-     * scope: `pay_schedules:read`
+     * <p>The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
      * @param companyId The UUID of the company
      * @param payScheduleId The UUID of the pay schedule
      * @return The response from the API call
@@ -614,12 +647,14 @@ public class PaySchedules implements
     
     /**
      * Get a pay schedule
-     * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
      * 
-     * scope: `pay_schedules:read`
+     * <p>The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
      * @param companyId The UUID of the company
      * @param payScheduleId The UUID of the pay schedule
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -656,6 +691,7 @@ public class PaySchedules implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-pay_schedules-pay_schedule_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -667,6 +703,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_schedules-pay_schedule_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -676,6 +713,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_schedules-pay_schedule_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -685,6 +723,7 @@ public class PaySchedules implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_schedules-pay_schedule_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -706,10 +745,10 @@ public class PaySchedules implements
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                PaySchedule _out = Utils.mapper().readValue(
+                PayScheduleObject _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<PaySchedule>() {});
-                _res.withPaySchedule(Optional.ofNullable(_out));
+                    new TypeReference<PayScheduleObject>() {});
+                _res.withPayScheduleObject(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(
@@ -746,9 +785,11 @@ public class PaySchedules implements
 
     /**
      * Update a pay schedule
-     * Updates a pay schedule.
      * 
-     * scope: `pay_schedules:write`
+     * <p>Updates a pay schedule.
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
      * @return The call builder
      */
     public PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder update() {
@@ -757,12 +798,14 @@ public class PaySchedules implements
 
     /**
      * Update a pay schedule
-     * Updates a pay schedule.
      * 
-     * scope: `pay_schedules:write`
+     * <p>Updates a pay schedule.
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
      * @param companyId The UUID of the company
      * @param payScheduleId The UUID of the pay schedule
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -775,13 +818,15 @@ public class PaySchedules implements
     
     /**
      * Update a pay schedule
-     * Updates a pay schedule.
      * 
-     * scope: `pay_schedules:write`
+     * <p>Updates a pay schedule.
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
      * @param companyId The UUID of the company
      * @param payScheduleId The UUID of the pay schedule
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -833,6 +878,7 @@ public class PaySchedules implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-companies-company_id-pay_schedules-pay_schedule_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -844,6 +890,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-pay_schedules-pay_schedule_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -853,6 +900,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-pay_schedules-pay_schedule_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -862,6 +910,7 @@ public class PaySchedules implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-pay_schedules-pay_schedule_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -937,13 +986,15 @@ public class PaySchedules implements
 
     /**
      * Get pay periods for a company
-     * Pay periods are the foundation of payroll. Compensation, time &amp; attendance, taxes, and expense reports all rely on when they happened. To begin submitting information for a given payroll, we need to agree on the time period.
      * 
-     * By default, this endpoint returns pay periods starting from 6 months ago to the date today.  Use the `start_date` and `end_date` parameters to change the scope of the response.  End dates can be up to 3 months in the future and there is no limit on start dates.
+     * <p>Pay periods are the foundation of payroll. Compensation, time &amp; attendance, taxes, and expense reports all rely on when they happened. To begin submitting information for a given payroll, we need to agree on the time period.
      * 
-     * Starting in version '2023-04-01', the eligible_employees attribute was removed from the response.  The eligible employees for a payroll are determined by the employee_compensations returned from the payrolls#prepare endpoint.
+     * <p>By default, this endpoint returns pay periods starting from 6 months ago to the date today.  Use the `start_date` and `end_date` parameters to change the scope of the response.  End dates can be up to 3 months in the future and there is no limit on start dates.
      * 
-     * scope: `payrolls:read`
+     * <p>Starting in version '2023-04-01', the eligible_employees attribute was removed from the response.  The eligible employees for a payroll are determined by the employee_compensations returned from the payrolls#prepare endpoint.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdPayPeriodsRequestBuilder getPayPeriods() {
@@ -952,13 +1003,15 @@ public class PaySchedules implements
 
     /**
      * Get pay periods for a company
-     * Pay periods are the foundation of payroll. Compensation, time &amp; attendance, taxes, and expense reports all rely on when they happened. To begin submitting information for a given payroll, we need to agree on the time period.
      * 
-     * By default, this endpoint returns pay periods starting from 6 months ago to the date today.  Use the `start_date` and `end_date` parameters to change the scope of the response.  End dates can be up to 3 months in the future and there is no limit on start dates.
+     * <p>Pay periods are the foundation of payroll. Compensation, time &amp; attendance, taxes, and expense reports all rely on when they happened. To begin submitting information for a given payroll, we need to agree on the time period.
      * 
-     * Starting in version '2023-04-01', the eligible_employees attribute was removed from the response.  The eligible employees for a payroll are determined by the employee_compensations returned from the payrolls#prepare endpoint.
+     * <p>By default, this endpoint returns pay periods starting from 6 months ago to the date today.  Use the `start_date` and `end_date` parameters to change the scope of the response.  End dates can be up to 3 months in the future and there is no limit on start dates.
      * 
-     * scope: `payrolls:read`
+     * <p>Starting in version '2023-04-01', the eligible_employees attribute was removed from the response.  The eligible employees for a payroll are determined by the employee_compensations returned from the payrolls#prepare endpoint.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -991,6 +1044,7 @@ public class PaySchedules implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-pay_periods", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1002,6 +1056,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_periods",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1011,6 +1066,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_periods",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1020,6 +1076,7 @@ public class PaySchedules implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_periods",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1081,11 +1138,13 @@ public class PaySchedules implements
 
     /**
      * Get termination pay periods for a company
-     * When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final payroll, their last pay period will appear on the list.
      * 
-     * This endpoint returns the unprocessed pay periods for past and future terminated employees in a given company.
+     * <p>When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final payroll, their last pay period will appear on the list.
      * 
-     * scope: `payrolls:read`
+     * <p>This endpoint returns the unprocessed pay periods for past and future terminated employees in a given company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequestBuilder getUnprocessedTerminationPeriods() {
@@ -1094,11 +1153,13 @@ public class PaySchedules implements
 
     /**
      * Get termination pay periods for a company
-     * When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final payroll, their last pay period will appear on the list.
      * 
-     * This endpoint returns the unprocessed pay periods for past and future terminated employees in a given company.
+     * <p>When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final payroll, their last pay period will appear on the list.
      * 
-     * scope: `payrolls:read`
+     * <p>This endpoint returns the unprocessed pay periods for past and future terminated employees in a given company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1110,13 +1171,15 @@ public class PaySchedules implements
     
     /**
      * Get termination pay periods for a company
-     * When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final payroll, their last pay period will appear on the list.
      * 
-     * This endpoint returns the unprocessed pay periods for past and future terminated employees in a given company.
+     * <p>When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final payroll, their last pay period will appear on the list.
      * 
-     * scope: `payrolls:read`
+     * <p>This endpoint returns the unprocessed pay periods for past and future terminated employees in a given company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1151,6 +1214,7 @@ public class PaySchedules implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-unprocessed_termination_pay_periods", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1162,6 +1226,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-unprocessed_termination_pay_periods",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1171,6 +1236,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-unprocessed_termination_pay_periods",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1180,6 +1246,7 @@ public class PaySchedules implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-unprocessed_termination_pay_periods",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1241,9 +1308,11 @@ public class PaySchedules implements
 
     /**
      * Get pay schedule assignments for a company
-     * This endpoint returns the current pay schedule assignment for a company, with pay schedule and employee/department mappings depending on the pay schedule type.
      * 
-     * scope: `pay_schedules:read`
+     * <p>This endpoint returns the current pay schedule assignment for a company, with pay schedule and employee/department mappings depending on the pay schedule type.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequestBuilder getAssignments() {
@@ -1252,9 +1321,11 @@ public class PaySchedules implements
 
     /**
      * Get pay schedule assignments for a company
-     * This endpoint returns the current pay schedule assignment for a company, with pay schedule and employee/department mappings depending on the pay schedule type.
      * 
-     * scope: `pay_schedules:read`
+     * <p>This endpoint returns the current pay schedule assignment for a company, with pay schedule and employee/department mappings depending on the pay schedule type.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1266,11 +1337,13 @@ public class PaySchedules implements
     
     /**
      * Get pay schedule assignments for a company
-     * This endpoint returns the current pay schedule assignment for a company, with pay schedule and employee/department mappings depending on the pay schedule type.
      * 
-     * scope: `pay_schedules:read`
+     * <p>This endpoint returns the current pay schedule assignment for a company, with pay schedule and employee/department mappings depending on the pay schedule type.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1305,6 +1378,7 @@ public class PaySchedules implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-pay_schedules-assignments", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1316,6 +1390,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_schedules-assignments",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1325,6 +1400,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_schedules-assignments",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1334,6 +1410,7 @@ public class PaySchedules implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-pay_schedules-assignments",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1395,9 +1472,11 @@ public class PaySchedules implements
 
     /**
      * Preview pay schedule assignments for a company
-     * This endpoint returns the employee changes, including pay period and transition pay periods, for changing the pay schedule.
      * 
-     * scope: `pay_schedules:write`
+     * <p>This endpoint returns the employee changes, including pay period and transition pay periods, for changing the pay schedule.
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequestBuilder previewAssignment() {
@@ -1406,11 +1485,13 @@ public class PaySchedules implements
 
     /**
      * Preview pay schedule assignments for a company
-     * This endpoint returns the employee changes, including pay period and transition pay periods, for changing the pay schedule.
      * 
-     * scope: `pay_schedules:write`
+     * <p>This endpoint returns the employee changes, including pay period and transition pay periods, for changing the pay schedule.
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
      * @param companyId The UUID of the company
-     * @param payScheduleAssignmentBody
+     * @param payScheduleAssignmentBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1422,12 +1503,14 @@ public class PaySchedules implements
     
     /**
      * Preview pay schedule assignments for a company
-     * This endpoint returns the employee changes, including pay period and transition pay periods, for changing the pay schedule.
      * 
-     * scope: `pay_schedules:write`
+     * <p>This endpoint returns the employee changes, including pay period and transition pay periods, for changing the pay schedule.
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param payScheduleAssignmentBody
+     * @param xGustoAPIVersion 
+     * @param payScheduleAssignmentBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1477,6 +1560,7 @@ public class PaySchedules implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_id-pay_schedules-assignment_preview", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1488,6 +1572,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-pay_schedules-assignment_preview",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1497,6 +1582,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-pay_schedules-assignment_preview",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1506,6 +1592,7 @@ public class PaySchedules implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-pay_schedules-assignment_preview",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1581,10 +1668,12 @@ public class PaySchedules implements
 
     /**
      * Assign pay schedules for a company
-     * This endpoint assigns employees to pay schedules based on the schedule type.
+     * 
+     * <p>This endpoint assigns employees to pay schedules based on the schedule type.
      * For `by_employee` and `by_department` schedules, use the `partial_assignment` parameter to control the assignment scope. Set it to `true` for partial assignments (only some employees or departments at a time) and `false` for full assignments (all employees or departments at once).
      * 
-     * scope: `pay_schedules:write`
+     * <p>scope: `pay_schedules:write`
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdPaySchedulesAssignRequestBuilder assign() {
@@ -1593,12 +1682,14 @@ public class PaySchedules implements
 
     /**
      * Assign pay schedules for a company
-     * This endpoint assigns employees to pay schedules based on the schedule type.
+     * 
+     * <p>This endpoint assigns employees to pay schedules based on the schedule type.
      * For `by_employee` and `by_department` schedules, use the `partial_assignment` parameter to control the assignment scope. Set it to `true` for partial assignments (only some employees or departments at a time) and `false` for full assignments (all employees or departments at once).
      * 
-     * scope: `pay_schedules:write`
+     * <p>scope: `pay_schedules:write`
+     * 
      * @param companyId The UUID of the company
-     * @param payScheduleAssignmentBody
+     * @param payScheduleAssignmentBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1610,13 +1701,15 @@ public class PaySchedules implements
     
     /**
      * Assign pay schedules for a company
-     * This endpoint assigns employees to pay schedules based on the schedule type.
+     * 
+     * <p>This endpoint assigns employees to pay schedules based on the schedule type.
      * For `by_employee` and `by_department` schedules, use the `partial_assignment` parameter to control the assignment scope. Set it to `true` for partial assignments (only some employees or departments at a time) and `false` for full assignments (all employees or departments at once).
      * 
-     * scope: `pay_schedules:write`
+     * <p>scope: `pay_schedules:write`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param payScheduleAssignmentBody
+     * @param xGustoAPIVersion 
+     * @param payScheduleAssignmentBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1666,6 +1759,7 @@ public class PaySchedules implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_id-pay_schedules-assign", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1677,6 +1771,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-pay_schedules-assign",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1686,6 +1781,7 @@ public class PaySchedules implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-pay_schedules-assign",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1695,6 +1791,7 @@ public class PaySchedules implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-pay_schedules-assign",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

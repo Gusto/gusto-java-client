@@ -34,7 +34,7 @@ public class Application {
 
         GetV1CompanyIndustryResponse res = sdk.industrySelection().get()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.industry().isPresent()) {
@@ -90,7 +90,7 @@ public class Application {
 
         PutV1CompanyIndustryResponse res = sdk.industrySelection().update()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompanyIndustryRequestBody.builder()
                     .naicsCode("611420")
                     .title("Computer Training")

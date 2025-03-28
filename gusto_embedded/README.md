@@ -47,7 +47,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.gusto:embedded-api:0.1.0'
+implementation 'com.gusto:embedded-api:0.2.0'
 ```
 
 Maven:
@@ -55,7 +55,7 @@ Maven:
 <dependency>
     <groupId>com.gusto</groupId>
     <artifactId>embedded-api</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -96,7 +96,7 @@ public class Application {
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.object().isPresent()) {
@@ -136,7 +136,7 @@ public class Application {
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.object().isPresent()) {
@@ -155,11 +155,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.Company;
-import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesResponse;
-import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesSecurity;
-import com.gusto.embedded_api.models.operations.User;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -173,7 +169,7 @@ public class Application {
                 .security(PostV1PartnerManagedCompaniesSecurity.builder()
                     .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
                     .build())
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1PartnerManagedCompaniesRequestBody.builder()
                     .user(User.builder()
                         .firstName("Frank")
@@ -228,6 +224,11 @@ public class Application {
 * [getOnboardingStatus](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
 * [finishOnboarding](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
 * [getCustomFields](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
+
+#### [companies().suspensions()](docs/sdks/suspensions/README.md)
+
+* [get](docs/sdks/suspensions/README.md#get) - Get suspensions for this company
+* [suspend](docs/sdks/suspensions/README.md#suspend) - Suspend a company's account
 
 ### [companyAttachment()](docs/sdks/companyattachment/README.md)
 
@@ -619,11 +620,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.Company;
-import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesResponse;
-import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesSecurity;
-import com.gusto.embedded_api.models.operations.User;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -637,7 +634,7 @@ public class Application {
                 .security(PostV1PartnerManagedCompaniesSecurity.builder()
                     .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
                     .build())
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1PartnerManagedCompaniesRequestBody.builder()
                     .user(User.builder()
                         .firstName("Frank")
@@ -694,7 +691,7 @@ public class Application {
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.object().isPresent()) {
@@ -725,7 +722,7 @@ public class Application {
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.object().isPresent()) {

@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayScheduleAssignmentPayPeriod - Pay schedule assignment first pay period information.
+ * PayScheduleAssignmentPayPeriod
+ * 
+ * <p>Pay schedule assignment first pay period information.
  */
 
 public class PayScheduleAssignmentPayPeriod {

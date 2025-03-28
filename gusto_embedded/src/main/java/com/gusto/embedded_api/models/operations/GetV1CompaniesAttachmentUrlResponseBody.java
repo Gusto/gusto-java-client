@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * GetV1CompaniesAttachmentUrlResponseBody - The temporary url to download a Company Attachment File
+ * GetV1CompaniesAttachmentUrlResponseBody
+ * 
+ * <p>The temporary url to download a Company Attachment File
  */
 
 public class GetV1CompaniesAttachmentUrlResponseBody {

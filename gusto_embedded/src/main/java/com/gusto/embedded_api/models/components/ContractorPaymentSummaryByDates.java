@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ContractorPaymentSummaryByDates - The representation of the summary of contractor payments for a given company in a given time period.
+ * ContractorPaymentSummaryByDates
+ * 
+ * <p>The representation of the summary of contractor payments for a given company in a given time period.
  */
 
 public class ContractorPaymentSummaryByDates {

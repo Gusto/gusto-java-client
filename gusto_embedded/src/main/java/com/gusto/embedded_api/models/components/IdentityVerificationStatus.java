@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * IdentityVerificationStatus - |   |   |
+ * IdentityVerificationStatus
+ * 
+ * <p>|   |   |
  * |---|---|
  * |__Status__| __Description__ |
  * | Pass | Signatory can sign all forms |

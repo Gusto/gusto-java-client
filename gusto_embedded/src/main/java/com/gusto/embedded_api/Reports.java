@@ -53,9 +53,11 @@ public class Reports implements
 
     /**
      * Create a custom report
-     * Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint.
      * 
-     * scope: `company_reports:write`
+     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
      * @return The call builder
      */
     public PostCompaniesCompanyUuidReportsRequestBuilder createCustom() {
@@ -64,11 +66,13 @@ public class Reports implements
 
     /**
      * Create a custom report
-     * Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint.
      * 
-     * scope: `company_reports:write`
+     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -80,12 +84,14 @@ public class Reports implements
     
     /**
      * Create a custom report
-     * Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint.
      * 
-     * scope: `company_reports:write`
+     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -135,6 +141,7 @@ public class Reports implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-companies-company_uuid-reports", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -146,6 +153,7 @@ public class Reports implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-companies-company_uuid-reports",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -155,6 +163,7 @@ public class Reports implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-companies-company_uuid-reports",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -164,6 +173,7 @@ public class Reports implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-companies-company_uuid-reports",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -239,9 +249,11 @@ public class Reports implements
 
     /**
      * Get a report
-     * Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
      * 
-     * scope: `company_reports:read`
+     * <p>Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
+     * 
+     * <p>scope: `company_reports:read`
+     * 
      * @return The call builder
      */
     public GetReportsReportUuidRequestBuilder get() {
@@ -250,9 +262,11 @@ public class Reports implements
 
     /**
      * Get a report
-     * Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
      * 
-     * scope: `company_reports:read`
+     * <p>Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
+     * 
+     * <p>scope: `company_reports:read`
+     * 
      * @param reportUuid The UUID of the report request
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -264,11 +278,13 @@ public class Reports implements
     
     /**
      * Get a report
-     * Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
      * 
-     * scope: `company_reports:read`
+     * <p>Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
+     * 
+     * <p>scope: `company_reports:read`
+     * 
      * @param reportUuid The UUID of the report request
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -303,6 +319,7 @@ public class Reports implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-reports-report_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -314,6 +331,7 @@ public class Reports implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-reports-report_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -323,6 +341,7 @@ public class Reports implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-reports-report_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -332,6 +351,7 @@ public class Reports implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-reports-report_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -393,9 +413,11 @@ public class Reports implements
 
     /**
      * Get a report template
-     * Get a company's report template. The only supported report type is `payroll_journal`. The resulting columns and groupings from this endpoint can be used as a guidance to create the report using the POST create report endpoint.
      * 
-     * scope: `company_reports:write`
+     * <p>Get a company's report template. The only supported report type is `payroll_journal`. The resulting columns and groupings from this endpoint can be used as a guidance to create the report using the POST create report endpoint.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
      * @return The call builder
      */
     public GetCompaniesCompanyUuidReportTemplatesReportTypeRequestBuilder getTemplate() {
@@ -404,9 +426,11 @@ public class Reports implements
 
     /**
      * Get a report template
-     * Get a company's report template. The only supported report type is `payroll_journal`. The resulting columns and groupings from this endpoint can be used as a guidance to create the report using the POST create report endpoint.
      * 
-     * scope: `company_reports:write`
+     * <p>Get a company's report template. The only supported report type is `payroll_journal`. The resulting columns and groupings from this endpoint can be used as a guidance to create the report using the POST create report endpoint.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
      * @param companyUuid The UUID of the company
      * @param reportType The report type
      * @return The response from the API call
@@ -420,12 +444,14 @@ public class Reports implements
     
     /**
      * Get a report template
-     * Get a company's report template. The only supported report type is `payroll_journal`. The resulting columns and groupings from this endpoint can be used as a guidance to create the report using the POST create report endpoint.
      * 
-     * scope: `company_reports:write`
+     * <p>Get a company's report template. The only supported report type is `payroll_journal`. The resulting columns and groupings from this endpoint can be used as a guidance to create the report using the POST create report endpoint.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
      * @param companyUuid The UUID of the company
      * @param reportType The report type
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -462,6 +488,7 @@ public class Reports implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-companies-company_uuid-report-templates-report_type", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -473,6 +500,7 @@ public class Reports implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-report-templates-report_type",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -482,6 +510,7 @@ public class Reports implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-report-templates-report_type",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -491,6 +520,7 @@ public class Reports implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-report-templates-report_type",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

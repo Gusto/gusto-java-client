@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody - Example response
+ * PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody
+ * 
+ * <p>Example response
  */
 
 public class PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody {

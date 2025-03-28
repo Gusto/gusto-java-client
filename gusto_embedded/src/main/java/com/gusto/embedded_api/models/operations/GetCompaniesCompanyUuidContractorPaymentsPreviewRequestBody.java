@@ -13,7 +13,9 @@ import java.lang.String;
 import java.util.List;
 import java.util.Objects;
 /**
- * GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBody - a list of contractor payments.
+ * GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBody
+ * 
+ * <p>a list of contractor payments.
  */
 
 public class GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBody {

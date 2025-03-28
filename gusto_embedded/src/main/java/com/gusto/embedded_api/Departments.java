@@ -70,9 +70,11 @@ public class Departments implements
 
     /**
      * Create a department
-     * Create a department
      * 
-     * scope: `departments:write`
+     * <p>Create a department
+     * 
+     * <p>scope: `departments:write`
+     * 
      * @return The call builder
      */
     public PostDepartmentsRequestBuilder create() {
@@ -81,11 +83,13 @@ public class Departments implements
 
     /**
      * Create a department
-     * Create a department
      * 
-     * scope: `departments:write`
+     * <p>Create a department
+     * 
+     * <p>scope: `departments:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -97,12 +101,14 @@ public class Departments implements
     
     /**
      * Create a department
-     * Create a department
      * 
-     * scope: `departments:write`
+     * <p>Create a department
+     * 
+     * <p>scope: `departments:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -152,6 +158,7 @@ public class Departments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-departments", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -163,6 +170,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-departments",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -172,6 +180,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-departments",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -181,6 +190,7 @@ public class Departments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-departments",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -256,9 +266,11 @@ public class Departments implements
 
     /**
      * Get all departments of a company
-     * Get all of the departments for a given company with the employees and contractors assigned to that department.
      * 
-     * scope: `departments:read`
+     * <p>Get all of the departments for a given company with the employees and contractors assigned to that department.
+     * 
+     * <p>scope: `departments:read`
+     * 
      * @return The call builder
      */
     public GetCompaniesDepartmentsRequestBuilder getAll() {
@@ -267,9 +279,11 @@ public class Departments implements
 
     /**
      * Get all departments of a company
-     * Get all of the departments for a given company with the employees and contractors assigned to that department.
      * 
-     * scope: `departments:read`
+     * <p>Get all of the departments for a given company with the employees and contractors assigned to that department.
+     * 
+     * <p>scope: `departments:read`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -281,11 +295,13 @@ public class Departments implements
     
     /**
      * Get all departments of a company
-     * Get all of the departments for a given company with the employees and contractors assigned to that department.
      * 
-     * scope: `departments:read`
+     * <p>Get all of the departments for a given company with the employees and contractors assigned to that department.
+     * 
+     * <p>scope: `departments:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -320,6 +336,7 @@ public class Departments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-companies-departments", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -331,6 +348,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-departments",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -340,6 +358,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-companies-departments",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -349,6 +368,7 @@ public class Departments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-departments",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -410,9 +430,10 @@ public class Departments implements
 
     /**
      * Get a department
-     * Get a department given the UUID
      * 
-     * scope: `departments:read`
+     * <p>Get a department given the UUID
+     * 
+     * <p>scope: `departments:read`
      * 
      * @return The call builder
      */
@@ -422,9 +443,10 @@ public class Departments implements
 
     /**
      * Get a department
-     * Get a department given the UUID
      * 
-     * scope: `departments:read`
+     * <p>Get a department given the UUID
+     * 
+     * <p>scope: `departments:read`
      * 
      * @param departmentUuid The UUID of the department
      * @return The response from the API call
@@ -437,12 +459,13 @@ public class Departments implements
     
     /**
      * Get a department
-     * Get a department given the UUID
      * 
-     * scope: `departments:read`
+     * <p>Get a department given the UUID
+     * 
+     * <p>scope: `departments:read`
      * 
      * @param departmentUuid The UUID of the department
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -477,6 +500,7 @@ public class Departments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-department", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -488,6 +512,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-department",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -497,6 +522,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-department",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -506,6 +532,7 @@ public class Departments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-department",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -567,9 +594,11 @@ public class Departments implements
 
     /**
      * Update a department
-     * Update a department
      * 
-     * scope: `departments:write`
+     * <p>Update a department
+     * 
+     * <p>scope: `departments:write`
+     * 
      * @return The call builder
      */
     public PutDepartmentsRequestBuilder update() {
@@ -578,11 +607,13 @@ public class Departments implements
 
     /**
      * Update a department
-     * Update a department
      * 
-     * scope: `departments:write`
+     * <p>Update a department
+     * 
+     * <p>scope: `departments:write`
+     * 
      * @param departmentUuid The UUID of the department
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -594,12 +625,14 @@ public class Departments implements
     
     /**
      * Update a department
-     * Update a department
      * 
-     * scope: `departments:write`
+     * <p>Update a department
+     * 
+     * <p>scope: `departments:write`
+     * 
      * @param departmentUuid The UUID of the department
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -649,6 +682,7 @@ public class Departments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-departments", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -660,6 +694,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-departments",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -669,6 +704,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-departments",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -678,6 +714,7 @@ public class Departments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-departments",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -753,9 +790,10 @@ public class Departments implements
 
     /**
      * Delete a department
-     * Delete a department. You cannot delete a department until all employees and contractors have been removed.
      * 
-     * scope: `departments:write`
+     * <p>Delete a department. You cannot delete a department until all employees and contractors have been removed.
+     * 
+     * <p>scope: `departments:write`
      * 
      * @return The call builder
      */
@@ -765,9 +803,10 @@ public class Departments implements
 
     /**
      * Delete a department
-     * Delete a department. You cannot delete a department until all employees and contractors have been removed.
      * 
-     * scope: `departments:write`
+     * <p>Delete a department. You cannot delete a department until all employees and contractors have been removed.
+     * 
+     * <p>scope: `departments:write`
      * 
      * @param departmentUuid The UUID of the department
      * @return The response from the API call
@@ -780,12 +819,13 @@ public class Departments implements
     
     /**
      * Delete a department
-     * Delete a department. You cannot delete a department until all employees and contractors have been removed.
      * 
-     * scope: `departments:write`
+     * <p>Delete a department. You cannot delete a department until all employees and contractors have been removed.
+     * 
+     * <p>scope: `departments:write`
      * 
      * @param departmentUuid The UUID of the department
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -820,6 +860,7 @@ public class Departments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-department", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -831,6 +872,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-department",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -840,6 +882,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-department",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -849,6 +892,7 @@ public class Departments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-department",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -913,9 +957,10 @@ public class Departments implements
 
     /**
      * Add people to a department
-     * Add employees and contractors to a department
      * 
-     * scope: `departments:write`
+     * <p>Add employees and contractors to a department
+     * 
+     * <p>scope: `departments:write`
      * 
      * @return The call builder
      */
@@ -925,12 +970,13 @@ public class Departments implements
 
     /**
      * Add people to a department
-     * Add employees and contractors to a department
      * 
-     * scope: `departments:write`
+     * <p>Add employees and contractors to a department
+     * 
+     * <p>scope: `departments:write`
      * 
      * @param departmentUuid The UUID of the department
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -942,13 +988,14 @@ public class Departments implements
     
     /**
      * Add people to a department
-     * Add employees and contractors to a department
      * 
-     * scope: `departments:write`
+     * <p>Add employees and contractors to a department
+     * 
+     * <p>scope: `departments:write`
      * 
      * @param departmentUuid The UUID of the department
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -998,6 +1045,7 @@ public class Departments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-add-people-to-department", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1009,6 +1057,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-add-people-to-department",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1018,6 +1067,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-add-people-to-department",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1027,6 +1077,7 @@ public class Departments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-add-people-to-department",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1088,9 +1139,10 @@ public class Departments implements
 
     /**
      * Remove people from a department
-     * Remove employees and contractors from a department
      * 
-     * scope: `departments:write`
+     * <p>Remove employees and contractors from a department
+     * 
+     * <p>scope: `departments:write`
      * 
      * @return The call builder
      */
@@ -1100,12 +1152,13 @@ public class Departments implements
 
     /**
      * Remove people from a department
-     * Remove employees and contractors from a department
      * 
-     * scope: `departments:write`
+     * <p>Remove employees and contractors from a department
+     * 
+     * <p>scope: `departments:write`
      * 
      * @param departmentUuid The UUID of the department
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1117,13 +1170,14 @@ public class Departments implements
     
     /**
      * Remove people from a department
-     * Remove employees and contractors from a department
      * 
-     * scope: `departments:write`
+     * <p>Remove employees and contractors from a department
+     * 
+     * <p>scope: `departments:write`
      * 
      * @param departmentUuid The UUID of the department
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1173,6 +1227,7 @@ public class Departments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-remove-people-from-department", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1184,6 +1239,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-remove-people-from-department",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1193,6 +1249,7 @@ public class Departments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-remove-people-from-department",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1202,6 +1259,7 @@ public class Departments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-remove-people-from-department",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

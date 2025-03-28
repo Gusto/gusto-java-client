@@ -19,7 +19,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * Location - The representation of an address in Gusto.
+ * Location
+ * 
+ * <p>The representation of an address in Gusto.
  */
 
 public class Location {

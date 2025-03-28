@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Section - The document option's section in the list of acceptable documents on the Form I-9
+ * Section
+ * 
+ * <p>The document option's section in the list of acceptable documents on the Form I-9
  */
 public enum Section {
     A("A"),

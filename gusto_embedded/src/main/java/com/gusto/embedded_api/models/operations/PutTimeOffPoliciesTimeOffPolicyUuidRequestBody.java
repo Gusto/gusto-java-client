@@ -18,7 +18,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutTimeOffPoliciesTimeOffPolicyUuidRequestBody - Can update any attributes of the time off policy except policy_type, is_active, complete &amp; employees
+ * PutTimeOffPoliciesTimeOffPolicyUuidRequestBody
+ * 
+ * <p>Can update any attributes of the time off policy except policy_type, is_active, complete &amp; employees
  */
 
 public class PutTimeOffPoliciesTimeOffPolicyUuidRequestBody {

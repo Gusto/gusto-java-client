@@ -46,9 +46,11 @@ public class PaymentConfigs implements
 
     /**
      * Get a company's payment configs
-     * Get payment speed for the company and fast payment limit (1-day is only applicable to partners that opt in).
      * 
-     * scope: `company_payment_configs:read`
+     * <p>Get payment speed for the company and fast payment limit (1-day is only applicable to partners that opt in).
+     * 
+     * <p>scope: `company_payment_configs:read`
+     * 
      * @return The call builder
      */
     public GetV1CompanyPaymentConfigsRequestBuilder get() {
@@ -57,9 +59,11 @@ public class PaymentConfigs implements
 
     /**
      * Get a company's payment configs
-     * Get payment speed for the company and fast payment limit (1-day is only applicable to partners that opt in).
      * 
-     * scope: `company_payment_configs:read`
+     * <p>Get payment speed for the company and fast payment limit (1-day is only applicable to partners that opt in).
+     * 
+     * <p>scope: `company_payment_configs:read`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -71,11 +75,13 @@ public class PaymentConfigs implements
     
     /**
      * Get a company's payment configs
-     * Get payment speed for the company and fast payment limit (1-day is only applicable to partners that opt in).
      * 
-     * scope: `company_payment_configs:read`
+     * <p>Get payment speed for the company and fast payment limit (1-day is only applicable to partners that opt in).
+     * 
+     * <p>scope: `company_payment_configs:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -110,6 +116,7 @@ public class PaymentConfigs implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-company-payment-configs", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -121,6 +128,7 @@ public class PaymentConfigs implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-payment-configs",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -130,6 +138,7 @@ public class PaymentConfigs implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-company-payment-configs",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -139,6 +148,7 @@ public class PaymentConfigs implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-payment-configs",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -200,9 +210,11 @@ public class PaymentConfigs implements
 
     /**
      * Update a company's payment configs
-     * Update payment speed and fast payment limit for a company. At least one of `payment_speed` or `fast_payment_limit` parameters is required. 1-day option is only applicable to partners that opt in.
      * 
-     * scope: `company_payment_configs:write`
+     * <p>Update payment speed and fast payment limit for a company. At least one of `payment_speed` or `fast_payment_limit` parameters is required. 1-day option is only applicable to partners that opt in.
+     * 
+     * <p>scope: `company_payment_configs:write`
+     * 
      * @return The call builder
      */
     public PutV1CompanyPaymentConfigsRequestBuilder update() {
@@ -211,11 +223,13 @@ public class PaymentConfigs implements
 
     /**
      * Update a company's payment configs
-     * Update payment speed and fast payment limit for a company. At least one of `payment_speed` or `fast_payment_limit` parameters is required. 1-day option is only applicable to partners that opt in.
      * 
-     * scope: `company_payment_configs:write`
+     * <p>Update payment speed and fast payment limit for a company. At least one of `payment_speed` or `fast_payment_limit` parameters is required. 1-day option is only applicable to partners that opt in.
+     * 
+     * <p>scope: `company_payment_configs:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -227,12 +241,14 @@ public class PaymentConfigs implements
     
     /**
      * Update a company's payment configs
-     * Update payment speed and fast payment limit for a company. At least one of `payment_speed` or `fast_payment_limit` parameters is required. 1-day option is only applicable to partners that opt in.
      * 
-     * scope: `company_payment_configs:write`
+     * <p>Update payment speed and fast payment limit for a company. At least one of `payment_speed` or `fast_payment_limit` parameters is required. 1-day option is only applicable to partners that opt in.
+     * 
+     * <p>scope: `company_payment_configs:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -282,6 +298,7 @@ public class PaymentConfigs implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-company-payment-configs", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -293,6 +310,7 @@ public class PaymentConfigs implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-company-payment-configs",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -302,6 +320,7 @@ public class PaymentConfigs implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-company-payment-configs",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -311,6 +330,7 @@ public class PaymentConfigs implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-company-payment-configs",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

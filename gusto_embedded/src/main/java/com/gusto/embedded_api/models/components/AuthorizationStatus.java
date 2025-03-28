@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * AuthorizationStatus - The employee's authorization status
+ * AuthorizationStatus
+ * 
+ * <p>The employee's authorization status
  */
 public enum AuthorizationStatus {
     CITIZEN("citizen"),

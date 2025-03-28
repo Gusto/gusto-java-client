@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Compensations - The available company-wide compensation rates for the company.
+ * Compensations
+ * 
+ * <p>The available company-wide compensation rates for the company.
  */
 
 public class Compensations {

@@ -21,7 +21,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * Employee - The representation of an employee in Gusto.
+ * Employee
+ * 
+ * <p>The representation of an employee in Gusto.
  */
 
 public class Employee {

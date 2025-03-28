@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PaymentMethod - The employee's compensation payment method. Invalid values will be ignored.
+ * PaymentMethod
+ * 
+ * <p>The employee's compensation payment method. Invalid values will be ignored.
  */
 public enum PaymentMethod {
     DIRECT_DEPOSIT("Direct Deposit"),

@@ -26,9 +26,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.ContractorPayments;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.time.LocalDate;
 import java.util.List;
@@ -43,15 +41,15 @@ public class Application {
 
         PostV1CompaniesCompanyIdContractorPaymentGroupsResponse res = sdk.contractorPaymentGroups().create()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody.builder()
                     .checkDate(LocalDate.parse("2020-01-01"))
                     .contractorPayments(List.of(
                         ContractorPayments.builder()
-                            .wage(5000d)
-                            .hours(40d)
-                            .bonus(500d)
-                            .reimbursement(20d)
+                            .wage(5000)
+                            .hours(40)
+                            .bonus(500)
+                            .reimbursement(20)
                             .build()))
                     .creationToken("1d532d13-8f61-4a57-ad3c-b5fac1c6e05e")
                     .build())
@@ -154,9 +152,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.time.LocalDate;
 import java.util.List;
@@ -171,15 +167,15 @@ public class Application {
 
         PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse res = sdk.contractorPaymentGroups().preview()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody.builder()
                     .checkDate(LocalDate.parse("2020-01-01"))
                     .contractorPayments(List.of(
                         PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments.builder()
-                            .wage(5000d)
-                            .hours(40d)
-                            .bonus(500d)
-                            .reimbursement(20d)
+                            .wage(5000)
+                            .hours(40)
+                            .bonus(500)
+                            .reimbursement(20)
                             .build()))
                     .creationToken("1d532d13-8f61-4a57-ad3c-b5fac1c6e05e")
                     .build())
@@ -237,7 +233,7 @@ public class Application {
 
         GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse res = sdk.contractorPaymentGroups().get()
                 .contractorPaymentGroupUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.contractorPaymentGroup().isPresent()) {
@@ -291,7 +287,7 @@ public class Application {
 
         DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse res = sdk.contractorPaymentGroups().delete()
                 .contractorPaymentGroupUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -348,7 +344,7 @@ public class Application {
 
         PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse res = sdk.contractorPaymentGroups().fund()
                 .contractorPaymentGroupUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.contractorPaymentGroup().isPresent()) {

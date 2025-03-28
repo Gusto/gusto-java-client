@@ -18,7 +18,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * ContractorPaymentGroup - The full contractor payment group, including associated contractor payments.
+ * ContractorPaymentGroup
+ * 
+ * <p>The full contractor payment group, including associated contractor payments.
  */
 
 public class ContractorPaymentGroup {

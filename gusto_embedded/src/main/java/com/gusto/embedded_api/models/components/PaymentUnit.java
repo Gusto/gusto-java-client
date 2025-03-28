@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PaymentUnit - The unit accompanying the compensation rate. If the employee is an owner, rate should be 'Paycheck'.
+ * PaymentUnit
+ * 
+ * <p>The unit accompanying the compensation rate. If the employee is an owner, rate should be 'Paycheck'.
  */
 public enum PaymentUnit {
     HOUR("Hour"),

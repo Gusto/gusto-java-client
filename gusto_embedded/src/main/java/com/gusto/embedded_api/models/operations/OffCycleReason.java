@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * OffCycleReason - An off cycle payroll reason. Select one from the following list.
+ * OffCycleReason
+ * 
+ * <p>An off cycle payroll reason. Select one from the following list.
  */
 public enum OffCycleReason {
     BONUS("Bonus"),

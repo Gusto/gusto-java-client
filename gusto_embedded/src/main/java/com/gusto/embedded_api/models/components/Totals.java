@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Totals - The subtotals for the payroll.
+ * Totals
+ * 
+ * <p>The subtotals for the payroll.
  */
 
 public class Totals {

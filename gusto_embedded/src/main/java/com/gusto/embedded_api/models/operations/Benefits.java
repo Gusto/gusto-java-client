@@ -16,7 +16,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Benefits - An array of benefits for the employee. Depends on your company selections, benefits include 401k, health insurance and more.
+ * Benefits
+ * 
+ * <p>An array of benefits for the employee. Depends on your company selections, benefits include 401k, health insurance and more.
  */
 
 public class Benefits {

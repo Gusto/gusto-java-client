@@ -103,16 +103,18 @@ public class Payrolls implements
 
     /**
      * Create an off-cycle payroll
-     * Creates a new, unprocessed, off-cycle payroll.
      * 
-     * ## `off_cycle_reason`
+     * <p>Creates a new, unprocessed, off-cycle payroll.
+     * 
+     * <p>## `off_cycle_reason`
      * By default:
      * - External benefits and deductions will be included when the `off_cycle_reason` is set to `Correction`.
      * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
      * 
-     * These elections can be overridden with the `skip_regular_deductions` boolean.
+     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
      * 
-     * scope: `payrolls:run`
+     * <p>scope: `payrolls:run`
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdPayrollsRequestBuilder createOffCycle() {
@@ -121,18 +123,20 @@ public class Payrolls implements
 
     /**
      * Create an off-cycle payroll
-     * Creates a new, unprocessed, off-cycle payroll.
      * 
-     * ## `off_cycle_reason`
+     * <p>Creates a new, unprocessed, off-cycle payroll.
+     * 
+     * <p>## `off_cycle_reason`
      * By default:
      * - External benefits and deductions will be included when the `off_cycle_reason` is set to `Correction`.
      * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
      * 
-     * These elections can be overridden with the `skip_regular_deductions` boolean.
+     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
      * 
-     * scope: `payrolls:run`
+     * <p>scope: `payrolls:run`
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -144,19 +148,21 @@ public class Payrolls implements
     
     /**
      * Create an off-cycle payroll
-     * Creates a new, unprocessed, off-cycle payroll.
      * 
-     * ## `off_cycle_reason`
+     * <p>Creates a new, unprocessed, off-cycle payroll.
+     * 
+     * <p>## `off_cycle_reason`
      * By default:
      * - External benefits and deductions will be included when the `off_cycle_reason` is set to `Correction`.
      * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
      * 
-     * These elections can be overridden with the `skip_regular_deductions` boolean.
+     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
      * 
-     * scope: `payrolls:run`
+     * <p>scope: `payrolls:run`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -206,6 +212,7 @@ public class Payrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_id-payrolls", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -217,6 +224,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-payrolls",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -226,6 +234,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-payrolls",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -235,6 +244,7 @@ public class Payrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-payrolls",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -310,15 +320,17 @@ public class Payrolls implements
 
     /**
      * Get all payrolls for a company
-     * Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, &amp; end_date params.
      * 
-     * By default, will return processed, regular payrolls for the past 6 months.
+     * <p>Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, &amp; end_date params.
      * 
-     * Notes:
+     * <p>By default, will return processed, regular payrolls for the past 6 months.
+     * 
+     * <p>Notes:
      * * Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
      * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdPayrollsRequestBuilder list() {
@@ -327,15 +339,17 @@ public class Payrolls implements
 
     /**
      * Get all payrolls for a company
-     * Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, &amp; end_date params.
      * 
-     * By default, will return processed, regular payrolls for the past 6 months.
+     * <p>Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, &amp; end_date params.
      * 
-     * Notes:
+     * <p>By default, will return processed, regular payrolls for the past 6 months.
+     * 
+     * <p>Notes:
      * * Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
      * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -368,6 +382,7 @@ public class Payrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-payrolls", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -379,6 +394,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-payrolls",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -388,6 +404,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-payrolls",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -397,6 +414,7 @@ public class Payrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-payrolls",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -458,9 +476,11 @@ public class Payrolls implements
 
     /**
      * Get approved payroll reversals
-     * Returns all approved Payroll Reversals for a Company.
      * 
-     * scope: `payrolls:read`
+     * <p>Returns all approved Payroll Reversals for a Company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder getApprovedReversals() {
@@ -469,9 +489,11 @@ public class Payrolls implements
 
     /**
      * Get approved payroll reversals
-     * Returns all approved Payroll Reversals for a Company.
      * 
-     * scope: `payrolls:read`
+     * <p>Returns all approved Payroll Reversals for a Company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -483,13 +505,15 @@ public class Payrolls implements
     
     /**
      * Get approved payroll reversals
-     * Returns all approved Payroll Reversals for a Company.
      * 
-     * scope: `payrolls:read`
+     * <p>Returns all approved Payroll Reversals for a Company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyId The UUID of the company
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -533,6 +557,7 @@ public class Payrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-payroll_reversals", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -544,6 +569,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-payroll_reversals",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -553,6 +579,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-payroll_reversals",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -562,6 +589,7 @@ public class Payrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-payroll_reversals",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -623,9 +651,10 @@ public class Payrolls implements
 
     /**
      * Get a single payroll
-     * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
      * 
-     * Notes:
+     * <p>Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
+     * 
+     * <p>Notes:
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Hours are represented to the thousands place; dollar amounts are represented to the cent.
      * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts) or “0.000” (for hours ).
@@ -633,7 +662,8 @@ public class Payrolls implements
      * * When include parameter with benefits value is passed, employee_benefits:read scope is required to return benefits
      *   * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdPayrollsPayrollIdRequestBuilder get() {
@@ -642,9 +672,10 @@ public class Payrolls implements
 
     /**
      * Get a single payroll
-     * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
      * 
-     * Notes:
+     * <p>Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
+     * 
+     * <p>Notes:
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Hours are represented to the thousands place; dollar amounts are represented to the cent.
      * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts) or “0.000” (for hours ).
@@ -652,7 +683,8 @@ public class Payrolls implements
      * * When include parameter with benefits value is passed, employee_benefits:read scope is required to return benefits
      *   * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyId The UUID of the company
      * @param payrollId The UUID of the payroll
      * @return The response from the API call
@@ -666,9 +698,10 @@ public class Payrolls implements
     
     /**
      * Get a single payroll
-     * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
      * 
-     * Notes:
+     * <p>Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
+     * 
+     * <p>Notes:
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Hours are represented to the thousands place; dollar amounts are represented to the cent.
      * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts) or “0.000” (for hours ).
@@ -676,11 +709,12 @@ public class Payrolls implements
      * * When include parameter with benefits value is passed, employee_benefits:read scope is required to return benefits
      *   * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyId The UUID of the company
      * @param payrollId The UUID of the payroll
      * @param include Include the requested attribute in the response, for multiple attributes comma separate the values, i.e. `?include=benefits,deductions,taxes`
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -724,6 +758,7 @@ public class Payrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-payrolls-payroll_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -735,6 +770,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-payrolls-payroll_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -744,6 +780,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-payrolls-payroll_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -753,6 +790,7 @@ public class Payrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-payrolls-payroll_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -814,12 +852,14 @@ public class Payrolls implements
 
     /**
      * Update a payroll by ID
-     * This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
+     * 
+     * <p>This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
      * payroll object as a template of fields that you can update.  You cannot modify the structure of the payroll object through this endpoint, only values
      * of the fields included in the payroll.  If you do not include specific employee compensations or fixed/hourly compensations in your request body, they
      * will not be removed from the payroll.
      * 
-     * scope: `payrolls:write`
+     * <p>scope: `payrolls:write`
+     * 
      * @return The call builder
      */
     public PutV1CompaniesCompanyIdPayrollsRequestBuilder update() {
@@ -828,15 +868,17 @@ public class Payrolls implements
 
     /**
      * Update a payroll by ID
-     * This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
+     * 
+     * <p>This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
      * payroll object as a template of fields that you can update.  You cannot modify the structure of the payroll object through this endpoint, only values
      * of the fields included in the payroll.  If you do not include specific employee compensations or fixed/hourly compensations in your request body, they
      * will not be removed from the payroll.
      * 
-     * scope: `payrolls:write`
+     * <p>scope: `payrolls:write`
+     * 
      * @param companyId The UUID of the company
      * @param payrollId The UUID of the payroll
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -849,16 +891,18 @@ public class Payrolls implements
     
     /**
      * Update a payroll by ID
-     * This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
+     * 
+     * <p>This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
      * payroll object as a template of fields that you can update.  You cannot modify the structure of the payroll object through this endpoint, only values
      * of the fields included in the payroll.  If you do not include specific employee compensations or fixed/hourly compensations in your request body, they
      * will not be removed from the payroll.
      * 
-     * scope: `payrolls:write`
+     * <p>scope: `payrolls:write`
+     * 
      * @param companyId The UUID of the company
      * @param payrollId The UUID of the payroll
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -910,6 +954,7 @@ public class Payrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-companies-company_id-payrolls", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -921,6 +966,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-payrolls",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -930,6 +976,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-payrolls",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -939,6 +986,7 @@ public class Payrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-payrolls",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1014,11 +1062,13 @@ public class Payrolls implements
 
     /**
      * Delete a payroll
-     * This endpoint allows you to delete an **unprocessed** payroll.
      * 
-     * By default the payroll and associated data is deleted synchronously. To request an asynchronous delete, use the `async=true` query parameter. In both cases validation of ability to delete will be performed and an Unprocessable Entity error will be returned if the payroll is not able to be deleted. A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for asynchronous deletion, `202/Accepted` will be returned.
+     * <p>This endpoint allows you to delete an **unprocessed** payroll.
      * 
-     * scope: `payrolls:run`
+     * <p>By default the payroll and associated data is deleted synchronously. To request an asynchronous delete, use the `async=true` query parameter. In both cases validation of ability to delete will be performed and an Unprocessable Entity error will be returned if the payroll is not able to be deleted. A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for asynchronous deletion, `202/Accepted` will be returned.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @return The call builder
      */
     public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder delete() {
@@ -1027,11 +1077,13 @@ public class Payrolls implements
 
     /**
      * Delete a payroll
-     * This endpoint allows you to delete an **unprocessed** payroll.
      * 
-     * By default the payroll and associated data is deleted synchronously. To request an asynchronous delete, use the `async=true` query parameter. In both cases validation of ability to delete will be performed and an Unprocessable Entity error will be returned if the payroll is not able to be deleted. A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for asynchronous deletion, `202/Accepted` will be returned.
+     * <p>This endpoint allows you to delete an **unprocessed** payroll.
      * 
-     * scope: `payrolls:run`
+     * <p>By default the payroll and associated data is deleted synchronously. To request an asynchronous delete, use the `async=true` query parameter. In both cases validation of ability to delete will be performed and an Unprocessable Entity error will be returned if the payroll is not able to be deleted. A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for asynchronous deletion, `202/Accepted` will be returned.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param companyId The UUID of the company
      * @param payrollId The UUID of the payroll
      * @return The response from the API call
@@ -1045,15 +1097,17 @@ public class Payrolls implements
     
     /**
      * Delete a payroll
-     * This endpoint allows you to delete an **unprocessed** payroll.
      * 
-     * By default the payroll and associated data is deleted synchronously. To request an asynchronous delete, use the `async=true` query parameter. In both cases validation of ability to delete will be performed and an Unprocessable Entity error will be returned if the payroll is not able to be deleted. A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for asynchronous deletion, `202/Accepted` will be returned.
+     * <p>This endpoint allows you to delete an **unprocessed** payroll.
      * 
-     * scope: `payrolls:run`
+     * <p>By default the payroll and associated data is deleted synchronously. To request an asynchronous delete, use the `async=true` query parameter. In both cases validation of ability to delete will be performed and an Unprocessable Entity error will be returned if the payroll is not able to be deleted. A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for asynchronous deletion, `202/Accepted` will be returned.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param companyId The UUID of the company
      * @param payrollId The UUID of the payroll
      * @param async When true, request an asynchronous delete of the payroll.
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1097,6 +1151,7 @@ public class Payrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-companies-company_id-payrolls", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1108,6 +1163,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-companies-company_id-payrolls",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1117,6 +1173,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-companies-company_id-payrolls",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1126,6 +1183,7 @@ public class Payrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-companies-company_id-payrolls",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1176,13 +1234,15 @@ public class Payrolls implements
 
     /**
      * Prepare a payroll for update
-     * This endpoint will build the payroll and get it ready for making updates. This includes adding/removing eligible employees from the Payroll and updating the check_date, payroll_deadline, and payroll_status_meta dates &amp; times.
      * 
-     * Notes:
+     * <p>This endpoint will build the payroll and get it ready for making updates. This includes adding/removing eligible employees from the Payroll and updating the check_date, payroll_deadline, and payroll_status_meta dates &amp; times.
+     * 
+     * <p>Notes:
      *  * Will null out calculated_at &amp; totals if a payroll has already been calculated.
      *  * Will return the version param used for updating the payroll
      * 
-     * scope: `payrolls:write`
+     * <p>scope: `payrolls:write`
+     * 
      * @return The call builder
      */
     public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBuilder prepare() {
@@ -1191,13 +1251,15 @@ public class Payrolls implements
 
     /**
      * Prepare a payroll for update
-     * This endpoint will build the payroll and get it ready for making updates. This includes adding/removing eligible employees from the Payroll and updating the check_date, payroll_deadline, and payroll_status_meta dates &amp; times.
      * 
-     * Notes:
+     * <p>This endpoint will build the payroll and get it ready for making updates. This includes adding/removing eligible employees from the Payroll and updating the check_date, payroll_deadline, and payroll_status_meta dates &amp; times.
+     * 
+     * <p>Notes:
      *  * Will null out calculated_at &amp; totals if a payroll has already been calculated.
      *  * Will return the version param used for updating the payroll
      * 
-     * scope: `payrolls:write`
+     * <p>scope: `payrolls:write`
+     * 
      * @param companyId The UUID of the company
      * @param payrollId The UUID of the payroll
      * @return The response from the API call
@@ -1211,16 +1273,18 @@ public class Payrolls implements
     
     /**
      * Prepare a payroll for update
-     * This endpoint will build the payroll and get it ready for making updates. This includes adding/removing eligible employees from the Payroll and updating the check_date, payroll_deadline, and payroll_status_meta dates &amp; times.
      * 
-     * Notes:
+     * <p>This endpoint will build the payroll and get it ready for making updates. This includes adding/removing eligible employees from the Payroll and updating the check_date, payroll_deadline, and payroll_status_meta dates &amp; times.
+     * 
+     * <p>Notes:
      *  * Will null out calculated_at &amp; totals if a payroll has already been calculated.
      *  * Will return the version param used for updating the payroll
      * 
-     * scope: `payrolls:write`
+     * <p>scope: `payrolls:write`
+     * 
      * @param companyId The UUID of the company
      * @param payrollId The UUID of the payroll
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1257,6 +1321,7 @@ public class Payrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-companies-company_id-payrolls-payroll_id-prepare", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1268,6 +1333,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-payrolls-payroll_id-prepare",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1277,6 +1343,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-payrolls-payroll_id-prepare",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1286,6 +1353,7 @@ public class Payrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-payrolls-payroll_id-prepare",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1347,14 +1415,16 @@ public class Payrolls implements
 
     /**
      * Get a single payroll receipt
-     * Returns a payroll receipt.
      * 
-     * Notes:
+     * <p>Returns a payroll receipt.
+     * 
+     * <p>Notes:
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Dollar amounts are represented to the cent.
      * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder getReceipt() {
@@ -1363,14 +1433,16 @@ public class Payrolls implements
 
     /**
      * Get a single payroll receipt
-     * Returns a payroll receipt.
      * 
-     * Notes:
+     * <p>Returns a payroll receipt.
+     * 
+     * <p>Notes:
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Dollar amounts are represented to the cent.
      * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @param payrollUuid The UUID of the payroll
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1382,16 +1454,18 @@ public class Payrolls implements
     
     /**
      * Get a single payroll receipt
-     * Returns a payroll receipt.
      * 
-     * Notes:
+     * <p>Returns a payroll receipt.
+     * 
+     * <p>Notes:
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Dollar amounts are represented to the cent.
      * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @param payrollUuid The UUID of the payroll
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1426,6 +1500,7 @@ public class Payrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-payment-receipts-payrolls-payroll_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1437,6 +1512,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-payment-receipts-payrolls-payroll_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1446,6 +1522,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-payment-receipts-payrolls-payroll_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1455,6 +1532,7 @@ public class Payrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-payment-receipts-payrolls-payroll_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1516,11 +1594,13 @@ public class Payrolls implements
 
     /**
      * Get all payroll blockers for a company
-     * Returns a list of reasons that prevent the company from running payrolls. See the [payroll blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) for a complete list of reasons.
      * 
-     * The list is empty if there are no payroll blockers.
+     * <p>Returns a list of reasons that prevent the company from running payrolls. See the [payroll blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) for a complete list of reasons.
      * 
-     * scope: `payrolls:run`
+     * <p>The list is empty if there are no payroll blockers.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesPayrollBlockersCompanyUuidRequestBuilder getBlockers() {
@@ -1529,11 +1609,13 @@ public class Payrolls implements
 
     /**
      * Get all payroll blockers for a company
-     * Returns a list of reasons that prevent the company from running payrolls. See the [payroll blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) for a complete list of reasons.
      * 
-     * The list is empty if there are no payroll blockers.
+     * <p>Returns a list of reasons that prevent the company from running payrolls. See the [payroll blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) for a complete list of reasons.
      * 
-     * scope: `payrolls:run`
+     * <p>The list is empty if there are no payroll blockers.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1545,13 +1627,15 @@ public class Payrolls implements
     
     /**
      * Get all payroll blockers for a company
-     * Returns a list of reasons that prevent the company from running payrolls. See the [payroll blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) for a complete list of reasons.
      * 
-     * The list is empty if there are no payroll blockers.
+     * <p>Returns a list of reasons that prevent the company from running payrolls. See the [payroll blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) for a complete list of reasons.
      * 
-     * scope: `payrolls:run`
+     * <p>The list is empty if there are no payroll blockers.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1586,6 +1670,7 @@ public class Payrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-payroll-blockers-company_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1597,6 +1682,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-payroll-blockers-company_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1606,6 +1692,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-payroll-blockers-company_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1615,6 +1702,7 @@ public class Payrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-payroll-blockers-company_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1676,11 +1764,12 @@ public class Payrolls implements
 
     /**
      * Cancel a payroll
-     * Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
+     * 
+     * <p>Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
      * - `processed` is true
      * - Current time is earlier than 3:30pm PT on the payroll_deadline
      * 
-     * scope: `payrolls:run`
+     * <p>scope: `payrolls:run`
      * 
      * @return The call builder
      */
@@ -1690,11 +1779,12 @@ public class Payrolls implements
 
     /**
      * Cancel a payroll
-     * Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
+     * 
+     * <p>Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
      * - `processed` is true
      * - Current time is earlier than 3:30pm PT on the payroll_deadline
      * 
-     * scope: `payrolls:run`
+     * <p>scope: `payrolls:run`
      * 
      * @param companyId The UUID of the company
      * @param payrollId The UUID of the payroll
@@ -1709,15 +1799,16 @@ public class Payrolls implements
     
     /**
      * Cancel a payroll
-     * Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
+     * 
+     * <p>Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
      * - `processed` is true
      * - Current time is earlier than 3:30pm PT on the payroll_deadline
      * 
-     * scope: `payrolls:run`
+     * <p>scope: `payrolls:run`
      * 
      * @param companyId The UUID of the company
      * @param payrollId The UUID of the payroll
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1754,6 +1845,7 @@ public class Payrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-api-v1-companies-company_id-payrolls-payroll_id-cancel", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1765,6 +1857,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-api-v1-companies-company_id-payrolls-payroll_id-cancel",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1774,6 +1867,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-api-v1-companies-company_id-payrolls-payroll_id-cancel",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1783,6 +1877,7 @@ public class Payrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-api-v1-companies-company_id-payrolls-payroll_id-cancel",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1858,9 +1953,11 @@ public class Payrolls implements
 
     /**
      * Get an employee pay stub (pdf)
-     * Get an employee's pay stub for the specified payroll. By default, an application/pdf response will be returned. No other content types are currently supported, but may be supported in the future.
      * 
-     * scope: `pay_stubs:read`
+     * <p>Get an employee's pay stub for the specified payroll. By default, an application/pdf response will be returned. No other content types are currently supported, but may be supported in the future.
+     * 
+     * <p>scope: `pay_stubs:read`
+     * 
      * @return The call builder
      */
     public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder getPayStub() {
@@ -1869,9 +1966,11 @@ public class Payrolls implements
 
     /**
      * Get an employee pay stub (pdf)
-     * Get an employee's pay stub for the specified payroll. By default, an application/pdf response will be returned. No other content types are currently supported, but may be supported in the future.
      * 
-     * scope: `pay_stubs:read`
+     * <p>Get an employee's pay stub for the specified payroll. By default, an application/pdf response will be returned. No other content types are currently supported, but may be supported in the future.
+     * 
+     * <p>scope: `pay_stubs:read`
+     * 
      * @param payrollId The UUID of the payroll
      * @param employeeId The UUID of the employee
      * @return The response from the API call
@@ -1885,12 +1984,14 @@ public class Payrolls implements
     
     /**
      * Get an employee pay stub (pdf)
-     * Get an employee's pay stub for the specified payroll. By default, an application/pdf response will be returned. No other content types are currently supported, but may be supported in the future.
      * 
-     * scope: `pay_stubs:read`
+     * <p>Get an employee's pay stub for the specified payroll. By default, an application/pdf response will be returned. No other content types are currently supported, but may be supported in the future.
+     * 
+     * <p>scope: `pay_stubs:read`
+     * 
      * @param payrollId The UUID of the payroll
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1927,6 +2028,7 @@ public class Payrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-payrolls-payroll_uuid-employees-employee_uuid-pay_stub", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1938,6 +2040,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-payrolls-payroll_uuid-employees-employee_uuid-pay_stub",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1947,6 +2050,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-payrolls-payroll_uuid-employees-employee_uuid-pay_stub",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1956,6 +2060,7 @@ public class Payrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-payrolls-payroll_uuid-employees-employee_uuid-pay_stub",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -2006,9 +2111,11 @@ public class Payrolls implements
 
     /**
      * Get an employee's pay stubs
-     * Get an employee's pay stubs
      * 
-     * scope: `pay_stubs:read`
+     * <p>Get an employee's pay stubs
+     * 
+     * <p>scope: `pay_stubs:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeUuidPayStubsRequestBuilder getPayStubs() {
@@ -2017,9 +2124,11 @@ public class Payrolls implements
 
     /**
      * Get an employee's pay stubs
-     * Get an employee's pay stubs
      * 
-     * scope: `pay_stubs:read`
+     * <p>Get an employee's pay stubs
+     * 
+     * <p>scope: `pay_stubs:read`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -2031,11 +2140,13 @@ public class Payrolls implements
     
     /**
      * Get an employee's pay stubs
-     * Get an employee's pay stubs
      * 
-     * scope: `pay_stubs:read`
+     * <p>Get an employee's pay stubs
+     * 
+     * <p>scope: `pay_stubs:read`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -2070,6 +2181,7 @@ public class Payrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_uuid-pay_stubs", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -2081,6 +2193,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_uuid-pay_stubs",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -2090,6 +2203,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_uuid-pay_stubs",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -2099,6 +2213,7 @@ public class Payrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_uuid-pay_stubs",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -2160,9 +2275,11 @@ public class Payrolls implements
 
     /**
      * Generate printable payroll checks (pdf)
-     * This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid. A generation status and corresponding request_uuid will be returned. Use the generated document GET endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check generation process and retrieve the generated check URL upon completion.
      * 
-     * scope: `generated_documents:write`
+     * <p>This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid. A generation status and corresponding request_uuid will be returned. Use the generated document GET endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check generation process and retrieve the generated check URL upon completion.
+     * 
+     * <p>scope: `generated_documents:write`
+     * 
      * @return The call builder
      */
     public PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBuilder generatePrintableChecks() {
@@ -2171,11 +2288,13 @@ public class Payrolls implements
 
     /**
      * Generate printable payroll checks (pdf)
-     * This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid. A generation status and corresponding request_uuid will be returned. Use the generated document GET endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check generation process and retrieve the generated check URL upon completion.
      * 
-     * scope: `generated_documents:write`
+     * <p>This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid. A generation status and corresponding request_uuid will be returned. Use the generated document GET endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check generation process and retrieve the generated check URL upon completion.
+     * 
+     * <p>scope: `generated_documents:write`
+     * 
      * @param payrollUuid The UUID of the payroll
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -2187,12 +2306,14 @@ public class Payrolls implements
     
     /**
      * Generate printable payroll checks (pdf)
-     * This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid. A generation status and corresponding request_uuid will be returned. Use the generated document GET endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check generation process and retrieve the generated check URL upon completion.
      * 
-     * scope: `generated_documents:write`
+     * <p>This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid. A generation status and corresponding request_uuid will be returned. Use the generated document GET endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check generation process and retrieve the generated check URL upon completion.
+     * 
+     * <p>scope: `generated_documents:write`
+     * 
      * @param payrollUuid The UUID of the payroll
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -2242,6 +2363,7 @@ public class Payrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-payrolls-payroll_uuid-generated_documents-printable_payroll_checks", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -2253,6 +2375,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-payrolls-payroll_uuid-generated_documents-printable_payroll_checks",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -2262,6 +2385,7 @@ public class Payrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-payrolls-payroll_uuid-generated_documents-printable_payroll_checks",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -2271,6 +2395,7 @@ public class Payrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-payrolls-payroll_uuid-generated_documents-printable_payroll_checks",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

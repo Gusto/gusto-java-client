@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EmployeeDeduction - The amount to be deducted, per pay period, from the employee's pay.
+ * EmployeeDeduction
+ * 
+ * <p>The amount to be deducted, per pay period, from the employee's pay.
  */
 
 public class EmployeeDeduction {

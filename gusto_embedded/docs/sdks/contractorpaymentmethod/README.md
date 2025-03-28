@@ -35,7 +35,7 @@ public class Application {
 
         GetV1ContractorsContractorUuidBankAccountsResponse res = sdk.contractorPaymentMethod().getBankAccounts()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.contractorBankAccountList().isPresent()) {
@@ -90,7 +90,7 @@ public class Application {
 
         GetV1ContractorsContractorUuidPaymentMethodResponse res = sdk.contractorPaymentMethod().get()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.contractorPaymentMethod().isPresent()) {
@@ -132,9 +132,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorIdPaymentMethodRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorIdPaymentMethodResponse;
-import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorIdPaymentMethodType;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -147,7 +145,7 @@ public class Application {
 
         PutV1ContractorsContractorIdPaymentMethodResponse res = sdk.contractorPaymentMethod().update()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
                     .version("63859768485e218ccf8a449bb60f14ed")
                     .type(PutV1ContractorsContractorIdPaymentMethodType.DIRECT_DEPOSIT)

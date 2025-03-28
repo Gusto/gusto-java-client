@@ -6,13 +6,14 @@
 package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gusto.embedded_api.utils.HasSecurity;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 
-public class GetV1WebhookSubscriptionUuidSecurity {
+public class GetV1WebhookSubscriptionUuidSecurity implements HasSecurity {
 
     @SpeakeasyMetadata("security:scheme=true,type=http,subtype=bearer,name=Authorization")
     private String systemAccessAuth;

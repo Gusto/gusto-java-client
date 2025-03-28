@@ -10,7 +10,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * PayrollSubmissionBlockersTypeMetadata - Additional data associated with the unblock option.
+ * PayrollSubmissionBlockersTypeMetadata
+ * 
+ * <p>Additional data associated with the unblock option.
  */
 
 public class PayrollSubmissionBlockersTypeMetadata {

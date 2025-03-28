@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * PayScheduleAssignment - The representation of a pay schedule assignment.
+ * PayScheduleAssignment
+ * 
+ * <p>The representation of a pay schedule assignment.
  */
 
 public class PayScheduleAssignment {

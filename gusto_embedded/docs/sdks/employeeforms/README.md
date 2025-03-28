@@ -42,7 +42,7 @@ public class Application {
             .build();
 
         PostV1SandboxGenerateW2Response res = sdk.employeeForms().generateW2()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1SandboxGenerateW2RequestBody.builder()
                     .employeeId("<id>")
                     .build())
@@ -99,7 +99,7 @@ public class Application {
 
         GetV1EmployeeFormsResponse res = sdk.employeeForms().list()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.formList().isPresent()) {
@@ -153,7 +153,7 @@ public class Application {
         GetV1EmployeeFormResponse res = sdk.employeeForms().get()
                 .employeeId("<id>")
                 .formId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.form().isPresent()) {
@@ -208,7 +208,7 @@ public class Application {
         GetV1EmployeeFormPdfResponse res = sdk.employeeForms().getPdf()
                 .employeeId("<id>")
                 .formId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.formPdf().isPresent()) {
@@ -252,9 +252,7 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1EmployeeFormSignRequest;
-import com.gusto.embedded_api.models.operations.PutV1EmployeeFormSignRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1EmployeeFormSignResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {

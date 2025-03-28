@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutV1HistoricalEmployeesRequestBody - Update a historical employee.
+ * PutV1HistoricalEmployeesRequestBody
+ * 
+ * <p>Update a historical employee.
  */
 
 public class PutV1HistoricalEmployeesRequestBody {

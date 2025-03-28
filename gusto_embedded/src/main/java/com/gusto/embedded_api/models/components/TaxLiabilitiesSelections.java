@@ -19,7 +19,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * TaxLiabilitiesSelections - Example response
+ * TaxLiabilitiesSelections
+ * 
+ * <p>Example response
  */
 
 public class TaxLiabilitiesSelections {

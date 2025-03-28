@@ -45,7 +45,7 @@ public class Application {
 
         PostV1EmployeesEmployeeIdTerminationsResponse res = sdk.employeeEmployments().createTermination()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1EmployeesEmployeeIdTerminationsRequestBody.builder()
                     .effectiveDate("2020-06-30")
                     .runTerminationPayroll(true)
@@ -106,7 +106,7 @@ public class Application {
 
         GetV1EmployeesEmployeeIdTerminationsResponse res = sdk.employeeEmployments().getTerminations()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.terminationList().isPresent()) {
@@ -160,7 +160,7 @@ public class Application {
 
         DeleteV1EmployeesEmployeeIdTerminationsResponse res = sdk.employeeEmployments().deleteTermination()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -216,7 +216,7 @@ public class Application {
 
         PutV1TerminationsEmployeeIdResponse res = sdk.employeeEmployments().updateTermination()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1TerminationsEmployeeIdRequestBody.builder()
                     .version("1928d0c378e519e9c03fb959bc959a6b")
                     .effectiveDate("2020-06-30")
@@ -278,7 +278,7 @@ public class Application {
 
         PostV1EmployeesEmployeeIdRehireResponse res = sdk.employeeEmployments().createRehire()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .rehireBody(RehireBody.builder()
                     .effectiveDate("2023-06-30")
                     .fileNewHireReport(true)
@@ -340,7 +340,7 @@ public class Application {
 
         PutV1EmployeesEmployeeIdRehireResponse res = sdk.employeeEmployments().rehire()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeesEmployeeIdRehireRequestBody.builder()
                     .version("1928d0c378e519e9c03fb959bc959a6b")
                     .effectiveDate("2023-06-30")
@@ -402,7 +402,7 @@ public class Application {
 
         GetV1EmployeesEmployeeIdRehireResponse res = sdk.employeeEmployments().getRehire()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.rehire().isPresent()) {
@@ -457,7 +457,7 @@ public class Application {
 
         DeleteV1EmployeesEmployeeIdRehireResponse res = sdk.employeeEmployments().deleteRehire()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -509,7 +509,7 @@ public class Application {
 
         GetV1EmployeesEmployeeIdEmploymentHistoryResponse res = sdk.employeeEmployments().getHistory()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employmentHistoryList().isPresent()) {

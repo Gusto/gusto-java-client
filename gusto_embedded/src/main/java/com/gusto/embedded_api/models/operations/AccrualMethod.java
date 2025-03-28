@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * AccrualMethod - Accrual method of the time off policy
+ * AccrualMethod
+ * 
+ * <p>Accrual method of the time off policy
  */
 public enum AccrualMethod {
     UNLIMITED("unlimited"),

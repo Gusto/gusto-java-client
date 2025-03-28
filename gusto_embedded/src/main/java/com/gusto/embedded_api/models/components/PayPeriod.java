@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayPeriod - The representation of a pay period.
+ * PayPeriod
+ * 
+ * <p>The representation of a pay period.
  */
 
 public class PayPeriod {

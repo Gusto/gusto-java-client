@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TimeOffPolicy - Representation of a Time Off Policy
+ * TimeOffPolicy
+ * 
+ * <p>Representation of a Time Off Policy
  */
 
 public class TimeOffPolicy {

@@ -9,7 +9,7 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 public enum VersionHeader {
-    TWO_THOUSAND_AND_TWENTY_FOUR0401("2024-04-01");
+    TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01("2024-04-01");
 
     @JsonValue
     private final String value;

@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ExternalPayrollItems - Submit wages, benefits, taxes for each employee
+ * ExternalPayrollItems
+ * 
+ * <p>Submit wages, benefits, taxes for each employee
  */
 
 public class ExternalPayrollItems {

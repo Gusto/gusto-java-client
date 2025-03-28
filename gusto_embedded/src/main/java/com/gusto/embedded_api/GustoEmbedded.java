@@ -26,11 +26,15 @@ public class GustoEmbedded {
      */
     public enum AvailableServers {
         /**
-         * DEMO - Demo
+         * DEMO
+         * 
+         * <p>Demo
          */
       DEMO("demo"),
         /**
-         * PROD - Prod
+         * PROD
+         * 
+         * <p>Prod
          */
       PROD("prod");
 
@@ -385,6 +389,7 @@ public class GustoEmbedded {
 
         /**
          * Configures the SDK to use a custom security source.
+         *
          * @param securitySource The security source to use for all requests.
          * @return The builder instance.
          */
@@ -452,6 +457,7 @@ public class GustoEmbedded {
         
         /**
          * Builds a new instance of the SDK.
+         *
          * @return The SDK instance.
          */
         public GustoEmbedded build() {
@@ -474,6 +480,7 @@ public class GustoEmbedded {
     
     /**
      * Get a new instance of the SDK builder to configure a new instance of the SDK.
+     *
      * @return The SDK builder instance.
      */
     public static Builder builder() {

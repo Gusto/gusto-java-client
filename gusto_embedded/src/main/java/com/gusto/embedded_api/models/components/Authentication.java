@@ -18,7 +18,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Authentication - Example response
+ * Authentication
+ * 
+ * <p>Example response
  */
 
 public class Authentication {

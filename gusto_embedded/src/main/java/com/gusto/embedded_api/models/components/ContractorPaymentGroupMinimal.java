@@ -17,7 +17,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * ContractorPaymentGroupMinimal - The summary of a contractor payment group.
+ * ContractorPaymentGroupMinimal
+ * 
+ * <p>The summary of a contractor payment group.
  */
 
 public class ContractorPaymentGroupMinimal {

@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody - OK
+ * GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody
+ * 
+ * <p>OK
  */
 
 public class GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody {

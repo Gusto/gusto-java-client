@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * GetV1EmployeesEmployeeIdJobsQueryParamInclude - Available options:
+ * GetV1EmployeesEmployeeIdJobsQueryParamInclude
+ * 
+ * <p>Available options:
  * - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
  */
 public enum GetV1EmployeesEmployeeIdJobsQueryParamInclude {

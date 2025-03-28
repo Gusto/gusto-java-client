@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * MetadataWithMultipleEntities - multiple entities
+ * MetadataWithMultipleEntities
+ * 
+ * <p>multiple entities
  */
 
 public class MetadataWithMultipleEntities {

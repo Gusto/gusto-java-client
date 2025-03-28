@@ -46,7 +46,7 @@ public class Application {
 
         GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse res = sdk.contractorPayments().getReceipt()
                 .contractorPaymentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.contractorPaymentReceipt().isPresent()) {
@@ -104,7 +104,7 @@ public class Application {
 
         GetV1ContractorPaymentsContractorPaymentUuidFundResponse res = sdk.contractorPayments().fund()
                 .contractorPaymentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.contractorPayment().isPresent()) {
@@ -161,14 +161,14 @@ public class Application {
 
         PostV1CompaniesCompanyIdContractorPaymentsResponse res = sdk.contractorPayments().create()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyIdContractorPaymentsRequestBody.builder()
                     .contractorUuid("<id>")
                     .date(LocalDate.parse("2020-01-01"))
-                    .wage(5000d)
-                    .hours(40d)
-                    .bonus(500d)
-                    .reimbursement(20d)
+                    .wage(5000)
+                    .hours(40)
+                    .bonus(500)
+                    .reimbursement(20)
                     .build())
                 .call();
 
@@ -281,7 +281,7 @@ public class Application {
         GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse res = sdk.contractorPayments().get()
                 .companyId("<id>")
                 .contractorPaymentId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.contractorPayment().isPresent()) {
@@ -337,7 +337,7 @@ public class Application {
         DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse res = sdk.contractorPayments().delete()
                 .companyId("<id>")
                 .contractorPaymentId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -380,9 +380,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody;
-import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidContractorPaymentsPreviewContractorPayments;
-import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBody;
-import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidContractorPaymentsPreviewResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
@@ -396,7 +394,7 @@ public class Application {
 
         GetCompaniesCompanyUuidContractorPaymentsPreviewResponse res = sdk.contractorPayments().preview()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBody.builder()
                     .contractorPayments(List.of(
                         GetCompaniesCompanyUuidContractorPaymentsPreviewContractorPayments.builder()

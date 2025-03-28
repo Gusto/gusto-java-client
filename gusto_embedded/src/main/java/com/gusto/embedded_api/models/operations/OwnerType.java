@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * OwnerType - The owner type of the bank account
+ * OwnerType
+ * 
+ * <p>The owner type of the bank account
  */
 public enum OwnerType {
     COMPANY("Company");

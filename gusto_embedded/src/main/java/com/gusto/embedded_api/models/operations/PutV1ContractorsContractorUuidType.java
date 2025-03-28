@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutV1ContractorsContractorUuidType - The contractor type.
+ * PutV1ContractorsContractorUuidType
+ * 
+ * <p>The contractor type.
  */
 public enum PutV1ContractorsContractorUuidType {
     INDIVIDUAL("Individual"),

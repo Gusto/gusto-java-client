@@ -17,7 +17,9 @@ import java.net.http.HttpResponse;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody - Unprocessable Entity (WebDAV)
+ * GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody
+ * 
+ * <p>Unprocessable Entity (WebDAV)
  */
 @SuppressWarnings("serial")
 public class GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody extends RuntimeException {

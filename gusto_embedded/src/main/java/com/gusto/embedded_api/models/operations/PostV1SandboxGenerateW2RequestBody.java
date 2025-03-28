@@ -26,7 +26,6 @@ public class PostV1SandboxGenerateW2RequestBody {
 
     /**
      * Must be equal to or more recent than 2015. If not specified, defaults to the previous year.
-     * 
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
@@ -57,7 +56,6 @@ public class PostV1SandboxGenerateW2RequestBody {
 
     /**
      * Must be equal to or more recent than 2015. If not specified, defaults to the previous year.
-     * 
      */
     @JsonIgnore
     public Optional<Long> year() {
@@ -79,7 +77,6 @@ public class PostV1SandboxGenerateW2RequestBody {
 
     /**
      * Must be equal to or more recent than 2015. If not specified, defaults to the previous year.
-     * 
      */
     public PostV1SandboxGenerateW2RequestBody withYear(long year) {
         Utils.checkNotNull(year, "year");
@@ -89,7 +86,6 @@ public class PostV1SandboxGenerateW2RequestBody {
 
     /**
      * Must be equal to or more recent than 2015. If not specified, defaults to the previous year.
-     * 
      */
     public PostV1SandboxGenerateW2RequestBody withYear(Optional<Long> year) {
         Utils.checkNotNull(year, "year");
@@ -146,7 +142,6 @@ public class PostV1SandboxGenerateW2RequestBody {
 
         /**
          * Must be equal to or more recent than 2015. If not specified, defaults to the previous year.
-         * 
          */
         public Builder year(long year) {
             Utils.checkNotNull(year, "year");
@@ -156,7 +151,6 @@ public class PostV1SandboxGenerateW2RequestBody {
 
         /**
          * Must be equal to or more recent than 2015. If not specified, defaults to the previous year.
-         * 
          */
         public Builder year(Optional<Long> year) {
             Utils.checkNotNull(year, "year");

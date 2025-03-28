@@ -19,7 +19,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * PayScheduleCreateUpdate - The representation of a pay schedule.
+ * PayScheduleCreateUpdate
+ * 
+ * <p>The representation of a pay schedule.
  */
 
 public class PayScheduleCreateUpdate {

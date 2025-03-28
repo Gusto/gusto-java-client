@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TimeOffType - Type of the time off activity
+ * TimeOffType
+ * 
+ * <p>Type of the time off activity
  */
 public enum TimeOffType {
     VACATION("vacation"),

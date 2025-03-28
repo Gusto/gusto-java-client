@@ -20,7 +20,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * MetadataWithOneEntity - single entity
+ * MetadataWithOneEntity
+ * 
+ * <p>single entity
  */
 
 public class MetadataWithOneEntity {

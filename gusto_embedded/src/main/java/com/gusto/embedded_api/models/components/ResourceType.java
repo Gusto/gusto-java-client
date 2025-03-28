@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ResourceType - Name of the parent resource of the described entity.
+ * ResourceType
+ * 
+ * <p>Name of the parent resource of the described entity.
  */
 public enum ResourceType {
     COMPANY("Company");

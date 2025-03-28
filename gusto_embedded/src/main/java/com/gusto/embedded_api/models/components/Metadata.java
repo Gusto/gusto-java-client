@@ -17,7 +17,9 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
 /**
- * Metadata - Contains relevant data to identify the resource in question when applicable. For example, to identify an entity `entity_type` and `entity_uuid` will be provided.
+ * Metadata
+ * 
+ * <p>Contains relevant data to identify the resource in question when applicable. For example, to identify an entity `entity_type` and `entity_uuid` will be provided.
  */
 
 @JsonDeserialize(using = Metadata._Deserializer.class)

@@ -37,7 +37,6 @@ public class PutV1ContractorsContractorUuidRequestBody {
 
     /**
      * The contractor’s wage type.
-     * 
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("wage_type")
@@ -45,7 +44,6 @@ public class PutV1ContractorsContractorUuidRequestBody {
 
     /**
      * The day when the contractor will start working for the company.
-     * 
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("start_date")
@@ -221,7 +219,6 @@ public class PutV1ContractorsContractorUuidRequestBody {
 
     /**
      * The contractor’s wage type.
-     * 
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -231,7 +228,6 @@ public class PutV1ContractorsContractorUuidRequestBody {
 
     /**
      * The day when the contractor will start working for the company.
-     * 
      */
     @JsonIgnore
     public Optional<String> startDate() {
@@ -377,7 +373,6 @@ public class PutV1ContractorsContractorUuidRequestBody {
 
     /**
      * The contractor’s wage type.
-     * 
      */
     public PutV1ContractorsContractorUuidRequestBody withWageType(PutV1ContractorsContractorUuidWageType wageType) {
         Utils.checkNotNull(wageType, "wageType");
@@ -387,7 +382,6 @@ public class PutV1ContractorsContractorUuidRequestBody {
 
     /**
      * The contractor’s wage type.
-     * 
      */
     public PutV1ContractorsContractorUuidRequestBody withWageType(Optional<? extends PutV1ContractorsContractorUuidWageType> wageType) {
         Utils.checkNotNull(wageType, "wageType");
@@ -397,7 +391,6 @@ public class PutV1ContractorsContractorUuidRequestBody {
 
     /**
      * The day when the contractor will start working for the company.
-     * 
      */
     public PutV1ContractorsContractorUuidRequestBody withStartDate(String startDate) {
         Utils.checkNotNull(startDate, "startDate");
@@ -407,7 +400,6 @@ public class PutV1ContractorsContractorUuidRequestBody {
 
     /**
      * The day when the contractor will start working for the company.
-     * 
      */
     public PutV1ContractorsContractorUuidRequestBody withStartDate(Optional<String> startDate) {
         Utils.checkNotNull(startDate, "startDate");
@@ -788,7 +780,6 @@ public class PutV1ContractorsContractorUuidRequestBody {
 
         /**
          * The contractor’s wage type.
-         * 
          */
         public Builder wageType(PutV1ContractorsContractorUuidWageType wageType) {
             Utils.checkNotNull(wageType, "wageType");
@@ -798,7 +789,6 @@ public class PutV1ContractorsContractorUuidRequestBody {
 
         /**
          * The contractor’s wage type.
-         * 
          */
         public Builder wageType(Optional<? extends PutV1ContractorsContractorUuidWageType> wageType) {
             Utils.checkNotNull(wageType, "wageType");
@@ -808,7 +798,6 @@ public class PutV1ContractorsContractorUuidRequestBody {
 
         /**
          * The day when the contractor will start working for the company.
-         * 
          */
         public Builder startDate(String startDate) {
             Utils.checkNotNull(startDate, "startDate");
@@ -818,7 +807,6 @@ public class PutV1ContractorsContractorUuidRequestBody {
 
         /**
          * The day when the contractor will start working for the company.
-         * 
          */
         public Builder startDate(Optional<String> startDate) {
             Utils.checkNotNull(startDate, "startDate");

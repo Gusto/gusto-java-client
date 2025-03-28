@@ -9,12 +9,13 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * DocumentType - The type of document an employee holds, based on their authorization status.
+ * DocumentType
  * 
- *   * This is unused for authorization status `citizen` or `noncitizen`.
+ * <p>The type of document an employee holds, based on their authorization status.
+ * 
+ * <p>  * This is unused for authorization status `citizen` or `noncitizen`.
  *   * If the authorization status is `permanent_resident`, this must be `uscis_alien_registration_number`.
  *   * If the authorization status is `alien`, this is required and may be any of the valid values.
- * 
  */
 public enum DocumentType {
     USCIS_ALIEN_REGISTRATION_NUMBER("uscis_alien_registration_number"),

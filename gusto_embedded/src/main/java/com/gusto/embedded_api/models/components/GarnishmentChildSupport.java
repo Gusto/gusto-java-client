@@ -17,7 +17,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * GarnishmentChildSupport - Additional child support order details
+ * GarnishmentChildSupport
+ * 
+ * <p>Additional child support order details
  */
 
 public class GarnishmentChildSupport {

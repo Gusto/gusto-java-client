@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ContractorPaymentReceiptLicensee - The licensed payroll processor
+ * ContractorPaymentReceiptLicensee
+ * 
+ * <p>The licensed payroll processor
  */
 
 public class ContractorPaymentReceiptLicensee {

@@ -24,9 +24,7 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.SortOrder;
-import com.gusto.embedded_api.models.operations.GetEventsRequest;
-import com.gusto.embedded_api.models.operations.GetEventsResponse;
-import com.gusto.embedded_api.models.operations.GetEventsSecurity;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {

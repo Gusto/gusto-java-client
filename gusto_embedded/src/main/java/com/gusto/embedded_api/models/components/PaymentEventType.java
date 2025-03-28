@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PaymentEventType - The type of payment event associated with the ACH transaction
+ * PaymentEventType
+ * 
+ * <p>The type of payment event associated with the ACH transaction
  */
 public enum PaymentEventType {
     PAYROLL("Payroll"),

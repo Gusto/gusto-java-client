@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Admin - The representation of an admin user in Gusto.
+ * Admin
+ * 
+ * <p>The representation of an admin user in Gusto.
  */
 
 public class Admin {

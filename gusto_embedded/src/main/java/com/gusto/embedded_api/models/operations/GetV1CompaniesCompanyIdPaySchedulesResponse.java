@@ -6,7 +6,7 @@
 package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api.models.components.PaySchedule;
+import com.gusto.embedded_api.models.components.PayScheduleList;
 import com.gusto.embedded_api.utils.Response;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
@@ -39,14 +39,14 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
     /**
      * Example response
      */
-    private Optional<? extends List<PaySchedule>> payScheduleList;
+    private Optional<? extends List<PayScheduleList>> payScheduleList;
 
     @JsonCreator
     public GetV1CompaniesCompanyIdPaySchedulesResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<PaySchedule>> payScheduleList) {
+            Optional<? extends List<PayScheduleList>> payScheduleList) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
@@ -93,8 +93,8 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PaySchedule>> payScheduleList() {
-        return (Optional<List<PaySchedule>>) payScheduleList;
+    public Optional<List<PayScheduleList>> payScheduleList() {
+        return (Optional<List<PayScheduleList>>) payScheduleList;
     }
 
     public final static Builder builder() {
@@ -131,7 +131,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
     /**
      * Example response
      */
-    public GetV1CompaniesCompanyIdPaySchedulesResponse withPayScheduleList(List<PaySchedule> payScheduleList) {
+    public GetV1CompaniesCompanyIdPaySchedulesResponse withPayScheduleList(List<PayScheduleList> payScheduleList) {
         Utils.checkNotNull(payScheduleList, "payScheduleList");
         this.payScheduleList = Optional.ofNullable(payScheduleList);
         return this;
@@ -140,7 +140,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
     /**
      * Example response
      */
-    public GetV1CompaniesCompanyIdPaySchedulesResponse withPayScheduleList(Optional<? extends List<PaySchedule>> payScheduleList) {
+    public GetV1CompaniesCompanyIdPaySchedulesResponse withPayScheduleList(Optional<? extends List<PayScheduleList>> payScheduleList) {
         Utils.checkNotNull(payScheduleList, "payScheduleList");
         this.payScheduleList = payScheduleList;
         return this;
@@ -188,7 +188,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends List<PaySchedule>> payScheduleList = Optional.empty();  
+        private Optional<? extends List<PayScheduleList>> payScheduleList = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -224,7 +224,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
         /**
          * Example response
          */
-        public Builder payScheduleList(List<PaySchedule> payScheduleList) {
+        public Builder payScheduleList(List<PayScheduleList> payScheduleList) {
             Utils.checkNotNull(payScheduleList, "payScheduleList");
             this.payScheduleList = Optional.ofNullable(payScheduleList);
             return this;
@@ -233,7 +233,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
         /**
          * Example response
          */
-        public Builder payScheduleList(Optional<? extends List<PaySchedule>> payScheduleList) {
+        public Builder payScheduleList(Optional<? extends List<PayScheduleList>> payScheduleList) {
             Utils.checkNotNull(payScheduleList, "payScheduleList");
             this.payScheduleList = payScheduleList;
             return this;

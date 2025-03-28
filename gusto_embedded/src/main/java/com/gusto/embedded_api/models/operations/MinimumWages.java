@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * MinimumWages - The minimum wage record you want to apply to the compensation
+ * MinimumWages
+ * 
+ * <p>The minimum wage record you want to apply to the compensation
  */
 
 public class MinimumWages {

@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * GetV1TokenInfoResponseBody - Example response
+ * GetV1TokenInfoResponseBody
+ * 
+ * <p>Example response
  */
 
 public class GetV1TokenInfoResponseBody {

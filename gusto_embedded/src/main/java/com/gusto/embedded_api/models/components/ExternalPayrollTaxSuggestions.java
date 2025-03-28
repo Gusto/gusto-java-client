@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ExternalPayrollTaxSuggestions - The representation of an external payroll with minimal information.
+ * ExternalPayrollTaxSuggestions
+ * 
+ * <p>The representation of an external payroll with minimal information.
  */
 
 public class ExternalPayrollTaxSuggestions {

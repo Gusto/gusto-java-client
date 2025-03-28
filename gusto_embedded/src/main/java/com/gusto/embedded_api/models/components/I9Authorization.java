@@ -17,7 +17,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * I9Authorization - An employee's I-9 authorization
+ * I9Authorization
+ * 
+ * <p>An employee's I-9 authorization
  */
 
 public class I9Authorization {

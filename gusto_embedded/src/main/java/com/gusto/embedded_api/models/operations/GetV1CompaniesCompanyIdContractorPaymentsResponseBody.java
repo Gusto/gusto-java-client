@@ -19,7 +19,9 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
 /**
- * GetV1CompaniesCompanyIdContractorPaymentsResponseBody - A JSON object containing contractor payments information
+ * GetV1CompaniesCompanyIdContractorPaymentsResponseBody
+ * 
+ * <p>A JSON object containing contractor payments information
  */
 
 @JsonDeserialize(using = GetV1CompaniesCompanyIdContractorPaymentsResponseBody._Deserializer.class)

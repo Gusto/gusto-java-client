@@ -49,7 +49,6 @@ public class ContractorPaymentSummaryByDatesContractorPayments {
 
     /**
      * The contractor’s payments within a given time period.
-     * 
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payments")
@@ -112,7 +111,6 @@ public class ContractorPaymentSummaryByDatesContractorPayments {
 
     /**
      * The contractor’s payments within a given time period.
-     * 
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -198,7 +196,6 @@ public class ContractorPaymentSummaryByDatesContractorPayments {
 
     /**
      * The contractor’s payments within a given time period.
-     * 
      */
     public ContractorPaymentSummaryByDatesContractorPayments withPayments(List<ContractorPayment> payments) {
         Utils.checkNotNull(payments, "payments");
@@ -208,7 +205,6 @@ public class ContractorPaymentSummaryByDatesContractorPayments {
 
     /**
      * The contractor’s payments within a given time period.
-     * 
      */
     public ContractorPaymentSummaryByDatesContractorPayments withPayments(Optional<? extends List<ContractorPayment>> payments) {
         Utils.checkNotNull(payments, "payments");
@@ -343,7 +339,6 @@ public class ContractorPaymentSummaryByDatesContractorPayments {
 
         /**
          * The contractor’s payments within a given time period.
-         * 
          */
         public Builder payments(List<ContractorPayment> payments) {
             Utils.checkNotNull(payments, "payments");
@@ -353,7 +348,6 @@ public class ContractorPaymentSummaryByDatesContractorPayments {
 
         /**
          * The contractor’s payments within a given time period.
-         * 
          */
         public Builder payments(Optional<? extends List<ContractorPayment>> payments) {
             Utils.checkNotNull(payments, "payments");

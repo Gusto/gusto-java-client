@@ -38,10 +38,12 @@ public class CompanyAttachment implements
 
     /**
      * Get a temporary url to download the Company Attachment file
-     * Retrieve a temporary url to download a attachment file uploaded
+     * 
+     * <p>Retrieve a temporary url to download a attachment file uploaded
      * by the company.
      * 
-     * scope: `company_attachments:read`
+     * <p>scope: `company_attachments:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesAttachmentUrlRequestBuilder getDownloadUrl() {
@@ -50,10 +52,12 @@ public class CompanyAttachment implements
 
     /**
      * Get a temporary url to download the Company Attachment file
-     * Retrieve a temporary url to download a attachment file uploaded
+     * 
+     * <p>Retrieve a temporary url to download a attachment file uploaded
      * by the company.
      * 
-     * scope: `company_attachments:read`
+     * <p>scope: `company_attachments:read`
+     * 
      * @param companyId The UUID of the company
      * @param companyAttachmentUuid The UUID of the company attachment
      * @return The response from the API call
@@ -67,13 +71,15 @@ public class CompanyAttachment implements
     
     /**
      * Get a temporary url to download the Company Attachment file
-     * Retrieve a temporary url to download a attachment file uploaded
+     * 
+     * <p>Retrieve a temporary url to download a attachment file uploaded
      * by the company.
      * 
-     * scope: `company_attachments:read`
+     * <p>scope: `company_attachments:read`
+     * 
      * @param companyId The UUID of the company
      * @param companyAttachmentUuid The UUID of the company attachment
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -110,6 +116,7 @@ public class CompanyAttachment implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-attachment-url", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -121,6 +128,7 @@ public class CompanyAttachment implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-attachment-url",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -130,6 +138,7 @@ public class CompanyAttachment implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-attachment-url",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -139,6 +148,7 @@ public class CompanyAttachment implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-attachment-url",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

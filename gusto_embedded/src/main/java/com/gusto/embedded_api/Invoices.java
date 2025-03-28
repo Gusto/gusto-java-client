@@ -39,13 +39,15 @@ public class Invoices implements
 
     /**
      * Retrieve invoicing data for companies
-     * Retrieve data for active companies used to calculate invoices for Gusto Embedded Payroll. A company is considered active for an invoice period if they are an active partner managed company, have run payroll or created contractor payments since becoming a partner managed company, and are not suspended at any point during the invoice period.  This endpoint forces pagination, with 100 results returned at a time. You can learn more about our pagination here: [pagination guide](https://docs.gusto.com/embedded-payroll/docs/pagination) 
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Retrieve data for active companies used to calculate invoices for Gusto Embedded Payroll. A company is considered active for an invoice period if they are an active partner managed company, have run payroll or created contractor payments since becoming a partner managed company, and are not suspended at any point during the invoice period.  This endpoint forces pagination, with 100 results returned at a time. You can learn more about our pagination here: [pagination guide](https://docs.gusto.com/embedded-payroll/docs/pagination) 
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
      * 
-     * scope: `invoices:read`
+     * <p>scope: `invoices:read`
+     * 
      * @return The call builder
      */
     public GetInvoicesInvoicePeriodRequestBuilder get() {
@@ -54,13 +56,15 @@ public class Invoices implements
 
     /**
      * Retrieve invoicing data for companies
-     * Retrieve data for active companies used to calculate invoices for Gusto Embedded Payroll. A company is considered active for an invoice period if they are an active partner managed company, have run payroll or created contractor payments since becoming a partner managed company, and are not suspended at any point during the invoice period.  This endpoint forces pagination, with 100 results returned at a time. You can learn more about our pagination here: [pagination guide](https://docs.gusto.com/embedded-payroll/docs/pagination) 
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Retrieve data for active companies used to calculate invoices for Gusto Embedded Payroll. A company is considered active for an invoice period if they are an active partner managed company, have run payroll or created contractor payments since becoming a partner managed company, and are not suspended at any point during the invoice period.  This endpoint forces pagination, with 100 results returned at a time. You can learn more about our pagination here: [pagination guide](https://docs.gusto.com/embedded-payroll/docs/pagination) 
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
      * 
-     * scope: `invoices:read`
+     * <p>scope: `invoices:read`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @param security The security details to use for authentication.
      * @return The response from the API call
@@ -86,17 +90,16 @@ public class Invoices implements
                 request, 
                 null));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+
+        // hooks will be passed method level security only
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(SecuritySource.of(security));
         Utils.configureSecurity(_req, security);
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-invoices-invoice-period", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -108,6 +111,7 @@ public class Invoices implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-invoices-invoice-period",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -117,6 +121,7 @@ public class Invoices implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-invoices-invoice-period",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -126,6 +131,7 @@ public class Invoices implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-invoices-invoice-period",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

@@ -21,11 +21,10 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The employee's authorization status
      * 
-     *   * `citizen`: A citizen is someone who was born in the United States or is a naturalized citizen living in the United States.
+     * <p>  * `citizen`: A citizen is someone who was born in the United States or is a naturalized citizen living in the United States.
      *   * `noncitizen`: A noncitizen national is someone born in American Samoa, certain former citizens of the former Trust Territory of the Pacific Islands, and certain children of noncitizen nationals born abroad.
      *   * `permanent_resident`: A lawful permanent resident is someone who is not a US citizen and who resides under legally recognized and lawfully recorded permanent residence as an immigrant.
      *   * `alien`: Also referred to as a "noncitizen authorized to work". This includes anyone who is authorized to work in the United States but is not a US citizen, US national or lawful permanent resident.
-     * 
      */
     @JsonProperty("authorization_status")
     private AuthorizationStatus authorizationStatus;
@@ -33,10 +32,9 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The type of document an employee holds, based on their authorization status.
      * 
-     *   * This is unused for authorization status `citizen` or `noncitizen`.
+     * <p>  * This is unused for authorization status `citizen` or `noncitizen`.
      *   * If the authorization status is `permanent_resident`, this must be `uscis_alien_registration_number`.
      *   * If the authorization status is `alien`, this is required and may be any of the valid values.
-     * 
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("document_type")
@@ -45,12 +43,11 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The document number. Formatting depends on the employee's document type.
      * 
-     *   * For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
+     * <p>  * For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
      *   * For `document_type:'form_i94'`, this must be a Form I-94 Admission Number, which is 11 digits.
      *   * For `document_type:'foreign_passport'`, this must be the passport number.
      * 
-     * This is required when the document type is present.
-     * 
+     * <p>This is required when the document type is present.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("document_number")
@@ -59,8 +56,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The document's country of issuance.
      * 
-     * This is required when the document type is `foreign_passport`.
-     * 
+     * <p>This is required when the document type is `foreign_passport`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("country")
@@ -69,8 +65,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The document's expiration date.
      * 
-     * This may only be used when the authorization status is `alien`.
-     * 
+     * <p>This may only be used when the authorization status is `alien`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiration_date")
@@ -113,11 +108,10 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The employee's authorization status
      * 
-     *   * `citizen`: A citizen is someone who was born in the United States or is a naturalized citizen living in the United States.
+     * <p>  * `citizen`: A citizen is someone who was born in the United States or is a naturalized citizen living in the United States.
      *   * `noncitizen`: A noncitizen national is someone born in American Samoa, certain former citizens of the former Trust Territory of the Pacific Islands, and certain children of noncitizen nationals born abroad.
      *   * `permanent_resident`: A lawful permanent resident is someone who is not a US citizen and who resides under legally recognized and lawfully recorded permanent residence as an immigrant.
      *   * `alien`: Also referred to as a "noncitizen authorized to work". This includes anyone who is authorized to work in the United States but is not a US citizen, US national or lawful permanent resident.
-     * 
      */
     @JsonIgnore
     public AuthorizationStatus authorizationStatus() {
@@ -127,10 +121,9 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The type of document an employee holds, based on their authorization status.
      * 
-     *   * This is unused for authorization status `citizen` or `noncitizen`.
+     * <p>  * This is unused for authorization status `citizen` or `noncitizen`.
      *   * If the authorization status is `permanent_resident`, this must be `uscis_alien_registration_number`.
      *   * If the authorization status is `alien`, this is required and may be any of the valid values.
-     * 
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -141,12 +134,11 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The document number. Formatting depends on the employee's document type.
      * 
-     *   * For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
+     * <p>  * For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
      *   * For `document_type:'form_i94'`, this must be a Form I-94 Admission Number, which is 11 digits.
      *   * For `document_type:'foreign_passport'`, this must be the passport number.
      * 
-     * This is required when the document type is present.
-     * 
+     * <p>This is required when the document type is present.
      */
     @JsonIgnore
     public Optional<String> documentNumber() {
@@ -156,8 +148,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The document's country of issuance.
      * 
-     * This is required when the document type is `foreign_passport`.
-     * 
+     * <p>This is required when the document type is `foreign_passport`.
      */
     @JsonIgnore
     public Optional<String> country() {
@@ -167,8 +158,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The document's expiration date.
      * 
-     * This may only be used when the authorization status is `alien`.
-     * 
+     * <p>This may only be used when the authorization status is `alien`.
      */
     @JsonIgnore
     public Optional<String> expirationDate() {
@@ -190,11 +180,10 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The employee's authorization status
      * 
-     *   * `citizen`: A citizen is someone who was born in the United States or is a naturalized citizen living in the United States.
+     * <p>  * `citizen`: A citizen is someone who was born in the United States or is a naturalized citizen living in the United States.
      *   * `noncitizen`: A noncitizen national is someone born in American Samoa, certain former citizens of the former Trust Territory of the Pacific Islands, and certain children of noncitizen nationals born abroad.
      *   * `permanent_resident`: A lawful permanent resident is someone who is not a US citizen and who resides under legally recognized and lawfully recorded permanent residence as an immigrant.
      *   * `alien`: Also referred to as a "noncitizen authorized to work". This includes anyone who is authorized to work in the United States but is not a US citizen, US national or lawful permanent resident.
-     * 
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationRequestBody withAuthorizationStatus(AuthorizationStatus authorizationStatus) {
         Utils.checkNotNull(authorizationStatus, "authorizationStatus");
@@ -205,10 +194,9 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The type of document an employee holds, based on their authorization status.
      * 
-     *   * This is unused for authorization status `citizen` or `noncitizen`.
+     * <p>  * This is unused for authorization status `citizen` or `noncitizen`.
      *   * If the authorization status is `permanent_resident`, this must be `uscis_alien_registration_number`.
      *   * If the authorization status is `alien`, this is required and may be any of the valid values.
-     * 
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationRequestBody withDocumentType(DocumentType documentType) {
         Utils.checkNotNull(documentType, "documentType");
@@ -219,10 +207,9 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The type of document an employee holds, based on their authorization status.
      * 
-     *   * This is unused for authorization status `citizen` or `noncitizen`.
+     * <p>  * This is unused for authorization status `citizen` or `noncitizen`.
      *   * If the authorization status is `permanent_resident`, this must be `uscis_alien_registration_number`.
      *   * If the authorization status is `alien`, this is required and may be any of the valid values.
-     * 
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationRequestBody withDocumentType(Optional<? extends DocumentType> documentType) {
         Utils.checkNotNull(documentType, "documentType");
@@ -233,12 +220,11 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The document number. Formatting depends on the employee's document type.
      * 
-     *   * For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
+     * <p>  * For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
      *   * For `document_type:'form_i94'`, this must be a Form I-94 Admission Number, which is 11 digits.
      *   * For `document_type:'foreign_passport'`, this must be the passport number.
      * 
-     * This is required when the document type is present.
-     * 
+     * <p>This is required when the document type is present.
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationRequestBody withDocumentNumber(String documentNumber) {
         Utils.checkNotNull(documentNumber, "documentNumber");
@@ -249,12 +235,11 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The document number. Formatting depends on the employee's document type.
      * 
-     *   * For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
+     * <p>  * For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
      *   * For `document_type:'form_i94'`, this must be a Form I-94 Admission Number, which is 11 digits.
      *   * For `document_type:'foreign_passport'`, this must be the passport number.
      * 
-     * This is required when the document type is present.
-     * 
+     * <p>This is required when the document type is present.
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationRequestBody withDocumentNumber(Optional<String> documentNumber) {
         Utils.checkNotNull(documentNumber, "documentNumber");
@@ -265,8 +250,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The document's country of issuance.
      * 
-     * This is required when the document type is `foreign_passport`.
-     * 
+     * <p>This is required when the document type is `foreign_passport`.
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationRequestBody withCountry(String country) {
         Utils.checkNotNull(country, "country");
@@ -277,8 +261,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The document's country of issuance.
      * 
-     * This is required when the document type is `foreign_passport`.
-     * 
+     * <p>This is required when the document type is `foreign_passport`.
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationRequestBody withCountry(Optional<String> country) {
         Utils.checkNotNull(country, "country");
@@ -289,8 +272,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The document's expiration date.
      * 
-     * This may only be used when the authorization status is `alien`.
-     * 
+     * <p>This may only be used when the authorization status is `alien`.
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationRequestBody withExpirationDate(String expirationDate) {
         Utils.checkNotNull(expirationDate, "expirationDate");
@@ -301,8 +283,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
     /**
      * The document's expiration date.
      * 
-     * This may only be used when the authorization status is `alien`.
-     * 
+     * <p>This may only be used when the authorization status is `alien`.
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationRequestBody withExpirationDate(Optional<String> expirationDate) {
         Utils.checkNotNull(expirationDate, "expirationDate");
@@ -389,11 +370,10 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
         /**
          * The employee's authorization status
          * 
-         *   * `citizen`: A citizen is someone who was born in the United States or is a naturalized citizen living in the United States.
+         * <p>  * `citizen`: A citizen is someone who was born in the United States or is a naturalized citizen living in the United States.
          *   * `noncitizen`: A noncitizen national is someone born in American Samoa, certain former citizens of the former Trust Territory of the Pacific Islands, and certain children of noncitizen nationals born abroad.
          *   * `permanent_resident`: A lawful permanent resident is someone who is not a US citizen and who resides under legally recognized and lawfully recorded permanent residence as an immigrant.
          *   * `alien`: Also referred to as a "noncitizen authorized to work". This includes anyone who is authorized to work in the United States but is not a US citizen, US national or lawful permanent resident.
-         * 
          */
         public Builder authorizationStatus(AuthorizationStatus authorizationStatus) {
             Utils.checkNotNull(authorizationStatus, "authorizationStatus");
@@ -404,10 +384,9 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
         /**
          * The type of document an employee holds, based on their authorization status.
          * 
-         *   * This is unused for authorization status `citizen` or `noncitizen`.
+         * <p>  * This is unused for authorization status `citizen` or `noncitizen`.
          *   * If the authorization status is `permanent_resident`, this must be `uscis_alien_registration_number`.
          *   * If the authorization status is `alien`, this is required and may be any of the valid values.
-         * 
          */
         public Builder documentType(DocumentType documentType) {
             Utils.checkNotNull(documentType, "documentType");
@@ -418,10 +397,9 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
         /**
          * The type of document an employee holds, based on their authorization status.
          * 
-         *   * This is unused for authorization status `citizen` or `noncitizen`.
+         * <p>  * This is unused for authorization status `citizen` or `noncitizen`.
          *   * If the authorization status is `permanent_resident`, this must be `uscis_alien_registration_number`.
          *   * If the authorization status is `alien`, this is required and may be any of the valid values.
-         * 
          */
         public Builder documentType(Optional<? extends DocumentType> documentType) {
             Utils.checkNotNull(documentType, "documentType");
@@ -432,12 +410,11 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
         /**
          * The document number. Formatting depends on the employee's document type.
          * 
-         *   * For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
+         * <p>  * For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
          *   * For `document_type:'form_i94'`, this must be a Form I-94 Admission Number, which is 11 digits.
          *   * For `document_type:'foreign_passport'`, this must be the passport number.
          * 
-         * This is required when the document type is present.
-         * 
+         * <p>This is required when the document type is present.
          */
         public Builder documentNumber(String documentNumber) {
             Utils.checkNotNull(documentNumber, "documentNumber");
@@ -448,12 +425,11 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
         /**
          * The document number. Formatting depends on the employee's document type.
          * 
-         *   * For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
+         * <p>  * For `document_type:'uscis_alien_registration_number'`, this must be a USCIS Number/A-Number, which is 7 to 9 digits.
          *   * For `document_type:'form_i94'`, this must be a Form I-94 Admission Number, which is 11 digits.
          *   * For `document_type:'foreign_passport'`, this must be the passport number.
          * 
-         * This is required when the document type is present.
-         * 
+         * <p>This is required when the document type is present.
          */
         public Builder documentNumber(Optional<String> documentNumber) {
             Utils.checkNotNull(documentNumber, "documentNumber");
@@ -464,8 +440,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
         /**
          * The document's country of issuance.
          * 
-         * This is required when the document type is `foreign_passport`.
-         * 
+         * <p>This is required when the document type is `foreign_passport`.
          */
         public Builder country(String country) {
             Utils.checkNotNull(country, "country");
@@ -476,8 +451,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
         /**
          * The document's country of issuance.
          * 
-         * This is required when the document type is `foreign_passport`.
-         * 
+         * <p>This is required when the document type is `foreign_passport`.
          */
         public Builder country(Optional<String> country) {
             Utils.checkNotNull(country, "country");
@@ -488,8 +462,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
         /**
          * The document's expiration date.
          * 
-         * This may only be used when the authorization status is `alien`.
-         * 
+         * <p>This may only be used when the authorization status is `alien`.
          */
         public Builder expirationDate(String expirationDate) {
             Utils.checkNotNull(expirationDate, "expirationDate");
@@ -500,8 +473,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBody {
         /**
          * The document's expiration date.
          * 
-         * This may only be used when the authorization status is `alien`.
-         * 
+         * <p>This may only be used when the authorization status is `alien`.
          */
         public Builder expirationDate(Optional<String> expirationDate) {
             Utils.checkNotNull(expirationDate, "expirationDate");

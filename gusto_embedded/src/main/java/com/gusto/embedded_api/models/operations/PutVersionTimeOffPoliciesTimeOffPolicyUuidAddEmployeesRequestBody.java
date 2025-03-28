@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody - A list of employee objects containing the employee uuid
+ * PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody
+ * 
+ * <p>A list of employee objects containing the employee uuid
  */
 
 public class PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody {

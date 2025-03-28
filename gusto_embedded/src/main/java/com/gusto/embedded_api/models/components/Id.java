@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Id - The string identifier for each onboarding step
+ * Id
+ * 
+ * <p>The string identifier for each onboarding step
  */
 public enum Id {
     ADD_ADDRESSES("add_addresses"),

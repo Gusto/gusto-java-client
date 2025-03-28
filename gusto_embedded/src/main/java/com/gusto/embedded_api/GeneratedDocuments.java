@@ -39,9 +39,11 @@ public class GeneratedDocuments implements
 
     /**
      * Get a generated document
-     * Get a document given the request_uuid. The response will include the generation request's status and urls to the document. A list of urls is returned as certain document types require several urls.
      * 
-     * scope: `generated_documents:read`
+     * <p>Get a document given the request_uuid. The response will include the generation request's status and urls to the document. A list of urls is returned as certain document types require several urls.
+     * 
+     * <p>scope: `generated_documents:read`
+     * 
      * @return The call builder
      */
     public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequestBuilder get() {
@@ -50,10 +52,12 @@ public class GeneratedDocuments implements
 
     /**
      * Get a generated document
-     * Get a document given the request_uuid. The response will include the generation request's status and urls to the document. A list of urls is returned as certain document types require several urls.
      * 
-     * scope: `generated_documents:read`
-     * @param documentType
+     * <p>Get a document given the request_uuid. The response will include the generation request's status and urls to the document. A list of urls is returned as certain document types require several urls.
+     * 
+     * <p>scope: `generated_documents:read`
+     * 
+     * @param documentType 
      * @param requestUuid The UUID of the request to generate a document. Generate document endpoints return request_uuids to be used with the GET generated document endpoint.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -66,12 +70,14 @@ public class GeneratedDocuments implements
     
     /**
      * Get a generated document
-     * Get a document given the request_uuid. The response will include the generation request's status and urls to the document. A list of urls is returned as certain document types require several urls.
      * 
-     * scope: `generated_documents:read`
-     * @param documentType
+     * <p>Get a document given the request_uuid. The response will include the generation request's status and urls to the document. A list of urls is returned as certain document types require several urls.
+     * 
+     * <p>scope: `generated_documents:read`
+     * 
+     * @param documentType 
      * @param requestUuid The UUID of the request to generate a document. Generate document endpoints return request_uuids to be used with the GET generated document endpoint.
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -108,6 +114,7 @@ public class GeneratedDocuments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-generated_documents-document_type-request_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -119,6 +126,7 @@ public class GeneratedDocuments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-generated_documents-document_type-request_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -128,6 +136,7 @@ public class GeneratedDocuments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-generated_documents-document_type-request_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -137,6 +146,7 @@ public class GeneratedDocuments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-generated_documents-document_type-request_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

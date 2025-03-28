@@ -31,10 +31,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PostV1WebhookSubscriptionRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1WebhookSubscriptionResponse;
-import com.gusto.embedded_api.models.operations.PostV1WebhookSubscriptionSecurity;
-import com.gusto.embedded_api.models.operations.SubscriptionTypes;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
@@ -49,7 +46,7 @@ public class Application {
                 .security(PostV1WebhookSubscriptionSecurity.builder()
                     .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
                     .build())
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1WebhookSubscriptionRequestBody.builder()
                     .url("https://partner-app.com/subscriber")
                     .subscriptionTypes(List.of(
@@ -116,7 +113,7 @@ public class Application {
                 .security(GetV1WebhookSubscriptionsSecurity.builder()
                     .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
                     .build())
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.webhookSubscriptionsList().isPresent()) {
@@ -162,10 +159,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1WebhookSubscriptionUuidRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1WebhookSubscriptionUuidResponse;
-import com.gusto.embedded_api.models.operations.PutV1WebhookSubscriptionUuidSecurity;
-import com.gusto.embedded_api.models.operations.PutV1WebhookSubscriptionUuidSubscriptionTypes;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
@@ -181,7 +175,7 @@ public class Application {
                     .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1WebhookSubscriptionUuidRequestBody.builder()
                     .subscriptionTypes(List.of(
                         PutV1WebhookSubscriptionUuidSubscriptionTypes.COMPANY,
@@ -250,7 +244,7 @@ public class Application {
                     .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.webhookSubscription().isPresent()) {
@@ -312,7 +306,7 @@ public class Application {
                     .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -359,9 +353,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1VerifyWebhookSubscriptionUuidRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1VerifyWebhookSubscriptionUuidResponse;
-import com.gusto.embedded_api.models.operations.PutV1VerifyWebhookSubscriptionUuidSecurity;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -376,7 +368,7 @@ public class Application {
                     .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody.builder()
                     .verificationToken("asefasedfe23e234easd")
                     .build())
@@ -443,7 +435,7 @@ public class Application {
                     .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response

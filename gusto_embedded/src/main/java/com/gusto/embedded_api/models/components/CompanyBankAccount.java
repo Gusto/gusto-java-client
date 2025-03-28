@@ -17,7 +17,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * CompanyBankAccount - The company bank account
+ * CompanyBankAccount
+ * 
+ * <p>The company bank account
  */
 
 public class CompanyBankAccount {
@@ -59,7 +61,7 @@ public class CompanyBankAccount {
     /**
      * The verification status of the bank account.
      * 
-     * 'awaiting_deposits' means the bank account is just created and money is being transferred.
+     * <p>'awaiting_deposits' means the bank account is just created and money is being transferred.
      * 'ready_for_verification' means the micro-deposits are completed and the verification process can begin by using the verify endpoint.
      * 'verified' means the bank account is verified.
      */
@@ -70,7 +72,7 @@ public class CompanyBankAccount {
     /**
      * The verification type of the bank account.
      * 
-     * 'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
+     * <p>'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
      * 'plaid' means the bank account is connected through Plaid.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -191,7 +193,7 @@ public class CompanyBankAccount {
     /**
      * The verification status of the bank account.
      * 
-     * 'awaiting_deposits' means the bank account is just created and money is being transferred.
+     * <p>'awaiting_deposits' means the bank account is just created and money is being transferred.
      * 'ready_for_verification' means the micro-deposits are completed and the verification process can begin by using the verify endpoint.
      * 'verified' means the bank account is verified.
      */
@@ -204,7 +206,7 @@ public class CompanyBankAccount {
     /**
      * The verification type of the bank account.
      * 
-     * 'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
+     * <p>'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
      * 'plaid' means the bank account is connected through Plaid.
      */
     @SuppressWarnings("unchecked")
@@ -334,7 +336,7 @@ public class CompanyBankAccount {
     /**
      * The verification status of the bank account.
      * 
-     * 'awaiting_deposits' means the bank account is just created and money is being transferred.
+     * <p>'awaiting_deposits' means the bank account is just created and money is being transferred.
      * 'ready_for_verification' means the micro-deposits are completed and the verification process can begin by using the verify endpoint.
      * 'verified' means the bank account is verified.
      */
@@ -347,7 +349,7 @@ public class CompanyBankAccount {
     /**
      * The verification status of the bank account.
      * 
-     * 'awaiting_deposits' means the bank account is just created and money is being transferred.
+     * <p>'awaiting_deposits' means the bank account is just created and money is being transferred.
      * 'ready_for_verification' means the micro-deposits are completed and the verification process can begin by using the verify endpoint.
      * 'verified' means the bank account is verified.
      */
@@ -360,7 +362,7 @@ public class CompanyBankAccount {
     /**
      * The verification type of the bank account.
      * 
-     * 'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
+     * <p>'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
      * 'plaid' means the bank account is connected through Plaid.
      */
     public CompanyBankAccount withVerificationType(VerificationType verificationType) {
@@ -372,7 +374,7 @@ public class CompanyBankAccount {
     /**
      * The verification type of the bank account.
      * 
-     * 'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
+     * <p>'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
      * 'plaid' means the bank account is connected through Plaid.
      */
     public CompanyBankAccount withVerificationType(Optional<? extends VerificationType> verificationType) {
@@ -620,7 +622,7 @@ public class CompanyBankAccount {
         /**
          * The verification status of the bank account.
          * 
-         * 'awaiting_deposits' means the bank account is just created and money is being transferred.
+         * <p>'awaiting_deposits' means the bank account is just created and money is being transferred.
          * 'ready_for_verification' means the micro-deposits are completed and the verification process can begin by using the verify endpoint.
          * 'verified' means the bank account is verified.
          */
@@ -633,7 +635,7 @@ public class CompanyBankAccount {
         /**
          * The verification status of the bank account.
          * 
-         * 'awaiting_deposits' means the bank account is just created and money is being transferred.
+         * <p>'awaiting_deposits' means the bank account is just created and money is being transferred.
          * 'ready_for_verification' means the micro-deposits are completed and the verification process can begin by using the verify endpoint.
          * 'verified' means the bank account is verified.
          */
@@ -646,7 +648,7 @@ public class CompanyBankAccount {
         /**
          * The verification type of the bank account.
          * 
-         * 'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
+         * <p>'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
          * 'plaid' means the bank account is connected through Plaid.
          */
         public Builder verificationType(VerificationType verificationType) {
@@ -658,7 +660,7 @@ public class CompanyBankAccount {
         /**
          * The verification type of the bank account.
          * 
-         * 'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
+         * <p>'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
          * 'plaid' means the bank account is connected through Plaid.
          */
         public Builder verificationType(Optional<? extends VerificationType> verificationType) {

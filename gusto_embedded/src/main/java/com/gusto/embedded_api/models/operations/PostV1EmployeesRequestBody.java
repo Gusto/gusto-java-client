@@ -16,7 +16,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PostV1EmployeesRequestBody - Create an employee.
+ * PostV1EmployeesRequestBody
+ * 
+ * <p>Create an employee.
  */
 
 public class PostV1EmployeesRequestBody {

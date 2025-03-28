@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * MigrationStatus - The migration status. 'success' is the only valid return value.
+ * MigrationStatus
+ * 
+ * <p>The migration status. 'success' is the only valid return value.
  */
 public enum MigrationStatus {
     SUCCESS("success");

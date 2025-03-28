@@ -77,7 +77,7 @@ public class Application {
                 .companyUuid("<id>")
                 .state("Oklahoma")
                 .scheduling(false)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.taxRequirementsState().isPresent()) {
@@ -120,10 +120,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidTaxRequirementsStateResponse;
-import com.gusto.embedded_api.models.operations.RequirementSets;
-import com.gusto.embedded_api.models.operations.Requirements;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -139,7 +136,7 @@ public class Application {
         PutV1CompaniesCompanyUuidTaxRequirementsStateResponse res = sdk.taxRequirements().updateState()
                 .companyUuid("<id>")
                 .state("Massachusetts")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody.builder()
                     .requirementSets(List.of(
                         RequirementSets.builder()
@@ -230,7 +227,7 @@ public class Application {
 
         GetV1CompaniesCompanyUuidTaxRequirementsResponse res = sdk.taxRequirements().getAll()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.responseBodies().isPresent()) {

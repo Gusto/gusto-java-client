@@ -15,12 +15,14 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
+import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 public class Answers {
 
+    @JsonInclude(Include.ALWAYS)
     @JsonProperty("value")
-    private String value;
+    private Optional<? extends Value> value;
 
     @JsonProperty("valid_from")
     private String validFrom;
@@ -31,7 +33,7 @@ public class Answers {
 
     @JsonCreator
     public Answers(
-            @JsonProperty("value") String value,
+            @JsonProperty("value") Optional<? extends Value> value,
             @JsonProperty("valid_from") String validFrom,
             @JsonProperty("valid_up_to") JsonNullable<? extends Object> validUpTo) {
         Utils.checkNotNull(value, "value");
@@ -43,14 +45,14 @@ public class Answers {
     }
     
     public Answers(
-            String value,
             String validFrom) {
-        this(value, validFrom, JsonNullable.undefined());
+        this(Optional.empty(), validFrom, JsonNullable.undefined());
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public String value() {
-        return value;
+    public Optional<Value> value() {
+        return (Optional<Value>) value;
     }
 
     @JsonIgnore
@@ -68,7 +70,13 @@ public class Answers {
         return new Builder();
     }
 
-    public Answers withValue(String value) {
+    public Answers withValue(Value value) {
+        Utils.checkNotNull(value, "value");
+        this.value = Optional.ofNullable(value);
+        return this;
+    }
+
+    public Answers withValue(Optional<? extends Value> value) {
         Utils.checkNotNull(value, "value");
         this.value = value;
         return this;
@@ -125,7 +133,7 @@ public class Answers {
     
     public final static class Builder {
  
-        private String value;
+        private Optional<? extends Value> value = Optional.empty();
  
         private String validFrom;
  
@@ -135,7 +143,13 @@ public class Answers {
           // force use of static builder() method
         }
 
-        public Builder value(String value) {
+        public Builder value(Value value) {
+            Utils.checkNotNull(value, "value");
+            this.value = Optional.ofNullable(value);
+            return this;
+        }
+
+        public Builder value(Optional<? extends Value> value) {
             Utils.checkNotNull(value, "value");
             this.value = value;
             return this;

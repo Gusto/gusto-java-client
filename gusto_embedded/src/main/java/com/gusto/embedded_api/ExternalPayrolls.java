@@ -80,9 +80,11 @@ public class ExternalPayrolls implements
 
     /**
      * Create a new external payroll for a company
-     * Creates a new external payroll for the company.
      * 
-     * scope: `external_payrolls:write`
+     * <p>Creates a new external payroll for the company.
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @return The call builder
      */
     public PostV1ExternalPayrollRequestBuilder create() {
@@ -91,11 +93,13 @@ public class ExternalPayrolls implements
 
     /**
      * Create a new external payroll for a company
-     * Creates a new external payroll for the company.
      * 
-     * scope: `external_payrolls:write`
+     * <p>Creates a new external payroll for the company.
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -107,12 +111,14 @@ public class ExternalPayrolls implements
     
     /**
      * Create a new external payroll for a company
-     * Creates a new external payroll for the company.
      * 
-     * scope: `external_payrolls:write`
+     * <p>Creates a new external payroll for the company.
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -162,6 +168,7 @@ public class ExternalPayrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-external-payroll", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -173,6 +180,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-external-payroll",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -182,6 +190,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-external-payroll",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -191,6 +200,7 @@ public class ExternalPayrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-external-payroll",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -266,9 +276,11 @@ public class ExternalPayrolls implements
 
     /**
      * Get external payrolls for a company
-     * Get an external payroll for a given company.
      * 
-     * scope: `external_payrolls:read`
+     * <p>Get an external payroll for a given company.
+     * 
+     * <p>scope: `external_payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1CompanyExternalPayrollsRequestBuilder get() {
@@ -277,9 +289,11 @@ public class ExternalPayrolls implements
 
     /**
      * Get external payrolls for a company
-     * Get an external payroll for a given company.
      * 
-     * scope: `external_payrolls:read`
+     * <p>Get an external payroll for a given company.
+     * 
+     * <p>scope: `external_payrolls:read`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -291,11 +305,13 @@ public class ExternalPayrolls implements
     
     /**
      * Get external payrolls for a company
-     * Get an external payroll for a given company.
      * 
-     * scope: `external_payrolls:read`
+     * <p>Get an external payroll for a given company.
+     * 
+     * <p>scope: `external_payrolls:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -330,6 +346,7 @@ public class ExternalPayrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-company-external-payrolls", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -341,6 +358,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-external-payrolls",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -350,6 +368,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-company-external-payrolls",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -359,6 +378,7 @@ public class ExternalPayrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-external-payrolls",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -420,9 +440,11 @@ public class ExternalPayrolls implements
 
     /**
      * Get an external payroll
-     * Get an external payroll for a given company.
      * 
-     * scope: `external_payrolls:read`
+     * <p>Get an external payroll for a given company.
+     * 
+     * <p>scope: `external_payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1ExternalPayrollRequestBuilder retrieve() {
@@ -431,9 +453,11 @@ public class ExternalPayrolls implements
 
     /**
      * Get an external payroll
-     * Get an external payroll for a given company.
      * 
-     * scope: `external_payrolls:read`
+     * <p>Get an external payroll for a given company.
+     * 
+     * <p>scope: `external_payrolls:read`
+     * 
      * @param companyUuid The UUID of the company
      * @param externalPayrollId The UUID of the external payroll
      * @return The response from the API call
@@ -447,12 +471,14 @@ public class ExternalPayrolls implements
     
     /**
      * Get an external payroll
-     * Get an external payroll for a given company.
      * 
-     * scope: `external_payrolls:read`
+     * <p>Get an external payroll for a given company.
+     * 
+     * <p>scope: `external_payrolls:read`
+     * 
      * @param companyUuid The UUID of the company
      * @param externalPayrollId The UUID of the external payroll
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -489,6 +515,7 @@ public class ExternalPayrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-external-payroll", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -500,6 +527,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-external-payroll",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -509,6 +537,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-external-payroll",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -518,6 +547,7 @@ public class ExternalPayrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-external-payroll",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -579,9 +609,11 @@ public class ExternalPayrolls implements
 
     /**
      * Delete an external payroll
-     * Delete an external payroll.
      * 
-     * scope: `external_payrolls:write`
+     * <p>Delete an external payroll.
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @return The call builder
      */
     public DeleteV1ExternalPayrollRequestBuilder delete() {
@@ -590,9 +622,11 @@ public class ExternalPayrolls implements
 
     /**
      * Delete an external payroll
-     * Delete an external payroll.
      * 
-     * scope: `external_payrolls:write`
+     * <p>Delete an external payroll.
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @param companyUuid The UUID of the company
      * @param externalPayrollId The UUID of the external payroll
      * @return The response from the API call
@@ -606,12 +640,14 @@ public class ExternalPayrolls implements
     
     /**
      * Delete an external payroll
-     * Delete an external payroll.
      * 
-     * scope: `external_payrolls:write`
+     * <p>Delete an external payroll.
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @param companyUuid The UUID of the company
      * @param externalPayrollId The UUID of the external payroll
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -648,6 +684,7 @@ public class ExternalPayrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-external-payroll", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -659,6 +696,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-external-payroll",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -668,6 +706,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-external-payroll",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -677,6 +716,7 @@ public class ExternalPayrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-external-payroll",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -727,9 +767,11 @@ public class ExternalPayrolls implements
 
     /**
      * Update an external payroll
-     * Update an external payroll with a list of external payroll items
      * 
-     * scope: `external_payrolls:write`
+     * <p>Update an external payroll with a list of external payroll items
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @return The call builder
      */
     public PutV1ExternalPayrollRequestBuilder update() {
@@ -738,12 +780,14 @@ public class ExternalPayrolls implements
 
     /**
      * Update an external payroll
-     * Update an external payroll with a list of external payroll items
      * 
-     * scope: `external_payrolls:write`
+     * <p>Update an external payroll with a list of external payroll items
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @param companyUuid The UUID of the company
      * @param externalPayrollId The UUID of the external payroll
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -756,13 +800,15 @@ public class ExternalPayrolls implements
     
     /**
      * Update an external payroll
-     * Update an external payroll with a list of external payroll items
      * 
-     * scope: `external_payrolls:write`
+     * <p>Update an external payroll with a list of external payroll items
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @param companyUuid The UUID of the company
      * @param externalPayrollId The UUID of the external payroll
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -814,6 +860,7 @@ public class ExternalPayrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-external-payroll", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -825,6 +872,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-external-payroll",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -834,6 +882,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-external-payroll",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -843,6 +892,7 @@ public class ExternalPayrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-external-payroll",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -918,11 +968,13 @@ public class ExternalPayrolls implements
 
     /**
      * Get tax suggestions for an external payroll
-     * Get tax suggestions for an external payroll. Earnings and/or benefits
+     * 
+     * <p>Get tax suggestions for an external payroll. Earnings and/or benefits
      * data must be saved prior to the calculation in order to retrieve accurate
      * tax calculation.
      * 
-     * scope: `external_payrolls:read`
+     * <p>scope: `external_payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1ExternalPayrollCalculateTaxesRequestBuilder calculateTaxes() {
@@ -931,11 +983,13 @@ public class ExternalPayrolls implements
 
     /**
      * Get tax suggestions for an external payroll
-     * Get tax suggestions for an external payroll. Earnings and/or benefits
+     * 
+     * <p>Get tax suggestions for an external payroll. Earnings and/or benefits
      * data must be saved prior to the calculation in order to retrieve accurate
      * tax calculation.
      * 
-     * scope: `external_payrolls:read`
+     * <p>scope: `external_payrolls:read`
+     * 
      * @param companyUuid The UUID of the company
      * @param externalPayrollId The UUID of the external payroll
      * @return The response from the API call
@@ -949,14 +1003,16 @@ public class ExternalPayrolls implements
     
     /**
      * Get tax suggestions for an external payroll
-     * Get tax suggestions for an external payroll. Earnings and/or benefits
+     * 
+     * <p>Get tax suggestions for an external payroll. Earnings and/or benefits
      * data must be saved prior to the calculation in order to retrieve accurate
      * tax calculation.
      * 
-     * scope: `external_payrolls:read`
+     * <p>scope: `external_payrolls:read`
+     * 
      * @param companyUuid The UUID of the company
      * @param externalPayrollId The UUID of the external payroll
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -993,6 +1049,7 @@ public class ExternalPayrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-external-payroll-calculate-taxes", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1004,6 +1061,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-external-payroll-calculate-taxes",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1013,6 +1071,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-external-payroll-calculate-taxes",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1022,6 +1081,7 @@ public class ExternalPayrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-external-payroll-calculate-taxes",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1083,9 +1143,11 @@ public class ExternalPayrolls implements
 
     /**
      * Get tax liabilities
-     * Get tax liabilities from aggregate external payrolls for a company.
      * 
-     * scope: `external_payrolls:read`
+     * <p>Get tax liabilities from aggregate external payrolls for a company.
+     * 
+     * <p>scope: `external_payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1TaxLiabilitiesRequestBuilder listTaxLiabilities() {
@@ -1094,9 +1156,11 @@ public class ExternalPayrolls implements
 
     /**
      * Get tax liabilities
-     * Get tax liabilities from aggregate external payrolls for a company.
      * 
-     * scope: `external_payrolls:read`
+     * <p>Get tax liabilities from aggregate external payrolls for a company.
+     * 
+     * <p>scope: `external_payrolls:read`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1108,11 +1172,13 @@ public class ExternalPayrolls implements
     
     /**
      * Get tax liabilities
-     * Get tax liabilities from aggregate external payrolls for a company.
      * 
-     * scope: `external_payrolls:read`
+     * <p>Get tax liabilities from aggregate external payrolls for a company.
+     * 
+     * <p>scope: `external_payrolls:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1147,6 +1213,7 @@ public class ExternalPayrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-tax-liabilities", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1158,6 +1225,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-tax-liabilities",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1167,6 +1235,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-tax-liabilities",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1176,6 +1245,7 @@ public class ExternalPayrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-tax-liabilities",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1237,9 +1307,11 @@ public class ExternalPayrolls implements
 
     /**
      * Update tax liabilities
-     * Update tax liabilities for a company.
      * 
-     * scope: `external_payrolls:write`
+     * <p>Update tax liabilities for a company.
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @return The call builder
      */
     public PutV1TaxLiabilitiesRequestBuilder updateTaxLiabilities() {
@@ -1248,11 +1320,13 @@ public class ExternalPayrolls implements
 
     /**
      * Update tax liabilities
-     * Update tax liabilities for a company.
      * 
-     * scope: `external_payrolls:write`
+     * <p>Update tax liabilities for a company.
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1264,12 +1338,14 @@ public class ExternalPayrolls implements
     
     /**
      * Update tax liabilities
-     * Update tax liabilities for a company.
      * 
-     * scope: `external_payrolls:write`
+     * <p>Update tax liabilities for a company.
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1319,6 +1395,7 @@ public class ExternalPayrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-tax-liabilities", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1330,6 +1407,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-tax-liabilities",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1339,6 +1417,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-tax-liabilities",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1348,6 +1427,7 @@ public class ExternalPayrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-tax-liabilities",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1423,9 +1503,11 @@ public class ExternalPayrolls implements
 
     /**
      * Finalize tax liabilities options and convert into processed payrolls
-     * Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
      * 
-     * scope: `external_payrolls:write`
+     * <p>Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @return The call builder
      */
     public PutV1TaxLiabilitiesFinishRequestBuilder finalizeTaxLiabilities() {
@@ -1434,9 +1516,11 @@ public class ExternalPayrolls implements
 
     /**
      * Finalize tax liabilities options and convert into processed payrolls
-     * Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
      * 
-     * scope: `external_payrolls:write`
+     * <p>Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1448,11 +1532,13 @@ public class ExternalPayrolls implements
     
     /**
      * Finalize tax liabilities options and convert into processed payrolls
-     * Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
      * 
-     * scope: `external_payrolls:write`
+     * <p>Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
+     * 
+     * <p>scope: `external_payrolls:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1487,6 +1573,7 @@ public class ExternalPayrolls implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-tax-liabilities-finish", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1498,6 +1585,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-tax-liabilities-finish",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1507,6 +1595,7 @@ public class ExternalPayrolls implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-tax-liabilities-finish",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1516,6 +1605,7 @@ public class ExternalPayrolls implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-tax-liabilities-finish",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

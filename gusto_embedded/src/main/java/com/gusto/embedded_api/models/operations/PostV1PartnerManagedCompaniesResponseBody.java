@@ -16,7 +16,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PostV1PartnerManagedCompaniesResponseBody - Object returned when creating a partner managed company
+ * PostV1PartnerManagedCompaniesResponseBody
+ * 
+ * <p>Object returned when creating a partner managed company
  */
 
 public class PostV1PartnerManagedCompaniesResponseBody {

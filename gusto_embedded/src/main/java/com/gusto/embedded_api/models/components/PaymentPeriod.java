@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PaymentPeriod - How often the agency collects the withholding amount. e.g. $500 monthly -&gt; `Monthly`.
+ * PaymentPeriod
+ * 
+ * <p>How often the agency collects the withholding amount. e.g. $500 monthly -&gt; `Monthly`.
  */
 public enum PaymentPeriod {
     EVERY_WEEK("Every week"),

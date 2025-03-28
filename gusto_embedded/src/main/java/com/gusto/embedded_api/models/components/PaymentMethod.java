@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PaymentMethod - The employee's payment method
+ * PaymentMethod
+ * 
+ * <p>The employee's payment method
  */
 public enum PaymentMethod {
     DIRECT_DEPOSIT("Direct Deposit"),

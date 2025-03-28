@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TaxRequirementMetadataValidationType - Describes the type of tax_rate validation rule
+ * TaxRequirementMetadataValidationType
+ * 
+ * <p>Describes the type of tax_rate validation rule
  */
 public enum TaxRequirementMetadataValidationType {
     ONE_OF("one_of"),

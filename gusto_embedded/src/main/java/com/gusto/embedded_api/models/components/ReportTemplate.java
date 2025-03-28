@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ReportTemplate - Example response
+ * ReportTemplate
+ * 
+ * <p>Example response
  */
 
 public class ReportTemplate {

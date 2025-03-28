@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * AccruingTimeOffHour - The representation of an unprocessed termination pay period.
+ * AccruingTimeOffHour
+ * 
+ * <p>The representation of an unprocessed termination pay period.
  */
 
 public class AccruingTimeOffHour {

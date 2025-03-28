@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EarningType - Example response
+ * EarningType
+ * 
+ * <p>Example response
  */
 
 public class EarningType {

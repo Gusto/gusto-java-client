@@ -17,7 +17,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PostCompaniesCompanyUuidTimeOffPoliciesRequestBody - Requires a policy name, a policy_type, and an accrual_method
+ * PostCompaniesCompanyUuidTimeOffPoliciesRequestBody
+ * 
+ * <p>Requires a policy name, a policy_type, and an accrual_method
  */
 
 public class PostCompaniesCompanyUuidTimeOffPoliciesRequestBody {

@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ContractorOnboardingStatus - The representation of an contractor's onboarding status.
+ * ContractorOnboardingStatus
+ * 
+ * <p>The representation of an contractor's onboarding status.
  */
 
 public class ContractorOnboardingStatus {

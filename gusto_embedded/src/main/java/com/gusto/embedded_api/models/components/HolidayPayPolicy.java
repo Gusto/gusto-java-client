@@ -13,7 +13,9 @@ import java.lang.String;
 import java.util.List;
 import java.util.Objects;
 /**
- * HolidayPayPolicy - Representation of a Holiday Pay Policy
+ * HolidayPayPolicy
+ * 
+ * <p>Representation of a Holiday Pay Policy
  */
 
 public class HolidayPayPolicy {

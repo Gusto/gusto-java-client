@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PostCompaniesCompanyUuidReportsEmploymentStatus - Employee employment status to filter by
+ * PostCompaniesCompanyUuidReportsEmploymentStatus
+ * 
+ * <p>Employee employment status to filter by
  */
 public enum PostCompaniesCompanyUuidReportsEmploymentStatus {
     ACTIVE_FULL_TIME("active_full_time"),

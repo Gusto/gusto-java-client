@@ -39,13 +39,15 @@ public class Notifications implements
 
     /**
      * Get a notification's details
-     * Upon receiving a notification webhook event, use this endpoint to fetch the notification's details. The notification details include basic suggested content that can help you build notifications in your platform.
      * 
-     * Note: partners are responsible for the delivery and any custom state management of notifications in their application. Refer to our [partner notification guide](https://docs.gusto.com/embedded-payroll/docs/partner-notifications) for more details.
+     * <p>Upon receiving a notification webhook event, use this endpoint to fetch the notification's details. The notification details include basic suggested content that can help you build notifications in your platform.
      * 
-     * If the notification UUID is not found, the response will be 404 Not Found. If the notification's supporting data is no longer valid, the response will be 422 Unprocessable Entity.
+     * <p>Note: partners are responsible for the delivery and any custom state management of notifications in their application. Refer to our [partner notification guide](https://docs.gusto.com/embedded-payroll/docs/partner-notifications) for more details.
      * 
-     * scope: `notifications:read`
+     * <p>If the notification UUID is not found, the response will be 404 Not Found. If the notification's supporting data is no longer valid, the response will be 422 Unprocessable Entity.
+     * 
+     * <p>scope: `notifications:read`
+     * 
      * @return The call builder
      */
     public GetNotificationsNotificationUuidRequestBuilder getDetails() {
@@ -54,13 +56,15 @@ public class Notifications implements
 
     /**
      * Get a notification's details
-     * Upon receiving a notification webhook event, use this endpoint to fetch the notification's details. The notification details include basic suggested content that can help you build notifications in your platform.
      * 
-     * Note: partners are responsible for the delivery and any custom state management of notifications in their application. Refer to our [partner notification guide](https://docs.gusto.com/embedded-payroll/docs/partner-notifications) for more details.
+     * <p>Upon receiving a notification webhook event, use this endpoint to fetch the notification's details. The notification details include basic suggested content that can help you build notifications in your platform.
      * 
-     * If the notification UUID is not found, the response will be 404 Not Found. If the notification's supporting data is no longer valid, the response will be 422 Unprocessable Entity.
+     * <p>Note: partners are responsible for the delivery and any custom state management of notifications in their application. Refer to our [partner notification guide](https://docs.gusto.com/embedded-payroll/docs/partner-notifications) for more details.
      * 
-     * scope: `notifications:read`
+     * <p>If the notification UUID is not found, the response will be 404 Not Found. If the notification's supporting data is no longer valid, the response will be 422 Unprocessable Entity.
+     * 
+     * <p>scope: `notifications:read`
+     * 
      * @param notificationUuid The notification entity_uuid
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -72,15 +76,17 @@ public class Notifications implements
     
     /**
      * Get a notification's details
-     * Upon receiving a notification webhook event, use this endpoint to fetch the notification's details. The notification details include basic suggested content that can help you build notifications in your platform.
      * 
-     * Note: partners are responsible for the delivery and any custom state management of notifications in their application. Refer to our [partner notification guide](https://docs.gusto.com/embedded-payroll/docs/partner-notifications) for more details.
+     * <p>Upon receiving a notification webhook event, use this endpoint to fetch the notification's details. The notification details include basic suggested content that can help you build notifications in your platform.
      * 
-     * If the notification UUID is not found, the response will be 404 Not Found. If the notification's supporting data is no longer valid, the response will be 422 Unprocessable Entity.
+     * <p>Note: partners are responsible for the delivery and any custom state management of notifications in their application. Refer to our [partner notification guide](https://docs.gusto.com/embedded-payroll/docs/partner-notifications) for more details.
      * 
-     * scope: `notifications:read`
+     * <p>If the notification UUID is not found, the response will be 404 Not Found. If the notification's supporting data is no longer valid, the response will be 422 Unprocessable Entity.
+     * 
+     * <p>scope: `notifications:read`
+     * 
      * @param notificationUuid The notification entity_uuid
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -115,6 +121,7 @@ public class Notifications implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-notifications-notification_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -126,6 +133,7 @@ public class Notifications implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-notifications-notification_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -135,6 +143,7 @@ public class Notifications implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-notifications-notification_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -144,6 +153,7 @@ public class Notifications implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-notifications-notification_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

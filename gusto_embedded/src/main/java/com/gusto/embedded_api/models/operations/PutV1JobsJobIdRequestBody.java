@@ -17,7 +17,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * PutV1JobsJobIdRequestBody - Update a job.
+ * PutV1JobsJobIdRequestBody
+ * 
+ * <p>Update a job.
  */
 
 public class PutV1JobsJobIdRequestBody {

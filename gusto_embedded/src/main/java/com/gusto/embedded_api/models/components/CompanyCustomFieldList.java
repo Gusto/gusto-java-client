@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CompanyCustomFieldList - Example response
+ * CompanyCustomFieldList
+ * 
+ * <p>Example response
  */
 
 public class CompanyCustomFieldList {

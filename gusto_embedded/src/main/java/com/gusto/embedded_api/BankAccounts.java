@@ -58,18 +58,20 @@ public class BankAccounts implements
 
     /**
      * Create a company bank account
-     * This endpoint creates a new company bank account.
      * 
-     * Upon being created, two verification deposits are automatically sent to the bank account, and the bank account's verification_status is 'awaiting_deposits'. 
+     * <p>This endpoint creates a new company bank account.
      * 
-     * When the deposits are successfully transferred, the verification_status changes to 'ready_for_verification', at which point the verify endpoint can be used to verify the bank account.
+     * <p>Upon being created, two verification deposits are automatically sent to the bank account, and the bank account's verification_status is 'awaiting_deposits'. 
+     * 
+     * <p>When the deposits are successfully transferred, the verification_status changes to 'ready_for_verification', at which point the verify endpoint can be used to verify the bank account.
      * After successful verification, the bank account's verification_status is 'verified'.
      * 
-     * scope: `company_bank_accounts:write`
+     * <p>scope: `company_bank_accounts:write`
      * 
-     * &gt; 🚧 Warning
+     * <p>&gt; 🚧 Warning
      * &gt;
      * &gt; If a default bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdBankAccountsRequestBuilder create() {
@@ -78,20 +80,22 @@ public class BankAccounts implements
 
     /**
      * Create a company bank account
-     * This endpoint creates a new company bank account.
      * 
-     * Upon being created, two verification deposits are automatically sent to the bank account, and the bank account's verification_status is 'awaiting_deposits'. 
+     * <p>This endpoint creates a new company bank account.
      * 
-     * When the deposits are successfully transferred, the verification_status changes to 'ready_for_verification', at which point the verify endpoint can be used to verify the bank account.
+     * <p>Upon being created, two verification deposits are automatically sent to the bank account, and the bank account's verification_status is 'awaiting_deposits'. 
+     * 
+     * <p>When the deposits are successfully transferred, the verification_status changes to 'ready_for_verification', at which point the verify endpoint can be used to verify the bank account.
      * After successful verification, the bank account's verification_status is 'verified'.
      * 
-     * scope: `company_bank_accounts:write`
+     * <p>scope: `company_bank_accounts:write`
      * 
-     * &gt; 🚧 Warning
+     * <p>&gt; 🚧 Warning
      * &gt;
      * &gt; If a default bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -103,21 +107,23 @@ public class BankAccounts implements
     
     /**
      * Create a company bank account
-     * This endpoint creates a new company bank account.
      * 
-     * Upon being created, two verification deposits are automatically sent to the bank account, and the bank account's verification_status is 'awaiting_deposits'. 
+     * <p>This endpoint creates a new company bank account.
      * 
-     * When the deposits are successfully transferred, the verification_status changes to 'ready_for_verification', at which point the verify endpoint can be used to verify the bank account.
+     * <p>Upon being created, two verification deposits are automatically sent to the bank account, and the bank account's verification_status is 'awaiting_deposits'. 
+     * 
+     * <p>When the deposits are successfully transferred, the verification_status changes to 'ready_for_verification', at which point the verify endpoint can be used to verify the bank account.
      * After successful verification, the bank account's verification_status is 'verified'.
      * 
-     * scope: `company_bank_accounts:write`
+     * <p>scope: `company_bank_accounts:write`
      * 
-     * &gt; 🚧 Warning
+     * <p>&gt; 🚧 Warning
      * &gt;
      * &gt; If a default bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -167,6 +173,7 @@ public class BankAccounts implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_id-bank-accounts", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -178,6 +185,7 @@ public class BankAccounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-bank-accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -187,6 +195,7 @@ public class BankAccounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-bank-accounts",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -196,6 +205,7 @@ public class BankAccounts implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-bank-accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -271,9 +281,11 @@ public class BankAccounts implements
 
     /**
      * Get all company bank accounts
-     * Returns company bank accounts. Currently, we only support a single default bank account per company.
      * 
-     * scope: `company_bank_accounts:read`
+     * <p>Returns company bank accounts. Currently, we only support a single default bank account per company.
+     * 
+     * <p>scope: `company_bank_accounts:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdBankAccountsRequestBuilder get() {
@@ -282,9 +294,11 @@ public class BankAccounts implements
 
     /**
      * Get all company bank accounts
-     * Returns company bank accounts. Currently, we only support a single default bank account per company.
      * 
-     * scope: `company_bank_accounts:read`
+     * <p>Returns company bank accounts. Currently, we only support a single default bank account per company.
+     * 
+     * <p>scope: `company_bank_accounts:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -296,11 +310,13 @@ public class BankAccounts implements
     
     /**
      * Get all company bank accounts
-     * Returns company bank accounts. Currently, we only support a single default bank account per company.
      * 
-     * scope: `company_bank_accounts:read`
+     * <p>Returns company bank accounts. Currently, we only support a single default bank account per company.
+     * 
+     * <p>scope: `company_bank_accounts:read`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -335,6 +351,7 @@ public class BankAccounts implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-bank-accounts", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -346,6 +363,7 @@ public class BankAccounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-bank-accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -355,6 +373,7 @@ public class BankAccounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-bank-accounts",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -364,6 +383,7 @@ public class BankAccounts implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-bank-accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -425,22 +445,24 @@ public class BankAccounts implements
 
     /**
      * Verify a company bank account
-     * Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note that the order of the two deposits specified in request parameters does not matter. There's a maximum of 5 verification attempts, after which we will automatically initiate a new set of micro-deposits and require the bank account to be verified with the new micro-deposits.
      * 
-     * ### Bank account verification in demo
+     * <p>Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note that the order of the two deposits specified in request parameters does not matter. There's a maximum of 5 verification attempts, after which we will automatically initiate a new set of micro-deposits and require the bank account to be verified with the new micro-deposits.
      * 
-     * We provide the endpoint `POST '/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits'` to facilitate bank account verification in the demo environment. This endpoint simulates the micro-deposits transfer and returns them in the response. You can call this endpoint as many times as you wish to retrieve the values of the two micro deposits.
+     * <p>### Bank account verification in demo
      * 
-     * ```
+     * <p>We provide the endpoint `POST '/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits'` to facilitate bank account verification in the demo environment. This endpoint simulates the micro-deposits transfer and returns them in the response. You can call this endpoint as many times as you wish to retrieve the values of the two micro deposits.
+     * 
+     * <p>```
      *   POST '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/bank_accounts/ade55e57-4800-4059-9ecd-fa29cfeb6dd2/send_test_deposits'
      * 
-     *   {
+     * <p>  {
      *     "deposit_1": 0.02,
      *     "deposit_2": 0.42
      *   }
      * ```
      * 
-     * scope: `company_bank_accounts:write`
+     * <p>scope: `company_bank_accounts:write`
+     * 
      * @return The call builder
      */
     public PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder verify() {
@@ -449,25 +471,27 @@ public class BankAccounts implements
 
     /**
      * Verify a company bank account
-     * Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note that the order of the two deposits specified in request parameters does not matter. There's a maximum of 5 verification attempts, after which we will automatically initiate a new set of micro-deposits and require the bank account to be verified with the new micro-deposits.
      * 
-     * ### Bank account verification in demo
+     * <p>Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note that the order of the two deposits specified in request parameters does not matter. There's a maximum of 5 verification attempts, after which we will automatically initiate a new set of micro-deposits and require the bank account to be verified with the new micro-deposits.
      * 
-     * We provide the endpoint `POST '/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits'` to facilitate bank account verification in the demo environment. This endpoint simulates the micro-deposits transfer and returns them in the response. You can call this endpoint as many times as you wish to retrieve the values of the two micro deposits.
+     * <p>### Bank account verification in demo
      * 
-     * ```
+     * <p>We provide the endpoint `POST '/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits'` to facilitate bank account verification in the demo environment. This endpoint simulates the micro-deposits transfer and returns them in the response. You can call this endpoint as many times as you wish to retrieve the values of the two micro deposits.
+     * 
+     * <p>```
      *   POST '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/bank_accounts/ade55e57-4800-4059-9ecd-fa29cfeb6dd2/send_test_deposits'
      * 
-     *   {
+     * <p>  {
      *     "deposit_1": 0.02,
      *     "deposit_2": 0.42
      *   }
      * ```
      * 
-     * scope: `company_bank_accounts:write`
+     * <p>scope: `company_bank_accounts:write`
+     * 
      * @param bankAccountUuid The UUID of the bank account
      * @param companyId The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -480,26 +504,28 @@ public class BankAccounts implements
     
     /**
      * Verify a company bank account
-     * Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note that the order of the two deposits specified in request parameters does not matter. There's a maximum of 5 verification attempts, after which we will automatically initiate a new set of micro-deposits and require the bank account to be verified with the new micro-deposits.
      * 
-     * ### Bank account verification in demo
+     * <p>Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note that the order of the two deposits specified in request parameters does not matter. There's a maximum of 5 verification attempts, after which we will automatically initiate a new set of micro-deposits and require the bank account to be verified with the new micro-deposits.
      * 
-     * We provide the endpoint `POST '/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits'` to facilitate bank account verification in the demo environment. This endpoint simulates the micro-deposits transfer and returns them in the response. You can call this endpoint as many times as you wish to retrieve the values of the two micro deposits.
+     * <p>### Bank account verification in demo
      * 
-     * ```
+     * <p>We provide the endpoint `POST '/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits'` to facilitate bank account verification in the demo environment. This endpoint simulates the micro-deposits transfer and returns them in the response. You can call this endpoint as many times as you wish to retrieve the values of the two micro deposits.
+     * 
+     * <p>```
      *   POST '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/bank_accounts/ade55e57-4800-4059-9ecd-fa29cfeb6dd2/send_test_deposits'
      * 
-     *   {
+     * <p>  {
      *     "deposit_1": 0.02,
      *     "deposit_2": 0.42
      *   }
      * ```
      * 
-     * scope: `company_bank_accounts:write`
+     * <p>scope: `company_bank_accounts:write`
+     * 
      * @param bankAccountUuid The UUID of the bank account
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -551,6 +577,7 @@ public class BankAccounts implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-companies-company_id-bank-accounts-verify", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -562,6 +589,7 @@ public class BankAccounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-bank-accounts-verify",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -571,6 +599,7 @@ public class BankAccounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-bank-accounts-verify",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -580,6 +609,7 @@ public class BankAccounts implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-bank-accounts-verify",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -655,16 +685,18 @@ public class BankAccounts implements
 
     /**
      * Create a bank account from a plaid processor token
-     * This endpoint creates a new **verified** bank account by using a plaid processor token to retrieve its information.
      * 
-     * scope: `plaid_processor:write`
+     * <p>This endpoint creates a new **verified** bank account by using a plaid processor token to retrieve its information.
      * 
-     * &gt; 📘
+     * <p>scope: `plaid_processor:write`
+     * 
+     * <p>&gt; 📘
      * &gt; To create a token please use the [plaid api](https://plaid.com/docs/api/processors/#processortokencreate) and select "gusto" as processor.
      * 
-     * &gt; 🚧 Warning - Company Bank Accounts
+     * <p>&gt; 🚧 Warning - Company Bank Accounts
      * &gt;
      * &gt; If a default company bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
+     * 
      * @return The call builder
      */
     public PostV1PlaidProcessorTokenRequestBuilder createFromPlaidToken() {
@@ -673,17 +705,19 @@ public class BankAccounts implements
 
     /**
      * Create a bank account from a plaid processor token
-     * This endpoint creates a new **verified** bank account by using a plaid processor token to retrieve its information.
      * 
-     * scope: `plaid_processor:write`
+     * <p>This endpoint creates a new **verified** bank account by using a plaid processor token to retrieve its information.
      * 
-     * &gt; 📘
+     * <p>scope: `plaid_processor:write`
+     * 
+     * <p>&gt; 📘
      * &gt; To create a token please use the [plaid api](https://plaid.com/docs/api/processors/#processortokencreate) and select "gusto" as processor.
      * 
-     * &gt; 🚧 Warning - Company Bank Accounts
+     * <p>&gt; 🚧 Warning - Company Bank Accounts
      * &gt;
      * &gt; If a default company bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
-     * @param requestBody
+     * 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -694,18 +728,20 @@ public class BankAccounts implements
     
     /**
      * Create a bank account from a plaid processor token
-     * This endpoint creates a new **verified** bank account by using a plaid processor token to retrieve its information.
      * 
-     * scope: `plaid_processor:write`
+     * <p>This endpoint creates a new **verified** bank account by using a plaid processor token to retrieve its information.
      * 
-     * &gt; 📘
+     * <p>scope: `plaid_processor:write`
+     * 
+     * <p>&gt; 📘
      * &gt; To create a token please use the [plaid api](https://plaid.com/docs/api/processors/#processortokencreate) and select "gusto" as processor.
      * 
-     * &gt; 🚧 Warning - Company Bank Accounts
+     * <p>&gt; 🚧 Warning - Company Bank Accounts
      * &gt;
      * &gt; If a default company bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * 
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -751,6 +787,7 @@ public class BankAccounts implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-plaid-processor_token", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -762,6 +799,7 @@ public class BankAccounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-plaid-processor_token",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -771,6 +809,7 @@ public class BankAccounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-plaid-processor_token",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -780,6 +819,7 @@ public class BankAccounts implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-plaid-processor_token",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

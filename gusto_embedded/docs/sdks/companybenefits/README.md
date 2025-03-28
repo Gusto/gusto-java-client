@@ -47,7 +47,7 @@ public class Application {
 
         PostV1CompaniesCompanyIdCompanyBenefitsResponse res = sdk.companyBenefits().create()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyIdCompanyBenefitsRequestBody.builder()
                     .description("yuck vice between gee ugh ha")
                     .build())
@@ -111,7 +111,7 @@ public class Application {
                 .companyId("<id>")
                 .active(false)
                 .enrollmentCount(false)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.companyBenefitList().isPresent()) {
@@ -171,7 +171,7 @@ public class Application {
         GetV1CompanyBenefitsCompanyBenefitIdResponse res = sdk.companyBenefits().get()
                 .companyBenefitId("<id>")
                 .withEmployeeBenefits(false)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.companyBenefitWithEmployeeBenefits().isPresent()) {
@@ -229,7 +229,7 @@ public class Application {
 
         PutV1CompanyBenefitsCompanyBenefitIdResponse res = sdk.companyBenefits().update()
                 .companyBenefitId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompanyBenefitsCompanyBenefitIdRequestBody.builder()
                     .version("98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872")
                     .active(false)
@@ -292,7 +292,7 @@ public class Application {
 
         DeleteV1CompanyBenefitsCompanyBenefitIdResponse res = sdk.companyBenefits().delete()
                 .companyBenefitId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -345,7 +345,7 @@ public class Application {
             .build();
 
         GetV1BenefitsResponse res = sdk.companyBenefits().getAll()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.supportedBenefitList().isPresent()) {
@@ -399,7 +399,7 @@ public class Application {
 
         GetV1BenefitsBenefitIdResponse res = sdk.companyBenefits().getSupported()
                 .benefitId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.supportedBenefit().isPresent()) {
@@ -517,7 +517,7 @@ public class Application {
                 .companyBenefitId("<id>")
                 .page(983681L)
                 .per(707622L)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeeBenefitList().isPresent()) {
@@ -580,7 +580,7 @@ public class Application {
 
         PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse res = sdk.companyBenefits().updateEmployeeBenefits()
                 .companyBenefitId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody.builder()
                     .employeeBenefits(List.of(
                         EmployeeBenefitForCompanyBenefit.builder()
@@ -642,7 +642,7 @@ public class Application {
 
         GetV1BenefitsBenefitsIdRequirementsResponse res = sdk.companyBenefits().getRequirements()
                 .benefitId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.benefitTypeRequirements().isPresent()) {

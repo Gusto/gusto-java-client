@@ -51,9 +51,11 @@ public class WireInRequests implements
 
     /**
      * Get a single Wire In Request
-     * Fetch a Wire In Request.
      * 
-     * scope: `payrolls:read`
+     * <p>Fetch a Wire In Request.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetWireInRequestsWireInRequestUuidRequestBuilder get() {
@@ -62,9 +64,11 @@ public class WireInRequests implements
 
     /**
      * Get a single Wire In Request
-     * Fetch a Wire In Request.
      * 
-     * scope: `payrolls:read`
+     * <p>Fetch a Wire In Request.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param wireInRequestUuid The UUID of the Wire In Request
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -76,11 +80,13 @@ public class WireInRequests implements
     
     /**
      * Get a single Wire In Request
-     * Fetch a Wire In Request.
      * 
-     * scope: `payrolls:read`
+     * <p>Fetch a Wire In Request.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param wireInRequestUuid The UUID of the Wire In Request
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -115,6 +121,7 @@ public class WireInRequests implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-wire_in_requests-wire_in_request_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -126,6 +133,7 @@ public class WireInRequests implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-wire_in_requests-wire_in_request_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -135,6 +143,7 @@ public class WireInRequests implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-wire_in_requests-wire_in_request_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -144,6 +153,7 @@ public class WireInRequests implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-wire_in_requests-wire_in_request_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -205,9 +215,11 @@ public class WireInRequests implements
 
     /**
      * Submit a wire in request
-     * Submit a wire in request for a payment
      * 
-     * scope: `payrolls:run`
+     * <p>Submit a wire in request for a payment
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @return The call builder
      */
     public PutWireInRequestsWireInRequestUuidRequestBuilder submit() {
@@ -216,11 +228,13 @@ public class WireInRequests implements
 
     /**
      * Submit a wire in request
-     * Submit a wire in request for a payment
      * 
-     * scope: `payrolls:run`
+     * <p>Submit a wire in request for a payment
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param wireInRequestUuid The UUID of the Wire In Request
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -232,12 +246,14 @@ public class WireInRequests implements
     
     /**
      * Submit a wire in request
-     * Submit a wire in request for a payment
      * 
-     * scope: `payrolls:run`
+     * <p>Submit a wire in request for a payment
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param wireInRequestUuid The UUID of the Wire In Request
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -287,6 +303,7 @@ public class WireInRequests implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-wire_in_requests-wire_in_request_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -298,6 +315,7 @@ public class WireInRequests implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-wire_in_requests-wire_in_request_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -307,6 +325,7 @@ public class WireInRequests implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-wire_in_requests-wire_in_request_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -316,6 +335,7 @@ public class WireInRequests implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-wire_in_requests-wire_in_request_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -391,9 +411,11 @@ public class WireInRequests implements
 
     /**
      * Get all Wire In Requests for a company
-     * Fetches all Wire In Requests for a company.
      * 
-     * scope: `payrolls:read`
+     * <p>Fetches all Wire In Requests for a company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder list() {
@@ -402,9 +424,11 @@ public class WireInRequests implements
 
     /**
      * Get all Wire In Requests for a company
-     * Fetches all Wire In Requests for a company.
      * 
-     * scope: `payrolls:read`
+     * <p>Fetches all Wire In Requests for a company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -416,11 +440,13 @@ public class WireInRequests implements
     
     /**
      * Get all Wire In Requests for a company
-     * Fetches all Wire In Requests for a company.
      * 
-     * scope: `payrolls:read`
+     * <p>Fetches all Wire In Requests for a company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -455,6 +481,7 @@ public class WireInRequests implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-companies-company_uuid-wire_in_request_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -466,6 +493,7 @@ public class WireInRequests implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-wire_in_request_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -475,6 +503,7 @@ public class WireInRequests implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-wire_in_request_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -484,6 +513,7 @@ public class WireInRequests implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-wire_in_request_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

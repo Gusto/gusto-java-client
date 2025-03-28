@@ -21,7 +21,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * EmployeeBenefit - The representation of an employee benefit.
+ * EmployeeBenefit
+ * 
+ * <p>The representation of an employee benefit.
  */
 
 public class EmployeeBenefit {
@@ -85,9 +87,9 @@ public class EmployeeBenefit {
     /**
      * Some benefits require additional information to determine their limit.
      * 
-     * `Family` and `Individual` are applicable to HSA benefit.
+     * <p>`Family` and `Individual` are applicable to HSA benefit.
      * 
-     * `Joint Filing or Single` and `Married and Filing Separately` are applicable to Dependent Care FSA benefit.
+     * <p>`Joint Filing or Single` and `Married and Filing Separately` are applicable to Dependent Care FSA benefit.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("limit_option")
@@ -130,6 +132,7 @@ public class EmployeeBenefit {
 
     /**
      * The amount to be paid, per pay period, by the company. This field will not appear for tiered contribution types.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -139,6 +142,7 @@ public class EmployeeBenefit {
 
     /**
      * Whether the company_contribution value should be treated as a percentage to be added to each payroll. This field will not appear for tiered contribution types.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -300,9 +304,9 @@ public class EmployeeBenefit {
     /**
      * Some benefits require additional information to determine their limit.
      * 
-     * `Family` and `Individual` are applicable to HSA benefit.
+     * <p>`Family` and `Individual` are applicable to HSA benefit.
      * 
-     * `Joint Filing or Single` and `Married and Filing Separately` are applicable to Dependent Care FSA benefit.
+     * <p>`Joint Filing or Single` and `Married and Filing Separately` are applicable to Dependent Care FSA benefit.
      */
     @JsonIgnore
     public JsonNullable<String> limitOption() {
@@ -352,6 +356,7 @@ public class EmployeeBenefit {
 
     /**
      * The amount to be paid, per pay period, by the company. This field will not appear for tiered contribution types.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -362,6 +367,7 @@ public class EmployeeBenefit {
 
     /**
      * Whether the company_contribution value should be treated as a percentage to be added to each payroll. This field will not appear for tiered contribution types.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -545,9 +551,9 @@ public class EmployeeBenefit {
     /**
      * Some benefits require additional information to determine their limit.
      * 
-     * `Family` and `Individual` are applicable to HSA benefit.
+     * <p>`Family` and `Individual` are applicable to HSA benefit.
      * 
-     * `Joint Filing or Single` and `Married and Filing Separately` are applicable to Dependent Care FSA benefit.
+     * <p>`Joint Filing or Single` and `Married and Filing Separately` are applicable to Dependent Care FSA benefit.
      */
     public EmployeeBenefit withLimitOption(String limitOption) {
         Utils.checkNotNull(limitOption, "limitOption");
@@ -558,9 +564,9 @@ public class EmployeeBenefit {
     /**
      * Some benefits require additional information to determine their limit.
      * 
-     * `Family` and `Individual` are applicable to HSA benefit.
+     * <p>`Family` and `Individual` are applicable to HSA benefit.
      * 
-     * `Joint Filing or Single` and `Married and Filing Separately` are applicable to Dependent Care FSA benefit.
+     * <p>`Joint Filing or Single` and `Married and Filing Separately` are applicable to Dependent Care FSA benefit.
      */
     public EmployeeBenefit withLimitOption(JsonNullable<String> limitOption) {
         Utils.checkNotNull(limitOption, "limitOption");
@@ -660,6 +666,7 @@ public class EmployeeBenefit {
 
     /**
      * The amount to be paid, per pay period, by the company. This field will not appear for tiered contribution types.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -671,6 +678,7 @@ public class EmployeeBenefit {
 
     /**
      * The amount to be paid, per pay period, by the company. This field will not appear for tiered contribution types.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -682,6 +690,7 @@ public class EmployeeBenefit {
 
     /**
      * Whether the company_contribution value should be treated as a percentage to be added to each payroll. This field will not appear for tiered contribution types.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -693,6 +702,7 @@ public class EmployeeBenefit {
 
     /**
      * Whether the company_contribution value should be treated as a percentage to be added to each payroll. This field will not appear for tiered contribution types.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -1019,9 +1029,9 @@ public class EmployeeBenefit {
         /**
          * Some benefits require additional information to determine their limit.
          * 
-         * `Family` and `Individual` are applicable to HSA benefit.
+         * <p>`Family` and `Individual` are applicable to HSA benefit.
          * 
-         * `Joint Filing or Single` and `Married and Filing Separately` are applicable to Dependent Care FSA benefit.
+         * <p>`Joint Filing or Single` and `Married and Filing Separately` are applicable to Dependent Care FSA benefit.
          */
         public Builder limitOption(String limitOption) {
             Utils.checkNotNull(limitOption, "limitOption");
@@ -1032,9 +1042,9 @@ public class EmployeeBenefit {
         /**
          * Some benefits require additional information to determine their limit.
          * 
-         * `Family` and `Individual` are applicable to HSA benefit.
+         * <p>`Family` and `Individual` are applicable to HSA benefit.
          * 
-         * `Joint Filing or Single` and `Married and Filing Separately` are applicable to Dependent Care FSA benefit.
+         * <p>`Joint Filing or Single` and `Married and Filing Separately` are applicable to Dependent Care FSA benefit.
          */
         public Builder limitOption(JsonNullable<String> limitOption) {
             Utils.checkNotNull(limitOption, "limitOption");
@@ -1134,6 +1144,7 @@ public class EmployeeBenefit {
 
         /**
          * The amount to be paid, per pay period, by the company. This field will not appear for tiered contribution types.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated
@@ -1145,6 +1156,7 @@ public class EmployeeBenefit {
 
         /**
          * The amount to be paid, per pay period, by the company. This field will not appear for tiered contribution types.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated
@@ -1156,6 +1168,7 @@ public class EmployeeBenefit {
 
         /**
          * Whether the company_contribution value should be treated as a percentage to be added to each payroll. This field will not appear for tiered contribution types.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated
@@ -1167,6 +1180,7 @@ public class EmployeeBenefit {
 
         /**
          * Whether the company_contribution value should be treated as a percentage to be added to each payroll. This field will not appear for tiered contribution types.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated

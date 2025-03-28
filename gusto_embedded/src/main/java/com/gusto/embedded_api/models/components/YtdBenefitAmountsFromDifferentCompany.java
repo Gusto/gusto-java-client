@@ -13,7 +13,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * YtdBenefitAmountsFromDifferentCompany - Ytd Benefit Amounts From Different Company
+ * YtdBenefitAmountsFromDifferentCompany
+ * 
+ * <p>Ytd Benefit Amounts From Different Company
  */
 
 public class YtdBenefitAmountsFromDifferentCompany {

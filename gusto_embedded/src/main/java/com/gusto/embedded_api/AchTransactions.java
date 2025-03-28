@@ -37,9 +37,11 @@ public class AchTransactions implements
 
     /**
      * Get all ACH transactions for a company
-     * Fetches all ACH transactions for a company.
      * 
-     * scope: `ach_transactions:read`
+     * <p>Fetches all ACH transactions for a company.
+     * 
+     * <p>scope: `ach_transactions:read`
+     * 
      * @return The call builder
      */
     public GetAchTransactionsRequestBuilder getAll() {
@@ -48,9 +50,11 @@ public class AchTransactions implements
 
     /**
      * Get all ACH transactions for a company
-     * Fetches all ACH transactions for a company.
      * 
-     * scope: `ach_transactions:read`
+     * <p>Fetches all ACH transactions for a company.
+     * 
+     * <p>scope: `ach_transactions:read`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -83,6 +87,7 @@ public class AchTransactions implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-ach-transactions", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -94,6 +99,7 @@ public class AchTransactions implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-ach-transactions",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -103,6 +109,7 @@ public class AchTransactions implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-ach-transactions",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -112,6 +119,7 @@ public class AchTransactions implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-ach-transactions",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

@@ -47,7 +47,9 @@ public class Introspection implements
 
     /**
      * Get info about the current access token
-     * Returns scope and resource information associated with the current access token.
+     * 
+     * <p>Returns scope and resource information associated with the current access token.
+     * 
      * @return The call builder
      */
     public GetV1TokenInfoRequestBuilder getInfo() {
@@ -56,7 +58,9 @@ public class Introspection implements
 
     /**
      * Get info about the current access token
-     * Returns scope and resource information associated with the current access token.
+     * 
+     * <p>Returns scope and resource information associated with the current access token.
+     * 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -66,8 +70,10 @@ public class Introspection implements
     
     /**
      * Get info about the current access token
-     * Returns scope and resource information associated with the current access token.
-     * @param xGustoAPIVersion
+     * 
+     * <p>Returns scope and resource information associated with the current access token.
+     * 
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -98,6 +104,7 @@ public class Introspection implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-token-info", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -109,6 +116,7 @@ public class Introspection implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-token-info",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -118,6 +126,7 @@ public class Introspection implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-token-info",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -127,6 +136,7 @@ public class Introspection implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-token-info",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -188,11 +198,13 @@ public class Introspection implements
 
     /**
      * Refresh access token
-     * Exchange a refresh token for a new access token.
      * 
-     * The previous `refresh_token` will be revoked on the first usage of the new `access_token`.
+     * <p>Exchange a refresh token for a new access token.
      * 
-     * The `expires_in` value is provided in seconds from when the `access_token` was generated.
+     * <p>The previous `refresh_token` will be revoked on the first usage of the new `access_token`.
+     * 
+     * <p>The `expires_in` value is provided in seconds from when the `access_token` was generated.
+     * 
      * @return The call builder
      */
     public RefreshAccessTokenRequestBuilder refreshToken() {
@@ -201,12 +213,14 @@ public class Introspection implements
 
     /**
      * Refresh access token
-     * Exchange a refresh token for a new access token.
      * 
-     * The previous `refresh_token` will be revoked on the first usage of the new `access_token`.
+     * <p>Exchange a refresh token for a new access token.
      * 
-     * The `expires_in` value is provided in seconds from when the `access_token` was generated.
-     * @param requestBody
+     * <p>The previous `refresh_token` will be revoked on the first usage of the new `access_token`.
+     * 
+     * <p>The `expires_in` value is provided in seconds from when the `access_token` was generated.
+     * 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -217,13 +231,15 @@ public class Introspection implements
     
     /**
      * Refresh access token
-     * Exchange a refresh token for a new access token.
      * 
-     * The previous `refresh_token` will be revoked on the first usage of the new `access_token`.
+     * <p>Exchange a refresh token for a new access token.
      * 
-     * The `expires_in` value is provided in seconds from when the `access_token` was generated.
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * <p>The previous `refresh_token` will be revoked on the first usage of the new `access_token`.
+     * 
+     * <p>The `expires_in` value is provided in seconds from when the `access_token` was generated.
+     * 
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -269,6 +285,7 @@ public class Introspection implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "refresh-access-token", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -280,6 +297,7 @@ public class Introspection implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "refresh-access-token",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -289,6 +307,7 @@ public class Introspection implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "refresh-access-token",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -298,6 +317,7 @@ public class Introspection implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "refresh-access-token",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

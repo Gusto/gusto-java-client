@@ -18,7 +18,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * EmployeeCustomField - A custom field of an employee
+ * EmployeeCustomField
+ * 
+ * <p>A custom field of an employee
  */
 
 public class EmployeeCustomField {

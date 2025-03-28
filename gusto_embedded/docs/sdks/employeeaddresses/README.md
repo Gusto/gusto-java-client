@@ -44,7 +44,7 @@ public class Application {
 
         GetV1EmployeesEmployeeIdHomeAddressesResponse res = sdk.employeeAddresses().get()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeeAddressList().isPresent()) {
@@ -103,7 +103,7 @@ public class Application {
 
         PostV1EmployeesEmployeeIdHomeAddressesResponse res = sdk.employeeAddresses().create()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1EmployeesEmployeeIdHomeAddressesRequestBody.builder()
                     .street1("300 3rd Street")
                     .street2(JsonNullable.of(null))
@@ -169,7 +169,7 @@ public class Application {
 
         GetV1HomeAddressesHomeAddressUuidResponse res = sdk.employeeAddresses().retrieveHomeAddress()
                 .homeAddressUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeeAddress().isPresent()) {
@@ -228,7 +228,7 @@ public class Application {
 
         PutV1HomeAddressesHomeAddressUuidResponse res = sdk.employeeAddresses().update()
                 .homeAddressUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1HomeAddressesHomeAddressUuidRequestBody.builder()
                     .version("fe75bd065ff48b91c35fe8ff842f986c")
                     .street1("300 3rd Street")
@@ -294,7 +294,7 @@ public class Application {
 
         DeleteV1HomeAddressesHomeAddressUuidResponse res = sdk.employeeAddresses().delete()
                 .homeAddressUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -347,7 +347,7 @@ public class Application {
 
         GetV1EmployeesEmployeeIdWorkAddressesResponse res = sdk.employeeAddresses().getWorkAddresses()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeeWorkAddressList().isPresent()) {
@@ -403,7 +403,7 @@ public class Application {
 
         PostV1EmployeesEmployeeIdWorkAddressesResponse res = sdk.employeeAddresses().createWorkAddress()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1EmployeesEmployeeIdWorkAddressesRequestBody.builder()
                     .locationUuid("6a119be7-b4b0-4e27-aaa0-89d5f2524635")
                     .effectiveDate(LocalDate.parse("2023-05-15"))
@@ -462,7 +462,7 @@ public class Application {
 
         GetV1WorkAddressesWorkAddressUuidResponse res = sdk.employeeAddresses().retrieveWorkAddress()
                 .workAddressUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeeWorkAddress().isPresent()) {
@@ -518,7 +518,7 @@ public class Application {
 
         PutV1WorkAddressesWorkAddressUuidResponse res = sdk.employeeAddresses().updateWorkAddress()
                 .workAddressUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1WorkAddressesWorkAddressUuidRequestBody.builder()
                     .version("e6db1baa29d3df1eb307ff6a12c778da")
                     .locationUuid("6a119be7-b4b0-4e27-aaa0-89d5f2524635")
@@ -579,7 +579,7 @@ public class Application {
 
         DeleteV1WorkAddressesWorkAddressUuidResponse res = sdk.employeeAddresses().deleteWorkAddress()
                 .workAddressUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response

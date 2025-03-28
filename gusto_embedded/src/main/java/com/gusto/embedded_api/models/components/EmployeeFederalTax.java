@@ -17,7 +17,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EmployeeFederalTax - Example response
+ * EmployeeFederalTax
+ * 
+ * <p>Example response
  */
 
 public class EmployeeFederalTax {
@@ -36,8 +38,9 @@ public class EmployeeFederalTax {
      * - Exempt from withholding
      * - Married, but withhold as Single (does not apply to rev_2020_w4 form)
      */
+    @JsonInclude(Include.ALWAYS)
     @JsonProperty("filing_status")
-    private String filingStatus;
+    private Optional<String> filingStatus;
 
     /**
      * An employee can request an additional amount to be withheld from each paycheck.
@@ -83,7 +86,7 @@ public class EmployeeFederalTax {
     /**
      * *does not apply to rev_2020_w4 form*
      * 
-     * An exemption from paying a certain amount of income tax.
+     * <p>An exemption from paying a certain amount of income tax.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("federal_withholding_allowance")
@@ -99,7 +102,7 @@ public class EmployeeFederalTax {
     @JsonCreator
     public EmployeeFederalTax(
             @JsonProperty("version") String version,
-            @JsonProperty("filing_status") String filingStatus,
+            @JsonProperty("filing_status") Optional<String> filingStatus,
             @JsonProperty("extra_withholding") Optional<String> extraWithholding,
             @JsonProperty("two_jobs") Optional<Boolean> twoJobs,
             @JsonProperty("dependents_amount") Optional<String> dependentsAmount,
@@ -132,9 +135,8 @@ public class EmployeeFederalTax {
     
     public EmployeeFederalTax(
             String version,
-            String filingStatus,
             W4DataType w4DataType) {
-        this(version, filingStatus, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), w4DataType, Optional.empty(), Optional.empty());
+        this(version, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), w4DataType, Optional.empty(), Optional.empty());
     }
 
     /**
@@ -154,7 +156,7 @@ public class EmployeeFederalTax {
      * - Married, but withhold as Single (does not apply to rev_2020_w4 form)
      */
     @JsonIgnore
-    public String filingStatus() {
+    public Optional<String> filingStatus() {
         return filingStatus;
     }
 
@@ -209,7 +211,7 @@ public class EmployeeFederalTax {
     /**
      * *does not apply to rev_2020_w4 form*
      * 
-     * An exemption from paying a certain amount of income tax.
+     * <p>An exemption from paying a certain amount of income tax.
      */
     @JsonIgnore
     public Optional<Double> federalWithholdingAllowance() {
@@ -246,6 +248,20 @@ public class EmployeeFederalTax {
      * - Married, but withhold as Single (does not apply to rev_2020_w4 form)
      */
     public EmployeeFederalTax withFilingStatus(String filingStatus) {
+        Utils.checkNotNull(filingStatus, "filingStatus");
+        this.filingStatus = Optional.ofNullable(filingStatus);
+        return this;
+    }
+
+    /**
+     * It determines which tax return form an individual will use and is an important factor in computing taxable income. One of:
+     * - Single
+     * - Married
+     * - Head of Household
+     * - Exempt from withholding
+     * - Married, but withhold as Single (does not apply to rev_2020_w4 form)
+     */
+    public EmployeeFederalTax withFilingStatus(Optional<String> filingStatus) {
         Utils.checkNotNull(filingStatus, "filingStatus");
         this.filingStatus = filingStatus;
         return this;
@@ -353,7 +369,7 @@ public class EmployeeFederalTax {
     /**
      * *does not apply to rev_2020_w4 form*
      * 
-     * An exemption from paying a certain amount of income tax.
+     * <p>An exemption from paying a certain amount of income tax.
      */
     public EmployeeFederalTax withFederalWithholdingAllowance(double federalWithholdingAllowance) {
         Utils.checkNotNull(federalWithholdingAllowance, "federalWithholdingAllowance");
@@ -364,7 +380,7 @@ public class EmployeeFederalTax {
     /**
      * *does not apply to rev_2020_w4 form*
      * 
-     * An exemption from paying a certain amount of income tax.
+     * <p>An exemption from paying a certain amount of income tax.
      */
     public EmployeeFederalTax withFederalWithholdingAllowance(Optional<Double> federalWithholdingAllowance) {
         Utils.checkNotNull(federalWithholdingAllowance, "federalWithholdingAllowance");
@@ -446,7 +462,7 @@ public class EmployeeFederalTax {
  
         private String version;
  
-        private String filingStatus;
+        private Optional<String> filingStatus = Optional.empty();
  
         private Optional<String> extraWithholding = Optional.empty();
  
@@ -486,6 +502,20 @@ public class EmployeeFederalTax {
          * - Married, but withhold as Single (does not apply to rev_2020_w4 form)
          */
         public Builder filingStatus(String filingStatus) {
+            Utils.checkNotNull(filingStatus, "filingStatus");
+            this.filingStatus = Optional.ofNullable(filingStatus);
+            return this;
+        }
+
+        /**
+         * It determines which tax return form an individual will use and is an important factor in computing taxable income. One of:
+         * - Single
+         * - Married
+         * - Head of Household
+         * - Exempt from withholding
+         * - Married, but withhold as Single (does not apply to rev_2020_w4 form)
+         */
+        public Builder filingStatus(Optional<String> filingStatus) {
             Utils.checkNotNull(filingStatus, "filingStatus");
             this.filingStatus = filingStatus;
             return this;
@@ -593,7 +623,7 @@ public class EmployeeFederalTax {
         /**
          * *does not apply to rev_2020_w4 form*
          * 
-         * An exemption from paying a certain amount of income tax.
+         * <p>An exemption from paying a certain amount of income tax.
          */
         public Builder federalWithholdingAllowance(double federalWithholdingAllowance) {
             Utils.checkNotNull(federalWithholdingAllowance, "federalWithholdingAllowance");
@@ -604,7 +634,7 @@ public class EmployeeFederalTax {
         /**
          * *does not apply to rev_2020_w4 form*
          * 
-         * An exemption from paying a certain amount of income tax.
+         * <p>An exemption from paying a certain amount of income tax.
          */
         public Builder federalWithholdingAllowance(Optional<Double> federalWithholdingAllowance) {
             Utils.checkNotNull(federalWithholdingAllowance, "federalWithholdingAllowance");

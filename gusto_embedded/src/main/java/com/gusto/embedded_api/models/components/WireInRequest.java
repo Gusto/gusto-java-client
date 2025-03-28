@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * WireInRequest - Representation of a wire in request
+ * WireInRequest
+ * 
+ * <p>Representation of a wire in request
  */
 
 public class WireInRequest {

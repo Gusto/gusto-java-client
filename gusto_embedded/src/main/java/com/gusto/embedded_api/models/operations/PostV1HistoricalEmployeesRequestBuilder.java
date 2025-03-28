@@ -9,6 +9,7 @@ import com.gusto.embedded_api.models.components.HistoricalEmployeeBody;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
+import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 

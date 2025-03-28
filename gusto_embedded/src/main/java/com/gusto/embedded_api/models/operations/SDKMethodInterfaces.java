@@ -121,6 +121,21 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallGetCompaniesCompanyUuidSuspensions {
+        GetCompaniesCompanyUuidSuspensionsResponse get(
+            String companyUuid,
+            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
+    }
+
+
+    public interface MethodCallPostCompaniesCompanyUuidSuspensions {
+        PostCompaniesCompanyUuidSuspensionsResponse suspend(
+            String companyUuid,
+            Optional<? extends VersionHeader> xGustoAPIVersion,
+            PostCompaniesCompanyUuidSuspensionsRequestBody requestBody) throws Exception;
+    }
+
+
     public interface MethodCallGetInvoicesInvoicePeriod {
         GetInvoicesInvoicePeriodResponse get(
             GetInvoicesInvoicePeriodRequest request,

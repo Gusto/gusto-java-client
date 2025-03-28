@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Flow - The representation of a flow in Gusto white-label UI.
+ * Flow
+ * 
+ * <p>The representation of a flow in Gusto white-label UI.
  */
 
 public class Flow {

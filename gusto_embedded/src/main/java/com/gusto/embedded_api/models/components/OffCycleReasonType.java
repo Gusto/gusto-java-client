@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * OffCycleReasonType - The off-cycle reason. Only included for off-cycle payrolls.
+ * OffCycleReasonType
+ * 
+ * <p>The off-cycle reason. Only included for off-cycle payrolls.
  */
 public enum OffCycleReasonType {
     BENEFIT_REVERSAL("Benefit reversal"),

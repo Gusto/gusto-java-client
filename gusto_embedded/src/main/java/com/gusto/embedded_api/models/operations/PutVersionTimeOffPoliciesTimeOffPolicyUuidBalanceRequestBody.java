@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody - A list of employee objects containing the employee uuid and time off hours balance
+ * PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody
+ * 
+ * <p>A list of employee objects containing the employee uuid and time off hours balance
  */
 
 public class PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody {

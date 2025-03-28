@@ -71,16 +71,18 @@ public class ContractorPayments implements
 
     /**
      * Get a single contractor payment receipt
-     * Returns a contractor payment receipt.
      * 
-     * Notes:
+     * <p>Returns a contractor payment receipt.
+     * 
+     * <p>Notes:
      * * Receipts are only available for direct deposit payments and are only available once those payments have been funded.
      * * Payroll Receipt requests for payrolls which do not have receipts available (e.g. payment by check) will return a 404 status.
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Dollar amounts are represented to the cent.
      * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1ContractorPaymentsContractorPaymentUuidReceiptRequestBuilder getReceipt() {
@@ -89,16 +91,18 @@ public class ContractorPayments implements
 
     /**
      * Get a single contractor payment receipt
-     * Returns a contractor payment receipt.
      * 
-     * Notes:
+     * <p>Returns a contractor payment receipt.
+     * 
+     * <p>Notes:
      * * Receipts are only available for direct deposit payments and are only available once those payments have been funded.
      * * Payroll Receipt requests for payrolls which do not have receipts available (e.g. payment by check) will return a 404 status.
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Dollar amounts are represented to the cent.
      * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @param contractorPaymentUuid The UUID of the contractor payment
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -110,18 +114,20 @@ public class ContractorPayments implements
     
     /**
      * Get a single contractor payment receipt
-     * Returns a contractor payment receipt.
      * 
-     * Notes:
+     * <p>Returns a contractor payment receipt.
+     * 
+     * <p>Notes:
      * * Receipts are only available for direct deposit payments and are only available once those payments have been funded.
      * * Payroll Receipt requests for payrolls which do not have receipts available (e.g. payment by check) will return a 404 status.
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Dollar amounts are represented to the cent.
      * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @param contractorPaymentUuid The UUID of the contractor payment
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -156,6 +162,7 @@ public class ContractorPayments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractor_payments-contractor_payment_uuid-receipt", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -167,6 +174,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor_payments-contractor_payment_uuid-receipt",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -176,6 +184,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractor_payments-contractor_payment_uuid-receipt",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -185,6 +194,7 @@ public class ContractorPayments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor_payments-contractor_payment_uuid-receipt",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -246,13 +256,15 @@ public class ContractorPayments implements
 
     /**
      * Fund a contractor payment [DEMO]
-     * &gt; 🚧 Demo action
+     * 
+     * <p>&gt; 🚧 Demo action
      * &gt;
      * &gt; This action is only available in the Demo environment
      * 
-     * Simulate funding a contractor payment. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
+     * <p>Simulate funding a contractor payment. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
      * 
-     * scope: `payrolls:run`
+     * <p>scope: `payrolls:run`
+     * 
      * @return The call builder
      */
     public GetV1ContractorPaymentsContractorPaymentUuidFundRequestBuilder fund() {
@@ -261,13 +273,15 @@ public class ContractorPayments implements
 
     /**
      * Fund a contractor payment [DEMO]
-     * &gt; 🚧 Demo action
+     * 
+     * <p>&gt; 🚧 Demo action
      * &gt;
      * &gt; This action is only available in the Demo environment
      * 
-     * Simulate funding a contractor payment. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
+     * <p>Simulate funding a contractor payment. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
      * 
-     * scope: `payrolls:run`
+     * <p>scope: `payrolls:run`
+     * 
      * @param contractorPaymentUuid The UUID of the contractor payment
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -279,15 +293,17 @@ public class ContractorPayments implements
     
     /**
      * Fund a contractor payment [DEMO]
-     * &gt; 🚧 Demo action
+     * 
+     * <p>&gt; 🚧 Demo action
      * &gt;
      * &gt; This action is only available in the Demo environment
      * 
-     * Simulate funding a contractor payment. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
+     * <p>Simulate funding a contractor payment. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
      * 
-     * scope: `payrolls:run`
+     * <p>scope: `payrolls:run`
+     * 
      * @param contractorPaymentUuid The UUID of the contractor payment
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -322,6 +338,7 @@ public class ContractorPayments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractor_payments-contractor_payment_uuid-fund", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -333,6 +350,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor_payments-contractor_payment_uuid-fund",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -342,6 +360,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractor_payments-contractor_payment_uuid-fund",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -351,6 +370,7 @@ public class ContractorPayments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor_payments-contractor_payment_uuid-fund",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -426,9 +446,11 @@ public class ContractorPayments implements
 
     /**
      * Create a contractor payment
-     * Pay a contractor. Information needed depends on the contractor's wage type (hourly vs fixed)
      * 
-     * scope: `payrolls:run`
+     * <p>Pay a contractor. Information needed depends on the contractor's wage type (hourly vs fixed)
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder create() {
@@ -437,11 +459,13 @@ public class ContractorPayments implements
 
     /**
      * Create a contractor payment
-     * Pay a contractor. Information needed depends on the contractor's wage type (hourly vs fixed)
      * 
-     * scope: `payrolls:run`
+     * <p>Pay a contractor. Information needed depends on the contractor's wage type (hourly vs fixed)
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -453,12 +477,14 @@ public class ContractorPayments implements
     
     /**
      * Create a contractor payment
-     * Pay a contractor. Information needed depends on the contractor's wage type (hourly vs fixed)
      * 
-     * scope: `payrolls:run`
+     * <p>Pay a contractor. Information needed depends on the contractor's wage type (hourly vs fixed)
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -508,6 +534,7 @@ public class ContractorPayments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_id-contractor_payments", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -519,6 +546,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-contractor_payments",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -528,6 +556,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-contractor_payments",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -537,6 +566,7 @@ public class ContractorPayments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-contractor_payments",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -612,9 +642,11 @@ public class ContractorPayments implements
 
     /**
      * Get contractor payments for a company
-     * Returns an object containing individual contractor payments, within a given time period, including totals.
      * 
-     * scope: `payrolls:read`
+     * <p>Returns an object containing individual contractor payments, within a given time period, including totals.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdContractorPaymentsRequestBuilder list() {
@@ -623,9 +655,11 @@ public class ContractorPayments implements
 
     /**
      * Get contractor payments for a company
-     * Returns an object containing individual contractor payments, within a given time period, including totals.
      * 
-     * scope: `payrolls:read`
+     * <p>Returns an object containing individual contractor payments, within a given time period, including totals.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -658,6 +692,7 @@ public class ContractorPayments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-contractor_payments", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -669,6 +704,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-contractor_payments",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -678,6 +714,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-contractor_payments",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -687,6 +724,7 @@ public class ContractorPayments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-contractor_payments",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -748,8 +786,10 @@ public class ContractorPayments implements
 
     /**
      * Get a single contractor payment
-     * Returns a single contractor payment.
+     * 
+     * <p>Returns a single contractor payment.
      * scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder get() {
@@ -758,8 +798,10 @@ public class ContractorPayments implements
 
     /**
      * Get a single contractor payment
-     * Returns a single contractor payment.
+     * 
+     * <p>Returns a single contractor payment.
      * scope: `payrolls:read`
+     * 
      * @param companyId The UUID of the company
      * @param contractorPaymentId The UUID of the contractor payment
      * @return The response from the API call
@@ -773,11 +815,13 @@ public class ContractorPayments implements
     
     /**
      * Get a single contractor payment
-     * Returns a single contractor payment.
+     * 
+     * <p>Returns a single contractor payment.
      * scope: `payrolls:read`
+     * 
      * @param companyId The UUID of the company
      * @param contractorPaymentId The UUID of the contractor payment
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -814,6 +858,7 @@ public class ContractorPayments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-contractor_payment-contractor-payment", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -825,6 +870,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-contractor_payment-contractor-payment",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -834,6 +880,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-contractor_payment-contractor-payment",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -843,6 +890,7 @@ public class ContractorPayments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-contractor_payment-contractor-payment",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -904,9 +952,11 @@ public class ContractorPayments implements
 
     /**
      * Cancel a contractor payment
-     * Cancels and deletes a contractor payment. If the contractor payment has already started processing ("may_cancel": true), the payment cannot be cancelled.
      * 
-     * scope: `payrolls:run`
+     * <p>Cancels and deletes a contractor payment. If the contractor payment has already started processing ("may_cancel": true), the payment cannot be cancelled.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @return The call builder
      */
     public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder delete() {
@@ -915,9 +965,11 @@ public class ContractorPayments implements
 
     /**
      * Cancel a contractor payment
-     * Cancels and deletes a contractor payment. If the contractor payment has already started processing ("may_cancel": true), the payment cannot be cancelled.
      * 
-     * scope: `payrolls:run`
+     * <p>Cancels and deletes a contractor payment. If the contractor payment has already started processing ("may_cancel": true), the payment cannot be cancelled.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param companyId The UUID of the company
      * @param contractorPaymentId The UUID of the contractor payment
      * @return The response from the API call
@@ -931,12 +983,14 @@ public class ContractorPayments implements
     
     /**
      * Cancel a contractor payment
-     * Cancels and deletes a contractor payment. If the contractor payment has already started processing ("may_cancel": true), the payment cannot be cancelled.
      * 
-     * scope: `payrolls:run`
+     * <p>Cancels and deletes a contractor payment. If the contractor payment has already started processing ("may_cancel": true), the payment cannot be cancelled.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param companyId The UUID of the company
      * @param contractorPaymentId The UUID of the contractor payment
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -973,6 +1027,7 @@ public class ContractorPayments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-companies-company_id-contractor_payment-contractor-payment", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -984,6 +1039,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-companies-company_id-contractor_payment-contractor-payment",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -993,6 +1049,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-companies-company_id-contractor_payment-contractor-payment",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1002,6 +1059,7 @@ public class ContractorPayments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-companies-company_id-contractor_payment-contractor-payment",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1066,11 +1124,13 @@ public class ContractorPayments implements
 
     /**
      * Preview contractor payment debit date
-     * Returns a debit_date dependent on the ACH payment speed of the company.
      * 
-     * If the payment method is Check or Historical payment, the debit_date will be the same as the check_date.
+     * <p>Returns a debit_date dependent on the ACH payment speed of the company.
      * 
-     * scope: `payrolls:read`
+     * <p>If the payment method is Check or Historical payment, the debit_date will be the same as the check_date.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBuilder preview() {
@@ -1079,11 +1139,13 @@ public class ContractorPayments implements
 
     /**
      * Preview contractor payment debit date
-     * Returns a debit_date dependent on the ACH payment speed of the company.
      * 
-     * If the payment method is Check or Historical payment, the debit_date will be the same as the check_date.
+     * <p>Returns a debit_date dependent on the ACH payment speed of the company.
      * 
-     * scope: `payrolls:read`
+     * <p>If the payment method is Check or Historical payment, the debit_date will be the same as the check_date.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyUuid The UUID of the company
      * @param requestBody a list of contractor payments.
      * @return The response from the API call
@@ -1097,13 +1159,15 @@ public class ContractorPayments implements
     
     /**
      * Preview contractor payment debit date
-     * Returns a debit_date dependent on the ACH payment speed of the company.
      * 
-     * If the payment method is Check or Historical payment, the debit_date will be the same as the check_date.
+     * <p>Returns a debit_date dependent on the ACH payment speed of the company.
      * 
-     * scope: `payrolls:read`
+     * <p>If the payment method is Check or Historical payment, the debit_date will be the same as the check_date.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody a list of contractor payments.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1154,6 +1218,7 @@ public class ContractorPayments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-companies-company_uuid-contractor_payments-preview", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1165,6 +1230,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-contractor_payments-preview",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1174,6 +1240,7 @@ public class ContractorPayments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-contractor_payments-preview",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1183,6 +1250,7 @@ public class ContractorPayments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-contractor_payments-preview",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

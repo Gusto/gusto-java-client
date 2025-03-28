@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ContractorPaymentSummaryByDatesTotal - The wage and reimbursement totals for all contractor payments within a given time period.
+ * ContractorPaymentSummaryByDatesTotal
+ * 
+ * <p>The wage and reimbursement totals for all contractor payments within a given time period.
  */
 
 public class ContractorPaymentSummaryByDatesTotal {

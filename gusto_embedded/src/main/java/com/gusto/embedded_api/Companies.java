@@ -89,26 +89,34 @@ public class Companies implements
             MethodCallGetV1CompaniesCompanyIdCustomFields {
 
     private final SDKConfiguration sdkConfiguration;
+    private final Suspensions suspensions;
 
     Companies(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+        this.suspensions = new Suspensions(this.sdkConfiguration);
+    }
+
+    public final Suspensions suspensions() {
+        return suspensions;
     }
 
 
     /**
      * Create a partner managed company
-     * Create a partner managed company. When you successfully call the API, it does the following:
+     * 
+     * <p>Create a partner managed company. When you successfully call the API, it does the following:
      * * Creates a new company in Gusto
      * * Creates a new user using the provided email if the user does not already exist.
      * * Makes the user the primary payroll administrator of the new company.
      * 
-     * In response, you will receive oauth access tokens for the created company.
+     * <p>In response, you will receive oauth access tokens for the created company.
      * 
-     * IMPORTANT: the returned access and refresh tokens are reserved for this company only. They cannot be used to access other companies AND previously granted tokens cannot be used to access this company.
+     * <p>IMPORTANT: the returned access and refresh tokens are reserved for this company only. They cannot be used to access other companies AND previously granted tokens cannot be used to access this company.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; this endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
      * @return The call builder
      */
     public PostV1PartnerManagedCompaniesRequestBuilder createPartnerManaged() {
@@ -117,20 +125,22 @@ public class Companies implements
 
     /**
      * Create a partner managed company
-     * Create a partner managed company. When you successfully call the API, it does the following:
+     * 
+     * <p>Create a partner managed company. When you successfully call the API, it does the following:
      * * Creates a new company in Gusto
      * * Creates a new user using the provided email if the user does not already exist.
      * * Makes the user the primary payroll administrator of the new company.
      * 
-     * In response, you will receive oauth access tokens for the created company.
+     * <p>In response, you will receive oauth access tokens for the created company.
      * 
-     * IMPORTANT: the returned access and refresh tokens are reserved for this company only. They cannot be used to access other companies AND previously granted tokens cannot be used to access this company.
+     * <p>IMPORTANT: the returned access and refresh tokens are reserved for this company only. They cannot be used to access other companies AND previously granted tokens cannot be used to access this company.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; this endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
      * @param security The security details to use for authentication.
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -142,21 +152,23 @@ public class Companies implements
     
     /**
      * Create a partner managed company
-     * Create a partner managed company. When you successfully call the API, it does the following:
+     * 
+     * <p>Create a partner managed company. When you successfully call the API, it does the following:
      * * Creates a new company in Gusto
      * * Creates a new user using the provided email if the user does not already exist.
      * * Makes the user the primary payroll administrator of the new company.
      * 
-     * In response, you will receive oauth access tokens for the created company.
+     * <p>In response, you will receive oauth access tokens for the created company.
      * 
-     * IMPORTANT: the returned access and refresh tokens are reserved for this company only. They cannot be used to access other companies AND previously granted tokens cannot be used to access this company.
+     * <p>IMPORTANT: the returned access and refresh tokens are reserved for this company only. They cannot be used to access other companies AND previously granted tokens cannot be used to access this company.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; this endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
      * @param security The security details to use for authentication.
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -194,17 +206,16 @@ public class Companies implements
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+
+        // hooks will be passed method level security only
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(SecuritySource.of(security));
         Utils.configureSecurity(_req, security);
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-partner-managed-companies", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -216,6 +227,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-partner-managed-companies",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -225,6 +237,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-partner-managed-companies",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -234,6 +247,7 @@ public class Companies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-partner-managed-companies",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -309,12 +323,14 @@ public class Companies implements
 
     /**
      * Get a company
-     * Get a company.         
+     * 
+     * <p>Get a company.         
      * The employees:read scope is required to return home_address and non-work locations.         
      * The company_admin:read scope is required to return primary_payroll_admin.         
      * The signatories:read scope is required to return primary_signatory.         
      * 
-     * scope: `companies:read`
+     * <p>scope: `companies:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesRequestBuilder get() {
@@ -323,12 +339,14 @@ public class Companies implements
 
     /**
      * Get a company
-     * Get a company.         
+     * 
+     * <p>Get a company.         
      * The employees:read scope is required to return home_address and non-work locations.         
      * The company_admin:read scope is required to return primary_payroll_admin.         
      * The signatories:read scope is required to return primary_signatory.         
      * 
-     * scope: `companies:read`
+     * <p>scope: `companies:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -340,14 +358,16 @@ public class Companies implements
     
     /**
      * Get a company
-     * Get a company.         
+     * 
+     * <p>Get a company.         
      * The employees:read scope is required to return home_address and non-work locations.         
      * The company_admin:read scope is required to return primary_payroll_admin.         
      * The signatories:read scope is required to return primary_signatory.         
      * 
-     * scope: `companies:read`
+     * <p>scope: `companies:read`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -382,6 +402,7 @@ public class Companies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -393,6 +414,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -402,6 +424,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -411,6 +434,7 @@ public class Companies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -472,9 +496,11 @@ public class Companies implements
 
     /**
      * Update a company
-     * Update a company.
      * 
-     * scope: `companies:write`
+     * <p>Update a company.
+     * 
+     * <p>scope: `companies:write`
+     * 
      * @return The call builder
      */
     public PutV1CompaniesRequestBuilder update() {
@@ -483,11 +509,13 @@ public class Companies implements
 
     /**
      * Update a company
-     * Update a company.
      * 
-     * scope: `companies:write`
+     * <p>Update a company.
+     * 
+     * <p>scope: `companies:write`
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -499,12 +527,14 @@ public class Companies implements
     
     /**
      * Update a company
-     * Update a company.
      * 
-     * scope: `companies:write`
+     * <p>Update a company.
+     * 
+     * <p>scope: `companies:write`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -554,6 +584,7 @@ public class Companies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-companies", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -565,6 +596,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -574,6 +606,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-companies",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -583,6 +616,7 @@ public class Companies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -658,11 +692,13 @@ public class Companies implements
 
     /**
      * Migrate company to embedded payroll
-     * Migrate an existing Gusto customer to your embedded payroll product.
      * 
-     * To use this endpoint, the customer will need to connect their Gusto account to your application using [OAuth2](https://docs.gusto.com/embedded-payroll/docs/oauth2) then view and [accept the Embedded Payroll Terms of Service](https://docs.gusto.com/embedded-payroll/reference/post-partner-managed-companies-company_uuid-accept_terms_of_service).
+     * <p>Migrate an existing Gusto customer to your embedded payroll product.
      * 
-     * scope: `partner_managed_companies:write`
+     * <p>To use this endpoint, the customer will need to connect their Gusto account to your application using [OAuth2](https://docs.gusto.com/embedded-payroll/docs/oauth2) then view and [accept the Embedded Payroll Terms of Service](https://docs.gusto.com/embedded-payroll/reference/post-partner-managed-companies-company_uuid-accept_terms_of_service).
+     * 
+     * <p>scope: `partner_managed_companies:write`
+     * 
      * @return The call builder
      */
     public PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder migrate() {
@@ -671,13 +707,15 @@ public class Companies implements
 
     /**
      * Migrate company to embedded payroll
-     * Migrate an existing Gusto customer to your embedded payroll product.
      * 
-     * To use this endpoint, the customer will need to connect their Gusto account to your application using [OAuth2](https://docs.gusto.com/embedded-payroll/docs/oauth2) then view and [accept the Embedded Payroll Terms of Service](https://docs.gusto.com/embedded-payroll/reference/post-partner-managed-companies-company_uuid-accept_terms_of_service).
+     * <p>Migrate an existing Gusto customer to your embedded payroll product.
      * 
-     * scope: `partner_managed_companies:write`
+     * <p>To use this endpoint, the customer will need to connect their Gusto account to your application using [OAuth2](https://docs.gusto.com/embedded-payroll/docs/oauth2) then view and [accept the Embedded Payroll Terms of Service](https://docs.gusto.com/embedded-payroll/reference/post-partner-managed-companies-company_uuid-accept_terms_of_service).
+     * 
+     * <p>scope: `partner_managed_companies:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -689,14 +727,16 @@ public class Companies implements
     
     /**
      * Migrate company to embedded payroll
-     * Migrate an existing Gusto customer to your embedded payroll product.
      * 
-     * To use this endpoint, the customer will need to connect their Gusto account to your application using [OAuth2](https://docs.gusto.com/embedded-payroll/docs/oauth2) then view and [accept the Embedded Payroll Terms of Service](https://docs.gusto.com/embedded-payroll/reference/post-partner-managed-companies-company_uuid-accept_terms_of_service).
+     * <p>Migrate an existing Gusto customer to your embedded payroll product.
      * 
-     * scope: `partner_managed_companies:write`
+     * <p>To use this endpoint, the customer will need to connect their Gusto account to your application using [OAuth2](https://docs.gusto.com/embedded-payroll/docs/oauth2) then view and [accept the Embedded Payroll Terms of Service](https://docs.gusto.com/embedded-payroll/reference/post-partner-managed-companies-company_uuid-accept_terms_of_service).
+     * 
+     * <p>scope: `partner_managed_companies:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -746,6 +786,7 @@ public class Companies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-partner-managed-companies-company-uuid-migrate", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -757,6 +798,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-partner-managed-companies-company-uuid-migrate",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -766,6 +808,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-partner-managed-companies-company-uuid-migrate",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -775,6 +818,7 @@ public class Companies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-partner-managed-companies-company-uuid-migrate",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -850,10 +894,12 @@ public class Companies implements
 
     /**
      * Accept terms of service for a company user
-     * Accept the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
+     * 
+     * <p>Accept the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
      * The user must have a role in the company in order to accept the Terms of Service.
      * 
-     * scope: `terms_of_services:write`
+     * <p>scope: `terms_of_services:write`
+     * 
      * @return The call builder
      */
     public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder acceptTermsOfService() {
@@ -862,12 +908,14 @@ public class Companies implements
 
     /**
      * Accept terms of service for a company user
-     * Accept the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
+     * 
+     * <p>Accept the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
      * The user must have a role in the company in order to accept the Terms of Service.
      * 
-     * scope: `terms_of_services:write`
+     * <p>scope: `terms_of_services:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -879,13 +927,15 @@ public class Companies implements
     
     /**
      * Accept terms of service for a company user
-     * Accept the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
+     * 
+     * <p>Accept the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
      * The user must have a role in the company in order to accept the Terms of Service.
      * 
-     * scope: `terms_of_services:write`
+     * <p>scope: `terms_of_services:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -935,6 +985,7 @@ public class Companies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-partner-managed-companies-company_uuid-accept_terms_of_service", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -946,6 +997,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-partner-managed-companies-company_uuid-accept_terms_of_service",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -955,6 +1007,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-partner-managed-companies-company_uuid-accept_terms_of_service",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -964,6 +1017,7 @@ public class Companies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-partner-managed-companies-company_uuid-accept_terms_of_service",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1039,9 +1093,11 @@ public class Companies implements
 
     /**
      * Retrieve terms of service status for a company user
-     * Retrieve the user acceptance status of the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
      * 
-     * scope: `terms_of_services:read`
+     * <p>Retrieve the user acceptance status of the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
+     * 
+     * <p>scope: `terms_of_services:read`
+     * 
      * @return The call builder
      */
     public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder retrieveTermsOfService() {
@@ -1050,11 +1106,13 @@ public class Companies implements
 
     /**
      * Retrieve terms of service status for a company user
-     * Retrieve the user acceptance status of the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
      * 
-     * scope: `terms_of_services:read`
+     * <p>Retrieve the user acceptance status of the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
+     * 
+     * <p>scope: `terms_of_services:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1066,12 +1124,14 @@ public class Companies implements
     
     /**
      * Retrieve terms of service status for a company user
-     * Retrieve the user acceptance status of the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
      * 
-     * scope: `terms_of_services:read`
+     * <p>Retrieve the user acceptance status of the Gusto Embedded Payroll's [Terms of Service](https://flows.gusto.com/terms).
+     * 
+     * <p>scope: `terms_of_services:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1121,6 +1181,7 @@ public class Companies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-partner-managed-companies-company_uuid-retrieve_terms_of_service", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1132,6 +1193,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-partner-managed-companies-company_uuid-retrieve_terms_of_service",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1141,6 +1203,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-partner-managed-companies-company_uuid-retrieve_terms_of_service",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1150,6 +1213,7 @@ public class Companies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-partner-managed-companies-company_uuid-retrieve_terms_of_service",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1225,10 +1289,12 @@ public class Companies implements
 
     /**
      * Create an admin for the company
-     * Creates a new admin for a company.
+     * 
+     * <p>Creates a new admin for a company.
      * If the email matches an existing user, this will create an admin account for the current user. Otherwise, this will create a new user.
      * 
-     * scope: `company_admin:write`
+     * <p>scope: `company_admin:write`
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdAdminsRequestBuilder createAdmin() {
@@ -1237,12 +1303,14 @@ public class Companies implements
 
     /**
      * Create an admin for the company
-     * Creates a new admin for a company.
+     * 
+     * <p>Creates a new admin for a company.
      * If the email matches an existing user, this will create an admin account for the current user. Otherwise, this will create a new user.
      * 
-     * scope: `company_admin:write`
+     * <p>scope: `company_admin:write`
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1254,13 +1322,15 @@ public class Companies implements
     
     /**
      * Create an admin for the company
-     * Creates a new admin for a company.
+     * 
+     * <p>Creates a new admin for a company.
      * If the email matches an existing user, this will create an admin account for the current user. Otherwise, this will create a new user.
      * 
-     * scope: `company_admin:write`
+     * <p>scope: `company_admin:write`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1310,6 +1380,7 @@ public class Companies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_id-admins", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1321,6 +1392,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-admins",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1330,6 +1402,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-admins",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1339,6 +1412,7 @@ public class Companies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-admins",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1414,9 +1488,11 @@ public class Companies implements
 
     /**
      * Get all the admins at a company
-     * Returns a list of all the admins at a company
      * 
-     * scope: `company_admin:read`
+     * <p>Returns a list of all the admins at a company
+     * 
+     * <p>scope: `company_admin:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdAdminsRequestBuilder listAdmins() {
@@ -1425,9 +1501,11 @@ public class Companies implements
 
     /**
      * Get all the admins at a company
-     * Returns a list of all the admins at a company
      * 
-     * scope: `company_admin:read`
+     * <p>Returns a list of all the admins at a company
+     * 
+     * <p>scope: `company_admin:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1439,13 +1517,15 @@ public class Companies implements
     
     /**
      * Get all the admins at a company
-     * Returns a list of all the admins at a company
      * 
-     * scope: `company_admin:read`
+     * <p>Returns a list of all the admins at a company
+     * 
+     * <p>scope: `company_admin:read`
+     * 
      * @param companyId The UUID of the company
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1489,6 +1569,7 @@ public class Companies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-admins", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1500,6 +1581,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-admins",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1509,6 +1591,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-admins",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1518,6 +1601,7 @@ public class Companies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-admins",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1579,10 +1663,12 @@ public class Companies implements
 
     /**
      * Get the company's onboarding status
-     * Get company's onboarding status.
+     * 
+     * <p>Get company's onboarding status.
      * The data returned helps inform the required onboarding steps and respective completion status.
      * 
-     * scope: `company_onboarding_status:read`
+     * <p>scope: `company_onboarding_status:read`
+     * 
      * @return The call builder
      */
     public GetV1CompanyOnboardingStatusRequestBuilder getOnboardingStatus() {
@@ -1591,10 +1677,12 @@ public class Companies implements
 
     /**
      * Get the company's onboarding status
-     * Get company's onboarding status.
+     * 
+     * <p>Get company's onboarding status.
      * The data returned helps inform the required onboarding steps and respective completion status.
      * 
-     * scope: `company_onboarding_status:read`
+     * <p>scope: `company_onboarding_status:read`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1606,13 +1694,15 @@ public class Companies implements
     
     /**
      * Get the company's onboarding status
-     * Get company's onboarding status.
+     * 
+     * <p>Get company's onboarding status.
      * The data returned helps inform the required onboarding steps and respective completion status.
      * 
-     * scope: `company_onboarding_status:read`
+     * <p>scope: `company_onboarding_status:read`
+     * 
      * @param companyUuid The UUID of the company
      * @param additionalSteps Comma delimited string indicating whether to include any additional steps of onboarding. Currently only supports the value "external_payroll".
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1654,6 +1744,7 @@ public class Companies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-company-onboarding-status", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1665,6 +1756,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-onboarding-status",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1674,6 +1766,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-company-onboarding-status",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1683,6 +1776,7 @@ public class Companies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-onboarding-status",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1744,21 +1838,23 @@ public class Companies implements
 
     /**
      * Finish company onboarding
-     * Finalize a given company's onboarding process.
      * 
-     * ### Approve a company in demo
+     * <p>Finalize a given company's onboarding process.
+     * 
+     * <p>### Approve a company in demo
      * After a company is finished onboarding, Gusto requires an additional step to review and approve that company. The company onboarding status is `"onboarding_completed": false`, until the API call is made to finish company onboarding.
      * In production environments, this step is required for risk-analysis purposes.
      * 
-     * We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals in the demo environment.
+     * <p>We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals in the demo environment.
      * 
-     * ```shell
+     * <p>```shell
      * PUT '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/approve'
      * 
-     * # Response: Company object, with company_status: 'Approved'
+     * <p># Response: Company object, with company_status: 'Approved'
      * ```
      * 
-     * scope: `companies:write`
+     * <p>scope: `companies:write`
+     * 
      * @return The call builder
      */
     public GetV1CompanyFinishOnboardingRequestBuilder finishOnboarding() {
@@ -1767,21 +1863,23 @@ public class Companies implements
 
     /**
      * Finish company onboarding
-     * Finalize a given company's onboarding process.
      * 
-     * ### Approve a company in demo
+     * <p>Finalize a given company's onboarding process.
+     * 
+     * <p>### Approve a company in demo
      * After a company is finished onboarding, Gusto requires an additional step to review and approve that company. The company onboarding status is `"onboarding_completed": false`, until the API call is made to finish company onboarding.
      * In production environments, this step is required for risk-analysis purposes.
      * 
-     * We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals in the demo environment.
+     * <p>We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals in the demo environment.
      * 
-     * ```shell
+     * <p>```shell
      * PUT '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/approve'
      * 
-     * # Response: Company object, with company_status: 'Approved'
+     * <p># Response: Company object, with company_status: 'Approved'
      * ```
      * 
-     * scope: `companies:write`
+     * <p>scope: `companies:write`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1793,23 +1891,25 @@ public class Companies implements
     
     /**
      * Finish company onboarding
-     * Finalize a given company's onboarding process.
      * 
-     * ### Approve a company in demo
+     * <p>Finalize a given company's onboarding process.
+     * 
+     * <p>### Approve a company in demo
      * After a company is finished onboarding, Gusto requires an additional step to review and approve that company. The company onboarding status is `"onboarding_completed": false`, until the API call is made to finish company onboarding.
      * In production environments, this step is required for risk-analysis purposes.
      * 
-     * We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals in the demo environment.
+     * <p>We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals in the demo environment.
      * 
-     * ```shell
+     * <p>```shell
      * PUT '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/approve'
      * 
-     * # Response: Company object, with company_status: 'Approved'
+     * <p># Response: Company object, with company_status: 'Approved'
      * ```
      * 
-     * scope: `companies:write`
+     * <p>scope: `companies:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1844,6 +1944,7 @@ public class Companies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-company-finish-onboarding", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1855,6 +1956,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-finish-onboarding",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1864,6 +1966,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-company-finish-onboarding",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1873,6 +1976,7 @@ public class Companies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-finish-onboarding",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1948,9 +2052,11 @@ public class Companies implements
 
     /**
      * Get the custom fields of a company
-     * Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
      * 
-     * scope: `companies:read`
+     * <p>Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdCustomFieldsRequestBuilder getCustomFields() {
@@ -1959,9 +2065,11 @@ public class Companies implements
 
     /**
      * Get the custom fields of a company
-     * Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
      * 
-     * scope: `companies:read`
+     * <p>Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1973,13 +2081,15 @@ public class Companies implements
     
     /**
      * Get the custom fields of a company
-     * Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
      * 
-     * scope: `companies:read`
+     * <p>Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @param companyId The UUID of the company
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -2023,6 +2133,7 @@ public class Companies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-custom_fields", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -2034,6 +2145,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-custom_fields",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -2043,6 +2155,7 @@ public class Companies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-custom_fields",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -2052,6 +2165,7 @@ public class Companies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-custom_fields",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

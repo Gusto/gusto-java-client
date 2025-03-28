@@ -17,7 +17,9 @@ import java.net.http.HttpResponse;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody - Unprocessable Entity
+ * DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
+ * 
+ * <p>Unprocessable Entity
  */
 @SuppressWarnings("serial")
 public class DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody extends RuntimeException {

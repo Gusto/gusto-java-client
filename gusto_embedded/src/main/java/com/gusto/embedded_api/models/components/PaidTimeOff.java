@@ -18,7 +18,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * PaidTimeOff - The representation of paid time off in Gusto.
+ * PaidTimeOff
+ * 
+ * <p>The representation of paid time off in Gusto.
  */
 
 public class PaidTimeOff {

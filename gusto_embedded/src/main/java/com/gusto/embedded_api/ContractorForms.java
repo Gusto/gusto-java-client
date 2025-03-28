@@ -56,9 +56,11 @@ public class ContractorForms implements
 
     /**
      * Get all contractor forms
-     * Get a list of all contractor's forms
      * 
-     * scope: `contractor_forms:read`
+     * <p>Get a list of all contractor's forms
+     * 
+     * <p>scope: `contractor_forms:read`
+     * 
      * @return The call builder
      */
     public GetV1ContractorFormsRequestBuilder list() {
@@ -67,9 +69,11 @@ public class ContractorForms implements
 
     /**
      * Get all contractor forms
-     * Get a list of all contractor's forms
      * 
-     * scope: `contractor_forms:read`
+     * <p>Get a list of all contractor's forms
+     * 
+     * <p>scope: `contractor_forms:read`
+     * 
      * @param contractorUuid The UUID of the contractor
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -81,11 +85,13 @@ public class ContractorForms implements
     
     /**
      * Get all contractor forms
-     * Get a list of all contractor's forms
      * 
-     * scope: `contractor_forms:read`
+     * <p>Get a list of all contractor's forms
+     * 
+     * <p>scope: `contractor_forms:read`
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -120,6 +126,7 @@ public class ContractorForms implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractor-forms", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -131,6 +138,7 @@ public class ContractorForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-forms",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -140,6 +148,7 @@ public class ContractorForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-forms",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -149,6 +158,7 @@ public class ContractorForms implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-forms",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -210,9 +220,11 @@ public class ContractorForms implements
 
     /**
      * Get a contractor form
-     * Get a contractor form
      * 
-     * scope: `contractor_forms:read`
+     * <p>Get a contractor form
+     * 
+     * <p>scope: `contractor_forms:read`
+     * 
      * @return The call builder
      */
     public GetV1ContractorFormRequestBuilder get() {
@@ -221,9 +233,11 @@ public class ContractorForms implements
 
     /**
      * Get a contractor form
-     * Get a contractor form
      * 
-     * scope: `contractor_forms:read`
+     * <p>Get a contractor form
+     * 
+     * <p>scope: `contractor_forms:read`
+     * 
      * @param contractorUuid The UUID of the contractor
      * @param formId The UUID of the form
      * @return The response from the API call
@@ -237,12 +251,14 @@ public class ContractorForms implements
     
     /**
      * Get a contractor form
-     * Get a contractor form
      * 
-     * scope: `contractor_forms:read`
+     * <p>Get a contractor form
+     * 
+     * <p>scope: `contractor_forms:read`
+     * 
      * @param contractorUuid The UUID of the contractor
      * @param formId The UUID of the form
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -279,6 +295,7 @@ public class ContractorForms implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractor-form", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -290,6 +307,7 @@ public class ContractorForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-form",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -299,6 +317,7 @@ public class ContractorForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-form",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -308,6 +327,7 @@ public class ContractorForms implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-form",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -369,9 +389,11 @@ public class ContractorForms implements
 
     /**
      * Get the contractor form pdf
-     * Get the link to the form PDF
      * 
-     * scope: `contractor_forms:read`
+     * <p>Get the link to the form PDF
+     * 
+     * <p>scope: `contractor_forms:read`
+     * 
      * @return The call builder
      */
     public GetV1ContractorFormPdfRequestBuilder getPdf() {
@@ -380,9 +402,11 @@ public class ContractorForms implements
 
     /**
      * Get the contractor form pdf
-     * Get the link to the form PDF
      * 
-     * scope: `contractor_forms:read`
+     * <p>Get the link to the form PDF
+     * 
+     * <p>scope: `contractor_forms:read`
+     * 
      * @param contractorUuid The UUID of the contractor
      * @param formId The UUID of the form
      * @return The response from the API call
@@ -396,12 +420,14 @@ public class ContractorForms implements
     
     /**
      * Get the contractor form pdf
-     * Get the link to the form PDF
      * 
-     * scope: `contractor_forms:read`
+     * <p>Get the link to the form PDF
+     * 
+     * <p>scope: `contractor_forms:read`
+     * 
      * @param contractorUuid The UUID of the contractor
      * @param formId The UUID of the form
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -438,6 +464,7 @@ public class ContractorForms implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractor-form-pdf", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -449,6 +476,7 @@ public class ContractorForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-form-pdf",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -458,6 +486,7 @@ public class ContractorForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-form-pdf",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -467,6 +496,7 @@ public class ContractorForms implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-form-pdf",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -528,13 +558,15 @@ public class ContractorForms implements
 
     /**
      * Generate a 1099 form [DEMO]
-     * &gt; 🚧 Demo action
+     * 
+     * <p>&gt; 🚧 Demo action
      * &gt;
      * &gt; This action is only available in the Demo environment
      * 
-     * Generates a 1099 document for testing purposes.
+     * <p>Generates a 1099 document for testing purposes.
      * 
-     * scope: `contractors:write`
+     * <p>scope: `contractors:write`
+     * 
      * @return The call builder
      */
     public PostV1SandboxGenerate1099RequestBuilder generate1099() {
@@ -543,14 +575,16 @@ public class ContractorForms implements
 
     /**
      * Generate a 1099 form [DEMO]
-     * &gt; 🚧 Demo action
+     * 
+     * <p>&gt; 🚧 Demo action
      * &gt;
      * &gt; This action is only available in the Demo environment
      * 
-     * Generates a 1099 document for testing purposes.
+     * <p>Generates a 1099 document for testing purposes.
      * 
-     * scope: `contractors:write`
-     * @param requestBody
+     * <p>scope: `contractors:write`
+     * 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -561,15 +595,17 @@ public class ContractorForms implements
     
     /**
      * Generate a 1099 form [DEMO]
-     * &gt; 🚧 Demo action
+     * 
+     * <p>&gt; 🚧 Demo action
      * &gt;
      * &gt; This action is only available in the Demo environment
      * 
-     * Generates a 1099 document for testing purposes.
+     * <p>Generates a 1099 document for testing purposes.
      * 
-     * scope: `contractors:write`
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * <p>scope: `contractors:write`
+     * 
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -615,6 +651,7 @@ public class ContractorForms implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-sandbox-generate_1099", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -626,6 +663,7 @@ public class ContractorForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-sandbox-generate_1099",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -635,6 +673,7 @@ public class ContractorForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-sandbox-generate_1099",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -644,6 +683,7 @@ public class ContractorForms implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-sandbox-generate_1099",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

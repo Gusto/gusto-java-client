@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CompanyContributionAnnualMaximum - The maximum company contribution amount per year. A null value signifies no limit.
+ * CompanyContributionAnnualMaximum
+ * 
+ * <p>The maximum company contribution amount per year. A null value signifies no limit.
  */
 
 public class CompanyContributionAnnualMaximum {

@@ -51,9 +51,11 @@ public class CompanyAttachments implements
 
     /**
      * Get Company Attachment Details
-     * Retrieve the detail of an attachment uploaded by the company.
      * 
-     * scope: `company_attachments:read`
+     * <p>Retrieve the detail of an attachment uploaded by the company.
+     * 
+     * <p>scope: `company_attachments:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesAttachmentRequestBuilder getDetails() {
@@ -62,9 +64,11 @@ public class CompanyAttachments implements
 
     /**
      * Get Company Attachment Details
-     * Retrieve the detail of an attachment uploaded by the company.
      * 
-     * scope: `company_attachments:read`
+     * <p>Retrieve the detail of an attachment uploaded by the company.
+     * 
+     * <p>scope: `company_attachments:read`
+     * 
      * @param companyId The UUID of the company
      * @param companyAttachmentUuid The UUID of the company attachment
      * @return The response from the API call
@@ -78,12 +82,14 @@ public class CompanyAttachments implements
     
     /**
      * Get Company Attachment Details
-     * Retrieve the detail of an attachment uploaded by the company.
      * 
-     * scope: `company_attachments:read`
+     * <p>Retrieve the detail of an attachment uploaded by the company.
+     * 
+     * <p>scope: `company_attachments:read`
+     * 
      * @param companyId The UUID of the company
      * @param companyAttachmentUuid The UUID of the company attachment
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -120,6 +126,7 @@ public class CompanyAttachments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-attachment", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -131,6 +138,7 @@ public class CompanyAttachments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-attachment",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -140,6 +148,7 @@ public class CompanyAttachments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-attachment",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -149,6 +158,7 @@ public class CompanyAttachments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-attachment",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -210,9 +220,11 @@ public class CompanyAttachments implements
 
     /**
      * Get List of Company Attachments
-     * Retrieve a list of all the attachments uploaded by the company.
      * 
-     * scope: `company_attachments:read`
+     * <p>Retrieve a list of all the attachments uploaded by the company.
+     * 
+     * <p>scope: `company_attachments:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesAttachmentsRequestBuilder getList() {
@@ -221,9 +233,11 @@ public class CompanyAttachments implements
 
     /**
      * Get List of Company Attachments
-     * Retrieve a list of all the attachments uploaded by the company.
      * 
-     * scope: `company_attachments:read`
+     * <p>Retrieve a list of all the attachments uploaded by the company.
+     * 
+     * <p>scope: `company_attachments:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -235,11 +249,13 @@ public class CompanyAttachments implements
     
     /**
      * Get List of Company Attachments
-     * Retrieve a list of all the attachments uploaded by the company.
      * 
-     * scope: `company_attachments:read`
+     * <p>Retrieve a list of all the attachments uploaded by the company.
+     * 
+     * <p>scope: `company_attachments:read`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -274,6 +290,7 @@ public class CompanyAttachments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-attachments", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -285,6 +302,7 @@ public class CompanyAttachments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-attachments",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -294,6 +312,7 @@ public class CompanyAttachments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-attachments",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -303,6 +322,7 @@ public class CompanyAttachments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-attachments",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -364,11 +384,13 @@ public class CompanyAttachments implements
 
     /**
      * Create Company Attachment and Upload File
-     * Upload a file and create a company attachment. We recommend uploading
+     * 
+     * <p>Upload a file and create a company attachment. We recommend uploading
      * PDF files for optimal compatibility. However, the following file types are
      * allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx. 
      * 
-     * scope: `company_attachments:write`
+     * <p>scope: `company_attachments:write`
+     * 
      * @return The call builder
      */
     public PostV1CompaniesAttachmentRequestBuilder create() {
@@ -377,11 +399,13 @@ public class CompanyAttachments implements
 
     /**
      * Create Company Attachment and Upload File
-     * Upload a file and create a company attachment. We recommend uploading
+     * 
+     * <p>Upload a file and create a company attachment. We recommend uploading
      * PDF files for optimal compatibility. However, the following file types are
      * allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx. 
      * 
-     * scope: `company_attachments:write`
+     * <p>scope: `company_attachments:write`
+     * 
      * @param companyId The UUID of the company
      * @param requestBody The binary payload of the file and the company attachment category.
      * @return The response from the API call
@@ -395,13 +419,15 @@ public class CompanyAttachments implements
     
     /**
      * Create Company Attachment and Upload File
-     * Upload a file and create a company attachment. We recommend uploading
+     * 
+     * <p>Upload a file and create a company attachment. We recommend uploading
      * PDF files for optimal compatibility. However, the following file types are
      * allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx. 
      * 
-     * scope: `company_attachments:write`
+     * <p>scope: `company_attachments:write`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody The binary payload of the file and the company attachment category.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -452,6 +478,7 @@ public class CompanyAttachments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-attachment", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -463,6 +490,7 @@ public class CompanyAttachments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-attachment",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -472,6 +500,7 @@ public class CompanyAttachments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-attachment",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -481,6 +510,7 @@ public class CompanyAttachments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-attachment",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

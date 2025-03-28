@@ -17,7 +17,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * PostV1JobsJobIdRequestBody - Create a job.
+ * PostV1JobsJobIdRequestBody
+ * 
+ * <p>Create a job.
  */
 
 public class PostV1JobsJobIdRequestBody {

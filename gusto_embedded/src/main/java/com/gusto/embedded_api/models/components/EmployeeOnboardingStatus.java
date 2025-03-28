@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EmployeeOnboardingStatus - The representation of an employee's onboarding status.
+ * EmployeeOnboardingStatus
+ * 
+ * <p>The representation of an employee's onboarding status.
  */
 
 public class EmployeeOnboardingStatus {

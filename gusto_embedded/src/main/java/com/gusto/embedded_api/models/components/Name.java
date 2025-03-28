@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Name - The name of the paid time off type.
+ * Name
+ * 
+ * <p>The name of the paid time off type.
  */
 public enum Name {
     VACATION_HOURS("Vacation Hours"),

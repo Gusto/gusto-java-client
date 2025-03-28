@@ -35,7 +35,7 @@ public class Application {
 
         GetWireInRequestsWireInRequestUuidResponse res = sdk.wireInRequests().get()
                 .wireInRequestUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.wireInRequest().isPresent()) {
@@ -90,7 +90,7 @@ public class Application {
 
         PutWireInRequestsWireInRequestUuidResponse res = sdk.wireInRequests().submit()
                 .wireInRequestUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutWireInRequestsWireInRequestUuidRequestBody.builder()
                     .dateSent("2024-06-10T00:00:00Z")
                     .bankName("Chase")
@@ -151,7 +151,7 @@ public class Application {
 
         GetCompaniesCompanyUuidWireInRequestUuidResponse res = sdk.wireInRequests().list()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.wireInRequestList().isPresent()) {

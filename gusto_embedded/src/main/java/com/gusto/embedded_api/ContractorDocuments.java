@@ -57,9 +57,11 @@ public class ContractorDocuments implements
 
     /**
      * Get all contractor documents
-     * Get a list of all contractor's documents
      * 
-     * scope: `contractor_documents:read`
+     * <p>Get a list of all contractor's documents
+     * 
+     * <p>scope: `contractor_documents:read`
+     * 
      * @return The call builder
      */
     public GetV1ContractorDocumentsRequestBuilder getAll() {
@@ -68,9 +70,11 @@ public class ContractorDocuments implements
 
     /**
      * Get all contractor documents
-     * Get a list of all contractor's documents
      * 
-     * scope: `contractor_documents:read`
+     * <p>Get a list of all contractor's documents
+     * 
+     * <p>scope: `contractor_documents:read`
+     * 
      * @param contractorUuid The UUID of the contractor
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -82,11 +86,13 @@ public class ContractorDocuments implements
     
     /**
      * Get all contractor documents
-     * Get a list of all contractor's documents
      * 
-     * scope: `contractor_documents:read`
+     * <p>Get a list of all contractor's documents
+     * 
+     * <p>scope: `contractor_documents:read`
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -121,6 +127,7 @@ public class ContractorDocuments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractor-documents", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -132,6 +139,7 @@ public class ContractorDocuments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-documents",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -141,6 +149,7 @@ public class ContractorDocuments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-documents",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -150,6 +159,7 @@ public class ContractorDocuments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-documents",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -211,9 +221,11 @@ public class ContractorDocuments implements
 
     /**
      * Get a contractor document
-     * Get a contractor document.
      * 
-     * scope: `contractor_documents:read`
+     * <p>Get a contractor document.
+     * 
+     * <p>scope: `contractor_documents:read`
+     * 
      * @return The call builder
      */
     public GetV1ContractorDocumentRequestBuilder get() {
@@ -222,9 +234,11 @@ public class ContractorDocuments implements
 
     /**
      * Get a contractor document
-     * Get a contractor document.
      * 
-     * scope: `contractor_documents:read`
+     * <p>Get a contractor document.
+     * 
+     * <p>scope: `contractor_documents:read`
+     * 
      * @param documentUuid The ID or UUID of the document
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -236,11 +250,13 @@ public class ContractorDocuments implements
     
     /**
      * Get a contractor document
-     * Get a contractor document.
      * 
-     * scope: `contractor_documents:read`
+     * <p>Get a contractor document.
+     * 
+     * <p>scope: `contractor_documents:read`
+     * 
      * @param documentUuid The ID or UUID of the document
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -275,6 +291,7 @@ public class ContractorDocuments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractor-document", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -286,6 +303,7 @@ public class ContractorDocuments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-document",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -295,6 +313,7 @@ public class ContractorDocuments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-document",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -304,6 +323,7 @@ public class ContractorDocuments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-document",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -365,9 +385,11 @@ public class ContractorDocuments implements
 
     /**
      * Get the contractor document pdf
-     * Get the contractor document pdf.
      * 
-     * scope: `contractor_documents:read`
+     * <p>Get the contractor document pdf.
+     * 
+     * <p>scope: `contractor_documents:read`
+     * 
      * @return The call builder
      */
     public GetV1ContractorDocumentPdfRequestBuilder getPdf() {
@@ -376,9 +398,11 @@ public class ContractorDocuments implements
 
     /**
      * Get the contractor document pdf
-     * Get the contractor document pdf.
      * 
-     * scope: `contractor_documents:read`
+     * <p>Get the contractor document pdf.
+     * 
+     * <p>scope: `contractor_documents:read`
+     * 
      * @param documentUuid The ID or UUID of the document
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -390,11 +414,13 @@ public class ContractorDocuments implements
     
     /**
      * Get the contractor document pdf
-     * Get the contractor document pdf.
      * 
-     * scope: `contractor_documents:read`
+     * <p>Get the contractor document pdf.
+     * 
+     * <p>scope: `contractor_documents:read`
+     * 
      * @param documentUuid The ID or UUID of the document
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -429,6 +455,7 @@ public class ContractorDocuments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractor-document-pdf", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -440,6 +467,7 @@ public class ContractorDocuments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-document-pdf",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -449,6 +477,7 @@ public class ContractorDocuments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-document-pdf",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -458,6 +487,7 @@ public class ContractorDocuments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor-document-pdf",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -519,9 +549,11 @@ public class ContractorDocuments implements
 
     /**
      * Sign a contractor document
-     * Sign a contractor document.
      * 
-     * scope: `contractor_documents:write`
+     * <p>Sign a contractor document.
+     * 
+     * <p>scope: `contractor_documents:write`
+     * 
      * @return The call builder
      */
     public PutV1ContractorDocumentSignRequestBuilder sign() {
@@ -530,11 +562,13 @@ public class ContractorDocuments implements
 
     /**
      * Sign a contractor document
-     * Sign a contractor document.
      * 
-     * scope: `contractor_documents:write`
+     * <p>Sign a contractor document.
+     * 
+     * <p>scope: `contractor_documents:write`
+     * 
      * @param documentUuid The ID or UUID of the document
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -546,13 +580,15 @@ public class ContractorDocuments implements
     
     /**
      * Sign a contractor document
-     * Sign a contractor document.
      * 
-     * scope: `contractor_documents:write`
+     * <p>Sign a contractor document.
+     * 
+     * <p>scope: `contractor_documents:write`
+     * 
      * @param documentUuid The ID or UUID of the document
      * @param xGustoClientIp Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -604,6 +640,7 @@ public class ContractorDocuments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-contractor-document-sign", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -615,6 +652,7 @@ public class ContractorDocuments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-contractor-document-sign",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -624,6 +662,7 @@ public class ContractorDocuments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-contractor-document-sign",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -633,6 +672,7 @@ public class ContractorDocuments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-contractor-document-sign",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

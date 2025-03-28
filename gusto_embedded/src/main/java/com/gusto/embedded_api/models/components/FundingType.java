@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * FundingType - Company's default funding type
+ * FundingType
+ * 
+ * <p>Company's default funding type
  */
 public enum FundingType {
     ACH("ach"),
