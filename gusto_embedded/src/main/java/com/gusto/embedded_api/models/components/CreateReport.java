@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CreateReport - Example response
+ * CreateReport
+ * 
+ * <p>Example response
  */
 
 public class CreateReport {

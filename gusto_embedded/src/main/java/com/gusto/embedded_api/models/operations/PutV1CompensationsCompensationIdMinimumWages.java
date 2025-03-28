@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutV1CompensationsCompensationIdMinimumWages - The minimum wage record you want to apply to the compensation
+ * PutV1CompensationsCompensationIdMinimumWages
+ * 
+ * <p>The minimum wage record you want to apply to the compensation
  */
 
 public class PutV1CompensationsCompensationIdMinimumWages {

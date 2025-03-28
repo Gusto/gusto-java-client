@@ -16,7 +16,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Termination - The representation of a termination in Gusto.
+ * Termination
+ * 
+ * <p>The representation of a termination in Gusto.
  */
 
 public class Termination {

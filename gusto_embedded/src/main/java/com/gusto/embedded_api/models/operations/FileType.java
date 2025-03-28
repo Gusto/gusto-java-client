@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * FileType - The type of file to generate
+ * FileType
+ * 
+ * <p>The type of file to generate
  */
 public enum FileType {
     CSV("csv"),

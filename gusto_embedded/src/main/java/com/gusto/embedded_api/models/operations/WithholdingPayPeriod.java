@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * WithholdingPayPeriod - The payment schedule tax rate the payroll is based on.
+ * WithholdingPayPeriod
+ * 
+ * <p>The payment schedule tax rate the payroll is based on.
  */
 public enum WithholdingPayPeriod {
     EVERY_WEEK("Every week"),

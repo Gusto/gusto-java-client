@@ -18,7 +18,9 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
 /**
- * PostV1PlaidProcessorTokenResponseBody - A JSON object containing bank information
+ * PostV1PlaidProcessorTokenResponseBody
+ * 
+ * <p>A JSON object containing bank information
  */
 
 @JsonDeserialize(using = PostV1PlaidProcessorTokenResponseBody._Deserializer.class)

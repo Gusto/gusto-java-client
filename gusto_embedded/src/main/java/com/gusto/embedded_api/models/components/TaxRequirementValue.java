@@ -19,7 +19,9 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
 /**
- * TaxRequirementValue - The required value of the requirement identified by `key`
+ * TaxRequirementValue
+ * 
+ * <p>The required value of the requirement identified by `key`
  */
 
 @JsonDeserialize(using = TaxRequirementValue._Deserializer.class)

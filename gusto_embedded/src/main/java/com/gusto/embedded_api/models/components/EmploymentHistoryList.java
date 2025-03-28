@@ -17,7 +17,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EmploymentHistoryList - Example response
+ * EmploymentHistoryList
+ * 
+ * <p>Example response
  */
 
 public class EmploymentHistoryList {

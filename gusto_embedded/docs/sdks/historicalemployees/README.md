@@ -20,13 +20,7 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.EmployeeStateTaxes;
-import com.gusto.embedded_api.models.operations.Job;
-import com.gusto.embedded_api.models.operations.PutV1HistoricalEmployeesHomeAddress;
-import com.gusto.embedded_api.models.operations.PutV1HistoricalEmployeesRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1HistoricalEmployeesResponse;
-import com.gusto.embedded_api.models.operations.Termination;
-import com.gusto.embedded_api.models.operations.WorkAddress;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.time.LocalDate;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -42,7 +36,7 @@ public class Application {
         PutV1HistoricalEmployeesResponse res = sdk.historicalEmployees().update()
                 .companyUuid("<id>")
                 .historicalEmployeeUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1HistoricalEmployeesRequestBody.builder()
                     .version("db0edd04aaac4506f7edab03ac855d56")
                     .firstName("Soren")

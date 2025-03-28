@@ -27,9 +27,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.HomeAddress;
-import com.gusto.embedded_api.models.operations.PostV1CompanySignatoriesRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1CompanySignatoriesResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -42,7 +40,7 @@ public class Application {
 
         PostV1CompanySignatoriesResponse res = sdk.signatories().create()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompanySignatoriesRequestBody.builder()
                     .ssn("<value>")
                     .firstName("Jed")
@@ -112,7 +110,7 @@ public class Application {
 
         GetV1CompaniesCompanyUuidSignatoriesResponse res = sdk.signatories().list()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.signatoryList().isPresent()) {
@@ -165,7 +163,7 @@ public class Application {
 
         PostV1CompaniesCompanyUuidSignatoriesInviteResponse res = sdk.signatories().invite()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody.builder()
                     .email("Maureen_Wyman@yahoo.com")
                     .build())
@@ -226,7 +224,7 @@ public class Application {
         PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse res = sdk.signatories().update()
                 .companyUuid("<id>")
                 .signatoryUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody.builder()
                     .build())
                 .call();
@@ -285,7 +283,7 @@ public class Application {
         DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse res = sdk.signatories().delete()
                 .companyUuid("<id>")
                 .signatoryUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response

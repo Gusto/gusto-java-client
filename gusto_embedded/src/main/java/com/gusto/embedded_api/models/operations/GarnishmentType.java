@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * GarnishmentType - The specific type of garnishment for court ordered garnishments.
+ * GarnishmentType
+ * 
+ * <p>The specific type of garnishment for court ordered garnishments.
  */
 public enum GarnishmentType {
     CHILD_SUPPORT("child_support"),

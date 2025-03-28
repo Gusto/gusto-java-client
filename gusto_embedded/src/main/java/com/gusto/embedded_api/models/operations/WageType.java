@@ -9,8 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * WageType - The contractor’s wage type.
+ * WageType
  * 
+ * <p>The contractor’s wage type.
  */
 public enum WageType {
     FIXED("Fixed"),

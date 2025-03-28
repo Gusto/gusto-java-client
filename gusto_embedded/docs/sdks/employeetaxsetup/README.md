@@ -36,7 +36,7 @@ public class Application {
 
         GetV1EmployeesEmployeeIdFederalTaxesResponse res = sdk.employeeTaxSetup().getFederalTaxes()
                 .employeeUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeeFederalTax().isPresent()) {
@@ -91,7 +91,7 @@ public class Application {
 
         PutV1EmployeesEmployeeIdFederalTaxesResponse res = sdk.employeeTaxSetup().updateFederalTaxes()
                 .employeeUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeesEmployeeIdFederalTaxesRequestBody.builder()
                     .version("56a489ce86ed6c1b0f0cecc4050a0b01")
                     .filingStatus("Single")
@@ -168,7 +168,7 @@ public class Application {
 
         GetV1EmployeesEmployeeIdStateTaxesResponse res = sdk.employeeTaxSetup().getStateTaxes()
                 .employeeUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeeStateTaxesList().isPresent()) {
@@ -211,11 +211,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.Answers;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdStateTaxesRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdStateTaxesResponse;
-import com.gusto.embedded_api.models.operations.Questions;
-import com.gusto.embedded_api.models.operations.States;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -230,7 +226,7 @@ public class Application {
 
         PutV1EmployeesEmployeeIdStateTaxesResponse res = sdk.employeeTaxSetup().updateStateTaxes()
                 .employeeUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeesEmployeeIdStateTaxesRequestBody.builder()
                     .states(List.of(
                         States.builder()
@@ -240,7 +236,7 @@ public class Application {
                                     .key("filing_status")
                                     .answers(List.of(
                                         Answers.builder()
-                                            .value("M")
+                                            .value(Value.of("M"))
                                             .validFrom("2010-01-01")
                                             .validUpTo(JsonNullable.of(null))
                                             .build()))
@@ -249,7 +245,7 @@ public class Application {
                                     .key("withholding_allowance")
                                     .answers(List.of(
                                         Answers.builder()
-                                            .value("2")
+                                            .value(Value.of(2))
                                             .validFrom("2010-01-01")
                                             .validUpTo(JsonNullable.of(null))
                                             .build()))
@@ -258,7 +254,7 @@ public class Application {
                                     .key("additional_withholding")
                                     .answers(List.of(
                                         Answers.builder()
-                                            .value("25.0")
+                                            .value(Value.of("25.0"))
                                             .validFrom("2010-01-01")
                                             .validUpTo(JsonNullable.of(null))
                                             .build()))
@@ -267,7 +263,7 @@ public class Application {
                                     .key("file_new_hire_report")
                                     .answers(List.of(
                                         Answers.builder()
-                                            .value("true")
+                                            .value(Value.of(true))
                                             .validFrom("2010-01-01")
                                             .validUpTo(JsonNullable.of(null))
                                             .build()))

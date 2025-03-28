@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome - Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
+ * EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome
+ * 
+ * <p>Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
  */
 public enum EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome {
     UNSET("unset"),

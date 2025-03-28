@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PaymentDirection - The direction of the payment
+ * PaymentDirection
+ * 
+ * <p>The direction of the payment
  */
 public enum PaymentDirection {
     CREDIT("credit"),

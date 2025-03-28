@@ -40,7 +40,7 @@ public class Application {
 
         PostV1CompaniesCompanyIdEarningTypesResponse res = sdk.earningTypes().create()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyIdEarningTypesRequestBody.builder()
                     .name("Gym Membership Stipend")
                     .build())
@@ -104,7 +104,7 @@ public class Application {
 
         GetV1CompaniesCompanyIdEarningTypesResponse res = sdk.earningTypes().list()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.earningTypeList().isPresent()) {
@@ -160,7 +160,7 @@ public class Application {
         PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse res = sdk.earningTypes().update()
                 .companyId("<id>")
                 .earningTypeUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody.builder()
                     .name("Gym Membership Stipend")
                     .build())
@@ -220,7 +220,7 @@ public class Application {
         DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse res = sdk.earningTypes().delete()
                 .companyId("<id>")
                 .earningTypeUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response

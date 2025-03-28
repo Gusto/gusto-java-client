@@ -62,11 +62,13 @@ public class Locations implements
 
     /**
      * Create a company location
-     * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
      * 
-     * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+     * <p>Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
      * 
-     * scope: `companies:write`
+     * <p>Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+     * 
+     * <p>scope: `companies:write`
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdLocationsRequestBuilder create() {
@@ -75,11 +77,13 @@ public class Locations implements
 
     /**
      * Create a company location
-     * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
      * 
-     * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+     * <p>Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
      * 
-     * scope: `companies:write`
+     * <p>Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+     * 
+     * <p>scope: `companies:write`
+     * 
      * @param companyId The UUID of the company
      * @param requestBody Create a company location.
      * @return The response from the API call
@@ -93,13 +97,15 @@ public class Locations implements
     
     /**
      * Create a company location
-     * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
      * 
-     * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+     * <p>Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
      * 
-     * scope: `companies:write`
+     * <p>Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+     * 
+     * <p>scope: `companies:write`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody Create a company location.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -150,6 +156,7 @@ public class Locations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_id-locations", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -161,6 +168,7 @@ public class Locations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-locations",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -170,6 +178,7 @@ public class Locations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-locations",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -179,6 +188,7 @@ public class Locations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-locations",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -254,11 +264,13 @@ public class Locations implements
 
     /**
      * Get company locations
-     * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
      * 
-     * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+     * <p>Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
      * 
-     * scope: `companies:read`
+     * <p>Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdLocationsRequestBuilder get() {
@@ -267,11 +279,13 @@ public class Locations implements
 
     /**
      * Get company locations
-     * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
      * 
-     * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+     * <p>Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
      * 
-     * scope: `companies:read`
+     * <p>Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -283,15 +297,17 @@ public class Locations implements
     
     /**
      * Get company locations
-     * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
      * 
-     * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+     * <p>Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
      * 
-     * scope: `companies:read`
+     * <p>Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @param companyId The UUID of the company
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -335,6 +351,7 @@ public class Locations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-locations", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -346,6 +363,7 @@ public class Locations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-locations",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -355,6 +373,7 @@ public class Locations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-locations",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -364,6 +383,7 @@ public class Locations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-locations",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -425,9 +445,11 @@ public class Locations implements
 
     /**
      * Get a location
-     * Get a location.
      * 
-     * scope: `companies:read`
+     * <p>Get a location.
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @return The call builder
      */
     public GetV1LocationsLocationIdRequestBuilder retrieve() {
@@ -436,9 +458,11 @@ public class Locations implements
 
     /**
      * Get a location
-     * Get a location.
      * 
-     * scope: `companies:read`
+     * <p>Get a location.
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @param locationId The UUID of the location
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -450,11 +474,13 @@ public class Locations implements
     
     /**
      * Get a location
-     * Get a location.
      * 
-     * scope: `companies:read`
+     * <p>Get a location.
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @param locationId The UUID of the location
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -489,6 +515,7 @@ public class Locations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-locations-location_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -500,6 +527,7 @@ public class Locations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-locations-location_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -509,6 +537,7 @@ public class Locations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-locations-location_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -518,6 +547,7 @@ public class Locations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-locations-location_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -579,9 +609,11 @@ public class Locations implements
 
     /**
      * Update a location
-     * Update a location.
      * 
-     * scope: `companies.write`
+     * <p>Update a location.
+     * 
+     * <p>scope: `companies.write`
+     * 
      * @return The call builder
      */
     public PutV1LocationsLocationIdRequestBuilder update() {
@@ -590,9 +622,11 @@ public class Locations implements
 
     /**
      * Update a location
-     * Update a location.
      * 
-     * scope: `companies.write`
+     * <p>Update a location.
+     * 
+     * <p>scope: `companies.write`
+     * 
      * @param locationId The UUID of the location
      * @param requestBody Update a location
      * @return The response from the API call
@@ -606,11 +640,13 @@ public class Locations implements
     
     /**
      * Update a location
-     * Update a location.
      * 
-     * scope: `companies.write`
+     * <p>Update a location.
+     * 
+     * <p>scope: `companies.write`
+     * 
      * @param locationId The UUID of the location
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody Update a location
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -661,6 +697,7 @@ public class Locations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-locations-location_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -672,6 +709,7 @@ public class Locations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-locations-location_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -681,6 +719,7 @@ public class Locations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-locations-location_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -690,6 +729,7 @@ public class Locations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-locations-location_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -765,9 +805,11 @@ public class Locations implements
 
     /**
      * Get minimum wages for a location
-     * Get minimum wages for a location
      * 
-     * scope: `companies:read`
+     * <p>Get minimum wages for a location
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @return The call builder
      */
     public GetV1LocationsLocationUuidMinimumWagesRequestBuilder getMinimumWages() {
@@ -776,9 +818,11 @@ public class Locations implements
 
     /**
      * Get minimum wages for a location
-     * Get minimum wages for a location
      * 
-     * scope: `companies:read`
+     * <p>Get minimum wages for a location
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @param locationUuid The UUID of the location
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -790,12 +834,14 @@ public class Locations implements
     
     /**
      * Get minimum wages for a location
-     * Get minimum wages for a location
      * 
-     * scope: `companies:read`
+     * <p>Get minimum wages for a location
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @param locationUuid The UUID of the location
-     * @param effectiveDate
-     * @param xGustoAPIVersion
+     * @param effectiveDate 
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -837,6 +883,7 @@ public class Locations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-locations-location_uuid-minimum_wages", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -848,6 +895,7 @@ public class Locations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-locations-location_uuid-minimum_wages",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -857,6 +905,7 @@ public class Locations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-locations-location_uuid-minimum_wages",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -866,6 +915,7 @@ public class Locations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-locations-location_uuid-minimum_wages",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

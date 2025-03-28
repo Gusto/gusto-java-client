@@ -9,8 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutV1ContractorsContractorUuidWageType - The contractor’s wage type.
+ * PutV1ContractorsContractorUuidWageType
  * 
+ * <p>The contractor’s wage type.
  */
 public enum PutV1ContractorsContractorUuidWageType {
     FIXED("Fixed"),

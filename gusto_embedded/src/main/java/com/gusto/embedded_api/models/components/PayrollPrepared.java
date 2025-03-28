@@ -20,7 +20,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * PayrollPrepared - An off-cycle payroll
+ * PayrollPrepared
+ * 
+ * <p>An off-cycle payroll
  */
 
 public class PayrollPrepared {

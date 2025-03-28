@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * AccountType - The bank account type
+ * AccountType
+ * 
+ * <p>The bank account type
  */
 public enum AccountType {
     CHECKING("Checking"),

@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EmployeeBenefitForCompanyBenefitContribution - An object representing the type and value of the company contribution.
+ * EmployeeBenefitForCompanyBenefitContribution
+ * 
+ * <p>An object representing the type and value of the company contribution.
  */
 
 public class EmployeeBenefitForCompanyBenefitContribution {
@@ -24,11 +26,11 @@ public class EmployeeBenefitForCompanyBenefitContribution {
     /**
      * The company contribution scheme.
      * 
-     * "amount": The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>"amount": The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * "percentage": The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>"percentage": The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * "tiered": The company contribution varies according to the size of the employee deduction.
+     * <p>"tiered": The company contribution varies according to the size of the employee deduction.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
@@ -37,7 +39,7 @@ public class EmployeeBenefitForCompanyBenefitContribution {
     /**
      * For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
      * 
-     * For the `tiered` contribution type, an array of tiers.
+     * <p>For the `tiered` contribution type, an array of tiers.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("value")
@@ -60,11 +62,11 @@ public class EmployeeBenefitForCompanyBenefitContribution {
     /**
      * The company contribution scheme.
      * 
-     * "amount": The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>"amount": The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * "percentage": The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>"percentage": The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * "tiered": The company contribution varies according to the size of the employee deduction.
+     * <p>"tiered": The company contribution varies according to the size of the employee deduction.
      */
     @JsonIgnore
     public Optional<String> type() {
@@ -74,7 +76,7 @@ public class EmployeeBenefitForCompanyBenefitContribution {
     /**
      * For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
      * 
-     * For the `tiered` contribution type, an array of tiers.
+     * <p>For the `tiered` contribution type, an array of tiers.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -89,11 +91,11 @@ public class EmployeeBenefitForCompanyBenefitContribution {
     /**
      * The company contribution scheme.
      * 
-     * "amount": The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>"amount": The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * "percentage": The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>"percentage": The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * "tiered": The company contribution varies according to the size of the employee deduction.
+     * <p>"tiered": The company contribution varies according to the size of the employee deduction.
      */
     public EmployeeBenefitForCompanyBenefitContribution withType(String type) {
         Utils.checkNotNull(type, "type");
@@ -104,11 +106,11 @@ public class EmployeeBenefitForCompanyBenefitContribution {
     /**
      * The company contribution scheme.
      * 
-     * "amount": The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>"amount": The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * "percentage": The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>"percentage": The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * "tiered": The company contribution varies according to the size of the employee deduction.
+     * <p>"tiered": The company contribution varies according to the size of the employee deduction.
      */
     public EmployeeBenefitForCompanyBenefitContribution withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
@@ -119,7 +121,7 @@ public class EmployeeBenefitForCompanyBenefitContribution {
     /**
      * For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
      * 
-     * For the `tiered` contribution type, an array of tiers.
+     * <p>For the `tiered` contribution type, an array of tiers.
      */
     public EmployeeBenefitForCompanyBenefitContribution withValue(EmployeeBenefitForCompanyBenefitValue value) {
         Utils.checkNotNull(value, "value");
@@ -130,7 +132,7 @@ public class EmployeeBenefitForCompanyBenefitContribution {
     /**
      * For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
      * 
-     * For the `tiered` contribution type, an array of tiers.
+     * <p>For the `tiered` contribution type, an array of tiers.
      */
     public EmployeeBenefitForCompanyBenefitContribution withValue(Optional<? extends EmployeeBenefitForCompanyBenefitValue> value) {
         Utils.checkNotNull(value, "value");
@@ -179,11 +181,11 @@ public class EmployeeBenefitForCompanyBenefitContribution {
         /**
          * The company contribution scheme.
          * 
-         * "amount": The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
+         * <p>"amount": The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
          * 
-         * "percentage": The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+         * <p>"percentage": The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
          * 
-         * "tiered": The company contribution varies according to the size of the employee deduction.
+         * <p>"tiered": The company contribution varies according to the size of the employee deduction.
          */
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
@@ -194,11 +196,11 @@ public class EmployeeBenefitForCompanyBenefitContribution {
         /**
          * The company contribution scheme.
          * 
-         * "amount": The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
+         * <p>"amount": The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
          * 
-         * "percentage": The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+         * <p>"percentage": The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
          * 
-         * "tiered": The company contribution varies according to the size of the employee deduction.
+         * <p>"tiered": The company contribution varies according to the size of the employee deduction.
          */
         public Builder type(Optional<String> type) {
             Utils.checkNotNull(type, "type");
@@ -209,7 +211,7 @@ public class EmployeeBenefitForCompanyBenefitContribution {
         /**
          * For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
          * 
-         * For the `tiered` contribution type, an array of tiers.
+         * <p>For the `tiered` contribution type, an array of tiers.
          */
         public Builder value(EmployeeBenefitForCompanyBenefitValue value) {
             Utils.checkNotNull(value, "value");
@@ -220,7 +222,7 @@ public class EmployeeBenefitForCompanyBenefitContribution {
         /**
          * For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
          * 
-         * For the `tiered` contribution type, an array of tiers.
+         * <p>For the `tiered` contribution type, an array of tiers.
          */
         public Builder value(Optional<? extends EmployeeBenefitForCompanyBenefitValue> value) {
             Utils.checkNotNull(value, "value");

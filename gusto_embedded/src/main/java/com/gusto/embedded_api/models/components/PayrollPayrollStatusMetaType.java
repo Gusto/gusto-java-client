@@ -16,7 +16,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayrollPayrollStatusMetaType - Information about the payroll's status and expected dates
+ * PayrollPayrollStatusMetaType
+ * 
+ * <p>Information about the payroll's status and expected dates
  */
 
 public class PayrollPayrollStatusMetaType {

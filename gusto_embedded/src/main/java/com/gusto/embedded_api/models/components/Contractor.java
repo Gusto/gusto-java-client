@@ -20,7 +20,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * Contractor - The representation of a contractor (individual or business) in Gusto.
+ * Contractor
+ * 
+ * <p>The representation of a contractor (individual or business) in Gusto.
  */
 
 public class Contractor {
@@ -60,7 +62,7 @@ public class Contractor {
     private Optional<String> version;
 
     /**
-     * The contractor's type, either "Individual" or "Business". 
+     * The contractor's type, either "Individual" or "Business".
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
@@ -109,7 +111,7 @@ public class Contractor {
     private JsonNullable<Boolean> hasEin;
 
     /**
-     * The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors. 
+     * The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
@@ -306,7 +308,7 @@ public class Contractor {
     }
 
     /**
-     * The contractor's type, either "Individual" or "Business". 
+     * The contractor's type, either "Individual" or "Business".
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -363,7 +365,7 @@ public class Contractor {
     }
 
     /**
-     * The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors. 
+     * The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
      */
     @JsonIgnore
     public JsonNullable<String> email() {
@@ -540,7 +542,7 @@ public class Contractor {
     }
 
     /**
-     * The contractor's type, either "Individual" or "Business". 
+     * The contractor's type, either "Individual" or "Business".
      */
     public Contractor withType(ContractorType type) {
         Utils.checkNotNull(type, "type");
@@ -549,7 +551,7 @@ public class Contractor {
     }
 
     /**
-     * The contractor's type, either "Individual" or "Business". 
+     * The contractor's type, either "Individual" or "Business".
      */
     public Contractor withType(Optional<? extends ContractorType> type) {
         Utils.checkNotNull(type, "type");
@@ -666,7 +668,7 @@ public class Contractor {
     }
 
     /**
-     * The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors. 
+     * The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
      */
     public Contractor withEmail(String email) {
         Utils.checkNotNull(email, "email");
@@ -675,7 +677,7 @@ public class Contractor {
     }
 
     /**
-     * The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors. 
+     * The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
      */
     public Contractor withEmail(JsonNullable<String> email) {
         Utils.checkNotNull(email, "email");
@@ -1090,7 +1092,7 @@ public class Contractor {
         }
 
         /**
-         * The contractor's type, either "Individual" or "Business". 
+         * The contractor's type, either "Individual" or "Business".
          */
         public Builder type(ContractorType type) {
             Utils.checkNotNull(type, "type");
@@ -1099,7 +1101,7 @@ public class Contractor {
         }
 
         /**
-         * The contractor's type, either "Individual" or "Business". 
+         * The contractor's type, either "Individual" or "Business".
          */
         public Builder type(Optional<? extends ContractorType> type) {
             Utils.checkNotNull(type, "type");
@@ -1216,7 +1218,7 @@ public class Contractor {
         }
 
         /**
-         * The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors. 
+         * The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
          */
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
@@ -1225,7 +1227,7 @@ public class Contractor {
         }
 
         /**
-         * The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors. 
+         * The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
          */
         public Builder email(JsonNullable<String> email) {
             Utils.checkNotNull(email, "email");

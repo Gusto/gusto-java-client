@@ -20,7 +20,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * PostV1CompaniesCompanyUuidContractorsRequestBody - Create an individual or business contractor.
+ * PostV1CompaniesCompanyUuidContractorsRequestBody
+ * 
+ * <p>Create an individual or business contractor.
  */
 
 public class PostV1CompaniesCompanyUuidContractorsRequestBody {
@@ -34,14 +36,12 @@ public class PostV1CompaniesCompanyUuidContractorsRequestBody {
 
     /**
      * The contractor’s wage type.
-     * 
      */
     @JsonProperty("wage_type")
     private WageType wageType;
 
     /**
      * The day when the contractor will start working for the company.
-     * 
      */
     @JsonProperty("start_date")
     private String startDate;
@@ -206,7 +206,6 @@ public class PostV1CompaniesCompanyUuidContractorsRequestBody {
 
     /**
      * The contractor’s wage type.
-     * 
      */
     @JsonIgnore
     public WageType wageType() {
@@ -215,7 +214,6 @@ public class PostV1CompaniesCompanyUuidContractorsRequestBody {
 
     /**
      * The day when the contractor will start working for the company.
-     * 
      */
     @JsonIgnore
     public String startDate() {
@@ -352,7 +350,6 @@ public class PostV1CompaniesCompanyUuidContractorsRequestBody {
 
     /**
      * The contractor’s wage type.
-     * 
      */
     public PostV1CompaniesCompanyUuidContractorsRequestBody withWageType(WageType wageType) {
         Utils.checkNotNull(wageType, "wageType");
@@ -362,7 +359,6 @@ public class PostV1CompaniesCompanyUuidContractorsRequestBody {
 
     /**
      * The day when the contractor will start working for the company.
-     * 
      */
     public PostV1CompaniesCompanyUuidContractorsRequestBody withStartDate(String startDate) {
         Utils.checkNotNull(startDate, "startDate");
@@ -729,7 +725,6 @@ public class PostV1CompaniesCompanyUuidContractorsRequestBody {
 
         /**
          * The contractor’s wage type.
-         * 
          */
         public Builder wageType(WageType wageType) {
             Utils.checkNotNull(wageType, "wageType");
@@ -739,7 +734,6 @@ public class PostV1CompaniesCompanyUuidContractorsRequestBody {
 
         /**
          * The day when the contractor will start working for the company.
-         * 
          */
         public Builder startDate(String startDate) {
             Utils.checkNotNull(startDate, "startDate");

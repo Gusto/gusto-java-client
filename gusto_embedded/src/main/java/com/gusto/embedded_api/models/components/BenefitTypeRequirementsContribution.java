@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * BenefitTypeRequirementsContribution - An object representing the type and value of the company contribution.
+ * BenefitTypeRequirementsContribution
+ * 
+ * <p>An object representing the type and value of the company contribution.
  */
 
 public class BenefitTypeRequirementsContribution {

@@ -27,9 +27,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdBankAccountsAccountType;
-import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdBankAccountsRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdBankAccountsResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -42,7 +40,7 @@ public class Application {
 
         PostV1EmployeesEmployeeIdBankAccountsResponse res = sdk.employeePaymentMethod().create()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1EmployeesEmployeeIdBankAccountsRequestBody.builder()
                     .name("BoA Checking Account")
                     .routingNumber("266905059")
@@ -105,7 +103,7 @@ public class Application {
         DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse res = sdk.employeePaymentMethod().deleteBankAccount()
                 .employeeId("<id>")
                 .bankAccountUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -145,9 +143,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdBankAccountsAccountType;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdBankAccountsRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdBankAccountsResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -161,7 +157,7 @@ public class Application {
         PutV1EmployeesEmployeeIdBankAccountsResponse res = sdk.employeePaymentMethod().updateBankAccount()
                 .employeeId("<id>")
                 .bankAccountUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeesEmployeeIdBankAccountsRequestBody.builder()
                     .name("BoA Checking Account")
                     .routingNumber("266905059")
@@ -225,7 +221,7 @@ public class Application {
 
         GetV1EmployeesEmployeeIdPaymentMethodResponse res = sdk.employeePaymentMethod().get()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeePaymentMethod().isPresent()) {
@@ -267,11 +263,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdPaymentMethodRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdPaymentMethodResponse;
-import com.gusto.embedded_api.models.operations.SplitBy;
-import com.gusto.embedded_api.models.operations.Splits;
-import com.gusto.embedded_api.models.operations.Type;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -286,7 +278,7 @@ public class Application {
 
         PutV1EmployeesEmployeeIdPaymentMethodResponse res = sdk.employeePaymentMethod().update()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeesEmployeeIdPaymentMethodRequestBody.builder()
                     .version("63859768485e218ccf8a449bb60f14ed")
                     .type(Type.DIRECT_DEPOSIT)

@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ContractorPaymentReceiptTotals - The subtotals for the contractor payment.
+ * ContractorPaymentReceiptTotals
+ * 
+ * <p>The subtotals for the contractor payment.
  */
 
 public class ContractorPaymentReceiptTotals {

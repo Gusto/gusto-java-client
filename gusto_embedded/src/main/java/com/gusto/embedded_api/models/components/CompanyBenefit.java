@@ -19,7 +19,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CompanyBenefit - The representation of a company benefit.
+ * CompanyBenefit
+ * 
+ * <p>The representation of a company benefit.
  */
 
 public class CompanyBenefit {

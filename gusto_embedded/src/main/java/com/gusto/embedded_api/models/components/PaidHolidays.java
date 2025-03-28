@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PaidHolidays - Representation of a company's paid holidays as descibed by their Holiday Pay Policy
+ * PaidHolidays
+ * 
+ * <p>Representation of a company's paid holidays as descibed by their Holiday Pay Policy
  */
 
 public class PaidHolidays {

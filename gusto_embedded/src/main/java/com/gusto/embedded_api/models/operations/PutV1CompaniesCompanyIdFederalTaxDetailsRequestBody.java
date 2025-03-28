@@ -17,7 +17,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody - Attributes related to federal tax details that can be updated via this endpoint include:
+ * PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody
+ * 
+ * <p>Attributes related to federal tax details that can be updated via this endpoint include:
  */
 
 public class PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody {

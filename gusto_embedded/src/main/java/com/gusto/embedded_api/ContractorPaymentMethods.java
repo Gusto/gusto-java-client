@@ -43,11 +43,13 @@ public class ContractorPaymentMethods implements
 
     /**
      * Create a contractor bank account
-     * Creates a contractor bank account.
      * 
-     * Note: We currently only support one bank account per contractor. Using this endpoint on a contractor who already has a bank account will just replace it.
+     * <p>Creates a contractor bank account.
      * 
-     * scope: `contractor_payment_methods:write`
+     * <p>Note: We currently only support one bank account per contractor. Using this endpoint on a contractor who already has a bank account will just replace it.
+     * 
+     * <p>scope: `contractor_payment_methods:write`
+     * 
      * @return The call builder
      */
     public PostV1ContractorsContractorUuidBankAccountsRequestBuilder createBankAccount() {
@@ -56,13 +58,15 @@ public class ContractorPaymentMethods implements
 
     /**
      * Create a contractor bank account
-     * Creates a contractor bank account.
      * 
-     * Note: We currently only support one bank account per contractor. Using this endpoint on a contractor who already has a bank account will just replace it.
+     * <p>Creates a contractor bank account.
      * 
-     * scope: `contractor_payment_methods:write`
+     * <p>Note: We currently only support one bank account per contractor. Using this endpoint on a contractor who already has a bank account will just replace it.
+     * 
+     * <p>scope: `contractor_payment_methods:write`
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -74,14 +78,16 @@ public class ContractorPaymentMethods implements
     
     /**
      * Create a contractor bank account
-     * Creates a contractor bank account.
      * 
-     * Note: We currently only support one bank account per contractor. Using this endpoint on a contractor who already has a bank account will just replace it.
+     * <p>Creates a contractor bank account.
      * 
-     * scope: `contractor_payment_methods:write`
+     * <p>Note: We currently only support one bank account per contractor. Using this endpoint on a contractor who already has a bank account will just replace it.
+     * 
+     * <p>scope: `contractor_payment_methods:write`
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -131,6 +137,7 @@ public class ContractorPaymentMethods implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-contractors-contractor_uuid-bank_accounts", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -142,6 +149,7 @@ public class ContractorPaymentMethods implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-contractors-contractor_uuid-bank_accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -151,6 +159,7 @@ public class ContractorPaymentMethods implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-contractors-contractor_uuid-bank_accounts",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -160,6 +169,7 @@ public class ContractorPaymentMethods implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-contractors-contractor_uuid-bank_accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

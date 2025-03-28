@@ -18,7 +18,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayPeriodPayroll - Information about the payroll for the pay period.
+ * PayPeriodPayroll
+ * 
+ * <p>Information about the payroll for the pay period.
  */
 
 public class PayPeriodPayroll {

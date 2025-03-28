@@ -72,9 +72,11 @@ public class HolidayPayPolicies implements
 
     /**
      * Get a company's holiday pay policy
-     * Get a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:read`
+     * <p>Get a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:read`
+     * 
      * @return The call builder
      */
     public GetCompaniesCompanyUuidHolidayPayPolicyRequestBuilder get() {
@@ -83,9 +85,11 @@ public class HolidayPayPolicies implements
 
     /**
      * Get a company's holiday pay policy
-     * Get a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:read`
+     * <p>Get a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:read`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -97,11 +101,13 @@ public class HolidayPayPolicies implements
     
     /**
      * Get a company's holiday pay policy
-     * Get a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:read`
+     * <p>Get a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -136,6 +142,7 @@ public class HolidayPayPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-companies-company_uuid-holiday_pay_policy", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -147,6 +154,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-holiday_pay_policy",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -156,6 +164,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-holiday_pay_policy",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -165,6 +174,7 @@ public class HolidayPayPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-holiday_pay_policy",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -226,9 +236,11 @@ public class HolidayPayPolicies implements
 
     /**
      * Create a holiday pay policy for a company
-     * Create a holiday pay policy for a company
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Create a holiday pay policy for a company
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @return The call builder
      */
     public PostCompaniesCompanyUuidHolidayPayPolicyRequestBuilder create() {
@@ -237,11 +249,13 @@ public class HolidayPayPolicies implements
 
     /**
      * Create a holiday pay policy for a company
-     * Create a holiday pay policy for a company
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Create a holiday pay policy for a company
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -253,12 +267,14 @@ public class HolidayPayPolicies implements
     
     /**
      * Create a holiday pay policy for a company
-     * Create a holiday pay policy for a company
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Create a holiday pay policy for a company
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -308,6 +324,7 @@ public class HolidayPayPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-companies-company_uuid-holiday_pay_policy", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -319,6 +336,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-companies-company_uuid-holiday_pay_policy",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -328,6 +346,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-companies-company_uuid-holiday_pay_policy",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -337,6 +356,7 @@ public class HolidayPayPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-companies-company_uuid-holiday_pay_policy",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -412,9 +432,11 @@ public class HolidayPayPolicies implements
 
     /**
      * Update a company's holiday pay policy
-     * Update a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Update a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @return The call builder
      */
     public PutCompaniesCompanyUuidHolidayPayPolicyRequestBuilder update() {
@@ -423,11 +445,13 @@ public class HolidayPayPolicies implements
 
     /**
      * Update a company's holiday pay policy
-     * Update a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Update a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -439,12 +463,14 @@ public class HolidayPayPolicies implements
     
     /**
      * Update a company's holiday pay policy
-     * Update a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Update a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -494,6 +520,7 @@ public class HolidayPayPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-companies-company_uuid-holiday_pay_policy", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -505,6 +532,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-companies-company_uuid-holiday_pay_policy",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -514,6 +542,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-companies-company_uuid-holiday_pay_policy",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -523,6 +552,7 @@ public class HolidayPayPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-companies-company_uuid-holiday_pay_policy",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -598,9 +628,11 @@ public class HolidayPayPolicies implements
 
     /**
      * Delete a company's holiday pay policy
-     * Delete a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Delete a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @return The call builder
      */
     public DeleteCompaniesCompanyUuidHolidayPayPolicyRequestBuilder delete() {
@@ -609,9 +641,11 @@ public class HolidayPayPolicies implements
 
     /**
      * Delete a company's holiday pay policy
-     * Delete a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Delete a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -623,11 +657,13 @@ public class HolidayPayPolicies implements
     
     /**
      * Delete a company's holiday pay policy
-     * Delete a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Delete a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -662,6 +698,7 @@ public class HolidayPayPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-companies-company_uuid-holiday_pay_policy", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -673,6 +710,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-companies-company_uuid-holiday_pay_policy",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -682,6 +720,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-companies-company_uuid-holiday_pay_policy",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -691,6 +730,7 @@ public class HolidayPayPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-companies-company_uuid-holiday_pay_policy",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -755,9 +795,11 @@ public class HolidayPayPolicies implements
 
     /**
      * Add employees to a company's holiday pay policy
-     * Add employees to a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Add employees to a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @return The call builder
      */
     public PutCompaniesCompanyUuidHolidayPayPolicyAddRequestBuilder addEmployees() {
@@ -766,11 +808,13 @@ public class HolidayPayPolicies implements
 
     /**
      * Add employees to a company's holiday pay policy
-     * Add employees to a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Add employees to a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -782,12 +826,14 @@ public class HolidayPayPolicies implements
     
     /**
      * Add employees to a company's holiday pay policy
-     * Add employees to a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Add employees to a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -837,6 +883,7 @@ public class HolidayPayPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-companies-company_uuid-holiday_pay_policy-add", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -848,6 +895,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-companies-company_uuid-holiday_pay_policy-add",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -857,6 +905,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-companies-company_uuid-holiday_pay_policy-add",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -866,6 +915,7 @@ public class HolidayPayPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-companies-company_uuid-holiday_pay_policy-add",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -941,9 +991,11 @@ public class HolidayPayPolicies implements
 
     /**
      * Remove employees from a company's holiday pay policy
-     * Remove employees from a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Remove employees from a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @return The call builder
      */
     public PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBuilder removeEmployees() {
@@ -952,11 +1004,13 @@ public class HolidayPayPolicies implements
 
     /**
      * Remove employees from a company's holiday pay policy
-     * Remove employees from a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Remove employees from a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -968,12 +1022,14 @@ public class HolidayPayPolicies implements
     
     /**
      * Remove employees from a company's holiday pay policy
-     * Remove employees from a company's holiday pay policy
      * 
-     * scope: `holiday_pay_policies:write`
+     * <p>Remove employees from a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1023,6 +1079,7 @@ public class HolidayPayPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-companies-company_uuid-holiday_pay_policy-remove", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1034,6 +1091,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-companies-company_uuid-holiday_pay_policy-remove",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1043,6 +1101,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-companies-company_uuid-holiday_pay_policy-remove",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1052,6 +1111,7 @@ public class HolidayPayPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-companies-company_uuid-holiday_pay_policy-remove",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1127,9 +1187,11 @@ public class HolidayPayPolicies implements
 
     /**
      * Preview a company's paid holidays
-     * Preview a company's paid holidays
      * 
-     * scope: `holiday_pay_policies:read`
+     * <p>Preview a company's paid holidays
+     * 
+     * <p>scope: `holiday_pay_policies:read`
+     * 
      * @return The call builder
      */
     public GetCompaniesCompanyUuidPaidHolidaysRequestBuilder previewPaidHolidays() {
@@ -1138,11 +1200,13 @@ public class HolidayPayPolicies implements
 
     /**
      * Preview a company's paid holidays
-     * Preview a company's paid holidays
      * 
-     * scope: `holiday_pay_policies:read`
+     * <p>Preview a company's paid holidays
+     * 
+     * <p>scope: `holiday_pay_policies:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1154,12 +1218,14 @@ public class HolidayPayPolicies implements
     
     /**
      * Preview a company's paid holidays
-     * Preview a company's paid holidays
      * 
-     * scope: `holiday_pay_policies:read`
+     * <p>Preview a company's paid holidays
+     * 
+     * <p>scope: `holiday_pay_policies:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1209,6 +1275,7 @@ public class HolidayPayPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-companies-company_uuid-paid_holidays", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1220,6 +1287,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-paid_holidays",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1229,6 +1297,7 @@ public class HolidayPayPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-paid_holidays",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1238,6 +1307,7 @@ public class HolidayPayPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-paid_holidays",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

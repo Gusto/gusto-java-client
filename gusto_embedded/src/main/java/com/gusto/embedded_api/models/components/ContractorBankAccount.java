@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ContractorBankAccount - Example response
+ * ContractorBankAccount
+ * 
+ * <p>Example response
  */
 
 public class ContractorBankAccount {

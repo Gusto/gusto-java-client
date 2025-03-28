@@ -84,9 +84,11 @@ public class JobsAndCompensations implements
 
     /**
      * Create a job
-     * Create a job.
      * 
-     * scope: `jobs:write`
+     * <p>Create a job.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @return The call builder
      */
     public PostV1JobsJobIdRequestBuilder createJob() {
@@ -95,9 +97,11 @@ public class JobsAndCompensations implements
 
     /**
      * Create a job
-     * Create a job.
      * 
-     * scope: `jobs:write`
+     * <p>Create a job.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @param employeeId The UUID of the employee
      * @param requestBody Create a job.
      * @return The response from the API call
@@ -111,11 +115,13 @@ public class JobsAndCompensations implements
     
     /**
      * Create a job
-     * Create a job.
      * 
-     * scope: `jobs:write`
+     * <p>Create a job.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody Create a job.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -166,6 +172,7 @@ public class JobsAndCompensations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-jobs-job_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -177,6 +184,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-jobs-job_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -186,6 +194,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-jobs-job_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -195,6 +204,7 @@ public class JobsAndCompensations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-jobs-job_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -270,9 +280,11 @@ public class JobsAndCompensations implements
 
     /**
      * Get jobs for an employee
-     * Get all of the jobs that an employee holds.
      * 
-     * scope: `jobs:read`
+     * <p>Get all of the jobs that an employee holds.
+     * 
+     * <p>scope: `jobs:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdJobsRequestBuilder getJobs() {
@@ -281,9 +293,11 @@ public class JobsAndCompensations implements
 
     /**
      * Get jobs for an employee
-     * Get all of the jobs that an employee holds.
      * 
-     * scope: `jobs:read`
+     * <p>Get all of the jobs that an employee holds.
+     * 
+     * <p>scope: `jobs:read`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -316,6 +330,7 @@ public class JobsAndCompensations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-jobs", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -327,6 +342,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-jobs",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -336,6 +352,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-jobs",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -345,6 +362,7 @@ public class JobsAndCompensations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-jobs",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -406,9 +424,11 @@ public class JobsAndCompensations implements
 
     /**
      * Get a job
-     * Get a job.
      * 
-     * scope: `jobs:read`
+     * <p>Get a job.
+     * 
+     * <p>scope: `jobs:read`
+     * 
      * @return The call builder
      */
     public GetV1JobsJobIdRequestBuilder getJob() {
@@ -417,9 +437,11 @@ public class JobsAndCompensations implements
 
     /**
      * Get a job
-     * Get a job.
      * 
-     * scope: `jobs:read`
+     * <p>Get a job.
+     * 
+     * <p>scope: `jobs:read`
+     * 
      * @param jobId The UUID of the job
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -431,13 +453,15 @@ public class JobsAndCompensations implements
     
     /**
      * Get a job
-     * Get a job.
      * 
-     * scope: `jobs:read`
+     * <p>Get a job.
+     * 
+     * <p>scope: `jobs:read`
+     * 
      * @param jobId The UUID of the job
      * @param include Available options:
-    - all_compensations: Include all effective dated compensations for the job instead of only the current compensation
-     * @param xGustoAPIVersion
+     *         - all_compensations: Include all effective dated compensations for the job instead of only the current compensation
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -479,6 +503,7 @@ public class JobsAndCompensations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-jobs-job_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -490,6 +515,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-jobs-job_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -499,6 +525,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-jobs-job_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -508,6 +535,7 @@ public class JobsAndCompensations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-jobs-job_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -569,9 +597,11 @@ public class JobsAndCompensations implements
 
     /**
      * Update a job
-     * Update a job.
      * 
-     * scope: `jobs:write`
+     * <p>Update a job.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @return The call builder
      */
     public PutV1JobsJobIdRequestBuilder update() {
@@ -580,9 +610,11 @@ public class JobsAndCompensations implements
 
     /**
      * Update a job
-     * Update a job.
      * 
-     * scope: `jobs:write`
+     * <p>Update a job.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @param jobId The UUID of the job
      * @param requestBody Update a job.
      * @return The response from the API call
@@ -596,11 +628,13 @@ public class JobsAndCompensations implements
     
     /**
      * Update a job
-     * Update a job.
      * 
-     * scope: `jobs:write`
+     * <p>Update a job.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @param jobId The UUID of the job
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody Update a job.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -651,6 +685,7 @@ public class JobsAndCompensations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-jobs-job_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -662,6 +697,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-jobs-job_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -671,6 +707,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-jobs-job_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -680,6 +717,7 @@ public class JobsAndCompensations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-jobs-job_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -755,9 +793,11 @@ public class JobsAndCompensations implements
 
     /**
      * Delete an individual job
-     * Deletes a specific job that an employee holds.
      * 
-     * scope: `jobs:write`
+     * <p>Deletes a specific job that an employee holds.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @return The call builder
      */
     public DeleteV1JobsJobIdRequestBuilder delete() {
@@ -766,9 +806,11 @@ public class JobsAndCompensations implements
 
     /**
      * Delete an individual job
-     * Deletes a specific job that an employee holds.
      * 
-     * scope: `jobs:write`
+     * <p>Deletes a specific job that an employee holds.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @param jobId The UUID of the job
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -780,11 +822,13 @@ public class JobsAndCompensations implements
     
     /**
      * Delete an individual job
-     * Deletes a specific job that an employee holds.
      * 
-     * scope: `jobs:write`
+     * <p>Deletes a specific job that an employee holds.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @param jobId The UUID of the job
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -819,6 +863,7 @@ public class JobsAndCompensations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-jobs-job_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -830,6 +875,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-jobs-job_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -839,6 +885,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-jobs-job_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -848,6 +895,7 @@ public class JobsAndCompensations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-jobs-job_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -898,13 +946,15 @@ public class JobsAndCompensations implements
 
     /**
      * Get compensations for a job
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. By default the API returns only the current compensation - see the `include` query parameter for retrieving all compensations.
      * 
-     * Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same `job_uuid` as another will fail with a relevant error.
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. By default the API returns only the current compensation - see the `include` query parameter for retrieving all compensations.
      * 
-     * Use `flsa_status` to determine if an employee is eligible for overtime.
+     * <p>Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same `job_uuid` as another will fail with a relevant error.
      * 
-     * scope: `jobs:read`
+     * <p>Use `flsa_status` to determine if an employee is eligible for overtime.
+     * 
+     * <p>scope: `jobs:read`
+     * 
      * @return The call builder
      */
     public GetV1JobsJobIdCompensationsRequestBuilder getCompensations() {
@@ -913,13 +963,15 @@ public class JobsAndCompensations implements
 
     /**
      * Get compensations for a job
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. By default the API returns only the current compensation - see the `include` query parameter for retrieving all compensations.
      * 
-     * Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same `job_uuid` as another will fail with a relevant error.
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. By default the API returns only the current compensation - see the `include` query parameter for retrieving all compensations.
      * 
-     * Use `flsa_status` to determine if an employee is eligible for overtime.
+     * <p>Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same `job_uuid` as another will fail with a relevant error.
      * 
-     * scope: `jobs:read`
+     * <p>Use `flsa_status` to determine if an employee is eligible for overtime.
+     * 
+     * <p>scope: `jobs:read`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -952,6 +1004,7 @@ public class JobsAndCompensations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-jobs-job_id-compensations", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -963,6 +1016,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-jobs-job_id-compensations",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -972,6 +1026,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-jobs-job_id-compensations",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -981,6 +1036,7 @@ public class JobsAndCompensations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-jobs-job_id-compensations",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1042,9 +1098,11 @@ public class JobsAndCompensations implements
 
     /**
      * Create a compensation
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
      * 
-     * scope: `jobs:write`
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @return The call builder
      */
     public PostV1CompensationsCompensationIdRequestBuilder createCompensation() {
@@ -1053,11 +1111,13 @@ public class JobsAndCompensations implements
 
     /**
      * Create a compensation
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
      * 
-     * scope: `jobs:write`
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @param jobId The UUID of the job
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1069,12 +1129,14 @@ public class JobsAndCompensations implements
     
     /**
      * Create a compensation
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
      * 
-     * scope: `jobs:write`
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @param jobId The UUID of the job
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1124,6 +1186,7 @@ public class JobsAndCompensations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-compensations-compensation_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1135,6 +1198,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-compensations-compensation_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1144,6 +1208,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-compensations-compensation_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1153,6 +1218,7 @@ public class JobsAndCompensations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-compensations-compensation_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1228,9 +1294,10 @@ public class JobsAndCompensations implements
 
     /**
      * Get a compensation
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
      * 
-     * scope: `jobs:read`
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+     * 
+     * <p>scope: `jobs:read`
      * 
      * @return The call builder
      */
@@ -1240,9 +1307,10 @@ public class JobsAndCompensations implements
 
     /**
      * Get a compensation
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
      * 
-     * scope: `jobs:read`
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+     * 
+     * <p>scope: `jobs:read`
      * 
      * @param compensationId The UUID of the compensation
      * @return The response from the API call
@@ -1255,12 +1323,13 @@ public class JobsAndCompensations implements
     
     /**
      * Get a compensation
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
      * 
-     * scope: `jobs:read`
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+     * 
+     * <p>scope: `jobs:read`
      * 
      * @param compensationId The UUID of the compensation
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1295,6 +1364,7 @@ public class JobsAndCompensations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-compensations-compensation_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1306,6 +1376,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-compensations-compensation_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1315,6 +1386,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-compensations-compensation_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1324,6 +1396,7 @@ public class JobsAndCompensations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-compensations-compensation_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1385,9 +1458,11 @@ public class JobsAndCompensations implements
 
     /**
      * Update a compensation
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
      * 
-     * scope: `jobs:write`
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @return The call builder
      */
     public PutV1CompensationsCompensationIdRequestBuilder updateCompensation() {
@@ -1396,11 +1471,13 @@ public class JobsAndCompensations implements
 
     /**
      * Update a compensation
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
      * 
-     * scope: `jobs:write`
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @param compensationId The UUID of the compensation
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1412,12 +1489,14 @@ public class JobsAndCompensations implements
     
     /**
      * Update a compensation
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
      * 
-     * scope: `jobs:write`
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+     * 
+     * <p>scope: `jobs:write`
+     * 
      * @param compensationId The UUID of the compensation
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1467,6 +1546,7 @@ public class JobsAndCompensations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-compensations-compensation_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1478,6 +1558,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-compensations-compensation_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1487,6 +1568,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-compensations-compensation_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1496,6 +1578,7 @@ public class JobsAndCompensations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-compensations-compensation_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1571,9 +1654,10 @@ public class JobsAndCompensations implements
 
     /**
      * Delete a compensation
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
      * 
-     * scope: `jobs:write`
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
+     * 
+     * <p>scope: `jobs:write`
      * 
      * @return The call builder
      */
@@ -1583,9 +1667,10 @@ public class JobsAndCompensations implements
 
     /**
      * Delete a compensation
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
      * 
-     * scope: `jobs:write`
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
+     * 
+     * <p>scope: `jobs:write`
      * 
      * @param compensationId The UUID of the compensation
      * @return The response from the API call
@@ -1598,12 +1683,13 @@ public class JobsAndCompensations implements
     
     /**
      * Delete a compensation
-     * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
      * 
-     * scope: `jobs:write`
+     * <p>Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
+     * 
+     * <p>scope: `jobs:write`
      * 
      * @param compensationId The UUID of the compensation
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1638,6 +1724,7 @@ public class JobsAndCompensations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-compensations-compensation_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1649,6 +1736,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-compensations-compensation_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1658,6 +1746,7 @@ public class JobsAndCompensations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-compensations-compensation_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1667,6 +1756,7 @@ public class JobsAndCompensations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-compensations-compensation_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays - An object containing federal holiday objects, each containing a boolean selected property.
+ * PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays
+ * 
+ * <p>An object containing federal holiday objects, each containing a boolean selected property.
  */
 
 public class PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays {

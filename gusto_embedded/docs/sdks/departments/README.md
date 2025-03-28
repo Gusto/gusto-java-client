@@ -41,7 +41,7 @@ public class Application {
 
         PostDepartmentsResponse res = sdk.departments().create()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostDepartmentsRequestBody.builder()
                     .title("Stage Hand")
                     .build())
@@ -99,7 +99,7 @@ public class Application {
 
         GetCompaniesDepartmentsResponse res = sdk.departments().getAll()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.departmentList().isPresent()) {
@@ -153,7 +153,7 @@ public class Application {
 
         GetDepartmentResponse res = sdk.departments().get()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.department().isPresent()) {
@@ -208,7 +208,7 @@ public class Application {
 
         PutDepartmentsResponse res = sdk.departments().update()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutDepartmentsRequestBody.builder()
                     .version("db0edd04aaac4506f7edab03ac855d56")
                     .title("Backup Dancer")
@@ -269,7 +269,7 @@ public class Application {
 
         DeleteDepartmentResponse res = sdk.departments().delete()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -323,7 +323,7 @@ public class Application {
 
         PutAddPeopleToDepartmentResponse res = sdk.departments().addPeople()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutAddPeopleToDepartmentRequestBody.builder()
                     .build())
                 .call();
@@ -381,7 +381,7 @@ public class Application {
 
         PutRemovePeopleFromDepartmentResponse res = sdk.departments().removePeople()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutRemovePeopleFromDepartmentRequestBody.builder()
                     .build())
                 .call();

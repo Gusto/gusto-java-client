@@ -18,7 +18,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * PostV1SandboxGenerateW2Form - OK
+ * PostV1SandboxGenerateW2Form
+ * 
+ * <p>OK
  */
 
 public class PostV1SandboxGenerateW2Form {

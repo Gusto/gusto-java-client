@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * WireInRequestStatus - Status of the wire in
+ * WireInRequestStatus
+ * 
+ * <p>Status of the wire in
  */
 public enum WireInRequestStatus {
     AWAITING_FUNDS("awaiting_funds"),

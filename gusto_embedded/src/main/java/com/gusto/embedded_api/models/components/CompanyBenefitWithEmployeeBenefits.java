@@ -21,7 +21,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CompanyBenefitWithEmployeeBenefits - The representation of a company benefit.
+ * CompanyBenefitWithEmployeeBenefits
+ * 
+ * <p>The representation of a company benefit.
  */
 
 public class CompanyBenefitWithEmployeeBenefits {

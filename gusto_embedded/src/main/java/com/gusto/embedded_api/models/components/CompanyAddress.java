@@ -19,7 +19,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * CompanyAddress - The representation of a company's address in Gusto.
+ * CompanyAddress
+ * 
+ * <p>The representation of a company's address in Gusto.
  */
 
 public class CompanyAddress {

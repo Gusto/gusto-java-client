@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CoverageSalaryMultiplier - The coverage amount as a multiple of the employee's salary. Only applicable for Group Term Life benefits. Note: cannot be set if coverage amount is also set.
+ * CoverageSalaryMultiplier
+ * 
+ * <p>The coverage amount as a multiple of the employee's salary. Only applicable for Group Term Life benefits. Note: cannot be set if coverage amount is also set.
  */
 
 public class CoverageSalaryMultiplier {

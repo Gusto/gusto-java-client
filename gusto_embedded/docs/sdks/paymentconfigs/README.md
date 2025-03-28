@@ -34,7 +34,7 @@ public class Application {
 
         GetV1CompanyPaymentConfigsResponse res = sdk.paymentConfigs().get()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.paymentConfigs().isPresent()) {
@@ -73,9 +73,7 @@ scope: `company_payment_configs:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.FastPaymentLimitRequiredBody;
-import com.gusto.embedded_api.models.components.PaymentSpeedParam;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.*;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.PutV1CompanyPaymentConfigsRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1CompanyPaymentConfigsResponse;
@@ -91,10 +89,10 @@ public class Application {
 
         PutV1CompanyPaymentConfigsResponse res = sdk.paymentConfigs().update()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompanyPaymentConfigsRequestBody.of(FastPaymentLimitRequiredBody.builder()
                     .fastPaymentLimit("5000")
-                    .paymentSpeed(PaymentSpeedParam.TWO_DAY)
+                    .paymentSpeed(PaymentSpeedParam.TWO_MINUS_DAY)
                     .build()))
                 .call();
 

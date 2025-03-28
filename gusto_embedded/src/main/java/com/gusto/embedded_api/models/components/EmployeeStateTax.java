@@ -18,7 +18,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * EmployeeStateTax - Example response
+ * EmployeeStateTax
+ * 
+ * <p>Example response
  */
 
 public class EmployeeStateTax {

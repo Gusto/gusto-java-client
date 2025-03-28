@@ -16,7 +16,9 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * MinimumWage - Representation of a Minimum Wage
+ * MinimumWage
+ * 
+ * <p>Representation of a Minimum Wage
  */
 
 public class MinimumWage {

@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ContractorPaymentStatus - Contractor payment status
+ * ContractorPaymentStatus
+ * 
+ * <p>Contractor payment status
  */
 public enum ContractorPaymentStatus {
     FUNDED("Funded"),

@@ -17,7 +17,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * OnboardingDocumentsConfig - Configuration for an employee onboarding documents during onboarding
+ * OnboardingDocumentsConfig
+ * 
+ * <p>Configuration for an employee onboarding documents during onboarding
  */
 
 public class OnboardingDocumentsConfig {

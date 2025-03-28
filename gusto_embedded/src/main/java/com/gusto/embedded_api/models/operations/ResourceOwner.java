@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * ResourceOwner - Information about the token owner
+ * ResourceOwner
+ * 
+ * <p>Information about the token owner
  */
 
 public class ResourceOwner {

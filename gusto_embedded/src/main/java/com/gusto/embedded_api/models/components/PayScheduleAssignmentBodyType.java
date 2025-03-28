@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayScheduleAssignmentBodyType - The pay schedule assignment type.
+ * PayScheduleAssignmentBodyType
+ * 
+ * <p>The pay schedule assignment type.
  */
 public enum PayScheduleAssignmentBodyType {
     SINGLE("single"),

@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ContractorOnboardingStatus1 - One of the "onboarding_status" enum values.
+ * ContractorOnboardingStatus1
+ * 
+ * <p>One of the "onboarding_status" enum values.
  */
 public enum ContractorOnboardingStatus1 {
     ADMIN_ONBOARDING_INCOMPLETE("admin_onboarding_incomplete"),

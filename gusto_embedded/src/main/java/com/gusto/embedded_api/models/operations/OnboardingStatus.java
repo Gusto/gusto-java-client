@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * OnboardingStatus - The updated onboarding status for the contractor
+ * OnboardingStatus
+ * 
+ * <p>The updated onboarding status for the contractor
  */
 public enum OnboardingStatus {
     ONBOARDING_COMPLETED("onboarding_completed");

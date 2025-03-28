@@ -62,9 +62,11 @@ public class Garnishments implements
 
     /**
      * Create a garnishment
-     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      * 
-     * scope: `garnishments:write`
+     * <p>Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     * 
+     * <p>scope: `garnishments:write`
+     * 
      * @return The call builder
      */
     public PostV1EmployeesEmployeeIdGarnishmentsRequestBuilder create() {
@@ -73,11 +75,13 @@ public class Garnishments implements
 
     /**
      * Create a garnishment
-     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      * 
-     * scope: `garnishments:write`
+     * <p>Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     * 
+     * <p>scope: `garnishments:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -89,12 +93,14 @@ public class Garnishments implements
     
     /**
      * Create a garnishment
-     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      * 
-     * scope: `garnishments:write`
+     * <p>Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     * 
+     * <p>scope: `garnishments:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -144,6 +150,7 @@ public class Garnishments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-employees-employee_id-garnishments", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -155,6 +162,7 @@ public class Garnishments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-garnishments",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -164,6 +172,7 @@ public class Garnishments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-garnishments",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -173,6 +182,7 @@ public class Garnishments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-garnishments",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -248,9 +258,11 @@ public class Garnishments implements
 
     /**
      * Get garnishments for an employee
-     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      * 
-     * scope: `garnishments:read`
+     * <p>Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     * 
+     * <p>scope: `garnishments:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdGarnishmentsRequestBuilder list() {
@@ -259,9 +271,11 @@ public class Garnishments implements
 
     /**
      * Get garnishments for an employee
-     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      * 
-     * scope: `garnishments:read`
+     * <p>Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     * 
+     * <p>scope: `garnishments:read`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -273,13 +287,15 @@ public class Garnishments implements
     
     /**
      * Get garnishments for an employee
-     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      * 
-     * scope: `garnishments:read`
+     * <p>Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     * 
+     * <p>scope: `garnishments:read`
+     * 
      * @param employeeId The UUID of the employee
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -323,6 +339,7 @@ public class Garnishments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-garnishments", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -334,6 +351,7 @@ public class Garnishments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-garnishments",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -343,6 +361,7 @@ public class Garnishments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-garnishments",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -352,6 +371,7 @@ public class Garnishments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-garnishments",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -413,9 +433,11 @@ public class Garnishments implements
 
     /**
      * Get a garnishment
-     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      * 
-     * scope: `garnishments:read`
+     * <p>Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     * 
+     * <p>scope: `garnishments:read`
+     * 
      * @return The call builder
      */
     public GetV1GarnishmentsGarnishmentIdRequestBuilder get() {
@@ -424,9 +446,11 @@ public class Garnishments implements
 
     /**
      * Get a garnishment
-     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      * 
-     * scope: `garnishments:read`
+     * <p>Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     * 
+     * <p>scope: `garnishments:read`
+     * 
      * @param garnishmentId The UUID of the garnishment
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -438,11 +462,13 @@ public class Garnishments implements
     
     /**
      * Get a garnishment
-     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      * 
-     * scope: `garnishments:read`
+     * <p>Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     * 
+     * <p>scope: `garnishments:read`
+     * 
      * @param garnishmentId The UUID of the garnishment
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -477,6 +503,7 @@ public class Garnishments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-garnishments-garnishment_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -488,6 +515,7 @@ public class Garnishments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-garnishments-garnishment_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -497,6 +525,7 @@ public class Garnishments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-garnishments-garnishment_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -506,6 +535,7 @@ public class Garnishments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-garnishments-garnishment_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -567,9 +597,11 @@ public class Garnishments implements
 
     /**
      * Update a garnishment
-     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      * 
-     * scope: `garnishments:write`
+     * <p>Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     * 
+     * <p>scope: `garnishments:write`
+     * 
      * @return The call builder
      */
     public PutV1GarnishmentsGarnishmentIdRequestBuilder update() {
@@ -578,11 +610,13 @@ public class Garnishments implements
 
     /**
      * Update a garnishment
-     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      * 
-     * scope: `garnishments:write`
+     * <p>Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     * 
+     * <p>scope: `garnishments:write`
+     * 
      * @param garnishmentId The UUID of the garnishment
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -594,12 +628,14 @@ public class Garnishments implements
     
     /**
      * Update a garnishment
-     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      * 
-     * scope: `garnishments:write`
+     * <p>Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     * 
+     * <p>scope: `garnishments:write`
+     * 
      * @param garnishmentId The UUID of the garnishment
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -649,6 +685,7 @@ public class Garnishments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-garnishments-garnishment_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -660,6 +697,7 @@ public class Garnishments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-garnishments-garnishment_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -669,6 +707,7 @@ public class Garnishments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-garnishments-garnishment_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -678,6 +717,7 @@ public class Garnishments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-garnishments-garnishment_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -753,9 +793,11 @@ public class Garnishments implements
 
     /**
      * Get child support garnishment data
-     * Agency data and requirements to be used for creating child support garnishments
      * 
-     * scope: `garnishments:read`
+     * <p>Agency data and requirements to be used for creating child support garnishments
+     * 
+     * <p>scope: `garnishments:read`
+     * 
      * @return The call builder
      */
     public GetV1GarnishmentsChildSupportRequestBuilder getChildSupportData() {
@@ -764,9 +806,11 @@ public class Garnishments implements
 
     /**
      * Get child support garnishment data
-     * Agency data and requirements to be used for creating child support garnishments
      * 
-     * scope: `garnishments:read`
+     * <p>Agency data and requirements to be used for creating child support garnishments
+     * 
+     * <p>scope: `garnishments:read`
+     * 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -776,10 +820,12 @@ public class Garnishments implements
     
     /**
      * Get child support garnishment data
-     * Agency data and requirements to be used for creating child support garnishments
      * 
-     * scope: `garnishments:read`
-     * @param xGustoAPIVersion
+     * <p>Agency data and requirements to be used for creating child support garnishments
+     * 
+     * <p>scope: `garnishments:read`
+     * 
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -810,6 +856,7 @@ public class Garnishments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-garnishments-child_support", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -821,6 +868,7 @@ public class Garnishments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-garnishments-child_support",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -830,6 +878,7 @@ public class Garnishments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-garnishments-child_support",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -839,6 +888,7 @@ public class Garnishments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-garnishments-child_support",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

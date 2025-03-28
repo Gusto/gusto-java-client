@@ -18,7 +18,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * ContractorPaymentMethod - Example response
+ * ContractorPaymentMethod
+ * 
+ * <p>Example response
  */
 
 public class ContractorPaymentMethod {

@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CatchUp - Whether the employee should use a benefit’s 'catch up' rate. Only Roth 401k and 401k benefits use this value for employees over 50.
+ * CatchUp
+ * 
+ * <p>Whether the employee should use a benefit’s 'catch up' rate. Only Roth 401k and 401k benefits use this value for employees over 50.
  */
 
 public class CatchUp {

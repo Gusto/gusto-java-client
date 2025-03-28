@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * RecoveryCaseStatus - Status of the recovery case
+ * RecoveryCaseStatus
+ * 
+ * <p>Status of the recovery case
  */
 public enum RecoveryCaseStatus {
     OPEN("open"),

@@ -17,7 +17,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * PaymentMethodBankAccount - Representation of a bank account item
+ * PaymentMethodBankAccount
+ * 
+ * <p>Representation of a bank account item
  */
 
 public class PaymentMethodBankAccount {

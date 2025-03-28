@@ -19,7 +19,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * EmployeeWorkAddress - List of employee work addresses
+ * EmployeeWorkAddress
+ * 
+ * <p>List of employee work addresses
  */
 
 public class EmployeeWorkAddress {

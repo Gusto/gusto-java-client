@@ -48,7 +48,7 @@ public class ContractorPayments {
     /**
      * The type of contractor.
      * 
-     * `Individual` `Business`
+     * <p>`Individual` `Business`
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contractor_type")
@@ -57,7 +57,7 @@ public class ContractorPayments {
     /**
      * The payment method.
      * 
-     * `Direct Deposit` `Check` `Historical Payment` `Correction Payment`
+     * <p>`Direct Deposit` `Check` `Historical Payment` `Correction Payment`
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payment_method")
@@ -154,7 +154,7 @@ public class ContractorPayments {
     /**
      * The type of contractor.
      * 
-     * `Individual` `Business`
+     * <p>`Individual` `Business`
      */
     @JsonIgnore
     public Optional<String> contractorType() {
@@ -164,7 +164,7 @@ public class ContractorPayments {
     /**
      * The payment method.
      * 
-     * `Direct Deposit` `Check` `Historical Payment` `Correction Payment`
+     * <p>`Direct Deposit` `Check` `Historical Payment` `Correction Payment`
      */
     @JsonIgnore
     public Optional<String> paymentMethod() {
@@ -274,7 +274,7 @@ public class ContractorPayments {
     /**
      * The type of contractor.
      * 
-     * `Individual` `Business`
+     * <p>`Individual` `Business`
      */
     public ContractorPayments withContractorType(String contractorType) {
         Utils.checkNotNull(contractorType, "contractorType");
@@ -285,7 +285,7 @@ public class ContractorPayments {
     /**
      * The type of contractor.
      * 
-     * `Individual` `Business`
+     * <p>`Individual` `Business`
      */
     public ContractorPayments withContractorType(Optional<String> contractorType) {
         Utils.checkNotNull(contractorType, "contractorType");
@@ -296,7 +296,7 @@ public class ContractorPayments {
     /**
      * The payment method.
      * 
-     * `Direct Deposit` `Check` `Historical Payment` `Correction Payment`
+     * <p>`Direct Deposit` `Check` `Historical Payment` `Correction Payment`
      */
     public ContractorPayments withPaymentMethod(String paymentMethod) {
         Utils.checkNotNull(paymentMethod, "paymentMethod");
@@ -307,7 +307,7 @@ public class ContractorPayments {
     /**
      * The payment method.
      * 
-     * `Direct Deposit` `Check` `Historical Payment` `Correction Payment`
+     * <p>`Direct Deposit` `Check` `Historical Payment` `Correction Payment`
      */
     public ContractorPayments withPaymentMethod(Optional<String> paymentMethod) {
         Utils.checkNotNull(paymentMethod, "paymentMethod");
@@ -517,7 +517,7 @@ public class ContractorPayments {
         /**
          * The type of contractor.
          * 
-         * `Individual` `Business`
+         * <p>`Individual` `Business`
          */
         public Builder contractorType(String contractorType) {
             Utils.checkNotNull(contractorType, "contractorType");
@@ -528,7 +528,7 @@ public class ContractorPayments {
         /**
          * The type of contractor.
          * 
-         * `Individual` `Business`
+         * <p>`Individual` `Business`
          */
         public Builder contractorType(Optional<String> contractorType) {
             Utils.checkNotNull(contractorType, "contractorType");
@@ -539,7 +539,7 @@ public class ContractorPayments {
         /**
          * The payment method.
          * 
-         * `Direct Deposit` `Check` `Historical Payment` `Correction Payment`
+         * <p>`Direct Deposit` `Check` `Historical Payment` `Correction Payment`
          */
         public Builder paymentMethod(String paymentMethod) {
             Utils.checkNotNull(paymentMethod, "paymentMethod");
@@ -550,7 +550,7 @@ public class ContractorPayments {
         /**
          * The payment method.
          * 
-         * `Direct Deposit` `Check` `Historical Payment` `Correction Payment`
+         * <p>`Direct Deposit` `Check` `Historical Payment` `Correction Payment`
          */
         public Builder paymentMethod(Optional<String> paymentMethod) {
             Utils.checkNotNull(paymentMethod, "paymentMethod");

@@ -80,11 +80,13 @@ public class EmployeeEmployments implements
 
     /**
      * Create an employee termination
-     * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * <p>Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * scope: `employments:write`
+     * <p>Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @return The call builder
      */
     public PostV1EmployeesEmployeeIdTerminationsRequestBuilder createTermination() {
@@ -93,13 +95,15 @@ public class EmployeeEmployments implements
 
     /**
      * Create an employee termination
-     * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * <p>Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * scope: `employments:write`
+     * <p>Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -111,14 +115,16 @@ public class EmployeeEmployments implements
     
     /**
      * Create an employee termination
-     * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * <p>Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * scope: `employments:write`
+     * <p>Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -168,6 +174,7 @@ public class EmployeeEmployments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-employees-employee_id-terminations", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -179,6 +186,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-terminations",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -188,6 +196,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-terminations",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -197,6 +206,7 @@ public class EmployeeEmployments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-terminations",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -272,11 +282,13 @@ public class EmployeeEmployments implements
 
     /**
      * Get terminations for an employee
-     * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * <p>Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * scope: `employments:read`
+     * <p>Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * 
+     * <p>scope: `employments:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdTerminationsRequestBuilder getTerminations() {
@@ -285,11 +297,13 @@ public class EmployeeEmployments implements
 
     /**
      * Get terminations for an employee
-     * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * <p>Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * scope: `employments:read`
+     * <p>Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * 
+     * <p>scope: `employments:read`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -301,13 +315,15 @@ public class EmployeeEmployments implements
     
     /**
      * Get terminations for an employee
-     * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * <p>Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * scope: `employments:read`
+     * <p>Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * 
+     * <p>scope: `employments:read`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -342,6 +358,7 @@ public class EmployeeEmployments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-terminations", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -353,6 +370,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-terminations",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -362,6 +380,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-terminations",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -371,6 +390,7 @@ public class EmployeeEmployments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-terminations",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -432,9 +452,11 @@ public class EmployeeEmployments implements
 
     /**
      * Delete an employee termination
-     * Delete an employee termination.
      * 
-     * scope: `employments:write`
+     * <p>Delete an employee termination.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @return The call builder
      */
     public DeleteV1EmployeesEmployeeIdTerminationsRequestBuilder deleteTermination() {
@@ -443,9 +465,11 @@ public class EmployeeEmployments implements
 
     /**
      * Delete an employee termination
-     * Delete an employee termination.
      * 
-     * scope: `employments:write`
+     * <p>Delete an employee termination.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -457,11 +481,13 @@ public class EmployeeEmployments implements
     
     /**
      * Delete an employee termination
-     * Delete an employee termination.
      * 
-     * scope: `employments:write`
+     * <p>Delete an employee termination.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -496,6 +522,7 @@ public class EmployeeEmployments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-employees-employee_id-terminations", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -507,6 +534,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-employees-employee_id-terminations",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -516,6 +544,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-employees-employee_id-terminations",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -525,6 +554,7 @@ public class EmployeeEmployments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-employees-employee_id-terminations",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -589,11 +619,13 @@ public class EmployeeEmployments implements
 
     /**
      * Update an employee termination
-     * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * <p>Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * scope: `employments:write`
+     * <p>Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @return The call builder
      */
     public PutV1TerminationsEmployeeIdRequestBuilder updateTermination() {
@@ -602,13 +634,15 @@ public class EmployeeEmployments implements
 
     /**
      * Update an employee termination
-     * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * <p>Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * scope: `employments:write`
+     * <p>Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -620,14 +654,16 @@ public class EmployeeEmployments implements
     
     /**
      * Update an employee termination
-     * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * <p>Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      * 
-     * scope: `employments:write`
+     * <p>Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -677,6 +713,7 @@ public class EmployeeEmployments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-terminations-employee_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -688,6 +725,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-terminations-employee_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -697,6 +735,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-terminations-employee_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -706,6 +745,7 @@ public class EmployeeEmployments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-terminations-employee_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -781,9 +821,11 @@ public class EmployeeEmployments implements
 
     /**
      * Create an employee rehire
-     * Rehire is created whenever an employee is scheduled to return to the company.
      * 
-     * scope: `employments:write`
+     * <p>Rehire is created whenever an employee is scheduled to return to the company.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @return The call builder
      */
     public PostV1EmployeesEmployeeIdRehireRequestBuilder createRehire() {
@@ -792,11 +834,13 @@ public class EmployeeEmployments implements
 
     /**
      * Create an employee rehire
-     * Rehire is created whenever an employee is scheduled to return to the company.
      * 
-     * scope: `employments:write`
+     * <p>Rehire is created whenever an employee is scheduled to return to the company.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param rehireBody
+     * @param rehireBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -808,12 +852,14 @@ public class EmployeeEmployments implements
     
     /**
      * Create an employee rehire
-     * Rehire is created whenever an employee is scheduled to return to the company.
      * 
-     * scope: `employments:write`
+     * <p>Rehire is created whenever an employee is scheduled to return to the company.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param rehireBody
+     * @param xGustoAPIVersion 
+     * @param rehireBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -863,6 +909,7 @@ public class EmployeeEmployments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-employees-employee_id-rehire", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -874,6 +921,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-rehire",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -883,6 +931,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-rehire",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -892,6 +941,7 @@ public class EmployeeEmployments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-rehire",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -967,9 +1017,11 @@ public class EmployeeEmployments implements
 
     /**
      * Update an employee rehire
-     * Update an employee's rehire.
      * 
-     * scope: `employments:write`
+     * <p>Update an employee's rehire.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @return The call builder
      */
     public PutV1EmployeesEmployeeIdRehireRequestBuilder rehire() {
@@ -978,11 +1030,13 @@ public class EmployeeEmployments implements
 
     /**
      * Update an employee rehire
-     * Update an employee's rehire.
      * 
-     * scope: `employments:write`
+     * <p>Update an employee's rehire.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -994,12 +1048,14 @@ public class EmployeeEmployments implements
     
     /**
      * Update an employee rehire
-     * Update an employee's rehire.
      * 
-     * scope: `employments:write`
+     * <p>Update an employee's rehire.
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1049,6 +1105,7 @@ public class EmployeeEmployments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-employees-employee_id-rehire", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1060,6 +1117,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-rehire",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1069,6 +1127,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-rehire",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1078,6 +1137,7 @@ public class EmployeeEmployments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-rehire",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1153,9 +1213,11 @@ public class EmployeeEmployments implements
 
     /**
      * Get an employee rehire
-     * Retrieve an employee's rehire, which contains information on when the employee returns to work.
      * 
-     * scope: `employments:read`
+     * <p>Retrieve an employee's rehire, which contains information on when the employee returns to work.
+     * 
+     * <p>scope: `employments:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdRehireRequestBuilder getRehire() {
@@ -1164,9 +1226,11 @@ public class EmployeeEmployments implements
 
     /**
      * Get an employee rehire
-     * Retrieve an employee's rehire, which contains information on when the employee returns to work.
      * 
-     * scope: `employments:read`
+     * <p>Retrieve an employee's rehire, which contains information on when the employee returns to work.
+     * 
+     * <p>scope: `employments:read`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1178,11 +1242,13 @@ public class EmployeeEmployments implements
     
     /**
      * Get an employee rehire
-     * Retrieve an employee's rehire, which contains information on when the employee returns to work.
      * 
-     * scope: `employments:read`
+     * <p>Retrieve an employee's rehire, which contains information on when the employee returns to work.
+     * 
+     * <p>scope: `employments:read`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1217,6 +1283,7 @@ public class EmployeeEmployments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-rehire", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1228,6 +1295,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-rehire",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1237,6 +1305,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-rehire",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1246,6 +1315,7 @@ public class EmployeeEmployments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-rehire",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1321,9 +1391,11 @@ public class EmployeeEmployments implements
 
     /**
      * Delete an employee rehire
-     * Delete an employee rehire. An employee rehire cannot be deleted if it's active (past effective date).
      * 
-     * scope: `employments:write`
+     * <p>Delete an employee rehire. An employee rehire cannot be deleted if it's active (past effective date).
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @return The call builder
      */
     public DeleteV1EmployeesEmployeeIdRehireRequestBuilder deleteRehire() {
@@ -1332,9 +1404,11 @@ public class EmployeeEmployments implements
 
     /**
      * Delete an employee rehire
-     * Delete an employee rehire. An employee rehire cannot be deleted if it's active (past effective date).
      * 
-     * scope: `employments:write`
+     * <p>Delete an employee rehire. An employee rehire cannot be deleted if it's active (past effective date).
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1346,11 +1420,13 @@ public class EmployeeEmployments implements
     
     /**
      * Delete an employee rehire
-     * Delete an employee rehire. An employee rehire cannot be deleted if it's active (past effective date).
      * 
-     * scope: `employments:write`
+     * <p>Delete an employee rehire. An employee rehire cannot be deleted if it's active (past effective date).
+     * 
+     * <p>scope: `employments:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1385,6 +1461,7 @@ public class EmployeeEmployments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-employees-employee_id-rehire", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1396,6 +1473,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-employees-employee_id-rehire",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1405,6 +1483,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-employees-employee_id-rehire",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1414,6 +1493,7 @@ public class EmployeeEmployments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-employees-employee_id-rehire",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1478,9 +1558,11 @@ public class EmployeeEmployments implements
 
     /**
      * Get employment history for an employee
-     * Retrieve the employment history for a given employee, which includes termination and rehire.
      * 
-     * scope: `employments:read`
+     * <p>Retrieve the employment history for a given employee, which includes termination and rehire.
+     * 
+     * <p>scope: `employments:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdEmploymentHistoryRequestBuilder getHistory() {
@@ -1489,9 +1571,11 @@ public class EmployeeEmployments implements
 
     /**
      * Get employment history for an employee
-     * Retrieve the employment history for a given employee, which includes termination and rehire.
      * 
-     * scope: `employments:read`
+     * <p>Retrieve the employment history for a given employee, which includes termination and rehire.
+     * 
+     * <p>scope: `employments:read`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1503,11 +1587,13 @@ public class EmployeeEmployments implements
     
     /**
      * Get employment history for an employee
-     * Retrieve the employment history for a given employee, which includes termination and rehire.
      * 
-     * scope: `employments:read`
+     * <p>Retrieve the employment history for a given employee, which includes termination and rehire.
+     * 
+     * <p>scope: `employments:read`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1542,6 +1628,7 @@ public class EmployeeEmployments implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-employment_history", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1553,6 +1640,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-employment_history",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1562,6 +1650,7 @@ public class EmployeeEmployments implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-employment_history",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1571,6 +1660,7 @@ public class EmployeeEmployments implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-employment_history",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

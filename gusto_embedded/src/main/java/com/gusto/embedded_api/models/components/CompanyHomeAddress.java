@@ -16,7 +16,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * CompanyHomeAddress - The company's primary signatory's home address.
+ * CompanyHomeAddress
+ * 
+ * <p>The company's primary signatory's home address.
  */
 
 public class CompanyHomeAddress {

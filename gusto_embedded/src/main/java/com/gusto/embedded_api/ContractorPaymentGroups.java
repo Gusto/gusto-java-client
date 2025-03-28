@@ -65,9 +65,11 @@ public class ContractorPaymentGroups implements
 
     /**
      * Create a contractor payment group
-     * Pay a group of contractors. Information needed depends on the contractor's wage type (hourly vs fixed)
      * 
-     * scope: `payrolls:run`
+     * <p>Pay a group of contractors. Information needed depends on the contractor's wage type (hourly vs fixed)
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBuilder create() {
@@ -76,11 +78,13 @@ public class ContractorPaymentGroups implements
 
     /**
      * Create a contractor payment group
-     * Pay a group of contractors. Information needed depends on the contractor's wage type (hourly vs fixed)
      * 
-     * scope: `payrolls:run`
+     * <p>Pay a group of contractors. Information needed depends on the contractor's wage type (hourly vs fixed)
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -92,12 +96,14 @@ public class ContractorPaymentGroups implements
     
     /**
      * Create a contractor payment group
-     * Pay a group of contractors. Information needed depends on the contractor's wage type (hourly vs fixed)
      * 
-     * scope: `payrolls:run`
+     * <p>Pay a group of contractors. Information needed depends on the contractor's wage type (hourly vs fixed)
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -147,6 +153,7 @@ public class ContractorPaymentGroups implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_id-contractor_payment_groups", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -158,6 +165,7 @@ public class ContractorPaymentGroups implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-contractor_payment_groups",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -167,6 +175,7 @@ public class ContractorPaymentGroups implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-contractor_payment_groups",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -176,6 +185,7 @@ public class ContractorPaymentGroups implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-contractor_payment_groups",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -251,9 +261,11 @@ public class ContractorPaymentGroups implements
 
     /**
      * Get contractor payment groups for a company
-     * Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
      * 
-     * scope: `payrolls:read`
+     * <p>Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdContractorPaymentGroupsRequestBuilder getList() {
@@ -262,9 +274,11 @@ public class ContractorPaymentGroups implements
 
     /**
      * Get contractor payment groups for a company
-     * Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
      * 
-     * scope: `payrolls:read`
+     * <p>Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -297,6 +311,7 @@ public class ContractorPaymentGroups implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-contractor_payment_groups", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -308,6 +323,7 @@ public class ContractorPaymentGroups implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-contractor_payment_groups",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -317,6 +333,7 @@ public class ContractorPaymentGroups implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-contractor_payment_groups",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -326,6 +343,7 @@ public class ContractorPaymentGroups implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-contractor_payment_groups",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -387,9 +405,11 @@ public class ContractorPaymentGroups implements
 
     /**
      * Preview a contractor payment group
-     * Preview a group of contractor payments. Request will validate inputs and return preview of the contractor payment group including the expected debit_date.  Uuid will be null in the response.
      * 
-     * scope: `payrolls:read`
+     * <p>Preview a group of contractor payments. Request will validate inputs and return preview of the contractor payment group including the expected debit_date.  Uuid will be null in the response.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBuilder preview() {
@@ -398,11 +418,13 @@ public class ContractorPaymentGroups implements
 
     /**
      * Preview a contractor payment group
-     * Preview a group of contractor payments. Request will validate inputs and return preview of the contractor payment group including the expected debit_date.  Uuid will be null in the response.
      * 
-     * scope: `payrolls:read`
+     * <p>Preview a group of contractor payments. Request will validate inputs and return preview of the contractor payment group including the expected debit_date.  Uuid will be null in the response.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -414,12 +436,14 @@ public class ContractorPaymentGroups implements
     
     /**
      * Preview a contractor payment group
-     * Preview a group of contractor payments. Request will validate inputs and return preview of the contractor payment group including the expected debit_date.  Uuid will be null in the response.
      * 
-     * scope: `payrolls:read`
+     * <p>Preview a group of contractor payments. Request will validate inputs and return preview of the contractor payment group including the expected debit_date.  Uuid will be null in the response.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -469,6 +493,7 @@ public class ContractorPaymentGroups implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_id-contractor_payment_groups-preview", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -480,6 +505,7 @@ public class ContractorPaymentGroups implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-contractor_payment_groups-preview",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -489,6 +515,7 @@ public class ContractorPaymentGroups implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-contractor_payment_groups-preview",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -498,6 +525,7 @@ public class ContractorPaymentGroups implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-contractor_payment_groups-preview",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -573,9 +601,11 @@ public class ContractorPaymentGroups implements
 
     /**
      * Fetch a contractor payment group
-     * Returns a contractor payment group with all associated contractor payments.
      * 
-     * scope: `payrolls:read`
+     * <p>Returns a contractor payment group with all associated contractor payments.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder get() {
@@ -584,9 +614,11 @@ public class ContractorPaymentGroups implements
 
     /**
      * Fetch a contractor payment group
-     * Returns a contractor payment group with all associated contractor payments.
      * 
-     * scope: `payrolls:read`
+     * <p>Returns a contractor payment group with all associated contractor payments.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param contractorPaymentGroupUuid The UUID of the contractor payment group
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -598,11 +630,13 @@ public class ContractorPaymentGroups implements
     
     /**
      * Fetch a contractor payment group
-     * Returns a contractor payment group with all associated contractor payments.
      * 
-     * scope: `payrolls:read`
+     * <p>Returns a contractor payment group with all associated contractor payments.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
      * @param contractorPaymentGroupUuid The UUID of the contractor payment group
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -637,6 +671,7 @@ public class ContractorPaymentGroups implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractor_payment_groups-contractor_payment_group_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -648,6 +683,7 @@ public class ContractorPaymentGroups implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor_payment_groups-contractor_payment_group_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -657,6 +693,7 @@ public class ContractorPaymentGroups implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractor_payment_groups-contractor_payment_group_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -666,6 +703,7 @@ public class ContractorPaymentGroups implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractor_payment_groups-contractor_payment_group_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -727,9 +765,11 @@ public class ContractorPaymentGroups implements
 
     /**
      * Cancel a contractor payment group
-     * Cancels a contractor payment group and all associated contractor payments. All contractor payments must be cancellable, unfunded.
      * 
-     * scope: `payrolls:run`
+     * <p>Cancels a contractor payment group and all associated contractor payments. All contractor payments must be cancellable, unfunded.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @return The call builder
      */
     public DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder delete() {
@@ -738,9 +778,11 @@ public class ContractorPaymentGroups implements
 
     /**
      * Cancel a contractor payment group
-     * Cancels a contractor payment group and all associated contractor payments. All contractor payments must be cancellable, unfunded.
      * 
-     * scope: `payrolls:run`
+     * <p>Cancels a contractor payment group and all associated contractor payments. All contractor payments must be cancellable, unfunded.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param contractorPaymentGroupUuid The UUID of the contractor payment group
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -752,11 +794,13 @@ public class ContractorPaymentGroups implements
     
     /**
      * Cancel a contractor payment group
-     * Cancels a contractor payment group and all associated contractor payments. All contractor payments must be cancellable, unfunded.
      * 
-     * scope: `payrolls:run`
+     * <p>Cancels a contractor payment group and all associated contractor payments. All contractor payments must be cancellable, unfunded.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
      * @param contractorPaymentGroupUuid The UUID of the contractor payment group
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -791,6 +835,7 @@ public class ContractorPaymentGroups implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-contractor_payment_groups-contractor_payment_group_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -802,6 +847,7 @@ public class ContractorPaymentGroups implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-contractor_payment_groups-contractor_payment_group_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -811,6 +857,7 @@ public class ContractorPaymentGroups implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-contractor_payment_groups-contractor_payment_group_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -820,6 +867,7 @@ public class ContractorPaymentGroups implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-contractor_payment_groups-contractor_payment_group_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -884,13 +932,15 @@ public class ContractorPaymentGroups implements
 
     /**
      * Fund a contractor payment group [DEMO]
-     * &gt; 🚧 Demo action
+     * 
+     * <p>&gt; 🚧 Demo action
      * &gt;
      * &gt; This action is only available in the Demo environment
      * 
-     * Simulate funding a contractor payment group. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment group's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
+     * <p>Simulate funding a contractor payment group. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment group's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
      * 
-     * scope: `payrolls:run`
+     * <p>scope: `payrolls:run`
+     * 
      * @return The call builder
      */
     public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder fund() {
@@ -899,13 +949,15 @@ public class ContractorPaymentGroups implements
 
     /**
      * Fund a contractor payment group [DEMO]
-     * &gt; 🚧 Demo action
+     * 
+     * <p>&gt; 🚧 Demo action
      * &gt;
      * &gt; This action is only available in the Demo environment
      * 
-     * Simulate funding a contractor payment group. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment group's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
+     * <p>Simulate funding a contractor payment group. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment group's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
      * 
-     * scope: `payrolls:run`
+     * <p>scope: `payrolls:run`
+     * 
      * @param contractorPaymentGroupUuid The UUID of the contractor payment group
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -917,15 +969,17 @@ public class ContractorPaymentGroups implements
     
     /**
      * Fund a contractor payment group [DEMO]
-     * &gt; 🚧 Demo action
+     * 
+     * <p>&gt; 🚧 Demo action
      * &gt;
      * &gt; This action is only available in the Demo environment
      * 
-     * Simulate funding a contractor payment group. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment group's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
+     * <p>Simulate funding a contractor payment group. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment group's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
      * 
-     * scope: `payrolls:run`
+     * <p>scope: `payrolls:run`
+     * 
      * @param contractorPaymentGroupUuid The UUID of the contractor payment group
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -960,6 +1014,7 @@ public class ContractorPaymentGroups implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-contractor_payment_groups-contractor_payment_group_id-fund", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -971,6 +1026,7 @@ public class ContractorPaymentGroups implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-contractor_payment_groups-contractor_payment_group_id-fund",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -980,6 +1036,7 @@ public class ContractorPaymentGroups implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-contractor_payment_groups-contractor_payment_group_id-fund",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -989,6 +1046,7 @@ public class ContractorPaymentGroups implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-contractor_payment_groups-contractor_payment_group_id-fund",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

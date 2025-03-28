@@ -40,11 +40,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.Company;
-import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesResponse;
-import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesSecurity;
-import com.gusto.embedded_api.models.operations.User;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -58,7 +54,7 @@ public class Application {
                 .security(PostV1PartnerManagedCompaniesSecurity.builder()
                     .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
                     .build())
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1PartnerManagedCompaniesRequestBody.builder()
                     .user(User.builder()
                         .firstName("Frank")
@@ -130,7 +126,7 @@ public class Application {
 
         GetV1CompaniesResponse res = sdk.companies().get()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.company().isPresent()) {
@@ -185,7 +181,7 @@ public class Application {
 
         PutV1CompaniesResponse res = sdk.companies().update()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompaniesRequestBody.builder()
                     .contractorOnly(false)
                     .build())
@@ -247,7 +243,7 @@ public class Application {
 
         PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse res = sdk.companies().migrate()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody.builder()
                     .email("Benjamin_Kihn44@yahoo.com")
                     .ipAddress("198.52.136.51")
@@ -310,7 +306,7 @@ public class Application {
 
         PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse res = sdk.companies().acceptTermsOfService()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody.builder()
                     .email("jsmith99@gmail.com")
                     .ipAddress("192.168.1.2")
@@ -372,7 +368,7 @@ public class Application {
 
         PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse res = sdk.companies().retrieveTermsOfService()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody.builder()
                     .email("jsmith99@gmail.com")
                     .build())
@@ -433,7 +429,7 @@ public class Application {
 
         PostV1CompaniesCompanyIdAdminsResponse res = sdk.companies().createAdmin()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyIdAdminsRequestBody.builder()
                     .firstName("John")
                     .lastName("Smith")
@@ -495,7 +491,7 @@ public class Application {
                 .companyId("<id>")
                 .page(620604L)
                 .per(696322L)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.adminList().isPresent()) {
@@ -552,7 +548,7 @@ public class Application {
         GetV1CompanyOnboardingStatusResponse res = sdk.companies().getOnboardingStatus()
                 .companyUuid("<id>")
                 .additionalSteps("external_payroll")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.companyOnboardingStatus().isPresent()) {
@@ -619,7 +615,7 @@ public class Application {
 
         GetV1CompanyFinishOnboardingResponse res = sdk.companies().finishOnboarding()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.companyOnboardingStatus().isPresent()) {
@@ -675,7 +671,7 @@ public class Application {
                 .companyId("<id>")
                 .page(653170L)
                 .per(309220L)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.companyCustomFieldList().isPresent()) {

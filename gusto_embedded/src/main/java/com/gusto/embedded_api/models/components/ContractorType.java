@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ContractorType - The contractor's type, either "Individual" or "Business". 
+ * ContractorType
+ * 
+ * <p>The contractor's type, either "Individual" or "Business".
  */
 public enum ContractorType {
     INDIVIDUAL("Individual"),

@@ -23,7 +23,7 @@ public class TaxRequirementMetadata {
     /**
      * Describes the type of requirement - each type may have additional metadata properties to describe possible values, formats, etc.
      * 
-     * - `text`: free-text input, no additional requirements
+     * <p>- `text`: free-text input, no additional requirements
      * - `currency`: a value representing a dollar amount, e.g. `374.55` representing `$374.55`
      * - `radio`: choose one of options provided, see `options`
      * - `select`: choose one of options provided, see `options`
@@ -31,7 +31,6 @@ public class TaxRequirementMetadata {
      * - `account_number`: An account number for a tax agency, more information provided by `mask` and `prefix`
      * - `tax_rate`: A decimal value representing a tax rate, e.g. `0.034` representing a tax rate of `3.4%`, see `validation` for additional validation guidance
      * - `workers_compensation_rate`: A decimal value representing a percentage, see `risk_class_code`, `risk_class_description`, and `rate_type`
-     * 
      */
     @JsonProperty("type")
     private TaxRequirementMetadataType type;
@@ -61,7 +60,6 @@ public class TaxRequirementMetadata {
      * [for `workers_compensation_rate`] The type of rate being collected. Either:
      *  - `percent`: A percentage formatted as a decimal, e.g. `0.01` for 1%
      *  - `currency_per_hour`: A dollar amount per hour, e.g. `3.24` for $3.24/hr
-     * 
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rate_type")
@@ -70,17 +68,16 @@ public class TaxRequirementMetadata {
     /**
      * [for `account_number`] A pattern describing the format of the account number
      * 
-     * The mask is a sequence of characters representing the requirements of the actual account number. Each character in the mask represents a single character in the account number as follows:
+     * <p>The mask is a sequence of characters representing the requirements of the actual account number. Each character in the mask represents a single character in the account number as follows:
      * - `#`: a digit (`\d`)
      * - `@`: a upper or lower case letter (`[a-zA-Z]`)
      * - `^`: an uppercase letter (`[A-Z]`)
      * - `%`: a digit or uppercase letter (`[0-9A-Z]`)
      * - any other character represents the literal character
      * 
-     * Examples:
+     * <p>Examples:
      * - mask: `WHT-######` represents `WHT-` followed by 5 digits, e.g. `WHT-33421`
      * - mask: `%####-^^` supports values of `75544-AB` and `Z7654-HK`
-     * 
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mask")
@@ -136,7 +133,7 @@ public class TaxRequirementMetadata {
     /**
      * Describes the type of requirement - each type may have additional metadata properties to describe possible values, formats, etc.
      * 
-     * - `text`: free-text input, no additional requirements
+     * <p>- `text`: free-text input, no additional requirements
      * - `currency`: a value representing a dollar amount, e.g. `374.55` representing `$374.55`
      * - `radio`: choose one of options provided, see `options`
      * - `select`: choose one of options provided, see `options`
@@ -144,7 +141,6 @@ public class TaxRequirementMetadata {
      * - `account_number`: An account number for a tax agency, more information provided by `mask` and `prefix`
      * - `tax_rate`: A decimal value representing a tax rate, e.g. `0.034` representing a tax rate of `3.4%`, see `validation` for additional validation guidance
      * - `workers_compensation_rate`: A decimal value representing a percentage, see `risk_class_code`, `risk_class_description`, and `rate_type`
-     * 
      */
     @JsonIgnore
     public TaxRequirementMetadataType type() {
@@ -180,7 +176,6 @@ public class TaxRequirementMetadata {
      * [for `workers_compensation_rate`] The type of rate being collected. Either:
      *  - `percent`: A percentage formatted as a decimal, e.g. `0.01` for 1%
      *  - `currency_per_hour`: A dollar amount per hour, e.g. `3.24` for $3.24/hr
-     * 
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -191,17 +186,16 @@ public class TaxRequirementMetadata {
     /**
      * [for `account_number`] A pattern describing the format of the account number
      * 
-     * The mask is a sequence of characters representing the requirements of the actual account number. Each character in the mask represents a single character in the account number as follows:
+     * <p>The mask is a sequence of characters representing the requirements of the actual account number. Each character in the mask represents a single character in the account number as follows:
      * - `#`: a digit (`\d`)
      * - `@`: a upper or lower case letter (`[a-zA-Z]`)
      * - `^`: an uppercase letter (`[A-Z]`)
      * - `%`: a digit or uppercase letter (`[0-9A-Z]`)
      * - any other character represents the literal character
      * 
-     * Examples:
+     * <p>Examples:
      * - mask: `WHT-######` represents `WHT-` followed by 5 digits, e.g. `WHT-33421`
      * - mask: `%####-^^` supports values of `75544-AB` and `Z7654-HK`
-     * 
      */
     @JsonIgnore
     public JsonNullable<String> mask() {
@@ -232,7 +226,7 @@ public class TaxRequirementMetadata {
     /**
      * Describes the type of requirement - each type may have additional metadata properties to describe possible values, formats, etc.
      * 
-     * - `text`: free-text input, no additional requirements
+     * <p>- `text`: free-text input, no additional requirements
      * - `currency`: a value representing a dollar amount, e.g. `374.55` representing `$374.55`
      * - `radio`: choose one of options provided, see `options`
      * - `select`: choose one of options provided, see `options`
@@ -240,7 +234,6 @@ public class TaxRequirementMetadata {
      * - `account_number`: An account number for a tax agency, more information provided by `mask` and `prefix`
      * - `tax_rate`: A decimal value representing a tax rate, e.g. `0.034` representing a tax rate of `3.4%`, see `validation` for additional validation guidance
      * - `workers_compensation_rate`: A decimal value representing a percentage, see `risk_class_code`, `risk_class_description`, and `rate_type`
-     * 
      */
     public TaxRequirementMetadata withType(TaxRequirementMetadataType type) {
         Utils.checkNotNull(type, "type");
@@ -306,7 +299,6 @@ public class TaxRequirementMetadata {
      * [for `workers_compensation_rate`] The type of rate being collected. Either:
      *  - `percent`: A percentage formatted as a decimal, e.g. `0.01` for 1%
      *  - `currency_per_hour`: A dollar amount per hour, e.g. `3.24` for $3.24/hr
-     * 
      */
     public TaxRequirementMetadata withRateType(RateType rateType) {
         Utils.checkNotNull(rateType, "rateType");
@@ -318,7 +310,6 @@ public class TaxRequirementMetadata {
      * [for `workers_compensation_rate`] The type of rate being collected. Either:
      *  - `percent`: A percentage formatted as a decimal, e.g. `0.01` for 1%
      *  - `currency_per_hour`: A dollar amount per hour, e.g. `3.24` for $3.24/hr
-     * 
      */
     public TaxRequirementMetadata withRateType(Optional<? extends RateType> rateType) {
         Utils.checkNotNull(rateType, "rateType");
@@ -329,17 +320,16 @@ public class TaxRequirementMetadata {
     /**
      * [for `account_number`] A pattern describing the format of the account number
      * 
-     * The mask is a sequence of characters representing the requirements of the actual account number. Each character in the mask represents a single character in the account number as follows:
+     * <p>The mask is a sequence of characters representing the requirements of the actual account number. Each character in the mask represents a single character in the account number as follows:
      * - `#`: a digit (`\d`)
      * - `@`: a upper or lower case letter (`[a-zA-Z]`)
      * - `^`: an uppercase letter (`[A-Z]`)
      * - `%`: a digit or uppercase letter (`[0-9A-Z]`)
      * - any other character represents the literal character
      * 
-     * Examples:
+     * <p>Examples:
      * - mask: `WHT-######` represents `WHT-` followed by 5 digits, e.g. `WHT-33421`
      * - mask: `%####-^^` supports values of `75544-AB` and `Z7654-HK`
-     * 
      */
     public TaxRequirementMetadata withMask(String mask) {
         Utils.checkNotNull(mask, "mask");
@@ -350,17 +340,16 @@ public class TaxRequirementMetadata {
     /**
      * [for `account_number`] A pattern describing the format of the account number
      * 
-     * The mask is a sequence of characters representing the requirements of the actual account number. Each character in the mask represents a single character in the account number as follows:
+     * <p>The mask is a sequence of characters representing the requirements of the actual account number. Each character in the mask represents a single character in the account number as follows:
      * - `#`: a digit (`\d`)
      * - `@`: a upper or lower case letter (`[a-zA-Z]`)
      * - `^`: an uppercase letter (`[A-Z]`)
      * - `%`: a digit or uppercase letter (`[0-9A-Z]`)
      * - any other character represents the literal character
      * 
-     * Examples:
+     * <p>Examples:
      * - mask: `WHT-######` represents `WHT-` followed by 5 digits, e.g. `WHT-33421`
      * - mask: `%####-^^` supports values of `75544-AB` and `Z7654-HK`
-     * 
      */
     public TaxRequirementMetadata withMask(JsonNullable<String> mask) {
         Utils.checkNotNull(mask, "mask");
@@ -475,7 +464,7 @@ public class TaxRequirementMetadata {
         /**
          * Describes the type of requirement - each type may have additional metadata properties to describe possible values, formats, etc.
          * 
-         * - `text`: free-text input, no additional requirements
+         * <p>- `text`: free-text input, no additional requirements
          * - `currency`: a value representing a dollar amount, e.g. `374.55` representing `$374.55`
          * - `radio`: choose one of options provided, see `options`
          * - `select`: choose one of options provided, see `options`
@@ -483,7 +472,6 @@ public class TaxRequirementMetadata {
          * - `account_number`: An account number for a tax agency, more information provided by `mask` and `prefix`
          * - `tax_rate`: A decimal value representing a tax rate, e.g. `0.034` representing a tax rate of `3.4%`, see `validation` for additional validation guidance
          * - `workers_compensation_rate`: A decimal value representing a percentage, see `risk_class_code`, `risk_class_description`, and `rate_type`
-         * 
          */
         public Builder type(TaxRequirementMetadataType type) {
             Utils.checkNotNull(type, "type");
@@ -549,7 +537,6 @@ public class TaxRequirementMetadata {
          * [for `workers_compensation_rate`] The type of rate being collected. Either:
          *  - `percent`: A percentage formatted as a decimal, e.g. `0.01` for 1%
          *  - `currency_per_hour`: A dollar amount per hour, e.g. `3.24` for $3.24/hr
-         * 
          */
         public Builder rateType(RateType rateType) {
             Utils.checkNotNull(rateType, "rateType");
@@ -561,7 +548,6 @@ public class TaxRequirementMetadata {
          * [for `workers_compensation_rate`] The type of rate being collected. Either:
          *  - `percent`: A percentage formatted as a decimal, e.g. `0.01` for 1%
          *  - `currency_per_hour`: A dollar amount per hour, e.g. `3.24` for $3.24/hr
-         * 
          */
         public Builder rateType(Optional<? extends RateType> rateType) {
             Utils.checkNotNull(rateType, "rateType");
@@ -572,17 +558,16 @@ public class TaxRequirementMetadata {
         /**
          * [for `account_number`] A pattern describing the format of the account number
          * 
-         * The mask is a sequence of characters representing the requirements of the actual account number. Each character in the mask represents a single character in the account number as follows:
+         * <p>The mask is a sequence of characters representing the requirements of the actual account number. Each character in the mask represents a single character in the account number as follows:
          * - `#`: a digit (`\d`)
          * - `@`: a upper or lower case letter (`[a-zA-Z]`)
          * - `^`: an uppercase letter (`[A-Z]`)
          * - `%`: a digit or uppercase letter (`[0-9A-Z]`)
          * - any other character represents the literal character
          * 
-         * Examples:
+         * <p>Examples:
          * - mask: `WHT-######` represents `WHT-` followed by 5 digits, e.g. `WHT-33421`
          * - mask: `%####-^^` supports values of `75544-AB` and `Z7654-HK`
-         * 
          */
         public Builder mask(String mask) {
             Utils.checkNotNull(mask, "mask");
@@ -593,17 +578,16 @@ public class TaxRequirementMetadata {
         /**
          * [for `account_number`] A pattern describing the format of the account number
          * 
-         * The mask is a sequence of characters representing the requirements of the actual account number. Each character in the mask represents a single character in the account number as follows:
+         * <p>The mask is a sequence of characters representing the requirements of the actual account number. Each character in the mask represents a single character in the account number as follows:
          * - `#`: a digit (`\d`)
          * - `@`: a upper or lower case letter (`[a-zA-Z]`)
          * - `^`: an uppercase letter (`[A-Z]`)
          * - `%`: a digit or uppercase letter (`[0-9A-Z]`)
          * - any other character represents the literal character
          * 
-         * Examples:
+         * <p>Examples:
          * - mask: `WHT-######` represents `WHT-` followed by 5 digits, e.g. `WHT-33421`
          * - mask: `%####-^^` supports values of `75544-AB` and `Z7654-HK`
-         * 
          */
         public Builder mask(JsonNullable<String> mask) {
             Utils.checkNotNull(mask, "mask");

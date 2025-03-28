@@ -17,10 +17,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * UnprocessableEntityErrorObject - Unprocessable Entity
- *   
- * This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+ * UnprocessableEntityErrorObject
  * 
+ * <p>Unprocessable Entity
+ * 
+ * <p>This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
  */
 @SuppressWarnings("serial")
 public class UnprocessableEntityErrorObject extends RuntimeException {

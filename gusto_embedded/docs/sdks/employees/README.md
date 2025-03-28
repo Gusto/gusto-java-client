@@ -45,7 +45,7 @@ public class Application {
 
         PostV1EmployeesResponse res = sdk.employees().create()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1EmployeesRequestBody.builder()
                     .firstName("Soren")
                     .lastName("Kierkegaard")
@@ -150,13 +150,7 @@ scope: `employees:manage`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.EmployeeStateTaxes;
-import com.gusto.embedded_api.models.components.HistoricalEmployeeBody;
-import com.gusto.embedded_api.models.components.HistoricalEmployeeBodyHomeAddress;
-import com.gusto.embedded_api.models.components.HistoricalEmployeeBodyJob;
-import com.gusto.embedded_api.models.components.HistoricalEmployeeBodyTermination;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.components.WorkAddress;
+import com.gusto.embedded_api.models.components.*;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.PostV1HistoricalEmployeesResponse;
 import java.lang.Exception;
@@ -173,7 +167,7 @@ public class Application {
 
         PostV1HistoricalEmployeesResponse res = sdk.employees().createHistorical()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .historicalEmployeeBody(HistoricalEmployeeBody.builder()
                     .firstName("Soren")
                     .lastName("Kierkegaard")
@@ -261,7 +255,7 @@ public class Application {
                 .employeeId("<id>")
                 .include(List.of(
                     QueryParamInclude.CUSTOM_FIELDS))
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employee().isPresent()) {
@@ -317,7 +311,7 @@ public class Application {
 
         PutV1EmployeesResponse res = sdk.employees().update()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeesRequestBody.builder()
                     .version("db0edd04aaac4506f7edab03ac855d56")
                     .firstName("Soren")
@@ -386,7 +380,7 @@ public class Application {
 
         DeleteV1EmployeeResponse res = sdk.employees().delete()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -440,7 +434,7 @@ public class Application {
                 .employeeId("<id>")
                 .page(653170L)
                 .per(309220L)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.object().isPresent()) {
@@ -496,7 +490,7 @@ public class Application {
 
         PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse res = sdk.employees().updateOnboardingDocumentsConfig()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody.builder()
                     .i9Document(true)
                     .build())
@@ -589,7 +583,7 @@ public class Application {
 
         GetV1EmployeesEmployeeIdOnboardingStatusResponse res = sdk.employees().getOnboardingStatus()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeeOnboardingStatus().isPresent()) {
@@ -653,7 +647,7 @@ public class Application {
 
         PutV1EmployeesEmployeeIdOnboardingStatusResponse res = sdk.employees().updateOnboardingStatus()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeesEmployeeIdOnboardingStatusRequestBody.builder()
                     .onboardingStatus("<value>")
                     .build())
@@ -712,7 +706,7 @@ public class Application {
         GetVersionEmployeesTimeOffActivitiesResponse res = sdk.employees().getTimeOffActivities()
                 .employeeUuid("<id>")
                 .timeOffType("<value>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.timeOffActivity().isPresent()) {

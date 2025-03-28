@@ -56,9 +56,11 @@ public class CompanyForms implements
 
     /**
      * Get all company forms
-     * Get a list of all company's forms
      * 
-     * scope: `company_forms:read`
+     * <p>Get a list of all company's forms
+     * 
+     * <p>scope: `company_forms:read`
+     * 
      * @return The call builder
      */
     public GetV1CompanyFormsRequestBuilder getAll() {
@@ -67,9 +69,11 @@ public class CompanyForms implements
 
     /**
      * Get all company forms
-     * Get a list of all company's forms
      * 
-     * scope: `company_forms:read`
+     * <p>Get a list of all company's forms
+     * 
+     * <p>scope: `company_forms:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -81,11 +85,13 @@ public class CompanyForms implements
     
     /**
      * Get all company forms
-     * Get a list of all company's forms
      * 
-     * scope: `company_forms:read`
+     * <p>Get a list of all company's forms
+     * 
+     * <p>scope: `company_forms:read`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -120,6 +126,7 @@ public class CompanyForms implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-company-forms", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -131,6 +138,7 @@ public class CompanyForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-forms",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -140,6 +148,7 @@ public class CompanyForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-company-forms",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -149,6 +158,7 @@ public class CompanyForms implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-forms",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -210,9 +220,11 @@ public class CompanyForms implements
 
     /**
      * Get a company form
-     * Get a company form
      * 
-     * scope: `company_forms:read`
+     * <p>Get a company form
+     * 
+     * <p>scope: `company_forms:read`
+     * 
      * @return The call builder
      */
     public GetV1CompanyFormRequestBuilder get() {
@@ -221,9 +233,11 @@ public class CompanyForms implements
 
     /**
      * Get a company form
-     * Get a company form
      * 
-     * scope: `company_forms:read`
+     * <p>Get a company form
+     * 
+     * <p>scope: `company_forms:read`
+     * 
      * @param formId The UUID of the form
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -235,11 +249,13 @@ public class CompanyForms implements
     
     /**
      * Get a company form
-     * Get a company form
      * 
-     * scope: `company_forms:read`
+     * <p>Get a company form
+     * 
+     * <p>scope: `company_forms:read`
+     * 
      * @param formId The UUID of the form
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -274,6 +290,7 @@ public class CompanyForms implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-company-form", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -285,6 +302,7 @@ public class CompanyForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-form",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -294,6 +312,7 @@ public class CompanyForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-company-form",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -303,6 +322,7 @@ public class CompanyForms implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-form",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -364,9 +384,11 @@ public class CompanyForms implements
 
     /**
      * Get a company form pdf
-     * Get the link to the form PDF
      * 
-     * scope: `company_forms:read`
+     * <p>Get the link to the form PDF
+     * 
+     * <p>scope: `company_forms:read`
+     * 
      * @return The call builder
      */
     public GetV1CompanyFormPdfRequestBuilder getPdf() {
@@ -375,9 +397,11 @@ public class CompanyForms implements
 
     /**
      * Get a company form pdf
-     * Get the link to the form PDF
      * 
-     * scope: `company_forms:read`
+     * <p>Get the link to the form PDF
+     * 
+     * <p>scope: `company_forms:read`
+     * 
      * @param formId The UUID of the form
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -389,11 +413,13 @@ public class CompanyForms implements
     
     /**
      * Get a company form pdf
-     * Get the link to the form PDF
      * 
-     * scope: `company_forms:read`
+     * <p>Get the link to the form PDF
+     * 
+     * <p>scope: `company_forms:read`
+     * 
      * @param formId The UUID of the form
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -428,6 +454,7 @@ public class CompanyForms implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-company-form-pdf", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -439,6 +466,7 @@ public class CompanyForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-form-pdf",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -448,6 +476,7 @@ public class CompanyForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-company-form-pdf",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -457,6 +486,7 @@ public class CompanyForms implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-form-pdf",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -518,9 +548,11 @@ public class CompanyForms implements
 
     /**
      * Sign a company form
-     * Sign a company form. Company forms must be signed by the company signatory.
      * 
-     * scope: `company_forms:sign`
+     * <p>Sign a company form. Company forms must be signed by the company signatory.
+     * 
+     * <p>scope: `company_forms:sign`
+     * 
      * @return The call builder
      */
     public PutV1CompanyFormSignRequestBuilder sign() {
@@ -529,11 +561,13 @@ public class CompanyForms implements
 
     /**
      * Sign a company form
-     * Sign a company form. Company forms must be signed by the company signatory.
      * 
-     * scope: `company_forms:sign`
+     * <p>Sign a company form. Company forms must be signed by the company signatory.
+     * 
+     * <p>scope: `company_forms:sign`
+     * 
      * @param formId The UUID of the form
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -545,13 +579,15 @@ public class CompanyForms implements
     
     /**
      * Sign a company form
-     * Sign a company form. Company forms must be signed by the company signatory.
      * 
-     * scope: `company_forms:sign`
+     * <p>Sign a company form. Company forms must be signed by the company signatory.
+     * 
+     * <p>scope: `company_forms:sign`
+     * 
      * @param formId The UUID of the form
      * @param xGustoClientIp Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -603,6 +639,7 @@ public class CompanyForms implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-company-form-sign", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -614,6 +651,7 @@ public class CompanyForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-company-form-sign",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -623,6 +661,7 @@ public class CompanyForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-company-form-sign",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -632,6 +671,7 @@ public class CompanyForms implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-company-form-sign",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

@@ -17,7 +17,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * FederalTaxDetails - Example response
+ * FederalTaxDetails
+ * 
+ * <p>Example response
  */
 
 public class FederalTaxDetails {
@@ -75,7 +77,7 @@ public class FederalTaxDetails {
     private Optional<Boolean> hasEin;
 
     /**
-     * Whether the EIN was able to be verified as a valid EIN with the IRS. 
+     * Whether the EIN was able to be verified as a valid EIN with the IRS.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ein_verified")
@@ -197,7 +199,7 @@ public class FederalTaxDetails {
     }
 
     /**
-     * Whether the EIN was able to be verified as a valid EIN with the IRS. 
+     * Whether the EIN was able to be verified as a valid EIN with the IRS.
      */
     @JsonIgnore
     public Optional<Boolean> einVerified() {
@@ -359,7 +361,7 @@ public class FederalTaxDetails {
     }
 
     /**
-     * Whether the EIN was able to be verified as a valid EIN with the IRS. 
+     * Whether the EIN was able to be verified as a valid EIN with the IRS.
      */
     public FederalTaxDetails withEinVerified(boolean einVerified) {
         Utils.checkNotNull(einVerified, "einVerified");
@@ -368,7 +370,7 @@ public class FederalTaxDetails {
     }
 
     /**
-     * Whether the EIN was able to be verified as a valid EIN with the IRS. 
+     * Whether the EIN was able to be verified as a valid EIN with the IRS.
      */
     public FederalTaxDetails withEinVerified(Optional<Boolean> einVerified) {
         Utils.checkNotNull(einVerified, "einVerified");
@@ -632,7 +634,7 @@ public class FederalTaxDetails {
         }
 
         /**
-         * Whether the EIN was able to be verified as a valid EIN with the IRS. 
+         * Whether the EIN was able to be verified as a valid EIN with the IRS.
          */
         public Builder einVerified(boolean einVerified) {
             Utils.checkNotNull(einVerified, "einVerified");
@@ -641,7 +643,7 @@ public class FederalTaxDetails {
         }
 
         /**
-         * Whether the EIN was able to be verified as a valid EIN with the IRS. 
+         * Whether the EIN was able to be verified as a valid EIN with the IRS.
          */
         public Builder einVerified(Optional<Boolean> einVerified) {
             Utils.checkNotNull(einVerified, "einVerified");

@@ -16,7 +16,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody - Example response
+ * PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody
+ * 
+ * <p>Example response
  */
 
 public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody {

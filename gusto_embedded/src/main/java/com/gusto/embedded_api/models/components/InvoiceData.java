@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * InvoiceData - Representation of a partners invoice data
+ * InvoiceData
+ * 
+ * <p>Representation of a partners invoice data
  */
 
 public class InvoiceData {

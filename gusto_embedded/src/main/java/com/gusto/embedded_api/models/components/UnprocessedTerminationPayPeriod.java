@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * UnprocessedTerminationPayPeriod - The representation of an unprocessed termination pay period.
+ * UnprocessedTerminationPayPeriod
+ * 
+ * <p>The representation of an unprocessed termination pay period.
  */
 
 public class UnprocessedTerminationPayPeriod {

@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * DeductAsPercentage - Whether the employee deduction amount should be treated as a percentage to be deducted from each payroll.
+ * DeductAsPercentage
+ * 
+ * <p>Whether the employee deduction amount should be treated as a percentage to be deducted from each payroll.
  */
 
 public class DeductAsPercentage {

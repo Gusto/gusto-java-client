@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PrimarySignatory - The primary signatory of the company.
+ * PrimarySignatory
+ * 
+ * <p>The primary signatory of the company.
  */
 
 public class PrimarySignatory {

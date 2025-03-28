@@ -52,13 +52,13 @@ public class Application {
         PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse res = sdk.timeOffPolicies().calculateAccruingTimeOffHours()
                 .payrollId("<id>")
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody.builder()
-                    .regularHoursWorked(30.25d)
-                    .overtimeHoursWorked(10d)
-                    .doubleOvertimeHoursWorked(0d)
-                    .ptoHoursUsed(5.5d)
-                    .sickHoursUsed(0d)
+                    .regularHoursWorked(30.25)
+                    .overtimeHoursWorked(10)
+                    .doubleOvertimeHoursWorked(0)
+                    .ptoHoursUsed(5.5)
+                    .sickHoursUsed(0)
                     .build())
                 .call();
 
@@ -115,7 +115,7 @@ public class Application {
 
         GetTimeOffPoliciesTimeOffPolicyUuidResponse res = sdk.timeOffPolicies().get()
                 .timeOffPolicyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.timeOffPolicy().isPresent()) {
@@ -156,9 +156,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.AccrualMethod;
-import com.gusto.embedded_api.models.operations.PutTimeOffPoliciesTimeOffPolicyUuidRequestBody;
-import com.gusto.embedded_api.models.operations.PutTimeOffPoliciesTimeOffPolicyUuidResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -171,7 +169,7 @@ public class Application {
 
         PutTimeOffPoliciesTimeOffPolicyUuidResponse res = sdk.timeOffPolicies().update()
                 .timeOffPolicyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutTimeOffPoliciesTimeOffPolicyUuidRequestBody.builder()
                     .name("Hourly Vacation Policy")
                     .accrualMethod(AccrualMethod.PER_HOUR_PAID)
@@ -237,7 +235,7 @@ public class Application {
 
         GetCompaniesCompanyUuidTimeOffPoliciesResponse res = sdk.timeOffPolicies().getAll()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.timeOffPolicyList().isPresent()) {
@@ -278,9 +276,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod;
-import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidTimeOffPoliciesRequestBody;
-import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidTimeOffPoliciesResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -293,7 +289,7 @@ public class Application {
 
         PostCompaniesCompanyUuidTimeOffPoliciesResponse res = sdk.timeOffPolicies().create()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostCompaniesCompanyUuidTimeOffPoliciesRequestBody.builder()
                     .name("Unlimited Vacation Policy")
                     .policyType("vacation")
@@ -355,7 +351,7 @@ public class Application {
 
         PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse res = sdk.timeOffPolicies().addEmployees()
                 .timeOffPolicyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody.builder()
                     .build())
                 .call();
@@ -414,7 +410,7 @@ public class Application {
 
         PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse res = sdk.timeOffPolicies().removeEmployees()
                 .timeOffPolicyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody.builder()
                     .build())
                 .call();
@@ -473,7 +469,7 @@ public class Application {
 
         PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse res = sdk.timeOffPolicies().updateBalance()
                 .timeOffPolicyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody.builder()
                     .build())
                 .call();
@@ -531,7 +527,7 @@ public class Application {
 
         PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse res = sdk.timeOffPolicies().deactivate()
                 .timeOffPolicyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.timeOffPolicy().isPresent()) {

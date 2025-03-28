@@ -36,7 +36,7 @@ public class Application {
 
         GetV1ContractorFormsResponse res = sdk.contractorForms().list()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.form1099s().isPresent()) {
@@ -90,7 +90,7 @@ public class Application {
         GetV1ContractorFormResponse res = sdk.contractorForms().get()
                 .contractorUuid("<id>")
                 .formId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.form1099().isPresent()) {
@@ -145,7 +145,7 @@ public class Application {
         GetV1ContractorFormPdfResponse res = sdk.contractorForms().getPdf()
                 .contractorUuid("<id>")
                 .formId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.formPdf().isPresent()) {
@@ -204,7 +204,7 @@ public class Application {
             .build();
 
         PostV1SandboxGenerate1099Response res = sdk.contractorForms().generate1099()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1SandboxGenerate1099RequestBody.builder()
                     .contractorId("<id>")
                     .build())

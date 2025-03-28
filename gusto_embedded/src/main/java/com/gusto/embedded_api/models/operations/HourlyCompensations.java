@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * HourlyCompensations - An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.
+ * HourlyCompensations
+ * 
+ * <p>An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.
  */
 
 public class HourlyCompensations {

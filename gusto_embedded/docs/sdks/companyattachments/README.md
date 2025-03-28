@@ -36,7 +36,7 @@ public class Application {
         GetV1CompaniesAttachmentResponse res = sdk.companyAttachments().getDetails()
                 .companyId("<id>")
                 .companyAttachmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.companyAttachment().isPresent()) {
@@ -90,7 +90,7 @@ public class Application {
 
         GetV1CompaniesAttachmentsResponse res = sdk.companyAttachments().getList()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.companyAttachmentList().isPresent()) {
@@ -133,10 +133,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.Category;
-import com.gusto.embedded_api.models.operations.Document;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesAttachmentRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesAttachmentResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.nio.charset.StandardCharsets;
 
@@ -150,7 +147,7 @@ public class Application {
 
         PostV1CompaniesAttachmentResponse res = sdk.companyAttachments().create()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesAttachmentRequestBody.builder()
                     .document(Document.builder()
                         .fileName("example.file")

@@ -33,9 +33,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.AccountType;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdBankAccountsRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdBankAccountsResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -48,7 +46,7 @@ public class Application {
 
         PostV1CompaniesCompanyIdBankAccountsResponse res = sdk.bankAccounts().create()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyIdBankAccountsRequestBody.builder()
                     .routingNumber("115092013")
                     .accountNumber("9775014007")
@@ -108,7 +106,7 @@ public class Application {
 
         GetV1CompaniesCompanyIdBankAccountsResponse res = sdk.bankAccounts().get()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.companyBankAccountList().isPresent()) {
@@ -177,10 +175,10 @@ public class Application {
         PutV1CompaniesCompanyIdBankAccountsVerifyResponse res = sdk.bankAccounts().verify()
                 .bankAccountUuid("<id>")
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody.builder()
-                    .deposit1(0.02d)
-                    .deposit2(0.42d)
+                    .deposit1(0.02)
+                    .deposit2(0.42)
                     .build())
                 .call();
 
@@ -232,9 +230,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.OwnerType;
-import com.gusto.embedded_api.models.operations.PostV1PlaidProcessorTokenRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1PlaidProcessorTokenResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -246,7 +242,7 @@ public class Application {
             .build();
 
         PostV1PlaidProcessorTokenResponse res = sdk.bankAccounts().createFromPlaidToken()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1PlaidProcessorTokenRequestBody.builder()
                     .ownerType(OwnerType.COMPANY)
                     .ownerId("ef279fbd-0fc6-4cf1-a977-6939d621c429")

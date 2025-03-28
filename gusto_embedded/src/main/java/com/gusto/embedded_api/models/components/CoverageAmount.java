@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CoverageAmount - The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.
+ * CoverageAmount
+ * 
+ * <p>The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.
  */
 
 public class CoverageAmount {

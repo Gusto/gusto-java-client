@@ -23,9 +23,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PostV1ContractorsContractorUuidBankAccountsAccountType;
-import com.gusto.embedded_api.models.operations.PostV1ContractorsContractorUuidBankAccountsRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1ContractorsContractorUuidBankAccountsResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -38,7 +36,7 @@ public class Application {
 
         PostV1ContractorsContractorUuidBankAccountsResponse res = sdk.contractorPaymentMethods().createBankAccount()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1ContractorsContractorUuidBankAccountsRequestBody.builder()
                     .name("BoA Checking Account")
                     .routingNumber("266905059")

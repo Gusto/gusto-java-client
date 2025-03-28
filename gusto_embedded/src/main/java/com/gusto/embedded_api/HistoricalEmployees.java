@@ -42,9 +42,11 @@ public class HistoricalEmployees implements
 
     /**
      * Update a historical employee
-     * Update a historical employee, an employee that was previously dismissed from the company in the current year.
      * 
-     * scope: `employees:manage`
+     * <p>Update a historical employee, an employee that was previously dismissed from the company in the current year.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @return The call builder
      */
     public PutV1HistoricalEmployeesRequestBuilder update() {
@@ -53,9 +55,11 @@ public class HistoricalEmployees implements
 
     /**
      * Update a historical employee
-     * Update a historical employee, an employee that was previously dismissed from the company in the current year.
      * 
-     * scope: `employees:manage`
+     * <p>Update a historical employee, an employee that was previously dismissed from the company in the current year.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param companyUuid The UUID of the company
      * @param historicalEmployeeUuid The UUID of the historical employee
      * @param requestBody Update a historical employee.
@@ -71,12 +75,14 @@ public class HistoricalEmployees implements
     
     /**
      * Update a historical employee
-     * Update a historical employee, an employee that was previously dismissed from the company in the current year.
      * 
-     * scope: `employees:manage`
+     * <p>Update a historical employee, an employee that was previously dismissed from the company in the current year.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param companyUuid The UUID of the company
      * @param historicalEmployeeUuid The UUID of the historical employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody Update a historical employee.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -129,6 +135,7 @@ public class HistoricalEmployees implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-historical_employees", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -140,6 +147,7 @@ public class HistoricalEmployees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-historical_employees",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -149,6 +157,7 @@ public class HistoricalEmployees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-historical_employees",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -158,6 +167,7 @@ public class HistoricalEmployees implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-historical_employees",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

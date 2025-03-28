@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * GeneratedDocumentStatus - Current status of the Generated Document
+ * GeneratedDocumentStatus
+ * 
+ * <p>Current status of the Generated Document
  */
 public enum GeneratedDocumentStatus {
     PENDING("pending"),

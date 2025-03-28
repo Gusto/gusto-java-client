@@ -31,7 +31,7 @@ public class Application {
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.object().isPresent()) {
@@ -85,7 +85,7 @@ public class Application {
             .build();
 
         RefreshAccessTokenResponse res = sdk.introspection().refreshToken()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(RefreshAccessTokenRequestBody.builder()
                     .clientId("<id>")
                     .clientSecret("<value>")

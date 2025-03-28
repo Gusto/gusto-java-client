@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * BenefitSummary - Benefit summary response
+ * BenefitSummary
+ * 
+ * <p>Benefit summary response
  */
 
 public class BenefitSummary {

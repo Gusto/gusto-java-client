@@ -41,7 +41,7 @@ public class Application {
 
         PostV1CompaniesCompanyIdLocationsResponse res = sdk.locations().create()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyIdLocationsRequestBody.builder()
                     .phoneNumber("8009360383")
                     .street1("425 2nd Street")
@@ -108,7 +108,7 @@ public class Application {
                 .companyId("<id>")
                 .page(700347L)
                 .per(558834L)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.locationList().isPresent()) {
@@ -163,7 +163,7 @@ public class Application {
 
         GetV1LocationsLocationIdResponse res = sdk.locations().retrieve()
                 .locationId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.location().isPresent()) {
@@ -218,7 +218,7 @@ public class Application {
 
         PutV1LocationsLocationIdResponse res = sdk.locations().update()
                 .locationId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1LocationsLocationIdRequestBody.builder()
                     .version("1928d0c378e519e9c03fb959bc959a6b")
                     .phoneNumber("8009360383")
@@ -284,7 +284,7 @@ public class Application {
         GetV1LocationsLocationUuidMinimumWagesResponse res = sdk.locations().getMinimumWages()
                 .locationUuid("<id>")
                 .effectiveDate("2020-01-31")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.minimumWageList().isPresent()) {

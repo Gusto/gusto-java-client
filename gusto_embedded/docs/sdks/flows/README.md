@@ -35,7 +35,7 @@ public class Application {
 
         PostV1CompanyFlowsResponse res = sdk.flows().create()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompanyFlowsRequestBody.builder()
                     .flowType("company_onboarding")
                     .build())

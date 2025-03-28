@@ -16,7 +16,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutV1EmployeesRequestBody - Update an employee.
+ * PutV1EmployeesRequestBody
+ * 
+ * <p>Update an employee.
  */
 
 public class PutV1EmployeesRequestBody {

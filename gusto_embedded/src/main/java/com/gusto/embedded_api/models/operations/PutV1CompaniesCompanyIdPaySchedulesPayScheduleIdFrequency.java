@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency - The frequency that employees on this pay schedule are paid with Gusto.
+ * PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency
+ * 
+ * <p>The frequency that employees on this pay schedule are paid with Gusto.
  */
 public enum PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency {
     EVERY_WEEK("Every week"),

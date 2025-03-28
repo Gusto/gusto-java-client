@@ -57,11 +57,13 @@ public class EarningTypes implements
 
     /**
      * Create a custom earning type
-     * Create a custom earning type.
      * 
-     * If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
+     * <p>Create a custom earning type.
      * 
-     * scope: `payrolls:write`
+     * <p>If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdEarningTypesRequestBuilder create() {
@@ -70,13 +72,15 @@ public class EarningTypes implements
 
     /**
      * Create a custom earning type
-     * Create a custom earning type.
      * 
-     * If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
+     * <p>Create a custom earning type.
      * 
-     * scope: `payrolls:write`
+     * <p>If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -88,14 +92,16 @@ public class EarningTypes implements
     
     /**
      * Create a custom earning type
-     * Create a custom earning type.
      * 
-     * If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
+     * <p>Create a custom earning type.
      * 
-     * scope: `payrolls:write`
+     * <p>If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -145,6 +151,7 @@ public class EarningTypes implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_id-earning_types", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -156,6 +163,7 @@ public class EarningTypes implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-earning_types",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -165,6 +173,7 @@ public class EarningTypes implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-earning_types",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -174,6 +183,7 @@ public class EarningTypes implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_id-earning_types",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -249,15 +259,17 @@ public class EarningTypes implements
 
     /**
      * Get all earning types for a company
-     * A payroll item in Gusto is associated to an earning type to name the type of earning described by the payroll item.
      * 
-     * #### Default Earning Type
+     * <p>A payroll item in Gusto is associated to an earning type to name the type of earning described by the payroll item.
+     * 
+     * <p>#### Default Earning Type
      * Certain earning types are special because they have tax considerations. Those earning types are mostly the same for every company depending on its legal structure (LLC, Corporation, etc.)
      * 
-     * #### Custom Earning Type
+     * <p>#### Custom Earning Type
      * Custom earning types are all the other earning types added specifically for a company.
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdEarningTypesRequestBuilder list() {
@@ -266,15 +278,17 @@ public class EarningTypes implements
 
     /**
      * Get all earning types for a company
-     * A payroll item in Gusto is associated to an earning type to name the type of earning described by the payroll item.
      * 
-     * #### Default Earning Type
+     * <p>A payroll item in Gusto is associated to an earning type to name the type of earning described by the payroll item.
+     * 
+     * <p>#### Default Earning Type
      * Certain earning types are special because they have tax considerations. Those earning types are mostly the same for every company depending on its legal structure (LLC, Corporation, etc.)
      * 
-     * #### Custom Earning Type
+     * <p>#### Custom Earning Type
      * Custom earning types are all the other earning types added specifically for a company.
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -286,17 +300,19 @@ public class EarningTypes implements
     
     /**
      * Get all earning types for a company
-     * A payroll item in Gusto is associated to an earning type to name the type of earning described by the payroll item.
      * 
-     * #### Default Earning Type
+     * <p>A payroll item in Gusto is associated to an earning type to name the type of earning described by the payroll item.
+     * 
+     * <p>#### Default Earning Type
      * Certain earning types are special because they have tax considerations. Those earning types are mostly the same for every company depending on its legal structure (LLC, Corporation, etc.)
      * 
-     * #### Custom Earning Type
+     * <p>#### Custom Earning Type
      * Custom earning types are all the other earning types added specifically for a company.
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -331,6 +347,7 @@ public class EarningTypes implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-earning_types", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -342,6 +359,7 @@ public class EarningTypes implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-earning_types",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -351,6 +369,7 @@ public class EarningTypes implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-earning_types",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -360,6 +379,7 @@ public class EarningTypes implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-earning_types",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -421,9 +441,11 @@ public class EarningTypes implements
 
     /**
      * Update an earning type
-     * Update an earning type.
      * 
-     * scope: `payrolls:write`
+     * <p>Update an earning type.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
      * @return The call builder
      */
     public PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder update() {
@@ -432,12 +454,14 @@ public class EarningTypes implements
 
     /**
      * Update an earning type
-     * Update an earning type.
      * 
-     * scope: `payrolls:write`
+     * <p>Update an earning type.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
      * @param companyId The UUID of the company
      * @param earningTypeUuid The UUID of the earning type
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -450,13 +474,15 @@ public class EarningTypes implements
     
     /**
      * Update an earning type
-     * Update an earning type.
      * 
-     * scope: `payrolls:write`
+     * <p>Update an earning type.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
      * @param companyId The UUID of the company
      * @param earningTypeUuid The UUID of the earning type
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -508,6 +534,7 @@ public class EarningTypes implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-companies-company_id-earning_types-earning_type_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -519,6 +546,7 @@ public class EarningTypes implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-earning_types-earning_type_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -528,6 +556,7 @@ public class EarningTypes implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-earning_types-earning_type_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -537,6 +566,7 @@ public class EarningTypes implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_id-earning_types-earning_type_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -612,9 +642,11 @@ public class EarningTypes implements
 
     /**
      * Deactivate an earning type
-     * Deactivate an earning type.
      * 
-     * scope: `payrolls:write`
+     * <p>Deactivate an earning type.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
      * @return The call builder
      */
     public DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder delete() {
@@ -623,9 +655,11 @@ public class EarningTypes implements
 
     /**
      * Deactivate an earning type
-     * Deactivate an earning type.
      * 
-     * scope: `payrolls:write`
+     * <p>Deactivate an earning type.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
      * @param companyId The UUID of the company
      * @param earningTypeUuid The UUID of the earning type
      * @return The response from the API call
@@ -639,12 +673,14 @@ public class EarningTypes implements
     
     /**
      * Deactivate an earning type
-     * Deactivate an earning type.
      * 
-     * scope: `payrolls:write`
+     * <p>Deactivate an earning type.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
      * @param companyId The UUID of the company
      * @param earningTypeUuid The UUID of the earning type
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -681,6 +717,7 @@ public class EarningTypes implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-companies-company_id-earning_types-earning_type_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -692,6 +729,7 @@ public class EarningTypes implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-companies-company_id-earning_types-earning_type_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -701,6 +739,7 @@ public class EarningTypes implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-companies-company_id-earning_types-earning_type_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -710,6 +749,7 @@ public class EarningTypes implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-companies-company_id-earning_types-earning_type_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

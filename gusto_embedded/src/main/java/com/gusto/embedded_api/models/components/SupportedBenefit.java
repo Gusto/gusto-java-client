@@ -17,7 +17,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * SupportedBenefit - Example response
+ * SupportedBenefit
+ * 
+ * <p>Example response
  */
 
 public class SupportedBenefit {

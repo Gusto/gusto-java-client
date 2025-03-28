@@ -18,9 +18,11 @@ import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Objects;
 /**
- * PutV1EmployeeBenefitsEmployeeBenefitIdValue - For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
+ * PutV1EmployeeBenefitsEmployeeBenefitIdValue
  * 
- * For the `tiered` contribution type, an array of tiers.
+ * <p>For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
+ * 
+ * <p>For the `tiered` contribution type, an array of tiers.
  */
 
 @JsonDeserialize(using = PutV1EmployeeBenefitsEmployeeBenefitIdValue._Deserializer.class)

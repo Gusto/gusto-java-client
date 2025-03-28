@@ -57,9 +57,11 @@ public class EmployeeTaxSetup implements
 
     /**
      * Get an employee's federal taxes
-     * Get attributes relevant for an employee's federal taxes.
      * 
-     *  scope: `employee_federal_taxes:read`
+     * <p>Get attributes relevant for an employee's federal taxes.
+     * 
+     * <p> scope: `employee_federal_taxes:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdFederalTaxesRequestBuilder getFederalTaxes() {
@@ -68,9 +70,11 @@ public class EmployeeTaxSetup implements
 
     /**
      * Get an employee's federal taxes
-     * Get attributes relevant for an employee's federal taxes.
      * 
-     *  scope: `employee_federal_taxes:read`
+     * <p>Get attributes relevant for an employee's federal taxes.
+     * 
+     * <p> scope: `employee_federal_taxes:read`
+     * 
      * @param employeeUuid The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -82,11 +86,13 @@ public class EmployeeTaxSetup implements
     
     /**
      * Get an employee's federal taxes
-     * Get attributes relevant for an employee's federal taxes.
      * 
-     *  scope: `employee_federal_taxes:read`
+     * <p>Get attributes relevant for an employee's federal taxes.
+     * 
+     * <p> scope: `employee_federal_taxes:read`
+     * 
      * @param employeeUuid The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -121,6 +127,7 @@ public class EmployeeTaxSetup implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-federal_taxes", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -132,6 +139,7 @@ public class EmployeeTaxSetup implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-federal_taxes",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -141,6 +149,7 @@ public class EmployeeTaxSetup implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-federal_taxes",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -150,6 +159,7 @@ public class EmployeeTaxSetup implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-federal_taxes",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -211,9 +221,11 @@ public class EmployeeTaxSetup implements
 
     /**
      * Update an employee's federal taxes
-     * Update attributes relevant for an employee's federal taxes.
      * 
-     * scope: `employee_federal_taxes:write`
+     * <p>Update attributes relevant for an employee's federal taxes.
+     * 
+     * <p>scope: `employee_federal_taxes:write`
+     * 
      * @return The call builder
      */
     public PutV1EmployeesEmployeeIdFederalTaxesRequestBuilder updateFederalTaxes() {
@@ -222,11 +234,13 @@ public class EmployeeTaxSetup implements
 
     /**
      * Update an employee's federal taxes
-     * Update attributes relevant for an employee's federal taxes.
      * 
-     * scope: `employee_federal_taxes:write`
+     * <p>Update attributes relevant for an employee's federal taxes.
+     * 
+     * <p>scope: `employee_federal_taxes:write`
+     * 
      * @param employeeUuid The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -238,12 +252,14 @@ public class EmployeeTaxSetup implements
     
     /**
      * Update an employee's federal taxes
-     * Update attributes relevant for an employee's federal taxes.
      * 
-     * scope: `employee_federal_taxes:write`
+     * <p>Update attributes relevant for an employee's federal taxes.
+     * 
+     * <p>scope: `employee_federal_taxes:write`
+     * 
      * @param employeeUuid The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -293,6 +309,7 @@ public class EmployeeTaxSetup implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-employees-employee_id-federal_taxes", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -304,6 +321,7 @@ public class EmployeeTaxSetup implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-federal_taxes",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -313,6 +331,7 @@ public class EmployeeTaxSetup implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-federal_taxes",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -322,6 +341,7 @@ public class EmployeeTaxSetup implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-federal_taxes",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -397,20 +417,21 @@ public class EmployeeTaxSetup implements
 
     /**
      * Get an employee's state taxes
-     * Get attributes relevant for an employee's state taxes.
      * 
-     * The data required to correctly calculate an employee's state taxes varies by both home and work location. This API returns information about each question that must be answered grouped by state. Mostly commonly, an employee lives and works in the same state and will only have questions for a single state. The response contains metadata about each question, the type of answer expected, and the current answer stored in Gusto for that question.
+     * <p>Get attributes relevant for an employee's state taxes.
      * 
-     * Answers are represented by an array. Today, this array can only be empty or contain exactly one element, but is designed to allow for forward compatibility with effective-dated fields. Until effective dated answers are supported, the `valid_from` and `valid_up_to` must always be `"2010-01-01"` and `null` respectively.
+     * <p>The data required to correctly calculate an employee's state taxes varies by both home and work location. This API returns information about each question that must be answered grouped by state. Mostly commonly, an employee lives and works in the same state and will only have questions for a single state. The response contains metadata about each question, the type of answer expected, and the current answer stored in Gusto for that question.
      * 
-     * ## About filing new hire reports
+     * <p>Answers are represented by an array. Today, this array can only be empty or contain exactly one element, but is designed to allow for forward compatibility with effective-dated fields. Until effective dated answers are supported, the `valid_from` and `valid_up_to` must always be `"2010-01-01"` and `null` respectively.
+     * 
+     * <p>## About filing new hire reports
      * Payroll Admins are responsible for filing a new hire report for each Employee. The `file_new_hire_report` question will only be listed if:
      * - the `employee.onboarding_status` is one of the following:
      *   - `admin_onboarding_incomplete`
      *   - `self_onboarding_awaiting_admin_review`
      * - that employee's work state requires filing a new hire report
      * 
-     * scope: `employee_state_taxes:read`
+     * <p>scope: `employee_state_taxes:read`
      * 
      * @return The call builder
      */
@@ -420,20 +441,21 @@ public class EmployeeTaxSetup implements
 
     /**
      * Get an employee's state taxes
-     * Get attributes relevant for an employee's state taxes.
      * 
-     * The data required to correctly calculate an employee's state taxes varies by both home and work location. This API returns information about each question that must be answered grouped by state. Mostly commonly, an employee lives and works in the same state and will only have questions for a single state. The response contains metadata about each question, the type of answer expected, and the current answer stored in Gusto for that question.
+     * <p>Get attributes relevant for an employee's state taxes.
      * 
-     * Answers are represented by an array. Today, this array can only be empty or contain exactly one element, but is designed to allow for forward compatibility with effective-dated fields. Until effective dated answers are supported, the `valid_from` and `valid_up_to` must always be `"2010-01-01"` and `null` respectively.
+     * <p>The data required to correctly calculate an employee's state taxes varies by both home and work location. This API returns information about each question that must be answered grouped by state. Mostly commonly, an employee lives and works in the same state and will only have questions for a single state. The response contains metadata about each question, the type of answer expected, and the current answer stored in Gusto for that question.
      * 
-     * ## About filing new hire reports
+     * <p>Answers are represented by an array. Today, this array can only be empty or contain exactly one element, but is designed to allow for forward compatibility with effective-dated fields. Until effective dated answers are supported, the `valid_from` and `valid_up_to` must always be `"2010-01-01"` and `null` respectively.
+     * 
+     * <p>## About filing new hire reports
      * Payroll Admins are responsible for filing a new hire report for each Employee. The `file_new_hire_report` question will only be listed if:
      * - the `employee.onboarding_status` is one of the following:
      *   - `admin_onboarding_incomplete`
      *   - `self_onboarding_awaiting_admin_review`
      * - that employee's work state requires filing a new hire report
      * 
-     * scope: `employee_state_taxes:read`
+     * <p>scope: `employee_state_taxes:read`
      * 
      * @param employeeUuid The UUID of the employee
      * @return The response from the API call
@@ -446,23 +468,24 @@ public class EmployeeTaxSetup implements
     
     /**
      * Get an employee's state taxes
-     * Get attributes relevant for an employee's state taxes.
      * 
-     * The data required to correctly calculate an employee's state taxes varies by both home and work location. This API returns information about each question that must be answered grouped by state. Mostly commonly, an employee lives and works in the same state and will only have questions for a single state. The response contains metadata about each question, the type of answer expected, and the current answer stored in Gusto for that question.
+     * <p>Get attributes relevant for an employee's state taxes.
      * 
-     * Answers are represented by an array. Today, this array can only be empty or contain exactly one element, but is designed to allow for forward compatibility with effective-dated fields. Until effective dated answers are supported, the `valid_from` and `valid_up_to` must always be `"2010-01-01"` and `null` respectively.
+     * <p>The data required to correctly calculate an employee's state taxes varies by both home and work location. This API returns information about each question that must be answered grouped by state. Mostly commonly, an employee lives and works in the same state and will only have questions for a single state. The response contains metadata about each question, the type of answer expected, and the current answer stored in Gusto for that question.
      * 
-     * ## About filing new hire reports
+     * <p>Answers are represented by an array. Today, this array can only be empty or contain exactly one element, but is designed to allow for forward compatibility with effective-dated fields. Until effective dated answers are supported, the `valid_from` and `valid_up_to` must always be `"2010-01-01"` and `null` respectively.
+     * 
+     * <p>## About filing new hire reports
      * Payroll Admins are responsible for filing a new hire report for each Employee. The `file_new_hire_report` question will only be listed if:
      * - the `employee.onboarding_status` is one of the following:
      *   - `admin_onboarding_incomplete`
      *   - `self_onboarding_awaiting_admin_review`
      * - that employee's work state requires filing a new hire report
      * 
-     * scope: `employee_state_taxes:read`
+     * <p>scope: `employee_state_taxes:read`
      * 
      * @param employeeUuid The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -497,6 +520,7 @@ public class EmployeeTaxSetup implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-state_taxes", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -508,6 +532,7 @@ public class EmployeeTaxSetup implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-state_taxes",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -517,6 +542,7 @@ public class EmployeeTaxSetup implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-state_taxes",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -526,6 +552,7 @@ public class EmployeeTaxSetup implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-state_taxes",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -587,11 +614,13 @@ public class EmployeeTaxSetup implements
 
     /**
      * Update an employee's state taxes
-     * Update attributes relevant for an employee's state taxes.
      * 
-     * As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted - `valid_from` and `valid_up_to` must be `"2010-01-01"` and `null` respectively.
+     * <p>Update attributes relevant for an employee's state taxes.
      * 
-     * scope: `employee_state_taxes:write`
+     * <p>As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted - `valid_from` and `valid_up_to` must be `"2010-01-01"` and `null` respectively.
+     * 
+     * <p>scope: `employee_state_taxes:write`
+     * 
      * @return The call builder
      */
     public PutV1EmployeesEmployeeIdStateTaxesRequestBuilder updateStateTaxes() {
@@ -600,13 +629,15 @@ public class EmployeeTaxSetup implements
 
     /**
      * Update an employee's state taxes
-     * Update attributes relevant for an employee's state taxes.
      * 
-     * As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted - `valid_from` and `valid_up_to` must be `"2010-01-01"` and `null` respectively.
+     * <p>Update attributes relevant for an employee's state taxes.
      * 
-     * scope: `employee_state_taxes:write`
+     * <p>As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted - `valid_from` and `valid_up_to` must be `"2010-01-01"` and `null` respectively.
+     * 
+     * <p>scope: `employee_state_taxes:write`
+     * 
      * @param employeeUuid The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -618,14 +649,16 @@ public class EmployeeTaxSetup implements
     
     /**
      * Update an employee's state taxes
-     * Update attributes relevant for an employee's state taxes.
      * 
-     * As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted - `valid_from` and `valid_up_to` must be `"2010-01-01"` and `null` respectively.
+     * <p>Update attributes relevant for an employee's state taxes.
      * 
-     * scope: `employee_state_taxes:write`
+     * <p>As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted - `valid_from` and `valid_up_to` must be `"2010-01-01"` and `null` respectively.
+     * 
+     * <p>scope: `employee_state_taxes:write`
+     * 
      * @param employeeUuid The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -675,6 +708,7 @@ public class EmployeeTaxSetup implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-employees-employee_id-state_taxes", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -686,6 +720,7 @@ public class EmployeeTaxSetup implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-state_taxes",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -695,6 +730,7 @@ public class EmployeeTaxSetup implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-state_taxes",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -704,6 +740,7 @@ public class EmployeeTaxSetup implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-state_taxes",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

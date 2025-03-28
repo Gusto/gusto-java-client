@@ -83,11 +83,13 @@ public class EmployeeAddresses implements
 
     /**
      * Get an employee's home addresses
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * Supports home address effective dating and courtesy withholding.
+     * <p>The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `employees:read`
+     * <p>Supports home address effective dating and courtesy withholding.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder get() {
@@ -96,11 +98,13 @@ public class EmployeeAddresses implements
 
     /**
      * Get an employee's home addresses
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * Supports home address effective dating and courtesy withholding.
+     * <p>The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `employees:read`
+     * <p>Supports home address effective dating and courtesy withholding.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -112,13 +116,15 @@ public class EmployeeAddresses implements
     
     /**
      * Get an employee's home addresses
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * Supports home address effective dating and courtesy withholding.
+     * <p>The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `employees:read`
+     * <p>Supports home address effective dating and courtesy withholding.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -153,6 +159,7 @@ public class EmployeeAddresses implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-home_addresses", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -164,6 +171,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-home_addresses",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -173,6 +181,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-home_addresses",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -182,6 +191,7 @@ public class EmployeeAddresses implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-home_addresses",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -243,11 +253,13 @@ public class EmployeeAddresses implements
 
     /**
      * Create an employee's home address
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * Supports home address effective dating and courtesy withholding.
+     * <p>The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `employees:write`
+     * <p>Supports home address effective dating and courtesy withholding.
+     * 
+     * <p>scope: `employees:write`
+     * 
      * @return The call builder
      */
     public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder create() {
@@ -256,13 +268,15 @@ public class EmployeeAddresses implements
 
     /**
      * Create an employee's home address
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * Supports home address effective dating and courtesy withholding.
+     * <p>The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `employees:write`
+     * <p>Supports home address effective dating and courtesy withholding.
+     * 
+     * <p>scope: `employees:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -274,14 +288,16 @@ public class EmployeeAddresses implements
     
     /**
      * Create an employee's home address
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * Supports home address effective dating and courtesy withholding.
+     * <p>The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `employees:write`
+     * <p>Supports home address effective dating and courtesy withholding.
+     * 
+     * <p>scope: `employees:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -331,6 +347,7 @@ public class EmployeeAddresses implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-employees-employee_id-home_addresses", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -342,6 +359,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-home_addresses",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -351,6 +369,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-home_addresses",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -360,6 +379,7 @@ public class EmployeeAddresses implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-home_addresses",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -435,11 +455,13 @@ public class EmployeeAddresses implements
 
     /**
      * Get an employee's home address
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * Supports home address effective dating and courtesy withholding.
+     * <p>The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `employees:read`
+     * <p>Supports home address effective dating and courtesy withholding.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @return The call builder
      */
     public GetV1HomeAddressesHomeAddressUuidRequestBuilder retrieveHomeAddress() {
@@ -448,11 +470,13 @@ public class EmployeeAddresses implements
 
     /**
      * Get an employee's home address
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * Supports home address effective dating and courtesy withholding.
+     * <p>The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `employees:read`
+     * <p>Supports home address effective dating and courtesy withholding.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @param homeAddressUuid The UUID of the home address
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -464,13 +488,15 @@ public class EmployeeAddresses implements
     
     /**
      * Get an employee's home address
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * Supports home address effective dating and courtesy withholding.
+     * <p>The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `employees:read`
+     * <p>Supports home address effective dating and courtesy withholding.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @param homeAddressUuid The UUID of the home address
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -505,6 +531,7 @@ public class EmployeeAddresses implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-home_addresses-home_address_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -516,6 +543,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-home_addresses-home_address_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -525,6 +553,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-home_addresses-home_address_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -534,6 +563,7 @@ public class EmployeeAddresses implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-home_addresses-home_address_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -595,11 +625,13 @@ public class EmployeeAddresses implements
 
     /**
      * Update an employee's home address
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * Supports home address effective dating and courtesy withholding.
+     * <p>The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `employees:write`
+     * <p>Supports home address effective dating and courtesy withholding.
+     * 
+     * <p>scope: `employees:write`
+     * 
      * @return The call builder
      */
     public PutV1HomeAddressesHomeAddressUuidRequestBuilder update() {
@@ -608,13 +640,15 @@ public class EmployeeAddresses implements
 
     /**
      * Update an employee's home address
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * Supports home address effective dating and courtesy withholding.
+     * <p>The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `employees:write`
+     * <p>Supports home address effective dating and courtesy withholding.
+     * 
+     * <p>scope: `employees:write`
+     * 
      * @param homeAddressUuid The UUID of the home address
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -626,14 +660,16 @@ public class EmployeeAddresses implements
     
     /**
      * Update an employee's home address
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * Supports home address effective dating and courtesy withholding.
+     * <p>The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      * 
-     * scope: `employees:write`
+     * <p>Supports home address effective dating and courtesy withholding.
+     * 
+     * <p>scope: `employees:write`
+     * 
      * @param homeAddressUuid The UUID of the home address
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -683,6 +719,7 @@ public class EmployeeAddresses implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-home_addresses-home_address_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -694,6 +731,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-home_addresses-home_address_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -703,6 +741,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-home_addresses-home_address_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -712,6 +751,7 @@ public class EmployeeAddresses implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-home_addresses-home_address_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -787,9 +827,11 @@ public class EmployeeAddresses implements
 
     /**
      * Delete an employee's home address
-     * Used for deleting an employee's home address.  Cannot delete the employee's active home address.
      * 
-     * scope: `employees:write`
+     * <p>Used for deleting an employee's home address.  Cannot delete the employee's active home address.
+     * 
+     * <p>scope: `employees:write`
+     * 
      * @return The call builder
      */
     public DeleteV1HomeAddressesHomeAddressUuidRequestBuilder delete() {
@@ -798,9 +840,11 @@ public class EmployeeAddresses implements
 
     /**
      * Delete an employee's home address
-     * Used for deleting an employee's home address.  Cannot delete the employee's active home address.
      * 
-     * scope: `employees:write`
+     * <p>Used for deleting an employee's home address.  Cannot delete the employee's active home address.
+     * 
+     * <p>scope: `employees:write`
+     * 
      * @param homeAddressUuid The UUID of the home address
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -812,11 +856,13 @@ public class EmployeeAddresses implements
     
     /**
      * Delete an employee's home address
-     * Used for deleting an employee's home address.  Cannot delete the employee's active home address.
      * 
-     * scope: `employees:write`
+     * <p>Used for deleting an employee's home address.  Cannot delete the employee's active home address.
+     * 
+     * <p>scope: `employees:write`
+     * 
      * @param homeAddressUuid The UUID of the home address
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -851,6 +897,7 @@ public class EmployeeAddresses implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-home_addresses-home_address_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -862,6 +909,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-home_addresses-home_address_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -871,6 +919,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-home_addresses-home_address_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -880,6 +929,7 @@ public class EmployeeAddresses implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-home_addresses-home_address_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -944,10 +994,12 @@ public class EmployeeAddresses implements
 
     /**
      * Get an employee's work addresses
-     * Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
+     * 
+     * <p>Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
      * signifying if it is the currently active work address.
      * 
-     * scope: `employees:read`
+     * <p>scope: `employees:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdWorkAddressesRequestBuilder getWorkAddresses() {
@@ -956,10 +1008,12 @@ public class EmployeeAddresses implements
 
     /**
      * Get an employee's work addresses
-     * Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
+     * 
+     * <p>Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
      * signifying if it is the currently active work address.
      * 
-     * scope: `employees:read`
+     * <p>scope: `employees:read`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -971,12 +1025,14 @@ public class EmployeeAddresses implements
     
     /**
      * Get an employee's work addresses
-     * Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
+     * 
+     * <p>Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
      * signifying if it is the currently active work address.
      * 
-     * scope: `employees:read`
+     * <p>scope: `employees:read`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1011,6 +1067,7 @@ public class EmployeeAddresses implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-work_addresses", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1022,6 +1079,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-work_addresses",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1031,6 +1089,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-work_addresses",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1040,6 +1099,7 @@ public class EmployeeAddresses implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-work_addresses",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1101,9 +1161,11 @@ public class EmployeeAddresses implements
 
     /**
      * Create an employee work address
-     * The work address of an employee describes when an employee began working at an associated company location.
      * 
-     * scope: `employees:manage`
+     * <p>The work address of an employee describes when an employee began working at an associated company location.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @return The call builder
      */
     public PostV1EmployeesEmployeeIdWorkAddressesRequestBuilder createWorkAddress() {
@@ -1112,11 +1174,13 @@ public class EmployeeAddresses implements
 
     /**
      * Create an employee work address
-     * The work address of an employee describes when an employee began working at an associated company location.
      * 
-     * scope: `employees:manage`
+     * <p>The work address of an employee describes when an employee began working at an associated company location.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1128,12 +1192,14 @@ public class EmployeeAddresses implements
     
     /**
      * Create an employee work address
-     * The work address of an employee describes when an employee began working at an associated company location.
      * 
-     * scope: `employees:manage`
+     * <p>The work address of an employee describes when an employee began working at an associated company location.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1183,6 +1249,7 @@ public class EmployeeAddresses implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-employees-employee_id-work_addresses", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1194,6 +1261,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-work_addresses",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1203,6 +1271,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-work_addresses",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1212,6 +1281,7 @@ public class EmployeeAddresses implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-work_addresses",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1287,9 +1357,11 @@ public class EmployeeAddresses implements
 
     /**
      * Get an employee work address
-     * The work address of an employee is used for payroll tax purposes.
      * 
-     * scope: `employees:read`
+     * <p>The work address of an employee is used for payroll tax purposes.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @return The call builder
      */
     public GetV1WorkAddressesWorkAddressUuidRequestBuilder retrieveWorkAddress() {
@@ -1298,9 +1370,11 @@ public class EmployeeAddresses implements
 
     /**
      * Get an employee work address
-     * The work address of an employee is used for payroll tax purposes.
      * 
-     * scope: `employees:read`
+     * <p>The work address of an employee is used for payroll tax purposes.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @param workAddressUuid The UUID of the work address
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1312,11 +1386,13 @@ public class EmployeeAddresses implements
     
     /**
      * Get an employee work address
-     * The work address of an employee is used for payroll tax purposes.
      * 
-     * scope: `employees:read`
+     * <p>The work address of an employee is used for payroll tax purposes.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @param workAddressUuid The UUID of the work address
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1351,6 +1427,7 @@ public class EmployeeAddresses implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-work_addresses-work_address_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1362,6 +1439,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-work_addresses-work_address_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1371,6 +1449,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-work_addresses-work_address_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1380,6 +1459,7 @@ public class EmployeeAddresses implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-work_addresses-work_address_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1441,9 +1521,11 @@ public class EmployeeAddresses implements
 
     /**
      * Update an employee work address
-     * The work address of an employee is used for payroll tax purposes.
      * 
-     * scope: `employees:manage`
+     * <p>The work address of an employee is used for payroll tax purposes.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @return The call builder
      */
     public PutV1WorkAddressesWorkAddressUuidRequestBuilder updateWorkAddress() {
@@ -1452,11 +1534,13 @@ public class EmployeeAddresses implements
 
     /**
      * Update an employee work address
-     * The work address of an employee is used for payroll tax purposes.
      * 
-     * scope: `employees:manage`
+     * <p>The work address of an employee is used for payroll tax purposes.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param workAddressUuid The UUID of the work address
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1468,12 +1552,14 @@ public class EmployeeAddresses implements
     
     /**
      * Update an employee work address
-     * The work address of an employee is used for payroll tax purposes.
      * 
-     * scope: `employees:manage`
+     * <p>The work address of an employee is used for payroll tax purposes.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param workAddressUuid The UUID of the work address
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1523,6 +1609,7 @@ public class EmployeeAddresses implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-work_addresses-work_address_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1534,6 +1621,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-work_addresses-work_address_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1543,6 +1631,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-work_addresses-work_address_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1552,6 +1641,7 @@ public class EmployeeAddresses implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-work_addresses-work_address_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1627,9 +1717,11 @@ public class EmployeeAddresses implements
 
     /**
      * Delete an employee's work address
-     * Used for deleting an employee's work address.  Cannot delete the employee's active work address.
      * 
-     * scope: `employees:manage`
+     * <p>Used for deleting an employee's work address.  Cannot delete the employee's active work address.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @return The call builder
      */
     public DeleteV1WorkAddressesWorkAddressUuidRequestBuilder deleteWorkAddress() {
@@ -1638,9 +1730,11 @@ public class EmployeeAddresses implements
 
     /**
      * Delete an employee's work address
-     * Used for deleting an employee's work address.  Cannot delete the employee's active work address.
      * 
-     * scope: `employees:manage`
+     * <p>Used for deleting an employee's work address.  Cannot delete the employee's active work address.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param workAddressUuid The UUID of the work address
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1652,11 +1746,13 @@ public class EmployeeAddresses implements
     
     /**
      * Delete an employee's work address
-     * Used for deleting an employee's work address.  Cannot delete the employee's active work address.
      * 
-     * scope: `employees:manage`
+     * <p>Used for deleting an employee's work address.  Cannot delete the employee's active work address.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param workAddressUuid The UUID of the work address
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1691,6 +1787,7 @@ public class EmployeeAddresses implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-work_addresses-work_address_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1702,6 +1799,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-work_addresses-work_address_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1711,6 +1809,7 @@ public class EmployeeAddresses implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-work_addresses-work_address_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1720,6 +1819,7 @@ public class EmployeeAddresses implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-work_addresses-work_address_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

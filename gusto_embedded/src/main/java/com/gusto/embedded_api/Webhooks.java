@@ -76,13 +76,15 @@ public class Webhooks implements
 
     /**
      * Create a webhook subscription
-     * Create a webhook subscription to receive events of the specified subscription_types whenever there is a state change.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Create a webhook subscription to receive events of the specified subscription_types whenever there is a state change.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:write`
+     * <p>scope: `webhook_subscriptions:write`
+     * 
      * @return The call builder
      */
     public PostV1WebhookSubscriptionRequestBuilder createSubscription() {
@@ -91,15 +93,17 @@ public class Webhooks implements
 
     /**
      * Create a webhook subscription
-     * Create a webhook subscription to receive events of the specified subscription_types whenever there is a state change.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Create a webhook subscription to receive events of the specified subscription_types whenever there is a state change.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:write`
+     * <p>scope: `webhook_subscriptions:write`
+     * 
      * @param security The security details to use for authentication.
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -111,16 +115,18 @@ public class Webhooks implements
     
     /**
      * Create a webhook subscription
-     * Create a webhook subscription to receive events of the specified subscription_types whenever there is a state change.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Create a webhook subscription to receive events of the specified subscription_types whenever there is a state change.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:write`
+     * <p>scope: `webhook_subscriptions:write`
+     * 
      * @param security The security details to use for authentication.
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -158,17 +164,16 @@ public class Webhooks implements
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+
+        // hooks will be passed method level security only
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(SecuritySource.of(security));
         Utils.configureSecurity(_req, security);
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-webhook-subscription", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -180,6 +185,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-webhook-subscription",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -189,6 +195,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-webhook-subscription",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -198,6 +205,7 @@ public class Webhooks implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-webhook-subscription",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -273,13 +281,15 @@ public class Webhooks implements
 
     /**
      * List webhook subscriptions
-     * Returns all webhook subscriptions associated with the provided Partner API token.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Returns all webhook subscriptions associated with the provided Partner API token.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:read`
+     * <p>scope: `webhook_subscriptions:read`
+     * 
      * @return The call builder
      */
     public GetV1WebhookSubscriptionsRequestBuilder listSubscriptions() {
@@ -288,13 +298,15 @@ public class Webhooks implements
 
     /**
      * List webhook subscriptions
-     * Returns all webhook subscriptions associated with the provided Partner API token.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Returns all webhook subscriptions associated with the provided Partner API token.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:read`
+     * <p>scope: `webhook_subscriptions:read`
+     * 
      * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -306,15 +318,17 @@ public class Webhooks implements
     
     /**
      * List webhook subscriptions
-     * Returns all webhook subscriptions associated with the provided Partner API token.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Returns all webhook subscriptions associated with the provided Partner API token.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:read`
+     * <p>scope: `webhook_subscriptions:read`
+     * 
      * @param security The security details to use for authentication.
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -337,17 +351,16 @@ public class Webhooks implements
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+
+        // hooks will be passed method level security only
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(SecuritySource.of(security));
         Utils.configureSecurity(_req, security);
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-webhook-subscriptions", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -359,6 +372,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-webhook-subscriptions",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -368,6 +382,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-webhook-subscriptions",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -377,6 +392,7 @@ public class Webhooks implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-webhook-subscriptions",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -438,13 +454,14 @@ public class Webhooks implements
 
     /**
      * Update a webhook subscription
-     * Updates the Webhook Subscription associated with the provided UUID.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Updates the Webhook Subscription associated with the provided UUID.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:write`
+     * <p>scope: `webhook_subscriptions:write`
      * 
      * @return The call builder
      */
@@ -454,17 +471,18 @@ public class Webhooks implements
 
     /**
      * Update a webhook subscription
-     * Updates the Webhook Subscription associated with the provided UUID.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Updates the Webhook Subscription associated with the provided UUID.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:write`
+     * <p>scope: `webhook_subscriptions:write`
      * 
      * @param security The security details to use for authentication.
      * @param webhookSubscriptionUuid The webhook subscription UUID.
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -477,18 +495,19 @@ public class Webhooks implements
     
     /**
      * Update a webhook subscription
-     * Updates the Webhook Subscription associated with the provided UUID.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Updates the Webhook Subscription associated with the provided UUID.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:write`
+     * <p>scope: `webhook_subscriptions:write`
      * 
      * @param security The security details to use for authentication.
      * @param webhookSubscriptionUuid The webhook subscription UUID.
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -530,17 +549,16 @@ public class Webhooks implements
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+
+        // hooks will be passed method level security only
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(SecuritySource.of(security));
         Utils.configureSecurity(_req, security);
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-webhook-subscription-uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -552,6 +570,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-webhook-subscription-uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -561,6 +580,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-webhook-subscription-uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -570,6 +590,7 @@ public class Webhooks implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-webhook-subscription-uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -645,13 +666,14 @@ public class Webhooks implements
 
     /**
      * Get a webhook subscription
-     * Returns the Webhook Subscription associated with the provided UUID.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Returns the Webhook Subscription associated with the provided UUID.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:read`
+     * <p>scope: `webhook_subscriptions:read`
      * 
      * @return The call builder
      */
@@ -661,13 +683,14 @@ public class Webhooks implements
 
     /**
      * Get a webhook subscription
-     * Returns the Webhook Subscription associated with the provided UUID.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Returns the Webhook Subscription associated with the provided UUID.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:read`
+     * <p>scope: `webhook_subscriptions:read`
      * 
      * @param security The security details to use for authentication.
      * @param webhookSubscriptionUuid The webhook subscription UUID.
@@ -682,17 +705,18 @@ public class Webhooks implements
     
     /**
      * Get a webhook subscription
-     * Returns the Webhook Subscription associated with the provided UUID.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Returns the Webhook Subscription associated with the provided UUID.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:read`
+     * <p>scope: `webhook_subscriptions:read`
      * 
      * @param security The security details to use for authentication.
      * @param webhookSubscriptionUuid The webhook subscription UUID.
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -719,17 +743,16 @@ public class Webhooks implements
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+
+        // hooks will be passed method level security only
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(SecuritySource.of(security));
         Utils.configureSecurity(_req, security);
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-webhook-subscription-uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -741,6 +764,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-webhook-subscription-uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -750,6 +774,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-webhook-subscription-uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -759,6 +784,7 @@ public class Webhooks implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-webhook-subscription-uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -820,13 +846,14 @@ public class Webhooks implements
 
     /**
      * Delete a webhook subscription
-     * Deletes the Webhook Subscription associated with the provided UUID.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Deletes the Webhook Subscription associated with the provided UUID.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:write`
+     * <p>scope: `webhook_subscriptions:write`
      * 
      * @return The call builder
      */
@@ -836,13 +863,14 @@ public class Webhooks implements
 
     /**
      * Delete a webhook subscription
-     * Deletes the Webhook Subscription associated with the provided UUID.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Deletes the Webhook Subscription associated with the provided UUID.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:write`
+     * <p>scope: `webhook_subscriptions:write`
      * 
      * @param security The security details to use for authentication.
      * @param webhookSubscriptionUuid The webhook subscription UUID.
@@ -857,17 +885,18 @@ public class Webhooks implements
     
     /**
      * Delete a webhook subscription
-     * Deletes the Webhook Subscription associated with the provided UUID.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Deletes the Webhook Subscription associated with the provided UUID.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:write`
+     * <p>scope: `webhook_subscriptions:write`
      * 
      * @param security The security details to use for authentication.
      * @param webhookSubscriptionUuid The webhook subscription UUID.
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -894,17 +923,16 @@ public class Webhooks implements
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+
+        // hooks will be passed method level security only
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(SecuritySource.of(security));
         Utils.configureSecurity(_req, security);
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-webhook-subscription-uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -916,6 +944,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-webhook-subscription-uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -925,6 +954,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-webhook-subscription-uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -934,6 +964,7 @@ public class Webhooks implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-webhook-subscription-uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -984,15 +1015,16 @@ public class Webhooks implements
 
     /**
      * Verify the webhook subscription
-     * When a webhook subscription is created, a `verification_token` is POSTed to the registered webhook subscription URL. This `verify` endpoint needs to be called with `verification_token` before webhook events can be sent to the registered webhook URL.
      * 
-     * Use the /v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token API to resend the `verification_token` to the Subscriber.
+     * <p>When a webhook subscription is created, a `verification_token` is POSTed to the registered webhook subscription URL. This `verify` endpoint needs to be called with `verification_token` before webhook events can be sent to the registered webhook URL.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Use the /v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token API to resend the `verification_token` to the Subscriber.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:write`
+     * <p>scope: `webhook_subscriptions:write`
      * 
      * @return The call builder
      */
@@ -1002,19 +1034,20 @@ public class Webhooks implements
 
     /**
      * Verify the webhook subscription
-     * When a webhook subscription is created, a `verification_token` is POSTed to the registered webhook subscription URL. This `verify` endpoint needs to be called with `verification_token` before webhook events can be sent to the registered webhook URL.
      * 
-     * Use the /v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token API to resend the `verification_token` to the Subscriber.
+     * <p>When a webhook subscription is created, a `verification_token` is POSTed to the registered webhook subscription URL. This `verify` endpoint needs to be called with `verification_token` before webhook events can be sent to the registered webhook URL.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Use the /v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token API to resend the `verification_token` to the Subscriber.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:write`
+     * <p>scope: `webhook_subscriptions:write`
      * 
      * @param security The security details to use for authentication.
      * @param webhookSubscriptionUuid The webhook subscription UUID.
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1027,20 +1060,21 @@ public class Webhooks implements
     
     /**
      * Verify the webhook subscription
-     * When a webhook subscription is created, a `verification_token` is POSTed to the registered webhook subscription URL. This `verify` endpoint needs to be called with `verification_token` before webhook events can be sent to the registered webhook URL.
      * 
-     * Use the /v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token API to resend the `verification_token` to the Subscriber.
+     * <p>When a webhook subscription is created, a `verification_token` is POSTed to the registered webhook subscription URL. This `verify` endpoint needs to be called with `verification_token` before webhook events can be sent to the registered webhook URL.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Use the /v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token API to resend the `verification_token` to the Subscriber.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:write`
+     * <p>scope: `webhook_subscriptions:write`
      * 
      * @param security The security details to use for authentication.
      * @param webhookSubscriptionUuid The webhook subscription UUID.
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1082,17 +1116,16 @@ public class Webhooks implements
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+
+        // hooks will be passed method level security only
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(SecuritySource.of(security));
         Utils.configureSecurity(_req, security);
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-verify-webhook-subscription-uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1104,6 +1137,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-verify-webhook-subscription-uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1113,6 +1147,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-verify-webhook-subscription-uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1122,6 +1157,7 @@ public class Webhooks implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-verify-webhook-subscription-uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1197,13 +1233,14 @@ public class Webhooks implements
 
     /**
      * Request the webhook subscription verification_token
-     * Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:read`
+     * <p>scope: `webhook_subscriptions:read`
      * 
      * @return The call builder
      */
@@ -1213,13 +1250,14 @@ public class Webhooks implements
 
     /**
      * Request the webhook subscription verification_token
-     * Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:read`
+     * <p>scope: `webhook_subscriptions:read`
      * 
      * @param security The security details to use for authentication.
      * @param webhookSubscriptionUuid The webhook subscription UUID.
@@ -1234,17 +1272,18 @@ public class Webhooks implements
     
     /**
      * Request the webhook subscription verification_token
-     * Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
      * 
-     * &gt; 📘 System Access Authentication
+     * <p>Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
+     * 
+     * <p>&gt; 📘 System Access Authentication
      * &gt;
      * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
      * 
-     * scope: `webhook_subscriptions:read`
+     * <p>scope: `webhook_subscriptions:read`
      * 
      * @param security The security details to use for authentication.
      * @param webhookSubscriptionUuid The webhook subscription UUID.
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1271,17 +1310,16 @@ public class Webhooks implements
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+
+        // hooks will be passed method level security only
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(SecuritySource.of(security));
         Utils.configureSecurity(_req, security);
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-webhook-subscription-verification-token-uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1293,6 +1331,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-webhook-subscription-verification-token-uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1302,6 +1341,7 @@ public class Webhooks implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-webhook-subscription-verification-token-uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1311,6 +1351,7 @@ public class Webhooks implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-webhook-subscription-verification-token-uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

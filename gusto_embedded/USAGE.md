@@ -16,7 +16,7 @@ public class Application {
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.object().isPresent()) {

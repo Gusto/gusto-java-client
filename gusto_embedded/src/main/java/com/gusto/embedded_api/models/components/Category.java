@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Category - The category of the company attachment
+ * Category
+ * 
+ * <p>The category of the company attachment
  */
 public enum Category {
     GEP_NOTICE("gep_notice"),

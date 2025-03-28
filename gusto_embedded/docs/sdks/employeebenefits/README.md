@@ -27,11 +27,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.Contribution;
-import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdEmployeeBenefitsResponse;
-import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdEmployeeBenefitsType;
-import com.gusto.embedded_api.models.operations.Value;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -44,12 +40,12 @@ public class Application {
 
         PostV1EmployeesEmployeeIdEmployeeBenefitsResponse res = sdk.employeeBenefits().create()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody.builder()
                     .companyBenefitUuid("f68abb42-431e-4392-bc3f-2795627e00f3")
                     .contribution(Contribution.builder()
                         .type(PostV1EmployeesEmployeeIdEmployeeBenefitsType.AMOUNT)
-                        .value(Value.of("100.00"))
+                        .value(PostV1EmployeesEmployeeIdEmployeeBenefitsValue.of("100.00"))
                         .build())
                     .build())
                 .call();
@@ -112,7 +108,7 @@ public class Application {
                 .employeeId("<id>")
                 .page(700347L)
                 .per(558834L)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeeBenefitList().isPresent()) {
@@ -169,7 +165,7 @@ public class Application {
 
         GetV1EmployeeBenefitsEmployeeBenefitIdResponse res = sdk.employeeBenefits().retrieve()
                 .employeeBenefitId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeeBenefit().isPresent()) {
@@ -224,7 +220,7 @@ public class Application {
 
         PutV1EmployeeBenefitsEmployeeBenefitIdResponse res = sdk.employeeBenefits().update()
                 .employeeBenefitId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody.builder()
                     .version("09j3d29jqdpj92109j9j2d90dq")
                     .build())
@@ -282,7 +278,7 @@ public class Application {
 
         DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse res = sdk.employeeBenefits().delete()
                 .employeeBenefitId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -337,7 +333,7 @@ public class Application {
         GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse res = sdk.employeeBenefits().getYtdBenefitAmountsFromDifferentCompany()
                 .employeeId("<id>")
                 .taxYear(2024L)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.ytdBenefitAmountsFromDifferentCompanyList().isPresent()) {
@@ -395,9 +391,9 @@ public class Application {
 
         PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse res = sdk.employeeBenefits().createYtdBenefitAmountsFromDifferentCompany()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .postEmployeeYtdBenefitAmountsFromDifferentCompany(PostEmployeeYtdBenefitAmountsFromDifferentCompany.builder()
-                    .taxYear(5621.31d)
+                    .taxYear(5621.31)
                     .build())
                 .call();
 

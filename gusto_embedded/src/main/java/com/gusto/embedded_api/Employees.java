@@ -93,9 +93,11 @@ public class Employees implements
 
     /**
      * Create an employee
-     * Create an employee.
      * 
-     * scope: `employees:manage`
+     * <p>Create an employee.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @return The call builder
      */
     public PostV1EmployeesRequestBuilder create() {
@@ -104,9 +106,11 @@ public class Employees implements
 
     /**
      * Create an employee
-     * Create an employee.
      * 
-     * scope: `employees:manage`
+     * <p>Create an employee.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param companyId The UUID of the company
      * @param requestBody Create an employee.
      * @return The response from the API call
@@ -120,11 +124,13 @@ public class Employees implements
     
     /**
      * Create an employee
-     * Create an employee.
      * 
-     * scope: `employees:manage`
+     * <p>Create an employee.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody Create an employee.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -175,6 +181,7 @@ public class Employees implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-employees", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -186,6 +193,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -195,6 +203,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-employees",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -204,6 +213,7 @@ public class Employees implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -279,9 +289,11 @@ public class Employees implements
 
     /**
      * Get employees of a company
-     * Get all of the employees, onboarding, active and terminated, for a given company.
      * 
-     * scope: `employees:read`
+     * <p>Get all of the employees, onboarding, active and terminated, for a given company.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdEmployeesRequestBuilder list() {
@@ -290,9 +302,11 @@ public class Employees implements
 
     /**
      * Get employees of a company
-     * Get all of the employees, onboarding, active and terminated, for a given company.
      * 
-     * scope: `employees:read`
+     * <p>Get all of the employees, onboarding, active and terminated, for a given company.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -325,6 +339,7 @@ public class Employees implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_id-employees", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -336,6 +351,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-employees",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -345,6 +361,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-employees",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -354,6 +371,7 @@ public class Employees implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_id-employees",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -415,9 +433,11 @@ public class Employees implements
 
     /**
      * Create a historical employee
-     * Create a historical employee, an employee that was previously dismissed from the company in the current year.
      * 
-     * scope: `employees:manage`
+     * <p>Create a historical employee, an employee that was previously dismissed from the company in the current year.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @return The call builder
      */
     public PostV1HistoricalEmployeesRequestBuilder createHistorical() {
@@ -426,11 +446,13 @@ public class Employees implements
 
     /**
      * Create a historical employee
-     * Create a historical employee, an employee that was previously dismissed from the company in the current year.
      * 
-     * scope: `employees:manage`
+     * <p>Create a historical employee, an employee that was previously dismissed from the company in the current year.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param companyUuid The UUID of the company
-     * @param historicalEmployeeBody
+     * @param historicalEmployeeBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -442,12 +464,14 @@ public class Employees implements
     
     /**
      * Create a historical employee
-     * Create a historical employee, an employee that was previously dismissed from the company in the current year.
      * 
-     * scope: `employees:manage`
+     * <p>Create a historical employee, an employee that was previously dismissed from the company in the current year.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param historicalEmployeeBody
+     * @param xGustoAPIVersion 
+     * @param historicalEmployeeBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -497,6 +521,7 @@ public class Employees implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-historical_employees", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -508,6 +533,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-historical_employees",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -517,6 +543,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-historical_employees",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -526,6 +553,7 @@ public class Employees implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-historical_employees",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -601,9 +629,10 @@ public class Employees implements
 
     /**
      * Get an employee
-     * Get an employee.
      * 
-     * scope: `employees:read`
+     * <p>Get an employee.
+     * 
+     * <p>scope: `employees:read`
      * 
      * @return The call builder
      */
@@ -613,9 +642,10 @@ public class Employees implements
 
     /**
      * Get an employee
-     * Get an employee.
      * 
-     * scope: `employees:read`
+     * <p>Get an employee.
+     * 
+     * <p>scope: `employees:read`
      * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
@@ -628,15 +658,16 @@ public class Employees implements
     
     /**
      * Get an employee
-     * Get an employee.
      * 
-     * scope: `employees:read`
+     * <p>Get an employee.
+     * 
+     * <p>scope: `employees:read`
      * 
      * @param employeeId The UUID of the employee
      * @param include Include the requested attribute(s) in each employee response, multiple options are comma separated. Available options:
-    - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
-    - custom_fields: Include employees' custom fields
-     * @param xGustoAPIVersion
+     *         - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
+     *         - custom_fields: Include employees' custom fields
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -678,6 +709,7 @@ public class Employees implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -689,6 +721,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -698,6 +731,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -707,6 +741,7 @@ public class Employees implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -768,9 +803,11 @@ public class Employees implements
 
     /**
      * Update an employee
-     * Update an employee.
      * 
-     * scope: `employees:write`
+     * <p>Update an employee.
+     * 
+     * <p>scope: `employees:write`
+     * 
      * @return The call builder
      */
     public PutV1EmployeesRequestBuilder update() {
@@ -779,9 +816,11 @@ public class Employees implements
 
     /**
      * Update an employee
-     * Update an employee.
      * 
-     * scope: `employees:write`
+     * <p>Update an employee.
+     * 
+     * <p>scope: `employees:write`
+     * 
      * @param employeeId The UUID of the employee
      * @param requestBody Update an employee.
      * @return The response from the API call
@@ -795,11 +834,13 @@ public class Employees implements
     
     /**
      * Update an employee
-     * Update an employee.
      * 
-     * scope: `employees:write`
+     * <p>Update an employee.
+     * 
+     * <p>scope: `employees:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody Update an employee.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -850,6 +891,7 @@ public class Employees implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-employees", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -861,6 +903,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -870,6 +913,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-employees",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -879,6 +923,7 @@ public class Employees implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -954,11 +999,13 @@ public class Employees implements
 
     /**
      * Delete an onboarding employee
-     * Use this endpoint to delete an employee who is in onboarding. Deleting
+     * 
+     * <p>Use this endpoint to delete an employee who is in onboarding. Deleting
      * an onboarded employee is not allowed and will return a 422 response. Please check out the Terminations api
      * if you need to terminate an onboarded employee.
      * 
-     * scope: `employees:manage`
+     * <p>scope: `employees:manage`
+     * 
      * @return The call builder
      */
     public DeleteV1EmployeeRequestBuilder delete() {
@@ -967,11 +1014,13 @@ public class Employees implements
 
     /**
      * Delete an onboarding employee
-     * Use this endpoint to delete an employee who is in onboarding. Deleting
+     * 
+     * <p>Use this endpoint to delete an employee who is in onboarding. Deleting
      * an onboarded employee is not allowed and will return a 422 response. Please check out the Terminations api
      * if you need to terminate an onboarded employee.
      * 
-     * scope: `employees:manage`
+     * <p>scope: `employees:manage`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -983,13 +1032,15 @@ public class Employees implements
     
     /**
      * Delete an onboarding employee
-     * Use this endpoint to delete an employee who is in onboarding. Deleting
+     * 
+     * <p>Use this endpoint to delete an employee who is in onboarding. Deleting
      * an onboarded employee is not allowed and will return a 422 response. Please check out the Terminations api
      * if you need to terminate an onboarded employee.
      * 
-     * scope: `employees:manage`
+     * <p>scope: `employees:manage`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1024,6 +1075,7 @@ public class Employees implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-employee", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1035,6 +1087,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-employee",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1044,6 +1097,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-employee",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1053,6 +1107,7 @@ public class Employees implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-employee",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1117,9 +1172,11 @@ public class Employees implements
 
     /**
      * Get an employee's custom fields
-     * Returns a list of the employee's custom fields.
      * 
-     * scope: `employees:read`
+     * <p>Returns a list of the employee's custom fields.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdCustomFieldsRequestBuilder getCustomFields() {
@@ -1128,9 +1185,11 @@ public class Employees implements
 
     /**
      * Get an employee's custom fields
-     * Returns a list of the employee's custom fields.
      * 
-     * scope: `employees:read`
+     * <p>Returns a list of the employee's custom fields.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1142,13 +1201,15 @@ public class Employees implements
     
     /**
      * Get an employee's custom fields
-     * Returns a list of the employee's custom fields.
      * 
-     * scope: `employees:read`
+     * <p>Returns a list of the employee's custom fields.
+     * 
+     * <p>scope: `employees:read`
+     * 
      * @param employeeId The UUID of the employee
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1192,6 +1253,7 @@ public class Employees implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-custom_fields", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1203,6 +1265,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-custom_fields",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1212,6 +1275,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-custom_fields",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1221,6 +1285,7 @@ public class Employees implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-custom_fields",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1282,9 +1347,11 @@ public class Employees implements
 
     /**
      * Update an employee's onboarding documents config
-     * Indicate whether to include the Form I-9 for an employee during the onboarding process.
      * 
-     * scope: `employees:manage`
+     * <p>Indicate whether to include the Form I-9 for an employee during the onboarding process.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @return The call builder
      */
     public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder updateOnboardingDocumentsConfig() {
@@ -1293,11 +1360,13 @@ public class Employees implements
 
     /**
      * Update an employee's onboarding documents config
-     * Indicate whether to include the Form I-9 for an employee during the onboarding process.
      * 
-     * scope: `employees:manage`
+     * <p>Indicate whether to include the Form I-9 for an employee during the onboarding process.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1309,12 +1378,14 @@ public class Employees implements
     
     /**
      * Update an employee's onboarding documents config
-     * Indicate whether to include the Form I-9 for an employee during the onboarding process.
      * 
-     * scope: `employees:manage`
+     * <p>Indicate whether to include the Form I-9 for an employee during the onboarding process.
+     * 
+     * <p>scope: `employees:manage`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1364,6 +1435,7 @@ public class Employees implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-employees-employee_id-onboarding_documents_config", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1375,6 +1447,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-onboarding_documents_config",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1384,6 +1457,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-onboarding_documents_config",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1393,6 +1467,7 @@ public class Employees implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-onboarding_documents_config",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1454,20 +1529,21 @@ public class Employees implements
 
     /**
      * Get the employee's onboarding status
-     * # Description
+     * 
+     * <p># Description
      * Retrieves an employee's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
      * 
-     * scope: `employees:read`
+     * <p>scope: `employees:read`
      * 
-     * ## onboarding_status
+     * <p>## onboarding_status
      * 
-     * ### Admin-facilitated onboarding
+     * <p>### Admin-facilitated onboarding
      * | onboarding_status | Description |
      * |:------------------|------------:|
      * | `admin_onboarding_incomplete` | Admin needs to complete the full employee-onboarding. |
      * | `onboarding_completed` | Employee has been fully onboarded and verified. |
      * 
-     * ### Employee self-onboarding
+     * <p>### Employee self-onboarding
      * | onboarding_status | Description |
      * |:------------------|------------:|
      * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the employee. |
@@ -1479,9 +1555,9 @@ public class Employees implements
      * | `self_onboarding_awaiting_admin_review` | Admin has started to verify the employee's information. |
      * | `onboarding_completed` | Employee has been fully onboarded and verified. |
      * 
-     * ## onboarding_steps
+     * <p>## onboarding_steps
      * 
-     * | onboarding_steps | Requirement(s) to be completed |
+     * <p>| onboarding_steps | Requirement(s) to be completed |
      * |:-----------------|-------------------------------:|
      * | `personal_details` | Add employee's first name, last name, email, date of birth, social security number |
      * | `compensation_details` | Associate employee to a job &amp; compensation. |
@@ -1493,6 +1569,7 @@ public class Employees implements
      * | `employee_form_signing` | Employee forms (e.g., W4, direct deposit authorization) are generated &amp; signed. |
      * | `file_new_hire_report` | File a new hire report for this employee. |
      * | `admin_review` | Admin reviews &amp; confirms employee details (only required for Employee self-onboarding) |
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdOnboardingStatusRequestBuilder getOnboardingStatus() {
@@ -1501,20 +1578,21 @@ public class Employees implements
 
     /**
      * Get the employee's onboarding status
-     * # Description
+     * 
+     * <p># Description
      * Retrieves an employee's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
      * 
-     * scope: `employees:read`
+     * <p>scope: `employees:read`
      * 
-     * ## onboarding_status
+     * <p>## onboarding_status
      * 
-     * ### Admin-facilitated onboarding
+     * <p>### Admin-facilitated onboarding
      * | onboarding_status | Description |
      * |:------------------|------------:|
      * | `admin_onboarding_incomplete` | Admin needs to complete the full employee-onboarding. |
      * | `onboarding_completed` | Employee has been fully onboarded and verified. |
      * 
-     * ### Employee self-onboarding
+     * <p>### Employee self-onboarding
      * | onboarding_status | Description |
      * |:------------------|------------:|
      * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the employee. |
@@ -1526,9 +1604,9 @@ public class Employees implements
      * | `self_onboarding_awaiting_admin_review` | Admin has started to verify the employee's information. |
      * | `onboarding_completed` | Employee has been fully onboarded and verified. |
      * 
-     * ## onboarding_steps
+     * <p>## onboarding_steps
      * 
-     * | onboarding_steps | Requirement(s) to be completed |
+     * <p>| onboarding_steps | Requirement(s) to be completed |
      * |:-----------------|-------------------------------:|
      * | `personal_details` | Add employee's first name, last name, email, date of birth, social security number |
      * | `compensation_details` | Associate employee to a job &amp; compensation. |
@@ -1540,6 +1618,7 @@ public class Employees implements
      * | `employee_form_signing` | Employee forms (e.g., W4, direct deposit authorization) are generated &amp; signed. |
      * | `file_new_hire_report` | File a new hire report for this employee. |
      * | `admin_review` | Admin reviews &amp; confirms employee details (only required for Employee self-onboarding) |
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1551,20 +1630,21 @@ public class Employees implements
     
     /**
      * Get the employee's onboarding status
-     * # Description
+     * 
+     * <p># Description
      * Retrieves an employee's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
      * 
-     * scope: `employees:read`
+     * <p>scope: `employees:read`
      * 
-     * ## onboarding_status
+     * <p>## onboarding_status
      * 
-     * ### Admin-facilitated onboarding
+     * <p>### Admin-facilitated onboarding
      * | onboarding_status | Description |
      * |:------------------|------------:|
      * | `admin_onboarding_incomplete` | Admin needs to complete the full employee-onboarding. |
      * | `onboarding_completed` | Employee has been fully onboarded and verified. |
      * 
-     * ### Employee self-onboarding
+     * <p>### Employee self-onboarding
      * | onboarding_status | Description |
      * |:------------------|------------:|
      * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the employee. |
@@ -1576,9 +1656,9 @@ public class Employees implements
      * | `self_onboarding_awaiting_admin_review` | Admin has started to verify the employee's information. |
      * | `onboarding_completed` | Employee has been fully onboarded and verified. |
      * 
-     * ## onboarding_steps
+     * <p>## onboarding_steps
      * 
-     * | onboarding_steps | Requirement(s) to be completed |
+     * <p>| onboarding_steps | Requirement(s) to be completed |
      * |:-----------------|-------------------------------:|
      * | `personal_details` | Add employee's first name, last name, email, date of birth, social security number |
      * | `compensation_details` | Associate employee to a job &amp; compensation. |
@@ -1590,8 +1670,9 @@ public class Employees implements
      * | `employee_form_signing` | Employee forms (e.g., W4, direct deposit authorization) are generated &amp; signed. |
      * | `file_new_hire_report` | File a new hire report for this employee. |
      * | `admin_review` | Admin reviews &amp; confirms employee details (only required for Employee self-onboarding) |
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1626,6 +1707,7 @@ public class Employees implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-onboarding_status", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1637,6 +1719,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-onboarding_status",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1646,6 +1729,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-onboarding_status",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1655,6 +1739,7 @@ public class Employees implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-onboarding_status",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1716,18 +1801,20 @@ public class Employees implements
 
     /**
      * Update the employee's onboarding status
-     * scope: `employees:manage`
      * 
-     * Updates an employee's onboarding status.
+     * <p>scope: `employees:manage`
+     * 
+     * <p>Updates an employee's onboarding status.
      * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
      * 
-     * | Action | current onboarding_status | new onboarding_status |
+     * <p>| Action | current onboarding_status | new onboarding_status |
      * |:------------------|:------------:|----------:|
      * | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
      * | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
      * | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
      * | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
      * | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+     * 
      * @return The call builder
      */
     public PutV1EmployeesEmployeeIdOnboardingStatusRequestBuilder updateOnboardingStatus() {
@@ -1736,20 +1823,22 @@ public class Employees implements
 
     /**
      * Update the employee's onboarding status
-     * scope: `employees:manage`
      * 
-     * Updates an employee's onboarding status.
+     * <p>scope: `employees:manage`
+     * 
+     * <p>Updates an employee's onboarding status.
      * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
      * 
-     * | Action | current onboarding_status | new onboarding_status |
+     * <p>| Action | current onboarding_status | new onboarding_status |
      * |:------------------|:------------:|----------:|
      * | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
      * | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
      * | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
      * | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
      * | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1761,21 +1850,23 @@ public class Employees implements
     
     /**
      * Update the employee's onboarding status
-     * scope: `employees:manage`
      * 
-     * Updates an employee's onboarding status.
+     * <p>scope: `employees:manage`
+     * 
+     * <p>Updates an employee's onboarding status.
      * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
      * 
-     * | Action | current onboarding_status | new onboarding_status |
+     * <p>| Action | current onboarding_status | new onboarding_status |
      * |:------------------|:------------:|----------:|
      * | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
      * | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
      * | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
      * | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
      * | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1825,6 +1916,7 @@ public class Employees implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-employees-employee_id-onboarding_status", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1836,6 +1928,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-onboarding_status",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1845,6 +1938,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-onboarding_status",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1854,6 +1948,7 @@ public class Employees implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-onboarding_status",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1929,9 +2024,11 @@ public class Employees implements
 
     /**
      * Get employee time off activities
-     * Get employee time off activities.
      * 
-     * scope: `employee_time_off_activities:read`
+     * <p>Get employee time off activities.
+     * 
+     * <p>scope: `employee_time_off_activities:read`
+     * 
      * @return The call builder
      */
     public GetVersionEmployeesTimeOffActivitiesRequestBuilder getTimeOffActivities() {
@@ -1940,9 +2037,11 @@ public class Employees implements
 
     /**
      * Get employee time off activities
-     * Get employee time off activities.
      * 
-     * scope: `employee_time_off_activities:read`
+     * <p>Get employee time off activities.
+     * 
+     * <p>scope: `employee_time_off_activities:read`
+     * 
      * @param employeeUuid The UUID of the employee
      * @param timeOffType The time off type name you want to query data for. ex: 'sick' or 'vacation'
      * @return The response from the API call
@@ -1956,12 +2055,14 @@ public class Employees implements
     
     /**
      * Get employee time off activities
-     * Get employee time off activities.
      * 
-     * scope: `employee_time_off_activities:read`
+     * <p>Get employee time off activities.
+     * 
+     * <p>scope: `employee_time_off_activities:read`
+     * 
      * @param employeeUuid The UUID of the employee
      * @param timeOffType The time off type name you want to query data for. ex: 'sick' or 'vacation'
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -2003,6 +2104,7 @@ public class Employees implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-version-employees-time_off_activities", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -2014,6 +2116,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-version-employees-time_off_activities",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -2023,6 +2126,7 @@ public class Employees implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-version-employees-time_off_activities",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -2032,6 +2136,7 @@ public class Employees implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-version-employees-time_off_activities",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EarningTypeList - Example response
+ * EarningTypeList
+ * 
+ * <p>Example response
  */
 
 public class EarningTypeList {

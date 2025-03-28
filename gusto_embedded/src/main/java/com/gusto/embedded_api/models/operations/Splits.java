@@ -21,7 +21,6 @@ public class Splits {
 
     /**
      * The bank account ID
-     * 
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("uuid")
@@ -70,7 +69,6 @@ public class Splits {
 
     /**
      * The bank account ID
-     * 
      */
     @JsonIgnore
     public Optional<String> uuid() {
@@ -107,7 +105,6 @@ public class Splits {
 
     /**
      * The bank account ID
-     * 
      */
     public Splits withUuid(String uuid) {
         Utils.checkNotNull(uuid, "uuid");
@@ -117,7 +114,6 @@ public class Splits {
 
     /**
      * The bank account ID
-     * 
      */
     public Splits withUuid(Optional<String> uuid) {
         Utils.checkNotNull(uuid, "uuid");
@@ -229,7 +225,6 @@ public class Splits {
 
         /**
          * The bank account ID
-         * 
          */
         public Builder uuid(String uuid) {
             Utils.checkNotNull(uuid, "uuid");
@@ -239,7 +234,6 @@ public class Splits {
 
         /**
          * The bank account ID
-         * 
          */
         public Builder uuid(Optional<String> uuid) {
             Utils.checkNotNull(uuid, "uuid");

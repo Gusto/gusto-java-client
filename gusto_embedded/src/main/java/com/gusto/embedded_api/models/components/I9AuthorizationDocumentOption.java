@@ -14,7 +14,9 @@ import java.lang.String;
 import java.util.List;
 import java.util.Objects;
 /**
- * I9AuthorizationDocumentOption - An employee's I-9 verification document option based on the authorization status
+ * I9AuthorizationDocumentOption
+ * 
+ * <p>An employee's I-9 verification document option based on the authorization status
  */
 
 public class I9AuthorizationDocumentOption {

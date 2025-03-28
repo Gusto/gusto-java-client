@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayrollReceipt - Example response
+ * PayrollReceipt
+ * 
+ * <p>Example response
  */
 
 public class PayrollReceipt {

@@ -51,9 +51,11 @@ public class ContractorPaymentMethod implements
 
     /**
      * Get all contractor bank accounts
-     * Returns all contractor bank accounts.
      * 
-     * scope: `contractor_payment_methods:read`
+     * <p>Returns all contractor bank accounts.
+     * 
+     * <p>scope: `contractor_payment_methods:read`
+     * 
      * @return The call builder
      */
     public GetV1ContractorsContractorUuidBankAccountsRequestBuilder getBankAccounts() {
@@ -62,9 +64,11 @@ public class ContractorPaymentMethod implements
 
     /**
      * Get all contractor bank accounts
-     * Returns all contractor bank accounts.
      * 
-     * scope: `contractor_payment_methods:read`
+     * <p>Returns all contractor bank accounts.
+     * 
+     * <p>scope: `contractor_payment_methods:read`
+     * 
      * @param contractorUuid The UUID of the contractor
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -76,11 +80,13 @@ public class ContractorPaymentMethod implements
     
     /**
      * Get all contractor bank accounts
-     * Returns all contractor bank accounts.
      * 
-     * scope: `contractor_payment_methods:read`
+     * <p>Returns all contractor bank accounts.
+     * 
+     * <p>scope: `contractor_payment_methods:read`
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -115,6 +121,7 @@ public class ContractorPaymentMethod implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractors-contractor_uuid-bank_accounts", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -126,6 +133,7 @@ public class ContractorPaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid-bank_accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -135,6 +143,7 @@ public class ContractorPaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid-bank_accounts",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -144,6 +153,7 @@ public class ContractorPaymentMethod implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid-bank_accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -205,11 +215,13 @@ public class ContractorPaymentMethod implements
 
     /**
      * Get a contractor's payment method
-     * Fetches a contractor's payment method. A contractor payment method
+     * 
+     * <p>Fetches a contractor's payment method. A contractor payment method
      * describes how the payment should be split across the contractor's associated
      * bank accounts.
      * 
-     * scope: `contractor_payment_methods:read`
+     * <p>scope: `contractor_payment_methods:read`
+     * 
      * @return The call builder
      */
     public GetV1ContractorsContractorUuidPaymentMethodRequestBuilder get() {
@@ -218,11 +230,13 @@ public class ContractorPaymentMethod implements
 
     /**
      * Get a contractor's payment method
-     * Fetches a contractor's payment method. A contractor payment method
+     * 
+     * <p>Fetches a contractor's payment method. A contractor payment method
      * describes how the payment should be split across the contractor's associated
      * bank accounts.
      * 
-     * scope: `contractor_payment_methods:read`
+     * <p>scope: `contractor_payment_methods:read`
+     * 
      * @param contractorUuid The UUID of the contractor
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -234,13 +248,15 @@ public class ContractorPaymentMethod implements
     
     /**
      * Get a contractor's payment method
-     * Fetches a contractor's payment method. A contractor payment method
+     * 
+     * <p>Fetches a contractor's payment method. A contractor payment method
      * describes how the payment should be split across the contractor's associated
      * bank accounts.
      * 
-     * scope: `contractor_payment_methods:read`
+     * <p>scope: `contractor_payment_methods:read`
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -275,6 +291,7 @@ public class ContractorPaymentMethod implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-contractors-contractor_uuid-payment_method", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -286,6 +303,7 @@ public class ContractorPaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid-payment_method",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -295,6 +313,7 @@ public class ContractorPaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid-payment_method",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -304,6 +323,7 @@ public class ContractorPaymentMethod implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-contractors-contractor_uuid-payment_method",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -365,10 +385,12 @@ public class ContractorPaymentMethod implements
 
     /**
      * Update a contractor's payment method
-     * Updates a contractor's payment method. Note that creating a contractor
+     * 
+     * <p>Updates a contractor's payment method. Note that creating a contractor
      * bank account will also update the contractor's payment method.
      * 
-     * scope: `contractor_payment_methods:write`
+     * <p>scope: `contractor_payment_methods:write`
+     * 
      * @return The call builder
      */
     public PutV1ContractorsContractorIdPaymentMethodRequestBuilder update() {
@@ -377,12 +399,14 @@ public class ContractorPaymentMethod implements
 
     /**
      * Update a contractor's payment method
-     * Updates a contractor's payment method. Note that creating a contractor
+     * 
+     * <p>Updates a contractor's payment method. Note that creating a contractor
      * bank account will also update the contractor's payment method.
      * 
-     * scope: `contractor_payment_methods:write`
+     * <p>scope: `contractor_payment_methods:write`
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -394,13 +418,15 @@ public class ContractorPaymentMethod implements
     
     /**
      * Update a contractor's payment method
-     * Updates a contractor's payment method. Note that creating a contractor
+     * 
+     * <p>Updates a contractor's payment method. Note that creating a contractor
      * bank account will also update the contractor's payment method.
      * 
-     * scope: `contractor_payment_methods:write`
+     * <p>scope: `contractor_payment_methods:write`
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -450,6 +476,7 @@ public class ContractorPaymentMethod implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-contractors-contractor_id-payment_method", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -461,6 +488,7 @@ public class ContractorPaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-contractors-contractor_id-payment_method",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -470,6 +498,7 @@ public class ContractorPaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-contractors-contractor_id-payment_method",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -479,6 +508,7 @@ public class ContractorPaymentMethod implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-contractors-contractor_id-payment_method",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

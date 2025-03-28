@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PaymentUuid - Unique identifier of the payment
+ * PaymentUuid
+ * 
+ * <p>Unique identifier of the payment
  */
 public enum PaymentUuid {
     PAYROLL("payroll");

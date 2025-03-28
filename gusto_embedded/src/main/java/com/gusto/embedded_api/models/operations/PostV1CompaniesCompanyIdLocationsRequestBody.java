@@ -17,7 +17,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * PostV1CompaniesCompanyIdLocationsRequestBody - Create a company location.
+ * PostV1CompaniesCompanyIdLocationsRequestBody
+ * 
+ * <p>Create a company location.
  */
 
 public class PostV1CompaniesCompanyIdLocationsRequestBody {

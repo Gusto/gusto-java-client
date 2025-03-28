@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * DocumentSignedRecipientType - The type of recipient associated with the document (will be `Contractor` for Contractor Documents)
+ * DocumentSignedRecipientType
+ * 
+ * <p>The type of recipient associated with the document (will be `Contractor` for Contractor Documents)
  */
 public enum DocumentSignedRecipientType {
     COMPANY("Company"),

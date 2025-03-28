@@ -61,13 +61,15 @@ public class EmployeeForms implements
 
     /**
      * Generate a W2 form [DEMO]
-     * &gt; 🚧 Demo action
+     * 
+     * <p>&gt; 🚧 Demo action
      * &gt;
      * &gt; This action is only available in the Demo environment
      * 
-     * Generates a W2 document for testing purposes.
+     * <p>Generates a W2 document for testing purposes.
      * 
-     * scope: `employees:write`
+     * <p>scope: `employees:write`
+     * 
      * @return The call builder
      */
     public PostV1SandboxGenerateW2RequestBuilder generateW2() {
@@ -76,14 +78,16 @@ public class EmployeeForms implements
 
     /**
      * Generate a W2 form [DEMO]
-     * &gt; 🚧 Demo action
+     * 
+     * <p>&gt; 🚧 Demo action
      * &gt;
      * &gt; This action is only available in the Demo environment
      * 
-     * Generates a W2 document for testing purposes.
+     * <p>Generates a W2 document for testing purposes.
      * 
-     * scope: `employees:write`
-     * @param requestBody
+     * <p>scope: `employees:write`
+     * 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -94,15 +98,17 @@ public class EmployeeForms implements
     
     /**
      * Generate a W2 form [DEMO]
-     * &gt; 🚧 Demo action
+     * 
+     * <p>&gt; 🚧 Demo action
      * &gt;
      * &gt; This action is only available in the Demo environment
      * 
-     * Generates a W2 document for testing purposes.
+     * <p>Generates a W2 document for testing purposes.
      * 
-     * scope: `employees:write`
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * <p>scope: `employees:write`
+     * 
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -148,6 +154,7 @@ public class EmployeeForms implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-sandbox-generate_w2", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -159,6 +166,7 @@ public class EmployeeForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-sandbox-generate_w2",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -168,6 +176,7 @@ public class EmployeeForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-sandbox-generate_w2",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -177,6 +186,7 @@ public class EmployeeForms implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-sandbox-generate_w2",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -252,9 +262,11 @@ public class EmployeeForms implements
 
     /**
      * Get all employee forms
-     * Get a list of all employee's forms
      * 
-     * scope: `employee_forms:read`
+     * <p>Get a list of all employee's forms
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeeFormsRequestBuilder list() {
@@ -263,9 +275,11 @@ public class EmployeeForms implements
 
     /**
      * Get all employee forms
-     * Get a list of all employee's forms
      * 
-     * scope: `employee_forms:read`
+     * <p>Get a list of all employee's forms
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -277,11 +291,13 @@ public class EmployeeForms implements
     
     /**
      * Get all employee forms
-     * Get a list of all employee's forms
      * 
-     * scope: `employee_forms:read`
+     * <p>Get a list of all employee's forms
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -316,6 +332,7 @@ public class EmployeeForms implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employee-forms", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -327,6 +344,7 @@ public class EmployeeForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employee-forms",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -336,6 +354,7 @@ public class EmployeeForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employee-forms",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -345,6 +364,7 @@ public class EmployeeForms implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employee-forms",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -406,9 +426,11 @@ public class EmployeeForms implements
 
     /**
      * Get an employee form
-     * Get an employee form
      * 
-     * scope: `employee_forms:read`
+     * <p>Get an employee form
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeeFormRequestBuilder get() {
@@ -417,9 +439,11 @@ public class EmployeeForms implements
 
     /**
      * Get an employee form
-     * Get an employee form
      * 
-     * scope: `employee_forms:read`
+     * <p>Get an employee form
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
      * @param employeeId The UUID of the employee
      * @param formId The UUID of the form
      * @return The response from the API call
@@ -433,12 +457,14 @@ public class EmployeeForms implements
     
     /**
      * Get an employee form
-     * Get an employee form
      * 
-     * scope: `employee_forms:read`
+     * <p>Get an employee form
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
      * @param employeeId The UUID of the employee
      * @param formId The UUID of the form
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -475,6 +501,7 @@ public class EmployeeForms implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employee-form", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -486,6 +513,7 @@ public class EmployeeForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employee-form",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -495,6 +523,7 @@ public class EmployeeForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employee-form",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -504,6 +533,7 @@ public class EmployeeForms implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employee-form",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -565,9 +595,11 @@ public class EmployeeForms implements
 
     /**
      * Get the employee form pdf
-     * Get the link to the employee form PDF
      * 
-     * scope: `employee_forms:read`
+     * <p>Get the link to the employee form PDF
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeeFormPdfRequestBuilder getPdf() {
@@ -576,9 +608,11 @@ public class EmployeeForms implements
 
     /**
      * Get the employee form pdf
-     * Get the link to the employee form PDF
      * 
-     * scope: `employee_forms:read`
+     * <p>Get the link to the employee form PDF
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
      * @param employeeId The UUID of the employee
      * @param formId The UUID of the form
      * @return The response from the API call
@@ -592,12 +626,14 @@ public class EmployeeForms implements
     
     /**
      * Get the employee form pdf
-     * Get the link to the employee form PDF
      * 
-     * scope: `employee_forms:read`
+     * <p>Get the link to the employee form PDF
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
      * @param employeeId The UUID of the employee
      * @param formId The UUID of the form
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -634,6 +670,7 @@ public class EmployeeForms implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employee-form-pdf", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -645,6 +682,7 @@ public class EmployeeForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employee-form-pdf",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -654,6 +692,7 @@ public class EmployeeForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employee-form-pdf",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -663,6 +702,7 @@ public class EmployeeForms implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employee-form-pdf",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -724,12 +764,14 @@ public class EmployeeForms implements
 
     /**
      * Sign an employee form
-     * Sign an employee form.
      * 
-     * The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
+     * <p>Sign an employee form.
+     * 
+     * <p>The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
      * first name, last name, street address, city, state, and zip for that preparer are all required.
      * 
-     * scope: `employee_forms:sign`
+     * <p>scope: `employee_forms:sign`
+     * 
      * @return The call builder
      */
     public PutV1EmployeeFormSignRequestBuilder sign() {
@@ -738,12 +780,14 @@ public class EmployeeForms implements
 
     /**
      * Sign an employee form
-     * Sign an employee form.
      * 
-     * The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
+     * <p>Sign an employee form.
+     * 
+     * <p>The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
      * first name, last name, street address, city, state, and zip for that preparer are all required.
      * 
-     * scope: `employee_forms:sign`
+     * <p>scope: `employee_forms:sign`
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -784,6 +828,7 @@ public class EmployeeForms implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-employee-form-sign", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -795,6 +840,7 @@ public class EmployeeForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employee-form-sign",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -804,6 +850,7 @@ public class EmployeeForms implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-employee-form-sign",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -813,6 +860,7 @@ public class EmployeeForms implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employee-form-sign",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

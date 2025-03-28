@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CompanyOnboardingStatus - The representation of a company's onboarding status
+ * CompanyOnboardingStatus
+ * 
+ * <p>The representation of a company's onboarding status
  */
 
 public class CompanyOnboardingStatus {

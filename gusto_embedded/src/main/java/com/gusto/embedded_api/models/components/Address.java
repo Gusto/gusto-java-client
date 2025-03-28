@@ -16,7 +16,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * Address - The contractor’s home address.
+ * Address
+ * 
+ * <p>The contractor’s home address.
  */
 
 public class Address {

@@ -36,7 +36,7 @@ public class Application {
 
         GetV1CompanyFormsResponse res = sdk.companyForms().getAll()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.formList().isPresent()) {
@@ -89,7 +89,7 @@ public class Application {
 
         GetV1CompanyFormResponse res = sdk.companyForms().get()
                 .formId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.form().isPresent()) {
@@ -142,7 +142,7 @@ public class Application {
 
         GetV1CompanyFormPdfResponse res = sdk.companyForms().getPdf()
                 .formId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.formPdf().isPresent()) {
@@ -198,7 +198,7 @@ public class Application {
         PutV1CompanyFormSignResponse res = sdk.companyForms().sign()
                 .formId("<id>")
                 .xGustoClientIp("<value>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompanyFormSignRequestBody.builder()
                     .signatureText("Jane Smith")
                     .agree(true)

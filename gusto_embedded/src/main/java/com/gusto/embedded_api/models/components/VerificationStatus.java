@@ -9,9 +9,11 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * VerificationStatus - The verification status of the bank account.
+ * VerificationStatus
  * 
- * 'awaiting_deposits' means the bank account is just created and money is being transferred.
+ * <p>The verification status of the bank account.
+ * 
+ * <p>'awaiting_deposits' means the bank account is just created and money is being transferred.
  * 'ready_for_verification' means the micro-deposits are completed and the verification process can begin by using the verify endpoint.
  * 'verified' means the bank account is verified.
  */

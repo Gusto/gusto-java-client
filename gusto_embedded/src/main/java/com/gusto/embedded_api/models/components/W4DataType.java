@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * W4DataType - The version of w4 form.
+ * W4DataType
+ * 
+ * <p>The version of w4 form.
  */
 public enum W4DataType {
     PRE2020_W4("pre_2020_w4"),

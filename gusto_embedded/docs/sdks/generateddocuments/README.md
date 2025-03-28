@@ -35,7 +35,7 @@ public class Application {
         GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse res = sdk.generatedDocuments().get()
                 .documentType(DocumentType.PRINTABLE_PAYROLL_CHECKS)
                 .requestUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.generatedDocument().isPresent()) {

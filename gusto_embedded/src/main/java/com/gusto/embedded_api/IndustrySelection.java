@@ -47,9 +47,11 @@ public class IndustrySelection implements
 
     /**
      * Get a company industry selection
-     * Get industry selection for the company.
      * 
-     * scope: `companies:read`
+     * <p>Get industry selection for the company.
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @return The call builder
      */
     public GetV1CompanyIndustryRequestBuilder get() {
@@ -58,9 +60,11 @@ public class IndustrySelection implements
 
     /**
      * Get a company industry selection
-     * Get industry selection for the company.
      * 
-     * scope: `companies:read`
+     * <p>Get industry selection for the company.
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -72,11 +76,13 @@ public class IndustrySelection implements
     
     /**
      * Get a company industry selection
-     * Get industry selection for the company.
      * 
-     * scope: `companies:read`
+     * <p>Get industry selection for the company.
+     * 
+     * <p>scope: `companies:read`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -111,6 +117,7 @@ public class IndustrySelection implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-company-industry", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -122,6 +129,7 @@ public class IndustrySelection implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-industry",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -131,6 +139,7 @@ public class IndustrySelection implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-company-industry",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -140,6 +149,7 @@ public class IndustrySelection implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-company-industry",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -201,9 +211,11 @@ public class IndustrySelection implements
 
     /**
      * Update a company industry selection
-     * Update the company industry selection by passing in industry classification codes: [NAICS code](https://www.naics.com), [SICS code](https://siccode.com/) and industry title. Our UI is leveraging [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry classification codes.
      * 
-     * scope: `companies:write`
+     * <p>Update the company industry selection by passing in industry classification codes: [NAICS code](https://www.naics.com), [SICS code](https://siccode.com/) and industry title. Our UI is leveraging [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry classification codes.
+     * 
+     * <p>scope: `companies:write`
+     * 
      * @return The call builder
      */
     public PutV1CompanyIndustryRequestBuilder update() {
@@ -212,11 +224,13 @@ public class IndustrySelection implements
 
     /**
      * Update a company industry selection
-     * Update the company industry selection by passing in industry classification codes: [NAICS code](https://www.naics.com), [SICS code](https://siccode.com/) and industry title. Our UI is leveraging [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry classification codes.
      * 
-     * scope: `companies:write`
+     * <p>Update the company industry selection by passing in industry classification codes: [NAICS code](https://www.naics.com), [SICS code](https://siccode.com/) and industry title. Our UI is leveraging [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry classification codes.
+     * 
+     * <p>scope: `companies:write`
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -228,12 +242,14 @@ public class IndustrySelection implements
     
     /**
      * Update a company industry selection
-     * Update the company industry selection by passing in industry classification codes: [NAICS code](https://www.naics.com), [SICS code](https://siccode.com/) and industry title. Our UI is leveraging [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry classification codes.
      * 
-     * scope: `companies:write`
+     * <p>Update the company industry selection by passing in industry classification codes: [NAICS code](https://www.naics.com), [SICS code](https://siccode.com/) and industry title. Our UI is leveraging [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry classification codes.
+     * 
+     * <p>scope: `companies:write`
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -283,6 +299,7 @@ public class IndustrySelection implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-company-industry", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -294,6 +311,7 @@ public class IndustrySelection implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-company-industry",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -303,6 +321,7 @@ public class IndustrySelection implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-company-industry",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -312,6 +331,7 @@ public class IndustrySelection implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-company-industry",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

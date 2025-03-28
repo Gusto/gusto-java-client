@@ -16,7 +16,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * PrimaryPayrollAdmin - The primary payroll admin of the company.
+ * PrimaryPayrollAdmin
+ * 
+ * <p>The primary payroll admin of the company.
  */
 
 public class PrimaryPayrollAdmin {

@@ -34,7 +34,7 @@ public class Application {
 
         GetV1CompaniesCompanyIdFederalTaxDetailsResponse res = sdk.federalTaxDetails().get()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.federalTaxDetails().isPresent()) {
@@ -76,10 +76,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.FilingForm;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsResponse;
-import com.gusto.embedded_api.models.operations.TaxPayerType;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -92,7 +89,7 @@ public class Application {
 
         PutV1CompaniesCompanyIdFederalTaxDetailsResponse res = sdk.federalTaxDetails().update()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody.builder()
                     .version("6cb95e00540706ca48d4577b3c839fbe")
                     .legalName("Acme Corp.")

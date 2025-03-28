@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * User - Information for the user who will be the primary payroll administrator for the new company.
+ * User
+ * 
+ * <p>Information for the user who will be the primary payroll administrator for the new company.
  */
 
 public class User {

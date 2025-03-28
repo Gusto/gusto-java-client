@@ -21,7 +21,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * Job - The representation of a job in Gusto.
+ * Job
+ * 
+ * <p>The representation of a job in Gusto.
  */
 
 public class Job {

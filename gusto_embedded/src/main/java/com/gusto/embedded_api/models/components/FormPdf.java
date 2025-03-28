@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * FormPdf - Example response
+ * FormPdf
+ * 
+ * <p>Example response
  */
 
 public class FormPdf {

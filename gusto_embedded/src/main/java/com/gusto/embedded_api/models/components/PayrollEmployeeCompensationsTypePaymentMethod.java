@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayrollEmployeeCompensationsTypePaymentMethod - The employee's compensation payment method.
+ * PayrollEmployeeCompensationsTypePaymentMethod
+ * 
+ * <p>The employee's compensation payment method.
  */
 public enum PayrollEmployeeCompensationsTypePaymentMethod {
     CHECK("Check"),

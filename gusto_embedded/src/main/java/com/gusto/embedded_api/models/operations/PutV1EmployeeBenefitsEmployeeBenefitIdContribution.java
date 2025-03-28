@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutV1EmployeeBenefitsEmployeeBenefitIdContribution - An object representing the type and value of the company contribution.
+ * PutV1EmployeeBenefitsEmployeeBenefitIdContribution
+ * 
+ * <p>An object representing the type and value of the company contribution.
  */
 
 public class PutV1EmployeeBenefitsEmployeeBenefitIdContribution {
@@ -24,11 +26,11 @@ public class PutV1EmployeeBenefitsEmployeeBenefitIdContribution {
     /**
      * The company contribution scheme.
      * 
-     * `amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>`amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * `percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>`percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * `tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
+     * <p>`tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
@@ -37,7 +39,7 @@ public class PutV1EmployeeBenefitsEmployeeBenefitIdContribution {
     /**
      * For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
      * 
-     * For the `tiered` contribution type, an array of tiers.
+     * <p>For the `tiered` contribution type, an array of tiers.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("value")
@@ -60,11 +62,11 @@ public class PutV1EmployeeBenefitsEmployeeBenefitIdContribution {
     /**
      * The company contribution scheme.
      * 
-     * `amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>`amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * `percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>`percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * `tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
+     * <p>`tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -75,7 +77,7 @@ public class PutV1EmployeeBenefitsEmployeeBenefitIdContribution {
     /**
      * For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
      * 
-     * For the `tiered` contribution type, an array of tiers.
+     * <p>For the `tiered` contribution type, an array of tiers.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -90,11 +92,11 @@ public class PutV1EmployeeBenefitsEmployeeBenefitIdContribution {
     /**
      * The company contribution scheme.
      * 
-     * `amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>`amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * `percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>`percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * `tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
+     * <p>`tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
      */
     public PutV1EmployeeBenefitsEmployeeBenefitIdContribution withType(PutV1EmployeeBenefitsEmployeeBenefitIdType type) {
         Utils.checkNotNull(type, "type");
@@ -105,11 +107,11 @@ public class PutV1EmployeeBenefitsEmployeeBenefitIdContribution {
     /**
      * The company contribution scheme.
      * 
-     * `amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>`amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * `percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+     * <p>`percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
      * 
-     * `tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
+     * <p>`tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
      */
     public PutV1EmployeeBenefitsEmployeeBenefitIdContribution withType(Optional<? extends PutV1EmployeeBenefitsEmployeeBenefitIdType> type) {
         Utils.checkNotNull(type, "type");
@@ -120,7 +122,7 @@ public class PutV1EmployeeBenefitsEmployeeBenefitIdContribution {
     /**
      * For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
      * 
-     * For the `tiered` contribution type, an array of tiers.
+     * <p>For the `tiered` contribution type, an array of tiers.
      */
     public PutV1EmployeeBenefitsEmployeeBenefitIdContribution withValue(PutV1EmployeeBenefitsEmployeeBenefitIdValue value) {
         Utils.checkNotNull(value, "value");
@@ -131,7 +133,7 @@ public class PutV1EmployeeBenefitsEmployeeBenefitIdContribution {
     /**
      * For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
      * 
-     * For the `tiered` contribution type, an array of tiers.
+     * <p>For the `tiered` contribution type, an array of tiers.
      */
     public PutV1EmployeeBenefitsEmployeeBenefitIdContribution withValue(Optional<? extends PutV1EmployeeBenefitsEmployeeBenefitIdValue> value) {
         Utils.checkNotNull(value, "value");
@@ -180,11 +182,11 @@ public class PutV1EmployeeBenefitsEmployeeBenefitIdContribution {
         /**
          * The company contribution scheme.
          * 
-         * `amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
+         * <p>`amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
          * 
-         * `percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+         * <p>`percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
          * 
-         * `tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
+         * <p>`tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
          */
         public Builder type(PutV1EmployeeBenefitsEmployeeBenefitIdType type) {
             Utils.checkNotNull(type, "type");
@@ -195,11 +197,11 @@ public class PutV1EmployeeBenefitsEmployeeBenefitIdContribution {
         /**
          * The company contribution scheme.
          * 
-         * `amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
+         * <p>`amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
          * 
-         * `percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+         * <p>`percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
          * 
-         * `tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
+         * <p>`tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
          */
         public Builder type(Optional<? extends PutV1EmployeeBenefitsEmployeeBenefitIdType> type) {
             Utils.checkNotNull(type, "type");
@@ -210,7 +212,7 @@ public class PutV1EmployeeBenefitsEmployeeBenefitIdContribution {
         /**
          * For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
          * 
-         * For the `tiered` contribution type, an array of tiers.
+         * <p>For the `tiered` contribution type, an array of tiers.
          */
         public Builder value(PutV1EmployeeBenefitsEmployeeBenefitIdValue value) {
             Utils.checkNotNull(value, "value");
@@ -221,7 +223,7 @@ public class PutV1EmployeeBenefitsEmployeeBenefitIdContribution {
         /**
          * For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
          * 
-         * For the `tiered` contribution type, an array of tiers.
+         * <p>For the `tiered` contribution type, an array of tiers.
          */
         public Builder value(Optional<? extends PutV1EmployeeBenefitsEmployeeBenefitIdValue> value) {
             Utils.checkNotNull(value, "value");

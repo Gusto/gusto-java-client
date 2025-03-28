@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PostCompaniesCompanyUuidReportsPaymentMethod - Payment method to filter by
+ * PostCompaniesCompanyUuidReportsPaymentMethod
+ * 
+ * <p>Payment method to filter by
  */
 public enum PostCompaniesCompanyUuidReportsPaymentMethod {
     CHECK("check"),

@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EarningType - The earning type for the compensation.
+ * EarningType
+ * 
+ * <p>The earning type for the compensation.
  */
 public enum EarningType {
     COMPANY_PAY_TYPE("CompanyPayType"),

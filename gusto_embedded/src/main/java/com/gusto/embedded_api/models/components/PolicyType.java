@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PolicyType - Type of the time off policy
+ * PolicyType
+ * 
+ * <p>Type of the time off policy
  */
 public enum PolicyType {
     VACATION("vacation"),

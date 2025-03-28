@@ -9,13 +9,15 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PostV1EmployeesEmployeeIdEmployeeBenefitsType - The company contribution scheme.
+ * PostV1EmployeesEmployeeIdEmployeeBenefitsType
  * 
- * `amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
+ * <p>The company contribution scheme.
  * 
- * `percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+ * <p>`amount`: The company contributes a fixed amount per payroll. If elective is true, the contribution is matching, dollar-for-dollar.
  * 
- * `tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
+ * <p>`percentage`: The company contributes a percentage of the payroll amount per payroll period. If elective is true, the contribution is matching, dollar-for-dollar.
+ * 
+ * <p>`tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
  */
 public enum PostV1EmployeesEmployeeIdEmployeeBenefitsType {
     TIERED("tiered"),

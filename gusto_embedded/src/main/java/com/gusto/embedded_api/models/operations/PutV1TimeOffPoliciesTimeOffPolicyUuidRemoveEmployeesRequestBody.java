@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody - A list of employee objects containing the employee uuid
+ * PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody
+ * 
+ * <p>A list of employee objects containing the employee uuid
  */
 
 public class PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody {

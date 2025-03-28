@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 5d57a1bf-31fa-4bb7-8d47-6fe0473a6fda
 management:
-  docChecksum: c4bbb668676635dabb3d2be600272902
+  docChecksum: 040871ecd05195c4f0c000645be00a17
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.513.4
-  generationVersion: 2.545.4
-  releaseVersion: 0.1.0
-  configChecksum: 1a20808c30127f4f2dc1e5b9e406de76
+  speakeasyVersion: 1.525.2
+  generationVersion: 2.562.3
+  releaseVersion: 0.2.0
+  configChecksum: 17a3bc343749259ab86a53c9505c49bb
   repoURL: https://github.com/Gusto/gusto-java-client.git
   repoSubDirectory: gusto_embedded
 features:
@@ -14,7 +14,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
     constsAndDefaults: 0.1.1
-    core: 3.34.0
+    core: 3.36.0
     deprecations: 2.81.1
     flattening: 2.81.1
     getRequestBodies: 2.81.1
@@ -27,7 +27,7 @@ features:
     methodSecurity: 2.82.2
     nameOverrides: 2.81.3
     nullables: 0.1.0
-    sdkHooks: 0.1.0
+    sdkHooks: 1.0.0
     serverIDs: 2.81.1
     unions: 0.0.6
 generatedFiles:
@@ -36,6 +36,7 @@ generatedFiles:
   - build.gradle
   - docs/models/components/AccountType.md
   - docs/models/components/AccruingTimeOffHour.md
+  - docs/models/components/AccruingTimeOffHourObject.md
   - docs/models/components/AchTransaction.md
   - docs/models/components/AchTransactionRecipientType.md
   - docs/models/components/ActiveCompanies.md
@@ -82,6 +83,7 @@ generatedFiles:
   - docs/models/components/CompanyOnboardingStatus.md
   - docs/models/components/CompanyPaidTimeOff.md
   - docs/models/components/CompanyStatus.md
+  - docs/models/components/CompanySuspension.md
   - docs/models/components/Compensation.md
   - docs/models/components/Compensations.md
   - docs/models/components/Contractor.md
@@ -249,7 +251,6 @@ generatedFiles:
   - docs/models/components/PaidTimeOff.md
   - docs/models/components/PayPeriod.md
   - docs/models/components/PayPeriodPayroll.md
-  - docs/models/components/PaySchedule.md
   - docs/models/components/PayScheduleAssignment.md
   - docs/models/components/PayScheduleAssignmentBody.md
   - docs/models/components/PayScheduleAssignmentBodyType.md
@@ -263,6 +264,8 @@ generatedFiles:
   - docs/models/components/PayScheduleCreateUpdate.md
   - docs/models/components/PayScheduleFrequency.md
   - docs/models/components/PayScheduleFrequencyCreateUpdate.md
+  - docs/models/components/PayScheduleList.md
+  - docs/models/components/PayScheduleObject.md
   - docs/models/components/PayScheduleType.md
   - docs/models/components/PaymentConfigs.md
   - docs/models/components/PaymentDirection.md
@@ -313,6 +316,7 @@ generatedFiles:
   - docs/models/components/PrimarySignatory.md
   - docs/models/components/RateType.md
   - docs/models/components/RecipientType.md
+  - docs/models/components/ReconcileTaxMethod.md
   - docs/models/components/RecoveryCase.md
   - docs/models/components/RecoveryCaseStatus.md
   - docs/models/components/Rehire.md
@@ -334,6 +338,7 @@ generatedFiles:
   - docs/models/components/SubscriptionTypes.md
   - docs/models/components/SupportedBenefit.md
   - docs/models/components/TaxLiabilitiesSelections.md
+  - docs/models/components/TaxRefunds.md
   - docs/models/components/TaxRequirement.md
   - docs/models/components/TaxRequirementMetadata.md
   - docs/models/components/TaxRequirementMetadataOptions.md
@@ -473,6 +478,8 @@ generatedFiles:
   - docs/models/operations/GetCompaniesCompanyUuidPaidHolidaysResponse.md
   - docs/models/operations/GetCompaniesCompanyUuidReportTemplatesReportTypeRequest.md
   - docs/models/operations/GetCompaniesCompanyUuidReportTemplatesReportTypeResponse.md
+  - docs/models/operations/GetCompaniesCompanyUuidSuspensionsRequest.md
+  - docs/models/operations/GetCompaniesCompanyUuidSuspensionsResponse.md
   - docs/models/operations/GetCompaniesCompanyUuidTimeOffPoliciesRequest.md
   - docs/models/operations/GetCompaniesCompanyUuidTimeOffPoliciesResponse.md
   - docs/models/operations/GetCompaniesCompanyUuidWireInRequestUuidRequest.md
@@ -721,6 +728,7 @@ generatedFiles:
   - docs/models/operations/Job.md
   - docs/models/operations/Juneteenth.md
   - docs/models/operations/LaborDay.md
+  - docs/models/operations/LeavingFor.md
   - docs/models/operations/LiabilitySelections.md
   - docs/models/operations/LimitOption.md
   - docs/models/operations/MemorialDay.md
@@ -744,6 +752,9 @@ generatedFiles:
   - docs/models/operations/PostCompaniesCompanyUuidReportsRequest.md
   - docs/models/operations/PostCompaniesCompanyUuidReportsRequestBody.md
   - docs/models/operations/PostCompaniesCompanyUuidReportsResponse.md
+  - docs/models/operations/PostCompaniesCompanyUuidSuspensionsRequest.md
+  - docs/models/operations/PostCompaniesCompanyUuidSuspensionsRequestBody.md
+  - docs/models/operations/PostCompaniesCompanyUuidSuspensionsResponse.md
   - docs/models/operations/PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod.md
   - docs/models/operations/PostCompaniesCompanyUuidTimeOffPoliciesRequest.md
   - docs/models/operations/PostCompaniesCompanyUuidTimeOffPoliciesRequestBody.md
@@ -830,6 +841,7 @@ generatedFiles:
   - docs/models/operations/PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody.md
   - docs/models/operations/PostV1EmployeesEmployeeIdEmployeeBenefitsResponse.md
   - docs/models/operations/PostV1EmployeesEmployeeIdEmployeeBenefitsType.md
+  - docs/models/operations/PostV1EmployeesEmployeeIdEmployeeBenefitsValue.md
   - docs/models/operations/PostV1EmployeesEmployeeIdGarnishmentsRequest.md
   - docs/models/operations/PostV1EmployeesEmployeeIdGarnishmentsRequestBody.md
   - docs/models/operations/PostV1EmployeesEmployeeIdGarnishmentsResponse.md
@@ -941,6 +953,7 @@ generatedFiles:
   - docs/models/operations/PutV1CompaniesCompanyIdPayrollsRequest.md
   - docs/models/operations/PutV1CompaniesCompanyIdPayrollsRequestBody.md
   - docs/models/operations/PutV1CompaniesCompanyIdPayrollsResponse.md
+  - docs/models/operations/PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod.md
   - docs/models/operations/PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress.md
   - docs/models/operations/PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest.md
   - docs/models/operations/PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody.md
@@ -1099,6 +1112,8 @@ generatedFiles:
   - docs/models/operations/QueryParamFrequency.md
   - docs/models/operations/QueryParamInclude.md
   - docs/models/operations/Questions.md
+  - docs/models/operations/Reason.md
+  - docs/models/operations/ReconcileTaxMethod.md
   - docs/models/operations/RedebitRecoveryCaseRequest.md
   - docs/models/operations/RedebitRecoveryCaseResponse.md
   - docs/models/operations/RefreshAccessTokenRequest.md
@@ -1172,10 +1187,12 @@ generatedFiles:
   - docs/sdks/recoverycases/README.md
   - docs/sdks/reports/README.md
   - docs/sdks/signatories/README.md
+  - docs/sdks/suspensions/README.md
   - docs/sdks/taxrequirements/README.md
   - docs/sdks/timeoffpolicies/README.md
   - docs/sdks/webhooks/README.md
   - docs/sdks/wireinrequests/README.md
+  - gradle.properties
   - gradle/wrapper/gradle-wrapper.jar
   - gradle/wrapper/gradle-wrapper.properties
   - gradlew
@@ -1229,12 +1246,14 @@ generatedFiles:
   - src/main/java/com/gusto/embedded_api/SDKConfiguration.java
   - src/main/java/com/gusto/embedded_api/SecuritySource.java
   - src/main/java/com/gusto/embedded_api/Signatories.java
+  - src/main/java/com/gusto/embedded_api/Suspensions.java
   - src/main/java/com/gusto/embedded_api/TaxRequirements.java
   - src/main/java/com/gusto/embedded_api/TimeOffPolicies.java
   - src/main/java/com/gusto/embedded_api/Webhooks.java
   - src/main/java/com/gusto/embedded_api/WireInRequests.java
   - src/main/java/com/gusto/embedded_api/models/components/AccountType.java
   - src/main/java/com/gusto/embedded_api/models/components/AccruingTimeOffHour.java
+  - src/main/java/com/gusto/embedded_api/models/components/AccruingTimeOffHourObject.java
   - src/main/java/com/gusto/embedded_api/models/components/AchTransaction.java
   - src/main/java/com/gusto/embedded_api/models/components/AchTransactionRecipientType.java
   - src/main/java/com/gusto/embedded_api/models/components/ActiveCompanies.java
@@ -1281,6 +1300,7 @@ generatedFiles:
   - src/main/java/com/gusto/embedded_api/models/components/CompanyOnboardingStatus.java
   - src/main/java/com/gusto/embedded_api/models/components/CompanyPaidTimeOff.java
   - src/main/java/com/gusto/embedded_api/models/components/CompanyStatus.java
+  - src/main/java/com/gusto/embedded_api/models/components/CompanySuspension.java
   - src/main/java/com/gusto/embedded_api/models/components/Compensation.java
   - src/main/java/com/gusto/embedded_api/models/components/Compensations.java
   - src/main/java/com/gusto/embedded_api/models/components/Contractor.java
@@ -1448,7 +1468,6 @@ generatedFiles:
   - src/main/java/com/gusto/embedded_api/models/components/PaidTimeOff.java
   - src/main/java/com/gusto/embedded_api/models/components/PayPeriod.java
   - src/main/java/com/gusto/embedded_api/models/components/PayPeriodPayroll.java
-  - src/main/java/com/gusto/embedded_api/models/components/PaySchedule.java
   - src/main/java/com/gusto/embedded_api/models/components/PayScheduleAssignment.java
   - src/main/java/com/gusto/embedded_api/models/components/PayScheduleAssignmentBody.java
   - src/main/java/com/gusto/embedded_api/models/components/PayScheduleAssignmentBodyType.java
@@ -1462,6 +1481,8 @@ generatedFiles:
   - src/main/java/com/gusto/embedded_api/models/components/PayScheduleCreateUpdate.java
   - src/main/java/com/gusto/embedded_api/models/components/PayScheduleFrequency.java
   - src/main/java/com/gusto/embedded_api/models/components/PayScheduleFrequencyCreateUpdate.java
+  - src/main/java/com/gusto/embedded_api/models/components/PayScheduleList.java
+  - src/main/java/com/gusto/embedded_api/models/components/PayScheduleObject.java
   - src/main/java/com/gusto/embedded_api/models/components/PayScheduleType.java
   - src/main/java/com/gusto/embedded_api/models/components/PaymentConfigs.java
   - src/main/java/com/gusto/embedded_api/models/components/PaymentDirection.java
@@ -1512,6 +1533,7 @@ generatedFiles:
   - src/main/java/com/gusto/embedded_api/models/components/PrimarySignatory.java
   - src/main/java/com/gusto/embedded_api/models/components/RateType.java
   - src/main/java/com/gusto/embedded_api/models/components/RecipientType.java
+  - src/main/java/com/gusto/embedded_api/models/components/ReconcileTaxMethod.java
   - src/main/java/com/gusto/embedded_api/models/components/RecoveryCase.java
   - src/main/java/com/gusto/embedded_api/models/components/RecoveryCaseStatus.java
   - src/main/java/com/gusto/embedded_api/models/components/Rehire.java
@@ -1533,6 +1555,7 @@ generatedFiles:
   - src/main/java/com/gusto/embedded_api/models/components/SubscriptionTypes.java
   - src/main/java/com/gusto/embedded_api/models/components/SupportedBenefit.java
   - src/main/java/com/gusto/embedded_api/models/components/TaxLiabilitiesSelections.java
+  - src/main/java/com/gusto/embedded_api/models/components/TaxRefunds.java
   - src/main/java/com/gusto/embedded_api/models/components/TaxRequirement.java
   - src/main/java/com/gusto/embedded_api/models/components/TaxRequirementMetadata.java
   - src/main/java/com/gusto/embedded_api/models/components/TaxRequirementMetadataOptions.java
@@ -1700,6 +1723,9 @@ generatedFiles:
   - src/main/java/com/gusto/embedded_api/models/operations/GetCompaniesCompanyUuidReportTemplatesReportTypeRequest.java
   - src/main/java/com/gusto/embedded_api/models/operations/GetCompaniesCompanyUuidReportTemplatesReportTypeRequestBuilder.java
   - src/main/java/com/gusto/embedded_api/models/operations/GetCompaniesCompanyUuidReportTemplatesReportTypeResponse.java
+  - src/main/java/com/gusto/embedded_api/models/operations/GetCompaniesCompanyUuidSuspensionsRequest.java
+  - src/main/java/com/gusto/embedded_api/models/operations/GetCompaniesCompanyUuidSuspensionsRequestBuilder.java
+  - src/main/java/com/gusto/embedded_api/models/operations/GetCompaniesCompanyUuidSuspensionsResponse.java
   - src/main/java/com/gusto/embedded_api/models/operations/GetCompaniesCompanyUuidTimeOffPoliciesRequest.java
   - src/main/java/com/gusto/embedded_api/models/operations/GetCompaniesCompanyUuidTimeOffPoliciesRequestBuilder.java
   - src/main/java/com/gusto/embedded_api/models/operations/GetCompaniesCompanyUuidTimeOffPoliciesResponse.java
@@ -2060,6 +2086,7 @@ generatedFiles:
   - src/main/java/com/gusto/embedded_api/models/operations/Job.java
   - src/main/java/com/gusto/embedded_api/models/operations/Juneteenth.java
   - src/main/java/com/gusto/embedded_api/models/operations/LaborDay.java
+  - src/main/java/com/gusto/embedded_api/models/operations/LeavingFor.java
   - src/main/java/com/gusto/embedded_api/models/operations/LiabilitySelections.java
   - src/main/java/com/gusto/embedded_api/models/operations/LimitOption.java
   - src/main/java/com/gusto/embedded_api/models/operations/MemorialDay.java
@@ -2085,6 +2112,10 @@ generatedFiles:
   - src/main/java/com/gusto/embedded_api/models/operations/PostCompaniesCompanyUuidReportsRequestBody.java
   - src/main/java/com/gusto/embedded_api/models/operations/PostCompaniesCompanyUuidReportsRequestBuilder.java
   - src/main/java/com/gusto/embedded_api/models/operations/PostCompaniesCompanyUuidReportsResponse.java
+  - src/main/java/com/gusto/embedded_api/models/operations/PostCompaniesCompanyUuidSuspensionsRequest.java
+  - src/main/java/com/gusto/embedded_api/models/operations/PostCompaniesCompanyUuidSuspensionsRequestBody.java
+  - src/main/java/com/gusto/embedded_api/models/operations/PostCompaniesCompanyUuidSuspensionsRequestBuilder.java
+  - src/main/java/com/gusto/embedded_api/models/operations/PostCompaniesCompanyUuidSuspensionsResponse.java
   - src/main/java/com/gusto/embedded_api/models/operations/PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod.java
   - src/main/java/com/gusto/embedded_api/models/operations/PostCompaniesCompanyUuidTimeOffPoliciesRequest.java
   - src/main/java/com/gusto/embedded_api/models/operations/PostCompaniesCompanyUuidTimeOffPoliciesRequestBody.java
@@ -2197,6 +2228,7 @@ generatedFiles:
   - src/main/java/com/gusto/embedded_api/models/operations/PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder.java
   - src/main/java/com/gusto/embedded_api/models/operations/PostV1EmployeesEmployeeIdEmployeeBenefitsResponse.java
   - src/main/java/com/gusto/embedded_api/models/operations/PostV1EmployeesEmployeeIdEmployeeBenefitsType.java
+  - src/main/java/com/gusto/embedded_api/models/operations/PostV1EmployeesEmployeeIdEmployeeBenefitsValue.java
   - src/main/java/com/gusto/embedded_api/models/operations/PostV1EmployeesEmployeeIdGarnishmentsRequest.java
   - src/main/java/com/gusto/embedded_api/models/operations/PostV1EmployeesEmployeeIdGarnishmentsRequestBody.java
   - src/main/java/com/gusto/embedded_api/models/operations/PostV1EmployeesEmployeeIdGarnishmentsRequestBuilder.java
@@ -2338,6 +2370,7 @@ generatedFiles:
   - src/main/java/com/gusto/embedded_api/models/operations/PutV1CompaniesCompanyIdPayrollsRequestBody.java
   - src/main/java/com/gusto/embedded_api/models/operations/PutV1CompaniesCompanyIdPayrollsRequestBuilder.java
   - src/main/java/com/gusto/embedded_api/models/operations/PutV1CompaniesCompanyIdPayrollsResponse.java
+  - src/main/java/com/gusto/embedded_api/models/operations/PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod.java
   - src/main/java/com/gusto/embedded_api/models/operations/PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress.java
   - src/main/java/com/gusto/embedded_api/models/operations/PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest.java
   - src/main/java/com/gusto/embedded_api/models/operations/PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody.java
@@ -2542,6 +2575,8 @@ generatedFiles:
   - src/main/java/com/gusto/embedded_api/models/operations/QueryParamFrequency.java
   - src/main/java/com/gusto/embedded_api/models/operations/QueryParamInclude.java
   - src/main/java/com/gusto/embedded_api/models/operations/Questions.java
+  - src/main/java/com/gusto/embedded_api/models/operations/Reason.java
+  - src/main/java/com/gusto/embedded_api/models/operations/ReconcileTaxMethod.java
   - src/main/java/com/gusto/embedded_api/models/operations/RedebitRecoveryCaseRequest.java
   - src/main/java/com/gusto/embedded_api/models/operations/RedebitRecoveryCaseRequestBuilder.java
   - src/main/java/com/gusto/embedded_api/models/operations/RedebitRecoveryCaseResponse.java
@@ -2583,6 +2618,7 @@ generatedFiles:
   - src/main/java/com/gusto/embedded_api/utils/FormMetadata.java
   - src/main/java/com/gusto/embedded_api/utils/HTTPClient.java
   - src/main/java/com/gusto/embedded_api/utils/HTTPRequest.java
+  - src/main/java/com/gusto/embedded_api/utils/HasSecurity.java
   - src/main/java/com/gusto/embedded_api/utils/HeaderMetadata.java
   - src/main/java/com/gusto/embedded_api/utils/Helpers.java
   - src/main/java/com/gusto/embedded_api/utils/Hook.java
@@ -3272,6 +3308,8 @@ examples:
         application/json: {"email": "Maureen_Wyman@yahoo.com"}
       responses:
         "201":
+          application/json: {"uuid": "f8c653dc-0094-41fb-8670-45d6399afade", "first_name": "Bob", "last_name": "Johnson", "title": "Owner", "phone": "4239879876", "email": "olin.okuneva@denesik.us", "birthday": "2002-10-31", "is_admin": false, "has_ssn": true, "version": "49ea586f528411f5cfadfd54452b2423", "identity_verification_status": "Skipped", "home_address": {"street_1": "524 Roob Divide", "street_2": "Suite 565", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA"}}
+        "200":
           application/json: {"uuid": "f8c653dc-0094-41fb-8670-45d6399afade", "first_name": "Bob", "last_name": "Johnson", "title": "Owner", "phone": "4239879876", "email": "olin.okuneva@denesik.us", "birthday": "2002-10-31", "is_admin": false, "has_ssn": true, "version": "49ea586f528411f5cfadfd54452b2423", "identity_verification_status": "Skipped", "home_address": {"street_1": "524 Roob Divide", "street_2": "Suite 565", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA"}}
     Basic:
       parameters:
@@ -4009,7 +4047,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "2097fe08-407a-46d7-b35c-a32402a2355e", "frequency": "Twice per month", "anchor_pay_date": "2020-05-15", "anchor_end_of_pay_period": "2020-05-08", "day_1": 15, "day_2": 31, "name": "Engineering", "custom_name": "Engineering department pay schedule", "auto_pilot": false, "active": true}, {"uuid": "8fc9f556-74fa-4271-97f6-4bfbfc5a5352", "frequency": "Monthly", "anchor_pay_date": "2020-05-31", "day_1": 31, "day_2": null, "name": "Sales", "custom_name": "Sales department monthly schedule", "auto_pilot": false, "active": false}, {"uuid": "0e07d35a-af11-4123-bfcb-4dd5f2f12ee1", "frequency": "Monthly", "anchor_pay_date": "2020-05-31", "day_1": 31, "day_2": null, "name": "Staff", "custom_name": "Staff department pay schedule", "auto_pilot": true, "active": false}]
+          application/json: [{"uuid": "2097fe08-407a-46d7-b35c-a32402a2355e", "frequency": "Twice per month", "anchor_pay_date": "2020-05-15", "anchor_end_of_pay_period": "2020-05-08", "day_1": 15, "day_2": 31, "name": "Engineering", "custom_name": "Engineering department pay schedule", "auto_pilot": false, "active": true, "version": "68934a3e9455fa72420237eb05902327"}, {"uuid": "8fc9f556-74fa-4271-97f6-4bfbfc5a5352", "frequency": "Monthly", "anchor_pay_date": "2020-05-31", "day_1": 31, "day_2": null, "name": "Sales", "custom_name": "Sales department monthly schedule", "auto_pilot": false, "active": false, "version": "68934a3e9455fa72420237eb05902320"}, {"uuid": "0e07d35a-af11-4123-bfcb-4dd5f2f12ee1", "frequency": "Monthly", "anchor_pay_date": "2020-05-31", "day_1": 31, "day_2": null, "name": "Staff", "custom_name": "Staff department pay schedule", "auto_pilot": true, "active": false, "version": "68934a3e9455fa72420237eb05902323"}]
   get-v1-companies-company_id-pay_schedules-preview:
     Example:
       parameters:
@@ -4034,7 +4072,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "f2a69c38-e2f9-4e31-b5c5-4754fc60a052", "frequency": "Twice per month", "anchor_pay_date": "2020-05-15", "anchor_end_of_pay_period": "2020-05-08", "day_1": 15, "day_2": 31, "name": "Engineering", "custom_name": "A new monthly pay schedule", "auto_pilot": false, "active": true}
+          application/json: {"uuid": "f2a69c38-e2f9-4e31-b5c5-4754fc60a052", "frequency": "Twice per month", "anchor_pay_date": "2020-05-15", "anchor_end_of_pay_period": "2020-05-08", "day_1": 15, "day_2": 31, "name": "Engineering", "custom_name": "A new monthly pay schedule", "auto_pilot": false, "active": true, "version": "68934a3e9455fa72420237eb05902327"}
   put-v1-companies-company_id-pay_schedules-pay_schedule_id:
     Example:
       parameters:
@@ -5312,7 +5350,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"states": [{"state": "CA", "questions": [{"key": "filing_status", "answers": [{"value": "M", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "withholding_allowance", "answers": [{"value": "2", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "additional_withholding", "answers": [{"value": "25.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "file_new_hire_report", "answers": [{"value": "true", "valid_from": "2010-01-01", "valid_up_to": null}]}]}]}
+        application/json: {"states": [{"state": "CA", "questions": [{"key": "filing_status", "answers": [{"value": "M", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "withholding_allowance", "answers": [{"value": 2, "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "additional_withholding", "answers": [{"value": "25.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "file_new_hire_report", "answers": [{"value": true, "valid_from": "2010-01-01", "valid_up_to": null}]}]}]}
       responses:
         "200":
           application/json: [{"employee_uuid": "<id>", "state": "Minnesota", "questions": [{"label": "<value>", "description": "airbrush convalesce behind within frequent acidly sans accredit", "key": "<key>", "input_question_format": {"type": "<value>"}, "answers": []}, {"label": "<value>", "description": "fuel confusion amused ugh", "key": "<key>", "input_question_format": {"type": "<value>"}, "answers": []}]}, {"employee_uuid": "<id>", "state": "Oregon", "questions": [{"label": "<value>", "description": "ugh after regularly toe", "key": "<key>", "input_question_format": {"type": "<value>"}, "answers": [{}, {}, {}]}]}]
@@ -7071,7 +7109,7 @@ examples:
         application/json: {"regular_hours_worked": 30.25, "overtime_hours_worked": 10, "double_overtime_hours_worked": 0, "pto_hours_used": 5.5, "sick_hours_used": 0}
       responses:
         "200":
-          application/json: [{"time_off_policy_uuid": "c3a15554-f124-415d-b2c4-90b430fd8eb1", "hours": "3.2"}, {"time_off_policy_uuid": "386fc48d-52d2-4009-87b3-368f74f6b3df", "hours": "6.0"}]
+          application/json: {"hours_earned": []}
     Basic:
       parameters:
         path:
@@ -9220,5 +9258,65 @@ examples:
       responses:
         "200":
           application/json: [{"uuid": "c5fdae57-5483-4529-9aae-f0edceed92d4", "status": "rfi", "origination_bank": "JP Morgan Chase", "origination_bank_address": "1 Chase Plaza, New York, NY 10081", "recipient_name": "Gusto, Inc", "recipient_address": "525 20th Street, San Francisco, CA 94107", "recipient_account_number": "21911761", "recipient_routing_number": "5773243", "additional_notes": "Additional Notes", "bank_name": "Chase", "date_sent": "2024-06-10T00:00:00Z", "unique_tracking_code": "1trvxwxp57zf", "payment_type": "Payroll,", "payment_uuid": "payroll", "amount_sent": "1054693.52", "requested_amount": "1054693.52", "wire_in_deadline": "2024-06-21T18:00:00Z"}]
+  get-companies-company_uuid-suspensions:
+    speakeasy-default-get-companies-company-uuid-suspensions:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: [{}, {}, {}]
+  post-companies-company_uuid-suspensions:
+    Leaving to join another payroll provider:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"file_quarterly_forms": true, "file_yearly_forms": true, "reconcile_tax_method": "pay_taxes", "reason": "switching_provider", "leaving_for": "other"}
+    Company is shutting down:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"file_quarterly_forms": true, "file_yearly_forms": true, "reconcile_tax_method": "pay_taxes", "reason": "shutting_down"}
+    Basic:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"file_quarterly_forms": false, "file_yearly_forms": false, "reconcile_tax_method": "refund_taxes", "reason": "acquired"}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
+    Resource:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"file_quarterly_forms": false, "file_yearly_forms": false, "reconcile_tax_method": "refund_taxes", "reason": "switching_provider"}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
+    Nested:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"file_quarterly_forms": false, "file_yearly_forms": false, "reconcile_tax_method": "pay_taxes", "reason": "no_more_employees"}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}}]}
 examplesVersion: 1.0.0
 generatedTests: {}

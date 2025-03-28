@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * I9AuthorizationDocumentType - The document's document type
+ * I9AuthorizationDocumentType
+ * 
+ * <p>The document's document type
  */
 public enum I9AuthorizationDocumentType {
     USCIS_ALIEN_REGISTRATION_NUMBER("uscis_alien_registration_number"),

@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CustomFieldType - Input type for the custom field.
+ * CustomFieldType
+ * 
+ * <p>Input type for the custom field.
  */
 public enum CustomFieldType {
     TEXT("text"),

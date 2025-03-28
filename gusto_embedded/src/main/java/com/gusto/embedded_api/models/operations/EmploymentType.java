@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EmploymentType - Employee employment type to filter by
+ * EmploymentType
+ * 
+ * <p>Employee employment type to filter by
  */
 public enum EmploymentType {
     EXEMPT("exempt"),

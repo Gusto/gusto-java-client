@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ContractorPaymentReceipt - Example response
+ * ContractorPaymentReceipt
+ * 
+ * <p>Example response
  */
 
 public class ContractorPaymentReceipt {

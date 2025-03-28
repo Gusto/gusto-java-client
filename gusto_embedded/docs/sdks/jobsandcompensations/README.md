@@ -44,7 +44,7 @@ public class Application {
 
         PostV1JobsJobIdResponse res = sdk.jobsAndCompensations().createJob()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1JobsJobIdRequestBody.builder()
                     .title("Regional Manager")
                     .hireDate("2020-12-21")
@@ -160,7 +160,7 @@ public class Application {
         GetV1JobsJobIdResponse res = sdk.jobsAndCompensations().getJob()
                 .jobId("<id>")
                 .include(GetV1JobsJobIdQueryParamInclude.ALL_COMPENSATIONS)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.job().isPresent()) {
@@ -216,7 +216,7 @@ public class Application {
 
         PutV1JobsJobIdResponse res = sdk.jobsAndCompensations().update()
                 .jobId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1JobsJobIdRequestBody.builder()
                     .version("gr78930htutrz444kuytr3s5hgxykuveb523fwl8sir")
                     .title("Regional Manager")
@@ -276,7 +276,7 @@ public class Application {
 
         DeleteV1JobsJobIdResponse res = sdk.jobsAndCompensations().delete()
                 .jobId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -375,9 +375,7 @@ import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.FlsaStatusType;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PaymentUnit;
-import com.gusto.embedded_api.models.operations.PostV1CompensationsCompensationIdRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1CompensationsCompensationIdResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -390,7 +388,7 @@ public class Application {
 
         PostV1CompensationsCompensationIdResponse res = sdk.jobsAndCompensations().createCompensation()
                 .jobId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompensationsCompensationIdRequestBody.builder()
                     .paymentUnit(PaymentUnit.YEAR)
                     .flsaStatus(FlsaStatusType.EXEMPT)
@@ -451,7 +449,7 @@ public class Application {
 
         GetV1CompensationsCompensationIdResponse res = sdk.jobsAndCompensations().getCompensation()
                 .compensationId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.compensation().isPresent()) {
@@ -493,9 +491,7 @@ import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.FlsaStatusType;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1CompensationsCompensationIdPaymentUnit;
-import com.gusto.embedded_api.models.operations.PutV1CompensationsCompensationIdRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1CompensationsCompensationIdResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -508,7 +504,7 @@ public class Application {
 
         PutV1CompensationsCompensationIdResponse res = sdk.jobsAndCompensations().updateCompensation()
                 .compensationId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompensationsCompensationIdRequestBody.builder()
                     .version("98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872")
                     .rate("60000.00")
@@ -570,7 +566,7 @@ public class Application {
 
         DeleteV1CompensationsCompensationIdResponse res = sdk.jobsAndCompensations().deleteCompensation()
                 .compensationId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response

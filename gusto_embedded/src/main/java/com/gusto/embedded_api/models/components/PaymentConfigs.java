@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PaymentConfigs - Example response
+ * PaymentConfigs
+ * 
+ * <p>Example response
  */
 
 public class PaymentConfigs {

@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Tier - The Gusto product tier of the company (not applicable to Embedded partner managed companies).
+ * Tier
+ * 
+ * <p>The Gusto product tier of the company (not applicable to Embedded partner managed companies).
  */
 public enum Tier {
     SIMPLE("simple"),

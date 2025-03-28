@@ -41,7 +41,7 @@ public class Application {
 
         GetV1EmployeesEmployeeIdI9AuthorizationResponse res = sdk.i9Verification().getAuthorization()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.i9Authorization().isPresent()) {
@@ -100,9 +100,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.AuthorizationStatus;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -115,7 +113,7 @@ public class Application {
 
         PutV1EmployeesEmployeeIdI9AuthorizationResponse res = sdk.i9Verification().update()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeesEmployeeIdI9AuthorizationRequestBody.builder()
                     .authorizationStatus(AuthorizationStatus.CITIZEN)
                     .version("52b7c567242cb7452e89ba2bc02cb476")
@@ -174,7 +172,7 @@ public class Application {
 
         GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse res = sdk.i9Verification().getDocumentOptions()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.i9AuthorizationDocumentOptionsObject().isPresent()) {
@@ -227,7 +225,7 @@ public class Application {
 
         GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse res = sdk.i9Verification().getDocuments()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.i9AuthorizationDocumentsObject().isPresent()) {
@@ -275,9 +273,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.Documents;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
@@ -291,7 +287,7 @@ public class Application {
 
         PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse res = sdk.i9Verification().createDocuments()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody.builder()
                     .documents(List.of(
                         Documents.builder()
@@ -357,7 +353,7 @@ public class Application {
         DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse res = sdk.i9Verification().deleteDocument()
                 .employeeId("<id>")
                 .documentId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -412,7 +408,7 @@ public class Application {
         PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse res = sdk.i9Verification().employerSign()
                 .employeeId("<id>")
                 .xGustoClientIp("<value>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody.builder()
                     .signatureText("<value>")
                     .signerTitle("<value>")

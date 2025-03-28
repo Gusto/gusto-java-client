@@ -61,11 +61,13 @@ public class Signatories implements
 
     /**
      * Create a signatory
-     * Create a company signatory with complete information.
+     * 
+     * <p>Create a company signatory with complete information.
      * A signatory can legally sign forms once the identity verification process is successful.
      * The signatory should be an officer, owner, general partner or LLC member manager, plan administrator, fiduciary, or an authorized representative who is designated to sign agreements on the company's behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc. There can only be a single primary signatory in a company.
      * 
-     * scope: `signatories:manage`
+     * <p>scope: `signatories:manage`
+     * 
      * @return The call builder
      */
     public PostV1CompanySignatoriesRequestBuilder create() {
@@ -74,13 +76,15 @@ public class Signatories implements
 
     /**
      * Create a signatory
-     * Create a company signatory with complete information.
+     * 
+     * <p>Create a company signatory with complete information.
      * A signatory can legally sign forms once the identity verification process is successful.
      * The signatory should be an officer, owner, general partner or LLC member manager, plan administrator, fiduciary, or an authorized representative who is designated to sign agreements on the company's behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc. There can only be a single primary signatory in a company.
      * 
-     * scope: `signatories:manage`
+     * <p>scope: `signatories:manage`
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -92,14 +96,16 @@ public class Signatories implements
     
     /**
      * Create a signatory
-     * Create a company signatory with complete information.
+     * 
+     * <p>Create a company signatory with complete information.
      * A signatory can legally sign forms once the identity verification process is successful.
      * The signatory should be an officer, owner, general partner or LLC member manager, plan administrator, fiduciary, or an authorized representative who is designated to sign agreements on the company's behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc. There can only be a single primary signatory in a company.
      * 
-     * scope: `signatories:manage`
+     * <p>scope: `signatories:manage`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -149,6 +155,7 @@ public class Signatories implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-company-signatories", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -160,6 +167,7 @@ public class Signatories implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-company-signatories",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -169,6 +177,7 @@ public class Signatories implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-company-signatories",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -178,6 +187,7 @@ public class Signatories implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-company-signatories",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -253,9 +263,11 @@ public class Signatories implements
 
     /**
      * Get all company signatories
-     * Returns company signatories. Currently we only support a single signatory per company.
      * 
-     * scope: `signatories:read`
+     * <p>Returns company signatories. Currently we only support a single signatory per company.
+     * 
+     * <p>scope: `signatories:read`
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyUuidSignatoriesRequestBuilder list() {
@@ -264,9 +276,11 @@ public class Signatories implements
 
     /**
      * Get all company signatories
-     * Returns company signatories. Currently we only support a single signatory per company.
      * 
-     * scope: `signatories:read`
+     * <p>Returns company signatories. Currently we only support a single signatory per company.
+     * 
+     * <p>scope: `signatories:read`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -278,11 +292,13 @@ public class Signatories implements
     
     /**
      * Get all company signatories
-     * Returns company signatories. Currently we only support a single signatory per company.
      * 
-     * scope: `signatories:read`
+     * <p>Returns company signatories. Currently we only support a single signatory per company.
+     * 
+     * <p>scope: `signatories:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -317,6 +333,7 @@ public class Signatories implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-companies-company_uuid-signatories", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -328,6 +345,7 @@ public class Signatories implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_uuid-signatories",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -337,6 +355,7 @@ public class Signatories implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_uuid-signatories",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -346,6 +365,7 @@ public class Signatories implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-companies-company_uuid-signatories",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -407,7 +427,9 @@ public class Signatories implements
 
     /**
      * Invite a signatory
-     * Create a signatory with minimal information. This signatory can be invited to provide more information through the `PUT /v1/companies/{company_uuid}/signatories/{signatory_uuid}` endpoint. This will start the identity verification process and allow the signatory to be verified to sign documents.
+     * 
+     * <p>Create a signatory with minimal information. This signatory can be invited to provide more information through the `PUT /v1/companies/{company_uuid}/signatories/{signatory_uuid}` endpoint. This will start the identity verification process and allow the signatory to be verified to sign documents.
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder invite() {
@@ -416,9 +438,11 @@ public class Signatories implements
 
     /**
      * Invite a signatory
-     * Create a signatory with minimal information. This signatory can be invited to provide more information through the `PUT /v1/companies/{company_uuid}/signatories/{signatory_uuid}` endpoint. This will start the identity verification process and allow the signatory to be verified to sign documents.
+     * 
+     * <p>Create a signatory with minimal information. This signatory can be invited to provide more information through the `PUT /v1/companies/{company_uuid}/signatories/{signatory_uuid}` endpoint. This will start the identity verification process and allow the signatory to be verified to sign documents.
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -430,10 +454,12 @@ public class Signatories implements
     
     /**
      * Invite a signatory
-     * Create a signatory with minimal information. This signatory can be invited to provide more information through the `PUT /v1/companies/{company_uuid}/signatories/{signatory_uuid}` endpoint. This will start the identity verification process and allow the signatory to be verified to sign documents.
+     * 
+     * <p>Create a signatory with minimal information. This signatory can be invited to provide more information through the `PUT /v1/companies/{company_uuid}/signatories/{signatory_uuid}` endpoint. This will start the identity verification process and allow the signatory to be verified to sign documents.
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -483,6 +509,7 @@ public class Signatories implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-companies-company_uuid-signatories-invite", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -494,6 +521,7 @@ public class Signatories implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_uuid-signatories-invite",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -503,6 +531,7 @@ public class Signatories implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_uuid-signatories-invite",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -512,6 +541,7 @@ public class Signatories implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-companies-company_uuid-signatories-invite",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -531,7 +561,7 @@ public class Signatories implements
 
         PostV1CompaniesCompanyUuidSignatoriesInviteResponse _res = _resBuilder.build();
         
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "201")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 Signatory _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
@@ -587,9 +617,11 @@ public class Signatories implements
 
     /**
      * Update a signatory
-     * Update a signatory that has been either invited or created. If the signatory has been created with minimal information through the `POST /v1/companies/{company_uuid}/signatories/invite` endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
      * 
-     * scope: `signatories:write`
+     * <p>Update a signatory that has been either invited or created. If the signatory has been created with minimal information through the `POST /v1/companies/{company_uuid}/signatories/invite` endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
+     * 
+     * <p>scope: `signatories:write`
+     * 
      * @return The call builder
      */
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder update() {
@@ -598,12 +630,14 @@ public class Signatories implements
 
     /**
      * Update a signatory
-     * Update a signatory that has been either invited or created. If the signatory has been created with minimal information through the `POST /v1/companies/{company_uuid}/signatories/invite` endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
      * 
-     * scope: `signatories:write`
+     * <p>Update a signatory that has been either invited or created. If the signatory has been created with minimal information through the `POST /v1/companies/{company_uuid}/signatories/invite` endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
+     * 
+     * <p>scope: `signatories:write`
+     * 
      * @param companyUuid The UUID of the company
      * @param signatoryUuid The UUID of the signatory
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -616,13 +650,15 @@ public class Signatories implements
     
     /**
      * Update a signatory
-     * Update a signatory that has been either invited or created. If the signatory has been created with minimal information through the `POST /v1/companies/{company_uuid}/signatories/invite` endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
      * 
-     * scope: `signatories:write`
+     * <p>Update a signatory that has been either invited or created. If the signatory has been created with minimal information through the `POST /v1/companies/{company_uuid}/signatories/invite` endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
+     * 
+     * <p>scope: `signatories:write`
+     * 
      * @param companyUuid The UUID of the company
      * @param signatoryUuid The UUID of the signatory
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -674,6 +710,7 @@ public class Signatories implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-companies-company_uuid-signatories-signatory_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -685,6 +722,7 @@ public class Signatories implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_uuid-signatories-signatory_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -694,6 +732,7 @@ public class Signatories implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_uuid-signatories-signatory_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -703,6 +742,7 @@ public class Signatories implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-companies-company_uuid-signatories-signatory_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -778,9 +818,11 @@ public class Signatories implements
 
     /**
      * Delete a signatory
-     * Delete a company signatory.
      * 
-     * scope: `signatories:manage`
+     * <p>Delete a company signatory.
+     * 
+     * <p>scope: `signatories:manage`
+     * 
      * @return The call builder
      */
     public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder delete() {
@@ -789,9 +831,11 @@ public class Signatories implements
 
     /**
      * Delete a signatory
-     * Delete a company signatory.
      * 
-     * scope: `signatories:manage`
+     * <p>Delete a company signatory.
+     * 
+     * <p>scope: `signatories:manage`
+     * 
      * @param companyUuid The UUID of the company
      * @param signatoryUuid The UUID of the signatory
      * @return The response from the API call
@@ -805,12 +849,14 @@ public class Signatories implements
     
     /**
      * Delete a signatory
-     * Delete a company signatory.
      * 
-     * scope: `signatories:manage`
+     * <p>Delete a company signatory.
+     * 
+     * <p>scope: `signatories:manage`
+     * 
      * @param companyUuid The UUID of the company
      * @param signatoryUuid The UUID of the signatory
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -847,6 +893,7 @@ public class Signatories implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-companies-company_uuid-signatories-signatory_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -858,6 +905,7 @@ public class Signatories implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-companies-company_uuid-signatories-signatory_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -867,6 +915,7 @@ public class Signatories implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-companies-company_uuid-signatories-signatory_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -876,6 +925,7 @@ public class Signatories implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-companies-company_uuid-signatories-signatory_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

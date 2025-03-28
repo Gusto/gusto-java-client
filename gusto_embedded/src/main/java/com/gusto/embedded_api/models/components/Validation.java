@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Validation - [for `tax_rate`] Describes the validation required for the tax rate
+ * Validation
+ * 
+ * <p>[for `tax_rate`] Describes the validation required for the tax rate
  */
 
 public class Validation {
@@ -45,7 +47,6 @@ public class Validation {
     /**
      * [for `one_of`] The possible, unformatted tax rates for selection.
      * - e.g. ["0.0", "0.001"] representing 0% and 0.1%
-     * 
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rates")
@@ -99,7 +100,6 @@ public class Validation {
     /**
      * [for `one_of`] The possible, unformatted tax rates for selection.
      * - e.g. ["0.0", "0.001"] representing 0% and 0.1%
-     * 
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -159,7 +159,6 @@ public class Validation {
     /**
      * [for `one_of`] The possible, unformatted tax rates for selection.
      * - e.g. ["0.0", "0.001"] representing 0% and 0.1%
-     * 
      */
     public Validation withRates(List<String> rates) {
         Utils.checkNotNull(rates, "rates");
@@ -170,7 +169,6 @@ public class Validation {
     /**
      * [for `one_of`] The possible, unformatted tax rates for selection.
      * - e.g. ["0.0", "0.001"] representing 0% and 0.1%
-     * 
      */
     public Validation withRates(Optional<? extends List<String>> rates) {
         Utils.checkNotNull(rates, "rates");
@@ -274,7 +272,6 @@ public class Validation {
         /**
          * [for `one_of`] The possible, unformatted tax rates for selection.
          * - e.g. ["0.0", "0.001"] representing 0% and 0.1%
-         * 
          */
         public Builder rates(List<String> rates) {
             Utils.checkNotNull(rates, "rates");
@@ -285,7 +282,6 @@ public class Validation {
         /**
          * [for `one_of`] The possible, unformatted tax rates for selection.
          * - e.g. ["0.0", "0.001"] representing 0% and 0.1%
-         * 
          */
         public Builder rates(Optional<? extends List<String>> rates) {
             Utils.checkNotNull(rates, "rates");

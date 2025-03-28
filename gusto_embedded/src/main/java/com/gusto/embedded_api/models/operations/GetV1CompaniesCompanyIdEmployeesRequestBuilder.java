@@ -5,6 +5,7 @@
 package com.gusto.embedded_api.models.operations;
 
 import com.gusto.embedded_api.utils.Utils;
+import java.lang.Exception;
 
 public class GetV1CompaniesCompanyIdEmployeesRequestBuilder {
 

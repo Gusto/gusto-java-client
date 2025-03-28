@@ -20,7 +20,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * Payroll - Example response
+ * Payroll
+ * 
+ * <p>Example response
  */
 
 public class Payroll {

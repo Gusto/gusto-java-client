@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PaymentStatus - The status of the ACH transaction
+ * PaymentStatus
+ * 
+ * <p>The status of the ACH transaction
  */
 public enum PaymentStatus {
     UNSUBMITTED("unsubmitted"),

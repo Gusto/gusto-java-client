@@ -36,7 +36,7 @@ public class Application {
 
         GetV1ContractorDocumentsResponse res = sdk.contractorDocuments().getAll()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.documents().isPresent()) {
@@ -89,7 +89,7 @@ public class Application {
 
         GetV1ContractorDocumentResponse res = sdk.contractorDocuments().get()
                 .documentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.document().isPresent()) {
@@ -142,7 +142,7 @@ public class Application {
 
         GetV1ContractorDocumentPdfResponse res = sdk.contractorDocuments().getPdf()
                 .documentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.documentPdf().isPresent()) {
@@ -183,9 +183,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.Fields;
-import com.gusto.embedded_api.models.operations.PutV1ContractorDocumentSignRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1ContractorDocumentSignResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
@@ -200,7 +198,7 @@ public class Application {
         PutV1ContractorDocumentSignResponse res = sdk.contractorDocuments().sign()
                 .documentUuid("<id>")
                 .xGustoClientIp("<value>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1ContractorDocumentSignRequestBody.builder()
                     .fields(List.of(
                         Fields.builder()

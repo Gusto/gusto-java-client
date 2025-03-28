@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * BenefitTypeRequirements - Benefit type requirements response
+ * BenefitTypeRequirements
+ * 
+ * <p>Benefit type requirements response
  */
 
 public class BenefitTypeRequirements {

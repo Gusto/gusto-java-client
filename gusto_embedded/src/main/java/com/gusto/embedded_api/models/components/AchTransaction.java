@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * AchTransaction - Representation of an ACH transaction
+ * AchTransaction
+ * 
+ * <p>Representation of an ACH transaction
  */
 
 public class AchTransaction {

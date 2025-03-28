@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
+import java.lang.Exception;
 import java.util.Optional;
 
 public class PostV1PartnerManagedCompaniesRequestBuilder {

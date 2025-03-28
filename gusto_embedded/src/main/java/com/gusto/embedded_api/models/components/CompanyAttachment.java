@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CompanyAttachment - The company attachment
+ * CompanyAttachment
+ * 
+ * <p>The company attachment
  */
 
 public class CompanyAttachment {

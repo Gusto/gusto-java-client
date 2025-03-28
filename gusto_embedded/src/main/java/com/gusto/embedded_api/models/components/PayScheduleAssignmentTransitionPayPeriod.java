@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayScheduleAssignmentTransitionPayPeriod - Pay schedule assignment transition pay period information.
+ * PayScheduleAssignmentTransitionPayPeriod
+ * 
+ * <p>Pay schedule assignment transition pay period information.
  */
 
 public class PayScheduleAssignmentTransitionPayPeriod {

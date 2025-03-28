@@ -40,9 +40,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.OffCycleReason;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPayrollsRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPayrollsResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -55,7 +53,7 @@ public class Application {
 
         PostV1CompaniesCompanyIdPayrollsResponse res = sdk.payrolls().createOffCycle()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyIdPayrollsRequestBody.builder()
                     .offCycle(true)
                     .offCycleReason(OffCycleReason.DISMISSED_EMPLOYEE)
@@ -181,7 +179,7 @@ public class Application {
                 .companyId("<id>")
                 .page(880741L)
                 .per(832368L)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.payrollReversal().isPresent()) {
@@ -249,7 +247,7 @@ public class Application {
                 .payrollId("<id>")
                 .include(List.of(
                     GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude.TAXES))
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.payroll().isPresent()) {
@@ -295,9 +293,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.EmployeeCompensations;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdPayrollsRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdPayrollsResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
@@ -312,7 +308,7 @@ public class Application {
         PutV1CompaniesCompanyIdPayrollsResponse res = sdk.payrolls().update()
                 .companyId("<id>")
                 .payrollId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompaniesCompanyIdPayrollsRequestBody.builder()
                     .employeeCompensations(List.of(
                         EmployeeCompensations.builder()
@@ -381,7 +377,7 @@ public class Application {
                 .companyId("<id>")
                 .payrollId("<id>")
                 .async(false)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -439,7 +435,7 @@ public class Application {
         PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse res = sdk.payrolls().prepare()
                 .companyId("<id>")
                 .payrollId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.payrollPrepared().isPresent()) {
@@ -498,7 +494,7 @@ public class Application {
 
         GetV1PaymentReceiptsPayrollsPayrollUuidResponse res = sdk.payrolls().getReceipt()
                 .payrollUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.payrollReceipt().isPresent()) {
@@ -553,7 +549,7 @@ public class Application {
 
         GetV1CompaniesPayrollBlockersCompanyUuidResponse res = sdk.payrolls().getBlockers()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.payrollBlockerList().isPresent()) {
@@ -611,7 +607,7 @@ public class Application {
         PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse res = sdk.payrolls().cancel()
                 .companyId("<id>")
                 .payrollId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.payroll().isPresent()) {
@@ -667,7 +663,7 @@ public class Application {
         GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse res = sdk.payrolls().getPayStub()
                 .payrollId("<id>")
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -719,7 +715,7 @@ public class Application {
 
         GetV1EmployeesEmployeeUuidPayStubsResponse res = sdk.payrolls().getPayStubs()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeePayStubsList().isPresent()) {
@@ -760,9 +756,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse;
-import com.gusto.embedded_api.models.operations.PrintingFormat;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -775,7 +769,7 @@ public class Application {
 
         PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse res = sdk.payrolls().generatePrintableChecks()
                 .payrollUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody.builder()
                     .printingFormat(PrintingFormat.BOTTOM)
                     .build())

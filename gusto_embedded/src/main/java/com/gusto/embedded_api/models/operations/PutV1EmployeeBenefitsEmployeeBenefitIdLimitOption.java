@@ -9,12 +9,14 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption - Some benefits require additional information to determine
+ * PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption
+ * 
+ * <p>Some benefits require additional information to determine
  * their limit.
  * 
- * `Family` or `Individual`: Applicable to HSA benefit.
+ * <p>`Family` or `Individual`: Applicable to HSA benefit.
  * 
- * `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
+ * <p>`Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
  */
 public enum PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption {
     FAMILY("Family"),

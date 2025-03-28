@@ -17,7 +17,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ContractorPayment - The representation of a single contractor payment.
+ * ContractorPayment
+ * 
+ * <p>The representation of a single contractor payment.
  */
 
 public class ContractorPayment {

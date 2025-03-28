@@ -61,11 +61,13 @@ public class EmployeePaymentMethod implements
 
     /**
      * Create an employee bank account
-     * Creates an employee bank account. An employee can have multiple
+     * 
+     * <p>Creates an employee bank account. An employee can have multiple
      * bank accounts. Note that creating an employee bank account will also update
      * the employee's payment method.
      * 
-     * scope: `employee_payment_methods:write`
+     * <p>scope: `employee_payment_methods:write`
+     * 
      * @return The call builder
      */
     public PostV1EmployeesEmployeeIdBankAccountsRequestBuilder create() {
@@ -74,13 +76,15 @@ public class EmployeePaymentMethod implements
 
     /**
      * Create an employee bank account
-     * Creates an employee bank account. An employee can have multiple
+     * 
+     * <p>Creates an employee bank account. An employee can have multiple
      * bank accounts. Note that creating an employee bank account will also update
      * the employee's payment method.
      * 
-     * scope: `employee_payment_methods:write`
+     * <p>scope: `employee_payment_methods:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -92,14 +96,16 @@ public class EmployeePaymentMethod implements
     
     /**
      * Create an employee bank account
-     * Creates an employee bank account. An employee can have multiple
+     * 
+     * <p>Creates an employee bank account. An employee can have multiple
      * bank accounts. Note that creating an employee bank account will also update
      * the employee's payment method.
      * 
-     * scope: `employee_payment_methods:write`
+     * <p>scope: `employee_payment_methods:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -149,6 +155,7 @@ public class EmployeePaymentMethod implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-employees-employee_id-bank_accounts", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -160,6 +167,7 @@ public class EmployeePaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-bank_accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -169,6 +177,7 @@ public class EmployeePaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-bank_accounts",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -178,6 +187,7 @@ public class EmployeePaymentMethod implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-employees-employee_id-bank_accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -253,10 +263,12 @@ public class EmployeePaymentMethod implements
 
     /**
      * Delete an employee bank account
-     * Deletes an employee bank account. To update an employee's bank
+     * 
+     * <p>Deletes an employee bank account. To update an employee's bank
      * account details, delete the bank account first and create a new one.
      * 
-     * scope: `employee_payment_methods:write`
+     * <p>scope: `employee_payment_methods:write`
+     * 
      * @return The call builder
      */
     public DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequestBuilder deleteBankAccount() {
@@ -265,10 +277,12 @@ public class EmployeePaymentMethod implements
 
     /**
      * Delete an employee bank account
-     * Deletes an employee bank account. To update an employee's bank
+     * 
+     * <p>Deletes an employee bank account. To update an employee's bank
      * account details, delete the bank account first and create a new one.
      * 
-     * scope: `employee_payment_methods:write`
+     * <p>scope: `employee_payment_methods:write`
+     * 
      * @param employeeId The UUID of the employee
      * @param bankAccountUuid The UUID of the bank account
      * @return The response from the API call
@@ -282,13 +296,15 @@ public class EmployeePaymentMethod implements
     
     /**
      * Delete an employee bank account
-     * Deletes an employee bank account. To update an employee's bank
+     * 
+     * <p>Deletes an employee bank account. To update an employee's bank
      * account details, delete the bank account first and create a new one.
      * 
-     * scope: `employee_payment_methods:write`
+     * <p>scope: `employee_payment_methods:write`
+     * 
      * @param employeeId The UUID of the employee
      * @param bankAccountUuid The UUID of the bank account
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -325,6 +341,7 @@ public class EmployeePaymentMethod implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "delete-v1-employees-employee_id-bank_accounts-bank_account_id", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -336,6 +353,7 @@ public class EmployeePaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-employees-employee_id-bank_accounts-bank_account_id",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -345,6 +363,7 @@ public class EmployeePaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "delete-v1-employees-employee_id-bank_accounts-bank_account_id",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -354,6 +373,7 @@ public class EmployeePaymentMethod implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "delete-v1-employees-employee_id-bank_accounts-bank_account_id",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -404,9 +424,11 @@ public class EmployeePaymentMethod implements
 
     /**
      * Update an employee bank account
-     * Updates an employee bank account.
      * 
-     * scope: `employee_payment_methods:write`
+     * <p>Updates an employee bank account.
+     * 
+     * <p>scope: `employee_payment_methods:write`
+     * 
      * @return The call builder
      */
     public PutV1EmployeesEmployeeIdBankAccountsRequestBuilder updateBankAccount() {
@@ -415,12 +437,14 @@ public class EmployeePaymentMethod implements
 
     /**
      * Update an employee bank account
-     * Updates an employee bank account.
      * 
-     * scope: `employee_payment_methods:write`
+     * <p>Updates an employee bank account.
+     * 
+     * <p>scope: `employee_payment_methods:write`
+     * 
      * @param employeeId The UUID of the employee
      * @param bankAccountUuid The UUID of the bank account
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -433,13 +457,15 @@ public class EmployeePaymentMethod implements
     
     /**
      * Update an employee bank account
-     * Updates an employee bank account.
      * 
-     * scope: `employee_payment_methods:write`
+     * <p>Updates an employee bank account.
+     * 
+     * <p>scope: `employee_payment_methods:write`
+     * 
      * @param employeeId The UUID of the employee
      * @param bankAccountUuid The UUID of the bank account
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -491,6 +517,7 @@ public class EmployeePaymentMethod implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-employees-employee_id-bank_accounts", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -502,6 +529,7 @@ public class EmployeePaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-bank_accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -511,6 +539,7 @@ public class EmployeePaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-bank_accounts",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -520,6 +549,7 @@ public class EmployeePaymentMethod implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-bank_accounts",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -595,11 +625,13 @@ public class EmployeePaymentMethod implements
 
     /**
      * Get an employee's payment method
-     * Fetches an employee's payment method. An employee payment method
+     * 
+     * <p>Fetches an employee's payment method. An employee payment method
      * describes how the payment should be split across the employee's associated
      * bank accounts.
      * 
-     * scope: `employee_payment_methods:read`
+     * <p>scope: `employee_payment_methods:read`
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdPaymentMethodRequestBuilder get() {
@@ -608,11 +640,13 @@ public class EmployeePaymentMethod implements
 
     /**
      * Get an employee's payment method
-     * Fetches an employee's payment method. An employee payment method
+     * 
+     * <p>Fetches an employee's payment method. An employee payment method
      * describes how the payment should be split across the employee's associated
      * bank accounts.
      * 
-     * scope: `employee_payment_methods:read`
+     * <p>scope: `employee_payment_methods:read`
+     * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -624,13 +658,15 @@ public class EmployeePaymentMethod implements
     
     /**
      * Get an employee's payment method
-     * Fetches an employee's payment method. An employee payment method
+     * 
+     * <p>Fetches an employee's payment method. An employee payment method
      * describes how the payment should be split across the employee's associated
      * bank accounts.
      * 
-     * scope: `employee_payment_methods:read`
+     * <p>scope: `employee_payment_methods:read`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -665,6 +701,7 @@ public class EmployeePaymentMethod implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-v1-employees-employee_id-payment_method", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -676,6 +713,7 @@ public class EmployeePaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-payment_method",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -685,6 +723,7 @@ public class EmployeePaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-payment_method",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -694,6 +733,7 @@ public class EmployeePaymentMethod implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-v1-employees-employee_id-payment_method",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -755,10 +795,12 @@ public class EmployeePaymentMethod implements
 
     /**
      * Update an employee's payment method
-     * Updates an employee's payment method. Note that creating an employee
+     * 
+     * <p>Updates an employee's payment method. Note that creating an employee
      * bank account will also update the employee's payment method.
      * 
-     * scope: `employee_payment_methods:write`
+     * <p>scope: `employee_payment_methods:write`
+     * 
      * @return The call builder
      */
     public PutV1EmployeesEmployeeIdPaymentMethodRequestBuilder update() {
@@ -767,12 +809,14 @@ public class EmployeePaymentMethod implements
 
     /**
      * Update an employee's payment method
-     * Updates an employee's payment method. Note that creating an employee
+     * 
+     * <p>Updates an employee's payment method. Note that creating an employee
      * bank account will also update the employee's payment method.
      * 
-     * scope: `employee_payment_methods:write`
+     * <p>scope: `employee_payment_methods:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -784,13 +828,15 @@ public class EmployeePaymentMethod implements
     
     /**
      * Update an employee's payment method
-     * Updates an employee's payment method. Note that creating an employee
+     * 
+     * <p>Updates an employee's payment method. Note that creating an employee
      * bank account will also update the employee's payment method.
      * 
-     * scope: `employee_payment_methods:write`
+     * <p>scope: `employee_payment_methods:write`
+     * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -840,6 +886,7 @@ public class EmployeePaymentMethod implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-employees-employee_id-payment_method", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -851,6 +898,7 @@ public class EmployeePaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-payment_method",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -860,6 +908,7 @@ public class EmployeePaymentMethod implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-payment_method",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -869,6 +918,7 @@ public class EmployeePaymentMethod implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-employees-employee_id-payment_method",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

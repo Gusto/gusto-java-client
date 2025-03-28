@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TimeOffActivity - Representation of a Time Off Activity
+ * TimeOffActivity
+ * 
+ * <p>Representation of a Time Off Activity
  */
 
 public class TimeOffActivity {

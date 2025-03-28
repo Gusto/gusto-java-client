@@ -18,7 +18,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * Signatory - The representation of a company's signatory
+ * Signatory
+ * 
+ * <p>The representation of a company's signatory
  */
 
 public class Signatory {

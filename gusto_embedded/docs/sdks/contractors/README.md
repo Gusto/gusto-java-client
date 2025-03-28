@@ -29,9 +29,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidContractorsRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidContractorsResponse;
-import com.gusto.embedded_api.models.operations.WageType;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -44,7 +42,7 @@ public class Application {
 
         PostV1CompaniesCompanyUuidContractorsResponse res = sdk.contractors().create()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyUuidContractorsRequestBody.builder()
                     .wageType(WageType.FIXED)
                     .startDate("2020-04-01")
@@ -162,7 +160,7 @@ public class Application {
 
         GetV1ContractorsContractorUuidResponse res = sdk.contractors().get()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.contractor().isPresent()) {
@@ -207,9 +205,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidResponse;
-import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidWageType;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -222,7 +218,7 @@ public class Application {
 
         PutV1ContractorsContractorUuidResponse res = sdk.contractors().update()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1ContractorsContractorUuidRequestBody.builder()
                     .version("b48c46abfed1487b873b442334b3c4ff")
                     .wageType(PutV1ContractorsContractorUuidWageType.HOURLY)
@@ -287,7 +283,7 @@ public class Application {
 
         DeleteV1ContractorsContractorUuidResponse res = sdk.contractors().delete()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -369,7 +365,7 @@ public class Application {
 
         GetV1ContractorsContractorUuidOnboardingStatusResponse res = sdk.contractors().getOnboardingStatus()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.contractorOnboardingStatus().isPresent()) {
@@ -434,7 +430,7 @@ public class Application {
 
         PutV1ContractorsContractorUuidOnboardingStatusResponse res = sdk.contractors().updateOnboardingStatus()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1ContractorsContractorUuidOnboardingStatusRequestBody.builder()
                     .build())
                 .call();
@@ -491,7 +487,7 @@ public class Application {
 
         GetV1ContractorsContractorUuidAddressResponse res = sdk.contractors().getAddress()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.contractorAddress().isPresent()) {
@@ -546,7 +542,7 @@ public class Application {
 
         PutV1ContractorsContractorUuidAddressResponse res = sdk.contractors().updateAddress()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1ContractorsContractorUuidAddressRequestBody.builder()
                     .version("fe75bd065ff48b91c35fe8ff842f986c")
                     .street1("300 3rd Street")

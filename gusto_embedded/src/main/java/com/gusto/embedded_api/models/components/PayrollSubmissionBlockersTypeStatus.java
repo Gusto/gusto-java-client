@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayrollSubmissionBlockersTypeStatus - The status of the submission blocker.
+ * PayrollSubmissionBlockersTypeStatus
+ * 
+ * <p>The status of the submission blocker.
  */
 public enum PayrollSubmissionBlockersTypeStatus {
     UNRESOLVED("unresolved"),

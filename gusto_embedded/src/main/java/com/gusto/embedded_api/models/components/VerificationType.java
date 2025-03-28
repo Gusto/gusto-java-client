@@ -9,9 +9,11 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * VerificationType - The verification type of the bank account.
+ * VerificationType
  * 
- * 'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
+ * <p>The verification type of the bank account.
+ * 
+ * <p>'bank_deposits' means the bank account is connected by entering routing and accounting numbers and verifying through micro-deposits.
  * 'plaid' means the bank account is connected through Plaid.
  */
 public enum VerificationType {

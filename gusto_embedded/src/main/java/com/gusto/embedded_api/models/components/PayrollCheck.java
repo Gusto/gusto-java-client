@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayrollCheck - Example response
+ * PayrollCheck
+ * 
+ * <p>Example response
  */
 
 public class PayrollCheck {

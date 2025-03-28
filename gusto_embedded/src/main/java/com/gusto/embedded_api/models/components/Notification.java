@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Notification - Representation of a notification
+ * Notification
+ * 
+ * <p>Representation of a notification
  */
 
 public class Notification {

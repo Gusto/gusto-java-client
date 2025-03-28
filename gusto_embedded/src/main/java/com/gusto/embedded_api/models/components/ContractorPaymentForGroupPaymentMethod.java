@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ContractorPaymentForGroupPaymentMethod - The payment method.
+ * ContractorPaymentForGroupPaymentMethod
+ * 
+ * <p>The payment method.
  */
 public enum ContractorPaymentForGroupPaymentMethod {
     DIRECT_DEPOSIT("Direct Deposit"),

@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * FilingForm - The form used by the company for federal tax filing. One of:
+ * FilingForm
+ * 
+ * <p>The form used by the company for federal tax filing. One of:
  * - 941 (Quarterly federal tax return)
  * - 944 (Annual federal tax return)
  */

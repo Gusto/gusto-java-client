@@ -23,11 +23,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.Columns;
-import com.gusto.embedded_api.models.operations.FileType;
-import com.gusto.embedded_api.models.operations.Groupings;
-import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidReportsRequestBody;
-import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidReportsResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.time.LocalDate;
 import java.util.List;
@@ -42,7 +38,7 @@ public class Application {
 
         PostCompaniesCompanyUuidReportsResponse res = sdk.reports().createCustom()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostCompaniesCompanyUuidReportsRequestBody.builder()
                     .columns(List.of(
                         Columns.TOTAL_EMPLOYER_BENEFIT_CONTRIBUTIONS,
@@ -110,7 +106,7 @@ public class Application {
 
         GetReportsReportUuidResponse res = sdk.reports().get()
                 .reportUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.report().isPresent()) {
@@ -164,7 +160,7 @@ public class Application {
         GetCompaniesCompanyUuidReportTemplatesReportTypeResponse res = sdk.reports().getTemplate()
                 .companyUuid("<id>")
                 .reportType("<value>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.reportTemplate().isPresent()) {

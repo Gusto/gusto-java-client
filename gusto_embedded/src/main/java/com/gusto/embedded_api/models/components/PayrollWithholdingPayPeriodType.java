@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayrollWithholdingPayPeriodType - The payment schedule tax rate the payroll is based on. Only included for off-cycle payrolls.
+ * PayrollWithholdingPayPeriodType
+ * 
+ * <p>The payment schedule tax rate the payroll is based on. Only included for off-cycle payrolls.
  */
 public enum PayrollWithholdingPayPeriodType {
     EVERY_WEEK("Every week"),

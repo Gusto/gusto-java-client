@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ExternalPayrollBasic - The representation of an external payroll with minimal information.
+ * ExternalPayrollBasic
+ * 
+ * <p>The representation of an external payroll with minimal information.
  */
 
 public class ExternalPayrollBasic {

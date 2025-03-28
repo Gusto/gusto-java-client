@@ -43,7 +43,7 @@ public class Application {
 
         PostV1ExternalPayrollResponse res = sdk.externalPayrolls().create()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1ExternalPayrollRequestBody.builder()
                     .checkDate("2022-06-01")
                     .paymentPeriodStartDate("2022-05-15")
@@ -103,7 +103,7 @@ public class Application {
 
         GetV1CompanyExternalPayrollsResponse res = sdk.externalPayrolls().get()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.externalPayrollList().isPresent()) {
@@ -157,7 +157,7 @@ public class Application {
         GetV1ExternalPayrollResponse res = sdk.externalPayrolls().retrieve()
                 .companyUuid("<id>")
                 .externalPayrollId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.externalPayroll().isPresent()) {
@@ -212,7 +212,7 @@ public class Application {
         DeleteV1ExternalPayrollResponse res = sdk.externalPayrolls().delete()
                 .companyUuid("<id>")
                 .externalPayrollId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -252,13 +252,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.Benefits;
-import com.gusto.embedded_api.models.operations.EarningType;
-import com.gusto.embedded_api.models.operations.Earnings;
-import com.gusto.embedded_api.models.operations.ExternalPayrollItems;
-import com.gusto.embedded_api.models.operations.PutV1ExternalPayrollRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1ExternalPayrollResponse;
-import com.gusto.embedded_api.models.operations.Taxes;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
@@ -273,7 +267,7 @@ public class Application {
         PutV1ExternalPayrollResponse res = sdk.externalPayrolls().update()
                 .companyUuid("<id>")
                 .externalPayrollId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1ExternalPayrollRequestBody.builder()
                     .replaceFields(true)
                     .externalPayrollItems(List.of(
@@ -372,7 +366,7 @@ public class Application {
         GetV1ExternalPayrollCalculateTaxesResponse res = sdk.externalPayrolls().calculateTaxes()
                 .companyUuid("<id>")
                 .externalPayrollId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.externalPayrollTaxSuggestionsList().isPresent()) {
@@ -426,7 +420,7 @@ public class Application {
 
         GetV1TaxLiabilitiesResponse res = sdk.externalPayrolls().listTaxLiabilities()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.taxLiabilitiesList().isPresent()) {
@@ -467,9 +461,7 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.LiabilitySelections;
-import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 import java.util.Optional;
@@ -484,23 +476,23 @@ public class Application {
 
         PutV1TaxLiabilitiesResponse res = sdk.externalPayrolls().updateTaxLiabilities()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1TaxLiabilitiesRequestBody.builder()
                     .liabilitySelections(List.of(
                         LiabilitySelections.builder()
                             .taxId(1L)
                             .lastUnpaidExternalPayrollUuid("7985032c-ee3a-4e98-af27-d56551eb5f1c")
-                            .unpaidLiabilityAmount(50d)
+                            .unpaidLiabilityAmount(50)
                             .build(),
                         LiabilitySelections.builder()
                             .taxId(2L)
                             .lastUnpaidExternalPayrollUuid("5ed14dbb-958f-47c8-b16e-c4fed82dc486")
-                            .unpaidLiabilityAmount(400d)
+                            .unpaidLiabilityAmount(400)
                             .build(),
                         LiabilitySelections.builder()
                             .taxId(8L)
                             .lastUnpaidExternalPayrollUuid(Optional.empty())
-                            .unpaidLiabilityAmount(0d)
+                            .unpaidLiabilityAmount(0)
                             .build()))
                     .build())
                 .call();
@@ -558,7 +550,7 @@ public class Application {
 
         PutV1TaxLiabilitiesFinishResponse res = sdk.externalPayrolls().finalizeTaxLiabilities()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR0401)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response

@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ContractorPaymentWageType - The wage type for the payment.
+ * ContractorPaymentWageType
+ * 
+ * <p>The wage type for the payment.
  */
 public enum ContractorPaymentWageType {
     HOURLY("Hourly"),

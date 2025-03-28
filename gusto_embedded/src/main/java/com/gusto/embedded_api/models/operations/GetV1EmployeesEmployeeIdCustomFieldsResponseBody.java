@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * GetV1EmployeesEmployeeIdCustomFieldsResponseBody - OK
+ * GetV1EmployeesEmployeeIdCustomFieldsResponseBody
+ * 
+ * <p>OK
  */
 
 public class GetV1EmployeesEmployeeIdCustomFieldsResponseBody {

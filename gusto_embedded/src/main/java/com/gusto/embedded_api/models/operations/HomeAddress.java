@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * HomeAddress - The signatory's home address
+ * HomeAddress
+ * 
+ * <p>The signatory's home address
  */
 
 public class HomeAddress {

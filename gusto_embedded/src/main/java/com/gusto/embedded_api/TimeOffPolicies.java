@@ -5,7 +5,7 @@
 package com.gusto.embedded_api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.AccruingTimeOffHour;
+import com.gusto.embedded_api.models.components.AccruingTimeOffHourObject;
 import com.gusto.embedded_api.models.components.TimeOffPolicy;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.APIException;
@@ -81,17 +81,19 @@ public class TimeOffPolicies implements
 
     /**
      * Calculate accruing time off hours
-     * Returns a list of accruing time off for each time off policy associated with the employee.
      * 
-     * Factors affecting the accrued hours:
+     * <p>Returns a list of accruing time off for each time off policy associated with the employee.
+     * 
+     * <p>Factors affecting the accrued hours:
      *   * the time off policy accrual method (whether they get pay per hour worked, per hour paid, with / without overtime, accumulate time off based on pay period / calendar year / anniversary)
      *   * how many hours of work during this pay period
      *   * how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
      *   * company pay schedule frequency (for per pay period)
      * 
-     * If none of the parameters is passed in, the accrued time off hour will be 0.
+     * <p>If none of the parameters is passed in, the accrued time off hour will be 0.
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @return The call builder
      */
     public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder calculateAccruingTimeOffHours() {
@@ -100,20 +102,22 @@ public class TimeOffPolicies implements
 
     /**
      * Calculate accruing time off hours
-     * Returns a list of accruing time off for each time off policy associated with the employee.
      * 
-     * Factors affecting the accrued hours:
+     * <p>Returns a list of accruing time off for each time off policy associated with the employee.
+     * 
+     * <p>Factors affecting the accrued hours:
      *   * the time off policy accrual method (whether they get pay per hour worked, per hour paid, with / without overtime, accumulate time off based on pay period / calendar year / anniversary)
      *   * how many hours of work during this pay period
      *   * how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
      *   * company pay schedule frequency (for per pay period)
      * 
-     * If none of the parameters is passed in, the accrued time off hour will be 0.
+     * <p>If none of the parameters is passed in, the accrued time off hour will be 0.
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @param payrollId The UUID of the payroll
      * @param employeeId The UUID of the employee
-     * @param requestBody
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -126,21 +130,23 @@ public class TimeOffPolicies implements
     
     /**
      * Calculate accruing time off hours
-     * Returns a list of accruing time off for each time off policy associated with the employee.
      * 
-     * Factors affecting the accrued hours:
+     * <p>Returns a list of accruing time off for each time off policy associated with the employee.
+     * 
+     * <p>Factors affecting the accrued hours:
      *   * the time off policy accrual method (whether they get pay per hour worked, per hour paid, with / without overtime, accumulate time off based on pay period / calendar year / anniversary)
      *   * how many hours of work during this pay period
      *   * how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
      *   * company pay schedule frequency (for per pay period)
      * 
-     * If none of the parameters is passed in, the accrued time off hour will be 0.
+     * <p>If none of the parameters is passed in, the accrued time off hour will be 0.
      * 
-     * scope: `payrolls:read`
+     * <p>scope: `payrolls:read`
+     * 
      * @param payrollId The UUID of the payroll
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion
-     * @param requestBody
+     * @param xGustoAPIVersion 
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -192,6 +198,7 @@ public class TimeOffPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -203,6 +210,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -212,6 +220,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -221,6 +230,7 @@ public class TimeOffPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -242,9 +252,9 @@ public class TimeOffPolicies implements
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<AccruingTimeOffHour> _out = Utils.mapper().readValue(
+                AccruingTimeOffHourObject _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<AccruingTimeOffHour>>() {});
+                    new TypeReference<AccruingTimeOffHourObject>() {});
                 _res.withAccruingTimeOffHourObject(Optional.ofNullable(_out));
                 return _res;
             } else {
@@ -296,9 +306,11 @@ public class TimeOffPolicies implements
 
     /**
      * Get a time off policy
-     * Get a time off policy
      * 
-     * scope: `time_off_policies:read`
+     * <p>Get a time off policy
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
      * @return The call builder
      */
     public GetTimeOffPoliciesTimeOffPolicyUuidRequestBuilder get() {
@@ -307,9 +319,11 @@ public class TimeOffPolicies implements
 
     /**
      * Get a time off policy
-     * Get a time off policy
      * 
-     * scope: `time_off_policies:read`
+     * <p>Get a time off policy
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
      * @param timeOffPolicyUuid The UUID of the company time off policy
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -321,11 +335,13 @@ public class TimeOffPolicies implements
     
     /**
      * Get a time off policy
-     * Get a time off policy
      * 
-     * scope: `time_off_policies:read`
+     * <p>Get a time off policy
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
      * @param timeOffPolicyUuid The UUID of the company time off policy
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -360,6 +376,7 @@ public class TimeOffPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-time_off_policies-time_off_policy_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -371,6 +388,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-time_off_policies-time_off_policy_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -380,6 +398,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-time_off_policies-time_off_policy_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -389,6 +408,7 @@ public class TimeOffPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-time_off_policies-time_off_policy_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -450,9 +470,11 @@ public class TimeOffPolicies implements
 
     /**
      * Update a time off policy
-     * Update a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Update a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @return The call builder
      */
     public PutTimeOffPoliciesTimeOffPolicyUuidRequestBuilder update() {
@@ -461,9 +483,11 @@ public class TimeOffPolicies implements
 
     /**
      * Update a time off policy
-     * Update a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Update a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @param timeOffPolicyUuid The UUID of the company time off policy
      * @param requestBody Can update any attributes of the time off policy except policy_type, is_active, complete & employees
      * @return The response from the API call
@@ -477,11 +501,13 @@ public class TimeOffPolicies implements
     
     /**
      * Update a time off policy
-     * Update a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Update a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @param timeOffPolicyUuid The UUID of the company time off policy
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody Can update any attributes of the time off policy except policy_type, is_active, complete & employees
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -532,6 +558,7 @@ public class TimeOffPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-time_off_policies-time_off_policy_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -543,6 +570,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-time_off_policies-time_off_policy_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -552,6 +580,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-time_off_policies-time_off_policy_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -561,6 +590,7 @@ public class TimeOffPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-time_off_policies-time_off_policy_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -636,9 +666,11 @@ public class TimeOffPolicies implements
 
     /**
      * Get all time off policies
-     * Get all time off policies for a company
      * 
-     * scope: `time_off_policies:read`
+     * <p>Get all time off policies for a company
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
      * @return The call builder
      */
     public GetCompaniesCompanyUuidTimeOffPoliciesRequestBuilder getAll() {
@@ -647,9 +679,11 @@ public class TimeOffPolicies implements
 
     /**
      * Get all time off policies
-     * Get all time off policies for a company
      * 
-     * scope: `time_off_policies:read`
+     * <p>Get all time off policies for a company
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -661,11 +695,13 @@ public class TimeOffPolicies implements
     
     /**
      * Get all time off policies
-     * Get all time off policies for a company
      * 
-     * scope: `time_off_policies:read`
+     * <p>Get all time off policies for a company
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -700,6 +736,7 @@ public class TimeOffPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-companies-company_uuid-time_off_policies", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -711,6 +748,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-time_off_policies",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -720,6 +758,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-time_off_policies",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -729,6 +768,7 @@ public class TimeOffPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-companies-company_uuid-time_off_policies",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -790,9 +830,11 @@ public class TimeOffPolicies implements
 
     /**
      * Create a time off policy
-     * Create a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Create a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @return The call builder
      */
     public PostCompaniesCompanyUuidTimeOffPoliciesRequestBuilder create() {
@@ -801,9 +843,11 @@ public class TimeOffPolicies implements
 
     /**
      * Create a time off policy
-     * Create a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Create a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @param companyUuid The UUID of the company
      * @param requestBody Requires a policy name, a policy_type, and an accrual_method
      * @return The response from the API call
@@ -817,11 +861,13 @@ public class TimeOffPolicies implements
     
     /**
      * Create a time off policy
-     * Create a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Create a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody Requires a policy name, a policy_type, and an accrual_method
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -872,6 +918,7 @@ public class TimeOffPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "post-companies-company_uuid-time_off_policies", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -883,6 +930,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-companies-company_uuid-time_off_policies",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -892,6 +940,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "post-companies-company_uuid-time_off_policies",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -901,6 +950,7 @@ public class TimeOffPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "post-companies-company_uuid-time_off_policies",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -976,9 +1026,11 @@ public class TimeOffPolicies implements
 
     /**
      * Add employees to a time off policy
-     * Add employees to a time off policy. Employees are required to have at least one job to be added to a time off policy. Accepts starting balances for non-unlimited policies
      * 
-     * scope: `time_off_policies:write`
+     * <p>Add employees to a time off policy. Employees are required to have at least one job to be added to a time off policy. Accepts starting balances for non-unlimited policies
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @return The call builder
      */
     public PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBuilder addEmployees() {
@@ -987,9 +1039,11 @@ public class TimeOffPolicies implements
 
     /**
      * Add employees to a time off policy
-     * Add employees to a time off policy. Employees are required to have at least one job to be added to a time off policy. Accepts starting balances for non-unlimited policies
      * 
-     * scope: `time_off_policies:write`
+     * <p>Add employees to a time off policy. Employees are required to have at least one job to be added to a time off policy. Accepts starting balances for non-unlimited policies
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @param timeOffPolicyUuid The UUID of the company time off policy
      * @param requestBody A list of employee objects containing the employee uuid
      * @return The response from the API call
@@ -1003,11 +1057,13 @@ public class TimeOffPolicies implements
     
     /**
      * Add employees to a time off policy
-     * Add employees to a time off policy. Employees are required to have at least one job to be added to a time off policy. Accepts starting balances for non-unlimited policies
      * 
-     * scope: `time_off_policies:write`
+     * <p>Add employees to a time off policy. Employees are required to have at least one job to be added to a time off policy. Accepts starting balances for non-unlimited policies
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @param timeOffPolicyUuid The UUID of the company time off policy
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody A list of employee objects containing the employee uuid
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1058,6 +1114,7 @@ public class TimeOffPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-version-time_off_policies-time_off_policy_uuid-add_employees", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1069,6 +1126,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-version-time_off_policies-time_off_policy_uuid-add_employees",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1078,6 +1136,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-version-time_off_policies-time_off_policy_uuid-add_employees",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1087,6 +1146,7 @@ public class TimeOffPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-version-time_off_policies-time_off_policy_uuid-add_employees",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1162,9 +1222,11 @@ public class TimeOffPolicies implements
 
     /**
      * Remove employees from a time off policy
-     * Remove employees from a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Remove employees from a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @return The call builder
      */
     public PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBuilder removeEmployees() {
@@ -1173,9 +1235,11 @@ public class TimeOffPolicies implements
 
     /**
      * Remove employees from a time off policy
-     * Remove employees from a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Remove employees from a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @param timeOffPolicyUuid The UUID of the company time off policy
      * @param requestBody A list of employee objects containing the employee uuid
      * @return The response from the API call
@@ -1189,11 +1253,13 @@ public class TimeOffPolicies implements
     
     /**
      * Remove employees from a time off policy
-     * Remove employees from a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Remove employees from a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @param timeOffPolicyUuid The UUID of the company time off policy
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody A list of employee objects containing the employee uuid
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1244,6 +1310,7 @@ public class TimeOffPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-time_off_policies-time_off_policy_uuid-remove_employees", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1255,6 +1322,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-time_off_policies-time_off_policy_uuid-remove_employees",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1264,6 +1332,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-time_off_policies-time_off_policy_uuid-remove_employees",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1273,6 +1342,7 @@ public class TimeOffPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-time_off_policies-time_off_policy_uuid-remove_employees",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1348,9 +1418,11 @@ public class TimeOffPolicies implements
 
     /**
      * Update employee time off hour balances
-     * Updates time off hours balances for employees for a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Updates time off hours balances for employees for a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @return The call builder
      */
     public PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBuilder updateBalance() {
@@ -1359,9 +1431,11 @@ public class TimeOffPolicies implements
 
     /**
      * Update employee time off hour balances
-     * Updates time off hours balances for employees for a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Updates time off hours balances for employees for a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @param timeOffPolicyUuid The UUID of the company time off policy
      * @param requestBody A list of employee objects containing the employee uuid and time off hours balance
      * @return The response from the API call
@@ -1375,11 +1449,13 @@ public class TimeOffPolicies implements
     
     /**
      * Update employee time off hour balances
-     * Updates time off hours balances for employees for a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Updates time off hours balances for employees for a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @param timeOffPolicyUuid The UUID of the company time off policy
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @param requestBody A list of employee objects containing the employee uuid and time off hours balance
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1430,6 +1506,7 @@ public class TimeOffPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-version-time_off_policies-time_off_policy_uuid-balance", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1441,6 +1518,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-version-time_off_policies-time_off_policy_uuid-balance",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1450,6 +1528,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-version-time_off_policies-time_off_policy_uuid-balance",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1459,6 +1538,7 @@ public class TimeOffPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-version-time_off_policies-time_off_policy_uuid-balance",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -1534,9 +1614,11 @@ public class TimeOffPolicies implements
 
     /**
      * Deactivate a time off policy
-     * Deactivate a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Deactivate a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @return The call builder
      */
     public PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequestBuilder deactivate() {
@@ -1545,9 +1627,11 @@ public class TimeOffPolicies implements
 
     /**
      * Deactivate a time off policy
-     * Deactivate a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Deactivate a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @param timeOffPolicyUuid The UUID of the company time off policy
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1559,11 +1643,13 @@ public class TimeOffPolicies implements
     
     /**
      * Deactivate a time off policy
-     * Deactivate a time off policy
      * 
-     * scope: `time_off_policies:write`
+     * <p>Deactivate a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
      * @param timeOffPolicyUuid The UUID of the company time off policy
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1598,6 +1684,7 @@ public class TimeOffPolicies implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "put-v1-time_off_policies-time_off_policy_uuid-deactivate", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -1609,6 +1696,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-time_off_policies-time_off_policy_uuid-deactivate",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -1618,6 +1706,7 @@ public class TimeOffPolicies implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "put-v1-time_off_policies-time_off_policy_uuid-deactivate",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -1627,6 +1716,7 @@ public class TimeOffPolicies implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "put-v1-time_off_policies-time_off_policy_uuid-deactivate",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

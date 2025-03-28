@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ExternalPayroll - The representation of an external payroll.
+ * ExternalPayroll
+ * 
+ * <p>The representation of an external payroll.
  */
 
 public class ExternalPayroll {

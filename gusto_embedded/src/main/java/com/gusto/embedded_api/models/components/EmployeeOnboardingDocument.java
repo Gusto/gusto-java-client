@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EmployeeOnboardingDocument - Configuration for an employee onboarding documents during onboarding
+ * EmployeeOnboardingDocument
+ * 
+ * <p>Configuration for an employee onboarding documents during onboarding
  */
 
 public class EmployeeOnboardingDocument {

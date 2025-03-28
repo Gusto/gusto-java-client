@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * Resource - Information about the token resource.
+ * Resource
+ * 
+ * <p>Information about the token resource.
  */
 
 public class Resource {

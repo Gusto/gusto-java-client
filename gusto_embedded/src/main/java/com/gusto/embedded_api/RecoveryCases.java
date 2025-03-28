@@ -43,9 +43,11 @@ public class RecoveryCases implements
 
     /**
      * Get all recovery cases for a company
-     * Fetch all recovery cases for a company.
      * 
-     * scope: `recovery_cases:read`
+     * <p>Fetch all recovery cases for a company.
+     * 
+     * <p>scope: `recovery_cases:read`
+     * 
      * @return The call builder
      */
     public GetRecoveryCasesRequestBuilder get() {
@@ -54,9 +56,11 @@ public class RecoveryCases implements
 
     /**
      * Get all recovery cases for a company
-     * Fetch all recovery cases for a company.
      * 
-     * scope: `recovery_cases:read`
+     * <p>Fetch all recovery cases for a company.
+     * 
+     * <p>scope: `recovery_cases:read`
+     * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -68,11 +72,13 @@ public class RecoveryCases implements
     
     /**
      * Get all recovery cases for a company
-     * Fetch all recovery cases for a company.
      * 
-     * scope: `recovery_cases:read`
+     * <p>Fetch all recovery cases for a company.
+     * 
+     * <p>scope: `recovery_cases:read`
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -107,6 +113,7 @@ public class RecoveryCases implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "get-recovery-cases", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -118,6 +125,7 @@ public class RecoveryCases implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-recovery-cases",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -127,6 +135,7 @@ public class RecoveryCases implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "get-recovery-cases",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -136,6 +145,7 @@ public class RecoveryCases implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "get-recovery-cases",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
@@ -197,13 +207,15 @@ public class RecoveryCases implements
 
     /**
      * Initiate a redebit for a recovery case
-     * After resolving the underlying bank error, initiate a redebit for an open recovery case. This submission is asynchronous and a successful request responds with a 202 HTTP status.
      * 
-     * It may take up to four business days for the ACH debit to process; in the meantime, the status of the recovery case will be in the `initiated_redebit` state. When funds are successfully redebited, the recovery case is transitioned to the `recovered` state.
+     * <p>After resolving the underlying bank error, initiate a redebit for an open recovery case. This submission is asynchronous and a successful request responds with a 202 HTTP status.
      * 
-     * If the company has exceeded maximum redebit attempts, or if the recovery case is not in a redebitable state, the response will be 422 Unprocessable Entity.
+     * <p>It may take up to four business days for the ACH debit to process; in the meantime, the status of the recovery case will be in the `initiated_redebit` state. When funds are successfully redebited, the recovery case is transitioned to the `recovered` state.
      * 
-     * scope: `recovery_cases:write`
+     * <p>If the company has exceeded maximum redebit attempts, or if the recovery case is not in a redebitable state, the response will be 422 Unprocessable Entity.
+     * 
+     * <p>scope: `recovery_cases:write`
+     * 
      * @return The call builder
      */
     public RedebitRecoveryCaseRequestBuilder redebit() {
@@ -212,13 +224,15 @@ public class RecoveryCases implements
 
     /**
      * Initiate a redebit for a recovery case
-     * After resolving the underlying bank error, initiate a redebit for an open recovery case. This submission is asynchronous and a successful request responds with a 202 HTTP status.
      * 
-     * It may take up to four business days for the ACH debit to process; in the meantime, the status of the recovery case will be in the `initiated_redebit` state. When funds are successfully redebited, the recovery case is transitioned to the `recovered` state.
+     * <p>After resolving the underlying bank error, initiate a redebit for an open recovery case. This submission is asynchronous and a successful request responds with a 202 HTTP status.
      * 
-     * If the company has exceeded maximum redebit attempts, or if the recovery case is not in a redebitable state, the response will be 422 Unprocessable Entity.
+     * <p>It may take up to four business days for the ACH debit to process; in the meantime, the status of the recovery case will be in the `initiated_redebit` state. When funds are successfully redebited, the recovery case is transitioned to the `recovered` state.
      * 
-     * scope: `recovery_cases:write`
+     * <p>If the company has exceeded maximum redebit attempts, or if the recovery case is not in a redebitable state, the response will be 422 Unprocessable Entity.
+     * 
+     * <p>scope: `recovery_cases:write`
+     * 
      * @param recoveryCaseUuid The UUID of the recovery case
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -230,15 +244,17 @@ public class RecoveryCases implements
     
     /**
      * Initiate a redebit for a recovery case
-     * After resolving the underlying bank error, initiate a redebit for an open recovery case. This submission is asynchronous and a successful request responds with a 202 HTTP status.
      * 
-     * It may take up to four business days for the ACH debit to process; in the meantime, the status of the recovery case will be in the `initiated_redebit` state. When funds are successfully redebited, the recovery case is transitioned to the `recovered` state.
+     * <p>After resolving the underlying bank error, initiate a redebit for an open recovery case. This submission is asynchronous and a successful request responds with a 202 HTTP status.
      * 
-     * If the company has exceeded maximum redebit attempts, or if the recovery case is not in a redebitable state, the response will be 422 Unprocessable Entity.
+     * <p>It may take up to four business days for the ACH debit to process; in the meantime, the status of the recovery case will be in the `initiated_redebit` state. When funds are successfully redebited, the recovery case is transitioned to the `recovered` state.
      * 
-     * scope: `recovery_cases:write`
+     * <p>If the company has exceeded maximum redebit attempts, or if the recovery case is not in a redebitable state, the response will be 422 Unprocessable Entity.
+     * 
+     * <p>scope: `recovery_cases:write`
+     * 
      * @param recoveryCaseUuid The UUID of the recovery case
-     * @param xGustoAPIVersion
+     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -273,6 +289,7 @@ public class RecoveryCases implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "redebit-recovery-case", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
@@ -284,6 +301,7 @@ public class RecoveryCases implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "redebit-recovery-case",
                             Optional.of(List.of()),
                             _hookSecuritySource),
@@ -293,6 +311,7 @@ public class RecoveryCases implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "redebit-recovery-case",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
@@ -302,6 +321,7 @@ public class RecoveryCases implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "redebit-recovery-case",
                             Optional.of(List.of()),
                             _hookSecuritySource), 

@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayrollProcessingRequestStatus - The status of the payroll processing request
+ * PayrollProcessingRequestStatus
+ * 
+ * <p>The status of the payroll processing request
  */
 public enum PayrollProcessingRequestStatus {
     CALCULATING("calculating"),
