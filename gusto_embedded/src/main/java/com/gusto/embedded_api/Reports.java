@@ -54,7 +54,7 @@ public class Reports implements
     /**
      * Create a custom report
      * 
-     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint.
+     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint. This URL is valid for 10 minutes.
      * 
      * <p>scope: `company_reports:write`
      * 
@@ -67,7 +67,7 @@ public class Reports implements
     /**
      * Create a custom report
      * 
-     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint.
+     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint. This URL is valid for 10 minutes.
      * 
      * <p>scope: `company_reports:write`
      * 
@@ -85,7 +85,7 @@ public class Reports implements
     /**
      * Create a custom report
      * 
-     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint.
+     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint. This URL is valid for 10 minutes.
      * 
      * <p>scope: `company_reports:write`
      * 

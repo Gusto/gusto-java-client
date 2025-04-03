@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 /**
  * PrimarySignatory
  * 
@@ -42,7 +43,7 @@ public class PrimarySignatory {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("middle_initial")
-    private Optional<String> middleInitial;
+    private JsonNullable<String> middleInitial;
 
     /**
      * The company's primary signatory's last name.
@@ -76,7 +77,7 @@ public class PrimarySignatory {
     public PrimarySignatory(
             @JsonProperty("uuid") Optional<String> uuid,
             @JsonProperty("first_name") Optional<String> firstName,
-            @JsonProperty("middle_initial") Optional<String> middleInitial,
+            @JsonProperty("middle_initial") JsonNullable<String> middleInitial,
             @JsonProperty("last_name") Optional<String> lastName,
             @JsonProperty("phone") Optional<String> phone,
             @JsonProperty("email") Optional<String> email,
@@ -98,7 +99,7 @@ public class PrimarySignatory {
     }
     
     public PrimarySignatory() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -121,7 +122,7 @@ public class PrimarySignatory {
      * The company's primary signatory's middle initial.
      */
     @JsonIgnore
-    public Optional<String> middleInitial() {
+    public JsonNullable<String> middleInitial() {
         return middleInitial;
     }
 
@@ -203,14 +204,14 @@ public class PrimarySignatory {
      */
     public PrimarySignatory withMiddleInitial(String middleInitial) {
         Utils.checkNotNull(middleInitial, "middleInitial");
-        this.middleInitial = Optional.ofNullable(middleInitial);
+        this.middleInitial = JsonNullable.of(middleInitial);
         return this;
     }
 
     /**
      * The company's primary signatory's middle initial.
      */
-    public PrimarySignatory withMiddleInitial(Optional<String> middleInitial) {
+    public PrimarySignatory withMiddleInitial(JsonNullable<String> middleInitial) {
         Utils.checkNotNull(middleInitial, "middleInitial");
         this.middleInitial = middleInitial;
         return this;
@@ -337,7 +338,7 @@ public class PrimarySignatory {
  
         private Optional<String> firstName = Optional.empty();
  
-        private Optional<String> middleInitial = Optional.empty();
+        private JsonNullable<String> middleInitial = JsonNullable.undefined();
  
         private Optional<String> lastName = Optional.empty();
  
@@ -392,14 +393,14 @@ public class PrimarySignatory {
          */
         public Builder middleInitial(String middleInitial) {
             Utils.checkNotNull(middleInitial, "middleInitial");
-            this.middleInitial = Optional.ofNullable(middleInitial);
+            this.middleInitial = JsonNullable.of(middleInitial);
             return this;
         }
 
         /**
          * The company's primary signatory's middle initial.
          */
-        public Builder middleInitial(Optional<String> middleInitial) {
+        public Builder middleInitial(JsonNullable<String> middleInitial) {
             Utils.checkNotNull(middleInitial, "middleInitial");
             this.middleInitial = middleInitial;
             return this;

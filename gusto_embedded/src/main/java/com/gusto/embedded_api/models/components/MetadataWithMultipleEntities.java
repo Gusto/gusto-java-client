@@ -6,16 +6,12 @@
 package com.gusto.embedded_api.models.components;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 /**
  * MetadataWithMultipleEntities
  * 
@@ -24,25 +20,19 @@ import java.util.Optional;
 
 public class MetadataWithMultipleEntities {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("entities")
-    private Optional<? extends List<MetadataWithOneEntity>> entities;
+    private List<MetadataWithOneEntity> entities;
 
     @JsonCreator
     public MetadataWithMultipleEntities(
-            @JsonProperty("entities") Optional<? extends List<MetadataWithOneEntity>> entities) {
+            @JsonProperty("entities") List<MetadataWithOneEntity> entities) {
         Utils.checkNotNull(entities, "entities");
         this.entities = entities;
     }
-    
-    public MetadataWithMultipleEntities() {
-        this(Optional.empty());
-    }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<MetadataWithOneEntity>> entities() {
-        return (Optional<List<MetadataWithOneEntity>>) entities;
+    public List<MetadataWithOneEntity> entities() {
+        return entities;
     }
 
     public final static Builder builder() {
@@ -50,12 +40,6 @@ public class MetadataWithMultipleEntities {
     }
 
     public MetadataWithMultipleEntities withEntities(List<MetadataWithOneEntity> entities) {
-        Utils.checkNotNull(entities, "entities");
-        this.entities = Optional.ofNullable(entities);
-        return this;
-    }
-
-    public MetadataWithMultipleEntities withEntities(Optional<? extends List<MetadataWithOneEntity>> entities) {
         Utils.checkNotNull(entities, "entities");
         this.entities = entities;
         return this;
@@ -88,19 +72,13 @@ public class MetadataWithMultipleEntities {
     
     public final static class Builder {
  
-        private Optional<? extends List<MetadataWithOneEntity>> entities = Optional.empty();  
+        private List<MetadataWithOneEntity> entities;  
         
         private Builder() {
           // force use of static builder() method
         }
 
         public Builder entities(List<MetadataWithOneEntity> entities) {
-            Utils.checkNotNull(entities, "entities");
-            this.entities = Optional.ofNullable(entities);
-            return this;
-        }
-
-        public Builder entities(Optional<? extends List<MetadataWithOneEntity>> entities) {
             Utils.checkNotNull(entities, "entities");
             this.entities = entities;
             return this;

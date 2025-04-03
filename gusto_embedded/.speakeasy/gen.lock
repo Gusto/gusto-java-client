@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 5d57a1bf-31fa-4bb7-8d47-6fe0473a6fda
 management:
-  docChecksum: 040871ecd05195c4f0c000645be00a17
+  docChecksum: 0666aa5ba193f86f8a9463d0e91eb577
   docVersion: "2024-04-01"
   speakeasyVersion: 1.525.2
   generationVersion: 2.562.3
-  releaseVersion: 0.2.0
-  configChecksum: 17a3bc343749259ab86a53c9505c49bb
+  releaseVersion: 0.2.1
+  configChecksum: 46e346529881a8ba484d8b075267f9a8
   repoURL: https://github.com/Gusto/gusto-java-client.git
   repoSubDirectory: gusto_embedded
 features:
