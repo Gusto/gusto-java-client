@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 /**
  * MetadataWithOneEntity
  * 
@@ -43,19 +44,19 @@ public class MetadataWithOneEntity {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("valid_from")
-    private Optional<String> validFrom;
+    private JsonNullable<String> validFrom;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("valid_up_to")
-    private Optional<String> validUpTo;
+    private JsonNullable<String> validUpTo;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
-    private Optional<String> key;
+    private JsonNullable<String> key;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("state")
-    private Optional<String> state;
+    private JsonNullable<String> state;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties;
@@ -64,10 +65,10 @@ public class MetadataWithOneEntity {
     public MetadataWithOneEntity(
             @JsonProperty("entity_type") Optional<String> entityType,
             @JsonProperty("entity_uuid") Optional<String> entityUuid,
-            @JsonProperty("valid_from") Optional<String> validFrom,
-            @JsonProperty("valid_up_to") Optional<String> validUpTo,
-            @JsonProperty("key") Optional<String> key,
-            @JsonProperty("state") Optional<String> state) {
+            @JsonProperty("valid_from") JsonNullable<String> validFrom,
+            @JsonProperty("valid_up_to") JsonNullable<String> validUpTo,
+            @JsonProperty("key") JsonNullable<String> key,
+            @JsonProperty("state") JsonNullable<String> state) {
         Utils.checkNotNull(entityType, "entityType");
         Utils.checkNotNull(entityUuid, "entityUuid");
         Utils.checkNotNull(validFrom, "validFrom");
@@ -84,7 +85,7 @@ public class MetadataWithOneEntity {
     }
     
     public MetadataWithOneEntity() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
@@ -104,22 +105,22 @@ public class MetadataWithOneEntity {
     }
 
     @JsonIgnore
-    public Optional<String> validFrom() {
+    public JsonNullable<String> validFrom() {
         return validFrom;
     }
 
     @JsonIgnore
-    public Optional<String> validUpTo() {
+    public JsonNullable<String> validUpTo() {
         return validUpTo;
     }
 
     @JsonIgnore
-    public Optional<String> key() {
+    public JsonNullable<String> key() {
         return key;
     }
 
     @JsonIgnore
-    public Optional<String> state() {
+    public JsonNullable<String> state() {
         return state;
     }
 
@@ -170,11 +171,11 @@ public class MetadataWithOneEntity {
 
     public MetadataWithOneEntity withValidFrom(String validFrom) {
         Utils.checkNotNull(validFrom, "validFrom");
-        this.validFrom = Optional.ofNullable(validFrom);
+        this.validFrom = JsonNullable.of(validFrom);
         return this;
     }
 
-    public MetadataWithOneEntity withValidFrom(Optional<String> validFrom) {
+    public MetadataWithOneEntity withValidFrom(JsonNullable<String> validFrom) {
         Utils.checkNotNull(validFrom, "validFrom");
         this.validFrom = validFrom;
         return this;
@@ -182,11 +183,11 @@ public class MetadataWithOneEntity {
 
     public MetadataWithOneEntity withValidUpTo(String validUpTo) {
         Utils.checkNotNull(validUpTo, "validUpTo");
-        this.validUpTo = Optional.ofNullable(validUpTo);
+        this.validUpTo = JsonNullable.of(validUpTo);
         return this;
     }
 
-    public MetadataWithOneEntity withValidUpTo(Optional<String> validUpTo) {
+    public MetadataWithOneEntity withValidUpTo(JsonNullable<String> validUpTo) {
         Utils.checkNotNull(validUpTo, "validUpTo");
         this.validUpTo = validUpTo;
         return this;
@@ -194,11 +195,11 @@ public class MetadataWithOneEntity {
 
     public MetadataWithOneEntity withKey(String key) {
         Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
+        this.key = JsonNullable.of(key);
         return this;
     }
 
-    public MetadataWithOneEntity withKey(Optional<String> key) {
+    public MetadataWithOneEntity withKey(JsonNullable<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
@@ -206,11 +207,11 @@ public class MetadataWithOneEntity {
 
     public MetadataWithOneEntity withState(String state) {
         Utils.checkNotNull(state, "state");
-        this.state = Optional.ofNullable(state);
+        this.state = JsonNullable.of(state);
         return this;
     }
 
-    public MetadataWithOneEntity withState(Optional<String> state) {
+    public MetadataWithOneEntity withState(JsonNullable<String> state) {
         Utils.checkNotNull(state, "state");
         this.state = state;
         return this;
@@ -279,13 +280,13 @@ public class MetadataWithOneEntity {
  
         private Optional<String> entityUuid = Optional.empty();
  
-        private Optional<String> validFrom = Optional.empty();
+        private JsonNullable<String> validFrom = JsonNullable.undefined();
  
-        private Optional<String> validUpTo = Optional.empty();
+        private JsonNullable<String> validUpTo = JsonNullable.undefined();
  
-        private Optional<String> key = Optional.empty();
+        private JsonNullable<String> key = JsonNullable.undefined();
  
-        private Optional<String> state = Optional.empty();
+        private JsonNullable<String> state = JsonNullable.undefined();
  
         private Map<String, Object> additionalProperties = new HashMap<>();  
         
@@ -331,11 +332,11 @@ public class MetadataWithOneEntity {
 
         public Builder validFrom(String validFrom) {
             Utils.checkNotNull(validFrom, "validFrom");
-            this.validFrom = Optional.ofNullable(validFrom);
+            this.validFrom = JsonNullable.of(validFrom);
             return this;
         }
 
-        public Builder validFrom(Optional<String> validFrom) {
+        public Builder validFrom(JsonNullable<String> validFrom) {
             Utils.checkNotNull(validFrom, "validFrom");
             this.validFrom = validFrom;
             return this;
@@ -343,11 +344,11 @@ public class MetadataWithOneEntity {
 
         public Builder validUpTo(String validUpTo) {
             Utils.checkNotNull(validUpTo, "validUpTo");
-            this.validUpTo = Optional.ofNullable(validUpTo);
+            this.validUpTo = JsonNullable.of(validUpTo);
             return this;
         }
 
-        public Builder validUpTo(Optional<String> validUpTo) {
+        public Builder validUpTo(JsonNullable<String> validUpTo) {
             Utils.checkNotNull(validUpTo, "validUpTo");
             this.validUpTo = validUpTo;
             return this;
@@ -355,11 +356,11 @@ public class MetadataWithOneEntity {
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
+            this.key = JsonNullable.of(key);
             return this;
         }
 
-        public Builder key(Optional<String> key) {
+        public Builder key(JsonNullable<String> key) {
             Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
@@ -367,11 +368,11 @@ public class MetadataWithOneEntity {
 
         public Builder state(String state) {
             Utils.checkNotNull(state, "state");
-            this.state = Optional.ofNullable(state);
+            this.state = JsonNullable.of(state);
             return this;
         }
 
-        public Builder state(Optional<String> state) {
+        public Builder state(JsonNullable<String> state) {
             Utils.checkNotNull(state, "state");
             this.state = state;
             return this;
