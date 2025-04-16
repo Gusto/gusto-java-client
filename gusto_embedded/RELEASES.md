@@ -47,3 +47,11 @@ Based on:
 - Speakeasy CLI 1.525.2 (2.562.3) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [java v0.2.1] gusto_embedded
+
+## 2025-04-16 00:18:28
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.525.2 (2.562.3) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.2.2] gusto_embedded

@@ -67,6 +67,13 @@ public class Notification {
     private Optional<Boolean> actionable;
 
     /**
+     * Indicates whether a notification may block ability to run payroll. If true, we suggest that these notifications are prioritized to your end users.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("can_block_payroll")
+    private Optional<Boolean> canBlockPayroll;
+
+    /**
      * Timestamp of when the notification was published.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -95,6 +102,7 @@ public class Notification {
             @JsonProperty("message") Optional<String> message,
             @JsonProperty("category") Optional<String> category,
             @JsonProperty("actionable") Optional<Boolean> actionable,
+            @JsonProperty("can_block_payroll") Optional<Boolean> canBlockPayroll,
             @JsonProperty("published_at") Optional<String> publishedAt,
             @JsonProperty("due_at") Optional<String> dueAt,
             @JsonProperty("resources") Optional<? extends List<Resources>> resources) {
@@ -104,6 +112,7 @@ public class Notification {
         Utils.checkNotNull(message, "message");
         Utils.checkNotNull(category, "category");
         Utils.checkNotNull(actionable, "actionable");
+        Utils.checkNotNull(canBlockPayroll, "canBlockPayroll");
         Utils.checkNotNull(publishedAt, "publishedAt");
         Utils.checkNotNull(dueAt, "dueAt");
         Utils.checkNotNull(resources, "resources");
@@ -113,6 +122,7 @@ public class Notification {
         this.message = message;
         this.category = category;
         this.actionable = actionable;
+        this.canBlockPayroll = canBlockPayroll;
         this.publishedAt = publishedAt;
         this.dueAt = dueAt;
         this.resources = resources;
@@ -120,7 +130,7 @@ public class Notification {
     
     public Notification(
             String uuid) {
-        this(uuid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(uuid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -169,6 +179,14 @@ public class Notification {
     @JsonIgnore
     public Optional<Boolean> actionable() {
         return actionable;
+    }
+
+    /**
+     * Indicates whether a notification may block ability to run payroll. If true, we suggest that these notifications are prioritized to your end users.
+     */
+    @JsonIgnore
+    public Optional<Boolean> canBlockPayroll() {
+        return canBlockPayroll;
     }
 
     /**
@@ -300,6 +318,24 @@ public class Notification {
     }
 
     /**
+     * Indicates whether a notification may block ability to run payroll. If true, we suggest that these notifications are prioritized to your end users.
+     */
+    public Notification withCanBlockPayroll(boolean canBlockPayroll) {
+        Utils.checkNotNull(canBlockPayroll, "canBlockPayroll");
+        this.canBlockPayroll = Optional.ofNullable(canBlockPayroll);
+        return this;
+    }
+
+    /**
+     * Indicates whether a notification may block ability to run payroll. If true, we suggest that these notifications are prioritized to your end users.
+     */
+    public Notification withCanBlockPayroll(Optional<Boolean> canBlockPayroll) {
+        Utils.checkNotNull(canBlockPayroll, "canBlockPayroll");
+        this.canBlockPayroll = canBlockPayroll;
+        return this;
+    }
+
+    /**
      * Timestamp of when the notification was published.
      */
     public Notification withPublishedAt(String publishedAt) {
@@ -369,6 +405,7 @@ public class Notification {
             Objects.deepEquals(this.message, other.message) &&
             Objects.deepEquals(this.category, other.category) &&
             Objects.deepEquals(this.actionable, other.actionable) &&
+            Objects.deepEquals(this.canBlockPayroll, other.canBlockPayroll) &&
             Objects.deepEquals(this.publishedAt, other.publishedAt) &&
             Objects.deepEquals(this.dueAt, other.dueAt) &&
             Objects.deepEquals(this.resources, other.resources);
@@ -383,6 +420,7 @@ public class Notification {
             message,
             category,
             actionable,
+            canBlockPayroll,
             publishedAt,
             dueAt,
             resources);
@@ -397,6 +435,7 @@ public class Notification {
                 "message", message,
                 "category", category,
                 "actionable", actionable,
+                "canBlockPayroll", canBlockPayroll,
                 "publishedAt", publishedAt,
                 "dueAt", dueAt,
                 "resources", resources);
@@ -415,6 +454,8 @@ public class Notification {
         private Optional<String> category = Optional.empty();
  
         private Optional<Boolean> actionable = Optional.empty();
+ 
+        private Optional<Boolean> canBlockPayroll = Optional.empty();
  
         private Optional<String> publishedAt = Optional.empty();
  
@@ -526,6 +567,24 @@ public class Notification {
         }
 
         /**
+         * Indicates whether a notification may block ability to run payroll. If true, we suggest that these notifications are prioritized to your end users.
+         */
+        public Builder canBlockPayroll(boolean canBlockPayroll) {
+            Utils.checkNotNull(canBlockPayroll, "canBlockPayroll");
+            this.canBlockPayroll = Optional.ofNullable(canBlockPayroll);
+            return this;
+        }
+
+        /**
+         * Indicates whether a notification may block ability to run payroll. If true, we suggest that these notifications are prioritized to your end users.
+         */
+        public Builder canBlockPayroll(Optional<Boolean> canBlockPayroll) {
+            Utils.checkNotNull(canBlockPayroll, "canBlockPayroll");
+            this.canBlockPayroll = canBlockPayroll;
+            return this;
+        }
+
+        /**
          * Timestamp of when the notification was published.
          */
         public Builder publishedAt(String publishedAt) {
@@ -587,6 +646,7 @@ public class Notification {
                 message,
                 category,
                 actionable,
+                canBlockPayroll,
                 publishedAt,
                 dueAt,
                 resources);
