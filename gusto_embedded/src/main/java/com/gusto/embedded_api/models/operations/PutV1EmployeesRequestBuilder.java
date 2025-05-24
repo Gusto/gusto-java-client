@@ -4,9 +4,6 @@
 
 package com.gusto.embedded_api.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -14,33 +11,30 @@ import java.util.Optional;
 
 public class PutV1EmployeesRequestBuilder {
 
+    private Optional<String> xGustoAPIVersion = Optional.empty();
     private String employeeId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
-                            "xGustoAPIVersion",
-                            "\"2024-04-01\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
     private PutV1EmployeesRequestBody requestBody;
     private final SDKMethodInterfaces.MethodCallPutV1Employees sdk;
 
     public PutV1EmployeesRequestBuilder(SDKMethodInterfaces.MethodCallPutV1Employees sdk) {
         this.sdk = sdk;
     }
-
-    public PutV1EmployeesRequestBuilder employeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
-    }
                 
-    public PutV1EmployeesRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1EmployeesRequestBuilder xGustoAPIVersion(String xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public PutV1EmployeesRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1EmployeesRequestBuilder xGustoAPIVersion(Optional<String> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutV1EmployeesRequestBuilder employeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
         return this;
     }
 
@@ -51,18 +45,10 @@ public class PutV1EmployeesRequestBuilder {
     }
 
     public PutV1EmployeesResponse call() throws Exception {
-        if (xGustoAPIVersion == null) {
-            xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
-        }
+
         return sdk.update(
-            employeeId,
             xGustoAPIVersion,
+            employeeId,
             requestBody);
     }
-
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
-            new LazySingletonValue<>(
-                    "xGustoAPIVersion",
-                    "\"2024-04-01\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
 }

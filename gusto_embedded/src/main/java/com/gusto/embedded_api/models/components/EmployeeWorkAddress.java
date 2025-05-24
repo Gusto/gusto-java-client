@@ -18,11 +18,6 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
-/**
- * EmployeeWorkAddress
- * 
- * <p>List of employee work addresses
- */
 
 public class EmployeeWorkAddress {
 

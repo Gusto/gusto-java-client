@@ -36,7 +36,7 @@ public class PostV1EmployeesEmployeeIdWorkAddressesResponse implements Response 
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * created
      */
     private Optional<? extends EmployeeWorkAddress> employeeWorkAddress;
 
@@ -88,7 +88,7 @@ public class PostV1EmployeesEmployeeIdWorkAddressesResponse implements Response 
     }
 
     /**
-     * Example response
+     * created
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PostV1EmployeesEmployeeIdWorkAddressesResponse implements Response 
     }
 
     /**
-     * Example response
+     * created
      */
     public PostV1EmployeesEmployeeIdWorkAddressesResponse withEmployeeWorkAddress(EmployeeWorkAddress employeeWorkAddress) {
         Utils.checkNotNull(employeeWorkAddress, "employeeWorkAddress");
@@ -137,7 +137,7 @@ public class PostV1EmployeesEmployeeIdWorkAddressesResponse implements Response 
     }
 
     /**
-     * Example response
+     * created
      */
     public PostV1EmployeesEmployeeIdWorkAddressesResponse withEmployeeWorkAddress(Optional<? extends EmployeeWorkAddress> employeeWorkAddress) {
         Utils.checkNotNull(employeeWorkAddress, "employeeWorkAddress");
@@ -221,7 +221,7 @@ public class PostV1EmployeesEmployeeIdWorkAddressesResponse implements Response 
         }
 
         /**
-         * Example response
+         * created
          */
         public Builder employeeWorkAddress(EmployeeWorkAddress employeeWorkAddress) {
             Utils.checkNotNull(employeeWorkAddress, "employeeWorkAddress");
@@ -230,7 +230,7 @@ public class PostV1EmployeesEmployeeIdWorkAddressesResponse implements Response 
         }
 
         /**
-         * Example response
+         * created
          */
         public Builder employeeWorkAddress(Optional<? extends EmployeeWorkAddress> employeeWorkAddress) {
             Utils.checkNotNull(employeeWorkAddress, "employeeWorkAddress");

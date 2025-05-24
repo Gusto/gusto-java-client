@@ -17,7 +17,6 @@ public enum WireInRequestStatus {
     AWAITING_FUNDS("awaiting_funds"),
     PENDING_REVIEW("pending_review"),
     APPROVED("approved"),
-    RFI("rfi"),
     CANCELED("canceled");
 
     @JsonValue

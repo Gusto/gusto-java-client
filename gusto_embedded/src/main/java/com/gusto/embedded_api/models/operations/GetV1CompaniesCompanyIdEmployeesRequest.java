@@ -7,7 +7,6 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -23,16 +22,22 @@ import java.util.Optional;
 public class GetV1CompaniesCompanyIdEmployeesRequest {
 
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
     private String companyId;
 
     /**
-     * Filters employees by the provided boolean
+     * A string to search for in the object's names
      */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=terminated")
-    private Optional<Boolean> terminated;
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=search_term")
+    private Optional<String> searchTerm;
 
     /**
      * Include the requested attribute(s) in each employee response, multiple options are comma separated. Available options:
@@ -41,6 +46,12 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=include")
     private Optional<? extends List<Include>> include;
+
+    /**
+     * Filters employees by the provided boolean
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=terminated")
+    private Optional<Boolean> terminated;
 
     /**
      * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
@@ -54,46 +65,43 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=per")
     private Optional<Long> per;
 
-    /**
-     * A string to search for in the object's names
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=search_term")
-    private Optional<String> searchTerm;
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
-
     @JsonCreator
     public GetV1CompaniesCompanyIdEmployeesRequest(
+            Optional<? extends GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyId,
-            Optional<Boolean> terminated,
-            Optional<? extends List<Include>> include,
-            Optional<Long> page,
-            Optional<Long> per,
             Optional<String> searchTerm,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends List<Include>> include,
+            Optional<Boolean> terminated,
+            Optional<Long> page,
+            Optional<Long> per) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyId, "companyId");
-        Utils.checkNotNull(terminated, "terminated");
+        Utils.checkNotNull(searchTerm, "searchTerm");
         Utils.checkNotNull(include, "include");
+        Utils.checkNotNull(terminated, "terminated");
         Utils.checkNotNull(page, "page");
         Utils.checkNotNull(per, "per");
-        Utils.checkNotNull(searchTerm, "searchTerm");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyId = companyId;
-        this.terminated = terminated;
+        this.searchTerm = searchTerm;
         this.include = include;
+        this.terminated = terminated;
         this.page = page;
         this.per = per;
-        this.searchTerm = searchTerm;
-        this.xGustoAPIVersion = xGustoAPIVersion;
     }
     
     public GetV1CompaniesCompanyIdEmployeesRequest(
             String companyId) {
-        this(companyId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), companyId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -105,11 +113,11 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
     }
 
     /**
-     * Filters employees by the provided boolean
+     * A string to search for in the object's names
      */
     @JsonIgnore
-    public Optional<Boolean> terminated() {
-        return terminated;
+    public Optional<String> searchTerm() {
+        return searchTerm;
     }
 
     /**
@@ -121,6 +129,14 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
     @JsonIgnore
     public Optional<List<Include>> include() {
         return (Optional<List<Include>>) include;
+    }
+
+    /**
+     * Filters employees by the provided boolean
+     */
+    @JsonIgnore
+    public Optional<Boolean> terminated() {
+        return terminated;
     }
 
     /**
@@ -139,25 +155,26 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
         return per;
     }
 
-    /**
-     * A string to search for in the object's names
-     */
-    @JsonIgnore
-    public Optional<String> searchTerm() {
-        return searchTerm;
+    public final static Builder builder() {
+        return new Builder();
     }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public GetV1CompaniesCompanyIdEmployeesRequest withXGustoAPIVersion(GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        return this;
     }
 
-    public final static Builder builder() {
-        return new Builder();
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public GetV1CompaniesCompanyIdEmployeesRequest withXGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     /**
@@ -170,20 +187,20 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
     }
 
     /**
-     * Filters employees by the provided boolean
+     * A string to search for in the object's names
      */
-    public GetV1CompaniesCompanyIdEmployeesRequest withTerminated(boolean terminated) {
-        Utils.checkNotNull(terminated, "terminated");
-        this.terminated = Optional.ofNullable(terminated);
+    public GetV1CompaniesCompanyIdEmployeesRequest withSearchTerm(String searchTerm) {
+        Utils.checkNotNull(searchTerm, "searchTerm");
+        this.searchTerm = Optional.ofNullable(searchTerm);
         return this;
     }
 
     /**
-     * Filters employees by the provided boolean
+     * A string to search for in the object's names
      */
-    public GetV1CompaniesCompanyIdEmployeesRequest withTerminated(Optional<Boolean> terminated) {
-        Utils.checkNotNull(terminated, "terminated");
-        this.terminated = terminated;
+    public GetV1CompaniesCompanyIdEmployeesRequest withSearchTerm(Optional<String> searchTerm) {
+        Utils.checkNotNull(searchTerm, "searchTerm");
+        this.searchTerm = searchTerm;
         return this;
     }
 
@@ -206,6 +223,24 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
     public GetV1CompaniesCompanyIdEmployeesRequest withInclude(Optional<? extends List<Include>> include) {
         Utils.checkNotNull(include, "include");
         this.include = include;
+        return this;
+    }
+
+    /**
+     * Filters employees by the provided boolean
+     */
+    public GetV1CompaniesCompanyIdEmployeesRequest withTerminated(boolean terminated) {
+        Utils.checkNotNull(terminated, "terminated");
+        this.terminated = Optional.ofNullable(terminated);
+        return this;
+    }
+
+    /**
+     * Filters employees by the provided boolean
+     */
+    public GetV1CompaniesCompanyIdEmployeesRequest withTerminated(Optional<Boolean> terminated) {
+        Utils.checkNotNull(terminated, "terminated");
+        this.terminated = terminated;
         return this;
     }
 
@@ -244,42 +279,6 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
         this.per = per;
         return this;
     }
-
-    /**
-     * A string to search for in the object's names
-     */
-    public GetV1CompaniesCompanyIdEmployeesRequest withSearchTerm(String searchTerm) {
-        Utils.checkNotNull(searchTerm, "searchTerm");
-        this.searchTerm = Optional.ofNullable(searchTerm);
-        return this;
-    }
-
-    /**
-     * A string to search for in the object's names
-     */
-    public GetV1CompaniesCompanyIdEmployeesRequest withSearchTerm(Optional<String> searchTerm) {
-        Utils.checkNotNull(searchTerm, "searchTerm");
-        this.searchTerm = searchTerm;
-        return this;
-    }
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public GetV1CompaniesCompanyIdEmployeesRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-        return this;
-    }
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public GetV1CompaniesCompanyIdEmployeesRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -291,57 +290,75 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
         }
         GetV1CompaniesCompanyIdEmployeesRequest other = (GetV1CompaniesCompanyIdEmployeesRequest) o;
         return 
+            Objects.deepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Objects.deepEquals(this.companyId, other.companyId) &&
-            Objects.deepEquals(this.terminated, other.terminated) &&
-            Objects.deepEquals(this.include, other.include) &&
-            Objects.deepEquals(this.page, other.page) &&
-            Objects.deepEquals(this.per, other.per) &&
             Objects.deepEquals(this.searchTerm, other.searchTerm) &&
-            Objects.deepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Objects.deepEquals(this.include, other.include) &&
+            Objects.deepEquals(this.terminated, other.terminated) &&
+            Objects.deepEquals(this.page, other.page) &&
+            Objects.deepEquals(this.per, other.per);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
+            xGustoAPIVersion,
             companyId,
-            terminated,
-            include,
-            page,
-            per,
             searchTerm,
-            xGustoAPIVersion);
+            include,
+            terminated,
+            page,
+            per);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1CompaniesCompanyIdEmployeesRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyId", companyId,
-                "terminated", terminated,
-                "include", include,
-                "page", page,
-                "per", per,
                 "searchTerm", searchTerm,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "include", include,
+                "terminated", terminated,
+                "page", page,
+                "per", per);
     }
     
     public final static class Builder {
  
+        private Optional<? extends GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion;
+ 
         private String companyId;
- 
-        private Optional<Boolean> terminated = Optional.empty();
- 
-        private Optional<? extends List<Include>> include = Optional.empty();
- 
-        private Optional<Long> page = Optional.empty();
- 
-        private Optional<Long> per = Optional.empty();
  
         private Optional<String> searchTerm = Optional.empty();
  
-        private Optional<? extends VersionHeader> xGustoAPIVersion;  
+        private Optional<? extends List<Include>> include = Optional.empty();
+ 
+        private Optional<Boolean> terminated = Optional.empty();
+ 
+        private Optional<Long> page = Optional.empty();
+ 
+        private Optional<Long> per = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
         /**
@@ -354,20 +371,20 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
         }
 
         /**
-         * Filters employees by the provided boolean
+         * A string to search for in the object's names
          */
-        public Builder terminated(boolean terminated) {
-            Utils.checkNotNull(terminated, "terminated");
-            this.terminated = Optional.ofNullable(terminated);
+        public Builder searchTerm(String searchTerm) {
+            Utils.checkNotNull(searchTerm, "searchTerm");
+            this.searchTerm = Optional.ofNullable(searchTerm);
             return this;
         }
 
         /**
-         * Filters employees by the provided boolean
+         * A string to search for in the object's names
          */
-        public Builder terminated(Optional<Boolean> terminated) {
-            Utils.checkNotNull(terminated, "terminated");
-            this.terminated = terminated;
+        public Builder searchTerm(Optional<String> searchTerm) {
+            Utils.checkNotNull(searchTerm, "searchTerm");
+            this.searchTerm = searchTerm;
             return this;
         }
 
@@ -390,6 +407,24 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
         public Builder include(Optional<? extends List<Include>> include) {
             Utils.checkNotNull(include, "include");
             this.include = include;
+            return this;
+        }
+
+        /**
+         * Filters employees by the provided boolean
+         */
+        public Builder terminated(boolean terminated) {
+            Utils.checkNotNull(terminated, "terminated");
+            this.terminated = Optional.ofNullable(terminated);
+            return this;
+        }
+
+        /**
+         * Filters employees by the provided boolean
+         */
+        public Builder terminated(Optional<Boolean> terminated) {
+            Utils.checkNotNull(terminated, "terminated");
+            this.terminated = terminated;
             return this;
         }
 
@@ -428,61 +463,25 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
             this.per = per;
             return this;
         }
-
-        /**
-         * A string to search for in the object's names
-         */
-        public Builder searchTerm(String searchTerm) {
-            Utils.checkNotNull(searchTerm, "searchTerm");
-            this.searchTerm = Optional.ofNullable(searchTerm);
-            return this;
-        }
-
-        /**
-         * A string to search for in the object's names
-         */
-        public Builder searchTerm(Optional<String> searchTerm) {
-            Utils.checkNotNull(searchTerm, "searchTerm");
-            this.searchTerm = searchTerm;
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
         
         public GetV1CompaniesCompanyIdEmployeesRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }            return new GetV1CompaniesCompanyIdEmployeesRequest(
+                xGustoAPIVersion,
                 companyId,
-                terminated,
-                include,
-                page,
-                per,
                 searchTerm,
-                xGustoAPIVersion);
+                include,
+                terminated,
+                page,
+                per);
         }
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2024-04-01\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion>>() {});
     }
 }
 

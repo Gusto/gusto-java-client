@@ -5,7 +5,6 @@
 package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Exception;
@@ -15,10 +14,10 @@ import java.util.Optional;
 public class GetV1WorkAddressesWorkAddressUuidRequestBuilder {
 
     private String workAddressUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2024-04-01\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>>() {});
     private final SDKMethodInterfaces.MethodCallGetV1WorkAddressesWorkAddressUuid sdk;
 
     public GetV1WorkAddressesWorkAddressUuidRequestBuilder(SDKMethodInterfaces.MethodCallGetV1WorkAddressesWorkAddressUuid sdk) {
@@ -31,13 +30,13 @@ public class GetV1WorkAddressesWorkAddressUuidRequestBuilder {
         return this;
     }
                 
-    public GetV1WorkAddressesWorkAddressUuidRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public GetV1WorkAddressesWorkAddressUuidRequestBuilder xGustoAPIVersion(GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public GetV1WorkAddressesWorkAddressUuidRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1WorkAddressesWorkAddressUuidRequestBuilder xGustoAPIVersion(Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -52,9 +51,9 @@ public class GetV1WorkAddressesWorkAddressUuidRequestBuilder {
             xGustoAPIVersion);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2024-04-01\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>>() {});
 }

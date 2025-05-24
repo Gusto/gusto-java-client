@@ -36,7 +36,7 @@ public class GetV1WorkAddressesWorkAddressUuidResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * successful
      */
     private Optional<? extends EmployeeWorkAddress> employeeWorkAddress;
 
@@ -88,7 +88,7 @@ public class GetV1WorkAddressesWorkAddressUuidResponse implements Response {
     }
 
     /**
-     * Example response
+     * successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1WorkAddressesWorkAddressUuidResponse implements Response {
     }
 
     /**
-     * Example response
+     * successful
      */
     public GetV1WorkAddressesWorkAddressUuidResponse withEmployeeWorkAddress(EmployeeWorkAddress employeeWorkAddress) {
         Utils.checkNotNull(employeeWorkAddress, "employeeWorkAddress");
@@ -137,7 +137,7 @@ public class GetV1WorkAddressesWorkAddressUuidResponse implements Response {
     }
 
     /**
-     * Example response
+     * successful
      */
     public GetV1WorkAddressesWorkAddressUuidResponse withEmployeeWorkAddress(Optional<? extends EmployeeWorkAddress> employeeWorkAddress) {
         Utils.checkNotNull(employeeWorkAddress, "employeeWorkAddress");
@@ -221,7 +221,7 @@ public class GetV1WorkAddressesWorkAddressUuidResponse implements Response {
         }
 
         /**
-         * Example response
+         * successful
          */
         public Builder employeeWorkAddress(EmployeeWorkAddress employeeWorkAddress) {
             Utils.checkNotNull(employeeWorkAddress, "employeeWorkAddress");
@@ -230,7 +230,7 @@ public class GetV1WorkAddressesWorkAddressUuidResponse implements Response {
         }
 
         /**
-         * Example response
+         * successful
          */
         public Builder employeeWorkAddress(Optional<? extends EmployeeWorkAddress> employeeWorkAddress) {
             Utils.checkNotNull(employeeWorkAddress, "employeeWorkAddress");

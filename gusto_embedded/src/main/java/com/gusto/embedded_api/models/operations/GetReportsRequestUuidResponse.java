@@ -18,7 +18,7 @@ import java.net.http.HttpResponse;
 import java.util.Objects;
 import java.util.Optional;
 
-public class GetReportsReportUuidResponse implements Response {
+public class GetReportsRequestUuidResponse implements Response {
 
     /**
      * HTTP response content type for this operation
@@ -41,7 +41,7 @@ public class GetReportsReportUuidResponse implements Response {
     private Optional<? extends Report> report;
 
     @JsonCreator
-    public GetReportsReportUuidResponse(
+    public GetReportsRequestUuidResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
@@ -56,7 +56,7 @@ public class GetReportsReportUuidResponse implements Response {
         this.report = report;
     }
     
-    public GetReportsReportUuidResponse(
+    public GetReportsRequestUuidResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse) {
@@ -103,7 +103,7 @@ public class GetReportsReportUuidResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
-    public GetReportsReportUuidResponse withContentType(String contentType) {
+    public GetReportsRequestUuidResponse withContentType(String contentType) {
         Utils.checkNotNull(contentType, "contentType");
         this.contentType = contentType;
         return this;
@@ -112,7 +112,7 @@ public class GetReportsReportUuidResponse implements Response {
     /**
      * HTTP response status code for this operation
      */
-    public GetReportsReportUuidResponse withStatusCode(int statusCode) {
+    public GetReportsRequestUuidResponse withStatusCode(int statusCode) {
         Utils.checkNotNull(statusCode, "statusCode");
         this.statusCode = statusCode;
         return this;
@@ -121,7 +121,7 @@ public class GetReportsReportUuidResponse implements Response {
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
-    public GetReportsReportUuidResponse withRawResponse(HttpResponse<InputStream> rawResponse) {
+    public GetReportsRequestUuidResponse withRawResponse(HttpResponse<InputStream> rawResponse) {
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.rawResponse = rawResponse;
         return this;
@@ -130,7 +130,7 @@ public class GetReportsReportUuidResponse implements Response {
     /**
      * Example response
      */
-    public GetReportsReportUuidResponse withReport(Report report) {
+    public GetReportsRequestUuidResponse withReport(Report report) {
         Utils.checkNotNull(report, "report");
         this.report = Optional.ofNullable(report);
         return this;
@@ -139,7 +139,7 @@ public class GetReportsReportUuidResponse implements Response {
     /**
      * Example response
      */
-    public GetReportsReportUuidResponse withReport(Optional<? extends Report> report) {
+    public GetReportsRequestUuidResponse withReport(Optional<? extends Report> report) {
         Utils.checkNotNull(report, "report");
         this.report = report;
         return this;
@@ -153,7 +153,7 @@ public class GetReportsReportUuidResponse implements Response {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        GetReportsReportUuidResponse other = (GetReportsReportUuidResponse) o;
+        GetReportsRequestUuidResponse other = (GetReportsRequestUuidResponse) o;
         return 
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
@@ -172,7 +172,7 @@ public class GetReportsReportUuidResponse implements Response {
     
     @Override
     public String toString() {
-        return Utils.toString(GetReportsReportUuidResponse.class,
+        return Utils.toString(GetReportsRequestUuidResponse.class,
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
@@ -238,8 +238,8 @@ public class GetReportsReportUuidResponse implements Response {
             return this;
         }
         
-        public GetReportsReportUuidResponse build() {
-            return new GetReportsReportUuidResponse(
+        public GetReportsRequestUuidResponse build() {
+            return new GetReportsRequestUuidResponse(
                 contentType,
                 statusCode,
                 rawResponse,

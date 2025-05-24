@@ -19,6 +19,12 @@ import java.util.Optional;
 public class PutV1WorkAddressesWorkAddressUuidRequestBody {
 
     /**
+     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+     */
+    @JsonProperty("version")
+    private String version;
+
+    /**
      * Reference to a company location
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -29,28 +35,30 @@ public class PutV1WorkAddressesWorkAddressUuidRequestBody {
     @JsonProperty("effective_date")
     private Optional<LocalDate> effectiveDate;
 
-    /**
-     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-     */
-    @JsonProperty("version")
-    private String version;
-
     @JsonCreator
     public PutV1WorkAddressesWorkAddressUuidRequestBody(
+            @JsonProperty("version") String version,
             @JsonProperty("location_uuid") Optional<String> locationUuid,
-            @JsonProperty("effective_date") Optional<LocalDate> effectiveDate,
-            @JsonProperty("version") String version) {
+            @JsonProperty("effective_date") Optional<LocalDate> effectiveDate) {
+        Utils.checkNotNull(version, "version");
         Utils.checkNotNull(locationUuid, "locationUuid");
         Utils.checkNotNull(effectiveDate, "effectiveDate");
-        Utils.checkNotNull(version, "version");
+        this.version = version;
         this.locationUuid = locationUuid;
         this.effectiveDate = effectiveDate;
-        this.version = version;
     }
     
     public PutV1WorkAddressesWorkAddressUuidRequestBody(
             String version) {
-        this(Optional.empty(), Optional.empty(), version);
+        this(version, Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+     */
+    @JsonIgnore
+    public String version() {
+        return version;
     }
 
     /**
@@ -66,16 +74,17 @@ public class PutV1WorkAddressesWorkAddressUuidRequestBody {
         return effectiveDate;
     }
 
-    /**
-     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-     */
-    @JsonIgnore
-    public String version() {
-        return version;
-    }
-
     public final static Builder builder() {
         return new Builder();
+    }
+
+    /**
+     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+     */
+    public PutV1WorkAddressesWorkAddressUuidRequestBody withVersion(String version) {
+        Utils.checkNotNull(version, "version");
+        this.version = version;
+        return this;
     }
 
     /**
@@ -107,15 +116,6 @@ public class PutV1WorkAddressesWorkAddressUuidRequestBody {
         this.effectiveDate = effectiveDate;
         return this;
     }
-
-    /**
-     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-     */
-    public PutV1WorkAddressesWorkAddressUuidRequestBody withVersion(String version) {
-        Utils.checkNotNull(version, "version");
-        this.version = version;
-        return this;
-    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -127,37 +127,46 @@ public class PutV1WorkAddressesWorkAddressUuidRequestBody {
         }
         PutV1WorkAddressesWorkAddressUuidRequestBody other = (PutV1WorkAddressesWorkAddressUuidRequestBody) o;
         return 
+            Objects.deepEquals(this.version, other.version) &&
             Objects.deepEquals(this.locationUuid, other.locationUuid) &&
-            Objects.deepEquals(this.effectiveDate, other.effectiveDate) &&
-            Objects.deepEquals(this.version, other.version);
+            Objects.deepEquals(this.effectiveDate, other.effectiveDate);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
+            version,
             locationUuid,
-            effectiveDate,
-            version);
+            effectiveDate);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1WorkAddressesWorkAddressUuidRequestBody.class,
+                "version", version,
                 "locationUuid", locationUuid,
-                "effectiveDate", effectiveDate,
-                "version", version);
+                "effectiveDate", effectiveDate);
     }
     
     public final static class Builder {
  
+        private String version;
+ 
         private Optional<String> locationUuid = Optional.empty();
  
-        private Optional<LocalDate> effectiveDate = Optional.empty();
- 
-        private String version;  
+        private Optional<LocalDate> effectiveDate = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
+        }
+
+        /**
+         * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+         */
+        public Builder version(String version) {
+            Utils.checkNotNull(version, "version");
+            this.version = version;
+            return this;
         }
 
         /**
@@ -189,21 +198,12 @@ public class PutV1WorkAddressesWorkAddressUuidRequestBody {
             this.effectiveDate = effectiveDate;
             return this;
         }
-
-        /**
-         * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-         */
-        public Builder version(String version) {
-            Utils.checkNotNull(version, "version");
-            this.version = version;
-            return this;
-        }
         
         public PutV1WorkAddressesWorkAddressUuidRequestBody build() {
             return new PutV1WorkAddressesWorkAddressUuidRequestBody(
+                version,
                 locationUuid,
-                effectiveDate,
-                version);
+                effectiveDate);
         }
     }
 }

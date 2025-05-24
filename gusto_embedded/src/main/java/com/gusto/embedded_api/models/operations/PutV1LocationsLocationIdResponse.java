@@ -36,7 +36,7 @@ public class PutV1LocationsLocationIdResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * successful
      */
     private Optional<? extends Location> location;
 
@@ -88,7 +88,7 @@ public class PutV1LocationsLocationIdResponse implements Response {
     }
 
     /**
-     * Example response
+     * successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PutV1LocationsLocationIdResponse implements Response {
     }
 
     /**
-     * Example response
+     * successful
      */
     public PutV1LocationsLocationIdResponse withLocation(Location location) {
         Utils.checkNotNull(location, "location");
@@ -137,7 +137,7 @@ public class PutV1LocationsLocationIdResponse implements Response {
     }
 
     /**
-     * Example response
+     * successful
      */
     public PutV1LocationsLocationIdResponse withLocation(Optional<? extends Location> location) {
         Utils.checkNotNull(location, "location");
@@ -221,7 +221,7 @@ public class PutV1LocationsLocationIdResponse implements Response {
         }
 
         /**
-         * Example response
+         * successful
          */
         public Builder location(Location location) {
             Utils.checkNotNull(location, "location");
@@ -230,7 +230,7 @@ public class PutV1LocationsLocationIdResponse implements Response {
         }
 
         /**
-         * Example response
+         * successful
          */
         public Builder location(Optional<? extends Location> location) {
             Utils.checkNotNull(location, "location");

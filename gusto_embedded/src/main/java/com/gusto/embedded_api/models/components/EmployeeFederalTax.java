@@ -94,10 +94,12 @@ public class EmployeeFederalTax {
 
     /**
      * *does not apply to rev_2020_w4 form*
+     * 
+     * <p>An additional withholding dollar amount
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("additional_withholding")
-    private Optional<Boolean> additionalWithholding;
+    private Optional<String> additionalWithholding;
 
     @JsonCreator
     public EmployeeFederalTax(
@@ -110,7 +112,7 @@ public class EmployeeFederalTax {
             @JsonProperty("deductions") Optional<String> deductions,
             @JsonProperty("w4_data_type") W4DataType w4DataType,
             @JsonProperty("federal_withholding_allowance") Optional<Double> federalWithholdingAllowance,
-            @JsonProperty("additional_withholding") Optional<Boolean> additionalWithholding) {
+            @JsonProperty("additional_withholding") Optional<String> additionalWithholding) {
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(filingStatus, "filingStatus");
         Utils.checkNotNull(extraWithholding, "extraWithholding");
@@ -220,9 +222,11 @@ public class EmployeeFederalTax {
 
     /**
      * *does not apply to rev_2020_w4 form*
+     * 
+     * <p>An additional withholding dollar amount
      */
     @JsonIgnore
-    public Optional<Boolean> additionalWithholding() {
+    public Optional<String> additionalWithholding() {
         return additionalWithholding;
     }
 
@@ -390,8 +394,10 @@ public class EmployeeFederalTax {
 
     /**
      * *does not apply to rev_2020_w4 form*
+     * 
+     * <p>An additional withholding dollar amount
      */
-    public EmployeeFederalTax withAdditionalWithholding(boolean additionalWithholding) {
+    public EmployeeFederalTax withAdditionalWithholding(String additionalWithholding) {
         Utils.checkNotNull(additionalWithholding, "additionalWithholding");
         this.additionalWithholding = Optional.ofNullable(additionalWithholding);
         return this;
@@ -399,8 +405,10 @@ public class EmployeeFederalTax {
 
     /**
      * *does not apply to rev_2020_w4 form*
+     * 
+     * <p>An additional withholding dollar amount
      */
-    public EmployeeFederalTax withAdditionalWithholding(Optional<Boolean> additionalWithholding) {
+    public EmployeeFederalTax withAdditionalWithholding(Optional<String> additionalWithholding) {
         Utils.checkNotNull(additionalWithholding, "additionalWithholding");
         this.additionalWithholding = additionalWithholding;
         return this;
@@ -478,7 +486,7 @@ public class EmployeeFederalTax {
  
         private Optional<Double> federalWithholdingAllowance = Optional.empty();
  
-        private Optional<Boolean> additionalWithholding = Optional.empty();  
+        private Optional<String> additionalWithholding = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -644,8 +652,10 @@ public class EmployeeFederalTax {
 
         /**
          * *does not apply to rev_2020_w4 form*
+         * 
+         * <p>An additional withholding dollar amount
          */
-        public Builder additionalWithholding(boolean additionalWithholding) {
+        public Builder additionalWithholding(String additionalWithholding) {
             Utils.checkNotNull(additionalWithholding, "additionalWithholding");
             this.additionalWithholding = Optional.ofNullable(additionalWithholding);
             return this;
@@ -653,8 +663,10 @@ public class EmployeeFederalTax {
 
         /**
          * *does not apply to rev_2020_w4 form*
+         * 
+         * <p>An additional withholding dollar amount
          */
-        public Builder additionalWithholding(Optional<Boolean> additionalWithholding) {
+        public Builder additionalWithholding(Optional<String> additionalWithholding) {
             Utils.checkNotNull(additionalWithholding, "additionalWithholding");
             this.additionalWithholding = additionalWithholding;
             return this;

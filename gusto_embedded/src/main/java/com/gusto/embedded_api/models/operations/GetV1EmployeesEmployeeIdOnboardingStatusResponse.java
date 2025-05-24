@@ -36,7 +36,7 @@ public class GetV1EmployeesEmployeeIdOnboardingStatusResponse implements Respons
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response.
+     * successful
      */
     private Optional<? extends EmployeeOnboardingStatus> employeeOnboardingStatus;
 
@@ -88,7 +88,7 @@ public class GetV1EmployeesEmployeeIdOnboardingStatusResponse implements Respons
     }
 
     /**
-     * Example response.
+     * successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1EmployeesEmployeeIdOnboardingStatusResponse implements Respons
     }
 
     /**
-     * Example response.
+     * successful
      */
     public GetV1EmployeesEmployeeIdOnboardingStatusResponse withEmployeeOnboardingStatus(EmployeeOnboardingStatus employeeOnboardingStatus) {
         Utils.checkNotNull(employeeOnboardingStatus, "employeeOnboardingStatus");
@@ -137,7 +137,7 @@ public class GetV1EmployeesEmployeeIdOnboardingStatusResponse implements Respons
     }
 
     /**
-     * Example response.
+     * successful
      */
     public GetV1EmployeesEmployeeIdOnboardingStatusResponse withEmployeeOnboardingStatus(Optional<? extends EmployeeOnboardingStatus> employeeOnboardingStatus) {
         Utils.checkNotNull(employeeOnboardingStatus, "employeeOnboardingStatus");
@@ -221,7 +221,7 @@ public class GetV1EmployeesEmployeeIdOnboardingStatusResponse implements Respons
         }
 
         /**
-         * Example response.
+         * successful
          */
         public Builder employeeOnboardingStatus(EmployeeOnboardingStatus employeeOnboardingStatus) {
             Utils.checkNotNull(employeeOnboardingStatus, "employeeOnboardingStatus");
@@ -230,7 +230,7 @@ public class GetV1EmployeesEmployeeIdOnboardingStatusResponse implements Respons
         }
 
         /**
-         * Example response.
+         * successful
          */
         public Builder employeeOnboardingStatus(Optional<? extends EmployeeOnboardingStatus> employeeOnboardingStatus) {
             Utils.checkNotNull(employeeOnboardingStatus, "employeeOnboardingStatus");

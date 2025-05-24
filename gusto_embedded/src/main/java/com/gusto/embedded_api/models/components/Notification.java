@@ -15,6 +15,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 /**
@@ -53,6 +54,13 @@ public class Notification {
     private Optional<String> message;
 
     /**
+     * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("status")
+    private Optional<? extends NotificationStatus> status;
+
+    /**
      * The notification's category.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -88,6 +96,13 @@ public class Notification {
     private Optional<String> dueAt;
 
     /**
+     * An object containing template variables used to render the notification. The structure of this object depends on the notification category. Each category defines a fixed set of variable names (keys), which are always present. The values of these variables can vary depending on the specific notification instance.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("template_variables")
+    private Optional<? extends Map<String, String>> templateVariables;
+
+    /**
      * An array of entities relevant to the notification
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -100,37 +115,43 @@ public class Notification {
             @JsonProperty("company_uuid") Optional<String> companyUuid,
             @JsonProperty("title") Optional<String> title,
             @JsonProperty("message") Optional<String> message,
+            @JsonProperty("status") Optional<? extends NotificationStatus> status,
             @JsonProperty("category") Optional<String> category,
             @JsonProperty("actionable") Optional<Boolean> actionable,
             @JsonProperty("can_block_payroll") Optional<Boolean> canBlockPayroll,
             @JsonProperty("published_at") Optional<String> publishedAt,
             @JsonProperty("due_at") Optional<String> dueAt,
+            @JsonProperty("template_variables") Optional<? extends Map<String, String>> templateVariables,
             @JsonProperty("resources") Optional<? extends List<Resources>> resources) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(title, "title");
         Utils.checkNotNull(message, "message");
+        Utils.checkNotNull(status, "status");
         Utils.checkNotNull(category, "category");
         Utils.checkNotNull(actionable, "actionable");
         Utils.checkNotNull(canBlockPayroll, "canBlockPayroll");
         Utils.checkNotNull(publishedAt, "publishedAt");
         Utils.checkNotNull(dueAt, "dueAt");
+        Utils.checkNotNull(templateVariables, "templateVariables");
         Utils.checkNotNull(resources, "resources");
         this.uuid = uuid;
         this.companyUuid = companyUuid;
         this.title = title;
         this.message = message;
+        this.status = status;
         this.category = category;
         this.actionable = actionable;
         this.canBlockPayroll = canBlockPayroll;
         this.publishedAt = publishedAt;
         this.dueAt = dueAt;
+        this.templateVariables = templateVariables;
         this.resources = resources;
     }
     
     public Notification(
             String uuid) {
-        this(uuid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(uuid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -163,6 +184,15 @@ public class Notification {
     @JsonIgnore
     public Optional<String> message() {
         return message;
+    }
+
+    /**
+     * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<NotificationStatus> status() {
+        return (Optional<NotificationStatus>) status;
     }
 
     /**
@@ -203,6 +233,15 @@ public class Notification {
     @JsonIgnore
     public Optional<String> dueAt() {
         return dueAt;
+    }
+
+    /**
+     * An object containing template variables used to render the notification. The structure of this object depends on the notification category. Each category defines a fixed set of variable names (keys), which are always present. The values of these variables can vary depending on the specific notification instance.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Map<String, String>> templateVariables() {
+        return (Optional<Map<String, String>>) templateVariables;
     }
 
     /**
@@ -278,6 +317,24 @@ public class Notification {
     public Notification withMessage(Optional<String> message) {
         Utils.checkNotNull(message, "message");
         this.message = message;
+        return this;
+    }
+
+    /**
+     * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
+     */
+    public Notification withStatus(NotificationStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = Optional.ofNullable(status);
+        return this;
+    }
+
+    /**
+     * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
+     */
+    public Notification withStatus(Optional<? extends NotificationStatus> status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
         return this;
     }
 
@@ -372,6 +429,24 @@ public class Notification {
     }
 
     /**
+     * An object containing template variables used to render the notification. The structure of this object depends on the notification category. Each category defines a fixed set of variable names (keys), which are always present. The values of these variables can vary depending on the specific notification instance.
+     */
+    public Notification withTemplateVariables(Map<String, String> templateVariables) {
+        Utils.checkNotNull(templateVariables, "templateVariables");
+        this.templateVariables = Optional.ofNullable(templateVariables);
+        return this;
+    }
+
+    /**
+     * An object containing template variables used to render the notification. The structure of this object depends on the notification category. Each category defines a fixed set of variable names (keys), which are always present. The values of these variables can vary depending on the specific notification instance.
+     */
+    public Notification withTemplateVariables(Optional<? extends Map<String, String>> templateVariables) {
+        Utils.checkNotNull(templateVariables, "templateVariables");
+        this.templateVariables = templateVariables;
+        return this;
+    }
+
+    /**
      * An array of entities relevant to the notification
      */
     public Notification withResources(List<Resources> resources) {
@@ -403,11 +478,13 @@ public class Notification {
             Objects.deepEquals(this.companyUuid, other.companyUuid) &&
             Objects.deepEquals(this.title, other.title) &&
             Objects.deepEquals(this.message, other.message) &&
+            Objects.deepEquals(this.status, other.status) &&
             Objects.deepEquals(this.category, other.category) &&
             Objects.deepEquals(this.actionable, other.actionable) &&
             Objects.deepEquals(this.canBlockPayroll, other.canBlockPayroll) &&
             Objects.deepEquals(this.publishedAt, other.publishedAt) &&
             Objects.deepEquals(this.dueAt, other.dueAt) &&
+            Objects.deepEquals(this.templateVariables, other.templateVariables) &&
             Objects.deepEquals(this.resources, other.resources);
     }
     
@@ -418,11 +495,13 @@ public class Notification {
             companyUuid,
             title,
             message,
+            status,
             category,
             actionable,
             canBlockPayroll,
             publishedAt,
             dueAt,
+            templateVariables,
             resources);
     }
     
@@ -433,11 +512,13 @@ public class Notification {
                 "companyUuid", companyUuid,
                 "title", title,
                 "message", message,
+                "status", status,
                 "category", category,
                 "actionable", actionable,
                 "canBlockPayroll", canBlockPayroll,
                 "publishedAt", publishedAt,
                 "dueAt", dueAt,
+                "templateVariables", templateVariables,
                 "resources", resources);
     }
     
@@ -451,6 +532,8 @@ public class Notification {
  
         private Optional<String> message = Optional.empty();
  
+        private Optional<? extends NotificationStatus> status = Optional.empty();
+ 
         private Optional<String> category = Optional.empty();
  
         private Optional<Boolean> actionable = Optional.empty();
@@ -460,6 +543,8 @@ public class Notification {
         private Optional<String> publishedAt = Optional.empty();
  
         private Optional<String> dueAt = Optional.empty();
+ 
+        private Optional<? extends Map<String, String>> templateVariables = Optional.empty();
  
         private Optional<? extends List<Resources>> resources = Optional.empty();  
         
@@ -527,6 +612,24 @@ public class Notification {
         public Builder message(Optional<String> message) {
             Utils.checkNotNull(message, "message");
             this.message = message;
+            return this;
+        }
+
+        /**
+         * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
+         */
+        public Builder status(NotificationStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = Optional.ofNullable(status);
+            return this;
+        }
+
+        /**
+         * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
+         */
+        public Builder status(Optional<? extends NotificationStatus> status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
             return this;
         }
 
@@ -621,6 +724,24 @@ public class Notification {
         }
 
         /**
+         * An object containing template variables used to render the notification. The structure of this object depends on the notification category. Each category defines a fixed set of variable names (keys), which are always present. The values of these variables can vary depending on the specific notification instance.
+         */
+        public Builder templateVariables(Map<String, String> templateVariables) {
+            Utils.checkNotNull(templateVariables, "templateVariables");
+            this.templateVariables = Optional.ofNullable(templateVariables);
+            return this;
+        }
+
+        /**
+         * An object containing template variables used to render the notification. The structure of this object depends on the notification category. Each category defines a fixed set of variable names (keys), which are always present. The values of these variables can vary depending on the specific notification instance.
+         */
+        public Builder templateVariables(Optional<? extends Map<String, String>> templateVariables) {
+            Utils.checkNotNull(templateVariables, "templateVariables");
+            this.templateVariables = templateVariables;
+            return this;
+        }
+
+        /**
          * An array of entities relevant to the notification
          */
         public Builder resources(List<Resources> resources) {
@@ -644,11 +765,13 @@ public class Notification {
                 companyUuid,
                 title,
                 message,
+                status,
                 category,
                 actionable,
                 canBlockPayroll,
                 publishedAt,
                 dueAt,
+                templateVariables,
                 resources);
         }
     }

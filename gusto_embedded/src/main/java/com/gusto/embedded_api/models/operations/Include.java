@@ -9,8 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 public enum Include {
+    CUSTOM_FIELDS("custom_fields"),
     ALL_COMPENSATIONS("all_compensations"),
-    CUSTOM_FIELDS("custom_fields");
+    COMPANY_NAME("company_name");
 
     @JsonValue
     private final String value;

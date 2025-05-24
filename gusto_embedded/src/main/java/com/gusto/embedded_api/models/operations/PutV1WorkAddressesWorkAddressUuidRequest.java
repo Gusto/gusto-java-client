@@ -7,7 +7,6 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -29,7 +28,7 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    private Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private PutV1WorkAddressesWorkAddressUuidRequestBody requestBody;
@@ -37,7 +36,7 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
     @JsonCreator
     public PutV1WorkAddressesWorkAddressUuidRequest(
             String workAddressUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
+            Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
             PutV1WorkAddressesWorkAddressUuidRequestBody requestBody) {
         Utils.checkNotNull(workAddressUuid, "workAddressUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
@@ -66,8 +65,8 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     @JsonIgnore
@@ -91,7 +90,7 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1WorkAddressesWorkAddressUuidRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1WorkAddressesWorkAddressUuidRequest withXGustoAPIVersion(PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -100,7 +99,7 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1WorkAddressesWorkAddressUuidRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1WorkAddressesWorkAddressUuidRequest withXGustoAPIVersion(Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -147,7 +146,7 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
  
         private String workAddressUuid;
  
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
  
         private PutV1WorkAddressesWorkAddressUuidRequestBody requestBody;  
         
@@ -167,7 +166,7 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
         /**
          * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -176,7 +175,7 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
         /**
          * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
@@ -197,11 +196,11 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
                 requestBody);
         }
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2024-04-01\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>>() {});
     }
 }
 

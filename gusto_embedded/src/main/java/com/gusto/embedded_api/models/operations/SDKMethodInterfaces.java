@@ -271,15 +271,15 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallGetV1LocationsLocationId {
         GetV1LocationsLocationIdResponse retrieve(
-            String locationId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
+            Optional<? extends XGustoAPIVersion> xGustoAPIVersion,
+            String locationId) throws Exception;
     }
 
 
     public interface MethodCallPutV1LocationsLocationId {
         PutV1LocationsLocationIdResponse update(
+            Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion,
             String locationId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1LocationsLocationIdRequestBody requestBody) throws Exception;
     }
 
@@ -287,8 +287,8 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1LocationsLocationUuidMinimumWages {
         GetV1LocationsLocationUuidMinimumWagesResponse getMinimumWages(
             String locationUuid,
-            Optional<String> effectiveDate,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
+            Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<String> effectiveDate) throws Exception;
     }
 
 
@@ -484,17 +484,17 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallPostV1Employees {
-        PostV1EmployeesResponse create(
-            String companyId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1EmployeesRequestBody requestBody) throws Exception;
-    }
-
-
     public interface MethodCallGetV1CompaniesCompanyIdEmployees {
         GetV1CompaniesCompanyIdEmployeesResponse list(
             GetV1CompaniesCompanyIdEmployeesRequest request) throws Exception;
+    }
+
+
+    public interface MethodCallPostV1Employees {
+        PostV1EmployeesResponse create(
+            Optional<? extends PostV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyId,
+            Optional<? extends PostV1EmployeesRequestBody> requestBody) throws Exception;
     }
 
 
@@ -508,24 +508,24 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallGetV1Employees {
         GetV1EmployeesResponse get(
+            Optional<? extends GetV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion,
             String employeeId,
-            Optional<? extends List<QueryParamInclude>> include,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
+            Optional<? extends List<QueryParamInclude>> include) throws Exception;
     }
 
 
     public interface MethodCallPutV1Employees {
         PutV1EmployeesResponse update(
+            Optional<String> xGustoAPIVersion,
             String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1EmployeesRequestBody requestBody) throws Exception;
     }
 
 
     public interface MethodCallDeleteV1Employee {
         DeleteV1EmployeeResponse delete(
-            String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
+            Optional<? extends DeleteV1EmployeeHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeId) throws Exception;
     }
 
 
@@ -548,15 +548,15 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallGetV1EmployeesEmployeeIdOnboardingStatus {
         GetV1EmployeesEmployeeIdOnboardingStatusResponse getOnboardingStatus(
-            String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
+            Optional<? extends GetV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeId) throws Exception;
     }
 
 
     public interface MethodCallPutV1EmployeesEmployeeIdOnboardingStatus {
         PutV1EmployeesEmployeeIdOnboardingStatusResponse updateOnboardingStatus(
+            Optional<? extends PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion,
             String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1EmployeesEmployeeIdOnboardingStatusRequestBody requestBody) throws Exception;
     }
 
@@ -693,8 +693,8 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallGetV1EmployeesEmployeeIdEmploymentHistory {
         GetV1EmployeesEmployeeIdEmploymentHistoryResponse getHistory(
-            String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
+            Optional<? extends GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeId) throws Exception;
     }
 
 
@@ -738,14 +738,14 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1EmployeesEmployeeIdWorkAddresses {
         GetV1EmployeesEmployeeIdWorkAddressesResponse getWorkAddresses(
             String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
+            Optional<? extends GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion) throws Exception;
     }
 
 
     public interface MethodCallPostV1EmployeesEmployeeIdWorkAddresses {
         PostV1EmployeesEmployeeIdWorkAddressesResponse createWorkAddress(
             String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
+            Optional<? extends PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion,
             PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody) throws Exception;
     }
 
@@ -753,14 +753,14 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetV1WorkAddressesWorkAddressUuid {
         GetV1WorkAddressesWorkAddressUuidResponse retrieveWorkAddress(
             String workAddressUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
+            Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) throws Exception;
     }
 
 
     public interface MethodCallPutV1WorkAddressesWorkAddressUuid {
         PutV1WorkAddressesWorkAddressUuidResponse updateWorkAddress(
             String workAddressUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
+            Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
             PutV1WorkAddressesWorkAddressUuidRequestBody requestBody) throws Exception;
     }
 
@@ -768,7 +768,7 @@ public class SDKMethodInterfaces {
     public interface MethodCallDeleteV1WorkAddressesWorkAddressUuid {
         DeleteV1WorkAddressesWorkAddressUuidResponse deleteWorkAddress(
             String workAddressUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
+            Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) throws Exception;
     }
 
 
@@ -1287,16 +1287,16 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallGetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStub {
         GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse getPayStub(
+            Optional<? extends GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion> xGustoAPIVersion,
             String payrollId,
-            String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
+            String employeeId) throws Exception;
     }
 
 
     public interface MethodCallGetV1EmployeesEmployeeUuidPayStubs {
         GetV1EmployeesEmployeeUuidPayStubsResponse getPayStubs(
-            String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
+            Optional<? extends GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeId) throws Exception;
     }
 
 
@@ -1519,9 +1519,17 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallGetReportsReportUuid {
-        GetReportsReportUuidResponse get(
-            String reportUuid,
+    public interface MethodCallPostPayrollsPayrollUuidReportsGeneralLedger {
+        PostPayrollsPayrollUuidReportsGeneralLedgerResponse postPayrollsPayrollUuidReportsGeneralLedger(
+            String payrollUuid,
+            Optional<? extends VersionHeader> xGustoAPIVersion,
+            PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody requestBody) throws Exception;
+    }
+
+
+    public interface MethodCallGetReportsRequestUuid {
+        GetReportsRequestUuidResponse getReportsRequestUuid(
+            String requestUuid,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
 
@@ -1854,6 +1862,13 @@ public class SDKMethodInterfaces {
         GetEventsResponse get(
             GetEventsRequest request,
             GetEventsSecurity security) throws Exception;
+    }
+
+
+    public interface MethodCallGetInformationRequests {
+        GetInformationRequestsResponse getInformationRequests(
+            String companyUuid,
+            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception;
     }
 
 

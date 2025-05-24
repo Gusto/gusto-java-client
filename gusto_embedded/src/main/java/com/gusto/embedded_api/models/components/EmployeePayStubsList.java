@@ -15,12 +15,12 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EmployeePayStub
+ * EmployeePayStubsList
  * 
  * <p>The representation of an employee pay stub information.
  */
 
-public class EmployeePayStub {
+public class EmployeePayStubsList {
 
     /**
      * The UUID of the employee pay stub.
@@ -64,7 +64,7 @@ public class EmployeePayStub {
     private Optional<String> checkAmount;
 
     @JsonCreator
-    public EmployeePayStub(
+    public EmployeePayStubsList(
             @JsonProperty("uuid") String uuid,
             @JsonProperty("check_date") Optional<String> checkDate,
             @JsonProperty("gross_pay") Optional<String> grossPay,
@@ -85,7 +85,7 @@ public class EmployeePayStub {
         this.checkAmount = checkAmount;
     }
     
-    public EmployeePayStub(
+    public EmployeePayStubsList(
             String uuid) {
         this(uuid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
@@ -145,7 +145,7 @@ public class EmployeePayStub {
     /**
      * The UUID of the employee pay stub.
      */
-    public EmployeePayStub withUuid(String uuid) {
+    public EmployeePayStubsList withUuid(String uuid) {
         Utils.checkNotNull(uuid, "uuid");
         this.uuid = uuid;
         return this;
@@ -154,7 +154,7 @@ public class EmployeePayStub {
     /**
      * The check date of the pay stub.
      */
-    public EmployeePayStub withCheckDate(String checkDate) {
+    public EmployeePayStubsList withCheckDate(String checkDate) {
         Utils.checkNotNull(checkDate, "checkDate");
         this.checkDate = Optional.ofNullable(checkDate);
         return this;
@@ -163,7 +163,7 @@ public class EmployeePayStub {
     /**
      * The check date of the pay stub.
      */
-    public EmployeePayStub withCheckDate(Optional<String> checkDate) {
+    public EmployeePayStubsList withCheckDate(Optional<String> checkDate) {
         Utils.checkNotNull(checkDate, "checkDate");
         this.checkDate = checkDate;
         return this;
@@ -172,7 +172,7 @@ public class EmployeePayStub {
     /**
      * The gross pay amount for the pay stub.
      */
-    public EmployeePayStub withGrossPay(String grossPay) {
+    public EmployeePayStubsList withGrossPay(String grossPay) {
         Utils.checkNotNull(grossPay, "grossPay");
         this.grossPay = Optional.ofNullable(grossPay);
         return this;
@@ -181,7 +181,7 @@ public class EmployeePayStub {
     /**
      * The gross pay amount for the pay stub.
      */
-    public EmployeePayStub withGrossPay(Optional<String> grossPay) {
+    public EmployeePayStubsList withGrossPay(Optional<String> grossPay) {
         Utils.checkNotNull(grossPay, "grossPay");
         this.grossPay = grossPay;
         return this;
@@ -190,7 +190,7 @@ public class EmployeePayStub {
     /**
      * The net pay amount for the pay stub.
      */
-    public EmployeePayStub withNetPay(String netPay) {
+    public EmployeePayStubsList withNetPay(String netPay) {
         Utils.checkNotNull(netPay, "netPay");
         this.netPay = Optional.ofNullable(netPay);
         return this;
@@ -199,7 +199,7 @@ public class EmployeePayStub {
     /**
      * The net pay amount for the pay stub.
      */
-    public EmployeePayStub withNetPay(Optional<String> netPay) {
+    public EmployeePayStubsList withNetPay(Optional<String> netPay) {
         Utils.checkNotNull(netPay, "netPay");
         this.netPay = netPay;
         return this;
@@ -208,7 +208,7 @@ public class EmployeePayStub {
     /**
      * A unique identifier of the payroll to which the pay stub belongs.
      */
-    public EmployeePayStub withPayrollUuid(String payrollUuid) {
+    public EmployeePayStubsList withPayrollUuid(String payrollUuid) {
         Utils.checkNotNull(payrollUuid, "payrollUuid");
         this.payrollUuid = Optional.ofNullable(payrollUuid);
         return this;
@@ -217,7 +217,7 @@ public class EmployeePayStub {
     /**
      * A unique identifier of the payroll to which the pay stub belongs.
      */
-    public EmployeePayStub withPayrollUuid(Optional<String> payrollUuid) {
+    public EmployeePayStubsList withPayrollUuid(Optional<String> payrollUuid) {
         Utils.checkNotNull(payrollUuid, "payrollUuid");
         this.payrollUuid = payrollUuid;
         return this;
@@ -226,7 +226,7 @@ public class EmployeePayStub {
     /**
      * The check amount for the pay stub.
      */
-    public EmployeePayStub withCheckAmount(String checkAmount) {
+    public EmployeePayStubsList withCheckAmount(String checkAmount) {
         Utils.checkNotNull(checkAmount, "checkAmount");
         this.checkAmount = Optional.ofNullable(checkAmount);
         return this;
@@ -235,7 +235,7 @@ public class EmployeePayStub {
     /**
      * The check amount for the pay stub.
      */
-    public EmployeePayStub withCheckAmount(Optional<String> checkAmount) {
+    public EmployeePayStubsList withCheckAmount(Optional<String> checkAmount) {
         Utils.checkNotNull(checkAmount, "checkAmount");
         this.checkAmount = checkAmount;
         return this;
@@ -249,7 +249,7 @@ public class EmployeePayStub {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        EmployeePayStub other = (EmployeePayStub) o;
+        EmployeePayStubsList other = (EmployeePayStubsList) o;
         return 
             Objects.deepEquals(this.uuid, other.uuid) &&
             Objects.deepEquals(this.checkDate, other.checkDate) &&
@@ -272,7 +272,7 @@ public class EmployeePayStub {
     
     @Override
     public String toString() {
-        return Utils.toString(EmployeePayStub.class,
+        return Utils.toString(EmployeePayStubsList.class,
                 "uuid", uuid,
                 "checkDate", checkDate,
                 "grossPay", grossPay,
@@ -398,8 +398,8 @@ public class EmployeePayStub {
             return this;
         }
         
-        public EmployeePayStub build() {
-            return new EmployeePayStub(
+        public EmployeePayStubsList build() {
+            return new EmployeePayStubsList(
                 uuid,
                 checkDate,
                 grossPay,

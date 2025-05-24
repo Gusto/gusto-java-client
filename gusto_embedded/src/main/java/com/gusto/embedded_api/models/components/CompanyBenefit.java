@@ -16,8 +16,10 @@ import java.lang.Boolean;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 /**
  * CompanyBenefit
  * 
@@ -75,6 +77,20 @@ public class CompanyBenefit {
     private Optional<String> description;
 
     /**
+     * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("source")
+    private Optional<? extends Source> source;
+
+    /**
+     * The partner name of the partner that created the company benefit. For example, "XYZ Corp".
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("partner_name")
+    private JsonNullable<String> partnerName;
+
+    /**
      * Whether this company benefit can be deleted. Deletable will be set to true if the benefit has not been used in payroll, has no employee benefits associated, and the benefit is not owned by Gusto or a Partner
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -111,6 +127,8 @@ public class CompanyBenefit {
             @JsonProperty("benefit_type") Optional<Long> benefitType,
             @JsonProperty("active") Optional<Boolean> active,
             @JsonProperty("description") Optional<String> description,
+            @JsonProperty("source") Optional<? extends Source> source,
+            @JsonProperty("partner_name") JsonNullable<String> partnerName,
             @JsonProperty("deletable") Optional<Boolean> deletable,
             @JsonProperty("supports_percentage_amounts") Optional<Boolean> supportsPercentageAmounts,
             @JsonProperty("responsible_for_employer_taxes") Optional<Boolean> responsibleForEmployerTaxes,
@@ -122,6 +140,8 @@ public class CompanyBenefit {
         Utils.checkNotNull(benefitType, "benefitType");
         Utils.checkNotNull(active, "active");
         Utils.checkNotNull(description, "description");
+        Utils.checkNotNull(source, "source");
+        Utils.checkNotNull(partnerName, "partnerName");
         Utils.checkNotNull(deletable, "deletable");
         Utils.checkNotNull(supportsPercentageAmounts, "supportsPercentageAmounts");
         Utils.checkNotNull(responsibleForEmployerTaxes, "responsibleForEmployerTaxes");
@@ -133,6 +153,8 @@ public class CompanyBenefit {
         this.benefitType = benefitType;
         this.active = active;
         this.description = description;
+        this.source = source;
+        this.partnerName = partnerName;
         this.deletable = deletable;
         this.supportsPercentageAmounts = supportsPercentageAmounts;
         this.responsibleForEmployerTaxes = responsibleForEmployerTaxes;
@@ -141,7 +163,7 @@ public class CompanyBenefit {
     
     public CompanyBenefit(
             String uuid) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), uuid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(), uuid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -198,6 +220,23 @@ public class CompanyBenefit {
     @JsonIgnore
     public Optional<String> description() {
         return description;
+    }
+
+    /**
+     * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Source> source() {
+        return (Optional<Source>) source;
+    }
+
+    /**
+     * The partner name of the partner that created the company benefit. For example, "XYZ Corp".
+     */
+    @JsonIgnore
+    public JsonNullable<String> partnerName() {
+        return partnerName;
     }
 
     /**
@@ -354,6 +393,42 @@ public class CompanyBenefit {
     }
 
     /**
+     * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
+     */
+    public CompanyBenefit withSource(Source source) {
+        Utils.checkNotNull(source, "source");
+        this.source = Optional.ofNullable(source);
+        return this;
+    }
+
+    /**
+     * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
+     */
+    public CompanyBenefit withSource(Optional<? extends Source> source) {
+        Utils.checkNotNull(source, "source");
+        this.source = source;
+        return this;
+    }
+
+    /**
+     * The partner name of the partner that created the company benefit. For example, "XYZ Corp".
+     */
+    public CompanyBenefit withPartnerName(String partnerName) {
+        Utils.checkNotNull(partnerName, "partnerName");
+        this.partnerName = JsonNullable.of(partnerName);
+        return this;
+    }
+
+    /**
+     * The partner name of the partner that created the company benefit. For example, "XYZ Corp".
+     */
+    public CompanyBenefit withPartnerName(JsonNullable<String> partnerName) {
+        Utils.checkNotNull(partnerName, "partnerName");
+        this.partnerName = partnerName;
+        return this;
+    }
+
+    /**
      * Whether this company benefit can be deleted. Deletable will be set to true if the benefit has not been used in payroll, has no employee benefits associated, and the benefit is not owned by Gusto or a Partner
      */
     public CompanyBenefit withDeletable(boolean deletable) {
@@ -442,6 +517,8 @@ public class CompanyBenefit {
             Objects.deepEquals(this.benefitType, other.benefitType) &&
             Objects.deepEquals(this.active, other.active) &&
             Objects.deepEquals(this.description, other.description) &&
+            Objects.deepEquals(this.source, other.source) &&
+            Objects.deepEquals(this.partnerName, other.partnerName) &&
             Objects.deepEquals(this.deletable, other.deletable) &&
             Objects.deepEquals(this.supportsPercentageAmounts, other.supportsPercentageAmounts) &&
             Objects.deepEquals(this.responsibleForEmployerTaxes, other.responsibleForEmployerTaxes) &&
@@ -458,6 +535,8 @@ public class CompanyBenefit {
             benefitType,
             active,
             description,
+            source,
+            partnerName,
             deletable,
             supportsPercentageAmounts,
             responsibleForEmployerTaxes,
@@ -474,6 +553,8 @@ public class CompanyBenefit {
                 "benefitType", benefitType,
                 "active", active,
                 "description", description,
+                "source", source,
+                "partnerName", partnerName,
                 "deletable", deletable,
                 "supportsPercentageAmounts", supportsPercentageAmounts,
                 "responsibleForEmployerTaxes", responsibleForEmployerTaxes,
@@ -495,6 +576,10 @@ public class CompanyBenefit {
         private Optional<Boolean> active;
  
         private Optional<String> description = Optional.empty();
+ 
+        private Optional<? extends Source> source = Optional.empty();
+ 
+        private JsonNullable<String> partnerName = JsonNullable.undefined();
  
         private Optional<Boolean> deletable = Optional.empty();
  
@@ -626,6 +711,42 @@ public class CompanyBenefit {
         }
 
         /**
+         * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
+         */
+        public Builder source(Source source) {
+            Utils.checkNotNull(source, "source");
+            this.source = Optional.ofNullable(source);
+            return this;
+        }
+
+        /**
+         * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
+         */
+        public Builder source(Optional<? extends Source> source) {
+            Utils.checkNotNull(source, "source");
+            this.source = source;
+            return this;
+        }
+
+        /**
+         * The partner name of the partner that created the company benefit. For example, "XYZ Corp".
+         */
+        public Builder partnerName(String partnerName) {
+            Utils.checkNotNull(partnerName, "partnerName");
+            this.partnerName = JsonNullable.of(partnerName);
+            return this;
+        }
+
+        /**
+         * The partner name of the partner that created the company benefit. For example, "XYZ Corp".
+         */
+        public Builder partnerName(JsonNullable<String> partnerName) {
+            Utils.checkNotNull(partnerName, "partnerName");
+            this.partnerName = partnerName;
+            return this;
+        }
+
+        /**
          * Whether this company benefit can be deleted. Deletable will be set to true if the benefit has not been used in payroll, has no employee benefits associated, and the benefit is not owned by Gusto or a Partner
          */
         public Builder deletable(boolean deletable) {
@@ -708,6 +829,8 @@ public class CompanyBenefit {
                 benefitType,
                 active,
                 description,
+                source,
+                partnerName,
                 deletable,
                 supportsPercentageAmounts,
                 responsibleForEmployerTaxes,

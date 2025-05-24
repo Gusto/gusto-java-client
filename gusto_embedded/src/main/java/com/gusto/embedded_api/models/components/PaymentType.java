@@ -9,17 +9,17 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PaymentUuid
+ * PaymentType
  * 
- * <p>Unique identifier of the payment
+ * <p>Type of payment for the wire in
  */
-public enum PaymentUuid {
+public enum PaymentType {
     PAYROLL("payroll");
 
     @JsonValue
     private final String value;
 
-    private PaymentUuid(String value) {
+    private PaymentType(String value) {
         this.value = value;
     }
     
@@ -27,8 +27,8 @@ public enum PaymentUuid {
         return value;
     }
     
-    public static Optional<PaymentUuid> fromValue(String value) {
-        for (PaymentUuid o: PaymentUuid.values()) {
+    public static Optional<PaymentType> fromValue(String value) {
+        for (PaymentType o: PaymentType.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

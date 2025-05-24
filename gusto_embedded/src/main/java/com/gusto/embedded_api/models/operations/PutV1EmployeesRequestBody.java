@@ -15,16 +15,12 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
-/**
- * PutV1EmployeesRequestBody
- * 
- * <p>Update an employee.
- */
+import org.openapitools.jackson.nullable.JsonNullable;
 
 public class PutV1EmployeesRequestBody {
 
     /**
-     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
+     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
      */
     @JsonProperty("version")
     private String version;
@@ -35,30 +31,27 @@ public class PutV1EmployeesRequestBody {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("middle_initial")
-    private Optional<String> middleInitial;
+    private JsonNullable<String> middleInitial;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("last_name")
     private Optional<String> lastName;
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("preferred_first_name")
-    private Optional<String> preferredFirstName;
+    @JsonProperty("email")
+    private Optional<String> email;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("date_of_birth")
     private Optional<String> dateOfBirth;
 
-    /**
-     * The employee's personal email address.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("email")
-    private Optional<String> email;
-
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ssn")
     private Optional<String> ssn;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("preferred_first_name")
+    private JsonNullable<String> preferredFirstName;
 
     /**
      * Whether the employee is a two percent shareholder of the company. This field only applies to companies with an S-Corp entity type.
@@ -71,40 +64,40 @@ public class PutV1EmployeesRequestBody {
     public PutV1EmployeesRequestBody(
             @JsonProperty("version") String version,
             @JsonProperty("first_name") Optional<String> firstName,
-            @JsonProperty("middle_initial") Optional<String> middleInitial,
+            @JsonProperty("middle_initial") JsonNullable<String> middleInitial,
             @JsonProperty("last_name") Optional<String> lastName,
-            @JsonProperty("preferred_first_name") Optional<String> preferredFirstName,
-            @JsonProperty("date_of_birth") Optional<String> dateOfBirth,
             @JsonProperty("email") Optional<String> email,
+            @JsonProperty("date_of_birth") Optional<String> dateOfBirth,
             @JsonProperty("ssn") Optional<String> ssn,
+            @JsonProperty("preferred_first_name") JsonNullable<String> preferredFirstName,
             @JsonProperty("two_percent_shareholder") Optional<Boolean> twoPercentShareholder) {
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(firstName, "firstName");
         Utils.checkNotNull(middleInitial, "middleInitial");
         Utils.checkNotNull(lastName, "lastName");
-        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-        Utils.checkNotNull(dateOfBirth, "dateOfBirth");
         Utils.checkNotNull(email, "email");
+        Utils.checkNotNull(dateOfBirth, "dateOfBirth");
         Utils.checkNotNull(ssn, "ssn");
+        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
         Utils.checkNotNull(twoPercentShareholder, "twoPercentShareholder");
         this.version = version;
         this.firstName = firstName;
         this.middleInitial = middleInitial;
         this.lastName = lastName;
-        this.preferredFirstName = preferredFirstName;
-        this.dateOfBirth = dateOfBirth;
         this.email = email;
+        this.dateOfBirth = dateOfBirth;
         this.ssn = ssn;
+        this.preferredFirstName = preferredFirstName;
         this.twoPercentShareholder = twoPercentShareholder;
     }
     
     public PutV1EmployeesRequestBody(
             String version) {
-        this(version, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(version, Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty());
     }
 
     /**
-     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
+     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
      */
     @JsonIgnore
     public String version() {
@@ -117,7 +110,7 @@ public class PutV1EmployeesRequestBody {
     }
 
     @JsonIgnore
-    public Optional<String> middleInitial() {
+    public JsonNullable<String> middleInitial() {
         return middleInitial;
     }
 
@@ -127,8 +120,8 @@ public class PutV1EmployeesRequestBody {
     }
 
     @JsonIgnore
-    public Optional<String> preferredFirstName() {
-        return preferredFirstName;
+    public Optional<String> email() {
+        return email;
     }
 
     @JsonIgnore
@@ -136,17 +129,14 @@ public class PutV1EmployeesRequestBody {
         return dateOfBirth;
     }
 
-    /**
-     * The employee's personal email address.
-     */
-    @JsonIgnore
-    public Optional<String> email() {
-        return email;
-    }
-
     @JsonIgnore
     public Optional<String> ssn() {
         return ssn;
+    }
+
+    @JsonIgnore
+    public JsonNullable<String> preferredFirstName() {
+        return preferredFirstName;
     }
 
     /**
@@ -162,7 +152,7 @@ public class PutV1EmployeesRequestBody {
     }
 
     /**
-     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
+     * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
      */
     public PutV1EmployeesRequestBody withVersion(String version) {
         Utils.checkNotNull(version, "version");
@@ -184,11 +174,11 @@ public class PutV1EmployeesRequestBody {
 
     public PutV1EmployeesRequestBody withMiddleInitial(String middleInitial) {
         Utils.checkNotNull(middleInitial, "middleInitial");
-        this.middleInitial = Optional.ofNullable(middleInitial);
+        this.middleInitial = JsonNullable.of(middleInitial);
         return this;
     }
 
-    public PutV1EmployeesRequestBody withMiddleInitial(Optional<String> middleInitial) {
+    public PutV1EmployeesRequestBody withMiddleInitial(JsonNullable<String> middleInitial) {
         Utils.checkNotNull(middleInitial, "middleInitial");
         this.middleInitial = middleInitial;
         return this;
@@ -206,15 +196,15 @@ public class PutV1EmployeesRequestBody {
         return this;
     }
 
-    public PutV1EmployeesRequestBody withPreferredFirstName(String preferredFirstName) {
-        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-        this.preferredFirstName = Optional.ofNullable(preferredFirstName);
+    public PutV1EmployeesRequestBody withEmail(String email) {
+        Utils.checkNotNull(email, "email");
+        this.email = Optional.ofNullable(email);
         return this;
     }
 
-    public PutV1EmployeesRequestBody withPreferredFirstName(Optional<String> preferredFirstName) {
-        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-        this.preferredFirstName = preferredFirstName;
+    public PutV1EmployeesRequestBody withEmail(Optional<String> email) {
+        Utils.checkNotNull(email, "email");
+        this.email = email;
         return this;
     }
 
@@ -230,24 +220,6 @@ public class PutV1EmployeesRequestBody {
         return this;
     }
 
-    /**
-     * The employee's personal email address.
-     */
-    public PutV1EmployeesRequestBody withEmail(String email) {
-        Utils.checkNotNull(email, "email");
-        this.email = Optional.ofNullable(email);
-        return this;
-    }
-
-    /**
-     * The employee's personal email address.
-     */
-    public PutV1EmployeesRequestBody withEmail(Optional<String> email) {
-        Utils.checkNotNull(email, "email");
-        this.email = email;
-        return this;
-    }
-
     public PutV1EmployeesRequestBody withSsn(String ssn) {
         Utils.checkNotNull(ssn, "ssn");
         this.ssn = Optional.ofNullable(ssn);
@@ -257,6 +229,18 @@ public class PutV1EmployeesRequestBody {
     public PutV1EmployeesRequestBody withSsn(Optional<String> ssn) {
         Utils.checkNotNull(ssn, "ssn");
         this.ssn = ssn;
+        return this;
+    }
+
+    public PutV1EmployeesRequestBody withPreferredFirstName(String preferredFirstName) {
+        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
+        this.preferredFirstName = JsonNullable.of(preferredFirstName);
+        return this;
+    }
+
+    public PutV1EmployeesRequestBody withPreferredFirstName(JsonNullable<String> preferredFirstName) {
+        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
+        this.preferredFirstName = preferredFirstName;
         return this;
     }
 
@@ -292,10 +276,10 @@ public class PutV1EmployeesRequestBody {
             Objects.deepEquals(this.firstName, other.firstName) &&
             Objects.deepEquals(this.middleInitial, other.middleInitial) &&
             Objects.deepEquals(this.lastName, other.lastName) &&
-            Objects.deepEquals(this.preferredFirstName, other.preferredFirstName) &&
-            Objects.deepEquals(this.dateOfBirth, other.dateOfBirth) &&
             Objects.deepEquals(this.email, other.email) &&
+            Objects.deepEquals(this.dateOfBirth, other.dateOfBirth) &&
             Objects.deepEquals(this.ssn, other.ssn) &&
+            Objects.deepEquals(this.preferredFirstName, other.preferredFirstName) &&
             Objects.deepEquals(this.twoPercentShareholder, other.twoPercentShareholder);
     }
     
@@ -306,10 +290,10 @@ public class PutV1EmployeesRequestBody {
             firstName,
             middleInitial,
             lastName,
-            preferredFirstName,
-            dateOfBirth,
             email,
+            dateOfBirth,
             ssn,
+            preferredFirstName,
             twoPercentShareholder);
     }
     
@@ -320,10 +304,10 @@ public class PutV1EmployeesRequestBody {
                 "firstName", firstName,
                 "middleInitial", middleInitial,
                 "lastName", lastName,
-                "preferredFirstName", preferredFirstName,
-                "dateOfBirth", dateOfBirth,
                 "email", email,
+                "dateOfBirth", dateOfBirth,
                 "ssn", ssn,
+                "preferredFirstName", preferredFirstName,
                 "twoPercentShareholder", twoPercentShareholder);
     }
     
@@ -333,17 +317,17 @@ public class PutV1EmployeesRequestBody {
  
         private Optional<String> firstName = Optional.empty();
  
-        private Optional<String> middleInitial = Optional.empty();
+        private JsonNullable<String> middleInitial = JsonNullable.undefined();
  
         private Optional<String> lastName = Optional.empty();
  
-        private Optional<String> preferredFirstName = Optional.empty();
+        private Optional<String> email = Optional.empty();
  
         private Optional<String> dateOfBirth = Optional.empty();
  
-        private Optional<String> email = Optional.empty();
- 
         private Optional<String> ssn = Optional.empty();
+ 
+        private JsonNullable<String> preferredFirstName = JsonNullable.undefined();
  
         private Optional<Boolean> twoPercentShareholder = Optional.empty();  
         
@@ -352,7 +336,7 @@ public class PutV1EmployeesRequestBody {
         }
 
         /**
-         * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
+         * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
          */
         public Builder version(String version) {
             Utils.checkNotNull(version, "version");
@@ -374,11 +358,11 @@ public class PutV1EmployeesRequestBody {
 
         public Builder middleInitial(String middleInitial) {
             Utils.checkNotNull(middleInitial, "middleInitial");
-            this.middleInitial = Optional.ofNullable(middleInitial);
+            this.middleInitial = JsonNullable.of(middleInitial);
             return this;
         }
 
-        public Builder middleInitial(Optional<String> middleInitial) {
+        public Builder middleInitial(JsonNullable<String> middleInitial) {
             Utils.checkNotNull(middleInitial, "middleInitial");
             this.middleInitial = middleInitial;
             return this;
@@ -396,15 +380,15 @@ public class PutV1EmployeesRequestBody {
             return this;
         }
 
-        public Builder preferredFirstName(String preferredFirstName) {
-            Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-            this.preferredFirstName = Optional.ofNullable(preferredFirstName);
+        public Builder email(String email) {
+            Utils.checkNotNull(email, "email");
+            this.email = Optional.ofNullable(email);
             return this;
         }
 
-        public Builder preferredFirstName(Optional<String> preferredFirstName) {
-            Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-            this.preferredFirstName = preferredFirstName;
+        public Builder email(Optional<String> email) {
+            Utils.checkNotNull(email, "email");
+            this.email = email;
             return this;
         }
 
@@ -420,24 +404,6 @@ public class PutV1EmployeesRequestBody {
             return this;
         }
 
-        /**
-         * The employee's personal email address.
-         */
-        public Builder email(String email) {
-            Utils.checkNotNull(email, "email");
-            this.email = Optional.ofNullable(email);
-            return this;
-        }
-
-        /**
-         * The employee's personal email address.
-         */
-        public Builder email(Optional<String> email) {
-            Utils.checkNotNull(email, "email");
-            this.email = email;
-            return this;
-        }
-
         public Builder ssn(String ssn) {
             Utils.checkNotNull(ssn, "ssn");
             this.ssn = Optional.ofNullable(ssn);
@@ -447,6 +413,18 @@ public class PutV1EmployeesRequestBody {
         public Builder ssn(Optional<String> ssn) {
             Utils.checkNotNull(ssn, "ssn");
             this.ssn = ssn;
+            return this;
+        }
+
+        public Builder preferredFirstName(String preferredFirstName) {
+            Utils.checkNotNull(preferredFirstName, "preferredFirstName");
+            this.preferredFirstName = JsonNullable.of(preferredFirstName);
+            return this;
+        }
+
+        public Builder preferredFirstName(JsonNullable<String> preferredFirstName) {
+            Utils.checkNotNull(preferredFirstName, "preferredFirstName");
+            this.preferredFirstName = preferredFirstName;
             return this;
         }
 
@@ -474,10 +452,10 @@ public class PutV1EmployeesRequestBody {
                 firstName,
                 middleInitial,
                 lastName,
-                preferredFirstName,
-                dateOfBirth,
                 email,
+                dateOfBirth,
                 ssn,
+                preferredFirstName,
                 twoPercentShareholder);
         }
     }

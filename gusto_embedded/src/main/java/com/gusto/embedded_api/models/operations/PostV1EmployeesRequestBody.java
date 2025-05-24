@@ -13,13 +13,9 @@ import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
-/**
- * PostV1EmployeesRequestBody
- * 
- * <p>Create an employee.
- */
 
 public class PostV1EmployeesRequestBody {
 
@@ -33,14 +29,6 @@ public class PostV1EmployeesRequestBody {
     @JsonProperty("last_name")
     private String lastName;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("preferred_first_name")
-    private Optional<String> preferredFirstName;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("date_of_birth")
-    private Optional<String> dateOfBirth;
-
     /**
      * The employee's personal email address.
      */
@@ -49,8 +37,16 @@ public class PostV1EmployeesRequestBody {
     private Optional<String> email;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("date_of_birth")
+    private Optional<LocalDate> dateOfBirth;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ssn")
     private Optional<String> ssn;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("preferred_first_name")
+    private Optional<String> preferredFirstName;
 
     /**
      * If true, employee is expected to self-onboard. If false, payroll admin is expected to enter in the employee's onboarding information
@@ -64,26 +60,26 @@ public class PostV1EmployeesRequestBody {
             @JsonProperty("first_name") String firstName,
             @JsonProperty("middle_initial") Optional<String> middleInitial,
             @JsonProperty("last_name") String lastName,
-            @JsonProperty("preferred_first_name") Optional<String> preferredFirstName,
-            @JsonProperty("date_of_birth") Optional<String> dateOfBirth,
             @JsonProperty("email") Optional<String> email,
+            @JsonProperty("date_of_birth") Optional<LocalDate> dateOfBirth,
             @JsonProperty("ssn") Optional<String> ssn,
+            @JsonProperty("preferred_first_name") Optional<String> preferredFirstName,
             @JsonProperty("self_onboarding") Optional<Boolean> selfOnboarding) {
         Utils.checkNotNull(firstName, "firstName");
         Utils.checkNotNull(middleInitial, "middleInitial");
         Utils.checkNotNull(lastName, "lastName");
-        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-        Utils.checkNotNull(dateOfBirth, "dateOfBirth");
         Utils.checkNotNull(email, "email");
+        Utils.checkNotNull(dateOfBirth, "dateOfBirth");
         Utils.checkNotNull(ssn, "ssn");
+        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
         Utils.checkNotNull(selfOnboarding, "selfOnboarding");
         this.firstName = firstName;
         this.middleInitial = middleInitial;
         this.lastName = lastName;
-        this.preferredFirstName = preferredFirstName;
-        this.dateOfBirth = dateOfBirth;
         this.email = email;
+        this.dateOfBirth = dateOfBirth;
         this.ssn = ssn;
+        this.preferredFirstName = preferredFirstName;
         this.selfOnboarding = selfOnboarding;
     }
     
@@ -108,16 +104,6 @@ public class PostV1EmployeesRequestBody {
         return lastName;
     }
 
-    @JsonIgnore
-    public Optional<String> preferredFirstName() {
-        return preferredFirstName;
-    }
-
-    @JsonIgnore
-    public Optional<String> dateOfBirth() {
-        return dateOfBirth;
-    }
-
     /**
      * The employee's personal email address.
      */
@@ -127,8 +113,18 @@ public class PostV1EmployeesRequestBody {
     }
 
     @JsonIgnore
+    public Optional<LocalDate> dateOfBirth() {
+        return dateOfBirth;
+    }
+
+    @JsonIgnore
     public Optional<String> ssn() {
         return ssn;
+    }
+
+    @JsonIgnore
+    public Optional<String> preferredFirstName() {
+        return preferredFirstName;
     }
 
     /**
@@ -167,30 +163,6 @@ public class PostV1EmployeesRequestBody {
         return this;
     }
 
-    public PostV1EmployeesRequestBody withPreferredFirstName(String preferredFirstName) {
-        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-        this.preferredFirstName = Optional.ofNullable(preferredFirstName);
-        return this;
-    }
-
-    public PostV1EmployeesRequestBody withPreferredFirstName(Optional<String> preferredFirstName) {
-        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-        this.preferredFirstName = preferredFirstName;
-        return this;
-    }
-
-    public PostV1EmployeesRequestBody withDateOfBirth(String dateOfBirth) {
-        Utils.checkNotNull(dateOfBirth, "dateOfBirth");
-        this.dateOfBirth = Optional.ofNullable(dateOfBirth);
-        return this;
-    }
-
-    public PostV1EmployeesRequestBody withDateOfBirth(Optional<String> dateOfBirth) {
-        Utils.checkNotNull(dateOfBirth, "dateOfBirth");
-        this.dateOfBirth = dateOfBirth;
-        return this;
-    }
-
     /**
      * The employee's personal email address.
      */
@@ -209,6 +181,18 @@ public class PostV1EmployeesRequestBody {
         return this;
     }
 
+    public PostV1EmployeesRequestBody withDateOfBirth(LocalDate dateOfBirth) {
+        Utils.checkNotNull(dateOfBirth, "dateOfBirth");
+        this.dateOfBirth = Optional.ofNullable(dateOfBirth);
+        return this;
+    }
+
+    public PostV1EmployeesRequestBody withDateOfBirth(Optional<LocalDate> dateOfBirth) {
+        Utils.checkNotNull(dateOfBirth, "dateOfBirth");
+        this.dateOfBirth = dateOfBirth;
+        return this;
+    }
+
     public PostV1EmployeesRequestBody withSsn(String ssn) {
         Utils.checkNotNull(ssn, "ssn");
         this.ssn = Optional.ofNullable(ssn);
@@ -218,6 +202,18 @@ public class PostV1EmployeesRequestBody {
     public PostV1EmployeesRequestBody withSsn(Optional<String> ssn) {
         Utils.checkNotNull(ssn, "ssn");
         this.ssn = ssn;
+        return this;
+    }
+
+    public PostV1EmployeesRequestBody withPreferredFirstName(String preferredFirstName) {
+        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
+        this.preferredFirstName = Optional.ofNullable(preferredFirstName);
+        return this;
+    }
+
+    public PostV1EmployeesRequestBody withPreferredFirstName(Optional<String> preferredFirstName) {
+        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
+        this.preferredFirstName = preferredFirstName;
         return this;
     }
 
@@ -252,10 +248,10 @@ public class PostV1EmployeesRequestBody {
             Objects.deepEquals(this.firstName, other.firstName) &&
             Objects.deepEquals(this.middleInitial, other.middleInitial) &&
             Objects.deepEquals(this.lastName, other.lastName) &&
-            Objects.deepEquals(this.preferredFirstName, other.preferredFirstName) &&
-            Objects.deepEquals(this.dateOfBirth, other.dateOfBirth) &&
             Objects.deepEquals(this.email, other.email) &&
+            Objects.deepEquals(this.dateOfBirth, other.dateOfBirth) &&
             Objects.deepEquals(this.ssn, other.ssn) &&
+            Objects.deepEquals(this.preferredFirstName, other.preferredFirstName) &&
             Objects.deepEquals(this.selfOnboarding, other.selfOnboarding);
     }
     
@@ -265,10 +261,10 @@ public class PostV1EmployeesRequestBody {
             firstName,
             middleInitial,
             lastName,
-            preferredFirstName,
-            dateOfBirth,
             email,
+            dateOfBirth,
             ssn,
+            preferredFirstName,
             selfOnboarding);
     }
     
@@ -278,10 +274,10 @@ public class PostV1EmployeesRequestBody {
                 "firstName", firstName,
                 "middleInitial", middleInitial,
                 "lastName", lastName,
-                "preferredFirstName", preferredFirstName,
-                "dateOfBirth", dateOfBirth,
                 "email", email,
+                "dateOfBirth", dateOfBirth,
                 "ssn", ssn,
+                "preferredFirstName", preferredFirstName,
                 "selfOnboarding", selfOnboarding);
     }
     
@@ -293,13 +289,13 @@ public class PostV1EmployeesRequestBody {
  
         private String lastName;
  
-        private Optional<String> preferredFirstName = Optional.empty();
- 
-        private Optional<String> dateOfBirth = Optional.empty();
- 
         private Optional<String> email = Optional.empty();
  
+        private Optional<LocalDate> dateOfBirth = Optional.empty();
+ 
         private Optional<String> ssn = Optional.empty();
+ 
+        private Optional<String> preferredFirstName = Optional.empty();
  
         private Optional<Boolean> selfOnboarding = Optional.empty();  
         
@@ -331,30 +327,6 @@ public class PostV1EmployeesRequestBody {
             return this;
         }
 
-        public Builder preferredFirstName(String preferredFirstName) {
-            Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-            this.preferredFirstName = Optional.ofNullable(preferredFirstName);
-            return this;
-        }
-
-        public Builder preferredFirstName(Optional<String> preferredFirstName) {
-            Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-            this.preferredFirstName = preferredFirstName;
-            return this;
-        }
-
-        public Builder dateOfBirth(String dateOfBirth) {
-            Utils.checkNotNull(dateOfBirth, "dateOfBirth");
-            this.dateOfBirth = Optional.ofNullable(dateOfBirth);
-            return this;
-        }
-
-        public Builder dateOfBirth(Optional<String> dateOfBirth) {
-            Utils.checkNotNull(dateOfBirth, "dateOfBirth");
-            this.dateOfBirth = dateOfBirth;
-            return this;
-        }
-
         /**
          * The employee's personal email address.
          */
@@ -373,6 +345,18 @@ public class PostV1EmployeesRequestBody {
             return this;
         }
 
+        public Builder dateOfBirth(LocalDate dateOfBirth) {
+            Utils.checkNotNull(dateOfBirth, "dateOfBirth");
+            this.dateOfBirth = Optional.ofNullable(dateOfBirth);
+            return this;
+        }
+
+        public Builder dateOfBirth(Optional<LocalDate> dateOfBirth) {
+            Utils.checkNotNull(dateOfBirth, "dateOfBirth");
+            this.dateOfBirth = dateOfBirth;
+            return this;
+        }
+
         public Builder ssn(String ssn) {
             Utils.checkNotNull(ssn, "ssn");
             this.ssn = Optional.ofNullable(ssn);
@@ -382,6 +366,18 @@ public class PostV1EmployeesRequestBody {
         public Builder ssn(Optional<String> ssn) {
             Utils.checkNotNull(ssn, "ssn");
             this.ssn = ssn;
+            return this;
+        }
+
+        public Builder preferredFirstName(String preferredFirstName) {
+            Utils.checkNotNull(preferredFirstName, "preferredFirstName");
+            this.preferredFirstName = Optional.ofNullable(preferredFirstName);
+            return this;
+        }
+
+        public Builder preferredFirstName(Optional<String> preferredFirstName) {
+            Utils.checkNotNull(preferredFirstName, "preferredFirstName");
+            this.preferredFirstName = preferredFirstName;
             return this;
         }
 
@@ -408,10 +404,10 @@ public class PostV1EmployeesRequestBody {
                 firstName,
                 middleInitial,
                 lastName,
-                preferredFirstName,
-                dateOfBirth,
                 email,
+                dateOfBirth,
                 ssn,
+                preferredFirstName,
                 selfOnboarding);
         }
     }

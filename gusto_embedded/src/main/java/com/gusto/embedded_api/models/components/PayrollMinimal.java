@@ -181,6 +181,13 @@ public class PayrollMinimal {
     @JsonProperty("credit_blockers")
     private Optional<? extends List<PayrollCreditBlockersType>> creditBlockers;
 
+    /**
+     * Array of reversal payroll UUIDs, if applicable.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("reversal_payroll_uuids")
+    private Optional<? extends List<String>> reversalPayrollUuids;
+
     @JsonCreator
     public PayrollMinimal(
             @JsonProperty("payroll_deadline") Optional<OffsetDateTime> payrollDeadline,
@@ -205,7 +212,8 @@ public class PayrollMinimal {
             @JsonProperty("payment_speed_changed") Optional<? extends PayrollPaymentSpeedChangedType> paymentSpeedChanged,
             @JsonProperty("created_at") Optional<OffsetDateTime> createdAt,
             @JsonProperty("submission_blockers") Optional<? extends List<PayrollSubmissionBlockersType>> submissionBlockers,
-            @JsonProperty("credit_blockers") Optional<? extends List<PayrollCreditBlockersType>> creditBlockers) {
+            @JsonProperty("credit_blockers") Optional<? extends List<PayrollCreditBlockersType>> creditBlockers,
+            @JsonProperty("reversal_payroll_uuids") Optional<? extends List<String>> reversalPayrollUuids) {
         Utils.checkNotNull(payrollDeadline, "payrollDeadline");
         Utils.checkNotNull(checkDate, "checkDate");
         Utils.checkNotNull(processed, "processed");
@@ -229,6 +237,7 @@ public class PayrollMinimal {
         Utils.checkNotNull(createdAt, "createdAt");
         Utils.checkNotNull(submissionBlockers, "submissionBlockers");
         Utils.checkNotNull(creditBlockers, "creditBlockers");
+        Utils.checkNotNull(reversalPayrollUuids, "reversalPayrollUuids");
         this.payrollDeadline = payrollDeadline;
         this.checkDate = checkDate;
         this.processed = processed;
@@ -252,6 +261,7 @@ public class PayrollMinimal {
         this.createdAt = createdAt;
         this.submissionBlockers = submissionBlockers;
         this.creditBlockers = creditBlockers;
+        this.reversalPayrollUuids = reversalPayrollUuids;
     }
     
     public PayrollMinimal(
@@ -259,7 +269,7 @@ public class PayrollMinimal {
             String uuid,
             String payrollUuid,
             String companyUuid) {
-        this(Optional.empty(), Optional.empty(), processed, Optional.empty(), Optional.empty(), uuid, payrollUuid, companyUuid, Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), processed, Optional.empty(), Optional.empty(), uuid, payrollUuid, companyUuid, Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -449,6 +459,15 @@ public class PayrollMinimal {
     @JsonIgnore
     public Optional<List<PayrollCreditBlockersType>> creditBlockers() {
         return (Optional<List<PayrollCreditBlockersType>>) creditBlockers;
+    }
+
+    /**
+     * Array of reversal payroll UUIDs, if applicable.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<String>> reversalPayrollUuids() {
+        return (Optional<List<String>>) reversalPayrollUuids;
     }
 
     public final static Builder builder() {
@@ -826,6 +845,24 @@ public class PayrollMinimal {
         this.creditBlockers = creditBlockers;
         return this;
     }
+
+    /**
+     * Array of reversal payroll UUIDs, if applicable.
+     */
+    public PayrollMinimal withReversalPayrollUuids(List<String> reversalPayrollUuids) {
+        Utils.checkNotNull(reversalPayrollUuids, "reversalPayrollUuids");
+        this.reversalPayrollUuids = Optional.ofNullable(reversalPayrollUuids);
+        return this;
+    }
+
+    /**
+     * Array of reversal payroll UUIDs, if applicable.
+     */
+    public PayrollMinimal withReversalPayrollUuids(Optional<? extends List<String>> reversalPayrollUuids) {
+        Utils.checkNotNull(reversalPayrollUuids, "reversalPayrollUuids");
+        this.reversalPayrollUuids = reversalPayrollUuids;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -859,7 +896,8 @@ public class PayrollMinimal {
             Objects.deepEquals(this.paymentSpeedChanged, other.paymentSpeedChanged) &&
             Objects.deepEquals(this.createdAt, other.createdAt) &&
             Objects.deepEquals(this.submissionBlockers, other.submissionBlockers) &&
-            Objects.deepEquals(this.creditBlockers, other.creditBlockers);
+            Objects.deepEquals(this.creditBlockers, other.creditBlockers) &&
+            Objects.deepEquals(this.reversalPayrollUuids, other.reversalPayrollUuids);
     }
     
     @Override
@@ -887,7 +925,8 @@ public class PayrollMinimal {
             paymentSpeedChanged,
             createdAt,
             submissionBlockers,
-            creditBlockers);
+            creditBlockers,
+            reversalPayrollUuids);
     }
     
     @Override
@@ -915,7 +954,8 @@ public class PayrollMinimal {
                 "paymentSpeedChanged", paymentSpeedChanged,
                 "createdAt", createdAt,
                 "submissionBlockers", submissionBlockers,
-                "creditBlockers", creditBlockers);
+                "creditBlockers", creditBlockers,
+                "reversalPayrollUuids", reversalPayrollUuids);
     }
     
     public final static class Builder {
@@ -964,7 +1004,9 @@ public class PayrollMinimal {
  
         private Optional<? extends List<PayrollSubmissionBlockersType>> submissionBlockers = Optional.empty();
  
-        private Optional<? extends List<PayrollCreditBlockersType>> creditBlockers = Optional.empty();  
+        private Optional<? extends List<PayrollCreditBlockersType>> creditBlockers = Optional.empty();
+ 
+        private Optional<? extends List<String>> reversalPayrollUuids = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -1341,6 +1383,24 @@ public class PayrollMinimal {
             this.creditBlockers = creditBlockers;
             return this;
         }
+
+        /**
+         * Array of reversal payroll UUIDs, if applicable.
+         */
+        public Builder reversalPayrollUuids(List<String> reversalPayrollUuids) {
+            Utils.checkNotNull(reversalPayrollUuids, "reversalPayrollUuids");
+            this.reversalPayrollUuids = Optional.ofNullable(reversalPayrollUuids);
+            return this;
+        }
+
+        /**
+         * Array of reversal payroll UUIDs, if applicable.
+         */
+        public Builder reversalPayrollUuids(Optional<? extends List<String>> reversalPayrollUuids) {
+            Utils.checkNotNull(reversalPayrollUuids, "reversalPayrollUuids");
+            this.reversalPayrollUuids = reversalPayrollUuids;
+            return this;
+        }
         
         public PayrollMinimal build() {
             return new PayrollMinimal(
@@ -1366,7 +1426,8 @@ public class PayrollMinimal {
                 paymentSpeedChanged,
                 createdAt,
                 submissionBlockers,
-                creditBlockers);
+                creditBlockers,
+                reversalPayrollUuids);
         }
     }
 }

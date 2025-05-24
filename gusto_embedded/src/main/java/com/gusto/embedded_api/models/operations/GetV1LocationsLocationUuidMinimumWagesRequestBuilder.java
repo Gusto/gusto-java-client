@@ -5,7 +5,6 @@
 package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Exception;
@@ -15,11 +14,11 @@ import java.util.Optional;
 public class GetV1LocationsLocationUuidMinimumWagesRequestBuilder {
 
     private String locationUuid;
-    private Optional<String> effectiveDate = Optional.empty();
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2024-04-01\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion>>() {});
+    private Optional<String> effectiveDate = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetV1LocationsLocationUuidMinimumWages sdk;
 
     public GetV1LocationsLocationUuidMinimumWagesRequestBuilder(SDKMethodInterfaces.MethodCallGetV1LocationsLocationUuidMinimumWages sdk) {
@@ -29,6 +28,18 @@ public class GetV1LocationsLocationUuidMinimumWagesRequestBuilder {
     public GetV1LocationsLocationUuidMinimumWagesRequestBuilder locationUuid(String locationUuid) {
         Utils.checkNotNull(locationUuid, "locationUuid");
         this.locationUuid = locationUuid;
+        return this;
+    }
+                
+    public GetV1LocationsLocationUuidMinimumWagesRequestBuilder xGustoAPIVersion(GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public GetV1LocationsLocationUuidMinimumWagesRequestBuilder xGustoAPIVersion(Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
                 
@@ -43,18 +54,6 @@ public class GetV1LocationsLocationUuidMinimumWagesRequestBuilder {
         this.effectiveDate = effectiveDate;
         return this;
     }
-                
-    public GetV1LocationsLocationUuidMinimumWagesRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
-
-    public GetV1LocationsLocationUuidMinimumWagesRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
 
     public GetV1LocationsLocationUuidMinimumWagesResponse call() throws Exception {
         if (xGustoAPIVersion == null) {
@@ -62,13 +61,13 @@ public class GetV1LocationsLocationUuidMinimumWagesRequestBuilder {
         }
         return sdk.getMinimumWages(
             locationUuid,
-            effectiveDate,
-            xGustoAPIVersion);
+            xGustoAPIVersion,
+            effectiveDate);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2024-04-01\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion>>() {});
 }

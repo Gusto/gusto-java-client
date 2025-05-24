@@ -6,12 +6,13 @@
 ### Available Operations
 
 * [createCustom](#createcustom) - Create a custom report
-* [get](#get) - Get a report
+* [postPayrollsPayrollUuidReportsGeneralLedger](#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
+* [getReportsRequestUuid](#getreportsrequestuuid) - Get a report
 * [getTemplate](#gettemplate) - Get a report template
 
 ## createCustom
 
-Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint. This URL is valid for 10 minutes.
+Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid). This URL is valid for 10 minutes.
 
 scope: `company_reports:write`
 
@@ -80,7 +81,68 @@ public class Application {
 | models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
-## get
+## postPayrollsPayrollUuidReportsGeneralLedger
+
+Create a general ledger report for a payroll. The report can be aggregated by different dimensions such as job or department.
+
+Use the `request_uuid` in the response with the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
+
+scope: `company_reports:write`
+
+### Example Usage
+
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+            .build();
+
+        PostPayrollsPayrollUuidReportsGeneralLedgerResponse res = sdk.reports().postPayrollsPayrollUuidReportsGeneralLedger()
+                .payrollUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .requestBody(PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody.builder()
+                    .aggregation(Aggregation.DEPARTMENT)
+                    .build())
+                .call();
+
+        if (res.generalLedgerReport().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `payrollUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the payroll                                                                                                                                                                                                      |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `requestBody`                                                                                                                                                                                                                | [PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody](../../models/operations/PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody.md)                                                                                  | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PostPayrollsPayrollUuidReportsGeneralLedgerResponse](../../models/operations/PostPayrollsPayrollUuidReportsGeneralLedgerResponse.md)**
+
+### Errors
+
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+
+## getReportsRequestUuid
 
 Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
 
@@ -93,7 +155,7 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.GetReportsReportUuidResponse;
+import com.gusto.embedded_api.models.operations.GetReportsRequestUuidResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -104,8 +166,8 @@ public class Application {
                 .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
-        GetReportsReportUuidResponse res = sdk.reports().get()
-                .reportUuid("<id>")
+        GetReportsRequestUuidResponse res = sdk.reports().getReportsRequestUuid()
+                .requestUuid("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
@@ -120,12 +182,12 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `reportUuid`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the report request                                                                                                                                                                                               |
+| `requestUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the request to generate a document. Generate document endpoints return request_uuids to be used with the GET generated document endpoint.                                                                        |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
-**[GetReportsReportUuidResponse](../../models/operations/GetReportsReportUuidResponse.md)**
+**[GetReportsRequestUuidResponse](../../models/operations/GetReportsRequestUuidResponse.md)**
 
 ### Errors
 

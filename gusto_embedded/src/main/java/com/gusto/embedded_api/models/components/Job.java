@@ -81,7 +81,7 @@ public class Job {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payment_unit")
-    private Optional<String> paymentUnit;
+    private JsonNullable<String> paymentUnit;
 
     /**
      * The UUID of the current compensation of the job.
@@ -115,6 +115,20 @@ public class Job {
     @JsonProperty("compensations")
     private Optional<? extends List<Compensation>> compensations;
 
+    /**
+     * The uuid of the employee's work location.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("location_uuid")
+    private Optional<String> locationUuid;
+
+    /**
+     * The representation of an address in Gusto.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("location")
+    private Optional<? extends Location> location;
+
     @JsonCreator
     public Job(
             @JsonProperty("uuid") String uuid,
@@ -124,12 +138,14 @@ public class Job {
             @JsonProperty("title") JsonNullable<String> title,
             @JsonProperty("primary") Optional<Boolean> primary,
             @JsonProperty("rate") Optional<String> rate,
-            @JsonProperty("payment_unit") Optional<String> paymentUnit,
+            @JsonProperty("payment_unit") JsonNullable<String> paymentUnit,
             @JsonProperty("current_compensation_uuid") Optional<String> currentCompensationUuid,
             @JsonProperty("two_percent_shareholder") Optional<Boolean> twoPercentShareholder,
             @JsonProperty("state_wc_covered") JsonNullable<Boolean> stateWcCovered,
             @JsonProperty("state_wc_class_code") JsonNullable<String> stateWcClassCode,
-            @JsonProperty("compensations") Optional<? extends List<Compensation>> compensations) {
+            @JsonProperty("compensations") Optional<? extends List<Compensation>> compensations,
+            @JsonProperty("location_uuid") Optional<String> locationUuid,
+            @JsonProperty("location") Optional<? extends Location> location) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(employeeUuid, "employeeUuid");
@@ -143,6 +159,8 @@ public class Job {
         Utils.checkNotNull(stateWcCovered, "stateWcCovered");
         Utils.checkNotNull(stateWcClassCode, "stateWcClassCode");
         Utils.checkNotNull(compensations, "compensations");
+        Utils.checkNotNull(locationUuid, "locationUuid");
+        Utils.checkNotNull(location, "location");
         this.uuid = uuid;
         this.version = version;
         this.employeeUuid = employeeUuid;
@@ -156,11 +174,13 @@ public class Job {
         this.stateWcCovered = stateWcCovered;
         this.stateWcClassCode = stateWcClassCode;
         this.compensations = compensations;
+        this.locationUuid = locationUuid;
+        this.location = location;
     }
     
     public Job(
             String uuid) {
-        this(uuid, Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty());
+        this(uuid, Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -223,7 +243,7 @@ public class Job {
      * The payment unit of the current compensation for the job.
      */
     @JsonIgnore
-    public Optional<String> paymentUnit() {
+    public JsonNullable<String> paymentUnit() {
         return paymentUnit;
     }
 
@@ -263,6 +283,23 @@ public class Job {
     @JsonIgnore
     public Optional<List<Compensation>> compensations() {
         return (Optional<List<Compensation>>) compensations;
+    }
+
+    /**
+     * The uuid of the employee's work location.
+     */
+    @JsonIgnore
+    public Optional<String> locationUuid() {
+        return locationUuid;
+    }
+
+    /**
+     * The representation of an address in Gusto.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Location> location() {
+        return (Optional<Location>) location;
     }
 
     public final static Builder builder() {
@@ -391,14 +428,14 @@ public class Job {
      */
     public Job withPaymentUnit(String paymentUnit) {
         Utils.checkNotNull(paymentUnit, "paymentUnit");
-        this.paymentUnit = Optional.ofNullable(paymentUnit);
+        this.paymentUnit = JsonNullable.of(paymentUnit);
         return this;
     }
 
     /**
      * The payment unit of the current compensation for the job.
      */
-    public Job withPaymentUnit(Optional<String> paymentUnit) {
+    public Job withPaymentUnit(JsonNullable<String> paymentUnit) {
         Utils.checkNotNull(paymentUnit, "paymentUnit");
         this.paymentUnit = paymentUnit;
         return this;
@@ -487,6 +524,42 @@ public class Job {
         this.compensations = compensations;
         return this;
     }
+
+    /**
+     * The uuid of the employee's work location.
+     */
+    public Job withLocationUuid(String locationUuid) {
+        Utils.checkNotNull(locationUuid, "locationUuid");
+        this.locationUuid = Optional.ofNullable(locationUuid);
+        return this;
+    }
+
+    /**
+     * The uuid of the employee's work location.
+     */
+    public Job withLocationUuid(Optional<String> locationUuid) {
+        Utils.checkNotNull(locationUuid, "locationUuid");
+        this.locationUuid = locationUuid;
+        return this;
+    }
+
+    /**
+     * The representation of an address in Gusto.
+     */
+    public Job withLocation(Location location) {
+        Utils.checkNotNull(location, "location");
+        this.location = Optional.ofNullable(location);
+        return this;
+    }
+
+    /**
+     * The representation of an address in Gusto.
+     */
+    public Job withLocation(Optional<? extends Location> location) {
+        Utils.checkNotNull(location, "location");
+        this.location = location;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -510,7 +583,9 @@ public class Job {
             Objects.deepEquals(this.twoPercentShareholder, other.twoPercentShareholder) &&
             Objects.deepEquals(this.stateWcCovered, other.stateWcCovered) &&
             Objects.deepEquals(this.stateWcClassCode, other.stateWcClassCode) &&
-            Objects.deepEquals(this.compensations, other.compensations);
+            Objects.deepEquals(this.compensations, other.compensations) &&
+            Objects.deepEquals(this.locationUuid, other.locationUuid) &&
+            Objects.deepEquals(this.location, other.location);
     }
     
     @Override
@@ -528,7 +603,9 @@ public class Job {
             twoPercentShareholder,
             stateWcCovered,
             stateWcClassCode,
-            compensations);
+            compensations,
+            locationUuid,
+            location);
     }
     
     @Override
@@ -546,7 +623,9 @@ public class Job {
                 "twoPercentShareholder", twoPercentShareholder,
                 "stateWcCovered", stateWcCovered,
                 "stateWcClassCode", stateWcClassCode,
-                "compensations", compensations);
+                "compensations", compensations,
+                "locationUuid", locationUuid,
+                "location", location);
     }
     
     public final static class Builder {
@@ -565,7 +644,7 @@ public class Job {
  
         private Optional<String> rate = Optional.empty();
  
-        private Optional<String> paymentUnit = Optional.empty();
+        private JsonNullable<String> paymentUnit = JsonNullable.undefined();
  
         private Optional<String> currentCompensationUuid = Optional.empty();
  
@@ -575,7 +654,11 @@ public class Job {
  
         private JsonNullable<String> stateWcClassCode = JsonNullable.undefined();
  
-        private Optional<? extends List<Compensation>> compensations = Optional.empty();  
+        private Optional<? extends List<Compensation>> compensations = Optional.empty();
+ 
+        private Optional<String> locationUuid = Optional.empty();
+ 
+        private Optional<? extends Location> location = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -703,14 +786,14 @@ public class Job {
          */
         public Builder paymentUnit(String paymentUnit) {
             Utils.checkNotNull(paymentUnit, "paymentUnit");
-            this.paymentUnit = Optional.ofNullable(paymentUnit);
+            this.paymentUnit = JsonNullable.of(paymentUnit);
             return this;
         }
 
         /**
          * The payment unit of the current compensation for the job.
          */
-        public Builder paymentUnit(Optional<String> paymentUnit) {
+        public Builder paymentUnit(JsonNullable<String> paymentUnit) {
             Utils.checkNotNull(paymentUnit, "paymentUnit");
             this.paymentUnit = paymentUnit;
             return this;
@@ -799,6 +882,42 @@ public class Job {
             this.compensations = compensations;
             return this;
         }
+
+        /**
+         * The uuid of the employee's work location.
+         */
+        public Builder locationUuid(String locationUuid) {
+            Utils.checkNotNull(locationUuid, "locationUuid");
+            this.locationUuid = Optional.ofNullable(locationUuid);
+            return this;
+        }
+
+        /**
+         * The uuid of the employee's work location.
+         */
+        public Builder locationUuid(Optional<String> locationUuid) {
+            Utils.checkNotNull(locationUuid, "locationUuid");
+            this.locationUuid = locationUuid;
+            return this;
+        }
+
+        /**
+         * The representation of an address in Gusto.
+         */
+        public Builder location(Location location) {
+            Utils.checkNotNull(location, "location");
+            this.location = Optional.ofNullable(location);
+            return this;
+        }
+
+        /**
+         * The representation of an address in Gusto.
+         */
+        public Builder location(Optional<? extends Location> location) {
+            Utils.checkNotNull(location, "location");
+            this.location = location;
+            return this;
+        }
         
         public Job build() {
             if (title == null) {
@@ -816,7 +935,9 @@ public class Job {
                 twoPercentShareholder,
                 stateWcCovered,
                 stateWcClassCode,
-                compensations);
+                compensations,
+                locationUuid,
+                location);
         }
 
         private static final LazySingletonValue<JsonNullable<String>> _SINGLETON_VALUE_Title =

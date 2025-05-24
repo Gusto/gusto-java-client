@@ -18,6 +18,7 @@ import com.gusto.embedded_api.models.operations.DeleteV1EmployeesEmployeeIdRehir
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeesEmployeeIdTerminationsRequest;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeesEmployeeIdTerminationsRequestBuilder;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeesEmployeeIdTerminationsResponse;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdEmploymentHistoryRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdEmploymentHistoryRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdEmploymentHistoryResponse;
@@ -1582,7 +1583,7 @@ public class EmployeeEmployments implements
      */
     public GetV1EmployeesEmployeeIdEmploymentHistoryResponse getHistory(
             String employeeId) throws Exception {
-        return getHistory(employeeId, Optional.empty());
+        return getHistory(Optional.empty(), employeeId);
     }
     
     /**
@@ -1592,19 +1593,19 @@ public class EmployeeEmployments implements
      * 
      * <p>scope: `employments:read`
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetV1EmployeesEmployeeIdEmploymentHistoryResponse getHistory(
-            String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
+            Optional<? extends GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeId) throws Exception {
         GetV1EmployeesEmployeeIdEmploymentHistoryRequest request =
             GetV1EmployeesEmployeeIdEmploymentHistoryRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -1695,7 +1696,21 @@ public class EmployeeEmployments implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<UnprocessableEntityErrorObject>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 

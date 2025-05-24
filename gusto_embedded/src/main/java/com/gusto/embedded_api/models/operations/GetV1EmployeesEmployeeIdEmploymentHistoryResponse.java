@@ -37,7 +37,7 @@ public class GetV1EmployeesEmployeeIdEmploymentHistoryResponse implements Respon
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * successful
      */
     private Optional<? extends List<EmploymentHistoryList>> employmentHistoryList;
 
@@ -89,7 +89,7 @@ public class GetV1EmployeesEmployeeIdEmploymentHistoryResponse implements Respon
     }
 
     /**
-     * Example response
+     * successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -129,7 +129,7 @@ public class GetV1EmployeesEmployeeIdEmploymentHistoryResponse implements Respon
     }
 
     /**
-     * Example response
+     * successful
      */
     public GetV1EmployeesEmployeeIdEmploymentHistoryResponse withEmploymentHistoryList(List<EmploymentHistoryList> employmentHistoryList) {
         Utils.checkNotNull(employmentHistoryList, "employmentHistoryList");
@@ -138,7 +138,7 @@ public class GetV1EmployeesEmployeeIdEmploymentHistoryResponse implements Respon
     }
 
     /**
-     * Example response
+     * successful
      */
     public GetV1EmployeesEmployeeIdEmploymentHistoryResponse withEmploymentHistoryList(Optional<? extends List<EmploymentHistoryList>> employmentHistoryList) {
         Utils.checkNotNull(employmentHistoryList, "employmentHistoryList");
@@ -222,7 +222,7 @@ public class GetV1EmployeesEmployeeIdEmploymentHistoryResponse implements Respon
         }
 
         /**
-         * Example response
+         * successful
          */
         public Builder employmentHistoryList(List<EmploymentHistoryList> employmentHistoryList) {
             Utils.checkNotNull(employmentHistoryList, "employmentHistoryList");
@@ -231,7 +231,7 @@ public class GetV1EmployeesEmployeeIdEmploymentHistoryResponse implements Respon
         }
 
         /**
-         * Example response
+         * successful
          */
         public Builder employmentHistoryList(Optional<? extends List<EmploymentHistoryList>> employmentHistoryList) {
             Utils.checkNotNull(employmentHistoryList, "employmentHistoryList");
