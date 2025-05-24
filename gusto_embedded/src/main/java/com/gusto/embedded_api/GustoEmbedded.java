@@ -150,6 +150,8 @@ public class GustoEmbedded {
 
     private final Events events;
 
+    private final InformationRequests informationRequests;
+
     private final RecoveryCases recoveryCases;
 
     private final AchTransactions achTransactions;
@@ -338,6 +340,10 @@ public class GustoEmbedded {
 
     public Events events() {
         return events;
+    }
+
+    public InformationRequests informationRequests() {
+        return informationRequests;
     }
 
     public RecoveryCases recoveryCases() {
@@ -535,6 +541,7 @@ public class GustoEmbedded {
         this.holidayPayPolicies = new HolidayPayPolicies(sdkConfiguration);
         this.notifications = new Notifications(sdkConfiguration);
         this.events = new Events(sdkConfiguration);
+        this.informationRequests = new InformationRequests(sdkConfiguration);
         this.recoveryCases = new RecoveryCases(sdkConfiguration);
         this.achTransactions = new AchTransactions(sdkConfiguration);
         this.wireInRequests = new WireInRequests(sdkConfiguration);

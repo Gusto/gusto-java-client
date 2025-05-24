@@ -46,14 +46,14 @@ public class TaxRequirement {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
-    private Optional<String> description;
+    private JsonNullable<String> description;
 
     /**
      * The "answer"
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("value")
-    private JsonNullable<String> value;
+    private JsonNullable<? extends TaxRequirementValue> value;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metadata")
@@ -64,8 +64,8 @@ public class TaxRequirement {
             @JsonProperty("key") Optional<String> key,
             @JsonProperty("applicable_if") Optional<? extends List<ApplicableIf>> applicableIf,
             @JsonProperty("label") Optional<String> label,
-            @JsonProperty("description") Optional<String> description,
-            @JsonProperty("value") JsonNullable<String> value,
+            @JsonProperty("description") JsonNullable<String> description,
+            @JsonProperty("value") JsonNullable<? extends TaxRequirementValue> value,
             @JsonProperty("metadata") Optional<? extends TaxRequirementMetadata> metadata) {
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(applicableIf, "applicableIf");
@@ -82,7 +82,7 @@ public class TaxRequirement {
     }
     
     public TaxRequirement() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty());
     }
 
     /**
@@ -114,16 +114,17 @@ public class TaxRequirement {
      * A more detailed customer facing description of the requirement
      */
     @JsonIgnore
-    public Optional<String> description() {
+    public JsonNullable<String> description() {
         return description;
     }
 
     /**
      * The "answer"
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<String> value() {
-        return value;
+    public JsonNullable<TaxRequirementValue> value() {
+        return (JsonNullable<TaxRequirementValue>) value;
     }
 
     @SuppressWarnings("unchecked")
@@ -195,14 +196,14 @@ public class TaxRequirement {
      */
     public TaxRequirement withDescription(String description) {
         Utils.checkNotNull(description, "description");
-        this.description = Optional.ofNullable(description);
+        this.description = JsonNullable.of(description);
         return this;
     }
 
     /**
      * A more detailed customer facing description of the requirement
      */
-    public TaxRequirement withDescription(Optional<String> description) {
+    public TaxRequirement withDescription(JsonNullable<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
         return this;
@@ -211,7 +212,7 @@ public class TaxRequirement {
     /**
      * The "answer"
      */
-    public TaxRequirement withValue(String value) {
+    public TaxRequirement withValue(TaxRequirementValue value) {
         Utils.checkNotNull(value, "value");
         this.value = JsonNullable.of(value);
         return this;
@@ -220,7 +221,7 @@ public class TaxRequirement {
     /**
      * The "answer"
      */
-    public TaxRequirement withValue(JsonNullable<String> value) {
+    public TaxRequirement withValue(JsonNullable<? extends TaxRequirementValue> value) {
         Utils.checkNotNull(value, "value");
         this.value = value;
         return this;
@@ -286,9 +287,9 @@ public class TaxRequirement {
  
         private Optional<String> label = Optional.empty();
  
-        private Optional<String> description = Optional.empty();
+        private JsonNullable<String> description = JsonNullable.undefined();
  
-        private JsonNullable<String> value = JsonNullable.undefined();
+        private JsonNullable<? extends TaxRequirementValue> value = JsonNullable.undefined();
  
         private Optional<? extends TaxRequirementMetadata> metadata = Optional.empty();  
         
@@ -355,14 +356,14 @@ public class TaxRequirement {
          */
         public Builder description(String description) {
             Utils.checkNotNull(description, "description");
-            this.description = Optional.ofNullable(description);
+            this.description = JsonNullable.of(description);
             return this;
         }
 
         /**
          * A more detailed customer facing description of the requirement
          */
-        public Builder description(Optional<String> description) {
+        public Builder description(JsonNullable<String> description) {
             Utils.checkNotNull(description, "description");
             this.description = description;
             return this;
@@ -371,7 +372,7 @@ public class TaxRequirement {
         /**
          * The "answer"
          */
-        public Builder value(String value) {
+        public Builder value(TaxRequirementValue value) {
             Utils.checkNotNull(value, "value");
             this.value = JsonNullable.of(value);
             return this;
@@ -380,7 +381,7 @@ public class TaxRequirement {
         /**
          * The "answer"
          */
-        public Builder value(JsonNullable<String> value) {
+        public Builder value(JsonNullable<? extends TaxRequirementValue> value) {
             Utils.checkNotNull(value, "value");
             this.value = value;
             return this;

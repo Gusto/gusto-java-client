@@ -112,14 +112,14 @@ public class WireInRequest {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payment_type")
-    private Optional<String> paymentType;
+    private Optional<? extends PaymentType> paymentType;
 
     /**
      * Unique identifier of the payment
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payment_uuid")
-    private Optional<? extends PaymentUuid> paymentUuid;
+    private Optional<String> paymentUuid;
 
     /**
      * Amount sent through wire in
@@ -156,8 +156,8 @@ public class WireInRequest {
             @JsonProperty("bank_name") Optional<String> bankName,
             @JsonProperty("date_sent") Optional<String> dateSent,
             @JsonProperty("unique_tracking_code") Optional<String> uniqueTrackingCode,
-            @JsonProperty("payment_type") Optional<String> paymentType,
-            @JsonProperty("payment_uuid") Optional<? extends PaymentUuid> paymentUuid,
+            @JsonProperty("payment_type") Optional<? extends PaymentType> paymentType,
+            @JsonProperty("payment_uuid") Optional<String> paymentUuid,
             @JsonProperty("amount_sent") Optional<String> amountSent,
             @JsonProperty("requested_amount") Optional<String> requestedAmount,
             @JsonProperty("wire_in_deadline") Optional<String> wireInDeadline) {
@@ -301,18 +301,18 @@ public class WireInRequest {
     /**
      * Type of payment for the wire in
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> paymentType() {
-        return paymentType;
+    public Optional<PaymentType> paymentType() {
+        return (Optional<PaymentType>) paymentType;
     }
 
     /**
      * Unique identifier of the payment
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PaymentUuid> paymentUuid() {
-        return (Optional<PaymentUuid>) paymentUuid;
+    public Optional<String> paymentUuid() {
+        return paymentUuid;
     }
 
     /**
@@ -562,7 +562,7 @@ public class WireInRequest {
     /**
      * Type of payment for the wire in
      */
-    public WireInRequest withPaymentType(String paymentType) {
+    public WireInRequest withPaymentType(PaymentType paymentType) {
         Utils.checkNotNull(paymentType, "paymentType");
         this.paymentType = Optional.ofNullable(paymentType);
         return this;
@@ -571,7 +571,7 @@ public class WireInRequest {
     /**
      * Type of payment for the wire in
      */
-    public WireInRequest withPaymentType(Optional<String> paymentType) {
+    public WireInRequest withPaymentType(Optional<? extends PaymentType> paymentType) {
         Utils.checkNotNull(paymentType, "paymentType");
         this.paymentType = paymentType;
         return this;
@@ -580,7 +580,7 @@ public class WireInRequest {
     /**
      * Unique identifier of the payment
      */
-    public WireInRequest withPaymentUuid(PaymentUuid paymentUuid) {
+    public WireInRequest withPaymentUuid(String paymentUuid) {
         Utils.checkNotNull(paymentUuid, "paymentUuid");
         this.paymentUuid = Optional.ofNullable(paymentUuid);
         return this;
@@ -589,7 +589,7 @@ public class WireInRequest {
     /**
      * Unique identifier of the payment
      */
-    public WireInRequest withPaymentUuid(Optional<? extends PaymentUuid> paymentUuid) {
+    public WireInRequest withPaymentUuid(Optional<String> paymentUuid) {
         Utils.checkNotNull(paymentUuid, "paymentUuid");
         this.paymentUuid = paymentUuid;
         return this;
@@ -748,9 +748,9 @@ public class WireInRequest {
  
         private Optional<String> uniqueTrackingCode = Optional.empty();
  
-        private Optional<String> paymentType = Optional.empty();
+        private Optional<? extends PaymentType> paymentType = Optional.empty();
  
-        private Optional<? extends PaymentUuid> paymentUuid = Optional.empty();
+        private Optional<String> paymentUuid = Optional.empty();
  
         private Optional<String> amountSent = Optional.empty();
  
@@ -981,7 +981,7 @@ public class WireInRequest {
         /**
          * Type of payment for the wire in
          */
-        public Builder paymentType(String paymentType) {
+        public Builder paymentType(PaymentType paymentType) {
             Utils.checkNotNull(paymentType, "paymentType");
             this.paymentType = Optional.ofNullable(paymentType);
             return this;
@@ -990,7 +990,7 @@ public class WireInRequest {
         /**
          * Type of payment for the wire in
          */
-        public Builder paymentType(Optional<String> paymentType) {
+        public Builder paymentType(Optional<? extends PaymentType> paymentType) {
             Utils.checkNotNull(paymentType, "paymentType");
             this.paymentType = paymentType;
             return this;
@@ -999,7 +999,7 @@ public class WireInRequest {
         /**
          * Unique identifier of the payment
          */
-        public Builder paymentUuid(PaymentUuid paymentUuid) {
+        public Builder paymentUuid(String paymentUuid) {
             Utils.checkNotNull(paymentUuid, "paymentUuid");
             this.paymentUuid = Optional.ofNullable(paymentUuid);
             return this;
@@ -1008,7 +1008,7 @@ public class WireInRequest {
         /**
          * Unique identifier of the payment
          */
-        public Builder paymentUuid(Optional<? extends PaymentUuid> paymentUuid) {
+        public Builder paymentUuid(Optional<String> paymentUuid) {
             Utils.checkNotNull(paymentUuid, "paymentUuid");
             this.paymentUuid = paymentUuid;
             return this;

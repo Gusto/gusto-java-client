@@ -37,7 +37,7 @@ public class GetV1LocationsLocationUuidMinimumWagesResponse implements Response 
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * successful
      */
     private Optional<? extends List<MinimumWage>> minimumWageList;
 
@@ -89,7 +89,7 @@ public class GetV1LocationsLocationUuidMinimumWagesResponse implements Response 
     }
 
     /**
-     * Example response
+     * successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -129,7 +129,7 @@ public class GetV1LocationsLocationUuidMinimumWagesResponse implements Response 
     }
 
     /**
-     * Example response
+     * successful
      */
     public GetV1LocationsLocationUuidMinimumWagesResponse withMinimumWageList(List<MinimumWage> minimumWageList) {
         Utils.checkNotNull(minimumWageList, "minimumWageList");
@@ -138,7 +138,7 @@ public class GetV1LocationsLocationUuidMinimumWagesResponse implements Response 
     }
 
     /**
-     * Example response
+     * successful
      */
     public GetV1LocationsLocationUuidMinimumWagesResponse withMinimumWageList(Optional<? extends List<MinimumWage>> minimumWageList) {
         Utils.checkNotNull(minimumWageList, "minimumWageList");
@@ -222,7 +222,7 @@ public class GetV1LocationsLocationUuidMinimumWagesResponse implements Response 
         }
 
         /**
-         * Example response
+         * successful
          */
         public Builder minimumWageList(List<MinimumWage> minimumWageList) {
             Utils.checkNotNull(minimumWageList, "minimumWageList");
@@ -231,7 +231,7 @@ public class GetV1LocationsLocationUuidMinimumWagesResponse implements Response 
         }
 
         /**
-         * Example response
+         * successful
          */
         public Builder minimumWageList(Optional<? extends List<MinimumWage>> minimumWageList) {
             Utils.checkNotNull(minimumWageList, "minimumWageList");

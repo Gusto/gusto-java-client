@@ -16,9 +16,11 @@ import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdLocations
 import com.gusto.embedded_api.models.operations.GetV1LocationsLocationIdRequest;
 import com.gusto.embedded_api.models.operations.GetV1LocationsLocationIdRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1LocationsLocationIdResponse;
+import com.gusto.embedded_api.models.operations.GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1LocationsLocationUuidMinimumWagesRequest;
 import com.gusto.embedded_api.models.operations.GetV1LocationsLocationUuidMinimumWagesRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1LocationsLocationUuidMinimumWagesResponse;
+import com.gusto.embedded_api.models.operations.HeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdLocationsRequest;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdLocationsRequestBody;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdLocationsRequestBuilder;
@@ -28,6 +30,7 @@ import com.gusto.embedded_api.models.operations.PutV1LocationsLocationIdRequestB
 import com.gusto.embedded_api.models.operations.PutV1LocationsLocationIdRequestBuilder;
 import com.gusto.embedded_api.models.operations.PutV1LocationsLocationIdResponse;
 import com.gusto.embedded_api.models.operations.SDKMethodInterfaces.*;
+import com.gusto.embedded_api.models.operations.XGustoAPIVersion;
 import com.gusto.embedded_api.utils.HTTPClient;
 import com.gusto.embedded_api.utils.HTTPRequest;
 import com.gusto.embedded_api.utils.Hook.AfterErrorContextImpl;
@@ -469,7 +472,7 @@ public class Locations implements
      */
     public GetV1LocationsLocationIdResponse retrieve(
             String locationId) throws Exception {
-        return retrieve(locationId, Optional.empty());
+        return retrieve(Optional.empty(), locationId);
     }
     
     /**
@@ -479,19 +482,19 @@ public class Locations implements
      * 
      * <p>scope: `companies:read`
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param locationId The UUID of the location
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetV1LocationsLocationIdResponse retrieve(
-            String locationId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
+            Optional<? extends XGustoAPIVersion> xGustoAPIVersion,
+            String locationId) throws Exception {
         GetV1LocationsLocationIdRequest request =
             GetV1LocationsLocationIdRequest
                 .builder()
-                .locationId(locationId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .locationId(locationId)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -582,7 +585,21 @@ public class Locations implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<UnprocessableEntityErrorObject>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -628,14 +645,14 @@ public class Locations implements
      * <p>scope: `companies.write`
      * 
      * @param locationId The UUID of the location
-     * @param requestBody Update a location
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public PutV1LocationsLocationIdResponse update(
             String locationId,
             PutV1LocationsLocationIdRequestBody requestBody) throws Exception {
-        return update(locationId, Optional.empty(), requestBody);
+        return update(Optional.empty(), locationId, requestBody);
     }
     
     /**
@@ -645,21 +662,21 @@ public class Locations implements
      * 
      * <p>scope: `companies.write`
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param locationId The UUID of the location
-     * @param xGustoAPIVersion 
-     * @param requestBody Update a location
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public PutV1LocationsLocationIdResponse update(
+            Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion,
             String locationId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1LocationsLocationIdRequestBody requestBody) throws Exception {
         PutV1LocationsLocationIdRequest request =
             PutV1LocationsLocationIdRequest
                 .builder()
-                .locationId(locationId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .locationId(locationId)
                 .requestBody(requestBody)
                 .build();
         
@@ -705,7 +722,7 @@ public class Locations implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "422", "4XX", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "409", "422", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -764,7 +781,7 @@ public class Locations implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "409", "422")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
@@ -778,7 +795,7 @@ public class Locations implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -840,21 +857,21 @@ public class Locations implements
      * <p>scope: `companies:read`
      * 
      * @param locationUuid The UUID of the location
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param effectiveDate 
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetV1LocationsLocationUuidMinimumWagesResponse getMinimumWages(
             String locationUuid,
-            Optional<String> effectiveDate,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
+            Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<String> effectiveDate) throws Exception {
         GetV1LocationsLocationUuidMinimumWagesRequest request =
             GetV1LocationsLocationUuidMinimumWagesRequest
                 .builder()
                 .locationUuid(locationUuid)
-                .effectiveDate(effectiveDate)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .effectiveDate(effectiveDate)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -950,7 +967,21 @@ public class Locations implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<UnprocessableEntityErrorObject>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 

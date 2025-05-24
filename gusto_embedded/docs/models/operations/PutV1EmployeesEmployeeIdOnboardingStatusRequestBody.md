@@ -3,6 +3,6 @@
 
 ## Fields
 
-| Field                                          | Type                                           | Required                                       | Description                                    |
-| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| `onboardingStatus`                             | *String*                                       | :heavy_check_mark:                             | The updated onboarding status for the employee |
+| Field                                                           | Type                                                            | Required                                                        | Description                                                     |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `onboardingStatus`                                              | [OnboardingStatus](../../models/operations/OnboardingStatus.md) | :heavy_check_mark:                                              | Onboarding status value                                         |

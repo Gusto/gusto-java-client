@@ -13,18 +13,21 @@ import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.DeleteV1HomeAddressesHomeAddressUuidRequest;
 import com.gusto.embedded_api.models.operations.DeleteV1HomeAddressesHomeAddressUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.DeleteV1HomeAddressesHomeAddressUuidResponse;
+import com.gusto.embedded_api.models.operations.DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1WorkAddressesWorkAddressUuidRequest;
 import com.gusto.embedded_api.models.operations.DeleteV1WorkAddressesWorkAddressUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.DeleteV1WorkAddressesWorkAddressUuidResponse;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdHomeAddressesRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdHomeAddressesResponse;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdWorkAddressesRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdWorkAddressesRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdWorkAddressesResponse;
 import com.gusto.embedded_api.models.operations.GetV1HomeAddressesHomeAddressUuidRequest;
 import com.gusto.embedded_api.models.operations.GetV1HomeAddressesHomeAddressUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1HomeAddressesHomeAddressUuidResponse;
+import com.gusto.embedded_api.models.operations.GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1WorkAddressesWorkAddressUuidRequest;
 import com.gusto.embedded_api.models.operations.GetV1WorkAddressesWorkAddressUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1WorkAddressesWorkAddressUuidResponse;
@@ -32,6 +35,7 @@ import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdHomeAdd
 import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdHomeAddressesRequestBody;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdHomeAddressesResponse;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdWorkAddressesRequest;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdWorkAddressesRequestBody;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdWorkAddressesRequestBuilder;
@@ -40,6 +44,7 @@ import com.gusto.embedded_api.models.operations.PutV1HomeAddressesHomeAddressUui
 import com.gusto.embedded_api.models.operations.PutV1HomeAddressesHomeAddressUuidRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1HomeAddressesHomeAddressUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.PutV1HomeAddressesHomeAddressUuidResponse;
+import com.gusto.embedded_api.models.operations.PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1WorkAddressesWorkAddressUuidRequest;
 import com.gusto.embedded_api.models.operations.PutV1WorkAddressesWorkAddressUuidRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1WorkAddressesWorkAddressUuidRequestBuilder;
@@ -995,8 +1000,8 @@ public class EmployeeAddresses implements
     /**
      * Get an employee's work addresses
      * 
-     * <p>Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
-     * signifying if it is the currently active work address.
+     * <p>Returns a list of an employee's work addresses. Each address includes its effective
+     * date and a boolean signifying if it is the currently active work address.
      * 
      * <p>scope: `employees:read`
      * 
@@ -1009,8 +1014,8 @@ public class EmployeeAddresses implements
     /**
      * Get an employee's work addresses
      * 
-     * <p>Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
-     * signifying if it is the currently active work address.
+     * <p>Returns a list of an employee's work addresses. Each address includes its effective
+     * date and a boolean signifying if it is the currently active work address.
      * 
      * <p>scope: `employees:read`
      * 
@@ -1026,19 +1031,19 @@ public class EmployeeAddresses implements
     /**
      * Get an employee's work addresses
      * 
-     * <p>Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
-     * signifying if it is the currently active work address.
+     * <p>Returns a list of an employee's work addresses. Each address includes its effective
+     * date and a boolean signifying if it is the currently active work address.
      * 
      * <p>scope: `employees:read`
      * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetV1EmployeesEmployeeIdWorkAddressesResponse getWorkAddresses(
             String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
+            Optional<? extends GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion) throws Exception {
         GetV1EmployeesEmployeeIdWorkAddressesRequest request =
             GetV1EmployeesEmployeeIdWorkAddressesRequest
                 .builder()
@@ -1124,7 +1129,7 @@ public class EmployeeAddresses implements
                 List<EmployeeWorkAddress> _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<List<EmployeeWorkAddress>>() {});
-                _res.withEmployeeWorkAddressList(Optional.ofNullable(_out));
+                _res.withEmployeeWorkAddressesList(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(
@@ -1134,7 +1139,21 @@ public class EmployeeAddresses implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<UnprocessableEntityErrorObject>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -1198,14 +1217,14 @@ public class EmployeeAddresses implements
      * <p>scope: `employees:manage`
      * 
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public PostV1EmployeesEmployeeIdWorkAddressesResponse createWorkAddress(
             String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
+            Optional<? extends PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion,
             PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody) throws Exception {
         PostV1EmployeesEmployeeIdWorkAddressesRequest request =
             PostV1EmployeesEmployeeIdWorkAddressesRequest
@@ -1316,7 +1335,7 @@ public class EmployeeAddresses implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "422")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
@@ -1330,7 +1349,7 @@ public class EmployeeAddresses implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -1392,13 +1411,13 @@ public class EmployeeAddresses implements
      * <p>scope: `employees:read`
      * 
      * @param workAddressUuid The UUID of the work address
-     * @param xGustoAPIVersion 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetV1WorkAddressesWorkAddressUuidResponse retrieveWorkAddress(
             String workAddressUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
+            Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) throws Exception {
         GetV1WorkAddressesWorkAddressUuidRequest request =
             GetV1WorkAddressesWorkAddressUuidRequest
                 .builder()
@@ -1494,7 +1513,21 @@ public class EmployeeAddresses implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<UnprocessableEntityErrorObject>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -1558,14 +1591,14 @@ public class EmployeeAddresses implements
      * <p>scope: `employees:manage`
      * 
      * @param workAddressUuid The UUID of the work address
-     * @param xGustoAPIVersion 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public PutV1WorkAddressesWorkAddressUuidResponse updateWorkAddress(
             String workAddressUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
+            Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
             PutV1WorkAddressesWorkAddressUuidRequestBody requestBody) throws Exception {
         PutV1WorkAddressesWorkAddressUuidRequest request =
             PutV1WorkAddressesWorkAddressUuidRequest
@@ -1676,7 +1709,7 @@ public class EmployeeAddresses implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "422")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
@@ -1690,7 +1723,7 @@ public class EmployeeAddresses implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -1718,7 +1751,7 @@ public class EmployeeAddresses implements
     /**
      * Delete an employee's work address
      * 
-     * <p>Used for deleting an employee's work address.  Cannot delete the employee's active work address.
+     * <p>Used for deleting an employee's work address. Cannot delete the employee's active work address.
      * 
      * <p>scope: `employees:manage`
      * 
@@ -1731,7 +1764,7 @@ public class EmployeeAddresses implements
     /**
      * Delete an employee's work address
      * 
-     * <p>Used for deleting an employee's work address.  Cannot delete the employee's active work address.
+     * <p>Used for deleting an employee's work address. Cannot delete the employee's active work address.
      * 
      * <p>scope: `employees:manage`
      * 
@@ -1747,18 +1780,18 @@ public class EmployeeAddresses implements
     /**
      * Delete an employee's work address
      * 
-     * <p>Used for deleting an employee's work address.  Cannot delete the employee's active work address.
+     * <p>Used for deleting an employee's work address. Cannot delete the employee's active work address.
      * 
      * <p>scope: `employees:manage`
      * 
      * @param workAddressUuid The UUID of the work address
-     * @param xGustoAPIVersion 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public DeleteV1WorkAddressesWorkAddressUuidResponse deleteWorkAddress(
             String workAddressUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
+            Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) throws Exception {
         DeleteV1WorkAddressesWorkAddressUuidRequest request =
             DeleteV1WorkAddressesWorkAddressUuidRequest
                 .builder()
@@ -1843,7 +1876,7 @@ public class EmployeeAddresses implements
             // no content 
             return _res;
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "422")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
@@ -1857,7 +1890,7 @@ public class EmployeeAddresses implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 

@@ -11,9 +11,11 @@ import java.util.Optional;
 /**
  * OnboardingStatus
  * 
- * <p>The updated onboarding status for the contractor
+ * <p>Onboarding status value
  */
 public enum OnboardingStatus {
+    SELF_ONBOARDING_INVITED("self_onboarding_invited"),
+    ADMIN_ONBOARDING_INCOMPLETE("admin_onboarding_incomplete"),
     ONBOARDING_COMPLETED("onboarding_completed");
 
     @JsonValue

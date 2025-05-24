@@ -6,6 +6,7 @@ package com.gusto.embedded_api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.models.components.CreateReport;
+import com.gusto.embedded_api.models.components.GeneralLedgerReport;
 import com.gusto.embedded_api.models.components.Report;
 import com.gusto.embedded_api.models.components.ReportTemplate;
 import com.gusto.embedded_api.models.components.VersionHeader;
@@ -14,13 +15,17 @@ import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidReportTemplatesReportTypeRequest;
 import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidReportTemplatesReportTypeRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidReportTemplatesReportTypeResponse;
-import com.gusto.embedded_api.models.operations.GetReportsReportUuidRequest;
-import com.gusto.embedded_api.models.operations.GetReportsReportUuidRequestBuilder;
-import com.gusto.embedded_api.models.operations.GetReportsReportUuidResponse;
+import com.gusto.embedded_api.models.operations.GetReportsRequestUuidRequest;
+import com.gusto.embedded_api.models.operations.GetReportsRequestUuidRequestBuilder;
+import com.gusto.embedded_api.models.operations.GetReportsRequestUuidResponse;
 import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidReportsRequest;
 import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidReportsRequestBody;
 import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidReportsRequestBuilder;
 import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidReportsResponse;
+import com.gusto.embedded_api.models.operations.PostPayrollsPayrollUuidReportsGeneralLedgerRequest;
+import com.gusto.embedded_api.models.operations.PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody;
+import com.gusto.embedded_api.models.operations.PostPayrollsPayrollUuidReportsGeneralLedgerRequestBuilder;
+import com.gusto.embedded_api.models.operations.PostPayrollsPayrollUuidReportsGeneralLedgerResponse;
 import com.gusto.embedded_api.models.operations.SDKMethodInterfaces.*;
 import com.gusto.embedded_api.utils.HTTPClient;
 import com.gusto.embedded_api.utils.HTTPRequest;
@@ -41,7 +46,8 @@ import java.util.Optional;
 
 public class Reports implements
             MethodCallPostCompaniesCompanyUuidReports,
-            MethodCallGetReportsReportUuid,
+            MethodCallPostPayrollsPayrollUuidReportsGeneralLedger,
+            MethodCallGetReportsRequestUuid,
             MethodCallGetCompaniesCompanyUuidReportTemplatesReportType {
 
     private final SDKConfiguration sdkConfiguration;
@@ -54,7 +60,7 @@ public class Reports implements
     /**
      * Create a custom report
      * 
-     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint. This URL is valid for 10 minutes.
+     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid). This URL is valid for 10 minutes.
      * 
      * <p>scope: `company_reports:write`
      * 
@@ -67,7 +73,7 @@ public class Reports implements
     /**
      * Create a custom report
      * 
-     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint. This URL is valid for 10 minutes.
+     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid). This URL is valid for 10 minutes.
      * 
      * <p>scope: `company_reports:write`
      * 
@@ -85,7 +91,7 @@ public class Reports implements
     /**
      * Create a custom report
      * 
-     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint. This URL is valid for 10 minutes.
+     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid). This URL is valid for 10 minutes.
      * 
      * <p>scope: `company_reports:write`
      * 
@@ -248,6 +254,208 @@ public class Reports implements
 
 
     /**
+     * Create a general ledger report
+     * 
+     * <p>Create a general ledger report for a payroll. The report can be aggregated by different dimensions such as job or department.
+     * 
+     * <p>Use the `request_uuid` in the response with the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * @return The call builder
+     */
+    public PostPayrollsPayrollUuidReportsGeneralLedgerRequestBuilder postPayrollsPayrollUuidReportsGeneralLedger() {
+        return new PostPayrollsPayrollUuidReportsGeneralLedgerRequestBuilder(this);
+    }
+
+    /**
+     * Create a general ledger report
+     * 
+     * <p>Create a general ledger report for a payroll. The report can be aggregated by different dimensions such as job or department.
+     * 
+     * <p>Use the `request_uuid` in the response with the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * @param payrollUuid The UUID of the payroll
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public PostPayrollsPayrollUuidReportsGeneralLedgerResponse postPayrollsPayrollUuidReportsGeneralLedger(
+            String payrollUuid,
+            PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody requestBody) throws Exception {
+        return postPayrollsPayrollUuidReportsGeneralLedger(payrollUuid, Optional.empty(), requestBody);
+    }
+    
+    /**
+     * Create a general ledger report
+     * 
+     * <p>Create a general ledger report for a payroll. The report can be aggregated by different dimensions such as job or department.
+     * 
+     * <p>Use the `request_uuid` in the response with the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * @param payrollUuid The UUID of the payroll
+     * @param xGustoAPIVersion 
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public PostPayrollsPayrollUuidReportsGeneralLedgerResponse postPayrollsPayrollUuidReportsGeneralLedger(
+            String payrollUuid,
+            Optional<? extends VersionHeader> xGustoAPIVersion,
+            PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody requestBody) throws Exception {
+        PostPayrollsPayrollUuidReportsGeneralLedgerRequest request =
+            PostPayrollsPayrollUuidReportsGeneralLedgerRequest
+                .builder()
+                .payrollUuid(payrollUuid)
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .requestBody(requestBody)
+                .build();
+        
+        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _url = Utils.generateURL(
+                PostPayrollsPayrollUuidReportsGeneralLedgerRequest.class,
+                _baseUrl,
+                "/v1/payrolls/{payroll_uuid}/reports/general_ledger",
+                request, null);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "POST");
+        Object _convertedRequest = Utils.convertToShape(
+                request, 
+                JsonShape.DEFAULT,
+                new TypeReference<Object>() {});
+        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
+                _convertedRequest, 
+                "requestBody",
+                "json",
+                false);
+        if (_serializedRequestBody == null) {
+            throw new Exception("Request body is required");
+        }
+        _req.setBody(Optional.ofNullable(_serializedRequestBody));
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      _baseUrl,
+                      "post-payrolls-payroll_uuid-reports-general_ledger", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "422", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            _baseUrl,
+                            "post-payrolls-payroll_uuid-reports-general_ledger",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            _baseUrl,
+                            "post-payrolls-payroll_uuid-reports-general_ledger",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            _baseUrl,
+                            "post-payrolls-payroll_uuid-reports-general_ledger",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        PostPayrollsPayrollUuidReportsGeneralLedgerResponse.Builder _resBuilder = 
+            PostPayrollsPayrollUuidReportsGeneralLedgerResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        PostPayrollsPayrollUuidReportsGeneralLedgerResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GeneralLedgerReport _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GeneralLedgerReport>() {});
+                _res.withGeneralLedgerReport(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<UnprocessableEntityErrorObject>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new APIException(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
      * Get a report
      * 
      * <p>Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
@@ -256,8 +464,8 @@ public class Reports implements
      * 
      * @return The call builder
      */
-    public GetReportsReportUuidRequestBuilder get() {
-        return new GetReportsReportUuidRequestBuilder(this);
+    public GetReportsRequestUuidRequestBuilder getReportsRequestUuid() {
+        return new GetReportsRequestUuidRequestBuilder(this);
     }
 
     /**
@@ -267,13 +475,13 @@ public class Reports implements
      * 
      * <p>scope: `company_reports:read`
      * 
-     * @param reportUuid The UUID of the report request
+     * @param requestUuid The UUID of the request to generate a document. Generate document endpoints return request_uuids to be used with the GET generated document endpoint.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetReportsReportUuidResponse get(
-            String reportUuid) throws Exception {
-        return get(reportUuid, Optional.empty());
+    public GetReportsRequestUuidResponse getReportsRequestUuid(
+            String requestUuid) throws Exception {
+        return getReportsRequestUuid(requestUuid, Optional.empty());
     }
     
     /**
@@ -283,26 +491,26 @@ public class Reports implements
      * 
      * <p>scope: `company_reports:read`
      * 
-     * @param reportUuid The UUID of the report request
+     * @param requestUuid The UUID of the request to generate a document. Generate document endpoints return request_uuids to be used with the GET generated document endpoint.
      * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetReportsReportUuidResponse get(
-            String reportUuid,
+    public GetReportsRequestUuidResponse getReportsRequestUuid(
+            String requestUuid,
             Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
-        GetReportsReportUuidRequest request =
-            GetReportsReportUuidRequest
+        GetReportsRequestUuidRequest request =
+            GetReportsRequestUuidRequest
                 .builder()
-                .reportUuid(reportUuid)
+                .requestUuid(requestUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
-                GetReportsReportUuidRequest.class,
+                GetReportsRequestUuidRequest.class,
                 _baseUrl,
-                "/v1/reports/{report_uuid}",
+                "/v1/reports/{request_uuid}",
                 request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
@@ -320,7 +528,7 @@ public class Reports implements
                .beforeRequest(
                   new BeforeRequestContextImpl(
                       _baseUrl,
-                      "get-reports-report_uuid", 
+                      "get-reports-request_uuid", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
                   _req.build());
@@ -332,7 +540,7 @@ public class Reports implements
                     .afterError(
                         new AfterErrorContextImpl(
                             _baseUrl,
-                            "get-reports-report_uuid",
+                            "get-reports-request_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
@@ -342,7 +550,7 @@ public class Reports implements
                     .afterSuccess(
                         new AfterSuccessContextImpl(
                             _baseUrl,
-                            "get-reports-report_uuid",
+                            "get-reports-request_uuid",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
                          _httpRes);
@@ -352,7 +560,7 @@ public class Reports implements
                     .afterError(
                         new AfterErrorContextImpl(
                             _baseUrl,
-                            "get-reports-report_uuid",
+                            "get-reports-request_uuid",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
                         Optional.empty(),
@@ -362,14 +570,14 @@ public class Reports implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        GetReportsReportUuidResponse.Builder _resBuilder = 
-            GetReportsReportUuidResponse
+        GetReportsRequestUuidResponse.Builder _resBuilder = 
+            GetReportsRequestUuidResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        GetReportsReportUuidResponse _res = _resBuilder.build();
+        GetReportsRequestUuidResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {

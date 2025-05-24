@@ -19,7 +19,7 @@ import java.util.Optional;
 /**
  * EmploymentHistoryList
  * 
- * <p>Example response
+ * <p>The representation of an employee's individual employements.
  */
 
 public class EmploymentHistoryList {

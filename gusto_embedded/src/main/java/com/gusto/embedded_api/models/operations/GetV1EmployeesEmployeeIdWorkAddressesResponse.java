@@ -39,22 +39,22 @@ public class GetV1EmployeesEmployeeIdWorkAddressesResponse implements Response {
     /**
      * List of employee work addresses
      */
-    private Optional<? extends List<EmployeeWorkAddress>> employeeWorkAddressList;
+    private Optional<? extends List<EmployeeWorkAddress>> employeeWorkAddressesList;
 
     @JsonCreator
     public GetV1EmployeesEmployeeIdWorkAddressesResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<EmployeeWorkAddress>> employeeWorkAddressList) {
+            Optional<? extends List<EmployeeWorkAddress>> employeeWorkAddressesList) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(employeeWorkAddressList, "employeeWorkAddressList");
+        Utils.checkNotNull(employeeWorkAddressesList, "employeeWorkAddressesList");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.employeeWorkAddressList = employeeWorkAddressList;
+        this.employeeWorkAddressesList = employeeWorkAddressesList;
     }
     
     public GetV1EmployeesEmployeeIdWorkAddressesResponse(
@@ -93,8 +93,8 @@ public class GetV1EmployeesEmployeeIdWorkAddressesResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<EmployeeWorkAddress>> employeeWorkAddressList() {
-        return (Optional<List<EmployeeWorkAddress>>) employeeWorkAddressList;
+    public Optional<List<EmployeeWorkAddress>> employeeWorkAddressesList() {
+        return (Optional<List<EmployeeWorkAddress>>) employeeWorkAddressesList;
     }
 
     public final static Builder builder() {
@@ -131,18 +131,18 @@ public class GetV1EmployeesEmployeeIdWorkAddressesResponse implements Response {
     /**
      * List of employee work addresses
      */
-    public GetV1EmployeesEmployeeIdWorkAddressesResponse withEmployeeWorkAddressList(List<EmployeeWorkAddress> employeeWorkAddressList) {
-        Utils.checkNotNull(employeeWorkAddressList, "employeeWorkAddressList");
-        this.employeeWorkAddressList = Optional.ofNullable(employeeWorkAddressList);
+    public GetV1EmployeesEmployeeIdWorkAddressesResponse withEmployeeWorkAddressesList(List<EmployeeWorkAddress> employeeWorkAddressesList) {
+        Utils.checkNotNull(employeeWorkAddressesList, "employeeWorkAddressesList");
+        this.employeeWorkAddressesList = Optional.ofNullable(employeeWorkAddressesList);
         return this;
     }
 
     /**
      * List of employee work addresses
      */
-    public GetV1EmployeesEmployeeIdWorkAddressesResponse withEmployeeWorkAddressList(Optional<? extends List<EmployeeWorkAddress>> employeeWorkAddressList) {
-        Utils.checkNotNull(employeeWorkAddressList, "employeeWorkAddressList");
-        this.employeeWorkAddressList = employeeWorkAddressList;
+    public GetV1EmployeesEmployeeIdWorkAddressesResponse withEmployeeWorkAddressesList(Optional<? extends List<EmployeeWorkAddress>> employeeWorkAddressesList) {
+        Utils.checkNotNull(employeeWorkAddressesList, "employeeWorkAddressesList");
+        this.employeeWorkAddressesList = employeeWorkAddressesList;
         return this;
     }
     
@@ -159,7 +159,7 @@ public class GetV1EmployeesEmployeeIdWorkAddressesResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.employeeWorkAddressList, other.employeeWorkAddressList);
+            Objects.deepEquals(this.employeeWorkAddressesList, other.employeeWorkAddressesList);
     }
     
     @Override
@@ -168,7 +168,7 @@ public class GetV1EmployeesEmployeeIdWorkAddressesResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            employeeWorkAddressList);
+            employeeWorkAddressesList);
     }
     
     @Override
@@ -177,7 +177,7 @@ public class GetV1EmployeesEmployeeIdWorkAddressesResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "employeeWorkAddressList", employeeWorkAddressList);
+                "employeeWorkAddressesList", employeeWorkAddressesList);
     }
     
     public final static class Builder {
@@ -188,7 +188,7 @@ public class GetV1EmployeesEmployeeIdWorkAddressesResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends List<EmployeeWorkAddress>> employeeWorkAddressList = Optional.empty();  
+        private Optional<? extends List<EmployeeWorkAddress>> employeeWorkAddressesList = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -224,18 +224,18 @@ public class GetV1EmployeesEmployeeIdWorkAddressesResponse implements Response {
         /**
          * List of employee work addresses
          */
-        public Builder employeeWorkAddressList(List<EmployeeWorkAddress> employeeWorkAddressList) {
-            Utils.checkNotNull(employeeWorkAddressList, "employeeWorkAddressList");
-            this.employeeWorkAddressList = Optional.ofNullable(employeeWorkAddressList);
+        public Builder employeeWorkAddressesList(List<EmployeeWorkAddress> employeeWorkAddressesList) {
+            Utils.checkNotNull(employeeWorkAddressesList, "employeeWorkAddressesList");
+            this.employeeWorkAddressesList = Optional.ofNullable(employeeWorkAddressesList);
             return this;
         }
 
         /**
          * List of employee work addresses
          */
-        public Builder employeeWorkAddressList(Optional<? extends List<EmployeeWorkAddress>> employeeWorkAddressList) {
-            Utils.checkNotNull(employeeWorkAddressList, "employeeWorkAddressList");
-            this.employeeWorkAddressList = employeeWorkAddressList;
+        public Builder employeeWorkAddressesList(Optional<? extends List<EmployeeWorkAddress>> employeeWorkAddressesList) {
+            Utils.checkNotNull(employeeWorkAddressesList, "employeeWorkAddressesList");
+            this.employeeWorkAddressesList = employeeWorkAddressesList;
             return this;
         }
         
@@ -244,7 +244,7 @@ public class GetV1EmployeesEmployeeIdWorkAddressesResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
-                employeeWorkAddressList);
+                employeeWorkAddressesList);
         }
     }
 }

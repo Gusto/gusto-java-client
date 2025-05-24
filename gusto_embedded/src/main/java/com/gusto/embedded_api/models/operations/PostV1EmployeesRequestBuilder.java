@@ -5,7 +5,6 @@
 package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Exception;
@@ -14,16 +13,28 @@ import java.util.Optional;
 
 public class PostV1EmployeesRequestBuilder {
 
-    private String companyId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PostV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2024-04-01\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PostV1EmployeesRequestBody requestBody;
+                            new TypeReference<Optional<? extends PostV1EmployeesHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private Optional<? extends PostV1EmployeesRequestBody> requestBody = Optional.empty();
     private final SDKMethodInterfaces.MethodCallPostV1Employees sdk;
 
     public PostV1EmployeesRequestBuilder(SDKMethodInterfaces.MethodCallPostV1Employees sdk) {
         this.sdk = sdk;
+    }
+                
+    public PostV1EmployeesRequestBuilder xGustoAPIVersion(PostV1EmployeesHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PostV1EmployeesRequestBuilder xGustoAPIVersion(Optional<? extends PostV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PostV1EmployeesRequestBuilder companyId(String companyId) {
@@ -32,19 +43,13 @@ public class PostV1EmployeesRequestBuilder {
         return this;
     }
                 
-    public PostV1EmployeesRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
-
-    public PostV1EmployeesRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
     public PostV1EmployeesRequestBuilder requestBody(PostV1EmployeesRequestBody requestBody) {
+        Utils.checkNotNull(requestBody, "requestBody");
+        this.requestBody = Optional.of(requestBody);
+        return this;
+    }
+
+    public PostV1EmployeesRequestBuilder requestBody(Optional<? extends PostV1EmployeesRequestBody> requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
         return this;
@@ -55,14 +60,14 @@ public class PostV1EmployeesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
         return sdk.create(
-            companyId,
             xGustoAPIVersion,
+            companyId,
             requestBody);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PostV1EmployeesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2024-04-01\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PostV1EmployeesHeaderXGustoAPIVersion>>() {});
 }

@@ -5,7 +5,6 @@
 package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Exception;
@@ -14,16 +13,28 @@ import java.util.Optional;
 
 public class GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder {
 
-    private String payrollId;
-    private String employeeId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2024-04-01\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion>>() {});
+    private String payrollId;
+    private String employeeId;
     private final SDKMethodInterfaces.MethodCallGetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStub sdk;
 
     public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder(SDKMethodInterfaces.MethodCallGetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStub sdk) {
         this.sdk = sdk;
+    }
+                
+    public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder xGustoAPIVersion(GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder xGustoAPIVersion(Optional<? extends GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder payrollId(String payrollId) {
@@ -37,32 +48,20 @@ public class GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder 
         this.employeeId = employeeId;
         return this;
     }
-                
-    public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
-
-    public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
 
     public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse call() throws Exception {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
         return sdk.getPayStub(
+            xGustoAPIVersion,
             payrollId,
-            employeeId,
-            xGustoAPIVersion);
+            employeeId);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2024-04-01\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion>>() {});
 }

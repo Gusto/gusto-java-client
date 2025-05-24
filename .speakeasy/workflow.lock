@@ -2,20 +2,20 @@ speakeasyVersion: 1.525.2
 sources:
     GustoEmbedded-OAS:
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:bb694d0087b14cbcbac56c6f63203d43552891f2c8a49319ce33abedc35440bf
-        sourceBlobDigest: sha256:37549766e4e4aaa724787a0c4d2ebc89fb776a0ccd77ca1836ece4c10a011b95
+        sourceRevisionDigest: sha256:be714595092b38e09d39d65b877d9e8a86bd52c926d66b949a9cc188601b2fa7
+        sourceBlobDigest: sha256:58bac3b0a66b3771214f68c2c08660af8b65c369f4f599bbde1323d94f240b52
         tags:
             - latest
-            - speakeasy-sdk-regen-1743812272
+            - speakeasy-sdk-regen-1747700399
             - "2024-04-01"
 targets:
     gusto-embedded:
         source: GustoEmbedded-OAS
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:bb694d0087b14cbcbac56c6f63203d43552891f2c8a49319ce33abedc35440bf
-        sourceBlobDigest: sha256:37549766e4e4aaa724787a0c4d2ebc89fb776a0ccd77ca1836ece4c10a011b95
+        sourceRevisionDigest: sha256:be714595092b38e09d39d65b877d9e8a86bd52c926d66b949a9cc188601b2fa7
+        sourceBlobDigest: sha256:58bac3b0a66b3771214f68c2c08660af8b65c369f4f599bbde1323d94f240b52
         codeSamplesNamespace: gusto-embedded-oas-java-code-samples
-        codeSamplesRevisionDigest: sha256:48a3996e1a4d708a380a5c626cdac8591bc0f9c87a1c65dd002e57e9eb6ed311
+        codeSamplesRevisionDigest: sha256:15d0a463d920a6e5c58f4a4dc30e460eac0a10b1b33f6d272c6472d87db67b62
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

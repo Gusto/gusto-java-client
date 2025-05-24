@@ -13,9 +13,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
+import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -105,7 +107,7 @@ public class Employee {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("onboarding_status")
-    private Optional<? extends OnboardingStatus> onboardingStatus;
+    private JsonNullable<? extends OnboardingStatus> onboardingStatus;
 
     /**
      * Configuration for an employee onboarding documents during onboarding
@@ -184,6 +186,50 @@ public class Employee {
     @JsonProperty("current_employment_status")
     private JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("historical")
+    private Optional<Boolean> historical;
+
+    /**
+     * The short format code of the employee
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("employee_code")
+    private Optional<String> employeeCode;
+
+    /**
+     * The UUID of the department the employee is under
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("department_uuid")
+    private JsonNullable<String> departmentUuid;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("title")
+    private Optional<String> title;
+
+    /**
+     * The date when the employee was hired to the company
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("hired_at")
+    private Optional<LocalDate> hiredAt;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("hidden_ssn")
+    private Optional<String> hiddenSsn;
+
+    /**
+     * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("flsa_status")
+    private Optional<? extends FlsaStatusType> flsaStatus;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("applicable_tax_ids")
+    private Optional<? extends List<Double>> applicableTaxIds;
+
     @JsonCreator
     public Employee(
             @JsonProperty("uuid") String uuid,
@@ -198,7 +244,7 @@ public class Employee {
             @JsonProperty("terminated") Optional<Boolean> terminated,
             @JsonProperty("two_percent_shareholder") JsonNullable<Boolean> twoPercentShareholder,
             @JsonProperty("onboarded") Optional<Boolean> onboarded,
-            @JsonProperty("onboarding_status") Optional<? extends OnboardingStatus> onboardingStatus,
+            @JsonProperty("onboarding_status") JsonNullable<? extends OnboardingStatus> onboardingStatus,
             @JsonProperty("onboarding_documents_config") Optional<? extends OnboardingDocumentsConfig> onboardingDocumentsConfig,
             @JsonProperty("jobs") Optional<? extends List<Job>> jobs,
             @JsonProperty("eligible_paid_time_off") Optional<? extends List<PaidTimeOff>> eligiblePaidTimeOff,
@@ -212,7 +258,15 @@ public class Employee {
             @JsonProperty("preferred_first_name") JsonNullable<String> preferredFirstName,
             @JsonProperty("payment_method") Optional<? extends PaymentMethod> paymentMethod,
             @JsonProperty("work_email") JsonNullable<String> workEmail,
-            @JsonProperty("current_employment_status") JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus) {
+            @JsonProperty("current_employment_status") JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus,
+            @JsonProperty("historical") Optional<Boolean> historical,
+            @JsonProperty("employee_code") Optional<String> employeeCode,
+            @JsonProperty("department_uuid") JsonNullable<String> departmentUuid,
+            @JsonProperty("title") Optional<String> title,
+            @JsonProperty("hired_at") Optional<LocalDate> hiredAt,
+            @JsonProperty("hidden_ssn") Optional<String> hiddenSsn,
+            @JsonProperty("flsa_status") Optional<? extends FlsaStatusType> flsaStatus,
+            @JsonProperty("applicable_tax_ids") Optional<? extends List<Double>> applicableTaxIds) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(firstName, "firstName");
         Utils.checkNotNull(middleInitial, "middleInitial");
@@ -240,6 +294,14 @@ public class Employee {
         Utils.checkNotNull(paymentMethod, "paymentMethod");
         Utils.checkNotNull(workEmail, "workEmail");
         Utils.checkNotNull(currentEmploymentStatus, "currentEmploymentStatus");
+        Utils.checkNotNull(historical, "historical");
+        Utils.checkNotNull(employeeCode, "employeeCode");
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        Utils.checkNotNull(title, "title");
+        Utils.checkNotNull(hiredAt, "hiredAt");
+        Utils.checkNotNull(hiddenSsn, "hiddenSsn");
+        Utils.checkNotNull(flsaStatus, "flsaStatus");
+        Utils.checkNotNull(applicableTaxIds, "applicableTaxIds");
         this.uuid = uuid;
         this.firstName = firstName;
         this.middleInitial = middleInitial;
@@ -267,13 +329,21 @@ public class Employee {
         this.paymentMethod = paymentMethod;
         this.workEmail = workEmail;
         this.currentEmploymentStatus = currentEmploymentStatus;
+        this.historical = historical;
+        this.employeeCode = employeeCode;
+        this.departmentUuid = departmentUuid;
+        this.title = title;
+        this.hiredAt = hiredAt;
+        this.hiddenSsn = hiddenSsn;
+        this.flsaStatus = flsaStatus;
+        this.applicableTaxIds = applicableTaxIds;
     }
     
     public Employee(
             String uuid,
             String firstName,
             String lastName) {
-        this(uuid, firstName, JsonNullable.undefined(), lastName, JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined());
+        this(uuid, firstName, JsonNullable.undefined(), lastName, JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -368,8 +438,8 @@ public class Employee {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<OnboardingStatus> onboardingStatus() {
-        return (Optional<OnboardingStatus>) onboardingStatus;
+    public JsonNullable<OnboardingStatus> onboardingStatus() {
+        return (JsonNullable<OnboardingStatus>) onboardingStatus;
     }
 
     /**
@@ -469,6 +539,60 @@ public class Employee {
     @JsonIgnore
     public JsonNullable<CurrentEmploymentStatus> currentEmploymentStatus() {
         return (JsonNullable<CurrentEmploymentStatus>) currentEmploymentStatus;
+    }
+
+    @JsonIgnore
+    public Optional<Boolean> historical() {
+        return historical;
+    }
+
+    /**
+     * The short format code of the employee
+     */
+    @JsonIgnore
+    public Optional<String> employeeCode() {
+        return employeeCode;
+    }
+
+    /**
+     * The UUID of the department the employee is under
+     */
+    @JsonIgnore
+    public JsonNullable<String> departmentUuid() {
+        return departmentUuid;
+    }
+
+    @JsonIgnore
+    public Optional<String> title() {
+        return title;
+    }
+
+    /**
+     * The date when the employee was hired to the company
+     */
+    @JsonIgnore
+    public Optional<LocalDate> hiredAt() {
+        return hiredAt;
+    }
+
+    @JsonIgnore
+    public Optional<String> hiddenSsn() {
+        return hiddenSsn;
+    }
+
+    /**
+     * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<FlsaStatusType> flsaStatus() {
+        return (Optional<FlsaStatusType>) flsaStatus;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Double>> applicableTaxIds() {
+        return (Optional<List<Double>>) applicableTaxIds;
     }
 
     public final static Builder builder() {
@@ -657,14 +781,14 @@ public class Employee {
      */
     public Employee withOnboardingStatus(OnboardingStatus onboardingStatus) {
         Utils.checkNotNull(onboardingStatus, "onboardingStatus");
-        this.onboardingStatus = Optional.ofNullable(onboardingStatus);
+        this.onboardingStatus = JsonNullable.of(onboardingStatus);
         return this;
     }
 
     /**
      * The current onboarding status of the employee
      */
-    public Employee withOnboardingStatus(Optional<? extends OnboardingStatus> onboardingStatus) {
+    public Employee withOnboardingStatus(JsonNullable<? extends OnboardingStatus> onboardingStatus) {
         Utils.checkNotNull(onboardingStatus, "onboardingStatus");
         this.onboardingStatus = onboardingStatus;
         return this;
@@ -879,6 +1003,126 @@ public class Employee {
         this.currentEmploymentStatus = currentEmploymentStatus;
         return this;
     }
+
+    public Employee withHistorical(boolean historical) {
+        Utils.checkNotNull(historical, "historical");
+        this.historical = Optional.ofNullable(historical);
+        return this;
+    }
+
+    public Employee withHistorical(Optional<Boolean> historical) {
+        Utils.checkNotNull(historical, "historical");
+        this.historical = historical;
+        return this;
+    }
+
+    /**
+     * The short format code of the employee
+     */
+    public Employee withEmployeeCode(String employeeCode) {
+        Utils.checkNotNull(employeeCode, "employeeCode");
+        this.employeeCode = Optional.ofNullable(employeeCode);
+        return this;
+    }
+
+    /**
+     * The short format code of the employee
+     */
+    public Employee withEmployeeCode(Optional<String> employeeCode) {
+        Utils.checkNotNull(employeeCode, "employeeCode");
+        this.employeeCode = employeeCode;
+        return this;
+    }
+
+    /**
+     * The UUID of the department the employee is under
+     */
+    public Employee withDepartmentUuid(String departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = JsonNullable.of(departmentUuid);
+        return this;
+    }
+
+    /**
+     * The UUID of the department the employee is under
+     */
+    public Employee withDepartmentUuid(JsonNullable<String> departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = departmentUuid;
+        return this;
+    }
+
+    public Employee withTitle(String title) {
+        Utils.checkNotNull(title, "title");
+        this.title = Optional.ofNullable(title);
+        return this;
+    }
+
+    public Employee withTitle(Optional<String> title) {
+        Utils.checkNotNull(title, "title");
+        this.title = title;
+        return this;
+    }
+
+    /**
+     * The date when the employee was hired to the company
+     */
+    public Employee withHiredAt(LocalDate hiredAt) {
+        Utils.checkNotNull(hiredAt, "hiredAt");
+        this.hiredAt = Optional.ofNullable(hiredAt);
+        return this;
+    }
+
+    /**
+     * The date when the employee was hired to the company
+     */
+    public Employee withHiredAt(Optional<LocalDate> hiredAt) {
+        Utils.checkNotNull(hiredAt, "hiredAt");
+        this.hiredAt = hiredAt;
+        return this;
+    }
+
+    public Employee withHiddenSsn(String hiddenSsn) {
+        Utils.checkNotNull(hiddenSsn, "hiddenSsn");
+        this.hiddenSsn = Optional.ofNullable(hiddenSsn);
+        return this;
+    }
+
+    public Employee withHiddenSsn(Optional<String> hiddenSsn) {
+        Utils.checkNotNull(hiddenSsn, "hiddenSsn");
+        this.hiddenSsn = hiddenSsn;
+        return this;
+    }
+
+    /**
+     * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
+     */
+    public Employee withFlsaStatus(FlsaStatusType flsaStatus) {
+        Utils.checkNotNull(flsaStatus, "flsaStatus");
+        this.flsaStatus = Optional.ofNullable(flsaStatus);
+        return this;
+    }
+
+    /**
+     * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
+     */
+    public Employee withFlsaStatus(Optional<? extends FlsaStatusType> flsaStatus) {
+        Utils.checkNotNull(flsaStatus, "flsaStatus");
+        this.flsaStatus = flsaStatus;
+        return this;
+    }
+
+    public Employee withApplicableTaxIds(List<Double> applicableTaxIds) {
+        Utils.checkNotNull(applicableTaxIds, "applicableTaxIds");
+        this.applicableTaxIds = Optional.ofNullable(applicableTaxIds);
+        return this;
+    }
+
+    public Employee withApplicableTaxIds(Optional<? extends List<Double>> applicableTaxIds) {
+        Utils.checkNotNull(applicableTaxIds, "applicableTaxIds");
+        this.applicableTaxIds = applicableTaxIds;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -916,7 +1160,15 @@ public class Employee {
             Objects.deepEquals(this.preferredFirstName, other.preferredFirstName) &&
             Objects.deepEquals(this.paymentMethod, other.paymentMethod) &&
             Objects.deepEquals(this.workEmail, other.workEmail) &&
-            Objects.deepEquals(this.currentEmploymentStatus, other.currentEmploymentStatus);
+            Objects.deepEquals(this.currentEmploymentStatus, other.currentEmploymentStatus) &&
+            Objects.deepEquals(this.historical, other.historical) &&
+            Objects.deepEquals(this.employeeCode, other.employeeCode) &&
+            Objects.deepEquals(this.departmentUuid, other.departmentUuid) &&
+            Objects.deepEquals(this.title, other.title) &&
+            Objects.deepEquals(this.hiredAt, other.hiredAt) &&
+            Objects.deepEquals(this.hiddenSsn, other.hiddenSsn) &&
+            Objects.deepEquals(this.flsaStatus, other.flsaStatus) &&
+            Objects.deepEquals(this.applicableTaxIds, other.applicableTaxIds);
     }
     
     @Override
@@ -948,7 +1200,15 @@ public class Employee {
             preferredFirstName,
             paymentMethod,
             workEmail,
-            currentEmploymentStatus);
+            currentEmploymentStatus,
+            historical,
+            employeeCode,
+            departmentUuid,
+            title,
+            hiredAt,
+            hiddenSsn,
+            flsaStatus,
+            applicableTaxIds);
     }
     
     @Override
@@ -980,7 +1240,15 @@ public class Employee {
                 "preferredFirstName", preferredFirstName,
                 "paymentMethod", paymentMethod,
                 "workEmail", workEmail,
-                "currentEmploymentStatus", currentEmploymentStatus);
+                "currentEmploymentStatus", currentEmploymentStatus,
+                "historical", historical,
+                "employeeCode", employeeCode,
+                "departmentUuid", departmentUuid,
+                "title", title,
+                "hiredAt", hiredAt,
+                "hiddenSsn", hiddenSsn,
+                "flsaStatus", flsaStatus,
+                "applicableTaxIds", applicableTaxIds);
     }
     
     public final static class Builder {
@@ -1009,7 +1277,7 @@ public class Employee {
  
         private Optional<Boolean> onboarded = Optional.empty();
  
-        private Optional<? extends OnboardingStatus> onboardingStatus = Optional.empty();
+        private JsonNullable<? extends OnboardingStatus> onboardingStatus = JsonNullable.undefined();
  
         private Optional<? extends OnboardingDocumentsConfig> onboardingDocumentsConfig = Optional.empty();
  
@@ -1037,7 +1305,23 @@ public class Employee {
  
         private JsonNullable<String> workEmail = JsonNullable.undefined();
  
-        private JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus = JsonNullable.undefined();  
+        private JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus = JsonNullable.undefined();
+ 
+        private Optional<Boolean> historical = Optional.empty();
+ 
+        private Optional<String> employeeCode = Optional.empty();
+ 
+        private JsonNullable<String> departmentUuid = JsonNullable.undefined();
+ 
+        private Optional<String> title = Optional.empty();
+ 
+        private Optional<LocalDate> hiredAt = Optional.empty();
+ 
+        private Optional<String> hiddenSsn = Optional.empty();
+ 
+        private Optional<? extends FlsaStatusType> flsaStatus = Optional.empty();
+ 
+        private Optional<? extends List<Double>> applicableTaxIds = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -1225,14 +1509,14 @@ public class Employee {
          */
         public Builder onboardingStatus(OnboardingStatus onboardingStatus) {
             Utils.checkNotNull(onboardingStatus, "onboardingStatus");
-            this.onboardingStatus = Optional.ofNullable(onboardingStatus);
+            this.onboardingStatus = JsonNullable.of(onboardingStatus);
             return this;
         }
 
         /**
          * The current onboarding status of the employee
          */
-        public Builder onboardingStatus(Optional<? extends OnboardingStatus> onboardingStatus) {
+        public Builder onboardingStatus(JsonNullable<? extends OnboardingStatus> onboardingStatus) {
             Utils.checkNotNull(onboardingStatus, "onboardingStatus");
             this.onboardingStatus = onboardingStatus;
             return this;
@@ -1447,6 +1731,126 @@ public class Employee {
             this.currentEmploymentStatus = currentEmploymentStatus;
             return this;
         }
+
+        public Builder historical(boolean historical) {
+            Utils.checkNotNull(historical, "historical");
+            this.historical = Optional.ofNullable(historical);
+            return this;
+        }
+
+        public Builder historical(Optional<Boolean> historical) {
+            Utils.checkNotNull(historical, "historical");
+            this.historical = historical;
+            return this;
+        }
+
+        /**
+         * The short format code of the employee
+         */
+        public Builder employeeCode(String employeeCode) {
+            Utils.checkNotNull(employeeCode, "employeeCode");
+            this.employeeCode = Optional.ofNullable(employeeCode);
+            return this;
+        }
+
+        /**
+         * The short format code of the employee
+         */
+        public Builder employeeCode(Optional<String> employeeCode) {
+            Utils.checkNotNull(employeeCode, "employeeCode");
+            this.employeeCode = employeeCode;
+            return this;
+        }
+
+        /**
+         * The UUID of the department the employee is under
+         */
+        public Builder departmentUuid(String departmentUuid) {
+            Utils.checkNotNull(departmentUuid, "departmentUuid");
+            this.departmentUuid = JsonNullable.of(departmentUuid);
+            return this;
+        }
+
+        /**
+         * The UUID of the department the employee is under
+         */
+        public Builder departmentUuid(JsonNullable<String> departmentUuid) {
+            Utils.checkNotNull(departmentUuid, "departmentUuid");
+            this.departmentUuid = departmentUuid;
+            return this;
+        }
+
+        public Builder title(String title) {
+            Utils.checkNotNull(title, "title");
+            this.title = Optional.ofNullable(title);
+            return this;
+        }
+
+        public Builder title(Optional<String> title) {
+            Utils.checkNotNull(title, "title");
+            this.title = title;
+            return this;
+        }
+
+        /**
+         * The date when the employee was hired to the company
+         */
+        public Builder hiredAt(LocalDate hiredAt) {
+            Utils.checkNotNull(hiredAt, "hiredAt");
+            this.hiredAt = Optional.ofNullable(hiredAt);
+            return this;
+        }
+
+        /**
+         * The date when the employee was hired to the company
+         */
+        public Builder hiredAt(Optional<LocalDate> hiredAt) {
+            Utils.checkNotNull(hiredAt, "hiredAt");
+            this.hiredAt = hiredAt;
+            return this;
+        }
+
+        public Builder hiddenSsn(String hiddenSsn) {
+            Utils.checkNotNull(hiddenSsn, "hiddenSsn");
+            this.hiddenSsn = Optional.ofNullable(hiddenSsn);
+            return this;
+        }
+
+        public Builder hiddenSsn(Optional<String> hiddenSsn) {
+            Utils.checkNotNull(hiddenSsn, "hiddenSsn");
+            this.hiddenSsn = hiddenSsn;
+            return this;
+        }
+
+        /**
+         * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
+         */
+        public Builder flsaStatus(FlsaStatusType flsaStatus) {
+            Utils.checkNotNull(flsaStatus, "flsaStatus");
+            this.flsaStatus = Optional.ofNullable(flsaStatus);
+            return this;
+        }
+
+        /**
+         * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
+         */
+        public Builder flsaStatus(Optional<? extends FlsaStatusType> flsaStatus) {
+            Utils.checkNotNull(flsaStatus, "flsaStatus");
+            this.flsaStatus = flsaStatus;
+            return this;
+        }
+
+        public Builder applicableTaxIds(List<Double> applicableTaxIds) {
+            Utils.checkNotNull(applicableTaxIds, "applicableTaxIds");
+            this.applicableTaxIds = Optional.ofNullable(applicableTaxIds);
+            return this;
+        }
+
+        public Builder applicableTaxIds(Optional<? extends List<Double>> applicableTaxIds) {
+            Utils.checkNotNull(applicableTaxIds, "applicableTaxIds");
+            this.applicableTaxIds = applicableTaxIds;
+            return this;
+        }
         
         public Employee build() {
             if (paymentMethod == null) {
@@ -1478,7 +1882,15 @@ public class Employee {
                 preferredFirstName,
                 paymentMethod,
                 workEmail,
-                currentEmploymentStatus);
+                currentEmploymentStatus,
+                historical,
+                employeeCode,
+                departmentUuid,
+                title,
+                hiredAt,
+                hiddenSsn,
+                flsaStatus,
+                applicableTaxIds);
         }
 
         private static final LazySingletonValue<Optional<? extends PaymentMethod>> _SINGLETON_VALUE_PaymentMethod =

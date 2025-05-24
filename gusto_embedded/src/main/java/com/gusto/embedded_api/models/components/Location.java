@@ -78,13 +78,6 @@ public class Location {
     private Optional<String> country;
 
     /**
-     * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("active")
-    private Optional<Boolean> active;
-
-    /**
      * Specifies if the location is the company's mailing address. Only included if the location belongs to a company.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -112,6 +105,20 @@ public class Location {
     @JsonProperty("updated_at")
     private Optional<String> updatedAt;
 
+    /**
+     * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("active")
+    private Optional<Boolean> active;
+
+    /**
+     * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("inactive")
+    private Optional<Boolean> inactive;
+
     @JsonCreator
     public Location(
             @JsonProperty("uuid") String uuid,
@@ -124,11 +131,12 @@ public class Location {
             @JsonProperty("state") Optional<String> state,
             @JsonProperty("zip") Optional<String> zip,
             @JsonProperty("country") Optional<String> country,
-            @JsonProperty("active") Optional<Boolean> active,
             @JsonProperty("mailing_address") Optional<Boolean> mailingAddress,
             @JsonProperty("filing_address") Optional<Boolean> filingAddress,
             @JsonProperty("created_at") Optional<String> createdAt,
-            @JsonProperty("updated_at") Optional<String> updatedAt) {
+            @JsonProperty("updated_at") Optional<String> updatedAt,
+            @JsonProperty("active") Optional<Boolean> active,
+            @JsonProperty("inactive") Optional<Boolean> inactive) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(companyUuid, "companyUuid");
@@ -139,11 +147,12 @@ public class Location {
         Utils.checkNotNull(state, "state");
         Utils.checkNotNull(zip, "zip");
         Utils.checkNotNull(country, "country");
-        Utils.checkNotNull(active, "active");
         Utils.checkNotNull(mailingAddress, "mailingAddress");
         Utils.checkNotNull(filingAddress, "filingAddress");
         Utils.checkNotNull(createdAt, "createdAt");
         Utils.checkNotNull(updatedAt, "updatedAt");
+        Utils.checkNotNull(active, "active");
+        Utils.checkNotNull(inactive, "inactive");
         this.uuid = uuid;
         this.version = version;
         this.companyUuid = companyUuid;
@@ -154,16 +163,17 @@ public class Location {
         this.state = state;
         this.zip = zip;
         this.country = country;
-        this.active = active;
         this.mailingAddress = mailingAddress;
         this.filingAddress = filingAddress;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.active = active;
+        this.inactive = inactive;
     }
     
     public Location(
             String uuid) {
-        this(uuid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(uuid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -229,14 +239,6 @@ public class Location {
     }
 
     /**
-     * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
-     */
-    @JsonIgnore
-    public Optional<Boolean> active() {
-        return active;
-    }
-
-    /**
      * Specifies if the location is the company's mailing address. Only included if the location belongs to a company.
      */
     @JsonIgnore
@@ -266,6 +268,22 @@ public class Location {
     @JsonIgnore
     public Optional<String> updatedAt() {
         return updatedAt;
+    }
+
+    /**
+     * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+     */
+    @JsonIgnore
+    public Optional<Boolean> active() {
+        return active;
+    }
+
+    /**
+     * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+     */
+    @JsonIgnore
+    public Optional<Boolean> inactive() {
+        return inactive;
     }
 
     public final static Builder builder() {
@@ -408,24 +426,6 @@ public class Location {
     }
 
     /**
-     * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
-     */
-    public Location withActive(boolean active) {
-        Utils.checkNotNull(active, "active");
-        this.active = Optional.ofNullable(active);
-        return this;
-    }
-
-    /**
-     * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
-     */
-    public Location withActive(Optional<Boolean> active) {
-        Utils.checkNotNull(active, "active");
-        this.active = active;
-        return this;
-    }
-
-    /**
      * Specifies if the location is the company's mailing address. Only included if the location belongs to a company.
      */
     public Location withMailingAddress(boolean mailingAddress) {
@@ -496,6 +496,42 @@ public class Location {
         this.updatedAt = updatedAt;
         return this;
     }
+
+    /**
+     * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+     */
+    public Location withActive(boolean active) {
+        Utils.checkNotNull(active, "active");
+        this.active = Optional.ofNullable(active);
+        return this;
+    }
+
+    /**
+     * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+     */
+    public Location withActive(Optional<Boolean> active) {
+        Utils.checkNotNull(active, "active");
+        this.active = active;
+        return this;
+    }
+
+    /**
+     * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+     */
+    public Location withInactive(boolean inactive) {
+        Utils.checkNotNull(inactive, "inactive");
+        this.inactive = Optional.ofNullable(inactive);
+        return this;
+    }
+
+    /**
+     * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+     */
+    public Location withInactive(Optional<Boolean> inactive) {
+        Utils.checkNotNull(inactive, "inactive");
+        this.inactive = inactive;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -517,11 +553,12 @@ public class Location {
             Objects.deepEquals(this.state, other.state) &&
             Objects.deepEquals(this.zip, other.zip) &&
             Objects.deepEquals(this.country, other.country) &&
-            Objects.deepEquals(this.active, other.active) &&
             Objects.deepEquals(this.mailingAddress, other.mailingAddress) &&
             Objects.deepEquals(this.filingAddress, other.filingAddress) &&
             Objects.deepEquals(this.createdAt, other.createdAt) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt);
+            Objects.deepEquals(this.updatedAt, other.updatedAt) &&
+            Objects.deepEquals(this.active, other.active) &&
+            Objects.deepEquals(this.inactive, other.inactive);
     }
     
     @Override
@@ -537,11 +574,12 @@ public class Location {
             state,
             zip,
             country,
-            active,
             mailingAddress,
             filingAddress,
             createdAt,
-            updatedAt);
+            updatedAt,
+            active,
+            inactive);
     }
     
     @Override
@@ -557,11 +595,12 @@ public class Location {
                 "state", state,
                 "zip", zip,
                 "country", country,
-                "active", active,
                 "mailingAddress", mailingAddress,
                 "filingAddress", filingAddress,
                 "createdAt", createdAt,
-                "updatedAt", updatedAt);
+                "updatedAt", updatedAt,
+                "active", active,
+                "inactive", inactive);
     }
     
     public final static class Builder {
@@ -586,15 +625,17 @@ public class Location {
  
         private Optional<String> country;
  
-        private Optional<Boolean> active = Optional.empty();
- 
         private Optional<Boolean> mailingAddress = Optional.empty();
  
         private Optional<Boolean> filingAddress = Optional.empty();
  
         private Optional<String> createdAt = Optional.empty();
  
-        private Optional<String> updatedAt = Optional.empty();  
+        private Optional<String> updatedAt = Optional.empty();
+ 
+        private Optional<Boolean> active = Optional.empty();
+ 
+        private Optional<Boolean> inactive = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -736,24 +777,6 @@ public class Location {
         }
 
         /**
-         * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
-         */
-        public Builder active(boolean active) {
-            Utils.checkNotNull(active, "active");
-            this.active = Optional.ofNullable(active);
-            return this;
-        }
-
-        /**
-         * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
-         */
-        public Builder active(Optional<Boolean> active) {
-            Utils.checkNotNull(active, "active");
-            this.active = active;
-            return this;
-        }
-
-        /**
          * Specifies if the location is the company's mailing address. Only included if the location belongs to a company.
          */
         public Builder mailingAddress(boolean mailingAddress) {
@@ -824,6 +847,42 @@ public class Location {
             this.updatedAt = updatedAt;
             return this;
         }
+
+        /**
+         * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+         */
+        public Builder active(boolean active) {
+            Utils.checkNotNull(active, "active");
+            this.active = Optional.ofNullable(active);
+            return this;
+        }
+
+        /**
+         * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+         */
+        public Builder active(Optional<Boolean> active) {
+            Utils.checkNotNull(active, "active");
+            this.active = active;
+            return this;
+        }
+
+        /**
+         * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+         */
+        public Builder inactive(boolean inactive) {
+            Utils.checkNotNull(inactive, "inactive");
+            this.inactive = Optional.ofNullable(inactive);
+            return this;
+        }
+
+        /**
+         * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+         */
+        public Builder inactive(Optional<Boolean> inactive) {
+            Utils.checkNotNull(inactive, "inactive");
+            this.inactive = inactive;
+            return this;
+        }
         
         public Location build() {
             if (country == null) {
@@ -839,11 +898,12 @@ public class Location {
                 state,
                 zip,
                 country,
-                active,
                 mailingAddress,
                 filingAddress,
                 createdAt,
-                updatedAt);
+                updatedAt,
+                active,
+                inactive);
         }
 
         private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_Country =

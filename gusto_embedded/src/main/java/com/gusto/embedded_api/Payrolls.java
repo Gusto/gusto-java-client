@@ -5,7 +5,7 @@
 package com.gusto.embedded_api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.EmployeePayStub;
+import com.gusto.embedded_api.models.components.EmployeePayStubsList;
 import com.gusto.embedded_api.models.components.Payroll;
 import com.gusto.embedded_api.models.components.PayrollBlocker;
 import com.gusto.embedded_api.models.components.PayrollCheck;
@@ -32,12 +32,14 @@ import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdPayrollsR
 import com.gusto.embedded_api.models.operations.GetV1CompaniesPayrollBlockersCompanyUuidRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesPayrollBlockersCompanyUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesPayrollBlockersCompanyUuidResponse;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeUuidPayStubsRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeUuidPayStubsRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeUuidPayStubsResponse;
 import com.gusto.embedded_api.models.operations.GetV1PaymentReceiptsPayrollsPayrollUuidRequest;
 import com.gusto.embedded_api.models.operations.GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1PaymentReceiptsPayrollsPayrollUuidResponse;
+import com.gusto.embedded_api.models.operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest;
 import com.gusto.embedded_api.models.operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse;
@@ -1976,7 +1978,7 @@ public class Payrolls implements
     public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse getPayStub(
             String payrollId,
             String employeeId) throws Exception {
-        return getPayStub(payrollId, employeeId, Optional.empty());
+        return getPayStub(Optional.empty(), payrollId, employeeId);
     }
     
     /**
@@ -1986,22 +1988,22 @@ public class Payrolls implements
      * 
      * <p>scope: `pay_stubs:read`
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param payrollId The UUID of the payroll
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse getPayStub(
+            Optional<? extends GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion> xGustoAPIVersion,
             String payrollId,
-            String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
+            String employeeId) throws Exception {
         GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest request =
             GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .payrollId(payrollId)
                 .employeeId(employeeId)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -2132,7 +2134,7 @@ public class Payrolls implements
      */
     public GetV1EmployeesEmployeeUuidPayStubsResponse getPayStubs(
             String employeeId) throws Exception {
-        return getPayStubs(employeeId, Optional.empty());
+        return getPayStubs(Optional.empty(), employeeId);
     }
     
     /**
@@ -2142,19 +2144,19 @@ public class Payrolls implements
      * 
      * <p>scope: `pay_stubs:read`
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetV1EmployeesEmployeeUuidPayStubsResponse getPayStubs(
-            String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
+            Optional<? extends GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeId) throws Exception {
         GetV1EmployeesEmployeeUuidPayStubsRequest request =
             GetV1EmployeesEmployeeUuidPayStubsRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -2232,9 +2234,9 @@ public class Payrolls implements
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<EmployeePayStub> _out = Utils.mapper().readValue(
+                List<EmployeePayStubsList> _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<EmployeePayStub>>() {});
+                    new TypeReference<List<EmployeePayStubsList>>() {});
                 _res.withEmployeePayStubsList(Optional.ofNullable(_out));
                 return _res;
             } else {
@@ -2245,7 +2247,21 @@ public class Payrolls implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<UnprocessableEntityErrorObject>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 

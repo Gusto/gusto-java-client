@@ -13,6 +13,7 @@ import com.gusto.embedded_api.models.components.TimeOffActivity;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.APIException;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.DeleteV1EmployeeHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeeRequest;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeeRequestBuilder;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeeResponse;
@@ -23,15 +24,18 @@ import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdCustomFi
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdCustomFieldsRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdCustomFieldsResponse;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdCustomFieldsResponseBody;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdOnboardingStatusRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdOnboardingStatusRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdOnboardingStatusResponse;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesResponse;
 import com.gusto.embedded_api.models.operations.GetVersionEmployeesTimeOffActivitiesRequest;
 import com.gusto.embedded_api.models.operations.GetVersionEmployeesTimeOffActivitiesRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetVersionEmployeesTimeOffActivitiesResponse;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesRequest;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesRequestBody;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesRequestBuilder;
@@ -43,6 +47,7 @@ import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardi
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse;
+import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingStatusRequest;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingStatusRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingStatusRequestBuilder;
@@ -72,8 +77,8 @@ import java.util.List;
 import java.util.Optional; 
 
 public class Employees implements
-            MethodCallPostV1Employees,
             MethodCallGetV1CompaniesCompanyIdEmployees,
+            MethodCallPostV1Employees,
             MethodCallPostV1HistoricalEmployees,
             MethodCallGetV1Employees,
             MethodCallPutV1Employees,
@@ -89,202 +94,6 @@ public class Employees implements
     Employees(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
-
-    /**
-     * Create an employee
-     * 
-     * <p>Create an employee.
-     * 
-     * <p>scope: `employees:manage`
-     * 
-     * @return The call builder
-     */
-    public PostV1EmployeesRequestBuilder create() {
-        return new PostV1EmployeesRequestBuilder(this);
-    }
-
-    /**
-     * Create an employee
-     * 
-     * <p>Create an employee.
-     * 
-     * <p>scope: `employees:manage`
-     * 
-     * @param companyId The UUID of the company
-     * @param requestBody Create an employee.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public PostV1EmployeesResponse create(
-            String companyId,
-            PostV1EmployeesRequestBody requestBody) throws Exception {
-        return create(companyId, Optional.empty(), requestBody);
-    }
-    
-    /**
-     * Create an employee
-     * 
-     * <p>Create an employee.
-     * 
-     * <p>scope: `employees:manage`
-     * 
-     * @param companyId The UUID of the company
-     * @param xGustoAPIVersion 
-     * @param requestBody Create an employee.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public PostV1EmployeesResponse create(
-            String companyId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1EmployeesRequestBody requestBody) throws Exception {
-        PostV1EmployeesRequest request =
-            PostV1EmployeesRequest
-                .builder()
-                .companyId(companyId)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
-                .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl;
-        String _url = Utils.generateURL(
-                PostV1EmployeesRequest.class,
-                _baseUrl,
-                "/v1/companies/{company_id}/employees",
-                request, null);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "POST");
-        Object _convertedRequest = Utils.convertToShape(
-                request, 
-                JsonShape.DEFAULT,
-                new TypeReference<Object>() {});
-        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, 
-                "requestBody",
-                "json",
-                false);
-        if (_serializedRequestBody == null) {
-            throw new Exception("Request body is required");
-        }
-        _req.setBody(Optional.ofNullable(_serializedRequestBody));
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      _baseUrl,
-                      "post-v1-employees", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "422", "4XX", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            _baseUrl,
-                            "post-v1-employees",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            _baseUrl,
-                            "post-v1-employees",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            _baseUrl,
-                            "post-v1-employees",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        PostV1EmployeesResponse.Builder _resBuilder = 
-            PostV1EmployeesResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        PostV1EmployeesResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "201")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                Employee _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<Employee>() {});
-                _res.withEmployee(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<UnprocessableEntityErrorObject>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
-    }
-
 
 
     /**
@@ -396,7 +205,7 @@ public class Employees implements
                 List<Employee> _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<List<Employee>>() {});
-                _res.withEmployeeList(Optional.ofNullable(_out));
+                _res.withEmployees(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(
@@ -406,7 +215,212 @@ public class Employees implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<UnprocessableEntityErrorObject>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new APIException(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     * Create an employee
+     * 
+     * <p>Create an employee.
+     * 
+     * <p>        scope: `employees:manage`
+     * 
+     * @return The call builder
+     */
+    public PostV1EmployeesRequestBuilder create() {
+        return new PostV1EmployeesRequestBuilder(this);
+    }
+
+    /**
+     * Create an employee
+     * 
+     * <p>Create an employee.
+     * 
+     * <p>        scope: `employees:manage`
+     * 
+     * @param companyId Company ID
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public PostV1EmployeesResponse create(
+            String companyId) throws Exception {
+        return create(Optional.empty(), companyId, Optional.empty());
+    }
+    
+    /**
+     * Create an employee
+     * 
+     * <p>Create an employee.
+     * 
+     * <p>        scope: `employees:manage`
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId Company ID
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public PostV1EmployeesResponse create(
+            Optional<? extends PostV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyId,
+            Optional<? extends PostV1EmployeesRequestBody> requestBody) throws Exception {
+        PostV1EmployeesRequest request =
+            PostV1EmployeesRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .requestBody(requestBody)
+                .build();
+        
+        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _url = Utils.generateURL(
+                PostV1EmployeesRequest.class,
+                _baseUrl,
+                "/v1/companies/{company_id}/employees",
+                request, null);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "POST");
+        Object _convertedRequest = Utils.convertToShape(
+                request, 
+                JsonShape.DEFAULT,
+                new TypeReference<Object>() {});
+        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
+                _convertedRequest, 
+                "requestBody",
+                "json",
+                false);
+        _req.setBody(Optional.ofNullable(_serializedRequestBody));
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      _baseUrl,
+                      "post-v1-employees", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "422", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            _baseUrl,
+                            "post-v1-employees",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            _baseUrl,
+                            "post-v1-employees",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            _baseUrl,
+                            "post-v1-employees",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        PostV1EmployeesResponse.Builder _resBuilder = 
+            PostV1EmployeesResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        PostV1EmployeesResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "201")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                Employee _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<Employee>() {});
+                _res.withEmployee(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "422")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<UnprocessableEntityErrorObject>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -653,7 +667,7 @@ public class Employees implements
      */
     public GetV1EmployeesResponse get(
             String employeeId) throws Exception {
-        return get(employeeId, Optional.empty(), Optional.empty());
+        return get(Optional.empty(), employeeId, Optional.empty());
     }
     
     /**
@@ -663,24 +677,25 @@ public class Employees implements
      * 
      * <p>scope: `employees:read`
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
      * @param include Include the requested attribute(s) in each employee response, multiple options are comma separated. Available options:
      *         - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
      *         - custom_fields: Include employees' custom fields
-     * @param xGustoAPIVersion 
+     *         
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetV1EmployeesResponse get(
+            Optional<? extends GetV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion,
             String employeeId,
-            Optional<? extends List<QueryParamInclude>> include,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
+            Optional<? extends List<QueryParamInclude>> include) throws Exception {
         GetV1EmployeesRequest request =
             GetV1EmployeesRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .employeeId(employeeId)
                 .include(include)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -802,7 +817,7 @@ public class Employees implements
 
 
     /**
-     * Update an employee
+     * Update an employee.
      * 
      * <p>Update an employee.
      * 
@@ -815,45 +830,45 @@ public class Employees implements
     }
 
     /**
-     * Update an employee
+     * Update an employee.
      * 
      * <p>Update an employee.
      * 
      * <p>scope: `employees:write`
      * 
      * @param employeeId The UUID of the employee
-     * @param requestBody Update an employee.
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public PutV1EmployeesResponse update(
             String employeeId,
             PutV1EmployeesRequestBody requestBody) throws Exception {
-        return update(employeeId, Optional.empty(), requestBody);
+        return update(Optional.empty(), employeeId, requestBody);
     }
     
     /**
-     * Update an employee
+     * Update an employee.
      * 
      * <p>Update an employee.
      * 
      * <p>scope: `employees:write`
      * 
-     * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion 
-     * @param requestBody Update an employee.
+     * @param employeeId The UUID of the employee
+     * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public PutV1EmployeesResponse update(
+            Optional<String> xGustoAPIVersion,
             String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1EmployeesRequestBody requestBody) throws Exception {
         PutV1EmployeesRequest request =
             PutV1EmployeesRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .requestBody(requestBody)
                 .build();
         
@@ -899,7 +914,7 @@ public class Employees implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "422", "4XX", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "409", "422", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -958,7 +973,7 @@ public class Employees implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "409", "422")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
@@ -972,7 +987,7 @@ public class Employees implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -1027,7 +1042,7 @@ public class Employees implements
      */
     public DeleteV1EmployeeResponse delete(
             String employeeId) throws Exception {
-        return delete(employeeId, Optional.empty());
+        return delete(Optional.empty(), employeeId);
     }
     
     /**
@@ -1039,19 +1054,19 @@ public class Employees implements
      * 
      * <p>scope: `employees:manage`
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public DeleteV1EmployeeResponse delete(
-            String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
+            Optional<? extends DeleteV1EmployeeHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeId) throws Exception {
         DeleteV1EmployeeRequest request =
             DeleteV1EmployeeRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -1062,7 +1077,7 @@ public class Employees implements
                 request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "DELETE");
-        _req.addHeader("Accept", "application/json")
+        _req.addHeader("Accept", "*/*")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
@@ -1131,21 +1146,7 @@ public class Employees implements
             // no content 
             return _res;
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<UnprocessableEntityErrorObject>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "422", "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -1625,7 +1626,7 @@ public class Employees implements
      */
     public GetV1EmployeesEmployeeIdOnboardingStatusResponse getOnboardingStatus(
             String employeeId) throws Exception {
-        return getOnboardingStatus(employeeId, Optional.empty());
+        return getOnboardingStatus(Optional.empty(), employeeId);
     }
     
     /**
@@ -1671,19 +1672,19 @@ public class Employees implements
      * | `file_new_hire_report` | File a new hire report for this employee. |
      * | `admin_review` | Admin reviews &amp; confirms employee details (only required for Employee self-onboarding) |
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetV1EmployeesEmployeeIdOnboardingStatusResponse getOnboardingStatus(
-            String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) throws Exception {
+            Optional<? extends GetV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeId) throws Exception {
         GetV1EmployeesEmployeeIdOnboardingStatusRequest request =
             GetV1EmployeesEmployeeIdOnboardingStatusRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -1804,16 +1805,16 @@ public class Employees implements
      * 
      * <p>scope: `employees:manage`
      * 
-     * <p>Updates an employee's onboarding status.
-     * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
+     * <p>        Updates an employee's onboarding status.
+     *         Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
      * 
-     * <p>| Action | current onboarding_status | new onboarding_status |
-     * |:------------------|:------------:|----------:|
-     * | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
-     * | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
-     * | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
-     * | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
-     * | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+     * <p>        | Action | current onboarding_status | new onboarding_status |
+     *         |:------------------|:------------:|----------:|
+     *         | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
+     *         | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
+     *         | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
+     *         | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
+     *         | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
      * 
      * @return The call builder
      */
@@ -1826,16 +1827,16 @@ public class Employees implements
      * 
      * <p>scope: `employees:manage`
      * 
-     * <p>Updates an employee's onboarding status.
-     * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
+     * <p>        Updates an employee's onboarding status.
+     *         Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
      * 
-     * <p>| Action | current onboarding_status | new onboarding_status |
-     * |:------------------|:------------:|----------:|
-     * | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
-     * | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
-     * | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
-     * | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
-     * | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+     * <p>        | Action | current onboarding_status | new onboarding_status |
+     *         |:------------------|:------------:|----------:|
+     *         | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
+     *         | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
+     *         | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
+     *         | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
+     *         | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
      * 
      * @param employeeId The UUID of the employee
      * @param requestBody 
@@ -1845,7 +1846,7 @@ public class Employees implements
     public PutV1EmployeesEmployeeIdOnboardingStatusResponse updateOnboardingStatus(
             String employeeId,
             PutV1EmployeesEmployeeIdOnboardingStatusRequestBody requestBody) throws Exception {
-        return updateOnboardingStatus(employeeId, Optional.empty(), requestBody);
+        return updateOnboardingStatus(Optional.empty(), employeeId, requestBody);
     }
     
     /**
@@ -1853,32 +1854,32 @@ public class Employees implements
      * 
      * <p>scope: `employees:manage`
      * 
-     * <p>Updates an employee's onboarding status.
-     * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
+     * <p>        Updates an employee's onboarding status.
+     *         Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
      * 
-     * <p>| Action | current onboarding_status | new onboarding_status |
-     * |:------------------|:------------:|----------:|
-     * | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
-     * | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
-     * | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
-     * | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
-     * | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+     * <p>        | Action | current onboarding_status | new onboarding_status |
+     *         |:------------------|:------------:|----------:|
+     *         | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
+     *         | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
+     *         | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
+     *         | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
+     *         | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @param requestBody 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public PutV1EmployeesEmployeeIdOnboardingStatusResponse updateOnboardingStatus(
+            Optional<? extends PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion,
             String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1EmployeesEmployeeIdOnboardingStatusRequestBody requestBody) throws Exception {
         PutV1EmployeesEmployeeIdOnboardingStatusRequest request =
             PutV1EmployeesEmployeeIdOnboardingStatusRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .requestBody(requestBody)
                 .build();
         
@@ -1983,7 +1984,7 @@ public class Employees implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "422")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 UnprocessableEntityErrorObject _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
@@ -1997,7 +1998,7 @@ public class Employees implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 

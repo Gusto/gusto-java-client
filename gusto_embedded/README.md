@@ -47,7 +47,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.gusto:embedded-api:0.2.2'
+implementation 'com.gusto:embedded-api:0.2.3'
 ```
 
 Maven:
@@ -55,7 +55,7 @@ Maven:
 <dependency>
     <groupId>com.gusto</groupId>
     <artifactId>embedded-api</artifactId>
-    <version>0.2.2</version>
+    <version>0.2.3</version>
 </dependency>
 ```
 
@@ -390,11 +390,11 @@ public class Application {
 
 ### [employees()](docs/sdks/employees/README.md)
 
-* [create](docs/sdks/employees/README.md#create) - Create an employee
 * [list](docs/sdks/employees/README.md#list) - Get employees of a company
+* [create](docs/sdks/employees/README.md#create) - Create an employee
 * [createHistorical](docs/sdks/employees/README.md#createhistorical) - Create a historical employee
 * [get](docs/sdks/employees/README.md#get) - Get an employee
-* [update](docs/sdks/employees/README.md#update) - Update an employee
+* [update](docs/sdks/employees/README.md#update) - Update an employee.
 * [delete](docs/sdks/employees/README.md#delete) - Delete an onboarding employee
 * [getCustomFields](docs/sdks/employees/README.md#getcustomfields) - Get an employee's custom fields
 * [updateOnboardingDocumentsConfig](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
@@ -476,6 +476,10 @@ public class Application {
 * [get](docs/sdks/industryselection/README.md#get) - Get a company industry selection
 * [update](docs/sdks/industryselection/README.md#update) - Update a company industry selection
 
+### [informationRequests()](docs/sdks/informationrequests/README.md)
+
+* [getInformationRequests](docs/sdks/informationrequests/README.md#getinformationrequests) - Get all information requests for a company
+
 ### [introspection()](docs/sdks/introspection/README.md)
 
 * [getInfo](docs/sdks/introspection/README.md#getinfo) - Get info about the current access token
@@ -552,7 +556,8 @@ public class Application {
 ### [reports()](docs/sdks/reports/README.md)
 
 * [createCustom](docs/sdks/reports/README.md#createcustom) - Create a custom report
-* [get](docs/sdks/reports/README.md#get) - Get a report
+* [postPayrollsPayrollUuidReportsGeneralLedger](docs/sdks/reports/README.md#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
+* [getReportsRequestUuid](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 * [getTemplate](docs/sdks/reports/README.md#gettemplate) - Get a report template
 
 ### [signatories()](docs/sdks/signatories/README.md)

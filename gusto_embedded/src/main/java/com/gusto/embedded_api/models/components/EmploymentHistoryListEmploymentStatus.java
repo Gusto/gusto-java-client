@@ -18,8 +18,7 @@ public enum EmploymentHistoryListEmploymentStatus {
     FULL_TIME("full_time"),
     PART_TIME_ELIGIBLE("part_time_eligible"),
     VARIABLE("variable"),
-    SEASONAL("seasonal"),
-    NOT_SET("not_set");
+    SEASONAL_NOT_SET("seasonal - not_set");
 
     @JsonValue
     private final String value;

@@ -15,23 +15,23 @@ import java.util.Objects;
 public class PutV1EmployeesEmployeeIdOnboardingStatusRequestBody {
 
     /**
-     * The updated onboarding status for the employee
+     * Onboarding status value
      */
     @JsonProperty("onboarding_status")
-    private String onboardingStatus;
+    private OnboardingStatus onboardingStatus;
 
     @JsonCreator
     public PutV1EmployeesEmployeeIdOnboardingStatusRequestBody(
-            @JsonProperty("onboarding_status") String onboardingStatus) {
+            @JsonProperty("onboarding_status") OnboardingStatus onboardingStatus) {
         Utils.checkNotNull(onboardingStatus, "onboardingStatus");
         this.onboardingStatus = onboardingStatus;
     }
 
     /**
-     * The updated onboarding status for the employee
+     * Onboarding status value
      */
     @JsonIgnore
-    public String onboardingStatus() {
+    public OnboardingStatus onboardingStatus() {
         return onboardingStatus;
     }
 
@@ -40,9 +40,9 @@ public class PutV1EmployeesEmployeeIdOnboardingStatusRequestBody {
     }
 
     /**
-     * The updated onboarding status for the employee
+     * Onboarding status value
      */
-    public PutV1EmployeesEmployeeIdOnboardingStatusRequestBody withOnboardingStatus(String onboardingStatus) {
+    public PutV1EmployeesEmployeeIdOnboardingStatusRequestBody withOnboardingStatus(OnboardingStatus onboardingStatus) {
         Utils.checkNotNull(onboardingStatus, "onboardingStatus");
         this.onboardingStatus = onboardingStatus;
         return this;
@@ -75,16 +75,16 @@ public class PutV1EmployeesEmployeeIdOnboardingStatusRequestBody {
     
     public final static class Builder {
  
-        private String onboardingStatus;  
+        private OnboardingStatus onboardingStatus;  
         
         private Builder() {
           // force use of static builder() method
         }
 
         /**
-         * The updated onboarding status for the employee
+         * Onboarding status value
          */
-        public Builder onboardingStatus(String onboardingStatus) {
+        public Builder onboardingStatus(OnboardingStatus onboardingStatus) {
             Utils.checkNotNull(onboardingStatus, "onboardingStatus");
             this.onboardingStatus = onboardingStatus;
             return this;

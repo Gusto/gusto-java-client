@@ -36,7 +36,7 @@ public class PutV1EmployeesResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * successful
      */
     private Optional<? extends Employee> employee;
 
@@ -88,7 +88,7 @@ public class PutV1EmployeesResponse implements Response {
     }
 
     /**
-     * Example response
+     * successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PutV1EmployeesResponse implements Response {
     }
 
     /**
-     * Example response
+     * successful
      */
     public PutV1EmployeesResponse withEmployee(Employee employee) {
         Utils.checkNotNull(employee, "employee");
@@ -137,7 +137,7 @@ public class PutV1EmployeesResponse implements Response {
     }
 
     /**
-     * Example response
+     * successful
      */
     public PutV1EmployeesResponse withEmployee(Optional<? extends Employee> employee) {
         Utils.checkNotNull(employee, "employee");
@@ -221,7 +221,7 @@ public class PutV1EmployeesResponse implements Response {
         }
 
         /**
-         * Example response
+         * successful
          */
         public Builder employee(Employee employee) {
             Utils.checkNotNull(employee, "employee");
@@ -230,7 +230,7 @@ public class PutV1EmployeesResponse implements Response {
         }
 
         /**
-         * Example response
+         * successful
          */
         public Builder employee(Optional<? extends Employee> employee) {
             Utils.checkNotNull(employee, "employee");

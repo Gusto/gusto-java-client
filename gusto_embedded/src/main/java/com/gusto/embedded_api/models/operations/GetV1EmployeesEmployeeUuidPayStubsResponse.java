@@ -6,7 +6,7 @@
 package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api.models.components.EmployeePayStub;
+import com.gusto.embedded_api.models.components.EmployeePayStubsList;
 import com.gusto.embedded_api.utils.Response;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
@@ -37,16 +37,16 @@ public class GetV1EmployeesEmployeeUuidPayStubsResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * successful
      */
-    private Optional<? extends List<EmployeePayStub>> employeePayStubsList;
+    private Optional<? extends List<EmployeePayStubsList>> employeePayStubsList;
 
     @JsonCreator
     public GetV1EmployeesEmployeeUuidPayStubsResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<EmployeePayStub>> employeePayStubsList) {
+            Optional<? extends List<EmployeePayStubsList>> employeePayStubsList) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
@@ -89,12 +89,12 @@ public class GetV1EmployeesEmployeeUuidPayStubsResponse implements Response {
     }
 
     /**
-     * Example response
+     * successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<EmployeePayStub>> employeePayStubsList() {
-        return (Optional<List<EmployeePayStub>>) employeePayStubsList;
+    public Optional<List<EmployeePayStubsList>> employeePayStubsList() {
+        return (Optional<List<EmployeePayStubsList>>) employeePayStubsList;
     }
 
     public final static Builder builder() {
@@ -129,18 +129,18 @@ public class GetV1EmployeesEmployeeUuidPayStubsResponse implements Response {
     }
 
     /**
-     * Example response
+     * successful
      */
-    public GetV1EmployeesEmployeeUuidPayStubsResponse withEmployeePayStubsList(List<EmployeePayStub> employeePayStubsList) {
+    public GetV1EmployeesEmployeeUuidPayStubsResponse withEmployeePayStubsList(List<EmployeePayStubsList> employeePayStubsList) {
         Utils.checkNotNull(employeePayStubsList, "employeePayStubsList");
         this.employeePayStubsList = Optional.ofNullable(employeePayStubsList);
         return this;
     }
 
     /**
-     * Example response
+     * successful
      */
-    public GetV1EmployeesEmployeeUuidPayStubsResponse withEmployeePayStubsList(Optional<? extends List<EmployeePayStub>> employeePayStubsList) {
+    public GetV1EmployeesEmployeeUuidPayStubsResponse withEmployeePayStubsList(Optional<? extends List<EmployeePayStubsList>> employeePayStubsList) {
         Utils.checkNotNull(employeePayStubsList, "employeePayStubsList");
         this.employeePayStubsList = employeePayStubsList;
         return this;
@@ -188,7 +188,7 @@ public class GetV1EmployeesEmployeeUuidPayStubsResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends List<EmployeePayStub>> employeePayStubsList = Optional.empty();  
+        private Optional<? extends List<EmployeePayStubsList>> employeePayStubsList = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -222,18 +222,18 @@ public class GetV1EmployeesEmployeeUuidPayStubsResponse implements Response {
         }
 
         /**
-         * Example response
+         * successful
          */
-        public Builder employeePayStubsList(List<EmployeePayStub> employeePayStubsList) {
+        public Builder employeePayStubsList(List<EmployeePayStubsList> employeePayStubsList) {
             Utils.checkNotNull(employeePayStubsList, "employeePayStubsList");
             this.employeePayStubsList = Optional.ofNullable(employeePayStubsList);
             return this;
         }
 
         /**
-         * Example response
+         * successful
          */
-        public Builder employeePayStubsList(Optional<? extends List<EmployeePayStub>> employeePayStubsList) {
+        public Builder employeePayStubsList(Optional<? extends List<EmployeePayStubsList>> employeePayStubsList) {
             Utils.checkNotNull(employeePayStubsList, "employeePayStubsList");
             this.employeePayStubsList = employeePayStubsList;
             return this;

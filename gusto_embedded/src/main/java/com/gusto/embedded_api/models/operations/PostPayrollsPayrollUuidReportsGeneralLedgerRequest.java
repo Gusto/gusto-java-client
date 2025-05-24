@@ -17,13 +17,13 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 
-public class GetReportsReportUuidRequest {
+public class PostPayrollsPayrollUuidReportsGeneralLedgerRequest {
 
     /**
-     * The UUID of the report request
+     * The UUID of the payroll
      */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=report_uuid")
-    private String reportUuid;
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=payroll_uuid")
+    private String payrollUuid;
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,27 +31,34 @@ public class GetReportsReportUuidRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends VersionHeader> xGustoAPIVersion;
 
+    @SpeakeasyMetadata("request:mediaType=application/json")
+    private PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody requestBody;
+
     @JsonCreator
-    public GetReportsReportUuidRequest(
-            String reportUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(reportUuid, "reportUuid");
+    public PostPayrollsPayrollUuidReportsGeneralLedgerRequest(
+            String payrollUuid,
+            Optional<? extends VersionHeader> xGustoAPIVersion,
+            PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody requestBody) {
+        Utils.checkNotNull(payrollUuid, "payrollUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.reportUuid = reportUuid;
+        Utils.checkNotNull(requestBody, "requestBody");
+        this.payrollUuid = payrollUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.requestBody = requestBody;
     }
     
-    public GetReportsReportUuidRequest(
-            String reportUuid) {
-        this(reportUuid, Optional.empty());
+    public PostPayrollsPayrollUuidReportsGeneralLedgerRequest(
+            String payrollUuid,
+            PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody requestBody) {
+        this(payrollUuid, Optional.empty(), requestBody);
     }
 
     /**
-     * The UUID of the report request
+     * The UUID of the payroll
      */
     @JsonIgnore
-    public String reportUuid() {
-        return reportUuid;
+    public String payrollUuid() {
+        return payrollUuid;
     }
 
     /**
@@ -63,23 +70,28 @@ public class GetReportsReportUuidRequest {
         return (Optional<VersionHeader>) xGustoAPIVersion;
     }
 
+    @JsonIgnore
+    public PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody requestBody() {
+        return requestBody;
+    }
+
     public final static Builder builder() {
         return new Builder();
     }
 
     /**
-     * The UUID of the report request
+     * The UUID of the payroll
      */
-    public GetReportsReportUuidRequest withReportUuid(String reportUuid) {
-        Utils.checkNotNull(reportUuid, "reportUuid");
-        this.reportUuid = reportUuid;
+    public PostPayrollsPayrollUuidReportsGeneralLedgerRequest withPayrollUuid(String payrollUuid) {
+        Utils.checkNotNull(payrollUuid, "payrollUuid");
+        this.payrollUuid = payrollUuid;
         return this;
     }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetReportsReportUuidRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PostPayrollsPayrollUuidReportsGeneralLedgerRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -88,9 +100,15 @@ public class GetReportsReportUuidRequest {
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetReportsReportUuidRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PostPayrollsPayrollUuidReportsGeneralLedgerRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PostPayrollsPayrollUuidReportsGeneralLedgerRequest withRequestBody(PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody requestBody) {
+        Utils.checkNotNull(requestBody, "requestBody");
+        this.requestBody = requestBody;
         return this;
     }
     
@@ -102,42 +120,47 @@ public class GetReportsReportUuidRequest {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        GetReportsReportUuidRequest other = (GetReportsReportUuidRequest) o;
+        PostPayrollsPayrollUuidReportsGeneralLedgerRequest other = (PostPayrollsPayrollUuidReportsGeneralLedgerRequest) o;
         return 
-            Objects.deepEquals(this.reportUuid, other.reportUuid) &&
-            Objects.deepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Objects.deepEquals(this.payrollUuid, other.payrollUuid) &&
+            Objects.deepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Objects.deepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            reportUuid,
-            xGustoAPIVersion);
+            payrollUuid,
+            xGustoAPIVersion,
+            requestBody);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(GetReportsReportUuidRequest.class,
-                "reportUuid", reportUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+        return Utils.toString(PostPayrollsPayrollUuidReportsGeneralLedgerRequest.class,
+                "payrollUuid", payrollUuid,
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "requestBody", requestBody);
     }
     
     public final static class Builder {
  
-        private String reportUuid;
+        private String payrollUuid;
  
-        private Optional<? extends VersionHeader> xGustoAPIVersion;  
+        private Optional<? extends VersionHeader> xGustoAPIVersion;
+ 
+        private PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody requestBody;  
         
         private Builder() {
           // force use of static builder() method
         }
 
         /**
-         * The UUID of the report request
+         * The UUID of the payroll
          */
-        public Builder reportUuid(String reportUuid) {
-            Utils.checkNotNull(reportUuid, "reportUuid");
-            this.reportUuid = reportUuid;
+        public Builder payrollUuid(String payrollUuid) {
+            Utils.checkNotNull(payrollUuid, "payrollUuid");
+            this.payrollUuid = payrollUuid;
             return this;
         }
 
@@ -158,13 +181,20 @@ public class GetReportsReportUuidRequest {
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
         }
+
+        public Builder requestBody(PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody requestBody) {
+            Utils.checkNotNull(requestBody, "requestBody");
+            this.requestBody = requestBody;
+            return this;
+        }
         
-        public GetReportsReportUuidRequest build() {
+        public PostPayrollsPayrollUuidReportsGeneralLedgerRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
-            }            return new GetReportsReportUuidRequest(
-                reportUuid,
-                xGustoAPIVersion);
+            }            return new PostPayrollsPayrollUuidReportsGeneralLedgerRequest(
+                payrollUuid,
+                xGustoAPIVersion,
+                requestBody);
         }
 
         private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =

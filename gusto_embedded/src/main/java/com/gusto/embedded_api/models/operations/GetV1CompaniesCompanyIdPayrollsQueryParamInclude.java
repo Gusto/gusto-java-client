@@ -11,7 +11,8 @@ import java.util.Optional;
 public enum GetV1CompaniesCompanyIdPayrollsQueryParamInclude {
     TOTALS("totals"),
     PAYROLL_STATUS_META("payroll_status_meta"),
-    RISK_BLOCKERS("risk_blockers");
+    RISK_BLOCKERS("risk_blockers"),
+    REVERSALS("reversals");
 
     @JsonValue
     private final String value;

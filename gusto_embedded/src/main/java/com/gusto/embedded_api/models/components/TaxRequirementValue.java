@@ -13,7 +13,6 @@ import com.gusto.embedded_api.utils.Utils.JsonShape;
 import com.gusto.embedded_api.utils.Utils.TypeReferenceWithShape;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -21,7 +20,7 @@ import java.util.Objects;
 /**
  * TaxRequirementValue
  * 
- * <p>The required value of the requirement identified by `key`
+ * <p>The "answer"
  */
 
 @JsonDeserialize(using = TaxRequirementValue._Deserializer.class)
@@ -34,27 +33,21 @@ public class TaxRequirementValue {
         this.value = value;
     }
 
-    public static TaxRequirementValue of(boolean value) {
-        Utils.checkNotNull(value, "value");
-        return new TaxRequirementValue(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.lang.Boolean>(){}));
-    }
-
     public static TaxRequirementValue of(String value) {
         Utils.checkNotNull(value, "value");
         return new TaxRequirementValue(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<String>(){}));
     }
 
-    public static TaxRequirementValue of(double value) {
+    public static TaxRequirementValue of(boolean value) {
         Utils.checkNotNull(value, "value");
-        return new TaxRequirementValue(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.lang.Double>(){}));
+        return new TaxRequirementValue(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.lang.Boolean>(){}));
     }
     
     /**
      * Returns an instance of one of these types:
      * <ul>
-     * <li>{@code boolean}</li>
      * <li>{@code java.lang.String}</li>
-     * <li>{@code double}</li>
+     * <li>{@code boolean}</li>
      * </ul>
      * 
      * <p>Use {@code instanceof} to determine what type is returned. For example:
@@ -94,9 +87,8 @@ public class TaxRequirementValue {
 
         public _Deserializer() {
             super(TaxRequirementValue.class, false,
-                  TypeReferenceWithShape.of(new TypeReference<Double>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<String>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<Boolean>() {}, JsonShape.DEFAULT));
+                  TypeReferenceWithShape.of(new TypeReference<Boolean>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<String>() {}, JsonShape.DEFAULT));
         }
     }
     

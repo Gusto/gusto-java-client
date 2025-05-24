@@ -5,8 +5,6 @@
 
 package com.gusto.embedded_api.models.errors;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.models.components.EntityErrorObject;
 import com.gusto.embedded_api.utils.Utils;
@@ -15,7 +13,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 /**
  * UnprocessableEntityErrorObject
  * 
@@ -26,24 +23,18 @@ import java.util.Optional;
 @SuppressWarnings("serial")
 public class UnprocessableEntityErrorObject extends RuntimeException {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("errors")
-    private Optional<? extends List<EntityErrorObject>> errors;
+    private List<EntityErrorObject> errors;
 
     @JsonCreator
     public UnprocessableEntityErrorObject(
-            @JsonProperty("errors") Optional<? extends List<EntityErrorObject>> errors) {
+            @JsonProperty("errors") List<EntityErrorObject> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = errors;
     }
-    
-    public UnprocessableEntityErrorObject() {
-        this(Optional.empty());
-    }
 
-    @SuppressWarnings("unchecked")
-    public Optional<List<EntityErrorObject>> errors(){
-        return (Optional<List<EntityErrorObject>>) errors;
+    public List<EntityErrorObject> errors(){
+        return errors;
     }
     
     public final static Builder builder() {
@@ -51,12 +42,6 @@ public class UnprocessableEntityErrorObject extends RuntimeException {
     }
 
     public UnprocessableEntityErrorObject withErrors(List<EntityErrorObject> errors) {
-        Utils.checkNotNull(errors, "errors");
-        this.errors = Optional.ofNullable(errors);
-        return this;
-    }
-    
-    public UnprocessableEntityErrorObject withErrors(Optional<? extends List<EntityErrorObject>> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = errors;
         return this;
@@ -89,19 +74,13 @@ public class UnprocessableEntityErrorObject extends RuntimeException {
 
     public final static class Builder {
 
-        private Optional<? extends List<EntityErrorObject>> errors = Optional.empty();
+        private List<EntityErrorObject> errors;
 
         private Builder() {
           // force use of static builder() method
         }
 
         public Builder errors(List<EntityErrorObject> errors) {
-            Utils.checkNotNull(errors, "errors");
-            this.errors = Optional.ofNullable(errors);
-            return this;
-        }
-        
-        public Builder errors(Optional<? extends List<EntityErrorObject>> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = errors;
             return this;

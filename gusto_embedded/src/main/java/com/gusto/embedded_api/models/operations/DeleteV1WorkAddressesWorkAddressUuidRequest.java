@@ -7,7 +7,6 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -29,12 +28,12 @@ public class DeleteV1WorkAddressesWorkAddressUuidRequest {
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    private Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
     @JsonCreator
     public DeleteV1WorkAddressesWorkAddressUuidRequest(
             String workAddressUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(workAddressUuid, "workAddressUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.workAddressUuid = workAddressUuid;
@@ -59,8 +58,8 @@ public class DeleteV1WorkAddressesWorkAddressUuidRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     public final static Builder builder() {
@@ -79,7 +78,7 @@ public class DeleteV1WorkAddressesWorkAddressUuidRequest {
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public DeleteV1WorkAddressesWorkAddressUuidRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public DeleteV1WorkAddressesWorkAddressUuidRequest withXGustoAPIVersion(DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -88,7 +87,7 @@ public class DeleteV1WorkAddressesWorkAddressUuidRequest {
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public DeleteV1WorkAddressesWorkAddressUuidRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public DeleteV1WorkAddressesWorkAddressUuidRequest withXGustoAPIVersion(Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -126,7 +125,7 @@ public class DeleteV1WorkAddressesWorkAddressUuidRequest {
  
         private String workAddressUuid;
  
-        private Optional<? extends VersionHeader> xGustoAPIVersion;  
+        private Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion;  
         
         private Builder() {
           // force use of static builder() method
@@ -144,7 +143,7 @@ public class DeleteV1WorkAddressesWorkAddressUuidRequest {
         /**
          * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -153,7 +152,7 @@ public class DeleteV1WorkAddressesWorkAddressUuidRequest {
         /**
          * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
@@ -167,11 +166,11 @@ public class DeleteV1WorkAddressesWorkAddressUuidRequest {
                 xGustoAPIVersion);
         }
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2024-04-01\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>>() {});
     }
 }
 

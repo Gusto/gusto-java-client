@@ -16,11 +16,6 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
-/**
- * PutV1LocationsLocationIdRequestBody
- * 
- * <p>Update a location
- */
 
 public class PutV1LocationsLocationIdRequestBody {
 

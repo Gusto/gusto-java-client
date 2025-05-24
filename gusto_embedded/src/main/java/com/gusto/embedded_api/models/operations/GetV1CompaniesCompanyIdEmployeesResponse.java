@@ -37,24 +37,24 @@ public class GetV1CompaniesCompanyIdEmployeesResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * successful
      */
-    private Optional<? extends List<Employee>> employeeList;
+    private Optional<? extends List<Employee>> employees;
 
     @JsonCreator
     public GetV1CompaniesCompanyIdEmployeesResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<Employee>> employeeList) {
+            Optional<? extends List<Employee>> employees) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(employeeList, "employeeList");
+        Utils.checkNotNull(employees, "employees");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.employeeList = employeeList;
+        this.employees = employees;
     }
     
     public GetV1CompaniesCompanyIdEmployeesResponse(
@@ -89,12 +89,12 @@ public class GetV1CompaniesCompanyIdEmployeesResponse implements Response {
     }
 
     /**
-     * Example response
+     * successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Employee>> employeeList() {
-        return (Optional<List<Employee>>) employeeList;
+    public Optional<List<Employee>> employees() {
+        return (Optional<List<Employee>>) employees;
     }
 
     public final static Builder builder() {
@@ -129,20 +129,20 @@ public class GetV1CompaniesCompanyIdEmployeesResponse implements Response {
     }
 
     /**
-     * Example response
+     * successful
      */
-    public GetV1CompaniesCompanyIdEmployeesResponse withEmployeeList(List<Employee> employeeList) {
-        Utils.checkNotNull(employeeList, "employeeList");
-        this.employeeList = Optional.ofNullable(employeeList);
+    public GetV1CompaniesCompanyIdEmployeesResponse withEmployees(List<Employee> employees) {
+        Utils.checkNotNull(employees, "employees");
+        this.employees = Optional.ofNullable(employees);
         return this;
     }
 
     /**
-     * Example response
+     * successful
      */
-    public GetV1CompaniesCompanyIdEmployeesResponse withEmployeeList(Optional<? extends List<Employee>> employeeList) {
-        Utils.checkNotNull(employeeList, "employeeList");
-        this.employeeList = employeeList;
+    public GetV1CompaniesCompanyIdEmployeesResponse withEmployees(Optional<? extends List<Employee>> employees) {
+        Utils.checkNotNull(employees, "employees");
+        this.employees = employees;
         return this;
     }
     
@@ -159,7 +159,7 @@ public class GetV1CompaniesCompanyIdEmployeesResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.employeeList, other.employeeList);
+            Objects.deepEquals(this.employees, other.employees);
     }
     
     @Override
@@ -168,7 +168,7 @@ public class GetV1CompaniesCompanyIdEmployeesResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            employeeList);
+            employees);
     }
     
     @Override
@@ -177,7 +177,7 @@ public class GetV1CompaniesCompanyIdEmployeesResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "employeeList", employeeList);
+                "employees", employees);
     }
     
     public final static class Builder {
@@ -188,7 +188,7 @@ public class GetV1CompaniesCompanyIdEmployeesResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends List<Employee>> employeeList = Optional.empty();  
+        private Optional<? extends List<Employee>> employees = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -222,20 +222,20 @@ public class GetV1CompaniesCompanyIdEmployeesResponse implements Response {
         }
 
         /**
-         * Example response
+         * successful
          */
-        public Builder employeeList(List<Employee> employeeList) {
-            Utils.checkNotNull(employeeList, "employeeList");
-            this.employeeList = Optional.ofNullable(employeeList);
+        public Builder employees(List<Employee> employees) {
+            Utils.checkNotNull(employees, "employees");
+            this.employees = Optional.ofNullable(employees);
             return this;
         }
 
         /**
-         * Example response
+         * successful
          */
-        public Builder employeeList(Optional<? extends List<Employee>> employeeList) {
-            Utils.checkNotNull(employeeList, "employeeList");
-            this.employeeList = employeeList;
+        public Builder employees(Optional<? extends List<Employee>> employees) {
+            Utils.checkNotNull(employees, "employees");
+            this.employees = employees;
             return this;
         }
         
@@ -244,7 +244,7 @@ public class GetV1CompaniesCompanyIdEmployeesResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
-                employeeList);
+                employees);
         }
     }
 }

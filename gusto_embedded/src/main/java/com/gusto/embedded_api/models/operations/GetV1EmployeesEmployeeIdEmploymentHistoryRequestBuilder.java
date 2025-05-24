@@ -5,7 +5,6 @@
 package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Exception;
@@ -14,32 +13,32 @@ import java.util.Optional;
 
 public class GetV1EmployeesEmployeeIdEmploymentHistoryRequestBuilder {
 
-    private String employeeId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2024-04-01\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
     private final SDKMethodInterfaces.MethodCallGetV1EmployeesEmployeeIdEmploymentHistory sdk;
 
     public GetV1EmployeesEmployeeIdEmploymentHistoryRequestBuilder(SDKMethodInterfaces.MethodCallGetV1EmployeesEmployeeIdEmploymentHistory sdk) {
         this.sdk = sdk;
     }
-
-    public GetV1EmployeesEmployeeIdEmploymentHistoryRequestBuilder employeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
-    }
                 
-    public GetV1EmployeesEmployeeIdEmploymentHistoryRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public GetV1EmployeesEmployeeIdEmploymentHistoryRequestBuilder xGustoAPIVersion(GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public GetV1EmployeesEmployeeIdEmploymentHistoryRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1EmployeesEmployeeIdEmploymentHistoryRequestBuilder xGustoAPIVersion(Optional<? extends GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public GetV1EmployeesEmployeeIdEmploymentHistoryRequestBuilder employeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
         return this;
     }
 
@@ -48,13 +47,13 @@ public class GetV1EmployeesEmployeeIdEmploymentHistoryRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
         return sdk.getHistory(
-            employeeId,
-            xGustoAPIVersion);
+            xGustoAPIVersion,
+            employeeId);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2024-04-01\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion>>() {});
 }

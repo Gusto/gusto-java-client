@@ -12,43 +12,43 @@ import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
-public class GetReportsReportUuidRequestBuilder {
+public class GetReportsRequestUuidRequestBuilder {
 
-    private String reportUuid;
+    private String requestUuid;
     private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2024-04-01\"",
                             new TypeReference<Optional<? extends VersionHeader>>() {});
-    private final SDKMethodInterfaces.MethodCallGetReportsReportUuid sdk;
+    private final SDKMethodInterfaces.MethodCallGetReportsRequestUuid sdk;
 
-    public GetReportsReportUuidRequestBuilder(SDKMethodInterfaces.MethodCallGetReportsReportUuid sdk) {
+    public GetReportsRequestUuidRequestBuilder(SDKMethodInterfaces.MethodCallGetReportsRequestUuid sdk) {
         this.sdk = sdk;
     }
 
-    public GetReportsReportUuidRequestBuilder reportUuid(String reportUuid) {
-        Utils.checkNotNull(reportUuid, "reportUuid");
-        this.reportUuid = reportUuid;
+    public GetReportsRequestUuidRequestBuilder requestUuid(String requestUuid) {
+        Utils.checkNotNull(requestUuid, "requestUuid");
+        this.requestUuid = requestUuid;
         return this;
     }
                 
-    public GetReportsReportUuidRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public GetReportsRequestUuidRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public GetReportsReportUuidRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetReportsRequestUuidRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public GetReportsReportUuidResponse call() throws Exception {
+    public GetReportsRequestUuidResponse call() throws Exception {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
-        return sdk.get(
-            reportUuid,
+        return sdk.getReportsRequestUuid(
+            requestUuid,
             xGustoAPIVersion);
     }
 

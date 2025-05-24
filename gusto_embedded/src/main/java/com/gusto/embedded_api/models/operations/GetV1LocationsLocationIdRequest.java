@@ -7,7 +7,6 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -20,30 +19,39 @@ import java.util.Optional;
 public class GetV1LocationsLocationIdRequest {
 
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends XGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the location
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=location_id")
     private String locationId;
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
-
     @JsonCreator
     public GetV1LocationsLocationIdRequest(
-            String locationId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(locationId, "locationId");
+            Optional<? extends XGustoAPIVersion> xGustoAPIVersion,
+            String locationId) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.locationId = locationId;
+        Utils.checkNotNull(locationId, "locationId");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.locationId = locationId;
     }
     
     public GetV1LocationsLocationIdRequest(
             String locationId) {
-        this(locationId, Optional.empty());
+        this(Optional.empty(), locationId);
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<XGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<XGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -54,32 +62,14 @@ public class GetV1LocationsLocationIdRequest {
         return locationId;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
-    }
-
     public final static Builder builder() {
         return new Builder();
     }
 
     /**
-     * The UUID of the location
-     */
-    public GetV1LocationsLocationIdRequest withLocationId(String locationId) {
-        Utils.checkNotNull(locationId, "locationId");
-        this.locationId = locationId;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1LocationsLocationIdRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public GetV1LocationsLocationIdRequest withXGustoAPIVersion(XGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -88,9 +78,18 @@ public class GetV1LocationsLocationIdRequest {
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1LocationsLocationIdRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1LocationsLocationIdRequest withXGustoAPIVersion(Optional<? extends XGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * The UUID of the location
+     */
+    public GetV1LocationsLocationIdRequest withLocationId(String locationId) {
+        Utils.checkNotNull(locationId, "locationId");
+        this.locationId = locationId;
         return this;
     }
     
@@ -104,32 +103,50 @@ public class GetV1LocationsLocationIdRequest {
         }
         GetV1LocationsLocationIdRequest other = (GetV1LocationsLocationIdRequest) o;
         return 
-            Objects.deepEquals(this.locationId, other.locationId) &&
-            Objects.deepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Objects.deepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Objects.deepEquals(this.locationId, other.locationId);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            locationId,
-            xGustoAPIVersion);
+            xGustoAPIVersion,
+            locationId);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1LocationsLocationIdRequest.class,
-                "locationId", locationId,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "locationId", locationId);
     }
     
     public final static class Builder {
  
-        private String locationId;
+        private Optional<? extends XGustoAPIVersion> xGustoAPIVersion;
  
-        private Optional<? extends VersionHeader> xGustoAPIVersion;  
+        private String locationId;  
         
         private Builder() {
           // force use of static builder() method
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(XGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends XGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
         /**
@@ -140,38 +157,20 @@ public class GetV1LocationsLocationIdRequest {
             this.locationId = locationId;
             return this;
         }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
         
         public GetV1LocationsLocationIdRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }            return new GetV1LocationsLocationIdRequest(
-                locationId,
-                xGustoAPIVersion);
+                xGustoAPIVersion,
+                locationId);
         }
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends XGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2024-04-01\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends XGustoAPIVersion>>() {});
     }
 }
 

@@ -25,11 +25,11 @@ public class PutV1ContractorsContractorUuidOnboardingStatusRequestBody {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("onboarding_status")
-    private Optional<? extends OnboardingStatus> onboardingStatus;
+    private Optional<? extends PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus> onboardingStatus;
 
     @JsonCreator
     public PutV1ContractorsContractorUuidOnboardingStatusRequestBody(
-            @JsonProperty("onboarding_status") Optional<? extends OnboardingStatus> onboardingStatus) {
+            @JsonProperty("onboarding_status") Optional<? extends PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus> onboardingStatus) {
         Utils.checkNotNull(onboardingStatus, "onboardingStatus");
         this.onboardingStatus = onboardingStatus;
     }
@@ -43,8 +43,8 @@ public class PutV1ContractorsContractorUuidOnboardingStatusRequestBody {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<OnboardingStatus> onboardingStatus() {
-        return (Optional<OnboardingStatus>) onboardingStatus;
+    public Optional<PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus> onboardingStatus() {
+        return (Optional<PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus>) onboardingStatus;
     }
 
     public final static Builder builder() {
@@ -54,7 +54,7 @@ public class PutV1ContractorsContractorUuidOnboardingStatusRequestBody {
     /**
      * The updated onboarding status for the contractor
      */
-    public PutV1ContractorsContractorUuidOnboardingStatusRequestBody withOnboardingStatus(OnboardingStatus onboardingStatus) {
+    public PutV1ContractorsContractorUuidOnboardingStatusRequestBody withOnboardingStatus(PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus onboardingStatus) {
         Utils.checkNotNull(onboardingStatus, "onboardingStatus");
         this.onboardingStatus = Optional.ofNullable(onboardingStatus);
         return this;
@@ -63,7 +63,7 @@ public class PutV1ContractorsContractorUuidOnboardingStatusRequestBody {
     /**
      * The updated onboarding status for the contractor
      */
-    public PutV1ContractorsContractorUuidOnboardingStatusRequestBody withOnboardingStatus(Optional<? extends OnboardingStatus> onboardingStatus) {
+    public PutV1ContractorsContractorUuidOnboardingStatusRequestBody withOnboardingStatus(Optional<? extends PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus> onboardingStatus) {
         Utils.checkNotNull(onboardingStatus, "onboardingStatus");
         this.onboardingStatus = onboardingStatus;
         return this;
@@ -96,7 +96,7 @@ public class PutV1ContractorsContractorUuidOnboardingStatusRequestBody {
     
     public final static class Builder {
  
-        private Optional<? extends OnboardingStatus> onboardingStatus;  
+        private Optional<? extends PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus> onboardingStatus;  
         
         private Builder() {
           // force use of static builder() method
@@ -105,7 +105,7 @@ public class PutV1ContractorsContractorUuidOnboardingStatusRequestBody {
         /**
          * The updated onboarding status for the contractor
          */
-        public Builder onboardingStatus(OnboardingStatus onboardingStatus) {
+        public Builder onboardingStatus(PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus onboardingStatus) {
             Utils.checkNotNull(onboardingStatus, "onboardingStatus");
             this.onboardingStatus = Optional.ofNullable(onboardingStatus);
             return this;
@@ -114,7 +114,7 @@ public class PutV1ContractorsContractorUuidOnboardingStatusRequestBody {
         /**
          * The updated onboarding status for the contractor
          */
-        public Builder onboardingStatus(Optional<? extends OnboardingStatus> onboardingStatus) {
+        public Builder onboardingStatus(Optional<? extends PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus> onboardingStatus) {
             Utils.checkNotNull(onboardingStatus, "onboardingStatus");
             this.onboardingStatus = onboardingStatus;
             return this;
@@ -127,11 +127,11 @@ public class PutV1ContractorsContractorUuidOnboardingStatusRequestBody {
                 onboardingStatus);
         }
 
-        private static final LazySingletonValue<Optional<? extends OnboardingStatus>> _SINGLETON_VALUE_OnboardingStatus =
+        private static final LazySingletonValue<Optional<? extends PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus>> _SINGLETON_VALUE_OnboardingStatus =
                 new LazySingletonValue<>(
                         "onboarding_status",
                         "\"onboarding_completed\"",
-                        new TypeReference<Optional<? extends OnboardingStatus>>() {});
+                        new TypeReference<Optional<? extends PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus>>() {});
     }
 }
 

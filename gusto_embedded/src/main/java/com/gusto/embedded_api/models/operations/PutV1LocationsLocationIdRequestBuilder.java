@@ -5,7 +5,6 @@
 package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Exception;
@@ -14,33 +13,33 @@ import java.util.Optional;
 
 public class PutV1LocationsLocationIdRequestBuilder {
 
-    private String locationId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2024-04-01\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends HeaderXGustoAPIVersion>>() {});
+    private String locationId;
     private PutV1LocationsLocationIdRequestBody requestBody;
     private final SDKMethodInterfaces.MethodCallPutV1LocationsLocationId sdk;
 
     public PutV1LocationsLocationIdRequestBuilder(SDKMethodInterfaces.MethodCallPutV1LocationsLocationId sdk) {
         this.sdk = sdk;
     }
-
-    public PutV1LocationsLocationIdRequestBuilder locationId(String locationId) {
-        Utils.checkNotNull(locationId, "locationId");
-        this.locationId = locationId;
-        return this;
-    }
                 
-    public PutV1LocationsLocationIdRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1LocationsLocationIdRequestBuilder xGustoAPIVersion(HeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public PutV1LocationsLocationIdRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1LocationsLocationIdRequestBuilder xGustoAPIVersion(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutV1LocationsLocationIdRequestBuilder locationId(String locationId) {
+        Utils.checkNotNull(locationId, "locationId");
+        this.locationId = locationId;
         return this;
     }
 
@@ -55,14 +54,14 @@ public class PutV1LocationsLocationIdRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
         return sdk.update(
-            locationId,
             xGustoAPIVersion,
+            locationId,
             requestBody);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends HeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2024-04-01\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends HeaderXGustoAPIVersion>>() {});
 }
