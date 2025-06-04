@@ -407,7 +407,6 @@ public class Application {
 
         PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse res = sdk.i9Verification().employerSign()
                 .employeeId("<id>")
-                .xGustoClientIp("<value>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody.builder()
                     .signatureText("<value>")

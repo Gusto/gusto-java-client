@@ -110,8 +110,6 @@ public class Application {
 
         GetV1CompaniesCompanyIdPaySchedulesResponse res = sdk.paySchedules().getAll()
                 .companyId("<id>")
-                .page(461008L)
-                .per(59215L)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
@@ -166,7 +164,7 @@ public class Application {
 
         GetV1CompaniesCompanyIdPaySchedulesPreviewRequest req = GetV1CompaniesCompanyIdPaySchedulesPreviewRequest.builder()
                 .companyId("<id>")
-                .frequency(QueryParamFrequency.EVERY_OTHER_WEEK)
+                .frequency(QueryParamFrequency.MONTHLY)
                 .anchorPayDate("2020-05-15")
                 .anchorEndOfPayPeriod("2020-05-08")
                 .build();

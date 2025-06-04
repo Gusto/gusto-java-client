@@ -245,8 +245,8 @@ public class Application {
                 .companyUuid("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody.builder()
-                    .email("Benjamin_Kihn44@yahoo.com")
-                    .ipAddress("198.52.136.51")
+                    .email("Janice18@gmail.com")
+                    .ipAddress("75.249.55.210")
                     .externalUserId("<id>")
                     .build())
                 .call();
@@ -489,8 +489,6 @@ public class Application {
 
         GetV1CompaniesCompanyIdAdminsResponse res = sdk.companies().listAdmins()
                 .companyId("<id>")
-                .page(620604L)
-                .per(696322L)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
@@ -669,8 +667,6 @@ public class Application {
 
         GetV1CompaniesCompanyIdCustomFieldsResponse res = sdk.companies().getCustomFields()
                 .companyId("<id>")
-                .page(653170L)
-                .per(309220L)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 

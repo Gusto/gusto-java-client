@@ -46,6 +46,7 @@ public class Application {
                 .requestBody(PostV1CompaniesCompanyUuidContractorsRequestBody.builder()
                     .wageType(WageType.FIXED)
                     .startDate("2020-04-01")
+                    .selfOnboarding(true)
                     .email("johnson@johnson.com")
                     .firstName("Johnson")
                     .lastName("Johnson")

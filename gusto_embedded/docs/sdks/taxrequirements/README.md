@@ -75,8 +75,7 @@ public class Application {
 
         GetV1CompaniesCompanyUuidTaxRequirementsStateResponse res = sdk.taxRequirements().get()
                 .companyUuid("<id>")
-                .state("Oklahoma")
-                .scheduling(false)
+                .state("South Dakota")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
@@ -135,7 +134,7 @@ public class Application {
 
         PutV1CompaniesCompanyUuidTaxRequirementsStateResponse res = sdk.taxRequirements().updateState()
                 .companyUuid("<id>")
-                .state("Massachusetts")
+                .state("Tennessee")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody.builder()
                     .requirementSets(List.of(

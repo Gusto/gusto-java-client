@@ -380,7 +380,8 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBody;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidContractorPaymentsPreviewResponse;
 import java.lang.Exception;
 import java.util.List;
 
@@ -396,9 +397,7 @@ public class Application {
                 .companyUuid("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBody.builder()
-                    .contractorPayments(List.of(
-                        GetCompaniesCompanyUuidContractorPaymentsPreviewContractorPayments.builder()
-                            .build()))
+                    .contractorPayments(List.of())
                     .build())
                 .call();
 

@@ -49,7 +49,7 @@ public class Application {
                 .companyId("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyIdCompanyBenefitsRequestBody.builder()
-                    .description("yuck vice between gee ugh ha")
+                    .description("hm pfft surge beyond")
                     .build())
                 .call();
 
@@ -109,8 +109,6 @@ public class Application {
 
         GetV1CompaniesCompanyIdCompanyBenefitsResponse res = sdk.companyBenefits().list()
                 .companyId("<id>")
-                .active(false)
-                .enrollmentCount(false)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
@@ -170,7 +168,6 @@ public class Application {
 
         GetV1CompanyBenefitsCompanyBenefitIdResponse res = sdk.companyBenefits().get()
                 .companyBenefitId("<id>")
-                .withEmployeeBenefits(false)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
@@ -515,8 +512,6 @@ public class Application {
 
         GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse res = sdk.companyBenefits().getEmployeeBenefits()
                 .companyBenefitId("<id>")
-                .page(983681L)
-                .per(707622L)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
@@ -586,6 +581,7 @@ public class Application {
                         EmployeeBenefitForCompanyBenefit.builder()
                             .employeeUuid("8f9f3f68-8fd3-499d-ade7-4a052e56494e")
                             .version("09j3d29jqdpj92109j9j2d90dq")
+                            .employeeDeduction("250.00")
                             .build()))
                     .build())
                 .call();

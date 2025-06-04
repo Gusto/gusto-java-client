@@ -145,7 +145,6 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.GetV1JobsJobIdQueryParamInclude;
 import com.gusto.embedded_api.models.operations.GetV1JobsJobIdResponse;
 import java.lang.Exception;
 
@@ -159,7 +158,6 @@ public class Application {
 
         GetV1JobsJobIdResponse res = sdk.jobsAndCompensations().getJob()
                 .jobId("<id>")
-                .include(GetV1JobsJobIdQueryParamInclude.ALL_COMPENSATIONS)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 

@@ -197,7 +197,6 @@ public class Application {
 
         PutV1CompanyFormSignResponse res = sdk.companyForms().sign()
                 .formId("<id>")
-                .xGustoClientIp("<value>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompanyFormSignRequestBody.builder()
                     .signatureText("Jane Smith")

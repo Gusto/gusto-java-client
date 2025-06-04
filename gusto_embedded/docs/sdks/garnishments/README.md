@@ -44,6 +44,7 @@ public class Application {
                     .amount("150.00")
                     .courtOrdered(true)
                     .description("Back taxes")
+                    .recurring(true)
                     .build())
                 .call();
 
@@ -99,8 +100,6 @@ public class Application {
 
         GetV1EmployeesEmployeeIdGarnishmentsResponse res = sdk.garnishments().list()
                 .employeeId("<id>")
-                .page(768578L)
-                .per(547272L)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
@@ -214,6 +213,7 @@ public class Application {
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1GarnishmentsGarnishmentIdRequestBody.builder()
                     .version("52b7c567242cb7452e89ba2bc02cb476")
+                    .active(false)
                     .build())
                 .call();
 

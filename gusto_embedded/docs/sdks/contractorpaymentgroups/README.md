@@ -26,7 +26,8 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsResponse;
 import java.lang.Exception;
 import java.time.LocalDate;
 import java.util.List;
@@ -44,13 +45,7 @@ public class Application {
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody.builder()
                     .checkDate(LocalDate.parse("2020-01-01"))
-                    .contractorPayments(List.of(
-                        ContractorPayments.builder()
-                            .wage(5000)
-                            .hours(40)
-                            .bonus(500)
-                            .reimbursement(20)
-                            .build()))
+                    .contractorPayments(List.of())
                     .creationToken("1d532d13-8f61-4a57-ad3c-b5fac1c6e05e")
                     .build())
                 .call();
@@ -152,7 +147,8 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse;
 import java.lang.Exception;
 import java.time.LocalDate;
 import java.util.List;
@@ -170,13 +166,7 @@ public class Application {
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody.builder()
                     .checkDate(LocalDate.parse("2020-01-01"))
-                    .contractorPayments(List.of(
-                        PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments.builder()
-                            .wage(5000)
-                            .hours(40)
-                            .bonus(500)
-                            .reimbursement(20)
-                            .build()))
+                    .contractorPayments(List.of())
                     .creationToken("1d532d13-8f61-4a57-ad3c-b5fac1c6e05e")
                     .build())
                 .call();

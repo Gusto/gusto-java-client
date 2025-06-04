@@ -183,7 +183,8 @@ package hello.world;
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PutV1ContractorDocumentSignRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1ContractorDocumentSignResponse;
 import java.lang.Exception;
 import java.util.List;
 
@@ -197,18 +198,10 @@ public class Application {
 
         PutV1ContractorDocumentSignResponse res = sdk.contractorDocuments().sign()
                 .documentUuid("<id>")
-                .xGustoClientIp("<value>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1ContractorDocumentSignRequestBody.builder()
-                    .fields(List.of(
-                        Fields.builder()
-                            .build(),
-                        Fields.builder()
-                            .build(),
-                        Fields.builder()
-                            .build()))
-                    .agree(true)
-                    .signedByIpAddress("<value>")
+                    .fields(List.of())
+                    .agree(false)
                     .build())
                 .call();
 

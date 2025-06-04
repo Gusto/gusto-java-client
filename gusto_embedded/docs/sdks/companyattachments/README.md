@@ -151,9 +151,9 @@ public class Application {
                 .requestBody(PostV1CompaniesAttachmentRequestBody.builder()
                     .document(Document.builder()
                         .fileName("example.file")
-                        .content("0xae921BE031".getBytes(StandardCharsets.UTF_8))
+                        .content("0x1E896B1Fda".getBytes(StandardCharsets.UTF_8))
                         .build())
-                    .category(Category.COMPLIANCE)
+                    .category(Category.GEP_NOTICE)
                     .build())
                 .call();
 

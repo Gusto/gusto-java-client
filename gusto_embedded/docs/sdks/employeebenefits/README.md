@@ -43,6 +43,7 @@ public class Application {
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody.builder()
                     .companyBenefitUuid("f68abb42-431e-4392-bc3f-2795627e00f3")
+                    .employeeDeduction("100.00")
                     .contribution(Contribution.builder()
                         .type(PostV1EmployeesEmployeeIdEmployeeBenefitsType.AMOUNT)
                         .value(PostV1EmployeesEmployeeIdEmployeeBenefitsValue.of("100.00"))
@@ -106,8 +107,6 @@ public class Application {
 
         GetV1EmployeesEmployeeIdEmployeeBenefitsResponse res = sdk.employeeBenefits().get()
                 .employeeId("<id>")
-                .page(700347L)
-                .per(558834L)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
@@ -223,6 +222,7 @@ public class Application {
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody.builder()
                     .version("09j3d29jqdpj92109j9j2d90dq")
+                    .employeeDeduction("250.00")
                     .build())
                 .call();
 
@@ -393,7 +393,7 @@ public class Application {
                 .employeeId("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .postEmployeeYtdBenefitAmountsFromDifferentCompany(PostEmployeeYtdBenefitAmountsFromDifferentCompany.builder()
-                    .taxYear(5621.31)
+                    .taxYear(1828.56)
                     .build())
                 .call();
 
