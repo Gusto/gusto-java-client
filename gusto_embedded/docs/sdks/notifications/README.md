@@ -6,6 +6,7 @@
 ### Available Operations
 
 * [getDetails](#getdetails) - Get a notification's details
+* [getCompanyNotifications](#getcompanynotifications) - Get notifications for company
 
 ## getDetails
 
@@ -19,6 +20,7 @@ scope: `notifications:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-notifications-notification_uuid" method="get" path="/v1/notifications/{notification_uuid}" -->
 ```java
 package hello.world;
 
@@ -33,7 +35,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetNotificationsNotificationUuidResponse res = sdk.notifications().getDetails()
@@ -65,3 +67,60 @@ public class Application {
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
 | models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+
+## getCompanyNotifications
+
+Returns all notifications relevant for the given company.
+
+scope: `notifications:read`
+
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-company-notifications" method="get" path="/v1/companies/{company_uuid}/notifications" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.operations.GetCompanyNotificationsRequest;
+import com.gusto.embedded_api.models.operations.GetCompanyNotificationsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetCompanyNotificationsRequest req = GetCompanyNotificationsRequest.builder()
+                .companyUuid("<id>")
+                .build();
+
+        GetCompanyNotificationsResponse res = sdk.notifications().getCompanyNotifications()
+                .request(req)
+                .call();
+
+        if (res.notificationsList().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `request`                                                                                   | [GetCompanyNotificationsRequest](../../models/operations/GetCompanyNotificationsRequest.md) | :heavy_check_mark:                                                                          | The request object to use for the request.                                                  |
+
+### Response
+
+**[GetCompanyNotificationsResponse](../../models/operations/GetCompanyNotificationsResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |

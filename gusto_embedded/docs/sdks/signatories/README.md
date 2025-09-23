@@ -21,6 +21,7 @@ scope: `signatories:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-company-signatories" method="post" path="/v1/companies/{company_uuid}/signatories" -->
 ```java
 package hello.world;
 
@@ -35,7 +36,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1CompanySignatoriesResponse res = sdk.signatories().create()
@@ -43,17 +44,17 @@ public class Application {
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompanySignatoriesRequestBody.builder()
                     .ssn("<value>")
-                    .firstName("Jed")
-                    .lastName("Johnson")
-                    .email("Annie.Wiegand16@gmail.com")
+                    .firstName("Ed")
+                    .lastName("Reichert")
+                    .email("Shanny62@hotmail.com")
                     .title("<value>")
-                    .phone("857-932-0220 x31016")
+                    .phone("1-346-396-8392 x69356")
                     .birthday("<value>")
                     .homeAddress(HomeAddress.builder()
                         .street1("<value>")
-                        .city("North Lilly")
-                        .state("North Carolina")
-                        .zip("05065")
+                        .city("East Clydefield")
+                        .state("Kentucky")
+                        .zip("13719-5134")
                         .build())
                     .build())
                 .call();
@@ -92,6 +93,7 @@ scope: `signatories:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_uuid-signatories" method="get" path="/v1/companies/{company_uuid}/signatories" -->
 ```java
 package hello.world;
 
@@ -105,7 +107,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyUuidSignatoriesResponse res = sdk.signatories().list()
@@ -143,6 +145,7 @@ Create a signatory with minimal information. This signatory can be invited to pr
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_uuid-signatories-invite" method="post" path="/v1/companies/{company_uuid}/signatories/invite" -->
 ```java
 package hello.world;
 
@@ -158,14 +161,14 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1CompaniesCompanyUuidSignatoriesInviteResponse res = sdk.signatories().invite()
                 .companyUuid("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody.builder()
-                    .email("Maureen_Wyman@yahoo.com")
+                    .email("Kamron.Nikolaus@yahoo.com")
                     .build())
                 .call();
 
@@ -203,6 +206,7 @@ scope: `signatories:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-companies-company_uuid-signatories-signatory_uuid" method="put" path="/v1/companies/{company_uuid}/signatories/{signatory_uuid}" -->
 ```java
 package hello.world;
 
@@ -218,7 +222,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse res = sdk.signatories().update()
@@ -264,6 +268,7 @@ scope: `signatories:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-v1-companies-company_uuid-signatories-signatory_uuid" method="delete" path="/v1/companies/{company_uuid}/signatories/{signatory_uuid}" -->
 ```java
 package hello.world;
 
@@ -277,7 +282,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse res = sdk.signatories().delete()

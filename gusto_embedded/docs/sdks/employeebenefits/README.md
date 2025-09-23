@@ -15,12 +15,15 @@
 
 ## create
 
-Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee's enrollment.
+
+When the application has the `employee_benefits:write:benefit_type_limited` data scope, the application can only create employee benefits for benefit types that are permitted for the application.
 
 scope: `employee_benefits:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-employee_benefits" method="post" path="/v1/employees/{employee_id}/employee_benefits" -->
 ```java
 package hello.world;
 
@@ -35,7 +38,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1EmployeesEmployeeIdEmployeeBenefitsResponse res = sdk.employeeBenefits().create()
@@ -43,9 +46,10 @@ public class Application {
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody.builder()
                     .companyBenefitUuid("f68abb42-431e-4392-bc3f-2795627e00f3")
+                    .employeeDeduction("100.00")
                     .contribution(Contribution.builder()
                         .type(PostV1EmployeesEmployeeIdEmployeeBenefitsType.AMOUNT)
-                        .value(PostV1EmployeesEmployeeIdEmployeeBenefitsValue.of("100.00"))
+                        .value(Value.of("100.00"))
                         .build())
                     .build())
                 .call();
@@ -88,6 +92,7 @@ scope: `employee_benefits:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-employee_benefits" method="get" path="/v1/employees/{employee_id}/employee_benefits" -->
 ```java
 package hello.world;
 
@@ -101,13 +106,11 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeesEmployeeIdEmployeeBenefitsResponse res = sdk.employeeBenefits().get()
                 .employeeId("<id>")
-                .page(700347L)
-                .per(558834L)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
@@ -147,6 +150,7 @@ scope: `employee_benefits:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employee_benefits-employee_benefit_id" method="get" path="/v1/employee_benefits/{employee_benefit_id}" -->
 ```java
 package hello.world;
 
@@ -160,7 +164,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeeBenefitsEmployeeBenefitIdResponse res = sdk.employeeBenefits().retrieve()
@@ -194,12 +198,15 @@ public class Application {
 
 ## update
 
-Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee's enrollment.
+
+When the application has the `employee_benefits:write:benefit_type_limited` data scope, the application can only update employee benefits for benefit types that are permitted for the application.
 
 scope: `employee_benefits:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-employee_benefits-employee_benefit_id" method="put" path="/v1/employee_benefits/{employee_benefit_id}" -->
 ```java
 package hello.world;
 
@@ -215,7 +222,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1EmployeeBenefitsEmployeeBenefitIdResponse res = sdk.employeeBenefits().update()
@@ -223,6 +230,7 @@ public class Application {
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody.builder()
                     .version("09j3d29jqdpj92109j9j2d90dq")
+                    .employeeDeduction("250.00")
                     .build())
                 .call();
 
@@ -254,12 +262,15 @@ public class Application {
 
 ## delete
 
-Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee's enrollment.
+
+When the application has the `employee_benefits:write:benefit_type_limited` data scope, the application can only delete employee benefits for benefit types that are permitted for the application.
 
 scope: `employee_benefits:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-v1-employee_benefits-employee_benefit_id" method="delete" path="/v1/employee_benefits/{employee_benefit_id}" -->
 ```java
 package hello.world;
 
@@ -273,7 +284,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse res = sdk.employeeBenefits().delete()
@@ -314,6 +325,7 @@ scope: `employee_benefits:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-employee-ytd-benefit-amounts-from-different-company" method="get" path="/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company" -->
 ```java
 package hello.world;
 
@@ -327,7 +339,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse res = sdk.employeeBenefits().getYtdBenefitAmountsFromDifferentCompany()
@@ -371,6 +383,7 @@ scope: `employee_benefits:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-employee-ytd-benefit-amounts-from-different-company" method="post" path="/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company" -->
 ```java
 package hello.world;
 
@@ -386,14 +399,14 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse res = sdk.employeeBenefits().createYtdBenefitAmountsFromDifferentCompany()
                 .employeeId("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .postEmployeeYtdBenefitAmountsFromDifferentCompany(PostEmployeeYtdBenefitAmountsFromDifferentCompany.builder()
-                    .taxYear(5621.31)
+                    .taxYear(1828.56)
                     .build())
                 .call();
 

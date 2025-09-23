@@ -34,6 +34,7 @@ IMPORTANT: the returned access and refresh tokens are reserved for this company 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-partner-managed-companies" method="post" path="/v1/partner_managed_companies" -->
 ```java
 package hello.world;
 
@@ -52,7 +53,7 @@ public class Application {
 
         PostV1PartnerManagedCompaniesResponse res = sdk.companies().createPartnerManaged()
                 .security(PostV1PartnerManagedCompaniesSecurity.builder()
-                    .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1PartnerManagedCompaniesRequestBody.builder()
@@ -108,6 +109,7 @@ scope: `companies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies" method="get" path="/v1/companies/{company_id}" -->
 ```java
 package hello.world;
 
@@ -121,7 +123,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesResponse res = sdk.companies().get()
@@ -161,6 +163,7 @@ scope: `companies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-companies" method="put" path="/v1/companies/{company_id}" -->
 ```java
 package hello.world;
 
@@ -176,7 +179,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompaniesResponse res = sdk.companies().update()
@@ -223,6 +226,7 @@ scope: `partner_managed_companies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-partner-managed-companies-company-uuid-migrate" method="put" path="/v1/partner_managed_companies/{company_uuid}/migrate" -->
 ```java
 package hello.world;
 
@@ -238,15 +242,15 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse res = sdk.companies().migrate()
                 .companyUuid("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody.builder()
-                    .email("Benjamin_Kihn44@yahoo.com")
-                    .ipAddress("198.52.136.51")
+                    .email("Janice18@gmail.com")
+                    .ipAddress("75.249.55.210")
                     .externalUserId("<id>")
                     .build())
                 .call();
@@ -286,6 +290,7 @@ scope: `terms_of_services:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-partner-managed-companies-company_uuid-accept_terms_of_service" method="post" path="/v1/partner_managed_companies/{company_uuid}/accept_terms_of_service" -->
 ```java
 package hello.world;
 
@@ -301,7 +306,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse res = sdk.companies().acceptTermsOfService()
@@ -348,6 +353,7 @@ scope: `terms_of_services:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-partner-managed-companies-company_uuid-retrieve_terms_of_service" method="post" path="/v1/partner_managed_companies/{company_uuid}/retrieve_terms_of_service" -->
 ```java
 package hello.world;
 
@@ -363,7 +369,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse res = sdk.companies().retrieveTermsOfService()
@@ -409,6 +415,7 @@ scope: `company_admin:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-admins" method="post" path="/v1/companies/{company_id}/admins" -->
 ```java
 package hello.world;
 
@@ -424,7 +431,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1CompaniesCompanyIdAdminsResponse res = sdk.companies().createAdmin()
@@ -471,6 +478,7 @@ scope: `company_admin:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-admins" method="get" path="/v1/companies/{company_id}/admins" -->
 ```java
 package hello.world;
 
@@ -484,13 +492,11 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyIdAdminsResponse res = sdk.companies().listAdmins()
                 .companyId("<id>")
-                .page(620604L)
-                .per(696322L)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
@@ -529,6 +535,7 @@ scope: `company_onboarding_status:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-company-onboarding-status" method="get" path="/v1/companies/{company_uuid}/onboarding_status" -->
 ```java
 package hello.world;
 
@@ -542,7 +549,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompanyOnboardingStatusResponse res = sdk.companies().getOnboardingStatus()
@@ -596,6 +603,7 @@ scope: `companies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-company-finish-onboarding" method="put" path="/v1/companies/{company_uuid}/finish_onboarding" -->
 ```java
 package hello.world;
 
@@ -610,7 +618,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompanyFinishOnboardingResponse res = sdk.companies().finishOnboarding()
@@ -651,6 +659,7 @@ scope: `companies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-custom_fields" method="get" path="/v1/companies/{company_id}/custom_fields" -->
 ```java
 package hello.world;
 
@@ -664,13 +673,11 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyIdCustomFieldsResponse res = sdk.companies().getCustomFields()
                 .companyId("<id>")
-                .page(653170L)
-                .per(309220L)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 

@@ -15,6 +15,7 @@ scope: `generated_documents:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-generated_documents-document_type-request_uuid" method="get" path="/v1/generated_documents/{document_type}/{request_uuid}" -->
 ```java
 package hello.world;
 
@@ -29,7 +30,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse res = sdk.generatedDocuments().get()

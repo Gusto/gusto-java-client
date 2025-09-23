@@ -18,6 +18,7 @@ scope: `company_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-company-forms" method="get" path="/v1/companies/{company_id}/forms" -->
 ```java
 package hello.world;
 
@@ -31,7 +32,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompanyFormsResponse res = sdk.companyForms().getAll()
@@ -71,6 +72,7 @@ scope: `company_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-company-form" method="get" path="/v1/forms/{form_id}" -->
 ```java
 package hello.world;
 
@@ -84,7 +86,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompanyFormResponse res = sdk.companyForms().get()
@@ -124,6 +126,7 @@ scope: `company_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-company-form-pdf" method="get" path="/v1/forms/{form_id}/pdf" -->
 ```java
 package hello.world;
 
@@ -137,7 +140,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompanyFormPdfResponse res = sdk.companyForms().getPdf()
@@ -177,6 +180,7 @@ scope: `company_forms:sign`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-company-form-sign" method="put" path="/v1/forms/{form_id}/sign" -->
 ```java
 package hello.world;
 
@@ -192,12 +196,11 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompanyFormSignResponse res = sdk.companyForms().sign()
                 .formId("<id>")
-                .xGustoClientIp("<value>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1CompanyFormSignRequestBody.builder()
                     .signatureText("Jane Smith")

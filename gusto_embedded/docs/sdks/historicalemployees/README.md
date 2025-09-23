@@ -15,6 +15,7 @@ scope: `employees:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-historical_employees" method="put" path="/v1/companies/{company_uuid}/historical_employees/{historical_employee_uuid}" -->
 ```java
 package hello.world;
 
@@ -30,7 +31,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1HistoricalEmployeesResponse res = sdk.historicalEmployees().update()

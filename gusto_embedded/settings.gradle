@@ -8,3 +8,9 @@
  */
 
 rootProject.name = 'GustoEmbedded'
+
+include 'GustoEmbedded-spring-boot-autoconfigure'
+include 'GustoEmbedded-spring-boot-starter'
+
+project(':GustoEmbedded-spring-boot-autoconfigure').projectDir = file('spring/GustoEmbedded-spring-boot-autoconfigure')
+project(':GustoEmbedded-spring-boot-starter').projectDir = file('spring/GustoEmbedded-spring-boot-starter')

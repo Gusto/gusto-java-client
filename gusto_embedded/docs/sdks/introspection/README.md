@@ -14,6 +14,7 @@ Returns scope and resource information associated with the current access token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-token-info" method="get" path="/v1/token_info" -->
 ```java
 package hello.world;
 
@@ -27,7 +28,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
@@ -67,6 +68,7 @@ The `expires_in` value is provided in seconds from when the `access_token` was g
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="refresh-access-token" method="post" path="/oauth/token" -->
 ```java
 package hello.world;
 
@@ -81,7 +83,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         RefreshAccessTokenResponse res = sdk.introspection().refreshToken()

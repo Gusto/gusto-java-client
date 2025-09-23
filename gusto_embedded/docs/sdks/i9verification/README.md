@@ -23,6 +23,7 @@ scope: `i9_authorizations:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-i9_authorization" method="get" path="/v1/employees/{employee_id}/i9_authorization" -->
 ```java
 package hello.world;
 
@@ -36,7 +37,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeesEmployeeIdI9AuthorizationResponse res = sdk.i9Verification().getAuthorization()
@@ -94,6 +95,7 @@ scope: `i9_authorizations:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-employees-employee_id-i9_authorization" method="put" path="/v1/employees/{employee_id}/i9_authorization" -->
 ```java
 package hello.world;
 
@@ -108,7 +110,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1EmployeesEmployeeIdI9AuthorizationResponse res = sdk.i9Verification().update()
@@ -154,6 +156,7 @@ scope: `i9_authorizations:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-i9_authorization-document_options" method="get" path="/v1/employees/{employee_id}/i9_authorization/document_options" -->
 ```java
 package hello.world;
 
@@ -167,7 +170,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse res = sdk.i9Verification().getDocumentOptions()
@@ -207,6 +210,7 @@ scope: `i9_authorizations:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-i9_authorization-documents" method="get" path="/v1/employees/{employee_id}/i9_authorization/documents" -->
 ```java
 package hello.world;
 
@@ -220,7 +224,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse res = sdk.i9Verification().getDocuments()
@@ -267,6 +271,7 @@ scope: `i9_authorizations:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-employees-employee_id-i9_authorization-documents" method="put" path="/v1/employees/{employee_id}/i9_authorization/documents" -->
 ```java
 package hello.world;
 
@@ -282,7 +287,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse res = sdk.i9Verification().createDocuments()
@@ -334,6 +339,7 @@ scope: `i9_authorizations:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-v1-employees-employee_id-i9_authorization-documents-document_id" method="delete" path="/v1/employees/{employee_id}/i9_authorization/documents/{document_id}" -->
 ```java
 package hello.world;
 
@@ -347,7 +353,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse res = sdk.i9Verification().deleteDocument()
@@ -387,6 +393,7 @@ scope: `i9_authorizations:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-employees-employee_id-i9_authorization-employer_sign" method="put" path="/v1/employees/{employee_id}/i9_authorization/employer_sign" -->
 ```java
 package hello.world;
 
@@ -402,12 +409,11 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse res = sdk.i9Verification().employerSign()
                 .employeeId("<id>")
-                .xGustoClientIp("<value>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody.builder()
                     .signatureText("<value>")

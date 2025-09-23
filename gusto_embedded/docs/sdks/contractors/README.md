@@ -14,6 +14,7 @@
 * [updateOnboardingStatus](#updateonboardingstatus) - Change the contractor's onboarding status
 * [getAddress](#getaddress) - Get a contractor address
 * [updateAddress](#updateaddress) - Update a contractor's address
+* [getV1CompaniesCompanyIdContractorsPaymentDetails](#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
 
 ## create
 
@@ -23,6 +24,7 @@ scope: `contractors:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_uuid-contractors" method="post" path="/v1/companies/{company_uuid}/contractors" -->
 ```java
 package hello.world;
 
@@ -37,7 +39,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1CompaniesCompanyUuidContractorsResponse res = sdk.contractors().create()
@@ -46,6 +48,7 @@ public class Application {
                 .requestBody(PostV1CompaniesCompanyUuidContractorsRequestBody.builder()
                     .wageType(WageType.FIXED)
                     .startDate("2020-04-01")
+                    .selfOnboarding(true)
                     .email("johnson@johnson.com")
                     .firstName("Johnson")
                     .lastName("Johnson")
@@ -87,6 +90,7 @@ scope: `contractors:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_uuid-contractors" method="get" path="/v1/companies/{company_uuid}/contractors" -->
 ```java
 package hello.world;
 
@@ -100,7 +104,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyUuidContractorsRequest req = GetV1CompaniesCompanyUuidContractorsRequest.builder()
@@ -142,6 +146,7 @@ scope: `contractors:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractors-contractor_uuid" method="get" path="/v1/contractors/{contractor_uuid}" -->
 ```java
 package hello.world;
 
@@ -155,7 +160,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorsContractorUuidResponse res = sdk.contractors().get()
@@ -199,6 +204,7 @@ scope: `contractors:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-contractors-contractor_uuid" method="put" path="/v1/contractors/{contractor_uuid}" -->
 ```java
 package hello.world;
 
@@ -213,7 +219,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1ContractorsContractorUuidResponse res = sdk.contractors().update()
@@ -265,6 +271,7 @@ scope: `contractors:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-v1-contractors-contractor_uuid" method="delete" path="/v1/contractors/{contractor_uuid}" -->
 ```java
 package hello.world;
 
@@ -278,7 +285,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1ContractorsContractorUuidResponse res = sdk.contractors().delete()
@@ -347,6 +354,7 @@ scope: `contractors:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractors-contractor_uuid-onboarding_status" method="get" path="/v1/contractors/{contractor_uuid}/onboarding_status" -->
 ```java
 package hello.world;
 
@@ -360,7 +368,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorsContractorUuidOnboardingStatusResponse res = sdk.contractors().getOnboardingStatus()
@@ -410,6 +418,7 @@ Below is a list of valid onboarding status changes depending on the intended act
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-contractors-contractor_uuid-onboarding_status" method="put" path="/v1/contractors/{contractor_uuid}/onboarding_status" -->
 ```java
 package hello.world;
 
@@ -425,7 +434,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1ContractorsContractorUuidOnboardingStatusResponse res = sdk.contractors().updateOnboardingStatus()
@@ -469,6 +478,7 @@ scope: `contractors:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractors-contractor_uuid-address" method="get" path="/v1/contractors/{contractor_uuid}/address" -->
 ```java
 package hello.world;
 
@@ -482,7 +492,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorsContractorUuidAddressResponse res = sdk.contractors().getAddress()
@@ -522,6 +532,7 @@ scope: `contractors:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-contractors-contractor_uuid-address" method="put" path="/v1/contractors/{contractor_uuid}/address" -->
 ```java
 package hello.world;
 
@@ -537,7 +548,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1ContractorsContractorUuidAddressResponse res = sdk.contractors().updateAddress()
@@ -577,4 +588,69 @@ public class Application {
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
 | models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+
+## getV1CompaniesCompanyIdContractorsPaymentDetails
+
+Get payment details for contractors in a company. This endpoint returns a list of all contractors associated with the specified company, including their payment methods and bank account details if they are paid via direct deposit.
+
+For contractors paid by direct deposit, the response includes their bank account information.
+
+For contractors paid by check, only the basic payment method information is returned.
+
+`encrypted_account_number` is available only with the additional scope `contractor_payment_methods:read:account_numbers`.
+
+scope: `contractor_payment_methods:read`
+
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-contractors-payment_details" method="get" path="/v1/companies/{company_id}/contractors/payment_details" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse res = sdk.contractors().getV1CompaniesCompanyIdContractorsPaymentDetails()
+                .companyId("<id>")
+                .xGustoAPIVersion(GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .call();
+
+        if (res.contractorPaymentDetailsList().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company. This identifies the company whose contractor payment details you want to retrieve.                                                                                                                  |
+| `contractorUuid`                                                                                                                                                                                                             | *Optional\<String>*                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                           | Optional filter to get payment details for a specific contractor. When provided, the response will only include payment details for this contractor.                                                                         |
+| `contractorPaymentGroupUuid`                                                                                                                                                                                                 | *Optional\<String>*                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                           | Optional filter to get payment details for contractors in a specific payment group. When provided, the response will only include payment details for contractors in this group.                                             |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion>](../../models/operations/GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion.md)                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+
+### Response
+
+**[GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse](../../models/operations/GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse.md)**
+
+### Errors
+
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |

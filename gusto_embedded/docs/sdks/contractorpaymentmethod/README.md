@@ -17,6 +17,7 @@ scope: `contractor_payment_methods:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractors-contractor_uuid-bank_accounts" method="get" path="/v1/contractors/{contractor_uuid}/bank_accounts" -->
 ```java
 package hello.world;
 
@@ -30,7 +31,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorsContractorUuidBankAccountsResponse res = sdk.contractorPaymentMethod().getBankAccounts()
@@ -72,6 +73,7 @@ scope: `contractor_payment_methods:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractors-contractor_uuid-payment_method" method="get" path="/v1/contractors/{contractor_uuid}/payment_method" -->
 ```java
 package hello.world;
 
@@ -85,7 +87,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorsContractorUuidPaymentMethodResponse res = sdk.contractorPaymentMethod().get()
@@ -126,6 +128,7 @@ scope: `contractor_payment_methods:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-contractors-contractor_id-payment_method" method="put" path="/v1/contractors/{contractor_uuid}/payment_method" -->
 ```java
 package hello.world;
 
@@ -140,7 +143,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1ContractorsContractorIdPaymentMethodResponse res = sdk.contractorPaymentMethod().update()

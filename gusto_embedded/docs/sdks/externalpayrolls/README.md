@@ -23,6 +23,7 @@ scope: `external_payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-external-payroll" method="post" path="/v1/companies/{company_uuid}/external_payrolls" -->
 ```java
 package hello.world;
 
@@ -38,7 +39,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1ExternalPayrollResponse res = sdk.externalPayrolls().create()
@@ -85,6 +86,7 @@ scope: `external_payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-company-external-payrolls" method="get" path="/v1/companies/{company_uuid}/external_payrolls" -->
 ```java
 package hello.world;
 
@@ -98,7 +100,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompanyExternalPayrollsResponse res = sdk.externalPayrolls().get()
@@ -138,6 +140,7 @@ scope: `external_payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-external-payroll" method="get" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}" -->
 ```java
 package hello.world;
 
@@ -151,7 +154,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ExternalPayrollResponse res = sdk.externalPayrolls().retrieve()
@@ -193,6 +196,7 @@ scope: `external_payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-v1-external-payroll" method="delete" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}" -->
 ```java
 package hello.world;
 
@@ -206,7 +210,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1ExternalPayrollResponse res = sdk.externalPayrolls().delete()
@@ -246,6 +250,7 @@ scope: `external_payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-external-payroll" method="put" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}" -->
 ```java
 package hello.world;
 
@@ -261,7 +266,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1ExternalPayrollResponse res = sdk.externalPayrolls().update()
@@ -347,6 +352,7 @@ scope: `external_payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-external-payroll-calculate-taxes" method="get" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}/calculate_taxes" -->
 ```java
 package hello.world;
 
@@ -360,7 +366,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ExternalPayrollCalculateTaxesResponse res = sdk.externalPayrolls().calculateTaxes()
@@ -402,6 +408,7 @@ scope: `external_payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-tax-liabilities" method="get" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" -->
 ```java
 package hello.world;
 
@@ -415,7 +422,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1TaxLiabilitiesResponse res = sdk.externalPayrolls().listTaxLiabilities()
@@ -455,6 +462,7 @@ scope: `external_payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" -->
 ```java
 package hello.world;
 
@@ -471,7 +479,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1TaxLiabilitiesResponse res = sdk.externalPayrolls().updateTaxLiabilities()
@@ -482,17 +490,17 @@ public class Application {
                         LiabilitySelections.builder()
                             .taxId(1L)
                             .lastUnpaidExternalPayrollUuid("7985032c-ee3a-4e98-af27-d56551eb5f1c")
-                            .unpaidLiabilityAmount(50)
+                            .unpaidLiabilityAmount(50d)
                             .build(),
                         LiabilitySelections.builder()
                             .taxId(2L)
                             .lastUnpaidExternalPayrollUuid("5ed14dbb-958f-47c8-b16e-c4fed82dc486")
-                            .unpaidLiabilityAmount(400)
+                            .unpaidLiabilityAmount(400d)
                             .build(),
                         LiabilitySelections.builder()
                             .taxId(8L)
                             .lastUnpaidExternalPayrollUuid(Optional.empty())
-                            .unpaidLiabilityAmount(0)
+                            .unpaidLiabilityAmount(0d)
                             .build()))
                     .build())
                 .call();
@@ -531,6 +539,7 @@ scope: `external_payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities-finish" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities/finish" -->
 ```java
 package hello.world;
 
@@ -545,7 +554,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1TaxLiabilitiesFinishResponse res = sdk.externalPayrolls().finalizeTaxLiabilities()

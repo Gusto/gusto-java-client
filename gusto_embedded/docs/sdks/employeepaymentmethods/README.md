@@ -15,6 +15,7 @@ scope: `employee_payment_methods:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-bank_accounts" method="get" path="/v1/employees/{employee_id}/bank_accounts" -->
 ```java
 package hello.world;
 
@@ -28,13 +29,11 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeesEmployeeIdBankAccountsResponse res = sdk.employeePaymentMethods().getBankAccounts()
                 .employeeId("<id>")
-                .page(791208L)
-                .per(144106L)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 

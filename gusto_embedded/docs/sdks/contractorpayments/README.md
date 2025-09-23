@@ -28,6 +28,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractor_payments-contractor_payment_uuid-receipt" method="get" path="/v1/contractor_payments/{contractor_payment_uuid}/receipt" -->
 ```java
 package hello.world;
 
@@ -41,7 +42,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse res = sdk.contractorPayments().getReceipt()
@@ -85,6 +86,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractor_payments-contractor_payment_uuid-fund" method="put" path="/v1/contractor_payments/{contractor_payment_uuid}/fund" -->
 ```java
 package hello.world;
 
@@ -99,7 +101,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorPaymentsContractorPaymentUuidFundResponse res = sdk.contractorPayments().fund()
@@ -140,6 +142,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-contractor_payments" method="post" path="/v1/companies/{company_id}/contractor_payments" -->
 ```java
 package hello.world;
 
@@ -156,7 +159,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1CompaniesCompanyIdContractorPaymentsResponse res = sdk.contractorPayments().create()
@@ -165,10 +168,10 @@ public class Application {
                 .requestBody(PostV1CompaniesCompanyIdContractorPaymentsRequestBody.builder()
                     .contractorUuid("<id>")
                     .date(LocalDate.parse("2020-01-01"))
-                    .wage(5000)
-                    .hours(40)
-                    .bonus(500)
-                    .reimbursement(20)
+                    .wage(5000d)
+                    .hours(40d)
+                    .bonus(500d)
+                    .reimbursement(20d)
                     .build())
                 .call();
 
@@ -206,6 +209,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-contractor_payments" method="get" path="/v1/companies/{company_id}/contractor_payments" -->
 ```java
 package hello.world;
 
@@ -219,7 +223,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyIdContractorPaymentsRequest req = GetV1CompaniesCompanyIdContractorPaymentsRequest.builder()
@@ -262,6 +266,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-contractor_payment-contractor-payment" method="get" path="/v1/companies/{company_id}/contractor_payments/{contractor_payment_id}" -->
 ```java
 package hello.world;
 
@@ -275,7 +280,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse res = sdk.contractorPayments().get()
@@ -317,6 +322,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-v1-companies-company_id-contractor_payment-contractor-payment" method="delete" path="/v1/companies/{company_id}/contractor_payments/{contractor_payment_id}" -->
 ```java
 package hello.world;
 
@@ -331,7 +337,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse res = sdk.contractorPayments().delete()
@@ -374,13 +380,15 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-contractor_payments-preview" method="get" path="/v1/companies/{company_uuid}/contractor_payments/preview" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBody;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidContractorPaymentsPreviewResponse;
 import java.lang.Exception;
 import java.util.List;
 
@@ -389,16 +397,14 @@ public class Application {
     public static void main(String[] args) throws GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetCompaniesCompanyUuidContractorPaymentsPreviewResponse res = sdk.contractorPayments().preview()
                 .companyUuid("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBody.builder()
-                    .contractorPayments(List.of(
-                        GetCompaniesCompanyUuidContractorPaymentsPreviewContractorPayments.builder()
-                            .build()))
+                    .contractorPayments(List.of())
                     .build())
                 .call();
 

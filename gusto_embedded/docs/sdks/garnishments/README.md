@@ -19,6 +19,7 @@ scope: `garnishments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-garnishments" method="post" path="/v1/employees/{employee_id}/garnishments" -->
 ```java
 package hello.world;
 
@@ -34,7 +35,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1EmployeesEmployeeIdGarnishmentsResponse res = sdk.garnishments().create()
@@ -44,6 +45,7 @@ public class Application {
                     .amount("150.00")
                     .courtOrdered(true)
                     .description("Back taxes")
+                    .recurring(true)
                     .build())
                 .call();
 
@@ -81,6 +83,7 @@ scope: `garnishments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-garnishments" method="get" path="/v1/employees/{employee_id}/garnishments" -->
 ```java
 package hello.world;
 
@@ -94,13 +97,11 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeesEmployeeIdGarnishmentsResponse res = sdk.garnishments().list()
                 .employeeId("<id>")
-                .page(768578L)
-                .per(547272L)
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
@@ -138,6 +139,7 @@ scope: `garnishments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-garnishments-garnishment_id" method="get" path="/v1/garnishments/{garnishment_id}" -->
 ```java
 package hello.world;
 
@@ -151,7 +153,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1GarnishmentsGarnishmentIdResponse res = sdk.garnishments().get()
@@ -191,6 +193,7 @@ scope: `garnishments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-garnishments-garnishment_id" method="put" path="/v1/garnishments/{garnishment_id}" -->
 ```java
 package hello.world;
 
@@ -206,7 +209,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1GarnishmentsGarnishmentIdResponse res = sdk.garnishments().update()
@@ -214,6 +217,7 @@ public class Application {
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1GarnishmentsGarnishmentIdRequestBody.builder()
                     .version("52b7c567242cb7452e89ba2bc02cb476")
+                    .active(false)
                     .build())
                 .call();
 
@@ -251,6 +255,7 @@ scope: `garnishments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-garnishments-child_support" method="get" path="/v1/garnishments/child_support" -->
 ```java
 package hello.world;
 
@@ -264,7 +269,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1GarnishmentsChildSupportResponse res = sdk.garnishments().getChildSupportData()

@@ -10,12 +10,13 @@
 
 ## get
 
-Get payment speed for the company and fast payment limit (1-day is only applicable to partners that opt in).
+Get payment speed configurations for the company and fast payment limit (1-day is only applicable to partners that opt in).
 
 scope: `company_payment_configs:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-company-payment-configs" method="get" path="/v1/companies/{company_uuid}/payment_configs" -->
 ```java
 package hello.world;
 
@@ -29,7 +30,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompanyPaymentConfigsResponse res = sdk.paymentConfigs().get()
@@ -69,6 +70,7 @@ scope: `company_payment_configs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-company-payment-configs" method="put" path="/v1/companies/{company_uuid}/payment_configs" -->
 ```java
 package hello.world;
 
@@ -84,7 +86,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompanyPaymentConfigsResponse res = sdk.paymentConfigs().update()

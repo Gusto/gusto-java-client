@@ -26,10 +26,12 @@ Gusto API: Welcome to Gusto's Embedded Payroll API documentation!
 * [openapi](#openapi)
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
+  * [Asynchronous Support](#asynchronous-support)
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
+  * [Debugging](#debugging)
 * [Development](#development)
   * [Maturity](#maturity)
   * [Contributions](#contributions)
@@ -47,7 +49,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.gusto:embedded-api:0.2.2'
+implementation 'com.gusto:embedded-api:0.3.0'
 ```
 
 Maven:
@@ -55,7 +57,7 @@ Maven:
 <dependency>
     <groupId>com.gusto</groupId>
     <artifactId>embedded-api</artifactId>
-    <version>0.2.2</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
@@ -92,7 +94,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
@@ -105,7 +107,107 @@ public class Application {
     }
 }
 ```
+#### Asynchronous Call
+An asynchronous SDK client is also available that returns a [`CompletableFuture<T>`][comp-fut]. See [Asynchronous Support](#asynchronous-support) for more details on async benefits and reactive library integration.
+```java
+package hello.world;
+
+import com.gusto.embedded_api.AsyncGustoEmbedded;
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.async.GetV1TokenInfoResponse;
+import java.util.concurrent.CompletableFuture;
+
+public class Application {
+
+    public static void main(String[] args) {
+
+        AsyncGustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build()
+            .async();
+
+        CompletableFuture<GetV1TokenInfoResponse> resFut = sdk.introspection().getInfo()
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .call();
+
+        resFut.thenAccept(res -> {
+            if (res.object().isPresent()) {
+            // handle response
+            }
+        });
+    }
+}
+```
+
+[comp-fut]: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html
 <!-- End SDK Example Usage [usage] -->
+
+<!-- Start Asynchronous Support [async-support] -->
+## Asynchronous Support
+
+The SDK provides comprehensive asynchronous support using Java's [`CompletableFuture<T>`][comp-fut] and [Reactive Streams `Publisher<T>`][reactive-streams] APIs. This design makes no assumptions about your choice of reactive toolkit, allowing seamless integration with any reactive library.
+
+<details>
+<summary>Why Use Async?</summary>
+
+Asynchronous operations provide several key benefits:
+
+- **Non-blocking I/O**: Your threads stay free for other work while operations are in flight
+- **Better resource utilization**: Handle more concurrent operations with fewer threads
+- **Improved scalability**: Build highly responsive applications that can handle thousands of concurrent requests
+- **Reactive integration**: Works seamlessly with reactive streams and backpressure handling
+
+</details>
+
+<details>
+<summary>Reactive Library Integration</summary>
+
+The SDK returns [Reactive Streams `Publisher<T>`][reactive-streams] instances for operations dealing with streams involving multiple I/O interactions. We use Reactive Streams instead of JDK Flow API to provide broader compatibility with the reactive ecosystem, as most reactive libraries natively support Reactive Streams.
+
+**Why Reactive Streams over JDK Flow?**
+- **Broader ecosystem compatibility**: Most reactive libraries (Project Reactor, RxJava, Akka Streams, etc.) natively support Reactive Streams
+- **Industry standard**: Reactive Streams is the de facto standard for reactive programming in Java
+- **Better interoperability**: Seamless integration without additional adapters for most use cases
+
+**Integration with Popular Libraries:**
+- **Project Reactor**: Use `Flux.from(publisher)` to convert to Reactor types
+- **RxJava**: Use `Flowable.fromPublisher(publisher)` for RxJava integration
+- **Akka Streams**: Use `Source.fromPublisher(publisher)` for Akka Streams integration
+- **Vert.x**: Use `ReadStream.fromPublisher(vertx, publisher)` for Vert.x reactive streams
+- **Mutiny**: Use `Multi.createFrom().publisher(publisher)` for Quarkus Mutiny integration
+
+**For JDK Flow API Integration:**
+If you need JDK Flow API compatibility (e.g., for Quarkus/Mutiny 2), you can use adapters:
+```java
+// Convert Reactive Streams Publisher to Flow Publisher
+Flow.Publisher<T> flowPublisher = FlowAdapters.toFlowPublisher(reactiveStreamsPublisher);
+
+// Convert Flow Publisher to Reactive Streams Publisher
+Publisher<T> reactiveStreamsPublisher = FlowAdapters.toPublisher(flowPublisher);
+```
+
+For standard single-response operations, the SDK returns `CompletableFuture<T>` for straightforward async execution.
+
+</details>
+
+<details>
+<summary>Supported Operations</summary>
+
+Async support is available for:
+
+- **[Server-sent Events](#server-sent-event-streaming)**: Stream real-time events with Reactive Streams `Publisher<T>`
+- **[JSONL Streaming](#jsonl-streaming)**: Process streaming JSON lines asynchronously
+- **[Pagination](#pagination)**: Iterate through paginated results using `callAsPublisher()` and `callAsPublisherUnwrapped()`
+- **[File Uploads](#file-uploads)**: Upload files asynchronously with progress tracking
+- **[File Downloads](#file-downloads)**: Download files asynchronously with streaming support
+- **[Standard Operations](#example)**: All regular API calls return `CompletableFuture<T>` for async execution
+
+</details>
+
+[comp-fut]: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html
+[reactive-streams]: https://www.reactive-streams.org/
+<!-- End Asynchronous Support [async-support] -->
 
 <!-- Start Authentication [security] -->
 ## Authentication
@@ -132,7 +234,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
@@ -167,7 +269,7 @@ public class Application {
 
         PostV1PartnerManagedCompaniesResponse res = sdk.companies().createPartnerManaged()
                 .security(PostV1PartnerManagedCompaniesSecurity.builder()
-                    .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1PartnerManagedCompaniesRequestBody.builder()
@@ -206,10 +308,11 @@ public class Application {
 
 ### [bankAccounts()](docs/sdks/bankaccounts/README.md)
 
-* [create](docs/sdks/bankaccounts/README.md#create) - Create a company bank account
 * [get](docs/sdks/bankaccounts/README.md#get) - Get all company bank accounts
+* [create](docs/sdks/bankaccounts/README.md#create) - Create a company bank account
 * [verify](docs/sdks/bankaccounts/README.md#verify) - Verify a company bank account
 * [createFromPlaidToken](docs/sdks/bankaccounts/README.md#createfromplaidtoken) - Create a bank account from a plaid processor token
+* [deleteV1CompaniesCompanyIdBankAccountsBankAccountId](docs/sdks/bankaccounts/README.md#deletev1companiescompanyidbankaccountsbankaccountid) - Delete a company bank account
 
 ### [companies()](docs/sdks/companies/README.md)
 
@@ -253,6 +356,8 @@ public class Application {
 * [getEmployeeBenefits](docs/sdks/companybenefits/README.md#getemployeebenefits) - Get all employee benefits for a company benefit
 * [updateEmployeeBenefits](docs/sdks/companybenefits/README.md#updateemployeebenefits) - Bulk update employee benefits for a company benefit
 * [getRequirements](docs/sdks/companybenefits/README.md#getrequirements) - Get benefit fields requirements by ID
+* [getV1CompanyBenefitsCompanyBenefitIdContributionExclusions](docs/sdks/companybenefits/README.md#getv1companybenefitscompanybenefitidcontributionexclusions) - Get contribution exclusions for a company benefit
+* [putV1CompanyBenefitsCompanyBenefitIdContributionExclusions](docs/sdks/companybenefits/README.md#putv1companybenefitscompanybenefitidcontributionexclusions) - Update contribution exclusions for a company benefit
 
 ### [companyForms()](docs/sdks/companyforms/README.md)
 
@@ -277,12 +382,14 @@ public class Application {
 
 ### [contractorPaymentGroups()](docs/sdks/contractorpaymentgroups/README.md)
 
-* [create](docs/sdks/contractorpaymentgroups/README.md#create) - Create a contractor payment group
 * [getList](docs/sdks/contractorpaymentgroups/README.md#getlist) - Get contractor payment groups for a company
+* [create](docs/sdks/contractorpaymentgroups/README.md#create) - Create a contractor payment group
 * [preview](docs/sdks/contractorpaymentgroups/README.md#preview) - Preview a contractor payment group
-* [get](docs/sdks/contractorpaymentgroups/README.md#get) - Fetch a contractor payment group
+* [get](docs/sdks/contractorpaymentgroups/README.md#get) - Get a contractor payment group
 * [delete](docs/sdks/contractorpaymentgroups/README.md#delete) - Cancel a contractor payment group
 * [fund](docs/sdks/contractorpaymentgroups/README.md#fund) - Fund a contractor payment group [DEMO]
+* [getV1ContractorPaymentGroupsIdPartnerDisbursements](docs/sdks/contractorpaymentgroups/README.md#getv1contractorpaymentgroupsidpartnerdisbursements) - Get partner disbursements for a contractor payment group
+* [patchV1ContractorPaymentGroupsIdPartnerDisbursements](docs/sdks/contractorpaymentgroups/README.md#patchv1contractorpaymentgroupsidpartnerdisbursements) - Update partner disbursements for a contractor payment group
 
 ### [contractorPaymentMethod()](docs/sdks/contractorpaymentmethod/README.md)
 
@@ -315,6 +422,7 @@ public class Application {
 * [updateOnboardingStatus](docs/sdks/contractors/README.md#updateonboardingstatus) - Change the contractor's onboarding status
 * [getAddress](docs/sdks/contractors/README.md#getaddress) - Get a contractor address
 * [updateAddress](docs/sdks/contractors/README.md#updateaddress) - Update a contractor's address
+* [getV1CompaniesCompanyIdContractorsPaymentDetails](docs/sdks/contractors/README.md#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
 
 ### [departments()](docs/sdks/departments/README.md)
 
@@ -390,11 +498,12 @@ public class Application {
 
 ### [employees()](docs/sdks/employees/README.md)
 
-* [create](docs/sdks/employees/README.md#create) - Create an employee
 * [list](docs/sdks/employees/README.md#list) - Get employees of a company
+* [create](docs/sdks/employees/README.md#create) - Create an employee
+* [getV1CompaniesCompanyIdEmployeesPaymentDetails](docs/sdks/employees/README.md#getv1companiescompanyidemployeespaymentdetails) - Get employee payment details for a company
 * [createHistorical](docs/sdks/employees/README.md#createhistorical) - Create a historical employee
 * [get](docs/sdks/employees/README.md#get) - Get an employee
-* [update](docs/sdks/employees/README.md#update) - Update an employee
+* [update](docs/sdks/employees/README.md#update) - Update an employee.
 * [delete](docs/sdks/employees/README.md#delete) - Delete an onboarding employee
 * [getCustomFields](docs/sdks/employees/README.md#getcustomfields) - Get an employee's custom fields
 * [updateOnboardingDocumentsConfig](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
@@ -476,6 +585,10 @@ public class Application {
 * [get](docs/sdks/industryselection/README.md#get) - Get a company industry selection
 * [update](docs/sdks/industryselection/README.md#update) - Update a company industry selection
 
+### [informationRequests()](docs/sdks/informationrequests/README.md)
+
+* [getInformationRequests](docs/sdks/informationrequests/README.md#getinformationrequests) - Get all information requests for a company
+
 ### [introspection()](docs/sdks/introspection/README.md)
 
 * [getInfo](docs/sdks/introspection/README.md#getinfo) - Get info about the current access token
@@ -509,6 +622,7 @@ public class Application {
 ### [notifications()](docs/sdks/notifications/README.md)
 
 * [getDetails](docs/sdks/notifications/README.md#getdetails) - Get a notification's details
+* [getCompanyNotifications](docs/sdks/notifications/README.md#getcompanynotifications) - Get notifications for company
 
 ### [paymentConfigs()](docs/sdks/paymentconfigs/README.md)
 
@@ -517,8 +631,8 @@ public class Application {
 
 ### [payrolls()](docs/sdks/payrolls/README.md)
 
-* [createOffCycle](docs/sdks/payrolls/README.md#createoffcycle) - Create an off-cycle payroll
 * [list](docs/sdks/payrolls/README.md#list) - Get all payrolls for a company
+* [createOffCycle](docs/sdks/payrolls/README.md#createoffcycle) - Create an off-cycle payroll
 * [getApprovedReversals](docs/sdks/payrolls/README.md#getapprovedreversals) - Get approved payroll reversals
 * [get](docs/sdks/payrolls/README.md#get) - Get a single payroll
 * [update](docs/sdks/payrolls/README.md#update) - Update a payroll by ID
@@ -530,6 +644,8 @@ public class Application {
 * [getPayStub](docs/sdks/payrolls/README.md#getpaystub) - Get an employee pay stub (pdf)
 * [getPayStubs](docs/sdks/payrolls/README.md#getpaystubs) - Get an employee's pay stubs
 * [generatePrintableChecks](docs/sdks/payrolls/README.md#generateprintablechecks) - Generate printable payroll checks (pdf)
+* [getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements](docs/sdks/payrolls/README.md#getv1companiescompanyidpayrollsidpartnerdisbursements) - Get partner disbursements for a payroll
+* [patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements](docs/sdks/payrolls/README.md#patchv1companiescompanyidpayrollsidpartnerdisbursements) - Update partner disbursements for a payroll
 
 ### [paySchedules()](docs/sdks/payschedules/README.md)
 
@@ -552,7 +668,8 @@ public class Application {
 ### [reports()](docs/sdks/reports/README.md)
 
 * [createCustom](docs/sdks/reports/README.md#createcustom) - Create a custom report
-* [get](docs/sdks/reports/README.md#get) - Get a report
+* [postPayrollsPayrollUuidReportsGeneralLedger](docs/sdks/reports/README.md#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
+* [getReportsRequestUuid](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 * [getTemplate](docs/sdks/reports/README.md#gettemplate) - Get a report template
 
 ### [signatories()](docs/sdks/signatories/README.md)
@@ -590,6 +707,7 @@ public class Application {
 * [deleteSubscription](docs/sdks/webhooks/README.md#deletesubscription) - Delete a webhook subscription
 * [verify](docs/sdks/webhooks/README.md#verify) - Verify the webhook subscription
 * [requestVerificationToken](docs/sdks/webhooks/README.md#requestverificationtoken) - Request the webhook subscription verification_token
+* [getV1WebhooksHealthCheck](docs/sdks/webhooks/README.md#getv1webhookshealthcheck) - Get the webhooks health status
 
 ### [wireInRequests()](docs/sdks/wireinrequests/README.md)
 
@@ -632,7 +750,7 @@ public class Application {
 
         PostV1PartnerManagedCompaniesResponse res = sdk.companies().createPartnerManaged()
                 .security(PostV1PartnerManagedCompaniesSecurity.builder()
-                    .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1PartnerManagedCompaniesRequestBody.builder()
@@ -687,7 +805,7 @@ public class Application {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .server(GustoEmbedded.AvailableServers.PROD)
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
@@ -718,7 +836,7 @@ public class Application {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .serverURL("https://api.gusto-demo.com")
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
@@ -732,6 +850,37 @@ public class Application {
 }
 ```
 <!-- End Server Selection [server] -->
+
+<!-- Start Debugging [debug] -->
+## Debugging
+
+### Debug
+You can setup your SDK to emit debug logs for SDK requests and responses.
+
+For request and response logging (especially json bodies), call `enableHTTPDebugLogging(boolean)` on the SDK builder like so:
+```java
+SDK.builder()
+    .enableHTTPDebugLogging(true)
+    .build();
+```
+Example output:
+```
+Sending request: http://localhost:35123/bearer#global GET
+Request headers: {Accept=[application/json], Authorization=[******], Client-Level-Header=[added by client], Idempotency-Key=[some-key], x-speakeasy-user-agent=[speakeasy-sdk/java 0.0.1 internal 0.1.0 org.openapis.openapi]}
+Received response: (GET http://localhost:35123/bearer#global) 200
+Response headers: {access-control-allow-credentials=[true], access-control-allow-origin=[*], connection=[keep-alive], content-length=[50], content-type=[application/json], date=[Wed, 09 Apr 2025 01:43:29 GMT], server=[gunicorn/19.9.0]}
+Response body:
+{
+  "authenticated": true, 
+  "token": "global"
+}
+```
+__WARNING__: This should only used for temporary debugging purposes. Leaving this option on in a production system could expose credentials/secrets in logs. <i>Authorization</i> headers are redacted by default and there is the ability to specify redacted header names via `SpeakeasyHTTPClient.setRedactedHeaders`.
+
+__NOTE__: This is a convenience method that calls `HTTPClient.enableDebugLogging()`. The `SpeakeasyHTTPClient` honors this setting. If you are using a custom HTTP client, it is up to the custom client to honor this setting.
+
+Another option is to set the System property `-Djdk.httpclient.HttpClient.log=all`. However, this second option does not log bodies.
+<!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

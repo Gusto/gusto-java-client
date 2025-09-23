@@ -18,6 +18,7 @@ scope: `contractor_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractor-forms" method="get" path="/v1/contractors/{contractor_uuid}/forms" -->
 ```java
 package hello.world;
 
@@ -31,7 +32,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorFormsResponse res = sdk.contractorForms().list()
@@ -71,6 +72,7 @@ scope: `contractor_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractor-form" method="get" path="/v1/contractors/{contractor_uuid}/forms/{form_id}" -->
 ```java
 package hello.world;
 
@@ -84,7 +86,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorFormResponse res = sdk.contractorForms().get()
@@ -126,6 +128,7 @@ scope: `contractor_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractor-form-pdf" method="get" path="/v1/contractors/{contractor_uuid}/forms/{form_id}/pdf" -->
 ```java
 package hello.world;
 
@@ -139,7 +142,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorFormPdfResponse res = sdk.contractorForms().getPdf()
@@ -185,6 +188,7 @@ scope: `contractors:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_1099" method="post" path="/v1/sandbox/generate_1099" -->
 ```java
 package hello.world;
 
@@ -200,7 +204,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1SandboxGenerate1099Response res = sdk.contractorForms().generate1099()

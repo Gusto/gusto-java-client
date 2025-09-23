@@ -31,6 +31,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours" method="post" path="/v1/payrolls/{payroll_id}/employees/{employee_id}/calculate_accruing_time_off_hours" -->
 ```java
 package hello.world;
 
@@ -46,7 +47,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse res = sdk.timeOffPolicies().calculateAccruingTimeOffHours()
@@ -55,10 +56,10 @@ public class Application {
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody.builder()
                     .regularHoursWorked(30.25)
-                    .overtimeHoursWorked(10)
-                    .doubleOvertimeHoursWorked(0)
+                    .overtimeHoursWorked(10d)
+                    .doubleOvertimeHoursWorked(0d)
                     .ptoHoursUsed(5.5)
-                    .sickHoursUsed(0)
+                    .sickHoursUsed(0d)
                     .build())
                 .call();
 
@@ -97,6 +98,7 @@ scope: `time_off_policies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-time_off_policies-time_off_policy_uuid" method="get" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
 ```java
 package hello.world;
 
@@ -110,7 +112,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetTimeOffPoliciesTimeOffPolicyUuidResponse res = sdk.timeOffPolicies().get()
@@ -150,6 +152,7 @@ scope: `time_off_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-time_off_policies-time_off_policy_uuid" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
 ```java
 package hello.world;
 
@@ -164,7 +167,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutTimeOffPoliciesTimeOffPolicyUuidResponse res = sdk.timeOffPolicies().update()
@@ -217,6 +220,7 @@ scope: `time_off_policies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-time_off_policies" method="get" path="/v1/companies/{company_uuid}/time_off_policies" -->
 ```java
 package hello.world;
 
@@ -230,7 +234,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetCompaniesCompanyUuidTimeOffPoliciesResponse res = sdk.timeOffPolicies().getAll()
@@ -270,6 +274,7 @@ scope: `time_off_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-companies-company_uuid-time_off_policies" method="post" path="/v1/companies/{company_uuid}/time_off_policies" -->
 ```java
 package hello.world;
 
@@ -284,7 +289,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostCompaniesCompanyUuidTimeOffPoliciesResponse res = sdk.timeOffPolicies().create()
@@ -331,6 +336,7 @@ scope: `time_off_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-version-time_off_policies-time_off_policy_uuid-add_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/add_employees" -->
 ```java
 package hello.world;
 
@@ -346,7 +352,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse res = sdk.timeOffPolicies().addEmployees()
@@ -390,6 +396,7 @@ scope: `time_off_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-time_off_policies-time_off_policy_uuid-remove_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/remove_employees" -->
 ```java
 package hello.world;
 
@@ -405,7 +412,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse res = sdk.timeOffPolicies().removeEmployees()
@@ -449,6 +456,7 @@ scope: `time_off_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-version-time_off_policies-time_off_policy_uuid-balance" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/balance" -->
 ```java
 package hello.world;
 
@@ -464,7 +472,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse res = sdk.timeOffPolicies().updateBalance()
@@ -508,6 +516,7 @@ scope: `time_off_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-time_off_policies-time_off_policy_uuid-deactivate" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/deactivate" -->
 ```java
 package hello.world;
 
@@ -522,7 +531,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse res = sdk.timeOffPolicies().deactivate()

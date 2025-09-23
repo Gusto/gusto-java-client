@@ -23,6 +23,7 @@ scope: `employees:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_w2" method="post" path="/v1/sandbox/generate_w2" -->
 ```java
 package hello.world;
 
@@ -38,7 +39,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1SandboxGenerateW2Response res = sdk.employeeForms().generateW2()
@@ -81,6 +82,7 @@ scope: `employee_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employee-forms" method="get" path="/v1/employees/{employee_id}/forms" -->
 ```java
 package hello.world;
 
@@ -94,7 +96,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeeFormsResponse res = sdk.employeeForms().list()
@@ -134,6 +136,7 @@ scope: `employee_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employee-form" method="get" path="/v1/employees/{employee_id}/forms/{form_id}" -->
 ```java
 package hello.world;
 
@@ -147,7 +150,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeeFormResponse res = sdk.employeeForms().get()
@@ -189,6 +192,7 @@ scope: `employee_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employee-form-pdf" method="get" path="/v1/employees/{employee_id}/forms/{form_id}/pdf" -->
 ```java
 package hello.world;
 
@@ -202,7 +206,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeeFormPdfResponse res = sdk.employeeForms().getPdf()
@@ -247,6 +251,7 @@ scope: `employee_forms:sign`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-employee-form-sign" method="put" path="/v1/employees/{employee_id}/forms/{form_id}/sign" -->
 ```java
 package hello.world;
 
@@ -260,7 +265,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1EmployeeFormSignRequest req = PutV1EmployeeFormSignRequest.builder()

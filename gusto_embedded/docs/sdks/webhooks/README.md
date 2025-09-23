@@ -12,6 +12,7 @@
 * [deleteSubscription](#deletesubscription) - Delete a webhook subscription
 * [verify](#verify) - Verify the webhook subscription
 * [requestVerificationToken](#requestverificationtoken) - Request the webhook subscription verification_token
+* [getV1WebhooksHealthCheck](#getv1webhookshealthcheck) - Get the webhooks health status
 
 ## createSubscription
 
@@ -25,6 +26,7 @@ scope: `webhook_subscriptions:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-webhook-subscription" method="post" path="/v1/webhook_subscriptions" -->
 ```java
 package hello.world;
 
@@ -44,7 +46,7 @@ public class Application {
 
         PostV1WebhookSubscriptionResponse res = sdk.webhooks().createSubscription()
                 .security(PostV1WebhookSubscriptionSecurity.builder()
-                    .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PostV1WebhookSubscriptionRequestBody.builder()
@@ -93,6 +95,7 @@ scope: `webhook_subscriptions:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-webhook-subscriptions" method="get" path="/v1/webhook_subscriptions" -->
 ```java
 package hello.world;
 
@@ -111,7 +114,7 @@ public class Application {
 
         GetV1WebhookSubscriptionsResponse res = sdk.webhooks().listSubscriptions()
                 .security(GetV1WebhookSubscriptionsSecurity.builder()
-                    .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
@@ -153,6 +156,7 @@ scope: `webhook_subscriptions:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" -->
 ```java
 package hello.world;
 
@@ -172,7 +176,7 @@ public class Application {
 
         PutV1WebhookSubscriptionUuidResponse res = sdk.webhooks().updateSubscription()
                 .security(PutV1WebhookSubscriptionUuidSecurity.builder()
-                    .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
@@ -223,6 +227,7 @@ scope: `webhook_subscriptions:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-webhook-subscription-uuid" method="get" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" -->
 ```java
 package hello.world;
 
@@ -241,7 +246,7 @@ public class Application {
 
         GetV1WebhookSubscriptionUuidResponse res = sdk.webhooks().getSubscription()
                 .security(GetV1WebhookSubscriptionUuidSecurity.builder()
-                    .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
@@ -285,6 +290,7 @@ scope: `webhook_subscriptions:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-v1-webhook-subscription-uuid" method="delete" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" -->
 ```java
 package hello.world;
 
@@ -303,7 +309,7 @@ public class Application {
 
         DeleteV1WebhookSubscriptionUuidResponse res = sdk.webhooks().deleteSubscription()
                 .security(DeleteV1WebhookSubscriptionUuidSecurity.builder()
-                    .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
@@ -347,6 +353,7 @@ scope: `webhook_subscriptions:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-verify-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify" -->
 ```java
 package hello.world;
 
@@ -365,7 +372,7 @@ public class Application {
 
         PutV1VerifyWebhookSubscriptionUuidResponse res = sdk.webhooks().verify()
                 .security(PutV1VerifyWebhookSubscriptionUuidSecurity.builder()
-                    .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
@@ -414,6 +421,7 @@ scope: `webhook_subscriptions:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-webhook-subscription-verification-token-uuid" method="get" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token" -->
 ```java
 package hello.world;
 
@@ -432,7 +440,7 @@ public class Application {
 
         GetV1WebhookSubscriptionVerificationTokenUuidResponse res = sdk.webhooks().requestVerificationToken()
                 .security(GetV1WebhookSubscriptionVerificationTokenUuidSecurity.builder()
-                    .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
@@ -454,6 +462,61 @@ public class Application {
 ### Response
 
 **[GetV1WebhookSubscriptionVerificationTokenUuidResponse](../../models/operations/GetV1WebhookSubscriptionVerificationTokenUuidResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## getV1WebhooksHealthCheck
+
+Returns the health status (`healthy`, `unhealthy`, or `unknown`) of the webhooks system based on the last ten minutes of activity.
+
+scope: `webhook_subscriptions:read`
+
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-webhooks-health_check" method="get" path="/v1/webhooks/health_check" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+            .build();
+
+        GetV1WebhooksHealthCheckResponse res = sdk.webhooks().getV1WebhooksHealthCheck()
+                .security(GetV1WebhooksHealthCheckSecurity.builder()
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
+                    .build())
+                .xGustoAPIVersion(GetV1WebhooksHealthCheckHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .call();
+
+        if (res.webhooksHealthCheckStatus().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.GetV1WebhooksHealthCheckSecurity](../../models/operations/GetV1WebhooksHealthCheckSecurity.md)                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1WebhooksHealthCheckHeaderXGustoAPIVersion>](../../models/operations/GetV1WebhooksHealthCheckHeaderXGustoAPIVersion.md)                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+
+### Response
+
+**[GetV1WebhooksHealthCheckResponse](../../models/operations/GetV1WebhooksHealthCheckResponse.md)**
 
 ### Errors
 

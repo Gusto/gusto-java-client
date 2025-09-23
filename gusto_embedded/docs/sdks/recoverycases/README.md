@@ -16,6 +16,7 @@ scope: `recovery_cases:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-recovery-cases" method="get" path="/v1/companies/{company_uuid}/recovery_cases" -->
 ```java
 package hello.world;
 
@@ -29,7 +30,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetRecoveryCasesResponse res = sdk.recoveryCases().get()
@@ -73,6 +74,7 @@ scope: `recovery_cases:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="redebit-recovery-case" method="put" path="/v1/recovery_cases/{recovery_case_uuid}/redebit" -->
 ```java
 package hello.world;
 
@@ -87,7 +89,7 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         RedebitRecoveryCaseResponse res = sdk.recoveryCases().redebit()
