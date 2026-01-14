@@ -1,5 +1,4 @@
 # FederalTaxDetails
-(*federalTaxDetails()*)
 
 ## Overview
 
@@ -16,6 +15,7 @@ scope: `company_federal_taxes:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-federal_tax_details" method="get" path="/v1/companies/{company_id}/federal_tax_details" -->
 ```java
 package hello.world;
 
@@ -29,12 +29,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyIdFederalTaxDetailsResponse res = sdk.federalTaxDetails().get()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.federalTaxDetails().isPresent()) {
@@ -70,6 +70,7 @@ scope: `company_federal_taxes:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-companies-company_id-federal_tax_details" method="put" path="/v1/companies/{company_id}/federal_tax_details" -->
 ```java
 package hello.world;
 
@@ -84,12 +85,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompaniesCompanyIdFederalTaxDetailsResponse res = sdk.federalTaxDetails().update()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody.builder()
                     .version("6cb95e00540706ca48d4577b3c839fbe")
                     .legalName("Acme Corp.")

@@ -1,5 +1,4 @@
 # EmployeeAddresses
-(*employeeAddresses()*)
 
 ## Overview
 
@@ -26,25 +25,27 @@ scope: `employees:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-home_addresses" method="get" path="/v1/employees/{employee_id}/home_addresses" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdHomeAddressesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeesEmployeeIdHomeAddressesResponse res = sdk.employeeAddresses().get()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.employeeAddressList().isPresent()) {
@@ -59,7 +60,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `employeeId`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion>](../../models/operations/GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion.md)                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -67,9 +68,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## create
 
@@ -81,37 +83,33 @@ scope: `employees:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-home_addresses" method="post" path="/v1/employees/{employee_id}/home_addresses" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdHomeAddressesRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdHomeAddressesResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.time.LocalDate;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1EmployeesEmployeeIdHomeAddressesResponse res = sdk.employeeAddresses().create()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostV1EmployeesEmployeeIdHomeAddressesRequestBody.builder()
                     .street1("300 3rd Street")
-                    .street2(JsonNullable.of(null))
                     .city("San Francisco")
                     .state("CA")
                     .zip("94107")
-                    .effectiveDate(LocalDate.parse("2021-01-01"))
-                    .courtesyWithholding(true)
+                    .effectiveDate(LocalDate.parse("2022-01-31"))
                     .build())
                 .call();
 
@@ -127,7 +125,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `employeeId`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion>](../../models/operations/PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion.md)                                                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `requestBody`                                                                                                                                                                                                                | [PostV1EmployeesEmployeeIdHomeAddressesRequestBody](../../models/operations/PostV1EmployeesEmployeeIdHomeAddressesRequestBody.md)                                                                                            | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -138,7 +136,7 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## retrieveHomeAddress
@@ -151,25 +149,27 @@ scope: `employees:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-home_addresses-home_address_uuid" method="get" path="/v1/home_addresses/{home_address_uuid}" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1HomeAddressesHomeAddressUuidResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1HomeAddressesHomeAddressUuidResponse res = sdk.employeeAddresses().retrieveHomeAddress()
                 .homeAddressUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.employeeAddress().isPresent()) {
@@ -184,7 +184,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `homeAddressUuid`                                                                                                                                                                                                            | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the home address                                                                                                                                                                                                 |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion>](../../models/operations/GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion.md)                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -192,9 +192,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## update
 
@@ -206,38 +207,28 @@ scope: `employees:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-home_addresses-home_address_uuid" method="put" path="/v1/home_addresses/{home_address_uuid}" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1HomeAddressesHomeAddressUuidRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1HomeAddressesHomeAddressUuidResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
-import java.time.LocalDate;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1HomeAddressesHomeAddressUuidResponse res = sdk.employeeAddresses().update()
+                .xGustoAPIVersion(PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .homeAddressUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .requestBody(PutV1HomeAddressesHomeAddressUuidRequestBody.builder()
-                    .version("fe75bd065ff48b91c35fe8ff842f986c")
-                    .street1("300 3rd Street")
-                    .street2(JsonNullable.of(null))
-                    .city("San Francisco")
-                    .state("CA")
-                    .zip("94107")
-                    .effectiveDate(LocalDate.parse("2021-01-01"))
-                    .courtesyWithholding(true)
+                    .version("56d00c178bc7393b2a206ed6a86afcb4")
                     .build())
                 .call();
 
@@ -252,8 +243,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion>](../../models/operations/PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion.md)                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `homeAddressUuid`                                                                                                                                                                                                            | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the home address                                                                                                                                                                                                 |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `requestBody`                                                                                                                                                                                                                | [PutV1HomeAddressesHomeAddressUuidRequestBody](../../models/operations/PutV1HomeAddressesHomeAddressUuidRequestBody.md)                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -264,23 +255,24 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## delete
 
-Used for deleting an employee's home address.  Cannot delete the employee's active home address.
+Used for deleting an employee's home address. Cannot delete the employee's active home address.
 
 scope: `employees:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-v1-home_addresses-home_address_uuid" method="delete" path="/v1/home_addresses/{home_address_uuid}" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1HomeAddressesHomeAddressUuidResponse;
 import java.lang.Exception;
 
@@ -289,12 +281,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1HomeAddressesHomeAddressUuidResponse res = sdk.employeeAddresses().delete()
+                .xGustoAPIVersion(DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .homeAddressUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -306,8 +298,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion>](../../models/operations/DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion.md)                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `homeAddressUuid`                                                                                                                                                                                                            | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the home address                                                                                                                                                                                                 |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -317,40 +309,42 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## getWorkAddresses
 
-Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
-signifying if it is the currently active work address.
+Returns a list of an employee's work addresses. Each address includes its effective
+date and a boolean signifying if it is the currently active work address.
 
 scope: `employees:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-work_addresses" method="get" path="/v1/employees/{employee_id}/work_addresses" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdWorkAddressesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeesEmployeeIdWorkAddressesResponse res = sdk.employeeAddresses().getWorkAddresses()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
-        if (res.employeeWorkAddressList().isPresent()) {
+        if (res.employeeWorkAddressesList().isPresent()) {
             // handle response
         }
     }
@@ -362,7 +356,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `employeeId`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion>](../../models/operations/GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion.md)                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -370,9 +364,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## createWorkAddress
 
@@ -382,14 +377,13 @@ scope: `employees:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-work_addresses" method="post" path="/v1/employees/{employee_id}/work_addresses" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdWorkAddressesRequestBody;
-import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdWorkAddressesResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.time.LocalDate;
 
@@ -398,12 +392,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1EmployeesEmployeeIdWorkAddressesResponse res = sdk.employeeAddresses().createWorkAddress()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostV1EmployeesEmployeeIdWorkAddressesRequestBody.builder()
                     .locationUuid("6a119be7-b4b0-4e27-aaa0-89d5f2524635")
                     .effectiveDate(LocalDate.parse("2023-05-15"))
@@ -422,7 +416,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `employeeId`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion>](../../models/operations/PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion.md)                                                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `requestBody`                                                                                                                                                                                                                | [PostV1EmployeesEmployeeIdWorkAddressesRequestBody](../../models/operations/PostV1EmployeesEmployeeIdWorkAddressesRequestBody.md)                                                                                            | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -433,7 +427,7 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## retrieveWorkAddress
@@ -444,25 +438,27 @@ scope: `employees:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-work_addresses-work_address_uuid" method="get" path="/v1/work_addresses/{work_address_uuid}" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1WorkAddressesWorkAddressUuidResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1WorkAddressesWorkAddressUuidResponse res = sdk.employeeAddresses().retrieveWorkAddress()
                 .workAddressUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.employeeWorkAddress().isPresent()) {
@@ -477,7 +473,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `workAddressUuid`                                                                                                                                                                                                            | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the work address                                                                                                                                                                                                 |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>](../../models/operations/GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion.md)                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -485,9 +481,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## updateWorkAddress
 
@@ -497,14 +494,13 @@ scope: `employees:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-work_addresses-work_address_uuid" method="put" path="/v1/work_addresses/{work_address_uuid}" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1WorkAddressesWorkAddressUuidRequestBody;
-import com.gusto.embedded_api.models.operations.PutV1WorkAddressesWorkAddressUuidResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.time.LocalDate;
 
@@ -513,14 +509,14 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1WorkAddressesWorkAddressUuidResponse res = sdk.employeeAddresses().updateWorkAddress()
                 .workAddressUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1WorkAddressesWorkAddressUuidRequestBody.builder()
-                    .version("e6db1baa29d3df1eb307ff6a12c778da")
+                    .version("56d00c178bc7393b2a206ed6a86afcb4")
                     .locationUuid("6a119be7-b4b0-4e27-aaa0-89d5f2524635")
                     .effectiveDate(LocalDate.parse("2023-05-15"))
                     .build())
@@ -538,7 +534,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `workAddressUuid`                                                                                                                                                                                                            | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the work address                                                                                                                                                                                                 |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>](../../models/operations/PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion.md)                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `requestBody`                                                                                                                                                                                                                | [PutV1WorkAddressesWorkAddressUuidRequestBody](../../models/operations/PutV1WorkAddressesWorkAddressUuidRequestBody.md)                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -549,23 +545,24 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## deleteWorkAddress
 
-Used for deleting an employee's work address.  Cannot delete the employee's active work address.
+Used for deleting an employee's work address. Cannot delete the employee's active work address.
 
 scope: `employees:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-v1-work_addresses-work_address_uuid" method="delete" path="/v1/work_addresses/{work_address_uuid}" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1WorkAddressesWorkAddressUuidResponse;
 import java.lang.Exception;
 
@@ -574,12 +571,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1WorkAddressesWorkAddressUuidResponse res = sdk.employeeAddresses().deleteWorkAddress()
                 .workAddressUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         // handle response
@@ -592,7 +589,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `workAddressUuid`                                                                                                                                                                                                            | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the work address                                                                                                                                                                                                 |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>](../../models/operations/DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion.md)                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -602,5 +599,5 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |

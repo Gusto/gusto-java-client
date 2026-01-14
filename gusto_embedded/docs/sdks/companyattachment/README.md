@@ -1,5 +1,4 @@
 # CompanyAttachment
-(*companyAttachment()*)
 
 ## Overview
 
@@ -16,6 +15,7 @@ scope: `company_attachments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-attachment-url" method="get" path="/v1/companies/{company_id}/attachments/{company_attachment_uuid}/download_url" -->
 ```java
 package hello.world;
 
@@ -29,13 +29,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesAttachmentUrlResponse res = sdk.companyAttachment().getDownloadUrl()
                 .companyId("<id>")
                 .companyAttachmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.object().isPresent()) {

@@ -1,5 +1,4 @@
 # AchTransactions
-(*achTransactions()*)
 
 ## Overview
 
@@ -15,6 +14,7 @@ scope: `ach_transactions:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-ach-transactions" method="get" path="/v1/companies/{company_uuid}/ach_transactions" -->
 ```java
 package hello.world;
 
@@ -28,7 +28,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetAchTransactionsRequest req = GetAchTransactionsRequest.builder()

@@ -1,5 +1,4 @@
 # JobsAndCompensations
-(*jobsAndCompensations()*)
 
 ## Overview
 
@@ -24,6 +23,7 @@ scope: `jobs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-jobs-job_id" method="post" path="/v1/employees/{employee_id}/jobs" -->
 ```java
 package hello.world;
 
@@ -39,12 +39,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1JobsJobIdResponse res = sdk.jobsAndCompensations().createJob()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostV1JobsJobIdRequestBody.builder()
                     .title("Regional Manager")
                     .hireDate("2020-12-21")
@@ -85,6 +85,7 @@ scope: `jobs:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-jobs" method="get" path="/v1/employees/{employee_id}/jobs" -->
 ```java
 package hello.world;
 
@@ -98,7 +99,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeesEmployeeIdJobsRequest req = GetV1EmployeesEmployeeIdJobsRequest.builder()
@@ -140,12 +141,12 @@ scope: `jobs:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-jobs-job_id" method="get" path="/v1/jobs/{job_id}" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.GetV1JobsJobIdQueryParamInclude;
 import com.gusto.embedded_api.models.operations.GetV1JobsJobIdResponse;
 import java.lang.Exception;
 
@@ -154,13 +155,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1JobsJobIdResponse res = sdk.jobsAndCompensations().getJob()
                 .jobId("<id>")
-                .include(GetV1JobsJobIdQueryParamInclude.ALL_COMPENSATIONS)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.job().isPresent()) {
@@ -196,6 +196,7 @@ scope: `jobs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" -->
 ```java
 package hello.world;
 
@@ -211,12 +212,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1JobsJobIdResponse res = sdk.jobsAndCompensations().update()
                 .jobId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1JobsJobIdRequestBody.builder()
                     .version("gr78930htutrz444kuytr3s5hgxykuveb523fwl8sir")
                     .title("Regional Manager")
@@ -258,6 +259,7 @@ scope: `jobs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-v1-jobs-job_id" method="delete" path="/v1/jobs/{job_id}" -->
 ```java
 package hello.world;
 
@@ -271,12 +273,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1JobsJobIdResponse res = sdk.jobsAndCompensations().delete()
                 .jobId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         // handle response
@@ -313,6 +315,7 @@ scope: `jobs:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-jobs-job_id-compensations" method="get" path="/v1/jobs/{job_id}/compensations" -->
 ```java
 package hello.world;
 
@@ -326,7 +329,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1JobsJobIdCompensationsRequest req = GetV1JobsJobIdCompensationsRequest.builder()
@@ -368,6 +371,7 @@ scope: `jobs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-compensations-compensation_id" method="post" path="/v1/jobs/{job_id}/compensations" -->
 ```java
 package hello.world;
 
@@ -383,12 +387,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1CompensationsCompensationIdResponse res = sdk.jobsAndCompensations().createCompensation()
                 .jobId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostV1CompensationsCompensationIdRequestBody.builder()
                     .paymentUnit(PaymentUnit.YEAR)
                     .flsaStatus(FlsaStatusType.EXEMPT)
@@ -431,6 +435,7 @@ scope: `jobs:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-compensations-compensation_id" method="get" path="/v1/compensations/{compensation_id}" -->
 ```java
 package hello.world;
 
@@ -444,12 +449,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompensationsCompensationIdResponse res = sdk.jobsAndCompensations().getCompensation()
                 .compensationId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.compensation().isPresent()) {
@@ -484,6 +489,7 @@ scope: `jobs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-compensations-compensation_id" method="put" path="/v1/compensations/{compensation_id}" -->
 ```java
 package hello.world;
 
@@ -499,12 +505,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompensationsCompensationIdResponse res = sdk.jobsAndCompensations().updateCompensation()
                 .compensationId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1CompensationsCompensationIdRequestBody.builder()
                     .version("98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872")
                     .rate("60000.00")
@@ -548,6 +554,7 @@ scope: `jobs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-v1-compensations-compensation_id" method="delete" path="/v1/compensations/{compensation_id}" -->
 ```java
 package hello.world;
 
@@ -561,12 +568,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1CompensationsCompensationIdResponse res = sdk.jobsAndCompensations().deleteCompensation()
                 .compensationId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         // handle response

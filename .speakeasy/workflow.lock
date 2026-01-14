@@ -1,28 +1,28 @@
-speakeasyVersion: 1.525.2
+speakeasyVersion: 1.685.0
 sources:
     GustoEmbedded-OAS:
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:bb694d0087b14cbcbac56c6f63203d43552891f2c8a49319ce33abedc35440bf
-        sourceBlobDigest: sha256:37549766e4e4aaa724787a0c4d2ebc89fb776a0ccd77ca1836ece4c10a011b95
+        sourceRevisionDigest: sha256:d5cbc3115f827c1a90905f1bc2c385a5d8953918262051b11e3c586f52a0af2c
+        sourceBlobDigest: sha256:1cc65db8e42da095f794bd3821437ae587e7e612acdbaf5add5b0cd546d0dd45
         tags:
             - latest
-            - speakeasy-sdk-regen-1743812272
-            - "2024-04-01"
+            - speakeasy-sdk-regen-1768408063
+            - "2025-06-15"
 targets:
     gusto-embedded:
         source: GustoEmbedded-OAS
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:bb694d0087b14cbcbac56c6f63203d43552891f2c8a49319ce33abedc35440bf
-        sourceBlobDigest: sha256:37549766e4e4aaa724787a0c4d2ebc89fb776a0ccd77ca1836ece4c10a011b95
+        sourceRevisionDigest: sha256:d5cbc3115f827c1a90905f1bc2c385a5d8953918262051b11e3c586f52a0af2c
+        sourceBlobDigest: sha256:1cc65db8e42da095f794bd3821437ae587e7e612acdbaf5add5b0cd546d0dd45
         codeSamplesNamespace: gusto-embedded-oas-java-code-samples
-        codeSamplesRevisionDigest: sha256:48a3996e1a4d708a380a5c626cdac8591bc0f9c87a1c65dd002e57e9eb6ed311
+        codeSamplesRevisionDigest: sha256:d5665bab8d4f5bc8bb9241d0d46370a7b1f43a7963435859a70326b805a2c5cd
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         GustoEmbedded-OAS:
             inputs:
-                - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2024-04-01.embedded.yaml
+                - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2025-06-15.embedded.yaml
                   authHeader: Authorization
                   authSecret: $openapi_doc_auth_token
             overlays:

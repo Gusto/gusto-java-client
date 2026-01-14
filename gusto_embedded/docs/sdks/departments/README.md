@@ -1,5 +1,4 @@
 # Departments
-(*departments()*)
 
 ## Overview
 
@@ -21,6 +20,7 @@ scope: `departments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-departments" method="post" path="/v1/companies/{company_uuid}/departments" -->
 ```java
 package hello.world;
 
@@ -36,12 +36,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostDepartmentsResponse res = sdk.departments().create()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostDepartmentsRequestBody.builder()
                     .title("Stage Hand")
                     .build())
@@ -81,6 +81,7 @@ scope: `departments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-companies-departments" method="get" path="/v1/companies/{company_uuid}/departments" -->
 ```java
 package hello.world;
 
@@ -94,12 +95,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetCompaniesDepartmentsResponse res = sdk.departments().getAll()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.departmentList().isPresent()) {
@@ -135,6 +136,7 @@ scope: `departments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-department" method="get" path="/v1/departments/{department_uuid}" -->
 ```java
 package hello.world;
 
@@ -148,12 +150,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetDepartmentResponse res = sdk.departments().get()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.department().isPresent()) {
@@ -188,6 +190,7 @@ scope: `departments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-departments" method="put" path="/v1/departments/{department_uuid}" -->
 ```java
 package hello.world;
 
@@ -203,12 +206,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutDepartmentsResponse res = sdk.departments().update()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutDepartmentsRequestBody.builder()
                     .version("db0edd04aaac4506f7edab03ac855d56")
                     .title("Backup Dancer")
@@ -250,6 +253,7 @@ scope: `departments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-department" method="delete" path="/v1/departments/{department_uuid}" -->
 ```java
 package hello.world;
 
@@ -264,12 +268,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteDepartmentResponse res = sdk.departments().delete()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         // handle response
@@ -304,6 +308,7 @@ scope: `departments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-add-people-to-department" method="put" path="/v1/departments/{department_uuid}/add" -->
 ```java
 package hello.world;
 
@@ -318,12 +323,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutAddPeopleToDepartmentResponse res = sdk.departments().addPeople()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutAddPeopleToDepartmentRequestBody.builder()
                     .build())
                 .call();
@@ -362,6 +367,7 @@ scope: `departments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-remove-people-from-department" method="put" path="/v1/departments/{department_uuid}/remove" -->
 ```java
 package hello.world;
 
@@ -376,12 +382,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutRemovePeopleFromDepartmentResponse res = sdk.departments().removePeople()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutRemovePeopleFromDepartmentRequestBody.builder()
                     .build())
                 .call();

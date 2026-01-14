@@ -1,5 +1,4 @@
 # PaySchedules
-(*paySchedules()*)
 
 ## Overview
 
@@ -26,8 +25,15 @@ Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)**
 
 scope: `pay_schedules:write`
 
+> ℹ️ Pay Schedules may be automatically adjusted
+>
+> If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
+>
+> See [Create a pay schedule](/embedded-payroll/docs/create-a-pay-schedule) for more information.
+
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-pay_schedules" method="post" path="/v1/companies/{company_id}/pay_schedules" -->
 ```java
 package hello.world;
 
@@ -42,12 +48,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1CompaniesCompanyIdPaySchedulesResponse res = sdk.paySchedules().create()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostV1CompaniesCompanyIdPaySchedulesRequestBody.builder()
                     .frequency(Frequency.TWICE_PER_MONTH)
                     .anchorPayDate("2021-10-15")
@@ -92,6 +98,7 @@ scope: `pay_schedules:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-pay_schedules" method="get" path="/v1/companies/{company_id}/pay_schedules" -->
 ```java
 package hello.world;
 
@@ -105,14 +112,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyIdPaySchedulesResponse res = sdk.paySchedules().getAll()
                 .companyId("<id>")
-                .page(461008L)
-                .per(59215L)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.payScheduleList().isPresent()) {
@@ -149,6 +154,7 @@ scope: `pay_schedules:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-pay_schedules-preview" method="get" path="/v1/companies/{company_id}/pay_schedules/preview" -->
 ```java
 package hello.world;
 
@@ -161,12 +167,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyIdPaySchedulesPreviewRequest req = GetV1CompaniesCompanyIdPaySchedulesPreviewRequest.builder()
                 .companyId("<id>")
-                .frequency(QueryParamFrequency.EVERY_OTHER_WEEK)
+                .frequency(QueryParamFrequency.MONTHLY)
                 .anchorPayDate("2020-05-15")
                 .anchorEndOfPayPeriod("2020-05-08")
                 .build();
@@ -206,6 +212,7 @@ scope: `pay_schedules:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-pay_schedules-pay_schedule_id" method="get" path="/v1/companies/{company_id}/pay_schedules/{pay_schedule_id}" -->
 ```java
 package hello.world;
 
@@ -219,13 +226,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse res = sdk.paySchedules().get()
                 .companyId("<id>")
                 .payScheduleId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.payScheduleObject().isPresent()) {
@@ -259,8 +266,15 @@ Updates a pay schedule.
 
 scope: `pay_schedules:write`
 
+> ℹ️ Pay Schedules may be automatically adjusted
+>
+> If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
+>
+> See [Create a pay schedule](/embedded-payroll/docs/create-a-pay-schedule) for more information.
+
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-companies-company_id-pay_schedules-pay_schedule_id" method="put" path="/v1/companies/{company_id}/pay_schedules/{pay_schedule_id}" -->
 ```java
 package hello.world;
 
@@ -275,13 +289,13 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse res = sdk.paySchedules().update()
                 .companyId("<id>")
                 .payScheduleId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody.builder()
                     .version("68934a3e9455fa72420237eb05902327")
                     .frequency(PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency.TWICE_PER_MONTH)
@@ -333,6 +347,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-pay_periods" method="get" path="/v1/companies/{company_id}/pay_periods" -->
 ```java
 package hello.world;
 
@@ -346,7 +361,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyIdPayPeriodsRequest req = GetV1CompaniesCompanyIdPayPeriodsRequest.builder()
@@ -392,6 +407,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-unprocessed_termination_pay_periods" method="get" path="/v1/companies/{company_id}/pay_periods/unprocessed_termination_pay_periods" -->
 ```java
 package hello.world;
 
@@ -405,12 +421,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse res = sdk.paySchedules().getUnprocessedTerminationPeriods()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.unprocessedTerminationPayPeriodList().isPresent()) {
@@ -445,6 +461,7 @@ scope: `pay_schedules:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-pay_schedules-assignments" method="get" path="/v1/companies/{company_id}/pay_schedules/assignments" -->
 ```java
 package hello.world;
 
@@ -458,12 +475,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse res = sdk.paySchedules().getAssignments()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.payScheduleAssignment().isPresent()) {
@@ -498,6 +515,7 @@ scope: `pay_schedules:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-pay_schedules-assignment_preview" method="post" path="/v1/companies/{company_id}/pay_schedules/assignment_preview" -->
 ```java
 package hello.world;
 
@@ -513,12 +531,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse res = sdk.paySchedules().previewAssignment()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .payScheduleAssignmentBody(PayScheduleAssignmentBody.builder()
                     .type(PayScheduleAssignmentBodyType.BY_EMPLOYEE)
                     .employees(List.of(
@@ -564,6 +582,7 @@ scope: `pay_schedules:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-pay_schedules-assign" method="post" path="/v1/companies/{company_id}/pay_schedules/assign" -->
 ```java
 package hello.world;
 
@@ -579,12 +598,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1CompaniesCompanyIdPaySchedulesAssignResponse res = sdk.paySchedules().assign()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .payScheduleAssignmentBody(PayScheduleAssignmentBody.builder()
                     .type(PayScheduleAssignmentBodyType.BY_EMPLOYEE)
                     .employees(List.of(

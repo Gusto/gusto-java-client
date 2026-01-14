@@ -1,5 +1,4 @@
 # Invoices
-(*invoices()*)
 
 ## Overview
 
@@ -19,6 +18,7 @@ scope: `invoices:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-invoices-invoice-period" method="get" path="/v1/invoices/{invoice_period}" -->
 ```java
 package hello.world;
 
@@ -41,7 +41,7 @@ public class Application {
         GetInvoicesInvoicePeriodResponse res = sdk.invoices().get()
                 .request(req)
                 .security(GetInvoicesInvoicePeriodSecurity.builder()
-                    .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .call();
 

@@ -1,5 +1,7 @@
 # FederalHolidays
 
+List of the eleven supported federal holidays and their details
+
 
 ## Fields
 
@@ -15,3 +17,4 @@
 | `columbusDay`                                                            | [Optional\<ColumbusDay>](../../models/components/ColumbusDay.md)         | :heavy_minus_sign:                                                       | N/A                                                                      |
 | `veteransDay`                                                            | [Optional\<VeteransDay>](../../models/components/VeteransDay.md)         | :heavy_minus_sign:                                                       | N/A                                                                      |
 | `thanksgiving`                                                           | [Optional\<Thanksgiving>](../../models/components/Thanksgiving.md)       | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `christmasDay`                                                           | [Optional\<ChristmasDay>](../../models/components/ChristmasDay.md)       | :heavy_minus_sign:                                                       | N/A                                                                      |

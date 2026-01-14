@@ -1,12 +1,11 @@
 # Introspection
-(*introspection()*)
 
 ## Overview
 
 ### Available Operations
 
 * [getInfo](#getinfo) - Get info about the current access token
-* [refreshToken](#refreshtoken) - Refresh access token
+* [oauthAccessToken](#oauthaccesstoken) - create or refresh an access token
 
 ## getInfo
 
@@ -14,6 +13,7 @@ Returns scope and resource information associated with the current access token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-token-info" method="get" path="/v1/token_info" -->
 ```java
 package hello.world;
 
@@ -27,11 +27,11 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.object().isPresent()) {
@@ -57,23 +57,20 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## refreshToken
+## oauthAccessToken
 
-Exchange a refresh token for a new access token.
+Creates or refreshes a system access token
 
-The previous `refresh_token` will be revoked on the first usage of the new `access_token`.
-
-The `expires_in` value is provided in seconds from when the `access_token` was generated.
+scope: ``
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="oauth-access-token" method="post" path="/oauth/token" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.RefreshAccessTokenRequestBody;
-import com.gusto.embedded_api.models.operations.RefreshAccessTokenResponse;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -81,17 +78,15 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
             .build();
 
-        RefreshAccessTokenResponse res = sdk.introspection().refreshToken()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
-                .requestBody(RefreshAccessTokenRequestBody.builder()
-                    .clientId("<id>")
-                    .clientSecret("<value>")
-                    .refreshToken("<value>")
-                    .grantType("<value>")
-                    .build())
+        OauthAccessTokenResponse res = sdk.introspection().oauthAccessToken()
+                .xGustoAPIVersion(XGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .requestBody(OauthAccessTokenRequestBody.of(RequestBody2.builder()
+                    .clientId("qr6L_9FRkbMVL_GdwvrMW6Ef8tcU6NUxjWpOfqXqOG8")
+                    .clientSecret("3aQSHRB3596nZhm6NdNBELZ1u9xbZmvCrKpBhbZYq6w")
+                    .grantType(RequestBodyGrantType.SYSTEM_ACCESS)
+                    .build()))
                 .call();
 
         if (res.authentication().isPresent()) {
@@ -105,12 +100,12 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [RefreshAccessTokenRequestBody](../../models/operations/RefreshAccessTokenRequestBody.md)                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<XGustoAPIVersion>](../../models/operations/XGustoAPIVersion.md)                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `requestBody`                                                                                                                                                                                                                | [OauthAccessTokenRequestBody](../../models/operations/OauthAccessTokenRequestBody.md)                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
-**[RefreshAccessTokenResponse](../../models/operations/RefreshAccessTokenResponse.md)**
+**[OauthAccessTokenResponse](../../models/operations/OauthAccessTokenResponse.md)**
 
 ### Errors
 

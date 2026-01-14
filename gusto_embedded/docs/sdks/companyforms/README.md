@@ -1,5 +1,4 @@
 # CompanyForms
-(*companyForms()*)
 
 ## Overview
 
@@ -18,6 +17,7 @@ scope: `company_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-company-forms" method="get" path="/v1/companies/{company_id}/forms" -->
 ```java
 package hello.world;
 
@@ -31,12 +31,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompanyFormsResponse res = sdk.companyForms().getAll()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.formList().isPresent()) {
@@ -51,6 +51,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `sortBy`                                                                                                                                                                                                                     | [Optional\<CompanyFormsSortBy>](../../models/components/CompanyFormsSortBy.md)                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Sort company forms. Options: name, year, quarter, draft, document_content_type                                                                                                                                               |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
@@ -71,6 +72,7 @@ scope: `company_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-company-form" method="get" path="/v1/forms/{form_id}" -->
 ```java
 package hello.world;
 
@@ -84,12 +86,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompanyFormResponse res = sdk.companyForms().get()
                 .formId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.form().isPresent()) {
@@ -124,6 +126,7 @@ scope: `company_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-company-form-pdf" method="get" path="/v1/forms/{form_id}/pdf" -->
 ```java
 package hello.world;
 
@@ -137,12 +140,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompanyFormPdfResponse res = sdk.companyForms().getPdf()
                 .formId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.formPdf().isPresent()) {
@@ -177,6 +180,7 @@ scope: `company_forms:sign`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-company-form-sign" method="put" path="/v1/forms/{form_id}/sign" -->
 ```java
 package hello.world;
 
@@ -192,13 +196,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompanyFormSignResponse res = sdk.companyForms().sign()
                 .formId("<id>")
-                .xGustoClientIp("<value>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1CompanyFormSignRequestBody.builder()
                     .signatureText("Jane Smith")
                     .agree(true)

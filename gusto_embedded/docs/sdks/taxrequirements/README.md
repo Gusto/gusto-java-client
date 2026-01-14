@@ -1,5 +1,4 @@
 # TaxRequirements
-(*taxRequirements()*)
 
 ## Overview
 
@@ -57,6 +56,7 @@ scope: `company_tax_requirements:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_uuid-tax_requirements-state" method="get" path="/v1/companies/{company_uuid}/tax_requirements/{state}" -->
 ```java
 package hello.world;
 
@@ -70,14 +70,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyUuidTaxRequirementsStateResponse res = sdk.taxRequirements().get()
                 .companyUuid("<id>")
-                .state("Oklahoma")
-                .scheduling(false)
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .state("South Dakota")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.taxRequirementsState().isPresent()) {
@@ -114,6 +113,7 @@ scope: `company_tax_requirements:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-companies-company_uuid-tax_requirements-state" method="put" path="/v1/companies/{company_uuid}/tax_requirements/{state}" -->
 ```java
 package hello.world;
 
@@ -130,13 +130,13 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompaniesCompanyUuidTaxRequirementsStateResponse res = sdk.taxRequirements().updateState()
                 .companyUuid("<id>")
-                .state("Massachusetts")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .state("Tennessee")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody.builder()
                     .requirementSets(List.of(
                         RequirementSets.builder()
@@ -209,6 +209,7 @@ scope: `company_tax_requirements:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_uuid-tax_requirements" method="get" path="/v1/companies/{company_uuid}/tax_requirements" -->
 ```java
 package hello.world;
 
@@ -222,12 +223,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyUuidTaxRequirementsResponse res = sdk.taxRequirements().getAll()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.responseBodies().isPresent()) {

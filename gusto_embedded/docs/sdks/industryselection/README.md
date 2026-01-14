@@ -1,5 +1,4 @@
 # IndustrySelection
-(*industrySelection()*)
 
 ## Overview
 
@@ -16,6 +15,7 @@ scope: `companies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-company-industry" method="get" path="/v1/companies/{company_id}/industry_selection" -->
 ```java
 package hello.world;
 
@@ -29,12 +29,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompanyIndustryResponse res = sdk.industrySelection().get()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.industry().isPresent()) {
@@ -69,6 +69,7 @@ scope: `companies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-company-industry" method="put" path="/v1/companies/{company_id}/industry_selection" -->
 ```java
 package hello.world;
 
@@ -85,12 +86,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompanyIndustryResponse res = sdk.industrySelection().update()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1CompanyIndustryRequestBody.builder()
                     .naicsCode("611420")
                     .title("Computer Training")

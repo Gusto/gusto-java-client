@@ -1,39 +1,31 @@
 # BankAccounts
-(*bankAccounts()*)
 
 ## Overview
 
 ### Available Operations
 
-* [create](#create) - Create a company bank account
 * [get](#get) - Get all company bank accounts
+* [create](#create) - Create a company bank account
 * [verify](#verify) - Verify a company bank account
 * [createFromPlaidToken](#createfromplaidtoken) - Create a bank account from a plaid processor token
+* [deleteV1CompaniesCompanyIdBankAccountsBankAccountId](#deletev1companiescompanyidbankaccountsbankaccountid) - Delete a company bank account
 
-## create
+## get
 
-This endpoint creates a new company bank account.
+Returns company bank accounts. Currently, we only support a single default bank account per company.
 
-Upon being created, two verification deposits are automatically sent to the bank account, and the bank account's verification_status is 'awaiting_deposits'. 
-
-When the deposits are successfully transferred, the verification_status changes to 'ready_for_verification', at which point the verify endpoint can be used to verify the bank account.
-After successful verification, the bank account's verification_status is 'verified'.
-
-scope: `company_bank_accounts:write`
-
-> 🚧 Warning
->
-> If a default bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
+scope: `company_bank_accounts:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-bank-accounts" method="get" path="/v1/companies/{company_id}/bank_accounts" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdBankAccountsResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -41,16 +33,84 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1CompaniesCompanyIdBankAccountsResponse res = sdk.bankAccounts().get()
+                .companyId("<id>")
+                .xGustoAPIVersion(GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .call();
+
+        if (res.companyBankAccounts().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion>](../../models/operations/GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion.md)                                                                 | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+
+### Response
+
+**[GetV1CompaniesCompanyIdBankAccountsResponse](../../models/operations/GetV1CompaniesCompanyIdBankAccountsResponse.md)**
+
+### Errors
+
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+
+## create
+
+This endpoint creates a new company bank account.
+
+Upon being created, two verification deposits are automatically sent to the bank account, and the bank account's verification_status is 'awaiting_deposits'.
+
+When the deposits are successfully transferred, the verification_status changes to 'ready_for_verification', at which point the verify endpoint can be used to verify the bank account.
+After successful verification, the bank account's verification_status is 'verified'.
+
+
+>🚧 Warning
+>
+> If a default bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
+
+scope: `company_bank_accounts:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-bank-accounts" method="post" path="/v1/companies/{company_id}/bank_accounts" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.CompanyBankAccountRequest;
+import com.gusto.embedded_api.models.components.CompanyBankAccountRequestAccountType;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdBankAccountsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1CompaniesCompanyIdBankAccountsResponse res = sdk.bankAccounts().create()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
-                .requestBody(PostV1CompaniesCompanyIdBankAccountsRequestBody.builder()
-                    .routingNumber("115092013")
-                    .accountNumber("9775014007")
-                    .accountType(AccountType.CHECKING)
+                .xGustoAPIVersion(PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyBankAccountRequest(CompanyBankAccountRequest.builder()
+                    .routingNumber("<value>")
+                    .accountNumber("<value>")
+                    .accountType(CompanyBankAccountRequestAccountType.SAVINGS)
                     .build())
                 .call();
 
@@ -66,8 +126,8 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PostV1CompaniesCompanyIdBankAccountsRequestBody](../../models/operations/PostV1CompaniesCompanyIdBankAccountsRequestBody.md)                                                                                                | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion>](../../models/operations/PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion.md)                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyBankAccountRequest`                                                                                                                                                                                                  | [CompanyBankAccountRequest](../../models/components/CompanyBankAccountRequest.md)                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
@@ -77,61 +137,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
-
-## get
-
-Returns company bank accounts. Currently, we only support a single default bank account per company.
-
-scope: `company_bank_accounts:read`
-
-### Example Usage
-
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdBankAccountsResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
-            .build();
-
-        GetV1CompaniesCompanyIdBankAccountsResponse res = sdk.bankAccounts().get()
-                .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
-                .call();
-
-        if (res.companyBankAccountList().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-
-### Response
-
-**[GetV1CompaniesCompanyIdBankAccountsResponse](../../models/operations/GetV1CompaniesCompanyIdBankAccountsResponse.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
 ## verify
 
@@ -154,6 +161,7 @@ scope: `company_bank_accounts:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-companies-company_id-bank-accounts-verify" method="put" path="/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/verify" -->
 ```java
 package hello.world;
 
@@ -169,13 +177,13 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompaniesCompanyIdBankAccountsVerifyResponse res = sdk.bankAccounts().verify()
                 .bankAccountUuid("<id>")
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody.builder()
                     .deposit1(0.02)
                     .deposit2(0.42)
@@ -224,6 +232,7 @@ scope: `plaid_processor:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-plaid-processor_token" method="post" path="/v1/plaid/processor_token" -->
 ```java
 package hello.world;
 
@@ -238,11 +247,11 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1PlaidProcessorTokenResponse res = sdk.bankAccounts().createFromPlaidToken()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostV1PlaidProcessorTokenRequestBody.builder()
                     .ownerType(OwnerType.COMPANY)
                     .ownerId("ef279fbd-0fc6-4cf1-a977-6939d621c429")
@@ -273,4 +282,62 @@ public class Application {
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
 | models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+
+## deleteV1CompaniesCompanyIdBankAccountsBankAccountId
+
+This endpoint disables a company bank account.
+
+A bank account cannot be disabled if it is used for any unprocessed payments.
+
+scope: `company_bank_accounts:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="delete-v1-companies-company_id-bank-accounts-bank_account_id" method="delete" path="/v1/companies/{company_id}/bank_accounts/{bank_account_id}" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse res = sdk.bankAccounts().deleteV1CompaniesCompanyIdBankAccountsBankAccountId()
+                .companyId("<id>")
+                .bankAccountId("<id>")
+                .xGustoAPIVersion(DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .call();
+
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `bankAccountId`                                                                                                                                                                                                              | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company bank account                                                                                                                                                                                         |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion>](../../models/operations/DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion.md)                                 | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+
+### Response
+
+**[DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse](../../models/operations/DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse.md)**
+
+### Errors
+
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |

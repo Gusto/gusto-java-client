@@ -1,5 +1,4 @@
 # HistoricalEmployees
-(*historicalEmployees()*)
 
 ## Overview
 
@@ -15,6 +14,7 @@ scope: `employees:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-historical_employees" method="put" path="/v1/companies/{company_uuid}/historical_employees/{historical_employee_uuid}" -->
 ```java
 package hello.world;
 
@@ -30,13 +30,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1HistoricalEmployeesResponse res = sdk.historicalEmployees().update()
                 .companyUuid("<id>")
                 .historicalEmployeeUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1HistoricalEmployeesRequestBody.builder()
                     .version("db0edd04aaac4506f7edab03ac855d56")
                     .firstName("Soren")
