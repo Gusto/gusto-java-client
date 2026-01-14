@@ -1,5 +1,4 @@
 # Events
-(*events()*)
 
 ## Overview
 
@@ -19,6 +18,7 @@ scope: `events:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-events" method="get" path="/v1/events" -->
 ```java
 package hello.world;
 
@@ -41,7 +41,7 @@ public class Application {
         GetEventsResponse res = sdk.events().get()
                 .request(req)
                 .security(GetEventsSecurity.builder()
-                    .systemAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .call();
 

@@ -1,9 +1,13 @@
 # Deductions
 
+An array of deductions for the employee.
+
 
 ## Fields
 
-| Field               | Type                | Required            | Description         |
-| ------------------- | ------------------- | ------------------- | ------------------- |
-| `name`              | *Optional\<String>* | :heavy_minus_sign:  | N/A                 |
-| `amount`            | *Optional\<Double>* | :heavy_minus_sign:  | N/A                 |
+| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                              | *Optional\<String>*                                                                                                 | :heavy_minus_sign:                                                                                                  | The name of the deduction.                                                                                          |
+| `amount`                                                                                                            | *Optional\<Double>*                                                                                                 | :heavy_minus_sign:                                                                                                  | The amount of the deduction for the pay period.                                                                     |
+| `amountType`                                                                                                        | [Optional\<AmountType>](../../models/components/AmountType.md)                                                      | :heavy_minus_sign:                                                                                                  | The amount type of the deduction for the pay period.                                                                |
+| `uuid`                                                                                                              | *Optional\<String>*                                                                                                 | :heavy_minus_sign:                                                                                                  | The UUID of the deduction. This parameter is optional and can be provided in order to update an existing deduction. |

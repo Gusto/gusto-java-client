@@ -1,5 +1,4 @@
 # PaymentConfigs
-(*paymentConfigs()*)
 
 ## Overview
 
@@ -10,12 +9,13 @@
 
 ## get
 
-Get payment speed for the company and fast payment limit (1-day is only applicable to partners that opt in).
+Get payment speed configurations for the company and fast payment limit (1-day is only applicable to partners that opt in).
 
 scope: `company_payment_configs:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-company-payment-configs" method="get" path="/v1/companies/{company_uuid}/payment_configs" -->
 ```java
 package hello.world;
 
@@ -29,12 +29,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompanyPaymentConfigsResponse res = sdk.paymentConfigs().get()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.paymentConfigs().isPresent()) {
@@ -69,6 +69,7 @@ scope: `company_payment_configs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-company-payment-configs" method="put" path="/v1/companies/{company_uuid}/payment_configs" -->
 ```java
 package hello.world;
 
@@ -84,12 +85,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompanyPaymentConfigsResponse res = sdk.paymentConfigs().update()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1CompanyPaymentConfigsRequestBody.of(FastPaymentLimitRequiredBody.builder()
                     .fastPaymentLimit("5000")
                     .paymentSpeed(PaymentSpeedParam.TWO_MINUS_DAY)

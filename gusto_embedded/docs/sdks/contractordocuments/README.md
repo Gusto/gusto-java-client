@@ -1,5 +1,4 @@
 # ContractorDocuments
-(*contractorDocuments()*)
 
 ## Overview
 
@@ -18,6 +17,7 @@ scope: `contractor_documents:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractor-documents" method="get" path="/v1/contractors/{contractor_uuid}/documents" -->
 ```java
 package hello.world;
 
@@ -31,12 +31,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorDocumentsResponse res = sdk.contractorDocuments().getAll()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.documents().isPresent()) {
@@ -71,6 +71,7 @@ scope: `contractor_documents:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractor-document" method="get" path="/v1/documents/{document_uuid}" -->
 ```java
 package hello.world;
 
@@ -84,12 +85,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorDocumentResponse res = sdk.contractorDocuments().get()
                 .documentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.document().isPresent()) {
@@ -103,7 +104,7 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `documentUuid`                                                                                                                                                                                                               | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The ID or UUID of the document                                                                                                                                                                                               |
+| `documentUuid`                                                                                                                                                                                                               | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the document                                                                                                                                                                                                     |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
@@ -124,6 +125,7 @@ scope: `contractor_documents:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractor-document-pdf" method="get" path="/v1/documents/{document_uuid}/pdf" -->
 ```java
 package hello.world;
 
@@ -137,12 +139,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorDocumentPdfResponse res = sdk.contractorDocuments().getPdf()
                 .documentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.documentPdf().isPresent()) {
@@ -156,7 +158,7 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `documentUuid`                                                                                                                                                                                                               | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The ID or UUID of the document                                                                                                                                                                                               |
+| `documentUuid`                                                                                                                                                                                                               | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the document                                                                                                                                                                                                     |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
@@ -177,13 +179,15 @@ scope: `contractor_documents:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PutV1ContractorDocumentSignRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1ContractorDocumentSignResponse;
 import java.lang.Exception;
 import java.util.List;
 
@@ -192,23 +196,15 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1ContractorDocumentSignResponse res = sdk.contractorDocuments().sign()
                 .documentUuid("<id>")
-                .xGustoClientIp("<value>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1ContractorDocumentSignRequestBody.builder()
-                    .fields(List.of(
-                        Fields.builder()
-                            .build(),
-                        Fields.builder()
-                            .build(),
-                        Fields.builder()
-                            .build()))
-                    .agree(true)
-                    .signedByIpAddress("<value>")
+                    .fields(List.of())
+                    .agree(false)
                     .build())
                 .call();
 
@@ -223,7 +219,7 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `documentUuid`                                                                                                                                                                                                               | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The ID or UUID of the document                                                                                                                                                                                               |
+| `documentUuid`                                                                                                                                                                                                               | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the document                                                                                                                                                                                                     |
 | `xGustoClientIp`                                                                                                                                                                                                             | *Optional\<String>*                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                           | Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.                                                                   |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `requestBody`                                                                                                                                                                                                                | [PutV1ContractorDocumentSignRequestBody](../../models/operations/PutV1ContractorDocumentSignRequestBody.md)                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

@@ -1,5 +1,4 @@
 # ContractorPaymentMethod
-(*contractorPaymentMethod()*)
 
 ## Overview
 
@@ -17,6 +16,7 @@ scope: `contractor_payment_methods:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractors-contractor_uuid-bank_accounts" method="get" path="/v1/contractors/{contractor_uuid}/bank_accounts" -->
 ```java
 package hello.world;
 
@@ -30,12 +30,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorsContractorUuidBankAccountsResponse res = sdk.contractorPaymentMethod().getBankAccounts()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.contractorBankAccountList().isPresent()) {
@@ -72,6 +72,7 @@ scope: `contractor_payment_methods:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-contractors-contractor_uuid-payment_method" method="get" path="/v1/contractors/{contractor_uuid}/payment_method" -->
 ```java
 package hello.world;
 
@@ -85,12 +86,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1ContractorsContractorUuidPaymentMethodResponse res = sdk.contractorPaymentMethod().get()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.contractorPaymentMethod().isPresent()) {
@@ -126,6 +127,7 @@ scope: `contractor_payment_methods:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-contractors-contractor_id-payment_method" method="put" path="/v1/contractors/{contractor_uuid}/payment_method" -->
 ```java
 package hello.world;
 
@@ -140,12 +142,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1ContractorsContractorIdPaymentMethodResponse res = sdk.contractorPaymentMethod().update()
                 .contractorUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
                     .version("63859768485e218ccf8a449bb60f14ed")
                     .type(PutV1ContractorsContractorIdPaymentMethodType.DIRECT_DEPOSIT)

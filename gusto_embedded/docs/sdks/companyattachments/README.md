@@ -1,5 +1,4 @@
 # CompanyAttachments
-(*companyAttachments()*)
 
 ## Overview
 
@@ -17,6 +16,7 @@ scope: `company_attachments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-attachment" method="get" path="/v1/companies/{company_id}/attachments/{company_attachment_uuid}" -->
 ```java
 package hello.world;
 
@@ -30,13 +30,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesAttachmentResponse res = sdk.companyAttachments().getDetails()
                 .companyId("<id>")
                 .companyAttachmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.companyAttachment().isPresent()) {
@@ -72,6 +72,7 @@ scope: `company_attachments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-attachments" method="get" path="/v1/companies/{company_id}/attachments" -->
 ```java
 package hello.world;
 
@@ -85,12 +86,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesAttachmentsResponse res = sdk.companyAttachments().getList()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.companyAttachmentList().isPresent()) {
@@ -127,6 +128,7 @@ scope: `company_attachments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-companies-attachment" method="post" path="/v1/companies/{company_id}/attachments" -->
 ```java
 package hello.world;
 
@@ -134,32 +136,30 @@ import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.utils.Utils;
+import java.io.FileInputStream;
 import java.lang.Exception;
-import java.nio.charset.StandardCharsets;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1CompaniesAttachmentResponse res = sdk.companyAttachments().create()
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostV1CompaniesAttachmentRequestBody.builder()
                     .document(Document.builder()
                         .fileName("example.file")
-                        .content("0xae921BE031".getBytes(StandardCharsets.UTF_8))
+                        .content(Utils.readBytesAndClose(new FileInputStream("example.file")))
                         .build())
-                    .category(Category.COMPLIANCE)
+                    .category(Category.GEP_NOTICE)
                     .build())
                 .call();
 
-        if (res.companyAttachment().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

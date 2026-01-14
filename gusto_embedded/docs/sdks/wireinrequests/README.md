@@ -1,5 +1,4 @@
 # WireInRequests
-(*wireInRequests()*)
 
 ## Overview
 
@@ -17,6 +16,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-wire_in_requests-wire_in_request_uuid" method="get" path="/v1/wire_in_requests/{wire_in_request_uuid}" -->
 ```java
 package hello.world;
 
@@ -30,12 +30,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetWireInRequestsWireInRequestUuidResponse res = sdk.wireInRequests().get()
                 .wireInRequestUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.wireInRequest().isPresent()) {
@@ -70,6 +70,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-wire_in_requests-wire_in_request_uuid" method="put" path="/v1/wire_in_requests/{wire_in_request_uuid}" -->
 ```java
 package hello.world;
 
@@ -85,12 +86,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutWireInRequestsWireInRequestUuidResponse res = sdk.wireInRequests().submit()
                 .wireInRequestUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutWireInRequestsWireInRequestUuidRequestBody.builder()
                     .dateSent("2024-06-10T00:00:00Z")
                     .bankName("Chase")
@@ -133,6 +134,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-wire_in_request_uuid" method="get" path="/v1/companies/{company_uuid}/wire_in_requests" -->
 ```java
 package hello.world;
 
@@ -146,12 +148,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetCompaniesCompanyUuidWireInRequestUuidResponse res = sdk.wireInRequests().list()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.wireInRequestList().isPresent()) {

@@ -1,5 +1,4 @@
 # EmployeePaymentMethod
-(*employeePaymentMethod()*)
 
 ## Overview
 
@@ -21,6 +20,7 @@ scope: `employee_payment_methods:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-bank_accounts" method="post" path="/v1/employees/{employee_id}/bank_accounts" -->
 ```java
 package hello.world;
 
@@ -35,17 +35,17 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1EmployeesEmployeeIdBankAccountsResponse res = sdk.employeePaymentMethod().create()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostV1EmployeesEmployeeIdBankAccountsRequestBody.builder()
                     .name("BoA Checking Account")
                     .routingNumber("266905059")
                     .accountNumber("5809431207")
-                    .accountType(PostV1EmployeesEmployeeIdBankAccountsAccountType.CHECKING)
+                    .accountType(AccountType.CHECKING)
                     .build())
                 .call();
 
@@ -84,6 +84,7 @@ scope: `employee_payment_methods:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-v1-employees-employee_id-bank_accounts-bank_account_id" method="delete" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" -->
 ```java
 package hello.world;
 
@@ -97,13 +98,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse res = sdk.employeePaymentMethod().deleteBankAccount()
                 .employeeId("<id>")
                 .bankAccountUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         // handle response
@@ -137,6 +138,7 @@ scope: `employee_payment_methods:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-employees-employee_id-bank_accounts" method="put" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" -->
 ```java
 package hello.world;
 
@@ -151,13 +153,13 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1EmployeesEmployeeIdBankAccountsResponse res = sdk.employeePaymentMethod().updateBankAccount()
                 .employeeId("<id>")
                 .bankAccountUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1EmployeesEmployeeIdBankAccountsRequestBody.builder()
                     .name("BoA Checking Account")
                     .routingNumber("266905059")
@@ -203,6 +205,7 @@ scope: `employee_payment_methods:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-payment_method" method="get" path="/v1/employees/{employee_id}/payment_method" -->
 ```java
 package hello.world;
 
@@ -216,12 +219,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeesEmployeeIdPaymentMethodResponse res = sdk.employeePaymentMethod().get()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.employeePaymentMethod().isPresent()) {
@@ -257,6 +260,7 @@ scope: `employee_payment_methods:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" -->
 ```java
 package hello.world;
 
@@ -273,12 +277,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1EmployeesEmployeeIdPaymentMethodResponse res = sdk.employeePaymentMethod().update()
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1EmployeesEmployeeIdPaymentMethodRequestBody.builder()
                     .version("63859768485e218ccf8a449bb60f14ed")
                     .type(Type.DIRECT_DEPOSIT)
@@ -288,13 +292,13 @@ public class Application {
                             .uuid("e88f9436-b74e-49a8-87e9-777b9bfe715e")
                             .name("BoA Checking Account")
                             .priority(1L)
-                            .splitAmount(500L)
+                            .splitAmount(50000L)
                             .build(),
                         Splits.builder()
                             .uuid("0d2b7f73-05d6-4184-911d-269edeecc30a")
                             .name("Chase Checking Account")
                             .priority(2L)
-                            .splitAmount(1000L)
+                            .splitAmount(100000L)
                             .build(),
                         Splits.builder()
                             .uuid("1531e824-8d9e-4bd8-9f90-0d04608125d7")

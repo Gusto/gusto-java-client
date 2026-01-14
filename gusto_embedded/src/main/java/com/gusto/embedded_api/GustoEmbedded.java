@@ -5,6 +5,8 @@
 package com.gusto.embedded_api;
 
 import com.gusto.embedded_api.utils.HTTPClient;
+import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Hook.SdkInitData;
 import com.gusto.embedded_api.utils.RetryConfig;
 import com.gusto.embedded_api.utils.SpeakeasyHTTPClient;
 import com.gusto.embedded_api.utils.Utils;
@@ -19,8 +21,8 @@ import java.util.function.Consumer;
  * Gusto API: Welcome to Gusto's Embedded Payroll API documentation!
  */
 public class GustoEmbedded {
+    private static final Headers _headers = Headers.EMPTY;
 
-  
     /**
      * AvailableServers contains identifiers for the servers available to the SDK.
      */
@@ -30,17 +32,17 @@ public class GustoEmbedded {
          * 
          * <p>Demo
          */
-      DEMO("demo"),
+        DEMO("demo"),
         /**
          * PROD
          * 
          * <p>Prod
          */
-      PROD("prod");
+        PROD("prod");
 
         private final String server;
 
-        private AvailableServers(String server) {
+        AvailableServers(String server) {
             this.server = server;
         }
 
@@ -54,305 +56,434 @@ public class GustoEmbedded {
      */
     @SuppressWarnings("serial")
     public static final Map<AvailableServers, String> SERVERS = new HashMap<>() { {
-    put(AvailableServers.DEMO, "https://api.gusto-demo.com");
-    put(AvailableServers.PROD, "https://api.gusto.com");
+        put(AvailableServers.DEMO, "https://api.gusto-demo.com");
+        put(AvailableServers.PROD, "https://api.gusto.com");
     }};
+
 
     private final Introspection introspection;
 
+
     private final Companies companies;
+
 
     private final Invoices invoices;
 
+
     private final CompanyAttachments companyAttachments;
+
 
     private final CompanyAttachment companyAttachment;
 
+
     private final FederalTaxDetails federalTaxDetails;
+
 
     private final IndustrySelection industrySelection;
 
+
     private final Signatories signatories;
+
 
     private final Flows flows;
 
+
     private final Locations locations;
+
 
     private final BankAccounts bankAccounts;
 
+
     private final ExternalPayrolls externalPayrolls;
+
 
     private final PaymentConfigs paymentConfigs;
 
+
     private final PaySchedules paySchedules;
+
 
     private final Employees employees;
 
+
     private final HistoricalEmployees historicalEmployees;
+
 
     private final Departments departments;
 
+
     private final EmployeeEmployments employeeEmployments;
+
 
     private final EmployeeAddresses employeeAddresses;
 
+
     private final EmployeeTaxSetup employeeTaxSetup;
+
 
     private final EmployeePaymentMethod employeePaymentMethod;
 
+
     private final EmployeePaymentMethods employeePaymentMethods;
+
 
     private final JobsAndCompensations jobsAndCompensations;
 
+
     private final EarningTypes earningTypes;
+
 
     private final Contractors contractors;
 
+
     private final ContractorPaymentMethods contractorPaymentMethods;
+
 
     private final ContractorPaymentMethod contractorPaymentMethod;
 
+
     private final Webhooks webhooks;
+
 
     private final ContractorForms contractorForms;
 
+
     private final ContractorDocuments contractorDocuments;
+
 
     private final EmployeeForms employeeForms;
 
+
     private final Payrolls payrolls;
+
 
     private final TimeOffPolicies timeOffPolicies;
 
+
     private final ContractorPayments contractorPayments;
+
 
     private final ContractorPaymentGroups contractorPaymentGroups;
 
+
     private final CompanyForms companyForms;
+
 
     private final GeneratedDocuments generatedDocuments;
 
+
     private final Reports reports;
+
 
     private final CompanyBenefits companyBenefits;
 
+
     private final EmployeeBenefits employeeBenefits;
+
 
     private final Garnishments garnishments;
 
+
     private final I9Verification i9Verification;
+
 
     private final TaxRequirements taxRequirements;
 
+
     private final HolidayPayPolicies holidayPayPolicies;
+
 
     private final Notifications notifications;
 
+
     private final Events events;
+
+
+    private final InformationRequests informationRequests;
+
 
     private final RecoveryCases recoveryCases;
 
+
     private final AchTransactions achTransactions;
 
+
     private final WireInRequests wireInRequests;
+
+
+    private final SalaryEstimates salaryEstimates;
+
+
+    private final Reimbursements reimbursements;
+
+
+    private final PeopleBatches peopleBatches;
+
 
     public Introspection introspection() {
         return introspection;
     }
 
+
     public Companies companies() {
         return companies;
     }
+
 
     public Invoices invoices() {
         return invoices;
     }
 
+
     public CompanyAttachments companyAttachments() {
         return companyAttachments;
     }
+
 
     public CompanyAttachment companyAttachment() {
         return companyAttachment;
     }
 
+
     public FederalTaxDetails federalTaxDetails() {
         return federalTaxDetails;
     }
+
 
     public IndustrySelection industrySelection() {
         return industrySelection;
     }
 
+
     public Signatories signatories() {
         return signatories;
     }
+
 
     public Flows flows() {
         return flows;
     }
 
+
     public Locations locations() {
         return locations;
     }
+
 
     public BankAccounts bankAccounts() {
         return bankAccounts;
     }
 
+
     public ExternalPayrolls externalPayrolls() {
         return externalPayrolls;
     }
+
 
     public PaymentConfigs paymentConfigs() {
         return paymentConfigs;
     }
 
+
     public PaySchedules paySchedules() {
         return paySchedules;
     }
+
 
     public Employees employees() {
         return employees;
     }
 
+
     public HistoricalEmployees historicalEmployees() {
         return historicalEmployees;
     }
+
 
     public Departments departments() {
         return departments;
     }
 
+
     public EmployeeEmployments employeeEmployments() {
         return employeeEmployments;
     }
+
 
     public EmployeeAddresses employeeAddresses() {
         return employeeAddresses;
     }
 
+
     public EmployeeTaxSetup employeeTaxSetup() {
         return employeeTaxSetup;
     }
+
 
     public EmployeePaymentMethod employeePaymentMethod() {
         return employeePaymentMethod;
     }
 
+
     public EmployeePaymentMethods employeePaymentMethods() {
         return employeePaymentMethods;
     }
+
 
     public JobsAndCompensations jobsAndCompensations() {
         return jobsAndCompensations;
     }
 
+
     public EarningTypes earningTypes() {
         return earningTypes;
     }
+
 
     public Contractors contractors() {
         return contractors;
     }
 
+
     public ContractorPaymentMethods contractorPaymentMethods() {
         return contractorPaymentMethods;
     }
+
 
     public ContractorPaymentMethod contractorPaymentMethod() {
         return contractorPaymentMethod;
     }
 
+
     public Webhooks webhooks() {
         return webhooks;
     }
+
 
     public ContractorForms contractorForms() {
         return contractorForms;
     }
 
+
     public ContractorDocuments contractorDocuments() {
         return contractorDocuments;
     }
+
 
     public EmployeeForms employeeForms() {
         return employeeForms;
     }
 
+
     public Payrolls payrolls() {
         return payrolls;
     }
+
 
     public TimeOffPolicies timeOffPolicies() {
         return timeOffPolicies;
     }
 
+
     public ContractorPayments contractorPayments() {
         return contractorPayments;
     }
+
 
     public ContractorPaymentGroups contractorPaymentGroups() {
         return contractorPaymentGroups;
     }
 
+
     public CompanyForms companyForms() {
         return companyForms;
     }
+
 
     public GeneratedDocuments generatedDocuments() {
         return generatedDocuments;
     }
 
+
     public Reports reports() {
         return reports;
     }
+
 
     public CompanyBenefits companyBenefits() {
         return companyBenefits;
     }
 
+
     public EmployeeBenefits employeeBenefits() {
         return employeeBenefits;
     }
+
 
     public Garnishments garnishments() {
         return garnishments;
     }
 
+
     public I9Verification i9Verification() {
         return i9Verification;
     }
+
 
     public TaxRequirements taxRequirements() {
         return taxRequirements;
     }
 
+
     public HolidayPayPolicies holidayPayPolicies() {
         return holidayPayPolicies;
     }
+
 
     public Notifications notifications() {
         return notifications;
     }
 
+
     public Events events() {
         return events;
     }
+
+
+    public InformationRequests informationRequests() {
+        return informationRequests;
+    }
+
 
     public RecoveryCases recoveryCases() {
         return recoveryCases;
     }
 
+
     public AchTransactions achTransactions() {
         return achTransactions;
     }
+
 
     public WireInRequests wireInRequests() {
         return wireInRequests;
     }
 
-    private final SDKConfiguration sdkConfiguration;
+
+    public SalaryEstimates salaryEstimates() {
+        return salaryEstimates;
+    }
+
+
+    public Reimbursements reimbursements() {
+        return reimbursements;
+    }
+
+
+    public PeopleBatches peopleBatches() {
+        return peopleBatches;
+    }
+    private final AsyncGustoEmbedded asyncSDK;
 
     /**
      * The Builder class allows the configuration of a new instance of the SDK.
@@ -360,6 +491,9 @@ public class GustoEmbedded {
     public static class Builder {
 
         private final SDKConfiguration sdkConfiguration = new SDKConfiguration();
+        private String serverUrl;
+        private String server;
+        
 
         private Builder() {
         }
@@ -371,7 +505,7 @@ public class GustoEmbedded {
          * @return The builder instance.
          */
         public Builder client(HTTPClient client) {
-            this.sdkConfiguration.defaultClient = client;
+            this.sdkConfiguration.setClient(client);
             return this;
         }
         /**
@@ -381,9 +515,9 @@ public class GustoEmbedded {
          * @return The builder instance.
          */
         public Builder companyAccessAuth(String companyAccessAuth) {
-            this.sdkConfiguration.securitySource = SecuritySource.of(com.gusto.embedded_api.models.components.Security.builder()
+            this.sdkConfiguration.setSecuritySource(SecuritySource.of(com.gusto.embedded_api.models.components.Security.builder()
               .companyAccessAuth(companyAccessAuth)
-              .build());
+              .build()));
             return this;
         }
 
@@ -394,7 +528,8 @@ public class GustoEmbedded {
          * @return The builder instance.
          */
         public Builder securitySource(SecuritySource securitySource) {
-            this.sdkConfiguration.securitySource = securitySource;
+            Utils.checkNotNull(securitySource, "securitySource");
+            this.sdkConfiguration.setSecuritySource(securitySource);
             return this;
         }
         
@@ -405,19 +540,19 @@ public class GustoEmbedded {
          * @return The builder instance.
          */
         public Builder serverURL(String serverUrl) {
-            this.sdkConfiguration.serverUrl = serverUrl;
+            this.serverUrl = serverUrl;
             return this;
         }
 
         /**
-         * Overrides the default server URL  with a templated URL populated with the provided parameters.
+         * Overrides the default server URL with a templated URL populated with the provided parameters.
          *
          * @param serverUrl The server URL to use for all requests.
          * @param params The parameters to use when templating the URL.
          * @return The builder instance.
          */
         public Builder serverURL(String serverUrl, Map<String, String> params) {
-            this.sdkConfiguration.serverUrl = Utils.templateUrl(serverUrl, params);
+            this.serverUrl = Utils.templateUrl(serverUrl, params);
             return this;
         }
         
@@ -428,8 +563,8 @@ public class GustoEmbedded {
          * @return The builder instance.
          */
         public Builder server(AvailableServers server) {
-            this.sdkConfiguration.server = server.server();
-            this.sdkConfiguration.serverUrl = SERVERS.get(server);
+            this.server = server.server();
+            this.serverUrl = SERVERS.get(server);
             return this;
         }
         
@@ -440,9 +575,26 @@ public class GustoEmbedded {
          * @return The builder instance.
          */
         public Builder retryConfig(RetryConfig retryConfig) {
-            this.sdkConfiguration.retryConfig = Optional.of(retryConfig);
+            this.sdkConfiguration.setRetryConfig(Optional.of(retryConfig));
             return this;
         }
+
+        /**
+         * Enables debug logging for HTTP requests and responses, including JSON body content.
+         * <p>
+         * Convenience method that calls {@link HTTPClient#enableDebugLogging(boolean)}.
+         * {@link SpeakeasyHTTPClient} honors this setting. If you are using a custom HTTP client,
+         * it is up to the custom client to honor this setting.
+         * </p>
+         *
+         * @param enabled Whether to enable debug logging.
+         * @return The builder instance.
+         */
+        public Builder enableHTTPDebugLogging(boolean enabled) {
+            this.sdkConfiguration.client().enableDebugLogging(enabled);
+            return this;
+        }
+
         // Visible for testing, may be accessed via reflection in tests
         Builder _hooks(com.gusto.embedded_api.utils.Hooks hooks) {
             sdkConfiguration.setHooks(hooks);  
@@ -454,30 +606,25 @@ public class GustoEmbedded {
             consumer.accept(sdkConfiguration.hooks());
             return this;    
         }
-        
+
         /**
          * Builds a new instance of the SDK.
          *
          * @return The SDK instance.
          */
         public GustoEmbedded build() {
-            if (sdkConfiguration.defaultClient == null) {
-                sdkConfiguration.defaultClient = new SpeakeasyHTTPClient();
+            if (serverUrl == null || serverUrl.isBlank()) {
+                serverUrl = SERVERS.get(AvailableServers.DEMO);
+                server = AvailableServers.DEMO.server();
             }
-	        if (sdkConfiguration.securitySource == null) {
-	    	    sdkConfiguration.securitySource = SecuritySource.of(null);
-	        }
-            if (sdkConfiguration.serverUrl == null || sdkConfiguration.serverUrl.isBlank()) {
-                sdkConfiguration.serverUrl = SERVERS.get(AvailableServers.DEMO);
-                sdkConfiguration.server = AvailableServers.DEMO.server();
-            }
-            if (sdkConfiguration.serverUrl.endsWith("/")) {
-                sdkConfiguration.serverUrl = sdkConfiguration.serverUrl.substring(0, sdkConfiguration.serverUrl.length() - 1);
+            sdkConfiguration.setServerUrl(serverUrl);
+            if (server != null) {
+                sdkConfiguration.setServer(server);
             }
             return new GustoEmbedded(sdkConfiguration);
         }
     }
-    
+
     /**
      * Get a new instance of the SDK builder to configure a new instance of the SDK.
      *
@@ -487,8 +634,8 @@ public class GustoEmbedded {
         return new Builder();
     }
 
-    private GustoEmbedded(SDKConfiguration sdkConfiguration) {
-        this.sdkConfiguration = sdkConfiguration;
+    public GustoEmbedded(SDKConfiguration sdkConfiguration) {
+        sdkConfiguration.initialize();
         this.introspection = new Introspection(sdkConfiguration);
         this.companies = new Companies(sdkConfiguration);
         this.invoices = new Invoices(sdkConfiguration);
@@ -535,8 +682,29 @@ public class GustoEmbedded {
         this.holidayPayPolicies = new HolidayPayPolicies(sdkConfiguration);
         this.notifications = new Notifications(sdkConfiguration);
         this.events = new Events(sdkConfiguration);
+        this.informationRequests = new InformationRequests(sdkConfiguration);
         this.recoveryCases = new RecoveryCases(sdkConfiguration);
         this.achTransactions = new AchTransactions(sdkConfiguration);
         this.wireInRequests = new WireInRequests(sdkConfiguration);
-        this.sdkConfiguration.initialize();
-    }}
+        this.salaryEstimates = new SalaryEstimates(sdkConfiguration);
+        this.reimbursements = new Reimbursements(sdkConfiguration);
+        this.peopleBatches = new PeopleBatches(sdkConfiguration);
+        SdkInitData data = sdkConfiguration.hooks().sdkInit(
+                new SdkInitData(
+                        sdkConfiguration.resolvedServerUrl(), 
+                        sdkConfiguration.client()));
+        sdkConfiguration.setServerUrl(data.baseUrl());
+        sdkConfiguration.setClient(data.client());
+        this.asyncSDK = new AsyncGustoEmbedded(this, sdkConfiguration);
+    }
+
+    /**
+     * Switches to the async SDK.
+     * 
+     * @return The async SDK
+     */
+    public AsyncGustoEmbedded async() {
+        return asyncSDK;
+    }
+
+}

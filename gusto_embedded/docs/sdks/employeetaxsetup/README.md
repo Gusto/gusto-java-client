@@ -1,5 +1,4 @@
 # EmployeeTaxSetup
-(*employeeTaxSetup()*)
 
 ## Overview
 
@@ -18,6 +17,7 @@ Get attributes relevant for an employee's federal taxes.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-federal_taxes" method="get" path="/v1/employees/{employee_uuid}/federal_taxes" -->
 ```java
 package hello.world;
 
@@ -31,12 +31,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeesEmployeeIdFederalTaxesResponse res = sdk.employeeTaxSetup().getFederalTaxes()
                 .employeeUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.employeeFederalTax().isPresent()) {
@@ -71,6 +71,7 @@ scope: `employee_federal_taxes:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-employees-employee_id-federal_taxes" method="put" path="/v1/employees/{employee_uuid}/federal_taxes" -->
 ```java
 package hello.world;
 
@@ -86,21 +87,21 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1EmployeesEmployeeIdFederalTaxesResponse res = sdk.employeeTaxSetup().updateFederalTaxes()
                 .employeeUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1EmployeesEmployeeIdFederalTaxesRequestBody.builder()
                     .version("56a489ce86ed6c1b0f0cecc4050a0b01")
                     .filingStatus("Single")
+                    .w4DataType("rev_2020_w4")
                     .extraWithholding("0.0")
                     .twoJobs(true)
                     .dependentsAmount("0.0")
                     .otherIncome("0.0")
                     .deductions("0.0")
-                    .w4DataType("rev_2020_w4")
                     .build())
                 .call();
 
@@ -147,28 +148,29 @@ Payroll Admins are responsible for filing a new hire report for each Employee. T
 
 scope: `employee_state_taxes:read`
 
-
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-state_taxes" method="get" path="/v1/employees/{employee_uuid}/state_taxes" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdStateTaxesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1EmployeesEmployeeIdStateTaxesResponse res = sdk.employeeTaxSetup().getStateTaxes()
+                .xGustoAPIVersion(GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .employeeUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.employeeStateTaxesList().isPresent()) {
@@ -182,8 +184,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion>](../../models/operations/GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion.md)                                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `employeeUuid`                                                                                                                                                                                                               | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -191,9 +193,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## updateStateTaxes
 
@@ -205,70 +208,31 @@ scope: `employee_state_taxes:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-employees-employee_id-state_taxes" method="put" path="/v1/employees/{employee_uuid}/state_taxes" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.EmployeeStateTaxesRequest;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdStateTaxesResponse;
 import java.lang.Exception;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 public class Application {
 
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1EmployeesEmployeeIdStateTaxesResponse res = sdk.employeeTaxSetup().updateStateTaxes()
+                .xGustoAPIVersion(PutV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .employeeUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
-                .requestBody(PutV1EmployeesEmployeeIdStateTaxesRequestBody.builder()
-                    .states(List.of(
-                        States.builder()
-                            .state("CA")
-                            .questions(List.of(
-                                Questions.builder()
-                                    .key("filing_status")
-                                    .answers(List.of(
-                                        Answers.builder()
-                                            .value(Value.of("M"))
-                                            .validFrom("2010-01-01")
-                                            .validUpTo(JsonNullable.of(null))
-                                            .build()))
-                                    .build(),
-                                Questions.builder()
-                                    .key("withholding_allowance")
-                                    .answers(List.of(
-                                        Answers.builder()
-                                            .value(Value.of(2))
-                                            .validFrom("2010-01-01")
-                                            .validUpTo(JsonNullable.of(null))
-                                            .build()))
-                                    .build(),
-                                Questions.builder()
-                                    .key("additional_withholding")
-                                    .answers(List.of(
-                                        Answers.builder()
-                                            .value(Value.of("25.0"))
-                                            .validFrom("2010-01-01")
-                                            .validUpTo(JsonNullable.of(null))
-                                            .build()))
-                                    .build(),
-                                Questions.builder()
-                                    .key("file_new_hire_report")
-                                    .answers(List.of(
-                                        Answers.builder()
-                                            .value(Value.of(true))
-                                            .validFrom("2010-01-01")
-                                            .validUpTo(JsonNullable.of(null))
-                                            .build()))
-                                    .build()))
-                            .build()))
+                .employeeStateTaxesRequest(EmployeeStateTaxesRequest.builder()
+                    .states(List.of())
                     .build())
                 .call();
 
@@ -283,9 +247,9 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion>](../../models/operations/PutV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion.md)                                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `employeeUuid`                                                                                                                                                                                                               | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PutV1EmployeesEmployeeIdStateTaxesRequestBody](../../models/operations/PutV1EmployeesEmployeeIdStateTaxesRequestBody.md)                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `employeeStateTaxesRequest`                                                                                                                                                                                                  | [EmployeeStateTaxesRequest](../../models/components/EmployeeStateTaxesRequest.md)                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
@@ -295,5 +259,5 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |

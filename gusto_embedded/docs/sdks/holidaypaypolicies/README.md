@@ -1,5 +1,4 @@
 # HolidayPayPolicies
-(*holidayPayPolicies()*)
 
 ## Overview
 
@@ -21,25 +20,27 @@ scope: `holiday_pay_policies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_uuid-holiday_pay_policy" method="get" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidHolidayPayPolicyResponse;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidHolidayPayPolicyResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
-        GetCompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().get()
+        GetV1CompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().get()
+                .xGustoAPIVersion(GetV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         if (res.holidayPayPolicy().isPresent()) {
@@ -53,18 +54,19 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion>](../../models/operations/GetV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.md)                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
-**[GetCompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/GetCompaniesCompanyUuidHolidayPayPolicyResponse.md)**
+**[GetV1CompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/GetV1CompaniesCompanyUuidHolidayPayPolicyResponse.md)**
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## create
 
@@ -74,13 +76,14 @@ scope: `holiday_pay_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_uuid-holiday_pay_policy" method="post" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidHolidayPayPolicyResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -88,34 +91,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
-        PostCompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().create()
+        PostV1CompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().create()
+                .xGustoAPIVersion(PostV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
-                .requestBody(PostCompaniesCompanyUuidHolidayPayPolicyRequestBody.builder()
-                    .federalHolidays(FederalHolidays.builder()
-                        .mlkDay(MlkDay.builder()
-                            .selected(true)
-                            .build())
-                        .memorialDay(MemorialDay.builder()
-                            .selected(true)
-                            .build())
-                        .independenceDay(IndependenceDay.builder()
-                            .selected(true)
-                            .build())
-                        .veteransDay(VeteransDay.builder()
-                            .selected(true)
-                            .build())
-                        .thanksgiving(Thanksgiving.builder()
-                            .selected(true)
-                            .build())
-                        .christmasDay(ChristmasDay.builder()
-                            .selected(true)
-                            .build())
-                        .build())
-                    .build())
                 .call();
 
         if (res.holidayPayPolicy().isPresent()) {
@@ -129,19 +110,19 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion>](../../models/operations/PostV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.md)                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PostCompaniesCompanyUuidHolidayPayPolicyRequestBody](../../models/operations/PostCompaniesCompanyUuidHolidayPayPolicyRequestBody.md)                                                                                        | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `holidayPayPolicyRequest`                                                                                                                                                                                                    | [Optional\<HolidayPayPolicyRequest>](../../models/components/HolidayPayPolicyRequest.md)                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
-**[PostCompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/PostCompaniesCompanyUuidHolidayPayPolicyResponse.md)**
+**[PostV1CompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/PostV1CompaniesCompanyUuidHolidayPayPolicyResponse.md)**
 
 ### Errors
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## update
@@ -152,11 +133,11 @@ scope: `holiday_pay_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-companies-company_uuid-holiday_pay_policy" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -166,34 +147,14 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
-        PutCompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().update()
+        PutV1CompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().update()
+                .xGustoAPIVersion(PutV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
-                .requestBody(PutCompaniesCompanyUuidHolidayPayPolicyRequestBody.builder()
-                    .version("1b37938b017c7fd7116bada007072290")
-                    .federalHolidays(PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays.builder()
-                        .mlkDay(PutCompaniesCompanyUuidHolidayPayPolicyMlkDay.builder()
-                            .selected(true)
-                            .build())
-                        .memorialDay(PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay.builder()
-                            .selected(true)
-                            .build())
-                        .independenceDay(PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay.builder()
-                            .selected(true)
-                            .build())
-                        .veteransDay(PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay.builder()
-                            .selected(true)
-                            .build())
-                        .thanksgiving(PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving.builder()
-                            .selected(true)
-                            .build())
-                        .christmasDay(PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay.builder()
-                            .selected(true)
-                            .build())
-                        .build())
+                .requestBody(PutV1CompaniesCompanyUuidHolidayPayPolicyRequestBody.builder()
+                    .version("56d00c178bc7393b2a206ed6a86afcb4")
                     .build())
                 .call();
 
@@ -208,19 +169,19 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion>](../../models/operations/PutV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.md)                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PutCompaniesCompanyUuidHolidayPayPolicyRequestBody](../../models/operations/PutCompaniesCompanyUuidHolidayPayPolicyRequestBody.md)                                                                                          | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `requestBody`                                                                                                                                                                                                                | [PutV1CompaniesCompanyUuidHolidayPayPolicyRequestBody](../../models/operations/PutV1CompaniesCompanyUuidHolidayPayPolicyRequestBody.md)                                                                                      | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
-**[PutCompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/PutCompaniesCompanyUuidHolidayPayPolicyResponse.md)**
+**[PutV1CompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/PutV1CompaniesCompanyUuidHolidayPayPolicyResponse.md)**
 
 ### Errors
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## delete
@@ -231,13 +192,14 @@ scope: `holiday_pay_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="delete-v1-companies-company_uuid-holiday_pay_policy" method="delete" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.DeleteCompaniesCompanyUuidHolidayPayPolicyResponse;
+import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -245,12 +207,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
-        DeleteCompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().delete()
+        DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().delete()
+                .xGustoAPIVersion(DeleteV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .call();
 
         // handle response
@@ -262,18 +224,18 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<DeleteV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion>](../../models/operations/DeleteV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.md)                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
-**[DeleteCompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/DeleteCompaniesCompanyUuidHolidayPayPolicyResponse.md)**
+**[DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse.md)**
 
 ### Errors
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## addEmployees
@@ -284,11 +246,11 @@ scope: `holiday_pay_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-companies-company_uuid-holiday_pay_policy-add" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy/add" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -299,21 +261,15 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
-        PutCompaniesCompanyUuidHolidayPayPolicyAddResponse res = sdk.holidayPayPolicies().addEmployees()
+        PutV1CompaniesCompanyUuidHolidayPayPolicyAddResponse res = sdk.holidayPayPolicies().addEmployees()
+                .xGustoAPIVersion(PutV1CompaniesCompanyUuidHolidayPayPolicyAddHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
-                .requestBody(PutCompaniesCompanyUuidHolidayPayPolicyAddRequestBody.builder()
-                    .version("1b37938b017c7fd7116bada007072290")
-                    .employees(List.of(
-                        PutCompaniesCompanyUuidHolidayPayPolicyAddEmployees.builder()
-                            .uuid("1ca3cd25-3eda-48c6-ac88-f0e7fb91a15a")
-                            .build(),
-                        PutCompaniesCompanyUuidHolidayPayPolicyAddEmployees.builder()
-                            .uuid("fe977550-6621-4cfc-b4af-60b6af58c8ef")
-                            .build()))
+                .requestBody(PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody.builder()
+                    .version("56d00c178bc7393b2a206ed6a86afcb4")
+                    .employees(List.of())
                     .build())
                 .call();
 
@@ -328,19 +284,19 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1CompaniesCompanyUuidHolidayPayPolicyAddHeaderXGustoAPIVersion>](../../models/operations/PutV1CompaniesCompanyUuidHolidayPayPolicyAddHeaderXGustoAPIVersion.md)                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PutCompaniesCompanyUuidHolidayPayPolicyAddRequestBody](../../models/operations/PutCompaniesCompanyUuidHolidayPayPolicyAddRequestBody.md)                                                                                    | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `requestBody`                                                                                                                                                                                                                | [PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody](../../models/operations/PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody.md)                                                                                | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
-**[PutCompaniesCompanyUuidHolidayPayPolicyAddResponse](../../models/operations/PutCompaniesCompanyUuidHolidayPayPolicyAddResponse.md)**
+**[PutV1CompaniesCompanyUuidHolidayPayPolicyAddResponse](../../models/operations/PutV1CompaniesCompanyUuidHolidayPayPolicyAddResponse.md)**
 
 ### Errors
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## removeEmployees
@@ -351,11 +307,11 @@ scope: `holiday_pay_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="put-v1-companies-company_uuid-holiday_pay_policy-remove" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy/remove" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -366,20 +322,16 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
-        PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse res = sdk.holidayPayPolicies().removeEmployees()
+        PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse res = sdk.holidayPayPolicies().removeEmployees()
+                .xGustoAPIVersion(PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
-                .requestBody(PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody.builder()
-                    .version("1b37938b017c7fd7116bada007072290")
+                .requestBody(PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody.builder()
+                    .version("56d00c178bc7393b2a206ed6a86afcb4")
                     .employees(List.of(
-                        PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees.builder()
-                            .uuid("1ca3cd25-3eda-48c6-ac88-f0e7fb91a15a")
-                            .build(),
-                        PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees.builder()
-                            .uuid("fe977550-6621-4cfc-b4af-60b6af58c8ef")
+                        PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveEmployees.builder()
                             .build()))
                     .build())
                 .call();
@@ -395,19 +347,19 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveHeaderXGustoAPIVersion>](../../models/operations/PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveHeaderXGustoAPIVersion.md)                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody](../../models/operations/PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody.md)                                                                              | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `requestBody`                                                                                                                                                                                                                | [PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody](../../models/operations/PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody.md)                                                                          | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
-**[PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse](../../models/operations/PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse.md)**
+**[PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse](../../models/operations/PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse.md)**
 
 ### Errors
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## previewPaidHolidays
@@ -418,6 +370,7 @@ scope: `holiday_pay_policies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-paid_holidays" method="get" path="/v1/companies/{company_uuid}/paid_holidays" -->
 ```java
 package hello.world;
 
@@ -433,12 +386,12 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetCompaniesCompanyUuidPaidHolidaysResponse res = sdk.holidayPayPolicies().previewPaidHolidays()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(GetCompaniesCompanyUuidPaidHolidaysRequestBody.builder()
                     .year("2023")
                     .build())

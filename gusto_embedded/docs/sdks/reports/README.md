@@ -1,22 +1,24 @@
 # Reports
-(*reports()*)
 
 ## Overview
 
 ### Available Operations
 
 * [createCustom](#createcustom) - Create a custom report
-* [get](#get) - Get a report
+* [postPayrollsPayrollUuidReportsGeneralLedger](#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
+* [getReportsRequestUuid](#getreportsrequestuuid) - Get a report
 * [getTemplate](#gettemplate) - Get a report template
+* [postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage](#postv1companiescompanyidreportsemployeesannualficawage) - Create an employees annual FICA wage report
 
 ## createCustom
 
-Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint. This URL is valid for 10 minutes.
+Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid). This URL is valid for 10 minutes.
 
 scope: `company_reports:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-companies-company_uuid-reports" method="post" path="/v1/companies/{company_uuid}/reports" -->
 ```java
 package hello.world;
 
@@ -33,20 +35,17 @@ public class Application {
     public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostCompaniesCompanyUuidReportsResponse res = sdk.reports().createCustom()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostCompaniesCompanyUuidReportsRequestBody.builder()
                     .columns(List.of(
-                        Columns.TOTAL_EMPLOYER_BENEFIT_CONTRIBUTIONS,
-                        Columns.EMPLOYEE_MEDICARE_ADDITIONAL_TAX))
-                    .groupings(List.of(
-                        Groupings.WORK_ADDRESS_STATE,
-                        Groupings.WORK_ADDRESS))
-                    .fileType(FileType.CSV)
+                        Columns.TOTAL_TIME_OFF_EARNINGS))
+                    .groupings(List.of())
+                    .fileType(FileType.JSON)
                     .startDate(LocalDate.parse("2024-01-01"))
                     .endDate(LocalDate.parse("2024-04-01"))
                     .dismissedStartDate(LocalDate.parse("2024-01-01"))
@@ -80,20 +79,85 @@ public class Application {
 | models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
-## get
+## postPayrollsPayrollUuidReportsGeneralLedger
 
-Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
+Create a general ledger report for a payroll. The report can be aggregated by different dimensions such as job or department.
 
-scope: `company_reports:read`
+Use the `request_uuid` in the response with the [report GET endpoint](../reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
+
+scope: `company_reports:write` OR `company_reports:write:general_ledger`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-payrolls-payroll_uuid-reports-general_ledger" method="post" path="/v1/payrolls/{payroll_uuid}/reports/general_ledger" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.GetReportsReportUuidResponse;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostPayrollsPayrollUuidReportsGeneralLedgerResponse res = sdk.reports().postPayrollsPayrollUuidReportsGeneralLedger()
+                .payrollUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody.builder()
+                    .aggregation(Aggregation.DEFAULT)
+                    .build())
+                .call();
+
+        if (res.generalLedgerReport().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `payrollUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the payroll                                                                                                                                                                                                      |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `requestBody`                                                                                                                                                                                                                | [PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody](../../models/operations/PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody.md)                                                                                  | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PostPayrollsPayrollUuidReportsGeneralLedgerResponse](../../models/operations/PostPayrollsPayrollUuidReportsGeneralLedgerResponse.md)**
+
+### Errors
+
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+
+## getReportsRequestUuid
+
+Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
+
+Reports containing PHI are inaccessible with `company_reports:read:tier_2_only` data scope
+
+scope: `company_reports:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-reports-request_uuid" method="get" path="/v1/reports/{request_uuid}" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetReportsRequestUuidResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -101,12 +165,12 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
-        GetReportsReportUuidResponse res = sdk.reports().get()
-                .reportUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+        GetReportsRequestUuidResponse res = sdk.reports().getReportsRequestUuid()
+                .requestUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.report().isPresent()) {
@@ -120,12 +184,12 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `reportUuid`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the report request                                                                                                                                                                                               |
+| `requestUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the request to generate a document. Generate document endpoints return request_uuids to be used with the GET generated document endpoint.                                                                        |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
-**[GetReportsReportUuidResponse](../../models/operations/GetReportsReportUuidResponse.md)**
+**[GetReportsRequestUuidResponse](../../models/operations/GetReportsRequestUuidResponse.md)**
 
 ### Errors
 
@@ -141,6 +205,7 @@ scope: `company_reports:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-report-templates-report_type" method="get" path="/v1/companies/{company_uuid}/report_templates/{report_type}" -->
 ```java
 package hello.world;
 
@@ -154,13 +219,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth("<YOUR_BEARER_TOKEN_HERE>")
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetCompaniesCompanyUuidReportTemplatesReportTypeResponse res = sdk.reports().getTemplate()
                 .companyUuid("<id>")
                 .reportType("<value>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.reportTemplate().isPresent()) {
@@ -187,3 +252,67 @@ public class Application {
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage
+
+Generates a report containing annual FICA (Federal Insurance Contributions Act) wage data for all employees in a company over a specified year range.
+
+This report provides detailed wage information subject to Social Security and Medicare taxes, useful for benefits integrations that need to verify employee earnings for compliance and benefit calculations.
+
+The report is generated asynchronously. After making this request, you will receive a `request_uuid` which can be used to poll the [Get a report](ref:get-v1-reports-request_uuid) endpoint to check the status and retrieve the report when complete.
+
+scope: `company_reports:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-reports-employees_annual_fica_wage" method="post" path="/v1/companies/{company_id}/reports/employees_annual_fica_wage" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse res = sdk.reports().postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage()
+                .xGustoAPIVersion(PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .companyId("<id>")
+                .requestBody(PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody.builder()
+                    .startYear(2023L)
+                    .endYear(2024L)
+                    .build())
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion>](../../models/operations/PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion.md)                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `requestBody`                                                                                                                                                                                                                | [PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody](../../models/operations/PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody.md)                                                            | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse](../../models/operations/PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse.md)**
+
+### Errors
+
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
