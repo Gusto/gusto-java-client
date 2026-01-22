@@ -9,3 +9,4 @@ The payment method type. If type is Check, then `split_by` and `splits` do not n
 | ---------------- | ---------------- |
 | `DIRECT_DEPOSIT` | Direct Deposit   |
 | `CHECK`          | Check            |
+| `NULL`           | null             |

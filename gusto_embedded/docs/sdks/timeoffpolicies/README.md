@@ -176,8 +176,6 @@ public class Application {
                 .requestBody(PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody.builder()
                     .version("56d00c178bc7393b2a206ed6a86afcb4")
                     .name("Vacation Policy")
-                    .policyType(PolicyType.VACATION)
-                    .accrualMethod(AccrualMethod.UNLIMITED)
                     .build())
                 .call();
 
@@ -559,5 +557,5 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |

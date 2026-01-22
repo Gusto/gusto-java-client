@@ -13,6 +13,7 @@ import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -58,28 +59,38 @@ public class InformationRequest {
     @JsonProperty("blocking_payroll")
     private Optional<Boolean> blockingPayroll;
 
+    /**
+     * The list of required questions for the information request
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("required_questions")
+    private Optional<? extends List<RequiredQuestions>> requiredQuestions;
+
     @JsonCreator
     public InformationRequest(
             @JsonProperty("uuid") Optional<String> uuid,
             @JsonProperty("company_uuid") Optional<String> companyUuid,
             @JsonProperty("type") JsonNullable<? extends InformationRequestType> type,
             @JsonProperty("status") Optional<? extends InformationRequestStatus> status,
-            @JsonProperty("blocking_payroll") Optional<Boolean> blockingPayroll) {
+            @JsonProperty("blocking_payroll") Optional<Boolean> blockingPayroll,
+            @JsonProperty("required_questions") Optional<? extends List<RequiredQuestions>> requiredQuestions) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(type, "type");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(blockingPayroll, "blockingPayroll");
+        Utils.checkNotNull(requiredQuestions, "requiredQuestions");
         this.uuid = uuid;
         this.companyUuid = companyUuid;
         this.type = type;
         this.status = status;
         this.blockingPayroll = blockingPayroll;
+        this.requiredQuestions = requiredQuestions;
     }
     
     public InformationRequest() {
         this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -123,6 +134,15 @@ public class InformationRequest {
     @JsonIgnore
     public Optional<Boolean> blockingPayroll() {
         return blockingPayroll;
+    }
+
+    /**
+     * The list of required questions for the information request
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<RequiredQuestions>> requiredQuestions() {
+        return (Optional<List<RequiredQuestions>>) requiredQuestions;
     }
 
     public static Builder builder() {
@@ -226,6 +246,25 @@ public class InformationRequest {
         return this;
     }
 
+    /**
+     * The list of required questions for the information request
+     */
+    public InformationRequest withRequiredQuestions(List<RequiredQuestions> requiredQuestions) {
+        Utils.checkNotNull(requiredQuestions, "requiredQuestions");
+        this.requiredQuestions = Optional.ofNullable(requiredQuestions);
+        return this;
+    }
+
+
+    /**
+     * The list of required questions for the information request
+     */
+    public InformationRequest withRequiredQuestions(Optional<? extends List<RequiredQuestions>> requiredQuestions) {
+        Utils.checkNotNull(requiredQuestions, "requiredQuestions");
+        this.requiredQuestions = requiredQuestions;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -240,14 +279,15 @@ public class InformationRequest {
             Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.type, other.type) &&
             Utils.enhancedDeepEquals(this.status, other.status) &&
-            Utils.enhancedDeepEquals(this.blockingPayroll, other.blockingPayroll);
+            Utils.enhancedDeepEquals(this.blockingPayroll, other.blockingPayroll) &&
+            Utils.enhancedDeepEquals(this.requiredQuestions, other.requiredQuestions);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             uuid, companyUuid, type,
-            status, blockingPayroll);
+            status, blockingPayroll, requiredQuestions);
     }
     
     @Override
@@ -257,7 +297,8 @@ public class InformationRequest {
                 "companyUuid", companyUuid,
                 "type", type,
                 "status", status,
-                "blockingPayroll", blockingPayroll);
+                "blockingPayroll", blockingPayroll,
+                "requiredQuestions", requiredQuestions);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -272,6 +313,8 @@ public class InformationRequest {
         private Optional<? extends InformationRequestStatus> status = Optional.empty();
 
         private Optional<Boolean> blockingPayroll = Optional.empty();
+
+        private Optional<? extends List<RequiredQuestions>> requiredQuestions = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -374,11 +417,30 @@ public class InformationRequest {
             return this;
         }
 
+
+        /**
+         * The list of required questions for the information request
+         */
+        public Builder requiredQuestions(List<RequiredQuestions> requiredQuestions) {
+            Utils.checkNotNull(requiredQuestions, "requiredQuestions");
+            this.requiredQuestions = Optional.ofNullable(requiredQuestions);
+            return this;
+        }
+
+        /**
+         * The list of required questions for the information request
+         */
+        public Builder requiredQuestions(Optional<? extends List<RequiredQuestions>> requiredQuestions) {
+            Utils.checkNotNull(requiredQuestions, "requiredQuestions");
+            this.requiredQuestions = requiredQuestions;
+            return this;
+        }
+
         public InformationRequest build() {
 
             return new InformationRequest(
                 uuid, companyUuid, type,
-                status, blockingPayroll);
+                status, blockingPayroll, requiredQuestions);
         }
 
     }

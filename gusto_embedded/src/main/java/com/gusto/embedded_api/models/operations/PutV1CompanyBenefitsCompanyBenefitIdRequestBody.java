@@ -12,7 +12,9 @@ import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class PutV1CompanyBenefitsCompanyBenefitIdRequestBody {
@@ -41,22 +43,34 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequestBody {
     @JsonProperty("description")
     private Optional<String> description;
 
+    /**
+     * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0
+     * Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("catch_up_type")
+    private JsonNullable<? extends PutV1CompanyBenefitsCompanyBenefitIdCatchUpType> catchUpType;
+
     @JsonCreator
     public PutV1CompanyBenefitsCompanyBenefitIdRequestBody(
             @JsonProperty("version") String version,
             @JsonProperty("active") Optional<Boolean> active,
-            @JsonProperty("description") Optional<String> description) {
+            @JsonProperty("description") Optional<String> description,
+            @JsonProperty("catch_up_type") JsonNullable<? extends PutV1CompanyBenefitsCompanyBenefitIdCatchUpType> catchUpType) {
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(active, "active");
         Utils.checkNotNull(description, "description");
+        Utils.checkNotNull(catchUpType, "catchUpType");
         this.version = version;
         this.active = active;
         this.description = description;
+        this.catchUpType = catchUpType;
     }
     
     public PutV1CompanyBenefitsCompanyBenefitIdRequestBody(
             String version) {
-        this(version, Optional.empty(), Optional.empty());
+        this(version, Optional.empty(), Optional.empty(),
+            JsonNullable.undefined());
     }
 
     /**
@@ -86,6 +100,16 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequestBody {
     @JsonIgnore
     public Optional<String> description() {
         return description;
+    }
+
+    /**
+     * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0
+     * Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public JsonNullable<PutV1CompanyBenefitsCompanyBenefitIdCatchUpType> catchUpType() {
+        return (JsonNullable<PutV1CompanyBenefitsCompanyBenefitIdCatchUpType>) catchUpType;
     }
 
     public static Builder builder() {
@@ -148,6 +172,26 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequestBody {
         return this;
     }
 
+    /**
+     * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0
+     * Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+     */
+    public PutV1CompanyBenefitsCompanyBenefitIdRequestBody withCatchUpType(PutV1CompanyBenefitsCompanyBenefitIdCatchUpType catchUpType) {
+        Utils.checkNotNull(catchUpType, "catchUpType");
+        this.catchUpType = JsonNullable.of(catchUpType);
+        return this;
+    }
+
+    /**
+     * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0
+     * Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+     */
+    public PutV1CompanyBenefitsCompanyBenefitIdRequestBody withCatchUpType(JsonNullable<? extends PutV1CompanyBenefitsCompanyBenefitIdCatchUpType> catchUpType) {
+        Utils.checkNotNull(catchUpType, "catchUpType");
+        this.catchUpType = catchUpType;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -160,13 +204,15 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequestBody {
         return 
             Utils.enhancedDeepEquals(this.version, other.version) &&
             Utils.enhancedDeepEquals(this.active, other.active) &&
-            Utils.enhancedDeepEquals(this.description, other.description);
+            Utils.enhancedDeepEquals(this.description, other.description) &&
+            Utils.enhancedDeepEquals(this.catchUpType, other.catchUpType);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            version, active, description);
+            version, active, description,
+            catchUpType);
     }
     
     @Override
@@ -174,7 +220,8 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequestBody {
         return Utils.toString(PutV1CompanyBenefitsCompanyBenefitIdRequestBody.class,
                 "version", version,
                 "active", active,
-                "description", description);
+                "description", description,
+                "catchUpType", catchUpType);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -185,6 +232,8 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequestBody {
         private Optional<Boolean> active = Optional.empty();
 
         private Optional<String> description = Optional.empty();
+
+        private JsonNullable<? extends PutV1CompanyBenefitsCompanyBenefitIdCatchUpType> catchUpType = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -246,10 +295,32 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequestBody {
             return this;
         }
 
+
+        /**
+         * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0
+         * Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+         */
+        public Builder catchUpType(PutV1CompanyBenefitsCompanyBenefitIdCatchUpType catchUpType) {
+            Utils.checkNotNull(catchUpType, "catchUpType");
+            this.catchUpType = JsonNullable.of(catchUpType);
+            return this;
+        }
+
+        /**
+         * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0
+         * Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+         */
+        public Builder catchUpType(JsonNullable<? extends PutV1CompanyBenefitsCompanyBenefitIdCatchUpType> catchUpType) {
+            Utils.checkNotNull(catchUpType, "catchUpType");
+            this.catchUpType = catchUpType;
+            return this;
+        }
+
         public PutV1CompanyBenefitsCompanyBenefitIdRequestBody build() {
 
             return new PutV1CompanyBenefitsCompanyBenefitIdRequestBody(
-                version, active, description);
+                version, active, description,
+                catchUpType);
         }
 
     }

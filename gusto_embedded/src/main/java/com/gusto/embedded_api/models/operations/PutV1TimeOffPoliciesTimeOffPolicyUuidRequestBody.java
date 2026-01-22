@@ -13,40 +13,36 @@ import java.lang.Boolean;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody
  * 
- * <p>Request body for creating or updating a time off policy
+ * <p>Request body for updating a time off policy
  */
 public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
     /**
-     * The current version of the object. See the [versioning
-     * guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this
-     * field.
-     */
-    @JsonProperty("version")
-    private String version;
-
-    /**
      * Name of the time off policy
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
-    private String name;
+    private Optional<String> name;
 
     /**
      * Type of the time off policy. Currently only "vacation" and "sick" are supported
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("policy_type")
-    private PolicyType policyType;
+    private Optional<? extends PolicyType> policyType;
 
     /**
      * Accrual method of the time off policy
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("accrual_method")
-    private AccrualMethod accrualMethod;
+    private Optional<? extends AccrualMethod> accrualMethod;
 
     /**
      * The rate at which the time off hours will accrue for an employee on the policy. Represented as a
@@ -61,7 +57,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
      * accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime,
      * per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g.
      * 
-     * <p>"40.0".. Represented as a float, e.g. "40.0".
+     * <p>"40.0".
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("accrual_rate_unit")
@@ -122,12 +118,19 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
     @JsonProperty("complete")
     private Optional<Boolean> complete;
 
+    /**
+     * The current version of the object. See the [versioning
+     * guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this
+     * field.
+     */
+    @JsonProperty("version")
+    private String version;
+
     @JsonCreator
     public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody(
-            @JsonProperty("version") String version,
-            @JsonProperty("name") String name,
-            @JsonProperty("policy_type") PolicyType policyType,
-            @JsonProperty("accrual_method") AccrualMethod accrualMethod,
+            @JsonProperty("name") Optional<String> name,
+            @JsonProperty("policy_type") Optional<? extends PolicyType> policyType,
+            @JsonProperty("accrual_method") Optional<? extends AccrualMethod> accrualMethod,
             @JsonProperty("accrual_rate") JsonNullable<String> accrualRate,
             @JsonProperty("accrual_rate_unit") JsonNullable<String> accrualRateUnit,
             @JsonProperty("paid_out_on_termination") Optional<Boolean> paidOutOnTermination,
@@ -136,8 +139,8 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
             @JsonProperty("max_accrual_hours_per_year") JsonNullable<String> maxAccrualHoursPerYear,
             @JsonProperty("max_hours") JsonNullable<String> maxHours,
             @JsonProperty("policy_reset_date") JsonNullable<String> policyResetDate,
-            @JsonProperty("complete") Optional<Boolean> complete) {
-        Utils.checkNotNull(version, "version");
+            @JsonProperty("complete") Optional<Boolean> complete,
+            @JsonProperty("version") String version) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(policyType, "policyType");
         Utils.checkNotNull(accrualMethod, "accrualMethod");
@@ -150,7 +153,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
         Utils.checkNotNull(maxHours, "maxHours");
         Utils.checkNotNull(policyResetDate, "policyResetDate");
         Utils.checkNotNull(complete, "complete");
-        this.version = version;
+        Utils.checkNotNull(version, "version");
         this.name = name;
         this.policyType = policyType;
         this.accrualMethod = accrualMethod;
@@ -163,52 +166,42 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
         this.maxHours = maxHours;
         this.policyResetDate = policyResetDate;
         this.complete = complete;
+        this.version = version;
     }
     
     public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody(
-            String version,
-            String name,
-            PolicyType policyType,
-            AccrualMethod accrualMethod) {
-        this(version, name, policyType,
-            accrualMethod, JsonNullable.undefined(), JsonNullable.undefined(),
-            Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
+            String version) {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
-            Optional.empty());
-    }
-
-    /**
-     * The current version of the object. See the [versioning
-     * guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this
-     * field.
-     */
-    @JsonIgnore
-    public String version() {
-        return version;
+            JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
+            version);
     }
 
     /**
      * Name of the time off policy
      */
     @JsonIgnore
-    public String name() {
+    public Optional<String> name() {
         return name;
     }
 
     /**
      * Type of the time off policy. Currently only "vacation" and "sick" are supported
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public PolicyType policyType() {
-        return policyType;
+    public Optional<PolicyType> policyType() {
+        return (Optional<PolicyType>) policyType;
     }
 
     /**
      * Accrual method of the time off policy
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public AccrualMethod accrualMethod() {
-        return accrualMethod;
+    public Optional<AccrualMethod> accrualMethod() {
+        return (Optional<AccrualMethod>) accrualMethod;
     }
 
     /**
@@ -225,7 +218,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
      * accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime,
      * per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g.
      * 
-     * <p>"40.0".. Represented as a float, e.g. "40.0".
+     * <p>"40.0".
      */
     @JsonIgnore
     public JsonNullable<String> accrualRateUnit() {
@@ -294,26 +287,35 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
         return complete;
     }
 
+    /**
+     * The current version of the object. See the [versioning
+     * guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this
+     * field.
+     */
+    @JsonIgnore
+    public String version() {
+        return version;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
 
     /**
-     * The current version of the object. See the [versioning
-     * guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this
-     * field.
+     * Name of the time off policy
      */
-    public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody withVersion(String version) {
-        Utils.checkNotNull(version, "version");
-        this.version = version;
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody withName(String name) {
+        Utils.checkNotNull(name, "name");
+        this.name = Optional.ofNullable(name);
         return this;
     }
+
 
     /**
      * Name of the time off policy
      */
-    public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody withName(String name) {
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
@@ -324,6 +326,16 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
      */
     public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody withPolicyType(PolicyType policyType) {
         Utils.checkNotNull(policyType, "policyType");
+        this.policyType = Optional.ofNullable(policyType);
+        return this;
+    }
+
+
+    /**
+     * Type of the time off policy. Currently only "vacation" and "sick" are supported
+     */
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody withPolicyType(Optional<? extends PolicyType> policyType) {
+        Utils.checkNotNull(policyType, "policyType");
         this.policyType = policyType;
         return this;
     }
@@ -332,6 +344,16 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
      * Accrual method of the time off policy
      */
     public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody withAccrualMethod(AccrualMethod accrualMethod) {
+        Utils.checkNotNull(accrualMethod, "accrualMethod");
+        this.accrualMethod = Optional.ofNullable(accrualMethod);
+        return this;
+    }
+
+
+    /**
+     * Accrual method of the time off policy
+     */
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody withAccrualMethod(Optional<? extends AccrualMethod> accrualMethod) {
         Utils.checkNotNull(accrualMethod, "accrualMethod");
         this.accrualMethod = accrualMethod;
         return this;
@@ -362,7 +384,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
      * accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime,
      * per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g.
      * 
-     * <p>"40.0".. Represented as a float, e.g. "40.0".
+     * <p>"40.0".
      */
     public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody withAccrualRateUnit(String accrualRateUnit) {
         Utils.checkNotNull(accrualRateUnit, "accrualRateUnit");
@@ -375,7 +397,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
      * accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime,
      * per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g.
      * 
-     * <p>"40.0".. Represented as a float, e.g. "40.0".
+     * <p>"40.0".
      */
     public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody withAccrualRateUnit(JsonNullable<String> accrualRateUnit) {
         Utils.checkNotNull(accrualRateUnit, "accrualRateUnit");
@@ -523,6 +545,17 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
         return this;
     }
 
+    /**
+     * The current version of the object. See the [versioning
+     * guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this
+     * field.
+     */
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody withVersion(String version) {
+        Utils.checkNotNull(version, "version");
+        this.version = version;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -533,7 +566,6 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
         }
         PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody other = (PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody) o;
         return 
-            Utils.enhancedDeepEquals(this.version, other.version) &&
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.policyType, other.policyType) &&
             Utils.enhancedDeepEquals(this.accrualMethod, other.accrualMethod) &&
@@ -545,23 +577,23 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
             Utils.enhancedDeepEquals(this.maxAccrualHoursPerYear, other.maxAccrualHoursPerYear) &&
             Utils.enhancedDeepEquals(this.maxHours, other.maxHours) &&
             Utils.enhancedDeepEquals(this.policyResetDate, other.policyResetDate) &&
-            Utils.enhancedDeepEquals(this.complete, other.complete);
+            Utils.enhancedDeepEquals(this.complete, other.complete) &&
+            Utils.enhancedDeepEquals(this.version, other.version);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            version, name, policyType,
-            accrualMethod, accrualRate, accrualRateUnit,
-            paidOutOnTermination, accrualWaitingPeriodDays, carryoverLimitHours,
-            maxAccrualHoursPerYear, maxHours, policyResetDate,
-            complete);
+            name, policyType, accrualMethod,
+            accrualRate, accrualRateUnit, paidOutOnTermination,
+            accrualWaitingPeriodDays, carryoverLimitHours, maxAccrualHoursPerYear,
+            maxHours, policyResetDate, complete,
+            version);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody.class,
-                "version", version,
                 "name", name,
                 "policyType", policyType,
                 "accrualMethod", accrualMethod,
@@ -573,19 +605,18 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
                 "maxAccrualHoursPerYear", maxAccrualHoursPerYear,
                 "maxHours", maxHours,
                 "policyResetDate", policyResetDate,
-                "complete", complete);
+                "complete", complete,
+                "version", version);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String version;
+        private Optional<String> name = Optional.empty();
 
-        private String name;
+        private Optional<? extends PolicyType> policyType = Optional.empty();
 
-        private PolicyType policyType;
-
-        private AccrualMethod accrualMethod;
+        private Optional<? extends AccrualMethod> accrualMethod = Optional.empty();
 
         private JsonNullable<String> accrualRate = JsonNullable.undefined();
 
@@ -605,20 +636,10 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
 
         private Optional<Boolean> complete = Optional.empty();
 
+        private String version;
+
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The current version of the object. See the [versioning
-         * guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this
-         * field.
-         */
-        public Builder version(String version) {
-            Utils.checkNotNull(version, "version");
-            this.version = version;
-            return this;
         }
 
 
@@ -626,6 +647,15 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
          * Name of the time off policy
          */
         public Builder name(String name) {
+            Utils.checkNotNull(name, "name");
+            this.name = Optional.ofNullable(name);
+            return this;
+        }
+
+        /**
+         * Name of the time off policy
+         */
+        public Builder name(Optional<String> name) {
             Utils.checkNotNull(name, "name");
             this.name = name;
             return this;
@@ -637,6 +667,15 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
          */
         public Builder policyType(PolicyType policyType) {
             Utils.checkNotNull(policyType, "policyType");
+            this.policyType = Optional.ofNullable(policyType);
+            return this;
+        }
+
+        /**
+         * Type of the time off policy. Currently only "vacation" and "sick" are supported
+         */
+        public Builder policyType(Optional<? extends PolicyType> policyType) {
+            Utils.checkNotNull(policyType, "policyType");
             this.policyType = policyType;
             return this;
         }
@@ -646,6 +685,15 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
          * Accrual method of the time off policy
          */
         public Builder accrualMethod(AccrualMethod accrualMethod) {
+            Utils.checkNotNull(accrualMethod, "accrualMethod");
+            this.accrualMethod = Optional.ofNullable(accrualMethod);
+            return this;
+        }
+
+        /**
+         * Accrual method of the time off policy
+         */
+        public Builder accrualMethod(Optional<? extends AccrualMethod> accrualMethod) {
             Utils.checkNotNull(accrualMethod, "accrualMethod");
             this.accrualMethod = accrualMethod;
             return this;
@@ -678,7 +726,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
          * accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime,
          * per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g.
          * 
-         * <p>"40.0".. Represented as a float, e.g. "40.0".
+         * <p>"40.0".
          */
         public Builder accrualRateUnit(String accrualRateUnit) {
             Utils.checkNotNull(accrualRateUnit, "accrualRateUnit");
@@ -691,7 +739,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
          * accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime,
          * per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g.
          * 
-         * <p>"40.0".. Represented as a float, e.g. "40.0".
+         * <p>"40.0".
          */
         public Builder accrualRateUnit(JsonNullable<String> accrualRateUnit) {
             Utils.checkNotNull(accrualRateUnit, "accrualRateUnit");
@@ -844,14 +892,26 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody {
             return this;
         }
 
+
+        /**
+         * The current version of the object. See the [versioning
+         * guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this
+         * field.
+         */
+        public Builder version(String version) {
+            Utils.checkNotNull(version, "version");
+            this.version = version;
+            return this;
+        }
+
         public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody build() {
 
             return new PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody(
-                version, name, policyType,
-                accrualMethod, accrualRate, accrualRateUnit,
-                paidOutOnTermination, accrualWaitingPeriodDays, carryoverLimitHours,
-                maxAccrualHoursPerYear, maxHours, policyResetDate,
-                complete);
+                name, policyType, accrualMethod,
+                accrualRate, accrualRateUnit, paidOutOnTermination,
+                accrualWaitingPeriodDays, carryoverLimitHours, maxAccrualHoursPerYear,
+                maxHours, policyResetDate, complete,
+                version);
         }
 
     }

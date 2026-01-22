@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
-import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -30,13 +29,13 @@ public class Answers {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("valid_up_to")
-    private JsonNullable<? extends Object> validUpTo;
+    private JsonNullable<String> validUpTo;
 
     @JsonCreator
     public Answers(
             @JsonProperty("value") Optional<? extends EmployeeStateTaxesRequestValue> value,
             @JsonProperty("valid_from") String validFrom,
-            @JsonProperty("valid_up_to") JsonNullable<? extends Object> validUpTo) {
+            @JsonProperty("valid_up_to") JsonNullable<String> validUpTo) {
         Utils.checkNotNull(value, "value");
         Utils.checkNotNull(validFrom, "validFrom");
         Utils.checkNotNull(validUpTo, "validUpTo");
@@ -61,10 +60,9 @@ public class Answers {
         return validFrom;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<Object> validUpTo() {
-        return (JsonNullable<Object>) validUpTo;
+    public JsonNullable<String> validUpTo() {
+        return validUpTo;
     }
 
     public static Builder builder() {
@@ -91,13 +89,13 @@ public class Answers {
         return this;
     }
 
-    public Answers withValidUpTo(Object validUpTo) {
+    public Answers withValidUpTo(String validUpTo) {
         Utils.checkNotNull(validUpTo, "validUpTo");
         this.validUpTo = JsonNullable.of(validUpTo);
         return this;
     }
 
-    public Answers withValidUpTo(JsonNullable<? extends Object> validUpTo) {
+    public Answers withValidUpTo(JsonNullable<String> validUpTo) {
         Utils.checkNotNull(validUpTo, "validUpTo");
         this.validUpTo = validUpTo;
         return this;
@@ -139,7 +137,7 @@ public class Answers {
 
         private String validFrom;
 
-        private JsonNullable<? extends Object> validUpTo = JsonNullable.undefined();
+        private JsonNullable<String> validUpTo = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -166,13 +164,13 @@ public class Answers {
         }
 
 
-        public Builder validUpTo(Object validUpTo) {
+        public Builder validUpTo(String validUpTo) {
             Utils.checkNotNull(validUpTo, "validUpTo");
             this.validUpTo = JsonNullable.of(validUpTo);
             return this;
         }
 
-        public Builder validUpTo(JsonNullable<? extends Object> validUpTo) {
+        public Builder validUpTo(JsonNullable<String> validUpTo) {
             Utils.checkNotNull(validUpTo, "validUpTo");
             this.validUpTo = validUpTo;
             return this;

@@ -243,7 +243,7 @@ public class TimeOffPolicies {
      * <p>scope: `time_off_policies:write`
      * 
      * @param timeOffPolicyUuid The UUID of the time off policy
-     * @param requestBody Request body for creating or updating a time off policy
+     * @param requestBody Request body for updating a time off policy
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
@@ -260,7 +260,7 @@ public class TimeOffPolicies {
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param timeOffPolicyUuid The UUID of the time off policy
-     * @param requestBody Request body for creating or updating a time off policy
+     * @param requestBody Request body for updating a time off policy
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
@@ -352,7 +352,7 @@ public class TimeOffPolicies {
      * <p>scope: `time_off_policies:write`
      * 
      * @param companyUuid The UUID of the company
-     * @param timeOffPolicyRequest Request body for creating or updating a time off policy
+     * @param timeOffPolicyRequest Request body for creating a time off policy
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
@@ -369,7 +369,7 @@ public class TimeOffPolicies {
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
-     * @param timeOffPolicyRequest Request body for creating or updating a time off policy
+     * @param timeOffPolicyRequest Request body for creating a time off policy
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */

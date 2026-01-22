@@ -7,9 +7,14 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.GetInformationRequestsRequest;
+import com.gusto.embedded_api.models.operations.SubmitInformationRequestRequest;
+import com.gusto.embedded_api.models.operations.SubmitInformationRequestRequestBody;
 import com.gusto.embedded_api.models.operations.async.GetInformationRequestsRequestBuilder;
 import com.gusto.embedded_api.models.operations.async.GetInformationRequestsResponse;
+import com.gusto.embedded_api.models.operations.async.SubmitInformationRequestRequestBuilder;
+import com.gusto.embedded_api.models.operations.async.SubmitInformationRequestResponse;
 import com.gusto.embedded_api.operations.GetInformationRequests;
+import com.gusto.embedded_api.operations.SubmitInformationRequest;
 import com.gusto.embedded_api.utils.Headers;
 import java.lang.String;
 import java.util.Optional;
@@ -83,6 +88,48 @@ public class AsyncInformationRequests {
                 .build();
         AsyncRequestOperation<GetInformationRequestsRequest, GetInformationRequestsResponse> operation
               = new GetInformationRequests.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Submit information request responses
+     * 
+     * <p>Submit responses to an information request.
+     * Supports both text responses and file uploads (multipart/form-data).
+     * Maximum file size: 120MB.
+     * 
+     * <p>scope: `information_requests:write`
+     * 
+     * @return The async call builder
+     */
+    public SubmitInformationRequestRequestBuilder submit() {
+        return new SubmitInformationRequestRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Submit information request responses
+     * 
+     * <p>Submit responses to an information request.
+     * Supports both text responses and file uploads (multipart/form-data).
+     * Maximum file size: 120MB.
+     * 
+     * <p>scope: `information_requests:write`
+     * 
+     * @param informationRequestUuid The UUID of the information request
+     * @param requestBody 
+     * @return {@code CompletableFuture<SubmitInformationRequestResponse>} - The async response
+     */
+    public CompletableFuture<SubmitInformationRequestResponse> submit(String informationRequestUuid, SubmitInformationRequestRequestBody requestBody) {
+        SubmitInformationRequestRequest request =
+            SubmitInformationRequestRequest
+                .builder()
+                .informationRequestUuid(informationRequestUuid)
+                .requestBody(requestBody)
+                .build();
+        AsyncRequestOperation<SubmitInformationRequestRequest, SubmitInformationRequestResponse> operation
+              = new SubmitInformationRequest.Async(sdkConfiguration, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

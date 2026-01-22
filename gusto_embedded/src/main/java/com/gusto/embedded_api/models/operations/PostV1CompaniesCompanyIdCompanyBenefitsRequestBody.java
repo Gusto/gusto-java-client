@@ -15,7 +15,9 @@ import java.lang.Boolean;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
@@ -57,29 +59,40 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
     @JsonProperty("responsible_for_employee_w2")
     private Optional<Boolean> responsibleForEmployeeW2;
 
+    /**
+     * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0
+     * Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("catch_up_type")
+    private JsonNullable<? extends CatchUpType> catchUpType;
+
     @JsonCreator
     public PostV1CompaniesCompanyIdCompanyBenefitsRequestBody(
             @JsonProperty("benefit_type") Optional<Long> benefitType,
             @JsonProperty("active") Optional<Boolean> active,
             @JsonProperty("description") String description,
             @JsonProperty("responsible_for_employer_taxes") Optional<Boolean> responsibleForEmployerTaxes,
-            @JsonProperty("responsible_for_employee_w2") Optional<Boolean> responsibleForEmployeeW2) {
+            @JsonProperty("responsible_for_employee_w2") Optional<Boolean> responsibleForEmployeeW2,
+            @JsonProperty("catch_up_type") JsonNullable<? extends CatchUpType> catchUpType) {
         Utils.checkNotNull(benefitType, "benefitType");
         Utils.checkNotNull(active, "active");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(responsibleForEmployerTaxes, "responsibleForEmployerTaxes");
         Utils.checkNotNull(responsibleForEmployeeW2, "responsibleForEmployeeW2");
+        Utils.checkNotNull(catchUpType, "catchUpType");
         this.benefitType = benefitType;
         this.active = active;
         this.description = description;
         this.responsibleForEmployerTaxes = responsibleForEmployerTaxes;
         this.responsibleForEmployeeW2 = responsibleForEmployeeW2;
+        this.catchUpType = catchUpType;
     }
     
     public PostV1CompaniesCompanyIdCompanyBenefitsRequestBody(
             String description) {
         this(Optional.empty(), Optional.empty(), description,
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), JsonNullable.undefined());
     }
 
     /**
@@ -124,6 +137,16 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
     @JsonIgnore
     public Optional<Boolean> responsibleForEmployeeW2() {
         return responsibleForEmployeeW2;
+    }
+
+    /**
+     * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0
+     * Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public JsonNullable<CatchUpType> catchUpType() {
+        return (JsonNullable<CatchUpType>) catchUpType;
     }
 
     public static Builder builder() {
@@ -222,6 +245,26 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
         return this;
     }
 
+    /**
+     * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0
+     * Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+     */
+    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBody withCatchUpType(CatchUpType catchUpType) {
+        Utils.checkNotNull(catchUpType, "catchUpType");
+        this.catchUpType = JsonNullable.of(catchUpType);
+        return this;
+    }
+
+    /**
+     * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0
+     * Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+     */
+    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBody withCatchUpType(JsonNullable<? extends CatchUpType> catchUpType) {
+        Utils.checkNotNull(catchUpType, "catchUpType");
+        this.catchUpType = catchUpType;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -236,14 +279,15 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
             Utils.enhancedDeepEquals(this.active, other.active) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.responsibleForEmployerTaxes, other.responsibleForEmployerTaxes) &&
-            Utils.enhancedDeepEquals(this.responsibleForEmployeeW2, other.responsibleForEmployeeW2);
+            Utils.enhancedDeepEquals(this.responsibleForEmployeeW2, other.responsibleForEmployeeW2) &&
+            Utils.enhancedDeepEquals(this.catchUpType, other.catchUpType);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             benefitType, active, description,
-            responsibleForEmployerTaxes, responsibleForEmployeeW2);
+            responsibleForEmployerTaxes, responsibleForEmployeeW2, catchUpType);
     }
     
     @Override
@@ -253,7 +297,8 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
                 "active", active,
                 "description", description,
                 "responsibleForEmployerTaxes", responsibleForEmployerTaxes,
-                "responsibleForEmployeeW2", responsibleForEmployeeW2);
+                "responsibleForEmployeeW2", responsibleForEmployeeW2,
+                "catchUpType", catchUpType);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -268,6 +313,8 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
         private Optional<Boolean> responsibleForEmployerTaxes = Optional.empty();
 
         private Optional<Boolean> responsibleForEmployeeW2 = Optional.empty();
+
+        private JsonNullable<? extends CatchUpType> catchUpType = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -365,6 +412,27 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
             return this;
         }
 
+
+        /**
+         * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0
+         * Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+         */
+        public Builder catchUpType(CatchUpType catchUpType) {
+            Utils.checkNotNull(catchUpType, "catchUpType");
+            this.catchUpType = JsonNullable.of(catchUpType);
+            return this;
+        }
+
+        /**
+         * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0
+         * Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+         */
+        public Builder catchUpType(JsonNullable<? extends CatchUpType> catchUpType) {
+            Utils.checkNotNull(catchUpType, "catchUpType");
+            this.catchUpType = catchUpType;
+            return this;
+        }
+
         public PostV1CompaniesCompanyIdCompanyBenefitsRequestBody build() {
             if (active == null) {
                 active = _SINGLETON_VALUE_Active.value();
@@ -372,7 +440,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBody {
 
             return new PostV1CompaniesCompanyIdCompanyBenefitsRequestBody(
                 benefitType, active, description,
-                responsibleForEmployerTaxes, responsibleForEmployeeW2);
+                responsibleForEmployerTaxes, responsibleForEmployeeW2, catchUpType);
         }
 
 

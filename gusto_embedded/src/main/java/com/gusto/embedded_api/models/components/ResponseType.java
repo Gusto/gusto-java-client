@@ -9,19 +9,19 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * ContractorPaymentMethod1
+ * ResponseType
  * 
- * <p>The contractor's payment method.
+ * <p>The type of response to the question
  */
-public enum ContractorPaymentMethod1 {
-    DIRECT_DEPOSIT("Direct Deposit"),
-    CHECK("Check"),
-    NULL("null");
+public enum ResponseType {
+    TEXT("text"),
+    DOCUMENT("document"),
+    PERSONA("persona");
 
     @JsonValue
     private final String value;
 
-    ContractorPaymentMethod1(String value) {
+    ResponseType(String value) {
         this.value = value;
     }
     
@@ -29,8 +29,8 @@ public enum ContractorPaymentMethod1 {
         return value;
     }
     
-    public static Optional<ContractorPaymentMethod1> fromValue(String value) {
-        for (ContractorPaymentMethod1 o: ContractorPaymentMethod1.values()) {
+    public static Optional<ResponseType> fromValue(String value) {
+        for (ResponseType o: ResponseType.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

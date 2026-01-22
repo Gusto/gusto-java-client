@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.gusto:embedded-api:0.3.0'
+implementation 'com.gusto:embedded-api:0.3.1'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>com.gusto</groupId>
     <artifactId>embedded-api</artifactId>
-    <version>0.3.0</version>
+    <version>0.3.1</version>
 </dependency>
 ```
 
@@ -592,6 +592,7 @@ public class Application {
 ### [InformationRequests](docs/sdks/informationrequests/README.md)
 
 * [getInformationRequests](docs/sdks/informationrequests/README.md#getinformationrequests) - Get all information requests for a company
+* [submit](docs/sdks/informationrequests/README.md#submit) - Submit information request responses
 
 ### [Introspection](docs/sdks/introspection/README.md)
 
@@ -857,12 +858,12 @@ public class Application {
 many more subclasses in the JDK platform).
 
 **Inherit from [`GustoEmbeddedException`](./src/main/java/models/errors/GustoEmbeddedException.java)**:
-* [`com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject.java): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 163 of 276 methods.*
-* [`com.gusto.embedded_api.models.errors.NotFoundErrorObject`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.NotFoundErrorObject.java): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 276 methods.*
-* [`com.gusto.embedded_api.models.errors.PostV1CompaniesCompanyIdPeopleBatchesResponseBody`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.PostV1CompaniesCompanyIdPeopleBatchesResponseBody.java): conflict - idempotency key already used. Status code `409`. Applicable to 1 of 276 methods.*
-* [`com.gusto.embedded_api.models.errors.GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody.java): Unprocessable Entity (WebDAV). Status code `422`. Applicable to 1 of 276 methods.*
-* [`com.gusto.embedded_api.models.errors.DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody.java): Unprocessable Entity. Status code `422`. Applicable to 1 of 276 methods.*
-* [`com.gusto.embedded_api.models.errors.CompanySuspensionCreationErrors`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.CompanySuspensionCreationErrors.java): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 276 methods.*
+* [`com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject.java): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 164 of 277 methods.*
+* [`com.gusto.embedded_api.models.errors.NotFoundErrorObject`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.NotFoundErrorObject.java): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 277 methods.*
+* [`com.gusto.embedded_api.models.errors.PostV1CompaniesCompanyIdPeopleBatchesResponseBody`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.PostV1CompaniesCompanyIdPeopleBatchesResponseBody.java): conflict - idempotency key already used. Status code `409`. Applicable to 1 of 277 methods.*
+* [`com.gusto.embedded_api.models.errors.GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody.java): Unprocessable Entity (WebDAV). Status code `422`. Applicable to 1 of 277 methods.*
+* [`com.gusto.embedded_api.models.errors.DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody.java): Unprocessable Entity. Status code `422`. Applicable to 1 of 277 methods.*
+* [`com.gusto.embedded_api.models.errors.CompanySuspensionCreationErrors`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.CompanySuspensionCreationErrors.java): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 277 methods.*
 
 
 </details>
