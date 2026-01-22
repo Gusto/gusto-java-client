@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
-import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -37,13 +36,13 @@ public class EmployeeStateTaxAnswer {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("valid_up_to")
-    private JsonNullable<? extends Object> validUpTo;
+    private JsonNullable<String> validUpTo;
 
     @JsonCreator
     public EmployeeStateTaxAnswer(
             @JsonProperty("value") JsonNullable<? extends Value> value,
             @JsonProperty("valid_from") Optional<String> validFrom,
-            @JsonProperty("valid_up_to") JsonNullable<? extends Object> validUpTo) {
+            @JsonProperty("valid_up_to") JsonNullable<String> validUpTo) {
         Utils.checkNotNull(value, "value");
         Utils.checkNotNull(validFrom, "validFrom");
         Utils.checkNotNull(validUpTo, "validUpTo");
@@ -76,10 +75,9 @@ public class EmployeeStateTaxAnswer {
     /**
      * The effective end date of the answer - currently always null.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<Object> validUpTo() {
-        return (JsonNullable<Object>) validUpTo;
+    public JsonNullable<String> validUpTo() {
+        return validUpTo;
     }
 
     public static Builder builder() {
@@ -127,7 +125,7 @@ public class EmployeeStateTaxAnswer {
     /**
      * The effective end date of the answer - currently always null.
      */
-    public EmployeeStateTaxAnswer withValidUpTo(Object validUpTo) {
+    public EmployeeStateTaxAnswer withValidUpTo(String validUpTo) {
         Utils.checkNotNull(validUpTo, "validUpTo");
         this.validUpTo = JsonNullable.of(validUpTo);
         return this;
@@ -136,7 +134,7 @@ public class EmployeeStateTaxAnswer {
     /**
      * The effective end date of the answer - currently always null.
      */
-    public EmployeeStateTaxAnswer withValidUpTo(JsonNullable<? extends Object> validUpTo) {
+    public EmployeeStateTaxAnswer withValidUpTo(JsonNullable<String> validUpTo) {
         Utils.checkNotNull(validUpTo, "validUpTo");
         this.validUpTo = validUpTo;
         return this;
@@ -178,7 +176,7 @@ public class EmployeeStateTaxAnswer {
 
         private Optional<String> validFrom = Optional.empty();
 
-        private JsonNullable<? extends Object> validUpTo = JsonNullable.undefined();
+        private JsonNullable<String> validUpTo = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -226,7 +224,7 @@ public class EmployeeStateTaxAnswer {
         /**
          * The effective end date of the answer - currently always null.
          */
-        public Builder validUpTo(Object validUpTo) {
+        public Builder validUpTo(String validUpTo) {
             Utils.checkNotNull(validUpTo, "validUpTo");
             this.validUpTo = JsonNullable.of(validUpTo);
             return this;
@@ -235,7 +233,7 @@ public class EmployeeStateTaxAnswer {
         /**
          * The effective end date of the answer - currently always null.
          */
-        public Builder validUpTo(JsonNullable<? extends Object> validUpTo) {
+        public Builder validUpTo(JsonNullable<String> validUpTo) {
             Utils.checkNotNull(validUpTo, "validUpTo");
             this.validUpTo = validUpTo;
             return this;

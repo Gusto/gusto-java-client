@@ -19,7 +19,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /**
  * TimeOffPolicyRequest
  * 
- * <p>Request body for creating or updating a time off policy
+ * <p>Request body for creating a time off policy
  */
 public class TimeOffPolicyRequest {
     /**
@@ -53,7 +53,7 @@ public class TimeOffPolicyRequest {
      * accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime,
      * per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g.
      * 
-     * <p>"40.0".. Represented as a float, e.g. "40.0".
+     * <p>"40.0".
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("accrual_rate_unit")
@@ -202,7 +202,7 @@ public class TimeOffPolicyRequest {
      * accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime,
      * per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g.
      * 
-     * <p>"40.0".. Represented as a float, e.g. "40.0".
+     * <p>"40.0".
      */
     @JsonIgnore
     public JsonNullable<String> accrualRateUnit() {
@@ -328,7 +328,7 @@ public class TimeOffPolicyRequest {
      * accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime,
      * per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g.
      * 
-     * <p>"40.0".. Represented as a float, e.g. "40.0".
+     * <p>"40.0".
      */
     public TimeOffPolicyRequest withAccrualRateUnit(String accrualRateUnit) {
         Utils.checkNotNull(accrualRateUnit, "accrualRateUnit");
@@ -341,7 +341,7 @@ public class TimeOffPolicyRequest {
      * accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime,
      * per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g.
      * 
-     * <p>"40.0".. Represented as a float, e.g. "40.0".
+     * <p>"40.0".
      */
     public TimeOffPolicyRequest withAccrualRateUnit(JsonNullable<String> accrualRateUnit) {
         Utils.checkNotNull(accrualRateUnit, "accrualRateUnit");
@@ -627,7 +627,7 @@ public class TimeOffPolicyRequest {
          * accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime,
          * per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g.
          * 
-         * <p>"40.0".. Represented as a float, e.g. "40.0".
+         * <p>"40.0".
          */
         public Builder accrualRateUnit(String accrualRateUnit) {
             Utils.checkNotNull(accrualRateUnit, "accrualRateUnit");
@@ -640,7 +640,7 @@ public class TimeOffPolicyRequest {
          * accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime,
          * per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g.
          * 
-         * <p>"40.0".. Represented as a float, e.g. "40.0".
+         * <p>"40.0".
          */
         public Builder accrualRateUnit(JsonNullable<String> accrualRateUnit) {
             Utils.checkNotNull(accrualRateUnit, "accrualRateUnit");

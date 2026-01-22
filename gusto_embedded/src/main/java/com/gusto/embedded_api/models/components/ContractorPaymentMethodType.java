@@ -16,7 +16,8 @@ import java.util.Optional;
  */
 public enum ContractorPaymentMethodType {
     DIRECT_DEPOSIT("Direct Deposit"),
-    CHECK("Check");
+    CHECK("Check"),
+    NULL("null");
 
     @JsonValue
     private final String value;

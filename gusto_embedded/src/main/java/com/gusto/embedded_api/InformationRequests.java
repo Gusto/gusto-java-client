@@ -9,7 +9,12 @@ import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.GetInformationRequestsRequest;
 import com.gusto.embedded_api.models.operations.GetInformationRequestsRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetInformationRequestsResponse;
+import com.gusto.embedded_api.models.operations.SubmitInformationRequestRequest;
+import com.gusto.embedded_api.models.operations.SubmitInformationRequestRequestBody;
+import com.gusto.embedded_api.models.operations.SubmitInformationRequestRequestBuilder;
+import com.gusto.embedded_api.models.operations.SubmitInformationRequestResponse;
 import com.gusto.embedded_api.operations.GetInformationRequests;
+import com.gusto.embedded_api.operations.SubmitInformationRequest;
 import com.gusto.embedded_api.utils.Headers;
 import java.lang.String;
 import java.util.Optional;
@@ -83,6 +88,47 @@ public class InformationRequests {
                 .build();
         RequestOperation<GetInformationRequestsRequest, GetInformationRequestsResponse> operation
               = new GetInformationRequests.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Submit information request responses
+     * 
+     * <p>Submit responses to an information request.
+     * Supports both text responses and file uploads (multipart/form-data).
+     * Maximum file size: 120MB.
+     * 
+     * <p>scope: `information_requests:write`
+     * 
+     * @return The call builder
+     */
+    public SubmitInformationRequestRequestBuilder submit() {
+        return new SubmitInformationRequestRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Submit information request responses
+     * 
+     * <p>Submit responses to an information request.
+     * Supports both text responses and file uploads (multipart/form-data).
+     * Maximum file size: 120MB.
+     * 
+     * <p>scope: `information_requests:write`
+     * 
+     * @param informationRequestUuid The UUID of the information request
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public SubmitInformationRequestResponse submit(String informationRequestUuid, SubmitInformationRequestRequestBody requestBody) {
+        SubmitInformationRequestRequest request =
+            SubmitInformationRequestRequest
+                .builder()
+                .informationRequestUuid(informationRequestUuid)
+                .requestBody(requestBody)
+                .build();
+        RequestOperation<SubmitInformationRequestRequest, SubmitInformationRequestResponse> operation
+              = new SubmitInformationRequest.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

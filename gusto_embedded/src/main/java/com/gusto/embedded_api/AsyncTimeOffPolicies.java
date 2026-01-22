@@ -246,7 +246,7 @@ public class AsyncTimeOffPolicies {
      * <p>scope: `time_off_policies:write`
      * 
      * @param timeOffPolicyUuid The UUID of the time off policy
-     * @param requestBody Request body for creating or updating a time off policy
+     * @param requestBody Request body for updating a time off policy
      * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse>} - The async response
      */
     public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse> update(String timeOffPolicyUuid, PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody requestBody) {
@@ -262,7 +262,7 @@ public class AsyncTimeOffPolicies {
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param timeOffPolicyUuid The UUID of the time off policy
-     * @param requestBody Request body for creating or updating a time off policy
+     * @param requestBody Request body for updating a time off policy
      * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse>} - The async response
      */
     public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse> update(
@@ -355,7 +355,7 @@ public class AsyncTimeOffPolicies {
      * <p>scope: `time_off_policies:write`
      * 
      * @param companyUuid The UUID of the company
-     * @param timeOffPolicyRequest Request body for creating or updating a time off policy
+     * @param timeOffPolicyRequest Request body for creating a time off policy
      * @return {@code CompletableFuture<PostV1CompaniesCompanyUuidTimeOffPoliciesResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyUuidTimeOffPoliciesResponse> create(String companyUuid, TimeOffPolicyRequest timeOffPolicyRequest) {
@@ -371,7 +371,7 @@ public class AsyncTimeOffPolicies {
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
-     * @param timeOffPolicyRequest Request body for creating or updating a time off policy
+     * @param timeOffPolicyRequest Request body for creating a time off policy
      * @return {@code CompletableFuture<PostV1CompaniesCompanyUuidTimeOffPoliciesResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyUuidTimeOffPoliciesResponse> create(

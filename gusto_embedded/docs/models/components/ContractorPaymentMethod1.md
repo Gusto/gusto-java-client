@@ -9,3 +9,4 @@ The contractor's payment method.
 | ---------------- | ---------------- |
 | `DIRECT_DEPOSIT` | Direct Deposit   |
 | `CHECK`          | Check            |
+| `NULL`           | null             |

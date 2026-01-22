@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: 5d57a1bf-31fa-4bb7-8d47-6fe0473a6fda
 management:
-  docChecksum: 29d3b52bd1d8e19ff07eb3c20255aacd
+  docChecksum: be45802dc4ba00d65ab9a94525be8fd8
   docVersion: "2025-06-15"
-  speakeasyVersion: 1.685.0
-  generationVersion: 2.794.1
-  releaseVersion: 0.3.0
-  configChecksum: d5305e1fe4063b32a836c89ded3433df
+  speakeasyVersion: 1.692.0
+  generationVersion: 2.797.1
+  releaseVersion: 0.3.1
+  configChecksum: f71701f8b840034cc7a5a7871b5eb719
   repoURL: https://github.com/Gusto/gusto-java-client.git
   repoSubDirectory: gusto_embedded
 persistentEdits:
-  generation_id: b01c272e-6705-48f7-8338-67d225d4d2fd
-  pristine_commit_hash: 1f2c178cbb580072a5bcc4c03b8992f0fd127d22
-  pristine_tree_hash: 54394fd8b3b9ff965fbce17783bcb1fdb15279ef
+  generation_id: 37fd4065-5af7-4439-a753-f23542fe2217
+  pristine_commit_hash: 6dd323602367b90fa53d0884caf6b76b169a26c7
+  pristine_tree_hash: 3a7c7d1e9c9af7c83d521d2479531a4a6498d735
 features:
   java:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
     constsAndDefaults: 0.1.1
-    core: 3.55.7
-    deprecations: 2.81.1
+    core: 3.55.8
+    deprecations: 2.81.2
     downloadStreams: 0.1.1
     flattening: 2.81.1
     getRequestBodies: 2.81.1
@@ -103,8 +103,8 @@ trackedFiles:
     pristine_git_object: bbb815ff6d0692d1dcb52ae2fea64e1a14e3538a
   docs/models/components/Answers.md:
     id: 10d18224c68c
-    last_write_checksum: sha1:095070ac1c2c3a4b40b31a63088006143e7843cc
-    pristine_git_object: 6f7241f3a72801735d4d447bde14550f1296c97a
+    last_write_checksum: sha1:0ba98cc9ad50397318c53ccab7d78b750d024ac1
+    pristine_git_object: 775a250f1cfb813103ca7ffa8aacc0518609c265
   docs/models/components/ApplicableBenefits.md:
     id: 1b72e8c00114
     last_write_checksum: sha1:1eb04a6c06568dbed0751020369fd67fa600cb79
@@ -447,16 +447,16 @@ trackedFiles:
     pristine_git_object: ace68c395933b9e84001e78b384fb6b7dfbc0769
   docs/models/components/ContractorPaymentMethod1.md:
     id: 4c39b3dc87c3
-    last_write_checksum: sha1:32267030a681c2d455edebe77dedd8901755c66a
-    pristine_git_object: e6b4ec1a218d3d33213b8345784eb06e9cda5c45
+    last_write_checksum: sha1:c9ebe2b5761aa3d73f18f71245703092af7866e9
+    pristine_git_object: 65ae15fbb9638872e77717a6b20e035e5a5d2cb1
   docs/models/components/ContractorPaymentMethodSplitBy.md:
     id: d8d8f3aea0b0
     last_write_checksum: sha1:fc2efebb2e705194e62609662b7d8b5313af7385
     pristine_git_object: f5b9925fc04bd3cd84f4aa8cdec2a31b48d7b452
   docs/models/components/ContractorPaymentMethodType.md:
     id: a36252b915d1
-    last_write_checksum: sha1:f592314e0f05ff0b9438968077faa76d920710b9
-    pristine_git_object: 8878f32838fb6fae814bd4fc96d2e417e5718511
+    last_write_checksum: sha1:79b8dd0070e90ddf1190b89bcbb7ee23b1977b85
+    pristine_git_object: d1f048278fa6e34a6d790ef1cc9a760356734d95
   docs/models/components/ContractorPaymentPaymentMethod.md:
     id: 05342fcfe2c6
     last_write_checksum: sha1:daa66abb28cdd7c2e55490a30e7ac15e5dd1f461
@@ -783,8 +783,8 @@ trackedFiles:
     pristine_git_object: e3cb6a1aced24837aeaed4e6b77259ed98647188
   docs/models/components/EmployeeStateTaxAnswer.md:
     id: d7194d8cbfb4
-    last_write_checksum: sha1:225cf2d3d4ca67716154bd5ec79b929d040a7b60
-    pristine_git_object: f767edc37f1aba1dd4b92171932e6d3344b33c2a
+    last_write_checksum: sha1:2316f22b7fbcdb8a4b62fd65865ccf393d4c2883
+    pristine_git_object: 871b6ebc0082bec87ba71c562c716130eccd2710
   docs/models/components/EmployeeStateTaxInputQuestionFormat.md:
     id: a17d8bad920b
     last_write_checksum: sha1:04ea59c96c8bc13ae68f00a5be18130636bc4fa0
@@ -1083,8 +1083,8 @@ trackedFiles:
     pristine_git_object: e2c1c1a73a5363b4a50f7625b3aef9482ff76992
   docs/models/components/InformationRequest.md:
     id: 470109d2da90
-    last_write_checksum: sha1:2e262932a1d1355ccc4e1af0c9a962164f645ef5
-    pristine_git_object: ac45ddc85d189b4cd9f497068d10ba3d90c1249e
+    last_write_checksum: sha1:af0be8266a6fdc22b7fdf91906d0579d307d95d2
+    pristine_git_object: 1c639bc54cba3ff352f1cccf4b0ff0b05d274994
   docs/models/components/InformationRequestStatus.md:
     id: a7fb91cc6721
     last_write_checksum: sha1:9645b47be020067ad9f24eb8c6b53e776334a29b
@@ -1669,6 +1669,10 @@ trackedFiles:
     id: 5a3341555761
     last_write_checksum: sha1:f71dcbcd4fbb7ff6f24474dc0412b5844483bdf2
     pristine_git_object: df640bc94c6a0d8cbe1ae2da66a6f5f372fe8802
+  docs/models/components/RequiredQuestions.md:
+    id: 3f844f076f8c
+    last_write_checksum: sha1:abb438414e92479d76488e4675a87a73ca057cc4
+    pristine_git_object: ca4a863b9792b96a3152b1b5cf706c653b6a1c02
   docs/models/components/Requirements.md:
     id: 00fdaf4bd6ca
     last_write_checksum: sha1:2e596c261fe3b7b937d33640a4e8aef897f31135
@@ -1681,6 +1685,10 @@ trackedFiles:
     id: cf6417b7edbf
     last_write_checksum: sha1:42af4a14322d976c7e3e6e46ccd084dc0ee50fd0
     pristine_git_object: fc416b60a8e83a865b92b0e5e0b341f10cf0dc6d
+  docs/models/components/ResponseType.md:
+    id: d6966d83e0e9
+    last_write_checksum: sha1:7e36e2bd169578468e0d2ca0871141a27ae094f5
+    pristine_git_object: aab2d5c4eb385d4d11c94047e083af9dee0d3595
   docs/models/components/SalaryEstimate.md:
     id: 1c66ede3c4bb
     last_write_checksum: sha1:26bc300c61120ba5f5f88c9478f60873f5e15cd0
@@ -1827,8 +1835,8 @@ trackedFiles:
     pristine_git_object: cfa936464a830a009e87d29efd1bcf8a22996f0e
   docs/models/components/TimeOffPolicyRequest.md:
     id: 006081da827a
-    last_write_checksum: sha1:45d77f70eae5fd3df83f49d84fd4af9ca24bd975
-    pristine_git_object: 5bb8ca8641b7775c63ea46eee1ae390eccb62053
+    last_write_checksum: sha1:b21379a5a4d1773f102764e2150f198a6e26b287
+    pristine_git_object: f7c57755cafd3041ac52373b4cb9f901f1df7d8c
   docs/models/components/TimeOffPolicyRequestPolicyType.md:
     id: 70215835cb0b
     last_write_checksum: sha1:6f8078a3e5af9f905f38d3459e37f4a546e1e608
@@ -2025,6 +2033,10 @@ trackedFiles:
     id: cac377aa7d5a
     last_write_checksum: sha1:21e16ad303aad820f4469b7eecbc0c7416125675
     pristine_git_object: cef3d6e284deca6f6e4cc2df14a92f97a2437c45
+  docs/models/operations/CatchUpType.md:
+    id: 4a73230fb9fa
+    last_write_checksum: sha1:83e51b763ea78526bf643c8b533928c6bd92b729
+    pristine_git_object: 019ae78cb5fdeb0fa852330f015337fa45b4a8a8
   docs/models/operations/Category.md:
     id: 0f6b25018d46
     last_write_checksum: sha1:71b0196e15533cbd682f75b09d23f64148e0e4cd
@@ -4039,8 +4051,8 @@ trackedFiles:
     pristine_git_object: 2abb013aa28bad891537902ffbffdb8a999c4e58
   docs/models/operations/PostV1CompaniesCompanyIdCompanyBenefitsRequestBody.md:
     id: 6873c834bf16
-    last_write_checksum: sha1:00f46ed5c3602351c186d71e77b2b884506c9a8f
-    pristine_git_object: 6f2857949d72848cf8d3ee02a863e689a54cb509
+    last_write_checksum: sha1:9efea2b23befd55d63f210c2727c66aa2d639f0a
+    pristine_git_object: f6fd9b19ce54c8a62e93d4b12941e5dca0872623
   docs/models/operations/PostV1CompaniesCompanyIdCompanyBenefitsResponse.md:
     id: ece1c151ffda
     last_write_checksum: sha1:f41f7a94f66b64aa4f1e58edd73efd3fef1efd86
@@ -4893,6 +4905,10 @@ trackedFiles:
     id: 9d08a5643a8b
     last_write_checksum: sha1:a11f5d13eb3c859463023ce0855f9f9620f52d73
     pristine_git_object: 07168df361e9a87c505abe9a9ee3660c5f975a29
+  docs/models/operations/PutV1CompanyBenefitsCompanyBenefitIdCatchUpType.md:
+    id: 7e724b6a9123
+    last_write_checksum: sha1:b6c784fa04ac650feeec4e462eea3845073184fd
+    pristine_git_object: f609515315f2b1a46cd561d3fce10a4d0f38d7a3
   docs/models/operations/PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest.md:
     id: 13b1e66fd68b
     last_write_checksum: sha1:cd1b66e52f3ba1696cd809dbe4d733555b217190
@@ -4923,8 +4939,8 @@ trackedFiles:
     pristine_git_object: d032b6de331d77232c55b64fb13c779d4b601d62
   docs/models/operations/PutV1CompanyBenefitsCompanyBenefitIdRequestBody.md:
     id: f1fdf40de0fd
-    last_write_checksum: sha1:3f0bb15f0f0c10b44374756b1de277bfc38dfd2b
-    pristine_git_object: 8c3586903f90e20e0ed1cbad0508e9759a7b24a1
+    last_write_checksum: sha1:857fade6d24792a5f93c61a66edc734baa01e67a
+    pristine_git_object: cd679b7b1f3454492f46a5bad7f35e9e68bfc35f
   docs/models/operations/PutV1CompanyBenefitsCompanyBenefitIdResponse.md:
     id: b8a089dfdf4a
     last_write_checksum: sha1:fe0409dd42b04979122f67f879ecf1b2ac4438ac
@@ -5519,8 +5535,8 @@ trackedFiles:
     pristine_git_object: 2b1ac2ec62799f2348968e9e853b8e9c8e56684d
   docs/models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody.md:
     id: f7dc038e88e3
-    last_write_checksum: sha1:69014731df7bc8094072e6bc7c19b2f34ba0c226
-    pristine_git_object: 5cf834a38f00c4cfcb5e63d3f39b237b92a69838
+    last_write_checksum: sha1:2bc751312c2ed508b52b42c8244062d6484c6149
+    pristine_git_object: d021c642c3d3cc41f93f0f2c819feacae2d147f0
   docs/models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidResponse.md:
     id: a6e95c29994c
     last_write_checksum: sha1:41fdc323b8d7677985d97608a09a9d09818142b4
@@ -5621,6 +5637,10 @@ trackedFiles:
     id: 6f4b80b4a1f6
     last_write_checksum: sha1:500051f69ad2270cb9bf8f12c336e2d3e811c7e1
     pristine_git_object: 4e97ec02623f27674ccd0474ce1bbb8c75357fdc
+  docs/models/operations/RequiredQuestions.md:
+    id: ff41beac0ab1
+    last_write_checksum: sha1:48bae59e65bb285ef4317b2f09b0722d1596f23d
+    pristine_git_object: f69a23ae887389af3465ce9a624f65f401f6a580
   docs/models/operations/RequirementSets.md:
     id: e820867d0918
     last_write_checksum: sha1:31a403a0519075ca0e09758f4a335c59d19cffe4
@@ -5641,6 +5661,10 @@ trackedFiles:
     id: 66b1653d36a8
     last_write_checksum: sha1:fc9626fd6a267852ee80b5e08857980d60152fad
     pristine_git_object: cebff776862b66de6880d5eccdc665d2bcabe41b
+  docs/models/operations/ResponseType.md:
+    id: 1bbf1571aa73
+    last_write_checksum: sha1:97e8ce9886ef703cf93e61498a9f9bd927b39915
+    pristine_git_object: 6cb42575a18eae9e7170243dd64536dd1b02f003
   docs/models/operations/Results.md:
     id: eab2fa1a9f6d
     last_write_checksum: sha1:0038d3f2c45dec8fe688d8a3169ef0d35c3e9944
@@ -5669,6 +5693,18 @@ trackedFiles:
     id: 4c05b42545a0
     last_write_checksum: sha1:050b348002940afa04cae003035c1361138a3e95
     pristine_git_object: 427e54c62a6d413d38d535157c7fad877025264a
+  docs/models/operations/SubmitInformationRequestRequest.md:
+    id: aaaf97070ff5
+    last_write_checksum: sha1:b64bf9877e0e45b2077a83b92835591b69e31100
+    pristine_git_object: 26c90d98bc76edad1f301ffebcb2bc2b1a79e2a4
+  docs/models/operations/SubmitInformationRequestRequestBody.md:
+    id: 59f3cadcef82
+    last_write_checksum: sha1:8a064aaf4f916e686f181b924c206ff3d9f24dda
+    pristine_git_object: bcc21490ae6e2262eeadf4d63b2d861ea0d7bc64
+  docs/models/operations/SubmitInformationRequestResponse.md:
+    id: 5982657b29dd
+    last_write_checksum: sha1:ee70537c66ca5760c1cfddcb99cc74447a23dc7e
+    pristine_git_object: d609733ca94981ecd583cf04ea5bdb28986ea922
   docs/models/operations/SubscriptionTypes.md:
     id: f7fa74935662
     last_write_checksum: sha1:ea3672e1c39baf0768dbdfe40735309574399adf
@@ -5867,8 +5903,8 @@ trackedFiles:
     pristine_git_object: 3b3f7448a6d8f7c9d169eff01fa83e9c6ff860a2
   docs/sdks/informationrequests/README.md:
     id: e176ae9536c5
-    last_write_checksum: sha1:f01908f7a8f6182926addde9c92ad0e71e9f3713
-    pristine_git_object: 62aeb8844aecab128a87919eab0d46504eac4d04
+    last_write_checksum: sha1:51692392903afe2064dc5d252d70bb3bf3ff201f
+    pristine_git_object: 53bf9fddd02bfe0da88328a8fcb648ed393759af
   docs/sdks/introspection/README.md:
     id: 9f867af7c1f3
     last_write_checksum: sha1:96ebe110df0347a5b712638a077730d30462997a
@@ -5935,8 +5971,8 @@ trackedFiles:
     pristine_git_object: 946136a42ed3a79388aa1faf1d64001abffac12a
   docs/sdks/timeoffpolicies/README.md:
     id: 8b8852bbde37
-    last_write_checksum: sha1:01ac76e24000beed06a79b7251a3a3ef2af69862
-    pristine_git_object: 05d18c846f840afb06c810253a7f0ffe6b1f198c
+    last_write_checksum: sha1:339af140b5c944e72e4cf123d32545f155e0bc36
+    pristine_git_object: 3647ee5b8ee54f3877639d54ef48c23196ecc95c
   docs/sdks/webhooks/README.md:
     id: e21b32d786a4
     last_write_checksum: sha1:3698c6f45245b0702a107108ec7815961db9575b
@@ -5951,8 +5987,8 @@ trackedFiles:
     pristine_git_object: 0f659807250bd74a70615ee7e9befe64fd92a66c
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:9b97953f494c3ff69c66be8b1f17ad549b210753
-    pristine_git_object: ee79ca2df9661f7b6188c699f579b9e4e0b203f9
+    last_write_checksum: sha1:5c37d0fba9580b4d61a7175b7af4a46d9acb2209
+    pristine_git_object: 150a2d3b9b8ccb1e331c3e08a810bf2a012a4eac
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -6151,8 +6187,8 @@ trackedFiles:
     pristine_git_object: e3b9a280dabeb798f30396b12578aec97c7a6a7a
   src/main/java/com/gusto/embedded_api/AsyncInformationRequests.java:
     id: 2d21db82fafc
-    last_write_checksum: sha1:de8d6b91768816add049ea301d4fe1cf16dca81f
-    pristine_git_object: d2e34e3925fc183dd65f8b9e5f1d792df9e54046
+    last_write_checksum: sha1:a6ac2af8fd14bd0480c678c7b8b5d0e5845e493e
+    pristine_git_object: 73958e5b95c5ea86aeb20d1025b9fa58a4b70e6f
   src/main/java/com/gusto/embedded_api/AsyncIntrospection.java:
     id: f10d3976b2c1
     last_write_checksum: sha1:c2737b09ff934ad2172b65e1fed3f5e75990d85d
@@ -6219,8 +6255,8 @@ trackedFiles:
     pristine_git_object: eed525a166e09cbde5e67d380d30f626db2c132b
   src/main/java/com/gusto/embedded_api/AsyncTimeOffPolicies.java:
     id: a21f1e7496e7
-    last_write_checksum: sha1:882be756f24da8e0565d62f75e1835712c9acbd1
-    pristine_git_object: 1f04e51da15f2ebb6be4af22ac94bc6abb3cb48f
+    last_write_checksum: sha1:2124ca650d0c288337b6a487b201f6bf811769f0
+    pristine_git_object: d2ebb09cb312746b05b88b88e0cb7d35320204c1
   src/main/java/com/gusto/embedded_api/AsyncWebhooks.java:
     id: ee3b4808d295
     last_write_checksum: sha1:686e76415f2bb90c66466bfbff6c7ddce948ddf5
@@ -6367,8 +6403,8 @@ trackedFiles:
     pristine_git_object: b0eb0c19315d2597f92e686c9d97f097205c72c7
   src/main/java/com/gusto/embedded_api/InformationRequests.java:
     id: 77a240b100a7
-    last_write_checksum: sha1:0a696b4f747196f7b8905d037d4c604549904c3e
-    pristine_git_object: 990d3239d3c6c758b2399fb7cdfde1999494e93a
+    last_write_checksum: sha1:c69b47cdde787de8fbb747034af5f5982b69098b
+    pristine_git_object: 8e1375d94a2f52cdcf29292fcda77335e805a74b
   src/main/java/com/gusto/embedded_api/Introspection.java:
     id: 09598fc172f7
     last_write_checksum: sha1:ffce992ec4f904ce57f5395466b22f6cc1624943
@@ -6419,8 +6455,8 @@ trackedFiles:
     pristine_git_object: a22fbe8ee97d741deda6415e8e4098e2e013bca8
   src/main/java/com/gusto/embedded_api/SDKConfiguration.java:
     id: c282180d7aa3
-    last_write_checksum: sha1:0c466853185838cb241656a81598fa9f5b0c2c10
-    pristine_git_object: 2d1f8c01ecf58cf5ba2eb5bb2c92ce0ebeecfe32
+    last_write_checksum: sha1:fe7309df0f2e3e4224913ece5da5ff23f0f142a3
+    pristine_git_object: c255e1271bfd33b17dc8f8718f5c982507c21232
   src/main/java/com/gusto/embedded_api/SalaryEstimates.java:
     id: 34e62c9ddacb
     last_write_checksum: sha1:94a3ef803e42aba150c70fdc88881e52068877e7
@@ -6443,8 +6479,8 @@ trackedFiles:
     pristine_git_object: d01ca4a168988fc9444d8be917b8df210e00229a
   src/main/java/com/gusto/embedded_api/TimeOffPolicies.java:
     id: cc093b9ba3de
-    last_write_checksum: sha1:4f59b469ab948b0f7da6cd4a48aa413302f0598b
-    pristine_git_object: edc455c62001c131b8fd64cdaa13062132b4c66c
+    last_write_checksum: sha1:7c88a520dc8d7dcbe88381672f13ad646c5b9266
+    pristine_git_object: 6c0ce3bfe4f596dd3b4974b1ea0f4e3774e10a83
   src/main/java/com/gusto/embedded_api/Webhooks.java:
     id: d2df3199a4f7
     last_write_checksum: sha1:813f8f315cc2493786e8f307f411a968d0ab9790
@@ -6507,8 +6543,8 @@ trackedFiles:
     pristine_git_object: ec2e165ef251f3e394700cd8772238a7202a4f1a
   src/main/java/com/gusto/embedded_api/models/components/Answers.java:
     id: b9fd46a198c8
-    last_write_checksum: sha1:2c2e9402c4f6680ea6f3f14c1807ee06ad0d030a
-    pristine_git_object: e20059f74390a20e0f986ee4c84de80ea0447bea
+    last_write_checksum: sha1:ed87b2c840d1f5052181ff5460f04a7b06bfc98e
+    pristine_git_object: 3ed76c7d3868c75dd0c322a9e6090f83584ff9db
   src/main/java/com/gusto/embedded_api/models/components/ApplicableBenefits.java:
     id: 0843cd25cc7e
     last_write_checksum: sha1:d4fed72b37e94590bab8c8d366bc0f19614d9426
@@ -6851,16 +6887,16 @@ trackedFiles:
     pristine_git_object: 13fac5dd84cd9812627659e90d9649378687b971
   src/main/java/com/gusto/embedded_api/models/components/ContractorPaymentMethod1.java:
     id: a829904638b4
-    last_write_checksum: sha1:aaf279e692153d7a21cf132abe52bc717b61b2bf
-    pristine_git_object: 5650ec281124a669efcaa5db86587d304206c2a4
+    last_write_checksum: sha1:c0b93b51e13565f92af877ae94d5ae6a210ee73e
+    pristine_git_object: 98f552ede9b548521e6ae8f5af276252401baece
   src/main/java/com/gusto/embedded_api/models/components/ContractorPaymentMethodSplitBy.java:
     id: d092ea8d1d3d
     last_write_checksum: sha1:3fc416493355a89113f40a4af24217c0f75a4688
     pristine_git_object: 6edbfc9cf6c3a922a6be705b5eb972cc1094e0c8
   src/main/java/com/gusto/embedded_api/models/components/ContractorPaymentMethodType.java:
     id: fc5944c137a4
-    last_write_checksum: sha1:4fe850acc02f83591ce6e51c8973a18e16a19890
-    pristine_git_object: 4c2bd65dff8d355c61d4f4e532283394a949da74
+    last_write_checksum: sha1:eb52b09f2cc9fd5fed466a10da9dcae261a354c3
+    pristine_git_object: d158bbc4750b149f08bb5cd79d440bfa704eba12
   src/main/java/com/gusto/embedded_api/models/components/ContractorPaymentPaymentMethod.java:
     id: 5505fdf8e7d1
     last_write_checksum: sha1:b3f8de63fd39b26668193830eb8c59ed77600115
@@ -7187,8 +7223,8 @@ trackedFiles:
     pristine_git_object: 7c7acaebee7b0ad730e00705c7e12cc8e21bc628
   src/main/java/com/gusto/embedded_api/models/components/EmployeeStateTaxAnswer.java:
     id: a3a48ce08a44
-    last_write_checksum: sha1:80990470a1b0c0cb8308d51117c34ac898697828
-    pristine_git_object: e378e8a015dcfdd678a72e3e03f692e73d229ea6
+    last_write_checksum: sha1:d4e35747f9cc579d8e047105c87a22a91f948de8
+    pristine_git_object: 53c398260a83dc4f4e65f72bf674fff4f1b99a89
   src/main/java/com/gusto/embedded_api/models/components/EmployeeStateTaxInputQuestionFormat.java:
     id: 5d75a34184c4
     last_write_checksum: sha1:98bd3ac78ffddb64efa7ef42c69d0a1685c87105
@@ -7487,8 +7523,8 @@ trackedFiles:
     pristine_git_object: b9fe127c1bb792180866ff8e32318fd5e8e6be5c
   src/main/java/com/gusto/embedded_api/models/components/InformationRequest.java:
     id: 7778114c7955
-    last_write_checksum: sha1:d291990b4f27db3c3ab17d344bab0741bde8c11a
-    pristine_git_object: 81064c5300b3fddea724c77509cae16abd793e4d
+    last_write_checksum: sha1:dd2fea7fcf7037b8d870e2ddf8ff219d8e752157
+    pristine_git_object: 364f171e17b9148343c8a98fc355c168ec9faf27
   src/main/java/com/gusto/embedded_api/models/components/InformationRequestStatus.java:
     id: 2ebc65dc2418
     last_write_checksum: sha1:d536f5cc9d86f1ea50176783abd8f1d8dc0beb35
@@ -8073,6 +8109,10 @@ trackedFiles:
     id: ea7603558c69
     last_write_checksum: sha1:ab257c88027f88d769a59db5b35b1f905499c1dd
     pristine_git_object: 3ceaaae8c4050f54ebc247cf29bda4a99e392110
+  src/main/java/com/gusto/embedded_api/models/components/RequiredQuestions.java:
+    id: 7e7cf734bb33
+    last_write_checksum: sha1:dbaa8eb36152316171187c67c1b788e93e8356cc
+    pristine_git_object: 9f93979069d9fc976e18584f6ee2a9362d00e918
   src/main/java/com/gusto/embedded_api/models/components/Requirements.java:
     id: 9ce3af2571a6
     last_write_checksum: sha1:73c7924486973c763c2d4bbca405a25875b66491
@@ -8085,6 +8125,10 @@ trackedFiles:
     id: f78a988f263e
     last_write_checksum: sha1:4fa6342098c251a8cb42bb8d82f026bf4fb148bc
     pristine_git_object: 2bebcc5045a530e95dc81b6af1386e0c3825a3e5
+  src/main/java/com/gusto/embedded_api/models/components/ResponseType.java:
+    id: a7a0deb70075
+    last_write_checksum: sha1:d4efd2905df7fe0cd28e189f2abd211beda5747c
+    pristine_git_object: cc23fd0ebeb6a81949f05e4294cd0cd3ef946850
   src/main/java/com/gusto/embedded_api/models/components/SalaryEstimate.java:
     id: 539931d75821
     last_write_checksum: sha1:2f7135b1d7bbf6b2c45f1d08823cd8ab9329f38c
@@ -8231,8 +8275,8 @@ trackedFiles:
     pristine_git_object: 084c17a21dfd03aa85674b57634cb32be198d939
   src/main/java/com/gusto/embedded_api/models/components/TimeOffPolicyRequest.java:
     id: a19071ae7349
-    last_write_checksum: sha1:461bae30ec3d6ca6d6ea8928943979bef8a97395
-    pristine_git_object: ff494de145510e05a25bf13197909e75df200f6d
+    last_write_checksum: sha1:28ec0b17eb0f049527282698f2976ddf23052b29
+    pristine_git_object: 662c3d9fa5e519805642a26eb310bf803b78f6ed
   src/main/java/com/gusto/embedded_api/models/components/TimeOffPolicyRequestPolicyType.java:
     id: 77d3ea349908
     last_write_checksum: sha1:036380e2184b9cf473fbd629301996afe0752ad7
@@ -9517,6 +9561,10 @@ trackedFiles:
     id: e498eb3858f1
     last_write_checksum: sha1:a7affabbfc5adde5b746c95ed74dadc32d870239
     pristine_git_object: 7d1fa1c1f07d51151c1eb4b3a7a40153ab1bd9d4
+  src/main/java/com/gusto/embedded_api/models/operations//async/SubmitInformationRequestRequestBuilder.java:
+    id: b16dd4270c4b
+    last_write_checksum: sha1:c4a304f5e70ed0f57fba8c7fc004a7f1317347b1
+    pristine_git_object: be275e9da79cf9ce4ef38d29eac6095765a8dd70
   src/main/java/com/gusto/embedded_api/models/operations/AccountType.java:
     id: bcf520856af7
     last_write_checksum: sha1:ca2c47114e6c1c79bf628f9ace4c5263c47b6003
@@ -9549,6 +9597,10 @@ trackedFiles:
     id: 379df9f5af89
     last_write_checksum: sha1:120da1998de205e77cf2d02b29dc6386d16fe6a5
     pristine_git_object: 0eea78299e55b95e7408ca3eff18b81e2618dc89
+  src/main/java/com/gusto/embedded_api/models/operations/CatchUpType.java:
+    id: 472c3edadba9
+    last_write_checksum: sha1:04cabbb83f3352136496d9f41620c1fb4be7d1e0
+    pristine_git_object: 52ec54dd5eacc198c6565c6bcc82b0b379a6b192
   src/main/java/com/gusto/embedded_api/models/operations/Category.java:
     id: ae11999d9a1c
     last_write_checksum: sha1:315839aa85c2b2a7b0a7dc3171fc9d3e0ce2b3bc
@@ -12243,8 +12295,8 @@ trackedFiles:
     pristine_git_object: d7d0ab1dc24a9894b1b481e7bd4c9297bb5257a8
   src/main/java/com/gusto/embedded_api/models/operations/PostV1CompaniesCompanyIdCompanyBenefitsRequestBody.java:
     id: b94554c21d18
-    last_write_checksum: sha1:c1e4535f2ae67da72058213b9ffeabbba4672b35
-    pristine_git_object: 4c30668cd395e881ca057746b91e40f42f5b5e33
+    last_write_checksum: sha1:6971fb9eff7eb39b7ded1b59bdb54634e94c99bf
+    pristine_git_object: 71affbb340b53140342f46fcc10d3deacefeb1d8
   src/main/java/com/gusto/embedded_api/models/operations/PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder.java:
     id: d98745f7dde5
     last_write_checksum: sha1:f833f8c12628876d84491f7e2563762eb7f1092e
@@ -13329,6 +13381,10 @@ trackedFiles:
     id: ca1dda3749f7
     last_write_checksum: sha1:d83eebcc054e2dc8f6411eb7b606091e21d1afa2
     pristine_git_object: 4e6ab44fc52ec4b93835fef65ee53de7352a99d0
+  src/main/java/com/gusto/embedded_api/models/operations/PutV1CompanyBenefitsCompanyBenefitIdCatchUpType.java:
+    id: 64eb877b9faf
+    last_write_checksum: sha1:d845c938bcd266a74b6962b808aefb995354b564
+    pristine_git_object: 60765bc0698eadac31a8f693a004563f439df519
   src/main/java/com/gusto/embedded_api/models/operations/PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest.java:
     id: d076fac4ce1e
     last_write_checksum: sha1:6223c16d0a55c509014137a53a06299d6c8a8b55
@@ -13367,8 +13423,8 @@ trackedFiles:
     pristine_git_object: ee4ef4d67914f9145a32e5f887b47239f1267ed6
   src/main/java/com/gusto/embedded_api/models/operations/PutV1CompanyBenefitsCompanyBenefitIdRequestBody.java:
     id: e3ce4c527002
-    last_write_checksum: sha1:b705576171ae79539d332a766087de434258ec64
-    pristine_git_object: 8e349b9d87812448aad47f025f5f33f3edb2bf4f
+    last_write_checksum: sha1:89216e1ac84ea66d9b7a8557d15296ee3a61174b
+    pristine_git_object: c617b013c99f43641ff0a84ff215cee882ace3f1
   src/main/java/com/gusto/embedded_api/models/operations/PutV1CompanyBenefitsCompanyBenefitIdRequestBuilder.java:
     id: 8158c19fe37c
     last_write_checksum: sha1:5d25de55d40925352870814b8fe654cc8c930003
@@ -14123,8 +14179,8 @@ trackedFiles:
     pristine_git_object: e4657663542a5bb03f519d4e130bf5b2efd58c8e
   src/main/java/com/gusto/embedded_api/models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody.java:
     id: 55ffd3316fb7
-    last_write_checksum: sha1:84baa058405babe19e6b768f113d2ed6460daedb
-    pristine_git_object: deead580ef5ef794866ec6d528d0705945488a9a
+    last_write_checksum: sha1:e271c8a48e55fde91ec429993f3a340fd4216c1e
+    pristine_git_object: 5021624f0aeebdc012cd6c650a7f96d2dec55d78
   src/main/java/com/gusto/embedded_api/models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder.java:
     id: 55e0e46d0378
     last_write_checksum: sha1:20fba720dc06db1438182036f3e94068ce3cd4cc
@@ -14249,6 +14305,10 @@ trackedFiles:
     id: 5332d9e6aefe
     last_write_checksum: sha1:efe769e729c7eccd971be3741881853e87ee2aeb
     pristine_git_object: 7ce211d88b8a7aa37480feb47bc031c546e5f521
+  src/main/java/com/gusto/embedded_api/models/operations/RequiredQuestions.java:
+    id: f59b48701c6b
+    last_write_checksum: sha1:e29dc4df6b32d3eb86b7854618cd8ce52920a64e
+    pristine_git_object: cd6b35b25ae4ca919238da4e9d0c8f4a42e22fc0
   src/main/java/com/gusto/embedded_api/models/operations/RequirementSets.java:
     id: f383b40ff4c4
     last_write_checksum: sha1:6291d7e5af7e979c227795238466adf57076a4db
@@ -14269,6 +14329,10 @@ trackedFiles:
     id: 1a7e8dba1483
     last_write_checksum: sha1:e3ecd7f980bb3796bcbd30f3bd5a8616423bd6a7
     pristine_git_object: d332b781acf276ea15a87ab96286e3fa23591828
+  src/main/java/com/gusto/embedded_api/models/operations/ResponseType.java:
+    id: de00817a7b56
+    last_write_checksum: sha1:dc1b3a324e78083a7ab1bb47f602a47a2770b3f9
+    pristine_git_object: 3c176f81eb3f525d8eac1820b4e1047db6f14489
   src/main/java/com/gusto/embedded_api/models/operations/Results.java:
     id: 62f351227f95
     last_write_checksum: sha1:84f8ce47acfb1cbb9a8d4fdb584dde3cb8c7f913
@@ -14297,6 +14361,22 @@ trackedFiles:
     id: f53b91ae36b0
     last_write_checksum: sha1:161357eaabc302216b852349057db644de65fbf0
     pristine_git_object: c6b3cff96f27f67223b2ad2ab74c52582439eec0
+  src/main/java/com/gusto/embedded_api/models/operations/SubmitInformationRequestRequest.java:
+    id: 90d515969f66
+    last_write_checksum: sha1:a73bccf9f9fb48a4409ac7222b60d8deb81b3343
+    pristine_git_object: b42337a10ce0807603cc797056f4dd950a376108
+  src/main/java/com/gusto/embedded_api/models/operations/SubmitInformationRequestRequestBody.java:
+    id: 76eabde6bf7c
+    last_write_checksum: sha1:169e0c81daf9de977d02f17820befa4fef95039b
+    pristine_git_object: 98b5caefe50867ee5859a113beef98195793e9ec
+  src/main/java/com/gusto/embedded_api/models/operations/SubmitInformationRequestRequestBuilder.java:
+    id: b838cf44840b
+    last_write_checksum: sha1:ec1d80f8d7291402e10155b48d0cad1b86eee975
+    pristine_git_object: 3b9206fcb26abf281ab671b50affff24d4655129
+  src/main/java/com/gusto/embedded_api/models/operations/SubmitInformationRequestResponse.java:
+    id: 6dd69f450b3b
+    last_write_checksum: sha1:47bc495b3f3e7e0656a71abf83830da5f7657fce
+    pristine_git_object: 5c986ce6f9998f89404a3e170cc8971e8e1bb687
   src/main/java/com/gusto/embedded_api/models/operations/SubscriptionTypes.java:
     id: b52a19241cf3
     last_write_checksum: sha1:23e52b0f1bc153326e92e08b63a175a862c2e6a3
@@ -15461,6 +15541,10 @@ trackedFiles:
     id: 32a3034c3d0c
     last_write_checksum: sha1:b07e5b0162d328d70ea329aed345ba5c067781d0
     pristine_git_object: 3b61ec6381679b3c56c459d088749ab5a199403f
+  src/main/java/com/gusto/embedded_api/models/operations/async/SubmitInformationRequestResponse.java:
+    id: b9969a14e6b1
+    last_write_checksum: sha1:d1d0ccd76e11b92e46db9367a02004f76682779e
+    pristine_git_object: 60f14b40e5571bae66be25a898f4f34a004be1a4
   src/main/java/com/gusto/embedded_api/operations/DeleteDepartment.java:
     id: 62fac4b6b19f
     last_write_checksum: sha1:7bbcd3aeb1ef2c8760b671ea5a57a8e778b529ae
@@ -16543,8 +16627,8 @@ trackedFiles:
     pristine_git_object: d8e5fce0f4441009e56610d38f9a1923b1d9ffa4
   src/main/java/com/gusto/embedded_api/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate.java:
     id: 2062285d50ea
-    last_write_checksum: sha1:01476f28b3a6aa40516a5768199c9cc70275f8e6
-    pristine_git_object: a49e3f0d0434784cf34bd8bbecb717724d94147a
+    last_write_checksum: sha1:cb861fe039c3c4f25497101df8d965f8889ebc18
+    pristine_git_object: 05118313f3cd836eb4a6779757fe94a775e2d3ab
   src/main/java/com/gusto/embedded_api/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployees.java:
     id: f8a70bf3c888
     last_write_checksum: sha1:97d204104e9f532847da4953d7ca1ef4d5520cd3
@@ -16569,6 +16653,10 @@ trackedFiles:
     id: 5fcc3f1c1e93
     last_write_checksum: sha1:25eca41ee32fe79f811276cefae240ea56abd264
     pristine_git_object: cfa86b5c939f4e13722add093bc3a85cd72b9716
+  src/main/java/com/gusto/embedded_api/operations/SubmitInformationRequest.java:
+    id: fdd2173165df
+    last_write_checksum: sha1:8a7c344ae23d2ccc04918e43a133f979be7486d0
+    pristine_git_object: 373f650e1761f843369ddfd8ba395bc251cc05ca
   src/main/java/com/gusto/embedded_api/utils/AsyncHook.java:
     id: 6f73e635f4a9
     last_write_checksum: sha1:611384d5fc7affc3eee9cf0583e214f53bc94a86
@@ -16679,8 +16767,8 @@ trackedFiles:
     pristine_git_object: 92427e83c68324078ef7a61419a21afa8a4bb6fe
   src/main/java/com/gusto/embedded_api/utils/JSON.java:
     id: aabf6fdd06ed
-    last_write_checksum: sha1:201cba3f9550d26092be88f645f189a9b1bb8674
-    pristine_git_object: 43aae8a13acd4057868ebd75e8efea18484aa4c6
+    last_write_checksum: sha1:6690c87d0a79b5af688bc0cda6d69d531a9c2332
+    pristine_git_object: 8f8128ec4e5bd69386edd7f3243a82445a66c16e
   src/main/java/com/gusto/embedded_api/utils/LazySingletonValue.java:
     id: 1375bf1ea4c4
     last_write_checksum: sha1:0cc6c98c7e91be7e2032d2c41c9fe4358b375b4a
@@ -16883,6 +16971,17 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-post-v1-partner-managed-companies:
+      parameters:
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      requestBody:
+        application/json: {"user": {"first_name": "Randi", "last_name": "Schaden", "email": "Geovanni_Mertz12@yahoo.com"}, "company": {"name": "<value>"}}
+      responses:
+        "200":
+          application/json: {}
+        "422":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   get-v1-companies:
     Example:
       parameters:
@@ -16972,6 +17071,19 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-put-v1-partner-managed-companies-company-uuid-migrate:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      requestBody:
+        application/json: {"email": "Janice18@gmail.com", "ip_address": "75.249.55.210", "external_user_id": "<id>"}
+      responses:
+        "200":
+          application/json: {}
+        "422":
+          application/json: {"errors": []}
   post-partner-managed-companies-company_uuid-accept_terms_of_service:
     Example:
       parameters:
@@ -17019,6 +17131,19 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-post-partner-managed-companies-company-uuid-accept-terms-of-service:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      requestBody:
+        application/json: {"email": "Mary_Welch@hotmail.com", "ip_address": "ad95:edec:dbf8:daea:be73:caca:2bf2:c269", "external_user_id": "<id>"}
+      responses:
+        "200":
+          application/json: {}
+        "422":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   post-partner-managed-companies-company_uuid-retrieve_terms_of_service:
     Example:
       parameters:
@@ -17066,6 +17191,19 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-post-partner-managed-companies-company-uuid-retrieve-terms-of-service:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      requestBody:
+        application/json: {"email": "Valentin_Ziemann@yahoo.com"}
+      responses:
+        "200":
+          application/json: {}
+        "422":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   post-v1-companies-company_id-admins:
     Example:
       parameters:
@@ -17854,6 +17992,17 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-post-v1-plaid-processor-token:
+      parameters:
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      requestBody:
+        application/json: {"owner_type": "Company", "owner_id": "<id>", "processor_token": "<value>"}
+      responses:
+        "201":
+          application/json: {"uuid": "cad871b5-7c72-4398-9874-9b5407e7ce36"}
+        "422":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   delete-v1-companies-company_id-bank-accounts-bank_account_id:
     speakeasy-default-delete-v1-companies-company-id-bank-accounts-bank-account-id:
       parameters:
@@ -18082,6 +18231,15 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-put-v1-tax-liabilities-finish:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      responses:
+        "422":
+          application/json: {"errors": []}
   get-v1-company-payment-configs:
     Example:
       parameters:
@@ -18389,6 +18547,17 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-post-v1-companies-company-id-pay-schedules-assign:
+      parameters:
+        path:
+          company_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      requestBody:
+        application/json: {"type": "hourly_salaried"}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   get-v1-companies-company_id-employees:
     speakeasy-default-get-v1-companies-company-id-employees:
       parameters:
@@ -18740,6 +18909,15 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-delete-department:
+      parameters:
+        path:
+          department_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      responses:
+        "422":
+          application/json: {"errors": []}
   put-add-people-to-department:
     Example:
       parameters:
@@ -18829,6 +19007,15 @@ examples:
       responses:
         "404":
           application/json: {"errors": [{"error_key": "employment", "category": "incorrect_state", "message": "The employee's employment is not in the right state."}]}
+    speakeasy-default-delete-v1-employees-employee-id-terminations:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      responses:
+        "404":
+          application/json: {"errors": []}
   put-v1-terminations-employee_id:
     Example:
       parameters:
@@ -18986,6 +19173,15 @@ examples:
       responses:
         "404":
           application/json: {"errors": [{"error_key": "employment", "category": "incorrect_state", "message": "The employee's employment is not in the right state."}]}
+    speakeasy-default-delete-v1-employees-employee-id-rehire:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      responses:
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   get-v1-employees-employee_id-employment_history:
     speakeasy-default-get-v1-employees-employee-id-employment-history:
       parameters:
@@ -20471,6 +20667,17 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-post-v1-sandbox-generate-1099:
+      parameters:
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      requestBody:
+        application/json: {"contractor_id": "<id>"}
+      responses:
+        "200":
+          application/json: {"uuid": "e6a485c4-a11b-42b6-bd5d-9877b74e0201"}
+        "422":
+          application/json: {"errors": []}
   get-v1-contractor-documents:
     speakeasy-default-get-v1-contractor-documents:
       parameters:
@@ -20535,6 +20742,19 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-put-v1-contractor-document-sign:
+      parameters:
+        path:
+          document_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      requestBody:
+        application/json: {"fields": [], "agree": false}
+      responses:
+        "200":
+          application/json: {}
+        "422":
+          application/json: {"errors": []}
   post-v1-sandbox-generate_w2:
     Basic:
       parameters:
@@ -20563,6 +20783,17 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-post-v1-sandbox-generate-w2:
+      parameters:
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      requestBody:
+        application/json: {"employee_id": "<id>"}
+      responses:
+        "200":
+          application/json: {"uuid": "4258b687-6a9e-45be-aa88-f4f4318585ed"}
+        "422":
+          application/json: {"errors": []}
   get-v1-employee-forms:
     Example:
       parameters:
@@ -20973,7 +21204,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "name": "Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited"}
+        application/json: {"name": "Vacation Policy", "version": "56d00c178bc7393b2a206ed6a86afcb4"}
       responses:
         "200":
           application/json: {"uuid": "ac96e9e3-e5ef-4d38-b257-e45dfba89ad4", "company_uuid": "<id>", "name": "<value>", "policy_type": "sick", "accrual_method": "<value>", "is_active": true, "employees": [{}]}
@@ -21206,6 +21437,16 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-delete-v1-companies-company-id-contractor-payment-contractor-payment:
+      parameters:
+        path:
+          company_id: "<id>"
+          contractor_payment_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   get-companies-company_uuid-contractor_payments-preview:
     speakeasy-default-get-companies-company-uuid-contractor-payments-preview:
       parameters:
@@ -21551,7 +21792,7 @@ examples:
         application/json: {"active": true, "description": "hm pfft surge beyond"}
       responses:
         "201":
-          application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "company_uuid": "881ce3f2-e3e1-49c9-8ad4-0bcf515f5618", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "benefit_type": 1, "active": true, "description": "Kaiser Permanente", "source": "external", "partner_name": "XYZ Corp", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false}
+          application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "company_uuid": "881ce3f2-e3e1-49c9-8ad4-0bcf515f5618", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "benefit_type": 1, "active": true, "description": "Kaiser Permanente", "source": "external", "partner_name": "XYZ Corp", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false, "catch_up_type": "elective"}
     Basic:
       parameters:
         path:
@@ -21594,7 +21835,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: [{"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "company_uuid": "528cc543-8a41-497e-b479-23a4c5ec77ac", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "benefit_type": 1, "active": true, "description": "Kaiser Permanente", "source": "external", "partner_name": "XYZ Corp", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false}]
+          application/json: [{"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "company_uuid": "528cc543-8a41-497e-b479-23a4c5ec77ac", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "benefit_type": 1, "active": true, "description": "Kaiser Permanente", "source": "external", "partner_name": "XYZ Corp", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false, "catch_up_type": "elective"}]
   get-v1-company_benefits-company_benefit_id:
     Example:
       parameters:
@@ -21604,7 +21845,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "active": true, "description": "Kaiser Permanente", "source": "external", "partner_name": "XYZ Corp", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false, "employee_benefits": [{"employee_uuid": "ae44a0b2-3c89-41e1-91c8-5f8224a779ca", "company_benefit_uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "active": true, "deduct_as_percentage": false, "employee_deduction": "3", "company_contribution": "0", "uuid": "9988f241-9aee-4383-bfca-eac79cf58135", "contribution": {"type": "amount", "value": "<value>"}}]}
+          application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "active": true, "description": "Kaiser Permanente", "source": "external", "partner_name": "XYZ Corp", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false, "catch_up_type": "elective", "employee_benefits": [{"employee_uuid": "ae44a0b2-3c89-41e1-91c8-5f8224a779ca", "company_benefit_uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "active": true, "deduct_as_percentage": false, "employee_deduction": "3", "company_contribution": "0", "uuid": "9988f241-9aee-4383-bfca-eac79cf58135", "contribution": {"type": "amount", "value": "<value>"}}]}
   put-v1-company_benefits-company_benefit_id:
     Example:
       parameters:
@@ -21616,7 +21857,7 @@ examples:
         application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "active": false}
       responses:
         "200":
-          application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "company_uuid": "881ce3f2-e3e1-49c9-8ad4-0bcf515f5618", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "benefit_type": 1, "active": true, "description": "Kaiser Permanente", "source": "external", "partner_name": "XYZ Corp", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false}
+          application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "company_uuid": "881ce3f2-e3e1-49c9-8ad4-0bcf515f5618", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "benefit_type": 1, "active": true, "description": "Kaiser Permanente", "source": "external", "partner_name": "XYZ Corp", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false, "catch_up_type": "elective"}
     Basic:
       parameters:
         path:
@@ -22005,6 +22246,17 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-post-employee-ytd-benefit-amounts-from-different-company:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      requestBody:
+        application/json: {"tax_year": 1828.56, "ytd_employee_deduction_amount": "0.00", "ytd_company_contribution_amount": "0.00"}
+      responses:
+        "422":
+          application/json: {"errors": []}
   get-v1-employees-employee_uuid-section603_high_earner_statuses:
     speakeasy-default-get-v1-employees-employee-uuid-section603-high-earner-statuses:
       parameters:
@@ -22441,6 +22693,18 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-put-v1-companies-company-uuid-tax-requirements-state:
+      parameters:
+        path:
+          company_uuid: "<id>"
+          state: "Tennessee"
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      requestBody:
+        application/json: {}
+      responses:
+        "422":
+          application/json: {"errors": []}
   get-v1-companies-company_uuid-tax_requirements:
     speakeasy-default-get-v1-companies-company-uuid-tax-requirements:
       parameters:
@@ -22677,6 +22941,15 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-redebit-recovery-case:
+      parameters:
+        path:
+          recovery_case_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2025-06-15"
+      responses:
+        "422":
+          application/json: {"errors": []}
   get-ach-transactions:
     Example:
       parameters:
@@ -22921,8 +23194,48 @@ examples:
           application/json: {}
         "404":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
+  submit-information-request:
+    Basic:
+      parameters:
+        path:
+          information_request_uuid: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
+    Resource:
+      parameters:
+        path:
+          information_request_uuid: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
+    Nested:
+      parameters:
+        path:
+          information_request_uuid: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-submit-information-request:
+      parameters:
+        path:
+          information_request_uuid: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "422":
+          application/json: {"errors": []}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Java SDK Changes:\n* `gustoembedded.employeeTaxSetup.getStateTaxes()`:  `response.[].questions.[].answers.[].validUpTo` **Changed** **Breaking** :warning:\n* `gustoembedded.employeeTaxSetup.updateStateTaxes()`: \n  *  `request.employee-state-taxes-request.states.[].questions.[].answers.[].validUpTo` **Changed** **Breaking** :warning:\n  *  `response.[].questions.[].answers.[].validUpTo` **Changed** **Breaking** :warning:\n* `gustoembedded.informationRequests.submit()`: **Added**\n* `gustoembedded.timeOffPolicies.update()`:  `requestbody` **Changed**\n* `gustoembedded.timeOffPolicies.deactivate()`:  `error.status[422]` **Added**\n* `gustoembedded.companyBenefits.create()`: \n  *  `requestbody.catchUpType` **Added**\n* `gustoembedded.companyBenefits.update()`: \n  *  `requestbody.catchUpType` **Added**\n* `gustoembedded.informationRequests.getInformationRequests()`:  `response.[].requiredQuestions` **Added**\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

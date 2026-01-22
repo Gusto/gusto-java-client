@@ -10,11 +10,11 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.SecuritySource;
-import com.gusto.embedded_api.models.components.TimeOffPolicy;
+import com.gusto.embedded_api.models.components.InformationRequest;
 import com.gusto.embedded_api.models.errors.APIException;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest;
-import com.gusto.embedded_api.models.operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse;
+import com.gusto.embedded_api.models.operations.SubmitInformationRequestRequest;
+import com.gusto.embedded_api.models.operations.SubmitInformationRequestResponse;
 import com.gusto.embedded_api.utils.Blob;
 import com.gusto.embedded_api.utils.HTTPClient;
 import com.gusto.embedded_api.utils.HTTPRequest;
@@ -22,9 +22,13 @@ import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.Hook.AfterErrorContextImpl;
 import com.gusto.embedded_api.utils.Hook.AfterSuccessContextImpl;
 import com.gusto.embedded_api.utils.Hook.BeforeRequestContextImpl;
+import com.gusto.embedded_api.utils.SerializedBody;
+import com.gusto.embedded_api.utils.Utils.JsonShape;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
 import java.lang.Exception;
+import java.lang.IllegalArgumentException;
+import java.lang.Object;
 import java.lang.String;
 import java.lang.Throwable;
 import java.net.http.HttpRequest;
@@ -34,7 +38,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 
-public class PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate {
+public class SubmitInformationRequest {
 
     static abstract class Base {
         final SDKConfiguration sdkConfiguration;
@@ -59,7 +63,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate {
             return new BeforeRequestContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "put-v1-time_off_policies-time_off_policy_uuid-deactivate",
+                    "submit-information-request",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -68,7 +72,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate {
             return new AfterSuccessContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "put-v1-time_off_policies-time_off_policy_uuid-deactivate",
+                    "submit-information-request",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -77,21 +81,33 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate {
             return new AfterErrorContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "put-v1-time_off_policies-time_off_policy_uuid-deactivate",
+                    "submit-information-request",
                     java.util.Optional.empty(),
                     securitySource());
         }
-        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
-                    "/v1/time_off_policies/{time_off_policy_uuid}/deactivate",
+                    "/v1/information_requests/{information_request_uuid}/submit",
                     request, null);
             HTTPRequest req = new HTTPRequest(url, "PUT");
+            Object convertedRequest = Utils.convertToShape(
+                    request,
+                    JsonShape.DEFAULT,
+                    typeReference);
+            SerializedBody serializedRequestBody = Utils.serializeRequestBody(
+                    convertedRequest,
+                    "requestBody",
+                    "json",
+                    false);
+            if (serializedRequestBody == null) {
+                throw new IllegalArgumentException("Request body is required");
+            }
+            req.setBody(Optional.ofNullable(serializedRequestBody));
             req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
-            req.addHeaders(Utils.getHeadersFromMetadata(request, null));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();
@@ -99,13 +115,13 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate {
     }
 
     public static class Sync extends Base
-            implements RequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> {
+            implements RequestOperation<SubmitInformationRequestRequest, SubmitInformationRequestResponse> {
         public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
             super(sdkConfiguration, _headers);
         }
 
-        private HttpRequest onBuildRequest(PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest request) throws Exception {
-            HttpRequest req = buildRequest(request, PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest.class);
+        private HttpRequest onBuildRequest(SubmitInformationRequestRequest request) throws Exception {
+            HttpRequest req = buildRequest(request, SubmitInformationRequestRequest.class, new TypeReference<SubmitInformationRequestRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 
@@ -121,7 +137,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate {
         }
 
         @Override
-        public HttpResponse<InputStream> doRequest(PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest request) {
+        public HttpResponse<InputStream> doRequest(SubmitInformationRequestRequest request) {
             HttpRequest r = unchecked(() -> onBuildRequest(request)).get();
             HttpResponse<InputStream> httpRes;
             try {
@@ -140,35 +156,35 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate {
 
 
         @Override
-        public PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse handleResponse(HttpResponse<InputStream> response) {
+        public SubmitInformationRequestResponse handleResponse(HttpResponse<InputStream> response) {
             String contentType = response
                     .headers()
                     .firstValue("Content-Type")
                     .orElse("application/octet-stream");
-            PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse.Builder resBuilder =
-                    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse
+            SubmitInformationRequestResponse.Builder resBuilder =
+                    SubmitInformationRequestResponse
                             .builder()
                             .contentType(contentType)
                             .statusCode(response.statusCode())
                             .rawResponse(response);
 
-            PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse res = resBuilder.build();
+            SubmitInformationRequestResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withTimeOffPolicy(Utils.unmarshal(response, new TypeReference<TimeOffPolicy>() {}));
+                    return res.withInformationRequest(Utils.unmarshal(response, new TypeReference<InformationRequest>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "404", "422")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "422")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     throw UnprocessableEntityErrorObject.from(response);
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "404", "4XX")) {
                 // no content
                 throw APIException.from("API error occurred", response);
             }
@@ -180,14 +196,14 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate {
         }
     }
     public static class Async extends Base
-            implements AsyncRequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest, com.gusto.embedded_api.models.operations.async.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> {
+            implements AsyncRequestOperation<SubmitInformationRequestRequest, com.gusto.embedded_api.models.operations.async.SubmitInformationRequestResponse> {
 
         public Async(SDKConfiguration sdkConfiguration, Headers _headers) {
             super(sdkConfiguration, _headers);
         }
 
-        private CompletableFuture<HttpRequest> onBuildRequest(PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest request) throws Exception {
-            HttpRequest req = buildRequest(request, PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest.class);
+        private CompletableFuture<HttpRequest> onBuildRequest(SubmitInformationRequestRequest request) throws Exception {
+            HttpRequest req = buildRequest(request, SubmitInformationRequestRequest.class, new TypeReference<SubmitInformationRequestRequest>() {});
             return this.sdkConfiguration.asyncHooks().beforeRequest(createBeforeRequestContext(), req);
         }
 
@@ -200,7 +216,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate {
         }
 
         @Override
-        public CompletableFuture<HttpResponse<Blob>> doRequest(PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest request) {
+        public CompletableFuture<HttpResponse<Blob>> doRequest(SubmitInformationRequestRequest request) {
             return unchecked(() -> onBuildRequest(request)).get().thenCompose(client::sendAsync)
                     .handle((resp, err) -> {
                         if (err != null) {
@@ -216,30 +232,30 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate {
         }
 
         @Override
-        public CompletableFuture<com.gusto.embedded_api.models.operations.async.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> handleResponse(
+        public CompletableFuture<com.gusto.embedded_api.models.operations.async.SubmitInformationRequestResponse> handleResponse(
                 HttpResponse<Blob> response) {
             String contentType = response
                     .headers()
                     .firstValue("Content-Type")
                     .orElse("application/octet-stream");
-            com.gusto.embedded_api.models.operations.async.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse.Builder resBuilder =
-                    com.gusto.embedded_api.models.operations.async.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse
+            com.gusto.embedded_api.models.operations.async.SubmitInformationRequestResponse.Builder resBuilder =
+                    com.gusto.embedded_api.models.operations.async.SubmitInformationRequestResponse
                             .builder()
                             .contentType(contentType)
                             .statusCode(response.statusCode())
                             .rawResponse(response);
 
-            com.gusto.embedded_api.models.operations.async.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse res = resBuilder.build();
+            com.gusto.embedded_api.models.operations.async.SubmitInformationRequestResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return Utils.unmarshalAsync(response, new TypeReference<TimeOffPolicy>() {})
-                            .thenApply(res::withTimeOffPolicy);
+                    return Utils.unmarshalAsync(response, new TypeReference<InformationRequest>() {})
+                            .thenApply(res::withInformationRequest);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "404", "422")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "422")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     return UnprocessableEntityErrorObject.fromAsync(response)
                             .thenCompose(CompletableFuture::failedFuture);
@@ -247,7 +263,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "404", "4XX")) {
                 // no content
                 return Utils.createAsyncApiError(response, "API error occurred");
             }
