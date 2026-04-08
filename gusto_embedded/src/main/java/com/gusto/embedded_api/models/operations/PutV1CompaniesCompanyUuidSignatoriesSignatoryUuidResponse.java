@@ -34,7 +34,7 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse implement
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
     private Optional<? extends Signatory> signatory;
 
@@ -87,7 +87,7 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse implement
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse implement
     }
 
     /**
-     * Example response
+     * Successful
      */
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse withSignatory(Signatory signatory) {
         Utils.checkNotNull(signatory, "signatory");
@@ -138,7 +138,7 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse implement
 
 
     /**
-     * Example response
+     * Successful
      */
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse withSignatory(Optional<? extends Signatory> signatory) {
         Utils.checkNotNull(signatory, "signatory");
@@ -225,7 +225,7 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse implement
 
 
         /**
-         * Example response
+         * Successful
          */
         public Builder signatory(Signatory signatory) {
             Utils.checkNotNull(signatory, "signatory");
@@ -234,7 +234,7 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse implement
         }
 
         /**
-         * Example response
+         * Successful
          */
         public Builder signatory(Optional<? extends Signatory> signatory) {
             Utils.checkNotNull(signatory, "signatory");

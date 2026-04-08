@@ -35,24 +35,24 @@ public class GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse 
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Success
      */
-    private Optional<? extends List<ContributionExclusion>> contributionExclusionList;
+    private Optional<? extends List<ContributionExclusion>> contributionExclusions;
 
     @JsonCreator
     public GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends List<ContributionExclusion>> contributionExclusionList) {
+            Optional<? extends List<ContributionExclusion>> contributionExclusions) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(contributionExclusionList, "contributionExclusionList");
+        Utils.checkNotNull(contributionExclusions, "contributionExclusions");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.contributionExclusionList = contributionExclusionList;
+        this.contributionExclusions = contributionExclusions;
     }
     
     public GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse(
@@ -88,12 +88,12 @@ public class GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse 
     }
 
     /**
-     * Example response
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<ContributionExclusion>> contributionExclusionList() {
-        return (Optional<List<ContributionExclusion>>) contributionExclusionList;
+    public Optional<List<ContributionExclusion>> contributionExclusions() {
+        return (Optional<List<ContributionExclusion>>) contributionExclusions;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse 
     }
 
     /**
-     * Example response
+     * Success
      */
-    public GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse withContributionExclusionList(List<ContributionExclusion> contributionExclusionList) {
-        Utils.checkNotNull(contributionExclusionList, "contributionExclusionList");
-        this.contributionExclusionList = Optional.ofNullable(contributionExclusionList);
+    public GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse withContributionExclusions(List<ContributionExclusion> contributionExclusions) {
+        Utils.checkNotNull(contributionExclusions, "contributionExclusions");
+        this.contributionExclusions = Optional.ofNullable(contributionExclusions);
         return this;
     }
 
 
     /**
-     * Example response
+     * Success
      */
-    public GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse withContributionExclusionList(Optional<? extends List<ContributionExclusion>> contributionExclusionList) {
-        Utils.checkNotNull(contributionExclusionList, "contributionExclusionList");
-        this.contributionExclusionList = contributionExclusionList;
+    public GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse withContributionExclusions(Optional<? extends List<ContributionExclusion>> contributionExclusions) {
+        Utils.checkNotNull(contributionExclusions, "contributionExclusions");
+        this.contributionExclusions = contributionExclusions;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse 
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.contributionExclusionList, other.contributionExclusionList);
+            Utils.enhancedDeepEquals(this.contributionExclusions, other.contributionExclusions);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            contributionExclusionList);
+            contributionExclusions);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse 
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "contributionExclusionList", contributionExclusionList);
+                "contributionExclusions", contributionExclusions);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse 
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends List<ContributionExclusion>> contributionExclusionList = Optional.empty();
+        private Optional<? extends List<ContributionExclusion>> contributionExclusions = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse 
 
 
         /**
-         * Example response
+         * Success
          */
-        public Builder contributionExclusionList(List<ContributionExclusion> contributionExclusionList) {
-            Utils.checkNotNull(contributionExclusionList, "contributionExclusionList");
-            this.contributionExclusionList = Optional.ofNullable(contributionExclusionList);
+        public Builder contributionExclusions(List<ContributionExclusion> contributionExclusions) {
+            Utils.checkNotNull(contributionExclusions, "contributionExclusions");
+            this.contributionExclusions = Optional.ofNullable(contributionExclusions);
             return this;
         }
 
         /**
-         * Example response
+         * Success
          */
-        public Builder contributionExclusionList(Optional<? extends List<ContributionExclusion>> contributionExclusionList) {
-            Utils.checkNotNull(contributionExclusionList, "contributionExclusionList");
-            this.contributionExclusionList = contributionExclusionList;
+        public Builder contributionExclusions(Optional<? extends List<ContributionExclusion>> contributionExclusions) {
+            Utils.checkNotNull(contributionExclusions, "contributionExclusions");
+            this.contributionExclusions = contributionExclusions;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse 
 
             return new GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse(
                 contentType, statusCode, rawResponse,
-                contributionExclusionList);
+                contributionExclusions);
         }
 
     }

@@ -25,26 +25,26 @@ scope: `holiday_pay_policies:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidHolidayPayPolicyResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1CompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().get()
-                .xGustoAPIVersion(GetV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(GetV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .companyUuid("<id>")
                 .call();
 
         if (res.holidayPayPolicy().isPresent()) {
-            // handle response
+            System.out.println(res.holidayPayPolicy().get());
         }
     }
 }
@@ -63,10 +63,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
-| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## create
 
@@ -81,6 +81,7 @@ scope: `holiday_pay_policies:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidHolidayPayPolicyResponse;
@@ -88,19 +89,19 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1CompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().create()
-                .xGustoAPIVersion(PostV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(PostV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .companyUuid("<id>")
                 .call();
 
         if (res.holidayPayPolicy().isPresent()) {
-            // handle response
+            System.out.println(res.holidayPayPolicy().get());
         }
     }
 }
@@ -122,7 +123,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## update
@@ -138,20 +140,21 @@ scope: `holiday_pay_policies:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().update()
-                .xGustoAPIVersion(PutV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(PutV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .companyUuid("<id>")
                 .requestBody(PutV1CompaniesCompanyUuidHolidayPayPolicyRequestBody.builder()
                     .version("56d00c178bc7393b2a206ed6a86afcb4")
@@ -159,7 +162,7 @@ public class Application {
                 .call();
 
         if (res.holidayPayPolicy().isPresent()) {
-            // handle response
+            System.out.println(res.holidayPayPolicy().get());
         }
     }
 }
@@ -181,7 +184,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## delete
@@ -197,6 +201,7 @@ scope: `holiday_pay_policies:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse;
@@ -204,14 +209,14 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse res = sdk.holidayPayPolicies().delete()
-                .xGustoAPIVersion(DeleteV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(DeleteV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .companyUuid("<id>")
                 .call();
 
@@ -235,7 +240,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## addEmployees
@@ -251,6 +257,7 @@ scope: `holiday_pay_policies:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -258,14 +265,14 @@ import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompaniesCompanyUuidHolidayPayPolicyAddResponse res = sdk.holidayPayPolicies().addEmployees()
-                .xGustoAPIVersion(PutV1CompaniesCompanyUuidHolidayPayPolicyAddHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(PutV1CompaniesCompanyUuidHolidayPayPolicyAddHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .companyUuid("<id>")
                 .requestBody(PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody.builder()
                     .version("56d00c178bc7393b2a206ed6a86afcb4")
@@ -274,7 +281,7 @@ public class Application {
                 .call();
 
         if (res.holidayPayPolicy().isPresent()) {
-            // handle response
+            System.out.println(res.holidayPayPolicy().get());
         }
     }
 }
@@ -296,7 +303,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## removeEmployees
@@ -312,6 +320,7 @@ scope: `holiday_pay_policies:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -319,14 +328,14 @@ import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse res = sdk.holidayPayPolicies().removeEmployees()
-                .xGustoAPIVersion(PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .companyUuid("<id>")
                 .requestBody(PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody.builder()
                     .version("56d00c178bc7393b2a206ed6a86afcb4")
@@ -337,7 +346,7 @@ public class Application {
                 .call();
 
         if (res.holidayPayPolicy().isPresent()) {
-            // handle response
+            System.out.println(res.holidayPayPolicy().get());
         }
     }
 }
@@ -359,7 +368,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## previewPaidHolidays
@@ -368,9 +378,43 @@ Preview a company's paid holidays
 
 scope: `holiday_pay_policies:read`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-paid_holidays" method="get" path="/v1/companies/{company_uuid}/paid_holidays" -->
+<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-paid_holidays" method="get" path="/v1/companies/{company_uuid}/paid_holidays" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidPaidHolidaysRequestBody;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidPaidHolidaysResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetCompaniesCompanyUuidPaidHolidaysResponse res = sdk.holidayPayPolicies().previewPaidHolidays()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(GetCompaniesCompanyUuidPaidHolidaysRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.paidHolidays().isPresent()) {
+            System.out.println(res.paidHolidays().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-paid_holidays" method="get" path="/v1/companies/{company_uuid}/paid_holidays" example="Example" -->
 ```java
 package hello.world;
 
@@ -398,7 +442,75 @@ public class Application {
                 .call();
 
         if (res.paidHolidays().isPresent()) {
-            // handle response
+            System.out.println(res.paidHolidays().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-paid_holidays" method="get" path="/v1/companies/{company_uuid}/paid_holidays" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidPaidHolidaysRequestBody;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidPaidHolidaysResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetCompaniesCompanyUuidPaidHolidaysResponse res = sdk.holidayPayPolicies().previewPaidHolidays()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(GetCompaniesCompanyUuidPaidHolidaysRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.paidHolidays().isPresent()) {
+            System.out.println(res.paidHolidays().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-paid_holidays" method="get" path="/v1/companies/{company_uuid}/paid_holidays" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidPaidHolidaysRequestBody;
+import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidPaidHolidaysResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetCompaniesCompanyUuidPaidHolidaysResponse res = sdk.holidayPayPolicies().previewPaidHolidays()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(GetCompaniesCompanyUuidPaidHolidaysRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.paidHolidays().isPresent()) {
+            System.out.println(res.paidHolidays().get());
         }
     }
 }

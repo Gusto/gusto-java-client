@@ -8,11 +8,6 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * PayScheduleAssignmentPreviewType
- * 
- * <p>The pay schedule assignment type.
- */
 public enum PayScheduleAssignmentPreviewType {
     SINGLE("single"),
     HOURLY_SALARIED("hourly_salaried"),

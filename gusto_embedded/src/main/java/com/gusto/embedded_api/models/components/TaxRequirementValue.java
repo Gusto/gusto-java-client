@@ -20,7 +20,7 @@ import java.lang.SuppressWarnings;
 /**
  * TaxRequirementValue
  * 
- * <p>The "answer"
+ * <p>The required value of the requirement identified by `key`
  */
 @JsonDeserialize(using = TaxRequirementValue._Deserializer.class)
 public class TaxRequirementValue {

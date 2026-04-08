@@ -7,9 +7,9 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.AdminCreateRequest;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdAdminsRequest;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdAdminsRequestBody;
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyIdAdmins;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -20,17 +20,29 @@ import java.util.concurrent.CompletableFuture;
 
 public class PostV1CompaniesCompanyIdAdminsRequestBuilder {
 
-    private String companyId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PostV1CompaniesCompanyIdAdminsRequestBody requestBody;
+                            new TypeReference<Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private AdminCreateRequest adminCreateRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1CompaniesCompanyIdAdminsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PostV1CompaniesCompanyIdAdminsRequestBuilder xGustoAPIVersion(PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyIdAdminsRequestBuilder xGustoAPIVersion(Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PostV1CompaniesCompanyIdAdminsRequestBuilder companyId(String companyId) {
@@ -38,22 +50,10 @@ public class PostV1CompaniesCompanyIdAdminsRequestBuilder {
         this.companyId = companyId;
         return this;
     }
-                
-    public PostV1CompaniesCompanyIdAdminsRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
 
-    public PostV1CompaniesCompanyIdAdminsRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PostV1CompaniesCompanyIdAdminsRequestBuilder requestBody(PostV1CompaniesCompanyIdAdminsRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PostV1CompaniesCompanyIdAdminsRequestBuilder adminCreateRequest(AdminCreateRequest adminCreateRequest) {
+        Utils.checkNotNull(adminCreateRequest, "adminCreateRequest");
+        this.adminCreateRequest = adminCreateRequest;
         return this;
     }
 
@@ -63,9 +63,9 @@ public class PostV1CompaniesCompanyIdAdminsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1CompaniesCompanyIdAdminsRequest request = new PostV1CompaniesCompanyIdAdminsRequest(companyId,
-            xGustoAPIVersion,
-            requestBody);
+        PostV1CompaniesCompanyIdAdminsRequest request = new PostV1CompaniesCompanyIdAdminsRequest(xGustoAPIVersion,
+            companyId,
+            adminCreateRequest);
 
         return request;
     }
@@ -80,9 +80,9 @@ public class PostV1CompaniesCompanyIdAdminsRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>>() {});
 }

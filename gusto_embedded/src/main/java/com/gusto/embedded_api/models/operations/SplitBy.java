@@ -11,13 +11,12 @@ import java.util.Optional;
 /**
  * SplitBy
  * 
- * <p>Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must
- * add up to exactly 100. If `split_by` is Amount, then amount is in cents and the last `split` amount
- * must be `null` to capture the remainder.
+ * <p>How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount,
+ * values are in cents and the last split amount must be null to capture the remainder.
  */
 public enum SplitBy {
-    AMOUNT("Amount"),
-    PERCENTAGE("Percentage");
+    PERCENTAGE("Percentage"),
+    AMOUNT("Amount");
 
     @JsonValue
     private final String value;

@@ -17,9 +17,44 @@ If an inactive earning type exists with the same name, this will reactivate it i
 
 scope: `payrolls:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-earning_types" method="post" path="/v1/companies/{company_id}/earning_types" -->
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-earning_types" method="post" path="/v1/companies/{company_id}/earning_types" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdEarningTypesRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdEarningTypesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1CompaniesCompanyIdEarningTypesResponse res = sdk.earningTypes().create()
+                .companyId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1CompaniesCompanyIdEarningTypesRequestBody.builder()
+                    .name("<value>")
+                    .build())
+                .call();
+
+        if (res.earningType().isPresent()) {
+            System.out.println(res.earningType().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-earning_types" method="post" path="/v1/companies/{company_id}/earning_types" example="Example" -->
 ```java
 package hello.world;
 
@@ -47,7 +82,77 @@ public class Application {
                 .call();
 
         if (res.earningType().isPresent()) {
-            // handle response
+            System.out.println(res.earningType().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-earning_types" method="post" path="/v1/companies/{company_id}/earning_types" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdEarningTypesRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdEarningTypesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1CompaniesCompanyIdEarningTypesResponse res = sdk.earningTypes().create()
+                .companyId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1CompaniesCompanyIdEarningTypesRequestBody.builder()
+                    .name("<value>")
+                    .build())
+                .call();
+
+        if (res.earningType().isPresent()) {
+            System.out.println(res.earningType().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-earning_types" method="post" path="/v1/companies/{company_id}/earning_types" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdEarningTypesRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdEarningTypesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1CompaniesCompanyIdEarningTypesResponse res = sdk.earningTypes().create()
+                .companyId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1CompaniesCompanyIdEarningTypesRequestBody.builder()
+                    .name("<value>")
+                    .build())
+                .call();
+
+        if (res.earningType().isPresent()) {
+            System.out.println(res.earningType().get());
         }
     }
 }
@@ -86,7 +191,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-earning_types" method="get" path="/v1/companies/{company_id}/earning_types" -->
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-earning_types" method="get" path="/v1/companies/{company_id}/earning_types" example="Example" -->
 ```java
 package hello.world;
 
@@ -109,7 +214,7 @@ public class Application {
                 .call();
 
         if (res.earningTypeList().isPresent()) {
-            // handle response
+            System.out.println(res.earningTypeList().get());
         }
     }
 }
@@ -138,9 +243,44 @@ Update an earning type.
 
 scope: `payrolls:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="put-v1-companies-company_id-earning_types-earning_type_uuid" method="put" path="/v1/companies/{company_id}/earning_types/{earning_type_uuid}" -->
+<!-- UsageSnippet language="java" operationID="put-v1-companies-company_id-earning_types-earning_type_uuid" method="put" path="/v1/companies/{company_id}/earning_types/{earning_type_uuid}" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse res = sdk.earningTypes().update()
+                .companyId("<id>")
+                .earningTypeUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.earningType().isPresent()) {
+            System.out.println(res.earningType().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-companies-company_id-earning_types-earning_type_uuid" method="put" path="/v1/companies/{company_id}/earning_types/{earning_type_uuid}" example="Example" -->
 ```java
 package hello.world;
 
@@ -169,7 +309,77 @@ public class Application {
                 .call();
 
         if (res.earningType().isPresent()) {
-            // handle response
+            System.out.println(res.earningType().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-v1-companies-company_id-earning_types-earning_type_uuid" method="put" path="/v1/companies/{company_id}/earning_types/{earning_type_uuid}" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse res = sdk.earningTypes().update()
+                .companyId("<id>")
+                .earningTypeUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.earningType().isPresent()) {
+            System.out.println(res.earningType().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-v1-companies-company_id-earning_types-earning_type_uuid" method="put" path="/v1/companies/{company_id}/earning_types/{earning_type_uuid}" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse res = sdk.earningTypes().update()
+                .companyId("<id>")
+                .earningTypeUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.earningType().isPresent()) {
+            System.out.println(res.earningType().get());
         }
     }
 }

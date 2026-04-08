@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.I9AuthorizationRequestBody;
 import com.gusto.embedded_api.operations.PutV1EmployeesEmployeeIdI9Authorization;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,17 +17,29 @@ import java.util.Optional;
 
 public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder {
 
-    private String employeeId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PutV1EmployeesEmployeeIdI9AuthorizationRequestBody requestBody;
+                            new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
+    private I9AuthorizationRequestBody i9AuthorizationRequestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder xGustoAPIVersion(PutV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder xGustoAPIVersion(Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder employeeId(String employeeId) {
@@ -35,22 +47,10 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder {
         this.employeeId = employeeId;
         return this;
     }
-                
-    public PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
 
-    public PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder requestBody(PutV1EmployeesEmployeeIdI9AuthorizationRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder i9AuthorizationRequestBody(I9AuthorizationRequestBody i9AuthorizationRequestBody) {
+        Utils.checkNotNull(i9AuthorizationRequestBody, "i9AuthorizationRequestBody");
+        this.i9AuthorizationRequestBody = i9AuthorizationRequestBody;
         return this;
     }
 
@@ -60,9 +60,9 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1EmployeesEmployeeIdI9AuthorizationRequest request = new PutV1EmployeesEmployeeIdI9AuthorizationRequest(employeeId,
-            xGustoAPIVersion,
-            requestBody);
+        PutV1EmployeesEmployeeIdI9AuthorizationRequest request = new PutV1EmployeesEmployeeIdI9AuthorizationRequest(xGustoAPIVersion,
+            employeeId,
+            i9AuthorizationRequestBody);
 
         return request;
     }
@@ -76,9 +76,9 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion>>() {});
 }

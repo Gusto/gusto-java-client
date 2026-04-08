@@ -54,6 +54,8 @@ public class Suspensions {
      * 
      * <p>scope: `company_suspensions:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public GetCompaniesCompanyUuidSuspensionsRequestBuilder get() {
@@ -73,6 +75,8 @@ public class Suspensions {
      * endpoint.
      * 
      * <p>scope: `company_suspensions:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
@@ -95,6 +99,8 @@ public class Suspensions {
      * endpoint.
      * 
      * <p>scope: `company_suspensions:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
@@ -122,6 +128,8 @@ public class Suspensions {
      * 
      * <p>scope: `company_suspensions:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PostCompaniesCompanyUuidSuspensionsRequestBuilder suspend() {
@@ -136,6 +144,8 @@ public class Suspensions {
      * past payrolls.
      * 
      * <p>scope: `company_suspensions:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @param requestBody 
@@ -154,6 +164,8 @@ public class Suspensions {
      * past payrolls.
      * 
      * <p>scope: `company_suspensions:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company

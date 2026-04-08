@@ -15,10 +15,10 @@ import java.util.Optional;
 
 public class OauthAccessTokenRequestBuilder {
 
-    private Optional<? extends XGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
-                            "\"2024-04-01\"",
-                            new TypeReference<Optional<? extends XGustoAPIVersion>>() {});
+                            "\"2025-06-15\"",
+                            new TypeReference<Optional<? extends HeaderXGustoAPIVersion>>() {});
     private OauthAccessTokenRequestBody requestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
@@ -27,13 +27,13 @@ public class OauthAccessTokenRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
                 
-    public OauthAccessTokenRequestBuilder xGustoAPIVersion(XGustoAPIVersion xGustoAPIVersion) {
+    public OauthAccessTokenRequestBuilder xGustoAPIVersion(HeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public OauthAccessTokenRequestBuilder xGustoAPIVersion(Optional<? extends XGustoAPIVersion> xGustoAPIVersion) {
+    public OauthAccessTokenRequestBuilder xGustoAPIVersion(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -66,9 +66,9 @@ public class OauthAccessTokenRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends XGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends HeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
-                    "\"2024-04-01\"",
-                    new TypeReference<Optional<? extends XGustoAPIVersion>>() {});
+                    "\"2025-06-15\"",
+                    new TypeReference<Optional<? extends HeaderXGustoAPIVersion>>() {});
 }

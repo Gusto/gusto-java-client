@@ -71,3 +71,11 @@ Based on:
 - Speakeasy CLI 1.692.0 (2.797.1) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [java v0.3.1] gusto_embedded
+
+## 2026-04-08 21:56:31
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.761.1 (2.879.6) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.3.2] gusto_embedded

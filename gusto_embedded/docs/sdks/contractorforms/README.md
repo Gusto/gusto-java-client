@@ -40,7 +40,7 @@ public class Application {
                 .call();
 
         if (res.form1099s().isPresent()) {
-            // handle response
+            System.out.println(res.form1099s().get());
         }
     }
 }
@@ -95,7 +95,7 @@ public class Application {
                 .call();
 
         if (res.form1099().isPresent()) {
-            // handle response
+            System.out.println(res.form1099().get());
         }
     }
 }
@@ -127,7 +127,7 @@ scope: `contractor_forms:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-contractor-form-pdf" method="get" path="/v1/contractors/{contractor_uuid}/forms/{form_id}/pdf" -->
+<!-- UsageSnippet language="java" operationID="get-v1-contractor-form-pdf" method="get" path="/v1/contractors/{contractor_uuid}/forms/{form_id}/pdf" example="Example" -->
 ```java
 package hello.world;
 
@@ -151,7 +151,7 @@ public class Application {
                 .call();
 
         if (res.formPdf().isPresent()) {
-            // handle response
+            System.out.println(res.formPdf().get());
         }
     }
 }
@@ -185,9 +185,9 @@ Generates a 1099 document for testing purposes.
 
 scope: `contractors:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_1099" method="post" path="/v1/sandbox/generate_1099" -->
+<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_1099" method="post" path="/v1/sandbox/generate_1099" example="Basic" -->
 ```java
 package hello.world;
 
@@ -214,7 +214,75 @@ public class Application {
                 .call();
 
         if (res.form1099().isPresent()) {
-            // handle response
+            System.out.println(res.form1099().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_1099" method="post" path="/v1/sandbox/generate_1099" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerate1099RequestBody;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerate1099Response;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1SandboxGenerate1099Response res = sdk.contractorForms().generate1099()
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1SandboxGenerate1099RequestBody.builder()
+                    .contractorId("<id>")
+                    .build())
+                .call();
+
+        if (res.form1099().isPresent()) {
+            System.out.println(res.form1099().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_1099" method="post" path="/v1/sandbox/generate_1099" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerate1099RequestBody;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerate1099Response;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1SandboxGenerate1099Response res = sdk.contractorForms().generate1099()
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1SandboxGenerate1099RequestBody.builder()
+                    .contractorId("<id>")
+                    .build())
+                .call();
+
+        if (res.form1099().isPresent()) {
+            System.out.println(res.form1099().get());
         }
     }
 }

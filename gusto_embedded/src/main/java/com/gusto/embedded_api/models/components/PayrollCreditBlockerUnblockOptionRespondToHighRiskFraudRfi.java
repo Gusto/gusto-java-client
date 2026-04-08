@@ -15,7 +15,7 @@ import java.lang.String;
  * 
  * <p>Unblock option to resolve a credit blocker by responding to high risk fraud RFI
  */
-public class PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi implements PayrollCreditBlockersTypeUnblockOptions {
+public class PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi implements PayrollCreditBlockerTypeUnblockOptions {
     /**
      * The type of unblock option for the credit blocker
      */

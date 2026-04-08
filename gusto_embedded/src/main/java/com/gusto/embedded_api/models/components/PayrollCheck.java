@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -41,7 +42,7 @@ public class PayrollCheck {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("starting_check_number")
-    private JsonNullable<String> startingCheckNumber;
+    private JsonNullable<Long> startingCheckNumber;
 
     /**
      * A unique identifier of the Generated Document request
@@ -68,7 +69,7 @@ public class PayrollCheck {
     public PayrollCheck(
             @JsonProperty("payroll_uuid") Optional<String> payrollUuid,
             @JsonProperty("printing_format") Optional<String> printingFormat,
-            @JsonProperty("starting_check_number") JsonNullable<String> startingCheckNumber,
+            @JsonProperty("starting_check_number") JsonNullable<Long> startingCheckNumber,
             @JsonProperty("request_uuid") Optional<String> requestUuid,
             @JsonProperty("status") Optional<String> status,
             @JsonProperty("employee_check_number_mapping") Optional<? extends List<EmployeeCheckNumberMapping>> employeeCheckNumberMapping) {
@@ -111,7 +112,7 @@ public class PayrollCheck {
      * The starting check number for the checks being printed.
      */
     @JsonIgnore
-    public JsonNullable<String> startingCheckNumber() {
+    public JsonNullable<Long> startingCheckNumber() {
         return startingCheckNumber;
     }
 
@@ -186,7 +187,7 @@ public class PayrollCheck {
     /**
      * The starting check number for the checks being printed.
      */
-    public PayrollCheck withStartingCheckNumber(String startingCheckNumber) {
+    public PayrollCheck withStartingCheckNumber(long startingCheckNumber) {
         Utils.checkNotNull(startingCheckNumber, "startingCheckNumber");
         this.startingCheckNumber = JsonNullable.of(startingCheckNumber);
         return this;
@@ -195,7 +196,7 @@ public class PayrollCheck {
     /**
      * The starting check number for the checks being printed.
      */
-    public PayrollCheck withStartingCheckNumber(JsonNullable<String> startingCheckNumber) {
+    public PayrollCheck withStartingCheckNumber(JsonNullable<Long> startingCheckNumber) {
         Utils.checkNotNull(startingCheckNumber, "startingCheckNumber");
         this.startingCheckNumber = startingCheckNumber;
         return this;
@@ -301,7 +302,7 @@ public class PayrollCheck {
 
         private Optional<String> printingFormat = Optional.empty();
 
-        private JsonNullable<String> startingCheckNumber = JsonNullable.undefined();
+        private JsonNullable<Long> startingCheckNumber = JsonNullable.undefined();
 
         private Optional<String> requestUuid = Optional.empty();
 
@@ -355,7 +356,7 @@ public class PayrollCheck {
         /**
          * The starting check number for the checks being printed.
          */
-        public Builder startingCheckNumber(String startingCheckNumber) {
+        public Builder startingCheckNumber(long startingCheckNumber) {
             Utils.checkNotNull(startingCheckNumber, "startingCheckNumber");
             this.startingCheckNumber = JsonNullable.of(startingCheckNumber);
             return this;
@@ -364,7 +365,7 @@ public class PayrollCheck {
         /**
          * The starting check number for the checks being printed.
          */
-        public Builder startingCheckNumber(JsonNullable<String> startingCheckNumber) {
+        public Builder startingCheckNumber(JsonNullable<Long> startingCheckNumber) {
             Utils.checkNotNull(startingCheckNumber, "startingCheckNumber");
             this.startingCheckNumber = startingCheckNumber;
             return this;

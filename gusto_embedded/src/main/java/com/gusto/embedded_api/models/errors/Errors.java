@@ -11,32 +11,74 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
-import java.util.List;
 import java.util.Optional;
 
 
 public class Errors {
+    /**
+     * Specifies where the error occurs. Typically this key identifies the attribute/parameter related to
+     * the error.
+     */
+    @JsonProperty("error_key")
+    private String errorKey;
 
+    /**
+     * Specifies the type of error. The category provides error groupings and can be used to build custom
+     * error handling in your integration.
+     */
+    @JsonProperty("category")
+    private String category;
+
+    /**
+     * Provides details about the error - generally this message can be surfaced to an end user.
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("base")
-    private Optional<? extends List<Base>> base;
+    @JsonProperty("message")
+    private Optional<String> message;
 
     @JsonCreator
     public Errors(
-            @JsonProperty("base") Optional<? extends List<Base>> base) {
-        Utils.checkNotNull(base, "base");
-        this.base = base;
+            @JsonProperty("error_key") String errorKey,
+            @JsonProperty("category") String category,
+            @JsonProperty("message") Optional<String> message) {
+        Utils.checkNotNull(errorKey, "errorKey");
+        Utils.checkNotNull(category, "category");
+        Utils.checkNotNull(message, "message");
+        this.errorKey = errorKey;
+        this.category = category;
+        this.message = message;
     }
     
-    public Errors() {
-        this(Optional.empty());
+    public Errors(
+            String errorKey,
+            String category) {
+        this(errorKey, category, Optional.empty());
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * Specifies where the error occurs. Typically this key identifies the attribute/parameter related to
+     * the error.
+     */
     @JsonIgnore
-    public Optional<List<Base>> base() {
-        return (Optional<List<Base>>) base;
+    public String errorKey() {
+        return errorKey;
+    }
+
+    /**
+     * Specifies the type of error. The category provides error groupings and can be used to build custom
+     * error handling in your integration.
+     */
+    @JsonIgnore
+    public String category() {
+        return category;
+    }
+
+    /**
+     * Provides details about the error - generally this message can be surfaced to an end user.
+     */
+    @JsonIgnore
+    public Optional<String> message() {
+        return message;
     }
 
     public static Builder builder() {
@@ -44,16 +86,42 @@ public class Errors {
     }
 
 
-    public Errors withBase(List<Base> base) {
-        Utils.checkNotNull(base, "base");
-        this.base = Optional.ofNullable(base);
+    /**
+     * Specifies where the error occurs. Typically this key identifies the attribute/parameter related to
+     * the error.
+     */
+    public Errors withErrorKey(String errorKey) {
+        Utils.checkNotNull(errorKey, "errorKey");
+        this.errorKey = errorKey;
+        return this;
+    }
+
+    /**
+     * Specifies the type of error. The category provides error groupings and can be used to build custom
+     * error handling in your integration.
+     */
+    public Errors withCategory(String category) {
+        Utils.checkNotNull(category, "category");
+        this.category = category;
+        return this;
+    }
+
+    /**
+     * Provides details about the error - generally this message can be surfaced to an end user.
+     */
+    public Errors withMessage(String message) {
+        Utils.checkNotNull(message, "message");
+        this.message = Optional.ofNullable(message);
         return this;
     }
 
 
-    public Errors withBase(Optional<? extends List<Base>> base) {
-        Utils.checkNotNull(base, "base");
-        this.base = base;
+    /**
+     * Provides details about the error - generally this message can be surfaced to an end user.
+     */
+    public Errors withMessage(Optional<String> message) {
+        Utils.checkNotNull(message, "message");
+        this.message = message;
         return this;
     }
 
@@ -67,47 +135,83 @@ public class Errors {
         }
         Errors other = (Errors) o;
         return 
-            Utils.enhancedDeepEquals(this.base, other.base);
+            Utils.enhancedDeepEquals(this.errorKey, other.errorKey) &&
+            Utils.enhancedDeepEquals(this.category, other.category) &&
+            Utils.enhancedDeepEquals(this.message, other.message);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            base);
+            errorKey, category, message);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Errors.class,
-                "base", base);
+                "errorKey", errorKey,
+                "category", category,
+                "message", message);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends List<Base>> base = Optional.empty();
+        private String errorKey;
+
+        private String category;
+
+        private Optional<String> message = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder base(List<Base> base) {
-            Utils.checkNotNull(base, "base");
-            this.base = Optional.ofNullable(base);
+        /**
+         * Specifies where the error occurs. Typically this key identifies the attribute/parameter related to
+         * the error.
+         */
+        public Builder errorKey(String errorKey) {
+            Utils.checkNotNull(errorKey, "errorKey");
+            this.errorKey = errorKey;
             return this;
         }
 
-        public Builder base(Optional<? extends List<Base>> base) {
-            Utils.checkNotNull(base, "base");
-            this.base = base;
+
+        /**
+         * Specifies the type of error. The category provides error groupings and can be used to build custom
+         * error handling in your integration.
+         */
+        public Builder category(String category) {
+            Utils.checkNotNull(category, "category");
+            this.category = category;
+            return this;
+        }
+
+
+        /**
+         * Provides details about the error - generally this message can be surfaced to an end user.
+         */
+        public Builder message(String message) {
+            Utils.checkNotNull(message, "message");
+            this.message = Optional.ofNullable(message);
+            return this;
+        }
+
+        /**
+         * Provides details about the error - generally this message can be surfaced to an end user.
+         */
+        public Builder message(Optional<String> message) {
+            Utils.checkNotNull(message, "message");
+            this.message = message;
             return this;
         }
 
         public Errors build() {
 
             return new Errors(
-                base);
+                errorKey, category, message);
         }
 
     }

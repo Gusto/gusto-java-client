@@ -34,7 +34,7 @@ public class GetV1CompensationsCompensationIdResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
     private Optional<? extends Compensation> compensation;
 
@@ -87,7 +87,7 @@ public class GetV1CompensationsCompensationIdResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1CompensationsCompensationIdResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
     public GetV1CompensationsCompensationIdResponse withCompensation(Compensation compensation) {
         Utils.checkNotNull(compensation, "compensation");
@@ -138,7 +138,7 @@ public class GetV1CompensationsCompensationIdResponse implements AsyncResponse {
 
 
     /**
-     * Example response
+     * Successful
      */
     public GetV1CompensationsCompensationIdResponse withCompensation(Optional<? extends Compensation> compensation) {
         Utils.checkNotNull(compensation, "compensation");
@@ -225,7 +225,7 @@ public class GetV1CompensationsCompensationIdResponse implements AsyncResponse {
 
 
         /**
-         * Example response
+         * Successful
          */
         public Builder compensation(Compensation compensation) {
             Utils.checkNotNull(compensation, "compensation");
@@ -234,7 +234,7 @@ public class GetV1CompensationsCompensationIdResponse implements AsyncResponse {
         }
 
         /**
-         * Example response
+         * Successful
          */
         public Builder compensation(Optional<? extends Compensation> compensation) {
             Utils.checkNotNull(compensation, "compensation");

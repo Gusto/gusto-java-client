@@ -35,24 +35,24 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse implements
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Created
      */
-    private Optional<? extends List<I9AuthorizationDocument>> i9AuthorizationDocumentsObject;
+    private Optional<? extends List<I9AuthorizationDocument>> i9AuthorizationDocuments;
 
     @JsonCreator
     public PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<I9AuthorizationDocument>> i9AuthorizationDocumentsObject) {
+            Optional<? extends List<I9AuthorizationDocument>> i9AuthorizationDocuments) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(i9AuthorizationDocumentsObject, "i9AuthorizationDocumentsObject");
+        Utils.checkNotNull(i9AuthorizationDocuments, "i9AuthorizationDocuments");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.i9AuthorizationDocumentsObject = i9AuthorizationDocumentsObject;
+        this.i9AuthorizationDocuments = i9AuthorizationDocuments;
     }
     
     public PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse(
@@ -88,12 +88,12 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse implements
     }
 
     /**
-     * Example response
+     * Created
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<I9AuthorizationDocument>> i9AuthorizationDocumentsObject() {
-        return (Optional<List<I9AuthorizationDocument>>) i9AuthorizationDocumentsObject;
+    public Optional<List<I9AuthorizationDocument>> i9AuthorizationDocuments() {
+        return (Optional<List<I9AuthorizationDocument>>) i9AuthorizationDocuments;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse implements
     }
 
     /**
-     * Example response
+     * Created
      */
-    public PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse withI9AuthorizationDocumentsObject(List<I9AuthorizationDocument> i9AuthorizationDocumentsObject) {
-        Utils.checkNotNull(i9AuthorizationDocumentsObject, "i9AuthorizationDocumentsObject");
-        this.i9AuthorizationDocumentsObject = Optional.ofNullable(i9AuthorizationDocumentsObject);
+    public PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse withI9AuthorizationDocuments(List<I9AuthorizationDocument> i9AuthorizationDocuments) {
+        Utils.checkNotNull(i9AuthorizationDocuments, "i9AuthorizationDocuments");
+        this.i9AuthorizationDocuments = Optional.ofNullable(i9AuthorizationDocuments);
         return this;
     }
 
 
     /**
-     * Example response
+     * Created
      */
-    public PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse withI9AuthorizationDocumentsObject(Optional<? extends List<I9AuthorizationDocument>> i9AuthorizationDocumentsObject) {
-        Utils.checkNotNull(i9AuthorizationDocumentsObject, "i9AuthorizationDocumentsObject");
-        this.i9AuthorizationDocumentsObject = i9AuthorizationDocumentsObject;
+    public PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse withI9AuthorizationDocuments(Optional<? extends List<I9AuthorizationDocument>> i9AuthorizationDocuments) {
+        Utils.checkNotNull(i9AuthorizationDocuments, "i9AuthorizationDocuments");
+        this.i9AuthorizationDocuments = i9AuthorizationDocuments;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse implements
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.i9AuthorizationDocumentsObject, other.i9AuthorizationDocumentsObject);
+            Utils.enhancedDeepEquals(this.i9AuthorizationDocuments, other.i9AuthorizationDocuments);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            i9AuthorizationDocumentsObject);
+            i9AuthorizationDocuments);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse implements
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "i9AuthorizationDocumentsObject", i9AuthorizationDocumentsObject);
+                "i9AuthorizationDocuments", i9AuthorizationDocuments);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse implements
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends List<I9AuthorizationDocument>> i9AuthorizationDocumentsObject = Optional.empty();
+        private Optional<? extends List<I9AuthorizationDocument>> i9AuthorizationDocuments = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse implements
 
 
         /**
-         * Example response
+         * Created
          */
-        public Builder i9AuthorizationDocumentsObject(List<I9AuthorizationDocument> i9AuthorizationDocumentsObject) {
-            Utils.checkNotNull(i9AuthorizationDocumentsObject, "i9AuthorizationDocumentsObject");
-            this.i9AuthorizationDocumentsObject = Optional.ofNullable(i9AuthorizationDocumentsObject);
+        public Builder i9AuthorizationDocuments(List<I9AuthorizationDocument> i9AuthorizationDocuments) {
+            Utils.checkNotNull(i9AuthorizationDocuments, "i9AuthorizationDocuments");
+            this.i9AuthorizationDocuments = Optional.ofNullable(i9AuthorizationDocuments);
             return this;
         }
 
         /**
-         * Example response
+         * Created
          */
-        public Builder i9AuthorizationDocumentsObject(Optional<? extends List<I9AuthorizationDocument>> i9AuthorizationDocumentsObject) {
-            Utils.checkNotNull(i9AuthorizationDocumentsObject, "i9AuthorizationDocumentsObject");
-            this.i9AuthorizationDocumentsObject = i9AuthorizationDocumentsObject;
+        public Builder i9AuthorizationDocuments(Optional<? extends List<I9AuthorizationDocument>> i9AuthorizationDocuments) {
+            Utils.checkNotNull(i9AuthorizationDocuments, "i9AuthorizationDocuments");
+            this.i9AuthorizationDocuments = i9AuthorizationDocuments;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse implements
 
             return new PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse(
                 contentType, statusCode, rawResponse,
-                i9AuthorizationDocumentsObject);
+                i9AuthorizationDocuments);
         }
 
     }

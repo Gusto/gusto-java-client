@@ -5,6 +5,7 @@ package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gusto.embedded_api.models.components.RecurringReimbursement;
 import com.gusto.embedded_api.utils.Response;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
@@ -35,22 +36,22 @@ public class PutV1RecurringReimbursementsResponse implements Response {
     /**
      * successful
      */
-    private Optional<? extends PutV1RecurringReimbursementsResponseBody> object;
+    private Optional<? extends RecurringReimbursement> recurringReimbursement;
 
     @JsonCreator
     public PutV1RecurringReimbursementsResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends PutV1RecurringReimbursementsResponseBody> object) {
+            Optional<? extends RecurringReimbursement> recurringReimbursement) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(object, "object");
+        Utils.checkNotNull(recurringReimbursement, "recurringReimbursement");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.object = object;
+        this.recurringReimbursement = recurringReimbursement;
     }
     
     public PutV1RecurringReimbursementsResponse(
@@ -90,8 +91,8 @@ public class PutV1RecurringReimbursementsResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PutV1RecurringReimbursementsResponseBody> object() {
-        return (Optional<PutV1RecurringReimbursementsResponseBody>) object;
+    public Optional<RecurringReimbursement> recurringReimbursement() {
+        return (Optional<RecurringReimbursement>) recurringReimbursement;
     }
 
     public static Builder builder() {
@@ -129,9 +130,9 @@ public class PutV1RecurringReimbursementsResponse implements Response {
     /**
      * successful
      */
-    public PutV1RecurringReimbursementsResponse withObject(PutV1RecurringReimbursementsResponseBody object) {
-        Utils.checkNotNull(object, "object");
-        this.object = Optional.ofNullable(object);
+    public PutV1RecurringReimbursementsResponse withRecurringReimbursement(RecurringReimbursement recurringReimbursement) {
+        Utils.checkNotNull(recurringReimbursement, "recurringReimbursement");
+        this.recurringReimbursement = Optional.ofNullable(recurringReimbursement);
         return this;
     }
 
@@ -139,9 +140,9 @@ public class PutV1RecurringReimbursementsResponse implements Response {
     /**
      * successful
      */
-    public PutV1RecurringReimbursementsResponse withObject(Optional<? extends PutV1RecurringReimbursementsResponseBody> object) {
-        Utils.checkNotNull(object, "object");
-        this.object = object;
+    public PutV1RecurringReimbursementsResponse withRecurringReimbursement(Optional<? extends RecurringReimbursement> recurringReimbursement) {
+        Utils.checkNotNull(recurringReimbursement, "recurringReimbursement");
+        this.recurringReimbursement = recurringReimbursement;
         return this;
     }
 
@@ -158,14 +159,14 @@ public class PutV1RecurringReimbursementsResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.object, other.object);
+            Utils.enhancedDeepEquals(this.recurringReimbursement, other.recurringReimbursement);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            object);
+            recurringReimbursement);
     }
     
     @Override
@@ -174,7 +175,7 @@ public class PutV1RecurringReimbursementsResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "object", object);
+                "recurringReimbursement", recurringReimbursement);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -186,7 +187,7 @@ public class PutV1RecurringReimbursementsResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends PutV1RecurringReimbursementsResponseBody> object = Optional.empty();
+        private Optional<? extends RecurringReimbursement> recurringReimbursement = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,18 +227,18 @@ public class PutV1RecurringReimbursementsResponse implements Response {
         /**
          * successful
          */
-        public Builder object(PutV1RecurringReimbursementsResponseBody object) {
-            Utils.checkNotNull(object, "object");
-            this.object = Optional.ofNullable(object);
+        public Builder recurringReimbursement(RecurringReimbursement recurringReimbursement) {
+            Utils.checkNotNull(recurringReimbursement, "recurringReimbursement");
+            this.recurringReimbursement = Optional.ofNullable(recurringReimbursement);
             return this;
         }
 
         /**
          * successful
          */
-        public Builder object(Optional<? extends PutV1RecurringReimbursementsResponseBody> object) {
-            Utils.checkNotNull(object, "object");
-            this.object = object;
+        public Builder recurringReimbursement(Optional<? extends RecurringReimbursement> recurringReimbursement) {
+            Utils.checkNotNull(recurringReimbursement, "recurringReimbursement");
+            this.recurringReimbursement = recurringReimbursement;
             return this;
         }
 
@@ -245,7 +246,7 @@ public class PutV1RecurringReimbursementsResponse implements Response {
 
             return new PutV1RecurringReimbursementsResponse(
                 contentType, statusCode, rawResponse,
-                object);
+                recurringReimbursement);
         }
 
     }

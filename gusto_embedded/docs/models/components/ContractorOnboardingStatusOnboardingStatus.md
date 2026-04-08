@@ -2,6 +2,14 @@
 
 One of the "onboarding_status" enum values.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.ContractorOnboardingStatusOnboardingStatus;
+
+ContractorOnboardingStatusOnboardingStatus value = ContractorOnboardingStatusOnboardingStatus.ONBOARDING_COMPLETED;
+```
+
 
 ## Values
 

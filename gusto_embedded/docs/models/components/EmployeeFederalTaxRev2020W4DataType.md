@@ -2,6 +2,14 @@
 
 The version of w4 form.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.EmployeeFederalTaxRev2020W4DataType;
+
+EmployeeFederalTaxRev2020W4DataType value = EmployeeFederalTaxRev2020W4DataType.REV2020_W4;
+```
+
 
 ## Values
 

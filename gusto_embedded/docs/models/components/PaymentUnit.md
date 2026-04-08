@@ -2,6 +2,14 @@
 
 The unit accompanying the compensation rate. If the employee is an owner, rate should be 'Paycheck'.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.PaymentUnit;
+
+PaymentUnit value = PaymentUnit.HOUR;
+```
+
 
 ## Values
 

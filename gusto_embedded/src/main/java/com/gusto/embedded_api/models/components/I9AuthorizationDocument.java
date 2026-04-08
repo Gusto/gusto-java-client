@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * I9AuthorizationDocument
@@ -42,7 +42,7 @@ public class I9AuthorizationDocument {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiration_date")
-    private Optional<String> expirationDate;
+    private JsonNullable<String> expirationDate;
 
     /**
      * The document's issuing authority
@@ -55,7 +55,7 @@ public class I9AuthorizationDocument {
             @JsonProperty("uuid") String uuid,
             @JsonProperty("document_type") String documentType,
             @JsonProperty("document_title") String documentTitle,
-            @JsonProperty("expiration_date") Optional<String> expirationDate,
+            @JsonProperty("expiration_date") JsonNullable<String> expirationDate,
             @JsonProperty("issuing_authority") String issuingAuthority) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(documentType, "documentType");
@@ -75,7 +75,7 @@ public class I9AuthorizationDocument {
             String documentTitle,
             String issuingAuthority) {
         this(uuid, documentType, documentTitle,
-            Optional.empty(), issuingAuthority);
+            JsonNullable.undefined(), issuingAuthority);
     }
 
     /**
@@ -106,7 +106,7 @@ public class I9AuthorizationDocument {
      * The document's expiration date
      */
     @JsonIgnore
-    public Optional<String> expirationDate() {
+    public JsonNullable<String> expirationDate() {
         return expirationDate;
     }
 
@@ -155,15 +155,14 @@ public class I9AuthorizationDocument {
      */
     public I9AuthorizationDocument withExpirationDate(String expirationDate) {
         Utils.checkNotNull(expirationDate, "expirationDate");
-        this.expirationDate = Optional.ofNullable(expirationDate);
+        this.expirationDate = JsonNullable.of(expirationDate);
         return this;
     }
-
 
     /**
      * The document's expiration date
      */
-    public I9AuthorizationDocument withExpirationDate(Optional<String> expirationDate) {
+    public I9AuthorizationDocument withExpirationDate(JsonNullable<String> expirationDate) {
         Utils.checkNotNull(expirationDate, "expirationDate");
         this.expirationDate = expirationDate;
         return this;
@@ -221,7 +220,7 @@ public class I9AuthorizationDocument {
 
         private String documentTitle;
 
-        private Optional<String> expirationDate = Optional.empty();
+        private JsonNullable<String> expirationDate = JsonNullable.undefined();
 
         private String issuingAuthority;
 
@@ -265,14 +264,14 @@ public class I9AuthorizationDocument {
          */
         public Builder expirationDate(String expirationDate) {
             Utils.checkNotNull(expirationDate, "expirationDate");
-            this.expirationDate = Optional.ofNullable(expirationDate);
+            this.expirationDate = JsonNullable.of(expirationDate);
             return this;
         }
 
         /**
          * The document's expiration date
          */
-        public Builder expirationDate(Optional<String> expirationDate) {
+        public Builder expirationDate(JsonNullable<String> expirationDate) {
             Utils.checkNotNull(expirationDate, "expirationDate");
             this.expirationDate = expirationDate;
             return this;

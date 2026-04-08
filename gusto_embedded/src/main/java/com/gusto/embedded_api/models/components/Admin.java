@@ -12,6 +12,7 @@ import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * Admin
@@ -51,7 +52,7 @@ public class Admin {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
-    private Optional<String> phone;
+    private JsonNullable<String> phone;
 
     @JsonCreator
     public Admin(
@@ -59,7 +60,7 @@ public class Admin {
             @JsonProperty("email") Optional<String> email,
             @JsonProperty("first_name") Optional<String> firstName,
             @JsonProperty("last_name") Optional<String> lastName,
-            @JsonProperty("phone") Optional<String> phone) {
+            @JsonProperty("phone") JsonNullable<String> phone) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(email, "email");
         Utils.checkNotNull(firstName, "firstName");
@@ -75,7 +76,7 @@ public class Admin {
     public Admin(
             String uuid) {
         this(uuid, Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), JsonNullable.undefined());
     }
 
     /**
@@ -114,7 +115,7 @@ public class Admin {
      * The phone number of the admin.
      */
     @JsonIgnore
-    public Optional<String> phone() {
+    public JsonNullable<String> phone() {
         return phone;
     }
 
@@ -194,15 +195,14 @@ public class Admin {
      */
     public Admin withPhone(String phone) {
         Utils.checkNotNull(phone, "phone");
-        this.phone = Optional.ofNullable(phone);
+        this.phone = JsonNullable.of(phone);
         return this;
     }
-
 
     /**
      * The phone number of the admin.
      */
-    public Admin withPhone(Optional<String> phone) {
+    public Admin withPhone(JsonNullable<String> phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = phone;
         return this;
@@ -253,7 +253,7 @@ public class Admin {
 
         private Optional<String> lastName = Optional.empty();
 
-        private Optional<String> phone = Optional.empty();
+        private JsonNullable<String> phone = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -332,14 +332,14 @@ public class Admin {
          */
         public Builder phone(String phone) {
             Utils.checkNotNull(phone, "phone");
-            this.phone = Optional.ofNullable(phone);
+            this.phone = JsonNullable.of(phone);
             return this;
         }
 
         /**
          * The phone number of the admin.
          */
-        public Builder phone(Optional<String> phone) {
+        public Builder phone(JsonNullable<String> phone) {
             Utils.checkNotNull(phone, "phone");
             this.phone = phone;
             return this;

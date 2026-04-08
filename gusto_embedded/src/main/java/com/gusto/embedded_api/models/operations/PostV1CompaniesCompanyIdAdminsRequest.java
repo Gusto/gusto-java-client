@@ -6,7 +6,7 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.AdminCreateRequest;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -18,40 +18,51 @@ import java.util.Optional;
 
 public class PostV1CompaniesCompanyIdAdminsRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
     private String companyId;
+
+
+    @SpeakeasyMetadata("request:mediaType=application/json")
+    private AdminCreateRequest adminCreateRequest;
+
+    @JsonCreator
+    public PostV1CompaniesCompanyIdAdminsRequest(
+            Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyId,
+            AdminCreateRequest adminCreateRequest) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyId, "companyId");
+        Utils.checkNotNull(adminCreateRequest, "adminCreateRequest");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyId = companyId;
+        this.adminCreateRequest = adminCreateRequest;
+    }
+    
+    public PostV1CompaniesCompanyIdAdminsRequest(
+            String companyId,
+            AdminCreateRequest adminCreateRequest) {
+        this(Optional.empty(), companyId, adminCreateRequest);
+    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-
-    @SpeakeasyMetadata("request:mediaType=application/json")
-    private PostV1CompaniesCompanyIdAdminsRequestBody requestBody;
-
-    @JsonCreator
-    public PostV1CompaniesCompanyIdAdminsRequest(
-            String companyId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1CompaniesCompanyIdAdminsRequestBody requestBody) {
-        Utils.checkNotNull(companyId, "companyId");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.companyId = companyId;
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        this.requestBody = requestBody;
-    }
-    
-    public PostV1CompaniesCompanyIdAdminsRequest(
-            String companyId,
-            PostV1CompaniesCompanyIdAdminsRequestBody requestBody) {
-        this(companyId, Optional.empty(), requestBody);
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -62,20 +73,9 @@ public class PostV1CompaniesCompanyIdAdminsRequest {
         return companyId;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
-    }
-
-    @JsonIgnore
-    public PostV1CompaniesCompanyIdAdminsRequestBody requestBody() {
-        return requestBody;
+    public AdminCreateRequest adminCreateRequest() {
+        return adminCreateRequest;
     }
 
     public static Builder builder() {
@@ -84,20 +84,11 @@ public class PostV1CompaniesCompanyIdAdminsRequest {
 
 
     /**
-     * The UUID of the company
-     */
-    public PostV1CompaniesCompanyIdAdminsRequest withCompanyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PostV1CompaniesCompanyIdAdminsRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PostV1CompaniesCompanyIdAdminsRequest withXGustoAPIVersion(PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -109,15 +100,24 @@ public class PostV1CompaniesCompanyIdAdminsRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PostV1CompaniesCompanyIdAdminsRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PostV1CompaniesCompanyIdAdminsRequest withXGustoAPIVersion(Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PostV1CompaniesCompanyIdAdminsRequest withRequestBody(PostV1CompaniesCompanyIdAdminsRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    /**
+     * The UUID of the company
+     */
+    public PostV1CompaniesCompanyIdAdminsRequest withCompanyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
+    public PostV1CompaniesCompanyIdAdminsRequest withAdminCreateRequest(AdminCreateRequest adminCreateRequest) {
+        Utils.checkNotNull(adminCreateRequest, "adminCreateRequest");
+        this.adminCreateRequest = adminCreateRequest;
         return this;
     }
 
@@ -131,36 +131,59 @@ public class PostV1CompaniesCompanyIdAdminsRequest {
         }
         PostV1CompaniesCompanyIdAdminsRequest other = (PostV1CompaniesCompanyIdAdminsRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
-            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
+            Utils.enhancedDeepEquals(this.adminCreateRequest, other.adminCreateRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, xGustoAPIVersion, requestBody);
+            xGustoAPIVersion, companyId, adminCreateRequest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostV1CompaniesCompanyIdAdminsRequest.class,
-                "companyId", companyId,
                 "xGustoAPIVersion", xGustoAPIVersion,
-                "requestBody", requestBody);
+                "companyId", companyId,
+                "adminCreateRequest", adminCreateRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String companyId;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-        private PostV1CompaniesCompanyIdAdminsRequestBody requestBody;
+        private AdminCreateRequest adminCreateRequest;
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -174,32 +197,9 @@ public class PostV1CompaniesCompanyIdAdminsRequest {
         }
 
 
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
-
-
-        public Builder requestBody(PostV1CompaniesCompanyIdAdminsRequestBody requestBody) {
-            Utils.checkNotNull(requestBody, "requestBody");
-            this.requestBody = requestBody;
+        public Builder adminCreateRequest(AdminCreateRequest adminCreateRequest) {
+            Utils.checkNotNull(adminCreateRequest, "adminCreateRequest");
+            this.adminCreateRequest = adminCreateRequest;
             return this;
         }
 
@@ -209,14 +209,14 @@ public class PostV1CompaniesCompanyIdAdminsRequest {
             }
 
             return new PostV1CompaniesCompanyIdAdminsRequest(
-                companyId, xGustoAPIVersion, requestBody);
+                xGustoAPIVersion, companyId, adminCreateRequest);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>>() {});
     }
 }

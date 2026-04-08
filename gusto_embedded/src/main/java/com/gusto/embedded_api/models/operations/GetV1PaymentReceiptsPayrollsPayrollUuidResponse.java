@@ -34,7 +34,7 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidResponse implements Response
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * successful
+     * Successful
      */
     private Optional<? extends PayrollReceipt> payrollReceipt;
 
@@ -87,7 +87,7 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidResponse implements Response
     }
 
     /**
-     * successful
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidResponse implements Response
     }
 
     /**
-     * successful
+     * Successful
      */
     public GetV1PaymentReceiptsPayrollsPayrollUuidResponse withPayrollReceipt(PayrollReceipt payrollReceipt) {
         Utils.checkNotNull(payrollReceipt, "payrollReceipt");
@@ -138,7 +138,7 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidResponse implements Response
 
 
     /**
-     * successful
+     * Successful
      */
     public GetV1PaymentReceiptsPayrollsPayrollUuidResponse withPayrollReceipt(Optional<? extends PayrollReceipt> payrollReceipt) {
         Utils.checkNotNull(payrollReceipt, "payrollReceipt");
@@ -225,7 +225,7 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidResponse implements Response
 
 
         /**
-         * successful
+         * Successful
          */
         public Builder payrollReceipt(PayrollReceipt payrollReceipt) {
             Utils.checkNotNull(payrollReceipt, "payrollReceipt");
@@ -234,7 +234,7 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidResponse implements Response
         }
 
         /**
-         * successful
+         * Successful
          */
         public Builder payrollReceipt(Optional<? extends PayrollReceipt> payrollReceipt) {
             Utils.checkNotNull(payrollReceipt, "payrollReceipt");

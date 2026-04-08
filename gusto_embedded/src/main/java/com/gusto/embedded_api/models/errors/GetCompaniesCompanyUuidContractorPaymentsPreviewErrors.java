@@ -20,7 +20,7 @@ public class GetCompaniesCompanyUuidContractorPaymentsPreviewErrors {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("base")
-    private Optional<? extends List<GetCompaniesCompanyUuidContractorPaymentsPreviewBase>> base;
+    private Optional<? extends List<Base>> base;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -29,7 +29,7 @@ public class GetCompaniesCompanyUuidContractorPaymentsPreviewErrors {
 
     @JsonCreator
     public GetCompaniesCompanyUuidContractorPaymentsPreviewErrors(
-            @JsonProperty("base") Optional<? extends List<GetCompaniesCompanyUuidContractorPaymentsPreviewBase>> base,
+            @JsonProperty("base") Optional<? extends List<Base>> base,
             @JsonProperty("check_date") Optional<? extends List<CheckDate>> checkDate) {
         Utils.checkNotNull(base, "base");
         Utils.checkNotNull(checkDate, "checkDate");
@@ -43,8 +43,8 @@ public class GetCompaniesCompanyUuidContractorPaymentsPreviewErrors {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<GetCompaniesCompanyUuidContractorPaymentsPreviewBase>> base() {
-        return (Optional<List<GetCompaniesCompanyUuidContractorPaymentsPreviewBase>>) base;
+    public Optional<List<Base>> base() {
+        return (Optional<List<Base>>) base;
     }
 
     @SuppressWarnings("unchecked")
@@ -58,14 +58,14 @@ public class GetCompaniesCompanyUuidContractorPaymentsPreviewErrors {
     }
 
 
-    public GetCompaniesCompanyUuidContractorPaymentsPreviewErrors withBase(List<GetCompaniesCompanyUuidContractorPaymentsPreviewBase> base) {
+    public GetCompaniesCompanyUuidContractorPaymentsPreviewErrors withBase(List<Base> base) {
         Utils.checkNotNull(base, "base");
         this.base = Optional.ofNullable(base);
         return this;
     }
 
 
-    public GetCompaniesCompanyUuidContractorPaymentsPreviewErrors withBase(Optional<? extends List<GetCompaniesCompanyUuidContractorPaymentsPreviewBase>> base) {
+    public GetCompaniesCompanyUuidContractorPaymentsPreviewErrors withBase(Optional<? extends List<Base>> base) {
         Utils.checkNotNull(base, "base");
         this.base = base;
         return this;
@@ -114,7 +114,7 @@ public class GetCompaniesCompanyUuidContractorPaymentsPreviewErrors {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends List<GetCompaniesCompanyUuidContractorPaymentsPreviewBase>> base = Optional.empty();
+        private Optional<? extends List<Base>> base = Optional.empty();
 
         private Optional<? extends List<CheckDate>> checkDate = Optional.empty();
 
@@ -123,13 +123,13 @@ public class GetCompaniesCompanyUuidContractorPaymentsPreviewErrors {
         }
 
 
-        public Builder base(List<GetCompaniesCompanyUuidContractorPaymentsPreviewBase> base) {
+        public Builder base(List<Base> base) {
             Utils.checkNotNull(base, "base");
             this.base = Optional.ofNullable(base);
             return this;
         }
 
-        public Builder base(Optional<? extends List<GetCompaniesCompanyUuidContractorPaymentsPreviewBase>> base) {
+        public Builder base(Optional<? extends List<Base>> base) {
             Utils.checkNotNull(base, "base");
             this.base = base;
             return this;

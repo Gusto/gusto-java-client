@@ -5,7 +5,7 @@ package com.gusto.embedded_api.models.operations.async;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody;
+import com.gusto.embedded_api.models.components.PaySchedulePreview;
 import com.gusto.embedded_api.utils.AsyncResponse;
 import com.gusto.embedded_api.utils.Blob;
 import com.gusto.embedded_api.utils.Utils;
@@ -34,24 +34,24 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewResponse implements Async
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * OK
+     * Successful
      */
-    private Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody> object;
+    private Optional<? extends PaySchedulePreview> paySchedulePreview;
 
     @JsonCreator
     public GetV1CompaniesCompanyIdPaySchedulesPreviewResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody> object) {
+            Optional<? extends PaySchedulePreview> paySchedulePreview) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(object, "object");
+        Utils.checkNotNull(paySchedulePreview, "paySchedulePreview");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.object = object;
+        this.paySchedulePreview = paySchedulePreview;
     }
     
     public GetV1CompaniesCompanyIdPaySchedulesPreviewResponse(
@@ -87,12 +87,12 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewResponse implements Async
     }
 
     /**
-     * OK
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody> object() {
-        return (Optional<GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody>) object;
+    public Optional<PaySchedulePreview> paySchedulePreview() {
+        return (Optional<PaySchedulePreview>) paySchedulePreview;
     }
 
     public static Builder builder() {
@@ -128,21 +128,21 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewResponse implements Async
     }
 
     /**
-     * OK
+     * Successful
      */
-    public GetV1CompaniesCompanyIdPaySchedulesPreviewResponse withObject(GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody object) {
-        Utils.checkNotNull(object, "object");
-        this.object = Optional.ofNullable(object);
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewResponse withPaySchedulePreview(PaySchedulePreview paySchedulePreview) {
+        Utils.checkNotNull(paySchedulePreview, "paySchedulePreview");
+        this.paySchedulePreview = Optional.ofNullable(paySchedulePreview);
         return this;
     }
 
 
     /**
-     * OK
+     * Successful
      */
-    public GetV1CompaniesCompanyIdPaySchedulesPreviewResponse withObject(Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody> object) {
-        Utils.checkNotNull(object, "object");
-        this.object = object;
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewResponse withPaySchedulePreview(Optional<? extends PaySchedulePreview> paySchedulePreview) {
+        Utils.checkNotNull(paySchedulePreview, "paySchedulePreview");
+        this.paySchedulePreview = paySchedulePreview;
         return this;
     }
 
@@ -159,14 +159,14 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewResponse implements Async
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.object, other.object);
+            Utils.enhancedDeepEquals(this.paySchedulePreview, other.paySchedulePreview);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            object);
+            paySchedulePreview);
     }
     
     @Override
@@ -175,7 +175,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewResponse implements Async
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "object", object);
+                "paySchedulePreview", paySchedulePreview);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -187,7 +187,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewResponse implements Async
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody> object = Optional.empty();
+        private Optional<? extends PaySchedulePreview> paySchedulePreview = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -225,20 +225,20 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewResponse implements Async
 
 
         /**
-         * OK
+         * Successful
          */
-        public Builder object(GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody object) {
-            Utils.checkNotNull(object, "object");
-            this.object = Optional.ofNullable(object);
+        public Builder paySchedulePreview(PaySchedulePreview paySchedulePreview) {
+            Utils.checkNotNull(paySchedulePreview, "paySchedulePreview");
+            this.paySchedulePreview = Optional.ofNullable(paySchedulePreview);
             return this;
         }
 
         /**
-         * OK
+         * Successful
          */
-        public Builder object(Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody> object) {
-            Utils.checkNotNull(object, "object");
-            this.object = object;
+        public Builder paySchedulePreview(Optional<? extends PaySchedulePreview> paySchedulePreview) {
+            Utils.checkNotNull(paySchedulePreview, "paySchedulePreview");
+            this.paySchedulePreview = paySchedulePreview;
             return this;
         }
 
@@ -246,7 +246,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewResponse implements Async
 
             return new GetV1CompaniesCompanyIdPaySchedulesPreviewResponse(
                 contentType, statusCode, rawResponse,
-                object);
+                paySchedulePreview);
         }
 
     }

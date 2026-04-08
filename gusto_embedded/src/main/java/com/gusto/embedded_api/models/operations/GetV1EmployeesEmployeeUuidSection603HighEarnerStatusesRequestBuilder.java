@@ -19,7 +19,7 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilde
     private String employeeUuid;
     private Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
-                            "\"2024-04-01\"",
+                            "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion>>() {});
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
@@ -70,6 +70,6 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilde
     private static final LazySingletonValue<Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
-                    "\"2024-04-01\"",
+                    "\"2025-06-15\"",
                     new TypeReference<Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion>>() {});
 }

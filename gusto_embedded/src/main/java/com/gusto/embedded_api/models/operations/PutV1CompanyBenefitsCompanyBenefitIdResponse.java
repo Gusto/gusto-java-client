@@ -34,7 +34,7 @@ public class PutV1CompanyBenefitsCompanyBenefitIdResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Success
      */
     private Optional<? extends CompanyBenefit> companyBenefit;
 
@@ -87,7 +87,7 @@ public class PutV1CompanyBenefitsCompanyBenefitIdResponse implements Response {
     }
 
     /**
-     * Example response
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PutV1CompanyBenefitsCompanyBenefitIdResponse implements Response {
     }
 
     /**
-     * Example response
+     * Success
      */
     public PutV1CompanyBenefitsCompanyBenefitIdResponse withCompanyBenefit(CompanyBenefit companyBenefit) {
         Utils.checkNotNull(companyBenefit, "companyBenefit");
@@ -138,7 +138,7 @@ public class PutV1CompanyBenefitsCompanyBenefitIdResponse implements Response {
 
 
     /**
-     * Example response
+     * Success
      */
     public PutV1CompanyBenefitsCompanyBenefitIdResponse withCompanyBenefit(Optional<? extends CompanyBenefit> companyBenefit) {
         Utils.checkNotNull(companyBenefit, "companyBenefit");
@@ -225,7 +225,7 @@ public class PutV1CompanyBenefitsCompanyBenefitIdResponse implements Response {
 
 
         /**
-         * Example response
+         * Success
          */
         public Builder companyBenefit(CompanyBenefit companyBenefit) {
             Utils.checkNotNull(companyBenefit, "companyBenefit");
@@ -234,7 +234,7 @@ public class PutV1CompanyBenefitsCompanyBenefitIdResponse implements Response {
         }
 
         /**
-         * Example response
+         * Success
          */
         public Builder companyBenefit(Optional<? extends CompanyBenefit> companyBenefit) {
             Utils.checkNotNull(companyBenefit, "companyBenefit");

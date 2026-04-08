@@ -20,7 +20,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /**
  * TaxLiabilitiesSelections
  * 
- * <p>Example response
+ * <p>The representation of tax liabilities selections.
  */
 public class TaxLiabilitiesSelections {
     /**

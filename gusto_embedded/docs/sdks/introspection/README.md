@@ -5,11 +5,13 @@
 ### Available Operations
 
 * [getInfo](#getinfo) - Get info about the current access token
-* [oauthAccessToken](#oauthaccesstoken) - create or refresh an access token
+* [oauthAccessToken](#oauthaccesstoken) - Create a System Access Token or Refresh an Access Token
 
 ## getInfo
 
-Returns scope and resource information associated with the current access token.
+Returns scope and resource information associated with the current access token. Use this endpoint to verify the following for the current access token:
+* Resource (company, employee, contractor, or application) and resource owner
+* Access level
 
 ### Example Usage
 
@@ -18,8 +20,8 @@ Returns scope and resource information associated with the current access token.
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.GetV1TokenInfoResponse;
+import com.gusto.embedded_api.models.operations.XGustoAPIVersion;
 import java.lang.Exception;
 
 public class Application {
@@ -31,11 +33,11 @@ public class Application {
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(XGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
-        if (res.object().isPresent()) {
-            // handle response
+        if (res.tokenInfo().isPresent()) {
+            System.out.println(res.tokenInfo().get());
         }
     }
 }
@@ -45,7 +47,7 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<XGustoAPIVersion>](../../models/operations/XGustoAPIVersion.md)                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -59,9 +61,7 @@ public class Application {
 
 ## oauthAccessToken
 
-Creates or refreshes a system access token
-
-scope: ``
+Creates a system access token or refreshes an oauth access token
 
 ### Example Usage
 
@@ -70,8 +70,10 @@ scope: ``
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.*;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
+import java.lang.Object;
 
 public class Application {
 
@@ -81,8 +83,8 @@ public class Application {
             .build();
 
         OauthAccessTokenResponse res = sdk.introspection().oauthAccessToken()
-                .xGustoAPIVersion(XGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
-                .requestBody(OauthAccessTokenRequestBody.of(RequestBody2.builder()
+                .xGustoAPIVersion(HeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(OauthAccessTokenRequestBody.of(SystemAccessTokenRequest.builder()
                     .clientId("qr6L_9FRkbMVL_GdwvrMW6Ef8tcU6NUxjWpOfqXqOG8")
                     .clientSecret("3aQSHRB3596nZhm6NdNBELZ1u9xbZmvCrKpBhbZYq6w")
                     .grantType(RequestBodyGrantType.SYSTEM_ACCESS)
@@ -90,7 +92,17 @@ public class Application {
                 .call();
 
         if (res.authentication().isPresent()) {
-            // handle response
+            Authentication unionValue = res.authentication().get();
+            Object raw = unionValue.value();
+            if (raw instanceof CreateTokenAuthentication) {
+                CreateTokenAuthentication createTokenAuthenticationValue = (CreateTokenAuthentication) raw;
+                // Handle createTokenAuthentication variant
+            } else if (raw instanceof RefreshTokenAuthentication) {
+                RefreshTokenAuthentication refreshTokenAuthenticationValue = (RefreshTokenAuthentication) raw;
+                // Handle refreshTokenAuthentication variant
+            } else {
+                // Unknown or unsupported variant
+            }
         }
     }
 }
@@ -100,7 +112,7 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<XGustoAPIVersion>](../../models/operations/XGustoAPIVersion.md)                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<HeaderXGustoAPIVersion>](../../models/operations/HeaderXGustoAPIVersion.md)                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `requestBody`                                                                                                                                                                                                                | [OauthAccessTokenRequestBody](../../models/operations/OauthAccessTokenRequestBody.md)                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response

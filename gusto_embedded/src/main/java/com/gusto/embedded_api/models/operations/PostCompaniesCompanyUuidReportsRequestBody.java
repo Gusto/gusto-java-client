@@ -18,6 +18,7 @@ import java.lang.SuppressWarnings;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class PostCompaniesCompanyUuidReportsRequestBody {
@@ -100,14 +101,14 @@ public class PostCompaniesCompanyUuidReportsRequestBody {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("employment_status")
-    private Optional<? extends PostCompaniesCompanyUuidReportsEmploymentStatus> employmentStatus;
+    private Optional<? extends EmploymentStatus> employmentStatus;
 
     /**
      * Employees to filter by
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("employee_uuids")
-    private Optional<? extends List<String>> employeeUuids;
+    private JsonNullable<? extends List<String>> employeeUuids;
 
     /**
      * Departments to filter by
@@ -136,8 +137,8 @@ public class PostCompaniesCompanyUuidReportsRequestBody {
             @JsonProperty("dismissed_end_date") Optional<LocalDate> dismissedEndDate,
             @JsonProperty("payment_method") Optional<? extends PostCompaniesCompanyUuidReportsPaymentMethod> paymentMethod,
             @JsonProperty("employment_type") Optional<? extends EmploymentType> employmentType,
-            @JsonProperty("employment_status") Optional<? extends PostCompaniesCompanyUuidReportsEmploymentStatus> employmentStatus,
-            @JsonProperty("employee_uuids") Optional<? extends List<String>> employeeUuids,
+            @JsonProperty("employment_status") Optional<? extends EmploymentStatus> employmentStatus,
+            @JsonProperty("employee_uuids") JsonNullable<? extends List<String>> employeeUuids,
             @JsonProperty("department_uuids") Optional<? extends List<String>> departmentUuids,
             @JsonProperty("work_address_uuids") Optional<? extends List<String>> workAddressUuids) {
         Utils.checkNotNull(columns, "columns");
@@ -180,7 +181,7 @@ public class PostCompaniesCompanyUuidReportsRequestBody {
             fileType, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            JsonNullable.undefined(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -278,8 +279,8 @@ public class PostCompaniesCompanyUuidReportsRequestBody {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PostCompaniesCompanyUuidReportsEmploymentStatus> employmentStatus() {
-        return (Optional<PostCompaniesCompanyUuidReportsEmploymentStatus>) employmentStatus;
+    public Optional<EmploymentStatus> employmentStatus() {
+        return (Optional<EmploymentStatus>) employmentStatus;
     }
 
     /**
@@ -287,8 +288,8 @@ public class PostCompaniesCompanyUuidReportsRequestBody {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<String>> employeeUuids() {
-        return (Optional<List<String>>) employeeUuids;
+    public JsonNullable<List<String>> employeeUuids() {
+        return (JsonNullable<List<String>>) employeeUuids;
     }
 
     /**
@@ -496,7 +497,7 @@ public class PostCompaniesCompanyUuidReportsRequestBody {
     /**
      * Employee employment status to filter by
      */
-    public PostCompaniesCompanyUuidReportsRequestBody withEmploymentStatus(PostCompaniesCompanyUuidReportsEmploymentStatus employmentStatus) {
+    public PostCompaniesCompanyUuidReportsRequestBody withEmploymentStatus(EmploymentStatus employmentStatus) {
         Utils.checkNotNull(employmentStatus, "employmentStatus");
         this.employmentStatus = Optional.ofNullable(employmentStatus);
         return this;
@@ -506,7 +507,7 @@ public class PostCompaniesCompanyUuidReportsRequestBody {
     /**
      * Employee employment status to filter by
      */
-    public PostCompaniesCompanyUuidReportsRequestBody withEmploymentStatus(Optional<? extends PostCompaniesCompanyUuidReportsEmploymentStatus> employmentStatus) {
+    public PostCompaniesCompanyUuidReportsRequestBody withEmploymentStatus(Optional<? extends EmploymentStatus> employmentStatus) {
         Utils.checkNotNull(employmentStatus, "employmentStatus");
         this.employmentStatus = employmentStatus;
         return this;
@@ -517,15 +518,14 @@ public class PostCompaniesCompanyUuidReportsRequestBody {
      */
     public PostCompaniesCompanyUuidReportsRequestBody withEmployeeUuids(List<String> employeeUuids) {
         Utils.checkNotNull(employeeUuids, "employeeUuids");
-        this.employeeUuids = Optional.ofNullable(employeeUuids);
+        this.employeeUuids = JsonNullable.of(employeeUuids);
         return this;
     }
-
 
     /**
      * Employees to filter by
      */
-    public PostCompaniesCompanyUuidReportsRequestBody withEmployeeUuids(Optional<? extends List<String>> employeeUuids) {
+    public PostCompaniesCompanyUuidReportsRequestBody withEmployeeUuids(JsonNullable<? extends List<String>> employeeUuids) {
         Utils.checkNotNull(employeeUuids, "employeeUuids");
         this.employeeUuids = employeeUuids;
         return this;
@@ -651,9 +651,9 @@ public class PostCompaniesCompanyUuidReportsRequestBody {
 
         private Optional<? extends EmploymentType> employmentType = Optional.empty();
 
-        private Optional<? extends PostCompaniesCompanyUuidReportsEmploymentStatus> employmentStatus = Optional.empty();
+        private Optional<? extends EmploymentStatus> employmentStatus = Optional.empty();
 
-        private Optional<? extends List<String>> employeeUuids = Optional.empty();
+        private JsonNullable<? extends List<String>> employeeUuids = JsonNullable.undefined();
 
         private Optional<? extends List<String>> departmentUuids = Optional.empty();
 
@@ -849,7 +849,7 @@ public class PostCompaniesCompanyUuidReportsRequestBody {
         /**
          * Employee employment status to filter by
          */
-        public Builder employmentStatus(PostCompaniesCompanyUuidReportsEmploymentStatus employmentStatus) {
+        public Builder employmentStatus(EmploymentStatus employmentStatus) {
             Utils.checkNotNull(employmentStatus, "employmentStatus");
             this.employmentStatus = Optional.ofNullable(employmentStatus);
             return this;
@@ -858,7 +858,7 @@ public class PostCompaniesCompanyUuidReportsRequestBody {
         /**
          * Employee employment status to filter by
          */
-        public Builder employmentStatus(Optional<? extends PostCompaniesCompanyUuidReportsEmploymentStatus> employmentStatus) {
+        public Builder employmentStatus(Optional<? extends EmploymentStatus> employmentStatus) {
             Utils.checkNotNull(employmentStatus, "employmentStatus");
             this.employmentStatus = employmentStatus;
             return this;
@@ -870,14 +870,14 @@ public class PostCompaniesCompanyUuidReportsRequestBody {
          */
         public Builder employeeUuids(List<String> employeeUuids) {
             Utils.checkNotNull(employeeUuids, "employeeUuids");
-            this.employeeUuids = Optional.ofNullable(employeeUuids);
+            this.employeeUuids = JsonNullable.of(employeeUuids);
             return this;
         }
 
         /**
          * Employees to filter by
          */
-        public Builder employeeUuids(Optional<? extends List<String>> employeeUuids) {
+        public Builder employeeUuids(JsonNullable<? extends List<String>> employeeUuids) {
             Utils.checkNotNull(employeeUuids, "employeeUuids");
             this.employeeUuids = employeeUuids;
             return this;

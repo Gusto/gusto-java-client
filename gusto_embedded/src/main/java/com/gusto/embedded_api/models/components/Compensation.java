@@ -90,6 +90,13 @@ public class Compensation {
     private Optional<String> effectiveDate;
 
     /**
+     * The job title for this compensation.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("title")
+    private Optional<String> title;
+
+    /**
      * Indicates if the compensation could be adjusted to minimum wage during payroll calculation.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -113,6 +120,7 @@ public class Compensation {
             @JsonProperty("payment_unit") Optional<? extends PaymentUnit> paymentUnit,
             @JsonProperty("flsa_status") Optional<? extends FlsaStatusType> flsaStatus,
             @JsonProperty("effective_date") Optional<String> effectiveDate,
+            @JsonProperty("title") Optional<String> title,
             @JsonProperty("adjust_for_minimum_wage") Optional<Boolean> adjustForMinimumWage,
             @JsonProperty("minimum_wages") Optional<? extends List<MinimumWages>> minimumWages) {
         Utils.checkNotNull(uuid, "uuid");
@@ -123,6 +131,7 @@ public class Compensation {
         Utils.checkNotNull(paymentUnit, "paymentUnit");
         Utils.checkNotNull(flsaStatus, "flsaStatus");
         Utils.checkNotNull(effectiveDate, "effectiveDate");
+        Utils.checkNotNull(title, "title");
         Utils.checkNotNull(adjustForMinimumWage, "adjustForMinimumWage");
         Utils.checkNotNull(minimumWages, "minimumWages");
         this.uuid = uuid;
@@ -133,6 +142,7 @@ public class Compensation {
         this.paymentUnit = paymentUnit;
         this.flsaStatus = flsaStatus;
         this.effectiveDate = effectiveDate;
+        this.title = title;
         this.adjustForMinimumWage = adjustForMinimumWage;
         this.minimumWages = minimumWages;
     }
@@ -142,7 +152,7 @@ public class Compensation {
         this(uuid, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -221,6 +231,14 @@ public class Compensation {
     @JsonIgnore
     public Optional<String> effectiveDate() {
         return effectiveDate;
+    }
+
+    /**
+     * The job title for this compensation.
+     */
+    @JsonIgnore
+    public Optional<String> title() {
+        return title;
     }
 
     /**
@@ -412,6 +430,25 @@ public class Compensation {
     }
 
     /**
+     * The job title for this compensation.
+     */
+    public Compensation withTitle(String title) {
+        Utils.checkNotNull(title, "title");
+        this.title = Optional.ofNullable(title);
+        return this;
+    }
+
+
+    /**
+     * The job title for this compensation.
+     */
+    public Compensation withTitle(Optional<String> title) {
+        Utils.checkNotNull(title, "title");
+        this.title = title;
+        return this;
+    }
+
+    /**
      * Indicates if the compensation could be adjusted to minimum wage during payroll calculation.
      */
     public Compensation withAdjustForMinimumWage(boolean adjustForMinimumWage) {
@@ -467,6 +504,7 @@ public class Compensation {
             Utils.enhancedDeepEquals(this.paymentUnit, other.paymentUnit) &&
             Utils.enhancedDeepEquals(this.flsaStatus, other.flsaStatus) &&
             Utils.enhancedDeepEquals(this.effectiveDate, other.effectiveDate) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
             Utils.enhancedDeepEquals(this.adjustForMinimumWage, other.adjustForMinimumWage) &&
             Utils.enhancedDeepEquals(this.minimumWages, other.minimumWages);
     }
@@ -476,8 +514,8 @@ public class Compensation {
         return Utils.enhancedHash(
             uuid, version, jobUuid,
             employeeUuid, rate, paymentUnit,
-            flsaStatus, effectiveDate, adjustForMinimumWage,
-            minimumWages);
+            flsaStatus, effectiveDate, title,
+            adjustForMinimumWage, minimumWages);
     }
     
     @Override
@@ -491,6 +529,7 @@ public class Compensation {
                 "paymentUnit", paymentUnit,
                 "flsaStatus", flsaStatus,
                 "effectiveDate", effectiveDate,
+                "title", title,
                 "adjustForMinimumWage", adjustForMinimumWage,
                 "minimumWages", minimumWages);
     }
@@ -513,6 +552,8 @@ public class Compensation {
         private Optional<? extends FlsaStatusType> flsaStatus = Optional.empty();
 
         private Optional<String> effectiveDate = Optional.empty();
+
+        private Optional<String> title = Optional.empty();
 
         private Optional<Boolean> adjustForMinimumWage = Optional.empty();
 
@@ -691,6 +732,25 @@ public class Compensation {
 
 
         /**
+         * The job title for this compensation.
+         */
+        public Builder title(String title) {
+            Utils.checkNotNull(title, "title");
+            this.title = Optional.ofNullable(title);
+            return this;
+        }
+
+        /**
+         * The job title for this compensation.
+         */
+        public Builder title(Optional<String> title) {
+            Utils.checkNotNull(title, "title");
+            this.title = title;
+            return this;
+        }
+
+
+        /**
          * Indicates if the compensation could be adjusted to minimum wage during payroll calculation.
          */
         public Builder adjustForMinimumWage(boolean adjustForMinimumWage) {
@@ -732,8 +792,8 @@ public class Compensation {
             return new Compensation(
                 uuid, version, jobUuid,
                 employeeUuid, rate, paymentUnit,
-                flsaStatus, effectiveDate, adjustForMinimumWage,
-                minimumWages);
+                flsaStatus, effectiveDate, title,
+                adjustForMinimumWage, minimumWages);
         }
 
     }

@@ -15,12 +15,16 @@ import java.util.Optional;
 
 
 public class Metadata {
-
+    /**
+     * The UUID of the existing entity.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("entity_uuid")
     private Optional<String> entityUuid;
 
-
+    /**
+     * The type of the existing entity.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("entity_type")
     private Optional<String> entityType;
@@ -39,11 +43,17 @@ public class Metadata {
         this(Optional.empty(), Optional.empty());
     }
 
+    /**
+     * The UUID of the existing entity.
+     */
     @JsonIgnore
     public Optional<String> entityUuid() {
         return entityUuid;
     }
 
+    /**
+     * The type of the existing entity.
+     */
     @JsonIgnore
     public Optional<String> entityType() {
         return entityType;
@@ -54,6 +64,9 @@ public class Metadata {
     }
 
 
+    /**
+     * The UUID of the existing entity.
+     */
     public Metadata withEntityUuid(String entityUuid) {
         Utils.checkNotNull(entityUuid, "entityUuid");
         this.entityUuid = Optional.ofNullable(entityUuid);
@@ -61,12 +74,18 @@ public class Metadata {
     }
 
 
+    /**
+     * The UUID of the existing entity.
+     */
     public Metadata withEntityUuid(Optional<String> entityUuid) {
         Utils.checkNotNull(entityUuid, "entityUuid");
         this.entityUuid = entityUuid;
         return this;
     }
 
+    /**
+     * The type of the existing entity.
+     */
     public Metadata withEntityType(String entityType) {
         Utils.checkNotNull(entityType, "entityType");
         this.entityType = Optional.ofNullable(entityType);
@@ -74,6 +93,9 @@ public class Metadata {
     }
 
 
+    /**
+     * The type of the existing entity.
+     */
     public Metadata withEntityType(Optional<String> entityType) {
         Utils.checkNotNull(entityType, "entityType");
         this.entityType = entityType;
@@ -119,12 +141,18 @@ public class Metadata {
         }
 
 
+        /**
+         * The UUID of the existing entity.
+         */
         public Builder entityUuid(String entityUuid) {
             Utils.checkNotNull(entityUuid, "entityUuid");
             this.entityUuid = Optional.ofNullable(entityUuid);
             return this;
         }
 
+        /**
+         * The UUID of the existing entity.
+         */
         public Builder entityUuid(Optional<String> entityUuid) {
             Utils.checkNotNull(entityUuid, "entityUuid");
             this.entityUuid = entityUuid;
@@ -132,12 +160,18 @@ public class Metadata {
         }
 
 
+        /**
+         * The type of the existing entity.
+         */
         public Builder entityType(String entityType) {
             Utils.checkNotNull(entityType, "entityType");
             this.entityType = Optional.ofNullable(entityType);
             return this;
         }
 
+        /**
+         * The type of the existing entity.
+         */
         public Builder entityType(Optional<String> entityType) {
             Utils.checkNotNull(entityType, "entityType");
             this.entityType = entityType;

@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.DeleteV1ContractorsContractorUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1ContractorsContractorUuidRequest;
 import com.gusto.embedded_api.operations.DeleteV1ContractorsContractorUuid;
 import com.gusto.embedded_api.utils.Headers;
@@ -19,33 +19,33 @@ import java.util.concurrent.CompletableFuture;
 
 public class DeleteV1ContractorsContractorUuidRequestBuilder {
 
-    private String contractorUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends DeleteV1ContractorsContractorUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends DeleteV1ContractorsContractorUuidHeaderXGustoAPIVersion>>() {});
+    private String contractorUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1ContractorsContractorUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
-    public DeleteV1ContractorsContractorUuidRequestBuilder contractorUuid(String contractorUuid) {
-        Utils.checkNotNull(contractorUuid, "contractorUuid");
-        this.contractorUuid = contractorUuid;
-        return this;
-    }
                 
-    public DeleteV1ContractorsContractorUuidRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public DeleteV1ContractorsContractorUuidRequestBuilder xGustoAPIVersion(DeleteV1ContractorsContractorUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public DeleteV1ContractorsContractorUuidRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public DeleteV1ContractorsContractorUuidRequestBuilder xGustoAPIVersion(Optional<? extends DeleteV1ContractorsContractorUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public DeleteV1ContractorsContractorUuidRequestBuilder contractorUuid(String contractorUuid) {
+        Utils.checkNotNull(contractorUuid, "contractorUuid");
+        this.contractorUuid = contractorUuid;
         return this;
     }
 
@@ -55,8 +55,8 @@ public class DeleteV1ContractorsContractorUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1ContractorsContractorUuidRequest request = new DeleteV1ContractorsContractorUuidRequest(contractorUuid,
-            xGustoAPIVersion);
+        DeleteV1ContractorsContractorUuidRequest request = new DeleteV1ContractorsContractorUuidRequest(xGustoAPIVersion,
+            contractorUuid);
 
         return request;
     }
@@ -71,9 +71,9 @@ public class DeleteV1ContractorsContractorUuidRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends DeleteV1ContractorsContractorUuidHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends DeleteV1ContractorsContractorUuidHeaderXGustoAPIVersion>>() {});
 }

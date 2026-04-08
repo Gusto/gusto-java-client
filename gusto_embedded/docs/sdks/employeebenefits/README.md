@@ -24,9 +24,44 @@ When the application has the `employee_benefits:write:benefit_type_limited` data
 
 scope: `employee_benefits:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-employee_benefits" method="post" path="/v1/employees/{employee_id}/employee_benefits" -->
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-employee_benefits" method="post" path="/v1/employees/{employee_id}/employee_benefits" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdEmployeeBenefitsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1EmployeesEmployeeIdEmployeeBenefitsResponse res = sdk.employeeBenefits().create()
+                .employeeId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody.builder()
+                    .companyBenefitUuid("<id>")
+                    .build())
+                .call();
+
+        if (res.employeeBenefit().isPresent()) {
+            System.out.println(res.employeeBenefit().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-employee_benefits" method="post" path="/v1/employees/{employee_id}/employee_benefits" example="Example" -->
 ```java
 package hello.world;
 
@@ -58,7 +93,112 @@ public class Application {
                 .call();
 
         if (res.employeeBenefit().isPresent()) {
-            // handle response
+            System.out.println(res.employeeBenefit().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-employee_benefits" method="post" path="/v1/employees/{employee_id}/employee_benefits" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdEmployeeBenefitsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1EmployeesEmployeeIdEmployeeBenefitsResponse res = sdk.employeeBenefits().create()
+                .employeeId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody.builder()
+                    .companyBenefitUuid("<id>")
+                    .build())
+                .call();
+
+        if (res.employeeBenefit().isPresent()) {
+            System.out.println(res.employeeBenefit().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-employee_benefits" method="post" path="/v1/employees/{employee_id}/employee_benefits" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdEmployeeBenefitsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1EmployeesEmployeeIdEmployeeBenefitsResponse res = sdk.employeeBenefits().create()
+                .employeeId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody.builder()
+                    .companyBenefitUuid("<id>")
+                    .build())
+                .call();
+
+        if (res.employeeBenefit().isPresent()) {
+            System.out.println(res.employeeBenefit().get());
+        }
+    }
+}
+```
+### Example Usage: Tiered example
+
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-employee_benefits" method="post" path="/v1/employees/{employee_id}/employee_benefits" example="Tiered example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdEmployeeBenefitsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1EmployeesEmployeeIdEmployeeBenefitsResponse res = sdk.employeeBenefits().create()
+                .employeeId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody.builder()
+                    .companyBenefitUuid("<id>")
+                    .build())
+                .call();
+
+        if (res.employeeBenefit().isPresent()) {
+            System.out.println(res.employeeBenefit().get());
         }
     }
 }
@@ -95,7 +235,7 @@ scope: `employee_benefits:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-employee_benefits" method="get" path="/v1/employees/{employee_id}/employee_benefits" -->
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-employee_benefits" method="get" path="/v1/employees/{employee_id}/employee_benefits" example="Example" -->
 ```java
 package hello.world;
 
@@ -121,7 +261,7 @@ public class Application {
                 .call();
 
         if (res.employeeBenefitList().isPresent()) {
-            // handle response
+            System.out.println(res.employeeBenefitList().get());
         }
     }
 }
@@ -151,9 +291,9 @@ Benefits containing PHI are only visible to applications with the `employee_bene
 
 scope: `employee_benefits:read`
 
-### Example Usage
+### Example Usage: Example
 
-<!-- UsageSnippet language="java" operationID="get-v1-employee_benefits-employee_benefit_id" method="get" path="/v1/employee_benefits/{employee_benefit_id}" -->
+<!-- UsageSnippet language="java" operationID="get-v1-employee_benefits-employee_benefit_id" method="get" path="/v1/employee_benefits/{employee_benefit_id}" example="Example" -->
 ```java
 package hello.world;
 
@@ -176,7 +316,37 @@ public class Application {
                 .call();
 
         if (res.employeeBenefit().isPresent()) {
-            // handle response
+            System.out.println(res.employeeBenefit().get());
+        }
+    }
+}
+```
+### Example Usage: Tiered example
+
+<!-- UsageSnippet language="java" operationID="get-v1-employee_benefits-employee_benefit_id" method="get" path="/v1/employee_benefits/{employee_benefit_id}" example="Tiered example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1EmployeeBenefitsEmployeeBenefitIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1EmployeeBenefitsEmployeeBenefitIdResponse res = sdk.employeeBenefits().retrieve()
+                .employeeBenefitId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .call();
+
+        if (res.employeeBenefit().isPresent()) {
+            System.out.println(res.employeeBenefit().get());
         }
     }
 }
@@ -207,9 +377,44 @@ When the application has the `employee_benefits:write:benefit_type_limited` data
 
 scope: `employee_benefits:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="put-v1-employee_benefits-employee_benefit_id" method="put" path="/v1/employee_benefits/{employee_benefit_id}" -->
+<!-- UsageSnippet language="java" operationID="put-v1-employee_benefits-employee_benefit_id" method="put" path="/v1/employee_benefits/{employee_benefit_id}" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1EmployeeBenefitsEmployeeBenefitIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1EmployeeBenefitsEmployeeBenefitIdResponse res = sdk.employeeBenefits().update()
+                .employeeBenefitId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.employeeBenefit().isPresent()) {
+            System.out.println(res.employeeBenefit().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-employee_benefits-employee_benefit_id" method="put" path="/v1/employee_benefits/{employee_benefit_id}" example="Example" -->
 ```java
 package hello.world;
 
@@ -238,7 +443,112 @@ public class Application {
                 .call();
 
         if (res.employeeBenefit().isPresent()) {
-            // handle response
+            System.out.println(res.employeeBenefit().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-v1-employee_benefits-employee_benefit_id" method="put" path="/v1/employee_benefits/{employee_benefit_id}" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1EmployeeBenefitsEmployeeBenefitIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1EmployeeBenefitsEmployeeBenefitIdResponse res = sdk.employeeBenefits().update()
+                .employeeBenefitId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.employeeBenefit().isPresent()) {
+            System.out.println(res.employeeBenefit().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-v1-employee_benefits-employee_benefit_id" method="put" path="/v1/employee_benefits/{employee_benefit_id}" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1EmployeeBenefitsEmployeeBenefitIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1EmployeeBenefitsEmployeeBenefitIdResponse res = sdk.employeeBenefits().update()
+                .employeeBenefitId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.employeeBenefit().isPresent()) {
+            System.out.println(res.employeeBenefit().get());
+        }
+    }
+}
+```
+### Example Usage: Tiered example
+
+<!-- UsageSnippet language="java" operationID="put-v1-employee_benefits-employee_benefit_id" method="put" path="/v1/employee_benefits/{employee_benefit_id}" example="Tiered example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1EmployeeBenefitsEmployeeBenefitIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1EmployeeBenefitsEmployeeBenefitIdResponse res = sdk.employeeBenefits().update()
+                .employeeBenefitId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.employeeBenefit().isPresent()) {
+            System.out.println(res.employeeBenefit().get());
         }
     }
 }
@@ -279,12 +589,13 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -313,9 +624,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## getYtdBenefitAmountsFromDifferentCompany
 
@@ -328,7 +640,7 @@ scope: `employee_benefits:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-employee-ytd-benefit-amounts-from-different-company" method="get" path="/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company" -->
+<!-- UsageSnippet language="java" operationID="get-employee-ytd-benefit-amounts-from-different-company" method="get" path="/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company" example="Example" -->
 ```java
 package hello.world;
 
@@ -352,7 +664,7 @@ public class Application {
                 .call();
 
         if (res.ytdBenefitAmountsFromDifferentCompanyList().isPresent()) {
-            // handle response
+            System.out.println(res.ytdBenefitAmountsFromDifferentCompanyList().get());
         }
     }
 }
@@ -384,9 +696,75 @@ This endpoint only supports passing outside contributions for 401(k) benefits.
 
 scope: `employee_benefits:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="post-employee-ytd-benefit-amounts-from-different-company" method="post" path="/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company" -->
+<!-- UsageSnippet language="java" operationID="post-employee-ytd-benefit-amounts-from-different-company" method="post" path="/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.PostEmployeeYtdBenefitAmountsFromDifferentCompany;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse res = sdk.employeeBenefits().createYtdBenefitAmountsFromDifferentCompany()
+                .employeeId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .postEmployeeYtdBenefitAmountsFromDifferentCompany(PostEmployeeYtdBenefitAmountsFromDifferentCompany.builder()
+                    .taxYear(1828.56)
+                    .build())
+                .call();
+
+        // handle response
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="post-employee-ytd-benefit-amounts-from-different-company" method="post" path="/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.PostEmployeeYtdBenefitAmountsFromDifferentCompany;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse res = sdk.employeeBenefits().createYtdBenefitAmountsFromDifferentCompany()
+                .employeeId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .postEmployeeYtdBenefitAmountsFromDifferentCompany(PostEmployeeYtdBenefitAmountsFromDifferentCompany.builder()
+                    .taxYear(1828.56)
+                    .build())
+                .call();
+
+        // handle response
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="post-employee-ytd-benefit-amounts-from-different-company" method="post" path="/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company" example="Resource" -->
 ```java
 package hello.world;
 
@@ -453,14 +831,14 @@ scope: `employee_benefits:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -468,11 +846,11 @@ public class Application {
 
         GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse res = sdk.employeeBenefits().getV1EmployeesEmployeeUuidSection603HighEarnerStatuses()
                 .employeeUuid("<id>")
-                .xGustoAPIVersion(GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.employeeSection603HighEarnerStatusList().isPresent()) {
-            // handle response
+            System.out.println(res.employeeSection603HighEarnerStatusList().get());
         }
     }
 }
@@ -491,10 +869,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
-| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## postV1EmployeesEmployeeUuidSection603HighEarnerStatuses
 
@@ -513,6 +891,7 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.EmployeeSection603HighEarnerStatusCreateRequest;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse;
@@ -520,7 +899,7 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -528,7 +907,7 @@ public class Application {
 
         PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse res = sdk.employeeBenefits().postV1EmployeesEmployeeUuidSection603HighEarnerStatuses()
                 .employeeUuid("<id>")
-                .xGustoAPIVersion(PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .employeeSection603HighEarnerStatusCreateRequest(EmployeeSection603HighEarnerStatusCreateRequest.builder()
                     .effectiveYear(2026L)
                     .isHighEarner(true)
@@ -536,7 +915,7 @@ public class Application {
                 .call();
 
         if (res.employeeSection603HighEarnerStatus().isPresent()) {
-            // handle response
+            System.out.println(res.employeeSection603HighEarnerStatus().get());
         }
     }
 }
@@ -558,7 +937,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 409, 422                                | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 409, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear
@@ -577,6 +957,7 @@ scope: `employee_benefits:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse;
@@ -584,7 +965,7 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -593,11 +974,11 @@ public class Application {
         GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse res = sdk.employeeBenefits().getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear()
                 .employeeUuid("<id>")
                 .effectiveYear(857230L)
-                .xGustoAPIVersion(GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.employeeSection603HighEarnerStatus().isPresent()) {
-            // handle response
+            System.out.println(res.employeeSection603HighEarnerStatus().get());
         }
     }
 }
@@ -619,7 +1000,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## patchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear
@@ -639,6 +1021,7 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.EmployeeSection603HighEarnerStatusUpdateRequest;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse;
@@ -646,7 +1029,7 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -655,14 +1038,14 @@ public class Application {
         PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse res = sdk.employeeBenefits().patchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear()
                 .employeeUuid("<id>")
                 .effectiveYear(152322L)
-                .xGustoAPIVersion(PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .employeeSection603HighEarnerStatusUpdateRequest(EmployeeSection603HighEarnerStatusUpdateRequest.builder()
                     .isHighEarner(true)
                     .build())
                 .call();
 
         if (res.employeeSection603HighEarnerStatus().isPresent()) {
-            // handle response
+            System.out.println(res.employeeSection603HighEarnerStatus().get());
         }
     }
 }
@@ -685,5 +1068,6 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |

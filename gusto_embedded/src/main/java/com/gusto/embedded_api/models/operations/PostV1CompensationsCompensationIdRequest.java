@@ -6,7 +6,7 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.CompensationsRequestBody;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -18,40 +18,51 @@ import java.util.Optional;
 
 public class PostV1CompensationsCompensationIdRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends PostV1CompensationsCompensationIdHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the job
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=job_id")
     private String jobId;
+
+
+    @SpeakeasyMetadata("request:mediaType=application/json")
+    private CompensationsRequestBody compensationsRequestBody;
+
+    @JsonCreator
+    public PostV1CompensationsCompensationIdRequest(
+            Optional<? extends PostV1CompensationsCompensationIdHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String jobId,
+            CompensationsRequestBody compensationsRequestBody) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(jobId, "jobId");
+        Utils.checkNotNull(compensationsRequestBody, "compensationsRequestBody");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        this.jobId = jobId;
+        this.compensationsRequestBody = compensationsRequestBody;
+    }
+    
+    public PostV1CompensationsCompensationIdRequest(
+            String jobId,
+            CompensationsRequestBody compensationsRequestBody) {
+        this(Optional.empty(), jobId, compensationsRequestBody);
+    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-
-    @SpeakeasyMetadata("request:mediaType=application/json")
-    private PostV1CompensationsCompensationIdRequestBody requestBody;
-
-    @JsonCreator
-    public PostV1CompensationsCompensationIdRequest(
-            String jobId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1CompensationsCompensationIdRequestBody requestBody) {
-        Utils.checkNotNull(jobId, "jobId");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.jobId = jobId;
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        this.requestBody = requestBody;
-    }
-    
-    public PostV1CompensationsCompensationIdRequest(
-            String jobId,
-            PostV1CompensationsCompensationIdRequestBody requestBody) {
-        this(jobId, Optional.empty(), requestBody);
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PostV1CompensationsCompensationIdHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PostV1CompensationsCompensationIdHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -62,20 +73,9 @@ public class PostV1CompensationsCompensationIdRequest {
         return jobId;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
-    }
-
-    @JsonIgnore
-    public PostV1CompensationsCompensationIdRequestBody requestBody() {
-        return requestBody;
+    public CompensationsRequestBody compensationsRequestBody() {
+        return compensationsRequestBody;
     }
 
     public static Builder builder() {
@@ -84,20 +84,11 @@ public class PostV1CompensationsCompensationIdRequest {
 
 
     /**
-     * The UUID of the job
-     */
-    public PostV1CompensationsCompensationIdRequest withJobId(String jobId) {
-        Utils.checkNotNull(jobId, "jobId");
-        this.jobId = jobId;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PostV1CompensationsCompensationIdRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PostV1CompensationsCompensationIdRequest withXGustoAPIVersion(PostV1CompensationsCompensationIdHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -109,15 +100,24 @@ public class PostV1CompensationsCompensationIdRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PostV1CompensationsCompensationIdRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PostV1CompensationsCompensationIdRequest withXGustoAPIVersion(Optional<? extends PostV1CompensationsCompensationIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PostV1CompensationsCompensationIdRequest withRequestBody(PostV1CompensationsCompensationIdRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    /**
+     * The UUID of the job
+     */
+    public PostV1CompensationsCompensationIdRequest withJobId(String jobId) {
+        Utils.checkNotNull(jobId, "jobId");
+        this.jobId = jobId;
+        return this;
+    }
+
+    public PostV1CompensationsCompensationIdRequest withCompensationsRequestBody(CompensationsRequestBody compensationsRequestBody) {
+        Utils.checkNotNull(compensationsRequestBody, "compensationsRequestBody");
+        this.compensationsRequestBody = compensationsRequestBody;
         return this;
     }
 
@@ -131,36 +131,59 @@ public class PostV1CompensationsCompensationIdRequest {
         }
         PostV1CompensationsCompensationIdRequest other = (PostV1CompensationsCompensationIdRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.jobId, other.jobId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
-            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.jobId, other.jobId) &&
+            Utils.enhancedDeepEquals(this.compensationsRequestBody, other.compensationsRequestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            jobId, xGustoAPIVersion, requestBody);
+            xGustoAPIVersion, jobId, compensationsRequestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostV1CompensationsCompensationIdRequest.class,
-                "jobId", jobId,
                 "xGustoAPIVersion", xGustoAPIVersion,
-                "requestBody", requestBody);
+                "jobId", jobId,
+                "compensationsRequestBody", compensationsRequestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends PostV1CompensationsCompensationIdHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String jobId;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-        private PostV1CompensationsCompensationIdRequestBody requestBody;
+        private CompensationsRequestBody compensationsRequestBody;
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(PostV1CompensationsCompensationIdHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends PostV1CompensationsCompensationIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -174,32 +197,9 @@ public class PostV1CompensationsCompensationIdRequest {
         }
 
 
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
-
-
-        public Builder requestBody(PostV1CompensationsCompensationIdRequestBody requestBody) {
-            Utils.checkNotNull(requestBody, "requestBody");
-            this.requestBody = requestBody;
+        public Builder compensationsRequestBody(CompensationsRequestBody compensationsRequestBody) {
+            Utils.checkNotNull(compensationsRequestBody, "compensationsRequestBody");
+            this.compensationsRequestBody = compensationsRequestBody;
             return this;
         }
 
@@ -209,14 +209,14 @@ public class PostV1CompensationsCompensationIdRequest {
             }
 
             return new PostV1CompensationsCompensationIdRequest(
-                jobId, xGustoAPIVersion, requestBody);
+                xGustoAPIVersion, jobId, compensationsRequestBody);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PostV1CompensationsCompensationIdHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PostV1CompensationsCompensationIdHeaderXGustoAPIVersion>>() {});
     }
 }

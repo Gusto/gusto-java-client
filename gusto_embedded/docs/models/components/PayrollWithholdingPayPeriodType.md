@@ -1,6 +1,12 @@
 # PayrollWithholdingPayPeriodType
 
-The payment schedule tax rate the payroll is based on. Only included for off-cycle payrolls.
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.PayrollWithholdingPayPeriodType;
+
+PayrollWithholdingPayPeriodType value = PayrollWithholdingPayPeriodType.EVERY_WEEK;
+```
 
 
 ## Values

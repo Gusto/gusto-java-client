@@ -49,14 +49,14 @@ public class RecoveryCase {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("latest_error_code")
-    private Optional<String> latestErrorCode;
+    private JsonNullable<String> latestErrorCode;
 
     /**
      * Date when funds were originally debited from the company's bank account
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("original_debit_date")
-    private Optional<String> originalDebitDate;
+    private JsonNullable<String> originalDebitDate;
 
     /**
      * Check date for the associated payroll or contractor payments
@@ -100,8 +100,8 @@ public class RecoveryCase {
             @JsonProperty("uuid") String uuid,
             @JsonProperty("company_uuid") Optional<String> companyUuid,
             @JsonProperty("status") Optional<? extends RecoveryCaseStatus> status,
-            @JsonProperty("latest_error_code") Optional<String> latestErrorCode,
-            @JsonProperty("original_debit_date") Optional<String> originalDebitDate,
+            @JsonProperty("latest_error_code") JsonNullable<String> latestErrorCode,
+            @JsonProperty("original_debit_date") JsonNullable<String> originalDebitDate,
             @JsonProperty("check_date") Optional<String> checkDate,
             @JsonProperty("payroll_uuid") Optional<String> payrollUuid,
             @JsonProperty("contractor_payment_uuids") JsonNullable<? extends List<String>> contractorPaymentUuids,
@@ -132,7 +132,7 @@ public class RecoveryCase {
     public RecoveryCase(
             String uuid) {
         this(uuid, Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
+            JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
             Optional.empty(), JsonNullable.undefined(), Optional.empty(),
             Optional.empty());
     }
@@ -168,7 +168,7 @@ public class RecoveryCase {
      * common ACH return codes.
      */
     @JsonIgnore
-    public Optional<String> latestErrorCode() {
+    public JsonNullable<String> latestErrorCode() {
         return latestErrorCode;
     }
 
@@ -176,7 +176,7 @@ public class RecoveryCase {
      * Date when funds were originally debited from the company's bank account
      */
     @JsonIgnore
-    public Optional<String> originalDebitDate() {
+    public JsonNullable<String> originalDebitDate() {
         return originalDebitDate;
     }
 
@@ -282,17 +282,16 @@ public class RecoveryCase {
      */
     public RecoveryCase withLatestErrorCode(String latestErrorCode) {
         Utils.checkNotNull(latestErrorCode, "latestErrorCode");
-        this.latestErrorCode = Optional.ofNullable(latestErrorCode);
+        this.latestErrorCode = JsonNullable.of(latestErrorCode);
         return this;
     }
-
 
     /**
      * The latest bank error code for the recovery case. See [this
      * doc](https://docs.gusto.com/embedded-payroll/docs/ach-codes-and-transaction-types) for a list of
      * common ACH return codes.
      */
-    public RecoveryCase withLatestErrorCode(Optional<String> latestErrorCode) {
+    public RecoveryCase withLatestErrorCode(JsonNullable<String> latestErrorCode) {
         Utils.checkNotNull(latestErrorCode, "latestErrorCode");
         this.latestErrorCode = latestErrorCode;
         return this;
@@ -303,15 +302,14 @@ public class RecoveryCase {
      */
     public RecoveryCase withOriginalDebitDate(String originalDebitDate) {
         Utils.checkNotNull(originalDebitDate, "originalDebitDate");
-        this.originalDebitDate = Optional.ofNullable(originalDebitDate);
+        this.originalDebitDate = JsonNullable.of(originalDebitDate);
         return this;
     }
-
 
     /**
      * Date when funds were originally debited from the company's bank account
      */
-    public RecoveryCase withOriginalDebitDate(Optional<String> originalDebitDate) {
+    public RecoveryCase withOriginalDebitDate(JsonNullable<String> originalDebitDate) {
         Utils.checkNotNull(originalDebitDate, "originalDebitDate");
         this.originalDebitDate = originalDebitDate;
         return this;
@@ -470,9 +468,9 @@ public class RecoveryCase {
 
         private Optional<? extends RecoveryCaseStatus> status = Optional.empty();
 
-        private Optional<String> latestErrorCode = Optional.empty();
+        private JsonNullable<String> latestErrorCode = JsonNullable.undefined();
 
-        private Optional<String> originalDebitDate = Optional.empty();
+        private JsonNullable<String> originalDebitDate = JsonNullable.undefined();
 
         private Optional<String> checkDate = Optional.empty();
 
@@ -544,7 +542,7 @@ public class RecoveryCase {
          */
         public Builder latestErrorCode(String latestErrorCode) {
             Utils.checkNotNull(latestErrorCode, "latestErrorCode");
-            this.latestErrorCode = Optional.ofNullable(latestErrorCode);
+            this.latestErrorCode = JsonNullable.of(latestErrorCode);
             return this;
         }
 
@@ -553,7 +551,7 @@ public class RecoveryCase {
          * doc](https://docs.gusto.com/embedded-payroll/docs/ach-codes-and-transaction-types) for a list of
          * common ACH return codes.
          */
-        public Builder latestErrorCode(Optional<String> latestErrorCode) {
+        public Builder latestErrorCode(JsonNullable<String> latestErrorCode) {
             Utils.checkNotNull(latestErrorCode, "latestErrorCode");
             this.latestErrorCode = latestErrorCode;
             return this;
@@ -565,14 +563,14 @@ public class RecoveryCase {
          */
         public Builder originalDebitDate(String originalDebitDate) {
             Utils.checkNotNull(originalDebitDate, "originalDebitDate");
-            this.originalDebitDate = Optional.ofNullable(originalDebitDate);
+            this.originalDebitDate = JsonNullable.of(originalDebitDate);
             return this;
         }
 
         /**
          * Date when funds were originally debited from the company's bank account
          */
-        public Builder originalDebitDate(Optional<String> originalDebitDate) {
+        public Builder originalDebitDate(JsonNullable<String> originalDebitDate) {
             Utils.checkNotNull(originalDebitDate, "originalDebitDate");
             this.originalDebitDate = originalDebitDate;
             return this;

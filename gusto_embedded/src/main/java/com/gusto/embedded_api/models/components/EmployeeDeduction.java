@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * EmployeeDeduction
@@ -35,19 +36,19 @@ public class EmployeeDeduction {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("default_value")
-    private Optional<? extends DefaultValue> defaultValue;
+    private JsonNullable<? extends DefaultValue> defaultValue;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("choices")
-    private Optional<? extends List<String>> choices;
+    private JsonNullable<? extends List<String>> choices;
 
     @JsonCreator
     public EmployeeDeduction(
             @JsonProperty("required") Optional<Boolean> required,
             @JsonProperty("editable") Optional<Boolean> editable,
-            @JsonProperty("default_value") Optional<? extends DefaultValue> defaultValue,
-            @JsonProperty("choices") Optional<? extends List<String>> choices) {
+            @JsonProperty("default_value") JsonNullable<? extends DefaultValue> defaultValue,
+            @JsonProperty("choices") JsonNullable<? extends List<String>> choices) {
         Utils.checkNotNull(required, "required");
         Utils.checkNotNull(editable, "editable");
         Utils.checkNotNull(defaultValue, "defaultValue");
@@ -59,8 +60,8 @@ public class EmployeeDeduction {
     }
     
     public EmployeeDeduction() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
+            JsonNullable.undefined());
     }
 
     @JsonIgnore
@@ -75,14 +76,14 @@ public class EmployeeDeduction {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<DefaultValue> defaultValue() {
-        return (Optional<DefaultValue>) defaultValue;
+    public JsonNullable<DefaultValue> defaultValue() {
+        return (JsonNullable<DefaultValue>) defaultValue;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<String>> choices() {
-        return (Optional<List<String>>) choices;
+    public JsonNullable<List<String>> choices() {
+        return (JsonNullable<List<String>>) choices;
     }
 
     public static Builder builder() {
@@ -118,12 +119,11 @@ public class EmployeeDeduction {
 
     public EmployeeDeduction withDefaultValue(DefaultValue defaultValue) {
         Utils.checkNotNull(defaultValue, "defaultValue");
-        this.defaultValue = Optional.ofNullable(defaultValue);
+        this.defaultValue = JsonNullable.of(defaultValue);
         return this;
     }
 
-
-    public EmployeeDeduction withDefaultValue(Optional<? extends DefaultValue> defaultValue) {
+    public EmployeeDeduction withDefaultValue(JsonNullable<? extends DefaultValue> defaultValue) {
         Utils.checkNotNull(defaultValue, "defaultValue");
         this.defaultValue = defaultValue;
         return this;
@@ -131,12 +131,11 @@ public class EmployeeDeduction {
 
     public EmployeeDeduction withChoices(List<String> choices) {
         Utils.checkNotNull(choices, "choices");
-        this.choices = Optional.ofNullable(choices);
+        this.choices = JsonNullable.of(choices);
         return this;
     }
 
-
-    public EmployeeDeduction withChoices(Optional<? extends List<String>> choices) {
+    public EmployeeDeduction withChoices(JsonNullable<? extends List<String>> choices) {
         Utils.checkNotNull(choices, "choices");
         this.choices = choices;
         return this;
@@ -181,9 +180,9 @@ public class EmployeeDeduction {
 
         private Optional<Boolean> editable = Optional.empty();
 
-        private Optional<? extends DefaultValue> defaultValue = Optional.empty();
+        private JsonNullable<? extends DefaultValue> defaultValue = JsonNullable.undefined();
 
-        private Optional<? extends List<String>> choices = Optional.empty();
+        private JsonNullable<? extends List<String>> choices = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -218,11 +217,11 @@ public class EmployeeDeduction {
 
         public Builder defaultValue(DefaultValue defaultValue) {
             Utils.checkNotNull(defaultValue, "defaultValue");
-            this.defaultValue = Optional.ofNullable(defaultValue);
+            this.defaultValue = JsonNullable.of(defaultValue);
             return this;
         }
 
-        public Builder defaultValue(Optional<? extends DefaultValue> defaultValue) {
+        public Builder defaultValue(JsonNullable<? extends DefaultValue> defaultValue) {
             Utils.checkNotNull(defaultValue, "defaultValue");
             this.defaultValue = defaultValue;
             return this;
@@ -231,11 +230,11 @@ public class EmployeeDeduction {
 
         public Builder choices(List<String> choices) {
             Utils.checkNotNull(choices, "choices");
-            this.choices = Optional.ofNullable(choices);
+            this.choices = JsonNullable.of(choices);
             return this;
         }
 
-        public Builder choices(Optional<? extends List<String>> choices) {
+        public Builder choices(JsonNullable<? extends List<String>> choices) {
             Utils.checkNotNull(choices, "choices");
             this.choices = choices;
             return this;

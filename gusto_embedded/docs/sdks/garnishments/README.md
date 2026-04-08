@@ -16,9 +16,90 @@ Garnishments, or employee deductions, are fixed amounts or percentages deducted 
 
 scope: `garnishments:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-garnishments" method="post" path="/v1/employees/{employee_id}/garnishments" -->
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-garnishments" method="post" path="/v1/employees/{employee_id}/garnishments" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdGarnishmentsRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdGarnishmentsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1EmployeesEmployeeIdGarnishmentsResponse res = sdk.garnishments().create()
+                .employeeId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1EmployeesEmployeeIdGarnishmentsRequestBody.builder()
+                    .amount("<value>")
+                    .courtOrdered(false)
+                    .build())
+                .call();
+
+        if (res.garnishment().isPresent()) {
+            System.out.println(res.garnishment().get());
+        }
+    }
+}
+```
+### Example Usage: Child-Support-Example
+
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-garnishments" method="post" path="/v1/employees/{employee_id}/garnishments" example="Child-Support-Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.*;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1EmployeesEmployeeIdGarnishmentsResponse res = sdk.garnishments().create()
+                .employeeId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1EmployeesEmployeeIdGarnishmentsRequestBody.builder()
+                    .amount("40")
+                    .courtOrdered(true)
+                    .garnishmentType(GarnishmentType.CHILD_SUPPORT)
+                    .recurring(true)
+                    .payPeriodMaximum("500.00")
+                    .deductAsPercentage(true)
+                    .childSupport(GarnishmentChildSupport.builder()
+                        .state("FL")
+                        .paymentPeriod(PaymentPeriod.MONTHLY)
+                        .fipsCode("12011")
+                        .caseNumber("CS1234")
+                        .build())
+                    .build())
+                .call();
+
+        if (res.garnishment().isPresent()) {
+            System.out.println(res.garnishment().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-garnishments" method="post" path="/v1/employees/{employee_id}/garnishments" example="Example" -->
 ```java
 package hello.world;
 
@@ -49,7 +130,79 @@ public class Application {
                 .call();
 
         if (res.garnishment().isPresent()) {
-            // handle response
+            System.out.println(res.garnishment().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-garnishments" method="post" path="/v1/employees/{employee_id}/garnishments" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdGarnishmentsRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdGarnishmentsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1EmployeesEmployeeIdGarnishmentsResponse res = sdk.garnishments().create()
+                .employeeId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1EmployeesEmployeeIdGarnishmentsRequestBody.builder()
+                    .amount("<value>")
+                    .courtOrdered(false)
+                    .build())
+                .call();
+
+        if (res.garnishment().isPresent()) {
+            System.out.println(res.garnishment().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-garnishments" method="post" path="/v1/employees/{employee_id}/garnishments" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdGarnishmentsRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdGarnishmentsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1EmployeesEmployeeIdGarnishmentsResponse res = sdk.garnishments().create()
+                .employeeId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1EmployeesEmployeeIdGarnishmentsRequestBody.builder()
+                    .amount("<value>")
+                    .courtOrdered(false)
+                    .build())
+                .call();
+
+        if (res.garnishment().isPresent()) {
+            System.out.println(res.garnishment().get());
         }
     }
 }
@@ -82,7 +235,7 @@ scope: `garnishments:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-garnishments" method="get" path="/v1/employees/{employee_id}/garnishments" -->
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-garnishments" method="get" path="/v1/employees/{employee_id}/garnishments" example="Example" -->
 ```java
 package hello.world;
 
@@ -105,7 +258,7 @@ public class Application {
                 .call();
 
         if (res.garnishmentList().isPresent()) {
-            // handle response
+            System.out.println(res.garnishmentList().get());
         }
     }
 }
@@ -136,9 +289,9 @@ Garnishments, or employee deductions, are fixed amounts or percentages deducted 
 
 scope: `garnishments:read`
 
-### Example Usage
+### Example Usage: Child-Support-Example
 
-<!-- UsageSnippet language="java" operationID="get-v1-garnishments-garnishment_id" method="get" path="/v1/garnishments/{garnishment_id}" -->
+<!-- UsageSnippet language="java" operationID="get-v1-garnishments-garnishment_id" method="get" path="/v1/garnishments/{garnishment_id}" example="Child-Support-Example" -->
 ```java
 package hello.world;
 
@@ -161,7 +314,37 @@ public class Application {
                 .call();
 
         if (res.garnishment().isPresent()) {
-            // handle response
+            System.out.println(res.garnishment().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="get-v1-garnishments-garnishment_id" method="get" path="/v1/garnishments/{garnishment_id}" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1GarnishmentsGarnishmentIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1GarnishmentsGarnishmentIdResponse res = sdk.garnishments().get()
+                .garnishmentId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .call();
+
+        if (res.garnishment().isPresent()) {
+            System.out.println(res.garnishment().get());
         }
     }
 }
@@ -190,9 +373,79 @@ Garnishments, or employee deductions, are fixed amounts or percentages deducted 
 
 scope: `garnishments:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="put-v1-garnishments-garnishment_id" method="put" path="/v1/garnishments/{garnishment_id}" -->
+<!-- UsageSnippet language="java" operationID="put-v1-garnishments-garnishment_id" method="put" path="/v1/garnishments/{garnishment_id}" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1GarnishmentsGarnishmentIdRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1GarnishmentsGarnishmentIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1GarnishmentsGarnishmentIdResponse res = sdk.garnishments().update()
+                .garnishmentId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1GarnishmentsGarnishmentIdRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.garnishment().isPresent()) {
+            System.out.println(res.garnishment().get());
+        }
+    }
+}
+```
+### Example Usage: Child-Support-Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-garnishments-garnishment_id" method="put" path="/v1/garnishments/{garnishment_id}" example="Child-Support-Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1GarnishmentsGarnishmentIdRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1GarnishmentsGarnishmentIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1GarnishmentsGarnishmentIdResponse res = sdk.garnishments().update()
+                .garnishmentId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1GarnishmentsGarnishmentIdRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.garnishment().isPresent()) {
+            System.out.println(res.garnishment().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-garnishments-garnishment_id" method="put" path="/v1/garnishments/{garnishment_id}" example="Example" -->
 ```java
 package hello.world;
 
@@ -221,7 +474,77 @@ public class Application {
                 .call();
 
         if (res.garnishment().isPresent()) {
-            // handle response
+            System.out.println(res.garnishment().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-v1-garnishments-garnishment_id" method="put" path="/v1/garnishments/{garnishment_id}" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1GarnishmentsGarnishmentIdRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1GarnishmentsGarnishmentIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1GarnishmentsGarnishmentIdResponse res = sdk.garnishments().update()
+                .garnishmentId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1GarnishmentsGarnishmentIdRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.garnishment().isPresent()) {
+            System.out.println(res.garnishment().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-v1-garnishments-garnishment_id" method="put" path="/v1/garnishments/{garnishment_id}" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1GarnishmentsGarnishmentIdRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1GarnishmentsGarnishmentIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1GarnishmentsGarnishmentIdResponse res = sdk.garnishments().update()
+                .garnishmentId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1GarnishmentsGarnishmentIdRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.garnishment().isPresent()) {
+            System.out.println(res.garnishment().get());
         }
     }
 }
@@ -254,7 +577,7 @@ scope: `garnishments:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-garnishments-child_support" method="get" path="/v1/garnishments/child_support" -->
+<!-- UsageSnippet language="java" operationID="get-v1-garnishments-child_support" method="get" path="/v1/garnishments/child_support" example="Example" -->
 ```java
 package hello.world;
 
@@ -276,7 +599,7 @@ public class Application {
                 .call();
 
         if (res.childSupportData().isPresent()) {
-            // handle response
+            System.out.println(res.childSupportData().get());
         }
     }
 }

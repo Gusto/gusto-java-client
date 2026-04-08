@@ -2,6 +2,14 @@
 
 The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls initially run outside of Gusto, then put into Gusto.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.PayrollEmployeeCompensationsTypePaymentMethod;
+
+PayrollEmployeeCompensationsTypePaymentMethod value = PayrollEmployeeCompensationsTypePaymentMethod.DIRECT_DEPOSIT;
+```
+
 
 ## Values
 

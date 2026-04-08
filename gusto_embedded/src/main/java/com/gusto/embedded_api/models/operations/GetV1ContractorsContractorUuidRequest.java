@@ -6,17 +6,25 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 
 public class GetV1ContractorsContractorUuidRequest {
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
     /**
      * The UUID of the contractor
      */
@@ -24,26 +32,39 @@ public class GetV1ContractorsContractorUuidRequest {
     private String contractorUuid;
 
     /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * Include the requested attribute(s) in each contractor response. Multiple options are comma
+     * separated.
      */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=include")
+    private Optional<? extends List<GetV1ContractorsContractorUuidQueryParamInclude>> include;
 
     @JsonCreator
     public GetV1ContractorsContractorUuidRequest(
+            Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
             String contractorUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(contractorUuid, "contractorUuid");
+            Optional<? extends List<GetV1ContractorsContractorUuidQueryParamInclude>> include) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.contractorUuid = contractorUuid;
+        Utils.checkNotNull(contractorUuid, "contractorUuid");
+        Utils.checkNotNull(include, "include");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.contractorUuid = contractorUuid;
+        this.include = include;
     }
     
     public GetV1ContractorsContractorUuidRequest(
             String contractorUuid) {
-        this(contractorUuid, Optional.empty());
+        this(Optional.empty(), contractorUuid, Optional.empty());
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetV1ContractorsContractorUuidHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetV1ContractorsContractorUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -55,14 +76,13 @@ public class GetV1ContractorsContractorUuidRequest {
     }
 
     /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * Include the requested attribute(s) in each contractor response. Multiple options are comma
+     * separated.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<List<GetV1ContractorsContractorUuidQueryParamInclude>> include() {
+        return (Optional<List<GetV1ContractorsContractorUuidQueryParamInclude>>) include;
     }
 
     public static Builder builder() {
@@ -71,20 +91,11 @@ public class GetV1ContractorsContractorUuidRequest {
 
 
     /**
-     * The UUID of the contractor
-     */
-    public GetV1ContractorsContractorUuidRequest withContractorUuid(String contractorUuid) {
-        Utils.checkNotNull(contractorUuid, "contractorUuid");
-        this.contractorUuid = contractorUuid;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1ContractorsContractorUuidRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public GetV1ContractorsContractorUuidRequest withXGustoAPIVersion(GetV1ContractorsContractorUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -96,9 +107,39 @@ public class GetV1ContractorsContractorUuidRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1ContractorsContractorUuidRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1ContractorsContractorUuidRequest withXGustoAPIVersion(Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * The UUID of the contractor
+     */
+    public GetV1ContractorsContractorUuidRequest withContractorUuid(String contractorUuid) {
+        Utils.checkNotNull(contractorUuid, "contractorUuid");
+        this.contractorUuid = contractorUuid;
+        return this;
+    }
+
+    /**
+     * Include the requested attribute(s) in each contractor response. Multiple options are comma
+     * separated.
+     */
+    public GetV1ContractorsContractorUuidRequest withInclude(List<GetV1ContractorsContractorUuidQueryParamInclude> include) {
+        Utils.checkNotNull(include, "include");
+        this.include = Optional.ofNullable(include);
+        return this;
+    }
+
+
+    /**
+     * Include the requested attribute(s) in each contractor response. Multiple options are comma
+     * separated.
+     */
+    public GetV1ContractorsContractorUuidRequest withInclude(Optional<? extends List<GetV1ContractorsContractorUuidQueryParamInclude>> include) {
+        Utils.checkNotNull(include, "include");
+        this.include = include;
         return this;
     }
 
@@ -112,32 +153,59 @@ public class GetV1ContractorsContractorUuidRequest {
         }
         GetV1ContractorsContractorUuidRequest other = (GetV1ContractorsContractorUuidRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.contractorUuid, other.contractorUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.include, other.include);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            contractorUuid, xGustoAPIVersion);
+            xGustoAPIVersion, contractorUuid, include);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1ContractorsContractorUuidRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "contractorUuid", contractorUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "include", include);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String contractorUuid;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<? extends List<GetV1ContractorsContractorUuidQueryParamInclude>> include = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(GetV1ContractorsContractorUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -152,24 +220,22 @@ public class GetV1ContractorsContractorUuidRequest {
 
 
         /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         * Include the requested attribute(s) in each contractor response. Multiple options are comma
+         * separated.
          */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        public Builder include(List<GetV1ContractorsContractorUuidQueryParamInclude> include) {
+            Utils.checkNotNull(include, "include");
+            this.include = Optional.ofNullable(include);
             return this;
         }
 
         /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         * Include the requested attribute(s) in each contractor response. Multiple options are comma
+         * separated.
          */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
+        public Builder include(Optional<? extends List<GetV1ContractorsContractorUuidQueryParamInclude>> include) {
+            Utils.checkNotNull(include, "include");
+            this.include = include;
             return this;
         }
 
@@ -179,14 +245,14 @@ public class GetV1ContractorsContractorUuidRequest {
             }
 
             return new GetV1ContractorsContractorUuidRequest(
-                contractorUuid, xGustoAPIVersion);
+                xGustoAPIVersion, contractorUuid, include);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion>>() {});
     }
 }

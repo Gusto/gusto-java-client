@@ -14,6 +14,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.time.LocalDate;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class PostV1EmployeesRequestBody {
@@ -31,11 +32,11 @@ public class PostV1EmployeesRequestBody {
     private String lastName;
 
     /**
-     * The employee's personal email address.
+     * The employee's personal email address. Required if self_onboarding is true.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
-    private Optional<String> email;
+    private JsonNullable<String> email;
 
     /**
      * The employee's work email address.
@@ -72,7 +73,7 @@ public class PostV1EmployeesRequestBody {
             @JsonProperty("first_name") String firstName,
             @JsonProperty("middle_initial") Optional<String> middleInitial,
             @JsonProperty("last_name") String lastName,
-            @JsonProperty("email") Optional<String> email,
+            @JsonProperty("email") JsonNullable<String> email,
             @JsonProperty("work_email") Optional<String> workEmail,
             @JsonProperty("date_of_birth") Optional<LocalDate> dateOfBirth,
             @JsonProperty("ssn") Optional<String> ssn,
@@ -102,7 +103,7 @@ public class PostV1EmployeesRequestBody {
             String firstName,
             String lastName) {
         this(firstName, Optional.empty(), lastName,
-            Optional.empty(), Optional.empty(), Optional.empty(),
+            JsonNullable.undefined(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty());
     }
 
@@ -122,10 +123,10 @@ public class PostV1EmployeesRequestBody {
     }
 
     /**
-     * The employee's personal email address.
+     * The employee's personal email address. Required if self_onboarding is true.
      */
     @JsonIgnore
-    public Optional<String> email() {
+    public JsonNullable<String> email() {
         return email;
     }
 
@@ -192,19 +193,18 @@ public class PostV1EmployeesRequestBody {
     }
 
     /**
-     * The employee's personal email address.
+     * The employee's personal email address. Required if self_onboarding is true.
      */
     public PostV1EmployeesRequestBody withEmail(String email) {
         Utils.checkNotNull(email, "email");
-        this.email = Optional.ofNullable(email);
+        this.email = JsonNullable.of(email);
         return this;
     }
 
-
     /**
-     * The employee's personal email address.
+     * The employee's personal email address. Required if self_onboarding is true.
      */
-    public PostV1EmployeesRequestBody withEmail(Optional<String> email) {
+    public PostV1EmployeesRequestBody withEmail(JsonNullable<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
         return this;
@@ -341,7 +341,7 @@ public class PostV1EmployeesRequestBody {
 
         private String lastName;
 
-        private Optional<String> email = Optional.empty();
+        private JsonNullable<String> email = JsonNullable.undefined();
 
         private Optional<String> workEmail = Optional.empty();
 
@@ -386,18 +386,18 @@ public class PostV1EmployeesRequestBody {
 
 
         /**
-         * The employee's personal email address.
+         * The employee's personal email address. Required if self_onboarding is true.
          */
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
-            this.email = Optional.ofNullable(email);
+            this.email = JsonNullable.of(email);
             return this;
         }
 
         /**
-         * The employee's personal email address.
+         * The employee's personal email address. Required if self_onboarding is true.
          */
-        public Builder email(Optional<String> email) {
+        public Builder email(JsonNullable<String> email) {
             Utils.checkNotNull(email, "email");
             this.email = email;
             return this;

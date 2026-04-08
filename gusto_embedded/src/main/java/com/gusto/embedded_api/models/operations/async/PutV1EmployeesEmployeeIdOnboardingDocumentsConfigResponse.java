@@ -34,7 +34,7 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse implement
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Success
      */
     private Optional<? extends EmployeeOnboardingDocument> employeeOnboardingDocument;
 
@@ -87,7 +87,7 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse implement
     }
 
     /**
-     * Example response
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse implement
     }
 
     /**
-     * Example response
+     * Success
      */
     public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse withEmployeeOnboardingDocument(EmployeeOnboardingDocument employeeOnboardingDocument) {
         Utils.checkNotNull(employeeOnboardingDocument, "employeeOnboardingDocument");
@@ -138,7 +138,7 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse implement
 
 
     /**
-     * Example response
+     * Success
      */
     public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse withEmployeeOnboardingDocument(Optional<? extends EmployeeOnboardingDocument> employeeOnboardingDocument) {
         Utils.checkNotNull(employeeOnboardingDocument, "employeeOnboardingDocument");
@@ -225,7 +225,7 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse implement
 
 
         /**
-         * Example response
+         * Success
          */
         public Builder employeeOnboardingDocument(EmployeeOnboardingDocument employeeOnboardingDocument) {
             Utils.checkNotNull(employeeOnboardingDocument, "employeeOnboardingDocument");
@@ -234,7 +234,7 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse implement
         }
 
         /**
-         * Example response
+         * Success
          */
         public Builder employeeOnboardingDocument(Optional<? extends EmployeeOnboardingDocument> employeeOnboardingDocument) {
             Utils.checkNotNull(employeeOnboardingDocument, "employeeOnboardingDocument");

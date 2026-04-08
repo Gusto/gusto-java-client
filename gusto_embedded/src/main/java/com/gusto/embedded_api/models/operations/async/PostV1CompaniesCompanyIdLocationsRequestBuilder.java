@@ -7,9 +7,9 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.CompanyLocationRequest;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdLocationsRequest;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdLocationsRequestBody;
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyIdLocations;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -20,17 +20,29 @@ import java.util.concurrent.CompletableFuture;
 
 public class PostV1CompaniesCompanyIdLocationsRequestBuilder {
 
-    private String companyId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PostV1CompaniesCompanyIdLocationsRequestBody requestBody;
+                            new TypeReference<Optional<? extends PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private CompanyLocationRequest companyLocationRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1CompaniesCompanyIdLocationsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PostV1CompaniesCompanyIdLocationsRequestBuilder xGustoAPIVersion(PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyIdLocationsRequestBuilder xGustoAPIVersion(Optional<? extends PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PostV1CompaniesCompanyIdLocationsRequestBuilder companyId(String companyId) {
@@ -38,22 +50,10 @@ public class PostV1CompaniesCompanyIdLocationsRequestBuilder {
         this.companyId = companyId;
         return this;
     }
-                
-    public PostV1CompaniesCompanyIdLocationsRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
 
-    public PostV1CompaniesCompanyIdLocationsRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PostV1CompaniesCompanyIdLocationsRequestBuilder requestBody(PostV1CompaniesCompanyIdLocationsRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PostV1CompaniesCompanyIdLocationsRequestBuilder companyLocationRequest(CompanyLocationRequest companyLocationRequest) {
+        Utils.checkNotNull(companyLocationRequest, "companyLocationRequest");
+        this.companyLocationRequest = companyLocationRequest;
         return this;
     }
 
@@ -63,9 +63,9 @@ public class PostV1CompaniesCompanyIdLocationsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1CompaniesCompanyIdLocationsRequest request = new PostV1CompaniesCompanyIdLocationsRequest(companyId,
-            xGustoAPIVersion,
-            requestBody);
+        PostV1CompaniesCompanyIdLocationsRequest request = new PostV1CompaniesCompanyIdLocationsRequest(xGustoAPIVersion,
+            companyId,
+            companyLocationRequest);
 
         return request;
     }
@@ -80,9 +80,9 @@ public class PostV1CompaniesCompanyIdLocationsRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion>>() {});
 }

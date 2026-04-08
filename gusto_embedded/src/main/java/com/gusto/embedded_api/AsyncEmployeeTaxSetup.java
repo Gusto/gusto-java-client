@@ -6,10 +6,11 @@ package com.gusto.embedded_api;
 import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation;
 
 import com.gusto.embedded_api.models.components.EmployeeStateTaxesRequest;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdFederalTaxesRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdStateTaxesRequest;
+import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdFederalTaxesRequest;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdFederalTaxesRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion;
@@ -53,11 +54,14 @@ public class AsyncEmployeeTaxSetup {
 
 
     /**
-     * Get an employee's federal taxes
+     * Get federal taxes for an employee
      * 
-     * <p>Get attributes relevant for an employee's federal taxes.
+     * <p>Returns federal tax information for an employee. The response structure varies based on the
+     * w4_data_type (pre_2020_w4 or rev_2020_w4).
      * 
      * <p>scope: `employee_federal_taxes:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -66,36 +70,42 @@ public class AsyncEmployeeTaxSetup {
     }
 
     /**
-     * Get an employee's federal taxes
+     * Get federal taxes for an employee
      * 
-     * <p>Get attributes relevant for an employee's federal taxes.
+     * <p>Returns federal tax information for an employee. The response structure varies based on the
+     * w4_data_type (pre_2020_w4 or rev_2020_w4).
      * 
      * <p>scope: `employee_federal_taxes:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeUuid The UUID of the employee
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdFederalTaxesResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdFederalTaxesResponse> getFederalTaxes(String employeeUuid) {
-        return getFederalTaxes(employeeUuid, Optional.empty());
+        return getFederalTaxes(Optional.empty(), employeeUuid);
     }
 
     /**
-     * Get an employee's federal taxes
+     * Get federal taxes for an employee
      * 
-     * <p>Get attributes relevant for an employee's federal taxes.
+     * <p>Returns federal tax information for an employee. The response structure varies based on the
+     * w4_data_type (pre_2020_w4 or rev_2020_w4).
      * 
      * <p>scope: `employee_federal_taxes:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeUuid The UUID of the employee
-     * @param xGustoAPIVersion 
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdFederalTaxesResponse>} - The async response
      */
-    public CompletableFuture<GetV1EmployeesEmployeeIdFederalTaxesResponse> getFederalTaxes(String employeeUuid, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public CompletableFuture<GetV1EmployeesEmployeeIdFederalTaxesResponse> getFederalTaxes(Optional<? extends GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid) {
         GetV1EmployeesEmployeeIdFederalTaxesRequest request =
             GetV1EmployeesEmployeeIdFederalTaxesRequest
                 .builder()
-                .employeeUuid(employeeUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeUuid(employeeUuid)
                 .build();
         AsyncRequestOperation<GetV1EmployeesEmployeeIdFederalTaxesRequest, GetV1EmployeesEmployeeIdFederalTaxesResponse> operation
               = new GetV1EmployeesEmployeeIdFederalTaxes.Async(sdkConfiguration, _headers);
@@ -105,11 +115,14 @@ public class AsyncEmployeeTaxSetup {
 
 
     /**
-     * Update an employee's federal taxes
+     * Update federal taxes for an employee
      * 
-     * <p>Update attributes relevant for an employee's federal taxes.
+     * <p>Updates federal tax (W4) information for an employee. Only rev_2020_w4 format is accepted for
+     * updates.
      * 
      * <p>scope: `employee_federal_taxes:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -118,40 +131,46 @@ public class AsyncEmployeeTaxSetup {
     }
 
     /**
-     * Update an employee's federal taxes
+     * Update federal taxes for an employee
      * 
-     * <p>Update attributes relevant for an employee's federal taxes.
+     * <p>Updates federal tax (W4) information for an employee. Only rev_2020_w4 format is accepted for
+     * updates.
      * 
      * <p>scope: `employee_federal_taxes:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeUuid The UUID of the employee
      * @param requestBody 
      * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdFederalTaxesResponse>} - The async response
      */
     public CompletableFuture<PutV1EmployeesEmployeeIdFederalTaxesResponse> updateFederalTaxes(String employeeUuid, PutV1EmployeesEmployeeIdFederalTaxesRequestBody requestBody) {
-        return updateFederalTaxes(employeeUuid, Optional.empty(), requestBody);
+        return updateFederalTaxes(Optional.empty(), employeeUuid, requestBody);
     }
 
     /**
-     * Update an employee's federal taxes
+     * Update federal taxes for an employee
      * 
-     * <p>Update attributes relevant for an employee's federal taxes.
+     * <p>Updates federal tax (W4) information for an employee. Only rev_2020_w4 format is accepted for
+     * updates.
      * 
      * <p>scope: `employee_federal_taxes:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeUuid The UUID of the employee
-     * @param xGustoAPIVersion 
      * @param requestBody 
      * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdFederalTaxesResponse>} - The async response
      */
     public CompletableFuture<PutV1EmployeesEmployeeIdFederalTaxesResponse> updateFederalTaxes(
-            String employeeUuid, Optional<? extends VersionHeader> xGustoAPIVersion,
+            Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
             PutV1EmployeesEmployeeIdFederalTaxesRequestBody requestBody) {
         PutV1EmployeesEmployeeIdFederalTaxesRequest request =
             PutV1EmployeesEmployeeIdFederalTaxesRequest
                 .builder()
-                .employeeUuid(employeeUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeUuid(employeeUuid)
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1EmployeesEmployeeIdFederalTaxesRequest, PutV1EmployeesEmployeeIdFederalTaxesResponse> operation
@@ -189,6 +208,8 @@ public class AsyncEmployeeTaxSetup {
      * 
      * <p>scope: `employee_state_taxes:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1EmployeesEmployeeIdStateTaxesRequestBuilder getStateTaxes() {
@@ -222,6 +243,8 @@ public class AsyncEmployeeTaxSetup {
      * - that employee's work state requires filing a new hire report
      * 
      * <p>scope: `employee_state_taxes:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeUuid The UUID of the employee
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdStateTaxesResponse>} - The async response
@@ -258,6 +281,8 @@ public class AsyncEmployeeTaxSetup {
      * 
      * <p>scope: `employee_state_taxes:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeUuid The UUID of the employee
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdStateTaxesResponse>} - The async response
@@ -287,6 +312,8 @@ public class AsyncEmployeeTaxSetup {
      * 
      * <p>scope: `employee_state_taxes:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PutV1EmployeesEmployeeIdStateTaxesRequestBuilder updateStateTaxes() {
@@ -303,6 +330,8 @@ public class AsyncEmployeeTaxSetup {
      * `"2010-01-01"` and `null` respectively.
      * 
      * <p>scope: `employee_state_taxes:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeUuid The UUID of the employee
      * @param employeeStateTaxesRequest 
@@ -322,6 +351,8 @@ public class AsyncEmployeeTaxSetup {
      * `"2010-01-01"` and `null` respectively.
      * 
      * <p>scope: `employee_state_taxes:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeUuid The UUID of the employee

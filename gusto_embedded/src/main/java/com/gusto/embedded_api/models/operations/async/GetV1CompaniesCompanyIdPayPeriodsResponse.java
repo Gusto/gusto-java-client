@@ -35,24 +35,24 @@ public class GetV1CompaniesCompanyIdPayPeriodsResponse implements AsyncResponse 
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
-    private Optional<? extends List<PayPeriod>> payPeriodList;
+    private Optional<? extends List<PayPeriod>> payPeriods;
 
     @JsonCreator
     public GetV1CompaniesCompanyIdPayPeriodsResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends List<PayPeriod>> payPeriodList) {
+            Optional<? extends List<PayPeriod>> payPeriods) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(payPeriodList, "payPeriodList");
+        Utils.checkNotNull(payPeriods, "payPeriods");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.payPeriodList = payPeriodList;
+        this.payPeriods = payPeriods;
     }
     
     public GetV1CompaniesCompanyIdPayPeriodsResponse(
@@ -88,12 +88,12 @@ public class GetV1CompaniesCompanyIdPayPeriodsResponse implements AsyncResponse 
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PayPeriod>> payPeriodList() {
-        return (Optional<List<PayPeriod>>) payPeriodList;
+    public Optional<List<PayPeriod>> payPeriods() {
+        return (Optional<List<PayPeriod>>) payPeriods;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1CompaniesCompanyIdPayPeriodsResponse implements AsyncResponse 
     }
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesCompanyIdPayPeriodsResponse withPayPeriodList(List<PayPeriod> payPeriodList) {
-        Utils.checkNotNull(payPeriodList, "payPeriodList");
-        this.payPeriodList = Optional.ofNullable(payPeriodList);
+    public GetV1CompaniesCompanyIdPayPeriodsResponse withPayPeriods(List<PayPeriod> payPeriods) {
+        Utils.checkNotNull(payPeriods, "payPeriods");
+        this.payPeriods = Optional.ofNullable(payPeriods);
         return this;
     }
 
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesCompanyIdPayPeriodsResponse withPayPeriodList(Optional<? extends List<PayPeriod>> payPeriodList) {
-        Utils.checkNotNull(payPeriodList, "payPeriodList");
-        this.payPeriodList = payPeriodList;
+    public GetV1CompaniesCompanyIdPayPeriodsResponse withPayPeriods(Optional<? extends List<PayPeriod>> payPeriods) {
+        Utils.checkNotNull(payPeriods, "payPeriods");
+        this.payPeriods = payPeriods;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1CompaniesCompanyIdPayPeriodsResponse implements AsyncResponse 
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.payPeriodList, other.payPeriodList);
+            Utils.enhancedDeepEquals(this.payPeriods, other.payPeriods);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            payPeriodList);
+            payPeriods);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1CompaniesCompanyIdPayPeriodsResponse implements AsyncResponse 
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "payPeriodList", payPeriodList);
+                "payPeriods", payPeriods);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1CompaniesCompanyIdPayPeriodsResponse implements AsyncResponse 
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends List<PayPeriod>> payPeriodList = Optional.empty();
+        private Optional<? extends List<PayPeriod>> payPeriods = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1CompaniesCompanyIdPayPeriodsResponse implements AsyncResponse 
 
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder payPeriodList(List<PayPeriod> payPeriodList) {
-            Utils.checkNotNull(payPeriodList, "payPeriodList");
-            this.payPeriodList = Optional.ofNullable(payPeriodList);
+        public Builder payPeriods(List<PayPeriod> payPeriods) {
+            Utils.checkNotNull(payPeriods, "payPeriods");
+            this.payPeriods = Optional.ofNullable(payPeriods);
             return this;
         }
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder payPeriodList(Optional<? extends List<PayPeriod>> payPeriodList) {
-            Utils.checkNotNull(payPeriodList, "payPeriodList");
-            this.payPeriodList = payPeriodList;
+        public Builder payPeriods(Optional<? extends List<PayPeriod>> payPeriods) {
+            Utils.checkNotNull(payPeriods, "payPeriods");
+            this.payPeriods = payPeriods;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1CompaniesCompanyIdPayPeriodsResponse implements AsyncResponse 
 
             return new GetV1CompaniesCompanyIdPayPeriodsResponse(
                 contentType, statusCode, rawResponse,
-                payPeriodList);
+                payPeriods);
         }
 
     }

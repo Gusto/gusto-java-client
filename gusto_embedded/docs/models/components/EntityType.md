@@ -2,6 +2,14 @@
 
 The tax payer type of the company.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.EntityType;
+
+EntityType value = EntityType.C_CORPORATION;
+```
+
 
 ## Values
 

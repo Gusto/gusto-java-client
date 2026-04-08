@@ -5,7 +5,7 @@ package com.gusto.embedded_api.models.operations.async;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api.models.components.PayScheduleList;
+import com.gusto.embedded_api.models.components.PaySchedule;
 import com.gusto.embedded_api.utils.AsyncResponse;
 import com.gusto.embedded_api.utils.Blob;
 import com.gusto.embedded_api.utils.Utils;
@@ -35,24 +35,24 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements AsyncRespons
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
-    private Optional<? extends List<PayScheduleList>> payScheduleList;
+    private Optional<? extends List<PaySchedule>> paySchedules;
 
     @JsonCreator
     public GetV1CompaniesCompanyIdPaySchedulesResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends List<PayScheduleList>> payScheduleList) {
+            Optional<? extends List<PaySchedule>> paySchedules) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(payScheduleList, "payScheduleList");
+        Utils.checkNotNull(paySchedules, "paySchedules");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.payScheduleList = payScheduleList;
+        this.paySchedules = paySchedules;
     }
     
     public GetV1CompaniesCompanyIdPaySchedulesResponse(
@@ -88,12 +88,12 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements AsyncRespons
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PayScheduleList>> payScheduleList() {
-        return (Optional<List<PayScheduleList>>) payScheduleList;
+    public Optional<List<PaySchedule>> paySchedules() {
+        return (Optional<List<PaySchedule>>) paySchedules;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements AsyncRespons
     }
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesCompanyIdPaySchedulesResponse withPayScheduleList(List<PayScheduleList> payScheduleList) {
-        Utils.checkNotNull(payScheduleList, "payScheduleList");
-        this.payScheduleList = Optional.ofNullable(payScheduleList);
+    public GetV1CompaniesCompanyIdPaySchedulesResponse withPaySchedules(List<PaySchedule> paySchedules) {
+        Utils.checkNotNull(paySchedules, "paySchedules");
+        this.paySchedules = Optional.ofNullable(paySchedules);
         return this;
     }
 
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesCompanyIdPaySchedulesResponse withPayScheduleList(Optional<? extends List<PayScheduleList>> payScheduleList) {
-        Utils.checkNotNull(payScheduleList, "payScheduleList");
-        this.payScheduleList = payScheduleList;
+    public GetV1CompaniesCompanyIdPaySchedulesResponse withPaySchedules(Optional<? extends List<PaySchedule>> paySchedules) {
+        Utils.checkNotNull(paySchedules, "paySchedules");
+        this.paySchedules = paySchedules;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements AsyncRespons
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.payScheduleList, other.payScheduleList);
+            Utils.enhancedDeepEquals(this.paySchedules, other.paySchedules);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            payScheduleList);
+            paySchedules);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements AsyncRespons
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "payScheduleList", payScheduleList);
+                "paySchedules", paySchedules);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements AsyncRespons
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends List<PayScheduleList>> payScheduleList = Optional.empty();
+        private Optional<? extends List<PaySchedule>> paySchedules = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements AsyncRespons
 
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder payScheduleList(List<PayScheduleList> payScheduleList) {
-            Utils.checkNotNull(payScheduleList, "payScheduleList");
-            this.payScheduleList = Optional.ofNullable(payScheduleList);
+        public Builder paySchedules(List<PaySchedule> paySchedules) {
+            Utils.checkNotNull(paySchedules, "paySchedules");
+            this.paySchedules = Optional.ofNullable(paySchedules);
             return this;
         }
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder payScheduleList(Optional<? extends List<PayScheduleList>> payScheduleList) {
-            Utils.checkNotNull(payScheduleList, "payScheduleList");
-            this.payScheduleList = payScheduleList;
+        public Builder paySchedules(Optional<? extends List<PaySchedule>> paySchedules) {
+            Utils.checkNotNull(paySchedules, "paySchedules");
+            this.paySchedules = paySchedules;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements AsyncRespons
 
             return new GetV1CompaniesCompanyIdPaySchedulesResponse(
                 contentType, statusCode, rawResponse,
-                payScheduleList);
+                paySchedules);
         }
 
     }

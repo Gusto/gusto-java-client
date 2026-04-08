@@ -5,15 +5,17 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.CompanyAttachmentCreateRequestBody;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentResponse;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentsRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentsRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentsResponse;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesAttachmentHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesAttachmentRequest;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesAttachmentRequestBody;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesAttachmentRequestBuilder;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesAttachmentResponse;
 import com.gusto.embedded_api.operations.GetV1CompaniesAttachment;
@@ -48,7 +50,12 @@ public class CompanyAttachments {
      * 
      * <p>Retrieve the detail of an attachment uploaded by the company.
      * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
+     * 
      * <p>scope: `company_attachments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -61,7 +68,12 @@ public class CompanyAttachments {
      * 
      * <p>Retrieve the detail of an attachment uploaded by the company.
      * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
+     * 
      * <p>scope: `company_attachments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @param companyAttachmentUuid The UUID of the company attachment
@@ -69,7 +81,7 @@ public class CompanyAttachments {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesAttachmentResponse getDetails(String companyId, String companyAttachmentUuid) {
-        return getDetails(companyId, companyAttachmentUuid, Optional.empty());
+        return getDetails(Optional.empty(), companyId, companyAttachmentUuid);
     }
 
     /**
@@ -77,23 +89,28 @@ public class CompanyAttachments {
      * 
      * <p>Retrieve the detail of an attachment uploaded by the company.
      * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
+     * 
      * <p>scope: `company_attachments:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param companyAttachmentUuid The UUID of the company attachment
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesAttachmentResponse getDetails(
-            String companyId, String companyAttachmentUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends GetV1CompaniesAttachmentHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String companyAttachmentUuid) {
         GetV1CompaniesAttachmentRequest request =
             GetV1CompaniesAttachmentRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .companyAttachmentUuid(companyAttachmentUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<GetV1CompaniesAttachmentRequest, GetV1CompaniesAttachmentResponse> operation
               = new GetV1CompaniesAttachment.Sync(sdkConfiguration, _headers);
@@ -105,7 +122,12 @@ public class CompanyAttachments {
      * 
      * <p>Retrieve a list of all the attachments uploaded by the company.
      * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
+     * 
      * <p>scope: `company_attachments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -118,14 +140,19 @@ public class CompanyAttachments {
      * 
      * <p>Retrieve a list of all the attachments uploaded by the company.
      * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
+     * 
      * <p>scope: `company_attachments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesAttachmentsResponse getList(String companyId) {
-        return getList(companyId, Optional.empty());
+        return getList(Optional.empty(), companyId);
     }
 
     /**
@@ -133,19 +160,24 @@ public class CompanyAttachments {
      * 
      * <p>Retrieve a list of all the attachments uploaded by the company.
      * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
+     * 
      * <p>scope: `company_attachments:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1CompaniesAttachmentsResponse getList(String companyId, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1CompaniesAttachmentsResponse getList(Optional<? extends GetV1CompaniesAttachmentsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
         GetV1CompaniesAttachmentsRequest request =
             GetV1CompaniesAttachmentsRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .build();
         RequestOperation<GetV1CompaniesAttachmentsRequest, GetV1CompaniesAttachmentsResponse> operation
               = new GetV1CompaniesAttachments.Sync(sdkConfiguration, _headers);
@@ -155,11 +187,16 @@ public class CompanyAttachments {
     /**
      * Create Company Attachment and Upload File
      * 
-     * <p>Upload a file and create a company attachment. We recommend uploading
-     * PDF files for optimal compatibility. However, the following file types are
-     * allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx.
+     * <p>Upload a file and create a company attachment. We recommend uploading PDF files for optimal
+     * compatibility. However, the following file types are allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf,
+     * .xls, .xlsx, .doc and .docx.
+     * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
      * 
      * <p>scope: `company_attachments:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -170,45 +207,55 @@ public class CompanyAttachments {
     /**
      * Create Company Attachment and Upload File
      * 
-     * <p>Upload a file and create a company attachment. We recommend uploading
-     * PDF files for optimal compatibility. However, the following file types are
-     * allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx.
+     * <p>Upload a file and create a company attachment. We recommend uploading PDF files for optimal
+     * compatibility. However, the following file types are allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf,
+     * .xls, .xlsx, .doc and .docx.
+     * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
      * 
      * <p>scope: `company_attachments:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody The binary payload of the file and the company attachment category.
+     * @param companyAttachmentCreateRequestBody The binary payload of the file and the company attachment category.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PostV1CompaniesAttachmentResponse create(String companyId, PostV1CompaniesAttachmentRequestBody requestBody) {
-        return create(companyId, Optional.empty(), requestBody);
+    public PostV1CompaniesAttachmentResponse create(String companyId, CompanyAttachmentCreateRequestBody companyAttachmentCreateRequestBody) {
+        return create(Optional.empty(), companyId, companyAttachmentCreateRequestBody);
     }
 
     /**
      * Create Company Attachment and Upload File
      * 
-     * <p>Upload a file and create a company attachment. We recommend uploading
-     * PDF files for optimal compatibility. However, the following file types are
-     * allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf, .xls, .xlsx, .doc and .docx.
+     * <p>Upload a file and create a company attachment. We recommend uploading PDF files for optimal
+     * compatibility. However, the following file types are allowed: .qbb, .qbm, .gif, .jpg, .png, .pdf,
+     * .xls, .xlsx, .doc and .docx.
+     * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
      * 
      * <p>scope: `company_attachments:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion 
-     * @param requestBody The binary payload of the file and the company attachment category.
+     * @param companyAttachmentCreateRequestBody The binary payload of the file and the company attachment category.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompaniesAttachmentResponse create(
-            String companyId, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1CompaniesAttachmentRequestBody requestBody) {
+            Optional<? extends PostV1CompaniesAttachmentHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            CompanyAttachmentCreateRequestBody companyAttachmentCreateRequestBody) {
         PostV1CompaniesAttachmentRequest request =
             PostV1CompaniesAttachmentRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .companyId(companyId)
+                .companyAttachmentCreateRequestBody(companyAttachmentCreateRequestBody)
                 .build();
         RequestOperation<PostV1CompaniesAttachmentRequest, PostV1CompaniesAttachmentResponse> operation
               = new PostV1CompaniesAttachment.Sync(sdkConfiguration, _headers);

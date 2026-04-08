@@ -1,6 +1,12 @@
 # PayScheduleType
 
-The pay schedule assignment type.
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.PayScheduleType;
+
+PayScheduleType value = PayScheduleType.SINGLE;
+```
 
 
 ## Values

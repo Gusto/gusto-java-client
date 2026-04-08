@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
@@ -34,6 +35,20 @@ public class EmployeeFederalTaxRev2020 implements EmployeeFederalTax {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("employee_uuid")
     private Optional<String> employeeUuid;
+
+    /**
+     * The internal ID of the employee.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("employee_id")
+    private Optional<Long> employeeId;
+
+    /**
+     * The internal ID of the company.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("company_id")
+    private Optional<Long> companyId;
 
     /**
      * The version of w4 form.
@@ -94,6 +109,8 @@ public class EmployeeFederalTaxRev2020 implements EmployeeFederalTax {
     public EmployeeFederalTaxRev2020(
             @JsonProperty("version") String version,
             @JsonProperty("employee_uuid") Optional<String> employeeUuid,
+            @JsonProperty("employee_id") Optional<Long> employeeId,
+            @JsonProperty("company_id") Optional<Long> companyId,
             @JsonProperty("w4_data_type") EmployeeFederalTaxRev2020W4DataType w4DataType,
             @JsonProperty("filing_status") Optional<String> filingStatus,
             @JsonProperty("extra_withholding") Optional<String> extraWithholding,
@@ -103,6 +120,8 @@ public class EmployeeFederalTaxRev2020 implements EmployeeFederalTax {
             @JsonProperty("deductions") Optional<String> deductions) {
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(employeeUuid, "employeeUuid");
+        Utils.checkNotNull(employeeId, "employeeId");
+        Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(w4DataType, "w4DataType");
         Utils.checkNotNull(filingStatus, "filingStatus");
         Utils.checkNotNull(extraWithholding, "extraWithholding");
@@ -112,6 +131,8 @@ public class EmployeeFederalTaxRev2020 implements EmployeeFederalTax {
         Utils.checkNotNull(deductions, "deductions");
         this.version = version;
         this.employeeUuid = employeeUuid;
+        this.employeeId = employeeId;
+        this.companyId = companyId;
         this.w4DataType = w4DataType;
         this.filingStatus = filingStatus;
         this.extraWithholding = extraWithholding;
@@ -124,9 +145,10 @@ public class EmployeeFederalTaxRev2020 implements EmployeeFederalTax {
     public EmployeeFederalTaxRev2020(
             String version,
             EmployeeFederalTaxRev2020W4DataType w4DataType) {
-        this(version, Optional.empty(), w4DataType,
+        this(version, Optional.empty(), Optional.empty(),
+            Optional.empty(), w4DataType, Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -145,6 +167,22 @@ public class EmployeeFederalTaxRev2020 implements EmployeeFederalTax {
     @JsonIgnore
     public Optional<String> employeeUuid() {
         return employeeUuid;
+    }
+
+    /**
+     * The internal ID of the employee.
+     */
+    @JsonIgnore
+    public Optional<Long> employeeId() {
+        return employeeId;
+    }
+
+    /**
+     * The internal ID of the company.
+     */
+    @JsonIgnore
+    public Optional<Long> companyId() {
+        return companyId;
     }
 
     /**
@@ -243,6 +281,44 @@ public class EmployeeFederalTaxRev2020 implements EmployeeFederalTax {
     public EmployeeFederalTaxRev2020 withEmployeeUuid(Optional<String> employeeUuid) {
         Utils.checkNotNull(employeeUuid, "employeeUuid");
         this.employeeUuid = employeeUuid;
+        return this;
+    }
+
+    /**
+     * The internal ID of the employee.
+     */
+    public EmployeeFederalTaxRev2020 withEmployeeId(long employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = Optional.ofNullable(employeeId);
+        return this;
+    }
+
+
+    /**
+     * The internal ID of the employee.
+     */
+    public EmployeeFederalTaxRev2020 withEmployeeId(Optional<Long> employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
+        return this;
+    }
+
+    /**
+     * The internal ID of the company.
+     */
+    public EmployeeFederalTaxRev2020 withCompanyId(long companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = Optional.ofNullable(companyId);
+        return this;
+    }
+
+
+    /**
+     * The internal ID of the company.
+     */
+    public EmployeeFederalTaxRev2020 withCompanyId(Optional<Long> companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
         return this;
     }
 
@@ -395,6 +471,8 @@ public class EmployeeFederalTaxRev2020 implements EmployeeFederalTax {
         return 
             Utils.enhancedDeepEquals(this.version, other.version) &&
             Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
+            Utils.enhancedDeepEquals(this.employeeId, other.employeeId) &&
+            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.w4DataType, other.w4DataType) &&
             Utils.enhancedDeepEquals(this.filingStatus, other.filingStatus) &&
             Utils.enhancedDeepEquals(this.extraWithholding, other.extraWithholding) &&
@@ -407,9 +485,10 @@ public class EmployeeFederalTaxRev2020 implements EmployeeFederalTax {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            version, employeeUuid, w4DataType,
-            filingStatus, extraWithholding, twoJobs,
-            dependentsAmount, otherIncome, deductions);
+            version, employeeUuid, employeeId,
+            companyId, w4DataType, filingStatus,
+            extraWithholding, twoJobs, dependentsAmount,
+            otherIncome, deductions);
     }
     
     @Override
@@ -417,6 +496,8 @@ public class EmployeeFederalTaxRev2020 implements EmployeeFederalTax {
         return Utils.toString(EmployeeFederalTaxRev2020.class,
                 "version", version,
                 "employeeUuid", employeeUuid,
+                "employeeId", employeeId,
+                "companyId", companyId,
                 "w4DataType", w4DataType,
                 "filingStatus", filingStatus,
                 "extraWithholding", extraWithholding,
@@ -432,6 +513,10 @@ public class EmployeeFederalTaxRev2020 implements EmployeeFederalTax {
         private String version;
 
         private Optional<String> employeeUuid = Optional.empty();
+
+        private Optional<Long> employeeId = Optional.empty();
+
+        private Optional<Long> companyId = Optional.empty();
 
         private EmployeeFederalTaxRev2020W4DataType w4DataType;
 
@@ -479,6 +564,44 @@ public class EmployeeFederalTaxRev2020 implements EmployeeFederalTax {
         public Builder employeeUuid(Optional<String> employeeUuid) {
             Utils.checkNotNull(employeeUuid, "employeeUuid");
             this.employeeUuid = employeeUuid;
+            return this;
+        }
+
+
+        /**
+         * The internal ID of the employee.
+         */
+        public Builder employeeId(long employeeId) {
+            Utils.checkNotNull(employeeId, "employeeId");
+            this.employeeId = Optional.ofNullable(employeeId);
+            return this;
+        }
+
+        /**
+         * The internal ID of the employee.
+         */
+        public Builder employeeId(Optional<Long> employeeId) {
+            Utils.checkNotNull(employeeId, "employeeId");
+            this.employeeId = employeeId;
+            return this;
+        }
+
+
+        /**
+         * The internal ID of the company.
+         */
+        public Builder companyId(long companyId) {
+            Utils.checkNotNull(companyId, "companyId");
+            this.companyId = Optional.ofNullable(companyId);
+            return this;
+        }
+
+        /**
+         * The internal ID of the company.
+         */
+        public Builder companyId(Optional<Long> companyId) {
+            Utils.checkNotNull(companyId, "companyId");
+            this.companyId = companyId;
             return this;
         }
 
@@ -623,9 +746,10 @@ public class EmployeeFederalTaxRev2020 implements EmployeeFederalTax {
         public EmployeeFederalTaxRev2020 build() {
 
             return new EmployeeFederalTaxRev2020(
-                version, employeeUuid, w4DataType,
-                filingStatus, extraWithholding, twoJobs,
-                dependentsAmount, otherIncome, deductions);
+                version, employeeUuid, employeeId,
+                companyId, w4DataType, filingStatus,
+                extraWithholding, twoJobs, dependentsAmount,
+                otherIncome, deductions);
         }
 
     }

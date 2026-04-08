@@ -215,7 +215,7 @@ public class PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest {
         private static final LazySingletonValue<Optional<? extends PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
-                        "\"2024-04-01\"",
+                        "\"2025-06-15\"",
                         new TypeReference<Optional<? extends PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion>>() {});
     }
 }

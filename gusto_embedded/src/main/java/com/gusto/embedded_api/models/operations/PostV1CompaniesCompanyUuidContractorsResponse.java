@@ -34,7 +34,7 @@ public class PostV1CompaniesCompanyUuidContractorsResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
     private Optional<? extends Contractor> contractor;
 
@@ -87,7 +87,7 @@ public class PostV1CompaniesCompanyUuidContractorsResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PostV1CompaniesCompanyUuidContractorsResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     public PostV1CompaniesCompanyUuidContractorsResponse withContractor(Contractor contractor) {
         Utils.checkNotNull(contractor, "contractor");
@@ -138,7 +138,7 @@ public class PostV1CompaniesCompanyUuidContractorsResponse implements Response {
 
 
     /**
-     * Example response
+     * Successful
      */
     public PostV1CompaniesCompanyUuidContractorsResponse withContractor(Optional<? extends Contractor> contractor) {
         Utils.checkNotNull(contractor, "contractor");
@@ -225,7 +225,7 @@ public class PostV1CompaniesCompanyUuidContractorsResponse implements Response {
 
 
         /**
-         * Example response
+         * Successful
          */
         public Builder contractor(Contractor contractor) {
             Utils.checkNotNull(contractor, "contractor");
@@ -234,7 +234,7 @@ public class PostV1CompaniesCompanyUuidContractorsResponse implements Response {
         }
 
         /**
-         * Example response
+         * Successful
          */
         public Builder contractor(Optional<? extends Contractor> contractor) {
             Utils.checkNotNull(contractor, "contractor");

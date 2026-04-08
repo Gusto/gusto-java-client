@@ -10,10 +10,10 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.SecuritySource;
+import com.gusto.embedded_api.models.components.TokenInfo;
 import com.gusto.embedded_api.models.errors.APIException;
 import com.gusto.embedded_api.models.operations.GetV1TokenInfoRequest;
 import com.gusto.embedded_api.models.operations.GetV1TokenInfoResponse;
-import com.gusto.embedded_api.models.operations.GetV1TokenInfoResponseBody;
 import com.gusto.embedded_api.utils.Blob;
 import com.gusto.embedded_api.utils.HTTPClient;
 import com.gusto.embedded_api.utils.HTTPRequest;
@@ -89,7 +89,7 @@ public class GetV1TokenInfo {
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
             req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-            Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
+            Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity(), "companyAccessAuth");
 
             return req.build();
         }
@@ -153,7 +153,7 @@ public class GetV1TokenInfo {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withObject(Utils.unmarshal(response, new TypeReference<GetV1TokenInfoResponseBody>() {}));
+                    return res.withTokenInfo(Utils.unmarshal(response, new TypeReference<TokenInfo>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
@@ -223,8 +223,8 @@ public class GetV1TokenInfo {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return Utils.unmarshalAsync(response, new TypeReference<GetV1TokenInfoResponseBody>() {})
-                            .thenApply(res::withObject);
+                    return Utils.unmarshalAsync(response, new TypeReference<TokenInfo>() {})
+                            .thenApply(res::withTokenInfo);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }

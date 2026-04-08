@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * PaymentUnit
  * 
- * <p>The unit accompanying the compensation rate. If the employee is an owner, rate should be 'Paycheck'.
+ * <p>The unit accompanying the compensation rate. If the employee is an owner, rate should be `Paycheck`.
  */
 public enum PaymentUnit {
     HOUR("Hour"),

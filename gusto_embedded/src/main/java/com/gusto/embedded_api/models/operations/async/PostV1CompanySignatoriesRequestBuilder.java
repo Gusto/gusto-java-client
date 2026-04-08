@@ -7,9 +7,9 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.SignatoryCreateRequest;
+import com.gusto.embedded_api.models.operations.PostV1CompanySignatoriesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompanySignatoriesRequest;
-import com.gusto.embedded_api.models.operations.PostV1CompanySignatoriesRequestBody;
 import com.gusto.embedded_api.operations.PostV1CompanySignatories;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -21,11 +21,11 @@ import java.util.concurrent.CompletableFuture;
 public class PostV1CompanySignatoriesRequestBuilder {
 
     private String companyUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PostV1CompanySignatoriesRequestBody requestBody;
+                            new TypeReference<Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion>>() {});
+    private SignatoryCreateRequest signatoryCreateRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -39,21 +39,21 @@ public class PostV1CompanySignatoriesRequestBuilder {
         return this;
     }
                 
-    public PostV1CompanySignatoriesRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PostV1CompanySignatoriesRequestBuilder xGustoAPIVersion(PostV1CompanySignatoriesHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public PostV1CompanySignatoriesRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PostV1CompanySignatoriesRequestBuilder xGustoAPIVersion(Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PostV1CompanySignatoriesRequestBuilder requestBody(PostV1CompanySignatoriesRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PostV1CompanySignatoriesRequestBuilder signatoryCreateRequest(SignatoryCreateRequest signatoryCreateRequest) {
+        Utils.checkNotNull(signatoryCreateRequest, "signatoryCreateRequest");
+        this.signatoryCreateRequest = signatoryCreateRequest;
         return this;
     }
 
@@ -65,7 +65,7 @@ public class PostV1CompanySignatoriesRequestBuilder {
 
         PostV1CompanySignatoriesRequest request = new PostV1CompanySignatoriesRequest(companyUuid,
             xGustoAPIVersion,
-            requestBody);
+            signatoryCreateRequest);
 
         return request;
     }
@@ -80,9 +80,9 @@ public class PostV1CompanySignatoriesRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion>>() {});
 }

@@ -35,24 +35,24 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse impl
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Success
      */
-    private Optional<? extends List<I9AuthorizationDocumentOption>> i9AuthorizationDocumentOptionsObject;
+    private Optional<? extends List<I9AuthorizationDocumentOption>> i9AuthorizationDocumentOptions;
 
     @JsonCreator
     public GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends List<I9AuthorizationDocumentOption>> i9AuthorizationDocumentOptionsObject) {
+            Optional<? extends List<I9AuthorizationDocumentOption>> i9AuthorizationDocumentOptions) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(i9AuthorizationDocumentOptionsObject, "i9AuthorizationDocumentOptionsObject");
+        Utils.checkNotNull(i9AuthorizationDocumentOptions, "i9AuthorizationDocumentOptions");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.i9AuthorizationDocumentOptionsObject = i9AuthorizationDocumentOptionsObject;
+        this.i9AuthorizationDocumentOptions = i9AuthorizationDocumentOptions;
     }
     
     public GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse(
@@ -88,12 +88,12 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse impl
     }
 
     /**
-     * Example response
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<I9AuthorizationDocumentOption>> i9AuthorizationDocumentOptionsObject() {
-        return (Optional<List<I9AuthorizationDocumentOption>>) i9AuthorizationDocumentOptionsObject;
+    public Optional<List<I9AuthorizationDocumentOption>> i9AuthorizationDocumentOptions() {
+        return (Optional<List<I9AuthorizationDocumentOption>>) i9AuthorizationDocumentOptions;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse impl
     }
 
     /**
-     * Example response
+     * Success
      */
-    public GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse withI9AuthorizationDocumentOptionsObject(List<I9AuthorizationDocumentOption> i9AuthorizationDocumentOptionsObject) {
-        Utils.checkNotNull(i9AuthorizationDocumentOptionsObject, "i9AuthorizationDocumentOptionsObject");
-        this.i9AuthorizationDocumentOptionsObject = Optional.ofNullable(i9AuthorizationDocumentOptionsObject);
+    public GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse withI9AuthorizationDocumentOptions(List<I9AuthorizationDocumentOption> i9AuthorizationDocumentOptions) {
+        Utils.checkNotNull(i9AuthorizationDocumentOptions, "i9AuthorizationDocumentOptions");
+        this.i9AuthorizationDocumentOptions = Optional.ofNullable(i9AuthorizationDocumentOptions);
         return this;
     }
 
 
     /**
-     * Example response
+     * Success
      */
-    public GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse withI9AuthorizationDocumentOptionsObject(Optional<? extends List<I9AuthorizationDocumentOption>> i9AuthorizationDocumentOptionsObject) {
-        Utils.checkNotNull(i9AuthorizationDocumentOptionsObject, "i9AuthorizationDocumentOptionsObject");
-        this.i9AuthorizationDocumentOptionsObject = i9AuthorizationDocumentOptionsObject;
+    public GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse withI9AuthorizationDocumentOptions(Optional<? extends List<I9AuthorizationDocumentOption>> i9AuthorizationDocumentOptions) {
+        Utils.checkNotNull(i9AuthorizationDocumentOptions, "i9AuthorizationDocumentOptions");
+        this.i9AuthorizationDocumentOptions = i9AuthorizationDocumentOptions;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse impl
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.i9AuthorizationDocumentOptionsObject, other.i9AuthorizationDocumentOptionsObject);
+            Utils.enhancedDeepEquals(this.i9AuthorizationDocumentOptions, other.i9AuthorizationDocumentOptions);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            i9AuthorizationDocumentOptionsObject);
+            i9AuthorizationDocumentOptions);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse impl
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "i9AuthorizationDocumentOptionsObject", i9AuthorizationDocumentOptionsObject);
+                "i9AuthorizationDocumentOptions", i9AuthorizationDocumentOptions);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse impl
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends List<I9AuthorizationDocumentOption>> i9AuthorizationDocumentOptionsObject = Optional.empty();
+        private Optional<? extends List<I9AuthorizationDocumentOption>> i9AuthorizationDocumentOptions = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse impl
 
 
         /**
-         * Example response
+         * Success
          */
-        public Builder i9AuthorizationDocumentOptionsObject(List<I9AuthorizationDocumentOption> i9AuthorizationDocumentOptionsObject) {
-            Utils.checkNotNull(i9AuthorizationDocumentOptionsObject, "i9AuthorizationDocumentOptionsObject");
-            this.i9AuthorizationDocumentOptionsObject = Optional.ofNullable(i9AuthorizationDocumentOptionsObject);
+        public Builder i9AuthorizationDocumentOptions(List<I9AuthorizationDocumentOption> i9AuthorizationDocumentOptions) {
+            Utils.checkNotNull(i9AuthorizationDocumentOptions, "i9AuthorizationDocumentOptions");
+            this.i9AuthorizationDocumentOptions = Optional.ofNullable(i9AuthorizationDocumentOptions);
             return this;
         }
 
         /**
-         * Example response
+         * Success
          */
-        public Builder i9AuthorizationDocumentOptionsObject(Optional<? extends List<I9AuthorizationDocumentOption>> i9AuthorizationDocumentOptionsObject) {
-            Utils.checkNotNull(i9AuthorizationDocumentOptionsObject, "i9AuthorizationDocumentOptionsObject");
-            this.i9AuthorizationDocumentOptionsObject = i9AuthorizationDocumentOptionsObject;
+        public Builder i9AuthorizationDocumentOptions(Optional<? extends List<I9AuthorizationDocumentOption>> i9AuthorizationDocumentOptions) {
+            Utils.checkNotNull(i9AuthorizationDocumentOptions, "i9AuthorizationDocumentOptions");
+            this.i9AuthorizationDocumentOptions = i9AuthorizationDocumentOptions;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse impl
 
             return new GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse(
                 contentType, statusCode, rawResponse,
-                i9AuthorizationDocumentOptionsObject);
+                i9AuthorizationDocumentOptions);
         }
 
     }

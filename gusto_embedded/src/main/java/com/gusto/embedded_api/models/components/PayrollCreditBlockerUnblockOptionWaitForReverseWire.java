@@ -15,7 +15,7 @@ import java.lang.String;
  * 
  * <p>Unblock option to resolve a credit blocker by waiting for reverse wire
  */
-public class PayrollCreditBlockerUnblockOptionWaitForReverseWire implements PayrollCreditBlockersTypeUnblockOptions {
+public class PayrollCreditBlockerUnblockOptionWaitForReverseWire implements PayrollCreditBlockerTypeUnblockOptions {
     /**
      * The type of unblock option for the credit blocker
      */

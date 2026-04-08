@@ -6,8 +6,6 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.PayrollPrepareSortBy;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -19,6 +17,14 @@ import java.util.Optional;
 
 
 public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest {
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion> xGustoAPIVersion;
+
     /**
      * The UUID of the company
      */
@@ -45,18 +51,10 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest {
     private Optional<Long> per;
 
     /**
-     * Sort employee compenstations by name. Options: first_name, last_name
+     * Sort employee compensations by name
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort_by")
-    private Optional<? extends PayrollPrepareSortBy> sortBy;
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    private Optional<? extends QueryParamSortBy> sortBy;
 
 
     @SpeakeasyMetadata("request:mediaType=application/json")
@@ -64,35 +62,46 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest {
 
     @JsonCreator
     public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest(
+            Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyId,
             String payrollId,
             Optional<Long> page,
             Optional<Long> per,
-            Optional<? extends PayrollPrepareSortBy> sortBy,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
+            Optional<? extends QueryParamSortBy> sortBy,
             Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody> requestBody) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(payrollId, "payrollId");
         Utils.checkNotNull(page, "page");
         Utils.checkNotNull(per, "per");
         Utils.checkNotNull(sortBy, "sortBy");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(requestBody, "requestBody");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyId = companyId;
         this.payrollId = payrollId;
         this.page = page;
         this.per = per;
         this.sortBy = sortBy;
-        this.xGustoAPIVersion = xGustoAPIVersion;
         this.requestBody = requestBody;
     }
     
     public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest(
             String companyId,
             String payrollId) {
-        this(companyId, payrollId, Optional.empty(),
+        this(Optional.empty(), companyId, payrollId,
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -129,23 +138,12 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest {
     }
 
     /**
-     * Sort employee compenstations by name. Options: first_name, last_name
+     * Sort employee compensations by name
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PayrollPrepareSortBy> sortBy() {
-        return (Optional<PayrollPrepareSortBy>) sortBy;
-    }
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<QueryParamSortBy> sortBy() {
+        return (Optional<QueryParamSortBy>) sortBy;
     }
 
     @SuppressWarnings("unchecked")
@@ -158,6 +156,29 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest {
         return new Builder();
     }
 
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest withXGustoAPIVersion(PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        return this;
+    }
+
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest withXGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
 
     /**
      * The UUID of the company
@@ -218,9 +239,9 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest {
     }
 
     /**
-     * Sort employee compenstations by name. Options: first_name, last_name
+     * Sort employee compensations by name
      */
-    public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest withSortBy(PayrollPrepareSortBy sortBy) {
+    public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest withSortBy(QueryParamSortBy sortBy) {
         Utils.checkNotNull(sortBy, "sortBy");
         this.sortBy = Optional.ofNullable(sortBy);
         return this;
@@ -228,34 +249,11 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest {
 
 
     /**
-     * Sort employee compenstations by name. Options: first_name, last_name
+     * Sort employee compensations by name
      */
-    public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest withSortBy(Optional<? extends PayrollPrepareSortBy> sortBy) {
+    public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest withSortBy(Optional<? extends QueryParamSortBy> sortBy) {
         Utils.checkNotNull(sortBy, "sortBy");
         this.sortBy = sortBy;
-        return this;
-    }
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-        return this;
-    }
-
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
@@ -282,37 +280,39 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest {
         }
         PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest other = (PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.payrollId, other.payrollId) &&
             Utils.enhancedDeepEquals(this.page, other.page) &&
             Utils.enhancedDeepEquals(this.per, other.per) &&
             Utils.enhancedDeepEquals(this.sortBy, other.sortBy) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, payrollId, page,
-            per, sortBy, xGustoAPIVersion,
+            xGustoAPIVersion, companyId, payrollId,
+            page, per, sortBy,
             requestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyId", companyId,
                 "payrollId", payrollId,
                 "page", page,
                 "per", per,
                 "sortBy", sortBy,
-                "xGustoAPIVersion", xGustoAPIVersion,
                 "requestBody", requestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
+
+        private Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private String companyId;
 
@@ -322,14 +322,35 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest {
 
         private Optional<Long> per = Optional.empty();
 
-        private Optional<? extends PayrollPrepareSortBy> sortBy = Optional.empty();
-
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<? extends QueryParamSortBy> sortBy = Optional.empty();
 
         private Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody> requestBody = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -394,43 +415,20 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest {
 
 
         /**
-         * Sort employee compenstations by name. Options: first_name, last_name
+         * Sort employee compensations by name
          */
-        public Builder sortBy(PayrollPrepareSortBy sortBy) {
+        public Builder sortBy(QueryParamSortBy sortBy) {
             Utils.checkNotNull(sortBy, "sortBy");
             this.sortBy = Optional.ofNullable(sortBy);
             return this;
         }
 
         /**
-         * Sort employee compenstations by name. Options: first_name, last_name
+         * Sort employee compensations by name
          */
-        public Builder sortBy(Optional<? extends PayrollPrepareSortBy> sortBy) {
+        public Builder sortBy(Optional<? extends QueryParamSortBy> sortBy) {
             Utils.checkNotNull(sortBy, "sortBy");
             this.sortBy = sortBy;
-            return this;
-        }
-
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
         }
 
@@ -453,16 +451,16 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest {
             }
 
             return new PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest(
-                companyId, payrollId, page,
-                per, sortBy, xGustoAPIVersion,
+                xGustoAPIVersion, companyId, payrollId,
+                page, per, sortBy,
                 requestBody);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion>>() {});
     }
 }

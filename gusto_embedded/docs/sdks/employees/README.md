@@ -12,7 +12,7 @@
 * [update](#update) - Update an employee.
 * [delete](#delete) - Delete an onboarding employee
 * [getCustomFields](#getcustomfields) - Get an employee's custom fields
-* [updateOnboardingDocumentsConfig](#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
+* [updateOnboardingDocumentsConfig](#updateonboardingdocumentsconfig) - Update employee onboarding documents config
 * [getOnboardingStatus](#getonboardingstatus) - Get the employee's onboarding status
 * [updateOnboardingStatus](#updateonboardingstatus) - Update the employee's onboarding status
 * [getTimeOffActivities](#gettimeoffactivities) - Get employee time off activities
@@ -20,6 +20,8 @@
 ## list
 
 Get all of the employees, onboarding, active and terminated, for a given company.
+
+Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
 
 scope: `employees:read`
 
@@ -30,14 +32,14 @@ scope: `employees:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdEmployeesRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdEmployeesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -52,7 +54,7 @@ public class Application {
                 .call();
 
         if (res.showEmployees().isPresent()) {
-            // handle response
+            System.out.println(res.showEmployees().get());
         }
     }
 }
@@ -70,10 +72,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
-| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## create
 
@@ -88,6 +90,7 @@ scope: `employees:manage`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesResponse;
@@ -95,7 +98,7 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -107,7 +110,7 @@ public class Application {
                 .call();
 
         if (res.employee().isPresent()) {
-            // handle response
+            System.out.println(res.employee().get());
         }
     }
 }
@@ -129,7 +132,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## getV1CompaniesCompanyIdEmployeesPaymentDetails
@@ -173,7 +177,7 @@ public class Application {
                 .call();
 
         if (res.employeePaymentDetailsList().isPresent()) {
-            // handle response
+            System.out.println(res.employeePaymentDetailsList().get());
         }
     }
 }
@@ -201,9 +205,107 @@ Create a historical employee, an employee that was previously dismissed from the
 
 scope: `employees:manage`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" -->
+<!-- UsageSnippet language="java" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.*;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1HistoricalEmployeesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1HistoricalEmployeesResponse res = sdk.employees().createHistorical()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .historicalEmployeeBody(HistoricalEmployeeBody.builder()
+                    .firstName("Maida")
+                    .lastName("Schroeder")
+                    .dateOfBirth("1959-03-15")
+                    .ssn("<value>")
+                    .workAddress(WorkAddress.builder()
+                        .build())
+                    .homeAddress(HistoricalEmployeeBodyHomeAddress.builder()
+                        .street1("<value>")
+                        .city("Beerstead")
+                        .state("Arizona")
+                        .zip("05000-6136")
+                        .build())
+                    .termination(HistoricalEmployeeBodyTermination.builder()
+                        .build())
+                    .job(HistoricalEmployeeBodyJob.builder()
+                        .build())
+                    .build())
+                .call();
+
+        if (res.employee().isPresent()) {
+            System.out.println(res.employee().get());
+        }
+    }
+}
+```
+### Example Usage: Create Historical Employee Example
+
+<!-- UsageSnippet language="java" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Create Historical Employee Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.*;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1HistoricalEmployeesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1HistoricalEmployeesResponse res = sdk.employees().createHistorical()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .historicalEmployeeBody(HistoricalEmployeeBody.builder()
+                    .firstName("Maida")
+                    .lastName("Schroeder")
+                    .dateOfBirth("1959-03-15")
+                    .ssn("<value>")
+                    .workAddress(WorkAddress.builder()
+                        .build())
+                    .homeAddress(HistoricalEmployeeBodyHomeAddress.builder()
+                        .street1("<value>")
+                        .city("Beerstead")
+                        .state("Arizona")
+                        .zip("05000-6136")
+                        .build())
+                    .termination(HistoricalEmployeeBodyTermination.builder()
+                        .build())
+                    .job(HistoricalEmployeeBodyJob.builder()
+                        .build())
+                    .build())
+                .call();
+
+        if (res.employee().isPresent()) {
+            System.out.println(res.employee().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Example" -->
 ```java
 package hello.world;
 
@@ -257,7 +359,105 @@ public class Application {
                 .call();
 
         if (res.employee().isPresent()) {
-            // handle response
+            System.out.println(res.employee().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.*;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1HistoricalEmployeesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1HistoricalEmployeesResponse res = sdk.employees().createHistorical()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .historicalEmployeeBody(HistoricalEmployeeBody.builder()
+                    .firstName("Maida")
+                    .lastName("Schroeder")
+                    .dateOfBirth("1959-03-15")
+                    .ssn("<value>")
+                    .workAddress(WorkAddress.builder()
+                        .build())
+                    .homeAddress(HistoricalEmployeeBodyHomeAddress.builder()
+                        .street1("<value>")
+                        .city("Beerstead")
+                        .state("Arizona")
+                        .zip("05000-6136")
+                        .build())
+                    .termination(HistoricalEmployeeBodyTermination.builder()
+                        .build())
+                    .job(HistoricalEmployeeBodyJob.builder()
+                        .build())
+                    .build())
+                .call();
+
+        if (res.employee().isPresent()) {
+            System.out.println(res.employee().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.*;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1HistoricalEmployeesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1HistoricalEmployeesResponse res = sdk.employees().createHistorical()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .historicalEmployeeBody(HistoricalEmployeeBody.builder()
+                    .firstName("Maida")
+                    .lastName("Schroeder")
+                    .dateOfBirth("1959-03-15")
+                    .ssn("<value>")
+                    .workAddress(WorkAddress.builder()
+                        .build())
+                    .homeAddress(HistoricalEmployeeBodyHomeAddress.builder()
+                        .street1("<value>")
+                        .city("Beerstead")
+                        .state("Arizona")
+                        .zip("05000-6136")
+                        .build())
+                    .termination(HistoricalEmployeeBodyTermination.builder()
+                        .build())
+                    .job(HistoricalEmployeeBodyJob.builder()
+                        .build())
+                    .build())
+                .call();
+
+        if (res.employee().isPresent()) {
+            System.out.println(res.employee().get());
         }
     }
 }
@@ -286,6 +486,8 @@ public class Application {
 
 Get an employee.
 
+Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+
 scope: `employees:read`
 
 ### Example Usage
@@ -295,14 +497,14 @@ scope: `employees:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -314,7 +516,7 @@ public class Application {
                 .call();
 
         if (res.employee().isPresent()) {
-            // handle response
+            System.out.println(res.employee().get());
         }
     }
 }
@@ -334,10 +536,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
-| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## update
 
@@ -352,13 +554,14 @@ scope: `employees:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -380,7 +583,7 @@ public class Application {
                 .call();
 
         if (res.employee().isPresent()) {
-            // handle response
+            System.out.println(res.employee().get());
         }
     }
 }
@@ -402,7 +605,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 409, 422                                | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 409, 422                                     | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## delete
@@ -420,6 +624,7 @@ scope: `employees:manage`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeeHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeeResponse;
@@ -427,7 +632,7 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -458,7 +663,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## getCustomFields
@@ -492,7 +698,7 @@ public class Application {
                 .call();
 
         if (res.object().isPresent()) {
-            // handle response
+            System.out.println(res.object().get());
         }
     }
 }
@@ -520,39 +726,44 @@ public class Application {
 ## updateOnboardingDocumentsConfig
 
 Indicate whether to include the Form I-9 for an employee during the onboarding process.
+If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
+
+## Related guides
+- [Employee onboarding](doc:employee-onboarding)
 
 scope: `employees:manage`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="put-v1-employees-employee_id-onboarding_documents_config" method="put" path="/v1/employees/{employee_id}/onboarding_documents_config" -->
+<!-- UsageSnippet language="java" operationID="put-v1-employees-employee_id-onboarding_documents_config" method="put" path="/v1/employees/{employee_id}/onboarding_documents_config" example="Example" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody;
+import com.gusto.embedded_api.models.components.EmployeeOnboardingDocumentsConfigRequest;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse res = sdk.employees().updateOnboardingDocumentsConfig()
+                .xGustoAPIVersion(PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .employeeId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody.builder()
+                .employeeOnboardingDocumentsConfigRequest(EmployeeOnboardingDocumentsConfigRequest.builder()
                     .i9Document(true)
                     .build())
                 .call();
 
         if (res.employeeOnboardingDocument().isPresent()) {
-            // handle response
+            System.out.println(res.employeeOnboardingDocument().get());
         }
     }
 }
@@ -560,11 +771,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `employeeId`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody](../../models/operations/PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody.md)                                                                      | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  | Example                                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion>](../../models/operations/PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion.md)                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |                                                                                                                                                                                                                              |
+| `employeeId`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     | 7b1d0df1-6403-4a06-8768-c1dd7d24d27a                                                                                                                                                                                         |
+| `employeeOnboardingDocumentsConfigRequest`                                                                                                                                                                                   | [Optional\<EmployeeOnboardingDocumentsConfigRequest>](../../models/components/EmployeeOnboardingDocumentsConfigRequest.md)                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |                                                                                                                                                                                                                              |
 
 ### Response
 
@@ -572,9 +783,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## getOnboardingStatus
 
@@ -626,14 +838,14 @@ scope: `employees:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdOnboardingStatusResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -645,7 +857,7 @@ public class Application {
                 .call();
 
         if (res.employeeOnboardingStatus().isPresent()) {
-            // handle response
+            System.out.println(res.employeeOnboardingStatus().get());
         }
     }
 }
@@ -664,10 +876,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
-| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## updateOnboardingStatus
 
@@ -691,13 +903,14 @@ scope: `employees:manage`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -712,7 +925,7 @@ public class Application {
                 .call();
 
         if (res.employeeOnboardingStatus().isPresent()) {
-            // handle response
+            System.out.println(res.employeeOnboardingStatus().get());
         }
     }
 }
@@ -734,7 +947,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## getTimeOffActivities
@@ -745,7 +959,7 @@ scope: `employee_time_off_activities:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-version-employees-time_off_activities" method="get" path="/v1/employees/{employee_uuid}/time_off_activities" -->
+<!-- UsageSnippet language="java" operationID="get-version-employees-time_off_activities" method="get" path="/v1/employees/{employee_uuid}/time_off_activities" example="example" -->
 ```java
 package hello.world;
 
@@ -769,7 +983,7 @@ public class Application {
                 .call();
 
         if (res.timeOffActivity().isPresent()) {
-            // handle response
+            System.out.println(res.timeOffActivity().get());
         }
     }
 }

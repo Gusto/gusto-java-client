@@ -33,6 +33,7 @@ Gusto API: Welcome to Gusto's Embedded Payroll API documentation!
   * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
   * [Debugging](#debugging)
+  * [Jackson Configuration](#jackson-configuration)
 * [Development](#development)
   * [Maturity](#maturity)
   * [Contributions](#contributions)
@@ -50,7 +51,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.gusto:embedded-api:0.3.1'
+implementation 'com.gusto:embedded-api:0.3.2'
 ```
 
 Maven:
@@ -58,7 +59,7 @@ Maven:
 <dependency>
     <groupId>com.gusto</groupId>
     <artifactId>embedded-api</artifactId>
-    <version>0.3.1</version>
+    <version>0.3.2</version>
 </dependency>
 ```
 
@@ -86,8 +87,8 @@ gradlew.bat publishToMavenLocal -Pskip.signing
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.GetV1TokenInfoResponse;
+import com.gusto.embedded_api.models.operations.XGustoAPIVersion;
 import java.lang.Exception;
 
 public class Application {
@@ -99,11 +100,11 @@ public class Application {
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(XGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
-        if (res.object().isPresent()) {
-            // handle response
+        if (res.tokenInfo().isPresent()) {
+            System.out.println(res.tokenInfo().get());
         }
     }
 }
@@ -115,7 +116,7 @@ package hello.world;
 
 import com.gusto.embedded_api.AsyncGustoEmbedded;
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.XGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.async.GetV1TokenInfoResponse;
 import java.util.concurrent.CompletableFuture;
 
@@ -129,12 +130,12 @@ public class Application {
             .async();
 
         CompletableFuture<GetV1TokenInfoResponse> resFut = sdk.introspection().getInfo()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(XGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         resFut.thenAccept(res -> {
-            if (res.object().isPresent()) {
-            // handle response
+            if (res.tokenInfo().isPresent()) {
+                System.out.println(res.tokenInfo().get());
             }
         });
     }
@@ -142,6 +143,15 @@ public class Application {
 ```
 
 [comp-fut]: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html
+
+#### Union Consumption Patterns
+
+When a response field is a union model:
+
+- Discriminated unions: branch on the discriminator (`switch`) and then narrow to the concrete type.
+- Non-discriminated unions: use generated accessors (for example `string()`, `asLong()`, `simpleObject()`) to determine the active variant.
+
+For full model-specific examples (including Java 11/16/21 variants), see each union model's **Supported Types** section in the generated model docs.
 <!-- End SDK Example Usage [usage] -->
 
 <!-- Start Asynchronous Support [async-support] -->
@@ -226,8 +236,8 @@ To authenticate with the API the `companyAccessAuth` parameter must be set when 
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.GetV1TokenInfoResponse;
+import com.gusto.embedded_api.models.operations.XGustoAPIVersion;
 import java.lang.Exception;
 
 public class Application {
@@ -239,11 +249,11 @@ public class Application {
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(XGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
-        if (res.object().isPresent()) {
-            // handle response
+        if (res.tokenInfo().isPresent()) {
+            System.out.println(res.tokenInfo().get());
         }
     }
 }
@@ -290,7 +300,7 @@ public class Application {
                 .call();
 
         if (res.object().isPresent()) {
-            // handle response
+            System.out.println(res.object().get());
         }
     }
 }
@@ -320,12 +330,12 @@ public class Application {
 * [createPartnerManaged](docs/sdks/companies/README.md#createpartnermanaged) - Create a partner managed company
 * [get](docs/sdks/companies/README.md#get) - Get a company
 * [update](docs/sdks/companies/README.md#update) - Update a company
-* [migrate](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
+* [getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 * [acceptTermsOfService](docs/sdks/companies/README.md#accepttermsofservice) - Accept terms of service for a company user
 * [retrieveTermsOfService](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
 * [createAdmin](docs/sdks/companies/README.md#createadmin) - Create an admin for the company
 * [listAdmins](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
-* [getOnboardingStatus](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
+* [getOnboardingStatus](docs/sdks/companies/README.md#getonboardingstatus) - Get company onboarding status
 * [finishOnboarding](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
 * [getCustomFields](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
 
@@ -351,12 +361,12 @@ public class Application {
 * [get](docs/sdks/companybenefits/README.md#get) - Get a company benefit
 * [update](docs/sdks/companybenefits/README.md#update) - Update a company benefit
 * [delete](docs/sdks/companybenefits/README.md#delete) - Delete a company benefit
-* [getAll](docs/sdks/companybenefits/README.md#getall) - Get all benefits supported by Gusto
-* [getSupported](docs/sdks/companybenefits/README.md#getsupported) - Get a supported benefit by ID
+* [getAll](docs/sdks/companybenefits/README.md#getall) - Get all supported benefits
+* [getSupported](docs/sdks/companybenefits/README.md#getsupported) - Get a supported benefit
 * [getSummary](docs/sdks/companybenefits/README.md#getsummary) - Get company benefit summary by company benefit id.
 * [getEmployeeBenefits](docs/sdks/companybenefits/README.md#getemployeebenefits) - Get all employee benefits for a company benefit
 * [updateEmployeeBenefits](docs/sdks/companybenefits/README.md#updateemployeebenefits) - Bulk update employee benefits for a company benefit
-* [getRequirements](docs/sdks/companybenefits/README.md#getrequirements) - Get benefit fields requirements by ID
+* [getRequirements](docs/sdks/companybenefits/README.md#getrequirements) - Get benefit fields requirements by benefit type
 * [getV1CompanyBenefitsCompanyBenefitIdContributionExclusions](docs/sdks/companybenefits/README.md#getv1companybenefitscompanybenefitidcontributionexclusions) - Get contribution exclusions for a company benefit
 * [putV1CompanyBenefitsCompanyBenefitIdContributionExclusions](docs/sdks/companybenefits/README.md#putv1companybenefitscompanybenefitidcontributionexclusions) - Update contribution exclusions for a company benefit
 
@@ -494,8 +504,8 @@ public class Application {
 * [create](docs/sdks/employeepaymentmethod/README.md#create) - Create an employee bank account
 * [deleteBankAccount](docs/sdks/employeepaymentmethod/README.md#deletebankaccount) - Delete an employee bank account
 * [updateBankAccount](docs/sdks/employeepaymentmethod/README.md#updatebankaccount) - Update an employee bank account
-* [get](docs/sdks/employeepaymentmethod/README.md#get) - Get an employee's payment method
-* [update](docs/sdks/employeepaymentmethod/README.md#update) - Update an employee's payment method
+* [get](docs/sdks/employeepaymentmethod/README.md#get) - Get payment method for an employee
+* [update](docs/sdks/employeepaymentmethod/README.md#update) - Update payment method for an employee
 
 ### [EmployeePaymentMethods](docs/sdks/employeepaymentmethods/README.md)
 
@@ -511,15 +521,15 @@ public class Application {
 * [update](docs/sdks/employees/README.md#update) - Update an employee.
 * [delete](docs/sdks/employees/README.md#delete) - Delete an onboarding employee
 * [getCustomFields](docs/sdks/employees/README.md#getcustomfields) - Get an employee's custom fields
-* [updateOnboardingDocumentsConfig](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
+* [updateOnboardingDocumentsConfig](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update employee onboarding documents config
 * [getOnboardingStatus](docs/sdks/employees/README.md#getonboardingstatus) - Get the employee's onboarding status
 * [updateOnboardingStatus](docs/sdks/employees/README.md#updateonboardingstatus) - Update the employee's onboarding status
 * [getTimeOffActivities](docs/sdks/employees/README.md#gettimeoffactivities) - Get employee time off activities
 
 ### [EmployeeTaxSetup](docs/sdks/employeetaxsetup/README.md)
 
-* [getFederalTaxes](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get an employee's federal taxes
-* [updateFederalTaxes](docs/sdks/employeetaxsetup/README.md#updatefederaltaxes) - Update an employee's federal taxes
+* [getFederalTaxes](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get federal taxes for an employee
+* [updateFederalTaxes](docs/sdks/employeetaxsetup/README.md#updatefederaltaxes) - Update federal taxes for an employee
 * [getStateTaxes](docs/sdks/employeetaxsetup/README.md#getstatetaxes) - Get an employee's state taxes
 * [updateStateTaxes](docs/sdks/employeetaxsetup/README.md#updatestatetaxes) - Update an employee's state taxes
 
@@ -541,8 +551,8 @@ public class Application {
 
 ### [FederalTaxDetails](docs/sdks/federaltaxdetails/README.md)
 
-* [get](docs/sdks/federaltaxdetails/README.md#get) - Get Federal Tax Details
-* [update](docs/sdks/federaltaxdetails/README.md#update) - Update Federal Tax Details
+* [get](docs/sdks/federaltaxdetails/README.md#get) - Get a company's federal tax details
+* [update](docs/sdks/federaltaxdetails/README.md#update) - Update a company's federal tax details
 
 ### [Flows](docs/sdks/flows/README.md)
 
@@ -597,7 +607,7 @@ public class Application {
 ### [Introspection](docs/sdks/introspection/README.md)
 
 * [getInfo](docs/sdks/introspection/README.md#getinfo) - Get info about the current access token
-* [oauthAccessToken](docs/sdks/introspection/README.md#oauthaccesstoken) - create or refresh an access token
+* [oauthAccessToken](docs/sdks/introspection/README.md#oauthaccesstoken) - Create a System Access Token or Refresh an Access Token
 
 ### [Invoices](docs/sdks/invoices/README.md)
 
@@ -619,7 +629,7 @@ public class Application {
 ### [Locations](docs/sdks/locations/README.md)
 
 * [create](docs/sdks/locations/README.md#create) - Create a company location
-* [get](docs/sdks/locations/README.md#get) - Get company locations
+* [get](docs/sdks/locations/README.md#get) - Get all company locations
 * [retrieve](docs/sdks/locations/README.md#retrieve) - Get a location
 * [update](docs/sdks/locations/README.md#update) - Update a location
 * [getMinimumWages](docs/sdks/locations/README.md#getminimumwages) - Get minimum wages for a location
@@ -645,6 +655,9 @@ public class Application {
 * [prepare](docs/sdks/payrolls/README.md#prepare) - Prepare a payroll for update
 * [getReceipt](docs/sdks/payrolls/README.md#getreceipt) - Get a single payroll receipt
 * [getBlockers](docs/sdks/payrolls/README.md#getblockers) - Get all payroll blockers for a company
+* [calculateGrossUp](docs/sdks/payrolls/README.md#calculategrossup) - Calculate gross up for a payroll
+* [calculate](docs/sdks/payrolls/README.md#calculate) - Calculate a payroll
+* [submit](docs/sdks/payrolls/README.md#submit) - Submit payroll
 * [cancel](docs/sdks/payrolls/README.md#cancel) - Cancel a payroll
 * [getPayStub](docs/sdks/payrolls/README.md#getpaystub) - Get an employee pay stub (pdf)
 * [getPayStubs](docs/sdks/payrolls/README.md#getpaystubs) - Get an employee's pay stubs
@@ -702,16 +715,16 @@ public class Application {
 ### [Signatories](docs/sdks/signatories/README.md)
 
 * [create](docs/sdks/signatories/README.md#create) - Create a signatory
-* [list](docs/sdks/signatories/README.md#list) - Get all company signatories
+* [list](docs/sdks/signatories/README.md#list) - Get the signatories for a company
 * [invite](docs/sdks/signatories/README.md#invite) - Invite a signatory
 * [update](docs/sdks/signatories/README.md#update) - Update a signatory
 * [delete](docs/sdks/signatories/README.md#delete) - Delete a signatory
 
 ### [TaxRequirements](docs/sdks/taxrequirements/README.md)
 
-* [get](docs/sdks/taxrequirements/README.md#get) - Get State Tax Requirements
-* [updateState](docs/sdks/taxrequirements/README.md#updatestate) - Update State Tax Requirements
-* [getAll](docs/sdks/taxrequirements/README.md#getall) - Get All Tax Requirement States
+* [get](docs/sdks/taxrequirements/README.md#get) - Get tax requirements for a state
+* [updateState](docs/sdks/taxrequirements/README.md#updatestate) - Update tax requirements for a state
+* [getAll](docs/sdks/taxrequirements/README.md#getall) - Get all tax requirements for a company
 
 ### [TimeOffPolicies](docs/sdks/timeoffpolicies/README.md)
 
@@ -807,7 +820,7 @@ public class Application {
                     .call();
 
             if (res.object().isPresent()) {
-                // handle response
+                System.out.println(res.object().get());
             }
         } catch (GustoEmbeddedException ex) { // all SDK exceptions inherit from GustoEmbeddedException
 
@@ -848,7 +861,7 @@ public class Application {
 **Primary error:**
 * [`GustoEmbeddedException`](./src/main/java/models/errors/GustoEmbeddedException.java): The base class for HTTP error responses.
 
-<details><summary>Less common errors (12)</summary>
+<details><summary>Less common errors (11)</summary>
 
 <br />
 
@@ -858,12 +871,11 @@ public class Application {
 many more subclasses in the JDK platform).
 
 **Inherit from [`GustoEmbeddedException`](./src/main/java/models/errors/GustoEmbeddedException.java)**:
-* [`com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject.java): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 164 of 277 methods.*
-* [`com.gusto.embedded_api.models.errors.NotFoundErrorObject`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.NotFoundErrorObject.java): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 277 methods.*
-* [`com.gusto.embedded_api.models.errors.PostV1CompaniesCompanyIdPeopleBatchesResponseBody`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.PostV1CompaniesCompanyIdPeopleBatchesResponseBody.java): conflict - idempotency key already used. Status code `409`. Applicable to 1 of 277 methods.*
-* [`com.gusto.embedded_api.models.errors.GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody.java): Unprocessable Entity (WebDAV). Status code `422`. Applicable to 1 of 277 methods.*
-* [`com.gusto.embedded_api.models.errors.DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody.java): Unprocessable Entity. Status code `422`. Applicable to 1 of 277 methods.*
-* [`com.gusto.embedded_api.models.errors.CompanySuspensionCreationErrors`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.CompanySuspensionCreationErrors.java): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 277 methods.*
+* [`com.gusto.embedded_api.models.errors.NotFoundErrorObject`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.NotFoundErrorObject.java): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 162 of 280 methods.*
+* [`com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject.java): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 143 of 280 methods.*
+* [`com.gusto.embedded_api.models.errors.PeopleBatchConflictError`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.PeopleBatchConflictError.java): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 280 methods.*
+* [`com.gusto.embedded_api.models.errors.GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody.java): Unprocessable Entity (WebDAV). Status code `422`. Applicable to 1 of 280 methods.*
+* [`com.gusto.embedded_api.models.errors.CompanySuspensionCreationErrors`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.CompanySuspensionCreationErrors.java): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 280 methods.*
 
 
 </details>
@@ -889,8 +901,8 @@ You can override the default server globally using the `.server(AvailableServers
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.GetV1TokenInfoResponse;
+import com.gusto.embedded_api.models.operations.XGustoAPIVersion;
 import java.lang.Exception;
 
 public class Application {
@@ -903,11 +915,11 @@ public class Application {
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(XGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
-        if (res.object().isPresent()) {
-            // handle response
+        if (res.tokenInfo().isPresent()) {
+            System.out.println(res.tokenInfo().get());
         }
     }
 }
@@ -920,8 +932,8 @@ The default server can also be overridden globally using the `.serverURL(String 
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.GetV1TokenInfoResponse;
+import com.gusto.embedded_api.models.operations.XGustoAPIVersion;
 import java.lang.Exception;
 
 public class Application {
@@ -934,11 +946,11 @@ public class Application {
             .build();
 
         GetV1TokenInfoResponse res = sdk.introspection().getInfo()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(XGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
-        if (res.object().isPresent()) {
-            // handle response
+        if (res.tokenInfo().isPresent()) {
+            System.out.println(res.tokenInfo().get());
         }
     }
 }
@@ -1114,6 +1126,36 @@ __NOTE__: This is a convenience method that calls `HTTPClient.enableDebugLogging
 
 Another option is to set the System property `-Djdk.httpclient.HttpClient.log=all`. However, this second option does not log bodies.
 <!-- End Debugging [debug] -->
+
+<!-- Start Jackson Configuration [jackson] -->
+## Jackson Configuration
+
+The SDK ships with a pre-configured Jackson [`ObjectMapper`][jackson-databind] accessible via
+`JSON.getMapper()`. It is set up with type modules, strict deserializers, and the feature flags
+needed for full SDK compatibility (including ISO-8601 `OffsetDateTime` serialization):
+
+```java
+import com.gusto.embedded_api.utils.JSON;
+
+String json = JSON.getMapper().writeValueAsString(response);
+```
+
+To compose with your own `ObjectMapper`, register the provided `GustoEmbeddedJacksonModule`, which
+bundles all the same modules and feature flags as a single plug-and-play module:
+
+```java
+import com.gusto.embedded_api.utils.GustoEmbeddedJacksonModule;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+ObjectMapper myMapper = new ObjectMapper()
+    .registerModule(new GustoEmbeddedJacksonModule());
+
+String json = myMapper.writeValueAsString(response);
+```
+
+[jackson-databind]: https://github.com/FasterXML/jackson-databind
+[jackson-jsr310]: https://github.com/FasterXML/jackson-modules-java8/tree/master/datetime
+<!-- End Jackson Configuration [jackson] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

@@ -6,7 +6,7 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.I9AuthorizationEmployerSignRequestBody;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -17,6 +17,14 @@ import java.util.Optional;
 
 
 public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest {
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion> xGustoAPIVersion;
+
     /**
      * The UUID of the employee
      */
@@ -30,39 +38,42 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-gusto-client-ip")
     private Optional<String> xGustoClientIp;
 
+
+    @SpeakeasyMetadata("request:mediaType=application/json")
+    private I9AuthorizationEmployerSignRequestBody i9AuthorizationEmployerSignRequestBody;
+
+    @JsonCreator
+    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest(
+            Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeId,
+            Optional<String> xGustoClientIp,
+            I9AuthorizationEmployerSignRequestBody i9AuthorizationEmployerSignRequestBody) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(employeeId, "employeeId");
+        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
+        Utils.checkNotNull(i9AuthorizationEmployerSignRequestBody, "i9AuthorizationEmployerSignRequestBody");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        this.employeeId = employeeId;
+        this.xGustoClientIp = xGustoClientIp;
+        this.i9AuthorizationEmployerSignRequestBody = i9AuthorizationEmployerSignRequestBody;
+    }
+    
+    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest(
+            String employeeId,
+            I9AuthorizationEmployerSignRequestBody i9AuthorizationEmployerSignRequestBody) {
+        this(Optional.empty(), employeeId, Optional.empty(),
+            i9AuthorizationEmployerSignRequestBody);
+    }
+
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-
-    @SpeakeasyMetadata("request:mediaType=application/json")
-    private PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody;
-
-    @JsonCreator
-    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest(
-            String employeeId,
-            Optional<String> xGustoClientIp,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        Utils.checkNotNull(xGustoClientIp, "xGustoClientIp");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.employeeId = employeeId;
-        this.xGustoClientIp = xGustoClientIp;
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        this.requestBody = requestBody;
-    }
-    
-    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest(
-            String employeeId,
-            PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody) {
-        this(employeeId, Optional.empty(), Optional.empty(),
-            requestBody);
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -82,26 +93,38 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest {
         return xGustoClientIp;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
-    }
-
-    @JsonIgnore
-    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody() {
-        return requestBody;
+    public I9AuthorizationEmployerSignRequestBody i9AuthorizationEmployerSignRequestBody() {
+        return i9AuthorizationEmployerSignRequestBody;
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest withXGustoAPIVersion(PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        return this;
+    }
+
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest withXGustoAPIVersion(Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
 
     /**
      * The UUID of the employee
@@ -133,32 +156,9 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest {
         return this;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-        return this;
-    }
-
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest withRequestBody(PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest withI9AuthorizationEmployerSignRequestBody(I9AuthorizationEmployerSignRequestBody i9AuthorizationEmployerSignRequestBody) {
+        Utils.checkNotNull(i9AuthorizationEmployerSignRequestBody, "i9AuthorizationEmployerSignRequestBody");
+        this.i9AuthorizationEmployerSignRequestBody = i9AuthorizationEmployerSignRequestBody;
         return this;
     }
 
@@ -172,41 +172,64 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest {
         }
         PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest other = (PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.employeeId, other.employeeId) &&
             Utils.enhancedDeepEquals(this.xGustoClientIp, other.xGustoClientIp) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
-            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.i9AuthorizationEmployerSignRequestBody, other.i9AuthorizationEmployerSignRequestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            employeeId, xGustoClientIp, xGustoAPIVersion,
-            requestBody);
+            xGustoAPIVersion, employeeId, xGustoClientIp,
+            i9AuthorizationEmployerSignRequestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "employeeId", employeeId,
                 "xGustoClientIp", xGustoClientIp,
-                "xGustoAPIVersion", xGustoAPIVersion,
-                "requestBody", requestBody);
+                "i9AuthorizationEmployerSignRequestBody", i9AuthorizationEmployerSignRequestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String employeeId;
 
         private Optional<String> xGustoClientIp = Optional.empty();
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-        private PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody;
+        private I9AuthorizationEmployerSignRequestBody i9AuthorizationEmployerSignRequestBody;
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -241,32 +264,9 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest {
         }
 
 
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
-
-
-        public Builder requestBody(PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody) {
-            Utils.checkNotNull(requestBody, "requestBody");
-            this.requestBody = requestBody;
+        public Builder i9AuthorizationEmployerSignRequestBody(I9AuthorizationEmployerSignRequestBody i9AuthorizationEmployerSignRequestBody) {
+            Utils.checkNotNull(i9AuthorizationEmployerSignRequestBody, "i9AuthorizationEmployerSignRequestBody");
+            this.i9AuthorizationEmployerSignRequestBody = i9AuthorizationEmployerSignRequestBody;
             return this;
         }
 
@@ -276,15 +276,15 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest {
             }
 
             return new PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest(
-                employeeId, xGustoClientIp, xGustoAPIVersion,
-                requestBody);
+                xGustoAPIVersion, employeeId, xGustoClientIp,
+                i9AuthorizationEmployerSignRequestBody);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion>>() {});
     }
 }

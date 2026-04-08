@@ -5,23 +5,27 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.SignatoryCreateRequest;
+import com.gusto.embedded_api.models.components.SignatoryInviteRequest;
+import com.gusto.embedded_api.models.components.SignatoryUpdateRequest;
+import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidSignatoriesRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidSignatoriesRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidSignatoriesResponse;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidSignatoriesInviteRequest;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidSignatoriesInviteResponse;
+import com.gusto.embedded_api.models.operations.PostV1CompanySignatoriesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompanySignatoriesRequest;
-import com.gusto.embedded_api.models.operations.PostV1CompanySignatoriesRequestBody;
 import com.gusto.embedded_api.models.operations.PostV1CompanySignatoriesRequestBuilder;
 import com.gusto.embedded_api.models.operations.PostV1CompanySignatoriesResponse;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
 import com.gusto.embedded_api.operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuid;
@@ -56,14 +60,25 @@ public class Signatories {
     /**
      * Create a signatory
      * 
-     * <p>Create a company signatory with complete information.
-     * A signatory can legally sign forms once the identity verification process is successful.
-     * The signatory should be an officer, owner, general partner or LLC member manager, plan
-     * administrator, fiduciary, or an authorized representative who is designated to sign agreements on
-     * the company's behalf. An officer is the president, vice president, treasurer, chief accounting
-     * officer, etc. There can only be a single primary signatory in a company.
+     * <p>Creates a company signatory with complete information. The company must not already have a
+     * signatory.
+     * 
+     * <p>A signatory can legally sign forms once the identity verification process is successful. The
+     * signatory should be an officer, owner, general partner or LLC member manager, plan administrator,
+     * fiduciary, or an authorized representative who is designated to sign agreements on the company's
+     * behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc.
+     * 
+     * <p>There can only be a single primary signatory in a company.
+     * 
+     * <p>### Webhooks
+     * - `signatory.created`: Fires when a signatory is successfully created.
+     * 
+     * <p>### Related guides
+     * - [Signatory Events](doc:signatory-events)
      * 
      * <p>scope: `signatories:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -74,51 +89,73 @@ public class Signatories {
     /**
      * Create a signatory
      * 
-     * <p>Create a company signatory with complete information.
-     * A signatory can legally sign forms once the identity verification process is successful.
-     * The signatory should be an officer, owner, general partner or LLC member manager, plan
-     * administrator, fiduciary, or an authorized representative who is designated to sign agreements on
-     * the company's behalf. An officer is the president, vice president, treasurer, chief accounting
-     * officer, etc. There can only be a single primary signatory in a company.
+     * <p>Creates a company signatory with complete information. The company must not already have a
+     * signatory.
+     * 
+     * <p>A signatory can legally sign forms once the identity verification process is successful. The
+     * signatory should be an officer, owner, general partner or LLC member manager, plan administrator,
+     * fiduciary, or an authorized representative who is designated to sign agreements on the company's
+     * behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc.
+     * 
+     * <p>There can only be a single primary signatory in a company.
+     * 
+     * <p>### Webhooks
+     * - `signatory.created`: Fires when a signatory is successfully created.
+     * 
+     * <p>### Related guides
+     * - [Signatory Events](doc:signatory-events)
      * 
      * <p>scope: `signatories:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody 
+     * @param signatoryCreateRequest Request body for creating a signatory with complete information. All listed required fields must be provided.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PostV1CompanySignatoriesResponse create(String companyUuid, PostV1CompanySignatoriesRequestBody requestBody) {
-        return create(companyUuid, Optional.empty(), requestBody);
+    public PostV1CompanySignatoriesResponse create(String companyUuid, SignatoryCreateRequest signatoryCreateRequest) {
+        return create(companyUuid, Optional.empty(), signatoryCreateRequest);
     }
 
     /**
      * Create a signatory
      * 
-     * <p>Create a company signatory with complete information.
-     * A signatory can legally sign forms once the identity verification process is successful.
-     * The signatory should be an officer, owner, general partner or LLC member manager, plan
-     * administrator, fiduciary, or an authorized representative who is designated to sign agreements on
-     * the company's behalf. An officer is the president, vice president, treasurer, chief accounting
-     * officer, etc. There can only be a single primary signatory in a company.
+     * <p>Creates a company signatory with complete information. The company must not already have a
+     * signatory.
+     * 
+     * <p>A signatory can legally sign forms once the identity verification process is successful. The
+     * signatory should be an officer, owner, general partner or LLC member manager, plan administrator,
+     * fiduciary, or an authorized representative who is designated to sign agreements on the company's
+     * behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc.
+     * 
+     * <p>There can only be a single primary signatory in a company.
+     * 
+     * <p>### Webhooks
+     * - `signatory.created`: Fires when a signatory is successfully created.
+     * 
+     * <p>### Related guides
+     * - [Signatory Events](doc:signatory-events)
      * 
      * <p>scope: `signatories:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param signatoryCreateRequest Request body for creating a signatory with complete information. All listed required fields must be provided.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompanySignatoriesResponse create(
-            String companyUuid, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1CompanySignatoriesRequestBody requestBody) {
+            String companyUuid, Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            SignatoryCreateRequest signatoryCreateRequest) {
         PostV1CompanySignatoriesRequest request =
             PostV1CompanySignatoriesRequest
                 .builder()
                 .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .signatoryCreateRequest(signatoryCreateRequest)
                 .build();
         RequestOperation<PostV1CompanySignatoriesRequest, PostV1CompanySignatoriesResponse> operation
               = new PostV1CompanySignatories.Sync(sdkConfiguration, _headers);
@@ -126,11 +163,16 @@ public class Signatories {
     }
 
     /**
-     * Get all company signatories
+     * Get the signatories for a company
      * 
-     * <p>Returns company signatories. Currently we only support a single signatory per company.
+     * <p>Returns the signatories for a company. A company has at most one signatory.
+     * 
+     * <p>## Related guides
+     * - [Signatory Events](doc:signatory-events)
      * 
      * <p>scope: `signatories:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -139,11 +181,16 @@ public class Signatories {
     }
 
     /**
-     * Get all company signatories
+     * Get the signatories for a company
      * 
-     * <p>Returns company signatories. Currently we only support a single signatory per company.
+     * <p>Returns the signatories for a company. A company has at most one signatory.
+     * 
+     * <p>## Related guides
+     * - [Signatory Events](doc:signatory-events)
      * 
      * <p>scope: `signatories:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
@@ -154,18 +201,23 @@ public class Signatories {
     }
 
     /**
-     * Get all company signatories
+     * Get the signatories for a company
      * 
-     * <p>Returns company signatories. Currently we only support a single signatory per company.
+     * <p>Returns the signatories for a company. A company has at most one signatory.
+     * 
+     * <p>## Related guides
+     * - [Signatory Events](doc:signatory-events)
      * 
      * <p>scope: `signatories:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1CompaniesCompanyUuidSignatoriesResponse list(String companyUuid, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1CompaniesCompanyUuidSignatoriesResponse list(String companyUuid, Optional<? extends GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         GetV1CompaniesCompanyUuidSignatoriesRequest request =
             GetV1CompaniesCompanyUuidSignatoriesRequest
                 .builder()
@@ -180,10 +232,17 @@ public class Signatories {
     /**
      * Invite a signatory
      * 
-     * <p>Create a signatory with minimal information. This signatory can be invited to provide more
-     * information through the `PUT /v1/companies/{company_uuid}/signatories/{signatory_uuid}` endpoint.
-     * This will start the identity verification process and allow the signatory to be verified to sign
-     * documents.
+     * <p>Creates a signatory with minimal information. This signatory can be invited to provide more
+     * information through the [Update a
+     * signatory](ref:put-v1-companies-company_uuid-signatories-signatory_uuid) endpoint. This will start
+     * the identity verification process and allow the signatory to be verified to sign documents.
+     * 
+     * <p>## Related guides
+     * - [Signatory Events](doc:signatory-events)
+     * 
+     * <p>scope: `signatories:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -194,43 +253,57 @@ public class Signatories {
     /**
      * Invite a signatory
      * 
-     * <p>Create a signatory with minimal information. This signatory can be invited to provide more
-     * information through the `PUT /v1/companies/{company_uuid}/signatories/{signatory_uuid}` endpoint.
-     * This will start the identity verification process and allow the signatory to be verified to sign
-     * documents.
+     * <p>Creates a signatory with minimal information. This signatory can be invited to provide more
+     * information through the [Update a
+     * signatory](ref:put-v1-companies-company_uuid-signatories-signatory_uuid) endpoint. This will start
+     * the identity verification process and allow the signatory to be verified to sign documents.
+     * 
+     * <p>## Related guides
+     * - [Signatory Events](doc:signatory-events)
+     * 
+     * <p>scope: `signatories:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
-     * @param requestBody 
+     * @param signatoryInviteRequest Request body for inviting a signatory.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PostV1CompaniesCompanyUuidSignatoriesInviteResponse invite(String companyUuid, PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody requestBody) {
-        return invite(companyUuid, Optional.empty(), requestBody);
+    public PostV1CompaniesCompanyUuidSignatoriesInviteResponse invite(String companyUuid, SignatoryInviteRequest signatoryInviteRequest) {
+        return invite(companyUuid, Optional.empty(), signatoryInviteRequest);
     }
 
     /**
      * Invite a signatory
      * 
-     * <p>Create a signatory with minimal information. This signatory can be invited to provide more
-     * information through the `PUT /v1/companies/{company_uuid}/signatories/{signatory_uuid}` endpoint.
-     * This will start the identity verification process and allow the signatory to be verified to sign
-     * documents.
+     * <p>Creates a signatory with minimal information. This signatory can be invited to provide more
+     * information through the [Update a
+     * signatory](ref:put-v1-companies-company_uuid-signatories-signatory_uuid) endpoint. This will start
+     * the identity verification process and allow the signatory to be verified to sign documents.
+     * 
+     * <p>## Related guides
+     * - [Signatory Events](doc:signatory-events)
+     * 
+     * <p>scope: `signatories:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param signatoryInviteRequest Request body for inviting a signatory.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompaniesCompanyUuidSignatoriesInviteResponse invite(
-            String companyUuid, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody requestBody) {
+            String companyUuid, Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion> xGustoAPIVersion,
+            SignatoryInviteRequest signatoryInviteRequest) {
         PostV1CompaniesCompanyUuidSignatoriesInviteRequest request =
             PostV1CompaniesCompanyUuidSignatoriesInviteRequest
                 .builder()
                 .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .signatoryInviteRequest(signatoryInviteRequest)
                 .build();
         RequestOperation<PostV1CompaniesCompanyUuidSignatoriesInviteRequest, PostV1CompaniesCompanyUuidSignatoriesInviteResponse> operation
               = new PostV1CompaniesCompanyUuidSignatoriesInvite.Sync(sdkConfiguration, _headers);
@@ -240,12 +313,18 @@ public class Signatories {
     /**
      * Update a signatory
      * 
-     * <p>Update a signatory that has been either invited or created. If the signatory has been created with
-     * minimal information through the `POST /v1/companies/{company_uuid}/signatories/invite` endpoint,
-     * then the first update must contain all attributes specified in the request body in order to start
-     * the identity verification process.
+     * <p>Updates a signatory that has been either invited or created. If the signatory has been created with
+     * minimal information through the [Invite a
+     * signatory](ref:post-v1-companies-company_uuid-signatories-invite) endpoint, then the first update
+     * must contain all attributes specified in the request body in order to start the identity
+     * verification process.
+     * 
+     * <p>## Related guides
+     * - [Signatory Events](doc:signatory-events)
      * 
      * <p>scope: `signatories:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -256,53 +335,65 @@ public class Signatories {
     /**
      * Update a signatory
      * 
-     * <p>Update a signatory that has been either invited or created. If the signatory has been created with
-     * minimal information through the `POST /v1/companies/{company_uuid}/signatories/invite` endpoint,
-     * then the first update must contain all attributes specified in the request body in order to start
-     * the identity verification process.
+     * <p>Updates a signatory that has been either invited or created. If the signatory has been created with
+     * minimal information through the [Invite a
+     * signatory](ref:post-v1-companies-company_uuid-signatories-invite) endpoint, then the first update
+     * must contain all attributes specified in the request body in order to start the identity
+     * verification process.
+     * 
+     * <p>## Related guides
+     * - [Signatory Events](doc:signatory-events)
      * 
      * <p>scope: `signatories:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyUuid The UUID of the company
      * @param signatoryUuid The UUID of the signatory
-     * @param requestBody 
+     * @param signatoryUpdateRequest Request body for updating a signatory. Email cannot be updated.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse update(
             String companyUuid, String signatoryUuid,
-            PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody requestBody) {
+            SignatoryUpdateRequest signatoryUpdateRequest) {
         return update(companyUuid, signatoryUuid, Optional.empty(),
-            requestBody);
+            signatoryUpdateRequest);
     }
 
     /**
      * Update a signatory
      * 
-     * <p>Update a signatory that has been either invited or created. If the signatory has been created with
-     * minimal information through the `POST /v1/companies/{company_uuid}/signatories/invite` endpoint,
-     * then the first update must contain all attributes specified in the request body in order to start
-     * the identity verification process.
+     * <p>Updates a signatory that has been either invited or created. If the signatory has been created with
+     * minimal information through the [Invite a
+     * signatory](ref:post-v1-companies-company_uuid-signatories-invite) endpoint, then the first update
+     * must contain all attributes specified in the request body in order to start the identity
+     * verification process.
+     * 
+     * <p>## Related guides
+     * - [Signatory Events](doc:signatory-events)
      * 
      * <p>scope: `signatories:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyUuid The UUID of the company
      * @param signatoryUuid The UUID of the signatory
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param signatoryUpdateRequest Request body for updating a signatory. Email cannot be updated.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse update(
             String companyUuid, String signatoryUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion, PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody requestBody) {
+            Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion, SignatoryUpdateRequest signatoryUpdateRequest) {
         PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request =
             PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest
                 .builder()
                 .companyUuid(companyUuid)
                 .signatoryUuid(signatoryUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .signatoryUpdateRequest(signatoryUpdateRequest)
                 .build();
         RequestOperation<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest, PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse> operation
               = new PutV1CompaniesCompanyUuidSignatoriesSignatoryUuid.Sync(sdkConfiguration, _headers);
@@ -312,9 +403,14 @@ public class Signatories {
     /**
      * Delete a signatory
      * 
-     * <p>Delete a company signatory.
+     * <p>Deletes a company signatory.
+     * 
+     * <p>## Related guides
+     * - [Signatory Events](doc:signatory-events)
      * 
      * <p>scope: `signatories:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -325,9 +421,14 @@ public class Signatories {
     /**
      * Delete a signatory
      * 
-     * <p>Delete a company signatory.
+     * <p>Deletes a company signatory.
+     * 
+     * <p>## Related guides
+     * - [Signatory Events](doc:signatory-events)
      * 
      * <p>scope: `signatories:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @param signatoryUuid The UUID of the signatory
@@ -341,19 +442,24 @@ public class Signatories {
     /**
      * Delete a signatory
      * 
-     * <p>Delete a company signatory.
+     * <p>Deletes a company signatory.
+     * 
+     * <p>## Related guides
+     * - [Signatory Events](doc:signatory-events)
      * 
      * <p>scope: `signatories:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyUuid The UUID of the company
      * @param signatoryUuid The UUID of the signatory
-     * @param xGustoAPIVersion 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse delete(
             String companyUuid, String signatoryUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request =
             DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest
                 .builder()

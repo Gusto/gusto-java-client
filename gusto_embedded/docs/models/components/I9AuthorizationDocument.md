@@ -10,5 +10,5 @@ An employee's I-9 verification document
 | `uuid`                                    | *String*                                  | :heavy_check_mark:                        | The UUID of the I-9 verification document |
 | `documentType`                            | *String*                                  | :heavy_check_mark:                        | The document's document type              |
 | `documentTitle`                           | *String*                                  | :heavy_check_mark:                        | The document's document title             |
-| `expirationDate`                          | *Optional\<String>*                       | :heavy_minus_sign:                        | The document's expiration date            |
+| `expirationDate`                          | *JsonNullable\<String>*                   | :heavy_minus_sign:                        | The document's expiration date            |
 | `issuingAuthority`                        | *String*                                  | :heavy_check_mark:                        | The document's issuing authority          |

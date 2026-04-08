@@ -5,7 +5,7 @@ package com.gusto.embedded_api.models.operations.async;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api.models.components.PayrollPrepared;
+import com.gusto.embedded_api.models.components.PayrollUnprocessed;
 import com.gusto.embedded_api.utils.AsyncResponse;
 import com.gusto.embedded_api.utils.Blob;
 import com.gusto.embedded_api.utils.Utils;
@@ -34,24 +34,24 @@ public class PostV1CompaniesCompanyIdPayrollsResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * successful
+     * Successful
      */
-    private Optional<? extends PayrollPrepared> payrollPrepared;
+    private Optional<? extends PayrollUnprocessed> payrollUnprocessed;
 
     @JsonCreator
     public PostV1CompaniesCompanyIdPayrollsResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends PayrollPrepared> payrollPrepared) {
+            Optional<? extends PayrollUnprocessed> payrollUnprocessed) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(payrollPrepared, "payrollPrepared");
+        Utils.checkNotNull(payrollUnprocessed, "payrollUnprocessed");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.payrollPrepared = payrollPrepared;
+        this.payrollUnprocessed = payrollUnprocessed;
     }
     
     public PostV1CompaniesCompanyIdPayrollsResponse(
@@ -87,12 +87,12 @@ public class PostV1CompaniesCompanyIdPayrollsResponse implements AsyncResponse {
     }
 
     /**
-     * successful
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PayrollPrepared> payrollPrepared() {
-        return (Optional<PayrollPrepared>) payrollPrepared;
+    public Optional<PayrollUnprocessed> payrollUnprocessed() {
+        return (Optional<PayrollUnprocessed>) payrollUnprocessed;
     }
 
     public static Builder builder() {
@@ -128,21 +128,21 @@ public class PostV1CompaniesCompanyIdPayrollsResponse implements AsyncResponse {
     }
 
     /**
-     * successful
+     * Successful
      */
-    public PostV1CompaniesCompanyIdPayrollsResponse withPayrollPrepared(PayrollPrepared payrollPrepared) {
-        Utils.checkNotNull(payrollPrepared, "payrollPrepared");
-        this.payrollPrepared = Optional.ofNullable(payrollPrepared);
+    public PostV1CompaniesCompanyIdPayrollsResponse withPayrollUnprocessed(PayrollUnprocessed payrollUnprocessed) {
+        Utils.checkNotNull(payrollUnprocessed, "payrollUnprocessed");
+        this.payrollUnprocessed = Optional.ofNullable(payrollUnprocessed);
         return this;
     }
 
 
     /**
-     * successful
+     * Successful
      */
-    public PostV1CompaniesCompanyIdPayrollsResponse withPayrollPrepared(Optional<? extends PayrollPrepared> payrollPrepared) {
-        Utils.checkNotNull(payrollPrepared, "payrollPrepared");
-        this.payrollPrepared = payrollPrepared;
+    public PostV1CompaniesCompanyIdPayrollsResponse withPayrollUnprocessed(Optional<? extends PayrollUnprocessed> payrollUnprocessed) {
+        Utils.checkNotNull(payrollUnprocessed, "payrollUnprocessed");
+        this.payrollUnprocessed = payrollUnprocessed;
         return this;
     }
 
@@ -159,14 +159,14 @@ public class PostV1CompaniesCompanyIdPayrollsResponse implements AsyncResponse {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.payrollPrepared, other.payrollPrepared);
+            Utils.enhancedDeepEquals(this.payrollUnprocessed, other.payrollUnprocessed);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            payrollPrepared);
+            payrollUnprocessed);
     }
     
     @Override
@@ -175,7 +175,7 @@ public class PostV1CompaniesCompanyIdPayrollsResponse implements AsyncResponse {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "payrollPrepared", payrollPrepared);
+                "payrollUnprocessed", payrollUnprocessed);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -187,7 +187,7 @@ public class PostV1CompaniesCompanyIdPayrollsResponse implements AsyncResponse {
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends PayrollPrepared> payrollPrepared = Optional.empty();
+        private Optional<? extends PayrollUnprocessed> payrollUnprocessed = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -225,20 +225,20 @@ public class PostV1CompaniesCompanyIdPayrollsResponse implements AsyncResponse {
 
 
         /**
-         * successful
+         * Successful
          */
-        public Builder payrollPrepared(PayrollPrepared payrollPrepared) {
-            Utils.checkNotNull(payrollPrepared, "payrollPrepared");
-            this.payrollPrepared = Optional.ofNullable(payrollPrepared);
+        public Builder payrollUnprocessed(PayrollUnprocessed payrollUnprocessed) {
+            Utils.checkNotNull(payrollUnprocessed, "payrollUnprocessed");
+            this.payrollUnprocessed = Optional.ofNullable(payrollUnprocessed);
             return this;
         }
 
         /**
-         * successful
+         * Successful
          */
-        public Builder payrollPrepared(Optional<? extends PayrollPrepared> payrollPrepared) {
-            Utils.checkNotNull(payrollPrepared, "payrollPrepared");
-            this.payrollPrepared = payrollPrepared;
+        public Builder payrollUnprocessed(Optional<? extends PayrollUnprocessed> payrollUnprocessed) {
+            Utils.checkNotNull(payrollUnprocessed, "payrollUnprocessed");
+            this.payrollUnprocessed = payrollUnprocessed;
             return this;
         }
 
@@ -246,7 +246,7 @@ public class PostV1CompaniesCompanyIdPayrollsResponse implements AsyncResponse {
 
             return new PostV1CompaniesCompanyIdPayrollsResponse(
                 contentType, statusCode, rawResponse,
-                payrollPrepared);
+                payrollUnprocessed);
         }
 
     }

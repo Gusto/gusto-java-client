@@ -6,18 +6,22 @@ package com.gusto.embedded_api;
 import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation;
 
 import com.gusto.embedded_api.models.components.RehireBody;
+import com.gusto.embedded_api.models.components.RehireUpdateRequestBody;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.DeleteV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeesEmployeeIdRehireRequest;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeesEmployeeIdTerminationsRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdEmploymentHistoryRequest;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdRehireRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdTerminationsRequest;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdRehireRequest;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdTerminationsRequest;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdTerminationsRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdRehireRequest;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdRehireRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1TerminationsEmployeeIdRequest;
 import com.gusto.embedded_api.models.operations.PutV1TerminationsEmployeeIdRequestBody;
 import com.gusto.embedded_api.models.operations.async.DeleteV1EmployeesEmployeeIdRehireRequestBuilder;
@@ -343,6 +347,8 @@ public class AsyncEmployeeEmployments {
      * 
      * <p>scope: `employments:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PostV1EmployeesEmployeeIdRehireRequestBuilder createRehire() {
@@ -356,12 +362,14 @@ public class AsyncEmployeeEmployments {
      * 
      * <p>scope: `employments:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param employeeId The UUID of the employee
      * @param rehireBody 
      * @return {@code CompletableFuture<PostV1EmployeesEmployeeIdRehireResponse>} - The async response
      */
     public CompletableFuture<PostV1EmployeesEmployeeIdRehireResponse> createRehire(String employeeId, RehireBody rehireBody) {
-        return createRehire(employeeId, Optional.empty(), rehireBody);
+        return createRehire(Optional.empty(), employeeId, rehireBody);
     }
 
     /**
@@ -371,19 +379,21 @@ public class AsyncEmployeeEmployments {
      * 
      * <p>scope: `employments:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @param rehireBody 
      * @return {@code CompletableFuture<PostV1EmployeesEmployeeIdRehireResponse>} - The async response
      */
     public CompletableFuture<PostV1EmployeesEmployeeIdRehireResponse> createRehire(
-            String employeeId, Optional<? extends VersionHeader> xGustoAPIVersion,
+            Optional<? extends PostV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             RehireBody rehireBody) {
         PostV1EmployeesEmployeeIdRehireRequest request =
             PostV1EmployeesEmployeeIdRehireRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .rehireBody(rehireBody)
                 .build();
         AsyncRequestOperation<PostV1EmployeesEmployeeIdRehireRequest, PostV1EmployeesEmployeeIdRehireResponse> operation
@@ -400,6 +410,8 @@ public class AsyncEmployeeEmployments {
      * 
      * <p>scope: `employments:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PutV1EmployeesEmployeeIdRehireRequestBuilder rehire() {
@@ -413,12 +425,14 @@ public class AsyncEmployeeEmployments {
      * 
      * <p>scope: `employments:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody 
+     * @param rehireUpdateRequestBody Request body for updating an employee rehire.
      * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdRehireResponse>} - The async response
      */
-    public CompletableFuture<PutV1EmployeesEmployeeIdRehireResponse> rehire(String employeeId, PutV1EmployeesEmployeeIdRehireRequestBody requestBody) {
-        return rehire(employeeId, Optional.empty(), requestBody);
+    public CompletableFuture<PutV1EmployeesEmployeeIdRehireResponse> rehire(String employeeId, RehireUpdateRequestBody rehireUpdateRequestBody) {
+        return rehire(Optional.empty(), employeeId, rehireUpdateRequestBody);
     }
 
     /**
@@ -428,20 +442,22 @@ public class AsyncEmployeeEmployments {
      * 
      * <p>scope: `employments:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param rehireUpdateRequestBody Request body for updating an employee rehire.
      * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdRehireResponse>} - The async response
      */
     public CompletableFuture<PutV1EmployeesEmployeeIdRehireResponse> rehire(
-            String employeeId, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1EmployeesEmployeeIdRehireRequestBody requestBody) {
+            Optional<? extends PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            RehireUpdateRequestBody rehireUpdateRequestBody) {
         PutV1EmployeesEmployeeIdRehireRequest request =
             PutV1EmployeesEmployeeIdRehireRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .employeeId(employeeId)
+                .rehireUpdateRequestBody(rehireUpdateRequestBody)
                 .build();
         AsyncRequestOperation<PutV1EmployeesEmployeeIdRehireRequest, PutV1EmployeesEmployeeIdRehireResponse> operation
               = new PutV1EmployeesEmployeeIdRehire.Async(sdkConfiguration, _headers);
@@ -457,6 +473,8 @@ public class AsyncEmployeeEmployments {
      * 
      * <p>scope: `employments:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1EmployeesEmployeeIdRehireRequestBuilder getRehire() {
@@ -470,11 +488,13 @@ public class AsyncEmployeeEmployments {
      * 
      * <p>scope: `employments:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param employeeId The UUID of the employee
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdRehireResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdRehireResponse> getRehire(String employeeId) {
-        return getRehire(employeeId, Optional.empty());
+        return getRehire(Optional.empty(), employeeId);
     }
 
     /**
@@ -484,16 +504,18 @@ public class AsyncEmployeeEmployments {
      * 
      * <p>scope: `employments:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdRehireResponse>} - The async response
      */
-    public CompletableFuture<GetV1EmployeesEmployeeIdRehireResponse> getRehire(String employeeId, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public CompletableFuture<GetV1EmployeesEmployeeIdRehireResponse> getRehire(Optional<? extends GetV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
         GetV1EmployeesEmployeeIdRehireRequest request =
             GetV1EmployeesEmployeeIdRehireRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         AsyncRequestOperation<GetV1EmployeesEmployeeIdRehireRequest, GetV1EmployeesEmployeeIdRehireResponse> operation
               = new GetV1EmployeesEmployeeIdRehire.Async(sdkConfiguration, _headers);
@@ -510,6 +532,8 @@ public class AsyncEmployeeEmployments {
      * 
      * <p>scope: `employments:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public DeleteV1EmployeesEmployeeIdRehireRequestBuilder deleteRehire() {
@@ -524,11 +548,13 @@ public class AsyncEmployeeEmployments {
      * 
      * <p>scope: `employments:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param employeeId The UUID of the employee
      * @return {@code CompletableFuture<DeleteV1EmployeesEmployeeIdRehireResponse>} - The async response
      */
     public CompletableFuture<DeleteV1EmployeesEmployeeIdRehireResponse> deleteRehire(String employeeId) {
-        return deleteRehire(employeeId, Optional.empty());
+        return deleteRehire(Optional.empty(), employeeId);
     }
 
     /**
@@ -539,16 +565,18 @@ public class AsyncEmployeeEmployments {
      * 
      * <p>scope: `employments:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @return {@code CompletableFuture<DeleteV1EmployeesEmployeeIdRehireResponse>} - The async response
      */
-    public CompletableFuture<DeleteV1EmployeesEmployeeIdRehireResponse> deleteRehire(String employeeId, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public CompletableFuture<DeleteV1EmployeesEmployeeIdRehireResponse> deleteRehire(Optional<? extends DeleteV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
         DeleteV1EmployeesEmployeeIdRehireRequest request =
             DeleteV1EmployeesEmployeeIdRehireRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         AsyncRequestOperation<DeleteV1EmployeesEmployeeIdRehireRequest, DeleteV1EmployeesEmployeeIdRehireResponse> operation
               = new DeleteV1EmployeesEmployeeIdRehire.Async(sdkConfiguration, _headers);
@@ -564,6 +592,8 @@ public class AsyncEmployeeEmployments {
      * 
      * <p>scope: `employments:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1EmployeesEmployeeIdEmploymentHistoryRequestBuilder getHistory() {
@@ -576,6 +606,8 @@ public class AsyncEmployeeEmployments {
      * <p>Retrieve the employment history for a given employee, which includes termination and rehire.
      * 
      * <p>scope: `employments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdEmploymentHistoryResponse>} - The async response
@@ -590,6 +622,8 @@ public class AsyncEmployeeEmployments {
      * <p>Retrieve the employment history for a given employee, which includes termination and rehire.
      * 
      * <p>scope: `employments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee

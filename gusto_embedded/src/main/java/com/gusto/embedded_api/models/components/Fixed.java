@@ -12,9 +12,17 @@ import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class Fixed {
+    /**
+     * The UUID of the fixed compensation.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("uuid")
+    private JsonNullable<String> uuid;
+
     /**
      * The name of the fixed compensation.
      */
@@ -24,13 +32,24 @@ public class Fixed {
 
     @JsonCreator
     public Fixed(
+            @JsonProperty("uuid") JsonNullable<String> uuid,
             @JsonProperty("name") Optional<String> name) {
+        Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(name, "name");
+        this.uuid = uuid;
         this.name = name;
     }
     
     public Fixed() {
-        this(Optional.empty());
+        this(JsonNullable.undefined(), Optional.empty());
+    }
+
+    /**
+     * The UUID of the fixed compensation.
+     */
+    @JsonIgnore
+    public JsonNullable<String> uuid() {
+        return uuid;
     }
 
     /**
@@ -45,6 +64,24 @@ public class Fixed {
         return new Builder();
     }
 
+
+    /**
+     * The UUID of the fixed compensation.
+     */
+    public Fixed withUuid(String uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = JsonNullable.of(uuid);
+        return this;
+    }
+
+    /**
+     * The UUID of the fixed compensation.
+     */
+    public Fixed withUuid(JsonNullable<String> uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = uuid;
+        return this;
+    }
 
     /**
      * The name of the fixed compensation.
@@ -75,28 +112,51 @@ public class Fixed {
         }
         Fixed other = (Fixed) o;
         return 
+            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
             Utils.enhancedDeepEquals(this.name, other.name);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name);
+            uuid, name);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Fixed.class,
+                "uuid", uuid,
                 "name", name);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private JsonNullable<String> uuid = JsonNullable.undefined();
+
         private Optional<String> name = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * The UUID of the fixed compensation.
+         */
+        public Builder uuid(String uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = JsonNullable.of(uuid);
+            return this;
+        }
+
+        /**
+         * The UUID of the fixed compensation.
+         */
+        public Builder uuid(JsonNullable<String> uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = uuid;
+            return this;
         }
 
 
@@ -121,7 +181,7 @@ public class Fixed {
         public Fixed build() {
 
             return new Fixed(
-                name);
+                uuid, name);
         }
 
     }

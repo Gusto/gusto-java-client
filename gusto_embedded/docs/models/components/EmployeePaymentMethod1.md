@@ -2,6 +2,14 @@
 
 The employee's payment method
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.EmployeePaymentMethod1;
+
+EmployeePaymentMethod1 value = EmployeePaymentMethod1.DIRECT_DEPOSIT;
+```
+
 
 ## Values
 

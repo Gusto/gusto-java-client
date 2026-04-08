@@ -34,7 +34,7 @@ public class GetV1EmployeesEmployeeIdFederalTaxesResponse implements AsyncRespon
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
     private Optional<? extends EmployeeFederalTax> employeeFederalTax;
 
@@ -87,7 +87,7 @@ public class GetV1EmployeesEmployeeIdFederalTaxesResponse implements AsyncRespon
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1EmployeesEmployeeIdFederalTaxesResponse implements AsyncRespon
     }
 
     /**
-     * Example response
+     * Successful
      */
     public GetV1EmployeesEmployeeIdFederalTaxesResponse withEmployeeFederalTax(EmployeeFederalTax employeeFederalTax) {
         Utils.checkNotNull(employeeFederalTax, "employeeFederalTax");
@@ -138,7 +138,7 @@ public class GetV1EmployeesEmployeeIdFederalTaxesResponse implements AsyncRespon
 
 
     /**
-     * Example response
+     * Successful
      */
     public GetV1EmployeesEmployeeIdFederalTaxesResponse withEmployeeFederalTax(Optional<? extends EmployeeFederalTax> employeeFederalTax) {
         Utils.checkNotNull(employeeFederalTax, "employeeFederalTax");
@@ -225,7 +225,7 @@ public class GetV1EmployeesEmployeeIdFederalTaxesResponse implements AsyncRespon
 
 
         /**
-         * Example response
+         * Successful
          */
         public Builder employeeFederalTax(EmployeeFederalTax employeeFederalTax) {
             Utils.checkNotNull(employeeFederalTax, "employeeFederalTax");
@@ -234,7 +234,7 @@ public class GetV1EmployeesEmployeeIdFederalTaxesResponse implements AsyncRespon
         }
 
         /**
-         * Example response
+         * Successful
          */
         public Builder employeeFederalTax(Optional<? extends EmployeeFederalTax> employeeFederalTax) {
             Utils.checkNotNull(employeeFederalTax, "employeeFederalTax");

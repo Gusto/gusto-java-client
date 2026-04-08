@@ -22,7 +22,7 @@ public class OauthAccessTokenRequest {
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends XGustoAPIVersion> xGustoAPIVersion;
+    private Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion;
 
 
     @SpeakeasyMetadata("request:mediaType=application/json")
@@ -30,7 +30,7 @@ public class OauthAccessTokenRequest {
 
     @JsonCreator
     public OauthAccessTokenRequest(
-            Optional<? extends XGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion,
             OauthAccessTokenRequestBody requestBody) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(requestBody, "requestBody");
@@ -50,8 +50,8 @@ public class OauthAccessTokenRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<XGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<XGustoAPIVersion>) xGustoAPIVersion;
+    public Optional<HeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<HeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     @JsonIgnore
@@ -69,7 +69,7 @@ public class OauthAccessTokenRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public OauthAccessTokenRequest withXGustoAPIVersion(XGustoAPIVersion xGustoAPIVersion) {
+    public OauthAccessTokenRequest withXGustoAPIVersion(HeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -81,7 +81,7 @@ public class OauthAccessTokenRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public OauthAccessTokenRequest withXGustoAPIVersion(Optional<? extends XGustoAPIVersion> xGustoAPIVersion) {
+    public OauthAccessTokenRequest withXGustoAPIVersion(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -123,7 +123,7 @@ public class OauthAccessTokenRequest {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends XGustoAPIVersion> xGustoAPIVersion;
+        private Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private OauthAccessTokenRequestBody requestBody;
 
@@ -137,7 +137,7 @@ public class OauthAccessTokenRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(XGustoAPIVersion xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(HeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -148,7 +148,7 @@ public class OauthAccessTokenRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends XGustoAPIVersion> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
@@ -171,10 +171,10 @@ public class OauthAccessTokenRequest {
         }
 
 
-        private static final LazySingletonValue<Optional<? extends XGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends HeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
-                        "\"2024-04-01\"",
-                        new TypeReference<Optional<? extends XGustoAPIVersion>>() {});
+                        "\"2025-06-15\"",
+                        new TypeReference<Optional<? extends HeaderXGustoAPIVersion>>() {});
     }
 }

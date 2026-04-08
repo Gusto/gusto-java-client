@@ -2,6 +2,14 @@
 
 The employee's authorization status
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.AuthorizationStatus;
+
+AuthorizationStatus value = AuthorizationStatus.CITIZEN;
+```
+
 
 ## Values
 

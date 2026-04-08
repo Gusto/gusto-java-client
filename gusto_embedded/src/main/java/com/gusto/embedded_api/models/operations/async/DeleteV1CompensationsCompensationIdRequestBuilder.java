@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1CompensationsCompensationIdRequest;
 import com.gusto.embedded_api.operations.DeleteV1CompensationsCompensationId;
 import com.gusto.embedded_api.utils.Headers;
@@ -19,33 +19,33 @@ import java.util.concurrent.CompletableFuture;
 
 public class DeleteV1CompensationsCompensationIdRequestBuilder {
 
-    private String compensationId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion>>() {});
+    private String compensationId;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1CompensationsCompensationIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
-    public DeleteV1CompensationsCompensationIdRequestBuilder compensationId(String compensationId) {
-        Utils.checkNotNull(compensationId, "compensationId");
-        this.compensationId = compensationId;
-        return this;
-    }
                 
-    public DeleteV1CompensationsCompensationIdRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public DeleteV1CompensationsCompensationIdRequestBuilder xGustoAPIVersion(DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public DeleteV1CompensationsCompensationIdRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public DeleteV1CompensationsCompensationIdRequestBuilder xGustoAPIVersion(Optional<? extends DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public DeleteV1CompensationsCompensationIdRequestBuilder compensationId(String compensationId) {
+        Utils.checkNotNull(compensationId, "compensationId");
+        this.compensationId = compensationId;
         return this;
     }
 
@@ -55,8 +55,8 @@ public class DeleteV1CompensationsCompensationIdRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1CompensationsCompensationIdRequest request = new DeleteV1CompensationsCompensationIdRequest(compensationId,
-            xGustoAPIVersion);
+        DeleteV1CompensationsCompensationIdRequest request = new DeleteV1CompensationsCompensationIdRequest(xGustoAPIVersion,
+            compensationId);
 
         return request;
     }
@@ -71,9 +71,9 @@ public class DeleteV1CompensationsCompensationIdRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion>>() {});
 }

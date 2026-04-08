@@ -81,6 +81,8 @@ public class AsyncContractorPaymentGroups {
      * 
      * <p>scope: `payrolls:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1CompaniesCompanyIdContractorPaymentGroupsRequestBuilder getList() {
@@ -94,6 +96,8 @@ public class AsyncContractorPaymentGroups {
      * not associated contractor payments.
      * 
      * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdContractorPaymentGroupsResponse>} - The async response
@@ -114,6 +118,8 @@ public class AsyncContractorPaymentGroups {
      * 
      * <p>scope: `payrolls:run`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBuilder create() {
@@ -127,6 +133,8 @@ public class AsyncContractorPaymentGroups {
      * fixed)
      * 
      * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @param requestBody 
@@ -143,6 +151,8 @@ public class AsyncContractorPaymentGroups {
      * fixed)
      * 
      * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
@@ -175,6 +185,8 @@ public class AsyncContractorPaymentGroups {
      * 
      * <p>scope: `payrolls:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBuilder preview() {
@@ -189,6 +201,8 @@ public class AsyncContractorPaymentGroups {
      * The returned creation_token is a required parameter in order to create the contractor payment group.
      * 
      * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @param requestBody 
@@ -206,6 +220,8 @@ public class AsyncContractorPaymentGroups {
      * The returned creation_token is a required parameter in order to create the contractor payment group.
      * 
      * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
@@ -236,6 +252,8 @@ public class AsyncContractorPaymentGroups {
      * 
      * <p>scope: `payrolls:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder get() {
@@ -248,6 +266,8 @@ public class AsyncContractorPaymentGroups {
      * <p>Returns a contractor payment group with all associated contractor payments.
      * 
      * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param contractorPaymentGroupUuid The UUID of the contractor payment group
      * @return {@code CompletableFuture<GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse>} - The async response
@@ -262,6 +282,8 @@ public class AsyncContractorPaymentGroups {
      * <p>Returns a contractor payment group with all associated contractor payments.
      * 
      * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param contractorPaymentGroupUuid The UUID of the contractor payment group
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -289,6 +311,8 @@ public class AsyncContractorPaymentGroups {
      * 
      * <p>scope: `payrolls:run`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder delete() {
@@ -302,6 +326,8 @@ public class AsyncContractorPaymentGroups {
      * must be cancellable, unfunded.
      * 
      * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param contractorPaymentGroupUuid The UUID of the contractor payment group
      * @return {@code CompletableFuture<DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse>} - The async response
@@ -317,6 +343,8 @@ public class AsyncContractorPaymentGroups {
      * must be cancellable, unfunded.
      * 
      * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param contractorPaymentGroupUuid The UUID of the contractor payment group
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -350,6 +378,8 @@ public class AsyncContractorPaymentGroups {
      * 
      * <p>scope: `payrolls:run`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder fund() {
@@ -369,6 +399,8 @@ public class AsyncContractorPaymentGroups {
      * <p>A `Funded` status is required for generating a contractor payment receipt.
      * 
      * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param contractorPaymentGroupUuid The UUID of the contractor payment group
      * @return {@code CompletableFuture<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse>} - The async response
@@ -390,6 +422,8 @@ public class AsyncContractorPaymentGroups {
      * <p>A `Funded` status is required for generating a contractor payment receipt.
      * 
      * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param contractorPaymentGroupUuid The UUID of the contractor payment group
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -416,6 +450,8 @@ public class AsyncContractorPaymentGroups {
      * 
      * <p>scope: `partner_disbursements:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder getV1ContractorPaymentGroupsIdPartnerDisbursements() {
@@ -428,6 +464,8 @@ public class AsyncContractorPaymentGroups {
      * <p>Get partner disbursements for a specific contractor payment group.
      * 
      * <p>scope: `partner_disbursements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param id The UUID of the contractor payment group
      * @return {@code CompletableFuture<GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse>} - The async response
@@ -442,6 +480,8 @@ public class AsyncContractorPaymentGroups {
      * <p>Get partner disbursements for a specific contractor payment group.
      * 
      * <p>scope: `partner_disbursements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param id The UUID of the contractor payment group
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -468,6 +508,8 @@ public class AsyncContractorPaymentGroups {
      * 
      * <p>scope: `partner_disbursements:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder patchV1ContractorPaymentGroupsIdPartnerDisbursements() {
@@ -480,6 +522,8 @@ public class AsyncContractorPaymentGroups {
      * <p>Update partner disbursements for a specific contractor payment group.
      * 
      * <p>scope: `partner_disbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param id The UUID of the contractor payment group
      * @return {@code CompletableFuture<PatchV1ContractorPaymentGroupsIdPartnerDisbursementsResponse>} - The async response
@@ -494,6 +538,8 @@ public class AsyncContractorPaymentGroups {
      * <p>Update partner disbursements for a specific contractor payment group.
      * 
      * <p>scope: `partner_disbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param id The UUID of the contractor payment group
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.

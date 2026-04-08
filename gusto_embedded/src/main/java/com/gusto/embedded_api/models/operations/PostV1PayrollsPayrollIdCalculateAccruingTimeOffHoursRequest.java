@@ -6,7 +6,7 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.PayrollCalculateAccruingTimeOffHoursRequest;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -17,6 +17,14 @@ import java.util.Optional;
 
 
 public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest {
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion> xGustoAPIVersion;
+
     /**
      * The UUID of the payroll
      */
@@ -29,40 +37,42 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_id")
     private String employeeId;
 
+
+    @SpeakeasyMetadata("request:mediaType=application/json")
+    private Optional<? extends PayrollCalculateAccruingTimeOffHoursRequest> payrollCalculateAccruingTimeOffHoursRequest;
+
+    @JsonCreator
+    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest(
+            Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String payrollId,
+            String employeeId,
+            Optional<? extends PayrollCalculateAccruingTimeOffHoursRequest> payrollCalculateAccruingTimeOffHoursRequest) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(payrollId, "payrollId");
+        Utils.checkNotNull(employeeId, "employeeId");
+        Utils.checkNotNull(payrollCalculateAccruingTimeOffHoursRequest, "payrollCalculateAccruingTimeOffHoursRequest");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        this.payrollId = payrollId;
+        this.employeeId = employeeId;
+        this.payrollCalculateAccruingTimeOffHoursRequest = payrollCalculateAccruingTimeOffHoursRequest;
+    }
+    
+    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest(
+            String payrollId,
+            String employeeId) {
+        this(Optional.empty(), payrollId, employeeId,
+            Optional.empty());
+    }
+
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-
-    @SpeakeasyMetadata("request:mediaType=application/json")
-    private PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody requestBody;
-
-    @JsonCreator
-    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest(
-            String payrollId,
-            String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody requestBody) {
-        Utils.checkNotNull(payrollId, "payrollId");
-        Utils.checkNotNull(employeeId, "employeeId");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.payrollId = payrollId;
-        this.employeeId = employeeId;
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        this.requestBody = requestBody;
-    }
-    
-    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest(
-            String payrollId,
-            String employeeId,
-            PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody requestBody) {
-        this(payrollId, employeeId, Optional.empty(),
-            requestBody);
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -81,26 +91,39 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest {
         return employeeId;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
-    }
-
-    @JsonIgnore
-    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody requestBody() {
-        return requestBody;
+    public Optional<PayrollCalculateAccruingTimeOffHoursRequest> payrollCalculateAccruingTimeOffHoursRequest() {
+        return (Optional<PayrollCalculateAccruingTimeOffHoursRequest>) payrollCalculateAccruingTimeOffHoursRequest;
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest withXGustoAPIVersion(PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        return this;
+    }
+
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest withXGustoAPIVersion(Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
 
     /**
      * The UUID of the payroll
@@ -120,32 +143,16 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest {
         return this;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest withPayrollCalculateAccruingTimeOffHoursRequest(PayrollCalculateAccruingTimeOffHoursRequest payrollCalculateAccruingTimeOffHoursRequest) {
+        Utils.checkNotNull(payrollCalculateAccruingTimeOffHoursRequest, "payrollCalculateAccruingTimeOffHoursRequest");
+        this.payrollCalculateAccruingTimeOffHoursRequest = Optional.ofNullable(payrollCalculateAccruingTimeOffHoursRequest);
         return this;
     }
 
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest withRequestBody(PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest withPayrollCalculateAccruingTimeOffHoursRequest(Optional<? extends PayrollCalculateAccruingTimeOffHoursRequest> payrollCalculateAccruingTimeOffHoursRequest) {
+        Utils.checkNotNull(payrollCalculateAccruingTimeOffHoursRequest, "payrollCalculateAccruingTimeOffHoursRequest");
+        this.payrollCalculateAccruingTimeOffHoursRequest = payrollCalculateAccruingTimeOffHoursRequest;
         return this;
     }
 
@@ -159,41 +166,64 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest {
         }
         PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest other = (PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.payrollId, other.payrollId) &&
             Utils.enhancedDeepEquals(this.employeeId, other.employeeId) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
-            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.payrollCalculateAccruingTimeOffHoursRequest, other.payrollCalculateAccruingTimeOffHoursRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            payrollId, employeeId, xGustoAPIVersion,
-            requestBody);
+            xGustoAPIVersion, payrollId, employeeId,
+            payrollCalculateAccruingTimeOffHoursRequest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "payrollId", payrollId,
                 "employeeId", employeeId,
-                "xGustoAPIVersion", xGustoAPIVersion,
-                "requestBody", requestBody);
+                "payrollCalculateAccruingTimeOffHoursRequest", payrollCalculateAccruingTimeOffHoursRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String payrollId;
 
         private String employeeId;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-        private PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody requestBody;
+        private Optional<? extends PayrollCalculateAccruingTimeOffHoursRequest> payrollCalculateAccruingTimeOffHoursRequest = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -217,32 +247,15 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest {
         }
 
 
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        public Builder payrollCalculateAccruingTimeOffHoursRequest(PayrollCalculateAccruingTimeOffHoursRequest payrollCalculateAccruingTimeOffHoursRequest) {
+            Utils.checkNotNull(payrollCalculateAccruingTimeOffHoursRequest, "payrollCalculateAccruingTimeOffHoursRequest");
+            this.payrollCalculateAccruingTimeOffHoursRequest = Optional.ofNullable(payrollCalculateAccruingTimeOffHoursRequest);
             return this;
         }
 
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
-
-
-        public Builder requestBody(PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody requestBody) {
-            Utils.checkNotNull(requestBody, "requestBody");
-            this.requestBody = requestBody;
+        public Builder payrollCalculateAccruingTimeOffHoursRequest(Optional<? extends PayrollCalculateAccruingTimeOffHoursRequest> payrollCalculateAccruingTimeOffHoursRequest) {
+            Utils.checkNotNull(payrollCalculateAccruingTimeOffHoursRequest, "payrollCalculateAccruingTimeOffHoursRequest");
+            this.payrollCalculateAccruingTimeOffHoursRequest = payrollCalculateAccruingTimeOffHoursRequest;
             return this;
         }
 
@@ -252,15 +265,15 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest {
             }
 
             return new PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest(
-                payrollId, employeeId, xGustoAPIVersion,
-                requestBody);
+                xGustoAPIVersion, payrollId, employeeId,
+                payrollCalculateAccruingTimeOffHoursRequest);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion>>() {});
     }
 }

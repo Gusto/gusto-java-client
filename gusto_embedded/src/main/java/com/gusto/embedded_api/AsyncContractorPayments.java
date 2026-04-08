@@ -5,16 +5,19 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation;
 
+import com.gusto.embedded_api.models.components.ContractorPaymentBody;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest;
 import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidContractorPaymentsPreviewRequest;
 import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBody;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdContractorPaymentsRequest;
 import com.gusto.embedded_api.models.operations.GetV1ContractorPaymentsContractorPaymentUuidFundRequest;
 import com.gusto.embedded_api.models.operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentsRequest;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentsRequestBody;
 import com.gusto.embedded_api.models.operations.async.DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder;
 import com.gusto.embedded_api.models.operations.async.DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse;
 import com.gusto.embedded_api.models.operations.async.GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBuilder;
@@ -224,6 +227,8 @@ public class AsyncContractorPayments {
      * 
      * <p>scope: `payrolls:run`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder create() {
@@ -237,12 +242,14 @@ public class AsyncContractorPayments {
      * 
      * <p>scope: `payrolls:run`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody 
+     * @param contractorPaymentBody Request body for creating a contractor payment.
      * @return {@code CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentsResponse>} - The async response
      */
-    public CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentsResponse> create(String companyId, PostV1CompaniesCompanyIdContractorPaymentsRequestBody requestBody) {
-        return create(companyId, Optional.empty(), requestBody);
+    public CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentsResponse> create(String companyId, ContractorPaymentBody contractorPaymentBody) {
+        return create(Optional.empty(), companyId, contractorPaymentBody);
     }
 
     /**
@@ -252,20 +259,22 @@ public class AsyncContractorPayments {
      * 
      * <p>scope: `payrolls:run`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param contractorPaymentBody Request body for creating a contractor payment.
      * @return {@code CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentsResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentsResponse> create(
-            String companyId, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1CompaniesCompanyIdContractorPaymentsRequestBody requestBody) {
+            Optional<? extends PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            ContractorPaymentBody contractorPaymentBody) {
         PostV1CompaniesCompanyIdContractorPaymentsRequest request =
             PostV1CompaniesCompanyIdContractorPaymentsRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .companyId(companyId)
+                .contractorPaymentBody(contractorPaymentBody)
                 .build();
         AsyncRequestOperation<PostV1CompaniesCompanyIdContractorPaymentsRequest, PostV1CompaniesCompanyIdContractorPaymentsResponse> operation
               = new PostV1CompaniesCompanyIdContractorPayments.Async(sdkConfiguration, _headers);
@@ -282,6 +291,8 @@ public class AsyncContractorPayments {
      * 
      * <p>scope: `payrolls:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1CompaniesCompanyIdContractorPaymentsRequestBuilder list() {
@@ -295,6 +306,8 @@ public class AsyncContractorPayments {
      * totals.
      * 
      * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdContractorPaymentsResponse>} - The async response
@@ -311,7 +324,10 @@ public class AsyncContractorPayments {
      * Get a single contractor payment
      * 
      * <p>Returns a single contractor payment.
-     * scope: `payrolls:read`
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -323,36 +339,42 @@ public class AsyncContractorPayments {
      * Get a single contractor payment
      * 
      * <p>Returns a single contractor payment.
-     * scope: `payrolls:read`
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @param contractorPaymentId The UUID of the contractor payment
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse> get(String companyId, String contractorPaymentId) {
-        return get(companyId, contractorPaymentId, Optional.empty());
+        return get(Optional.empty(), companyId, contractorPaymentId);
     }
 
     /**
      * Get a single contractor payment
      * 
      * <p>Returns a single contractor payment.
-     * scope: `payrolls:read`
      * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param contractorPaymentId The UUID of the contractor payment
-     * @param xGustoAPIVersion 
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse> get(
-            String companyId, String contractorPaymentId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends GetV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String contractorPaymentId) {
         GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest request =
             GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .contractorPaymentId(contractorPaymentId)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         AsyncRequestOperation<GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest, GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse> operation
               = new GetV1CompaniesCompanyIdContractorPaymentContractorPayment.Async(sdkConfiguration, _headers);
@@ -369,6 +391,8 @@ public class AsyncContractorPayments {
      * 
      * <p>scope: `payrolls:run`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder delete() {
@@ -383,12 +407,14 @@ public class AsyncContractorPayments {
      * 
      * <p>scope: `payrolls:run`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
      * @param contractorPaymentId The UUID of the contractor payment
      * @return {@code CompletableFuture<DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse>} - The async response
      */
     public CompletableFuture<DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse> delete(String companyId, String contractorPaymentId) {
-        return delete(companyId, contractorPaymentId, Optional.empty());
+        return delete(Optional.empty(), companyId, contractorPaymentId);
     }
 
     /**
@@ -399,20 +425,22 @@ public class AsyncContractorPayments {
      * 
      * <p>scope: `payrolls:run`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param contractorPaymentId The UUID of the contractor payment
-     * @param xGustoAPIVersion 
      * @return {@code CompletableFuture<DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse>} - The async response
      */
     public CompletableFuture<DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse> delete(
-            String companyId, String contractorPaymentId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String contractorPaymentId) {
         DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest request =
             DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .contractorPaymentId(contractorPaymentId)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         AsyncRequestOperation<DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest, DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse> operation
               = new DeleteV1CompaniesCompanyIdContractorPaymentContractorPayment.Async(sdkConfiguration, _headers);

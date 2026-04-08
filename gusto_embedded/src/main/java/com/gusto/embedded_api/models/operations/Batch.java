@@ -21,7 +21,7 @@ public class Batch {
      * The type of entity to create
      */
     @JsonProperty("entity_type")
-    private PostV1CompaniesCompanyIdPeopleBatchesEntityType entityType;
+    private EntityType entityType;
 
 
     @JsonProperty("person")
@@ -63,9 +63,12 @@ public class Batch {
     private Optional<? extends Compensation> compensation;
 
     /**
-     * Creates employee bank accounts and payment methods for direct deposit. If splitting payments by
-     * amount, the priority is set based on the order of the bank accounts in the array and the last bank
-     * account is the remainder account (should have `split_amount` set to `null`).
+     * Creates employee bank account(s) and payment method(s) for direct deposit. Payments can be split
+     * across accounts by Percentage or by Amount. If splitting payments by `Percentage`, all splits must
+     * have a `split_amount` and the percentages must add up to `100`.
+     * If splitting payments by `Amount`, the priority is set based on the order of the bank accounts in
+     * the array and the last bank account is the remainder account (should have `split_amount` set to
+     * `null`).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bank_accounts")
@@ -73,7 +76,7 @@ public class Batch {
 
     @JsonCreator
     public Batch(
-            @JsonProperty("entity_type") PostV1CompaniesCompanyIdPeopleBatchesEntityType entityType,
+            @JsonProperty("entity_type") EntityType entityType,
             @JsonProperty("person") Person person,
             @JsonProperty("home_address") Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHomeAddress> homeAddress,
             @JsonProperty("work_address") Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesWorkAddress> workAddress,
@@ -100,7 +103,7 @@ public class Batch {
     }
     
     public Batch(
-            PostV1CompaniesCompanyIdPeopleBatchesEntityType entityType,
+            EntityType entityType,
             Person person) {
         this(entityType, person, Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
@@ -111,7 +114,7 @@ public class Batch {
      * The type of entity to create
      */
     @JsonIgnore
-    public PostV1CompaniesCompanyIdPeopleBatchesEntityType entityType() {
+    public EntityType entityType() {
         return entityType;
     }
 
@@ -166,9 +169,12 @@ public class Batch {
     }
 
     /**
-     * Creates employee bank accounts and payment methods for direct deposit. If splitting payments by
-     * amount, the priority is set based on the order of the bank accounts in the array and the last bank
-     * account is the remainder account (should have `split_amount` set to `null`).
+     * Creates employee bank account(s) and payment method(s) for direct deposit. Payments can be split
+     * across accounts by Percentage or by Amount. If splitting payments by `Percentage`, all splits must
+     * have a `split_amount` and the percentages must add up to `100`.
+     * If splitting payments by `Amount`, the priority is set based on the order of the bank accounts in
+     * the array and the last bank account is the remainder account (should have `split_amount` set to
+     * `null`).
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -184,7 +190,7 @@ public class Batch {
     /**
      * The type of entity to create
      */
-    public Batch withEntityType(PostV1CompaniesCompanyIdPeopleBatchesEntityType entityType) {
+    public Batch withEntityType(EntityType entityType) {
         Utils.checkNotNull(entityType, "entityType");
         this.entityType = entityType;
         return this;
@@ -292,9 +298,12 @@ public class Batch {
     }
 
     /**
-     * Creates employee bank accounts and payment methods for direct deposit. If splitting payments by
-     * amount, the priority is set based on the order of the bank accounts in the array and the last bank
-     * account is the remainder account (should have `split_amount` set to `null`).
+     * Creates employee bank account(s) and payment method(s) for direct deposit. Payments can be split
+     * across accounts by Percentage or by Amount. If splitting payments by `Percentage`, all splits must
+     * have a `split_amount` and the percentages must add up to `100`.
+     * If splitting payments by `Amount`, the priority is set based on the order of the bank accounts in
+     * the array and the last bank account is the remainder account (should have `split_amount` set to
+     * `null`).
      */
     public Batch withBankAccounts(List<BankAccounts> bankAccounts) {
         Utils.checkNotNull(bankAccounts, "bankAccounts");
@@ -304,9 +313,12 @@ public class Batch {
 
 
     /**
-     * Creates employee bank accounts and payment methods for direct deposit. If splitting payments by
-     * amount, the priority is set based on the order of the bank accounts in the array and the last bank
-     * account is the remainder account (should have `split_amount` set to `null`).
+     * Creates employee bank account(s) and payment method(s) for direct deposit. Payments can be split
+     * across accounts by Percentage or by Amount. If splitting payments by `Percentage`, all splits must
+     * have a `split_amount` and the percentages must add up to `100`.
+     * If splitting payments by `Amount`, the priority is set based on the order of the bank accounts in
+     * the array and the last bank account is the remainder account (should have `split_amount` set to
+     * `null`).
      */
     public Batch withBankAccounts(Optional<? extends List<BankAccounts>> bankAccounts) {
         Utils.checkNotNull(bankAccounts, "bankAccounts");
@@ -358,7 +370,7 @@ public class Batch {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private PostV1CompaniesCompanyIdPeopleBatchesEntityType entityType;
+        private EntityType entityType;
 
         private Person person;
 
@@ -382,7 +394,7 @@ public class Batch {
         /**
          * The type of entity to create
          */
-        public Builder entityType(PostV1CompaniesCompanyIdPeopleBatchesEntityType entityType) {
+        public Builder entityType(EntityType entityType) {
             Utils.checkNotNull(entityType, "entityType");
             this.entityType = entityType;
             return this;
@@ -492,9 +504,12 @@ public class Batch {
 
 
         /**
-         * Creates employee bank accounts and payment methods for direct deposit. If splitting payments by
-         * amount, the priority is set based on the order of the bank accounts in the array and the last bank
-         * account is the remainder account (should have `split_amount` set to `null`).
+         * Creates employee bank account(s) and payment method(s) for direct deposit. Payments can be split
+         * across accounts by Percentage or by Amount. If splitting payments by `Percentage`, all splits must
+         * have a `split_amount` and the percentages must add up to `100`.
+         * If splitting payments by `Amount`, the priority is set based on the order of the bank accounts in
+         * the array and the last bank account is the remainder account (should have `split_amount` set to
+         * `null`).
          */
         public Builder bankAccounts(List<BankAccounts> bankAccounts) {
             Utils.checkNotNull(bankAccounts, "bankAccounts");
@@ -503,9 +518,12 @@ public class Batch {
         }
 
         /**
-         * Creates employee bank accounts and payment methods for direct deposit. If splitting payments by
-         * amount, the priority is set based on the order of the bank accounts in the array and the last bank
-         * account is the remainder account (should have `split_amount` set to `null`).
+         * Creates employee bank account(s) and payment method(s) for direct deposit. Payments can be split
+         * across accounts by Percentage or by Amount. If splitting payments by `Percentage`, all splits must
+         * have a `split_amount` and the percentages must add up to `100`.
+         * If splitting payments by `Amount`, the priority is set based on the order of the bank accounts in
+         * the array and the last bank account is the remainder account (should have `split_amount` set to
+         * `null`).
          */
         public Builder bankAccounts(Optional<? extends List<BankAccounts>> bankAccounts) {
             Utils.checkNotNull(bankAccounts, "bankAccounts");

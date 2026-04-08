@@ -20,9 +20,9 @@ Generates a W2 document for testing purposes.
 
 scope: `employees:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_w2" method="post" path="/v1/sandbox/generate_w2" -->
+<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_w2" method="post" path="/v1/sandbox/generate_w2" example="Basic" -->
 ```java
 package hello.world;
 
@@ -49,7 +49,75 @@ public class Application {
                 .call();
 
         if (res.form().isPresent()) {
-            // handle response
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_w2" method="post" path="/v1/sandbox/generate_w2" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerateW2RequestBody;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerateW2Response;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1SandboxGenerateW2Response res = sdk.employeeForms().generateW2()
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1SandboxGenerateW2RequestBody.builder()
+                    .employeeId("<id>")
+                    .build())
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_w2" method="post" path="/v1/sandbox/generate_w2" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerateW2RequestBody;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerateW2Response;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1SandboxGenerateW2Response res = sdk.employeeForms().generateW2()
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1SandboxGenerateW2RequestBody.builder()
+                    .employeeId("<id>")
+                    .build())
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
         }
     }
 }
@@ -81,7 +149,7 @@ scope: `employee_forms:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-employee-forms" method="get" path="/v1/employees/{employee_id}/forms" -->
+<!-- UsageSnippet language="java" operationID="get-v1-employee-forms" method="get" path="/v1/employees/{employee_id}/forms" example="Example" -->
 ```java
 package hello.world;
 
@@ -104,7 +172,7 @@ public class Application {
                 .call();
 
         if (res.formList().isPresent()) {
-            // handle response
+            System.out.println(res.formList().get());
         }
     }
 }
@@ -135,7 +203,7 @@ scope: `employee_forms:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-employee-form" method="get" path="/v1/employees/{employee_id}/forms/{form_id}" -->
+<!-- UsageSnippet language="java" operationID="get-v1-employee-form" method="get" path="/v1/employees/{employee_id}/forms/{form_id}" example="Example" -->
 ```java
 package hello.world;
 
@@ -159,7 +227,7 @@ public class Application {
                 .call();
 
         if (res.form().isPresent()) {
-            // handle response
+            System.out.println(res.form().get());
         }
     }
 }
@@ -191,7 +259,7 @@ scope: `employee_forms:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-employee-form-pdf" method="get" path="/v1/employees/{employee_id}/forms/{form_id}/pdf" -->
+<!-- UsageSnippet language="java" operationID="get-v1-employee-form-pdf" method="get" path="/v1/employees/{employee_id}/forms/{form_id}/pdf" example="Example" -->
 ```java
 package hello.world;
 
@@ -215,7 +283,7 @@ public class Application {
                 .call();
 
         if (res.formPdf().isPresent()) {
-            // handle response
+            System.out.println(res.formPdf().get());
         }
     }
 }
@@ -248,9 +316,47 @@ first name, last name, street address, city, state, and zip for that preparer ar
 
 scope: `employee_forms:sign`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="put-v1-employee-form-sign" method="put" path="/v1/employees/{employee_id}/forms/{form_id}/sign" -->
+<!-- UsageSnippet language="java" operationID="put-v1-employee-form-sign" method="put" path="/v1/employees/{employee_id}/forms/{form_id}/sign" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1EmployeeFormSignRequest req = PutV1EmployeeFormSignRequest.builder()
+                .employeeId("<id>")
+                .formId("<id>")
+                .requestBody(PutV1EmployeeFormSignRequestBody.builder()
+                    .signatureText("<value>")
+                    .agree(true)
+                    .build())
+                .build();
+
+        PutV1EmployeeFormSignResponse res = sdk.employeeForms().sign()
+                .request(req)
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-employee-form-sign" method="put" path="/v1/employees/{employee_id}/forms/{form_id}/sign" example="Example" -->
 ```java
 package hello.world;
 
@@ -282,7 +388,83 @@ public class Application {
                 .call();
 
         if (res.form().isPresent()) {
-            // handle response
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-v1-employee-form-sign" method="put" path="/v1/employees/{employee_id}/forms/{form_id}/sign" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1EmployeeFormSignRequest req = PutV1EmployeeFormSignRequest.builder()
+                .employeeId("<id>")
+                .formId("<id>")
+                .requestBody(PutV1EmployeeFormSignRequestBody.builder()
+                    .signatureText("<value>")
+                    .agree(true)
+                    .build())
+                .build();
+
+        PutV1EmployeeFormSignResponse res = sdk.employeeForms().sign()
+                .request(req)
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-v1-employee-form-sign" method="put" path="/v1/employees/{employee_id}/forms/{form_id}/sign" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1EmployeeFormSignRequest req = PutV1EmployeeFormSignRequest.builder()
+                .employeeId("<id>")
+                .formId("<id>")
+                .requestBody(PutV1EmployeeFormSignRequestBody.builder()
+                    .signatureText("<value>")
+                    .agree(true)
+                    .build())
+                .build();
+
+        PutV1EmployeeFormSignResponse res = sdk.employeeForms().sign()
+                .request(req)
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
         }
     }
 }

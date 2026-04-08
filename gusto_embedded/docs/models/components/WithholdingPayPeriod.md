@@ -2,6 +2,14 @@
 
 The payment schedule tax rate the payroll is based on. Only relevant for off-cycle payrolls.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.WithholdingPayPeriod;
+
+WithholdingPayPeriod value = WithholdingPayPeriod.EVERY_WEEK;
+```
+
 
 ## Values
 

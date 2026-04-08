@@ -5,6 +5,7 @@ package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gusto.embedded_api.models.components.RecurringReimbursement;
 import com.gusto.embedded_api.utils.Response;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
@@ -36,22 +37,22 @@ public class GetV1EmployeesEmployeeIdRecurringReimbursementsResponse implements 
     /**
      * successful
      */
-    private Optional<? extends List<GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody>> responseBodies;
+    private Optional<? extends List<RecurringReimbursement>> recurringReimbursementList;
 
     @JsonCreator
     public GetV1EmployeesEmployeeIdRecurringReimbursementsResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody>> responseBodies) {
+            Optional<? extends List<RecurringReimbursement>> recurringReimbursementList) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(responseBodies, "responseBodies");
+        Utils.checkNotNull(recurringReimbursementList, "recurringReimbursementList");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.responseBodies = responseBodies;
+        this.recurringReimbursementList = recurringReimbursementList;
     }
     
     public GetV1EmployeesEmployeeIdRecurringReimbursementsResponse(
@@ -91,8 +92,8 @@ public class GetV1EmployeesEmployeeIdRecurringReimbursementsResponse implements 
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody>> responseBodies() {
-        return (Optional<List<GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody>>) responseBodies;
+    public Optional<List<RecurringReimbursement>> recurringReimbursementList() {
+        return (Optional<List<RecurringReimbursement>>) recurringReimbursementList;
     }
 
     public static Builder builder() {
@@ -130,9 +131,9 @@ public class GetV1EmployeesEmployeeIdRecurringReimbursementsResponse implements 
     /**
      * successful
      */
-    public GetV1EmployeesEmployeeIdRecurringReimbursementsResponse withResponseBodies(List<GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody> responseBodies) {
-        Utils.checkNotNull(responseBodies, "responseBodies");
-        this.responseBodies = Optional.ofNullable(responseBodies);
+    public GetV1EmployeesEmployeeIdRecurringReimbursementsResponse withRecurringReimbursementList(List<RecurringReimbursement> recurringReimbursementList) {
+        Utils.checkNotNull(recurringReimbursementList, "recurringReimbursementList");
+        this.recurringReimbursementList = Optional.ofNullable(recurringReimbursementList);
         return this;
     }
 
@@ -140,9 +141,9 @@ public class GetV1EmployeesEmployeeIdRecurringReimbursementsResponse implements 
     /**
      * successful
      */
-    public GetV1EmployeesEmployeeIdRecurringReimbursementsResponse withResponseBodies(Optional<? extends List<GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody>> responseBodies) {
-        Utils.checkNotNull(responseBodies, "responseBodies");
-        this.responseBodies = responseBodies;
+    public GetV1EmployeesEmployeeIdRecurringReimbursementsResponse withRecurringReimbursementList(Optional<? extends List<RecurringReimbursement>> recurringReimbursementList) {
+        Utils.checkNotNull(recurringReimbursementList, "recurringReimbursementList");
+        this.recurringReimbursementList = recurringReimbursementList;
         return this;
     }
 
@@ -159,14 +160,14 @@ public class GetV1EmployeesEmployeeIdRecurringReimbursementsResponse implements 
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.responseBodies, other.responseBodies);
+            Utils.enhancedDeepEquals(this.recurringReimbursementList, other.recurringReimbursementList);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            responseBodies);
+            recurringReimbursementList);
     }
     
     @Override
@@ -175,7 +176,7 @@ public class GetV1EmployeesEmployeeIdRecurringReimbursementsResponse implements 
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "responseBodies", responseBodies);
+                "recurringReimbursementList", recurringReimbursementList);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -187,7 +188,7 @@ public class GetV1EmployeesEmployeeIdRecurringReimbursementsResponse implements 
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends List<GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody>> responseBodies = Optional.empty();
+        private Optional<? extends List<RecurringReimbursement>> recurringReimbursementList = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -227,18 +228,18 @@ public class GetV1EmployeesEmployeeIdRecurringReimbursementsResponse implements 
         /**
          * successful
          */
-        public Builder responseBodies(List<GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody> responseBodies) {
-            Utils.checkNotNull(responseBodies, "responseBodies");
-            this.responseBodies = Optional.ofNullable(responseBodies);
+        public Builder recurringReimbursementList(List<RecurringReimbursement> recurringReimbursementList) {
+            Utils.checkNotNull(recurringReimbursementList, "recurringReimbursementList");
+            this.recurringReimbursementList = Optional.ofNullable(recurringReimbursementList);
             return this;
         }
 
         /**
          * successful
          */
-        public Builder responseBodies(Optional<? extends List<GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody>> responseBodies) {
-            Utils.checkNotNull(responseBodies, "responseBodies");
-            this.responseBodies = responseBodies;
+        public Builder recurringReimbursementList(Optional<? extends List<RecurringReimbursement>> recurringReimbursementList) {
+            Utils.checkNotNull(recurringReimbursementList, "recurringReimbursementList");
+            this.recurringReimbursementList = recurringReimbursementList;
             return this;
         }
 
@@ -246,7 +247,7 @@ public class GetV1EmployeesEmployeeIdRecurringReimbursementsResponse implements 
 
             return new GetV1EmployeesEmployeeIdRecurringReimbursementsResponse(
                 contentType, statusCode, rawResponse,
-                responseBodies);
+                recurringReimbursementList);
         }
 
     }

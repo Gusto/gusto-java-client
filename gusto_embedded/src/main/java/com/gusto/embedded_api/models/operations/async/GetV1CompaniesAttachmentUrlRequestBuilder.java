@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentUrlRequest;
 import com.gusto.embedded_api.operations.GetV1CompaniesAttachmentUrl;
 import com.gusto.embedded_api.utils.Headers;
@@ -19,17 +19,29 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompaniesAttachmentUrlRequestBuilder {
 
-    private String companyId;
-    private String companyAttachmentUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private String companyAttachmentUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompaniesAttachmentUrlRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public GetV1CompaniesAttachmentUrlRequestBuilder xGustoAPIVersion(GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public GetV1CompaniesAttachmentUrlRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public GetV1CompaniesAttachmentUrlRequestBuilder companyId(String companyId) {
@@ -43,18 +55,6 @@ public class GetV1CompaniesAttachmentUrlRequestBuilder {
         this.companyAttachmentUuid = companyAttachmentUuid;
         return this;
     }
-                
-    public GetV1CompaniesAttachmentUrlRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
-
-    public GetV1CompaniesAttachmentUrlRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
 
 
     private GetV1CompaniesAttachmentUrlRequest buildRequest() {
@@ -62,9 +62,9 @@ public class GetV1CompaniesAttachmentUrlRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompaniesAttachmentUrlRequest request = new GetV1CompaniesAttachmentUrlRequest(companyId,
-            companyAttachmentUuid,
-            xGustoAPIVersion);
+        GetV1CompaniesAttachmentUrlRequest request = new GetV1CompaniesAttachmentUrlRequest(xGustoAPIVersion,
+            companyId,
+            companyAttachmentUuid);
 
         return request;
     }
@@ -79,9 +79,9 @@ public class GetV1CompaniesAttachmentUrlRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion>>() {});
 }

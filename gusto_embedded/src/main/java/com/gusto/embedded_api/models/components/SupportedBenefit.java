@@ -15,11 +15,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-/**
- * SupportedBenefit
- * 
- * <p>Example response
- */
+
 public class SupportedBenefit {
     /**
      * The benefit type in Gusto.

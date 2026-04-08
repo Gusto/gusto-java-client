@@ -34,7 +34,7 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateResponse implements As
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * OK
+     * Success
      */
     private Optional<? extends TaxRequirementsState> taxRequirementsState;
 
@@ -87,7 +87,7 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateResponse implements As
     }
 
     /**
-     * OK
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateResponse implements As
     }
 
     /**
-     * OK
+     * Success
      */
     public GetV1CompaniesCompanyUuidTaxRequirementsStateResponse withTaxRequirementsState(TaxRequirementsState taxRequirementsState) {
         Utils.checkNotNull(taxRequirementsState, "taxRequirementsState");
@@ -138,7 +138,7 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateResponse implements As
 
 
     /**
-     * OK
+     * Success
      */
     public GetV1CompaniesCompanyUuidTaxRequirementsStateResponse withTaxRequirementsState(Optional<? extends TaxRequirementsState> taxRequirementsState) {
         Utils.checkNotNull(taxRequirementsState, "taxRequirementsState");
@@ -225,7 +225,7 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateResponse implements As
 
 
         /**
-         * OK
+         * Success
          */
         public Builder taxRequirementsState(TaxRequirementsState taxRequirementsState) {
             Utils.checkNotNull(taxRequirementsState, "taxRequirementsState");
@@ -234,7 +234,7 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateResponse implements As
         }
 
         /**
-         * OK
+         * Success
          */
         public Builder taxRequirementsState(Optional<? extends TaxRequirementsState> taxRequirementsState) {
             Utils.checkNotNull(taxRequirementsState, "taxRequirementsState");

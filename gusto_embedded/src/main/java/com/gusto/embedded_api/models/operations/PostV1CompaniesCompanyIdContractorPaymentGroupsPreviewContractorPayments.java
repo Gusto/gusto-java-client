@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
-import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -37,7 +36,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("wage")
-    private Optional<Double> wage;
+    private Optional<String> wage;
 
     /**
      * If the contractor is on an hourly wage, this is the number of hours that the contractor worked for
@@ -45,30 +44,30 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hours")
-    private Optional<Double> hours;
+    private Optional<String> hours;
 
     /**
      * If the contractor is on an hourly wage, this is the bonus the contractor earned
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bonus")
-    private Optional<Double> bonus;
+    private Optional<String> bonus;
 
     /**
      * Reimbursed wages for the contractor
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("reimbursement")
-    private Optional<Double> reimbursement;
+    private Optional<String> reimbursement;
 
     @JsonCreator
     public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments(
             @JsonProperty("contractor_uuid") Optional<String> contractorUuid,
             @JsonProperty("payment_method") Optional<? extends PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod> paymentMethod,
-            @JsonProperty("wage") Optional<Double> wage,
-            @JsonProperty("hours") Optional<Double> hours,
-            @JsonProperty("bonus") Optional<Double> bonus,
-            @JsonProperty("reimbursement") Optional<Double> reimbursement) {
+            @JsonProperty("wage") Optional<String> wage,
+            @JsonProperty("hours") Optional<String> hours,
+            @JsonProperty("bonus") Optional<String> bonus,
+            @JsonProperty("reimbursement") Optional<String> reimbursement) {
         Utils.checkNotNull(contractorUuid, "contractorUuid");
         Utils.checkNotNull(paymentMethod, "paymentMethod");
         Utils.checkNotNull(wage, "wage");
@@ -107,7 +106,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
      * of hours worked
      */
     @JsonIgnore
-    public Optional<Double> wage() {
+    public Optional<String> wage() {
         return wage;
     }
 
@@ -116,7 +115,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
      * the payment
      */
     @JsonIgnore
-    public Optional<Double> hours() {
+    public Optional<String> hours() {
         return hours;
     }
 
@@ -124,7 +123,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
      * If the contractor is on an hourly wage, this is the bonus the contractor earned
      */
     @JsonIgnore
-    public Optional<Double> bonus() {
+    public Optional<String> bonus() {
         return bonus;
     }
 
@@ -132,7 +131,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
      * Reimbursed wages for the contractor
      */
     @JsonIgnore
-    public Optional<Double> reimbursement() {
+    public Optional<String> reimbursement() {
         return reimbursement;
     }
 
@@ -177,7 +176,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
      * If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless
      * of hours worked
      */
-    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withWage(double wage) {
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withWage(String wage) {
         Utils.checkNotNull(wage, "wage");
         this.wage = Optional.ofNullable(wage);
         return this;
@@ -188,7 +187,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
      * If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless
      * of hours worked
      */
-    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withWage(Optional<Double> wage) {
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withWage(Optional<String> wage) {
         Utils.checkNotNull(wage, "wage");
         this.wage = wage;
         return this;
@@ -198,7 +197,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
      * If the contractor is on an hourly wage, this is the number of hours that the contractor worked for
      * the payment
      */
-    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withHours(double hours) {
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withHours(String hours) {
         Utils.checkNotNull(hours, "hours");
         this.hours = Optional.ofNullable(hours);
         return this;
@@ -209,7 +208,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
      * If the contractor is on an hourly wage, this is the number of hours that the contractor worked for
      * the payment
      */
-    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withHours(Optional<Double> hours) {
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withHours(Optional<String> hours) {
         Utils.checkNotNull(hours, "hours");
         this.hours = hours;
         return this;
@@ -218,7 +217,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
     /**
      * If the contractor is on an hourly wage, this is the bonus the contractor earned
      */
-    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withBonus(double bonus) {
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withBonus(String bonus) {
         Utils.checkNotNull(bonus, "bonus");
         this.bonus = Optional.ofNullable(bonus);
         return this;
@@ -228,7 +227,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
     /**
      * If the contractor is on an hourly wage, this is the bonus the contractor earned
      */
-    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withBonus(Optional<Double> bonus) {
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withBonus(Optional<String> bonus) {
         Utils.checkNotNull(bonus, "bonus");
         this.bonus = bonus;
         return this;
@@ -237,7 +236,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
     /**
      * Reimbursed wages for the contractor
      */
-    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withReimbursement(double reimbursement) {
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withReimbursement(String reimbursement) {
         Utils.checkNotNull(reimbursement, "reimbursement");
         this.reimbursement = Optional.ofNullable(reimbursement);
         return this;
@@ -247,7 +246,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
     /**
      * Reimbursed wages for the contractor
      */
-    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withReimbursement(Optional<Double> reimbursement) {
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments withReimbursement(Optional<String> reimbursement) {
         Utils.checkNotNull(reimbursement, "reimbursement");
         this.reimbursement = reimbursement;
         return this;
@@ -296,13 +295,13 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
 
         private Optional<? extends PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod> paymentMethod;
 
-        private Optional<Double> wage = Optional.empty();
+        private Optional<String> wage = Optional.empty();
 
-        private Optional<Double> hours = Optional.empty();
+        private Optional<String> hours = Optional.empty();
 
-        private Optional<Double> bonus = Optional.empty();
+        private Optional<String> bonus = Optional.empty();
 
-        private Optional<Double> reimbursement = Optional.empty();
+        private Optional<String> reimbursement = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -345,7 +344,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
          * If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless
          * of hours worked
          */
-        public Builder wage(double wage) {
+        public Builder wage(String wage) {
             Utils.checkNotNull(wage, "wage");
             this.wage = Optional.ofNullable(wage);
             return this;
@@ -355,7 +354,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
          * If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless
          * of hours worked
          */
-        public Builder wage(Optional<Double> wage) {
+        public Builder wage(Optional<String> wage) {
             Utils.checkNotNull(wage, "wage");
             this.wage = wage;
             return this;
@@ -366,7 +365,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
          * If the contractor is on an hourly wage, this is the number of hours that the contractor worked for
          * the payment
          */
-        public Builder hours(double hours) {
+        public Builder hours(String hours) {
             Utils.checkNotNull(hours, "hours");
             this.hours = Optional.ofNullable(hours);
             return this;
@@ -376,7 +375,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
          * If the contractor is on an hourly wage, this is the number of hours that the contractor worked for
          * the payment
          */
-        public Builder hours(Optional<Double> hours) {
+        public Builder hours(Optional<String> hours) {
             Utils.checkNotNull(hours, "hours");
             this.hours = hours;
             return this;
@@ -386,7 +385,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
         /**
          * If the contractor is on an hourly wage, this is the bonus the contractor earned
          */
-        public Builder bonus(double bonus) {
+        public Builder bonus(String bonus) {
             Utils.checkNotNull(bonus, "bonus");
             this.bonus = Optional.ofNullable(bonus);
             return this;
@@ -395,7 +394,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
         /**
          * If the contractor is on an hourly wage, this is the bonus the contractor earned
          */
-        public Builder bonus(Optional<Double> bonus) {
+        public Builder bonus(Optional<String> bonus) {
             Utils.checkNotNull(bonus, "bonus");
             this.bonus = bonus;
             return this;
@@ -405,7 +404,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
         /**
          * Reimbursed wages for the contractor
          */
-        public Builder reimbursement(double reimbursement) {
+        public Builder reimbursement(String reimbursement) {
             Utils.checkNotNull(reimbursement, "reimbursement");
             this.reimbursement = Optional.ofNullable(reimbursement);
             return this;
@@ -414,7 +413,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
         /**
          * Reimbursed wages for the contractor
          */
-        public Builder reimbursement(Optional<Double> reimbursement) {
+        public Builder reimbursement(Optional<String> reimbursement) {
             Utils.checkNotNull(reimbursement, "reimbursement");
             this.reimbursement = reimbursement;
             return this;

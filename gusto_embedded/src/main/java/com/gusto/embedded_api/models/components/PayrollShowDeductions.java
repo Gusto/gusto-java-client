@@ -17,22 +17,30 @@ import java.util.Optional;
 
 
 public class PayrollShowDeductions {
-
+    /**
+     * The name of the deduction.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
     private Optional<String> name;
 
-
+    /**
+     * The amount of the deduction for the pay period.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
     private Optional<Double> amount;
 
-
+    /**
+     * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount_type")
     private Optional<? extends PayrollShowAmountType> amountType;
 
-
+    /**
+     * The UUID of the deduction. Only present for unprocessed payrolls.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("uuid")
     private Optional<String> uuid;
@@ -58,22 +66,34 @@ public class PayrollShowDeductions {
             Optional.empty());
     }
 
+    /**
+     * The name of the deduction.
+     */
     @JsonIgnore
     public Optional<String> name() {
         return name;
     }
 
+    /**
+     * The amount of the deduction for the pay period.
+     */
     @JsonIgnore
     public Optional<Double> amount() {
         return amount;
     }
 
+    /**
+     * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<PayrollShowAmountType> amountType() {
         return (Optional<PayrollShowAmountType>) amountType;
     }
 
+    /**
+     * The UUID of the deduction. Only present for unprocessed payrolls.
+     */
     @JsonIgnore
     public Optional<String> uuid() {
         return uuid;
@@ -84,6 +104,9 @@ public class PayrollShowDeductions {
     }
 
 
+    /**
+     * The name of the deduction.
+     */
     public PayrollShowDeductions withName(String name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
@@ -91,12 +114,18 @@ public class PayrollShowDeductions {
     }
 
 
+    /**
+     * The name of the deduction.
+     */
     public PayrollShowDeductions withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
     }
 
+    /**
+     * The amount of the deduction for the pay period.
+     */
     public PayrollShowDeductions withAmount(double amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = Optional.ofNullable(amount);
@@ -104,12 +133,18 @@ public class PayrollShowDeductions {
     }
 
 
+    /**
+     * The amount of the deduction for the pay period.
+     */
     public PayrollShowDeductions withAmount(Optional<Double> amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
         return this;
     }
 
+    /**
+     * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
+     */
     public PayrollShowDeductions withAmountType(PayrollShowAmountType amountType) {
         Utils.checkNotNull(amountType, "amountType");
         this.amountType = Optional.ofNullable(amountType);
@@ -117,12 +152,18 @@ public class PayrollShowDeductions {
     }
 
 
+    /**
+     * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
+     */
     public PayrollShowDeductions withAmountType(Optional<? extends PayrollShowAmountType> amountType) {
         Utils.checkNotNull(amountType, "amountType");
         this.amountType = amountType;
         return this;
     }
 
+    /**
+     * The UUID of the deduction. Only present for unprocessed payrolls.
+     */
     public PayrollShowDeductions withUuid(String uuid) {
         Utils.checkNotNull(uuid, "uuid");
         this.uuid = Optional.ofNullable(uuid);
@@ -130,6 +171,9 @@ public class PayrollShowDeductions {
     }
 
 
+    /**
+     * The UUID of the deduction. Only present for unprocessed payrolls.
+     */
     public PayrollShowDeductions withUuid(Optional<String> uuid) {
         Utils.checkNotNull(uuid, "uuid");
         this.uuid = uuid;
@@ -184,12 +228,18 @@ public class PayrollShowDeductions {
         }
 
 
+        /**
+         * The name of the deduction.
+         */
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
             this.name = Optional.ofNullable(name);
             return this;
         }
 
+        /**
+         * The name of the deduction.
+         */
         public Builder name(Optional<String> name) {
             Utils.checkNotNull(name, "name");
             this.name = name;
@@ -197,12 +247,18 @@ public class PayrollShowDeductions {
         }
 
 
+        /**
+         * The amount of the deduction for the pay period.
+         */
         public Builder amount(double amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
             return this;
         }
 
+        /**
+         * The amount of the deduction for the pay period.
+         */
         public Builder amount(Optional<Double> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
@@ -210,12 +266,18 @@ public class PayrollShowDeductions {
         }
 
 
+        /**
+         * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
+         */
         public Builder amountType(PayrollShowAmountType amountType) {
             Utils.checkNotNull(amountType, "amountType");
             this.amountType = Optional.ofNullable(amountType);
             return this;
         }
 
+        /**
+         * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
+         */
         public Builder amountType(Optional<? extends PayrollShowAmountType> amountType) {
             Utils.checkNotNull(amountType, "amountType");
             this.amountType = amountType;
@@ -223,12 +285,18 @@ public class PayrollShowDeductions {
         }
 
 
+        /**
+         * The UUID of the deduction. Only present for unprocessed payrolls.
+         */
         public Builder uuid(String uuid) {
             Utils.checkNotNull(uuid, "uuid");
             this.uuid = Optional.ofNullable(uuid);
             return this;
         }
 
+        /**
+         * The UUID of the deduction. Only present for unprocessed payrolls.
+         */
         public Builder uuid(Optional<String> uuid) {
             Utils.checkNotNull(uuid, "uuid");
             this.uuid = uuid;

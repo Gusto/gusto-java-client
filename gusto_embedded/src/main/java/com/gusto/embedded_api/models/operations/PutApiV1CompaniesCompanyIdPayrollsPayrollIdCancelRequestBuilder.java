@@ -7,7 +7,6 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.operations.PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancel;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,17 +16,29 @@ import java.util.Optional;
 
 public class PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder {
 
-    private String companyId;
-    private String payrollId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutAPIV1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends PutAPIV1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private String payrollId;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder xGustoAPIVersion(PutAPIV1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder xGustoAPIVersion(Optional<? extends PutAPIV1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder companyId(String companyId) {
@@ -41,18 +52,6 @@ public class PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder {
         this.payrollId = payrollId;
         return this;
     }
-                
-    public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
-
-    public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
 
 
     private PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest buildRequest() {
@@ -60,9 +59,9 @@ public class PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest request = new PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest(companyId,
-            payrollId,
-            xGustoAPIVersion);
+        PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest request = new PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest(xGustoAPIVersion,
+            companyId,
+            payrollId);
 
         return request;
     }
@@ -76,9 +75,9 @@ public class PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutAPIV1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutAPIV1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion>>() {});
 }

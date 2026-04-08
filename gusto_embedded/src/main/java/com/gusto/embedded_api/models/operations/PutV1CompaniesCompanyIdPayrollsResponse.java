@@ -34,7 +34,7 @@ public class PutV1CompaniesCompanyIdPayrollsResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * successful
+     * Successful
      */
     private Optional<? extends PayrollPrepared> payrollPrepared;
 
@@ -87,7 +87,7 @@ public class PutV1CompaniesCompanyIdPayrollsResponse implements Response {
     }
 
     /**
-     * successful
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PutV1CompaniesCompanyIdPayrollsResponse implements Response {
     }
 
     /**
-     * successful
+     * Successful
      */
     public PutV1CompaniesCompanyIdPayrollsResponse withPayrollPrepared(PayrollPrepared payrollPrepared) {
         Utils.checkNotNull(payrollPrepared, "payrollPrepared");
@@ -138,7 +138,7 @@ public class PutV1CompaniesCompanyIdPayrollsResponse implements Response {
 
 
     /**
-     * successful
+     * Successful
      */
     public PutV1CompaniesCompanyIdPayrollsResponse withPayrollPrepared(Optional<? extends PayrollPrepared> payrollPrepared) {
         Utils.checkNotNull(payrollPrepared, "payrollPrepared");
@@ -225,7 +225,7 @@ public class PutV1CompaniesCompanyIdPayrollsResponse implements Response {
 
 
         /**
-         * successful
+         * Successful
          */
         public Builder payrollPrepared(PayrollPrepared payrollPrepared) {
             Utils.checkNotNull(payrollPrepared, "payrollPrepared");
@@ -234,7 +234,7 @@ public class PutV1CompaniesCompanyIdPayrollsResponse implements Response {
         }
 
         /**
-         * successful
+         * Successful
          */
         public Builder payrollPrepared(Optional<? extends PayrollPrepared> payrollPrepared) {
             Utils.checkNotNull(payrollPrepared, "payrollPrepared");

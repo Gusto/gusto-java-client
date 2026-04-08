@@ -8,6 +8,11 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * PayrollShowAmountType
+ * 
+ * <p>The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
+ */
 public enum PayrollShowAmountType {
     FIXED("fixed"),
     PERCENT("percent");

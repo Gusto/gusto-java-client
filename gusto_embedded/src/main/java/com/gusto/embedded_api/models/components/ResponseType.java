@@ -16,7 +16,8 @@ import java.util.Optional;
 public enum ResponseType {
     TEXT("text"),
     DOCUMENT("document"),
-    PERSONA("persona");
+    PERSONA("persona"),
+    RADIO_BUTTON("radio_button");
 
     @JsonValue
     private final String value;

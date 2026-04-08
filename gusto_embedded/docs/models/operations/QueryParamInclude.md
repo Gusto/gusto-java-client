@@ -1,5 +1,13 @@
 # QueryParamInclude
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.QueryParamInclude;
+
+QueryParamInclude value = QueryParamInclude.ALL_COMPENSATIONS;
+```
+
 
 ## Values
 

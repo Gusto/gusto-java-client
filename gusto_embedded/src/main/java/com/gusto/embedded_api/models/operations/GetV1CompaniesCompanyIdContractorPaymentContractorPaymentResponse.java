@@ -34,7 +34,7 @@ public class GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse i
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * successful
      */
     private Optional<? extends ContractorPayment> contractorPayment;
 
@@ -87,7 +87,7 @@ public class GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse i
     }
 
     /**
-     * Example response
+     * successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse i
     }
 
     /**
-     * Example response
+     * successful
      */
     public GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse withContractorPayment(ContractorPayment contractorPayment) {
         Utils.checkNotNull(contractorPayment, "contractorPayment");
@@ -138,7 +138,7 @@ public class GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse i
 
 
     /**
-     * Example response
+     * successful
      */
     public GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse withContractorPayment(Optional<? extends ContractorPayment> contractorPayment) {
         Utils.checkNotNull(contractorPayment, "contractorPayment");
@@ -225,7 +225,7 @@ public class GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse i
 
 
         /**
-         * Example response
+         * successful
          */
         public Builder contractorPayment(ContractorPayment contractorPayment) {
             Utils.checkNotNull(contractorPayment, "contractorPayment");
@@ -234,7 +234,7 @@ public class GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse i
         }
 
         /**
-         * Example response
+         * successful
          */
         public Builder contractorPayment(Optional<? extends ContractorPayment> contractorPayment) {
             Utils.checkNotNull(contractorPayment, "contractorPayment");

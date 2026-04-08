@@ -11,11 +11,21 @@ import java.util.Optional;
 /**
  * PolicyType
  * 
- * <p>Type of the time off policy
+ * <p>Type of the time off policy. Only "vacation" and "sick" can be created through the API, but other
+ * types may be present if the company was previously a Gusto.com customer.
  */
 public enum PolicyType {
     VACATION("vacation"),
-    SICK("sick");
+    SICK("sick"),
+    BEREAVEMENT("bereavement"),
+    CUSTOM("custom"),
+    FLOATING_HOLIDAY("floating_holiday"),
+    JURY_DUTY("jury_duty"),
+    LEARNING_AND_DEVELOPMENT("learning_and_development"),
+    PARENTAL_LEAVE("parental_leave"),
+    PERSONAL_DAY("personal_day"),
+    VOLUNTEER("volunteer"),
+    WEATHER("weather");
 
     @JsonValue
     private final String value;

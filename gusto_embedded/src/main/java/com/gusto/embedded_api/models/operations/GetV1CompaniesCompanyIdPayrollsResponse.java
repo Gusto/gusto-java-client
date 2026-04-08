@@ -35,7 +35,7 @@ public class GetV1CompaniesCompanyIdPayrollsResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * successful
+     * Successful
      */
     private Optional<? extends List<Payroll>> payrollList;
 
@@ -88,7 +88,7 @@ public class GetV1CompaniesCompanyIdPayrollsResponse implements Response {
     }
 
     /**
-     * successful
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -129,7 +129,7 @@ public class GetV1CompaniesCompanyIdPayrollsResponse implements Response {
     }
 
     /**
-     * successful
+     * Successful
      */
     public GetV1CompaniesCompanyIdPayrollsResponse withPayrollList(List<Payroll> payrollList) {
         Utils.checkNotNull(payrollList, "payrollList");
@@ -139,7 +139,7 @@ public class GetV1CompaniesCompanyIdPayrollsResponse implements Response {
 
 
     /**
-     * successful
+     * Successful
      */
     public GetV1CompaniesCompanyIdPayrollsResponse withPayrollList(Optional<? extends List<Payroll>> payrollList) {
         Utils.checkNotNull(payrollList, "payrollList");
@@ -226,7 +226,7 @@ public class GetV1CompaniesCompanyIdPayrollsResponse implements Response {
 
 
         /**
-         * successful
+         * Successful
          */
         public Builder payrollList(List<Payroll> payrollList) {
             Utils.checkNotNull(payrollList, "payrollList");
@@ -235,7 +235,7 @@ public class GetV1CompaniesCompanyIdPayrollsResponse implements Response {
         }
 
         /**
-         * successful
+         * Successful
          */
         public Builder payrollList(Optional<? extends List<Payroll>> payrollList) {
             Utils.checkNotNull(payrollList, "payrollList");

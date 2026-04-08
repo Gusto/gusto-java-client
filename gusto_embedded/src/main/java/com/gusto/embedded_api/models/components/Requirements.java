@@ -3,41 +3,186 @@
  */
 package com.gusto.embedded_api.models.components;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.gusto.embedded_api.utils.Utils;
+import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
-import java.util.Optional;
+import java.lang.SuppressWarnings;
+import org.openapitools.jackson.nullable.JsonNullable;
 
-public enum Requirements {
-    ADD_ADDRESSES("add_addresses"),
-    FEDERAL_TAX_SETUP("federal_tax_setup"),
-    SELECT_INDUSTRY("select_industry"),
-    ADD_BANK_INFO("add_bank_info"),
-    ADD_EMPLOYEES("add_employees"),
-    STATE_SETUP("state_setup"),
-    PAYROLL_SCHEDULE("payroll_schedule"),
-    SIGN_ALL_FORMS("sign_all_forms"),
-    VERIFY_BANK_INFO("verify_bank_info"),
-    EXTERNAL_PAYROLL("external_payroll");
 
-    @JsonValue
-    private final String value;
+public class Requirements {
+    /**
+     * An identifier for an individual requirement. Uniqueness is guaranteed within a requirement set.
+     */
+    @JsonProperty("key")
+    private String key;
 
-    Requirements(String value) {
+    /**
+     * The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g.
+     * string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate).
+     * 
+     * <p>Null when the requirement has not been answered.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("value")
+    private JsonNullable<? extends TaxRequirementsValue> value;
+
+    @JsonCreator
+    public Requirements(
+            @JsonProperty("key") String key,
+            @JsonProperty("value") JsonNullable<? extends TaxRequirementsValue> value) {
+        Utils.checkNotNull(key, "key");
+        Utils.checkNotNull(value, "value");
+        this.key = key;
         this.value = value;
     }
     
-    public String value() {
-        return value;
+    public Requirements(
+            String key) {
+        this(key, JsonNullable.undefined());
+    }
+
+    /**
+     * An identifier for an individual requirement. Uniqueness is guaranteed within a requirement set.
+     */
+    @JsonIgnore
+    public String key() {
+        return key;
+    }
+
+    /**
+     * The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g.
+     * string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate).
+     * 
+     * <p>Null when the requirement has not been answered.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public JsonNullable<TaxRequirementsValue> value() {
+        return (JsonNullable<TaxRequirementsValue>) value;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+
+    /**
+     * An identifier for an individual requirement. Uniqueness is guaranteed within a requirement set.
+     */
+    public Requirements withKey(String key) {
+        Utils.checkNotNull(key, "key");
+        this.key = key;
+        return this;
+    }
+
+    /**
+     * The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g.
+     * string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate).
+     * 
+     * <p>Null when the requirement has not been answered.
+     */
+    public Requirements withValue(TaxRequirementsValue value) {
+        Utils.checkNotNull(value, "value");
+        this.value = JsonNullable.of(value);
+        return this;
+    }
+
+    /**
+     * The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g.
+     * string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate).
+     * 
+     * <p>Null when the requirement has not been answered.
+     */
+    public Requirements withValue(JsonNullable<? extends TaxRequirementsValue> value) {
+        Utils.checkNotNull(value, "value");
+        this.value = value;
+        return this;
+    }
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Requirements other = (Requirements) o;
+        return 
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.value, other.value);
     }
     
-    public static Optional<Requirements> fromValue(String value) {
-        for (Requirements o: Requirements.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+    @Override
+    public int hashCode() {
+        return Utils.enhancedHash(
+            key, value);
+    }
+    
+    @Override
+    public String toString() {
+        return Utils.toString(Requirements.class,
+                "key", key,
+                "value", value);
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public final static class Builder {
+
+        private String key;
+
+        private JsonNullable<? extends TaxRequirementsValue> value = JsonNullable.undefined();
+
+        private Builder() {
+          // force use of static builder() method
         }
-        return Optional.empty();
+
+
+        /**
+         * An identifier for an individual requirement. Uniqueness is guaranteed within a requirement set.
+         */
+        public Builder key(String key) {
+            Utils.checkNotNull(key, "key");
+            this.key = key;
+            return this;
+        }
+
+
+        /**
+         * The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g.
+         * string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate).
+         * 
+         * <p>Null when the requirement has not been answered.
+         */
+        public Builder value(TaxRequirementsValue value) {
+            Utils.checkNotNull(value, "value");
+            this.value = JsonNullable.of(value);
+            return this;
+        }
+
+        /**
+         * The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g.
+         * string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate).
+         * 
+         * <p>Null when the requirement has not been answered.
+         */
+        public Builder value(JsonNullable<? extends TaxRequirementsValue> value) {
+            Utils.checkNotNull(value, "value");
+            this.value = value;
+            return this;
+        }
+
+        public Requirements build() {
+
+            return new Requirements(
+                key, value);
+        }
+
     }
 }
-

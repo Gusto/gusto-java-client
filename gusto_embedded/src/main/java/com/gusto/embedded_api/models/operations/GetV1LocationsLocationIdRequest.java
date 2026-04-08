@@ -22,7 +22,7 @@ public class GetV1LocationsLocationIdRequest {
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion;
+    private Optional<? extends GetV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion;
 
     /**
      * The UUID of the location
@@ -32,7 +32,7 @@ public class GetV1LocationsLocationIdRequest {
 
     @JsonCreator
     public GetV1LocationsLocationIdRequest(
-            Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends GetV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion,
             String locationId) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(locationId, "locationId");
@@ -52,8 +52,8 @@ public class GetV1LocationsLocationIdRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<HeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<HeaderXGustoAPIVersion>) xGustoAPIVersion;
+    public Optional<GetV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetV1LocationsLocationIdHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -74,7 +74,7 @@ public class GetV1LocationsLocationIdRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1LocationsLocationIdRequest withXGustoAPIVersion(HeaderXGustoAPIVersion xGustoAPIVersion) {
+    public GetV1LocationsLocationIdRequest withXGustoAPIVersion(GetV1LocationsLocationIdHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -86,7 +86,7 @@ public class GetV1LocationsLocationIdRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1LocationsLocationIdRequest withXGustoAPIVersion(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1LocationsLocationIdRequest withXGustoAPIVersion(Optional<? extends GetV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -131,7 +131,7 @@ public class GetV1LocationsLocationIdRequest {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion;
+        private Optional<? extends GetV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private String locationId;
 
@@ -145,7 +145,7 @@ public class GetV1LocationsLocationIdRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(HeaderXGustoAPIVersion xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(GetV1LocationsLocationIdHeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -156,7 +156,7 @@ public class GetV1LocationsLocationIdRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends GetV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
@@ -182,10 +182,10 @@ public class GetV1LocationsLocationIdRequest {
         }
 
 
-        private static final LazySingletonValue<Optional<? extends HeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends GetV1LocationsLocationIdHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends HeaderXGustoAPIVersion>>() {});
+                        new TypeReference<Optional<? extends GetV1LocationsLocationIdHeaderXGustoAPIVersion>>() {});
     }
 }

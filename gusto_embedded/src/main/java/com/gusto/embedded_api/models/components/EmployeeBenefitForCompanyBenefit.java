@@ -3,6 +3,8 @@
  */
 package com.gusto.embedded_api.models.components;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -13,10 +15,13 @@ import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Deprecated;
+import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -111,7 +116,7 @@ public class EmployeeBenefitForCompanyBenefit {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("retirement_loan_identifier")
-    private Optional<String> retirementLoanIdentifier;
+    private JsonNullable<String> retirementLoanIdentifier;
 
     /**
      * The amount that the employee is insured for. Note: company contribution cannot be present if
@@ -180,6 +185,25 @@ public class EmployeeBenefitForCompanyBenefit {
     @JsonProperty("employee_uuid")
     private String employeeUuid;
 
+    /**
+     * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("uuid")
+    private Optional<String> uuid;
+
+    /**
+     * The action to perform on the employee benefit. Required for creating/updating an effective dated
+     * employee benefit.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("action")
+    private Optional<? extends Action> action;
+
+
+    @JsonIgnore
+    private Map<String, Object> additionalProperties;
+
     @JsonCreator
     public EmployeeBenefitForCompanyBenefit(
             @JsonProperty("version") Optional<String> version,
@@ -192,7 +216,7 @@ public class EmployeeBenefitForCompanyBenefit {
             @JsonProperty("company_contribution_annual_maximum") JsonNullable<String> companyContributionAnnualMaximum,
             @JsonProperty("limit_option") JsonNullable<String> limitOption,
             @JsonProperty("catch_up") JsonNullable<Boolean> catchUp,
-            @JsonProperty("retirement_loan_identifier") Optional<String> retirementLoanIdentifier,
+            @JsonProperty("retirement_loan_identifier") JsonNullable<String> retirementLoanIdentifier,
             @JsonProperty("coverage_amount") JsonNullable<String> coverageAmount,
             @JsonProperty("deduction_reduces_taxable_income") JsonNullable<? extends EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome> deductionReducesTaxableIncome,
             @JsonProperty("coverage_salary_multiplier") JsonNullable<String> coverageSalaryMultiplier,
@@ -200,7 +224,9 @@ public class EmployeeBenefitForCompanyBenefit {
             @JsonProperty("contribute_as_percentage") Optional<Boolean> contributeAsPercentage,
             @JsonProperty("effective_date") Optional<LocalDate> effectiveDate,
             @JsonProperty("expiration_date") JsonNullable<LocalDate> expirationDate,
-            @JsonProperty("employee_uuid") String employeeUuid) {
+            @JsonProperty("employee_uuid") String employeeUuid,
+            @JsonProperty("uuid") Optional<String> uuid,
+            @JsonProperty("action") Optional<? extends Action> action) {
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(active, "active");
         Utils.checkNotNull(employeeDeduction, "employeeDeduction");
@@ -220,6 +246,8 @@ public class EmployeeBenefitForCompanyBenefit {
         Utils.checkNotNull(effectiveDate, "effectiveDate");
         Utils.checkNotNull(expirationDate, "expirationDate");
         Utils.checkNotNull(employeeUuid, "employeeUuid");
+        Utils.checkNotNull(uuid, "uuid");
+        Utils.checkNotNull(action, "action");
         this.version = version;
         this.active = active;
         this.employeeDeduction = employeeDeduction;
@@ -239,6 +267,9 @@ public class EmployeeBenefitForCompanyBenefit {
         this.effectiveDate = effectiveDate;
         this.expirationDate = expirationDate;
         this.employeeUuid = employeeUuid;
+        this.uuid = uuid;
+        this.action = action;
+        this.additionalProperties = new HashMap<>();
     }
     
     public EmployeeBenefitForCompanyBenefit(
@@ -246,10 +277,10 @@ public class EmployeeBenefitForCompanyBenefit {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), JsonNullable.undefined(), Optional.empty(),
             Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
-            JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(),
+            JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
             JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
             Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            employeeUuid);
+            employeeUuid, Optional.empty(), Optional.empty());
     }
 
     /**
@@ -347,7 +378,7 @@ public class EmployeeBenefitForCompanyBenefit {
      * Identifier for a 401(k) loan assigned by the 401(k) provider
      */
     @JsonIgnore
-    public Optional<String> retirementLoanIdentifier() {
+    public JsonNullable<String> retirementLoanIdentifier() {
         return retirementLoanIdentifier;
     }
 
@@ -426,6 +457,29 @@ public class EmployeeBenefitForCompanyBenefit {
     @JsonIgnore
     public String employeeUuid() {
         return employeeUuid;
+    }
+
+    /**
+     * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
+     */
+    @JsonIgnore
+    public Optional<String> uuid() {
+        return uuid;
+    }
+
+    /**
+     * The action to perform on the employee benefit. Required for creating/updating an effective dated
+     * employee benefit.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Action> action() {
+        return (Optional<Action>) action;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> additionalProperties() {
+        return additionalProperties;
     }
 
     public static Builder builder() {
@@ -644,15 +698,14 @@ public class EmployeeBenefitForCompanyBenefit {
      */
     public EmployeeBenefitForCompanyBenefit withRetirementLoanIdentifier(String retirementLoanIdentifier) {
         Utils.checkNotNull(retirementLoanIdentifier, "retirementLoanIdentifier");
-        this.retirementLoanIdentifier = Optional.ofNullable(retirementLoanIdentifier);
+        this.retirementLoanIdentifier = JsonNullable.of(retirementLoanIdentifier);
         return this;
     }
-
 
     /**
      * Identifier for a 401(k) loan assigned by the 401(k) provider
      */
-    public EmployeeBenefitForCompanyBenefit withRetirementLoanIdentifier(Optional<String> retirementLoanIdentifier) {
+    public EmployeeBenefitForCompanyBenefit withRetirementLoanIdentifier(JsonNullable<String> retirementLoanIdentifier) {
         Utils.checkNotNull(retirementLoanIdentifier, "retirementLoanIdentifier");
         this.retirementLoanIdentifier = retirementLoanIdentifier;
         return this;
@@ -820,6 +873,59 @@ public class EmployeeBenefitForCompanyBenefit {
         return this;
     }
 
+    /**
+     * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
+     */
+    public EmployeeBenefitForCompanyBenefit withUuid(String uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = Optional.ofNullable(uuid);
+        return this;
+    }
+
+
+    /**
+     * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
+     */
+    public EmployeeBenefitForCompanyBenefit withUuid(Optional<String> uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = uuid;
+        return this;
+    }
+
+    /**
+     * The action to perform on the employee benefit. Required for creating/updating an effective dated
+     * employee benefit.
+     */
+    public EmployeeBenefitForCompanyBenefit withAction(Action action) {
+        Utils.checkNotNull(action, "action");
+        this.action = Optional.ofNullable(action);
+        return this;
+    }
+
+
+    /**
+     * The action to perform on the employee benefit. Required for creating/updating an effective dated
+     * employee benefit.
+     */
+    public EmployeeBenefitForCompanyBenefit withAction(Optional<? extends Action> action) {
+        Utils.checkNotNull(action, "action");
+        this.action = action;
+        return this;
+    }
+
+    @JsonAnySetter
+    public EmployeeBenefitForCompanyBenefit withAdditionalProperty(String key, Object value) {
+        // note that value can be null because of the way JsonAnySetter works
+        Utils.checkNotNull(key, "key");
+        additionalProperties.put(key, value); 
+        return this;
+    }
+    public EmployeeBenefitForCompanyBenefit withAdditionalProperties(Map<String, Object> additionalProperties) {
+        Utils.checkNotNull(additionalProperties, "additionalProperties");
+        this.additionalProperties = additionalProperties;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -848,7 +954,10 @@ public class EmployeeBenefitForCompanyBenefit {
             Utils.enhancedDeepEquals(this.contributeAsPercentage, other.contributeAsPercentage) &&
             Utils.enhancedDeepEquals(this.effectiveDate, other.effectiveDate) &&
             Utils.enhancedDeepEquals(this.expirationDate, other.expirationDate) &&
-            Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid);
+            Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
+            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
+            Utils.enhancedDeepEquals(this.action, other.action) &&
+            Utils.enhancedDeepEquals(this.additionalProperties, other.additionalProperties);
     }
     
     @Override
@@ -860,7 +969,8 @@ public class EmployeeBenefitForCompanyBenefit {
             catchUp, retirementLoanIdentifier, coverageAmount,
             deductionReducesTaxableIncome, coverageSalaryMultiplier, companyContribution,
             contributeAsPercentage, effectiveDate, expirationDate,
-            employeeUuid);
+            employeeUuid, uuid, action,
+            additionalProperties);
     }
     
     @Override
@@ -884,7 +994,10 @@ public class EmployeeBenefitForCompanyBenefit {
                 "contributeAsPercentage", contributeAsPercentage,
                 "effectiveDate", effectiveDate,
                 "expirationDate", expirationDate,
-                "employeeUuid", employeeUuid);
+                "employeeUuid", employeeUuid,
+                "uuid", uuid,
+                "action", action,
+                "additionalProperties", additionalProperties);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -910,7 +1023,7 @@ public class EmployeeBenefitForCompanyBenefit {
 
         private JsonNullable<Boolean> catchUp;
 
-        private Optional<String> retirementLoanIdentifier = Optional.empty();
+        private JsonNullable<String> retirementLoanIdentifier = JsonNullable.undefined();
 
         private JsonNullable<String> coverageAmount = JsonNullable.undefined();
 
@@ -929,6 +1042,12 @@ public class EmployeeBenefitForCompanyBenefit {
         private JsonNullable<LocalDate> expirationDate = JsonNullable.undefined();
 
         private String employeeUuid;
+
+        private Optional<String> uuid = Optional.empty();
+
+        private Optional<? extends Action> action = Optional.empty();
+
+        private Map<String, Object> additionalProperties = new HashMap<>();
 
         private Builder() {
           // force use of static builder() method
@@ -1150,14 +1269,14 @@ public class EmployeeBenefitForCompanyBenefit {
          */
         public Builder retirementLoanIdentifier(String retirementLoanIdentifier) {
             Utils.checkNotNull(retirementLoanIdentifier, "retirementLoanIdentifier");
-            this.retirementLoanIdentifier = Optional.ofNullable(retirementLoanIdentifier);
+            this.retirementLoanIdentifier = JsonNullable.of(retirementLoanIdentifier);
             return this;
         }
 
         /**
          * Identifier for a 401(k) loan assigned by the 401(k) provider
          */
-        public Builder retirementLoanIdentifier(Optional<String> retirementLoanIdentifier) {
+        public Builder retirementLoanIdentifier(JsonNullable<String> retirementLoanIdentifier) {
             Utils.checkNotNull(retirementLoanIdentifier, "retirementLoanIdentifier");
             this.retirementLoanIdentifier = retirementLoanIdentifier;
             return this;
@@ -1330,6 +1449,62 @@ public class EmployeeBenefitForCompanyBenefit {
             return this;
         }
 
+
+        /**
+         * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
+         */
+        public Builder uuid(String uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = Optional.ofNullable(uuid);
+            return this;
+        }
+
+        /**
+         * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
+         */
+        public Builder uuid(Optional<String> uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = uuid;
+            return this;
+        }
+
+
+        /**
+         * The action to perform on the employee benefit. Required for creating/updating an effective dated
+         * employee benefit.
+         */
+        public Builder action(Action action) {
+            Utils.checkNotNull(action, "action");
+            this.action = Optional.ofNullable(action);
+            return this;
+        }
+
+        /**
+         * The action to perform on the employee benefit. Required for creating/updating an effective dated
+         * employee benefit.
+         */
+        public Builder action(Optional<? extends Action> action) {
+            Utils.checkNotNull(action, "action");
+            this.action = action;
+            return this;
+        }
+
+        public Builder additionalProperty(String key, Object value) {
+            Utils.checkNotNull(key, "key");
+            // we could be strict about null values (force the user
+            // to pass `JsonNullable.of(null)`) but likely to be a bit 
+            // annoying for additional properties building so we'll 
+            // relax preconditions.
+            this.additionalProperties.put(key, value);
+            return this;
+        }
+
+        public Builder additionalProperties(Map<String, Object> additionalProperties) {
+            Utils.checkNotNull(additionalProperties, "additionalProperties");
+            this.additionalProperties = additionalProperties;
+            return this;
+        }
+
         public EmployeeBenefitForCompanyBenefit build() {
             if (active == null) {
                 active = _SINGLETON_VALUE_Active.value();
@@ -1366,7 +1541,8 @@ public class EmployeeBenefitForCompanyBenefit {
                 catchUp, retirementLoanIdentifier, coverageAmount,
                 deductionReducesTaxableIncome, coverageSalaryMultiplier, companyContribution,
                 contributeAsPercentage, effectiveDate, expirationDate,
-                employeeUuid);
+                employeeUuid, uuid, action)
+                .withAdditionalProperties(additionalProperties);
         }
 
 

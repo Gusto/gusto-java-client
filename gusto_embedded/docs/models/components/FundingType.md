@@ -2,6 +2,14 @@
 
 Company's default funding type
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.FundingType;
+
+FundingType value = FundingType.ACH;
+```
+
 
 ## Values
 

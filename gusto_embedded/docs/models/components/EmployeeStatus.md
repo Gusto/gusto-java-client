@@ -2,6 +2,14 @@
 
 The current status of the member portal invitation.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.EmployeeStatus;
+
+EmployeeStatus value = EmployeeStatus.PENDING;
+```
+
 
 ## Values
 

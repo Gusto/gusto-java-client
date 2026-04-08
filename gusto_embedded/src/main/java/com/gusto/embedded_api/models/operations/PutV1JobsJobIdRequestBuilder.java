@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.JobsUpdateRequestBody;
 import com.gusto.embedded_api.operations.PutV1JobsJobId;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -18,11 +18,11 @@ import java.util.Optional;
 public class PutV1JobsJobIdRequestBuilder {
 
     private String jobId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PutV1JobsJobIdRequestBody requestBody;
+                            new TypeReference<Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion>>() {});
+    private JobsUpdateRequestBody jobsUpdateRequestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -36,21 +36,21 @@ public class PutV1JobsJobIdRequestBuilder {
         return this;
     }
                 
-    public PutV1JobsJobIdRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1JobsJobIdRequestBuilder xGustoAPIVersion(PutV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public PutV1JobsJobIdRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1JobsJobIdRequestBuilder xGustoAPIVersion(Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PutV1JobsJobIdRequestBuilder requestBody(PutV1JobsJobIdRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1JobsJobIdRequestBuilder jobsUpdateRequestBody(JobsUpdateRequestBody jobsUpdateRequestBody) {
+        Utils.checkNotNull(jobsUpdateRequestBody, "jobsUpdateRequestBody");
+        this.jobsUpdateRequestBody = jobsUpdateRequestBody;
         return this;
     }
 
@@ -62,7 +62,7 @@ public class PutV1JobsJobIdRequestBuilder {
 
         PutV1JobsJobIdRequest request = new PutV1JobsJobIdRequest(jobId,
             xGustoAPIVersion,
-            requestBody);
+            jobsUpdateRequestBody);
 
         return request;
     }
@@ -76,9 +76,9 @@ public class PutV1JobsJobIdRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion>>() {});
 }

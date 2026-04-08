@@ -2,6 +2,14 @@
 
 Payment method for the contractor
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.PatchV1ContractorPaymentGroupsIdPartnerDisbursementsPaymentMethod;
+
+PatchV1ContractorPaymentGroupsIdPartnerDisbursementsPaymentMethod value = PatchV1ContractorPaymentGroupsIdPartnerDisbursementsPaymentMethod.DIRECT_DEPOSIT;
+```
+
 
 ## Values
 

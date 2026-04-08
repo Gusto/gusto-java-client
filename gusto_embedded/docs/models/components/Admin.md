@@ -11,4 +11,4 @@ The representation of an admin user in Gusto.
 | `email`                                    | *Optional\<String>*                        | :heavy_minus_sign:                         | The email of the admin for Gusto's system. |
 | `firstName`                                | *Optional\<String>*                        | :heavy_minus_sign:                         | The first name of the admin.               |
 | `lastName`                                 | *Optional\<String>*                        | :heavy_minus_sign:                         | The last name of the admin.                |
-| `phone`                                    | *Optional\<String>*                        | :heavy_minus_sign:                         | The phone number of the admin.             |
+| `phone`                                    | *JsonNullable\<String>*                    | :heavy_minus_sign:                         | The phone number of the admin.             |

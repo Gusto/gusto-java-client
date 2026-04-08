@@ -18,7 +18,7 @@ scope: `invoices:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-invoices-invoice-period" method="get" path="/v1/invoices/{invoice_period}" -->
+<!-- UsageSnippet language="java" operationID="get-invoices-invoice-period" method="get" path="/v1/invoices/{invoice_period}" example="example" -->
 ```java
 package hello.world;
 
@@ -46,7 +46,7 @@ public class Application {
                 .call();
 
         if (res.invoiceData().isPresent()) {
-            // handle response
+            System.out.println(res.invoiceData().get());
         }
     }
 }

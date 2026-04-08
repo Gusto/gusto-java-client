@@ -15,7 +15,7 @@ scope: `recovery_cases:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-recovery-cases" method="get" path="/v1/companies/{company_uuid}/recovery_cases" -->
+<!-- UsageSnippet language="java" operationID="get-recovery-cases" method="get" path="/v1/companies/{company_uuid}/recovery_cases" example="Example" -->
 ```java
 package hello.world;
 
@@ -38,7 +38,7 @@ public class Application {
                 .call();
 
         if (res.recoveryCaseList().isPresent()) {
-            // handle response
+            System.out.println(res.recoveryCaseList().get());
         }
     }
 }

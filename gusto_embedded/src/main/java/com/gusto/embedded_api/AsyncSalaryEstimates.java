@@ -76,6 +76,8 @@ public class AsyncSalaryEstimates {
      * 
      * <p>scope: `salary_estimates:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PostV1EmployeesEmployeeIdSalaryEstimatesRequestBuilder postV1EmployeesEmployeeIdSalaryEstimates() {
@@ -97,6 +99,8 @@ public class AsyncSalaryEstimates {
      * already exists, you must either accept it or use the update endpoint.
      * 
      * <p>scope: `salary_estimates:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @param requestBody 
@@ -121,6 +125,8 @@ public class AsyncSalaryEstimates {
      * already exists, you must either accept it or use the update endpoint.
      * 
      * <p>scope: `salary_estimates:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
@@ -152,6 +158,8 @@ public class AsyncSalaryEstimates {
      * 
      * <p>scope: `salary_estimates:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1SalaryEstimatesIdRequestBuilder getV1SalaryEstimatesId() {
@@ -165,6 +173,8 @@ public class AsyncSalaryEstimates {
      * occupation details, revenue, and location information.
      * 
      * <p>scope: `salary_estimates:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param uuid The UUID of the salary estimate
      * @return {@code CompletableFuture<GetV1SalaryEstimatesIdResponse>} - The async response
@@ -180,6 +190,8 @@ public class AsyncSalaryEstimates {
      * occupation details, revenue, and location information.
      * 
      * <p>scope: `salary_estimates:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param uuid The UUID of the salary estimate
@@ -210,6 +222,8 @@ public class AsyncSalaryEstimates {
      * 
      * <p>scope: `salary_estimates:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PutV1SalaryEstimatesIdRequestBuilder putV1SalaryEstimatesId() {
@@ -226,6 +240,8 @@ public class AsyncSalaryEstimates {
      * read-only for record-keeping purposes.
      * 
      * <p>scope: `salary_estimates:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param uuid The UUID of the salary estimate
      * @param requestBody 
@@ -245,6 +261,8 @@ public class AsyncSalaryEstimates {
      * read-only for record-keeping purposes.
      * 
      * <p>scope: `salary_estimates:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param uuid The UUID of the salary estimate
@@ -279,6 +297,8 @@ public class AsyncSalaryEstimates {
      * 
      * <p>scope: `salary_estimates:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PostV1SalaryEstimatesUuidAcceptRequestBuilder postV1SalaryEstimatesUuidAccept() {
@@ -295,6 +315,8 @@ public class AsyncSalaryEstimates {
      * salary can then be used to set up compensation for the employee.
      * 
      * <p>scope: `salary_estimates:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param uuid The UUID of the salary estimate
      * @param requestBody 
@@ -314,6 +336,8 @@ public class AsyncSalaryEstimates {
      * salary can then be used to set up compensation for the employee.
      * 
      * <p>scope: `salary_estimates:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param uuid The UUID of the salary estimate

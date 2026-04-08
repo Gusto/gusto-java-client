@@ -8,11 +8,6 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * OffCycleReasonType
- * 
- * <p>The off-cycle reason. Only included for off-cycle payrolls.
- */
 public enum OffCycleReasonType {
     ADHOC("Adhoc"),
     BENEFIT_REVERSAL("Benefit reversal"),

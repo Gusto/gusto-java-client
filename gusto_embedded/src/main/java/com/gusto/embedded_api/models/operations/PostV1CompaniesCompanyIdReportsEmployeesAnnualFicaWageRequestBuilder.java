@@ -18,7 +18,7 @@ public class PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBuilde
 
     private Optional<? extends PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
-                            "\"2024-04-01\"",
+                            "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody requestBody;
@@ -78,6 +78,6 @@ public class PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBuilde
     private static final LazySingletonValue<Optional<? extends PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
-                    "\"2024-04-01\"",
+                    "\"2025-06-15\"",
                     new TypeReference<Optional<? extends PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion>>() {});
 }

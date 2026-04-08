@@ -23,7 +23,7 @@ public class RequiredAttributes {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
-    private Optional<? extends Key> key;
+    private Optional<? extends ChildSupportDataKey> key;
 
     /**
      * A human readable name of the attribute, e.g. CSE Case Number
@@ -34,7 +34,7 @@ public class RequiredAttributes {
 
     @JsonCreator
     public RequiredAttributes(
-            @JsonProperty("key") Optional<? extends Key> key,
+            @JsonProperty("key") Optional<? extends ChildSupportDataKey> key,
             @JsonProperty("label") Optional<String> label) {
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(label, "label");
@@ -53,8 +53,8 @@ public class RequiredAttributes {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Key> key() {
-        return (Optional<Key>) key;
+    public Optional<ChildSupportDataKey> key() {
+        return (Optional<ChildSupportDataKey>) key;
     }
 
     /**
@@ -75,7 +75,7 @@ public class RequiredAttributes {
      * listed as an enum; though unlikely, values could be added if state agency requirements change in the
      * future.
      */
-    public RequiredAttributes withKey(Key key) {
+    public RequiredAttributes withKey(ChildSupportDataKey key) {
         Utils.checkNotNull(key, "key");
         this.key = Optional.ofNullable(key);
         return this;
@@ -87,7 +87,7 @@ public class RequiredAttributes {
      * listed as an enum; though unlikely, values could be added if state agency requirements change in the
      * future.
      */
-    public RequiredAttributes withKey(Optional<? extends Key> key) {
+    public RequiredAttributes withKey(Optional<? extends ChildSupportDataKey> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
@@ -142,7 +142,7 @@ public class RequiredAttributes {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends Key> key = Optional.empty();
+        private Optional<? extends ChildSupportDataKey> key = Optional.empty();
 
         private Optional<String> label = Optional.empty();
 
@@ -156,7 +156,7 @@ public class RequiredAttributes {
          * listed as an enum; though unlikely, values could be added if state agency requirements change in the
          * future.
          */
-        public Builder key(Key key) {
+        public Builder key(ChildSupportDataKey key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
             return this;
@@ -167,7 +167,7 @@ public class RequiredAttributes {
          * listed as an enum; though unlikely, values could be added if state agency requirements change in the
          * future.
          */
-        public Builder key(Optional<? extends Key> key) {
+        public Builder key(Optional<? extends ChildSupportDataKey> key) {
             Utils.checkNotNull(key, "key");
             this.key = key;
             return this;

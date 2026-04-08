@@ -2,6 +2,14 @@
 
 Status of the payment disbursement
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus;
+
+PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus value = PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus.PENDING;
+```
+
 
 ## Values
 

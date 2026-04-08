@@ -7,9 +7,9 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.RehireUpdateRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdRehireRequest;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdRehireRequestBody;
 import com.gusto.embedded_api.operations.PutV1EmployeesEmployeeIdRehire;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -20,17 +20,29 @@ import java.util.concurrent.CompletableFuture;
 
 public class PutV1EmployeesEmployeeIdRehireRequestBuilder {
 
-    private String employeeId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PutV1EmployeesEmployeeIdRehireRequestBody requestBody;
+                            new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
+    private RehireUpdateRequestBody rehireUpdateRequestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1EmployeesEmployeeIdRehireRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PutV1EmployeesEmployeeIdRehireRequestBuilder xGustoAPIVersion(PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PutV1EmployeesEmployeeIdRehireRequestBuilder xGustoAPIVersion(Optional<? extends PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PutV1EmployeesEmployeeIdRehireRequestBuilder employeeId(String employeeId) {
@@ -38,22 +50,10 @@ public class PutV1EmployeesEmployeeIdRehireRequestBuilder {
         this.employeeId = employeeId;
         return this;
     }
-                
-    public PutV1EmployeesEmployeeIdRehireRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
 
-    public PutV1EmployeesEmployeeIdRehireRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PutV1EmployeesEmployeeIdRehireRequestBuilder requestBody(PutV1EmployeesEmployeeIdRehireRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1EmployeesEmployeeIdRehireRequestBuilder rehireUpdateRequestBody(RehireUpdateRequestBody rehireUpdateRequestBody) {
+        Utils.checkNotNull(rehireUpdateRequestBody, "rehireUpdateRequestBody");
+        this.rehireUpdateRequestBody = rehireUpdateRequestBody;
         return this;
     }
 
@@ -63,9 +63,9 @@ public class PutV1EmployeesEmployeeIdRehireRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1EmployeesEmployeeIdRehireRequest request = new PutV1EmployeesEmployeeIdRehireRequest(employeeId,
-            xGustoAPIVersion,
-            requestBody);
+        PutV1EmployeesEmployeeIdRehireRequest request = new PutV1EmployeesEmployeeIdRehireRequest(xGustoAPIVersion,
+            employeeId,
+            rehireUpdateRequestBody);
 
         return request;
     }
@@ -80,9 +80,9 @@ public class PutV1EmployeesEmployeeIdRehireRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion>>() {});
 }

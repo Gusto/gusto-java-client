@@ -6,6 +6,14 @@ Explanation for why the company is suspending their account.
 > If a company is switching FEIN or changing their entity type, this change must be performed by Gusto Customer Support and cannot be performed via the API at this time.
 
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.Reason;
+
+Reason value = Reason.SWITCHING_PROVIDER;
+```
+
 
 ## Values
 

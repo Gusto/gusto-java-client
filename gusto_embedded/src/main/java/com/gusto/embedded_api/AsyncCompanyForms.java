@@ -5,7 +5,6 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation;
 
-import com.gusto.embedded_api.models.components.CompanyFormsSortBy;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.GetV1CompanyFormPdfRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompanyFormRequest;
@@ -85,12 +84,12 @@ public class AsyncCompanyForms {
      * <p>scope: `company_forms:read`
      * 
      * @param companyId The UUID of the company
-     * @param sortBy 
+     * @param sortBy Sort company forms. Options: name, year, quarter, draft, document_content_type, created_at (optionally with :asc or :desc suffix)
      * @param xGustoAPIVersion 
      * @return {@code CompletableFuture<GetV1CompanyFormsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompanyFormsResponse> getAll(
-            String companyId, Optional<? extends CompanyFormsSortBy> sortBy,
+            String companyId, Optional<String> sortBy,
             Optional<? extends VersionHeader> xGustoAPIVersion) {
         GetV1CompanyFormsRequest request =
             GetV1CompanyFormsRequest

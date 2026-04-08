@@ -35,24 +35,24 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements AsyncRespon
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
-    private Optional<? extends List<Contractor>> contractorList;
+    private Optional<? extends List<Contractor>> contractors;
 
     @JsonCreator
     public GetV1CompaniesCompanyUuidContractorsResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends List<Contractor>> contractorList) {
+            Optional<? extends List<Contractor>> contractors) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(contractorList, "contractorList");
+        Utils.checkNotNull(contractors, "contractors");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.contractorList = contractorList;
+        this.contractors = contractors;
     }
     
     public GetV1CompaniesCompanyUuidContractorsResponse(
@@ -88,12 +88,12 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements AsyncRespon
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Contractor>> contractorList() {
-        return (Optional<List<Contractor>>) contractorList;
+    public Optional<List<Contractor>> contractors() {
+        return (Optional<List<Contractor>>) contractors;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements AsyncRespon
     }
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesCompanyUuidContractorsResponse withContractorList(List<Contractor> contractorList) {
-        Utils.checkNotNull(contractorList, "contractorList");
-        this.contractorList = Optional.ofNullable(contractorList);
+    public GetV1CompaniesCompanyUuidContractorsResponse withContractors(List<Contractor> contractors) {
+        Utils.checkNotNull(contractors, "contractors");
+        this.contractors = Optional.ofNullable(contractors);
         return this;
     }
 
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesCompanyUuidContractorsResponse withContractorList(Optional<? extends List<Contractor>> contractorList) {
-        Utils.checkNotNull(contractorList, "contractorList");
-        this.contractorList = contractorList;
+    public GetV1CompaniesCompanyUuidContractorsResponse withContractors(Optional<? extends List<Contractor>> contractors) {
+        Utils.checkNotNull(contractors, "contractors");
+        this.contractors = contractors;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements AsyncRespon
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.contractorList, other.contractorList);
+            Utils.enhancedDeepEquals(this.contractors, other.contractors);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            contractorList);
+            contractors);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements AsyncRespon
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "contractorList", contractorList);
+                "contractors", contractors);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements AsyncRespon
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends List<Contractor>> contractorList = Optional.empty();
+        private Optional<? extends List<Contractor>> contractors = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements AsyncRespon
 
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder contractorList(List<Contractor> contractorList) {
-            Utils.checkNotNull(contractorList, "contractorList");
-            this.contractorList = Optional.ofNullable(contractorList);
+        public Builder contractors(List<Contractor> contractors) {
+            Utils.checkNotNull(contractors, "contractors");
+            this.contractors = Optional.ofNullable(contractors);
             return this;
         }
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder contractorList(Optional<? extends List<Contractor>> contractorList) {
-            Utils.checkNotNull(contractorList, "contractorList");
-            this.contractorList = contractorList;
+        public Builder contractors(Optional<? extends List<Contractor>> contractors) {
+            Utils.checkNotNull(contractors, "contractors");
+            this.contractors = contractors;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements AsyncRespon
 
             return new GetV1CompaniesCompanyUuidContractorsResponse(
                 contentType, statusCode, rawResponse,
-                contractorList);
+                contractors);
         }
 
     }

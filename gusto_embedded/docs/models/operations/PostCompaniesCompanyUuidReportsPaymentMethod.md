@@ -2,6 +2,14 @@
 
 Payment method to filter by
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidReportsPaymentMethod;
+
+PostCompaniesCompanyUuidReportsPaymentMethod value = PostCompaniesCompanyUuidReportsPaymentMethod.CHECK;
+```
+
 
 ## Values
 

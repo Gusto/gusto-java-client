@@ -16,7 +16,7 @@ scope: `contractor_payment_methods:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-contractors-contractor_uuid-bank_accounts" method="get" path="/v1/contractors/{contractor_uuid}/bank_accounts" -->
+<!-- UsageSnippet language="java" operationID="get-v1-contractors-contractor_uuid-bank_accounts" method="get" path="/v1/contractors/{contractor_uuid}/bank_accounts" example="Example" -->
 ```java
 package hello.world;
 
@@ -39,7 +39,7 @@ public class Application {
                 .call();
 
         if (res.contractorBankAccountList().isPresent()) {
-            // handle response
+            System.out.println(res.contractorBankAccountList().get());
         }
     }
 }
@@ -72,7 +72,7 @@ scope: `contractor_payment_methods:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-contractors-contractor_uuid-payment_method" method="get" path="/v1/contractors/{contractor_uuid}/payment_method" -->
+<!-- UsageSnippet language="java" operationID="get-v1-contractors-contractor_uuid-payment_method" method="get" path="/v1/contractors/{contractor_uuid}/payment_method" example="Example" -->
 ```java
 package hello.world;
 
@@ -95,7 +95,7 @@ public class Application {
                 .call();
 
         if (res.contractorPaymentMethod().isPresent()) {
-            // handle response
+            System.out.println(res.contractorPaymentMethod().get());
         }
     }
 }
@@ -125,9 +125,149 @@ bank account will also update the contractor's payment method.
 
 scope: `contractor_payment_methods:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="put-v1-contractors-contractor_id-payment_method" method="put" path="/v1/contractors/{contractor_uuid}/payment_method" -->
+<!-- UsageSnippet language="java" operationID="put-v1-contractors-contractor_id-payment_method" method="put" path="/v1/contractors/{contractor_uuid}/payment_method" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1ContractorsContractorIdPaymentMethodResponse res = sdk.contractorPaymentMethod().update()
+                .contractorUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
+                    .version("56d00c178bc7393b2a206ed6a86afcb4")
+                    .type(PutV1ContractorsContractorIdPaymentMethodType.DIRECT_DEPOSIT)
+                    .build())
+                .call();
+
+        if (res.contractorPaymentMethod().isPresent()) {
+            System.out.println(res.contractorPaymentMethod().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-contractors-contractor_id-payment_method" method="put" path="/v1/contractors/{contractor_uuid}/payment_method" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1ContractorsContractorIdPaymentMethodResponse res = sdk.contractorPaymentMethod().update()
+                .contractorUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
+                    .version("56d00c178bc7393b2a206ed6a86afcb4")
+                    .type(PutV1ContractorsContractorIdPaymentMethodType.DIRECT_DEPOSIT)
+                    .build())
+                .call();
+
+        if (res.contractorPaymentMethod().isPresent()) {
+            System.out.println(res.contractorPaymentMethod().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-v1-contractors-contractor_id-payment_method" method="put" path="/v1/contractors/{contractor_uuid}/payment_method" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1ContractorsContractorIdPaymentMethodResponse res = sdk.contractorPaymentMethod().update()
+                .contractorUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
+                    .version("56d00c178bc7393b2a206ed6a86afcb4")
+                    .type(PutV1ContractorsContractorIdPaymentMethodType.DIRECT_DEPOSIT)
+                    .build())
+                .call();
+
+        if (res.contractorPaymentMethod().isPresent()) {
+            System.out.println(res.contractorPaymentMethod().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-v1-contractors-contractor_id-payment_method" method="put" path="/v1/contractors/{contractor_uuid}/payment_method" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1ContractorsContractorIdPaymentMethodResponse res = sdk.contractorPaymentMethod().update()
+                .contractorUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
+                    .version("56d00c178bc7393b2a206ed6a86afcb4")
+                    .type(PutV1ContractorsContractorIdPaymentMethodType.DIRECT_DEPOSIT)
+                    .build())
+                .call();
+
+        if (res.contractorPaymentMethod().isPresent()) {
+            System.out.println(res.contractorPaymentMethod().get());
+        }
+    }
+}
+```
+### Example Usage: example-1
+
+<!-- UsageSnippet language="java" operationID="put-v1-contractors-contractor_id-payment_method" method="put" path="/v1/contractors/{contractor_uuid}/payment_method" example="example-1" -->
 ```java
 package hello.world;
 
@@ -155,7 +295,42 @@ public class Application {
                 .call();
 
         if (res.contractorPaymentMethod().isPresent()) {
-            // handle response
+            System.out.println(res.contractorPaymentMethod().get());
+        }
+    }
+}
+```
+### Example Usage: example-3
+
+<!-- UsageSnippet language="java" operationID="put-v1-contractors-contractor_id-payment_method" method="put" path="/v1/contractors/{contractor_uuid}/payment_method" example="example-3" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1ContractorsContractorIdPaymentMethodResponse res = sdk.contractorPaymentMethod().update()
+                .contractorUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
+                    .version("63859768485e218ccf8a449bb60f14ed")
+                    .type(PutV1ContractorsContractorIdPaymentMethodType.CHECK)
+                    .build())
+                .call();
+
+        if (res.contractorPaymentMethod().isPresent()) {
+            System.out.println(res.contractorPaymentMethod().get());
         }
     }
 }

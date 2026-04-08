@@ -2,6 +2,14 @@
 
 How often the agency collects the withholding amount. e.g. $500 monthly -> `Monthly`.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.PaymentPeriod;
+
+PaymentPeriod value = PaymentPeriod.EVERY_WEEK;
+```
+
 
 ## Values
 

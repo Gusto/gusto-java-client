@@ -37,22 +37,22 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsResponse implements Response 
     /**
      * Example response
      */
-    private Optional<? extends List<CompanyBenefit>> companyBenefitList;
+    private Optional<? extends List<CompanyBenefit>> companyBenefits;
 
     @JsonCreator
     public GetV1CompaniesCompanyIdCompanyBenefitsResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<CompanyBenefit>> companyBenefitList) {
+            Optional<? extends List<CompanyBenefit>> companyBenefits) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(companyBenefitList, "companyBenefitList");
+        Utils.checkNotNull(companyBenefits, "companyBenefits");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.companyBenefitList = companyBenefitList;
+        this.companyBenefits = companyBenefits;
     }
     
     public GetV1CompaniesCompanyIdCompanyBenefitsResponse(
@@ -92,8 +92,8 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsResponse implements Response 
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<CompanyBenefit>> companyBenefitList() {
-        return (Optional<List<CompanyBenefit>>) companyBenefitList;
+    public Optional<List<CompanyBenefit>> companyBenefits() {
+        return (Optional<List<CompanyBenefit>>) companyBenefits;
     }
 
     public static Builder builder() {
@@ -131,9 +131,9 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsResponse implements Response 
     /**
      * Example response
      */
-    public GetV1CompaniesCompanyIdCompanyBenefitsResponse withCompanyBenefitList(List<CompanyBenefit> companyBenefitList) {
-        Utils.checkNotNull(companyBenefitList, "companyBenefitList");
-        this.companyBenefitList = Optional.ofNullable(companyBenefitList);
+    public GetV1CompaniesCompanyIdCompanyBenefitsResponse withCompanyBenefits(List<CompanyBenefit> companyBenefits) {
+        Utils.checkNotNull(companyBenefits, "companyBenefits");
+        this.companyBenefits = Optional.ofNullable(companyBenefits);
         return this;
     }
 
@@ -141,9 +141,9 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsResponse implements Response 
     /**
      * Example response
      */
-    public GetV1CompaniesCompanyIdCompanyBenefitsResponse withCompanyBenefitList(Optional<? extends List<CompanyBenefit>> companyBenefitList) {
-        Utils.checkNotNull(companyBenefitList, "companyBenefitList");
-        this.companyBenefitList = companyBenefitList;
+    public GetV1CompaniesCompanyIdCompanyBenefitsResponse withCompanyBenefits(Optional<? extends List<CompanyBenefit>> companyBenefits) {
+        Utils.checkNotNull(companyBenefits, "companyBenefits");
+        this.companyBenefits = companyBenefits;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsResponse implements Response 
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.companyBenefitList, other.companyBenefitList);
+            Utils.enhancedDeepEquals(this.companyBenefits, other.companyBenefits);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            companyBenefitList);
+            companyBenefits);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsResponse implements Response 
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "companyBenefitList", companyBenefitList);
+                "companyBenefits", companyBenefits);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsResponse implements Response 
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends List<CompanyBenefit>> companyBenefitList = Optional.empty();
+        private Optional<? extends List<CompanyBenefit>> companyBenefits = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -228,18 +228,18 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsResponse implements Response 
         /**
          * Example response
          */
-        public Builder companyBenefitList(List<CompanyBenefit> companyBenefitList) {
-            Utils.checkNotNull(companyBenefitList, "companyBenefitList");
-            this.companyBenefitList = Optional.ofNullable(companyBenefitList);
+        public Builder companyBenefits(List<CompanyBenefit> companyBenefits) {
+            Utils.checkNotNull(companyBenefits, "companyBenefits");
+            this.companyBenefits = Optional.ofNullable(companyBenefits);
             return this;
         }
 
         /**
          * Example response
          */
-        public Builder companyBenefitList(Optional<? extends List<CompanyBenefit>> companyBenefitList) {
-            Utils.checkNotNull(companyBenefitList, "companyBenefitList");
-            this.companyBenefitList = companyBenefitList;
+        public Builder companyBenefits(Optional<? extends List<CompanyBenefit>> companyBenefits) {
+            Utils.checkNotNull(companyBenefits, "companyBenefits");
+            this.companyBenefits = companyBenefits;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1CompaniesCompanyIdCompanyBenefitsResponse implements Response 
 
             return new GetV1CompaniesCompanyIdCompanyBenefitsResponse(
                 contentType, statusCode, rawResponse,
-                companyBenefitList);
+                companyBenefits);
         }
 
     }

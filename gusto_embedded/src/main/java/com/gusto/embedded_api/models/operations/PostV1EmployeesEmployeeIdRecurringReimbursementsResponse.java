@@ -5,6 +5,7 @@ package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gusto.embedded_api.models.components.RecurringReimbursement;
 import com.gusto.embedded_api.utils.Response;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
@@ -35,22 +36,22 @@ public class PostV1EmployeesEmployeeIdRecurringReimbursementsResponse implements
     /**
      * successful
      */
-    private Optional<? extends PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody> object;
+    private Optional<? extends RecurringReimbursement> recurringReimbursement;
 
     @JsonCreator
     public PostV1EmployeesEmployeeIdRecurringReimbursementsResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody> object) {
+            Optional<? extends RecurringReimbursement> recurringReimbursement) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(object, "object");
+        Utils.checkNotNull(recurringReimbursement, "recurringReimbursement");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.object = object;
+        this.recurringReimbursement = recurringReimbursement;
     }
     
     public PostV1EmployeesEmployeeIdRecurringReimbursementsResponse(
@@ -90,8 +91,8 @@ public class PostV1EmployeesEmployeeIdRecurringReimbursementsResponse implements
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody> object() {
-        return (Optional<PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody>) object;
+    public Optional<RecurringReimbursement> recurringReimbursement() {
+        return (Optional<RecurringReimbursement>) recurringReimbursement;
     }
 
     public static Builder builder() {
@@ -129,9 +130,9 @@ public class PostV1EmployeesEmployeeIdRecurringReimbursementsResponse implements
     /**
      * successful
      */
-    public PostV1EmployeesEmployeeIdRecurringReimbursementsResponse withObject(PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody object) {
-        Utils.checkNotNull(object, "object");
-        this.object = Optional.ofNullable(object);
+    public PostV1EmployeesEmployeeIdRecurringReimbursementsResponse withRecurringReimbursement(RecurringReimbursement recurringReimbursement) {
+        Utils.checkNotNull(recurringReimbursement, "recurringReimbursement");
+        this.recurringReimbursement = Optional.ofNullable(recurringReimbursement);
         return this;
     }
 
@@ -139,9 +140,9 @@ public class PostV1EmployeesEmployeeIdRecurringReimbursementsResponse implements
     /**
      * successful
      */
-    public PostV1EmployeesEmployeeIdRecurringReimbursementsResponse withObject(Optional<? extends PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody> object) {
-        Utils.checkNotNull(object, "object");
-        this.object = object;
+    public PostV1EmployeesEmployeeIdRecurringReimbursementsResponse withRecurringReimbursement(Optional<? extends RecurringReimbursement> recurringReimbursement) {
+        Utils.checkNotNull(recurringReimbursement, "recurringReimbursement");
+        this.recurringReimbursement = recurringReimbursement;
         return this;
     }
 
@@ -158,14 +159,14 @@ public class PostV1EmployeesEmployeeIdRecurringReimbursementsResponse implements
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.object, other.object);
+            Utils.enhancedDeepEquals(this.recurringReimbursement, other.recurringReimbursement);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            object);
+            recurringReimbursement);
     }
     
     @Override
@@ -174,7 +175,7 @@ public class PostV1EmployeesEmployeeIdRecurringReimbursementsResponse implements
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "object", object);
+                "recurringReimbursement", recurringReimbursement);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -186,7 +187,7 @@ public class PostV1EmployeesEmployeeIdRecurringReimbursementsResponse implements
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody> object = Optional.empty();
+        private Optional<? extends RecurringReimbursement> recurringReimbursement = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,18 +227,18 @@ public class PostV1EmployeesEmployeeIdRecurringReimbursementsResponse implements
         /**
          * successful
          */
-        public Builder object(PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody object) {
-            Utils.checkNotNull(object, "object");
-            this.object = Optional.ofNullable(object);
+        public Builder recurringReimbursement(RecurringReimbursement recurringReimbursement) {
+            Utils.checkNotNull(recurringReimbursement, "recurringReimbursement");
+            this.recurringReimbursement = Optional.ofNullable(recurringReimbursement);
             return this;
         }
 
         /**
          * successful
          */
-        public Builder object(Optional<? extends PostV1EmployeesEmployeeIdRecurringReimbursementsResponseBody> object) {
-            Utils.checkNotNull(object, "object");
-            this.object = object;
+        public Builder recurringReimbursement(Optional<? extends RecurringReimbursement> recurringReimbursement) {
+            Utils.checkNotNull(recurringReimbursement, "recurringReimbursement");
+            this.recurringReimbursement = recurringReimbursement;
             return this;
         }
 
@@ -245,7 +246,7 @@ public class PostV1EmployeesEmployeeIdRecurringReimbursementsResponse implements
 
             return new PostV1EmployeesEmployeeIdRecurringReimbursementsResponse(
                 contentType, statusCode, rawResponse,
-                object);
+                recurringReimbursement);
         }
 
     }

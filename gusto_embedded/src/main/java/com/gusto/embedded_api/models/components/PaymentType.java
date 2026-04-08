@@ -14,7 +14,8 @@ import java.util.Optional;
  * <p>Type of payment for the wire in
  */
 public enum PaymentType {
-    PAYROLL("Payroll");
+    PAYROLL("Payroll"),
+    CONTRACTOR_PAYMENT_GROUP("ContractorPaymentGroup");
 
     @JsonValue
     private final String value;

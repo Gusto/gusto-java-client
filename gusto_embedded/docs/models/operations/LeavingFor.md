@@ -6,6 +6,14 @@ The competitor the company is switching to. Required if `reason` is `'switching_
 > If `'gusto_com'` is selected, this change must be completed by Gusto Customer Support and cannot be performed via the API. This endpoint will return a 422 error in that case.
 
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.LeavingFor;
+
+LeavingFor value = LeavingFor.ACCOUNTANT;
+```
+
 
 ## Values
 

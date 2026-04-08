@@ -5,10 +5,11 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation;
 
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.CompanyIndustrySelectionRequiredBody;
+import com.gusto.embedded_api.models.operations.GetV1CompanyIndustryHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompanyIndustryRequest;
+import com.gusto.embedded_api.models.operations.PutV1CompanyIndustryHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompanyIndustryRequest;
-import com.gusto.embedded_api.models.operations.PutV1CompanyIndustryRequestBody;
 import com.gusto.embedded_api.models.operations.async.GetV1CompanyIndustryRequestBuilder;
 import com.gusto.embedded_api.models.operations.async.GetV1CompanyIndustryResponse;
 import com.gusto.embedded_api.models.operations.async.PutV1CompanyIndustryRequestBuilder;
@@ -44,9 +45,12 @@ public class AsyncIndustrySelection {
     /**
      * Get a company industry selection
      * 
-     * <p>Get industry selection for the company.
+     * <p>Returns the industry classification for a company, including NAICS code, SIC codes, and industry
+     * title.
      * 
      * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -57,9 +61,12 @@ public class AsyncIndustrySelection {
     /**
      * Get a company industry selection
      * 
-     * <p>Get industry selection for the company.
+     * <p>Returns the industry classification for a company, including NAICS code, SIC codes, and industry
+     * title.
      * 
      * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @return {@code CompletableFuture<GetV1CompanyIndustryResponse>} - The async response
@@ -71,15 +78,18 @@ public class AsyncIndustrySelection {
     /**
      * Get a company industry selection
      * 
-     * <p>Get industry selection for the company.
+     * <p>Returns the industry classification for a company, including NAICS code, SIC codes, and industry
+     * title.
      * 
      * <p>scope: `companies:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return {@code CompletableFuture<GetV1CompanyIndustryResponse>} - The async response
      */
-    public CompletableFuture<GetV1CompanyIndustryResponse> get(String companyId, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public CompletableFuture<GetV1CompanyIndustryResponse> get(String companyId, Optional<? extends GetV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion) {
         GetV1CompanyIndustryRequest request =
             GetV1CompanyIndustryRequest
                 .builder()
@@ -96,12 +106,20 @@ public class AsyncIndustrySelection {
     /**
      * Update a company industry selection
      * 
-     * <p>Update the company industry selection by passing in industry classification codes: [NAICS
-     * code](https://www.naics.com), [SICS code](https://siccode.com/) and industry title. Our UI is
-     * leveraging [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry
+     * <p>Update the industry classification for a company by passing in a [NAICS
+     * code](https://www.naics.com).
+     * 
+     * <p>Optionally provide an industry title and [SIC codes](https://siccode.com/). If you do not provide
+     * SIC codes,
+     * we will use the NAICS code to perform an internal lookup.
+     * 
+     * <p>Our UI leverages [Middesk API](https://docs.middesk.com/reference/introduction) to determine
+     * industry
      * classification codes.
      * 
      * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -112,45 +130,61 @@ public class AsyncIndustrySelection {
     /**
      * Update a company industry selection
      * 
-     * <p>Update the company industry selection by passing in industry classification codes: [NAICS
-     * code](https://www.naics.com), [SICS code](https://siccode.com/) and industry title. Our UI is
-     * leveraging [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry
+     * <p>Update the industry classification for a company by passing in a [NAICS
+     * code](https://www.naics.com).
+     * 
+     * <p>Optionally provide an industry title and [SIC codes](https://siccode.com/). If you do not provide
+     * SIC codes,
+     * we will use the NAICS code to perform an internal lookup.
+     * 
+     * <p>Our UI leverages [Middesk API](https://docs.middesk.com/reference/introduction) to determine
+     * industry
      * classification codes.
      * 
      * <p>scope: `companies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody 
+     * @param companyIndustrySelectionRequiredBody 
      * @return {@code CompletableFuture<PutV1CompanyIndustryResponse>} - The async response
      */
-    public CompletableFuture<PutV1CompanyIndustryResponse> update(String companyId, PutV1CompanyIndustryRequestBody requestBody) {
-        return update(companyId, Optional.empty(), requestBody);
+    public CompletableFuture<PutV1CompanyIndustryResponse> update(String companyId, CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody) {
+        return update(companyId, Optional.empty(), companyIndustrySelectionRequiredBody);
     }
 
     /**
      * Update a company industry selection
      * 
-     * <p>Update the company industry selection by passing in industry classification codes: [NAICS
-     * code](https://www.naics.com), [SICS code](https://siccode.com/) and industry title. Our UI is
-     * leveraging [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry
+     * <p>Update the industry classification for a company by passing in a [NAICS
+     * code](https://www.naics.com).
+     * 
+     * <p>Optionally provide an industry title and [SIC codes](https://siccode.com/). If you do not provide
+     * SIC codes,
+     * we will use the NAICS code to perform an internal lookup.
+     * 
+     * <p>Our UI leverages [Middesk API](https://docs.middesk.com/reference/introduction) to determine
+     * industry
      * classification codes.
      * 
      * <p>scope: `companies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyIndustrySelectionRequiredBody 
      * @return {@code CompletableFuture<PutV1CompanyIndustryResponse>} - The async response
      */
     public CompletableFuture<PutV1CompanyIndustryResponse> update(
-            String companyId, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1CompanyIndustryRequestBody requestBody) {
+            String companyId, Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion,
+            CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody) {
         PutV1CompanyIndustryRequest request =
             PutV1CompanyIndustryRequest
                 .builder()
                 .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .companyIndustrySelectionRequiredBody(companyIndustrySelectionRequiredBody)
                 .build();
         AsyncRequestOperation<PutV1CompanyIndustryRequest, PutV1CompanyIndustryResponse> operation
               = new PutV1CompanyIndustry.Async(sdkConfiguration, _headers);

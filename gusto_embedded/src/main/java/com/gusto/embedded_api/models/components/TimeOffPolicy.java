@@ -42,7 +42,8 @@ public class TimeOffPolicy {
     private String name;
 
     /**
-     * Type of the time off policy
+     * Type of the time off policy. Only "vacation" and "sick" can be created through the API, but other
+     * types may be present if the company was previously a Gusto.com customer.
      */
     @JsonProperty("policy_type")
     private PolicyType policyType;
@@ -238,7 +239,8 @@ public class TimeOffPolicy {
     }
 
     /**
-     * Type of the time off policy
+     * Type of the time off policy. Only "vacation" and "sick" can be created through the API, but other
+     * types may be present if the company was previously a Gusto.com customer.
      */
     @JsonIgnore
     public PolicyType policyType() {
@@ -389,7 +391,8 @@ public class TimeOffPolicy {
     }
 
     /**
-     * Type of the time off policy
+     * Type of the time off policy. Only "vacation" and "sick" can be created through the API, but other
+     * types may be present if the company was previously a Gusto.com customer.
      */
     public TimeOffPolicy withPolicyType(PolicyType policyType) {
         Utils.checkNotNull(policyType, "policyType");
@@ -755,7 +758,8 @@ public class TimeOffPolicy {
 
 
         /**
-         * Type of the time off policy
+         * Type of the time off policy. Only "vacation" and "sick" can be created through the API, but other
+         * types may be present if the company was previously a Gusto.com customer.
          */
         public Builder policyType(PolicyType policyType) {
             Utils.checkNotNull(policyType, "policyType");

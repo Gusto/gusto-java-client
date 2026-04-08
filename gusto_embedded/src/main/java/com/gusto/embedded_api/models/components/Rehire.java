@@ -15,11 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-/**
- * Rehire
- * 
- * <p>Example response
- */
+
 public class Rehire {
     /**
      * The current version of the object. See the [versioning

@@ -5,6 +5,14 @@
   - `currency_per_hour`: A dollar amount per hour, e.g. `3.24` for $3.24/hr
 
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.RateType;
+
+RateType value = RateType.PERCENT;
+```
+
 
 ## Values
 

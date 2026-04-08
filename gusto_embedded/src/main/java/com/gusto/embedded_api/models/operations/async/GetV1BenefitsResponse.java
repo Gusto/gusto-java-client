@@ -35,24 +35,24 @@ public class GetV1BenefitsResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
-    private Optional<? extends List<SupportedBenefit>> supportedBenefitList;
+    private Optional<? extends List<SupportedBenefit>> supportedBenefits;
 
     @JsonCreator
     public GetV1BenefitsResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends List<SupportedBenefit>> supportedBenefitList) {
+            Optional<? extends List<SupportedBenefit>> supportedBenefits) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(supportedBenefitList, "supportedBenefitList");
+        Utils.checkNotNull(supportedBenefits, "supportedBenefits");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.supportedBenefitList = supportedBenefitList;
+        this.supportedBenefits = supportedBenefits;
     }
     
     public GetV1BenefitsResponse(
@@ -88,12 +88,12 @@ public class GetV1BenefitsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<SupportedBenefit>> supportedBenefitList() {
-        return (Optional<List<SupportedBenefit>>) supportedBenefitList;
+    public Optional<List<SupportedBenefit>> supportedBenefits() {
+        return (Optional<List<SupportedBenefit>>) supportedBenefits;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1BenefitsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1BenefitsResponse withSupportedBenefitList(List<SupportedBenefit> supportedBenefitList) {
-        Utils.checkNotNull(supportedBenefitList, "supportedBenefitList");
-        this.supportedBenefitList = Optional.ofNullable(supportedBenefitList);
+    public GetV1BenefitsResponse withSupportedBenefits(List<SupportedBenefit> supportedBenefits) {
+        Utils.checkNotNull(supportedBenefits, "supportedBenefits");
+        this.supportedBenefits = Optional.ofNullable(supportedBenefits);
         return this;
     }
 
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1BenefitsResponse withSupportedBenefitList(Optional<? extends List<SupportedBenefit>> supportedBenefitList) {
-        Utils.checkNotNull(supportedBenefitList, "supportedBenefitList");
-        this.supportedBenefitList = supportedBenefitList;
+    public GetV1BenefitsResponse withSupportedBenefits(Optional<? extends List<SupportedBenefit>> supportedBenefits) {
+        Utils.checkNotNull(supportedBenefits, "supportedBenefits");
+        this.supportedBenefits = supportedBenefits;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1BenefitsResponse implements AsyncResponse {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.supportedBenefitList, other.supportedBenefitList);
+            Utils.enhancedDeepEquals(this.supportedBenefits, other.supportedBenefits);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            supportedBenefitList);
+            supportedBenefits);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1BenefitsResponse implements AsyncResponse {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "supportedBenefitList", supportedBenefitList);
+                "supportedBenefits", supportedBenefits);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1BenefitsResponse implements AsyncResponse {
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends List<SupportedBenefit>> supportedBenefitList = Optional.empty();
+        private Optional<? extends List<SupportedBenefit>> supportedBenefits = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1BenefitsResponse implements AsyncResponse {
 
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder supportedBenefitList(List<SupportedBenefit> supportedBenefitList) {
-            Utils.checkNotNull(supportedBenefitList, "supportedBenefitList");
-            this.supportedBenefitList = Optional.ofNullable(supportedBenefitList);
+        public Builder supportedBenefits(List<SupportedBenefit> supportedBenefits) {
+            Utils.checkNotNull(supportedBenefits, "supportedBenefits");
+            this.supportedBenefits = Optional.ofNullable(supportedBenefits);
             return this;
         }
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder supportedBenefitList(Optional<? extends List<SupportedBenefit>> supportedBenefitList) {
-            Utils.checkNotNull(supportedBenefitList, "supportedBenefitList");
-            this.supportedBenefitList = supportedBenefitList;
+        public Builder supportedBenefits(Optional<? extends List<SupportedBenefit>> supportedBenefits) {
+            Utils.checkNotNull(supportedBenefits, "supportedBenefits");
+            this.supportedBenefits = supportedBenefits;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1BenefitsResponse implements AsyncResponse {
 
             return new GetV1BenefitsResponse(
                 contentType, statusCode, rawResponse,
-                supportedBenefitList);
+                supportedBenefits);
         }
 
     }

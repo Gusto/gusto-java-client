@@ -78,6 +78,8 @@ public class AsyncHolidayPayPolicies {
      * 
      * <p>scope: `holiday_pay_policies:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1CompaniesCompanyUuidHolidayPayPolicyRequestBuilder get() {
@@ -90,6 +92,8 @@ public class AsyncHolidayPayPolicies {
      * <p>Get a company's holiday pay policy
      * 
      * <p>scope: `holiday_pay_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @return {@code CompletableFuture<GetV1CompaniesCompanyUuidHolidayPayPolicyResponse>} - The async response
@@ -104,6 +108,8 @@ public class AsyncHolidayPayPolicies {
      * <p>Get a company's holiday pay policy
      * 
      * <p>scope: `holiday_pay_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
@@ -130,6 +136,8 @@ public class AsyncHolidayPayPolicies {
      * 
      * <p>scope: `holiday_pay_policies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PostV1CompaniesCompanyUuidHolidayPayPolicyRequestBuilder create() {
@@ -142,6 +150,8 @@ public class AsyncHolidayPayPolicies {
      * <p>Create a holiday pay policy for a company
      * 
      * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @return {@code CompletableFuture<PostV1CompaniesCompanyUuidHolidayPayPolicyResponse>} - The async response
@@ -156,6 +166,8 @@ public class AsyncHolidayPayPolicies {
      * <p>Create a holiday pay policy for a company
      * 
      * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
@@ -186,6 +198,8 @@ public class AsyncHolidayPayPolicies {
      * 
      * <p>scope: `holiday_pay_policies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PutV1CompaniesCompanyUuidHolidayPayPolicyRequestBuilder update() {
@@ -198,6 +212,8 @@ public class AsyncHolidayPayPolicies {
      * <p>Update a company's holiday pay policy
      * 
      * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @param requestBody Request body for creating or updating a holiday pay policy
@@ -213,6 +229,8 @@ public class AsyncHolidayPayPolicies {
      * <p>Update a company's holiday pay policy
      * 
      * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
@@ -243,6 +261,8 @@ public class AsyncHolidayPayPolicies {
      * 
      * <p>scope: `holiday_pay_policies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequestBuilder delete() {
@@ -255,6 +275,8 @@ public class AsyncHolidayPayPolicies {
      * <p>Delete a company's holiday pay policy
      * 
      * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @return {@code CompletableFuture<DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse>} - The async response
@@ -269,6 +291,8 @@ public class AsyncHolidayPayPolicies {
      * <p>Delete a company's holiday pay policy
      * 
      * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
@@ -295,6 +319,8 @@ public class AsyncHolidayPayPolicies {
      * 
      * <p>scope: `holiday_pay_policies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBuilder addEmployees() {
@@ -307,6 +333,8 @@ public class AsyncHolidayPayPolicies {
      * <p>Add employees to a company's holiday pay policy
      * 
      * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @param requestBody 
@@ -322,6 +350,8 @@ public class AsyncHolidayPayPolicies {
      * <p>Add employees to a company's holiday pay policy
      * 
      * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
@@ -352,6 +382,8 @@ public class AsyncHolidayPayPolicies {
      * 
      * <p>scope: `holiday_pay_policies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBuilder removeEmployees() {
@@ -364,6 +396,8 @@ public class AsyncHolidayPayPolicies {
      * <p>Remove employees from a company's holiday pay policy
      * 
      * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @param requestBody 
@@ -379,6 +413,8 @@ public class AsyncHolidayPayPolicies {
      * <p>Remove employees from a company's holiday pay policy
      * 
      * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company

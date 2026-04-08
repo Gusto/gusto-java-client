@@ -6,7 +6,7 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.EmployeeOnboardingDocumentsConfigRequest;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -18,40 +18,50 @@ import java.util.Optional;
 
 public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the employee
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_id")
     private String employeeId;
+
+
+    @SpeakeasyMetadata("request:mediaType=application/json")
+    private Optional<? extends EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest;
+
+    @JsonCreator
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest(
+            Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeId,
+            Optional<? extends EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(employeeId, "employeeId");
+        Utils.checkNotNull(employeeOnboardingDocumentsConfigRequest, "employeeOnboardingDocumentsConfigRequest");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        this.employeeId = employeeId;
+        this.employeeOnboardingDocumentsConfigRequest = employeeOnboardingDocumentsConfigRequest;
+    }
+    
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest(
+            String employeeId) {
+        this(Optional.empty(), employeeId, Optional.empty());
+    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-
-    @SpeakeasyMetadata("request:mediaType=application/json")
-    private PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody requestBody;
-
-    @JsonCreator
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest(
-            String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody requestBody) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.employeeId = employeeId;
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        this.requestBody = requestBody;
-    }
-    
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest(
-            String employeeId,
-            PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody requestBody) {
-        this(employeeId, Optional.empty(), requestBody);
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -62,20 +72,10 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest {
         return employeeId;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
-    }
-
-    @JsonIgnore
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody requestBody() {
-        return requestBody;
+    public Optional<EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest() {
+        return (Optional<EmployeeOnboardingDocumentsConfigRequest>) employeeOnboardingDocumentsConfigRequest;
     }
 
     public static Builder builder() {
@@ -84,20 +84,11 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest {
 
 
     /**
-     * The UUID of the employee
-     */
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest withEmployeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest withXGustoAPIVersion(PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -109,15 +100,31 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest withXGustoAPIVersion(Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest withRequestBody(PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    /**
+     * The UUID of the employee
+     */
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest withEmployeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
+        return this;
+    }
+
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest withEmployeeOnboardingDocumentsConfigRequest(EmployeeOnboardingDocumentsConfigRequest employeeOnboardingDocumentsConfigRequest) {
+        Utils.checkNotNull(employeeOnboardingDocumentsConfigRequest, "employeeOnboardingDocumentsConfigRequest");
+        this.employeeOnboardingDocumentsConfigRequest = Optional.ofNullable(employeeOnboardingDocumentsConfigRequest);
+        return this;
+    }
+
+
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest withEmployeeOnboardingDocumentsConfigRequest(Optional<? extends EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest) {
+        Utils.checkNotNull(employeeOnboardingDocumentsConfigRequest, "employeeOnboardingDocumentsConfigRequest");
+        this.employeeOnboardingDocumentsConfigRequest = employeeOnboardingDocumentsConfigRequest;
         return this;
     }
 
@@ -131,36 +138,59 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest {
         }
         PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest other = (PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.employeeId, other.employeeId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
-            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.employeeId, other.employeeId) &&
+            Utils.enhancedDeepEquals(this.employeeOnboardingDocumentsConfigRequest, other.employeeOnboardingDocumentsConfigRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            employeeId, xGustoAPIVersion, requestBody);
+            xGustoAPIVersion, employeeId, employeeOnboardingDocumentsConfigRequest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest.class,
-                "employeeId", employeeId,
                 "xGustoAPIVersion", xGustoAPIVersion,
-                "requestBody", requestBody);
+                "employeeId", employeeId,
+                "employeeOnboardingDocumentsConfigRequest", employeeOnboardingDocumentsConfigRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String employeeId;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-        private PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody requestBody;
+        private Optional<? extends EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -174,32 +204,15 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest {
         }
 
 
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        public Builder employeeOnboardingDocumentsConfigRequest(EmployeeOnboardingDocumentsConfigRequest employeeOnboardingDocumentsConfigRequest) {
+            Utils.checkNotNull(employeeOnboardingDocumentsConfigRequest, "employeeOnboardingDocumentsConfigRequest");
+            this.employeeOnboardingDocumentsConfigRequest = Optional.ofNullable(employeeOnboardingDocumentsConfigRequest);
             return this;
         }
 
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
-
-
-        public Builder requestBody(PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody requestBody) {
-            Utils.checkNotNull(requestBody, "requestBody");
-            this.requestBody = requestBody;
+        public Builder employeeOnboardingDocumentsConfigRequest(Optional<? extends EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest) {
+            Utils.checkNotNull(employeeOnboardingDocumentsConfigRequest, "employeeOnboardingDocumentsConfigRequest");
+            this.employeeOnboardingDocumentsConfigRequest = employeeOnboardingDocumentsConfigRequest;
             return this;
         }
 
@@ -209,14 +222,14 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest {
             }
 
             return new PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest(
-                employeeId, xGustoAPIVersion, requestBody);
+                xGustoAPIVersion, employeeId, employeeOnboardingDocumentsConfigRequest);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion>>() {});
     }
 }

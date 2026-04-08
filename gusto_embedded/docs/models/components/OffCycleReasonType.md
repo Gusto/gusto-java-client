@@ -1,6 +1,12 @@
 # OffCycleReasonType
 
-The off-cycle reason. Only included for off-cycle payrolls.
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.OffCycleReasonType;
+
+OffCycleReasonType value = OffCycleReasonType.ADHOC;
+```
 
 
 ## Values

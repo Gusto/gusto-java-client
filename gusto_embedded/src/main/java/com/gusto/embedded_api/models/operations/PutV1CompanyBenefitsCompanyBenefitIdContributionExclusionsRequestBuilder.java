@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.ContributionExclusionUpdateRequest;
 import com.gusto.embedded_api.operations.PutV1CompanyBenefitsCompanyBenefitIdContributionExclusions;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,17 +17,29 @@ import java.util.Optional;
 
 public class PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder {
 
-    private String companyBenefitId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody requestBody;
+                            new TypeReference<Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion>>() {});
+    private String companyBenefitId;
+    private ContributionExclusionUpdateRequest contributionExclusionUpdateRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder xGustoAPIVersion(PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder xGustoAPIVersion(Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder companyBenefitId(String companyBenefitId) {
@@ -35,22 +47,10 @@ public class PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBu
         this.companyBenefitId = companyBenefitId;
         return this;
     }
-                
-    public PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
 
-    public PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder requestBody(PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder contributionExclusionUpdateRequest(ContributionExclusionUpdateRequest contributionExclusionUpdateRequest) {
+        Utils.checkNotNull(contributionExclusionUpdateRequest, "contributionExclusionUpdateRequest");
+        this.contributionExclusionUpdateRequest = contributionExclusionUpdateRequest;
         return this;
     }
 
@@ -60,9 +60,9 @@ public class PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBu
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest request = new PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest(companyBenefitId,
-            xGustoAPIVersion,
-            requestBody);
+        PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest request = new PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest(xGustoAPIVersion,
+            companyBenefitId,
+            contributionExclusionUpdateRequest);
 
         return request;
     }
@@ -76,9 +76,9 @@ public class PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBu
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion>>() {});
 }

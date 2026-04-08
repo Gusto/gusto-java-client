@@ -19,7 +19,7 @@ scope: `notifications:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-notifications-notification_uuid" method="get" path="/v1/notifications/{notification_uuid}" -->
+<!-- UsageSnippet language="java" operationID="get-notifications-notification_uuid" method="get" path="/v1/notifications/{notification_uuid}" example="Example" -->
 ```java
 package hello.world;
 
@@ -43,7 +43,7 @@ public class Application {
                 .call();
 
         if (res.notification().isPresent()) {
-            // handle response
+            System.out.println(res.notification().get());
         }
     }
 }
@@ -101,7 +101,7 @@ public class Application {
                 .call();
 
         if (res.notificationsList().isPresent()) {
-            // handle response
+            System.out.println(res.notificationsList().get());
         }
     }
 }

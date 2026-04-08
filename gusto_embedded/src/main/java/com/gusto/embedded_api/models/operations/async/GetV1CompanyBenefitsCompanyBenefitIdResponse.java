@@ -34,7 +34,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdResponse implements AsyncRespon
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Success
      */
     private Optional<? extends CompanyBenefitWithEmployeeBenefits> companyBenefitWithEmployeeBenefits;
 
@@ -87,7 +87,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdResponse implements AsyncRespon
     }
 
     /**
-     * Example response
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdResponse implements AsyncRespon
     }
 
     /**
-     * Example response
+     * Success
      */
     public GetV1CompanyBenefitsCompanyBenefitIdResponse withCompanyBenefitWithEmployeeBenefits(CompanyBenefitWithEmployeeBenefits companyBenefitWithEmployeeBenefits) {
         Utils.checkNotNull(companyBenefitWithEmployeeBenefits, "companyBenefitWithEmployeeBenefits");
@@ -138,7 +138,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdResponse implements AsyncRespon
 
 
     /**
-     * Example response
+     * Success
      */
     public GetV1CompanyBenefitsCompanyBenefitIdResponse withCompanyBenefitWithEmployeeBenefits(Optional<? extends CompanyBenefitWithEmployeeBenefits> companyBenefitWithEmployeeBenefits) {
         Utils.checkNotNull(companyBenefitWithEmployeeBenefits, "companyBenefitWithEmployeeBenefits");
@@ -225,7 +225,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdResponse implements AsyncRespon
 
 
         /**
-         * Example response
+         * Success
          */
         public Builder companyBenefitWithEmployeeBenefits(CompanyBenefitWithEmployeeBenefits companyBenefitWithEmployeeBenefits) {
             Utils.checkNotNull(companyBenefitWithEmployeeBenefits, "companyBenefitWithEmployeeBenefits");
@@ -234,7 +234,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdResponse implements AsyncRespon
         }
 
         /**
-         * Example response
+         * Success
          */
         public Builder companyBenefitWithEmployeeBenefits(Optional<? extends CompanyBenefitWithEmployeeBenefits> companyBenefitWithEmployeeBenefits) {
             Utils.checkNotNull(companyBenefitWithEmployeeBenefits, "companyBenefitWithEmployeeBenefits");

@@ -7,7 +7,6 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.operations.GetV1CompanyBenefitsCompanyBenefitId;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -18,18 +17,30 @@ import java.util.Optional;
 
 public class GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder {
 
+    private Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+                            "xGustoAPIVersion",
+                            "\"2025-06-15\"",
+                            new TypeReference<Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion>>() {});
     private String companyBenefitId;
     private Optional<Boolean> withEmployeeBenefits = Optional.empty();
     private Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude> include = Optional.empty();
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
-                            "xGustoAPIVersion",
-                            "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder xGustoAPIVersion(GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder companyBenefitId(String companyBenefitId) {
@@ -61,18 +72,6 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder {
         this.include = include;
         return this;
     }
-                
-    public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
-
-    public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
 
 
     private GetV1CompanyBenefitsCompanyBenefitIdRequest buildRequest() {
@@ -80,10 +79,10 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompanyBenefitsCompanyBenefitIdRequest request = new GetV1CompanyBenefitsCompanyBenefitIdRequest(companyBenefitId,
+        GetV1CompanyBenefitsCompanyBenefitIdRequest request = new GetV1CompanyBenefitsCompanyBenefitIdRequest(xGustoAPIVersion,
+            companyBenefitId,
             withEmployeeBenefits,
-            include,
-            xGustoAPIVersion);
+            include);
 
         return request;
     }
@@ -97,9 +96,9 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion>>() {});
 }

@@ -15,11 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-/**
- * Deductions
- * 
- * <p>An array of deductions for the employee.
- */
+
 public class Deductions {
     /**
      * The name of the deduction.
@@ -36,15 +32,14 @@ public class Deductions {
     private Optional<Double> amount;
 
     /**
-     * The amount type of the deduction for the pay period.
+     * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount_type")
     private Optional<? extends AmountType> amountType;
 
     /**
-     * The UUID of the deduction. This parameter is optional and can be provided in order to update an
-     * existing deduction.
+     * The UUID of the deduction. Only present for unprocessed payrolls.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("uuid")
@@ -88,7 +83,7 @@ public class Deductions {
     }
 
     /**
-     * The amount type of the deduction for the pay period.
+     * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -97,8 +92,7 @@ public class Deductions {
     }
 
     /**
-     * The UUID of the deduction. This parameter is optional and can be provided in order to update an
-     * existing deduction.
+     * The UUID of the deduction. Only present for unprocessed payrolls.
      */
     @JsonIgnore
     public Optional<String> uuid() {
@@ -149,7 +143,7 @@ public class Deductions {
     }
 
     /**
-     * The amount type of the deduction for the pay period.
+     * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
      */
     public Deductions withAmountType(AmountType amountType) {
         Utils.checkNotNull(amountType, "amountType");
@@ -159,7 +153,7 @@ public class Deductions {
 
 
     /**
-     * The amount type of the deduction for the pay period.
+     * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
      */
     public Deductions withAmountType(Optional<? extends AmountType> amountType) {
         Utils.checkNotNull(amountType, "amountType");
@@ -168,8 +162,7 @@ public class Deductions {
     }
 
     /**
-     * The UUID of the deduction. This parameter is optional and can be provided in order to update an
-     * existing deduction.
+     * The UUID of the deduction. Only present for unprocessed payrolls.
      */
     public Deductions withUuid(String uuid) {
         Utils.checkNotNull(uuid, "uuid");
@@ -179,8 +172,7 @@ public class Deductions {
 
 
     /**
-     * The UUID of the deduction. This parameter is optional and can be provided in order to update an
-     * existing deduction.
+     * The UUID of the deduction. Only present for unprocessed payrolls.
      */
     public Deductions withUuid(Optional<String> uuid) {
         Utils.checkNotNull(uuid, "uuid");
@@ -275,7 +267,7 @@ public class Deductions {
 
 
         /**
-         * The amount type of the deduction for the pay period.
+         * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
          */
         public Builder amountType(AmountType amountType) {
             Utils.checkNotNull(amountType, "amountType");
@@ -284,7 +276,7 @@ public class Deductions {
         }
 
         /**
-         * The amount type of the deduction for the pay period.
+         * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
          */
         public Builder amountType(Optional<? extends AmountType> amountType) {
             Utils.checkNotNull(amountType, "amountType");
@@ -294,8 +286,7 @@ public class Deductions {
 
 
         /**
-         * The UUID of the deduction. This parameter is optional and can be provided in order to update an
-         * existing deduction.
+         * The UUID of the deduction. Only present for unprocessed payrolls.
          */
         public Builder uuid(String uuid) {
             Utils.checkNotNull(uuid, "uuid");
@@ -304,8 +295,7 @@ public class Deductions {
         }
 
         /**
-         * The UUID of the deduction. This parameter is optional and can be provided in order to update an
-         * existing deduction.
+         * The UUID of the deduction. Only present for unprocessed payrolls.
          */
         public Builder uuid(Optional<String> uuid) {
             Utils.checkNotNull(uuid, "uuid");

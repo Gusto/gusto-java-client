@@ -338,6 +338,8 @@ public class Reports {
      * 
      * <p>scope: `company_reports:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBuilder postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage() {
@@ -359,6 +361,8 @@ public class Reports {
      * status and retrieve the report when complete.
      * 
      * <p>scope: `company_reports:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @param requestBody 
@@ -384,6 +388,8 @@ public class Reports {
      * status and retrieve the report when complete.
      * 
      * <p>scope: `company_reports:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company

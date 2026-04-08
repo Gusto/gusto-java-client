@@ -5,6 +5,14 @@ The status of EIN verification:
 - `verified`: The EIN has been successfully verified as a valid EIN with the IRS.
 - `failed`: The company's EIN did not pass verification. Common issues are being entered incorrectly or not matching the company's legal name.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.FederalTaxDetailsStatus;
+
+FederalTaxDetailsStatus value = FederalTaxDetailsStatus.PENDING;
+```
+
 
 ## Values
 

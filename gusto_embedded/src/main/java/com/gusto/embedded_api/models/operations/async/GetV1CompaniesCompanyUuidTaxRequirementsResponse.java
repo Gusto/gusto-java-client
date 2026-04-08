@@ -5,7 +5,7 @@ package com.gusto.embedded_api.models.operations.async;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api.models.operations.ResponseBody;
+import com.gusto.embedded_api.models.components.TaxRequirementStatesList;
 import com.gusto.embedded_api.utils.AsyncResponse;
 import com.gusto.embedded_api.utils.Blob;
 import com.gusto.embedded_api.utils.Utils;
@@ -35,24 +35,24 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsResponse implements AsyncRe
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * OK
+     * Success
      */
-    private Optional<? extends List<ResponseBody>> responseBodies;
+    private Optional<? extends List<TaxRequirementStatesList>> taxRequirementStatesList;
 
     @JsonCreator
     public GetV1CompaniesCompanyUuidTaxRequirementsResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends List<ResponseBody>> responseBodies) {
+            Optional<? extends List<TaxRequirementStatesList>> taxRequirementStatesList) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(responseBodies, "responseBodies");
+        Utils.checkNotNull(taxRequirementStatesList, "taxRequirementStatesList");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.responseBodies = responseBodies;
+        this.taxRequirementStatesList = taxRequirementStatesList;
     }
     
     public GetV1CompaniesCompanyUuidTaxRequirementsResponse(
@@ -88,12 +88,12 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsResponse implements AsyncRe
     }
 
     /**
-     * OK
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<ResponseBody>> responseBodies() {
-        return (Optional<List<ResponseBody>>) responseBodies;
+    public Optional<List<TaxRequirementStatesList>> taxRequirementStatesList() {
+        return (Optional<List<TaxRequirementStatesList>>) taxRequirementStatesList;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsResponse implements AsyncRe
     }
 
     /**
-     * OK
+     * Success
      */
-    public GetV1CompaniesCompanyUuidTaxRequirementsResponse withResponseBodies(List<ResponseBody> responseBodies) {
-        Utils.checkNotNull(responseBodies, "responseBodies");
-        this.responseBodies = Optional.ofNullable(responseBodies);
+    public GetV1CompaniesCompanyUuidTaxRequirementsResponse withTaxRequirementStatesList(List<TaxRequirementStatesList> taxRequirementStatesList) {
+        Utils.checkNotNull(taxRequirementStatesList, "taxRequirementStatesList");
+        this.taxRequirementStatesList = Optional.ofNullable(taxRequirementStatesList);
         return this;
     }
 
 
     /**
-     * OK
+     * Success
      */
-    public GetV1CompaniesCompanyUuidTaxRequirementsResponse withResponseBodies(Optional<? extends List<ResponseBody>> responseBodies) {
-        Utils.checkNotNull(responseBodies, "responseBodies");
-        this.responseBodies = responseBodies;
+    public GetV1CompaniesCompanyUuidTaxRequirementsResponse withTaxRequirementStatesList(Optional<? extends List<TaxRequirementStatesList>> taxRequirementStatesList) {
+        Utils.checkNotNull(taxRequirementStatesList, "taxRequirementStatesList");
+        this.taxRequirementStatesList = taxRequirementStatesList;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsResponse implements AsyncRe
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.responseBodies, other.responseBodies);
+            Utils.enhancedDeepEquals(this.taxRequirementStatesList, other.taxRequirementStatesList);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            responseBodies);
+            taxRequirementStatesList);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsResponse implements AsyncRe
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "responseBodies", responseBodies);
+                "taxRequirementStatesList", taxRequirementStatesList);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsResponse implements AsyncRe
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends List<ResponseBody>> responseBodies = Optional.empty();
+        private Optional<? extends List<TaxRequirementStatesList>> taxRequirementStatesList = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsResponse implements AsyncRe
 
 
         /**
-         * OK
+         * Success
          */
-        public Builder responseBodies(List<ResponseBody> responseBodies) {
-            Utils.checkNotNull(responseBodies, "responseBodies");
-            this.responseBodies = Optional.ofNullable(responseBodies);
+        public Builder taxRequirementStatesList(List<TaxRequirementStatesList> taxRequirementStatesList) {
+            Utils.checkNotNull(taxRequirementStatesList, "taxRequirementStatesList");
+            this.taxRequirementStatesList = Optional.ofNullable(taxRequirementStatesList);
             return this;
         }
 
         /**
-         * OK
+         * Success
          */
-        public Builder responseBodies(Optional<? extends List<ResponseBody>> responseBodies) {
-            Utils.checkNotNull(responseBodies, "responseBodies");
-            this.responseBodies = responseBodies;
+        public Builder taxRequirementStatesList(Optional<? extends List<TaxRequirementStatesList>> taxRequirementStatesList) {
+            Utils.checkNotNull(taxRequirementStatesList, "taxRequirementStatesList");
+            this.taxRequirementStatesList = taxRequirementStatesList;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsResponse implements AsyncRe
 
             return new GetV1CompaniesCompanyUuidTaxRequirementsResponse(
                 contentType, statusCode, rawResponse,
-                responseBodies);
+                taxRequirementStatesList);
         }
 
     }

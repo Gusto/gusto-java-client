@@ -35,24 +35,24 @@ public class GetV1JobsJobIdCompensationsResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
-    private Optional<? extends List<Compensation>> compensationList;
+    private Optional<? extends List<Compensation>> compensations;
 
     @JsonCreator
     public GetV1JobsJobIdCompensationsResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<Compensation>> compensationList) {
+            Optional<? extends List<Compensation>> compensations) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(compensationList, "compensationList");
+        Utils.checkNotNull(compensations, "compensations");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.compensationList = compensationList;
+        this.compensations = compensations;
     }
     
     public GetV1JobsJobIdCompensationsResponse(
@@ -88,12 +88,12 @@ public class GetV1JobsJobIdCompensationsResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Compensation>> compensationList() {
-        return (Optional<List<Compensation>>) compensationList;
+    public Optional<List<Compensation>> compensations() {
+        return (Optional<List<Compensation>>) compensations;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1JobsJobIdCompensationsResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1JobsJobIdCompensationsResponse withCompensationList(List<Compensation> compensationList) {
-        Utils.checkNotNull(compensationList, "compensationList");
-        this.compensationList = Optional.ofNullable(compensationList);
+    public GetV1JobsJobIdCompensationsResponse withCompensations(List<Compensation> compensations) {
+        Utils.checkNotNull(compensations, "compensations");
+        this.compensations = Optional.ofNullable(compensations);
         return this;
     }
 
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1JobsJobIdCompensationsResponse withCompensationList(Optional<? extends List<Compensation>> compensationList) {
-        Utils.checkNotNull(compensationList, "compensationList");
-        this.compensationList = compensationList;
+    public GetV1JobsJobIdCompensationsResponse withCompensations(Optional<? extends List<Compensation>> compensations) {
+        Utils.checkNotNull(compensations, "compensations");
+        this.compensations = compensations;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1JobsJobIdCompensationsResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.compensationList, other.compensationList);
+            Utils.enhancedDeepEquals(this.compensations, other.compensations);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            compensationList);
+            compensations);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1JobsJobIdCompensationsResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "compensationList", compensationList);
+                "compensations", compensations);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1JobsJobIdCompensationsResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends List<Compensation>> compensationList = Optional.empty();
+        private Optional<? extends List<Compensation>> compensations = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1JobsJobIdCompensationsResponse implements Response {
 
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder compensationList(List<Compensation> compensationList) {
-            Utils.checkNotNull(compensationList, "compensationList");
-            this.compensationList = Optional.ofNullable(compensationList);
+        public Builder compensations(List<Compensation> compensations) {
+            Utils.checkNotNull(compensations, "compensations");
+            this.compensations = Optional.ofNullable(compensations);
             return this;
         }
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder compensationList(Optional<? extends List<Compensation>> compensationList) {
-            Utils.checkNotNull(compensationList, "compensationList");
-            this.compensationList = compensationList;
+        public Builder compensations(Optional<? extends List<Compensation>> compensations) {
+            Utils.checkNotNull(compensations, "compensations");
+            this.compensations = compensations;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1JobsJobIdCompensationsResponse implements Response {
 
             return new GetV1JobsJobIdCompensationsResponse(
                 contentType, statusCode, rawResponse,
-                compensationList);
+                compensations);
         }
 
     }

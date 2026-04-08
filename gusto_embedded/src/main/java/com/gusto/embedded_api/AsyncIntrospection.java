@@ -5,8 +5,8 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation;
 
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.GetV1TokenInfoRequest;
+import com.gusto.embedded_api.models.operations.HeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.OauthAccessTokenRequest;
 import com.gusto.embedded_api.models.operations.OauthAccessTokenRequestBody;
 import com.gusto.embedded_api.models.operations.XGustoAPIVersion;
@@ -44,7 +44,12 @@ public class AsyncIntrospection {
     /**
      * Get info about the current access token
      * 
-     * <p>Returns scope and resource information associated with the current access token.
+     * <p>Returns scope and resource information associated with the current access token. Use this endpoint
+     * to verify the following for the current access token:
+     * * Resource (company, employee, contractor, or application) and resource owner
+     * * Access level
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -55,7 +60,12 @@ public class AsyncIntrospection {
     /**
      * Get info about the current access token
      * 
-     * <p>Returns scope and resource information associated with the current access token.
+     * <p>Returns scope and resource information associated with the current access token. Use this endpoint
+     * to verify the following for the current access token:
+     * * Resource (company, employee, contractor, or application) and resource owner
+     * * Access level
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return {@code CompletableFuture<GetV1TokenInfoResponse>} - The async response
      */
@@ -66,12 +76,17 @@ public class AsyncIntrospection {
     /**
      * Get info about the current access token
      * 
-     * <p>Returns scope and resource information associated with the current access token.
+     * <p>Returns scope and resource information associated with the current access token. Use this endpoint
+     * to verify the following for the current access token:
+     * * Resource (company, employee, contractor, or application) and resource owner
+     * * Access level
      * 
-     * @param xGustoAPIVersion 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return {@code CompletableFuture<GetV1TokenInfoResponse>} - The async response
      */
-    public CompletableFuture<GetV1TokenInfoResponse> getInfo(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public CompletableFuture<GetV1TokenInfoResponse> getInfo(Optional<? extends XGustoAPIVersion> xGustoAPIVersion) {
         GetV1TokenInfoRequest request =
             GetV1TokenInfoRequest
                 .builder()
@@ -85,11 +100,9 @@ public class AsyncIntrospection {
 
 
     /**
-     * create or refresh an access token
+     * Create a System Access Token or Refresh an Access Token
      * 
-     * <p>Creates or refreshes a system access token
-     * 
-     * <p>scope: ``
+     * <p>Creates a system access token or refreshes an oauth access token
      * 
      * @return The async call builder
      */
@@ -98,11 +111,9 @@ public class AsyncIntrospection {
     }
 
     /**
-     * create or refresh an access token
+     * Create a System Access Token or Refresh an Access Token
      * 
-     * <p>Creates or refreshes a system access token
-     * 
-     * <p>scope: ``
+     * <p>Creates a system access token or refreshes an oauth access token
      * 
      * @param requestBody 
      * @return {@code CompletableFuture<OauthAccessTokenResponse>} - The async response
@@ -112,17 +123,15 @@ public class AsyncIntrospection {
     }
 
     /**
-     * create or refresh an access token
+     * Create a System Access Token or Refresh an Access Token
      * 
-     * <p>Creates or refreshes a system access token
-     * 
-     * <p>scope: ``
+     * <p>Creates a system access token or refreshes an oauth access token
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param requestBody 
      * @return {@code CompletableFuture<OauthAccessTokenResponse>} - The async response
      */
-    public CompletableFuture<OauthAccessTokenResponse> oauthAccessToken(Optional<? extends XGustoAPIVersion> xGustoAPIVersion, OauthAccessTokenRequestBody requestBody) {
+    public CompletableFuture<OauthAccessTokenResponse> oauthAccessToken(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion, OauthAccessTokenRequestBody requestBody) {
         OauthAccessTokenRequest request =
             OauthAccessTokenRequest
                 .builder()

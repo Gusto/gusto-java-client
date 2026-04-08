@@ -5,13 +5,15 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidTaxRequirementsRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidTaxRequirementsResponse;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidTaxRequirementsStateRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidTaxRequirementsStateResponse;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidTaxRequirementsStateRequest;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder;
@@ -45,50 +47,19 @@ public class TaxRequirements {
     }
 
     /**
-     * Get State Tax Requirements
+     * Get tax requirements for a state
      * 
-     * <p>Get all tax requirements for a given state.
+     * <p>Retrieves the detailed tax requirements for a specific state. The response includes requirement sets
+     * grouped by
+     * category (e.g., registrations, tax rates, deposit schedules), each containing individual
+     * requirements with their
+     * current values, labels, and metadata describing the expected input format.
      * 
-     * <p>### Metadata Examples
-     * 
-     * <p>```json select
-     * {
-     * "type": "select",
-     * "options": [
-     * { "label": "Semiweekly",  value: "Semi-weekly" },
-     * { "label": "Monthly",  value: "Monthly" },
-     * { "label": "Quarterly",  value: "Quarterly" },
-     * ]
-     * }
-     * ```
-     * ```json radio
-     * {
-     * "type": "radio",
-     * "options": [
-     * { "label": "No, we cannot reimburse",  value: false, short_label: "Not Reimbursable" },
-     * { "label": "Yes, we can reimburse",  value: true, short_label: "Reimbursable" },
-     * ]
-     * }
-     * ```
-     * ```json account_number
-     * {
-     * "type": "account_number",
-     * "mask": "######-##',
-     * "prefix": null
-     * }
-     * ```
-     * ```json tax_rate
-     * {
-     * "type": "tax_rate",
-     * "validation": {
-     * "type": "min_max",
-     * "min": "0.0004",
-     * "max": "0.081"
-     * }
-     * }
-     * ```
+     * <p>Use this to build dynamic UIs for tax setup or to read the current tax configuration for a state.
      * 
      * <p>scope: `company_tax_requirements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -97,53 +68,22 @@ public class TaxRequirements {
     }
 
     /**
-     * Get State Tax Requirements
+     * Get tax requirements for a state
      * 
-     * <p>Get all tax requirements for a given state.
+     * <p>Retrieves the detailed tax requirements for a specific state. The response includes requirement sets
+     * grouped by
+     * category (e.g., registrations, tax rates, deposit schedules), each containing individual
+     * requirements with their
+     * current values, labels, and metadata describing the expected input format.
      * 
-     * <p>### Metadata Examples
-     * 
-     * <p>```json select
-     * {
-     * "type": "select",
-     * "options": [
-     * { "label": "Semiweekly",  value: "Semi-weekly" },
-     * { "label": "Monthly",  value: "Monthly" },
-     * { "label": "Quarterly",  value: "Quarterly" },
-     * ]
-     * }
-     * ```
-     * ```json radio
-     * {
-     * "type": "radio",
-     * "options": [
-     * { "label": "No, we cannot reimburse",  value: false, short_label: "Not Reimbursable" },
-     * { "label": "Yes, we can reimburse",  value: true, short_label: "Reimbursable" },
-     * ]
-     * }
-     * ```
-     * ```json account_number
-     * {
-     * "type": "account_number",
-     * "mask": "######-##',
-     * "prefix": null
-     * }
-     * ```
-     * ```json tax_rate
-     * {
-     * "type": "tax_rate",
-     * "validation": {
-     * "type": "min_max",
-     * "min": "0.0004",
-     * "max": "0.081"
-     * }
-     * }
-     * ```
+     * <p>Use this to build dynamic UIs for tax setup or to read the current tax configuration for a state.
      * 
      * <p>scope: `company_tax_requirements:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyUuid The UUID of the company
-     * @param state 2-letter US state abbreviation
+     * @param state The two-letter state abbreviation
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
@@ -153,68 +93,37 @@ public class TaxRequirements {
     }
 
     /**
-     * Get State Tax Requirements
+     * Get tax requirements for a state
      * 
-     * <p>Get all tax requirements for a given state.
+     * <p>Retrieves the detailed tax requirements for a specific state. The response includes requirement sets
+     * grouped by
+     * category (e.g., registrations, tax rates, deposit schedules), each containing individual
+     * requirements with their
+     * current values, labels, and metadata describing the expected input format.
      * 
-     * <p>### Metadata Examples
-     * 
-     * <p>```json select
-     * {
-     * "type": "select",
-     * "options": [
-     * { "label": "Semiweekly",  value: "Semi-weekly" },
-     * { "label": "Monthly",  value: "Monthly" },
-     * { "label": "Quarterly",  value: "Quarterly" },
-     * ]
-     * }
-     * ```
-     * ```json radio
-     * {
-     * "type": "radio",
-     * "options": [
-     * { "label": "No, we cannot reimburse",  value: false, short_label: "Not Reimbursable" },
-     * { "label": "Yes, we can reimburse",  value: true, short_label: "Reimbursable" },
-     * ]
-     * }
-     * ```
-     * ```json account_number
-     * {
-     * "type": "account_number",
-     * "mask": "######-##',
-     * "prefix": null
-     * }
-     * ```
-     * ```json tax_rate
-     * {
-     * "type": "tax_rate",
-     * "validation": {
-     * "type": "min_max",
-     * "min": "0.0004",
-     * "max": "0.081"
-     * }
-     * }
-     * ```
+     * <p>Use this to build dynamic UIs for tax setup or to read the current tax configuration for a state.
      * 
      * <p>scope: `company_tax_requirements:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyUuid The UUID of the company
-     * @param state 2-letter US state abbreviation
-     * @param scheduling When true, return "new" requirement sets with valid `effective_from` dates that are available to save new effective dated values.
-     * @param xGustoAPIVersion 
+     * @param state The two-letter state abbreviation
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param scheduling When true, return "new" requirement sets with valid `effective_from` dates that are available to save new effective-dated values.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyUuidTaxRequirementsStateResponse get(
             String companyUuid, String state,
-            Optional<Boolean> scheduling, Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion, Optional<Boolean> scheduling) {
         GetV1CompaniesCompanyUuidTaxRequirementsStateRequest request =
             GetV1CompaniesCompanyUuidTaxRequirementsStateRequest
                 .builder()
                 .companyUuid(companyUuid)
                 .state(state)
-                .scheduling(scheduling)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .scheduling(scheduling)
                 .build();
         RequestOperation<GetV1CompaniesCompanyUuidTaxRequirementsStateRequest, GetV1CompaniesCompanyUuidTaxRequirementsStateResponse> operation
               = new GetV1CompaniesCompanyUuidTaxRequirementsState.Sync(sdkConfiguration, _headers);
@@ -222,11 +131,23 @@ public class TaxRequirements {
     }
 
     /**
-     * Update State Tax Requirements
+     * Update tax requirements for a state
      * 
-     * <p>Update State Tax Requirements
+     * <p>Updates the tax requirement answers for a specific state. Submit answers to the requirement
+     * questions returned
+     * by [GET
+     * /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state).
+     * 
+     * <p>### Prerequisites
+     * 
+     * <p>1. Retrieve current requirements via [GET
+     * /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state)
+     * 2. Ensure that each requirement set that you're updating includes the correct `key`, `state`, and
+     * `effective_from` values from the GET response
      * 
      * <p>scope: `company_tax_requirements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -235,14 +156,26 @@ public class TaxRequirements {
     }
 
     /**
-     * Update State Tax Requirements
+     * Update tax requirements for a state
      * 
-     * <p>Update State Tax Requirements
+     * <p>Updates the tax requirement answers for a specific state. Submit answers to the requirement
+     * questions returned
+     * by [GET
+     * /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state).
+     * 
+     * <p>### Prerequisites
+     * 
+     * <p>1. Retrieve current requirements via [GET
+     * /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state)
+     * 2. Ensure that each requirement set that you're updating includes the correct `key`, `state`, and
+     * `effective_from` values from the GET response
      * 
      * <p>scope: `company_tax_requirements:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyUuid The UUID of the company
-     * @param state 2-letter US state abbreviation
+     * @param state The two-letter state abbreviation
      * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
@@ -255,22 +188,34 @@ public class TaxRequirements {
     }
 
     /**
-     * Update State Tax Requirements
+     * Update tax requirements for a state
      * 
-     * <p>Update State Tax Requirements
+     * <p>Updates the tax requirement answers for a specific state. Submit answers to the requirement
+     * questions returned
+     * by [GET
+     * /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state).
+     * 
+     * <p>### Prerequisites
+     * 
+     * <p>1. Retrieve current requirements via [GET
+     * /v1/companies/{company_uuid}/tax_requirements/{state}](ref:get-v1-companies-company_uuid-tax_requirements-state)
+     * 2. Ensure that each requirement set that you're updating includes the correct `key`, `state`, and
+     * `effective_from` values from the GET response
      * 
      * <p>scope: `company_tax_requirements:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyUuid The UUID of the company
-     * @param state 2-letter US state abbreviation
-     * @param xGustoAPIVersion 
+     * @param state The two-letter state abbreviation
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1CompaniesCompanyUuidTaxRequirementsStateResponse updateState(
             String companyUuid, String state,
-            Optional<? extends VersionHeader> xGustoAPIVersion, PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody) {
+            Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion, PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody) {
         PutV1CompaniesCompanyUuidTaxRequirementsStateRequest request =
             PutV1CompaniesCompanyUuidTaxRequirementsStateRequest
                 .builder()
@@ -285,11 +230,16 @@ public class TaxRequirements {
     }
 
     /**
-     * Get All Tax Requirement States
+     * Get all tax requirements for a company
      * 
-     * <p>Returns objects describing the states that have tax requirements for the company
+     * <p>Retrieves all states for which a company has tax requirements, along with a boolean indicating
+     * whether tax setup
+     * is complete for each state. Use this to determine which states still need tax setup during company
+     * onboarding.
      * 
      * <p>scope: `company_tax_requirements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -298,11 +248,16 @@ public class TaxRequirements {
     }
 
     /**
-     * Get All Tax Requirement States
+     * Get all tax requirements for a company
      * 
-     * <p>Returns objects describing the states that have tax requirements for the company
+     * <p>Retrieves all states for which a company has tax requirements, along with a boolean indicating
+     * whether tax setup
+     * is complete for each state. Use this to determine which states still need tax setup during company
+     * onboarding.
      * 
      * <p>scope: `company_tax_requirements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
@@ -313,18 +268,23 @@ public class TaxRequirements {
     }
 
     /**
-     * Get All Tax Requirement States
+     * Get all tax requirements for a company
      * 
-     * <p>Returns objects describing the states that have tax requirements for the company
+     * <p>Retrieves all states for which a company has tax requirements, along with a boolean indicating
+     * whether tax setup
+     * is complete for each state. Use this to determine which states still need tax setup during company
+     * onboarding.
      * 
      * <p>scope: `company_tax_requirements:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1CompaniesCompanyUuidTaxRequirementsResponse getAll(String companyUuid, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1CompaniesCompanyUuidTaxRequirementsResponse getAll(String companyUuid, Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         GetV1CompaniesCompanyUuidTaxRequirementsRequest request =
             GetV1CompaniesCompanyUuidTaxRequirementsRequest
                 .builder()

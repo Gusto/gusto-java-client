@@ -6,24 +6,76 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.ContractorsSortBy;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 
 public class GetV1CompaniesCompanyUuidContractorsRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
     private String companyUuid;
+
+    /**
+     * A string to search for in the object's names
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=search_term")
+    private Optional<String> searchTerm;
+
+    /**
+     * Sort contractors. Options: type, onboarding_status, name, created_at
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort_by")
+    private Optional<String> sortBy;
+
+    /**
+     * Filters contractors by those who have completed onboarding
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=onboarded")
+    private Optional<Boolean> onboarded;
+
+    /**
+     * Filters contractors who are ready to work (onboarded AND active today)
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=onboarded_active")
+    private Optional<Boolean> onboardedActive;
+
+    /**
+     * Filters contractors by those who have been or are scheduled to be dismissed
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=terminated")
+    private Optional<Boolean> terminated;
+
+    /**
+     * Filters contractors by those who have been dismissed and whose dismissal is in effect today
+     * (excludes active and scheduled to be dismissed)
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=terminated_today")
+    private Optional<Boolean> terminatedToday;
+
+    /**
+     * Include the requested attribute(s) in each contractor response. Multiple options are comma
+     * separated.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=include")
+    private Optional<? extends List<GetV1CompaniesCompanyUuidContractorsQueryParamInclude>> include;
 
     /**
      * The page that is requested. When unspecified, will load all objects unless endpoint forces
@@ -38,52 +90,60 @@ public class GetV1CompaniesCompanyUuidContractorsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=per")
     private Optional<Long> per;
 
-    /**
-     * A string to search for in the object's names
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=search_term")
-    private Optional<String> searchTerm;
-
-    /**
-     * Sort contractors. Options: type, onboarding_status, name, created_at
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort_by")
-    private Optional<? extends ContractorsSortBy> sortBy;
+    @JsonCreator
+    public GetV1CompaniesCompanyUuidContractorsRequest(
+            Optional<? extends GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyUuid,
+            Optional<String> searchTerm,
+            Optional<String> sortBy,
+            Optional<Boolean> onboarded,
+            Optional<Boolean> onboardedActive,
+            Optional<Boolean> terminated,
+            Optional<Boolean> terminatedToday,
+            Optional<? extends List<GetV1CompaniesCompanyUuidContractorsQueryParamInclude>> include,
+            Optional<Long> page,
+            Optional<Long> per) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        Utils.checkNotNull(searchTerm, "searchTerm");
+        Utils.checkNotNull(sortBy, "sortBy");
+        Utils.checkNotNull(onboarded, "onboarded");
+        Utils.checkNotNull(onboardedActive, "onboardedActive");
+        Utils.checkNotNull(terminated, "terminated");
+        Utils.checkNotNull(terminatedToday, "terminatedToday");
+        Utils.checkNotNull(include, "include");
+        Utils.checkNotNull(page, "page");
+        Utils.checkNotNull(per, "per");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyUuid = companyUuid;
+        this.searchTerm = searchTerm;
+        this.sortBy = sortBy;
+        this.onboarded = onboarded;
+        this.onboardedActive = onboardedActive;
+        this.terminated = terminated;
+        this.terminatedToday = terminatedToday;
+        this.include = include;
+        this.page = page;
+        this.per = per;
+    }
+    
+    public GetV1CompaniesCompanyUuidContractorsRequest(
+            String companyUuid) {
+        this(Optional.empty(), companyUuid, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
+    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-    @JsonCreator
-    public GetV1CompaniesCompanyUuidContractorsRequest(
-            String companyUuid,
-            Optional<Long> page,
-            Optional<Long> per,
-            Optional<String> searchTerm,
-            Optional<? extends ContractorsSortBy> sortBy,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        Utils.checkNotNull(page, "page");
-        Utils.checkNotNull(per, "per");
-        Utils.checkNotNull(searchTerm, "searchTerm");
-        Utils.checkNotNull(sortBy, "sortBy");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.companyUuid = companyUuid;
-        this.page = page;
-        this.per = per;
-        this.searchTerm = searchTerm;
-        this.sortBy = sortBy;
-        this.xGustoAPIVersion = xGustoAPIVersion;
-    }
-    
-    public GetV1CompaniesCompanyUuidContractorsRequest(
-            String companyUuid) {
-        this(companyUuid, Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -92,6 +152,65 @@ public class GetV1CompaniesCompanyUuidContractorsRequest {
     @JsonIgnore
     public String companyUuid() {
         return companyUuid;
+    }
+
+    /**
+     * A string to search for in the object's names
+     */
+    @JsonIgnore
+    public Optional<String> searchTerm() {
+        return searchTerm;
+    }
+
+    /**
+     * Sort contractors. Options: type, onboarding_status, name, created_at
+     */
+    @JsonIgnore
+    public Optional<String> sortBy() {
+        return sortBy;
+    }
+
+    /**
+     * Filters contractors by those who have completed onboarding
+     */
+    @JsonIgnore
+    public Optional<Boolean> onboarded() {
+        return onboarded;
+    }
+
+    /**
+     * Filters contractors who are ready to work (onboarded AND active today)
+     */
+    @JsonIgnore
+    public Optional<Boolean> onboardedActive() {
+        return onboardedActive;
+    }
+
+    /**
+     * Filters contractors by those who have been or are scheduled to be dismissed
+     */
+    @JsonIgnore
+    public Optional<Boolean> terminated() {
+        return terminated;
+    }
+
+    /**
+     * Filters contractors by those who have been dismissed and whose dismissal is in effect today
+     * (excludes active and scheduled to be dismissed)
+     */
+    @JsonIgnore
+    public Optional<Boolean> terminatedToday() {
+        return terminatedToday;
+    }
+
+    /**
+     * Include the requested attribute(s) in each contractor response. Multiple options are comma
+     * separated.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<GetV1CompaniesCompanyUuidContractorsQueryParamInclude>> include() {
+        return (Optional<List<GetV1CompaniesCompanyUuidContractorsQueryParamInclude>>) include;
     }
 
     /**
@@ -111,38 +230,33 @@ public class GetV1CompaniesCompanyUuidContractorsRequest {
         return per;
     }
 
-    /**
-     * A string to search for in the object's names
-     */
-    @JsonIgnore
-    public Optional<String> searchTerm() {
-        return searchTerm;
+    public static Builder builder() {
+        return new Builder();
     }
 
-    /**
-     * Sort contractors. Options: type, onboarding_status, name, created_at
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<ContractorsSortBy> sortBy() {
-        return (Optional<ContractorsSortBy>) sortBy;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public GetV1CompaniesCompanyUuidContractorsRequest withXGustoAPIVersion(GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        return this;
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
 
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withXGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
 
     /**
      * The UUID of the company
@@ -150,6 +264,143 @@ public class GetV1CompaniesCompanyUuidContractorsRequest {
     public GetV1CompaniesCompanyUuidContractorsRequest withCompanyUuid(String companyUuid) {
         Utils.checkNotNull(companyUuid, "companyUuid");
         this.companyUuid = companyUuid;
+        return this;
+    }
+
+    /**
+     * A string to search for in the object's names
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withSearchTerm(String searchTerm) {
+        Utils.checkNotNull(searchTerm, "searchTerm");
+        this.searchTerm = Optional.ofNullable(searchTerm);
+        return this;
+    }
+
+
+    /**
+     * A string to search for in the object's names
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withSearchTerm(Optional<String> searchTerm) {
+        Utils.checkNotNull(searchTerm, "searchTerm");
+        this.searchTerm = searchTerm;
+        return this;
+    }
+
+    /**
+     * Sort contractors. Options: type, onboarding_status, name, created_at
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withSortBy(String sortBy) {
+        Utils.checkNotNull(sortBy, "sortBy");
+        this.sortBy = Optional.ofNullable(sortBy);
+        return this;
+    }
+
+
+    /**
+     * Sort contractors. Options: type, onboarding_status, name, created_at
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withSortBy(Optional<String> sortBy) {
+        Utils.checkNotNull(sortBy, "sortBy");
+        this.sortBy = sortBy;
+        return this;
+    }
+
+    /**
+     * Filters contractors by those who have completed onboarding
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withOnboarded(boolean onboarded) {
+        Utils.checkNotNull(onboarded, "onboarded");
+        this.onboarded = Optional.ofNullable(onboarded);
+        return this;
+    }
+
+
+    /**
+     * Filters contractors by those who have completed onboarding
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withOnboarded(Optional<Boolean> onboarded) {
+        Utils.checkNotNull(onboarded, "onboarded");
+        this.onboarded = onboarded;
+        return this;
+    }
+
+    /**
+     * Filters contractors who are ready to work (onboarded AND active today)
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withOnboardedActive(boolean onboardedActive) {
+        Utils.checkNotNull(onboardedActive, "onboardedActive");
+        this.onboardedActive = Optional.ofNullable(onboardedActive);
+        return this;
+    }
+
+
+    /**
+     * Filters contractors who are ready to work (onboarded AND active today)
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withOnboardedActive(Optional<Boolean> onboardedActive) {
+        Utils.checkNotNull(onboardedActive, "onboardedActive");
+        this.onboardedActive = onboardedActive;
+        return this;
+    }
+
+    /**
+     * Filters contractors by those who have been or are scheduled to be dismissed
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withTerminated(boolean terminated) {
+        Utils.checkNotNull(terminated, "terminated");
+        this.terminated = Optional.ofNullable(terminated);
+        return this;
+    }
+
+
+    /**
+     * Filters contractors by those who have been or are scheduled to be dismissed
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withTerminated(Optional<Boolean> terminated) {
+        Utils.checkNotNull(terminated, "terminated");
+        this.terminated = terminated;
+        return this;
+    }
+
+    /**
+     * Filters contractors by those who have been dismissed and whose dismissal is in effect today
+     * (excludes active and scheduled to be dismissed)
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withTerminatedToday(boolean terminatedToday) {
+        Utils.checkNotNull(terminatedToday, "terminatedToday");
+        this.terminatedToday = Optional.ofNullable(terminatedToday);
+        return this;
+    }
+
+
+    /**
+     * Filters contractors by those who have been dismissed and whose dismissal is in effect today
+     * (excludes active and scheduled to be dismissed)
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withTerminatedToday(Optional<Boolean> terminatedToday) {
+        Utils.checkNotNull(terminatedToday, "terminatedToday");
+        this.terminatedToday = terminatedToday;
+        return this;
+    }
+
+    /**
+     * Include the requested attribute(s) in each contractor response. Multiple options are comma
+     * separated.
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withInclude(List<GetV1CompaniesCompanyUuidContractorsQueryParamInclude> include) {
+        Utils.checkNotNull(include, "include");
+        this.include = Optional.ofNullable(include);
+        return this;
+    }
+
+
+    /**
+     * Include the requested attribute(s) in each contractor response. Multiple options are comma
+     * separated.
+     */
+    public GetV1CompaniesCompanyUuidContractorsRequest withInclude(Optional<? extends List<GetV1CompaniesCompanyUuidContractorsQueryParamInclude>> include) {
+        Utils.checkNotNull(include, "include");
+        this.include = include;
         return this;
     }
 
@@ -193,67 +444,6 @@ public class GetV1CompaniesCompanyUuidContractorsRequest {
         return this;
     }
 
-    /**
-     * A string to search for in the object's names
-     */
-    public GetV1CompaniesCompanyUuidContractorsRequest withSearchTerm(String searchTerm) {
-        Utils.checkNotNull(searchTerm, "searchTerm");
-        this.searchTerm = Optional.ofNullable(searchTerm);
-        return this;
-    }
-
-
-    /**
-     * A string to search for in the object's names
-     */
-    public GetV1CompaniesCompanyUuidContractorsRequest withSearchTerm(Optional<String> searchTerm) {
-        Utils.checkNotNull(searchTerm, "searchTerm");
-        this.searchTerm = searchTerm;
-        return this;
-    }
-
-    /**
-     * Sort contractors. Options: type, onboarding_status, name, created_at
-     */
-    public GetV1CompaniesCompanyUuidContractorsRequest withSortBy(ContractorsSortBy sortBy) {
-        Utils.checkNotNull(sortBy, "sortBy");
-        this.sortBy = Optional.ofNullable(sortBy);
-        return this;
-    }
-
-
-    /**
-     * Sort contractors. Options: type, onboarding_status, name, created_at
-     */
-    public GetV1CompaniesCompanyUuidContractorsRequest withSortBy(Optional<? extends ContractorsSortBy> sortBy) {
-        Utils.checkNotNull(sortBy, "sortBy");
-        this.sortBy = sortBy;
-        return this;
-    }
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public GetV1CompaniesCompanyUuidContractorsRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-        return this;
-    }
-
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public GetV1CompaniesCompanyUuidContractorsRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -264,49 +454,94 @@ public class GetV1CompaniesCompanyUuidContractorsRequest {
         }
         GetV1CompaniesCompanyUuidContractorsRequest other = (GetV1CompaniesCompanyUuidContractorsRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
-            Utils.enhancedDeepEquals(this.page, other.page) &&
-            Utils.enhancedDeepEquals(this.per, other.per) &&
             Utils.enhancedDeepEquals(this.searchTerm, other.searchTerm) &&
             Utils.enhancedDeepEquals(this.sortBy, other.sortBy) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.onboarded, other.onboarded) &&
+            Utils.enhancedDeepEquals(this.onboardedActive, other.onboardedActive) &&
+            Utils.enhancedDeepEquals(this.terminated, other.terminated) &&
+            Utils.enhancedDeepEquals(this.terminatedToday, other.terminatedToday) &&
+            Utils.enhancedDeepEquals(this.include, other.include) &&
+            Utils.enhancedDeepEquals(this.page, other.page) &&
+            Utils.enhancedDeepEquals(this.per, other.per);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, page, per,
-            searchTerm, sortBy, xGustoAPIVersion);
+            xGustoAPIVersion, companyUuid, searchTerm,
+            sortBy, onboarded, onboardedActive,
+            terminated, terminatedToday, include,
+            page, per);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1CompaniesCompanyUuidContractorsRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyUuid", companyUuid,
-                "page", page,
-                "per", per,
                 "searchTerm", searchTerm,
                 "sortBy", sortBy,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "onboarded", onboarded,
+                "onboardedActive", onboardedActive,
+                "terminated", terminated,
+                "terminatedToday", terminatedToday,
+                "include", include,
+                "page", page,
+                "per", per);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String companyUuid;
+
+        private Optional<String> searchTerm = Optional.empty();
+
+        private Optional<String> sortBy = Optional.empty();
+
+        private Optional<Boolean> onboarded = Optional.empty();
+
+        private Optional<Boolean> onboardedActive = Optional.empty();
+
+        private Optional<Boolean> terminated = Optional.empty();
+
+        private Optional<Boolean> terminatedToday = Optional.empty();
+
+        private Optional<? extends List<GetV1CompaniesCompanyUuidContractorsQueryParamInclude>> include = Optional.empty();
 
         private Optional<Long> page = Optional.empty();
 
         private Optional<Long> per = Optional.empty();
 
-        private Optional<String> searchTerm = Optional.empty();
-
-        private Optional<? extends ContractorsSortBy> sortBy = Optional.empty();
-
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
-
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -316,6 +551,143 @@ public class GetV1CompaniesCompanyUuidContractorsRequest {
         public Builder companyUuid(String companyUuid) {
             Utils.checkNotNull(companyUuid, "companyUuid");
             this.companyUuid = companyUuid;
+            return this;
+        }
+
+
+        /**
+         * A string to search for in the object's names
+         */
+        public Builder searchTerm(String searchTerm) {
+            Utils.checkNotNull(searchTerm, "searchTerm");
+            this.searchTerm = Optional.ofNullable(searchTerm);
+            return this;
+        }
+
+        /**
+         * A string to search for in the object's names
+         */
+        public Builder searchTerm(Optional<String> searchTerm) {
+            Utils.checkNotNull(searchTerm, "searchTerm");
+            this.searchTerm = searchTerm;
+            return this;
+        }
+
+
+        /**
+         * Sort contractors. Options: type, onboarding_status, name, created_at
+         */
+        public Builder sortBy(String sortBy) {
+            Utils.checkNotNull(sortBy, "sortBy");
+            this.sortBy = Optional.ofNullable(sortBy);
+            return this;
+        }
+
+        /**
+         * Sort contractors. Options: type, onboarding_status, name, created_at
+         */
+        public Builder sortBy(Optional<String> sortBy) {
+            Utils.checkNotNull(sortBy, "sortBy");
+            this.sortBy = sortBy;
+            return this;
+        }
+
+
+        /**
+         * Filters contractors by those who have completed onboarding
+         */
+        public Builder onboarded(boolean onboarded) {
+            Utils.checkNotNull(onboarded, "onboarded");
+            this.onboarded = Optional.ofNullable(onboarded);
+            return this;
+        }
+
+        /**
+         * Filters contractors by those who have completed onboarding
+         */
+        public Builder onboarded(Optional<Boolean> onboarded) {
+            Utils.checkNotNull(onboarded, "onboarded");
+            this.onboarded = onboarded;
+            return this;
+        }
+
+
+        /**
+         * Filters contractors who are ready to work (onboarded AND active today)
+         */
+        public Builder onboardedActive(boolean onboardedActive) {
+            Utils.checkNotNull(onboardedActive, "onboardedActive");
+            this.onboardedActive = Optional.ofNullable(onboardedActive);
+            return this;
+        }
+
+        /**
+         * Filters contractors who are ready to work (onboarded AND active today)
+         */
+        public Builder onboardedActive(Optional<Boolean> onboardedActive) {
+            Utils.checkNotNull(onboardedActive, "onboardedActive");
+            this.onboardedActive = onboardedActive;
+            return this;
+        }
+
+
+        /**
+         * Filters contractors by those who have been or are scheduled to be dismissed
+         */
+        public Builder terminated(boolean terminated) {
+            Utils.checkNotNull(terminated, "terminated");
+            this.terminated = Optional.ofNullable(terminated);
+            return this;
+        }
+
+        /**
+         * Filters contractors by those who have been or are scheduled to be dismissed
+         */
+        public Builder terminated(Optional<Boolean> terminated) {
+            Utils.checkNotNull(terminated, "terminated");
+            this.terminated = terminated;
+            return this;
+        }
+
+
+        /**
+         * Filters contractors by those who have been dismissed and whose dismissal is in effect today
+         * (excludes active and scheduled to be dismissed)
+         */
+        public Builder terminatedToday(boolean terminatedToday) {
+            Utils.checkNotNull(terminatedToday, "terminatedToday");
+            this.terminatedToday = Optional.ofNullable(terminatedToday);
+            return this;
+        }
+
+        /**
+         * Filters contractors by those who have been dismissed and whose dismissal is in effect today
+         * (excludes active and scheduled to be dismissed)
+         */
+        public Builder terminatedToday(Optional<Boolean> terminatedToday) {
+            Utils.checkNotNull(terminatedToday, "terminatedToday");
+            this.terminatedToday = terminatedToday;
+            return this;
+        }
+
+
+        /**
+         * Include the requested attribute(s) in each contractor response. Multiple options are comma
+         * separated.
+         */
+        public Builder include(List<GetV1CompaniesCompanyUuidContractorsQueryParamInclude> include) {
+            Utils.checkNotNull(include, "include");
+            this.include = Optional.ofNullable(include);
+            return this;
+        }
+
+        /**
+         * Include the requested attribute(s) in each contractor response. Multiple options are comma
+         * separated.
+         */
+        public Builder include(Optional<? extends List<GetV1CompaniesCompanyUuidContractorsQueryParamInclude>> include) {
+            Utils.checkNotNull(include, "include");
+            this.include = include;
             return this;
         }
 
@@ -359,82 +731,23 @@ public class GetV1CompaniesCompanyUuidContractorsRequest {
             return this;
         }
 
-
-        /**
-         * A string to search for in the object's names
-         */
-        public Builder searchTerm(String searchTerm) {
-            Utils.checkNotNull(searchTerm, "searchTerm");
-            this.searchTerm = Optional.ofNullable(searchTerm);
-            return this;
-        }
-
-        /**
-         * A string to search for in the object's names
-         */
-        public Builder searchTerm(Optional<String> searchTerm) {
-            Utils.checkNotNull(searchTerm, "searchTerm");
-            this.searchTerm = searchTerm;
-            return this;
-        }
-
-
-        /**
-         * Sort contractors. Options: type, onboarding_status, name, created_at
-         */
-        public Builder sortBy(ContractorsSortBy sortBy) {
-            Utils.checkNotNull(sortBy, "sortBy");
-            this.sortBy = Optional.ofNullable(sortBy);
-            return this;
-        }
-
-        /**
-         * Sort contractors. Options: type, onboarding_status, name, created_at
-         */
-        public Builder sortBy(Optional<? extends ContractorsSortBy> sortBy) {
-            Utils.checkNotNull(sortBy, "sortBy");
-            this.sortBy = sortBy;
-            return this;
-        }
-
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
-
         public GetV1CompaniesCompanyUuidContractorsRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1CompaniesCompanyUuidContractorsRequest(
-                companyUuid, page, per,
-                searchTerm, sortBy, xGustoAPIVersion);
+                xGustoAPIVersion, companyUuid, searchTerm,
+                sortBy, onboarded, onboardedActive,
+                terminated, terminatedToday, include,
+                page, per);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion>>() {});
     }
 }

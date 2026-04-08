@@ -185,7 +185,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest {
         private static final LazySingletonValue<Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
-                        "\"2024-04-01\"",
+                        "\"2025-06-15\"",
                         new TypeReference<Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion>>() {});
     }
 }

@@ -17,6 +17,14 @@ import java.util.Optional;
 
 public class DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
@@ -28,31 +36,34 @@ public class DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=bank_account_id")
     private String bankAccountId;
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion;
-
     @JsonCreator
     public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest(
+            Optional<? extends DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyId,
-            String bankAccountId,
-            Optional<? extends DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            String bankAccountId) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(bankAccountId, "bankAccountId");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyId = companyId;
         this.bankAccountId = bankAccountId;
-        this.xGustoAPIVersion = xGustoAPIVersion;
     }
     
     public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest(
             String companyId,
             String bankAccountId) {
-        this(companyId, bankAccountId, Optional.empty());
+        this(Optional.empty(), companyId, bankAccountId);
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -71,39 +82,10 @@ public class DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest {
         return bankAccountId;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion>) xGustoAPIVersion;
-    }
-
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest withCompanyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
-
-    /**
-     * The UUID of the company bank account
-     */
-    public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest withBankAccountId(String bankAccountId) {
-        Utils.checkNotNull(bankAccountId, "bankAccountId");
-        this.bankAccountId = bankAccountId;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -128,6 +110,24 @@ public class DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest withCompanyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
+    /**
+     * The UUID of the company bank account
+     */
+    public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest withBankAccountId(String bankAccountId) {
+        Utils.checkNotNull(bankAccountId, "bankAccountId");
+        this.bankAccountId = bankAccountId;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -138,56 +138,36 @@ public class DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest {
         }
         DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest other = (DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
-            Utils.enhancedDeepEquals(this.bankAccountId, other.bankAccountId) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.bankAccountId, other.bankAccountId);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, bankAccountId, xGustoAPIVersion);
+            xGustoAPIVersion, companyId, bankAccountId);
     }
     
     @Override
     public String toString() {
         return Utils.toString(DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyId", companyId,
-                "bankAccountId", bankAccountId,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "bankAccountId", bankAccountId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String companyId;
 
         private String bankAccountId;
 
-        private Optional<? extends DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion;
-
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyId(String companyId) {
-            Utils.checkNotNull(companyId, "companyId");
-            this.companyId = companyId;
-            return this;
-        }
-
-
-        /**
-         * The UUID of the company bank account
-         */
-        public Builder bankAccountId(String bankAccountId) {
-            Utils.checkNotNull(bankAccountId, "bankAccountId");
-            this.bankAccountId = bankAccountId;
-            return this;
         }
 
 
@@ -213,13 +193,33 @@ public class DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the company
+         */
+        public Builder companyId(String companyId) {
+            Utils.checkNotNull(companyId, "companyId");
+            this.companyId = companyId;
+            return this;
+        }
+
+
+        /**
+         * The UUID of the company bank account
+         */
+        public Builder bankAccountId(String bankAccountId) {
+            Utils.checkNotNull(bankAccountId, "bankAccountId");
+            this.bankAccountId = bankAccountId;
+            return this;
+        }
+
         public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest(
-                companyId, bankAccountId, xGustoAPIVersion);
+                xGustoAPIVersion, companyId, bankAccountId);
         }
 
 

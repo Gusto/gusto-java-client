@@ -2,6 +2,14 @@
 
 The earning type for the compensation.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.EarningType;
+
+EarningType value = EarningType.COMPANY_PAY_TYPE;
+```
+
 
 ## Values
 

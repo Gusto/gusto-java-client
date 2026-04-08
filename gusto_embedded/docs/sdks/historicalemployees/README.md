@@ -12,9 +12,59 @@ Update a historical employee, an employee that was previously dismissed from the
 
 scope: `employees:manage`
 
-### Example Usage
+### Example Usage: Create Historical Employee Example
 
-<!-- UsageSnippet language="java" operationID="put-v1-historical_employees" method="put" path="/v1/companies/{company_uuid}/historical_employees/{historical_employee_uuid}" -->
+<!-- UsageSnippet language="java" operationID="put-v1-historical_employees" method="put" path="/v1/companies/{company_uuid}/historical_employees/{historical_employee_uuid}" example="Create Historical Employee Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1HistoricalEmployeesResponse res = sdk.historicalEmployees().update()
+                .companyUuid("<id>")
+                .historicalEmployeeUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1HistoricalEmployeesRequestBody.builder()
+                    .version("56d00c178bc7393b2a206ed6a86afcb4")
+                    .firstName("Damion")
+                    .lastName("Vandervort")
+                    .dateOfBirth("1998-11-29")
+                    .ssn("<value>")
+                    .workAddress(WorkAddress.builder()
+                        .build())
+                    .homeAddress(HomeAddress.builder()
+                        .street1("<value>")
+                        .city("Diannafort")
+                        .state("Oregon")
+                        .zip("08576")
+                        .build())
+                    .termination(Termination.builder()
+                        .build())
+                    .job(Job.builder()
+                        .build())
+                    .build())
+                .call();
+
+        if (res.employee().isPresent()) {
+            System.out.println(res.employee().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-historical_employees" method="put" path="/v1/companies/{company_uuid}/historical_employees/{historical_employee_uuid}" example="Example" -->
 ```java
 package hello.world;
 
@@ -46,7 +96,7 @@ public class Application {
                     .workAddress(WorkAddress.builder()
                         .locationUuid("1da85d35-1910-4d5e-8e94-39e8cdfe8c9a")
                         .build())
-                    .homeAddress(PutV1HistoricalEmployeesHomeAddress.builder()
+                    .homeAddress(HomeAddress.builder()
                         .street1("300 3rd Street")
                         .city("San Francisco")
                         .state("CA")
@@ -68,7 +118,7 @@ public class Application {
                 .call();
 
         if (res.employee().isPresent()) {
-            // handle response
+            System.out.println(res.employee().get());
         }
     }
 }

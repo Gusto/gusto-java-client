@@ -1,6 +1,12 @@
 # ContractorPaymentMethod1
 
-The contractor's payment method.
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.ContractorPaymentMethod1;
+
+ContractorPaymentMethod1 value = ContractorPaymentMethod1.DIRECT_DEPOSIT;
+```
 
 
 ## Values
@@ -9,4 +15,3 @@ The contractor's payment method.
 | ---------------- | ---------------- |
 | `DIRECT_DEPOSIT` | Direct Deposit   |
 | `CHECK`          | Check            |
-| `NULL`           | null             |

@@ -8,15 +8,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * ContractorPaymentMethod1
- * 
- * <p>The contractor's payment method.
- */
 public enum ContractorPaymentMethod1 {
     DIRECT_DEPOSIT("Direct Deposit"),
-    CHECK("Check"),
-    NULL("null");
+    CHECK("Check");
 
     @JsonValue
     private final String value;

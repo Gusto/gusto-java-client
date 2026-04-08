@@ -185,7 +185,7 @@ public class GetV1PeopleBatchesPeopleBatchUuidRequest {
         private static final LazySingletonValue<Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
-                        "\"2025-11-15\"",
+                        "\"2025-06-15\"",
                         new TypeReference<Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion>>() {});
     }
 }

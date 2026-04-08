@@ -16,7 +16,7 @@ import java.util.Optional;
  * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 public enum PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion {
-    TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01("2024-04-01");
+    TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15("2025-06-15");
 
     @JsonValue
     private final String value;

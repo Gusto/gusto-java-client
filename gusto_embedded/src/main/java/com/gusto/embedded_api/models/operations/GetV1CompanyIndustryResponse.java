@@ -34,7 +34,7 @@ public class GetV1CompanyIndustryResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
     private Optional<? extends Industry> industry;
 
@@ -87,7 +87,7 @@ public class GetV1CompanyIndustryResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1CompanyIndustryResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     public GetV1CompanyIndustryResponse withIndustry(Industry industry) {
         Utils.checkNotNull(industry, "industry");
@@ -138,7 +138,7 @@ public class GetV1CompanyIndustryResponse implements Response {
 
 
     /**
-     * Example response
+     * Successful
      */
     public GetV1CompanyIndustryResponse withIndustry(Optional<? extends Industry> industry) {
         Utils.checkNotNull(industry, "industry");
@@ -225,7 +225,7 @@ public class GetV1CompanyIndustryResponse implements Response {
 
 
         /**
-         * Example response
+         * Successful
          */
         public Builder industry(Industry industry) {
             Utils.checkNotNull(industry, "industry");
@@ -234,7 +234,7 @@ public class GetV1CompanyIndustryResponse implements Response {
         }
 
         /**
-         * Example response
+         * Successful
          */
         public Builder industry(Optional<? extends Industry> industry) {
             Utils.checkNotNull(industry, "industry");

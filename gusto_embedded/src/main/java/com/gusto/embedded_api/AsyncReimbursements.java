@@ -66,6 +66,8 @@ public class AsyncReimbursements {
      * 
      * <p>scope: `reimbursements:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1EmployeesEmployeeIdRecurringReimbursementsRequestBuilder getV1EmployeesEmployeeIdRecurringReimbursements() {
@@ -78,6 +80,8 @@ public class AsyncReimbursements {
      * <p>Get all active recurring reimbursements for an employee.
      * 
      * <p>scope: `reimbursements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdRecurringReimbursementsResponse>} - The async response
@@ -94,6 +98,8 @@ public class AsyncReimbursements {
      * <p>Get all active recurring reimbursements for an employee.
      * 
      * <p>scope: `reimbursements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
@@ -126,6 +132,8 @@ public class AsyncReimbursements {
      * 
      * <p>scope: `reimbursements:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PostV1EmployeesEmployeeIdRecurringReimbursementsRequestBuilder postV1EmployeesEmployeeIdRecurringReimbursements() {
@@ -138,6 +146,8 @@ public class AsyncReimbursements {
      * <p>Create a recurring reimbursement for an employee.
      * 
      * <p>scope: `reimbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @param requestBody 
@@ -153,6 +163,8 @@ public class AsyncReimbursements {
      * <p>Create a recurring reimbursement for an employee.
      * 
      * <p>scope: `reimbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
@@ -183,6 +195,8 @@ public class AsyncReimbursements {
      * 
      * <p>scope: `reimbursements:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1RecurringReimbursementsRequestBuilder getV1RecurringReimbursements() {
@@ -195,6 +209,8 @@ public class AsyncReimbursements {
      * <p>Get a specific recurring reimbursement.
      * 
      * <p>scope: `reimbursements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param id The UUID of the reimbursement
      * @return {@code CompletableFuture<GetV1RecurringReimbursementsResponse>} - The async response
@@ -209,6 +225,8 @@ public class AsyncReimbursements {
      * <p>Get a specific recurring reimbursement.
      * 
      * <p>scope: `reimbursements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param id The UUID of the reimbursement
@@ -235,6 +253,8 @@ public class AsyncReimbursements {
      * 
      * <p>scope: `reimbursements:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PutV1RecurringReimbursementsRequestBuilder putV1RecurringReimbursements() {
@@ -247,6 +267,8 @@ public class AsyncReimbursements {
      * <p>Update a recurring reimbursement.
      * 
      * <p>scope: `reimbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param id The UUID of the reimbursement
      * @param requestBody 
@@ -262,6 +284,8 @@ public class AsyncReimbursements {
      * <p>Update a recurring reimbursement.
      * 
      * <p>scope: `reimbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param id The UUID of the reimbursement
@@ -292,6 +316,8 @@ public class AsyncReimbursements {
      * 
      * <p>scope: `reimbursements:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public DeleteV1RecurringReimbursementsRequestBuilder deleteV1RecurringReimbursements() {
@@ -304,6 +330,8 @@ public class AsyncReimbursements {
      * <p>Delete (soft delete) a recurring reimbursement for an employee.
      * 
      * <p>scope: `reimbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param id The UUID of the reimbursement
      * @return {@code CompletableFuture<DeleteV1RecurringReimbursementsResponse>} - The async response
@@ -318,6 +346,8 @@ public class AsyncReimbursements {
      * <p>Delete (soft delete) a recurring reimbursement for an employee.
      * 
      * <p>scope: `reimbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param id The UUID of the reimbursement

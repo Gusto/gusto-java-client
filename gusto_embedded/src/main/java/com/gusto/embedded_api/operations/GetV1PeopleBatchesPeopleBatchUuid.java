@@ -10,11 +10,11 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.SecuritySource;
+import com.gusto.embedded_api.models.components.PeopleBatchResults;
 import com.gusto.embedded_api.models.errors.APIException;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1PeopleBatchesPeopleBatchUuidRequest;
 import com.gusto.embedded_api.models.operations.GetV1PeopleBatchesPeopleBatchUuidResponse;
-import com.gusto.embedded_api.models.operations.GetV1PeopleBatchesPeopleBatchUuidResponseBody;
 import com.gusto.embedded_api.utils.Blob;
 import com.gusto.embedded_api.utils.HTTPClient;
 import com.gusto.embedded_api.utils.HTTPRequest;
@@ -92,7 +92,7 @@ public class GetV1PeopleBatchesPeopleBatchUuid {
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
             req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-            Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
+            Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity(), "companyAccessAuth");
 
             return req.build();
         }
@@ -156,14 +156,14 @@ public class GetV1PeopleBatchesPeopleBatchUuid {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withObject(Utils.unmarshal(response, new TypeReference<GetV1PeopleBatchesPeopleBatchUuidResponseBody>() {}));
+                    return res.withPeopleBatchResults(Utils.unmarshal(response, new TypeReference<PeopleBatchResults>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
             if (Utils.statusCodeMatches(response.statusCode(), "404")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    throw UnprocessableEntityErrorObject.from(response);
+                    throw NotFoundErrorObject.from(response);
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
@@ -233,15 +233,15 @@ public class GetV1PeopleBatchesPeopleBatchUuid {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return Utils.unmarshalAsync(response, new TypeReference<GetV1PeopleBatchesPeopleBatchUuidResponseBody>() {})
-                            .thenApply(res::withObject);
+                    return Utils.unmarshalAsync(response, new TypeReference<PeopleBatchResults>() {})
+                            .thenApply(res::withPeopleBatchResults);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }
             }
             if (Utils.statusCodeMatches(response.statusCode(), "404")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return UnprocessableEntityErrorObject.fromAsync(response)
+                    return NotFoundErrorObject.fromAsync(response)
                             .thenCompose(CompletableFuture::failedFuture);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);

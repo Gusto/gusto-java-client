@@ -2,6 +2,14 @@
 
 Input type for the custom field.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.CustomFieldType;
+
+CustomFieldType value = CustomFieldType.TEXT;
+```
+
 
 ## Values
 

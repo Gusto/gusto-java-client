@@ -6,71 +6,84 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.time.LocalDate;
 import java.util.Optional;
 
 
 public class GetV1CompaniesCompanyIdPayPeriodsRequest {
-    /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
-    private String companyId;
-
-
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=start_date")
-    private Optional<String> startDate;
-
-    /**
-     * If left empty, defaults to today's date.
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=end_date")
-    private Optional<String> endDate;
-
-    /**
-     * regular and/or transition. Multiple options are comma separated. The default is regular pay periods
-     * if nothing is passed in.
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=payroll_types")
-    private Optional<String> payrollTypes;
-
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    private Optional<? extends GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
+    private String companyId;
+
+    /**
+     * Start date (YYYY-MM-DD) for the pay periods range. Defaults to 6 months ago.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=start_date")
+    private Optional<LocalDate> startDate;
+
+    /**
+     * End date (YYYY-MM-DD) for the pay periods range. Cannot be more than 3 months in the future.
+     * Defaults to today.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=end_date")
+    private Optional<LocalDate> endDate;
+
+    /**
+     * Comma-separated list of payroll types to include (regular, transition). Defaults to regular only.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=payroll_types")
+    private Optional<? extends PayrollTypes> payrollTypes;
 
     @JsonCreator
     public GetV1CompaniesCompanyIdPayPeriodsRequest(
+            Optional<? extends GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyId,
-            Optional<String> startDate,
-            Optional<String> endDate,
-            Optional<String> payrollTypes,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<LocalDate> startDate,
+            Optional<LocalDate> endDate,
+            Optional<? extends PayrollTypes> payrollTypes) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(startDate, "startDate");
         Utils.checkNotNull(endDate, "endDate");
         Utils.checkNotNull(payrollTypes, "payrollTypes");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyId = companyId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.payrollTypes = payrollTypes;
-        this.xGustoAPIVersion = xGustoAPIVersion;
     }
     
     public GetV1CompaniesCompanyIdPayPeriodsRequest(
             String companyId) {
-        this(companyId, Optional.empty(), Optional.empty(),
+        this(Optional.empty(), companyId, Optional.empty(),
             Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -81,37 +94,30 @@ public class GetV1CompaniesCompanyIdPayPeriodsRequest {
         return companyId;
     }
 
+    /**
+     * Start date (YYYY-MM-DD) for the pay periods range. Defaults to 6 months ago.
+     */
     @JsonIgnore
-    public Optional<String> startDate() {
+    public Optional<LocalDate> startDate() {
         return startDate;
     }
 
     /**
-     * If left empty, defaults to today's date.
+     * End date (YYYY-MM-DD) for the pay periods range. Cannot be more than 3 months in the future.
+     * Defaults to today.
      */
     @JsonIgnore
-    public Optional<String> endDate() {
+    public Optional<LocalDate> endDate() {
         return endDate;
     }
 
     /**
-     * regular and/or transition. Multiple options are comma separated. The default is regular pay periods
-     * if nothing is passed in.
-     */
-    @JsonIgnore
-    public Optional<String> payrollTypes() {
-        return payrollTypes;
-    }
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * Comma-separated list of payroll types to include (regular, transition). Defaults to regular only.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<PayrollTypes> payrollTypes() {
+        return (Optional<PayrollTypes>) payrollTypes;
     }
 
     public static Builder builder() {
@@ -120,73 +126,11 @@ public class GetV1CompaniesCompanyIdPayPeriodsRequest {
 
 
     /**
-     * The UUID of the company
-     */
-    public GetV1CompaniesCompanyIdPayPeriodsRequest withCompanyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
-
-    public GetV1CompaniesCompanyIdPayPeriodsRequest withStartDate(String startDate) {
-        Utils.checkNotNull(startDate, "startDate");
-        this.startDate = Optional.ofNullable(startDate);
-        return this;
-    }
-
-
-    public GetV1CompaniesCompanyIdPayPeriodsRequest withStartDate(Optional<String> startDate) {
-        Utils.checkNotNull(startDate, "startDate");
-        this.startDate = startDate;
-        return this;
-    }
-
-    /**
-     * If left empty, defaults to today's date.
-     */
-    public GetV1CompaniesCompanyIdPayPeriodsRequest withEndDate(String endDate) {
-        Utils.checkNotNull(endDate, "endDate");
-        this.endDate = Optional.ofNullable(endDate);
-        return this;
-    }
-
-
-    /**
-     * If left empty, defaults to today's date.
-     */
-    public GetV1CompaniesCompanyIdPayPeriodsRequest withEndDate(Optional<String> endDate) {
-        Utils.checkNotNull(endDate, "endDate");
-        this.endDate = endDate;
-        return this;
-    }
-
-    /**
-     * regular and/or transition. Multiple options are comma separated. The default is regular pay periods
-     * if nothing is passed in.
-     */
-    public GetV1CompaniesCompanyIdPayPeriodsRequest withPayrollTypes(String payrollTypes) {
-        Utils.checkNotNull(payrollTypes, "payrollTypes");
-        this.payrollTypes = Optional.ofNullable(payrollTypes);
-        return this;
-    }
-
-
-    /**
-     * regular and/or transition. Multiple options are comma separated. The default is regular pay periods
-     * if nothing is passed in.
-     */
-    public GetV1CompaniesCompanyIdPayPeriodsRequest withPayrollTypes(Optional<String> payrollTypes) {
-        Utils.checkNotNull(payrollTypes, "payrollTypes");
-        this.payrollTypes = payrollTypes;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1CompaniesCompanyIdPayPeriodsRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public GetV1CompaniesCompanyIdPayPeriodsRequest withXGustoAPIVersion(GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -198,9 +142,77 @@ public class GetV1CompaniesCompanyIdPayPeriodsRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1CompaniesCompanyIdPayPeriodsRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1CompaniesCompanyIdPayPeriodsRequest withXGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * The UUID of the company
+     */
+    public GetV1CompaniesCompanyIdPayPeriodsRequest withCompanyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
+    /**
+     * Start date (YYYY-MM-DD) for the pay periods range. Defaults to 6 months ago.
+     */
+    public GetV1CompaniesCompanyIdPayPeriodsRequest withStartDate(LocalDate startDate) {
+        Utils.checkNotNull(startDate, "startDate");
+        this.startDate = Optional.ofNullable(startDate);
+        return this;
+    }
+
+
+    /**
+     * Start date (YYYY-MM-DD) for the pay periods range. Defaults to 6 months ago.
+     */
+    public GetV1CompaniesCompanyIdPayPeriodsRequest withStartDate(Optional<LocalDate> startDate) {
+        Utils.checkNotNull(startDate, "startDate");
+        this.startDate = startDate;
+        return this;
+    }
+
+    /**
+     * End date (YYYY-MM-DD) for the pay periods range. Cannot be more than 3 months in the future.
+     * Defaults to today.
+     */
+    public GetV1CompaniesCompanyIdPayPeriodsRequest withEndDate(LocalDate endDate) {
+        Utils.checkNotNull(endDate, "endDate");
+        this.endDate = Optional.ofNullable(endDate);
+        return this;
+    }
+
+
+    /**
+     * End date (YYYY-MM-DD) for the pay periods range. Cannot be more than 3 months in the future.
+     * Defaults to today.
+     */
+    public GetV1CompaniesCompanyIdPayPeriodsRequest withEndDate(Optional<LocalDate> endDate) {
+        Utils.checkNotNull(endDate, "endDate");
+        this.endDate = endDate;
+        return this;
+    }
+
+    /**
+     * Comma-separated list of payroll types to include (regular, transition). Defaults to regular only.
+     */
+    public GetV1CompaniesCompanyIdPayPeriodsRequest withPayrollTypes(PayrollTypes payrollTypes) {
+        Utils.checkNotNull(payrollTypes, "payrollTypes");
+        this.payrollTypes = Optional.ofNullable(payrollTypes);
+        return this;
+    }
+
+
+    /**
+     * Comma-separated list of payroll types to include (regular, transition). Defaults to regular only.
+     */
+    public GetV1CompaniesCompanyIdPayPeriodsRequest withPayrollTypes(Optional<? extends PayrollTypes> payrollTypes) {
+        Utils.checkNotNull(payrollTypes, "payrollTypes");
+        this.payrollTypes = payrollTypes;
         return this;
     }
 
@@ -214,45 +226,68 @@ public class GetV1CompaniesCompanyIdPayPeriodsRequest {
         }
         GetV1CompaniesCompanyIdPayPeriodsRequest other = (GetV1CompaniesCompanyIdPayPeriodsRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.startDate, other.startDate) &&
             Utils.enhancedDeepEquals(this.endDate, other.endDate) &&
-            Utils.enhancedDeepEquals(this.payrollTypes, other.payrollTypes) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.payrollTypes, other.payrollTypes);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, startDate, endDate,
-            payrollTypes, xGustoAPIVersion);
+            xGustoAPIVersion, companyId, startDate,
+            endDate, payrollTypes);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1CompaniesCompanyIdPayPeriodsRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyId", companyId,
                 "startDate", startDate,
                 "endDate", endDate,
-                "payrollTypes", payrollTypes,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "payrollTypes", payrollTypes);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String companyId;
 
-        private Optional<String> startDate = Optional.empty();
+        private Optional<LocalDate> startDate = Optional.empty();
 
-        private Optional<String> endDate = Optional.empty();
+        private Optional<LocalDate> endDate = Optional.empty();
 
-        private Optional<String> payrollTypes = Optional.empty();
-
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<? extends PayrollTypes> payrollTypes = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -266,13 +301,19 @@ public class GetV1CompaniesCompanyIdPayPeriodsRequest {
         }
 
 
-        public Builder startDate(String startDate) {
+        /**
+         * Start date (YYYY-MM-DD) for the pay periods range. Defaults to 6 months ago.
+         */
+        public Builder startDate(LocalDate startDate) {
             Utils.checkNotNull(startDate, "startDate");
             this.startDate = Optional.ofNullable(startDate);
             return this;
         }
 
-        public Builder startDate(Optional<String> startDate) {
+        /**
+         * Start date (YYYY-MM-DD) for the pay periods range. Defaults to 6 months ago.
+         */
+        public Builder startDate(Optional<LocalDate> startDate) {
             Utils.checkNotNull(startDate, "startDate");
             this.startDate = startDate;
             return this;
@@ -280,18 +321,20 @@ public class GetV1CompaniesCompanyIdPayPeriodsRequest {
 
 
         /**
-         * If left empty, defaults to today's date.
+         * End date (YYYY-MM-DD) for the pay periods range. Cannot be more than 3 months in the future.
+         * Defaults to today.
          */
-        public Builder endDate(String endDate) {
+        public Builder endDate(LocalDate endDate) {
             Utils.checkNotNull(endDate, "endDate");
             this.endDate = Optional.ofNullable(endDate);
             return this;
         }
 
         /**
-         * If left empty, defaults to today's date.
+         * End date (YYYY-MM-DD) for the pay periods range. Cannot be more than 3 months in the future.
+         * Defaults to today.
          */
-        public Builder endDate(Optional<String> endDate) {
+        public Builder endDate(Optional<LocalDate> endDate) {
             Utils.checkNotNull(endDate, "endDate");
             this.endDate = endDate;
             return this;
@@ -299,45 +342,20 @@ public class GetV1CompaniesCompanyIdPayPeriodsRequest {
 
 
         /**
-         * regular and/or transition. Multiple options are comma separated. The default is regular pay periods
-         * if nothing is passed in.
+         * Comma-separated list of payroll types to include (regular, transition). Defaults to regular only.
          */
-        public Builder payrollTypes(String payrollTypes) {
+        public Builder payrollTypes(PayrollTypes payrollTypes) {
             Utils.checkNotNull(payrollTypes, "payrollTypes");
             this.payrollTypes = Optional.ofNullable(payrollTypes);
             return this;
         }
 
         /**
-         * regular and/or transition. Multiple options are comma separated. The default is regular pay periods
-         * if nothing is passed in.
+         * Comma-separated list of payroll types to include (regular, transition). Defaults to regular only.
          */
-        public Builder payrollTypes(Optional<String> payrollTypes) {
+        public Builder payrollTypes(Optional<? extends PayrollTypes> payrollTypes) {
             Utils.checkNotNull(payrollTypes, "payrollTypes");
             this.payrollTypes = payrollTypes;
-            return this;
-        }
-
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
         }
 
@@ -347,15 +365,15 @@ public class GetV1CompaniesCompanyIdPayPeriodsRequest {
             }
 
             return new GetV1CompaniesCompanyIdPayPeriodsRequest(
-                companyId, startDate, endDate,
-                payrollTypes, xGustoAPIVersion);
+                xGustoAPIVersion, companyId, startDate,
+                endDate, payrollTypes);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends GetV1CompaniesCompanyIdPayPeriodsHeaderXGustoAPIVersion>>() {});
     }
 }

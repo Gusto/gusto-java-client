@@ -67,7 +67,7 @@ public class OnboardingStep {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("requirements")
-    private Optional<? extends List<Requirements>> requirements;
+    private Optional<? extends List<CompanyOnboardingStatusRequirements>> requirements;
 
     @JsonCreator
     public OnboardingStep(
@@ -77,7 +77,7 @@ public class OnboardingStep {
             @JsonProperty("completed") Optional<Boolean> completed,
             @JsonProperty("completed_at") JsonNullable<String> completedAt,
             @JsonProperty("skippable") Optional<Boolean> skippable,
-            @JsonProperty("requirements") Optional<? extends List<Requirements>> requirements) {
+            @JsonProperty("requirements") Optional<? extends List<CompanyOnboardingStatusRequirements>> requirements) {
         Utils.checkNotNull(title, "title");
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(required, "required");
@@ -155,8 +155,8 @@ public class OnboardingStep {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Requirements>> requirements() {
-        return (Optional<List<Requirements>>) requirements;
+    public Optional<List<CompanyOnboardingStatusRequirements>> requirements() {
+        return (Optional<List<CompanyOnboardingStatusRequirements>>) requirements;
     }
 
     public static Builder builder() {
@@ -281,7 +281,7 @@ public class OnboardingStep {
      * A list of onboarding steps that are required to be completed in order to proceed with the current
      * onboarding step.
      */
-    public OnboardingStep withRequirements(List<Requirements> requirements) {
+    public OnboardingStep withRequirements(List<CompanyOnboardingStatusRequirements> requirements) {
         Utils.checkNotNull(requirements, "requirements");
         this.requirements = Optional.ofNullable(requirements);
         return this;
@@ -292,7 +292,7 @@ public class OnboardingStep {
      * A list of onboarding steps that are required to be completed in order to proceed with the current
      * onboarding step.
      */
-    public OnboardingStep withRequirements(Optional<? extends List<Requirements>> requirements) {
+    public OnboardingStep withRequirements(Optional<? extends List<CompanyOnboardingStatusRequirements>> requirements) {
         Utils.checkNotNull(requirements, "requirements");
         this.requirements = requirements;
         return this;
@@ -352,7 +352,7 @@ public class OnboardingStep {
 
         private Optional<Boolean> skippable = Optional.empty();
 
-        private Optional<? extends List<Requirements>> requirements = Optional.empty();
+        private Optional<? extends List<CompanyOnboardingStatusRequirements>> requirements = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -477,7 +477,7 @@ public class OnboardingStep {
          * A list of onboarding steps that are required to be completed in order to proceed with the current
          * onboarding step.
          */
-        public Builder requirements(List<Requirements> requirements) {
+        public Builder requirements(List<CompanyOnboardingStatusRequirements> requirements) {
             Utils.checkNotNull(requirements, "requirements");
             this.requirements = Optional.ofNullable(requirements);
             return this;
@@ -487,7 +487,7 @@ public class OnboardingStep {
          * A list of onboarding steps that are required to be completed in order to proceed with the current
          * onboarding step.
          */
-        public Builder requirements(Optional<? extends List<Requirements>> requirements) {
+        public Builder requirements(Optional<? extends List<CompanyOnboardingStatusRequirements>> requirements) {
             Utils.checkNotNull(requirements, "requirements");
             this.requirements = requirements;
             return this;

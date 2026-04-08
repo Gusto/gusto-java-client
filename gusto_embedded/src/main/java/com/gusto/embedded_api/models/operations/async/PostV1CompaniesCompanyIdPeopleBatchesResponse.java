@@ -5,7 +5,7 @@ package com.gusto.embedded_api.models.operations.async;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPeopleBatchesResponseBody;
+import com.gusto.embedded_api.models.components.PeopleBatch;
 import com.gusto.embedded_api.utils.AsyncResponse;
 import com.gusto.embedded_api.utils.Blob;
 import com.gusto.embedded_api.utils.Utils;
@@ -36,22 +36,22 @@ public class PostV1CompaniesCompanyIdPeopleBatchesResponse implements AsyncRespo
     /**
      * created
      */
-    private Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesResponseBody> object;
+    private Optional<? extends PeopleBatch> peopleBatch;
 
     @JsonCreator
     public PostV1CompaniesCompanyIdPeopleBatchesResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesResponseBody> object) {
+            Optional<? extends PeopleBatch> peopleBatch) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(object, "object");
+        Utils.checkNotNull(peopleBatch, "peopleBatch");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.object = object;
+        this.peopleBatch = peopleBatch;
     }
     
     public PostV1CompaniesCompanyIdPeopleBatchesResponse(
@@ -91,8 +91,8 @@ public class PostV1CompaniesCompanyIdPeopleBatchesResponse implements AsyncRespo
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PostV1CompaniesCompanyIdPeopleBatchesResponseBody> object() {
-        return (Optional<PostV1CompaniesCompanyIdPeopleBatchesResponseBody>) object;
+    public Optional<PeopleBatch> peopleBatch() {
+        return (Optional<PeopleBatch>) peopleBatch;
     }
 
     public static Builder builder() {
@@ -130,9 +130,9 @@ public class PostV1CompaniesCompanyIdPeopleBatchesResponse implements AsyncRespo
     /**
      * created
      */
-    public PostV1CompaniesCompanyIdPeopleBatchesResponse withObject(PostV1CompaniesCompanyIdPeopleBatchesResponseBody object) {
-        Utils.checkNotNull(object, "object");
-        this.object = Optional.ofNullable(object);
+    public PostV1CompaniesCompanyIdPeopleBatchesResponse withPeopleBatch(PeopleBatch peopleBatch) {
+        Utils.checkNotNull(peopleBatch, "peopleBatch");
+        this.peopleBatch = Optional.ofNullable(peopleBatch);
         return this;
     }
 
@@ -140,9 +140,9 @@ public class PostV1CompaniesCompanyIdPeopleBatchesResponse implements AsyncRespo
     /**
      * created
      */
-    public PostV1CompaniesCompanyIdPeopleBatchesResponse withObject(Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesResponseBody> object) {
-        Utils.checkNotNull(object, "object");
-        this.object = object;
+    public PostV1CompaniesCompanyIdPeopleBatchesResponse withPeopleBatch(Optional<? extends PeopleBatch> peopleBatch) {
+        Utils.checkNotNull(peopleBatch, "peopleBatch");
+        this.peopleBatch = peopleBatch;
         return this;
     }
 
@@ -159,14 +159,14 @@ public class PostV1CompaniesCompanyIdPeopleBatchesResponse implements AsyncRespo
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.object, other.object);
+            Utils.enhancedDeepEquals(this.peopleBatch, other.peopleBatch);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            object);
+            peopleBatch);
     }
     
     @Override
@@ -175,7 +175,7 @@ public class PostV1CompaniesCompanyIdPeopleBatchesResponse implements AsyncRespo
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "object", object);
+                "peopleBatch", peopleBatch);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -187,7 +187,7 @@ public class PostV1CompaniesCompanyIdPeopleBatchesResponse implements AsyncRespo
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesResponseBody> object = Optional.empty();
+        private Optional<? extends PeopleBatch> peopleBatch = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -227,18 +227,18 @@ public class PostV1CompaniesCompanyIdPeopleBatchesResponse implements AsyncRespo
         /**
          * created
          */
-        public Builder object(PostV1CompaniesCompanyIdPeopleBatchesResponseBody object) {
-            Utils.checkNotNull(object, "object");
-            this.object = Optional.ofNullable(object);
+        public Builder peopleBatch(PeopleBatch peopleBatch) {
+            Utils.checkNotNull(peopleBatch, "peopleBatch");
+            this.peopleBatch = Optional.ofNullable(peopleBatch);
             return this;
         }
 
         /**
          * created
          */
-        public Builder object(Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesResponseBody> object) {
-            Utils.checkNotNull(object, "object");
-            this.object = object;
+        public Builder peopleBatch(Optional<? extends PeopleBatch> peopleBatch) {
+            Utils.checkNotNull(peopleBatch, "peopleBatch");
+            this.peopleBatch = peopleBatch;
             return this;
         }
 
@@ -246,7 +246,7 @@ public class PostV1CompaniesCompanyIdPeopleBatchesResponse implements AsyncRespo
 
             return new PostV1CompaniesCompanyIdPeopleBatchesResponse(
                 contentType, statusCode, rawResponse,
-                object);
+                peopleBatch);
         }
 
     }

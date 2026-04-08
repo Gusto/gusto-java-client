@@ -34,7 +34,7 @@ public class GetV1EmployeesEmployeeIdPaymentMethodResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
     private Optional<? extends EmployeePaymentMethod> employeePaymentMethod;
 
@@ -87,7 +87,7 @@ public class GetV1EmployeesEmployeeIdPaymentMethodResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1EmployeesEmployeeIdPaymentMethodResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     public GetV1EmployeesEmployeeIdPaymentMethodResponse withEmployeePaymentMethod(EmployeePaymentMethod employeePaymentMethod) {
         Utils.checkNotNull(employeePaymentMethod, "employeePaymentMethod");
@@ -138,7 +138,7 @@ public class GetV1EmployeesEmployeeIdPaymentMethodResponse implements Response {
 
 
     /**
-     * Example response
+     * Successful
      */
     public GetV1EmployeesEmployeeIdPaymentMethodResponse withEmployeePaymentMethod(Optional<? extends EmployeePaymentMethod> employeePaymentMethod) {
         Utils.checkNotNull(employeePaymentMethod, "employeePaymentMethod");
@@ -225,7 +225,7 @@ public class GetV1EmployeesEmployeeIdPaymentMethodResponse implements Response {
 
 
         /**
-         * Example response
+         * Successful
          */
         public Builder employeePaymentMethod(EmployeePaymentMethod employeePaymentMethod) {
             Utils.checkNotNull(employeePaymentMethod, "employeePaymentMethod");
@@ -234,7 +234,7 @@ public class GetV1EmployeesEmployeeIdPaymentMethodResponse implements Response {
         }
 
         /**
-         * Example response
+         * Successful
          */
         public Builder employeePaymentMethod(Optional<? extends EmployeePaymentMethod> employeePaymentMethod) {
             Utils.checkNotNull(employeePaymentMethod, "employeePaymentMethod");

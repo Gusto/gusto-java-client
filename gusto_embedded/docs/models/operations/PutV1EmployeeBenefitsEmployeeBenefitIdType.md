@@ -8,6 +8,14 @@ The company contribution scheme.
 
 `tiered`: The size of the company contribution corresponds to the size of the employee deduction relative to a tiered matching scheme.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.PutV1EmployeeBenefitsEmployeeBenefitIdType;
+
+PutV1EmployeeBenefitsEmployeeBenefitIdType value = PutV1EmployeeBenefitsEmployeeBenefitIdType.AMOUNT;
+```
+
 
 ## Values
 

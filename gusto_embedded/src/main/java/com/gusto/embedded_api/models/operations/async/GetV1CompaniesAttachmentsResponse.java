@@ -35,24 +35,24 @@ public class GetV1CompaniesAttachmentsResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
-    private Optional<? extends List<CompanyAttachment>> companyAttachmentList;
+    private Optional<? extends List<CompanyAttachment>> companyAttachments;
 
     @JsonCreator
     public GetV1CompaniesAttachmentsResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends List<CompanyAttachment>> companyAttachmentList) {
+            Optional<? extends List<CompanyAttachment>> companyAttachments) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(companyAttachmentList, "companyAttachmentList");
+        Utils.checkNotNull(companyAttachments, "companyAttachments");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.companyAttachmentList = companyAttachmentList;
+        this.companyAttachments = companyAttachments;
     }
     
     public GetV1CompaniesAttachmentsResponse(
@@ -88,12 +88,12 @@ public class GetV1CompaniesAttachmentsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<CompanyAttachment>> companyAttachmentList() {
-        return (Optional<List<CompanyAttachment>>) companyAttachmentList;
+    public Optional<List<CompanyAttachment>> companyAttachments() {
+        return (Optional<List<CompanyAttachment>>) companyAttachments;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1CompaniesAttachmentsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesAttachmentsResponse withCompanyAttachmentList(List<CompanyAttachment> companyAttachmentList) {
-        Utils.checkNotNull(companyAttachmentList, "companyAttachmentList");
-        this.companyAttachmentList = Optional.ofNullable(companyAttachmentList);
+    public GetV1CompaniesAttachmentsResponse withCompanyAttachments(List<CompanyAttachment> companyAttachments) {
+        Utils.checkNotNull(companyAttachments, "companyAttachments");
+        this.companyAttachments = Optional.ofNullable(companyAttachments);
         return this;
     }
 
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesAttachmentsResponse withCompanyAttachmentList(Optional<? extends List<CompanyAttachment>> companyAttachmentList) {
-        Utils.checkNotNull(companyAttachmentList, "companyAttachmentList");
-        this.companyAttachmentList = companyAttachmentList;
+    public GetV1CompaniesAttachmentsResponse withCompanyAttachments(Optional<? extends List<CompanyAttachment>> companyAttachments) {
+        Utils.checkNotNull(companyAttachments, "companyAttachments");
+        this.companyAttachments = companyAttachments;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1CompaniesAttachmentsResponse implements AsyncResponse {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.companyAttachmentList, other.companyAttachmentList);
+            Utils.enhancedDeepEquals(this.companyAttachments, other.companyAttachments);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            companyAttachmentList);
+            companyAttachments);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1CompaniesAttachmentsResponse implements AsyncResponse {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "companyAttachmentList", companyAttachmentList);
+                "companyAttachments", companyAttachments);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1CompaniesAttachmentsResponse implements AsyncResponse {
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends List<CompanyAttachment>> companyAttachmentList = Optional.empty();
+        private Optional<? extends List<CompanyAttachment>> companyAttachments = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1CompaniesAttachmentsResponse implements AsyncResponse {
 
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder companyAttachmentList(List<CompanyAttachment> companyAttachmentList) {
-            Utils.checkNotNull(companyAttachmentList, "companyAttachmentList");
-            this.companyAttachmentList = Optional.ofNullable(companyAttachmentList);
+        public Builder companyAttachments(List<CompanyAttachment> companyAttachments) {
+            Utils.checkNotNull(companyAttachments, "companyAttachments");
+            this.companyAttachments = Optional.ofNullable(companyAttachments);
             return this;
         }
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder companyAttachmentList(Optional<? extends List<CompanyAttachment>> companyAttachmentList) {
-            Utils.checkNotNull(companyAttachmentList, "companyAttachmentList");
-            this.companyAttachmentList = companyAttachmentList;
+        public Builder companyAttachments(Optional<? extends List<CompanyAttachment>> companyAttachments) {
+            Utils.checkNotNull(companyAttachments, "companyAttachments");
+            this.companyAttachments = companyAttachments;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1CompaniesAttachmentsResponse implements AsyncResponse {
 
             return new GetV1CompaniesAttachmentsResponse(
                 contentType, statusCode, rawResponse,
-                companyAttachmentList);
+                companyAttachments);
         }
 
     }

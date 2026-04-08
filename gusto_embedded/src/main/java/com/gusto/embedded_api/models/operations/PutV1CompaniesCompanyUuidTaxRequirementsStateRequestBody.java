@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.gusto.embedded_api.models.components.TaxRequirementSetUpdate;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
@@ -17,14 +18,17 @@ import java.util.Optional;
 
 
 public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody {
-
+    /**
+     * Array of requirement sets to update. Each set corresponds to a category of requirements for the
+     * state.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("requirement_sets")
-    private Optional<? extends List<RequirementSets>> requirementSets;
+    private Optional<? extends List<TaxRequirementSetUpdate>> requirementSets;
 
     @JsonCreator
     public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody(
-            @JsonProperty("requirement_sets") Optional<? extends List<RequirementSets>> requirementSets) {
+            @JsonProperty("requirement_sets") Optional<? extends List<TaxRequirementSetUpdate>> requirementSets) {
         Utils.checkNotNull(requirementSets, "requirementSets");
         this.requirementSets = requirementSets;
     }
@@ -33,10 +37,14 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody {
         this(Optional.empty());
     }
 
+    /**
+     * Array of requirement sets to update. Each set corresponds to a category of requirements for the
+     * state.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<RequirementSets>> requirementSets() {
-        return (Optional<List<RequirementSets>>) requirementSets;
+    public Optional<List<TaxRequirementSetUpdate>> requirementSets() {
+        return (Optional<List<TaxRequirementSetUpdate>>) requirementSets;
     }
 
     public static Builder builder() {
@@ -44,14 +52,22 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody {
     }
 
 
-    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody withRequirementSets(List<RequirementSets> requirementSets) {
+    /**
+     * Array of requirement sets to update. Each set corresponds to a category of requirements for the
+     * state.
+     */
+    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody withRequirementSets(List<TaxRequirementSetUpdate> requirementSets) {
         Utils.checkNotNull(requirementSets, "requirementSets");
         this.requirementSets = Optional.ofNullable(requirementSets);
         return this;
     }
 
 
-    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody withRequirementSets(Optional<? extends List<RequirementSets>> requirementSets) {
+    /**
+     * Array of requirement sets to update. Each set corresponds to a category of requirements for the
+     * state.
+     */
+    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody withRequirementSets(Optional<? extends List<TaxRequirementSetUpdate>> requirementSets) {
         Utils.checkNotNull(requirementSets, "requirementSets");
         this.requirementSets = requirementSets;
         return this;
@@ -85,20 +101,28 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends List<RequirementSets>> requirementSets = Optional.empty();
+        private Optional<? extends List<TaxRequirementSetUpdate>> requirementSets = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder requirementSets(List<RequirementSets> requirementSets) {
+        /**
+         * Array of requirement sets to update. Each set corresponds to a category of requirements for the
+         * state.
+         */
+        public Builder requirementSets(List<TaxRequirementSetUpdate> requirementSets) {
             Utils.checkNotNull(requirementSets, "requirementSets");
             this.requirementSets = Optional.ofNullable(requirementSets);
             return this;
         }
 
-        public Builder requirementSets(Optional<? extends List<RequirementSets>> requirementSets) {
+        /**
+         * Array of requirement sets to update. Each set corresponds to a category of requirements for the
+         * state.
+         */
+        public Builder requirementSets(Optional<? extends List<TaxRequirementSetUpdate>> requirementSets) {
             Utils.checkNotNull(requirementSets, "requirementSets");
             this.requirementSets = requirementSets;
             return this;

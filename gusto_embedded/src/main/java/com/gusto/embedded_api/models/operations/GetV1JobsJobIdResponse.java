@@ -34,7 +34,7 @@ public class GetV1JobsJobIdResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
     private Optional<? extends Job> job;
 
@@ -87,7 +87,7 @@ public class GetV1JobsJobIdResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1JobsJobIdResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     public GetV1JobsJobIdResponse withJob(Job job) {
         Utils.checkNotNull(job, "job");
@@ -138,7 +138,7 @@ public class GetV1JobsJobIdResponse implements Response {
 
 
     /**
-     * Example response
+     * Successful
      */
     public GetV1JobsJobIdResponse withJob(Optional<? extends Job> job) {
         Utils.checkNotNull(job, "job");
@@ -225,7 +225,7 @@ public class GetV1JobsJobIdResponse implements Response {
 
 
         /**
-         * Example response
+         * Successful
          */
         public Builder job(Job job) {
             Utils.checkNotNull(job, "job");
@@ -234,7 +234,7 @@ public class GetV1JobsJobIdResponse implements Response {
         }
 
         /**
-         * Example response
+         * Successful
          */
         public Builder job(Optional<? extends Job> job) {
             Utils.checkNotNull(job, "job");

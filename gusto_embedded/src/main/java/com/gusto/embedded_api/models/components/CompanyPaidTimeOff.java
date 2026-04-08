@@ -12,9 +12,17 @@ import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class CompanyPaidTimeOff {
+    /**
+     * The UUID of the paid time off type.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("uuid")
+    private JsonNullable<String> uuid;
+
     /**
      * The name of the paid time off type.
      */
@@ -24,13 +32,24 @@ public class CompanyPaidTimeOff {
 
     @JsonCreator
     public CompanyPaidTimeOff(
+            @JsonProperty("uuid") JsonNullable<String> uuid,
             @JsonProperty("name") Optional<String> name) {
+        Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(name, "name");
+        this.uuid = uuid;
         this.name = name;
     }
     
     public CompanyPaidTimeOff() {
-        this(Optional.empty());
+        this(JsonNullable.undefined(), Optional.empty());
+    }
+
+    /**
+     * The UUID of the paid time off type.
+     */
+    @JsonIgnore
+    public JsonNullable<String> uuid() {
+        return uuid;
     }
 
     /**
@@ -45,6 +64,24 @@ public class CompanyPaidTimeOff {
         return new Builder();
     }
 
+
+    /**
+     * The UUID of the paid time off type.
+     */
+    public CompanyPaidTimeOff withUuid(String uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = JsonNullable.of(uuid);
+        return this;
+    }
+
+    /**
+     * The UUID of the paid time off type.
+     */
+    public CompanyPaidTimeOff withUuid(JsonNullable<String> uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = uuid;
+        return this;
+    }
 
     /**
      * The name of the paid time off type.
@@ -75,28 +112,51 @@ public class CompanyPaidTimeOff {
         }
         CompanyPaidTimeOff other = (CompanyPaidTimeOff) o;
         return 
+            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
             Utils.enhancedDeepEquals(this.name, other.name);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name);
+            uuid, name);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CompanyPaidTimeOff.class,
+                "uuid", uuid,
                 "name", name);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private JsonNullable<String> uuid = JsonNullable.undefined();
+
         private Optional<String> name = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * The UUID of the paid time off type.
+         */
+        public Builder uuid(String uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = JsonNullable.of(uuid);
+            return this;
+        }
+
+        /**
+         * The UUID of the paid time off type.
+         */
+        public Builder uuid(JsonNullable<String> uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = uuid;
+            return this;
         }
 
 
@@ -121,7 +181,7 @@ public class CompanyPaidTimeOff {
         public CompanyPaidTimeOff build() {
 
             return new CompanyPaidTimeOff(
-                name);
+                uuid, name);
         }
 
     }

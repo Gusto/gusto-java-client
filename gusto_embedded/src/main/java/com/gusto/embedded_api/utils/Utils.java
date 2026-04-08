@@ -308,8 +308,8 @@ public final class Utils {
         return QueryParameters.parseQueryParams(type, params, globals);
     }
 
-    public static HTTPRequest configureSecurity(HTTPRequest request, Object security) throws Exception {
-        return Security.configureSecurity(request, security);
+    public static HTTPRequest configureSecurity(HTTPRequest request, Object security, String... allowedFields) throws Exception {
+        return Security.configureSecurity(request, security, allowedFields);
     }
     
     private static final String DOLLAR_MARKER = "D9qPtyhOYzkHGu3c";
@@ -983,13 +983,18 @@ public final class Utils {
         m.event().ifPresent(value -> node.set("event", new TextNode(value)));
         m.id().ifPresent(value -> node.set("id", new TextNode(value)));
         m.retryMs().ifPresent(value -> node.set("retry", new IntNode(value)));
-        // data is always present (but may be an empty string)
-        if (dataIsPlainText || m.data().trim().isEmpty()) {
-            node.set("data", new TextNode(m.data()));
-        } else {
-            JsonNode tree = mapper.readTree(m.data());
-            node.set("data", tree);
-        }
+        m.data().ifPresent(data -> {
+            if (dataIsPlainText) {
+                node.set("data", new TextNode(data));
+            } else {
+                try {
+                    JsonNode tree = mapper.readTree(data);
+                    node.set("data", tree);
+                } catch (JsonProcessingException e) {
+                    node.set("data", new TextNode(data));
+                }
+            }
+        });
         return mapper.writeValueAsString(node);
     }
     

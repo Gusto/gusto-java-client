@@ -2,6 +2,14 @@
 
 The string identifier for each onboarding step
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.Id;
+
+Id value = Id.ADD_ADDRESSES;
+```
+
 
 ## Values
 

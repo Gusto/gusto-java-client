@@ -2,6 +2,14 @@
 
 The payment method.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.ContractorPaymentPaymentMethod;
+
+ContractorPaymentPaymentMethod value = ContractorPaymentPaymentMethod.DIRECT_DEPOSIT;
+```
+
 
 ## Values
 

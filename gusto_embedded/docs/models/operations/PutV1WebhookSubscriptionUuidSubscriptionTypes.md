@@ -1,5 +1,13 @@
 # PutV1WebhookSubscriptionUuidSubscriptionTypes
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.PutV1WebhookSubscriptionUuidSubscriptionTypes;
+
+PutV1WebhookSubscriptionUuidSubscriptionTypes value = PutV1WebhookSubscriptionUuidSubscriptionTypes.BANK_ACCOUNT;
+```
+
 
 ## Values
 

@@ -35,24 +35,24 @@ public class GetV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Success
      */
-    private Optional<? extends List<Admin>> adminList;
+    private Optional<? extends List<Admin>> admins;
 
     @JsonCreator
     public GetV1CompaniesCompanyIdAdminsResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends List<Admin>> adminList) {
+            Optional<? extends List<Admin>> admins) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(adminList, "adminList");
+        Utils.checkNotNull(admins, "admins");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.adminList = adminList;
+        this.admins = admins;
     }
     
     public GetV1CompaniesCompanyIdAdminsResponse(
@@ -88,12 +88,12 @@ public class GetV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Admin>> adminList() {
-        return (Optional<List<Admin>>) adminList;
+    public Optional<List<Admin>> admins() {
+        return (Optional<List<Admin>>) admins;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Success
      */
-    public GetV1CompaniesCompanyIdAdminsResponse withAdminList(List<Admin> adminList) {
-        Utils.checkNotNull(adminList, "adminList");
-        this.adminList = Optional.ofNullable(adminList);
+    public GetV1CompaniesCompanyIdAdminsResponse withAdmins(List<Admin> admins) {
+        Utils.checkNotNull(admins, "admins");
+        this.admins = Optional.ofNullable(admins);
         return this;
     }
 
 
     /**
-     * Example response
+     * Success
      */
-    public GetV1CompaniesCompanyIdAdminsResponse withAdminList(Optional<? extends List<Admin>> adminList) {
-        Utils.checkNotNull(adminList, "adminList");
-        this.adminList = adminList;
+    public GetV1CompaniesCompanyIdAdminsResponse withAdmins(Optional<? extends List<Admin>> admins) {
+        Utils.checkNotNull(admins, "admins");
+        this.admins = admins;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.adminList, other.adminList);
+            Utils.enhancedDeepEquals(this.admins, other.admins);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            adminList);
+            admins);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "adminList", adminList);
+                "admins", admins);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends List<Admin>> adminList = Optional.empty();
+        private Optional<? extends List<Admin>> admins = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
 
 
         /**
-         * Example response
+         * Success
          */
-        public Builder adminList(List<Admin> adminList) {
-            Utils.checkNotNull(adminList, "adminList");
-            this.adminList = Optional.ofNullable(adminList);
+        public Builder admins(List<Admin> admins) {
+            Utils.checkNotNull(admins, "admins");
+            this.admins = Optional.ofNullable(admins);
             return this;
         }
 
         /**
-         * Example response
+         * Success
          */
-        public Builder adminList(Optional<? extends List<Admin>> adminList) {
-            Utils.checkNotNull(adminList, "adminList");
-            this.adminList = adminList;
+        public Builder admins(Optional<? extends List<Admin>> admins) {
+            Utils.checkNotNull(admins, "admins");
+            this.admins = admins;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
 
             return new GetV1CompaniesCompanyIdAdminsResponse(
                 contentType, statusCode, rawResponse,
-                adminList);
+                admins);
         }
 
     }

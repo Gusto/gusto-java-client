@@ -19,7 +19,7 @@ public class PostV1CompaniesCompanyUuidHolidayPayPolicyRequestBuilder {
 
     private Optional<? extends PostV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
-                            "\"2024-04-01\"",
+                            "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
     private Optional<? extends HolidayPayPolicyRequest> holidayPayPolicyRequest = Optional.empty();
@@ -85,6 +85,6 @@ public class PostV1CompaniesCompanyUuidHolidayPayPolicyRequestBuilder {
     private static final LazySingletonValue<Optional<? extends PostV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
-                    "\"2024-04-01\"",
+                    "\"2025-06-15\"",
                     new TypeReference<Optional<? extends PostV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion>>() {});
 }

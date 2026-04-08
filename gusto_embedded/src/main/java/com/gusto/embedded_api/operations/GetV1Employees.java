@@ -12,7 +12,7 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.SecuritySource;
 import com.gusto.embedded_api.models.components.Employee;
 import com.gusto.embedded_api.models.errors.APIException;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesResponse;
 import com.gusto.embedded_api.utils.Blob;
@@ -97,7 +97,7 @@ public class GetV1Employees {
                     request,
                     null));
             req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-            Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
+            Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity(), "companyAccessAuth");
 
             return req.build();
         }
@@ -168,7 +168,7 @@ public class GetV1Employees {
             }
             if (Utils.statusCodeMatches(response.statusCode(), "404")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    throw UnprocessableEntityErrorObject.from(response);
+                    throw NotFoundErrorObject.from(response);
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
@@ -246,7 +246,7 @@ public class GetV1Employees {
             }
             if (Utils.statusCodeMatches(response.statusCode(), "404")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return UnprocessableEntityErrorObject.fromAsync(response)
+                    return NotFoundErrorObject.fromAsync(response)
                             .thenCompose(CompletableFuture::failedFuture);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);

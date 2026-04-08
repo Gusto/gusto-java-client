@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * CoverageAmount
@@ -36,19 +37,19 @@ public class CoverageAmount {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("default_value")
-    private Optional<? extends BenefitTypeRequirementsCoverageAmountDefaultValue> defaultValue;
+    private JsonNullable<? extends BenefitTypeRequirementsCoverageAmountDefaultValue> defaultValue;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("choices")
-    private Optional<? extends List<String>> choices;
+    private JsonNullable<? extends List<String>> choices;
 
     @JsonCreator
     public CoverageAmount(
             @JsonProperty("required") Optional<Boolean> required,
             @JsonProperty("editable") Optional<Boolean> editable,
-            @JsonProperty("default_value") Optional<? extends BenefitTypeRequirementsCoverageAmountDefaultValue> defaultValue,
-            @JsonProperty("choices") Optional<? extends List<String>> choices) {
+            @JsonProperty("default_value") JsonNullable<? extends BenefitTypeRequirementsCoverageAmountDefaultValue> defaultValue,
+            @JsonProperty("choices") JsonNullable<? extends List<String>> choices) {
         Utils.checkNotNull(required, "required");
         Utils.checkNotNull(editable, "editable");
         Utils.checkNotNull(defaultValue, "defaultValue");
@@ -60,8 +61,8 @@ public class CoverageAmount {
     }
     
     public CoverageAmount() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
+            JsonNullable.undefined());
     }
 
     @JsonIgnore
@@ -76,14 +77,14 @@ public class CoverageAmount {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<BenefitTypeRequirementsCoverageAmountDefaultValue> defaultValue() {
-        return (Optional<BenefitTypeRequirementsCoverageAmountDefaultValue>) defaultValue;
+    public JsonNullable<BenefitTypeRequirementsCoverageAmountDefaultValue> defaultValue() {
+        return (JsonNullable<BenefitTypeRequirementsCoverageAmountDefaultValue>) defaultValue;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<String>> choices() {
-        return (Optional<List<String>>) choices;
+    public JsonNullable<List<String>> choices() {
+        return (JsonNullable<List<String>>) choices;
     }
 
     public static Builder builder() {
@@ -119,12 +120,11 @@ public class CoverageAmount {
 
     public CoverageAmount withDefaultValue(BenefitTypeRequirementsCoverageAmountDefaultValue defaultValue) {
         Utils.checkNotNull(defaultValue, "defaultValue");
-        this.defaultValue = Optional.ofNullable(defaultValue);
+        this.defaultValue = JsonNullable.of(defaultValue);
         return this;
     }
 
-
-    public CoverageAmount withDefaultValue(Optional<? extends BenefitTypeRequirementsCoverageAmountDefaultValue> defaultValue) {
+    public CoverageAmount withDefaultValue(JsonNullable<? extends BenefitTypeRequirementsCoverageAmountDefaultValue> defaultValue) {
         Utils.checkNotNull(defaultValue, "defaultValue");
         this.defaultValue = defaultValue;
         return this;
@@ -132,12 +132,11 @@ public class CoverageAmount {
 
     public CoverageAmount withChoices(List<String> choices) {
         Utils.checkNotNull(choices, "choices");
-        this.choices = Optional.ofNullable(choices);
+        this.choices = JsonNullable.of(choices);
         return this;
     }
 
-
-    public CoverageAmount withChoices(Optional<? extends List<String>> choices) {
+    public CoverageAmount withChoices(JsonNullable<? extends List<String>> choices) {
         Utils.checkNotNull(choices, "choices");
         this.choices = choices;
         return this;
@@ -182,9 +181,9 @@ public class CoverageAmount {
 
         private Optional<Boolean> editable = Optional.empty();
 
-        private Optional<? extends BenefitTypeRequirementsCoverageAmountDefaultValue> defaultValue = Optional.empty();
+        private JsonNullable<? extends BenefitTypeRequirementsCoverageAmountDefaultValue> defaultValue = JsonNullable.undefined();
 
-        private Optional<? extends List<String>> choices = Optional.empty();
+        private JsonNullable<? extends List<String>> choices = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -219,11 +218,11 @@ public class CoverageAmount {
 
         public Builder defaultValue(BenefitTypeRequirementsCoverageAmountDefaultValue defaultValue) {
             Utils.checkNotNull(defaultValue, "defaultValue");
-            this.defaultValue = Optional.ofNullable(defaultValue);
+            this.defaultValue = JsonNullable.of(defaultValue);
             return this;
         }
 
-        public Builder defaultValue(Optional<? extends BenefitTypeRequirementsCoverageAmountDefaultValue> defaultValue) {
+        public Builder defaultValue(JsonNullable<? extends BenefitTypeRequirementsCoverageAmountDefaultValue> defaultValue) {
             Utils.checkNotNull(defaultValue, "defaultValue");
             this.defaultValue = defaultValue;
             return this;
@@ -232,11 +231,11 @@ public class CoverageAmount {
 
         public Builder choices(List<String> choices) {
             Utils.checkNotNull(choices, "choices");
-            this.choices = Optional.ofNullable(choices);
+            this.choices = JsonNullable.of(choices);
             return this;
         }
 
-        public Builder choices(Optional<? extends List<String>> choices) {
+        public Builder choices(JsonNullable<? extends List<String>> choices) {
             Utils.checkNotNull(choices, "choices");
             this.choices = choices;
             return this;

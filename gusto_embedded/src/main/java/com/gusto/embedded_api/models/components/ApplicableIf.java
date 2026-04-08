@@ -29,12 +29,12 @@ public class ApplicableIf {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("value")
-    private JsonNullable<? extends TaxRequirementApplicableIfValue> value;
+    private JsonNullable<? extends TaxRequirementValue> value;
 
     @JsonCreator
     public ApplicableIf(
             @JsonProperty("key") Optional<String> key,
-            @JsonProperty("value") JsonNullable<? extends TaxRequirementApplicableIfValue> value) {
+            @JsonProperty("value") JsonNullable<? extends TaxRequirementValue> value) {
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(value, "value");
         this.key = key;
@@ -58,8 +58,8 @@ public class ApplicableIf {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<TaxRequirementApplicableIfValue> value() {
-        return (JsonNullable<TaxRequirementApplicableIfValue>) value;
+    public JsonNullable<TaxRequirementValue> value() {
+        return (JsonNullable<TaxRequirementValue>) value;
     }
 
     public static Builder builder() {
@@ -89,7 +89,7 @@ public class ApplicableIf {
     /**
      * The required value of the requirement identified by `key`
      */
-    public ApplicableIf withValue(TaxRequirementApplicableIfValue value) {
+    public ApplicableIf withValue(TaxRequirementValue value) {
         Utils.checkNotNull(value, "value");
         this.value = JsonNullable.of(value);
         return this;
@@ -98,7 +98,7 @@ public class ApplicableIf {
     /**
      * The required value of the requirement identified by `key`
      */
-    public ApplicableIf withValue(JsonNullable<? extends TaxRequirementApplicableIfValue> value) {
+    public ApplicableIf withValue(JsonNullable<? extends TaxRequirementValue> value) {
         Utils.checkNotNull(value, "value");
         this.value = value;
         return this;
@@ -136,7 +136,7 @@ public class ApplicableIf {
 
         private Optional<String> key = Optional.empty();
 
-        private JsonNullable<? extends TaxRequirementApplicableIfValue> value = JsonNullable.undefined();
+        private JsonNullable<? extends TaxRequirementValue> value = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -165,7 +165,7 @@ public class ApplicableIf {
         /**
          * The required value of the requirement identified by `key`
          */
-        public Builder value(TaxRequirementApplicableIfValue value) {
+        public Builder value(TaxRequirementValue value) {
             Utils.checkNotNull(value, "value");
             this.value = JsonNullable.of(value);
             return this;
@@ -174,7 +174,7 @@ public class ApplicableIf {
         /**
          * The required value of the requirement identified by `key`
          */
-        public Builder value(JsonNullable<? extends TaxRequirementApplicableIfValue> value) {
+        public Builder value(JsonNullable<? extends TaxRequirementValue> value) {
             Utils.checkNotNull(value, "value");
             this.value = value;
             return this;

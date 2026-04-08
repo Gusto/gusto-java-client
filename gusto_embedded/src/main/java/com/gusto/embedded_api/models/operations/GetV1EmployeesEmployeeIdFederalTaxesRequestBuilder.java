@@ -7,7 +7,6 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.operations.GetV1EmployeesEmployeeIdFederalTaxes;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,33 +16,33 @@ import java.util.Optional;
 
 public class GetV1EmployeesEmployeeIdFederalTaxesRequestBuilder {
 
-    private String employeeUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion>>() {});
+    private String employeeUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1EmployeesEmployeeIdFederalTaxesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
-    public GetV1EmployeesEmployeeIdFederalTaxesRequestBuilder employeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
-        return this;
-    }
                 
-    public GetV1EmployeesEmployeeIdFederalTaxesRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public GetV1EmployeesEmployeeIdFederalTaxesRequestBuilder xGustoAPIVersion(GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public GetV1EmployeesEmployeeIdFederalTaxesRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1EmployeesEmployeeIdFederalTaxesRequestBuilder xGustoAPIVersion(Optional<? extends GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public GetV1EmployeesEmployeeIdFederalTaxesRequestBuilder employeeUuid(String employeeUuid) {
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
+        this.employeeUuid = employeeUuid;
         return this;
     }
 
@@ -53,8 +52,8 @@ public class GetV1EmployeesEmployeeIdFederalTaxesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1EmployeesEmployeeIdFederalTaxesRequest request = new GetV1EmployeesEmployeeIdFederalTaxesRequest(employeeUuid,
-            xGustoAPIVersion);
+        GetV1EmployeesEmployeeIdFederalTaxesRequest request = new GetV1EmployeesEmployeeIdFederalTaxesRequest(xGustoAPIVersion,
+            employeeUuid);
 
         return request;
     }
@@ -68,9 +67,9 @@ public class GetV1EmployeesEmployeeIdFederalTaxesRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion>>() {});
 }

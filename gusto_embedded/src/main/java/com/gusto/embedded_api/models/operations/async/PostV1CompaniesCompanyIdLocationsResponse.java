@@ -34,7 +34,7 @@ public class PostV1CompaniesCompanyIdLocationsResponse implements AsyncResponse 
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Created
      */
     private Optional<? extends Location> location;
 
@@ -87,7 +87,7 @@ public class PostV1CompaniesCompanyIdLocationsResponse implements AsyncResponse 
     }
 
     /**
-     * Example response
+     * Created
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PostV1CompaniesCompanyIdLocationsResponse implements AsyncResponse 
     }
 
     /**
-     * Example response
+     * Created
      */
     public PostV1CompaniesCompanyIdLocationsResponse withLocation(Location location) {
         Utils.checkNotNull(location, "location");
@@ -138,7 +138,7 @@ public class PostV1CompaniesCompanyIdLocationsResponse implements AsyncResponse 
 
 
     /**
-     * Example response
+     * Created
      */
     public PostV1CompaniesCompanyIdLocationsResponse withLocation(Optional<? extends Location> location) {
         Utils.checkNotNull(location, "location");
@@ -225,7 +225,7 @@ public class PostV1CompaniesCompanyIdLocationsResponse implements AsyncResponse 
 
 
         /**
-         * Example response
+         * Created
          */
         public Builder location(Location location) {
             Utils.checkNotNull(location, "location");
@@ -234,7 +234,7 @@ public class PostV1CompaniesCompanyIdLocationsResponse implements AsyncResponse 
         }
 
         /**
-         * Example response
+         * Created
          */
         public Builder location(Optional<? extends Location> location) {
             Utils.checkNotNull(location, "location");

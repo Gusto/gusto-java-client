@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * AmountType
  * 
- * <p>The amount type of the deduction for the pay period.
+ * <p>The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
  */
 public enum AmountType {
     FIXED("fixed"),

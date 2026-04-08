@@ -16,6 +16,7 @@ import java.lang.SuppressWarnings;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class PostV1CompaniesCompanyIdPayrollsRequestBody {
@@ -56,7 +57,7 @@ public class PostV1CompaniesCompanyIdPayrollsRequestBody {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("employee_uuids")
-    private Optional<? extends List<String>> employeeUuids;
+    private JsonNullable<? extends List<String>> employeeUuids;
 
     /**
      * Payment date.
@@ -104,7 +105,7 @@ public class PostV1CompaniesCompanyIdPayrollsRequestBody {
             @JsonProperty("start_date") LocalDate startDate,
             @JsonProperty("end_date") LocalDate endDate,
             @JsonProperty("pay_schedule_uuid") Optional<String> payScheduleUuid,
-            @JsonProperty("employee_uuids") Optional<? extends List<String>> employeeUuids,
+            @JsonProperty("employee_uuids") JsonNullable<? extends List<String>> employeeUuids,
             @JsonProperty("check_date") Optional<LocalDate> checkDate,
             @JsonProperty("withholding_pay_period") Optional<? extends WithholdingPayPeriod> withholdingPayPeriod,
             @JsonProperty("skip_regular_deductions") Optional<Boolean> skipRegularDeductions,
@@ -140,7 +141,7 @@ public class PostV1CompaniesCompanyIdPayrollsRequestBody {
             LocalDate startDate,
             LocalDate endDate) {
         this(offCycle, offCycleReason, startDate,
-            endDate, Optional.empty(), Optional.empty(),
+            endDate, Optional.empty(), JsonNullable.undefined(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty());
     }
@@ -191,8 +192,8 @@ public class PostV1CompaniesCompanyIdPayrollsRequestBody {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<String>> employeeUuids() {
-        return (Optional<List<String>>) employeeUuids;
+    public JsonNullable<List<String>> employeeUuids() {
+        return (JsonNullable<List<String>>) employeeUuids;
     }
 
     /**
@@ -307,15 +308,14 @@ public class PostV1CompaniesCompanyIdPayrollsRequestBody {
      */
     public PostV1CompaniesCompanyIdPayrollsRequestBody withEmployeeUuids(List<String> employeeUuids) {
         Utils.checkNotNull(employeeUuids, "employeeUuids");
-        this.employeeUuids = Optional.ofNullable(employeeUuids);
+        this.employeeUuids = JsonNullable.of(employeeUuids);
         return this;
     }
-
 
     /**
      * A list of employee uuids to include on the payroll.
      */
-    public PostV1CompaniesCompanyIdPayrollsRequestBody withEmployeeUuids(Optional<? extends List<String>> employeeUuids) {
+    public PostV1CompaniesCompanyIdPayrollsRequestBody withEmployeeUuids(JsonNullable<? extends List<String>> employeeUuids) {
         Utils.checkNotNull(employeeUuids, "employeeUuids");
         this.employeeUuids = employeeUuids;
         return this;
@@ -485,7 +485,7 @@ public class PostV1CompaniesCompanyIdPayrollsRequestBody {
 
         private Optional<String> payScheduleUuid = Optional.empty();
 
-        private Optional<? extends List<String>> employeeUuids = Optional.empty();
+        private JsonNullable<? extends List<String>> employeeUuids = JsonNullable.undefined();
 
         private Optional<LocalDate> checkDate = Optional.empty();
 
@@ -568,14 +568,14 @@ public class PostV1CompaniesCompanyIdPayrollsRequestBody {
          */
         public Builder employeeUuids(List<String> employeeUuids) {
             Utils.checkNotNull(employeeUuids, "employeeUuids");
-            this.employeeUuids = Optional.ofNullable(employeeUuids);
+            this.employeeUuids = JsonNullable.of(employeeUuids);
             return this;
         }
 
         /**
          * A list of employee uuids to include on the payroll.
          */
-        public Builder employeeUuids(Optional<? extends List<String>> employeeUuids) {
+        public Builder employeeUuids(JsonNullable<? extends List<String>> employeeUuids) {
             Utils.checkNotNull(employeeUuids, "employeeUuids");
             this.employeeUuids = employeeUuids;
             return this;

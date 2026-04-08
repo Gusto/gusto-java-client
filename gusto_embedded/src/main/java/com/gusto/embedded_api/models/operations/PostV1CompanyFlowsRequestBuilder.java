@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.CreateFlowRequest;
 import com.gusto.embedded_api.operations.PostV1CompanyFlows;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,17 +17,29 @@ import java.util.Optional;
 
 public class PostV1CompanyFlowsRequestBuilder {
 
-    private String companyUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PostV1CompanyFlowsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PostV1CompanyFlowsRequestBody requestBody;
+                            new TypeReference<Optional<? extends PostV1CompanyFlowsHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private CreateFlowRequest createFlowRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1CompanyFlowsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PostV1CompanyFlowsRequestBuilder xGustoAPIVersion(PostV1CompanyFlowsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PostV1CompanyFlowsRequestBuilder xGustoAPIVersion(Optional<? extends PostV1CompanyFlowsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PostV1CompanyFlowsRequestBuilder companyUuid(String companyUuid) {
@@ -35,22 +47,10 @@ public class PostV1CompanyFlowsRequestBuilder {
         this.companyUuid = companyUuid;
         return this;
     }
-                
-    public PostV1CompanyFlowsRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
 
-    public PostV1CompanyFlowsRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PostV1CompanyFlowsRequestBuilder requestBody(PostV1CompanyFlowsRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PostV1CompanyFlowsRequestBuilder createFlowRequest(CreateFlowRequest createFlowRequest) {
+        Utils.checkNotNull(createFlowRequest, "createFlowRequest");
+        this.createFlowRequest = createFlowRequest;
         return this;
     }
 
@@ -60,9 +60,9 @@ public class PostV1CompanyFlowsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1CompanyFlowsRequest request = new PostV1CompanyFlowsRequest(companyUuid,
-            xGustoAPIVersion,
-            requestBody);
+        PostV1CompanyFlowsRequest request = new PostV1CompanyFlowsRequest(xGustoAPIVersion,
+            companyUuid,
+            createFlowRequest);
 
         return request;
     }
@@ -76,9 +76,9 @@ public class PostV1CompanyFlowsRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PostV1CompanyFlowsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PostV1CompanyFlowsHeaderXGustoAPIVersion>>() {});
 }

@@ -5,14 +5,10 @@ package com.gusto.embedded_api.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
-import java.util.Optional;
 
 /**
  * CompanyAttachment
@@ -23,37 +19,36 @@ public class CompanyAttachment {
     /**
      * UUID of the company attachment
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("uuid")
-    private Optional<String> uuid;
+    private String uuid;
 
     /**
      * name of the file uploaded
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
-    private Optional<String> name;
+    private String name;
 
     /**
-     * The category of the company attachment
+     * The category of the company attachment.
+     * - `gep_notice`: A tax notice attachment
+     * - `compliance`: A compliance attachment
+     * - `other`: Any other attachment type
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("category")
-    private Optional<? extends Category> category;
+    private Category category;
 
     /**
      * The ISO 8601 timestamp of when an attachment was uploaded
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("upload_time")
-    private Optional<String> uploadTime;
+    private String uploadTime;
 
     @JsonCreator
     public CompanyAttachment(
-            @JsonProperty("uuid") Optional<String> uuid,
-            @JsonProperty("name") Optional<String> name,
-            @JsonProperty("category") Optional<? extends Category> category,
-            @JsonProperty("upload_time") Optional<String> uploadTime) {
+            @JsonProperty("uuid") String uuid,
+            @JsonProperty("name") String name,
+            @JsonProperty("category") Category category,
+            @JsonProperty("upload_time") String uploadTime) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(category, "category");
@@ -63,17 +58,12 @@ public class CompanyAttachment {
         this.category = category;
         this.uploadTime = uploadTime;
     }
-    
-    public CompanyAttachment() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
-    }
 
     /**
      * UUID of the company attachment
      */
     @JsonIgnore
-    public Optional<String> uuid() {
+    public String uuid() {
         return uuid;
     }
 
@@ -81,24 +71,26 @@ public class CompanyAttachment {
      * name of the file uploaded
      */
     @JsonIgnore
-    public Optional<String> name() {
+    public String name() {
         return name;
     }
 
     /**
-     * The category of the company attachment
+     * The category of the company attachment.
+     * - `gep_notice`: A tax notice attachment
+     * - `compliance`: A compliance attachment
+     * - `other`: Any other attachment type
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Category> category() {
-        return (Optional<Category>) category;
+    public Category category() {
+        return category;
     }
 
     /**
      * The ISO 8601 timestamp of when an attachment was uploaded
      */
     @JsonIgnore
-    public Optional<String> uploadTime() {
+    public String uploadTime() {
         return uploadTime;
     }
 
@@ -112,16 +104,6 @@ public class CompanyAttachment {
      */
     public CompanyAttachment withUuid(String uuid) {
         Utils.checkNotNull(uuid, "uuid");
-        this.uuid = Optional.ofNullable(uuid);
-        return this;
-    }
-
-
-    /**
-     * UUID of the company attachment
-     */
-    public CompanyAttachment withUuid(Optional<String> uuid) {
-        Utils.checkNotNull(uuid, "uuid");
         this.uuid = uuid;
         return this;
     }
@@ -131,34 +113,17 @@ public class CompanyAttachment {
      */
     public CompanyAttachment withName(String name) {
         Utils.checkNotNull(name, "name");
-        this.name = Optional.ofNullable(name);
-        return this;
-    }
-
-
-    /**
-     * name of the file uploaded
-     */
-    public CompanyAttachment withName(Optional<String> name) {
-        Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
     }
 
     /**
-     * The category of the company attachment
+     * The category of the company attachment.
+     * - `gep_notice`: A tax notice attachment
+     * - `compliance`: A compliance attachment
+     * - `other`: Any other attachment type
      */
     public CompanyAttachment withCategory(Category category) {
-        Utils.checkNotNull(category, "category");
-        this.category = Optional.ofNullable(category);
-        return this;
-    }
-
-
-    /**
-     * The category of the company attachment
-     */
-    public CompanyAttachment withCategory(Optional<? extends Category> category) {
         Utils.checkNotNull(category, "category");
         this.category = category;
         return this;
@@ -168,16 +133,6 @@ public class CompanyAttachment {
      * The ISO 8601 timestamp of when an attachment was uploaded
      */
     public CompanyAttachment withUploadTime(String uploadTime) {
-        Utils.checkNotNull(uploadTime, "uploadTime");
-        this.uploadTime = Optional.ofNullable(uploadTime);
-        return this;
-    }
-
-
-    /**
-     * The ISO 8601 timestamp of when an attachment was uploaded
-     */
-    public CompanyAttachment withUploadTime(Optional<String> uploadTime) {
         Utils.checkNotNull(uploadTime, "uploadTime");
         this.uploadTime = uploadTime;
         return this;
@@ -218,13 +173,13 @@ public class CompanyAttachment {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> uuid = Optional.empty();
+        private String uuid;
 
-        private Optional<String> name = Optional.empty();
+        private String name;
 
-        private Optional<? extends Category> category = Optional.empty();
+        private Category category;
 
-        private Optional<String> uploadTime = Optional.empty();
+        private String uploadTime;
 
         private Builder() {
           // force use of static builder() method
@@ -236,15 +191,6 @@ public class CompanyAttachment {
          */
         public Builder uuid(String uuid) {
             Utils.checkNotNull(uuid, "uuid");
-            this.uuid = Optional.ofNullable(uuid);
-            return this;
-        }
-
-        /**
-         * UUID of the company attachment
-         */
-        public Builder uuid(Optional<String> uuid) {
-            Utils.checkNotNull(uuid, "uuid");
             this.uuid = uuid;
             return this;
         }
@@ -255,33 +201,18 @@ public class CompanyAttachment {
          */
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
-            this.name = Optional.ofNullable(name);
-            return this;
-        }
-
-        /**
-         * name of the file uploaded
-         */
-        public Builder name(Optional<String> name) {
-            Utils.checkNotNull(name, "name");
             this.name = name;
             return this;
         }
 
 
         /**
-         * The category of the company attachment
+         * The category of the company attachment.
+         * - `gep_notice`: A tax notice attachment
+         * - `compliance`: A compliance attachment
+         * - `other`: Any other attachment type
          */
         public Builder category(Category category) {
-            Utils.checkNotNull(category, "category");
-            this.category = Optional.ofNullable(category);
-            return this;
-        }
-
-        /**
-         * The category of the company attachment
-         */
-        public Builder category(Optional<? extends Category> category) {
             Utils.checkNotNull(category, "category");
             this.category = category;
             return this;
@@ -292,15 +223,6 @@ public class CompanyAttachment {
          * The ISO 8601 timestamp of when an attachment was uploaded
          */
         public Builder uploadTime(String uploadTime) {
-            Utils.checkNotNull(uploadTime, "uploadTime");
-            this.uploadTime = Optional.ofNullable(uploadTime);
-            return this;
-        }
-
-        /**
-         * The ISO 8601 timestamp of when an attachment was uploaded
-         */
-        public Builder uploadTime(Optional<String> uploadTime) {
             Utils.checkNotNull(uploadTime, "uploadTime");
             this.uploadTime = uploadTime;
             return this;

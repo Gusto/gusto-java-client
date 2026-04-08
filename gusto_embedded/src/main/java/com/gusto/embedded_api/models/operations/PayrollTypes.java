@@ -8,10 +8,15 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * PayrollTypes
+ * 
+ * <p>Comma-separated list of payroll types to include (regular, transition). Defaults to regular only.
+ */
 public enum PayrollTypes {
     REGULAR("regular"),
-    OFF_CYCLE("off_cycle"),
-    EXTERNAL("external");
+    TRANSITION("transition"),
+    REGULAR_TRANSITION("regular,transition");
 
     @JsonValue
     private final String value;

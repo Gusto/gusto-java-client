@@ -5,6 +5,7 @@ package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gusto.embedded_api.models.components.CompanyAttachmentDownloadUrl;
 import com.gusto.embedded_api.utils.Response;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
@@ -33,24 +34,24 @@ public class GetV1CompaniesAttachmentUrlResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
-    private Optional<? extends GetV1CompaniesAttachmentUrlResponseBody> object;
+    private Optional<? extends CompanyAttachmentDownloadUrl> companyAttachmentDownloadUrl;
 
     @JsonCreator
     public GetV1CompaniesAttachmentUrlResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends GetV1CompaniesAttachmentUrlResponseBody> object) {
+            Optional<? extends CompanyAttachmentDownloadUrl> companyAttachmentDownloadUrl) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(object, "object");
+        Utils.checkNotNull(companyAttachmentDownloadUrl, "companyAttachmentDownloadUrl");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.object = object;
+        this.companyAttachmentDownloadUrl = companyAttachmentDownloadUrl;
     }
     
     public GetV1CompaniesAttachmentUrlResponse(
@@ -86,12 +87,12 @@ public class GetV1CompaniesAttachmentUrlResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetV1CompaniesAttachmentUrlResponseBody> object() {
-        return (Optional<GetV1CompaniesAttachmentUrlResponseBody>) object;
+    public Optional<CompanyAttachmentDownloadUrl> companyAttachmentDownloadUrl() {
+        return (Optional<CompanyAttachmentDownloadUrl>) companyAttachmentDownloadUrl;
     }
 
     public static Builder builder() {
@@ -127,21 +128,21 @@ public class GetV1CompaniesAttachmentUrlResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesAttachmentUrlResponse withObject(GetV1CompaniesAttachmentUrlResponseBody object) {
-        Utils.checkNotNull(object, "object");
-        this.object = Optional.ofNullable(object);
+    public GetV1CompaniesAttachmentUrlResponse withCompanyAttachmentDownloadUrl(CompanyAttachmentDownloadUrl companyAttachmentDownloadUrl) {
+        Utils.checkNotNull(companyAttachmentDownloadUrl, "companyAttachmentDownloadUrl");
+        this.companyAttachmentDownloadUrl = Optional.ofNullable(companyAttachmentDownloadUrl);
         return this;
     }
 
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesAttachmentUrlResponse withObject(Optional<? extends GetV1CompaniesAttachmentUrlResponseBody> object) {
-        Utils.checkNotNull(object, "object");
-        this.object = object;
+    public GetV1CompaniesAttachmentUrlResponse withCompanyAttachmentDownloadUrl(Optional<? extends CompanyAttachmentDownloadUrl> companyAttachmentDownloadUrl) {
+        Utils.checkNotNull(companyAttachmentDownloadUrl, "companyAttachmentDownloadUrl");
+        this.companyAttachmentDownloadUrl = companyAttachmentDownloadUrl;
         return this;
     }
 
@@ -158,14 +159,14 @@ public class GetV1CompaniesAttachmentUrlResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.object, other.object);
+            Utils.enhancedDeepEquals(this.companyAttachmentDownloadUrl, other.companyAttachmentDownloadUrl);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            object);
+            companyAttachmentDownloadUrl);
     }
     
     @Override
@@ -174,7 +175,7 @@ public class GetV1CompaniesAttachmentUrlResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "object", object);
+                "companyAttachmentDownloadUrl", companyAttachmentDownloadUrl);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -186,7 +187,7 @@ public class GetV1CompaniesAttachmentUrlResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends GetV1CompaniesAttachmentUrlResponseBody> object = Optional.empty();
+        private Optional<? extends CompanyAttachmentDownloadUrl> companyAttachmentDownloadUrl = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -224,20 +225,20 @@ public class GetV1CompaniesAttachmentUrlResponse implements Response {
 
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder object(GetV1CompaniesAttachmentUrlResponseBody object) {
-            Utils.checkNotNull(object, "object");
-            this.object = Optional.ofNullable(object);
+        public Builder companyAttachmentDownloadUrl(CompanyAttachmentDownloadUrl companyAttachmentDownloadUrl) {
+            Utils.checkNotNull(companyAttachmentDownloadUrl, "companyAttachmentDownloadUrl");
+            this.companyAttachmentDownloadUrl = Optional.ofNullable(companyAttachmentDownloadUrl);
             return this;
         }
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder object(Optional<? extends GetV1CompaniesAttachmentUrlResponseBody> object) {
-            Utils.checkNotNull(object, "object");
-            this.object = object;
+        public Builder companyAttachmentDownloadUrl(Optional<? extends CompanyAttachmentDownloadUrl> companyAttachmentDownloadUrl) {
+            Utils.checkNotNull(companyAttachmentDownloadUrl, "companyAttachmentDownloadUrl");
+            this.companyAttachmentDownloadUrl = companyAttachmentDownloadUrl;
             return this;
         }
 
@@ -245,7 +246,7 @@ public class GetV1CompaniesAttachmentUrlResponse implements Response {
 
             return new GetV1CompaniesAttachmentUrlResponse(
                 contentType, statusCode, rawResponse,
-                object);
+                companyAttachmentDownloadUrl);
         }
 
     }

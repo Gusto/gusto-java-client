@@ -2,6 +2,14 @@
 
 An off cycle payroll reason. Select one from the following list.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.OffCycleReason;
+
+OffCycleReason value = OffCycleReason.BONUS;
+```
+
 
 ## Values
 

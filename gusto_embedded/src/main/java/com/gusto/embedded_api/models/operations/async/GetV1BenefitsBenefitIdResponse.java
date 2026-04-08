@@ -34,7 +34,7 @@ public class GetV1BenefitsBenefitIdResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Supported benefit response
+     * Successful
      */
     private Optional<? extends SupportedBenefit> supportedBenefit;
 
@@ -87,7 +87,7 @@ public class GetV1BenefitsBenefitIdResponse implements AsyncResponse {
     }
 
     /**
-     * Supported benefit response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1BenefitsBenefitIdResponse implements AsyncResponse {
     }
 
     /**
-     * Supported benefit response
+     * Successful
      */
     public GetV1BenefitsBenefitIdResponse withSupportedBenefit(SupportedBenefit supportedBenefit) {
         Utils.checkNotNull(supportedBenefit, "supportedBenefit");
@@ -138,7 +138,7 @@ public class GetV1BenefitsBenefitIdResponse implements AsyncResponse {
 
 
     /**
-     * Supported benefit response
+     * Successful
      */
     public GetV1BenefitsBenefitIdResponse withSupportedBenefit(Optional<? extends SupportedBenefit> supportedBenefit) {
         Utils.checkNotNull(supportedBenefit, "supportedBenefit");
@@ -225,7 +225,7 @@ public class GetV1BenefitsBenefitIdResponse implements AsyncResponse {
 
 
         /**
-         * Supported benefit response
+         * Successful
          */
         public Builder supportedBenefit(SupportedBenefit supportedBenefit) {
             Utils.checkNotNull(supportedBenefit, "supportedBenefit");
@@ -234,7 +234,7 @@ public class GetV1BenefitsBenefitIdResponse implements AsyncResponse {
         }
 
         /**
-         * Supported benefit response
+         * Successful
          */
         public Builder supportedBenefit(Optional<? extends SupportedBenefit> supportedBenefit) {
             Utils.checkNotNull(supportedBenefit, "supportedBenefit");

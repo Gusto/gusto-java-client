@@ -3,11 +3,10 @@
  */
 package com.gusto.embedded_api.models.components;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 import java.lang.String;
 
 /**
@@ -16,10 +15,14 @@ import java.lang.String;
  * <p>Federal tax information for an employee. The response structure varies based on the w4_data_type
  * field.
  */
-@JsonTypeInfo(use = Id.NAME, property = "w4_data_type", include = As.EXISTING_PROPERTY, visible = true)
-@JsonSubTypes({
-    @Type(value = EmployeeFederalTaxPre2020.class, name="pre_2020_w4"),
-    @Type(value = EmployeeFederalTaxRev2020.class, name="rev_2020_w4")})
+@JsonTypeInfo(
+        use = Id.CUSTOM,
+        property = "w4_data_type",
+        include = As.EXISTING_PROPERTY,
+        visible = true,
+        defaultImpl = UnknownEmployeeFederalTax.class
+)
+@JsonTypeIdResolver(EmployeeFederalTaxTypeIdResolver.class)
 public interface EmployeeFederalTax {
 
     String w4DataType();

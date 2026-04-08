@@ -6,8 +6,6 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.SortOrder;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -18,6 +16,14 @@ import java.util.Optional;
 
 
 public class GetEventsRequest {
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends GetEventsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
     /**
      * A cursor for pagination. Returns all events occuring after the specified UUID (exclusive). Events
      * are sorted according to the provided sort_order param.
@@ -49,41 +55,44 @@ public class GetEventsRequest {
      * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort_order")
-    private Optional<? extends SortOrder> sortOrder;
+    private Optional<? extends QueryParamSortOrder> sortOrder;
+
+    @JsonCreator
+    public GetEventsRequest(
+            Optional<? extends GetEventsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<String> startingAfterUuid,
+            Optional<String> resourceUuid,
+            Optional<String> limit,
+            Optional<String> eventType,
+            Optional<? extends QueryParamSortOrder> sortOrder) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(startingAfterUuid, "startingAfterUuid");
+        Utils.checkNotNull(resourceUuid, "resourceUuid");
+        Utils.checkNotNull(limit, "limit");
+        Utils.checkNotNull(eventType, "eventType");
+        Utils.checkNotNull(sortOrder, "sortOrder");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        this.startingAfterUuid = startingAfterUuid;
+        this.resourceUuid = resourceUuid;
+        this.limit = limit;
+        this.eventType = eventType;
+        this.sortOrder = sortOrder;
+    }
+    
+    public GetEventsRequest() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
+    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-    @JsonCreator
-    public GetEventsRequest(
-            Optional<String> startingAfterUuid,
-            Optional<String> resourceUuid,
-            Optional<String> limit,
-            Optional<String> eventType,
-            Optional<? extends SortOrder> sortOrder,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(startingAfterUuid, "startingAfterUuid");
-        Utils.checkNotNull(resourceUuid, "resourceUuid");
-        Utils.checkNotNull(limit, "limit");
-        Utils.checkNotNull(eventType, "eventType");
-        Utils.checkNotNull(sortOrder, "sortOrder");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.startingAfterUuid = startingAfterUuid;
-        this.resourceUuid = resourceUuid;
-        this.limit = limit;
-        this.eventType = eventType;
-        this.sortOrder = sortOrder;
-        this.xGustoAPIVersion = xGustoAPIVersion;
-    }
-    
-    public GetEventsRequest() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetEventsHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetEventsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -126,25 +135,37 @@ public class GetEventsRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<SortOrder> sortOrder() {
-        return (Optional<SortOrder>) sortOrder;
-    }
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<QueryParamSortOrder> sortOrder() {
+        return (Optional<QueryParamSortOrder>) sortOrder;
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public GetEventsRequest withXGustoAPIVersion(GetEventsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        return this;
+    }
+
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public GetEventsRequest withXGustoAPIVersion(Optional<? extends GetEventsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
 
     /**
      * A cursor for pagination. Returns all events occuring after the specified UUID (exclusive). Events
@@ -230,7 +251,7 @@ public class GetEventsRequest {
      * A string indicating whether to sort resulting events in ascending (asc) or descending (desc)
      * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
      */
-    public GetEventsRequest withSortOrder(SortOrder sortOrder) {
+    public GetEventsRequest withSortOrder(QueryParamSortOrder sortOrder) {
         Utils.checkNotNull(sortOrder, "sortOrder");
         this.sortOrder = Optional.ofNullable(sortOrder);
         return this;
@@ -241,32 +262,9 @@ public class GetEventsRequest {
      * A string indicating whether to sort resulting events in ascending (asc) or descending (desc)
      * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
      */
-    public GetEventsRequest withSortOrder(Optional<? extends SortOrder> sortOrder) {
+    public GetEventsRequest withSortOrder(Optional<? extends QueryParamSortOrder> sortOrder) {
         Utils.checkNotNull(sortOrder, "sortOrder");
         this.sortOrder = sortOrder;
-        return this;
-    }
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public GetEventsRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-        return this;
-    }
-
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public GetEventsRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
@@ -280,34 +278,36 @@ public class GetEventsRequest {
         }
         GetEventsRequest other = (GetEventsRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.startingAfterUuid, other.startingAfterUuid) &&
             Utils.enhancedDeepEquals(this.resourceUuid, other.resourceUuid) &&
             Utils.enhancedDeepEquals(this.limit, other.limit) &&
             Utils.enhancedDeepEquals(this.eventType, other.eventType) &&
-            Utils.enhancedDeepEquals(this.sortOrder, other.sortOrder) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.sortOrder, other.sortOrder);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            startingAfterUuid, resourceUuid, limit,
-            eventType, sortOrder, xGustoAPIVersion);
+            xGustoAPIVersion, startingAfterUuid, resourceUuid,
+            limit, eventType, sortOrder);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetEventsRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "startingAfterUuid", startingAfterUuid,
                 "resourceUuid", resourceUuid,
                 "limit", limit,
                 "eventType", eventType,
-                "sortOrder", sortOrder,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "sortOrder", sortOrder);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
+
+        private Optional<? extends GetEventsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private Optional<String> startingAfterUuid = Optional.empty();
 
@@ -317,12 +317,33 @@ public class GetEventsRequest {
 
         private Optional<String> eventType = Optional.empty();
 
-        private Optional<? extends SortOrder> sortOrder = Optional.empty();
-
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<? extends QueryParamSortOrder> sortOrder = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(GetEventsHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends GetEventsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -410,7 +431,7 @@ public class GetEventsRequest {
          * A string indicating whether to sort resulting events in ascending (asc) or descending (desc)
          * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
          */
-        public Builder sortOrder(SortOrder sortOrder) {
+        public Builder sortOrder(QueryParamSortOrder sortOrder) {
             Utils.checkNotNull(sortOrder, "sortOrder");
             this.sortOrder = Optional.ofNullable(sortOrder);
             return this;
@@ -420,32 +441,9 @@ public class GetEventsRequest {
          * A string indicating whether to sort resulting events in ascending (asc) or descending (desc)
          * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
          */
-        public Builder sortOrder(Optional<? extends SortOrder> sortOrder) {
+        public Builder sortOrder(Optional<? extends QueryParamSortOrder> sortOrder) {
             Utils.checkNotNull(sortOrder, "sortOrder");
             this.sortOrder = sortOrder;
-            return this;
-        }
-
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
         }
 
@@ -455,15 +453,15 @@ public class GetEventsRequest {
             }
 
             return new GetEventsRequest(
-                startingAfterUuid, resourceUuid, limit,
-                eventType, sortOrder, xGustoAPIVersion);
+                xGustoAPIVersion, startingAfterUuid, resourceUuid,
+                limit, eventType, sortOrder);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends GetEventsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends GetEventsHeaderXGustoAPIVersion>>() {});
     }
 }

@@ -19,7 +19,7 @@ public class PostV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder {
 
     private Optional<? extends PostV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
-                            "\"2024-04-01\"",
+                            "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
     private TimeOffPolicyRequest timeOffPolicyRequest;
@@ -79,6 +79,6 @@ public class PostV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder {
     private static final LazySingletonValue<Optional<? extends PostV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
-                    "\"2024-04-01\"",
+                    "\"2025-06-15\"",
                     new TypeReference<Optional<? extends PostV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion>>() {});
 }

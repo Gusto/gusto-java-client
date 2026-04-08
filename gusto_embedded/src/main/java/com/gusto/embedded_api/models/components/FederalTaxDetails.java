@@ -16,11 +16,7 @@ import java.lang.SuppressWarnings;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
-/**
- * FederalTaxDetails
- * 
- * <p>Example response
- */
+
 public class FederalTaxDetails {
     /**
      * The current version of the object. See the [versioning
@@ -48,7 +44,7 @@ public class FederalTaxDetails {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tax_payer_type")
-    private JsonNullable<String> taxPayerType;
+    private JsonNullable<? extends TaxPayerType> taxPayerType;
 
     /**
      * Whether the company is taxed as an S-Corporation. Tax payer types that may be taxed as an
@@ -68,7 +64,7 @@ public class FederalTaxDetails {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("filing_form")
-    private Optional<String> filingForm;
+    private Optional<? extends FilingForm> filingForm;
 
     /**
      * Whether company's Employer Identification Number (EIN) is present
@@ -117,9 +113,9 @@ public class FederalTaxDetails {
     @JsonCreator
     public FederalTaxDetails(
             @JsonProperty("version") Optional<String> version,
-            @JsonProperty("tax_payer_type") JsonNullable<String> taxPayerType,
+            @JsonProperty("tax_payer_type") JsonNullable<? extends TaxPayerType> taxPayerType,
             @JsonProperty("taxable_as_scorp") Optional<Boolean> taxableAsScorp,
-            @JsonProperty("filing_form") Optional<String> filingForm,
+            @JsonProperty("filing_form") Optional<? extends FilingForm> filingForm,
             @JsonProperty("has_ein") Optional<Boolean> hasEin,
             @JsonProperty("ein_verified") Optional<Boolean> einVerified,
             @JsonProperty("ein_verification") Optional<? extends EinVerification> einVerification,
@@ -180,9 +176,10 @@ public class FederalTaxDetails {
      * - Joint venture
      * - Non-Profit
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<String> taxPayerType() {
-        return taxPayerType;
+    public JsonNullable<TaxPayerType> taxPayerType() {
+        return (JsonNullable<TaxPayerType>) taxPayerType;
     }
 
     /**
@@ -202,9 +199,10 @@ public class FederalTaxDetails {
      * - 941 (Quarterly federal tax return form)
      * - 944 (Annual federal tax return form)
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> filingForm() {
-        return filingForm;
+    public Optional<FilingForm> filingForm() {
+        return (Optional<FilingForm>) filingForm;
     }
 
     /**
@@ -301,7 +299,7 @@ public class FederalTaxDetails {
      * - Joint venture
      * - Non-Profit
      */
-    public FederalTaxDetails withTaxPayerType(String taxPayerType) {
+    public FederalTaxDetails withTaxPayerType(TaxPayerType taxPayerType) {
         Utils.checkNotNull(taxPayerType, "taxPayerType");
         this.taxPayerType = JsonNullable.of(taxPayerType);
         return this;
@@ -322,7 +320,7 @@ public class FederalTaxDetails {
      * - Joint venture
      * - Non-Profit
      */
-    public FederalTaxDetails withTaxPayerType(JsonNullable<String> taxPayerType) {
+    public FederalTaxDetails withTaxPayerType(JsonNullable<? extends TaxPayerType> taxPayerType) {
         Utils.checkNotNull(taxPayerType, "taxPayerType");
         this.taxPayerType = taxPayerType;
         return this;
@@ -360,7 +358,7 @@ public class FederalTaxDetails {
      * - 941 (Quarterly federal tax return form)
      * - 944 (Annual federal tax return form)
      */
-    public FederalTaxDetails withFilingForm(String filingForm) {
+    public FederalTaxDetails withFilingForm(FilingForm filingForm) {
         Utils.checkNotNull(filingForm, "filingForm");
         this.filingForm = Optional.ofNullable(filingForm);
         return this;
@@ -372,7 +370,7 @@ public class FederalTaxDetails {
      * - 941 (Quarterly federal tax return form)
      * - 944 (Annual federal tax return form)
      */
-    public FederalTaxDetails withFilingForm(Optional<String> filingForm) {
+    public FederalTaxDetails withFilingForm(Optional<? extends FilingForm> filingForm) {
         Utils.checkNotNull(filingForm, "filingForm");
         this.filingForm = filingForm;
         return this;
@@ -547,11 +545,11 @@ public class FederalTaxDetails {
 
         private Optional<String> version = Optional.empty();
 
-        private JsonNullable<String> taxPayerType = JsonNullable.undefined();
+        private JsonNullable<? extends TaxPayerType> taxPayerType = JsonNullable.undefined();
 
         private Optional<Boolean> taxableAsScorp = Optional.empty();
 
-        private Optional<String> filingForm = Optional.empty();
+        private Optional<? extends FilingForm> filingForm = Optional.empty();
 
         private Optional<Boolean> hasEin = Optional.empty();
 
@@ -608,7 +606,7 @@ public class FederalTaxDetails {
          * - Joint venture
          * - Non-Profit
          */
-        public Builder taxPayerType(String taxPayerType) {
+        public Builder taxPayerType(TaxPayerType taxPayerType) {
             Utils.checkNotNull(taxPayerType, "taxPayerType");
             this.taxPayerType = JsonNullable.of(taxPayerType);
             return this;
@@ -629,7 +627,7 @@ public class FederalTaxDetails {
          * - Joint venture
          * - Non-Profit
          */
-        public Builder taxPayerType(JsonNullable<String> taxPayerType) {
+        public Builder taxPayerType(JsonNullable<? extends TaxPayerType> taxPayerType) {
             Utils.checkNotNull(taxPayerType, "taxPayerType");
             this.taxPayerType = taxPayerType;
             return this;
@@ -668,7 +666,7 @@ public class FederalTaxDetails {
          * - 941 (Quarterly federal tax return form)
          * - 944 (Annual federal tax return form)
          */
-        public Builder filingForm(String filingForm) {
+        public Builder filingForm(FilingForm filingForm) {
             Utils.checkNotNull(filingForm, "filingForm");
             this.filingForm = Optional.ofNullable(filingForm);
             return this;
@@ -679,7 +677,7 @@ public class FederalTaxDetails {
          * - 941 (Quarterly federal tax return form)
          * - 944 (Annual federal tax return form)
          */
-        public Builder filingForm(Optional<String> filingForm) {
+        public Builder filingForm(Optional<? extends FilingForm> filingForm) {
             Utils.checkNotNull(filingForm, "filingForm");
             this.filingForm = filingForm;
             return this;

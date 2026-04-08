@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.CompanyIndustrySelectionRequiredBody;
 import com.gusto.embedded_api.operations.PutV1CompanyIndustry;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -18,11 +18,11 @@ import java.util.Optional;
 public class PutV1CompanyIndustryRequestBuilder {
 
     private String companyId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PutV1CompanyIndustryRequestBody requestBody;
+                            new TypeReference<Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion>>() {});
+    private CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -36,21 +36,21 @@ public class PutV1CompanyIndustryRequestBuilder {
         return this;
     }
                 
-    public PutV1CompanyIndustryRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1CompanyIndustryRequestBuilder xGustoAPIVersion(PutV1CompanyIndustryHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public PutV1CompanyIndustryRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1CompanyIndustryRequestBuilder xGustoAPIVersion(Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PutV1CompanyIndustryRequestBuilder requestBody(PutV1CompanyIndustryRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1CompanyIndustryRequestBuilder companyIndustrySelectionRequiredBody(CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody) {
+        Utils.checkNotNull(companyIndustrySelectionRequiredBody, "companyIndustrySelectionRequiredBody");
+        this.companyIndustrySelectionRequiredBody = companyIndustrySelectionRequiredBody;
         return this;
     }
 
@@ -62,7 +62,7 @@ public class PutV1CompanyIndustryRequestBuilder {
 
         PutV1CompanyIndustryRequest request = new PutV1CompanyIndustryRequest(companyId,
             xGustoAPIVersion,
-            requestBody);
+            companyIndustrySelectionRequiredBody);
 
         return request;
     }
@@ -76,9 +76,9 @@ public class PutV1CompanyIndustryRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion>>() {});
 }

@@ -7,11 +7,13 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdPaymentMethodRequest;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdBankAccountsRequest;
 import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdBankAccountsRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdBankAccountsRequest;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdBankAccountsRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdPaymentMethodRequest;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdPaymentMethodRequestBody;
 import com.gusto.embedded_api.models.operations.async.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequestBuilder;
@@ -243,13 +245,13 @@ public class AsyncEmployeePaymentMethod {
 
 
     /**
-     * Get an employee's payment method
+     * Get payment method for an employee
      * 
-     * <p>Fetches an employee's payment method. An employee payment method
-     * describes how the payment should be split across the employee's associated
-     * bank accounts.
+     * <p>Returns the payment method for an employee (e.g. Check or Direct Deposit with split configuration).
      * 
      * <p>scope: `employee_payment_methods:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -258,40 +260,40 @@ public class AsyncEmployeePaymentMethod {
     }
 
     /**
-     * Get an employee's payment method
+     * Get payment method for an employee
      * 
-     * <p>Fetches an employee's payment method. An employee payment method
-     * describes how the payment should be split across the employee's associated
-     * bank accounts.
+     * <p>Returns the payment method for an employee (e.g. Check or Direct Deposit with split configuration).
      * 
      * <p>scope: `employee_payment_methods:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdPaymentMethodResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdPaymentMethodResponse> get(String employeeId) {
-        return get(employeeId, Optional.empty());
+        return get(Optional.empty(), employeeId);
     }
 
     /**
-     * Get an employee's payment method
+     * Get payment method for an employee
      * 
-     * <p>Fetches an employee's payment method. An employee payment method
-     * describes how the payment should be split across the employee's associated
-     * bank accounts.
+     * <p>Returns the payment method for an employee (e.g. Check or Direct Deposit with split configuration).
      * 
      * <p>scope: `employee_payment_methods:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdPaymentMethodResponse>} - The async response
      */
-    public CompletableFuture<GetV1EmployeesEmployeeIdPaymentMethodResponse> get(String employeeId, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public CompletableFuture<GetV1EmployeesEmployeeIdPaymentMethodResponse> get(Optional<? extends GetV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
         GetV1EmployeesEmployeeIdPaymentMethodRequest request =
             GetV1EmployeesEmployeeIdPaymentMethodRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         AsyncRequestOperation<GetV1EmployeesEmployeeIdPaymentMethodRequest, GetV1EmployeesEmployeeIdPaymentMethodResponse> operation
               = new GetV1EmployeesEmployeeIdPaymentMethod.Async(sdkConfiguration, _headers);
@@ -301,12 +303,14 @@ public class AsyncEmployeePaymentMethod {
 
 
     /**
-     * Update an employee's payment method
+     * Update payment method for an employee
      * 
-     * <p>Updates an employee's payment method. Note that creating an employee
-     * bank account will also update the employee's payment method.
+     * <p>Updates the payment method for an employee. Can set to Check or Direct Deposit with split
+     * configuration.
      * 
      * <p>scope: `employee_payment_methods:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -315,42 +319,46 @@ public class AsyncEmployeePaymentMethod {
     }
 
     /**
-     * Update an employee's payment method
+     * Update payment method for an employee
      * 
-     * <p>Updates an employee's payment method. Note that creating an employee
-     * bank account will also update the employee's payment method.
+     * <p>Updates the payment method for an employee. Can set to Check or Direct Deposit with split
+     * configuration.
      * 
      * <p>scope: `employee_payment_methods:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @param requestBody 
      * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdPaymentMethodResponse>} - The async response
      */
     public CompletableFuture<PutV1EmployeesEmployeeIdPaymentMethodResponse> update(String employeeId, PutV1EmployeesEmployeeIdPaymentMethodRequestBody requestBody) {
-        return update(employeeId, Optional.empty(), requestBody);
+        return update(Optional.empty(), employeeId, requestBody);
     }
 
     /**
-     * Update an employee's payment method
+     * Update payment method for an employee
      * 
-     * <p>Updates an employee's payment method. Note that creating an employee
-     * bank account will also update the employee's payment method.
+     * <p>Updates the payment method for an employee. Can set to Check or Direct Deposit with split
+     * configuration.
      * 
      * <p>scope: `employee_payment_methods:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @param requestBody 
      * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdPaymentMethodResponse>} - The async response
      */
     public CompletableFuture<PutV1EmployeesEmployeeIdPaymentMethodResponse> update(
-            String employeeId, Optional<? extends VersionHeader> xGustoAPIVersion,
+            Optional<? extends PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             PutV1EmployeesEmployeeIdPaymentMethodRequestBody requestBody) {
         PutV1EmployeesEmployeeIdPaymentMethodRequest request =
             PutV1EmployeesEmployeeIdPaymentMethodRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1EmployeesEmployeeIdPaymentMethodRequest, PutV1EmployeesEmployeeIdPaymentMethodResponse> operation

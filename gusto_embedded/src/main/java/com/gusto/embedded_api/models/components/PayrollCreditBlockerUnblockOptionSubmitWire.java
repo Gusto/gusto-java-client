@@ -15,7 +15,7 @@ import java.lang.String;
  * 
  * <p>Unblock option to resolve a credit blocker by submitting a wire transfer
  */
-public class PayrollCreditBlockerUnblockOptionSubmitWire implements PayrollCreditBlockersTypeUnblockOptions {
+public class PayrollCreditBlockerUnblockOptionSubmitWire implements PayrollCreditBlockerTypeUnblockOptions {
     /**
      * The type of unblock option for the credit blocker
      */

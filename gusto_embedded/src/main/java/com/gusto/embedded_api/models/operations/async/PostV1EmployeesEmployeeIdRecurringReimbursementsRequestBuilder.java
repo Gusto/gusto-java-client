@@ -22,7 +22,7 @@ public class PostV1EmployeesEmployeeIdRecurringReimbursementsRequestBuilder {
 
     private Optional<? extends PostV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
-                            "\"2024-04-01\"",
+                            "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PostV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private PostV1EmployeesEmployeeIdRecurringReimbursementsRequestBody requestBody;
@@ -83,6 +83,6 @@ public class PostV1EmployeesEmployeeIdRecurringReimbursementsRequestBuilder {
     private static final LazySingletonValue<Optional<? extends PostV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
-                    "\"2024-04-01\"",
+                    "\"2025-06-15\"",
                     new TypeReference<Optional<? extends PostV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion>>() {});
 }

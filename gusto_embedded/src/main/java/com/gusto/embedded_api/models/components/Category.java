@@ -11,7 +11,10 @@ import java.util.Optional;
 /**
  * Category
  * 
- * <p>The category of the company attachment
+ * <p>The category of the company attachment.
+ * - `gep_notice`: A tax notice attachment
+ * - `compliance`: A compliance attachment
+ * - `other`: Any other attachment type
  */
 public enum Category {
     GEP_NOTICE("gep_notice"),

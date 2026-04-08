@@ -2,6 +2,14 @@
 
 The type of entity being described.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.NotificationEntityType;
+
+NotificationEntityType value = NotificationEntityType.BANK_ACCOUNT;
+```
+
 
 ## Values
 

@@ -7,9 +7,9 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.FederalTaxDetailsUpdate;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsRequest;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody;
 import com.gusto.embedded_api.operations.PutV1CompaniesCompanyIdFederalTaxDetails;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -21,11 +21,11 @@ import java.util.concurrent.CompletableFuture;
 public class PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
 
     private String companyId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody requestBody;
+                            new TypeReference<Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>>() {});
+    private FederalTaxDetailsUpdate federalTaxDetailsUpdate;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -39,21 +39,21 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
         return this;
     }
                 
-    public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder xGustoAPIVersion(PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder xGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder requestBody(PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder federalTaxDetailsUpdate(FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
+        Utils.checkNotNull(federalTaxDetailsUpdate, "federalTaxDetailsUpdate");
+        this.federalTaxDetailsUpdate = federalTaxDetailsUpdate;
         return this;
     }
 
@@ -65,7 +65,7 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
 
         PutV1CompaniesCompanyIdFederalTaxDetailsRequest request = new PutV1CompaniesCompanyIdFederalTaxDetailsRequest(companyId,
             xGustoAPIVersion,
-            requestBody);
+            federalTaxDetailsUpdate);
 
         return request;
     }
@@ -80,9 +80,9 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>>() {});
 }

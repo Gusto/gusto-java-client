@@ -6,7 +6,6 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -14,10 +13,19 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.time.LocalDate;
 import java.util.Optional;
 
 
 public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion> xGustoAPIVersion;
+
     /**
      * The UUID of the company
      */
@@ -25,83 +33,93 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
     private String companyId;
 
     /**
-     * The frequency that employees on this pay schedule are paid with Gusto.
+     * The frequency that employees on this pay schedule are paid.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=frequency")
-    private QueryParamFrequency frequency;
+    private Frequency frequency;
 
     /**
-     * The first date that employees on this pay schedule are paid with Gusto.
+     * The first date that employees on this pay schedule are paid.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=anchor_pay_date")
-    private String anchorPayDate;
+    private LocalDate anchorPayDate;
 
     /**
      * The last date of the first pay period. This can be the same date as the anchor pay date.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=anchor_end_of_pay_period")
-    private String anchorEndOfPayPeriod;
+    private LocalDate anchorEndOfPayPeriod;
 
     /**
-     * An integer between 1 and 31 indicating the first day of the month that employees are paid. This
-     * field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It
-     * will be null for pay schedules with other frequencies.
+     * First pay day of the month (1-31).
+     * - **Twice per month, Monthly:** required.
+     * - **Every week, Every other week:** omit or null.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=day_1")
     private Optional<Long> day1;
 
     /**
-     * An integer between 1 and 31 indicating the second day of the month that employees are paid. This
-     * field is the second pay date for pay schedules with the "Twice per month" frequency. For
-     * semi-monthly pay schedules, set this field to 31.
-     * 
-     * <p>For months shorter than 31 days, we will set the second pay date to the last day of the month. It
-     * will be null for pay schedules with other frequencies.
+     * Second pay day of the month (1-31); only for **Twice per month**.
+     * - Use 31 for last day of month (shorter months use the actual last day).
+     * - **Other frequencies:** omit or null.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=day_2")
     private Optional<Long> day2;
 
     /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * End date for the preview range. If given, this date must be in the future. When unspecified,
+     * defaults to 18 months from today.
      */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=end_date")
+    private Optional<LocalDate> endDate;
 
     @JsonCreator
     public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest(
+            Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyId,
-            QueryParamFrequency frequency,
-            String anchorPayDate,
-            String anchorEndOfPayPeriod,
+            Frequency frequency,
+            LocalDate anchorPayDate,
+            LocalDate anchorEndOfPayPeriod,
             Optional<Long> day1,
             Optional<Long> day2,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<LocalDate> endDate) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(frequency, "frequency");
         Utils.checkNotNull(anchorPayDate, "anchorPayDate");
         Utils.checkNotNull(anchorEndOfPayPeriod, "anchorEndOfPayPeriod");
         Utils.checkNotNull(day1, "day1");
         Utils.checkNotNull(day2, "day2");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(endDate, "endDate");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyId = companyId;
         this.frequency = frequency;
         this.anchorPayDate = anchorPayDate;
         this.anchorEndOfPayPeriod = anchorEndOfPayPeriod;
         this.day1 = day1;
         this.day2 = day2;
-        this.xGustoAPIVersion = xGustoAPIVersion;
+        this.endDate = endDate;
     }
     
     public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest(
             String companyId,
-            QueryParamFrequency frequency,
-            String anchorPayDate,
-            String anchorEndOfPayPeriod) {
-        this(companyId, frequency, anchorPayDate,
-            anchorEndOfPayPeriod, Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Frequency frequency,
+            LocalDate anchorPayDate,
+            LocalDate anchorEndOfPayPeriod) {
+        this(Optional.empty(), companyId, frequency,
+            anchorPayDate, anchorEndOfPayPeriod, Optional.empty(),
+            Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -113,18 +131,18 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
     }
 
     /**
-     * The frequency that employees on this pay schedule are paid with Gusto.
+     * The frequency that employees on this pay schedule are paid.
      */
     @JsonIgnore
-    public QueryParamFrequency frequency() {
+    public Frequency frequency() {
         return frequency;
     }
 
     /**
-     * The first date that employees on this pay schedule are paid with Gusto.
+     * The first date that employees on this pay schedule are paid.
      */
     @JsonIgnore
-    public String anchorPayDate() {
+    public LocalDate anchorPayDate() {
         return anchorPayDate;
     }
 
@@ -132,14 +150,14 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
      * The last date of the first pay period. This can be the same date as the anchor pay date.
      */
     @JsonIgnore
-    public String anchorEndOfPayPeriod() {
+    public LocalDate anchorEndOfPayPeriod() {
         return anchorEndOfPayPeriod;
     }
 
     /**
-     * An integer between 1 and 31 indicating the first day of the month that employees are paid. This
-     * field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It
-     * will be null for pay schedules with other frequencies.
+     * First pay day of the month (1-31).
+     * - **Twice per month, Monthly:** required.
+     * - **Every week, Every other week:** omit or null.
      */
     @JsonIgnore
     public Optional<Long> day1() {
@@ -147,12 +165,9 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
     }
 
     /**
-     * An integer between 1 and 31 indicating the second day of the month that employees are paid. This
-     * field is the second pay date for pay schedules with the "Twice per month" frequency. For
-     * semi-monthly pay schedules, set this field to 31.
-     * 
-     * <p>For months shorter than 31 days, we will set the second pay date to the last day of the month. It
-     * will be null for pay schedules with other frequencies.
+     * Second pay day of the month (1-31); only for **Twice per month**.
+     * - Use 31 for last day of month (shorter months use the actual last day).
+     * - **Other frequencies:** omit or null.
      */
     @JsonIgnore
     public Optional<Long> day2() {
@@ -160,14 +175,12 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
     }
 
     /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * End date for the preview range. If given, this date must be in the future. When unspecified,
+     * defaults to 18 months from today.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<LocalDate> endDate() {
+        return endDate;
     }
 
     public static Builder builder() {
@@ -176,99 +189,11 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
 
 
     /**
-     * The UUID of the company
-     */
-    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withCompanyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
-
-    /**
-     * The frequency that employees on this pay schedule are paid with Gusto.
-     */
-    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withFrequency(QueryParamFrequency frequency) {
-        Utils.checkNotNull(frequency, "frequency");
-        this.frequency = frequency;
-        return this;
-    }
-
-    /**
-     * The first date that employees on this pay schedule are paid with Gusto.
-     */
-    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withAnchorPayDate(String anchorPayDate) {
-        Utils.checkNotNull(anchorPayDate, "anchorPayDate");
-        this.anchorPayDate = anchorPayDate;
-        return this;
-    }
-
-    /**
-     * The last date of the first pay period. This can be the same date as the anchor pay date.
-     */
-    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withAnchorEndOfPayPeriod(String anchorEndOfPayPeriod) {
-        Utils.checkNotNull(anchorEndOfPayPeriod, "anchorEndOfPayPeriod");
-        this.anchorEndOfPayPeriod = anchorEndOfPayPeriod;
-        return this;
-    }
-
-    /**
-     * An integer between 1 and 31 indicating the first day of the month that employees are paid. This
-     * field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It
-     * will be null for pay schedules with other frequencies.
-     */
-    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withDay1(long day1) {
-        Utils.checkNotNull(day1, "day1");
-        this.day1 = Optional.ofNullable(day1);
-        return this;
-    }
-
-
-    /**
-     * An integer between 1 and 31 indicating the first day of the month that employees are paid. This
-     * field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It
-     * will be null for pay schedules with other frequencies.
-     */
-    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withDay1(Optional<Long> day1) {
-        Utils.checkNotNull(day1, "day1");
-        this.day1 = day1;
-        return this;
-    }
-
-    /**
-     * An integer between 1 and 31 indicating the second day of the month that employees are paid. This
-     * field is the second pay date for pay schedules with the "Twice per month" frequency. For
-     * semi-monthly pay schedules, set this field to 31.
-     * 
-     * <p>For months shorter than 31 days, we will set the second pay date to the last day of the month. It
-     * will be null for pay schedules with other frequencies.
-     */
-    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withDay2(long day2) {
-        Utils.checkNotNull(day2, "day2");
-        this.day2 = Optional.ofNullable(day2);
-        return this;
-    }
-
-
-    /**
-     * An integer between 1 and 31 indicating the second day of the month that employees are paid. This
-     * field is the second pay date for pay schedules with the "Twice per month" frequency. For
-     * semi-monthly pay schedules, set this field to 31.
-     * 
-     * <p>For months shorter than 31 days, we will set the second pay date to the last day of the month. It
-     * will be null for pay schedules with other frequencies.
-     */
-    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withDay2(Optional<Long> day2) {
-        Utils.checkNotNull(day2, "day2");
-        this.day2 = day2;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withXGustoAPIVersion(GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -280,9 +205,112 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withXGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * The UUID of the company
+     */
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withCompanyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
+    /**
+     * The frequency that employees on this pay schedule are paid.
+     */
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withFrequency(Frequency frequency) {
+        Utils.checkNotNull(frequency, "frequency");
+        this.frequency = frequency;
+        return this;
+    }
+
+    /**
+     * The first date that employees on this pay schedule are paid.
+     */
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withAnchorPayDate(LocalDate anchorPayDate) {
+        Utils.checkNotNull(anchorPayDate, "anchorPayDate");
+        this.anchorPayDate = anchorPayDate;
+        return this;
+    }
+
+    /**
+     * The last date of the first pay period. This can be the same date as the anchor pay date.
+     */
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withAnchorEndOfPayPeriod(LocalDate anchorEndOfPayPeriod) {
+        Utils.checkNotNull(anchorEndOfPayPeriod, "anchorEndOfPayPeriod");
+        this.anchorEndOfPayPeriod = anchorEndOfPayPeriod;
+        return this;
+    }
+
+    /**
+     * First pay day of the month (1-31).
+     * - **Twice per month, Monthly:** required.
+     * - **Every week, Every other week:** omit or null.
+     */
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withDay1(long day1) {
+        Utils.checkNotNull(day1, "day1");
+        this.day1 = Optional.ofNullable(day1);
+        return this;
+    }
+
+
+    /**
+     * First pay day of the month (1-31).
+     * - **Twice per month, Monthly:** required.
+     * - **Every week, Every other week:** omit or null.
+     */
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withDay1(Optional<Long> day1) {
+        Utils.checkNotNull(day1, "day1");
+        this.day1 = day1;
+        return this;
+    }
+
+    /**
+     * Second pay day of the month (1-31); only for **Twice per month**.
+     * - Use 31 for last day of month (shorter months use the actual last day).
+     * - **Other frequencies:** omit or null.
+     */
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withDay2(long day2) {
+        Utils.checkNotNull(day2, "day2");
+        this.day2 = Optional.ofNullable(day2);
+        return this;
+    }
+
+
+    /**
+     * Second pay day of the month (1-31); only for **Twice per month**.
+     * - Use 31 for last day of month (shorter months use the actual last day).
+     * - **Other frequencies:** omit or null.
+     */
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withDay2(Optional<Long> day2) {
+        Utils.checkNotNull(day2, "day2");
+        this.day2 = day2;
+        return this;
+    }
+
+    /**
+     * End date for the preview range. If given, this date must be in the future. When unspecified,
+     * defaults to 18 months from today.
+     */
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withEndDate(LocalDate endDate) {
+        Utils.checkNotNull(endDate, "endDate");
+        this.endDate = Optional.ofNullable(endDate);
+        return this;
+    }
+
+
+    /**
+     * End date for the preview range. If given, this date must be in the future. When unspecified,
+     * defaults to 18 months from today.
+     */
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withEndDate(Optional<LocalDate> endDate) {
+        Utils.checkNotNull(endDate, "endDate");
+        this.endDate = endDate;
         return this;
     }
 
@@ -296,54 +324,81 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
         }
         GetV1CompaniesCompanyIdPaySchedulesPreviewRequest other = (GetV1CompaniesCompanyIdPaySchedulesPreviewRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.frequency, other.frequency) &&
             Utils.enhancedDeepEquals(this.anchorPayDate, other.anchorPayDate) &&
             Utils.enhancedDeepEquals(this.anchorEndOfPayPeriod, other.anchorEndOfPayPeriod) &&
             Utils.enhancedDeepEquals(this.day1, other.day1) &&
             Utils.enhancedDeepEquals(this.day2, other.day2) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.endDate, other.endDate);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, frequency, anchorPayDate,
-            anchorEndOfPayPeriod, day1, day2,
-            xGustoAPIVersion);
+            xGustoAPIVersion, companyId, frequency,
+            anchorPayDate, anchorEndOfPayPeriod, day1,
+            day2, endDate);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1CompaniesCompanyIdPaySchedulesPreviewRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyId", companyId,
                 "frequency", frequency,
                 "anchorPayDate", anchorPayDate,
                 "anchorEndOfPayPeriod", anchorEndOfPayPeriod,
                 "day1", day1,
                 "day2", day2,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "endDate", endDate);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String companyId;
 
-        private QueryParamFrequency frequency;
+        private Frequency frequency;
 
-        private String anchorPayDate;
+        private LocalDate anchorPayDate;
 
-        private String anchorEndOfPayPeriod;
+        private LocalDate anchorEndOfPayPeriod;
 
         private Optional<Long> day1 = Optional.empty();
 
         private Optional<Long> day2 = Optional.empty();
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<LocalDate> endDate = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -358,9 +413,9 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
 
 
         /**
-         * The frequency that employees on this pay schedule are paid with Gusto.
+         * The frequency that employees on this pay schedule are paid.
          */
-        public Builder frequency(QueryParamFrequency frequency) {
+        public Builder frequency(Frequency frequency) {
             Utils.checkNotNull(frequency, "frequency");
             this.frequency = frequency;
             return this;
@@ -368,9 +423,9 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
 
 
         /**
-         * The first date that employees on this pay schedule are paid with Gusto.
+         * The first date that employees on this pay schedule are paid.
          */
-        public Builder anchorPayDate(String anchorPayDate) {
+        public Builder anchorPayDate(LocalDate anchorPayDate) {
             Utils.checkNotNull(anchorPayDate, "anchorPayDate");
             this.anchorPayDate = anchorPayDate;
             return this;
@@ -380,7 +435,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
         /**
          * The last date of the first pay period. This can be the same date as the anchor pay date.
          */
-        public Builder anchorEndOfPayPeriod(String anchorEndOfPayPeriod) {
+        public Builder anchorEndOfPayPeriod(LocalDate anchorEndOfPayPeriod) {
             Utils.checkNotNull(anchorEndOfPayPeriod, "anchorEndOfPayPeriod");
             this.anchorEndOfPayPeriod = anchorEndOfPayPeriod;
             return this;
@@ -388,9 +443,9 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
 
 
         /**
-         * An integer between 1 and 31 indicating the first day of the month that employees are paid. This
-         * field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It
-         * will be null for pay schedules with other frequencies.
+         * First pay day of the month (1-31).
+         * - **Twice per month, Monthly:** required.
+         * - **Every week, Every other week:** omit or null.
          */
         public Builder day1(long day1) {
             Utils.checkNotNull(day1, "day1");
@@ -399,9 +454,9 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
         }
 
         /**
-         * An integer between 1 and 31 indicating the first day of the month that employees are paid. This
-         * field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It
-         * will be null for pay schedules with other frequencies.
+         * First pay day of the month (1-31).
+         * - **Twice per month, Monthly:** required.
+         * - **Every week, Every other week:** omit or null.
          */
         public Builder day1(Optional<Long> day1) {
             Utils.checkNotNull(day1, "day1");
@@ -411,12 +466,9 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
 
 
         /**
-         * An integer between 1 and 31 indicating the second day of the month that employees are paid. This
-         * field is the second pay date for pay schedules with the "Twice per month" frequency. For
-         * semi-monthly pay schedules, set this field to 31.
-         * 
-         * <p>For months shorter than 31 days, we will set the second pay date to the last day of the month. It
-         * will be null for pay schedules with other frequencies.
+         * Second pay day of the month (1-31); only for **Twice per month**.
+         * - Use 31 for last day of month (shorter months use the actual last day).
+         * - **Other frequencies:** omit or null.
          */
         public Builder day2(long day2) {
             Utils.checkNotNull(day2, "day2");
@@ -425,12 +477,9 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
         }
 
         /**
-         * An integer between 1 and 31 indicating the second day of the month that employees are paid. This
-         * field is the second pay date for pay schedules with the "Twice per month" frequency. For
-         * semi-monthly pay schedules, set this field to 31.
-         * 
-         * <p>For months shorter than 31 days, we will set the second pay date to the last day of the month. It
-         * will be null for pay schedules with other frequencies.
+         * Second pay day of the month (1-31); only for **Twice per month**.
+         * - Use 31 for last day of month (shorter months use the actual last day).
+         * - **Other frequencies:** omit or null.
          */
         public Builder day2(Optional<Long> day2) {
             Utils.checkNotNull(day2, "day2");
@@ -440,24 +489,22 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
 
 
         /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         * End date for the preview range. If given, this date must be in the future. When unspecified,
+         * defaults to 18 months from today.
          */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        public Builder endDate(LocalDate endDate) {
+            Utils.checkNotNull(endDate, "endDate");
+            this.endDate = Optional.ofNullable(endDate);
             return this;
         }
 
         /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         * End date for the preview range. If given, this date must be in the future. When unspecified,
+         * defaults to 18 months from today.
          */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
+        public Builder endDate(Optional<LocalDate> endDate) {
+            Utils.checkNotNull(endDate, "endDate");
+            this.endDate = endDate;
             return this;
         }
 
@@ -467,16 +514,16 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
             }
 
             return new GetV1CompaniesCompanyIdPaySchedulesPreviewRequest(
-                companyId, frequency, anchorPayDate,
-                anchorEndOfPayPeriod, day1, day2,
-                xGustoAPIVersion);
+                xGustoAPIVersion, companyId, frequency,
+                anchorPayDate, anchorEndOfPayPeriod, day1,
+                day2, endDate);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion>>() {});
     }
 }

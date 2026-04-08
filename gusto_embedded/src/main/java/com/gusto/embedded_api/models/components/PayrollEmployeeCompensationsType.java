@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Double;
+import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -34,15 +35,6 @@ public class PayrollEmployeeCompensationsType {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("excluded")
     private Optional<Boolean> excluded;
-
-    /**
-     * The current version of this employee compensation. This field is only available for prepared
-     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-     * information on how to use this field.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("version")
-    private Optional<String> version;
 
     /**
      * The first name of the employee. Requires `employees:read` scope.
@@ -113,7 +105,7 @@ public class PayrollEmployeeCompensationsType {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fixed_compensations")
-    private Optional<? extends List<FixedCompensations>> fixedCompensations;
+    private Optional<? extends List<PayrollEmployeeCompensationsTypeFixedCompensations>> fixedCompensations;
 
     /**
      * An array of hourly compensations for the employee. Hourly compensations include regular, overtime,
@@ -124,7 +116,7 @@ public class PayrollEmployeeCompensationsType {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hourly_compensations")
-    private Optional<? extends List<HourlyCompensations>> hourlyCompensations;
+    private Optional<? extends List<PayrollEmployeeCompensationsTypeHourlyCompensations>> hourlyCompensations;
 
     /**
      * An array of all paid time off the employee is eligible for this pay period.
@@ -133,23 +125,34 @@ public class PayrollEmployeeCompensationsType {
     @JsonProperty("paid_time_off")
     private Optional<? extends List<PayrollEmployeeCompensationsTypePaidTimeOff>> paidTimeOff;
 
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("deductions")
-    private Optional<? extends List<Deductions>> deductions;
-
     /**
      * An array of reimbursements for the employee.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("reimbursements")
-    private Optional<? extends List<Reimbursements>> reimbursements;
+    private Optional<? extends List<PayrollEmployeeCompensationsTypeReimbursements>> reimbursements;
+
+    /**
+     * The current version of this employee compensation. This field is only available for prepared
+     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
+     * information on how to use this field.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("version")
+    private Optional<? extends Object> version;
+
+    /**
+     * An array of deductions for the employee. This field is included by default for regular payrolls in
+     * version `v2025-06-15` and later.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("deductions")
+    private Optional<? extends List<Deductions>> deductions;
 
     @JsonCreator
     public PayrollEmployeeCompensationsType(
             @JsonProperty("employee_uuid") Optional<String> employeeUuid,
             @JsonProperty("excluded") Optional<Boolean> excluded,
-            @JsonProperty("version") Optional<String> version,
             @JsonProperty("first_name") JsonNullable<String> firstName,
             @JsonProperty("preferred_first_name") JsonNullable<String> preferredFirstName,
             @JsonProperty("last_name") JsonNullable<String> lastName,
@@ -158,14 +161,14 @@ public class PayrollEmployeeCompensationsType {
             @JsonProperty("check_amount") JsonNullable<Double> checkAmount,
             @JsonProperty("payment_method") JsonNullable<? extends PayrollEmployeeCompensationsTypePaymentMethod> paymentMethod,
             @JsonProperty("memo") JsonNullable<String> memo,
-            @JsonProperty("fixed_compensations") Optional<? extends List<FixedCompensations>> fixedCompensations,
-            @JsonProperty("hourly_compensations") Optional<? extends List<HourlyCompensations>> hourlyCompensations,
+            @JsonProperty("fixed_compensations") Optional<? extends List<PayrollEmployeeCompensationsTypeFixedCompensations>> fixedCompensations,
+            @JsonProperty("hourly_compensations") Optional<? extends List<PayrollEmployeeCompensationsTypeHourlyCompensations>> hourlyCompensations,
             @JsonProperty("paid_time_off") Optional<? extends List<PayrollEmployeeCompensationsTypePaidTimeOff>> paidTimeOff,
-            @JsonProperty("deductions") Optional<? extends List<Deductions>> deductions,
-            @JsonProperty("reimbursements") Optional<? extends List<Reimbursements>> reimbursements) {
+            @JsonProperty("reimbursements") Optional<? extends List<PayrollEmployeeCompensationsTypeReimbursements>> reimbursements,
+            @JsonProperty("version") Optional<? extends Object> version,
+            @JsonProperty("deductions") Optional<? extends List<Deductions>> deductions) {
         Utils.checkNotNull(employeeUuid, "employeeUuid");
         Utils.checkNotNull(excluded, "excluded");
-        Utils.checkNotNull(version, "version");
         Utils.checkNotNull(firstName, "firstName");
         Utils.checkNotNull(preferredFirstName, "preferredFirstName");
         Utils.checkNotNull(lastName, "lastName");
@@ -177,11 +180,11 @@ public class PayrollEmployeeCompensationsType {
         Utils.checkNotNull(fixedCompensations, "fixedCompensations");
         Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
         Utils.checkNotNull(paidTimeOff, "paidTimeOff");
-        Utils.checkNotNull(deductions, "deductions");
         Utils.checkNotNull(reimbursements, "reimbursements");
+        Utils.checkNotNull(version, "version");
+        Utils.checkNotNull(deductions, "deductions");
         this.employeeUuid = employeeUuid;
         this.excluded = excluded;
-        this.version = version;
         this.firstName = firstName;
         this.preferredFirstName = preferredFirstName;
         this.lastName = lastName;
@@ -193,15 +196,16 @@ public class PayrollEmployeeCompensationsType {
         this.fixedCompensations = fixedCompensations;
         this.hourlyCompensations = hourlyCompensations;
         this.paidTimeOff = paidTimeOff;
-        this.deductions = deductions;
         this.reimbursements = reimbursements;
+        this.version = version;
+        this.deductions = deductions;
     }
     
     public PayrollEmployeeCompensationsType() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
+        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
-            JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
+            JsonNullable.undefined(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
     }
@@ -221,16 +225,6 @@ public class PayrollEmployeeCompensationsType {
     @JsonIgnore
     public Optional<Boolean> excluded() {
         return excluded;
-    }
-
-    /**
-     * The current version of this employee compensation. This field is only available for prepared
-     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-     * information on how to use this field.
-     */
-    @JsonIgnore
-    public Optional<String> version() {
-        return version;
     }
 
     /**
@@ -311,8 +305,8 @@ public class PayrollEmployeeCompensationsType {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<FixedCompensations>> fixedCompensations() {
-        return (Optional<List<FixedCompensations>>) fixedCompensations;
+    public Optional<List<PayrollEmployeeCompensationsTypeFixedCompensations>> fixedCompensations() {
+        return (Optional<List<PayrollEmployeeCompensationsTypeFixedCompensations>>) fixedCompensations;
     }
 
     /**
@@ -324,8 +318,8 @@ public class PayrollEmployeeCompensationsType {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<HourlyCompensations>> hourlyCompensations() {
-        return (Optional<List<HourlyCompensations>>) hourlyCompensations;
+    public Optional<List<PayrollEmployeeCompensationsTypeHourlyCompensations>> hourlyCompensations() {
+        return (Optional<List<PayrollEmployeeCompensationsTypeHourlyCompensations>>) hourlyCompensations;
     }
 
     /**
@@ -337,19 +331,34 @@ public class PayrollEmployeeCompensationsType {
         return (Optional<List<PayrollEmployeeCompensationsTypePaidTimeOff>>) paidTimeOff;
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<Deductions>> deductions() {
-        return (Optional<List<Deductions>>) deductions;
-    }
-
     /**
      * An array of reimbursements for the employee.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Reimbursements>> reimbursements() {
-        return (Optional<List<Reimbursements>>) reimbursements;
+    public Optional<List<PayrollEmployeeCompensationsTypeReimbursements>> reimbursements() {
+        return (Optional<List<PayrollEmployeeCompensationsTypeReimbursements>>) reimbursements;
+    }
+
+    /**
+     * The current version of this employee compensation. This field is only available for prepared
+     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
+     * information on how to use this field.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> version() {
+        return (Optional<Object>) version;
+    }
+
+    /**
+     * An array of deductions for the employee. This field is included by default for regular payrolls in
+     * version `v2025-06-15` and later.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Deductions>> deductions() {
+        return (Optional<List<Deductions>>) deductions;
     }
 
     public static Builder builder() {
@@ -394,29 +403,6 @@ public class PayrollEmployeeCompensationsType {
     public PayrollEmployeeCompensationsType withExcluded(Optional<Boolean> excluded) {
         Utils.checkNotNull(excluded, "excluded");
         this.excluded = excluded;
-        return this;
-    }
-
-    /**
-     * The current version of this employee compensation. This field is only available for prepared
-     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-     * information on how to use this field.
-     */
-    public PayrollEmployeeCompensationsType withVersion(String version) {
-        Utils.checkNotNull(version, "version");
-        this.version = Optional.ofNullable(version);
-        return this;
-    }
-
-
-    /**
-     * The current version of this employee compensation. This field is only available for prepared
-     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-     * information on how to use this field.
-     */
-    public PayrollEmployeeCompensationsType withVersion(Optional<String> version) {
-        Utils.checkNotNull(version, "version");
-        this.version = version;
         return this;
     }
 
@@ -579,7 +565,7 @@ public class PayrollEmployeeCompensationsType {
      * 
      * <p>For an unprocessed payroll, all active fixed compensations are returned.
      */
-    public PayrollEmployeeCompensationsType withFixedCompensations(List<FixedCompensations> fixedCompensations) {
+    public PayrollEmployeeCompensationsType withFixedCompensations(List<PayrollEmployeeCompensationsTypeFixedCompensations> fixedCompensations) {
         Utils.checkNotNull(fixedCompensations, "fixedCompensations");
         this.fixedCompensations = Optional.ofNullable(fixedCompensations);
         return this;
@@ -593,7 +579,7 @@ public class PayrollEmployeeCompensationsType {
      * 
      * <p>For an unprocessed payroll, all active fixed compensations are returned.
      */
-    public PayrollEmployeeCompensationsType withFixedCompensations(Optional<? extends List<FixedCompensations>> fixedCompensations) {
+    public PayrollEmployeeCompensationsType withFixedCompensations(Optional<? extends List<PayrollEmployeeCompensationsTypeFixedCompensations>> fixedCompensations) {
         Utils.checkNotNull(fixedCompensations, "fixedCompensations");
         this.fixedCompensations = fixedCompensations;
         return this;
@@ -606,7 +592,7 @@ public class PayrollEmployeeCompensationsType {
      * 
      * <p>For an unprocessed payroll, all active hourly compensations are returned.
      */
-    public PayrollEmployeeCompensationsType withHourlyCompensations(List<HourlyCompensations> hourlyCompensations) {
+    public PayrollEmployeeCompensationsType withHourlyCompensations(List<PayrollEmployeeCompensationsTypeHourlyCompensations> hourlyCompensations) {
         Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
         this.hourlyCompensations = Optional.ofNullable(hourlyCompensations);
         return this;
@@ -620,7 +606,7 @@ public class PayrollEmployeeCompensationsType {
      * 
      * <p>For an unprocessed payroll, all active hourly compensations are returned.
      */
-    public PayrollEmployeeCompensationsType withHourlyCompensations(Optional<? extends List<HourlyCompensations>> hourlyCompensations) {
+    public PayrollEmployeeCompensationsType withHourlyCompensations(Optional<? extends List<PayrollEmployeeCompensationsTypeHourlyCompensations>> hourlyCompensations) {
         Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
         this.hourlyCompensations = hourlyCompensations;
         return this;
@@ -645,23 +631,10 @@ public class PayrollEmployeeCompensationsType {
         return this;
     }
 
-    public PayrollEmployeeCompensationsType withDeductions(List<Deductions> deductions) {
-        Utils.checkNotNull(deductions, "deductions");
-        this.deductions = Optional.ofNullable(deductions);
-        return this;
-    }
-
-
-    public PayrollEmployeeCompensationsType withDeductions(Optional<? extends List<Deductions>> deductions) {
-        Utils.checkNotNull(deductions, "deductions");
-        this.deductions = deductions;
-        return this;
-    }
-
     /**
      * An array of reimbursements for the employee.
      */
-    public PayrollEmployeeCompensationsType withReimbursements(List<Reimbursements> reimbursements) {
+    public PayrollEmployeeCompensationsType withReimbursements(List<PayrollEmployeeCompensationsTypeReimbursements> reimbursements) {
         Utils.checkNotNull(reimbursements, "reimbursements");
         this.reimbursements = Optional.ofNullable(reimbursements);
         return this;
@@ -671,9 +644,53 @@ public class PayrollEmployeeCompensationsType {
     /**
      * An array of reimbursements for the employee.
      */
-    public PayrollEmployeeCompensationsType withReimbursements(Optional<? extends List<Reimbursements>> reimbursements) {
+    public PayrollEmployeeCompensationsType withReimbursements(Optional<? extends List<PayrollEmployeeCompensationsTypeReimbursements>> reimbursements) {
         Utils.checkNotNull(reimbursements, "reimbursements");
         this.reimbursements = reimbursements;
+        return this;
+    }
+
+    /**
+     * The current version of this employee compensation. This field is only available for prepared
+     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
+     * information on how to use this field.
+     */
+    public PayrollEmployeeCompensationsType withVersion(Object version) {
+        Utils.checkNotNull(version, "version");
+        this.version = Optional.ofNullable(version);
+        return this;
+    }
+
+
+    /**
+     * The current version of this employee compensation. This field is only available for prepared
+     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
+     * information on how to use this field.
+     */
+    public PayrollEmployeeCompensationsType withVersion(Optional<? extends Object> version) {
+        Utils.checkNotNull(version, "version");
+        this.version = version;
+        return this;
+    }
+
+    /**
+     * An array of deductions for the employee. This field is included by default for regular payrolls in
+     * version `v2025-06-15` and later.
+     */
+    public PayrollEmployeeCompensationsType withDeductions(List<Deductions> deductions) {
+        Utils.checkNotNull(deductions, "deductions");
+        this.deductions = Optional.ofNullable(deductions);
+        return this;
+    }
+
+
+    /**
+     * An array of deductions for the employee. This field is included by default for regular payrolls in
+     * version `v2025-06-15` and later.
+     */
+    public PayrollEmployeeCompensationsType withDeductions(Optional<? extends List<Deductions>> deductions) {
+        Utils.checkNotNull(deductions, "deductions");
+        this.deductions = deductions;
         return this;
     }
 
@@ -689,7 +706,6 @@ public class PayrollEmployeeCompensationsType {
         return 
             Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
             Utils.enhancedDeepEquals(this.excluded, other.excluded) &&
-            Utils.enhancedDeepEquals(this.version, other.version) &&
             Utils.enhancedDeepEquals(this.firstName, other.firstName) &&
             Utils.enhancedDeepEquals(this.preferredFirstName, other.preferredFirstName) &&
             Utils.enhancedDeepEquals(this.lastName, other.lastName) &&
@@ -701,19 +717,20 @@ public class PayrollEmployeeCompensationsType {
             Utils.enhancedDeepEquals(this.fixedCompensations, other.fixedCompensations) &&
             Utils.enhancedDeepEquals(this.hourlyCompensations, other.hourlyCompensations) &&
             Utils.enhancedDeepEquals(this.paidTimeOff, other.paidTimeOff) &&
-            Utils.enhancedDeepEquals(this.deductions, other.deductions) &&
-            Utils.enhancedDeepEquals(this.reimbursements, other.reimbursements);
+            Utils.enhancedDeepEquals(this.reimbursements, other.reimbursements) &&
+            Utils.enhancedDeepEquals(this.version, other.version) &&
+            Utils.enhancedDeepEquals(this.deductions, other.deductions);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            employeeUuid, excluded, version,
-            firstName, preferredFirstName, lastName,
-            grossPay, netPay, checkAmount,
-            paymentMethod, memo, fixedCompensations,
-            hourlyCompensations, paidTimeOff, deductions,
-            reimbursements);
+            employeeUuid, excluded, firstName,
+            preferredFirstName, lastName, grossPay,
+            netPay, checkAmount, paymentMethod,
+            memo, fixedCompensations, hourlyCompensations,
+            paidTimeOff, reimbursements, version,
+            deductions);
     }
     
     @Override
@@ -721,7 +738,6 @@ public class PayrollEmployeeCompensationsType {
         return Utils.toString(PayrollEmployeeCompensationsType.class,
                 "employeeUuid", employeeUuid,
                 "excluded", excluded,
-                "version", version,
                 "firstName", firstName,
                 "preferredFirstName", preferredFirstName,
                 "lastName", lastName,
@@ -733,8 +749,9 @@ public class PayrollEmployeeCompensationsType {
                 "fixedCompensations", fixedCompensations,
                 "hourlyCompensations", hourlyCompensations,
                 "paidTimeOff", paidTimeOff,
-                "deductions", deductions,
-                "reimbursements", reimbursements);
+                "reimbursements", reimbursements,
+                "version", version,
+                "deductions", deductions);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -743,8 +760,6 @@ public class PayrollEmployeeCompensationsType {
         private Optional<String> employeeUuid = Optional.empty();
 
         private Optional<Boolean> excluded = Optional.empty();
-
-        private Optional<String> version = Optional.empty();
 
         private JsonNullable<String> firstName = JsonNullable.undefined();
 
@@ -762,15 +777,17 @@ public class PayrollEmployeeCompensationsType {
 
         private JsonNullable<String> memo = JsonNullable.undefined();
 
-        private Optional<? extends List<FixedCompensations>> fixedCompensations = Optional.empty();
+        private Optional<? extends List<PayrollEmployeeCompensationsTypeFixedCompensations>> fixedCompensations = Optional.empty();
 
-        private Optional<? extends List<HourlyCompensations>> hourlyCompensations = Optional.empty();
+        private Optional<? extends List<PayrollEmployeeCompensationsTypeHourlyCompensations>> hourlyCompensations = Optional.empty();
 
         private Optional<? extends List<PayrollEmployeeCompensationsTypePaidTimeOff>> paidTimeOff = Optional.empty();
 
-        private Optional<? extends List<Deductions>> deductions = Optional.empty();
+        private Optional<? extends List<PayrollEmployeeCompensationsTypeReimbursements>> reimbursements = Optional.empty();
 
-        private Optional<? extends List<Reimbursements>> reimbursements = Optional.empty();
+        private Optional<? extends Object> version = Optional.empty();
+
+        private Optional<? extends List<Deductions>> deductions = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -813,29 +830,6 @@ public class PayrollEmployeeCompensationsType {
         public Builder excluded(Optional<Boolean> excluded) {
             Utils.checkNotNull(excluded, "excluded");
             this.excluded = excluded;
-            return this;
-        }
-
-
-        /**
-         * The current version of this employee compensation. This field is only available for prepared
-         * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-         * information on how to use this field.
-         */
-        public Builder version(String version) {
-            Utils.checkNotNull(version, "version");
-            this.version = Optional.ofNullable(version);
-            return this;
-        }
-
-        /**
-         * The current version of this employee compensation. This field is only available for prepared
-         * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-         * information on how to use this field.
-         */
-        public Builder version(Optional<String> version) {
-            Utils.checkNotNull(version, "version");
-            this.version = version;
             return this;
         }
 
@@ -1007,7 +1001,7 @@ public class PayrollEmployeeCompensationsType {
          * 
          * <p>For an unprocessed payroll, all active fixed compensations are returned.
          */
-        public Builder fixedCompensations(List<FixedCompensations> fixedCompensations) {
+        public Builder fixedCompensations(List<PayrollEmployeeCompensationsTypeFixedCompensations> fixedCompensations) {
             Utils.checkNotNull(fixedCompensations, "fixedCompensations");
             this.fixedCompensations = Optional.ofNullable(fixedCompensations);
             return this;
@@ -1020,7 +1014,7 @@ public class PayrollEmployeeCompensationsType {
          * 
          * <p>For an unprocessed payroll, all active fixed compensations are returned.
          */
-        public Builder fixedCompensations(Optional<? extends List<FixedCompensations>> fixedCompensations) {
+        public Builder fixedCompensations(Optional<? extends List<PayrollEmployeeCompensationsTypeFixedCompensations>> fixedCompensations) {
             Utils.checkNotNull(fixedCompensations, "fixedCompensations");
             this.fixedCompensations = fixedCompensations;
             return this;
@@ -1034,7 +1028,7 @@ public class PayrollEmployeeCompensationsType {
          * 
          * <p>For an unprocessed payroll, all active hourly compensations are returned.
          */
-        public Builder hourlyCompensations(List<HourlyCompensations> hourlyCompensations) {
+        public Builder hourlyCompensations(List<PayrollEmployeeCompensationsTypeHourlyCompensations> hourlyCompensations) {
             Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
             this.hourlyCompensations = Optional.ofNullable(hourlyCompensations);
             return this;
@@ -1047,7 +1041,7 @@ public class PayrollEmployeeCompensationsType {
          * 
          * <p>For an unprocessed payroll, all active hourly compensations are returned.
          */
-        public Builder hourlyCompensations(Optional<? extends List<HourlyCompensations>> hourlyCompensations) {
+        public Builder hourlyCompensations(Optional<? extends List<PayrollEmployeeCompensationsTypeHourlyCompensations>> hourlyCompensations) {
             Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
             this.hourlyCompensations = hourlyCompensations;
             return this;
@@ -1073,23 +1067,10 @@ public class PayrollEmployeeCompensationsType {
         }
 
 
-        public Builder deductions(List<Deductions> deductions) {
-            Utils.checkNotNull(deductions, "deductions");
-            this.deductions = Optional.ofNullable(deductions);
-            return this;
-        }
-
-        public Builder deductions(Optional<? extends List<Deductions>> deductions) {
-            Utils.checkNotNull(deductions, "deductions");
-            this.deductions = deductions;
-            return this;
-        }
-
-
         /**
          * An array of reimbursements for the employee.
          */
-        public Builder reimbursements(List<Reimbursements> reimbursements) {
+        public Builder reimbursements(List<PayrollEmployeeCompensationsTypeReimbursements> reimbursements) {
             Utils.checkNotNull(reimbursements, "reimbursements");
             this.reimbursements = Optional.ofNullable(reimbursements);
             return this;
@@ -1098,21 +1079,65 @@ public class PayrollEmployeeCompensationsType {
         /**
          * An array of reimbursements for the employee.
          */
-        public Builder reimbursements(Optional<? extends List<Reimbursements>> reimbursements) {
+        public Builder reimbursements(Optional<? extends List<PayrollEmployeeCompensationsTypeReimbursements>> reimbursements) {
             Utils.checkNotNull(reimbursements, "reimbursements");
             this.reimbursements = reimbursements;
+            return this;
+        }
+
+
+        /**
+         * The current version of this employee compensation. This field is only available for prepared
+         * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
+         * information on how to use this field.
+         */
+        public Builder version(Object version) {
+            Utils.checkNotNull(version, "version");
+            this.version = Optional.ofNullable(version);
+            return this;
+        }
+
+        /**
+         * The current version of this employee compensation. This field is only available for prepared
+         * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
+         * information on how to use this field.
+         */
+        public Builder version(Optional<? extends Object> version) {
+            Utils.checkNotNull(version, "version");
+            this.version = version;
+            return this;
+        }
+
+
+        /**
+         * An array of deductions for the employee. This field is included by default for regular payrolls in
+         * version `v2025-06-15` and later.
+         */
+        public Builder deductions(List<Deductions> deductions) {
+            Utils.checkNotNull(deductions, "deductions");
+            this.deductions = Optional.ofNullable(deductions);
+            return this;
+        }
+
+        /**
+         * An array of deductions for the employee. This field is included by default for regular payrolls in
+         * version `v2025-06-15` and later.
+         */
+        public Builder deductions(Optional<? extends List<Deductions>> deductions) {
+            Utils.checkNotNull(deductions, "deductions");
+            this.deductions = deductions;
             return this;
         }
 
         public PayrollEmployeeCompensationsType build() {
 
             return new PayrollEmployeeCompensationsType(
-                employeeUuid, excluded, version,
-                firstName, preferredFirstName, lastName,
-                grossPay, netPay, checkAmount,
-                paymentMethod, memo, fixedCompensations,
-                hourlyCompensations, paidTimeOff, deductions,
-                reimbursements);
+                employeeUuid, excluded, firstName,
+                preferredFirstName, lastName, grossPay,
+                netPay, checkAmount, paymentMethod,
+                memo, fixedCompensations, hourlyCompensations,
+                paidTimeOff, reimbursements, version,
+                deductions);
         }
 
     }

@@ -13,7 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
@@ -26,32 +26,33 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
     private String version;
 
     /**
-     * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated.
-     * If type is Direct Deposit, `split_by` and `splits` are required.
+     * The payment method type. If type is Check, split_by and splits do not need to be populated. If type
+     * is Direct Deposit, split_by and splits are required.
      */
     @JsonProperty("type")
     private Type type;
 
     /**
-     * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must
-     * add up to exactly 100. If `split_by` is Amount, then amount is in cents and the last `split` amount
-     * must be `null` to capture the remainder.
+     * How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount,
+     * values are in cents and the last split amount must be null to capture the remainder.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("split_by")
-    private Optional<? extends SplitBy> splitBy;
+    private JsonNullable<? extends SplitBy> splitBy;
 
-
+    /**
+     * Array of payment splits. Required when type is Direct Deposit.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("splits")
-    private Optional<? extends List<Splits>> splits;
+    private JsonNullable<? extends List<Splits>> splits;
 
     @JsonCreator
     public PutV1EmployeesEmployeeIdPaymentMethodRequestBody(
             @JsonProperty("version") String version,
             @JsonProperty("type") Type type,
-            @JsonProperty("split_by") Optional<? extends SplitBy> splitBy,
-            @JsonProperty("splits") Optional<? extends List<Splits>> splits) {
+            @JsonProperty("split_by") JsonNullable<? extends SplitBy> splitBy,
+            @JsonProperty("splits") JsonNullable<? extends List<Splits>> splits) {
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(type, "type");
         Utils.checkNotNull(splitBy, "splitBy");
@@ -65,8 +66,8 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
     public PutV1EmployeesEmployeeIdPaymentMethodRequestBody(
             String version,
             Type type) {
-        this(version, type, Optional.empty(),
-            Optional.empty());
+        this(version, type, JsonNullable.undefined(),
+            JsonNullable.undefined());
     }
 
     /**
@@ -80,8 +81,8 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
     }
 
     /**
-     * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated.
-     * If type is Direct Deposit, `split_by` and `splits` are required.
+     * The payment method type. If type is Check, split_by and splits do not need to be populated. If type
+     * is Direct Deposit, split_by and splits are required.
      */
     @JsonIgnore
     public Type type() {
@@ -89,20 +90,22 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
     }
 
     /**
-     * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must
-     * add up to exactly 100. If `split_by` is Amount, then amount is in cents and the last `split` amount
-     * must be `null` to capture the remainder.
+     * How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount,
+     * values are in cents and the last split amount must be null to capture the remainder.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<SplitBy> splitBy() {
-        return (Optional<SplitBy>) splitBy;
+    public JsonNullable<SplitBy> splitBy() {
+        return (JsonNullable<SplitBy>) splitBy;
     }
 
+    /**
+     * Array of payment splits. Required when type is Direct Deposit.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Splits>> splits() {
-        return (Optional<List<Splits>>) splits;
+    public JsonNullable<List<Splits>> splits() {
+        return (JsonNullable<List<Splits>>) splits;
     }
 
     public static Builder builder() {
@@ -122,8 +125,8 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
     }
 
     /**
-     * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated.
-     * If type is Direct Deposit, `split_by` and `splits` are required.
+     * The payment method type. If type is Check, split_by and splits do not need to be populated. If type
+     * is Direct Deposit, split_by and splits are required.
      */
     public PutV1EmployeesEmployeeIdPaymentMethodRequestBody withType(Type type) {
         Utils.checkNotNull(type, "type");
@@ -132,36 +135,38 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
     }
 
     /**
-     * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must
-     * add up to exactly 100. If `split_by` is Amount, then amount is in cents and the last `split` amount
-     * must be `null` to capture the remainder.
+     * How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount,
+     * values are in cents and the last split amount must be null to capture the remainder.
      */
     public PutV1EmployeesEmployeeIdPaymentMethodRequestBody withSplitBy(SplitBy splitBy) {
         Utils.checkNotNull(splitBy, "splitBy");
-        this.splitBy = Optional.ofNullable(splitBy);
+        this.splitBy = JsonNullable.of(splitBy);
         return this;
     }
 
-
     /**
-     * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must
-     * add up to exactly 100. If `split_by` is Amount, then amount is in cents and the last `split` amount
-     * must be `null` to capture the remainder.
+     * How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount,
+     * values are in cents and the last split amount must be null to capture the remainder.
      */
-    public PutV1EmployeesEmployeeIdPaymentMethodRequestBody withSplitBy(Optional<? extends SplitBy> splitBy) {
+    public PutV1EmployeesEmployeeIdPaymentMethodRequestBody withSplitBy(JsonNullable<? extends SplitBy> splitBy) {
         Utils.checkNotNull(splitBy, "splitBy");
         this.splitBy = splitBy;
         return this;
     }
 
+    /**
+     * Array of payment splits. Required when type is Direct Deposit.
+     */
     public PutV1EmployeesEmployeeIdPaymentMethodRequestBody withSplits(List<Splits> splits) {
         Utils.checkNotNull(splits, "splits");
-        this.splits = Optional.ofNullable(splits);
+        this.splits = JsonNullable.of(splits);
         return this;
     }
 
-
-    public PutV1EmployeesEmployeeIdPaymentMethodRequestBody withSplits(Optional<? extends List<Splits>> splits) {
+    /**
+     * Array of payment splits. Required when type is Direct Deposit.
+     */
+    public PutV1EmployeesEmployeeIdPaymentMethodRequestBody withSplits(JsonNullable<? extends List<Splits>> splits) {
         Utils.checkNotNull(splits, "splits");
         this.splits = splits;
         return this;
@@ -206,9 +211,9 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
 
         private Type type;
 
-        private Optional<? extends SplitBy> splitBy = Optional.empty();
+        private JsonNullable<? extends SplitBy> splitBy = JsonNullable.undefined();
 
-        private Optional<? extends List<Splits>> splits = Optional.empty();
+        private JsonNullable<? extends List<Splits>> splits = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -228,8 +233,8 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
 
 
         /**
-         * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated.
-         * If type is Direct Deposit, `split_by` and `splits` are required.
+         * The payment method type. If type is Check, split_by and splits do not need to be populated. If type
+         * is Direct Deposit, split_by and splits are required.
          */
         public Builder type(Type type) {
             Utils.checkNotNull(type, "type");
@@ -239,35 +244,39 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
 
 
         /**
-         * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must
-         * add up to exactly 100. If `split_by` is Amount, then amount is in cents and the last `split` amount
-         * must be `null` to capture the remainder.
+         * How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount,
+         * values are in cents and the last split amount must be null to capture the remainder.
          */
         public Builder splitBy(SplitBy splitBy) {
             Utils.checkNotNull(splitBy, "splitBy");
-            this.splitBy = Optional.ofNullable(splitBy);
+            this.splitBy = JsonNullable.of(splitBy);
             return this;
         }
 
         /**
-         * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must
-         * add up to exactly 100. If `split_by` is Amount, then amount is in cents and the last `split` amount
-         * must be `null` to capture the remainder.
+         * How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount,
+         * values are in cents and the last split amount must be null to capture the remainder.
          */
-        public Builder splitBy(Optional<? extends SplitBy> splitBy) {
+        public Builder splitBy(JsonNullable<? extends SplitBy> splitBy) {
             Utils.checkNotNull(splitBy, "splitBy");
             this.splitBy = splitBy;
             return this;
         }
 
 
+        /**
+         * Array of payment splits. Required when type is Direct Deposit.
+         */
         public Builder splits(List<Splits> splits) {
             Utils.checkNotNull(splits, "splits");
-            this.splits = Optional.ofNullable(splits);
+            this.splits = JsonNullable.of(splits);
             return this;
         }
 
-        public Builder splits(Optional<? extends List<Splits>> splits) {
+        /**
+         * Array of payment splits. Required when type is Direct Deposit.
+         */
+        public Builder splits(JsonNullable<? extends List<Splits>> splits) {
             Utils.checkNotNull(splits, "splits");
             this.splits = splits;
             return this;

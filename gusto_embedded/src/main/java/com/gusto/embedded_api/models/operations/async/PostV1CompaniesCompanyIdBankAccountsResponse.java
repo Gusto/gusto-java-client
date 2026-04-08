@@ -34,7 +34,7 @@ public class PostV1CompaniesCompanyIdBankAccountsResponse implements AsyncRespon
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * created
+     * Bank account unchanged
      */
     private Optional<? extends CompanyBankAccount> companyBankAccount;
 
@@ -87,7 +87,7 @@ public class PostV1CompaniesCompanyIdBankAccountsResponse implements AsyncRespon
     }
 
     /**
-     * created
+     * Bank account unchanged
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PostV1CompaniesCompanyIdBankAccountsResponse implements AsyncRespon
     }
 
     /**
-     * created
+     * Bank account unchanged
      */
     public PostV1CompaniesCompanyIdBankAccountsResponse withCompanyBankAccount(CompanyBankAccount companyBankAccount) {
         Utils.checkNotNull(companyBankAccount, "companyBankAccount");
@@ -138,7 +138,7 @@ public class PostV1CompaniesCompanyIdBankAccountsResponse implements AsyncRespon
 
 
     /**
-     * created
+     * Bank account unchanged
      */
     public PostV1CompaniesCompanyIdBankAccountsResponse withCompanyBankAccount(Optional<? extends CompanyBankAccount> companyBankAccount) {
         Utils.checkNotNull(companyBankAccount, "companyBankAccount");
@@ -225,7 +225,7 @@ public class PostV1CompaniesCompanyIdBankAccountsResponse implements AsyncRespon
 
 
         /**
-         * created
+         * Bank account unchanged
          */
         public Builder companyBankAccount(CompanyBankAccount companyBankAccount) {
             Utils.checkNotNull(companyBankAccount, "companyBankAccount");
@@ -234,7 +234,7 @@ public class PostV1CompaniesCompanyIdBankAccountsResponse implements AsyncRespon
         }
 
         /**
-         * created
+         * Bank account unchanged
          */
         public Builder companyBankAccount(Optional<? extends CompanyBankAccount> companyBankAccount) {
             Utils.checkNotNull(companyBankAccount, "companyBankAccount");

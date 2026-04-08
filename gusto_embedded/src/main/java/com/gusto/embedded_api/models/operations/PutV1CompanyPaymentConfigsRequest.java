@@ -6,7 +6,7 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.PaymentConfigsUpdateRequest;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -18,40 +18,51 @@ import java.util.Optional;
 
 public class PutV1CompanyPaymentConfigsRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
     private String companyUuid;
+
+
+    @SpeakeasyMetadata("request:mediaType=application/json")
+    private PaymentConfigsUpdateRequest paymentConfigsUpdateRequest;
+
+    @JsonCreator
+    public PutV1CompanyPaymentConfigsRequest(
+            Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyUuid,
+            PaymentConfigsUpdateRequest paymentConfigsUpdateRequest) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        Utils.checkNotNull(paymentConfigsUpdateRequest, "paymentConfigsUpdateRequest");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyUuid = companyUuid;
+        this.paymentConfigsUpdateRequest = paymentConfigsUpdateRequest;
+    }
+    
+    public PutV1CompanyPaymentConfigsRequest(
+            String companyUuid,
+            PaymentConfigsUpdateRequest paymentConfigsUpdateRequest) {
+        this(Optional.empty(), companyUuid, paymentConfigsUpdateRequest);
+    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-
-    @SpeakeasyMetadata("request:mediaType=application/json")
-    private PutV1CompanyPaymentConfigsRequestBody requestBody;
-
-    @JsonCreator
-    public PutV1CompanyPaymentConfigsRequest(
-            String companyUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1CompanyPaymentConfigsRequestBody requestBody) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.companyUuid = companyUuid;
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        this.requestBody = requestBody;
-    }
-    
-    public PutV1CompanyPaymentConfigsRequest(
-            String companyUuid,
-            PutV1CompanyPaymentConfigsRequestBody requestBody) {
-        this(companyUuid, Optional.empty(), requestBody);
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -62,20 +73,9 @@ public class PutV1CompanyPaymentConfigsRequest {
         return companyUuid;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
-    }
-
-    @JsonIgnore
-    public PutV1CompanyPaymentConfigsRequestBody requestBody() {
-        return requestBody;
+    public PaymentConfigsUpdateRequest paymentConfigsUpdateRequest() {
+        return paymentConfigsUpdateRequest;
     }
 
     public static Builder builder() {
@@ -84,20 +84,11 @@ public class PutV1CompanyPaymentConfigsRequest {
 
 
     /**
-     * The UUID of the company
-     */
-    public PutV1CompanyPaymentConfigsRequest withCompanyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1CompanyPaymentConfigsRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1CompanyPaymentConfigsRequest withXGustoAPIVersion(PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -109,15 +100,24 @@ public class PutV1CompanyPaymentConfigsRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1CompanyPaymentConfigsRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1CompanyPaymentConfigsRequest withXGustoAPIVersion(Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PutV1CompanyPaymentConfigsRequest withRequestBody(PutV1CompanyPaymentConfigsRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    /**
+     * The UUID of the company
+     */
+    public PutV1CompanyPaymentConfigsRequest withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
+    public PutV1CompanyPaymentConfigsRequest withPaymentConfigsUpdateRequest(PaymentConfigsUpdateRequest paymentConfigsUpdateRequest) {
+        Utils.checkNotNull(paymentConfigsUpdateRequest, "paymentConfigsUpdateRequest");
+        this.paymentConfigsUpdateRequest = paymentConfigsUpdateRequest;
         return this;
     }
 
@@ -131,36 +131,59 @@ public class PutV1CompanyPaymentConfigsRequest {
         }
         PutV1CompanyPaymentConfigsRequest other = (PutV1CompanyPaymentConfigsRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
-            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
+            Utils.enhancedDeepEquals(this.paymentConfigsUpdateRequest, other.paymentConfigsUpdateRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, xGustoAPIVersion, requestBody);
+            xGustoAPIVersion, companyUuid, paymentConfigsUpdateRequest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1CompanyPaymentConfigsRequest.class,
-                "companyUuid", companyUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
-                "requestBody", requestBody);
+                "companyUuid", companyUuid,
+                "paymentConfigsUpdateRequest", paymentConfigsUpdateRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String companyUuid;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-        private PutV1CompanyPaymentConfigsRequestBody requestBody;
+        private PaymentConfigsUpdateRequest paymentConfigsUpdateRequest;
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -174,32 +197,9 @@ public class PutV1CompanyPaymentConfigsRequest {
         }
 
 
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
-
-
-        public Builder requestBody(PutV1CompanyPaymentConfigsRequestBody requestBody) {
-            Utils.checkNotNull(requestBody, "requestBody");
-            this.requestBody = requestBody;
+        public Builder paymentConfigsUpdateRequest(PaymentConfigsUpdateRequest paymentConfigsUpdateRequest) {
+            Utils.checkNotNull(paymentConfigsUpdateRequest, "paymentConfigsUpdateRequest");
+            this.paymentConfigsUpdateRequest = paymentConfigsUpdateRequest;
             return this;
         }
 
@@ -209,14 +209,14 @@ public class PutV1CompanyPaymentConfigsRequest {
             }
 
             return new PutV1CompanyPaymentConfigsRequest(
-                companyUuid, xGustoAPIVersion, requestBody);
+                xGustoAPIVersion, companyUuid, paymentConfigsUpdateRequest);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion>>() {});
     }
 }

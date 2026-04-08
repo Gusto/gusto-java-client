@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -52,16 +53,26 @@ public class TaxRequirement {
     private JsonNullable<String> description;
 
     /**
-     * The "answer"
+     * The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g.
+     * string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate).
+     * 
+     * <p>Null when the requirement has not been answered.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("value")
-    private JsonNullable<? extends TaxRequirementValue> value;
+    private JsonNullable<? extends TaxRequirementsValue> value;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metadata")
     private Optional<? extends TaxRequirementMetadata> metadata;
+
+    /**
+     * Whether the value of this requirement can be updated
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("editable")
+    private Optional<Boolean> editable;
 
     @JsonCreator
     public TaxRequirement(
@@ -69,25 +80,29 @@ public class TaxRequirement {
             @JsonProperty("applicable_if") Optional<? extends List<ApplicableIf>> applicableIf,
             @JsonProperty("label") Optional<String> label,
             @JsonProperty("description") JsonNullable<String> description,
-            @JsonProperty("value") JsonNullable<? extends TaxRequirementValue> value,
-            @JsonProperty("metadata") Optional<? extends TaxRequirementMetadata> metadata) {
+            @JsonProperty("value") JsonNullable<? extends TaxRequirementsValue> value,
+            @JsonProperty("metadata") Optional<? extends TaxRequirementMetadata> metadata,
+            @JsonProperty("editable") Optional<Boolean> editable) {
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(applicableIf, "applicableIf");
         Utils.checkNotNull(label, "label");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(value, "value");
         Utils.checkNotNull(metadata, "metadata");
+        Utils.checkNotNull(editable, "editable");
         this.key = key;
         this.applicableIf = applicableIf;
         this.label = label;
         this.description = description;
         this.value = value;
         this.metadata = metadata;
+        this.editable = editable;
     }
     
     public TaxRequirement() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty());
+            JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -129,18 +144,29 @@ public class TaxRequirement {
     }
 
     /**
-     * The "answer"
+     * The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g.
+     * string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate).
+     * 
+     * <p>Null when the requirement has not been answered.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<TaxRequirementValue> value() {
-        return (JsonNullable<TaxRequirementValue>) value;
+    public JsonNullable<TaxRequirementsValue> value() {
+        return (JsonNullable<TaxRequirementsValue>) value;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<TaxRequirementMetadata> metadata() {
         return (Optional<TaxRequirementMetadata>) metadata;
+    }
+
+    /**
+     * Whether the value of this requirement can be updated
+     */
+    @JsonIgnore
+    public Optional<Boolean> editable() {
+        return editable;
     }
 
     public static Builder builder() {
@@ -234,18 +260,24 @@ public class TaxRequirement {
     }
 
     /**
-     * The "answer"
+     * The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g.
+     * string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate).
+     * 
+     * <p>Null when the requirement has not been answered.
      */
-    public TaxRequirement withValue(TaxRequirementValue value) {
+    public TaxRequirement withValue(TaxRequirementsValue value) {
         Utils.checkNotNull(value, "value");
         this.value = JsonNullable.of(value);
         return this;
     }
 
     /**
-     * The "answer"
+     * The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g.
+     * string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate).
+     * 
+     * <p>Null when the requirement has not been answered.
      */
-    public TaxRequirement withValue(JsonNullable<? extends TaxRequirementValue> value) {
+    public TaxRequirement withValue(JsonNullable<? extends TaxRequirementsValue> value) {
         Utils.checkNotNull(value, "value");
         this.value = value;
         return this;
@@ -264,6 +296,25 @@ public class TaxRequirement {
         return this;
     }
 
+    /**
+     * Whether the value of this requirement can be updated
+     */
+    public TaxRequirement withEditable(boolean editable) {
+        Utils.checkNotNull(editable, "editable");
+        this.editable = Optional.ofNullable(editable);
+        return this;
+    }
+
+
+    /**
+     * Whether the value of this requirement can be updated
+     */
+    public TaxRequirement withEditable(Optional<Boolean> editable) {
+        Utils.checkNotNull(editable, "editable");
+        this.editable = editable;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -279,14 +330,16 @@ public class TaxRequirement {
             Utils.enhancedDeepEquals(this.label, other.label) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.value, other.value) &&
-            Utils.enhancedDeepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.editable, other.editable);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             key, applicableIf, label,
-            description, value, metadata);
+            description, value, metadata,
+            editable);
     }
     
     @Override
@@ -297,7 +350,8 @@ public class TaxRequirement {
                 "label", label,
                 "description", description,
                 "value", value,
-                "metadata", metadata);
+                "metadata", metadata,
+                "editable", editable);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -311,9 +365,11 @@ public class TaxRequirement {
 
         private JsonNullable<String> description = JsonNullable.undefined();
 
-        private JsonNullable<? extends TaxRequirementValue> value = JsonNullable.undefined();
+        private JsonNullable<? extends TaxRequirementsValue> value = JsonNullable.undefined();
 
         private Optional<? extends TaxRequirementMetadata> metadata = Optional.empty();
+
+        private Optional<Boolean> editable = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -407,18 +463,24 @@ public class TaxRequirement {
 
 
         /**
-         * The "answer"
+         * The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g.
+         * string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate).
+         * 
+         * <p>Null when the requirement has not been answered.
          */
-        public Builder value(TaxRequirementValue value) {
+        public Builder value(TaxRequirementsValue value) {
             Utils.checkNotNull(value, "value");
             this.value = JsonNullable.of(value);
             return this;
         }
 
         /**
-         * The "answer"
+         * The value or "answer" for a tax requirement. Type depends on the requirement metadata type (e.g.
+         * string for text/account_number, boolean for radio/checkbox, number for percent/currency/tax_rate).
+         * 
+         * <p>Null when the requirement has not been answered.
          */
-        public Builder value(JsonNullable<? extends TaxRequirementValue> value) {
+        public Builder value(JsonNullable<? extends TaxRequirementsValue> value) {
             Utils.checkNotNull(value, "value");
             this.value = value;
             return this;
@@ -437,11 +499,31 @@ public class TaxRequirement {
             return this;
         }
 
+
+        /**
+         * Whether the value of this requirement can be updated
+         */
+        public Builder editable(boolean editable) {
+            Utils.checkNotNull(editable, "editable");
+            this.editable = Optional.ofNullable(editable);
+            return this;
+        }
+
+        /**
+         * Whether the value of this requirement can be updated
+         */
+        public Builder editable(Optional<Boolean> editable) {
+            Utils.checkNotNull(editable, "editable");
+            this.editable = editable;
+            return this;
+        }
+
         public TaxRequirement build() {
 
             return new TaxRequirement(
                 key, applicableIf, label,
-                description, value, metadata);
+                description, value, metadata,
+                editable);
         }
 
     }

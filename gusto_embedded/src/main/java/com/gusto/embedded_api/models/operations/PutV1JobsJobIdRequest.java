@@ -6,7 +6,7 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.JobsUpdateRequestBody;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -29,31 +29,29 @@ public class PutV1JobsJobIdRequest {
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    private Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion;
 
-    /**
-     * Update a job.
-     */
+
     @SpeakeasyMetadata("request:mediaType=application/json")
-    private PutV1JobsJobIdRequestBody requestBody;
+    private JobsUpdateRequestBody jobsUpdateRequestBody;
 
     @JsonCreator
     public PutV1JobsJobIdRequest(
             String jobId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1JobsJobIdRequestBody requestBody) {
+            Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion,
+            JobsUpdateRequestBody jobsUpdateRequestBody) {
         Utils.checkNotNull(jobId, "jobId");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        Utils.checkNotNull(requestBody, "requestBody");
+        Utils.checkNotNull(jobsUpdateRequestBody, "jobsUpdateRequestBody");
         this.jobId = jobId;
         this.xGustoAPIVersion = xGustoAPIVersion;
-        this.requestBody = requestBody;
+        this.jobsUpdateRequestBody = jobsUpdateRequestBody;
     }
     
     public PutV1JobsJobIdRequest(
             String jobId,
-            PutV1JobsJobIdRequestBody requestBody) {
-        this(jobId, Optional.empty(), requestBody);
+            JobsUpdateRequestBody jobsUpdateRequestBody) {
+        this(jobId, Optional.empty(), jobsUpdateRequestBody);
     }
 
     /**
@@ -71,16 +69,13 @@ public class PutV1JobsJobIdRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1JobsJobIdHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
-    /**
-     * Update a job.
-     */
     @JsonIgnore
-    public PutV1JobsJobIdRequestBody requestBody() {
-        return requestBody;
+    public JobsUpdateRequestBody jobsUpdateRequestBody() {
+        return jobsUpdateRequestBody;
     }
 
     public static Builder builder() {
@@ -102,7 +97,7 @@ public class PutV1JobsJobIdRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1JobsJobIdRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1JobsJobIdRequest withXGustoAPIVersion(PutV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -114,18 +109,15 @@ public class PutV1JobsJobIdRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1JobsJobIdRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1JobsJobIdRequest withXGustoAPIVersion(Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    /**
-     * Update a job.
-     */
-    public PutV1JobsJobIdRequest withRequestBody(PutV1JobsJobIdRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1JobsJobIdRequest withJobsUpdateRequestBody(JobsUpdateRequestBody jobsUpdateRequestBody) {
+        Utils.checkNotNull(jobsUpdateRequestBody, "jobsUpdateRequestBody");
+        this.jobsUpdateRequestBody = jobsUpdateRequestBody;
         return this;
     }
 
@@ -141,13 +133,13 @@ public class PutV1JobsJobIdRequest {
         return 
             Utils.enhancedDeepEquals(this.jobId, other.jobId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
-            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.jobsUpdateRequestBody, other.jobsUpdateRequestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            jobId, xGustoAPIVersion, requestBody);
+            jobId, xGustoAPIVersion, jobsUpdateRequestBody);
     }
     
     @Override
@@ -155,7 +147,7 @@ public class PutV1JobsJobIdRequest {
         return Utils.toString(PutV1JobsJobIdRequest.class,
                 "jobId", jobId,
                 "xGustoAPIVersion", xGustoAPIVersion,
-                "requestBody", requestBody);
+                "jobsUpdateRequestBody", jobsUpdateRequestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -163,9 +155,9 @@ public class PutV1JobsJobIdRequest {
 
         private String jobId;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion;
 
-        private PutV1JobsJobIdRequestBody requestBody;
+        private JobsUpdateRequestBody jobsUpdateRequestBody;
 
         private Builder() {
           // force use of static builder() method
@@ -187,7 +179,7 @@ public class PutV1JobsJobIdRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(PutV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -198,19 +190,16 @@ public class PutV1JobsJobIdRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
         }
 
 
-        /**
-         * Update a job.
-         */
-        public Builder requestBody(PutV1JobsJobIdRequestBody requestBody) {
-            Utils.checkNotNull(requestBody, "requestBody");
-            this.requestBody = requestBody;
+        public Builder jobsUpdateRequestBody(JobsUpdateRequestBody jobsUpdateRequestBody) {
+            Utils.checkNotNull(jobsUpdateRequestBody, "jobsUpdateRequestBody");
+            this.jobsUpdateRequestBody = jobsUpdateRequestBody;
             return this;
         }
 
@@ -220,14 +209,14 @@ public class PutV1JobsJobIdRequest {
             }
 
             return new PutV1JobsJobIdRequest(
-                jobId, xGustoAPIVersion, requestBody);
+                jobId, xGustoAPIVersion, jobsUpdateRequestBody);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion>>() {});
     }
 }

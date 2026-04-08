@@ -549,6 +549,8 @@ public class EmployeeBenefits {
      * 
      * <p>scope: `employee_benefits:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder getV1EmployeesEmployeeUuidSection603HighEarnerStatuses() {
@@ -566,6 +568,8 @@ public class EmployeeBenefits {
      * retirement benefits must be designated as post-tax contributions.
      * 
      * <p>scope: `employee_benefits:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeUuid The UUID of the employee
      * @return The response from the API call
@@ -586,6 +590,8 @@ public class EmployeeBenefits {
      * retirement benefits must be designated as post-tax contributions.
      * 
      * <p>scope: `employee_benefits:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeUuid The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -616,6 +622,8 @@ public class EmployeeBenefits {
      * 
      * <p>scope: `employee_benefits:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder postV1EmployeesEmployeeUuidSection603HighEarnerStatuses() {
@@ -633,6 +641,8 @@ public class EmployeeBenefits {
      * retirement benefits must be designated as post-tax contributions.
      * 
      * <p>scope: `employee_benefits:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeUuid The UUID of the employee
      * @param employeeSection603HighEarnerStatusCreateRequest Request body for creating an employee's Section 603 high earner status
@@ -654,6 +664,8 @@ public class EmployeeBenefits {
      * retirement benefits must be designated as post-tax contributions.
      * 
      * <p>scope: `employee_benefits:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeUuid The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -688,6 +700,8 @@ public class EmployeeBenefits {
      * 
      * <p>scope: `employee_benefits:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear() {
@@ -705,6 +719,8 @@ public class EmployeeBenefits {
      * retirement benefits must be designated as post-tax contributions.
      * 
      * <p>scope: `employee_benefits:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeUuid The UUID of the employee
      * @param effectiveYear The effective year for the Section 603 status
@@ -726,6 +742,8 @@ public class EmployeeBenefits {
      * retirement benefits must be designated as post-tax contributions.
      * 
      * <p>scope: `employee_benefits:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeUuid The UUID of the employee
      * @param effectiveYear The effective year for the Section 603 status
@@ -760,6 +778,8 @@ public class EmployeeBenefits {
      * 
      * <p>scope: `employee_benefits:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder patchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear() {
@@ -777,6 +797,8 @@ public class EmployeeBenefits {
      * retirement benefits must be designated as post-tax contributions.
      * 
      * <p>scope: `employee_benefits:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeUuid The UUID of the employee
      * @param effectiveYear The effective year for the Section 603 status
@@ -802,6 +824,8 @@ public class EmployeeBenefits {
      * retirement benefits must be designated as post-tax contributions.
      * 
      * <p>scope: `employee_benefits:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeUuid The UUID of the employee
      * @param effectiveYear The effective year for the Section 603 status

@@ -7,9 +7,9 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.PaymentConfigsUpdateRequest;
+import com.gusto.embedded_api.models.operations.PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompanyPaymentConfigsRequest;
-import com.gusto.embedded_api.models.operations.PutV1CompanyPaymentConfigsRequestBody;
 import com.gusto.embedded_api.operations.PutV1CompanyPaymentConfigs;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -20,17 +20,29 @@ import java.util.concurrent.CompletableFuture;
 
 public class PutV1CompanyPaymentConfigsRequestBuilder {
 
-    private String companyUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PutV1CompanyPaymentConfigsRequestBody requestBody;
+                            new TypeReference<Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private PaymentConfigsUpdateRequest paymentConfigsUpdateRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompanyPaymentConfigsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PutV1CompanyPaymentConfigsRequestBuilder xGustoAPIVersion(PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PutV1CompanyPaymentConfigsRequestBuilder xGustoAPIVersion(Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PutV1CompanyPaymentConfigsRequestBuilder companyUuid(String companyUuid) {
@@ -38,22 +50,10 @@ public class PutV1CompanyPaymentConfigsRequestBuilder {
         this.companyUuid = companyUuid;
         return this;
     }
-                
-    public PutV1CompanyPaymentConfigsRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
 
-    public PutV1CompanyPaymentConfigsRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PutV1CompanyPaymentConfigsRequestBuilder requestBody(PutV1CompanyPaymentConfigsRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1CompanyPaymentConfigsRequestBuilder paymentConfigsUpdateRequest(PaymentConfigsUpdateRequest paymentConfigsUpdateRequest) {
+        Utils.checkNotNull(paymentConfigsUpdateRequest, "paymentConfigsUpdateRequest");
+        this.paymentConfigsUpdateRequest = paymentConfigsUpdateRequest;
         return this;
     }
 
@@ -63,9 +63,9 @@ public class PutV1CompanyPaymentConfigsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompanyPaymentConfigsRequest request = new PutV1CompanyPaymentConfigsRequest(companyUuid,
-            xGustoAPIVersion,
-            requestBody);
+        PutV1CompanyPaymentConfigsRequest request = new PutV1CompanyPaymentConfigsRequest(xGustoAPIVersion,
+            companyUuid,
+            paymentConfigsUpdateRequest);
 
         return request;
     }
@@ -80,9 +80,9 @@ public class PutV1CompanyPaymentConfigsRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion>>() {});
 }
