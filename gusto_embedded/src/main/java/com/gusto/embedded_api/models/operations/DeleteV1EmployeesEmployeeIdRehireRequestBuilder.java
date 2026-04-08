@@ -7,7 +7,6 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.operations.DeleteV1EmployeesEmployeeIdRehire;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,33 +16,33 @@ import java.util.Optional;
 
 public class DeleteV1EmployeesEmployeeIdRehireRequestBuilder {
 
-    private String employeeId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends DeleteV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends DeleteV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1EmployeesEmployeeIdRehireRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
-    public DeleteV1EmployeesEmployeeIdRehireRequestBuilder employeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
-    }
                 
-    public DeleteV1EmployeesEmployeeIdRehireRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public DeleteV1EmployeesEmployeeIdRehireRequestBuilder xGustoAPIVersion(DeleteV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public DeleteV1EmployeesEmployeeIdRehireRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public DeleteV1EmployeesEmployeeIdRehireRequestBuilder xGustoAPIVersion(Optional<? extends DeleteV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public DeleteV1EmployeesEmployeeIdRehireRequestBuilder employeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
         return this;
     }
 
@@ -53,8 +52,8 @@ public class DeleteV1EmployeesEmployeeIdRehireRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1EmployeesEmployeeIdRehireRequest request = new DeleteV1EmployeesEmployeeIdRehireRequest(employeeId,
-            xGustoAPIVersion);
+        DeleteV1EmployeesEmployeeIdRehireRequest request = new DeleteV1EmployeesEmployeeIdRehireRequest(xGustoAPIVersion,
+            employeeId);
 
         return request;
     }
@@ -68,9 +67,9 @@ public class DeleteV1EmployeesEmployeeIdRehireRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends DeleteV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends DeleteV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion>>() {});
 }

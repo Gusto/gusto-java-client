@@ -5,14 +5,10 @@ package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.time.LocalDate;
-import java.util.Optional;
 
 /**
  * Compensation
@@ -30,14 +26,7 @@ public class Compensation {
      * The unit accompanying the compensation rate. If the employee is an owner, rate should be `Paycheck`.
      */
     @JsonProperty("payment_unit")
-    private PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit paymentUnit;
-
-    /**
-     * The date when the compensation takes effect.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("effective_date")
-    private Optional<LocalDate> effectiveDate;
+    private PaymentUnit paymentUnit;
 
     /**
      * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every
@@ -58,25 +47,14 @@ public class Compensation {
     @JsonCreator
     public Compensation(
             @JsonProperty("rate") String rate,
-            @JsonProperty("payment_unit") PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit paymentUnit,
-            @JsonProperty("effective_date") Optional<LocalDate> effectiveDate,
+            @JsonProperty("payment_unit") PaymentUnit paymentUnit,
             @JsonProperty("flsa_status") FlsaStatus flsaStatus) {
         Utils.checkNotNull(rate, "rate");
         Utils.checkNotNull(paymentUnit, "paymentUnit");
-        Utils.checkNotNull(effectiveDate, "effectiveDate");
         Utils.checkNotNull(flsaStatus, "flsaStatus");
         this.rate = rate;
         this.paymentUnit = paymentUnit;
-        this.effectiveDate = effectiveDate;
         this.flsaStatus = flsaStatus;
-    }
-    
-    public Compensation(
-            String rate,
-            PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit paymentUnit,
-            FlsaStatus flsaStatus) {
-        this(rate, paymentUnit, Optional.empty(),
-            flsaStatus);
     }
 
     /**
@@ -91,16 +69,8 @@ public class Compensation {
      * The unit accompanying the compensation rate. If the employee is an owner, rate should be `Paycheck`.
      */
     @JsonIgnore
-    public PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit paymentUnit() {
+    public PaymentUnit paymentUnit() {
         return paymentUnit;
-    }
-
-    /**
-     * The date when the compensation takes effect.
-     */
-    @JsonIgnore
-    public Optional<LocalDate> effectiveDate() {
-        return effectiveDate;
     }
 
     /**
@@ -138,28 +108,9 @@ public class Compensation {
     /**
      * The unit accompanying the compensation rate. If the employee is an owner, rate should be `Paycheck`.
      */
-    public Compensation withPaymentUnit(PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit paymentUnit) {
+    public Compensation withPaymentUnit(PaymentUnit paymentUnit) {
         Utils.checkNotNull(paymentUnit, "paymentUnit");
         this.paymentUnit = paymentUnit;
-        return this;
-    }
-
-    /**
-     * The date when the compensation takes effect.
-     */
-    public Compensation withEffectiveDate(LocalDate effectiveDate) {
-        Utils.checkNotNull(effectiveDate, "effectiveDate");
-        this.effectiveDate = Optional.ofNullable(effectiveDate);
-        return this;
-    }
-
-
-    /**
-     * The date when the compensation takes effect.
-     */
-    public Compensation withEffectiveDate(Optional<LocalDate> effectiveDate) {
-        Utils.checkNotNull(effectiveDate, "effectiveDate");
-        this.effectiveDate = effectiveDate;
         return this;
     }
 
@@ -194,15 +145,13 @@ public class Compensation {
         return 
             Utils.enhancedDeepEquals(this.rate, other.rate) &&
             Utils.enhancedDeepEquals(this.paymentUnit, other.paymentUnit) &&
-            Utils.enhancedDeepEquals(this.effectiveDate, other.effectiveDate) &&
             Utils.enhancedDeepEquals(this.flsaStatus, other.flsaStatus);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            rate, paymentUnit, effectiveDate,
-            flsaStatus);
+            rate, paymentUnit, flsaStatus);
     }
     
     @Override
@@ -210,7 +159,6 @@ public class Compensation {
         return Utils.toString(Compensation.class,
                 "rate", rate,
                 "paymentUnit", paymentUnit,
-                "effectiveDate", effectiveDate,
                 "flsaStatus", flsaStatus);
     }
 
@@ -219,9 +167,7 @@ public class Compensation {
 
         private String rate;
 
-        private PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit paymentUnit;
-
-        private Optional<LocalDate> effectiveDate = Optional.empty();
+        private PaymentUnit paymentUnit;
 
         private FlsaStatus flsaStatus;
 
@@ -243,28 +189,9 @@ public class Compensation {
         /**
          * The unit accompanying the compensation rate. If the employee is an owner, rate should be `Paycheck`.
          */
-        public Builder paymentUnit(PostV1CompaniesCompanyIdPeopleBatchesPaymentUnit paymentUnit) {
+        public Builder paymentUnit(PaymentUnit paymentUnit) {
             Utils.checkNotNull(paymentUnit, "paymentUnit");
             this.paymentUnit = paymentUnit;
-            return this;
-        }
-
-
-        /**
-         * The date when the compensation takes effect.
-         */
-        public Builder effectiveDate(LocalDate effectiveDate) {
-            Utils.checkNotNull(effectiveDate, "effectiveDate");
-            this.effectiveDate = Optional.ofNullable(effectiveDate);
-            return this;
-        }
-
-        /**
-         * The date when the compensation takes effect.
-         */
-        public Builder effectiveDate(Optional<LocalDate> effectiveDate) {
-            Utils.checkNotNull(effectiveDate, "effectiveDate");
-            this.effectiveDate = effectiveDate;
             return this;
         }
 
@@ -291,8 +218,7 @@ public class Compensation {
         public Compensation build() {
 
             return new Compensation(
-                rate, paymentUnit, effectiveDate,
-                flsaStatus);
+                rate, paymentUnit, flsaStatus);
         }
 
     }

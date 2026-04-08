@@ -5,29 +5,35 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.I9AuthorizationDocumentsRequestBody;
+import com.gusto.embedded_api.models.components.I9AuthorizationEmployerSignRequestBody;
+import com.gusto.embedded_api.models.components.I9AuthorizationRequestBody;
+import com.gusto.embedded_api.models.operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequestBuilder;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdI9AuthorizationRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdI9AuthorizationRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdI9AuthorizationResponse;
+import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBuilder;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse;
+import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse;
+import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationRequest;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationResponse;
 import com.gusto.embedded_api.operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentId;
@@ -65,12 +71,17 @@ public class I9Verification {
      * Get an employee's I-9 authorization
      * 
      * <p>An employee's I-9 authorization stores information about an employee's authorization status and I-9
-     * signatures, information required to filled out the Form I-9 for employment eligibility verification.
+     * signatures, information required to fill out the Form I-9 for employment eligibility verification.
      * 
      * <p>**NOTE:** The `form_uuid` in responses from this endpoint can be used to retrieve the PDF version of
      * the I-9. See the "get employee form PDF" request for more details.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -82,43 +93,53 @@ public class I9Verification {
      * Get an employee's I-9 authorization
      * 
      * <p>An employee's I-9 authorization stores information about an employee's authorization status and I-9
-     * signatures, information required to filled out the Form I-9 for employment eligibility verification.
+     * signatures, information required to fill out the Form I-9 for employment eligibility verification.
      * 
      * <p>**NOTE:** The `form_uuid` in responses from this endpoint can be used to retrieve the PDF version of
      * the I-9. See the "get employee form PDF" request for more details.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1EmployeesEmployeeIdI9AuthorizationResponse getAuthorization(String employeeId) {
-        return getAuthorization(employeeId, Optional.empty());
+        return getAuthorization(Optional.empty(), employeeId);
     }
 
     /**
      * Get an employee's I-9 authorization
      * 
      * <p>An employee's I-9 authorization stores information about an employee's authorization status and I-9
-     * signatures, information required to filled out the Form I-9 for employment eligibility verification.
+     * signatures, information required to fill out the Form I-9 for employment eligibility verification.
      * 
      * <p>**NOTE:** The `form_uuid` in responses from this endpoint can be used to retrieve the PDF version of
      * the I-9. See the "get employee form PDF" request for more details.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1EmployeesEmployeeIdI9AuthorizationResponse getAuthorization(String employeeId, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1EmployeesEmployeeIdI9AuthorizationResponse getAuthorization(Optional<? extends GetV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
         GetV1EmployeesEmployeeIdI9AuthorizationRequest request =
             GetV1EmployeesEmployeeIdI9AuthorizationRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         RequestOperation<GetV1EmployeesEmployeeIdI9AuthorizationRequest, GetV1EmployeesEmployeeIdI9AuthorizationResponse> operation
               = new GetV1EmployeesEmployeeIdI9Authorization.Sync(sdkConfiguration, _headers);
@@ -136,8 +157,7 @@ public class I9Verification {
      * update. Otherwise, it will create an employee I-9 authorization.
      * 
      * <p>Validations on this endpoint are conditional:
-     * 
-     * <p>* `document_type` may be required, depending on `authorization_status`.
+     * * `document_type` may be required, depending on `authorization_status`.
      * * Valid formats for `document_number` vary, depending on `document_type`.
      * * `country` is only allowed with `document_type: 'foreign_passport'`.
      * * `expiration_date` is only allowed with `authorization_status: 'alien'`.
@@ -154,7 +174,12 @@ public class I9Verification {
      * <p>Detailed instructions for completing Form I-9 can be found at
      * https://www.uscis.gov/sites/default/files/document/forms/i-9instr.pdf
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -173,8 +198,7 @@ public class I9Verification {
      * update. Otherwise, it will create an employee I-9 authorization.
      * 
      * <p>Validations on this endpoint are conditional:
-     * 
-     * <p>* `document_type` may be required, depending on `authorization_status`.
+     * * `document_type` may be required, depending on `authorization_status`.
      * * Valid formats for `document_number` vary, depending on `document_type`.
      * * `country` is only allowed with `document_type: 'foreign_passport'`.
      * * `expiration_date` is only allowed with `authorization_status: 'alien'`.
@@ -191,15 +215,20 @@ public class I9Verification {
      * <p>Detailed instructions for completing Form I-9 can be found at
      * https://www.uscis.gov/sites/default/files/document/forms/i-9instr.pdf
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody 
+     * @param i9AuthorizationRequestBody Request body for creating or updating an employee's I-9 authorization.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PutV1EmployeesEmployeeIdI9AuthorizationResponse update(String employeeId, PutV1EmployeesEmployeeIdI9AuthorizationRequestBody requestBody) {
-        return update(employeeId, Optional.empty(), requestBody);
+    public PutV1EmployeesEmployeeIdI9AuthorizationResponse update(String employeeId, I9AuthorizationRequestBody i9AuthorizationRequestBody) {
+        return update(Optional.empty(), employeeId, i9AuthorizationRequestBody);
     }
 
     /**
@@ -213,8 +242,7 @@ public class I9Verification {
      * update. Otherwise, it will create an employee I-9 authorization.
      * 
      * <p>Validations on this endpoint are conditional:
-     * 
-     * <p>* `document_type` may be required, depending on `authorization_status`.
+     * * `document_type` may be required, depending on `authorization_status`.
      * * Valid formats for `document_number` vary, depending on `document_type`.
      * * `country` is only allowed with `document_type: 'foreign_passport'`.
      * * `expiration_date` is only allowed with `authorization_status: 'alien'`.
@@ -231,23 +259,28 @@ public class I9Verification {
      * <p>Detailed instructions for completing Form I-9 can be found at
      * https://www.uscis.gov/sites/default/files/document/forms/i-9instr.pdf
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param i9AuthorizationRequestBody Request body for creating or updating an employee's I-9 authorization.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationResponse update(
-            String employeeId, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1EmployeesEmployeeIdI9AuthorizationRequestBody requestBody) {
+            Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            I9AuthorizationRequestBody i9AuthorizationRequestBody) {
         PutV1EmployeesEmployeeIdI9AuthorizationRequest request =
             PutV1EmployeesEmployeeIdI9AuthorizationRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .employeeId(employeeId)
+                .i9AuthorizationRequestBody(i9AuthorizationRequestBody)
                 .build();
         RequestOperation<PutV1EmployeesEmployeeIdI9AuthorizationRequest, PutV1EmployeesEmployeeIdI9AuthorizationResponse> operation
               = new PutV1EmployeesEmployeeIdI9Authorization.Sync(sdkConfiguration, _headers);
@@ -262,7 +295,12 @@ public class I9Verification {
      * possible document options based on the employee's authorization status. These options can then be
      * used to create the I-9 verification documents.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -278,14 +316,19 @@ public class I9Verification {
      * possible document options based on the employee's authorization status. These options can then be
      * used to create the I-9 verification documents.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse getDocumentOptions(String employeeId) {
-        return getDocumentOptions(employeeId, Optional.empty());
+        return getDocumentOptions(Optional.empty(), employeeId);
     }
 
     /**
@@ -296,19 +339,24 @@ public class I9Verification {
      * possible document options based on the employee's authorization status. These options can then be
      * used to create the I-9 verification documents.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse getDocumentOptions(String employeeId, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse getDocumentOptions(Optional<? extends GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
         GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest request =
             GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         RequestOperation<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest, GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse> operation
               = new GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptions.Sync(sdkConfiguration, _headers);
@@ -321,7 +369,12 @@ public class I9Verification {
      * <p>An employee's I-9 verification documents are the documents an employee has provided the employer to
      * verify their identity and authorization to work in the United States.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -335,14 +388,19 @@ public class I9Verification {
      * <p>An employee's I-9 verification documents are the documents an employee has provided the employer to
      * verify their identity and authorization to work in the United States.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse getDocuments(String employeeId) {
-        return getDocuments(employeeId, Optional.empty());
+        return getDocuments(Optional.empty(), employeeId);
     }
 
     /**
@@ -351,19 +409,24 @@ public class I9Verification {
      * <p>An employee's I-9 verification documents are the documents an employee has provided the employer to
      * verify their identity and authorization to work in the United States.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse getDocuments(String employeeId, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse getDocuments(Optional<? extends GetV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
         GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest request =
             GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         RequestOperation<GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest, GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse> operation
               = new GetV1EmployeesEmployeeIdI9AuthorizationDocuments.Sync(sdkConfiguration, _headers);
@@ -376,15 +439,21 @@ public class I9Verification {
      * <p>An employee's I-9 verification documents are the documents an employee has provided the employer to
      * verify their identity and authorization to work in the United States.
      * 
-     * <p>Use the document options endpoint to get the possible document types and titles, which can vary
-     * depending on the employee's authorization status.
+     * <p>Use the [document options
+     * endpoint](ref:get-v1-employees-employee_id-i9_authorization-document_options) to get the possible
+     * document types and titles, which can vary depending on the employee's authorization status.
      * 
      * <p>&gt; 🚧 Every request must contain the complete list of documents for the Employee.
      * &gt;
      * &gt; Every request to this endpoint removes any previous verification document records for the
      * employee.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -398,23 +467,29 @@ public class I9Verification {
      * <p>An employee's I-9 verification documents are the documents an employee has provided the employer to
      * verify their identity and authorization to work in the United States.
      * 
-     * <p>Use the document options endpoint to get the possible document types and titles, which can vary
-     * depending on the employee's authorization status.
+     * <p>Use the [document options
+     * endpoint](ref:get-v1-employees-employee_id-i9_authorization-document_options) to get the possible
+     * document types and titles, which can vary depending on the employee's authorization status.
      * 
      * <p>&gt; 🚧 Every request must contain the complete list of documents for the Employee.
      * &gt;
      * &gt; Every request to this endpoint removes any previous verification document records for the
      * employee.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody 
+     * @param i9AuthorizationDocumentsRequestBody Request body for creating an employee's I-9 authorization verification documents.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse createDocuments(String employeeId, PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody requestBody) {
-        return createDocuments(employeeId, Optional.empty(), requestBody);
+    public PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse createDocuments(String employeeId, I9AuthorizationDocumentsRequestBody i9AuthorizationDocumentsRequestBody) {
+        return createDocuments(Optional.empty(), employeeId, i9AuthorizationDocumentsRequestBody);
     }
 
     /**
@@ -423,31 +498,37 @@ public class I9Verification {
      * <p>An employee's I-9 verification documents are the documents an employee has provided the employer to
      * verify their identity and authorization to work in the United States.
      * 
-     * <p>Use the document options endpoint to get the possible document types and titles, which can vary
-     * depending on the employee's authorization status.
+     * <p>Use the [document options
+     * endpoint](ref:get-v1-employees-employee_id-i9_authorization-document_options) to get the possible
+     * document types and titles, which can vary depending on the employee's authorization status.
      * 
      * <p>&gt; 🚧 Every request must contain the complete list of documents for the Employee.
      * &gt;
      * &gt; Every request to this endpoint removes any previous verification document records for the
      * employee.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param i9AuthorizationDocumentsRequestBody Request body for creating an employee's I-9 authorization verification documents.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse createDocuments(
-            String employeeId, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody requestBody) {
+            Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            I9AuthorizationDocumentsRequestBody i9AuthorizationDocumentsRequestBody) {
         PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest request =
             PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .employeeId(employeeId)
+                .i9AuthorizationDocumentsRequestBody(i9AuthorizationDocumentsRequestBody)
                 .build();
         RequestOperation<PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest, PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse> operation
               = new PutV1EmployeesEmployeeIdI9AuthorizationDocuments.Sync(sdkConfiguration, _headers);
@@ -461,7 +542,12 @@ public class I9Verification {
      * verify their identity and authorization to work in the United States. This endpoint deletes a
      * specific verification document.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -476,7 +562,12 @@ public class I9Verification {
      * verify their identity and authorization to work in the United States. This endpoint deletes a
      * specific verification document.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @param documentId The UUID of the document
@@ -484,7 +575,7 @@ public class I9Verification {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse deleteDocument(String employeeId, String documentId) {
-        return deleteDocument(employeeId, documentId, Optional.empty());
+        return deleteDocument(Optional.empty(), employeeId, documentId);
     }
 
     /**
@@ -494,23 +585,28 @@ public class I9Verification {
      * verify their identity and authorization to work in the United States. This endpoint deletes a
      * specific verification document.
      * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
      * @param documentId The UUID of the document
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse deleteDocument(
-            String employeeId, String documentId,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            String documentId) {
         DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest request =
             DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .employeeId(employeeId)
                 .documentId(documentId)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest, DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse> operation
               = new DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentId.Sync(sdkConfiguration, _headers);
@@ -523,7 +619,20 @@ public class I9Verification {
      * <p>Sign an employee's Form I-9 as an employer. Once the form is signed, the employee's I-9
      * authorization is considered complete and cannot be modified.
      * 
+     * <p>### Prerequisites
+     * Before calling this endpoint:
+     * 1. The employee must have a completed [I-9
+     * authorization](ref:put-v1-employees-employee_id-i9_authorization)
+     * 2. The employee must have signed the Form I-9
+     * 3. [I-9 verification documents](ref:put-v1-employees-employee_id-i9_authorization-documents) must be
+     * submitted
+     * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -537,16 +646,29 @@ public class I9Verification {
      * <p>Sign an employee's Form I-9 as an employer. Once the form is signed, the employee's I-9
      * authorization is considered complete and cannot be modified.
      * 
+     * <p>### Prerequisites
+     * Before calling this endpoint:
+     * 1. The employee must have a completed [I-9
+     * authorization](ref:put-v1-employees-employee_id-i9_authorization)
+     * 2. The employee must have signed the Form I-9
+     * 3. [I-9 verification documents](ref:put-v1-employees-employee_id-i9_authorization-documents) must be
+     * submitted
+     * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody 
+     * @param i9AuthorizationEmployerSignRequestBody Request body for employer signing an employee's Form I-9.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse employerSign(String employeeId, PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody) {
-        return employerSign(employeeId, Optional.empty(), Optional.empty(),
-            requestBody);
+    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse employerSign(String employeeId, I9AuthorizationEmployerSignRequestBody i9AuthorizationEmployerSignRequestBody) {
+        return employerSign(Optional.empty(), employeeId, Optional.empty(),
+            i9AuthorizationEmployerSignRequestBody);
     }
 
     /**
@@ -555,25 +677,38 @@ public class I9Verification {
      * <p>Sign an employee's Form I-9 as an employer. Once the form is signed, the employee's I-9
      * authorization is considered complete and cannot be modified.
      * 
+     * <p>### Prerequisites
+     * Before calling this endpoint:
+     * 1. The employee must have a completed [I-9
+     * authorization](ref:put-v1-employees-employee_id-i9_authorization)
+     * 2. The employee must have signed the Form I-9
+     * 3. [I-9 verification documents](ref:put-v1-employees-employee_id-i9_authorization-documents) must be
+     * submitted
+     * 
+     * <p>### Related guides
+     * - [I-9 employment verification](doc:i-9-employment-verification)
+     * 
      * <p>scope: `i9_authorizations:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
      * @param xGustoClientIp Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param i9AuthorizationEmployerSignRequestBody Request body for employer signing an employee's Form I-9.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse employerSign(
-            String employeeId, Optional<String> xGustoClientIp,
-            Optional<? extends VersionHeader> xGustoAPIVersion, PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody) {
+            Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<String> xGustoClientIp, I9AuthorizationEmployerSignRequestBody i9AuthorizationEmployerSignRequestBody) {
         PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest request =
             PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .employeeId(employeeId)
                 .xGustoClientIp(xGustoClientIp)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .i9AuthorizationEmployerSignRequestBody(i9AuthorizationEmployerSignRequestBody)
                 .build();
         RequestOperation<PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest, PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse> operation
               = new PutV1EmployeesEmployeeIdI9AuthorizationEmployerSign.Sync(sdkConfiguration, _headers);

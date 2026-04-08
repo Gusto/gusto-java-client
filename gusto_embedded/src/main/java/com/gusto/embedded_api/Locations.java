@@ -5,10 +5,12 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.CompanyLocationRequest;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdLocationsRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdLocationsRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdLocationsResponse;
+import com.gusto.embedded_api.models.operations.GetV1LocationsLocationIdHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1LocationsLocationIdRequest;
 import com.gusto.embedded_api.models.operations.GetV1LocationsLocationIdRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1LocationsLocationIdResponse;
@@ -16,9 +18,8 @@ import com.gusto.embedded_api.models.operations.GetV1LocationsLocationUuidMinimu
 import com.gusto.embedded_api.models.operations.GetV1LocationsLocationUuidMinimumWagesRequest;
 import com.gusto.embedded_api.models.operations.GetV1LocationsLocationUuidMinimumWagesRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1LocationsLocationUuidMinimumWagesResponse;
-import com.gusto.embedded_api.models.operations.HeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdLocationsRequest;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdLocationsRequestBody;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdLocationsRequestBuilder;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdLocationsResponse;
 import com.gusto.embedded_api.models.operations.PutV1LocationsLocationIdHeaderXGustoAPIVersion;
@@ -59,13 +60,17 @@ public class Locations {
     /**
      * Create a company location
      * 
-     * <p>Company locations represent all addresses associated with a company. These can be filing addresses,
-     * mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+     * <p>Create a company location, which represents any address associated with a company: mailing
+     * addresses, filing addresses, or work locations. A single address may serve multiple, or all,
+     * purposes.
      * 
-     * <p>Since all company locations are subsets of locations, retrieving or updating an individual record
-     * should be done via the locations endpoints.
+     * <p>Since all company locations are subsets of locations, use the Locations endpoints to
+     * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual
+     * record.
      * 
      * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -76,49 +81,57 @@ public class Locations {
     /**
      * Create a company location
      * 
-     * <p>Company locations represent all addresses associated with a company. These can be filing addresses,
-     * mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+     * <p>Create a company location, which represents any address associated with a company: mailing
+     * addresses, filing addresses, or work locations. A single address may serve multiple, or all,
+     * purposes.
      * 
-     * <p>Since all company locations are subsets of locations, retrieving or updating an individual record
-     * should be done via the locations endpoints.
+     * <p>Since all company locations are subsets of locations, use the Locations endpoints to
+     * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual
+     * record.
      * 
      * <p>scope: `companies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody Create a company location.
+     * @param companyLocationRequest Request body for creating a company location (company address).
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PostV1CompaniesCompanyIdLocationsResponse create(String companyId, PostV1CompaniesCompanyIdLocationsRequestBody requestBody) {
-        return create(companyId, Optional.empty(), requestBody);
+    public PostV1CompaniesCompanyIdLocationsResponse create(String companyId, CompanyLocationRequest companyLocationRequest) {
+        return create(Optional.empty(), companyId, companyLocationRequest);
     }
 
     /**
      * Create a company location
      * 
-     * <p>Company locations represent all addresses associated with a company. These can be filing addresses,
-     * mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+     * <p>Create a company location, which represents any address associated with a company: mailing
+     * addresses, filing addresses, or work locations. A single address may serve multiple, or all,
+     * purposes.
      * 
-     * <p>Since all company locations are subsets of locations, retrieving or updating an individual record
-     * should be done via the locations endpoints.
+     * <p>Since all company locations are subsets of locations, use the Locations endpoints to
+     * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual
+     * record.
      * 
      * <p>scope: `companies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion 
-     * @param requestBody Create a company location.
+     * @param companyLocationRequest Request body for creating a company location (company address).
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompaniesCompanyIdLocationsResponse create(
-            String companyId, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1CompaniesCompanyIdLocationsRequestBody requestBody) {
+            Optional<? extends PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            CompanyLocationRequest companyLocationRequest) {
         PostV1CompaniesCompanyIdLocationsRequest request =
             PostV1CompaniesCompanyIdLocationsRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .companyId(companyId)
+                .companyLocationRequest(companyLocationRequest)
                 .build();
         RequestOperation<PostV1CompaniesCompanyIdLocationsRequest, PostV1CompaniesCompanyIdLocationsResponse> operation
               = new PostV1CompaniesCompanyIdLocations.Sync(sdkConfiguration, _headers);
@@ -126,15 +139,18 @@ public class Locations {
     }
 
     /**
-     * Get company locations
+     * Get all company locations
      * 
-     * <p>Company locations represent all addresses associated with a company. These can be filing addresses,
-     * mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+     * <p>Retrieves all company locations (addresses) associated with a company: mailing addresses, filing
+     * addresses, or work locations. A single address may serve multiple, or all, purposes.
      * 
-     * <p>Since all company locations are subsets of locations, retrieving or updating an individual record
-     * should be done via the locations endpoints.
+     * <p>Since all company locations are subsets of locations, use the Locations endpoints to
+     * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual
+     * record.
      * 
      * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -143,53 +159,59 @@ public class Locations {
     }
 
     /**
-     * Get company locations
+     * Get all company locations
      * 
-     * <p>Company locations represent all addresses associated with a company. These can be filing addresses,
-     * mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+     * <p>Retrieves all company locations (addresses) associated with a company: mailing addresses, filing
+     * addresses, or work locations. A single address may serve multiple, or all, purposes.
      * 
-     * <p>Since all company locations are subsets of locations, retrieving or updating an individual record
-     * should be done via the locations endpoints.
+     * <p>Since all company locations are subsets of locations, use the Locations endpoints to
+     * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual
+     * record.
      * 
      * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdLocationsResponse get(String companyId) {
-        return get(companyId, Optional.empty(), Optional.empty(),
+        return get(Optional.empty(), companyId, Optional.empty(),
             Optional.empty());
     }
 
     /**
-     * Get company locations
+     * Get all company locations
      * 
-     * <p>Company locations represent all addresses associated with a company. These can be filing addresses,
-     * mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+     * <p>Retrieves all company locations (addresses) associated with a company: mailing addresses, filing
+     * addresses, or work locations. A single address may serve multiple, or all, purposes.
      * 
-     * <p>Since all company locations are subsets of locations, retrieving or updating an individual record
-     * should be done via the locations endpoints.
+     * <p>Since all company locations are subsets of locations, use the Locations endpoints to
+     * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual
+     * record.
      * 
      * <p>scope: `companies:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdLocationsResponse get(
-            String companyId, Optional<Long> page,
-            Optional<Long> per, Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends GetV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<Long> page, Optional<Long> per) {
         GetV1CompaniesCompanyIdLocationsRequest request =
             GetV1CompaniesCompanyIdLocationsRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .page(page)
                 .per(per)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<GetV1CompaniesCompanyIdLocationsRequest, GetV1CompaniesCompanyIdLocationsResponse> operation
               = new GetV1CompaniesCompanyIdLocations.Sync(sdkConfiguration, _headers);
@@ -203,6 +225,8 @@ public class Locations {
      * 
      * <p>scope: `companies:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public GetV1LocationsLocationIdRequestBuilder retrieve() {
@@ -215,6 +239,8 @@ public class Locations {
      * <p>Get a location.
      * 
      * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param locationId The UUID of the location
      * @return The response from the API call
@@ -231,12 +257,14 @@ public class Locations {
      * 
      * <p>scope: `companies:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param locationId The UUID of the location
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1LocationsLocationIdResponse retrieve(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion, String locationId) {
+    public GetV1LocationsLocationIdResponse retrieve(Optional<? extends GetV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion, String locationId) {
         GetV1LocationsLocationIdRequest request =
             GetV1LocationsLocationIdRequest
                 .builder()
@@ -255,6 +283,8 @@ public class Locations {
      * 
      * <p>scope: `companies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PutV1LocationsLocationIdRequestBuilder update() {
@@ -267,6 +297,8 @@ public class Locations {
      * <p>Update a location.
      * 
      * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param locationId The UUID of the location
      * @param requestBody 
@@ -283,6 +315,8 @@ public class Locations {
      * <p>Update a location.
      * 
      * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param locationId The UUID of the location
@@ -312,6 +346,8 @@ public class Locations {
      * 
      * <p>scope: `companies:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public GetV1LocationsLocationUuidMinimumWagesRequestBuilder getMinimumWages() {
@@ -324,6 +360,8 @@ public class Locations {
      * <p>Get minimum wages for a location
      * 
      * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param locationUuid The UUID of the location
      * @return The response from the API call
@@ -339,6 +377,8 @@ public class Locations {
      * <p>Get minimum wages for a location
      * 
      * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param locationUuid The UUID of the location
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.

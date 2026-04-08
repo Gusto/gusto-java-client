@@ -40,7 +40,7 @@ public class Application {
                 .call();
 
         if (res.documents().isPresent()) {
-            // handle response
+            System.out.println(res.documents().get());
         }
     }
 }
@@ -94,7 +94,7 @@ public class Application {
                 .call();
 
         if (res.document().isPresent()) {
-            // handle response
+            System.out.println(res.document().get());
         }
     }
 }
@@ -148,7 +148,7 @@ public class Application {
                 .call();
 
         if (res.documentPdf().isPresent()) {
-            // handle response
+            System.out.println(res.documentPdf().get());
         }
     }
 }
@@ -177,9 +177,9 @@ Sign a contractor document.
 
 scope: `contractor_documents:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" -->
+<!-- UsageSnippet language="java" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" example="Basic" -->
 ```java
 package hello.world;
 
@@ -209,7 +209,81 @@ public class Application {
                 .call();
 
         if (res.documentSigned().isPresent()) {
-            // handle response
+            System.out.println(res.documentSigned().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1ContractorDocumentSignRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1ContractorDocumentSignResponse;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1ContractorDocumentSignResponse res = sdk.contractorDocuments().sign()
+                .documentUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1ContractorDocumentSignRequestBody.builder()
+                    .fields(List.of())
+                    .agree(false)
+                    .build())
+                .call();
+
+        if (res.documentSigned().isPresent()) {
+            System.out.println(res.documentSigned().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1ContractorDocumentSignRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1ContractorDocumentSignResponse;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1ContractorDocumentSignResponse res = sdk.contractorDocuments().sign()
+                .documentUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1ContractorDocumentSignRequestBody.builder()
+                    .fields(List.of())
+                    .agree(false)
+                    .build())
+                .call();
+
+        if (res.documentSigned().isPresent()) {
+            System.out.println(res.documentSigned().get());
         }
     }
 }

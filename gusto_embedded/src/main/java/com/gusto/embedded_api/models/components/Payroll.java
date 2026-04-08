@@ -125,7 +125,7 @@ public class Payroll {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("withholding_pay_period")
-    private Optional<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod;
+    private JsonNullable<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod;
 
     /**
      * Block regular deductions and contributions for this payroll. Only included for off-cycle payrolls.
@@ -200,14 +200,14 @@ public class Payroll {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("submission_blockers")
-    private Optional<? extends List<PayrollSubmissionBlockersType>> submissionBlockers;
+    private Optional<? extends List<PayrollSubmissionBlockerType>> submissionBlockers;
 
     /**
      * Only included for processed payrolls
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("credit_blockers")
-    private Optional<? extends List<PayrollCreditBlockersType>> creditBlockers;
+    private Optional<? extends List<PayrollCreditBlockerType>> creditBlockers;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -236,7 +236,7 @@ public class Payroll {
             @JsonProperty("auto_pilot") Optional<Boolean> autoPilot,
             @JsonProperty("external") Optional<Boolean> external,
             @JsonProperty("final_termination_payroll") Optional<Boolean> finalTerminationPayroll,
-            @JsonProperty("withholding_pay_period") Optional<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod,
+            @JsonProperty("withholding_pay_period") JsonNullable<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod,
             @JsonProperty("skip_regular_deductions") JsonNullable<Boolean> skipRegularDeductions,
             @JsonProperty("fixed_withholding_rate") JsonNullable<Boolean> fixedWithholdingRate,
             @JsonProperty("pay_period") Optional<? extends PayrollPayPeriodType> payPeriod,
@@ -246,8 +246,8 @@ public class Payroll {
             @JsonProperty("payroll_taxes") Optional<? extends List<PayrollTaxesType>> payrollTaxes,
             @JsonProperty("payment_speed_changed") Optional<? extends PayrollPaymentSpeedChangedType> paymentSpeedChanged,
             @JsonProperty("created_at") Optional<OffsetDateTime> createdAt,
-            @JsonProperty("submission_blockers") Optional<? extends List<PayrollSubmissionBlockersType>> submissionBlockers,
-            @JsonProperty("credit_blockers") Optional<? extends List<PayrollCreditBlockersType>> creditBlockers,
+            @JsonProperty("submission_blockers") Optional<? extends List<PayrollSubmissionBlockerType>> submissionBlockers,
+            @JsonProperty("credit_blockers") Optional<? extends List<PayrollCreditBlockerType>> creditBlockers,
             @JsonProperty("processing_request") JsonNullable<? extends PayrollProcessingRequest> processingRequest,
             @JsonProperty("partner_owned_disbursement") JsonNullable<Boolean> partnerOwnedDisbursement) {
         Utils.checkNotNull(payrollDeadline, "payrollDeadline");
@@ -311,7 +311,7 @@ public class Payroll {
             JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             JsonNullable.undefined(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), JsonNullable.undefined(),
+            Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
             JsonNullable.undefined(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
@@ -437,8 +437,8 @@ public class Payroll {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PayrollWithholdingPayPeriodType> withholdingPayPeriod() {
-        return (Optional<PayrollWithholdingPayPeriodType>) withholdingPayPeriod;
+    public JsonNullable<PayrollWithholdingPayPeriodType> withholdingPayPeriod() {
+        return (JsonNullable<PayrollWithholdingPayPeriodType>) withholdingPayPeriod;
     }
 
     /**
@@ -528,8 +528,8 @@ public class Payroll {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PayrollSubmissionBlockersType>> submissionBlockers() {
-        return (Optional<List<PayrollSubmissionBlockersType>>) submissionBlockers;
+    public Optional<List<PayrollSubmissionBlockerType>> submissionBlockers() {
+        return (Optional<List<PayrollSubmissionBlockerType>>) submissionBlockers;
     }
 
     /**
@@ -537,8 +537,8 @@ public class Payroll {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PayrollCreditBlockersType>> creditBlockers() {
-        return (Optional<List<PayrollCreditBlockersType>>) creditBlockers;
+    public Optional<List<PayrollCreditBlockerType>> creditBlockers() {
+        return (Optional<List<PayrollCreditBlockerType>>) creditBlockers;
     }
 
     @SuppressWarnings("unchecked")
@@ -827,15 +827,14 @@ public class Payroll {
      */
     public Payroll withWithholdingPayPeriod(PayrollWithholdingPayPeriodType withholdingPayPeriod) {
         Utils.checkNotNull(withholdingPayPeriod, "withholdingPayPeriod");
-        this.withholdingPayPeriod = Optional.ofNullable(withholdingPayPeriod);
+        this.withholdingPayPeriod = JsonNullable.of(withholdingPayPeriod);
         return this;
     }
-
 
     /**
      * The payment schedule tax rate the payroll is based on. Only included for off-cycle payrolls.
      */
-    public Payroll withWithholdingPayPeriod(Optional<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod) {
+    public Payroll withWithholdingPayPeriod(JsonNullable<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod) {
         Utils.checkNotNull(withholdingPayPeriod, "withholdingPayPeriod");
         this.withholdingPayPeriod = withholdingPayPeriod;
         return this;
@@ -1021,7 +1020,7 @@ public class Payroll {
     /**
      * Only included for processed or calculated payrolls
      */
-    public Payroll withSubmissionBlockers(List<PayrollSubmissionBlockersType> submissionBlockers) {
+    public Payroll withSubmissionBlockers(List<PayrollSubmissionBlockerType> submissionBlockers) {
         Utils.checkNotNull(submissionBlockers, "submissionBlockers");
         this.submissionBlockers = Optional.ofNullable(submissionBlockers);
         return this;
@@ -1031,7 +1030,7 @@ public class Payroll {
     /**
      * Only included for processed or calculated payrolls
      */
-    public Payroll withSubmissionBlockers(Optional<? extends List<PayrollSubmissionBlockersType>> submissionBlockers) {
+    public Payroll withSubmissionBlockers(Optional<? extends List<PayrollSubmissionBlockerType>> submissionBlockers) {
         Utils.checkNotNull(submissionBlockers, "submissionBlockers");
         this.submissionBlockers = submissionBlockers;
         return this;
@@ -1040,7 +1039,7 @@ public class Payroll {
     /**
      * Only included for processed payrolls
      */
-    public Payroll withCreditBlockers(List<PayrollCreditBlockersType> creditBlockers) {
+    public Payroll withCreditBlockers(List<PayrollCreditBlockerType> creditBlockers) {
         Utils.checkNotNull(creditBlockers, "creditBlockers");
         this.creditBlockers = Optional.ofNullable(creditBlockers);
         return this;
@@ -1050,7 +1049,7 @@ public class Payroll {
     /**
      * Only included for processed payrolls
      */
-    public Payroll withCreditBlockers(Optional<? extends List<PayrollCreditBlockersType>> creditBlockers) {
+    public Payroll withCreditBlockers(Optional<? extends List<PayrollCreditBlockerType>> creditBlockers) {
         Utils.checkNotNull(creditBlockers, "creditBlockers");
         this.creditBlockers = creditBlockers;
         return this;
@@ -1200,7 +1199,7 @@ public class Payroll {
 
         private Optional<Boolean> finalTerminationPayroll = Optional.empty();
 
-        private Optional<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod = Optional.empty();
+        private JsonNullable<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod = JsonNullable.undefined();
 
         private JsonNullable<Boolean> skipRegularDeductions = JsonNullable.undefined();
 
@@ -1220,9 +1219,9 @@ public class Payroll {
 
         private Optional<OffsetDateTime> createdAt = Optional.empty();
 
-        private Optional<? extends List<PayrollSubmissionBlockersType>> submissionBlockers = Optional.empty();
+        private Optional<? extends List<PayrollSubmissionBlockerType>> submissionBlockers = Optional.empty();
 
-        private Optional<? extends List<PayrollCreditBlockersType>> creditBlockers = Optional.empty();
+        private Optional<? extends List<PayrollCreditBlockerType>> creditBlockers = Optional.empty();
 
         private JsonNullable<? extends PayrollProcessingRequest> processingRequest = JsonNullable.undefined();
 
@@ -1503,14 +1502,14 @@ public class Payroll {
          */
         public Builder withholdingPayPeriod(PayrollWithholdingPayPeriodType withholdingPayPeriod) {
             Utils.checkNotNull(withholdingPayPeriod, "withholdingPayPeriod");
-            this.withholdingPayPeriod = Optional.ofNullable(withholdingPayPeriod);
+            this.withholdingPayPeriod = JsonNullable.of(withholdingPayPeriod);
             return this;
         }
 
         /**
          * The payment schedule tax rate the payroll is based on. Only included for off-cycle payrolls.
          */
-        public Builder withholdingPayPeriod(Optional<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod) {
+        public Builder withholdingPayPeriod(JsonNullable<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod) {
             Utils.checkNotNull(withholdingPayPeriod, "withholdingPayPeriod");
             this.withholdingPayPeriod = withholdingPayPeriod;
             return this;
@@ -1699,7 +1698,7 @@ public class Payroll {
         /**
          * Only included for processed or calculated payrolls
          */
-        public Builder submissionBlockers(List<PayrollSubmissionBlockersType> submissionBlockers) {
+        public Builder submissionBlockers(List<PayrollSubmissionBlockerType> submissionBlockers) {
             Utils.checkNotNull(submissionBlockers, "submissionBlockers");
             this.submissionBlockers = Optional.ofNullable(submissionBlockers);
             return this;
@@ -1708,7 +1707,7 @@ public class Payroll {
         /**
          * Only included for processed or calculated payrolls
          */
-        public Builder submissionBlockers(Optional<? extends List<PayrollSubmissionBlockersType>> submissionBlockers) {
+        public Builder submissionBlockers(Optional<? extends List<PayrollSubmissionBlockerType>> submissionBlockers) {
             Utils.checkNotNull(submissionBlockers, "submissionBlockers");
             this.submissionBlockers = submissionBlockers;
             return this;
@@ -1718,7 +1717,7 @@ public class Payroll {
         /**
          * Only included for processed payrolls
          */
-        public Builder creditBlockers(List<PayrollCreditBlockersType> creditBlockers) {
+        public Builder creditBlockers(List<PayrollCreditBlockerType> creditBlockers) {
             Utils.checkNotNull(creditBlockers, "creditBlockers");
             this.creditBlockers = Optional.ofNullable(creditBlockers);
             return this;
@@ -1727,7 +1726,7 @@ public class Payroll {
         /**
          * Only included for processed payrolls
          */
-        public Builder creditBlockers(Optional<? extends List<PayrollCreditBlockersType>> creditBlockers) {
+        public Builder creditBlockers(Optional<? extends List<PayrollCreditBlockerType>> creditBlockers) {
             Utils.checkNotNull(creditBlockers, "creditBlockers");
             this.creditBlockers = creditBlockers;
             return this;

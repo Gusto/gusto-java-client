@@ -63,21 +63,6 @@ public class EmployeeBenefits {
     private Optional<String> companyContribution;
 
     /**
-     * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("uuid")
-    private Optional<String> uuid;
-
-    /**
-     * The action to perform on the employee benefit. Required for creating/updating an effective dated
-     * employee benefit.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("action")
-    private Optional<? extends Action> action;
-
-    /**
      * The date when the employee benefit becomes effective. If not provided, the benefit will be effective
      * from 1970-01-01 (unix epoch).
      */
@@ -108,8 +93,6 @@ public class EmployeeBenefits {
             @JsonProperty("deduct_as_percentage") Optional<Boolean> deductAsPercentage,
             @JsonProperty("employee_deduction") Optional<String> employeeDeduction,
             @JsonProperty("company_contribution") Optional<String> companyContribution,
-            @JsonProperty("uuid") Optional<String> uuid,
-            @JsonProperty("action") Optional<? extends Action> action,
             @JsonProperty("effective_date") Optional<String> effectiveDate,
             @JsonProperty("expiration_date") Optional<String> expirationDate,
             @JsonProperty("contribution") Optional<? extends CompanyBenefitWithEmployeeBenefitsContribution> contribution) {
@@ -119,8 +102,6 @@ public class EmployeeBenefits {
         Utils.checkNotNull(deductAsPercentage, "deductAsPercentage");
         Utils.checkNotNull(employeeDeduction, "employeeDeduction");
         Utils.checkNotNull(companyContribution, "companyContribution");
-        Utils.checkNotNull(uuid, "uuid");
-        Utils.checkNotNull(action, "action");
         Utils.checkNotNull(effectiveDate, "effectiveDate");
         Utils.checkNotNull(expirationDate, "expirationDate");
         Utils.checkNotNull(contribution, "contribution");
@@ -130,8 +111,6 @@ public class EmployeeBenefits {
         this.deductAsPercentage = deductAsPercentage;
         this.employeeDeduction = employeeDeduction;
         this.companyContribution = companyContribution;
-        this.uuid = uuid;
-        this.action = action;
         this.effectiveDate = effectiveDate;
         this.expirationDate = expirationDate;
         this.contribution = contribution;
@@ -140,8 +119,7 @@ public class EmployeeBenefits {
     public EmployeeBenefits() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -191,24 +169,6 @@ public class EmployeeBenefits {
     @JsonIgnore
     public Optional<String> companyContribution() {
         return companyContribution;
-    }
-
-    /**
-     * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
-     */
-    @JsonIgnore
-    public Optional<String> uuid() {
-        return uuid;
-    }
-
-    /**
-     * The action to perform on the employee benefit. Required for creating/updating an effective dated
-     * employee benefit.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Action> action() {
-        return (Optional<Action>) action;
     }
 
     /**
@@ -360,46 +320,6 @@ public class EmployeeBenefits {
     }
 
     /**
-     * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
-     */
-    public EmployeeBenefits withUuid(String uuid) {
-        Utils.checkNotNull(uuid, "uuid");
-        this.uuid = Optional.ofNullable(uuid);
-        return this;
-    }
-
-
-    /**
-     * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
-     */
-    public EmployeeBenefits withUuid(Optional<String> uuid) {
-        Utils.checkNotNull(uuid, "uuid");
-        this.uuid = uuid;
-        return this;
-    }
-
-    /**
-     * The action to perform on the employee benefit. Required for creating/updating an effective dated
-     * employee benefit.
-     */
-    public EmployeeBenefits withAction(Action action) {
-        Utils.checkNotNull(action, "action");
-        this.action = Optional.ofNullable(action);
-        return this;
-    }
-
-
-    /**
-     * The action to perform on the employee benefit. Required for creating/updating an effective dated
-     * employee benefit.
-     */
-    public EmployeeBenefits withAction(Optional<? extends Action> action) {
-        Utils.checkNotNull(action, "action");
-        this.action = action;
-        return this;
-    }
-
-    /**
      * The date when the employee benefit becomes effective. If not provided, the benefit will be effective
      * from 1970-01-01 (unix epoch).
      */
@@ -476,8 +396,6 @@ public class EmployeeBenefits {
             Utils.enhancedDeepEquals(this.deductAsPercentage, other.deductAsPercentage) &&
             Utils.enhancedDeepEquals(this.employeeDeduction, other.employeeDeduction) &&
             Utils.enhancedDeepEquals(this.companyContribution, other.companyContribution) &&
-            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
-            Utils.enhancedDeepEquals(this.action, other.action) &&
             Utils.enhancedDeepEquals(this.effectiveDate, other.effectiveDate) &&
             Utils.enhancedDeepEquals(this.expirationDate, other.expirationDate) &&
             Utils.enhancedDeepEquals(this.contribution, other.contribution);
@@ -488,8 +406,7 @@ public class EmployeeBenefits {
         return Utils.enhancedHash(
             employeeUuid, companyBenefitUuid, active,
             deductAsPercentage, employeeDeduction, companyContribution,
-            uuid, action, effectiveDate,
-            expirationDate, contribution);
+            effectiveDate, expirationDate, contribution);
     }
     
     @Override
@@ -501,8 +418,6 @@ public class EmployeeBenefits {
                 "deductAsPercentage", deductAsPercentage,
                 "employeeDeduction", employeeDeduction,
                 "companyContribution", companyContribution,
-                "uuid", uuid,
-                "action", action,
                 "effectiveDate", effectiveDate,
                 "expirationDate", expirationDate,
                 "contribution", contribution);
@@ -522,10 +437,6 @@ public class EmployeeBenefits {
         private Optional<String> employeeDeduction;
 
         private Optional<String> companyContribution = Optional.empty();
-
-        private Optional<String> uuid = Optional.empty();
-
-        private Optional<? extends Action> action = Optional.empty();
 
         private Optional<String> effectiveDate = Optional.empty();
 
@@ -655,46 +566,6 @@ public class EmployeeBenefits {
 
 
         /**
-         * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
-         */
-        public Builder uuid(String uuid) {
-            Utils.checkNotNull(uuid, "uuid");
-            this.uuid = Optional.ofNullable(uuid);
-            return this;
-        }
-
-        /**
-         * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
-         */
-        public Builder uuid(Optional<String> uuid) {
-            Utils.checkNotNull(uuid, "uuid");
-            this.uuid = uuid;
-            return this;
-        }
-
-
-        /**
-         * The action to perform on the employee benefit. Required for creating/updating an effective dated
-         * employee benefit.
-         */
-        public Builder action(Action action) {
-            Utils.checkNotNull(action, "action");
-            this.action = Optional.ofNullable(action);
-            return this;
-        }
-
-        /**
-         * The action to perform on the employee benefit. Required for creating/updating an effective dated
-         * employee benefit.
-         */
-        public Builder action(Optional<? extends Action> action) {
-            Utils.checkNotNull(action, "action");
-            this.action = action;
-            return this;
-        }
-
-
-        /**
          * The date when the employee benefit becomes effective. If not provided, the benefit will be effective
          * from 1970-01-01 (unix epoch).
          */
@@ -768,8 +639,7 @@ public class EmployeeBenefits {
             return new EmployeeBenefits(
                 employeeUuid, companyBenefitUuid, active,
                 deductAsPercentage, employeeDeduction, companyContribution,
-                uuid, action, effectiveDate,
-                expirationDate, contribution);
+                effectiveDate, expirationDate, contribution);
         }
 
 

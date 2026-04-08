@@ -34,7 +34,7 @@ public class PutV1CompaniesResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
     private Optional<? extends Company> company;
 
@@ -87,7 +87,7 @@ public class PutV1CompaniesResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PutV1CompaniesResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     public PutV1CompaniesResponse withCompany(Company company) {
         Utils.checkNotNull(company, "company");
@@ -138,7 +138,7 @@ public class PutV1CompaniesResponse implements Response {
 
 
     /**
-     * Example response
+     * Successful
      */
     public PutV1CompaniesResponse withCompany(Optional<? extends Company> company) {
         Utils.checkNotNull(company, "company");
@@ -225,7 +225,7 @@ public class PutV1CompaniesResponse implements Response {
 
 
         /**
-         * Example response
+         * Successful
          */
         public Builder company(Company company) {
             Utils.checkNotNull(company, "company");
@@ -234,7 +234,7 @@ public class PutV1CompaniesResponse implements Response {
         }
 
         /**
-         * Example response
+         * Successful
          */
         public Builder company(Optional<? extends Company> company) {
             Utils.checkNotNull(company, "company");

@@ -1,5 +1,13 @@
 # GetV1CompaniesCompanyIdPayrollsQueryParamInclude
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdPayrollsQueryParamInclude;
+
+GetV1CompaniesCompanyIdPayrollsQueryParamInclude value = GetV1CompaniesCompanyIdPayrollsQueryParamInclude.TAXES;
+```
+
 
 ## Values
 

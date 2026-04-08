@@ -35,24 +35,24 @@ public class GetV1CompaniesCompanyUuidSignatoriesResponse implements AsyncRespon
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
-    private Optional<? extends List<Signatory>> signatoryList;
+    private Optional<? extends List<Signatory>> signatories;
 
     @JsonCreator
     public GetV1CompaniesCompanyUuidSignatoriesResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends List<Signatory>> signatoryList) {
+            Optional<? extends List<Signatory>> signatories) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(signatoryList, "signatoryList");
+        Utils.checkNotNull(signatories, "signatories");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.signatoryList = signatoryList;
+        this.signatories = signatories;
     }
     
     public GetV1CompaniesCompanyUuidSignatoriesResponse(
@@ -88,12 +88,12 @@ public class GetV1CompaniesCompanyUuidSignatoriesResponse implements AsyncRespon
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Signatory>> signatoryList() {
-        return (Optional<List<Signatory>>) signatoryList;
+    public Optional<List<Signatory>> signatories() {
+        return (Optional<List<Signatory>>) signatories;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1CompaniesCompanyUuidSignatoriesResponse implements AsyncRespon
     }
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesCompanyUuidSignatoriesResponse withSignatoryList(List<Signatory> signatoryList) {
-        Utils.checkNotNull(signatoryList, "signatoryList");
-        this.signatoryList = Optional.ofNullable(signatoryList);
+    public GetV1CompaniesCompanyUuidSignatoriesResponse withSignatories(List<Signatory> signatories) {
+        Utils.checkNotNull(signatories, "signatories");
+        this.signatories = Optional.ofNullable(signatories);
         return this;
     }
 
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesCompanyUuidSignatoriesResponse withSignatoryList(Optional<? extends List<Signatory>> signatoryList) {
-        Utils.checkNotNull(signatoryList, "signatoryList");
-        this.signatoryList = signatoryList;
+    public GetV1CompaniesCompanyUuidSignatoriesResponse withSignatories(Optional<? extends List<Signatory>> signatories) {
+        Utils.checkNotNull(signatories, "signatories");
+        this.signatories = signatories;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1CompaniesCompanyUuidSignatoriesResponse implements AsyncRespon
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.signatoryList, other.signatoryList);
+            Utils.enhancedDeepEquals(this.signatories, other.signatories);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            signatoryList);
+            signatories);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1CompaniesCompanyUuidSignatoriesResponse implements AsyncRespon
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "signatoryList", signatoryList);
+                "signatories", signatories);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1CompaniesCompanyUuidSignatoriesResponse implements AsyncRespon
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends List<Signatory>> signatoryList = Optional.empty();
+        private Optional<? extends List<Signatory>> signatories = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1CompaniesCompanyUuidSignatoriesResponse implements AsyncRespon
 
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder signatoryList(List<Signatory> signatoryList) {
-            Utils.checkNotNull(signatoryList, "signatoryList");
-            this.signatoryList = Optional.ofNullable(signatoryList);
+        public Builder signatories(List<Signatory> signatories) {
+            Utils.checkNotNull(signatories, "signatories");
+            this.signatories = Optional.ofNullable(signatories);
             return this;
         }
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder signatoryList(Optional<? extends List<Signatory>> signatoryList) {
-            Utils.checkNotNull(signatoryList, "signatoryList");
-            this.signatoryList = signatoryList;
+        public Builder signatories(Optional<? extends List<Signatory>> signatories) {
+            Utils.checkNotNull(signatories, "signatories");
+            this.signatories = signatories;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1CompaniesCompanyUuidSignatoriesResponse implements AsyncRespon
 
             return new GetV1CompaniesCompanyUuidSignatoriesResponse(
                 contentType, statusCode, rawResponse,
-                signatoryList);
+                signatories);
         }
 
     }

@@ -7,7 +7,6 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.CompanyFormsSortBy;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.GetV1CompanyFormsRequest;
 import com.gusto.embedded_api.operations.GetV1CompanyForms;
@@ -21,7 +20,7 @@ import java.util.concurrent.CompletableFuture;
 public class GetV1CompanyFormsRequestBuilder {
 
     private String companyId;
-    private Optional<? extends CompanyFormsSortBy> sortBy = Optional.empty();
+    private Optional<String> sortBy = Optional.empty();
     private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
@@ -39,13 +38,13 @@ public class GetV1CompanyFormsRequestBuilder {
         return this;
     }
                 
-    public GetV1CompanyFormsRequestBuilder sortBy(CompanyFormsSortBy sortBy) {
+    public GetV1CompanyFormsRequestBuilder sortBy(String sortBy) {
         Utils.checkNotNull(sortBy, "sortBy");
         this.sortBy = Optional.of(sortBy);
         return this;
     }
 
-    public GetV1CompanyFormsRequestBuilder sortBy(Optional<? extends CompanyFormsSortBy> sortBy) {
+    public GetV1CompanyFormsRequestBuilder sortBy(Optional<String> sortBy) {
         Utils.checkNotNull(sortBy, "sortBy");
         this.sortBy = sortBy;
         return this;

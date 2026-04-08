@@ -74,14 +74,23 @@ public final class EventStream<T> implements Iterable<T>, AutoCloseable {
     private final TypeReference<T> typeReference;
     private final ObjectMapper mapper;
     private final Optional<String> terminalMessage;
+    private final boolean dataRequired;
+    private boolean terminated = false;
+    private boolean closed = false;
 
     // Internal use only
     public EventStream(InputStream in, TypeReference<T> typeReference, ObjectMapper mapper, Optional<String> terminalMessage) {
+        this(in, typeReference, mapper, terminalMessage, true);
+    }
+
+    // Internal use only
+    public EventStream(InputStream in, TypeReference<T> typeReference, ObjectMapper mapper, Optional<String> terminalMessage, boolean dataRequired) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8), 8192);
         this.parser = BlockingParser.forSSE(reader);
         this.typeReference = typeReference;
         this.mapper = mapper;
         this.terminalMessage = terminalMessage;
+        this.dataRequired = dataRequired;
         logger.debug("EventStream initialized for type: {}", typeReference.getType().getTypeName());
     }
 
@@ -93,20 +102,35 @@ public final class EventStream<T> implements Iterable<T>, AutoCloseable {
      * @throws IOException when parsing the next message.
      */
     public Optional<T> next() throws IOException {
-        Optional<T> result = parser.next() //
-                .filter(x -> {
-                    boolean isTerminal = terminalMessage.map(sentinel -> sentinel.equals(x.data())).orElse(false);
-                    if (isTerminal && logger.isTraceEnabled()) {
-                        logger.trace("Terminal message encountered in EventStream");
-                    }
-                    return !isTerminal;
-                })
-                .map(x -> Utils.asType(x, mapper, typeReference));
-        
-        if (logger.isTraceEnabled() && result.isPresent()) {
-            logger.trace("EventStream item processed");
+        while (!terminated) {
+            Optional<EventStreamMessage> message = parser.next();
+            if (message.isEmpty()) {
+                terminated = true;
+                return Optional.empty();
+            }
+            EventStreamMessage msg = message.get();
+            boolean isTerminal = terminalMessage.flatMap(sentinel -> msg.data().map(sentinel::equals)).orElse(false);
+            if (isTerminal) {
+                terminated = true;
+                if (logger.isTraceEnabled()) {
+                    logger.trace("Terminal message encountered in EventStream");
+                }
+                return Optional.empty();
+            }
+            // Skip events without data when data is required
+            if (dataRequired && msg.data().isEmpty()) {
+                if (logger.isTraceEnabled()) {
+                    logger.trace("Skipping SSE event with no data field");
+                }
+                continue;
+            }
+            Optional<T> result = Optional.of(Utils.asType(msg, mapper, typeReference));
+            if (logger.isTraceEnabled()) {
+                logger.trace("EventStream item processed");
+            }
+            return result;
         }
-        return result;
+        return Optional.empty();
     }
 
     /**
@@ -162,8 +186,13 @@ public final class EventStream<T> implements Iterable<T>, AutoCloseable {
 
     @Override
     public void close() throws IOException {
+        closed = true;
         logger.debug("EventStream closed");
         parser.close();
+    }
+
+    public boolean isClosed() {
+        return closed;
     }
 
     static class EventIterator<T> implements Iterator<T> {

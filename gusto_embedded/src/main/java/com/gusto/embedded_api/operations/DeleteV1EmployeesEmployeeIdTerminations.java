@@ -124,7 +124,7 @@ public class DeleteV1EmployeesEmployeeIdTerminations {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "404", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "404", "422", "4XX", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -156,7 +156,7 @@ public class DeleteV1EmployeesEmployeeIdTerminations {
                 // no content
                 return res;
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "404")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "404", "422")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     throw UnprocessableEntityErrorObject.from(response);
                 } else {
@@ -201,7 +201,7 @@ public class DeleteV1EmployeesEmployeeIdTerminations {
                         if (err != null) {
                             return onError(null, err);
                         }
-                        if (Utils.statusCodeMatches(resp.statusCode(), "404", "4XX", "5XX")) {
+                        if (Utils.statusCodeMatches(resp.statusCode(), "404", "422", "4XX", "5XX")) {
                             return onError(resp, null);
                         }
                         return CompletableFuture.completedFuture(resp);
@@ -230,7 +230,7 @@ public class DeleteV1EmployeesEmployeeIdTerminations {
                 // no content
                 return CompletableFuture.completedFuture(res);
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "404")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "404", "422")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     return UnprocessableEntityErrorObject.fromAsync(response)
                             .thenCompose(CompletableFuture::failedFuture);

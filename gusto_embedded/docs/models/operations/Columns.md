@@ -1,5 +1,13 @@
 # Columns
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.Columns;
+
+Columns value = Columns.BANK_ACCOUNT_ACCOUNT_NUMBER;
+```
+
 
 ## Values
 

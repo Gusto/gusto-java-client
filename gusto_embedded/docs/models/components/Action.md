@@ -2,6 +2,14 @@
 
 The action to perform on the employee benefit. Required for creating/updating an effective dated employee benefit.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.Action;
+
+Action value = Action.CREATE;
+```
+
 
 ## Values
 

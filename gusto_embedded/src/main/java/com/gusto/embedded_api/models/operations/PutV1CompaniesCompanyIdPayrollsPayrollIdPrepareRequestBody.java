@@ -13,7 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody {
@@ -22,17 +22,17 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("employee_uuids")
-    private Optional<? extends List<String>> employeeUuids;
+    private JsonNullable<? extends List<String>> employeeUuids;
 
     @JsonCreator
     public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody(
-            @JsonProperty("employee_uuids") Optional<? extends List<String>> employeeUuids) {
+            @JsonProperty("employee_uuids") JsonNullable<? extends List<String>> employeeUuids) {
         Utils.checkNotNull(employeeUuids, "employeeUuids");
         this.employeeUuids = employeeUuids;
     }
     
     public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody() {
-        this(Optional.empty());
+        this(JsonNullable.undefined());
     }
 
     /**
@@ -40,8 +40,8 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<String>> employeeUuids() {
-        return (Optional<List<String>>) employeeUuids;
+    public JsonNullable<List<String>> employeeUuids() {
+        return (JsonNullable<List<String>>) employeeUuids;
     }
 
     public static Builder builder() {
@@ -54,15 +54,14 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody {
      */
     public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody withEmployeeUuids(List<String> employeeUuids) {
         Utils.checkNotNull(employeeUuids, "employeeUuids");
-        this.employeeUuids = Optional.ofNullable(employeeUuids);
+        this.employeeUuids = JsonNullable.of(employeeUuids);
         return this;
     }
-
 
     /**
      * An array of employee UUIDs. If passed, only those employees payroll items will be prepared.
      */
-    public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody withEmployeeUuids(Optional<? extends List<String>> employeeUuids) {
+    public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody withEmployeeUuids(JsonNullable<? extends List<String>> employeeUuids) {
         Utils.checkNotNull(employeeUuids, "employeeUuids");
         this.employeeUuids = employeeUuids;
         return this;
@@ -96,7 +95,7 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends List<String>> employeeUuids = Optional.empty();
+        private JsonNullable<? extends List<String>> employeeUuids = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -108,14 +107,14 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody {
          */
         public Builder employeeUuids(List<String> employeeUuids) {
             Utils.checkNotNull(employeeUuids, "employeeUuids");
-            this.employeeUuids = Optional.ofNullable(employeeUuids);
+            this.employeeUuids = JsonNullable.of(employeeUuids);
             return this;
         }
 
         /**
          * An array of employee UUIDs. If passed, only those employees payroll items will be prepared.
          */
-        public Builder employeeUuids(Optional<? extends List<String>> employeeUuids) {
+        public Builder employeeUuids(JsonNullable<? extends List<String>> employeeUuids) {
             Utils.checkNotNull(employeeUuids, "employeeUuids");
             this.employeeUuids = employeeUuids;
             return this;

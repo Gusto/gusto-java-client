@@ -1,6 +1,12 @@
 # I9AuthorizationDocumentType
 
-The document's document type
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.I9AuthorizationDocumentType;
+
+I9AuthorizationDocumentType value = I9AuthorizationDocumentType.USCIS_ALIEN_REGISTRATION_NUMBER;
+```
 
 
 ## Values

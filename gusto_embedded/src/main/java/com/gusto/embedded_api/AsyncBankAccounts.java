@@ -6,6 +6,7 @@ package com.gusto.embedded_api;
 import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation;
 
 import com.gusto.embedded_api.models.components.CompanyBankAccountRequest;
+import com.gusto.embedded_api.models.components.CompanyBankAccountVerifyRequest;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest;
@@ -15,8 +16,8 @@ import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdBankAcco
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdBankAccountsRequest;
 import com.gusto.embedded_api.models.operations.PostV1PlaidProcessorTokenRequest;
 import com.gusto.embedded_api.models.operations.PostV1PlaidProcessorTokenRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdBankAccountsVerifyRequest;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody;
 import com.gusto.embedded_api.models.operations.async.DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequestBuilder;
 import com.gusto.embedded_api.models.operations.async.DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse;
 import com.gusto.embedded_api.models.operations.async.GetV1CompaniesCompanyIdBankAccountsRequestBuilder;
@@ -65,6 +66,8 @@ public class AsyncBankAccounts {
      * 
      * <p>scope: `company_bank_accounts:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1CompaniesCompanyIdBankAccountsRequestBuilder get() {
@@ -78,11 +81,13 @@ public class AsyncBankAccounts {
      * 
      * <p>scope: `company_bank_accounts:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdBankAccountsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdBankAccountsResponse> get(String companyId) {
-        return get(companyId, Optional.empty());
+        return get(Optional.empty(), companyId);
     }
 
     /**
@@ -92,16 +97,18 @@ public class AsyncBankAccounts {
      * 
      * <p>scope: `company_bank_accounts:read`
      * 
-     * @param companyId The UUID of the company
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdBankAccountsResponse>} - The async response
      */
-    public CompletableFuture<GetV1CompaniesCompanyIdBankAccountsResponse> get(String companyId, Optional<? extends GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1CompaniesCompanyIdBankAccountsResponse> get(Optional<? extends GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
         GetV1CompaniesCompanyIdBankAccountsRequest request =
             GetV1CompaniesCompanyIdBankAccountsRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .build();
         AsyncRequestOperation<GetV1CompaniesCompanyIdBankAccountsRequest, GetV1CompaniesCompanyIdBankAccountsResponse> operation
               = new GetV1CompaniesCompanyIdBankAccounts.Async(sdkConfiguration, _headers);
@@ -129,6 +136,8 @@ public class AsyncBankAccounts {
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PostV1CompaniesCompanyIdBankAccountsRequestBuilder create() {
@@ -154,12 +163,14 @@ public class AsyncBankAccounts {
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
      * @param companyBankAccountRequest 
      * @return {@code CompletableFuture<PostV1CompaniesCompanyIdBankAccountsResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyIdBankAccountsResponse> create(String companyId, CompanyBankAccountRequest companyBankAccountRequest) {
-        return create(companyId, Optional.empty(), companyBankAccountRequest);
+        return create(Optional.empty(), companyId, companyBankAccountRequest);
     }
 
     /**
@@ -181,19 +192,21 @@ public class AsyncBankAccounts {
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
-     * @param companyId The UUID of the company
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @param companyBankAccountRequest 
      * @return {@code CompletableFuture<PostV1CompaniesCompanyIdBankAccountsResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyIdBankAccountsResponse> create(
-            String companyId, Optional<? extends PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             CompanyBankAccountRequest companyBankAccountRequest) {
         PostV1CompaniesCompanyIdBankAccountsRequest request =
             PostV1CompaniesCompanyIdBankAccountsRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .companyBankAccountRequest(companyBankAccountRequest)
                 .build();
         AsyncRequestOperation<PostV1CompaniesCompanyIdBankAccountsRequest, PostV1CompaniesCompanyIdBankAccountsResponse> operation
@@ -206,30 +219,28 @@ public class AsyncBankAccounts {
     /**
      * Verify a company bank account
      * 
-     * <p>Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note
-     * that the order of the two deposits specified in request parameters does not matter. There's a
-     * maximum of 5 verification attempts, after which we will automatically initiate a new set of
-     * micro-deposits and require the bank account to be verified with the new micro-deposits.
+     * <p>Verify a company bank account by confirming the two micro-deposits sent to the bank account.
+     * 
+     * <p>Note that the order of the two deposits specified in request parameters does not matter.
+     * There's a maximum of 5 verification attempts, after which we will automatically initiate a new set
+     * of micro-deposits and require the bank account to be verified with the new micro-deposits.
      * 
      * <p>### Bank account verification in demo
+     * In the demo environment, use the `POST
+     * /v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits` endpoint to
+     * simulate the micro-deposits transfer and return the two amounts in the response. You can call this
+     * endpoint as many times as you wish to retrieve the values of the two micro-deposits.
      * 
-     * <p>We provide the endpoint `POST
-     * '/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits'` to facilitate
-     * bank account verification in the demo environment. This endpoint simulates the micro-deposits
-     * transfer and returns them in the response. You can call this endpoint as many times as you wish to
-     * retrieve the values of the two micro deposits.
+     * <p>### Webhooks
+     * - `company.bank_account.verified`: Fires when the company bank account is successfully verified.
      * 
-     * <p>```
-     * POST
-     * '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/bank_accounts/ade55e57-4800-4059-9ecd-fa29cfeb6dd2/send_test_deposits'
-     * 
-     * <p>{
-     * "deposit_1": 0.02,
-     * "deposit_2": 0.42
-     * }
-     * ```
+     * <p>### Related guides
+     * - [Manage company bank accounts](doc:manage-company-bank-accounts)
+     * - [Bank Account Events](doc:bank-account-events)
      * 
      * <p>scope: `company_bank_accounts:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -240,88 +251,84 @@ public class AsyncBankAccounts {
     /**
      * Verify a company bank account
      * 
-     * <p>Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note
-     * that the order of the two deposits specified in request parameters does not matter. There's a
-     * maximum of 5 verification attempts, after which we will automatically initiate a new set of
-     * micro-deposits and require the bank account to be verified with the new micro-deposits.
+     * <p>Verify a company bank account by confirming the two micro-deposits sent to the bank account.
+     * 
+     * <p>Note that the order of the two deposits specified in request parameters does not matter.
+     * There's a maximum of 5 verification attempts, after which we will automatically initiate a new set
+     * of micro-deposits and require the bank account to be verified with the new micro-deposits.
      * 
      * <p>### Bank account verification in demo
+     * In the demo environment, use the `POST
+     * /v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits` endpoint to
+     * simulate the micro-deposits transfer and return the two amounts in the response. You can call this
+     * endpoint as many times as you wish to retrieve the values of the two micro-deposits.
      * 
-     * <p>We provide the endpoint `POST
-     * '/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits'` to facilitate
-     * bank account verification in the demo environment. This endpoint simulates the micro-deposits
-     * transfer and returns them in the response. You can call this endpoint as many times as you wish to
-     * retrieve the values of the two micro deposits.
+     * <p>### Webhooks
+     * - `company.bank_account.verified`: Fires when the company bank account is successfully verified.
      * 
-     * <p>```
-     * POST
-     * '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/bank_accounts/ade55e57-4800-4059-9ecd-fa29cfeb6dd2/send_test_deposits'
-     * 
-     * <p>{
-     * "deposit_1": 0.02,
-     * "deposit_2": 0.42
-     * }
-     * ```
+     * <p>### Related guides
+     * - [Manage company bank accounts](doc:manage-company-bank-accounts)
+     * - [Bank Account Events](doc:bank-account-events)
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
-     * @param bankAccountUuid The UUID of the bank account
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody 
+     * @param bankAccountUuid The UUID of the company bank account
+     * @param companyBankAccountVerifyRequest Request body for verifying a company bank account with the two micro-deposit amounts.
      * @return {@code CompletableFuture<PutV1CompaniesCompanyIdBankAccountsVerifyResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesCompanyIdBankAccountsVerifyResponse> verify(
-            String bankAccountUuid, String companyId,
-            PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody requestBody) {
+            String companyId, String bankAccountUuid,
+            CompanyBankAccountVerifyRequest companyBankAccountVerifyRequest) {
         return verify(
-                bankAccountUuid, companyId, Optional.empty(),
-                requestBody);
+                Optional.empty(), companyId, bankAccountUuid,
+                companyBankAccountVerifyRequest);
     }
 
     /**
      * Verify a company bank account
      * 
-     * <p>Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note
-     * that the order of the two deposits specified in request parameters does not matter. There's a
-     * maximum of 5 verification attempts, after which we will automatically initiate a new set of
-     * micro-deposits and require the bank account to be verified with the new micro-deposits.
+     * <p>Verify a company bank account by confirming the two micro-deposits sent to the bank account.
+     * 
+     * <p>Note that the order of the two deposits specified in request parameters does not matter.
+     * There's a maximum of 5 verification attempts, after which we will automatically initiate a new set
+     * of micro-deposits and require the bank account to be verified with the new micro-deposits.
      * 
      * <p>### Bank account verification in demo
+     * In the demo environment, use the `POST
+     * /v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits` endpoint to
+     * simulate the micro-deposits transfer and return the two amounts in the response. You can call this
+     * endpoint as many times as you wish to retrieve the values of the two micro-deposits.
      * 
-     * <p>We provide the endpoint `POST
-     * '/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits'` to facilitate
-     * bank account verification in the demo environment. This endpoint simulates the micro-deposits
-     * transfer and returns them in the response. You can call this endpoint as many times as you wish to
-     * retrieve the values of the two micro deposits.
+     * <p>### Webhooks
+     * - `company.bank_account.verified`: Fires when the company bank account is successfully verified.
      * 
-     * <p>```
-     * POST
-     * '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/bank_accounts/ade55e57-4800-4059-9ecd-fa29cfeb6dd2/send_test_deposits'
-     * 
-     * <p>{
-     * "deposit_1": 0.02,
-     * "deposit_2": 0.42
-     * }
-     * ```
+     * <p>### Related guides
+     * - [Manage company bank accounts](doc:manage-company-bank-accounts)
+     * - [Bank Account Events](doc:bank-account-events)
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
-     * @param bankAccountUuid The UUID of the bank account
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param bankAccountUuid The UUID of the company bank account
+     * @param companyBankAccountVerifyRequest Request body for verifying a company bank account with the two micro-deposit amounts.
      * @return {@code CompletableFuture<PutV1CompaniesCompanyIdBankAccountsVerifyResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesCompanyIdBankAccountsVerifyResponse> verify(
-            String bankAccountUuid, String companyId,
-            Optional<? extends VersionHeader> xGustoAPIVersion, PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody requestBody) {
+            Optional<? extends PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String bankAccountUuid, CompanyBankAccountVerifyRequest companyBankAccountVerifyRequest) {
         PutV1CompaniesCompanyIdBankAccountsVerifyRequest request =
             PutV1CompaniesCompanyIdBankAccountsVerifyRequest
                 .builder()
-                .bankAccountUuid(bankAccountUuid)
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .companyId(companyId)
+                .bankAccountUuid(bankAccountUuid)
+                .companyBankAccountVerifyRequest(companyBankAccountVerifyRequest)
                 .build();
         AsyncRequestOperation<PutV1CompaniesCompanyIdBankAccountsVerifyRequest, PutV1CompaniesCompanyIdBankAccountsVerifyResponse> operation
               = new PutV1CompaniesCompanyIdBankAccountsVerify.Async(sdkConfiguration, _headers);
@@ -421,6 +428,8 @@ public class AsyncBankAccounts {
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequestBuilder deleteV1CompaniesCompanyIdBankAccountsBankAccountId() {
@@ -436,12 +445,14 @@ public class AsyncBankAccounts {
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
      * @param bankAccountId The UUID of the company bank account
      * @return {@code CompletableFuture<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse>} - The async response
      */
     public CompletableFuture<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse> deleteV1CompaniesCompanyIdBankAccountsBankAccountId(String companyId, String bankAccountId) {
-        return deleteV1CompaniesCompanyIdBankAccountsBankAccountId(companyId, bankAccountId, Optional.empty());
+        return deleteV1CompaniesCompanyIdBankAccountsBankAccountId(Optional.empty(), companyId, bankAccountId);
     }
 
     /**
@@ -453,20 +464,22 @@ public class AsyncBankAccounts {
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param bankAccountId The UUID of the company bank account
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return {@code CompletableFuture<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse>} - The async response
      */
     public CompletableFuture<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse> deleteV1CompaniesCompanyIdBankAccountsBankAccountId(
-            String companyId, String bankAccountId,
-            Optional<? extends DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<? extends DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String bankAccountId) {
         DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest request =
             DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .bankAccountId(bankAccountId)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         AsyncRequestOperation<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest, DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse> operation
               = new DeleteV1CompaniesCompanyIdBankAccountsBankAccountId.Async(sdkConfiguration, _headers);

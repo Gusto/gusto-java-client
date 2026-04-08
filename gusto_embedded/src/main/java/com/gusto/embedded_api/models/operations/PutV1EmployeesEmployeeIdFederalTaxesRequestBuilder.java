@@ -7,7 +7,6 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.operations.PutV1EmployeesEmployeeIdFederalTaxes;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,11 +16,11 @@ import java.util.Optional;
 
 public class PutV1EmployeesEmployeeIdFederalTaxesRequestBuilder {
 
-    private String employeeUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion>>() {});
+    private String employeeUuid;
     private PutV1EmployeesEmployeeIdFederalTaxesRequestBody requestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
@@ -29,22 +28,22 @@ public class PutV1EmployeesEmployeeIdFederalTaxesRequestBuilder {
     public PutV1EmployeesEmployeeIdFederalTaxesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
-    public PutV1EmployeesEmployeeIdFederalTaxesRequestBuilder employeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
-        return this;
-    }
                 
-    public PutV1EmployeesEmployeeIdFederalTaxesRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1EmployeesEmployeeIdFederalTaxesRequestBuilder xGustoAPIVersion(PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public PutV1EmployeesEmployeeIdFederalTaxesRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1EmployeesEmployeeIdFederalTaxesRequestBuilder xGustoAPIVersion(Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutV1EmployeesEmployeeIdFederalTaxesRequestBuilder employeeUuid(String employeeUuid) {
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
+        this.employeeUuid = employeeUuid;
         return this;
     }
 
@@ -60,8 +59,8 @@ public class PutV1EmployeesEmployeeIdFederalTaxesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1EmployeesEmployeeIdFederalTaxesRequest request = new PutV1EmployeesEmployeeIdFederalTaxesRequest(employeeUuid,
-            xGustoAPIVersion,
+        PutV1EmployeesEmployeeIdFederalTaxesRequest request = new PutV1EmployeesEmployeeIdFederalTaxesRequest(xGustoAPIVersion,
+            employeeUuid,
             requestBody);
 
         return request;
@@ -76,9 +75,9 @@ public class PutV1EmployeesEmployeeIdFederalTaxesRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion>>() {});
 }

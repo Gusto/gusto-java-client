@@ -1,6 +1,12 @@
 # PlaidStatus
 
-The Plaid connection status of the bank account. Only applies when verification type is Plaid.
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.PlaidStatus;
+
+PlaidStatus value = PlaidStatus.CONNECTED;
+```
 
 
 ## Values

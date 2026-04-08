@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesRequest;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesRequestBody;
 import com.gusto.embedded_api.operations.PutV1Companies;
@@ -21,10 +21,10 @@ import java.util.concurrent.CompletableFuture;
 public class PutV1CompaniesRequestBuilder {
 
     private String companyId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion>>() {});
     private PutV1CompaniesRequestBody requestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
@@ -39,13 +39,13 @@ public class PutV1CompaniesRequestBuilder {
         return this;
     }
                 
-    public PutV1CompaniesRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1CompaniesRequestBuilder xGustoAPIVersion(PutV1CompaniesHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public PutV1CompaniesRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1CompaniesRequestBuilder xGustoAPIVersion(Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -80,9 +80,9 @@ public class PutV1CompaniesRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion>>() {});
 }

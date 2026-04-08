@@ -2,6 +2,14 @@
 
 The type of information request
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.InformationRequestType;
+
+InformationRequestType value = InformationRequestType.COMPANY_ONBOARDING;
+```
+
 
 ## Values
 

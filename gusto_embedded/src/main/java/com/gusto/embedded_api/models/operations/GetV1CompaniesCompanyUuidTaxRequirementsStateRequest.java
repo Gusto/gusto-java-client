@@ -6,7 +6,6 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -25,17 +24,10 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
     private String companyUuid;
 
     /**
-     * 2-letter US state abbreviation
+     * The two-letter state abbreviation
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=state")
     private String state;
-
-    /**
-     * When true, return "new" requirement sets with valid `effective_from` dates that are available to
-     * save new effective dated values.
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=scheduling")
-    private Optional<Boolean> scheduling;
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -43,22 +35,29 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    private Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
+     * When true, return "new" requirement sets with valid `effective_from` dates that are available to
+     * save new effective-dated values.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=scheduling")
+    private Optional<Boolean> scheduling;
 
     @JsonCreator
     public GetV1CompaniesCompanyUuidTaxRequirementsStateRequest(
             String companyUuid,
             String state,
-            Optional<Boolean> scheduling,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<Boolean> scheduling) {
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(state, "state");
-        Utils.checkNotNull(scheduling, "scheduling");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(scheduling, "scheduling");
         this.companyUuid = companyUuid;
         this.state = state;
-        this.scheduling = scheduling;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.scheduling = scheduling;
     }
     
     public GetV1CompaniesCompanyUuidTaxRequirementsStateRequest(
@@ -77,20 +76,11 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
     }
 
     /**
-     * 2-letter US state abbreviation
+     * The two-letter state abbreviation
      */
     @JsonIgnore
     public String state() {
         return state;
-    }
-
-    /**
-     * When true, return "new" requirement sets with valid `effective_from` dates that are available to
-     * save new effective dated values.
-     */
-    @JsonIgnore
-    public Optional<Boolean> scheduling() {
-        return scheduling;
     }
 
     /**
@@ -100,8 +90,17 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion>) xGustoAPIVersion;
+    }
+
+    /**
+     * When true, return "new" requirement sets with valid `effective_from` dates that are available to
+     * save new effective-dated values.
+     */
+    @JsonIgnore
+    public Optional<Boolean> scheduling() {
+        return scheduling;
     }
 
     public static Builder builder() {
@@ -119,7 +118,7 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
     }
 
     /**
-     * 2-letter US state abbreviation
+     * The two-letter state abbreviation
      */
     public GetV1CompaniesCompanyUuidTaxRequirementsStateRequest withState(String state) {
         Utils.checkNotNull(state, "state");
@@ -128,32 +127,11 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
     }
 
     /**
-     * When true, return "new" requirement sets with valid `effective_from` dates that are available to
-     * save new effective dated values.
-     */
-    public GetV1CompaniesCompanyUuidTaxRequirementsStateRequest withScheduling(boolean scheduling) {
-        Utils.checkNotNull(scheduling, "scheduling");
-        this.scheduling = Optional.ofNullable(scheduling);
-        return this;
-    }
-
-
-    /**
-     * When true, return "new" requirement sets with valid `effective_from` dates that are available to
-     * save new effective dated values.
-     */
-    public GetV1CompaniesCompanyUuidTaxRequirementsStateRequest withScheduling(Optional<Boolean> scheduling) {
-        Utils.checkNotNull(scheduling, "scheduling");
-        this.scheduling = scheduling;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1CompaniesCompanyUuidTaxRequirementsStateRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public GetV1CompaniesCompanyUuidTaxRequirementsStateRequest withXGustoAPIVersion(GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -165,9 +143,30 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1CompaniesCompanyUuidTaxRequirementsStateRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1CompaniesCompanyUuidTaxRequirementsStateRequest withXGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * When true, return "new" requirement sets with valid `effective_from` dates that are available to
+     * save new effective-dated values.
+     */
+    public GetV1CompaniesCompanyUuidTaxRequirementsStateRequest withScheduling(boolean scheduling) {
+        Utils.checkNotNull(scheduling, "scheduling");
+        this.scheduling = Optional.ofNullable(scheduling);
+        return this;
+    }
+
+
+    /**
+     * When true, return "new" requirement sets with valid `effective_from` dates that are available to
+     * save new effective-dated values.
+     */
+    public GetV1CompaniesCompanyUuidTaxRequirementsStateRequest withScheduling(Optional<Boolean> scheduling) {
+        Utils.checkNotNull(scheduling, "scheduling");
+        this.scheduling = scheduling;
         return this;
     }
 
@@ -183,15 +182,15 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
         return 
             Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.state, other.state) &&
-            Utils.enhancedDeepEquals(this.scheduling, other.scheduling) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.scheduling, other.scheduling);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, state, scheduling,
-            xGustoAPIVersion);
+            companyUuid, state, xGustoAPIVersion,
+            scheduling);
     }
     
     @Override
@@ -199,8 +198,8 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
         return Utils.toString(GetV1CompaniesCompanyUuidTaxRequirementsStateRequest.class,
                 "companyUuid", companyUuid,
                 "state", state,
-                "scheduling", scheduling,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "scheduling", scheduling);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -210,9 +209,9 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
 
         private String state;
 
-        private Optional<Boolean> scheduling = Optional.empty();
+        private Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<Boolean> scheduling = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -230,7 +229,7 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
 
 
         /**
-         * 2-letter US state abbreviation
+         * The two-letter state abbreviation
          */
         public Builder state(String state) {
             Utils.checkNotNull(state, "state");
@@ -240,32 +239,11 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
 
 
         /**
-         * When true, return "new" requirement sets with valid `effective_from` dates that are available to
-         * save new effective dated values.
-         */
-        public Builder scheduling(boolean scheduling) {
-            Utils.checkNotNull(scheduling, "scheduling");
-            this.scheduling = Optional.ofNullable(scheduling);
-            return this;
-        }
-
-        /**
-         * When true, return "new" requirement sets with valid `effective_from` dates that are available to
-         * save new effective dated values.
-         */
-        public Builder scheduling(Optional<Boolean> scheduling) {
-            Utils.checkNotNull(scheduling, "scheduling");
-            this.scheduling = scheduling;
-            return this;
-        }
-
-
-        /**
          * Determines the date-based API version associated with your API call. If none is provided, your
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -276,9 +254,30 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
+        }
+
+
+        /**
+         * When true, return "new" requirement sets with valid `effective_from` dates that are available to
+         * save new effective-dated values.
+         */
+        public Builder scheduling(boolean scheduling) {
+            Utils.checkNotNull(scheduling, "scheduling");
+            this.scheduling = Optional.ofNullable(scheduling);
+            return this;
+        }
+
+        /**
+         * When true, return "new" requirement sets with valid `effective_from` dates that are available to
+         * save new effective-dated values.
+         */
+        public Builder scheduling(Optional<Boolean> scheduling) {
+            Utils.checkNotNull(scheduling, "scheduling");
+            this.scheduling = scheduling;
             return this;
         }
 
@@ -288,15 +287,15 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsStateRequest {
             }
 
             return new GetV1CompaniesCompanyUuidTaxRequirementsStateRequest(
-                companyUuid, state, scheduling,
-                xGustoAPIVersion);
+                companyUuid, state, xGustoAPIVersion,
+                scheduling);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion>>() {});
     }
 }

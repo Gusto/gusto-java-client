@@ -7,9 +7,9 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.I9AuthorizationEmployerSignRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody;
 import com.gusto.embedded_api.operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSign;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -20,18 +20,30 @@ import java.util.concurrent.CompletableFuture;
 
 public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder {
 
-    private String employeeId;
-    private Optional<String> xGustoClientIp = Optional.empty();
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody;
+                            new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
+    private Optional<String> xGustoClientIp = Optional.empty();
+    private I9AuthorizationEmployerSignRequestBody i9AuthorizationEmployerSignRequestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder xGustoAPIVersion(PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder xGustoAPIVersion(Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder employeeId(String employeeId) {
@@ -51,22 +63,10 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder {
         this.xGustoClientIp = xGustoClientIp;
         return this;
     }
-                
-    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
 
-    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder requestBody(PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder i9AuthorizationEmployerSignRequestBody(I9AuthorizationEmployerSignRequestBody i9AuthorizationEmployerSignRequestBody) {
+        Utils.checkNotNull(i9AuthorizationEmployerSignRequestBody, "i9AuthorizationEmployerSignRequestBody");
+        this.i9AuthorizationEmployerSignRequestBody = i9AuthorizationEmployerSignRequestBody;
         return this;
     }
 
@@ -76,10 +76,10 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest request = new PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest(employeeId,
+        PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest request = new PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest(xGustoAPIVersion,
+            employeeId,
             xGustoClientIp,
-            xGustoAPIVersion,
-            requestBody);
+            i9AuthorizationEmployerSignRequestBody);
 
         return request;
     }
@@ -94,9 +94,9 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignHeaderXGustoAPIVersion>>() {});
 }

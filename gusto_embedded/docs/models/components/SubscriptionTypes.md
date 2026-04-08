@@ -1,5 +1,13 @@
 # SubscriptionTypes
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.SubscriptionTypes;
+
+SubscriptionTypes value = SubscriptionTypes.BANK_ACCOUNT;
+```
+
 
 ## Values
 
@@ -18,5 +26,6 @@
 | `LOCATION`                  | Location                    |
 | `NOTIFICATION`              | Notification                |
 | `PAYROLL`                   | Payroll                     |
+| `PAYROLL_SYNC`              | PayrollSync                 |
 | `PAY_SCHEDULE`              | PaySchedule                 |
 | `SIGNATORY`                 | Signatory                   |

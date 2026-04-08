@@ -1,2 +1,0 @@
-# PutV1CompanyPaymentConfigsRequestBody
-

@@ -5,7 +5,7 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentUrlRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentUrlRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentUrlResponse;
@@ -37,10 +37,14 @@ public class CompanyAttachment {
     /**
      * Get a temporary url to download the Company Attachment file
      * 
-     * <p>Retrieve a temporary url to download a attachment file uploaded
-     * by the company.
+     * <p>Retrieve a temporary url to download an attachment file uploaded by the company.
+     * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
      * 
      * <p>scope: `company_attachments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -51,10 +55,14 @@ public class CompanyAttachment {
     /**
      * Get a temporary url to download the Company Attachment file
      * 
-     * <p>Retrieve a temporary url to download a attachment file uploaded
-     * by the company.
+     * <p>Retrieve a temporary url to download an attachment file uploaded by the company.
+     * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
      * 
      * <p>scope: `company_attachments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @param companyAttachmentUuid The UUID of the company attachment
@@ -62,32 +70,36 @@ public class CompanyAttachment {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesAttachmentUrlResponse getDownloadUrl(String companyId, String companyAttachmentUuid) {
-        return getDownloadUrl(companyId, companyAttachmentUuid, Optional.empty());
+        return getDownloadUrl(Optional.empty(), companyId, companyAttachmentUuid);
     }
 
     /**
      * Get a temporary url to download the Company Attachment file
      * 
-     * <p>Retrieve a temporary url to download a attachment file uploaded
-     * by the company.
+     * <p>Retrieve a temporary url to download an attachment file uploaded by the company.
+     * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
      * 
      * <p>scope: `company_attachments:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param companyAttachmentUuid The UUID of the company attachment
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesAttachmentUrlResponse getDownloadUrl(
-            String companyId, String companyAttachmentUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String companyAttachmentUuid) {
         GetV1CompaniesAttachmentUrlRequest request =
             GetV1CompaniesAttachmentUrlRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .companyAttachmentUuid(companyAttachmentUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<GetV1CompaniesAttachmentUrlRequest, GetV1CompaniesAttachmentUrlResponse> operation
               = new GetV1CompaniesAttachmentUrl.Sync(sdkConfiguration, _headers);

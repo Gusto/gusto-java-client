@@ -2,6 +2,14 @@
 
 The status of the payroll processing request
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.PayrollProcessingRequestStatus;
+
+PayrollProcessingRequestStatus value = PayrollProcessingRequestStatus.CALCULATING;
+```
+
 
 ## Values
 

@@ -25,7 +25,7 @@ public class PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYe
     private Long effectiveYear;
     private Optional<? extends PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
-                            "\"2024-04-01\"",
+                            "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion>>() {});
     private EmployeeSection603HighEarnerStatusUpdateRequest employeeSection603HighEarnerStatusUpdateRequest;
     private final SDKConfiguration sdkConfiguration;
@@ -92,6 +92,6 @@ public class PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYe
     private static final LazySingletonValue<Optional<? extends PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
-                    "\"2024-04-01\"",
+                    "\"2025-06-15\"",
                     new TypeReference<Optional<? extends PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion>>() {});
 }

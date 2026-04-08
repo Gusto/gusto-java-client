@@ -22,7 +22,7 @@ public class GetV1PeopleBatchesPeopleBatchUuidRequestBuilder {
     private String peopleBatchUuid;
     private Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
-                            "\"2025-11-15\"",
+                            "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion>>() {});
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
@@ -74,6 +74,6 @@ public class GetV1PeopleBatchesPeopleBatchUuidRequestBuilder {
     private static final LazySingletonValue<Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
-                    "\"2025-11-15\"",
+                    "\"2025-06-15\"",
                     new TypeReference<Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion>>() {});
 }

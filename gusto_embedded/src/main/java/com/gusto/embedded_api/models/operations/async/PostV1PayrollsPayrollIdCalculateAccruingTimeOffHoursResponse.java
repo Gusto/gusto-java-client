@@ -5,7 +5,7 @@ package com.gusto.embedded_api.models.operations.async;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api.models.components.AccruingTimeOffHourObject;
+import com.gusto.embedded_api.models.components.PayrollCalculateAccruingTimeOffHoursResponse;
 import com.gusto.embedded_api.utils.AsyncResponse;
 import com.gusto.embedded_api.utils.Blob;
 import com.gusto.embedded_api.utils.Utils;
@@ -34,24 +34,24 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse implem
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
-    private Optional<? extends AccruingTimeOffHourObject> accruingTimeOffHourObject;
+    private Optional<? extends PayrollCalculateAccruingTimeOffHoursResponse> payrollCalculateAccruingTimeOffHoursResponse;
 
     @JsonCreator
     public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends AccruingTimeOffHourObject> accruingTimeOffHourObject) {
+            Optional<? extends PayrollCalculateAccruingTimeOffHoursResponse> payrollCalculateAccruingTimeOffHoursResponse) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(accruingTimeOffHourObject, "accruingTimeOffHourObject");
+        Utils.checkNotNull(payrollCalculateAccruingTimeOffHoursResponse, "payrollCalculateAccruingTimeOffHoursResponse");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.accruingTimeOffHourObject = accruingTimeOffHourObject;
+        this.payrollCalculateAccruingTimeOffHoursResponse = payrollCalculateAccruingTimeOffHoursResponse;
     }
     
     public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse(
@@ -87,12 +87,12 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse implem
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<AccruingTimeOffHourObject> accruingTimeOffHourObject() {
-        return (Optional<AccruingTimeOffHourObject>) accruingTimeOffHourObject;
+    public Optional<PayrollCalculateAccruingTimeOffHoursResponse> payrollCalculateAccruingTimeOffHoursResponse() {
+        return (Optional<PayrollCalculateAccruingTimeOffHoursResponse>) payrollCalculateAccruingTimeOffHoursResponse;
     }
 
     public static Builder builder() {
@@ -128,21 +128,21 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse implem
     }
 
     /**
-     * Example response
+     * Successful
      */
-    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse withAccruingTimeOffHourObject(AccruingTimeOffHourObject accruingTimeOffHourObject) {
-        Utils.checkNotNull(accruingTimeOffHourObject, "accruingTimeOffHourObject");
-        this.accruingTimeOffHourObject = Optional.ofNullable(accruingTimeOffHourObject);
+    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse withPayrollCalculateAccruingTimeOffHoursResponse(PayrollCalculateAccruingTimeOffHoursResponse payrollCalculateAccruingTimeOffHoursResponse) {
+        Utils.checkNotNull(payrollCalculateAccruingTimeOffHoursResponse, "payrollCalculateAccruingTimeOffHoursResponse");
+        this.payrollCalculateAccruingTimeOffHoursResponse = Optional.ofNullable(payrollCalculateAccruingTimeOffHoursResponse);
         return this;
     }
 
 
     /**
-     * Example response
+     * Successful
      */
-    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse withAccruingTimeOffHourObject(Optional<? extends AccruingTimeOffHourObject> accruingTimeOffHourObject) {
-        Utils.checkNotNull(accruingTimeOffHourObject, "accruingTimeOffHourObject");
-        this.accruingTimeOffHourObject = accruingTimeOffHourObject;
+    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse withPayrollCalculateAccruingTimeOffHoursResponse(Optional<? extends PayrollCalculateAccruingTimeOffHoursResponse> payrollCalculateAccruingTimeOffHoursResponse) {
+        Utils.checkNotNull(payrollCalculateAccruingTimeOffHoursResponse, "payrollCalculateAccruingTimeOffHoursResponse");
+        this.payrollCalculateAccruingTimeOffHoursResponse = payrollCalculateAccruingTimeOffHoursResponse;
         return this;
     }
 
@@ -159,14 +159,14 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse implem
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.accruingTimeOffHourObject, other.accruingTimeOffHourObject);
+            Utils.enhancedDeepEquals(this.payrollCalculateAccruingTimeOffHoursResponse, other.payrollCalculateAccruingTimeOffHoursResponse);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            accruingTimeOffHourObject);
+            payrollCalculateAccruingTimeOffHoursResponse);
     }
     
     @Override
@@ -175,7 +175,7 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse implem
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "accruingTimeOffHourObject", accruingTimeOffHourObject);
+                "payrollCalculateAccruingTimeOffHoursResponse", payrollCalculateAccruingTimeOffHoursResponse);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -187,7 +187,7 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse implem
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends AccruingTimeOffHourObject> accruingTimeOffHourObject = Optional.empty();
+        private Optional<? extends PayrollCalculateAccruingTimeOffHoursResponse> payrollCalculateAccruingTimeOffHoursResponse = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -225,20 +225,20 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse implem
 
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder accruingTimeOffHourObject(AccruingTimeOffHourObject accruingTimeOffHourObject) {
-            Utils.checkNotNull(accruingTimeOffHourObject, "accruingTimeOffHourObject");
-            this.accruingTimeOffHourObject = Optional.ofNullable(accruingTimeOffHourObject);
+        public Builder payrollCalculateAccruingTimeOffHoursResponse(PayrollCalculateAccruingTimeOffHoursResponse payrollCalculateAccruingTimeOffHoursResponse) {
+            Utils.checkNotNull(payrollCalculateAccruingTimeOffHoursResponse, "payrollCalculateAccruingTimeOffHoursResponse");
+            this.payrollCalculateAccruingTimeOffHoursResponse = Optional.ofNullable(payrollCalculateAccruingTimeOffHoursResponse);
             return this;
         }
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder accruingTimeOffHourObject(Optional<? extends AccruingTimeOffHourObject> accruingTimeOffHourObject) {
-            Utils.checkNotNull(accruingTimeOffHourObject, "accruingTimeOffHourObject");
-            this.accruingTimeOffHourObject = accruingTimeOffHourObject;
+        public Builder payrollCalculateAccruingTimeOffHoursResponse(Optional<? extends PayrollCalculateAccruingTimeOffHoursResponse> payrollCalculateAccruingTimeOffHoursResponse) {
+            Utils.checkNotNull(payrollCalculateAccruingTimeOffHoursResponse, "payrollCalculateAccruingTimeOffHoursResponse");
+            this.payrollCalculateAccruingTimeOffHoursResponse = payrollCalculateAccruingTimeOffHoursResponse;
             return this;
         }
 
@@ -246,7 +246,7 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse implem
 
             return new PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse(
                 contentType, statusCode, rawResponse,
-                accruingTimeOffHourObject);
+                payrollCalculateAccruingTimeOffHoursResponse);
         }
 
     }

@@ -17,11 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
-/**
- * PaymentConfigs
- * 
- * <p>Example response
- */
+
 public class PaymentConfigs {
     /**
      * Company uuid
@@ -38,18 +34,21 @@ public class PaymentConfigs {
     private Optional<String> partnerUuid;
 
     /**
-     * Payment limit for 1-day or 2-day payroll
+     * Payment limit for 1-day or 2-day payroll (string representation of decimal).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fast_payment_limit")
     private JsonNullable<String> fastPaymentLimit;
 
     /**
-     * Payment speed for 1-day, 2-day, 4-day
+     * Payment speed. READ-ONLY.
+     * - `1-day`: Next-day ACH (only for partners that opt in).
+     * - `2-day`: Two-day ACH.
+     * - `4-day`: Standard ACH.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payment_speed")
-    private Optional<String> paymentSpeed;
+    private Optional<? extends PaymentSpeed> paymentSpeed;
 
     /**
      * Whether the company is configured to use the partner-owned disbursement payment rail
@@ -70,7 +69,7 @@ public class PaymentConfigs {
             @JsonProperty("company_uuid") Optional<String> companyUuid,
             @JsonProperty("partner_uuid") Optional<String> partnerUuid,
             @JsonProperty("fast_payment_limit") JsonNullable<String> fastPaymentLimit,
-            @JsonProperty("payment_speed") Optional<String> paymentSpeed,
+            @JsonProperty("payment_speed") Optional<? extends PaymentSpeed> paymentSpeed,
             @JsonProperty("partner_owned_disbursement") Optional<Boolean> partnerOwnedDisbursement,
             @JsonProperty("earned_fast_ach_blockers") Optional<? extends List<EarnedFastAchBlockers>> earnedFastAchBlockers) {
         Utils.checkNotNull(companyUuid, "companyUuid");
@@ -109,7 +108,7 @@ public class PaymentConfigs {
     }
 
     /**
-     * Payment limit for 1-day or 2-day payroll
+     * Payment limit for 1-day or 2-day payroll (string representation of decimal).
      */
     @JsonIgnore
     public JsonNullable<String> fastPaymentLimit() {
@@ -117,11 +116,15 @@ public class PaymentConfigs {
     }
 
     /**
-     * Payment speed for 1-day, 2-day, 4-day
+     * Payment speed. READ-ONLY.
+     * - `1-day`: Next-day ACH (only for partners that opt in).
+     * - `2-day`: Two-day ACH.
+     * - `4-day`: Standard ACH.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> paymentSpeed() {
-        return paymentSpeed;
+    public Optional<PaymentSpeed> paymentSpeed() {
+        return (Optional<PaymentSpeed>) paymentSpeed;
     }
 
     /**
@@ -185,7 +188,7 @@ public class PaymentConfigs {
     }
 
     /**
-     * Payment limit for 1-day or 2-day payroll
+     * Payment limit for 1-day or 2-day payroll (string representation of decimal).
      */
     public PaymentConfigs withFastPaymentLimit(String fastPaymentLimit) {
         Utils.checkNotNull(fastPaymentLimit, "fastPaymentLimit");
@@ -194,7 +197,7 @@ public class PaymentConfigs {
     }
 
     /**
-     * Payment limit for 1-day or 2-day payroll
+     * Payment limit for 1-day or 2-day payroll (string representation of decimal).
      */
     public PaymentConfigs withFastPaymentLimit(JsonNullable<String> fastPaymentLimit) {
         Utils.checkNotNull(fastPaymentLimit, "fastPaymentLimit");
@@ -203,9 +206,12 @@ public class PaymentConfigs {
     }
 
     /**
-     * Payment speed for 1-day, 2-day, 4-day
+     * Payment speed. READ-ONLY.
+     * - `1-day`: Next-day ACH (only for partners that opt in).
+     * - `2-day`: Two-day ACH.
+     * - `4-day`: Standard ACH.
      */
-    public PaymentConfigs withPaymentSpeed(String paymentSpeed) {
+    public PaymentConfigs withPaymentSpeed(PaymentSpeed paymentSpeed) {
         Utils.checkNotNull(paymentSpeed, "paymentSpeed");
         this.paymentSpeed = Optional.ofNullable(paymentSpeed);
         return this;
@@ -213,9 +219,12 @@ public class PaymentConfigs {
 
 
     /**
-     * Payment speed for 1-day, 2-day, 4-day
+     * Payment speed. READ-ONLY.
+     * - `1-day`: Next-day ACH (only for partners that opt in).
+     * - `2-day`: Two-day ACH.
+     * - `4-day`: Standard ACH.
      */
-    public PaymentConfigs withPaymentSpeed(Optional<String> paymentSpeed) {
+    public PaymentConfigs withPaymentSpeed(Optional<? extends PaymentSpeed> paymentSpeed) {
         Utils.checkNotNull(paymentSpeed, "paymentSpeed");
         this.paymentSpeed = paymentSpeed;
         return this;
@@ -304,7 +313,7 @@ public class PaymentConfigs {
 
         private JsonNullable<String> fastPaymentLimit = JsonNullable.undefined();
 
-        private Optional<String> paymentSpeed = Optional.empty();
+        private Optional<? extends PaymentSpeed> paymentSpeed = Optional.empty();
 
         private Optional<Boolean> partnerOwnedDisbursement = Optional.empty();
 
@@ -354,7 +363,7 @@ public class PaymentConfigs {
 
 
         /**
-         * Payment limit for 1-day or 2-day payroll
+         * Payment limit for 1-day or 2-day payroll (string representation of decimal).
          */
         public Builder fastPaymentLimit(String fastPaymentLimit) {
             Utils.checkNotNull(fastPaymentLimit, "fastPaymentLimit");
@@ -363,7 +372,7 @@ public class PaymentConfigs {
         }
 
         /**
-         * Payment limit for 1-day or 2-day payroll
+         * Payment limit for 1-day or 2-day payroll (string representation of decimal).
          */
         public Builder fastPaymentLimit(JsonNullable<String> fastPaymentLimit) {
             Utils.checkNotNull(fastPaymentLimit, "fastPaymentLimit");
@@ -373,18 +382,24 @@ public class PaymentConfigs {
 
 
         /**
-         * Payment speed for 1-day, 2-day, 4-day
+         * Payment speed. READ-ONLY.
+         * - `1-day`: Next-day ACH (only for partners that opt in).
+         * - `2-day`: Two-day ACH.
+         * - `4-day`: Standard ACH.
          */
-        public Builder paymentSpeed(String paymentSpeed) {
+        public Builder paymentSpeed(PaymentSpeed paymentSpeed) {
             Utils.checkNotNull(paymentSpeed, "paymentSpeed");
             this.paymentSpeed = Optional.ofNullable(paymentSpeed);
             return this;
         }
 
         /**
-         * Payment speed for 1-day, 2-day, 4-day
+         * Payment speed. READ-ONLY.
+         * - `1-day`: Next-day ACH (only for partners that opt in).
+         * - `2-day`: Two-day ACH.
+         * - `4-day`: Standard ACH.
          */
-        public Builder paymentSpeed(Optional<String> paymentSpeed) {
+        public Builder paymentSpeed(Optional<? extends PaymentSpeed> paymentSpeed) {
             Utils.checkNotNull(paymentSpeed, "paymentSpeed");
             this.paymentSpeed = paymentSpeed;
             return this;

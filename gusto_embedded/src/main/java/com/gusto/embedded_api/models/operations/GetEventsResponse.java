@@ -35,7 +35,7 @@ public class GetEventsResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
     private Optional<? extends List<Event>> eventList;
 
@@ -88,7 +88,7 @@ public class GetEventsResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -129,7 +129,7 @@ public class GetEventsResponse implements Response {
     }
 
     /**
-     * Example response
+     * Successful
      */
     public GetEventsResponse withEventList(List<Event> eventList) {
         Utils.checkNotNull(eventList, "eventList");
@@ -139,7 +139,7 @@ public class GetEventsResponse implements Response {
 
 
     /**
-     * Example response
+     * Successful
      */
     public GetEventsResponse withEventList(Optional<? extends List<Event>> eventList) {
         Utils.checkNotNull(eventList, "eventList");
@@ -226,7 +226,7 @@ public class GetEventsResponse implements Response {
 
 
         /**
-         * Example response
+         * Successful
          */
         public Builder eventList(List<Event> eventList) {
             Utils.checkNotNull(eventList, "eventList");
@@ -235,7 +235,7 @@ public class GetEventsResponse implements Response {
         }
 
         /**
-         * Example response
+         * Successful
          */
         public Builder eventList(Optional<? extends List<Event>> eventList) {
             Utils.checkNotNull(eventList, "eventList");

@@ -7,6 +7,14 @@ their limit.
 
 `Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption;
+
+PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption value = PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption.FAMILY;
+```
+
 
 ## Values
 

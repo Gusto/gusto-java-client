@@ -6,7 +6,7 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.CompanyIndustrySelectionRequiredBody;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -29,29 +29,29 @@ public class PutV1CompanyIndustryRequest {
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    private Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion;
 
 
     @SpeakeasyMetadata("request:mediaType=application/json")
-    private PutV1CompanyIndustryRequestBody requestBody;
+    private CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody;
 
     @JsonCreator
     public PutV1CompanyIndustryRequest(
             String companyId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1CompanyIndustryRequestBody requestBody) {
+            Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion,
+            CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody) {
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        Utils.checkNotNull(requestBody, "requestBody");
+        Utils.checkNotNull(companyIndustrySelectionRequiredBody, "companyIndustrySelectionRequiredBody");
         this.companyId = companyId;
         this.xGustoAPIVersion = xGustoAPIVersion;
-        this.requestBody = requestBody;
+        this.companyIndustrySelectionRequiredBody = companyIndustrySelectionRequiredBody;
     }
     
     public PutV1CompanyIndustryRequest(
             String companyId,
-            PutV1CompanyIndustryRequestBody requestBody) {
-        this(companyId, Optional.empty(), requestBody);
+            CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody) {
+        this(companyId, Optional.empty(), companyIndustrySelectionRequiredBody);
     }
 
     /**
@@ -69,13 +69,13 @@ public class PutV1CompanyIndustryRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1CompanyIndustryHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     @JsonIgnore
-    public PutV1CompanyIndustryRequestBody requestBody() {
-        return requestBody;
+    public CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody() {
+        return companyIndustrySelectionRequiredBody;
     }
 
     public static Builder builder() {
@@ -97,7 +97,7 @@ public class PutV1CompanyIndustryRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1CompanyIndustryRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1CompanyIndustryRequest withXGustoAPIVersion(PutV1CompanyIndustryHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -109,15 +109,15 @@ public class PutV1CompanyIndustryRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1CompanyIndustryRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1CompanyIndustryRequest withXGustoAPIVersion(Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PutV1CompanyIndustryRequest withRequestBody(PutV1CompanyIndustryRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1CompanyIndustryRequest withCompanyIndustrySelectionRequiredBody(CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody) {
+        Utils.checkNotNull(companyIndustrySelectionRequiredBody, "companyIndustrySelectionRequiredBody");
+        this.companyIndustrySelectionRequiredBody = companyIndustrySelectionRequiredBody;
         return this;
     }
 
@@ -133,13 +133,13 @@ public class PutV1CompanyIndustryRequest {
         return 
             Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
-            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.companyIndustrySelectionRequiredBody, other.companyIndustrySelectionRequiredBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, xGustoAPIVersion, requestBody);
+            companyId, xGustoAPIVersion, companyIndustrySelectionRequiredBody);
     }
     
     @Override
@@ -147,7 +147,7 @@ public class PutV1CompanyIndustryRequest {
         return Utils.toString(PutV1CompanyIndustryRequest.class,
                 "companyId", companyId,
                 "xGustoAPIVersion", xGustoAPIVersion,
-                "requestBody", requestBody);
+                "companyIndustrySelectionRequiredBody", companyIndustrySelectionRequiredBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -155,9 +155,9 @@ public class PutV1CompanyIndustryRequest {
 
         private String companyId;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion;
 
-        private PutV1CompanyIndustryRequestBody requestBody;
+        private CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody;
 
         private Builder() {
           // force use of static builder() method
@@ -179,7 +179,7 @@ public class PutV1CompanyIndustryRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(PutV1CompanyIndustryHeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -190,16 +190,16 @@ public class PutV1CompanyIndustryRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
         }
 
 
-        public Builder requestBody(PutV1CompanyIndustryRequestBody requestBody) {
-            Utils.checkNotNull(requestBody, "requestBody");
-            this.requestBody = requestBody;
+        public Builder companyIndustrySelectionRequiredBody(CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody) {
+            Utils.checkNotNull(companyIndustrySelectionRequiredBody, "companyIndustrySelectionRequiredBody");
+            this.companyIndustrySelectionRequiredBody = companyIndustrySelectionRequiredBody;
             return this;
         }
 
@@ -209,14 +209,14 @@ public class PutV1CompanyIndustryRequest {
             }
 
             return new PutV1CompanyIndustryRequest(
-                companyId, xGustoAPIVersion, requestBody);
+                companyId, xGustoAPIVersion, companyIndustrySelectionRequiredBody);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion>>() {});
     }
 }

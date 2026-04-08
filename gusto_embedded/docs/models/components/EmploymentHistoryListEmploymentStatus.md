@@ -2,6 +2,14 @@
 
 The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.EmploymentHistoryListEmploymentStatus;
+
+EmploymentHistoryListEmploymentStatus value = EmploymentHistoryListEmploymentStatus.PART_TIME;
+```
+
 
 ## Values
 

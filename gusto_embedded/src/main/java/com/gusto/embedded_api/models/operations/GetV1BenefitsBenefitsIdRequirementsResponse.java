@@ -34,7 +34,7 @@ public class GetV1BenefitsBenefitsIdRequirementsResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Benefit type requirements response
+     * Successful
      */
     private Optional<? extends BenefitTypeRequirements> benefitTypeRequirements;
 
@@ -87,7 +87,7 @@ public class GetV1BenefitsBenefitsIdRequirementsResponse implements Response {
     }
 
     /**
-     * Benefit type requirements response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1BenefitsBenefitsIdRequirementsResponse implements Response {
     }
 
     /**
-     * Benefit type requirements response
+     * Successful
      */
     public GetV1BenefitsBenefitsIdRequirementsResponse withBenefitTypeRequirements(BenefitTypeRequirements benefitTypeRequirements) {
         Utils.checkNotNull(benefitTypeRequirements, "benefitTypeRequirements");
@@ -138,7 +138,7 @@ public class GetV1BenefitsBenefitsIdRequirementsResponse implements Response {
 
 
     /**
-     * Benefit type requirements response
+     * Successful
      */
     public GetV1BenefitsBenefitsIdRequirementsResponse withBenefitTypeRequirements(Optional<? extends BenefitTypeRequirements> benefitTypeRequirements) {
         Utils.checkNotNull(benefitTypeRequirements, "benefitTypeRequirements");
@@ -225,7 +225,7 @@ public class GetV1BenefitsBenefitsIdRequirementsResponse implements Response {
 
 
         /**
-         * Benefit type requirements response
+         * Successful
          */
         public Builder benefitTypeRequirements(BenefitTypeRequirements benefitTypeRequirements) {
             Utils.checkNotNull(benefitTypeRequirements, "benefitTypeRequirements");
@@ -234,7 +234,7 @@ public class GetV1BenefitsBenefitsIdRequirementsResponse implements Response {
         }
 
         /**
-         * Benefit type requirements response
+         * Successful
          */
         public Builder benefitTypeRequirements(Optional<? extends BenefitTypeRequirements> benefitTypeRequirements) {
             Utils.checkNotNull(benefitTypeRequirements, "benefitTypeRequirements");

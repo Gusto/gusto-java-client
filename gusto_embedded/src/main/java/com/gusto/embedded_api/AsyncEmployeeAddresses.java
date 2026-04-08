@@ -95,6 +95,8 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>scope: `employees:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder get() {
@@ -110,6 +112,8 @@ public class AsyncEmployeeAddresses {
      * <p>Supports home address effective dating and courtesy withholding.
      * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdHomeAddressesResponse>} - The async response
@@ -127,6 +131,8 @@ public class AsyncEmployeeAddresses {
      * <p>Supports home address effective dating and courtesy withholding.
      * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -156,6 +162,8 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>scope: `employees:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder create() {
@@ -171,6 +179,8 @@ public class AsyncEmployeeAddresses {
      * <p>Supports home address effective dating and courtesy withholding.
      * 
      * <p>scope: `employees:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @param requestBody 
@@ -189,6 +199,8 @@ public class AsyncEmployeeAddresses {
      * <p>Supports home address effective dating and courtesy withholding.
      * 
      * <p>scope: `employees:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -222,6 +234,8 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>scope: `employees:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1HomeAddressesHomeAddressUuidRequestBuilder retrieveHomeAddress() {
@@ -237,6 +251,8 @@ public class AsyncEmployeeAddresses {
      * <p>Supports home address effective dating and courtesy withholding.
      * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param homeAddressUuid The UUID of the home address
      * @return {@code CompletableFuture<GetV1HomeAddressesHomeAddressUuidResponse>} - The async response
@@ -254,6 +270,8 @@ public class AsyncEmployeeAddresses {
      * <p>Supports home address effective dating and courtesy withholding.
      * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param homeAddressUuid The UUID of the home address
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -283,6 +301,8 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>scope: `employees:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PutV1HomeAddressesHomeAddressUuidRequestBuilder update() {
@@ -298,6 +318,8 @@ public class AsyncEmployeeAddresses {
      * <p>Supports home address effective dating and courtesy withholding.
      * 
      * <p>scope: `employees:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param homeAddressUuid The UUID of the home address
      * @param requestBody 
@@ -316,6 +338,8 @@ public class AsyncEmployeeAddresses {
      * <p>Supports home address effective dating and courtesy withholding.
      * 
      * <p>scope: `employees:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param homeAddressUuid The UUID of the home address
@@ -346,6 +370,8 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>scope: `employees:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public DeleteV1HomeAddressesHomeAddressUuidRequestBuilder delete() {
@@ -358,6 +384,8 @@ public class AsyncEmployeeAddresses {
      * <p>Used for deleting an employee's home address. Cannot delete the employee's active home address.
      * 
      * <p>scope: `employees:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param homeAddressUuid The UUID of the home address
      * @return {@code CompletableFuture<DeleteV1HomeAddressesHomeAddressUuidResponse>} - The async response
@@ -372,6 +400,8 @@ public class AsyncEmployeeAddresses {
      * <p>Used for deleting an employee's home address. Cannot delete the employee's active home address.
      * 
      * <p>scope: `employees:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param homeAddressUuid The UUID of the home address
@@ -399,6 +429,8 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>scope: `employees:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1EmployeesEmployeeIdWorkAddressesRequestBuilder getWorkAddresses() {
@@ -412,6 +444,8 @@ public class AsyncEmployeeAddresses {
      * date and a boolean signifying if it is the currently active work address.
      * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdWorkAddressesResponse>} - The async response
@@ -427,6 +461,8 @@ public class AsyncEmployeeAddresses {
      * date and a boolean signifying if it is the currently active work address.
      * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -454,6 +490,8 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>scope: `employees:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PostV1EmployeesEmployeeIdWorkAddressesRequestBuilder createWorkAddress() {
@@ -467,6 +505,8 @@ public class AsyncEmployeeAddresses {
      * location.
      * 
      * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @param requestBody 
@@ -483,6 +523,8 @@ public class AsyncEmployeeAddresses {
      * location.
      * 
      * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -513,6 +555,8 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>scope: `employees:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1WorkAddressesWorkAddressUuidRequestBuilder retrieveWorkAddress() {
@@ -525,6 +569,8 @@ public class AsyncEmployeeAddresses {
      * <p>The work address of an employee is used for payroll tax purposes.
      * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param workAddressUuid The UUID of the work address
      * @return {@code CompletableFuture<GetV1WorkAddressesWorkAddressUuidResponse>} - The async response
@@ -539,6 +585,8 @@ public class AsyncEmployeeAddresses {
      * <p>The work address of an employee is used for payroll tax purposes.
      * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param workAddressUuid The UUID of the work address
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -565,6 +613,8 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>scope: `employees:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PutV1WorkAddressesWorkAddressUuidRequestBuilder updateWorkAddress() {
@@ -577,6 +627,8 @@ public class AsyncEmployeeAddresses {
      * <p>The work address of an employee is used for payroll tax purposes.
      * 
      * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param workAddressUuid The UUID of the work address
      * @param requestBody 
@@ -592,6 +644,8 @@ public class AsyncEmployeeAddresses {
      * <p>The work address of an employee is used for payroll tax purposes.
      * 
      * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param workAddressUuid The UUID of the work address
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -622,6 +676,8 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>scope: `employees:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public DeleteV1WorkAddressesWorkAddressUuidRequestBuilder deleteWorkAddress() {
@@ -634,6 +690,8 @@ public class AsyncEmployeeAddresses {
      * <p>Used for deleting an employee's work address. Cannot delete the employee's active work address.
      * 
      * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param workAddressUuid The UUID of the work address
      * @return {@code CompletableFuture<DeleteV1WorkAddressesWorkAddressUuidResponse>} - The async response
@@ -648,6 +706,8 @@ public class AsyncEmployeeAddresses {
      * <p>Used for deleting an employee's work address. Cannot delete the employee's active work address.
      * 
      * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param workAddressUuid The UUID of the work address
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.

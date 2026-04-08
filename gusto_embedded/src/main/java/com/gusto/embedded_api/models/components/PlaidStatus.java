@@ -8,11 +8,6 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * PlaidStatus
- * 
- * <p>The Plaid connection status of the bank account. Only applies when verification type is Plaid.
- */
 public enum PlaidStatus {
     CONNECTED("connected"),
     DISCONNECTED("disconnected");

@@ -5,12 +5,16 @@ package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 
 public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
@@ -27,6 +31,14 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
     @JsonProperty("creation_token")
     private String creationToken;
 
+    /**
+     * Optional array of submission blockers with selected unblock options. Returned from the preview
+     * endpoint and can be submitted with selected_option to resolve blockers.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("submission_blockers")
+    private Optional<? extends List<SubmissionBlockers>> submissionBlockers;
+
 
     @JsonProperty("contractor_payments")
     private List<ContractorPayments> contractorPayments;
@@ -35,13 +47,24 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
     public PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody(
             @JsonProperty("check_date") LocalDate checkDate,
             @JsonProperty("creation_token") String creationToken,
+            @JsonProperty("submission_blockers") Optional<? extends List<SubmissionBlockers>> submissionBlockers,
             @JsonProperty("contractor_payments") List<ContractorPayments> contractorPayments) {
         Utils.checkNotNull(checkDate, "checkDate");
         Utils.checkNotNull(creationToken, "creationToken");
+        Utils.checkNotNull(submissionBlockers, "submissionBlockers");
         Utils.checkNotNull(contractorPayments, "contractorPayments");
         this.checkDate = checkDate;
         this.creationToken = creationToken;
+        this.submissionBlockers = submissionBlockers;
         this.contractorPayments = contractorPayments;
+    }
+    
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody(
+            LocalDate checkDate,
+            String creationToken,
+            List<ContractorPayments> contractorPayments) {
+        this(checkDate, creationToken, Optional.empty(),
+            contractorPayments);
     }
 
     /**
@@ -59,6 +82,16 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
     @JsonIgnore
     public String creationToken() {
         return creationToken;
+    }
+
+    /**
+     * Optional array of submission blockers with selected unblock options. Returned from the preview
+     * endpoint and can be submitted with selected_option to resolve blockers.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<SubmissionBlockers>> submissionBlockers() {
+        return (Optional<List<SubmissionBlockers>>) submissionBlockers;
     }
 
     @JsonIgnore
@@ -90,6 +123,27 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
         return this;
     }
 
+    /**
+     * Optional array of submission blockers with selected unblock options. Returned from the preview
+     * endpoint and can be submitted with selected_option to resolve blockers.
+     */
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody withSubmissionBlockers(List<SubmissionBlockers> submissionBlockers) {
+        Utils.checkNotNull(submissionBlockers, "submissionBlockers");
+        this.submissionBlockers = Optional.ofNullable(submissionBlockers);
+        return this;
+    }
+
+
+    /**
+     * Optional array of submission blockers with selected unblock options. Returned from the preview
+     * endpoint and can be submitted with selected_option to resolve blockers.
+     */
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody withSubmissionBlockers(Optional<? extends List<SubmissionBlockers>> submissionBlockers) {
+        Utils.checkNotNull(submissionBlockers, "submissionBlockers");
+        this.submissionBlockers = submissionBlockers;
+        return this;
+    }
+
     public PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody withContractorPayments(List<ContractorPayments> contractorPayments) {
         Utils.checkNotNull(contractorPayments, "contractorPayments");
         this.contractorPayments = contractorPayments;
@@ -108,13 +162,15 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
         return 
             Utils.enhancedDeepEquals(this.checkDate, other.checkDate) &&
             Utils.enhancedDeepEquals(this.creationToken, other.creationToken) &&
+            Utils.enhancedDeepEquals(this.submissionBlockers, other.submissionBlockers) &&
             Utils.enhancedDeepEquals(this.contractorPayments, other.contractorPayments);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            checkDate, creationToken, contractorPayments);
+            checkDate, creationToken, submissionBlockers,
+            contractorPayments);
     }
     
     @Override
@@ -122,6 +178,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
         return Utils.toString(PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody.class,
                 "checkDate", checkDate,
                 "creationToken", creationToken,
+                "submissionBlockers", submissionBlockers,
                 "contractorPayments", contractorPayments);
     }
 
@@ -131,6 +188,8 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
         private LocalDate checkDate;
 
         private String creationToken;
+
+        private Optional<? extends List<SubmissionBlockers>> submissionBlockers = Optional.empty();
 
         private List<ContractorPayments> contractorPayments;
 
@@ -160,6 +219,27 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
         }
 
 
+        /**
+         * Optional array of submission blockers with selected unblock options. Returned from the preview
+         * endpoint and can be submitted with selected_option to resolve blockers.
+         */
+        public Builder submissionBlockers(List<SubmissionBlockers> submissionBlockers) {
+            Utils.checkNotNull(submissionBlockers, "submissionBlockers");
+            this.submissionBlockers = Optional.ofNullable(submissionBlockers);
+            return this;
+        }
+
+        /**
+         * Optional array of submission blockers with selected unblock options. Returned from the preview
+         * endpoint and can be submitted with selected_option to resolve blockers.
+         */
+        public Builder submissionBlockers(Optional<? extends List<SubmissionBlockers>> submissionBlockers) {
+            Utils.checkNotNull(submissionBlockers, "submissionBlockers");
+            this.submissionBlockers = submissionBlockers;
+            return this;
+        }
+
+
         public Builder contractorPayments(List<ContractorPayments> contractorPayments) {
             Utils.checkNotNull(contractorPayments, "contractorPayments");
             this.contractorPayments = contractorPayments;
@@ -169,7 +249,8 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
         public PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody build() {
 
             return new PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody(
-                checkDate, creationToken, contractorPayments);
+                checkDate, creationToken, submissionBlockers,
+                contractorPayments);
         }
 
     }

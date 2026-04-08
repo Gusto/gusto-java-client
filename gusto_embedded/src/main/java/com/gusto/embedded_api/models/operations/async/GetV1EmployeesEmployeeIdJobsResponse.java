@@ -35,24 +35,24 @@ public class GetV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
-    private Optional<? extends List<Job>> jobList;
+    private Optional<? extends List<Job>> jobs;
 
     @JsonCreator
     public GetV1EmployeesEmployeeIdJobsResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends List<Job>> jobList) {
+            Optional<? extends List<Job>> jobs) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(jobList, "jobList");
+        Utils.checkNotNull(jobs, "jobs");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.jobList = jobList;
+        this.jobs = jobs;
     }
     
     public GetV1EmployeesEmployeeIdJobsResponse(
@@ -88,12 +88,12 @@ public class GetV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Job>> jobList() {
-        return (Optional<List<Job>>) jobList;
+    public Optional<List<Job>> jobs() {
+        return (Optional<List<Job>>) jobs;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1EmployeesEmployeeIdJobsResponse withJobList(List<Job> jobList) {
-        Utils.checkNotNull(jobList, "jobList");
-        this.jobList = Optional.ofNullable(jobList);
+    public GetV1EmployeesEmployeeIdJobsResponse withJobs(List<Job> jobs) {
+        Utils.checkNotNull(jobs, "jobs");
+        this.jobs = Optional.ofNullable(jobs);
         return this;
     }
 
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1EmployeesEmployeeIdJobsResponse withJobList(Optional<? extends List<Job>> jobList) {
-        Utils.checkNotNull(jobList, "jobList");
-        this.jobList = jobList;
+    public GetV1EmployeesEmployeeIdJobsResponse withJobs(Optional<? extends List<Job>> jobs) {
+        Utils.checkNotNull(jobs, "jobs");
+        this.jobs = jobs;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.jobList, other.jobList);
+            Utils.enhancedDeepEquals(this.jobs, other.jobs);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            jobList);
+            jobs);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "jobList", jobList);
+                "jobs", jobs);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends List<Job>> jobList = Optional.empty();
+        private Optional<? extends List<Job>> jobs = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
 
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder jobList(List<Job> jobList) {
-            Utils.checkNotNull(jobList, "jobList");
-            this.jobList = Optional.ofNullable(jobList);
+        public Builder jobs(List<Job> jobs) {
+            Utils.checkNotNull(jobs, "jobs");
+            this.jobs = Optional.ofNullable(jobs);
             return this;
         }
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder jobList(Optional<? extends List<Job>> jobList) {
-            Utils.checkNotNull(jobList, "jobList");
-            this.jobList = jobList;
+        public Builder jobs(Optional<? extends List<Job>> jobs) {
+            Utils.checkNotNull(jobs, "jobs");
+            this.jobs = jobs;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
 
             return new GetV1EmployeesEmployeeIdJobsResponse(
                 contentType, statusCode, rawResponse,
-                jobList);
+                jobs);
         }
 
     }

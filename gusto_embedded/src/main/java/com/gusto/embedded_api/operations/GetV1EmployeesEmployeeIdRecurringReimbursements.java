@@ -10,11 +10,11 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.SecuritySource;
+import com.gusto.embedded_api.models.components.RecurringReimbursement;
 import com.gusto.embedded_api.models.errors.APIException;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdRecurringReimbursementsRequest;
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdRecurringReimbursementsResponse;
-import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody;
 import com.gusto.embedded_api.utils.Blob;
 import com.gusto.embedded_api.utils.HTTPClient;
 import com.gusto.embedded_api.utils.HTTPRequest;
@@ -98,7 +98,7 @@ public class GetV1EmployeesEmployeeIdRecurringReimbursements {
                     request,
                     null));
             req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-            Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
+            Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity(), "companyAccessAuth");
 
             return req.build();
         }
@@ -162,14 +162,14 @@ public class GetV1EmployeesEmployeeIdRecurringReimbursements {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withResponseBodies(Utils.unmarshal(response, new TypeReference<List<GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody>>() {}));
+                    return res.withRecurringReimbursementList(Utils.unmarshal(response, new TypeReference<List<RecurringReimbursement>>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
             if (Utils.statusCodeMatches(response.statusCode(), "404")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    throw UnprocessableEntityErrorObject.from(response);
+                    throw NotFoundErrorObject.from(response);
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
@@ -239,15 +239,15 @@ public class GetV1EmployeesEmployeeIdRecurringReimbursements {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return Utils.unmarshalAsync(response, new TypeReference<List<GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody>>() {})
-                            .thenApply(res::withResponseBodies);
+                    return Utils.unmarshalAsync(response, new TypeReference<List<RecurringReimbursement>>() {})
+                            .thenApply(res::withRecurringReimbursementList);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }
             }
             if (Utils.statusCodeMatches(response.statusCode(), "404")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return UnprocessableEntityErrorObject.fromAsync(response)
+                    return NotFoundErrorObject.fromAsync(response)
                             .thenCompose(CompletableFuture::failedFuture);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);

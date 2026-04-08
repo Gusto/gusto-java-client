@@ -34,7 +34,7 @@ public class PostV1CompanyFlowsResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Created
      */
     private Optional<? extends Flow> flow;
 
@@ -87,7 +87,7 @@ public class PostV1CompanyFlowsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Created
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PostV1CompanyFlowsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Created
      */
     public PostV1CompanyFlowsResponse withFlow(Flow flow) {
         Utils.checkNotNull(flow, "flow");
@@ -138,7 +138,7 @@ public class PostV1CompanyFlowsResponse implements AsyncResponse {
 
 
     /**
-     * Example response
+     * Created
      */
     public PostV1CompanyFlowsResponse withFlow(Optional<? extends Flow> flow) {
         Utils.checkNotNull(flow, "flow");
@@ -225,7 +225,7 @@ public class PostV1CompanyFlowsResponse implements AsyncResponse {
 
 
         /**
-         * Example response
+         * Created
          */
         public Builder flow(Flow flow) {
             Utils.checkNotNull(flow, "flow");
@@ -234,7 +234,7 @@ public class PostV1CompanyFlowsResponse implements AsyncResponse {
         }
 
         /**
-         * Example response
+         * Created
          */
         public Builder flow(Optional<? extends Flow> flow) {
             Utils.checkNotNull(flow, "flow");

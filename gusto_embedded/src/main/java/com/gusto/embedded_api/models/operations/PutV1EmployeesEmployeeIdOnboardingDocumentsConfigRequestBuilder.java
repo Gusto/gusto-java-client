@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.EmployeeOnboardingDocumentsConfigRequest;
 import com.gusto.embedded_api.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfig;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,17 +17,29 @@ import java.util.Optional;
 
 public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder {
 
-    private String employeeId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody requestBody;
+                            new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
+    private Optional<? extends EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder xGustoAPIVersion(PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder xGustoAPIVersion(Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder employeeId(String employeeId) {
@@ -36,21 +48,15 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder {
         return this;
     }
                 
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder employeeOnboardingDocumentsConfigRequest(EmployeeOnboardingDocumentsConfigRequest employeeOnboardingDocumentsConfigRequest) {
+        Utils.checkNotNull(employeeOnboardingDocumentsConfigRequest, "employeeOnboardingDocumentsConfigRequest");
+        this.employeeOnboardingDocumentsConfigRequest = Optional.of(employeeOnboardingDocumentsConfigRequest);
         return this;
     }
 
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder requestBody(PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder employeeOnboardingDocumentsConfigRequest(Optional<? extends EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest) {
+        Utils.checkNotNull(employeeOnboardingDocumentsConfigRequest, "employeeOnboardingDocumentsConfigRequest");
+        this.employeeOnboardingDocumentsConfigRequest = employeeOnboardingDocumentsConfigRequest;
         return this;
     }
 
@@ -60,9 +66,9 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest request = new PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest(employeeId,
-            xGustoAPIVersion,
-            requestBody);
+        PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest request = new PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest(xGustoAPIVersion,
+            employeeId,
+            employeeOnboardingDocumentsConfigRequest);
 
         return request;
     }
@@ -76,9 +82,9 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion>>() {});
 }

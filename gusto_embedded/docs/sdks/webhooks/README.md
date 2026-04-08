@@ -23,9 +23,47 @@ Create a webhook subscription to receive events of the specified subscription_ty
 
 scope: `webhook_subscriptions:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="post-v1-webhook-subscription" method="post" path="/v1/webhook_subscriptions" -->
+<!-- UsageSnippet language="java" operationID="post-v1-webhook-subscription" method="post" path="/v1/webhook_subscriptions" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+            .build();
+
+        PostV1WebhookSubscriptionResponse res = sdk.webhooks().createSubscription()
+                .security(PostV1WebhookSubscriptionSecurity.builder()
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
+                    .build())
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1WebhookSubscriptionRequestBody.builder()
+                    .url("https://slow-median.com")
+                    .subscriptionTypes(List.of(
+                        SubscriptionTypes.LOCATION))
+                    .build())
+                .call();
+
+        if (res.webhookSubscription().isPresent()) {
+            System.out.println(res.webhookSubscription().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="post-v1-webhook-subscription" method="post" path="/v1/webhook_subscriptions" example="Example" -->
 ```java
 package hello.world;
 
@@ -57,7 +95,83 @@ public class Application {
                 .call();
 
         if (res.webhookSubscription().isPresent()) {
-            // handle response
+            System.out.println(res.webhookSubscription().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="post-v1-webhook-subscription" method="post" path="/v1/webhook_subscriptions" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+            .build();
+
+        PostV1WebhookSubscriptionResponse res = sdk.webhooks().createSubscription()
+                .security(PostV1WebhookSubscriptionSecurity.builder()
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
+                    .build())
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1WebhookSubscriptionRequestBody.builder()
+                    .url("https://slow-median.com")
+                    .subscriptionTypes(List.of(
+                        SubscriptionTypes.LOCATION))
+                    .build())
+                .call();
+
+        if (res.webhookSubscription().isPresent()) {
+            System.out.println(res.webhookSubscription().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="post-v1-webhook-subscription" method="post" path="/v1/webhook_subscriptions" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+            .build();
+
+        PostV1WebhookSubscriptionResponse res = sdk.webhooks().createSubscription()
+                .security(PostV1WebhookSubscriptionSecurity.builder()
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
+                    .build())
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1WebhookSubscriptionRequestBody.builder()
+                    .url("https://slow-median.com")
+                    .subscriptionTypes(List.of(
+                        SubscriptionTypes.LOCATION))
+                    .build())
+                .call();
+
+        if (res.webhookSubscription().isPresent()) {
+            System.out.println(res.webhookSubscription().get());
         }
     }
 }
@@ -94,7 +208,7 @@ scope: `webhook_subscriptions:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-webhook-subscriptions" method="get" path="/v1/webhook_subscriptions" -->
+<!-- UsageSnippet language="java" operationID="get-v1-webhook-subscriptions" method="get" path="/v1/webhook_subscriptions" example="Example" -->
 ```java
 package hello.world;
 
@@ -119,7 +233,7 @@ public class Application {
                 .call();
 
         if (res.webhookSubscriptionsList().isPresent()) {
-            // handle response
+            System.out.println(res.webhookSubscriptionsList().get());
         }
     }
 }
@@ -153,9 +267,47 @@ Updates the Webhook Subscription associated with the provided UUID.
 scope: `webhook_subscriptions:write`
 
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="put-v1-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" -->
+<!-- UsageSnippet language="java" operationID="put-v1-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+            .build();
+
+        PutV1WebhookSubscriptionUuidResponse res = sdk.webhooks().updateSubscription()
+                .security(PutV1WebhookSubscriptionUuidSecurity.builder()
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
+                    .build())
+                .webhookSubscriptionUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1WebhookSubscriptionUuidRequestBody.builder()
+                    .subscriptionTypes(List.of(
+                        PutV1WebhookSubscriptionUuidSubscriptionTypes.PAYROLL))
+                    .build())
+                .call();
+
+        if (res.webhookSubscription().isPresent()) {
+            System.out.println(res.webhookSubscription().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" example="Example" -->
 ```java
 package hello.world;
 
@@ -187,7 +339,83 @@ public class Application {
                 .call();
 
         if (res.webhookSubscription().isPresent()) {
-            // handle response
+            System.out.println(res.webhookSubscription().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-v1-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+            .build();
+
+        PutV1WebhookSubscriptionUuidResponse res = sdk.webhooks().updateSubscription()
+                .security(PutV1WebhookSubscriptionUuidSecurity.builder()
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
+                    .build())
+                .webhookSubscriptionUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1WebhookSubscriptionUuidRequestBody.builder()
+                    .subscriptionTypes(List.of(
+                        PutV1WebhookSubscriptionUuidSubscriptionTypes.PAYROLL))
+                    .build())
+                .call();
+
+        if (res.webhookSubscription().isPresent()) {
+            System.out.println(res.webhookSubscription().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-v1-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+            .build();
+
+        PutV1WebhookSubscriptionUuidResponse res = sdk.webhooks().updateSubscription()
+                .security(PutV1WebhookSubscriptionUuidSecurity.builder()
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
+                    .build())
+                .webhookSubscriptionUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1WebhookSubscriptionUuidRequestBody.builder()
+                    .subscriptionTypes(List.of(
+                        PutV1WebhookSubscriptionUuidSubscriptionTypes.PAYROLL))
+                    .build())
+                .call();
+
+        if (res.webhookSubscription().isPresent()) {
+            System.out.println(res.webhookSubscription().get());
         }
     }
 }
@@ -226,7 +454,7 @@ scope: `webhook_subscriptions:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-webhook-subscription-uuid" method="get" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" -->
+<!-- UsageSnippet language="java" operationID="get-v1-webhook-subscription-uuid" method="get" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" example="Example" -->
 ```java
 package hello.world;
 
@@ -252,7 +480,7 @@ public class Application {
                 .call();
 
         if (res.webhookSubscription().isPresent()) {
-            // handle response
+            System.out.println(res.webhookSubscription().get());
         }
     }
 }
@@ -350,9 +578,45 @@ Use the /v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verificati
 scope: `webhook_subscriptions:write`
 
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="put-v1-verify-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify" -->
+<!-- UsageSnippet language="java" operationID="put-v1-verify-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+            .build();
+
+        PutV1VerifyWebhookSubscriptionUuidResponse res = sdk.webhooks().verify()
+                .security(PutV1VerifyWebhookSubscriptionUuidSecurity.builder()
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
+                    .build())
+                .webhookSubscriptionUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody.builder()
+                    .verificationToken("<value>")
+                    .build())
+                .call();
+
+        if (res.webhookSubscription().isPresent()) {
+            System.out.println(res.webhookSubscription().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-verify-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify" example="Example" -->
 ```java
 package hello.world;
 
@@ -381,7 +645,79 @@ public class Application {
                 .call();
 
         if (res.webhookSubscription().isPresent()) {
-            // handle response
+            System.out.println(res.webhookSubscription().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-v1-verify-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+            .build();
+
+        PutV1VerifyWebhookSubscriptionUuidResponse res = sdk.webhooks().verify()
+                .security(PutV1VerifyWebhookSubscriptionUuidSecurity.builder()
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
+                    .build())
+                .webhookSubscriptionUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody.builder()
+                    .verificationToken("<value>")
+                    .build())
+                .call();
+
+        if (res.webhookSubscription().isPresent()) {
+            System.out.println(res.webhookSubscription().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-v1-verify-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+            .build();
+
+        PutV1VerifyWebhookSubscriptionUuidResponse res = sdk.webhooks().verify()
+                .security(PutV1VerifyWebhookSubscriptionUuidSecurity.builder()
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
+                    .build())
+                .webhookSubscriptionUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody.builder()
+                    .verificationToken("<value>")
+                    .build())
+                .call();
+
+        if (res.webhookSubscription().isPresent()) {
+            System.out.println(res.webhookSubscription().get());
         }
     }
 }
@@ -503,7 +839,7 @@ public class Application {
                 .call();
 
         if (res.webhooksHealthCheckStatus().isPresent()) {
-            // handle response
+            System.out.println(res.webhooksHealthCheckStatus().get());
         }
     }
 }

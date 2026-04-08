@@ -23,7 +23,7 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder {
     private String companyId;
     private Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
-                            "\"2025-11-15\"",
+                            "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion>>() {});
     private PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody;
     private final SDKConfiguration sdkConfiguration;
@@ -83,6 +83,6 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder {
     private static final LazySingletonValue<Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
-                    "\"2025-11-15\"",
+                    "\"2025-06-15\"",
                     new TypeReference<Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion>>() {});
 }

@@ -7,7 +7,6 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.operations.DeleteV1CompaniesCompanyIdContractorPaymentContractorPayment;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,17 +16,29 @@ import java.util.Optional;
 
 public class DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder {
 
-    private String companyId;
-    private String contractorPaymentId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private String contractorPaymentId;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder xGustoAPIVersion(DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder xGustoAPIVersion(Optional<? extends DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder companyId(String companyId) {
@@ -41,18 +52,6 @@ public class DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest
         this.contractorPaymentId = contractorPaymentId;
         return this;
     }
-                
-    public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
-
-    public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
 
 
     private DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest buildRequest() {
@@ -60,9 +59,9 @@ public class DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest request = new DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest(companyId,
-            contractorPaymentId,
-            xGustoAPIVersion);
+        DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest request = new DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest(xGustoAPIVersion,
+            companyId,
+            contractorPaymentId);
 
         return request;
     }
@@ -76,9 +75,9 @@ public class DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion>>() {});
 }

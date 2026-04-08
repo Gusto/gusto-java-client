@@ -2,6 +2,14 @@
 
 Specifies which date field to use when filtering payrolls with start_date and end_date. This field applies only to regular processed payrolls and defaults to pay period if not provided.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.DateFilterBy;
+
+DateFilterBy value = DateFilterBy.CHECK_DATE;
+```
+
 
 ## Values
 

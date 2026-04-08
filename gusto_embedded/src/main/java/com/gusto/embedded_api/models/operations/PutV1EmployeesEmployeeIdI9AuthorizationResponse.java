@@ -34,7 +34,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationResponse implements Response
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Success
      */
     private Optional<? extends I9Authorization> i9Authorization;
 
@@ -87,7 +87,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationResponse implements Response
     }
 
     /**
-     * Example response
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationResponse implements Response
     }
 
     /**
-     * Example response
+     * Success
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationResponse withI9Authorization(I9Authorization i9Authorization) {
         Utils.checkNotNull(i9Authorization, "i9Authorization");
@@ -138,7 +138,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationResponse implements Response
 
 
     /**
-     * Example response
+     * Success
      */
     public PutV1EmployeesEmployeeIdI9AuthorizationResponse withI9Authorization(Optional<? extends I9Authorization> i9Authorization) {
         Utils.checkNotNull(i9Authorization, "i9Authorization");
@@ -225,7 +225,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationResponse implements Response
 
 
         /**
-         * Example response
+         * Success
          */
         public Builder i9Authorization(I9Authorization i9Authorization) {
             Utils.checkNotNull(i9Authorization, "i9Authorization");
@@ -234,7 +234,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationResponse implements Response
         }
 
         /**
-         * Example response
+         * Success
          */
         public Builder i9Authorization(Optional<? extends I9Authorization> i9Authorization) {
             Utils.checkNotNull(i9Authorization, "i9Authorization");

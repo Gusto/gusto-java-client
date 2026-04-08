@@ -34,7 +34,7 @@ public class PutV1CompanyIndustryResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Created
      */
     private Optional<? extends Industry> industry;
 
@@ -87,7 +87,7 @@ public class PutV1CompanyIndustryResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Created
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PutV1CompanyIndustryResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Created
      */
     public PutV1CompanyIndustryResponse withIndustry(Industry industry) {
         Utils.checkNotNull(industry, "industry");
@@ -138,7 +138,7 @@ public class PutV1CompanyIndustryResponse implements AsyncResponse {
 
 
     /**
-     * Example response
+     * Created
      */
     public PutV1CompanyIndustryResponse withIndustry(Optional<? extends Industry> industry) {
         Utils.checkNotNull(industry, "industry");
@@ -225,7 +225,7 @@ public class PutV1CompanyIndustryResponse implements AsyncResponse {
 
 
         /**
-         * Example response
+         * Created
          */
         public Builder industry(Industry industry) {
             Utils.checkNotNull(industry, "industry");
@@ -234,7 +234,7 @@ public class PutV1CompanyIndustryResponse implements AsyncResponse {
         }
 
         /**
-         * Example response
+         * Created
          */
         public Builder industry(Optional<? extends Industry> industry) {
             Utils.checkNotNull(industry, "industry");

@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * TimeOffActivity
@@ -25,7 +26,7 @@ public class TimeOffActivity {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("policy_uuid")
-    private Optional<String> policyUuid;
+    private JsonNullable<String> policyUuid;
 
     /**
      * Type of the time off activity
@@ -39,7 +40,7 @@ public class TimeOffActivity {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("policy_name")
-    private Optional<String> policyName;
+    private JsonNullable<String> policyName;
 
     /**
      * The type of the time off event/activity
@@ -53,39 +54,39 @@ public class TimeOffActivity {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("event_description")
-    private Optional<String> eventDescription;
+    private JsonNullable<String> eventDescription;
 
     /**
      * The datetime of the time off activity
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("effective_time")
-    private Optional<String> effectiveTime;
+    private JsonNullable<String> effectiveTime;
 
     /**
      * The time off balance at the time of the activity
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("balance")
-    private Optional<String> balance;
+    private JsonNullable<String> balance;
 
     /**
      * The amount the time off balance changed as a result of the activity
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("balance_change")
-    private Optional<String> balanceChange;
+    private JsonNullable<String> balanceChange;
 
     @JsonCreator
     public TimeOffActivity(
-            @JsonProperty("policy_uuid") Optional<String> policyUuid,
+            @JsonProperty("policy_uuid") JsonNullable<String> policyUuid,
             @JsonProperty("time_off_type") Optional<? extends TimeOffType> timeOffType,
-            @JsonProperty("policy_name") Optional<String> policyName,
+            @JsonProperty("policy_name") JsonNullable<String> policyName,
             @JsonProperty("event_type") Optional<String> eventType,
-            @JsonProperty("event_description") Optional<String> eventDescription,
-            @JsonProperty("effective_time") Optional<String> effectiveTime,
-            @JsonProperty("balance") Optional<String> balance,
-            @JsonProperty("balance_change") Optional<String> balanceChange) {
+            @JsonProperty("event_description") JsonNullable<String> eventDescription,
+            @JsonProperty("effective_time") JsonNullable<String> effectiveTime,
+            @JsonProperty("balance") JsonNullable<String> balance,
+            @JsonProperty("balance_change") JsonNullable<String> balanceChange) {
         Utils.checkNotNull(policyUuid, "policyUuid");
         Utils.checkNotNull(timeOffType, "timeOffType");
         Utils.checkNotNull(policyName, "policyName");
@@ -105,16 +106,16 @@ public class TimeOffActivity {
     }
     
     public TimeOffActivity() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+        this(JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(),
+            Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
+            JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
      * unique identifier of a time off policy
      */
     @JsonIgnore
-    public Optional<String> policyUuid() {
+    public JsonNullable<String> policyUuid() {
         return policyUuid;
     }
 
@@ -131,7 +132,7 @@ public class TimeOffActivity {
      * The name of the time off policy for this activity
      */
     @JsonIgnore
-    public Optional<String> policyName() {
+    public JsonNullable<String> policyName() {
         return policyName;
     }
 
@@ -147,7 +148,7 @@ public class TimeOffActivity {
      * A description for the time off event/activity
      */
     @JsonIgnore
-    public Optional<String> eventDescription() {
+    public JsonNullable<String> eventDescription() {
         return eventDescription;
     }
 
@@ -155,7 +156,7 @@ public class TimeOffActivity {
      * The datetime of the time off activity
      */
     @JsonIgnore
-    public Optional<String> effectiveTime() {
+    public JsonNullable<String> effectiveTime() {
         return effectiveTime;
     }
 
@@ -163,7 +164,7 @@ public class TimeOffActivity {
      * The time off balance at the time of the activity
      */
     @JsonIgnore
-    public Optional<String> balance() {
+    public JsonNullable<String> balance() {
         return balance;
     }
 
@@ -171,7 +172,7 @@ public class TimeOffActivity {
      * The amount the time off balance changed as a result of the activity
      */
     @JsonIgnore
-    public Optional<String> balanceChange() {
+    public JsonNullable<String> balanceChange() {
         return balanceChange;
     }
 
@@ -185,15 +186,14 @@ public class TimeOffActivity {
      */
     public TimeOffActivity withPolicyUuid(String policyUuid) {
         Utils.checkNotNull(policyUuid, "policyUuid");
-        this.policyUuid = Optional.ofNullable(policyUuid);
+        this.policyUuid = JsonNullable.of(policyUuid);
         return this;
     }
-
 
     /**
      * unique identifier of a time off policy
      */
-    public TimeOffActivity withPolicyUuid(Optional<String> policyUuid) {
+    public TimeOffActivity withPolicyUuid(JsonNullable<String> policyUuid) {
         Utils.checkNotNull(policyUuid, "policyUuid");
         this.policyUuid = policyUuid;
         return this;
@@ -223,15 +223,14 @@ public class TimeOffActivity {
      */
     public TimeOffActivity withPolicyName(String policyName) {
         Utils.checkNotNull(policyName, "policyName");
-        this.policyName = Optional.ofNullable(policyName);
+        this.policyName = JsonNullable.of(policyName);
         return this;
     }
-
 
     /**
      * The name of the time off policy for this activity
      */
-    public TimeOffActivity withPolicyName(Optional<String> policyName) {
+    public TimeOffActivity withPolicyName(JsonNullable<String> policyName) {
         Utils.checkNotNull(policyName, "policyName");
         this.policyName = policyName;
         return this;
@@ -261,15 +260,14 @@ public class TimeOffActivity {
      */
     public TimeOffActivity withEventDescription(String eventDescription) {
         Utils.checkNotNull(eventDescription, "eventDescription");
-        this.eventDescription = Optional.ofNullable(eventDescription);
+        this.eventDescription = JsonNullable.of(eventDescription);
         return this;
     }
-
 
     /**
      * A description for the time off event/activity
      */
-    public TimeOffActivity withEventDescription(Optional<String> eventDescription) {
+    public TimeOffActivity withEventDescription(JsonNullable<String> eventDescription) {
         Utils.checkNotNull(eventDescription, "eventDescription");
         this.eventDescription = eventDescription;
         return this;
@@ -280,15 +278,14 @@ public class TimeOffActivity {
      */
     public TimeOffActivity withEffectiveTime(String effectiveTime) {
         Utils.checkNotNull(effectiveTime, "effectiveTime");
-        this.effectiveTime = Optional.ofNullable(effectiveTime);
+        this.effectiveTime = JsonNullable.of(effectiveTime);
         return this;
     }
-
 
     /**
      * The datetime of the time off activity
      */
-    public TimeOffActivity withEffectiveTime(Optional<String> effectiveTime) {
+    public TimeOffActivity withEffectiveTime(JsonNullable<String> effectiveTime) {
         Utils.checkNotNull(effectiveTime, "effectiveTime");
         this.effectiveTime = effectiveTime;
         return this;
@@ -299,15 +296,14 @@ public class TimeOffActivity {
      */
     public TimeOffActivity withBalance(String balance) {
         Utils.checkNotNull(balance, "balance");
-        this.balance = Optional.ofNullable(balance);
+        this.balance = JsonNullable.of(balance);
         return this;
     }
-
 
     /**
      * The time off balance at the time of the activity
      */
-    public TimeOffActivity withBalance(Optional<String> balance) {
+    public TimeOffActivity withBalance(JsonNullable<String> balance) {
         Utils.checkNotNull(balance, "balance");
         this.balance = balance;
         return this;
@@ -318,15 +314,14 @@ public class TimeOffActivity {
      */
     public TimeOffActivity withBalanceChange(String balanceChange) {
         Utils.checkNotNull(balanceChange, "balanceChange");
-        this.balanceChange = Optional.ofNullable(balanceChange);
+        this.balanceChange = JsonNullable.of(balanceChange);
         return this;
     }
-
 
     /**
      * The amount the time off balance changed as a result of the activity
      */
-    public TimeOffActivity withBalanceChange(Optional<String> balanceChange) {
+    public TimeOffActivity withBalanceChange(JsonNullable<String> balanceChange) {
         Utils.checkNotNull(balanceChange, "balanceChange");
         this.balanceChange = balanceChange;
         return this;
@@ -376,21 +371,21 @@ public class TimeOffActivity {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> policyUuid = Optional.empty();
+        private JsonNullable<String> policyUuid = JsonNullable.undefined();
 
         private Optional<? extends TimeOffType> timeOffType = Optional.empty();
 
-        private Optional<String> policyName = Optional.empty();
+        private JsonNullable<String> policyName = JsonNullable.undefined();
 
         private Optional<String> eventType = Optional.empty();
 
-        private Optional<String> eventDescription = Optional.empty();
+        private JsonNullable<String> eventDescription = JsonNullable.undefined();
 
-        private Optional<String> effectiveTime = Optional.empty();
+        private JsonNullable<String> effectiveTime = JsonNullable.undefined();
 
-        private Optional<String> balance = Optional.empty();
+        private JsonNullable<String> balance = JsonNullable.undefined();
 
-        private Optional<String> balanceChange = Optional.empty();
+        private JsonNullable<String> balanceChange = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -402,14 +397,14 @@ public class TimeOffActivity {
          */
         public Builder policyUuid(String policyUuid) {
             Utils.checkNotNull(policyUuid, "policyUuid");
-            this.policyUuid = Optional.ofNullable(policyUuid);
+            this.policyUuid = JsonNullable.of(policyUuid);
             return this;
         }
 
         /**
          * unique identifier of a time off policy
          */
-        public Builder policyUuid(Optional<String> policyUuid) {
+        public Builder policyUuid(JsonNullable<String> policyUuid) {
             Utils.checkNotNull(policyUuid, "policyUuid");
             this.policyUuid = policyUuid;
             return this;
@@ -440,14 +435,14 @@ public class TimeOffActivity {
          */
         public Builder policyName(String policyName) {
             Utils.checkNotNull(policyName, "policyName");
-            this.policyName = Optional.ofNullable(policyName);
+            this.policyName = JsonNullable.of(policyName);
             return this;
         }
 
         /**
          * The name of the time off policy for this activity
          */
-        public Builder policyName(Optional<String> policyName) {
+        public Builder policyName(JsonNullable<String> policyName) {
             Utils.checkNotNull(policyName, "policyName");
             this.policyName = policyName;
             return this;
@@ -478,14 +473,14 @@ public class TimeOffActivity {
          */
         public Builder eventDescription(String eventDescription) {
             Utils.checkNotNull(eventDescription, "eventDescription");
-            this.eventDescription = Optional.ofNullable(eventDescription);
+            this.eventDescription = JsonNullable.of(eventDescription);
             return this;
         }
 
         /**
          * A description for the time off event/activity
          */
-        public Builder eventDescription(Optional<String> eventDescription) {
+        public Builder eventDescription(JsonNullable<String> eventDescription) {
             Utils.checkNotNull(eventDescription, "eventDescription");
             this.eventDescription = eventDescription;
             return this;
@@ -497,14 +492,14 @@ public class TimeOffActivity {
          */
         public Builder effectiveTime(String effectiveTime) {
             Utils.checkNotNull(effectiveTime, "effectiveTime");
-            this.effectiveTime = Optional.ofNullable(effectiveTime);
+            this.effectiveTime = JsonNullable.of(effectiveTime);
             return this;
         }
 
         /**
          * The datetime of the time off activity
          */
-        public Builder effectiveTime(Optional<String> effectiveTime) {
+        public Builder effectiveTime(JsonNullable<String> effectiveTime) {
             Utils.checkNotNull(effectiveTime, "effectiveTime");
             this.effectiveTime = effectiveTime;
             return this;
@@ -516,14 +511,14 @@ public class TimeOffActivity {
          */
         public Builder balance(String balance) {
             Utils.checkNotNull(balance, "balance");
-            this.balance = Optional.ofNullable(balance);
+            this.balance = JsonNullable.of(balance);
             return this;
         }
 
         /**
          * The time off balance at the time of the activity
          */
-        public Builder balance(Optional<String> balance) {
+        public Builder balance(JsonNullable<String> balance) {
             Utils.checkNotNull(balance, "balance");
             this.balance = balance;
             return this;
@@ -535,14 +530,14 @@ public class TimeOffActivity {
          */
         public Builder balanceChange(String balanceChange) {
             Utils.checkNotNull(balanceChange, "balanceChange");
-            this.balanceChange = Optional.ofNullable(balanceChange);
+            this.balanceChange = JsonNullable.of(balanceChange);
             return this;
         }
 
         /**
          * The amount the time off balance changed as a result of the activity
          */
-        public Builder balanceChange(Optional<String> balanceChange) {
+        public Builder balanceChange(JsonNullable<String> balanceChange) {
             Utils.checkNotNull(balanceChange, "balanceChange");
             this.balanceChange = balanceChange;
             return this;

@@ -34,7 +34,7 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsResponse implements AsyncRe
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Success
      */
     private Optional<? extends FederalTaxDetails> federalTaxDetails;
 
@@ -87,7 +87,7 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsResponse implements AsyncRe
     }
 
     /**
-     * Example response
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsResponse implements AsyncRe
     }
 
     /**
-     * Example response
+     * Success
      */
     public PutV1CompaniesCompanyIdFederalTaxDetailsResponse withFederalTaxDetails(FederalTaxDetails federalTaxDetails) {
         Utils.checkNotNull(federalTaxDetails, "federalTaxDetails");
@@ -138,7 +138,7 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsResponse implements AsyncRe
 
 
     /**
-     * Example response
+     * Success
      */
     public PutV1CompaniesCompanyIdFederalTaxDetailsResponse withFederalTaxDetails(Optional<? extends FederalTaxDetails> federalTaxDetails) {
         Utils.checkNotNull(federalTaxDetails, "federalTaxDetails");
@@ -225,7 +225,7 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsResponse implements AsyncRe
 
 
         /**
-         * Example response
+         * Success
          */
         public Builder federalTaxDetails(FederalTaxDetails federalTaxDetails) {
             Utils.checkNotNull(federalTaxDetails, "federalTaxDetails");
@@ -234,7 +234,7 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsResponse implements AsyncRe
         }
 
         /**
-         * Example response
+         * Success
          */
         public Builder federalTaxDetails(Optional<? extends FederalTaxDetails> federalTaxDetails) {
             Utils.checkNotNull(federalTaxDetails, "federalTaxDetails");

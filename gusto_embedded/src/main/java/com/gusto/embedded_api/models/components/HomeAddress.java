@@ -15,12 +15,15 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-
+/**
+ * HomeAddress
+ * 
+ * <p>The signatory's home address.
+ */
 public class HomeAddress {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("street_1")
-    private Optional<String> street1;
+    private String street1;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -28,19 +31,16 @@ public class HomeAddress {
     private Optional<String> street2;
 
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("city")
-    private Optional<String> city;
+    private String city;
 
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("state")
-    private Optional<String> state;
+    private String state;
 
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("zip")
-    private Optional<String> zip;
+    private String zip;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -49,11 +49,11 @@ public class HomeAddress {
 
     @JsonCreator
     public HomeAddress(
-            @JsonProperty("street_1") Optional<String> street1,
+            @JsonProperty("street_1") String street1,
             @JsonProperty("street_2") Optional<String> street2,
-            @JsonProperty("city") Optional<String> city,
-            @JsonProperty("state") Optional<String> state,
-            @JsonProperty("zip") Optional<String> zip,
+            @JsonProperty("city") String city,
+            @JsonProperty("state") String state,
+            @JsonProperty("zip") String zip,
             @JsonProperty("country") Optional<String> country) {
         Utils.checkNotNull(street1, "street1");
         Utils.checkNotNull(street2, "street2");
@@ -69,13 +69,17 @@ public class HomeAddress {
         this.country = country;
     }
     
-    public HomeAddress() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+    public HomeAddress(
+            String street1,
+            String city,
+            String state,
+            String zip) {
+        this(street1, Optional.empty(), city,
+            state, zip, Optional.empty());
     }
 
     @JsonIgnore
-    public Optional<String> street1() {
+    public String street1() {
         return street1;
     }
 
@@ -85,17 +89,17 @@ public class HomeAddress {
     }
 
     @JsonIgnore
-    public Optional<String> city() {
+    public String city() {
         return city;
     }
 
     @JsonIgnore
-    public Optional<String> state() {
+    public String state() {
         return state;
     }
 
     @JsonIgnore
-    public Optional<String> zip() {
+    public String zip() {
         return zip;
     }
 
@@ -110,13 +114,6 @@ public class HomeAddress {
 
 
     public HomeAddress withStreet1(String street1) {
-        Utils.checkNotNull(street1, "street1");
-        this.street1 = Optional.ofNullable(street1);
-        return this;
-    }
-
-
-    public HomeAddress withStreet1(Optional<String> street1) {
         Utils.checkNotNull(street1, "street1");
         this.street1 = street1;
         return this;
@@ -137,38 +134,17 @@ public class HomeAddress {
 
     public HomeAddress withCity(String city) {
         Utils.checkNotNull(city, "city");
-        this.city = Optional.ofNullable(city);
-        return this;
-    }
-
-
-    public HomeAddress withCity(Optional<String> city) {
-        Utils.checkNotNull(city, "city");
         this.city = city;
         return this;
     }
 
     public HomeAddress withState(String state) {
         Utils.checkNotNull(state, "state");
-        this.state = Optional.ofNullable(state);
-        return this;
-    }
-
-
-    public HomeAddress withState(Optional<String> state) {
-        Utils.checkNotNull(state, "state");
         this.state = state;
         return this;
     }
 
     public HomeAddress withZip(String zip) {
-        Utils.checkNotNull(zip, "zip");
-        this.zip = Optional.ofNullable(zip);
-        return this;
-    }
-
-
-    public HomeAddress withZip(Optional<String> zip) {
         Utils.checkNotNull(zip, "zip");
         this.zip = zip;
         return this;
@@ -226,15 +202,15 @@ public class HomeAddress {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> street1 = Optional.empty();
+        private String street1;
 
         private Optional<String> street2 = Optional.empty();
 
-        private Optional<String> city = Optional.empty();
+        private String city;
 
-        private Optional<String> state = Optional.empty();
+        private String state;
 
-        private Optional<String> zip = Optional.empty();
+        private String zip;
 
         private Optional<String> country;
 
@@ -244,12 +220,6 @@ public class HomeAddress {
 
 
         public Builder street1(String street1) {
-            Utils.checkNotNull(street1, "street1");
-            this.street1 = Optional.ofNullable(street1);
-            return this;
-        }
-
-        public Builder street1(Optional<String> street1) {
             Utils.checkNotNull(street1, "street1");
             this.street1 = street1;
             return this;
@@ -271,12 +241,6 @@ public class HomeAddress {
 
         public Builder city(String city) {
             Utils.checkNotNull(city, "city");
-            this.city = Optional.ofNullable(city);
-            return this;
-        }
-
-        public Builder city(Optional<String> city) {
-            Utils.checkNotNull(city, "city");
             this.city = city;
             return this;
         }
@@ -284,24 +248,12 @@ public class HomeAddress {
 
         public Builder state(String state) {
             Utils.checkNotNull(state, "state");
-            this.state = Optional.ofNullable(state);
-            return this;
-        }
-
-        public Builder state(Optional<String> state) {
-            Utils.checkNotNull(state, "state");
             this.state = state;
             return this;
         }
 
 
         public Builder zip(String zip) {
-            Utils.checkNotNull(zip, "zip");
-            this.zip = Optional.ofNullable(zip);
-            return this;
-        }
-
-        public Builder zip(Optional<String> zip) {
             Utils.checkNotNull(zip, "zip");
             this.zip = zip;
             return this;

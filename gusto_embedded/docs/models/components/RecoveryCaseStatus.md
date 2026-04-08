@@ -2,6 +2,14 @@
 
 Status of the recovery case
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.RecoveryCaseStatus;
+
+RecoveryCaseStatus value = RecoveryCaseStatus.OPEN;
+```
+
 
 ## Values
 

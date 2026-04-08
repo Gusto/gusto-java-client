@@ -61,6 +61,14 @@ public class CompanyAddress {
     @JsonProperty("inactive")
     private Optional<Boolean> inactive;
 
+    /**
+     * The status of the location. Inactive locations have been deleted, but may still have historical data
+     * associated with them.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("active")
+    private Optional<Boolean> active;
+
     @JsonCreator
     public CompanyAddress(
             @JsonProperty("street_1") Optional<String> street1,
@@ -69,7 +77,8 @@ public class CompanyAddress {
             @JsonProperty("state") Optional<String> state,
             @JsonProperty("zip") Optional<String> zip,
             @JsonProperty("country") Optional<String> country,
-            @JsonProperty("inactive") Optional<Boolean> inactive) {
+            @JsonProperty("inactive") Optional<Boolean> inactive,
+            @JsonProperty("active") Optional<Boolean> active) {
         Utils.checkNotNull(street1, "street1");
         Utils.checkNotNull(street2, "street2");
         Utils.checkNotNull(city, "city");
@@ -77,6 +86,7 @@ public class CompanyAddress {
         Utils.checkNotNull(zip, "zip");
         Utils.checkNotNull(country, "country");
         Utils.checkNotNull(inactive, "inactive");
+        Utils.checkNotNull(active, "active");
         this.street1 = street1;
         this.street2 = street2;
         this.city = city;
@@ -84,12 +94,13 @@ public class CompanyAddress {
         this.zip = zip;
         this.country = country;
         this.inactive = inactive;
+        this.active = active;
     }
     
     public CompanyAddress() {
         this(Optional.empty(), JsonNullable.undefined(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -129,6 +140,15 @@ public class CompanyAddress {
     @JsonIgnore
     public Optional<Boolean> inactive() {
         return inactive;
+    }
+
+    /**
+     * The status of the location. Inactive locations have been deleted, but may still have historical data
+     * associated with them.
+     */
+    @JsonIgnore
+    public Optional<Boolean> active() {
+        return active;
     }
 
     public static Builder builder() {
@@ -234,6 +254,27 @@ public class CompanyAddress {
         return this;
     }
 
+    /**
+     * The status of the location. Inactive locations have been deleted, but may still have historical data
+     * associated with them.
+     */
+    public CompanyAddress withActive(boolean active) {
+        Utils.checkNotNull(active, "active");
+        this.active = Optional.ofNullable(active);
+        return this;
+    }
+
+
+    /**
+     * The status of the location. Inactive locations have been deleted, but may still have historical data
+     * associated with them.
+     */
+    public CompanyAddress withActive(Optional<Boolean> active) {
+        Utils.checkNotNull(active, "active");
+        this.active = active;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -250,7 +291,8 @@ public class CompanyAddress {
             Utils.enhancedDeepEquals(this.state, other.state) &&
             Utils.enhancedDeepEquals(this.zip, other.zip) &&
             Utils.enhancedDeepEquals(this.country, other.country) &&
-            Utils.enhancedDeepEquals(this.inactive, other.inactive);
+            Utils.enhancedDeepEquals(this.inactive, other.inactive) &&
+            Utils.enhancedDeepEquals(this.active, other.active);
     }
     
     @Override
@@ -258,7 +300,7 @@ public class CompanyAddress {
         return Utils.enhancedHash(
             street1, street2, city,
             state, zip, country,
-            inactive);
+            inactive, active);
     }
     
     @Override
@@ -270,7 +312,8 @@ public class CompanyAddress {
                 "state", state,
                 "zip", zip,
                 "country", country,
-                "inactive", inactive);
+                "inactive", inactive,
+                "active", active);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -289,6 +332,8 @@ public class CompanyAddress {
         private Optional<String> country;
 
         private Optional<Boolean> inactive = Optional.empty();
+
+        private Optional<Boolean> active = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -393,6 +438,27 @@ public class CompanyAddress {
             return this;
         }
 
+
+        /**
+         * The status of the location. Inactive locations have been deleted, but may still have historical data
+         * associated with them.
+         */
+        public Builder active(boolean active) {
+            Utils.checkNotNull(active, "active");
+            this.active = Optional.ofNullable(active);
+            return this;
+        }
+
+        /**
+         * The status of the location. Inactive locations have been deleted, but may still have historical data
+         * associated with them.
+         */
+        public Builder active(Optional<Boolean> active) {
+            Utils.checkNotNull(active, "active");
+            this.active = active;
+            return this;
+        }
+
         public CompanyAddress build() {
             if (country == null) {
                 country = _SINGLETON_VALUE_Country.value();
@@ -401,7 +467,7 @@ public class CompanyAddress {
             return new CompanyAddress(
                 street1, street2, city,
                 state, zip, country,
-                inactive);
+                inactive, active);
         }
 
 

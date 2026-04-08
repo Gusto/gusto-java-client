@@ -5,7 +5,7 @@ package com.gusto.embedded_api.models.operations.async;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api.models.components.Payroll;
+import com.gusto.embedded_api.models.components.UnprocessedPayroll;
 import com.gusto.embedded_api.utils.AsyncResponse;
 import com.gusto.embedded_api.utils.Blob;
 import com.gusto.embedded_api.utils.Utils;
@@ -34,24 +34,24 @@ public class PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse implement
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
-    private Optional<? extends Payroll> payroll;
+    private Optional<? extends UnprocessedPayroll> unprocessedPayroll;
 
     @JsonCreator
     public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends Payroll> payroll) {
+            Optional<? extends UnprocessedPayroll> unprocessedPayroll) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(payroll, "payroll");
+        Utils.checkNotNull(unprocessedPayroll, "unprocessedPayroll");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.payroll = payroll;
+        this.unprocessedPayroll = unprocessedPayroll;
     }
     
     public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse(
@@ -87,12 +87,12 @@ public class PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse implement
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Payroll> payroll() {
-        return (Optional<Payroll>) payroll;
+    public Optional<UnprocessedPayroll> unprocessedPayroll() {
+        return (Optional<UnprocessedPayroll>) unprocessedPayroll;
     }
 
     public static Builder builder() {
@@ -128,21 +128,21 @@ public class PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse implement
     }
 
     /**
-     * Example response
+     * Successful
      */
-    public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse withPayroll(Payroll payroll) {
-        Utils.checkNotNull(payroll, "payroll");
-        this.payroll = Optional.ofNullable(payroll);
+    public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse withUnprocessedPayroll(UnprocessedPayroll unprocessedPayroll) {
+        Utils.checkNotNull(unprocessedPayroll, "unprocessedPayroll");
+        this.unprocessedPayroll = Optional.ofNullable(unprocessedPayroll);
         return this;
     }
 
 
     /**
-     * Example response
+     * Successful
      */
-    public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse withPayroll(Optional<? extends Payroll> payroll) {
-        Utils.checkNotNull(payroll, "payroll");
-        this.payroll = payroll;
+    public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse withUnprocessedPayroll(Optional<? extends UnprocessedPayroll> unprocessedPayroll) {
+        Utils.checkNotNull(unprocessedPayroll, "unprocessedPayroll");
+        this.unprocessedPayroll = unprocessedPayroll;
         return this;
     }
 
@@ -159,14 +159,14 @@ public class PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse implement
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.payroll, other.payroll);
+            Utils.enhancedDeepEquals(this.unprocessedPayroll, other.unprocessedPayroll);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            payroll);
+            unprocessedPayroll);
     }
     
     @Override
@@ -175,7 +175,7 @@ public class PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse implement
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "payroll", payroll);
+                "unprocessedPayroll", unprocessedPayroll);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -187,7 +187,7 @@ public class PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse implement
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends Payroll> payroll = Optional.empty();
+        private Optional<? extends UnprocessedPayroll> unprocessedPayroll = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -225,20 +225,20 @@ public class PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse implement
 
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder payroll(Payroll payroll) {
-            Utils.checkNotNull(payroll, "payroll");
-            this.payroll = Optional.ofNullable(payroll);
+        public Builder unprocessedPayroll(UnprocessedPayroll unprocessedPayroll) {
+            Utils.checkNotNull(unprocessedPayroll, "unprocessedPayroll");
+            this.unprocessedPayroll = Optional.ofNullable(unprocessedPayroll);
             return this;
         }
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder payroll(Optional<? extends Payroll> payroll) {
-            Utils.checkNotNull(payroll, "payroll");
-            this.payroll = payroll;
+        public Builder unprocessedPayroll(Optional<? extends UnprocessedPayroll> unprocessedPayroll) {
+            Utils.checkNotNull(unprocessedPayroll, "unprocessedPayroll");
+            this.unprocessedPayroll = unprocessedPayroll;
             return this;
         }
 
@@ -246,7 +246,7 @@ public class PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse implement
 
             return new PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse(
                 contentType, statusCode, rawResponse,
-                payroll);
+                unprocessedPayroll);
         }
 
     }

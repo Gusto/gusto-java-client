@@ -16,14 +16,10 @@ import java.util.List;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
-/**
- * Industry
- * 
- * <p>Example response
- */
+
 public class Industry {
     /**
-     * Company uuid
+     * Company UUID
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("company_uuid")
@@ -38,8 +34,9 @@ public class Industry {
     private JsonNullable<String> naicsCode;
 
     /**
-     * A list of Standard Industrial Classification (SIC) codes, which are four digit number that
-     * categorize the industries that companies belong to based on their business activities.
+     * A list of Standard Industrial Classification (SIC) codes, which are four digit numbers that
+     * categorize the industries that companies belong to based on their business activities. If sic_codes
+     * is not passed in, we will perform an internal lookup with `naics_code`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sic_codes")
@@ -74,7 +71,7 @@ public class Industry {
     }
 
     /**
-     * Company uuid
+     * Company UUID
      */
     @JsonIgnore
     public Optional<String> companyUuid() {
@@ -91,8 +88,9 @@ public class Industry {
     }
 
     /**
-     * A list of Standard Industrial Classification (SIC) codes, which are four digit number that
-     * categorize the industries that companies belong to based on their business activities.
+     * A list of Standard Industrial Classification (SIC) codes, which are four digit numbers that
+     * categorize the industries that companies belong to based on their business activities. If sic_codes
+     * is not passed in, we will perform an internal lookup with `naics_code`.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -114,7 +112,7 @@ public class Industry {
 
 
     /**
-     * Company uuid
+     * Company UUID
      */
     public Industry withCompanyUuid(String companyUuid) {
         Utils.checkNotNull(companyUuid, "companyUuid");
@@ -124,7 +122,7 @@ public class Industry {
 
 
     /**
-     * Company uuid
+     * Company UUID
      */
     public Industry withCompanyUuid(Optional<String> companyUuid) {
         Utils.checkNotNull(companyUuid, "companyUuid");
@@ -153,8 +151,9 @@ public class Industry {
     }
 
     /**
-     * A list of Standard Industrial Classification (SIC) codes, which are four digit number that
-     * categorize the industries that companies belong to based on their business activities.
+     * A list of Standard Industrial Classification (SIC) codes, which are four digit numbers that
+     * categorize the industries that companies belong to based on their business activities. If sic_codes
+     * is not passed in, we will perform an internal lookup with `naics_code`.
      */
     public Industry withSicCodes(List<String> sicCodes) {
         Utils.checkNotNull(sicCodes, "sicCodes");
@@ -164,8 +163,9 @@ public class Industry {
 
 
     /**
-     * A list of Standard Industrial Classification (SIC) codes, which are four digit number that
-     * categorize the industries that companies belong to based on their business activities.
+     * A list of Standard Industrial Classification (SIC) codes, which are four digit numbers that
+     * categorize the industries that companies belong to based on their business activities. If sic_codes
+     * is not passed in, we will perform an internal lookup with `naics_code`.
      */
     public Industry withSicCodes(Optional<? extends List<String>> sicCodes) {
         Utils.checkNotNull(sicCodes, "sicCodes");
@@ -240,7 +240,7 @@ public class Industry {
 
 
         /**
-         * Company uuid
+         * Company UUID
          */
         public Builder companyUuid(String companyUuid) {
             Utils.checkNotNull(companyUuid, "companyUuid");
@@ -249,7 +249,7 @@ public class Industry {
         }
 
         /**
-         * Company uuid
+         * Company UUID
          */
         public Builder companyUuid(Optional<String> companyUuid) {
             Utils.checkNotNull(companyUuid, "companyUuid");
@@ -280,8 +280,9 @@ public class Industry {
 
 
         /**
-         * A list of Standard Industrial Classification (SIC) codes, which are four digit number that
-         * categorize the industries that companies belong to based on their business activities.
+         * A list of Standard Industrial Classification (SIC) codes, which are four digit numbers that
+         * categorize the industries that companies belong to based on their business activities. If sic_codes
+         * is not passed in, we will perform an internal lookup with `naics_code`.
          */
         public Builder sicCodes(List<String> sicCodes) {
             Utils.checkNotNull(sicCodes, "sicCodes");
@@ -290,8 +291,9 @@ public class Industry {
         }
 
         /**
-         * A list of Standard Industrial Classification (SIC) codes, which are four digit number that
-         * categorize the industries that companies belong to based on their business activities.
+         * A list of Standard Industrial Classification (SIC) codes, which are four digit numbers that
+         * categorize the industries that companies belong to based on their business activities. If sic_codes
+         * is not passed in, we will perform an internal lookup with `naics_code`.
          */
         public Builder sicCodes(Optional<? extends List<String>> sicCodes) {
             Utils.checkNotNull(sicCodes, "sicCodes");

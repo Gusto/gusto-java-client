@@ -1,6 +1,12 @@
 # GarnishmentType
 
-The specific type of garnishment for court ordered garnishments.
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.GarnishmentType;
+
+GarnishmentType value = GarnishmentType.CHILD_SUPPORT;
+```
 
 
 ## Values

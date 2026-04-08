@@ -7,9 +7,9 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.CompensationsRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1CompensationsCompensationIdHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompensationsCompensationIdRequest;
-import com.gusto.embedded_api.models.operations.PostV1CompensationsCompensationIdRequestBody;
 import com.gusto.embedded_api.operations.PostV1CompensationsCompensationId;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -20,17 +20,29 @@ import java.util.concurrent.CompletableFuture;
 
 public class PostV1CompensationsCompensationIdRequestBuilder {
 
-    private String jobId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PostV1CompensationsCompensationIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PostV1CompensationsCompensationIdRequestBody requestBody;
+                            new TypeReference<Optional<? extends PostV1CompensationsCompensationIdHeaderXGustoAPIVersion>>() {});
+    private String jobId;
+    private CompensationsRequestBody compensationsRequestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1CompensationsCompensationIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PostV1CompensationsCompensationIdRequestBuilder xGustoAPIVersion(PostV1CompensationsCompensationIdHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PostV1CompensationsCompensationIdRequestBuilder xGustoAPIVersion(Optional<? extends PostV1CompensationsCompensationIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PostV1CompensationsCompensationIdRequestBuilder jobId(String jobId) {
@@ -38,22 +50,10 @@ public class PostV1CompensationsCompensationIdRequestBuilder {
         this.jobId = jobId;
         return this;
     }
-                
-    public PostV1CompensationsCompensationIdRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
 
-    public PostV1CompensationsCompensationIdRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PostV1CompensationsCompensationIdRequestBuilder requestBody(PostV1CompensationsCompensationIdRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PostV1CompensationsCompensationIdRequestBuilder compensationsRequestBody(CompensationsRequestBody compensationsRequestBody) {
+        Utils.checkNotNull(compensationsRequestBody, "compensationsRequestBody");
+        this.compensationsRequestBody = compensationsRequestBody;
         return this;
     }
 
@@ -63,9 +63,9 @@ public class PostV1CompensationsCompensationIdRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1CompensationsCompensationIdRequest request = new PostV1CompensationsCompensationIdRequest(jobId,
-            xGustoAPIVersion,
-            requestBody);
+        PostV1CompensationsCompensationIdRequest request = new PostV1CompensationsCompensationIdRequest(xGustoAPIVersion,
+            jobId,
+            compensationsRequestBody);
 
         return request;
     }
@@ -80,9 +80,9 @@ public class PostV1CompensationsCompensationIdRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PostV1CompensationsCompensationIdHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PostV1CompensationsCompensationIdHeaderXGustoAPIVersion>>() {});
 }

@@ -16,9 +16,9 @@ Create a custom report for a company. This endpoint initiates creating a custom 
 
 scope: `company_reports:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="post-companies-company_uuid-reports" method="post" path="/v1/companies/{company_uuid}/reports" -->
+<!-- UsageSnippet language="java" operationID="post-companies-company_uuid-reports" method="post" path="/v1/companies/{company_uuid}/reports" example="Basic" -->
 ```java
 package hello.world;
 
@@ -54,7 +54,136 @@ public class Application {
                 .call();
 
         if (res.createReport().isPresent()) {
-            // handle response
+            System.out.println(res.createReport().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="post-companies-company_uuid-reports" method="post" path="/v1/companies/{company_uuid}/reports" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+import java.time.LocalDate;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostCompaniesCompanyUuidReportsResponse res = sdk.reports().createCustom()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostCompaniesCompanyUuidReportsRequestBody.builder()
+                    .columns(List.of(
+                        Columns.TOTAL_TIME_OFF_EARNINGS))
+                    .groupings(List.of())
+                    .fileType(FileType.JSON)
+                    .startDate(LocalDate.parse("2024-01-01"))
+                    .endDate(LocalDate.parse("2024-04-01"))
+                    .dismissedStartDate(LocalDate.parse("2024-01-01"))
+                    .dismissedEndDate(LocalDate.parse("2024-04-01"))
+                    .build())
+                .call();
+
+        if (res.createReport().isPresent()) {
+            System.out.println(res.createReport().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="post-companies-company_uuid-reports" method="post" path="/v1/companies/{company_uuid}/reports" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+import java.time.LocalDate;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostCompaniesCompanyUuidReportsResponse res = sdk.reports().createCustom()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostCompaniesCompanyUuidReportsRequestBody.builder()
+                    .columns(List.of(
+                        Columns.TOTAL_TIME_OFF_EARNINGS))
+                    .groupings(List.of())
+                    .fileType(FileType.JSON)
+                    .startDate(LocalDate.parse("2024-01-01"))
+                    .endDate(LocalDate.parse("2024-04-01"))
+                    .dismissedStartDate(LocalDate.parse("2024-01-01"))
+                    .dismissedEndDate(LocalDate.parse("2024-04-01"))
+                    .build())
+                .call();
+
+        if (res.createReport().isPresent()) {
+            System.out.println(res.createReport().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="post-companies-company_uuid-reports" method="post" path="/v1/companies/{company_uuid}/reports" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+import java.time.LocalDate;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostCompaniesCompanyUuidReportsResponse res = sdk.reports().createCustom()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostCompaniesCompanyUuidReportsRequestBody.builder()
+                    .columns(List.of(
+                        Columns.TOTAL_TIME_OFF_EARNINGS))
+                    .groupings(List.of())
+                    .fileType(FileType.JSON)
+                    .startDate(LocalDate.parse("2024-01-01"))
+                    .endDate(LocalDate.parse("2024-04-01"))
+                    .dismissedStartDate(LocalDate.parse("2024-01-01"))
+                    .dismissedEndDate(LocalDate.parse("2024-04-01"))
+                    .build())
+                .call();
+
+        if (res.createReport().isPresent()) {
+            System.out.println(res.createReport().get());
         }
     }
 }
@@ -87,9 +216,9 @@ Use the `request_uuid` in the response with the [report GET endpoint](../referen
 
 scope: `company_reports:write` OR `company_reports:write:general_ledger`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="post-payrolls-payroll_uuid-reports-general_ledger" method="post" path="/v1/payrolls/{payroll_uuid}/reports/general_ledger" -->
+<!-- UsageSnippet language="java" operationID="post-payrolls-payroll_uuid-reports-general_ledger" method="post" path="/v1/payrolls/{payroll_uuid}/reports/general_ledger" example="Basic" -->
 ```java
 package hello.world;
 
@@ -116,7 +245,109 @@ public class Application {
                 .call();
 
         if (res.generalLedgerReport().isPresent()) {
-            // handle response
+            System.out.println(res.generalLedgerReport().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="post-payrolls-payroll_uuid-reports-general_ledger" method="post" path="/v1/payrolls/{payroll_uuid}/reports/general_ledger" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostPayrollsPayrollUuidReportsGeneralLedgerResponse res = sdk.reports().postPayrollsPayrollUuidReportsGeneralLedger()
+                .payrollUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody.builder()
+                    .aggregation(Aggregation.DEFAULT)
+                    .build())
+                .call();
+
+        if (res.generalLedgerReport().isPresent()) {
+            System.out.println(res.generalLedgerReport().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="post-payrolls-payroll_uuid-reports-general_ledger" method="post" path="/v1/payrolls/{payroll_uuid}/reports/general_ledger" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostPayrollsPayrollUuidReportsGeneralLedgerResponse res = sdk.reports().postPayrollsPayrollUuidReportsGeneralLedger()
+                .payrollUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody.builder()
+                    .aggregation(Aggregation.DEFAULT)
+                    .build())
+                .call();
+
+        if (res.generalLedgerReport().isPresent()) {
+            System.out.println(res.generalLedgerReport().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="post-payrolls-payroll_uuid-reports-general_ledger" method="post" path="/v1/payrolls/{payroll_uuid}/reports/general_ledger" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostPayrollsPayrollUuidReportsGeneralLedgerResponse res = sdk.reports().postPayrollsPayrollUuidReportsGeneralLedger()
+                .payrollUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody.builder()
+                    .aggregation(Aggregation.DEFAULT)
+                    .build())
+                .call();
+
+        if (res.generalLedgerReport().isPresent()) {
+            System.out.println(res.generalLedgerReport().get());
         }
     }
 }
@@ -151,7 +382,7 @@ scope: `company_reports:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-reports-request_uuid" method="get" path="/v1/reports/{request_uuid}" -->
+<!-- UsageSnippet language="java" operationID="get-reports-request_uuid" method="get" path="/v1/reports/{request_uuid}" example="Example" -->
 ```java
 package hello.world;
 
@@ -174,7 +405,7 @@ public class Application {
                 .call();
 
         if (res.report().isPresent()) {
-            // handle response
+            System.out.println(res.report().get());
         }
     }
 }
@@ -205,7 +436,7 @@ scope: `company_reports:write`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-report-templates-report_type" method="get" path="/v1/companies/{company_uuid}/report_templates/{report_type}" -->
+<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-report-templates-report_type" method="get" path="/v1/companies/{company_uuid}/report_templates/{report_type}" example="Example" -->
 ```java
 package hello.world;
 
@@ -229,7 +460,7 @@ public class Application {
                 .call();
 
         if (res.reportTemplate().isPresent()) {
-            // handle response
+            System.out.println(res.reportTemplate().get());
         }
     }
 }
@@ -270,20 +501,21 @@ scope: `company_reports:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse res = sdk.reports().postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage()
-                .xGustoAPIVersion(PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .companyId("<id>")
                 .requestBody(PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody.builder()
                     .startYear(2023L)
@@ -292,7 +524,7 @@ public class Application {
                 .call();
 
         if (res.object().isPresent()) {
-            // handle response
+            System.out.println(res.object().get());
         }
     }
 }
@@ -314,5 +546,6 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |

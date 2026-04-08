@@ -20,23 +20,17 @@ import java.util.concurrent.CompletableFuture;
 
 public class PostV1CompaniesCompanyIdBankAccountsRequestBuilder {
 
-    private String companyId;
     private Optional<? extends PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
     private CompanyBankAccountRequest companyBankAccountRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1CompaniesCompanyIdBankAccountsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1CompaniesCompanyIdBankAccountsRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public PostV1CompaniesCompanyIdBankAccountsRequestBuilder xGustoAPIVersion(PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,6 +42,12 @@ public class PostV1CompaniesCompanyIdBankAccountsRequestBuilder {
     public PostV1CompaniesCompanyIdBankAccountsRequestBuilder xGustoAPIVersion(Optional<? extends PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PostV1CompaniesCompanyIdBankAccountsRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
         return this;
     }
 
@@ -63,8 +63,8 @@ public class PostV1CompaniesCompanyIdBankAccountsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1CompaniesCompanyIdBankAccountsRequest request = new PostV1CompaniesCompanyIdBankAccountsRequest(companyId,
-            xGustoAPIVersion,
+        PostV1CompaniesCompanyIdBankAccountsRequest request = new PostV1CompaniesCompanyIdBankAccountsRequest(xGustoAPIVersion,
+            companyId,
             companyBankAccountRequest);
 
         return request;

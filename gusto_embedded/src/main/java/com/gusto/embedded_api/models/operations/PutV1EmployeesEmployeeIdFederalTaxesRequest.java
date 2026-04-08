@@ -6,7 +6,6 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -18,18 +17,18 @@ import java.util.Optional;
 
 public class PutV1EmployeesEmployeeIdFederalTaxesRequest {
     /**
-     * The UUID of the employee
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_uuid")
-    private String employeeUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    private Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
+     * The UUID of the employee
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_uuid")
+    private String employeeUuid;
 
 
     @SpeakeasyMetadata("request:mediaType=application/json")
@@ -37,29 +36,21 @@ public class PutV1EmployeesEmployeeIdFederalTaxesRequest {
 
     @JsonCreator
     public PutV1EmployeesEmployeeIdFederalTaxesRequest(
+            Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion,
             String employeeUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
             PutV1EmployeesEmployeeIdFederalTaxesRequestBody requestBody) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
         Utils.checkNotNull(requestBody, "requestBody");
-        this.employeeUuid = employeeUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.employeeUuid = employeeUuid;
         this.requestBody = requestBody;
     }
     
     public PutV1EmployeesEmployeeIdFederalTaxesRequest(
             String employeeUuid,
             PutV1EmployeesEmployeeIdFederalTaxesRequestBody requestBody) {
-        this(employeeUuid, Optional.empty(), requestBody);
-    }
-
-    /**
-     * The UUID of the employee
-     */
-    @JsonIgnore
-    public String employeeUuid() {
-        return employeeUuid;
+        this(Optional.empty(), employeeUuid, requestBody);
     }
 
     /**
@@ -69,8 +60,16 @@ public class PutV1EmployeesEmployeeIdFederalTaxesRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion>) xGustoAPIVersion;
+    }
+
+    /**
+     * The UUID of the employee
+     */
+    @JsonIgnore
+    public String employeeUuid() {
+        return employeeUuid;
     }
 
     @JsonIgnore
@@ -84,20 +83,11 @@ public class PutV1EmployeesEmployeeIdFederalTaxesRequest {
 
 
     /**
-     * The UUID of the employee
-     */
-    public PutV1EmployeesEmployeeIdFederalTaxesRequest withEmployeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1EmployeesEmployeeIdFederalTaxesRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1EmployeesEmployeeIdFederalTaxesRequest withXGustoAPIVersion(PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -109,9 +99,18 @@ public class PutV1EmployeesEmployeeIdFederalTaxesRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1EmployeesEmployeeIdFederalTaxesRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1EmployeesEmployeeIdFederalTaxesRequest withXGustoAPIVersion(Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * The UUID of the employee
+     */
+    public PutV1EmployeesEmployeeIdFederalTaxesRequest withEmployeeUuid(String employeeUuid) {
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
+        this.employeeUuid = employeeUuid;
         return this;
     }
 
@@ -131,31 +130,31 @@ public class PutV1EmployeesEmployeeIdFederalTaxesRequest {
         }
         PutV1EmployeesEmployeeIdFederalTaxesRequest other = (PutV1EmployeesEmployeeIdFederalTaxesRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
             Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            employeeUuid, xGustoAPIVersion, requestBody);
+            xGustoAPIVersion, employeeUuid, requestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1EmployeesEmployeeIdFederalTaxesRequest.class,
-                "employeeUuid", employeeUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "employeeUuid", employeeUuid,
                 "requestBody", requestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String employeeUuid;
+        private Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private String employeeUuid;
 
         private PutV1EmployeesEmployeeIdFederalTaxesRequestBody requestBody;
 
@@ -165,21 +164,11 @@ public class PutV1EmployeesEmployeeIdFederalTaxesRequest {
 
 
         /**
-         * The UUID of the employee
-         */
-        public Builder employeeUuid(String employeeUuid) {
-            Utils.checkNotNull(employeeUuid, "employeeUuid");
-            this.employeeUuid = employeeUuid;
-            return this;
-        }
-
-
-        /**
          * Determines the date-based API version associated with your API call. If none is provided, your
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -190,9 +179,19 @@ public class PutV1EmployeesEmployeeIdFederalTaxesRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
+        }
+
+
+        /**
+         * The UUID of the employee
+         */
+        public Builder employeeUuid(String employeeUuid) {
+            Utils.checkNotNull(employeeUuid, "employeeUuid");
+            this.employeeUuid = employeeUuid;
             return this;
         }
 
@@ -209,14 +208,14 @@ public class PutV1EmployeesEmployeeIdFederalTaxesRequest {
             }
 
             return new PutV1EmployeesEmployeeIdFederalTaxesRequest(
-                employeeUuid, xGustoAPIVersion, requestBody);
+                xGustoAPIVersion, employeeUuid, requestBody);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion>>() {});
     }
 }

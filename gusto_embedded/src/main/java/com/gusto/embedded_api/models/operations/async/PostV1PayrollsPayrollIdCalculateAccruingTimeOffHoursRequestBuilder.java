@@ -7,9 +7,9 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.PayrollCalculateAccruingTimeOffHoursRequest;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest;
-import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody;
 import com.gusto.embedded_api.operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHours;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -20,18 +20,30 @@ import java.util.concurrent.CompletableFuture;
 
 public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder {
 
-    private String payrollId;
-    private String employeeId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody requestBody;
+                            new TypeReference<Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion>>() {});
+    private String payrollId;
+    private String employeeId;
+    private Optional<? extends PayrollCalculateAccruingTimeOffHoursRequest> payrollCalculateAccruingTimeOffHoursRequest = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder xGustoAPIVersion(PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder xGustoAPIVersion(Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder payrollId(String payrollId) {
@@ -46,21 +58,15 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder 
         return this;
     }
                 
-    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder payrollCalculateAccruingTimeOffHoursRequest(PayrollCalculateAccruingTimeOffHoursRequest payrollCalculateAccruingTimeOffHoursRequest) {
+        Utils.checkNotNull(payrollCalculateAccruingTimeOffHoursRequest, "payrollCalculateAccruingTimeOffHoursRequest");
+        this.payrollCalculateAccruingTimeOffHoursRequest = Optional.of(payrollCalculateAccruingTimeOffHoursRequest);
         return this;
     }
 
-    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder requestBody(PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder payrollCalculateAccruingTimeOffHoursRequest(Optional<? extends PayrollCalculateAccruingTimeOffHoursRequest> payrollCalculateAccruingTimeOffHoursRequest) {
+        Utils.checkNotNull(payrollCalculateAccruingTimeOffHoursRequest, "payrollCalculateAccruingTimeOffHoursRequest");
+        this.payrollCalculateAccruingTimeOffHoursRequest = payrollCalculateAccruingTimeOffHoursRequest;
         return this;
     }
 
@@ -70,10 +76,10 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder 
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest request = new PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest(payrollId,
+        PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest request = new PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest(xGustoAPIVersion,
+            payrollId,
             employeeId,
-            xGustoAPIVersion,
-            requestBody);
+            payrollCalculateAccruingTimeOffHoursRequest);
 
         return request;
     }
@@ -88,9 +94,9 @@ public class PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder 
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion>>() {});
 }

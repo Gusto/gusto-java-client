@@ -49,6 +49,8 @@ public class PeopleBatches {
      * 
      * <p>scope: `people_batches:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder postV1CompaniesCompanyIdPeopleBatches() {
@@ -63,6 +65,8 @@ public class PeopleBatches {
      * <p>The batch is processed asynchronously. Use the returned batch UUID to poll for status and results.
      * 
      * <p>scope: `people_batches:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @param requestBody 
@@ -81,6 +85,8 @@ public class PeopleBatches {
      * <p>The batch is processed asynchronously. Use the returned batch UUID to poll for status and results.
      * 
      * <p>scope: `people_batches:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -112,6 +118,8 @@ public class PeopleBatches {
      * 
      * <p>scope: `people_batches:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public GetV1PeopleBatchesPeopleBatchUuidRequestBuilder getV1PeopleBatchesPeopleBatchUuid() {
@@ -126,6 +134,8 @@ public class PeopleBatches {
      * <p>Poll this endpoint to check the batch processing status and retrieve results.
      * 
      * <p>scope: `people_batches:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param peopleBatchUuid The UUID of the people batch
      * @return The response from the API call
@@ -143,6 +153,8 @@ public class PeopleBatches {
      * <p>Poll this endpoint to check the batch processing status and retrieve results.
      * 
      * <p>scope: `people_batches:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param peopleBatchUuid The UUID of the people batch
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.

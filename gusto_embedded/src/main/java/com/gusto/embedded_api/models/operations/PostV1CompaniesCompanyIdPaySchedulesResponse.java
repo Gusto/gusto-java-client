@@ -5,7 +5,7 @@ package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api.models.components.PayScheduleCreateUpdate;
+import com.gusto.embedded_api.models.components.PaySchedule;
 import com.gusto.embedded_api.utils.Response;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
@@ -34,24 +34,24 @@ public class PostV1CompaniesCompanyIdPaySchedulesResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Created
      */
-    private Optional<? extends PayScheduleCreateUpdate> payScheduleCreateUpdate;
+    private Optional<? extends PaySchedule> paySchedule;
 
     @JsonCreator
     public PostV1CompaniesCompanyIdPaySchedulesResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends PayScheduleCreateUpdate> payScheduleCreateUpdate) {
+            Optional<? extends PaySchedule> paySchedule) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(payScheduleCreateUpdate, "payScheduleCreateUpdate");
+        Utils.checkNotNull(paySchedule, "paySchedule");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.payScheduleCreateUpdate = payScheduleCreateUpdate;
+        this.paySchedule = paySchedule;
     }
     
     public PostV1CompaniesCompanyIdPaySchedulesResponse(
@@ -87,12 +87,12 @@ public class PostV1CompaniesCompanyIdPaySchedulesResponse implements Response {
     }
 
     /**
-     * Example response
+     * Created
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PayScheduleCreateUpdate> payScheduleCreateUpdate() {
-        return (Optional<PayScheduleCreateUpdate>) payScheduleCreateUpdate;
+    public Optional<PaySchedule> paySchedule() {
+        return (Optional<PaySchedule>) paySchedule;
     }
 
     public static Builder builder() {
@@ -128,21 +128,21 @@ public class PostV1CompaniesCompanyIdPaySchedulesResponse implements Response {
     }
 
     /**
-     * Example response
+     * Created
      */
-    public PostV1CompaniesCompanyIdPaySchedulesResponse withPayScheduleCreateUpdate(PayScheduleCreateUpdate payScheduleCreateUpdate) {
-        Utils.checkNotNull(payScheduleCreateUpdate, "payScheduleCreateUpdate");
-        this.payScheduleCreateUpdate = Optional.ofNullable(payScheduleCreateUpdate);
+    public PostV1CompaniesCompanyIdPaySchedulesResponse withPaySchedule(PaySchedule paySchedule) {
+        Utils.checkNotNull(paySchedule, "paySchedule");
+        this.paySchedule = Optional.ofNullable(paySchedule);
         return this;
     }
 
 
     /**
-     * Example response
+     * Created
      */
-    public PostV1CompaniesCompanyIdPaySchedulesResponse withPayScheduleCreateUpdate(Optional<? extends PayScheduleCreateUpdate> payScheduleCreateUpdate) {
-        Utils.checkNotNull(payScheduleCreateUpdate, "payScheduleCreateUpdate");
-        this.payScheduleCreateUpdate = payScheduleCreateUpdate;
+    public PostV1CompaniesCompanyIdPaySchedulesResponse withPaySchedule(Optional<? extends PaySchedule> paySchedule) {
+        Utils.checkNotNull(paySchedule, "paySchedule");
+        this.paySchedule = paySchedule;
         return this;
     }
 
@@ -159,14 +159,14 @@ public class PostV1CompaniesCompanyIdPaySchedulesResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.payScheduleCreateUpdate, other.payScheduleCreateUpdate);
+            Utils.enhancedDeepEquals(this.paySchedule, other.paySchedule);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            payScheduleCreateUpdate);
+            paySchedule);
     }
     
     @Override
@@ -175,7 +175,7 @@ public class PostV1CompaniesCompanyIdPaySchedulesResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "payScheduleCreateUpdate", payScheduleCreateUpdate);
+                "paySchedule", paySchedule);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -187,7 +187,7 @@ public class PostV1CompaniesCompanyIdPaySchedulesResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends PayScheduleCreateUpdate> payScheduleCreateUpdate = Optional.empty();
+        private Optional<? extends PaySchedule> paySchedule = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -225,20 +225,20 @@ public class PostV1CompaniesCompanyIdPaySchedulesResponse implements Response {
 
 
         /**
-         * Example response
+         * Created
          */
-        public Builder payScheduleCreateUpdate(PayScheduleCreateUpdate payScheduleCreateUpdate) {
-            Utils.checkNotNull(payScheduleCreateUpdate, "payScheduleCreateUpdate");
-            this.payScheduleCreateUpdate = Optional.ofNullable(payScheduleCreateUpdate);
+        public Builder paySchedule(PaySchedule paySchedule) {
+            Utils.checkNotNull(paySchedule, "paySchedule");
+            this.paySchedule = Optional.ofNullable(paySchedule);
             return this;
         }
 
         /**
-         * Example response
+         * Created
          */
-        public Builder payScheduleCreateUpdate(Optional<? extends PayScheduleCreateUpdate> payScheduleCreateUpdate) {
-            Utils.checkNotNull(payScheduleCreateUpdate, "payScheduleCreateUpdate");
-            this.payScheduleCreateUpdate = payScheduleCreateUpdate;
+        public Builder paySchedule(Optional<? extends PaySchedule> paySchedule) {
+            Utils.checkNotNull(paySchedule, "paySchedule");
+            this.paySchedule = paySchedule;
             return this;
         }
 
@@ -246,7 +246,7 @@ public class PostV1CompaniesCompanyIdPaySchedulesResponse implements Response {
 
             return new PostV1CompaniesCompanyIdPaySchedulesResponse(
                 contentType, statusCode, rawResponse,
-                payScheduleCreateUpdate);
+                paySchedule);
         }
 
     }

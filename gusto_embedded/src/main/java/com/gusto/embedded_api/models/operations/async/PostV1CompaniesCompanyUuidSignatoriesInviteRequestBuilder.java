@@ -7,9 +7,9 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.SignatoryInviteRequest;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidSignatoriesInviteRequest;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody;
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyUuidSignatoriesInvite;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -21,11 +21,11 @@ import java.util.concurrent.CompletableFuture;
 public class PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder {
 
     private String companyUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody requestBody;
+                            new TypeReference<Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion>>() {});
+    private SignatoryInviteRequest signatoryInviteRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -39,21 +39,21 @@ public class PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder {
         return this;
     }
                 
-    public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder xGustoAPIVersion(PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder xGustoAPIVersion(Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder requestBody(PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder signatoryInviteRequest(SignatoryInviteRequest signatoryInviteRequest) {
+        Utils.checkNotNull(signatoryInviteRequest, "signatoryInviteRequest");
+        this.signatoryInviteRequest = signatoryInviteRequest;
         return this;
     }
 
@@ -65,7 +65,7 @@ public class PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder {
 
         PostV1CompaniesCompanyUuidSignatoriesInviteRequest request = new PostV1CompaniesCompanyUuidSignatoriesInviteRequest(companyUuid,
             xGustoAPIVersion,
-            requestBody);
+            signatoryInviteRequest);
 
         return request;
     }
@@ -80,9 +80,9 @@ public class PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion>>() {});
 }

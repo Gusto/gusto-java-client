@@ -14,7 +14,7 @@ scope: `employee_payment_methods:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-bank_accounts" method="get" path="/v1/employees/{employee_id}/bank_accounts" -->
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-bank_accounts" method="get" path="/v1/employees/{employee_id}/bank_accounts" example="Example" -->
 ```java
 package hello.world;
 
@@ -37,7 +37,7 @@ public class Application {
                 .call();
 
         if (res.employeeBankAccountList().isPresent()) {
-            // handle response
+            System.out.println(res.employeeBankAccountList().get());
         }
     }
 }

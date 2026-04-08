@@ -37,14 +37,14 @@ public class PutV1TaxLiabilitiesResponse implements AsyncResponse {
     /**
      * Example response
      */
-    private Optional<? extends List<List<TaxLiabilitiesSelections>>> taxLiabilitiesList;
+    private Optional<? extends List<TaxLiabilitiesSelections>> taxLiabilitiesList;
 
     @JsonCreator
     public PutV1TaxLiabilitiesResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends List<List<TaxLiabilitiesSelections>>> taxLiabilitiesList) {
+            Optional<? extends List<TaxLiabilitiesSelections>> taxLiabilitiesList) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
@@ -92,8 +92,8 @@ public class PutV1TaxLiabilitiesResponse implements AsyncResponse {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<List<TaxLiabilitiesSelections>>> taxLiabilitiesList() {
-        return (Optional<List<List<TaxLiabilitiesSelections>>>) taxLiabilitiesList;
+    public Optional<List<TaxLiabilitiesSelections>> taxLiabilitiesList() {
+        return (Optional<List<TaxLiabilitiesSelections>>) taxLiabilitiesList;
     }
 
     public static Builder builder() {
@@ -131,7 +131,7 @@ public class PutV1TaxLiabilitiesResponse implements AsyncResponse {
     /**
      * Example response
      */
-    public PutV1TaxLiabilitiesResponse withTaxLiabilitiesList(List<List<TaxLiabilitiesSelections>> taxLiabilitiesList) {
+    public PutV1TaxLiabilitiesResponse withTaxLiabilitiesList(List<TaxLiabilitiesSelections> taxLiabilitiesList) {
         Utils.checkNotNull(taxLiabilitiesList, "taxLiabilitiesList");
         this.taxLiabilitiesList = Optional.ofNullable(taxLiabilitiesList);
         return this;
@@ -141,7 +141,7 @@ public class PutV1TaxLiabilitiesResponse implements AsyncResponse {
     /**
      * Example response
      */
-    public PutV1TaxLiabilitiesResponse withTaxLiabilitiesList(Optional<? extends List<List<TaxLiabilitiesSelections>>> taxLiabilitiesList) {
+    public PutV1TaxLiabilitiesResponse withTaxLiabilitiesList(Optional<? extends List<TaxLiabilitiesSelections>> taxLiabilitiesList) {
         Utils.checkNotNull(taxLiabilitiesList, "taxLiabilitiesList");
         this.taxLiabilitiesList = taxLiabilitiesList;
         return this;
@@ -188,7 +188,7 @@ public class PutV1TaxLiabilitiesResponse implements AsyncResponse {
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends List<List<TaxLiabilitiesSelections>>> taxLiabilitiesList = Optional.empty();
+        private Optional<? extends List<TaxLiabilitiesSelections>> taxLiabilitiesList = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -228,7 +228,7 @@ public class PutV1TaxLiabilitiesResponse implements AsyncResponse {
         /**
          * Example response
          */
-        public Builder taxLiabilitiesList(List<List<TaxLiabilitiesSelections>> taxLiabilitiesList) {
+        public Builder taxLiabilitiesList(List<TaxLiabilitiesSelections> taxLiabilitiesList) {
             Utils.checkNotNull(taxLiabilitiesList, "taxLiabilitiesList");
             this.taxLiabilitiesList = Optional.ofNullable(taxLiabilitiesList);
             return this;
@@ -237,7 +237,7 @@ public class PutV1TaxLiabilitiesResponse implements AsyncResponse {
         /**
          * Example response
          */
-        public Builder taxLiabilitiesList(Optional<? extends List<List<TaxLiabilitiesSelections>>> taxLiabilitiesList) {
+        public Builder taxLiabilitiesList(Optional<? extends List<TaxLiabilitiesSelections>> taxLiabilitiesList) {
             Utils.checkNotNull(taxLiabilitiesList, "taxLiabilitiesList");
             this.taxLiabilitiesList = taxLiabilitiesList;
             return this;

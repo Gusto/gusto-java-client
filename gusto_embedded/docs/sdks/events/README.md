@@ -10,32 +10,32 @@
 
 Fetch all events, going back up to 30 days, that your partner application has the required scopes for. Note that a partner does NOT have to have verified webhook subscriptions in order to utilize this endpoint.
 
-> 📘 System Access Authentication
->
-> This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+📘 System Access Authentication
+
+This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
 
 scope: `events:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-events" method="get" path="/v1/events" -->
+<!-- UsageSnippet language="java" operationID="get-events" method="get" path="/v1/events" example="Example" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.SortOrder;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
 
         GetEventsRequest req = GetEventsRequest.builder()
-                .sortOrder(SortOrder.ASC)
+                .sortOrder(QueryParamSortOrder.ASC)
                 .build();
 
         GetEventsResponse res = sdk.events().get()
@@ -46,7 +46,7 @@ public class Application {
                 .call();
 
         if (res.eventList().isPresent()) {
-            // handle response
+            System.out.println(res.eventList().get());
         }
     }
 }
@@ -65,6 +65,7 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |

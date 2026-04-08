@@ -35,24 +35,24 @@ public class GetV1CompaniesCompanyIdLocationsResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Success
      */
-    private Optional<? extends List<Location>> locationList;
+    private Optional<? extends List<Location>> companyLocationsList;
 
     @JsonCreator
     public GetV1CompaniesCompanyIdLocationsResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends List<Location>> locationList) {
+            Optional<? extends List<Location>> companyLocationsList) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(locationList, "locationList");
+        Utils.checkNotNull(companyLocationsList, "companyLocationsList");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.locationList = locationList;
+        this.companyLocationsList = companyLocationsList;
     }
     
     public GetV1CompaniesCompanyIdLocationsResponse(
@@ -88,12 +88,12 @@ public class GetV1CompaniesCompanyIdLocationsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Location>> locationList() {
-        return (Optional<List<Location>>) locationList;
+    public Optional<List<Location>> companyLocationsList() {
+        return (Optional<List<Location>>) companyLocationsList;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1CompaniesCompanyIdLocationsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Success
      */
-    public GetV1CompaniesCompanyIdLocationsResponse withLocationList(List<Location> locationList) {
-        Utils.checkNotNull(locationList, "locationList");
-        this.locationList = Optional.ofNullable(locationList);
+    public GetV1CompaniesCompanyIdLocationsResponse withCompanyLocationsList(List<Location> companyLocationsList) {
+        Utils.checkNotNull(companyLocationsList, "companyLocationsList");
+        this.companyLocationsList = Optional.ofNullable(companyLocationsList);
         return this;
     }
 
 
     /**
-     * Example response
+     * Success
      */
-    public GetV1CompaniesCompanyIdLocationsResponse withLocationList(Optional<? extends List<Location>> locationList) {
-        Utils.checkNotNull(locationList, "locationList");
-        this.locationList = locationList;
+    public GetV1CompaniesCompanyIdLocationsResponse withCompanyLocationsList(Optional<? extends List<Location>> companyLocationsList) {
+        Utils.checkNotNull(companyLocationsList, "companyLocationsList");
+        this.companyLocationsList = companyLocationsList;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1CompaniesCompanyIdLocationsResponse implements AsyncResponse {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.locationList, other.locationList);
+            Utils.enhancedDeepEquals(this.companyLocationsList, other.companyLocationsList);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            locationList);
+            companyLocationsList);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1CompaniesCompanyIdLocationsResponse implements AsyncResponse {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "locationList", locationList);
+                "companyLocationsList", companyLocationsList);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1CompaniesCompanyIdLocationsResponse implements AsyncResponse {
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends List<Location>> locationList = Optional.empty();
+        private Optional<? extends List<Location>> companyLocationsList = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1CompaniesCompanyIdLocationsResponse implements AsyncResponse {
 
 
         /**
-         * Example response
+         * Success
          */
-        public Builder locationList(List<Location> locationList) {
-            Utils.checkNotNull(locationList, "locationList");
-            this.locationList = Optional.ofNullable(locationList);
+        public Builder companyLocationsList(List<Location> companyLocationsList) {
+            Utils.checkNotNull(companyLocationsList, "companyLocationsList");
+            this.companyLocationsList = Optional.ofNullable(companyLocationsList);
             return this;
         }
 
         /**
-         * Example response
+         * Success
          */
-        public Builder locationList(Optional<? extends List<Location>> locationList) {
-            Utils.checkNotNull(locationList, "locationList");
-            this.locationList = locationList;
+        public Builder companyLocationsList(Optional<? extends List<Location>> companyLocationsList) {
+            Utils.checkNotNull(companyLocationsList, "companyLocationsList");
+            this.companyLocationsList = companyLocationsList;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1CompaniesCompanyIdLocationsResponse implements AsyncResponse {
 
             return new GetV1CompaniesCompanyIdLocationsResponse(
                 contentType, statusCode, rawResponse,
-                locationList);
+                companyLocationsList);
         }
 
     }

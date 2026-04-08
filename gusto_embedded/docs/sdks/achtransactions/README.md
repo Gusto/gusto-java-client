@@ -14,7 +14,7 @@ scope: `ach_transactions:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-ach-transactions" method="get" path="/v1/companies/{company_uuid}/ach_transactions" -->
+<!-- UsageSnippet language="java" operationID="get-ach-transactions" method="get" path="/v1/companies/{company_uuid}/ach_transactions" example="Example" -->
 ```java
 package hello.world;
 
@@ -40,7 +40,7 @@ public class Application {
                 .call();
 
         if (res.achTransactionList().isPresent()) {
-            // handle response
+            System.out.println(res.achTransactionList().get());
         }
     }
 }

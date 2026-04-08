@@ -16,29 +16,17 @@ import java.util.Optional;
 
 public class DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequestBuilder {
 
-    private String companyId;
-    private String bankAccountId;
     private Optional<? extends DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private String bankAccountId;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
-
-    public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequestBuilder bankAccountId(String bankAccountId) {
-        Utils.checkNotNull(bankAccountId, "bankAccountId");
-        this.bankAccountId = bankAccountId;
-        return this;
     }
                 
     public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequestBuilder xGustoAPIVersion(DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -53,15 +41,27 @@ public class DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequestBuilder {
         return this;
     }
 
+    public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
+    public DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequestBuilder bankAccountId(String bankAccountId) {
+        Utils.checkNotNull(bankAccountId, "bankAccountId");
+        this.bankAccountId = bankAccountId;
+        return this;
+    }
+
 
     private DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest request = new DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest(companyId,
-            bankAccountId,
-            xGustoAPIVersion);
+        DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest request = new DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest(xGustoAPIVersion,
+            companyId,
+            bankAccountId);
 
         return request;
     }

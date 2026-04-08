@@ -34,7 +34,7 @@ public class GetV1CompanyOnboardingStatusResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Success
      */
     private Optional<? extends CompanyOnboardingStatus> companyOnboardingStatus;
 
@@ -87,7 +87,7 @@ public class GetV1CompanyOnboardingStatusResponse implements Response {
     }
 
     /**
-     * Example response
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1CompanyOnboardingStatusResponse implements Response {
     }
 
     /**
-     * Example response
+     * Success
      */
     public GetV1CompanyOnboardingStatusResponse withCompanyOnboardingStatus(CompanyOnboardingStatus companyOnboardingStatus) {
         Utils.checkNotNull(companyOnboardingStatus, "companyOnboardingStatus");
@@ -138,7 +138,7 @@ public class GetV1CompanyOnboardingStatusResponse implements Response {
 
 
     /**
-     * Example response
+     * Success
      */
     public GetV1CompanyOnboardingStatusResponse withCompanyOnboardingStatus(Optional<? extends CompanyOnboardingStatus> companyOnboardingStatus) {
         Utils.checkNotNull(companyOnboardingStatus, "companyOnboardingStatus");
@@ -225,7 +225,7 @@ public class GetV1CompanyOnboardingStatusResponse implements Response {
 
 
         /**
-         * Example response
+         * Success
          */
         public Builder companyOnboardingStatus(CompanyOnboardingStatus companyOnboardingStatus) {
             Utils.checkNotNull(companyOnboardingStatus, "companyOnboardingStatus");
@@ -234,7 +234,7 @@ public class GetV1CompanyOnboardingStatusResponse implements Response {
         }
 
         /**
-         * Example response
+         * Success
          */
         public Builder companyOnboardingStatus(Optional<? extends CompanyOnboardingStatus> companyOnboardingStatus) {
             Utils.checkNotNull(companyOnboardingStatus, "companyOnboardingStatus");

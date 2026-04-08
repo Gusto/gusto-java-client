@@ -13,9 +13,17 @@ import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class Hourly {
+    /**
+     * The UUID of the hourly compensation rate.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("uuid")
+    private JsonNullable<String> uuid;
+
     /**
      * The name of the hourly compensation rate.
      */
@@ -32,16 +40,27 @@ public class Hourly {
 
     @JsonCreator
     public Hourly(
+            @JsonProperty("uuid") JsonNullable<String> uuid,
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("multiple") Optional<Double> multiple) {
+        Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(multiple, "multiple");
+        this.uuid = uuid;
         this.name = name;
         this.multiple = multiple;
     }
     
     public Hourly() {
-        this(Optional.empty(), Optional.empty());
+        this(JsonNullable.undefined(), Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * The UUID of the hourly compensation rate.
+     */
+    @JsonIgnore
+    public JsonNullable<String> uuid() {
+        return uuid;
     }
 
     /**
@@ -64,6 +83,24 @@ public class Hourly {
         return new Builder();
     }
 
+
+    /**
+     * The UUID of the hourly compensation rate.
+     */
+    public Hourly withUuid(String uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = JsonNullable.of(uuid);
+        return this;
+    }
+
+    /**
+     * The UUID of the hourly compensation rate.
+     */
+    public Hourly withUuid(JsonNullable<String> uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = uuid;
+        return this;
+    }
 
     /**
      * The name of the hourly compensation rate.
@@ -113,6 +150,7 @@ public class Hourly {
         }
         Hourly other = (Hourly) o;
         return 
+            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.multiple, other.multiple);
     }
@@ -120,12 +158,13 @@ public class Hourly {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name, multiple);
+            uuid, name, multiple);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Hourly.class,
+                "uuid", uuid,
                 "name", name,
                 "multiple", multiple);
     }
@@ -133,12 +172,33 @@ public class Hourly {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private JsonNullable<String> uuid = JsonNullable.undefined();
+
         private Optional<String> name = Optional.empty();
 
         private Optional<Double> multiple = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * The UUID of the hourly compensation rate.
+         */
+        public Builder uuid(String uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = JsonNullable.of(uuid);
+            return this;
+        }
+
+        /**
+         * The UUID of the hourly compensation rate.
+         */
+        public Builder uuid(JsonNullable<String> uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = uuid;
+            return this;
         }
 
 
@@ -182,7 +242,7 @@ public class Hourly {
         public Hourly build() {
 
             return new Hourly(
-                name, multiple);
+                uuid, name, multiple);
         }
 
     }

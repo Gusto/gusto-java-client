@@ -5,7 +5,7 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation;
 
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentUrlRequest;
 import com.gusto.embedded_api.models.operations.async.GetV1CompaniesAttachmentUrlRequestBuilder;
 import com.gusto.embedded_api.models.operations.async.GetV1CompaniesAttachmentUrlResponse;
@@ -39,10 +39,14 @@ public class AsyncCompanyAttachment {
     /**
      * Get a temporary url to download the Company Attachment file
      * 
-     * <p>Retrieve a temporary url to download a attachment file uploaded
-     * by the company.
+     * <p>Retrieve a temporary url to download an attachment file uploaded by the company.
+     * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
      * 
      * <p>scope: `company_attachments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -53,41 +57,49 @@ public class AsyncCompanyAttachment {
     /**
      * Get a temporary url to download the Company Attachment file
      * 
-     * <p>Retrieve a temporary url to download a attachment file uploaded
-     * by the company.
+     * <p>Retrieve a temporary url to download an attachment file uploaded by the company.
+     * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
      * 
      * <p>scope: `company_attachments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @param companyAttachmentUuid The UUID of the company attachment
      * @return {@code CompletableFuture<GetV1CompaniesAttachmentUrlResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesAttachmentUrlResponse> getDownloadUrl(String companyId, String companyAttachmentUuid) {
-        return getDownloadUrl(companyId, companyAttachmentUuid, Optional.empty());
+        return getDownloadUrl(Optional.empty(), companyId, companyAttachmentUuid);
     }
 
     /**
      * Get a temporary url to download the Company Attachment file
      * 
-     * <p>Retrieve a temporary url to download a attachment file uploaded
-     * by the company.
+     * <p>Retrieve a temporary url to download an attachment file uploaded by the company.
+     * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
      * 
      * <p>scope: `company_attachments:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param companyAttachmentUuid The UUID of the company attachment
-     * @param xGustoAPIVersion 
      * @return {@code CompletableFuture<GetV1CompaniesAttachmentUrlResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesAttachmentUrlResponse> getDownloadUrl(
-            String companyId, String companyAttachmentUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String companyAttachmentUuid) {
         GetV1CompaniesAttachmentUrlRequest request =
             GetV1CompaniesAttachmentUrlRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .companyAttachmentUuid(companyAttachmentUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         AsyncRequestOperation<GetV1CompaniesAttachmentUrlRequest, GetV1CompaniesAttachmentUrlResponse> operation
               = new GetV1CompaniesAttachmentUrl.Async(sdkConfiguration, _headers);

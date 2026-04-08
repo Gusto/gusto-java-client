@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.CompanyBankAccountVerifyRequest;
 import com.gusto.embedded_api.operations.PutV1CompaniesCompanyIdBankAccountsVerify;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,23 +17,29 @@ import java.util.Optional;
 
 public class PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder {
 
-    private String bankAccountUuid;
-    private String companyId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody requestBody;
+                            new TypeReference<Optional<? extends PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private String bankAccountUuid;
+    private CompanyBankAccountVerifyRequest companyBankAccountVerifyRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+                
+    public PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder xGustoAPIVersion(PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
 
-    public PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder bankAccountUuid(String bankAccountUuid) {
-        Utils.checkNotNull(bankAccountUuid, "bankAccountUuid");
-        this.bankAccountUuid = bankAccountUuid;
+    public PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder xGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
@@ -42,22 +48,16 @@ public class PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder {
         this.companyId = companyId;
         return this;
     }
-                
-    public PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+
+    public PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder bankAccountUuid(String bankAccountUuid) {
+        Utils.checkNotNull(bankAccountUuid, "bankAccountUuid");
+        this.bankAccountUuid = bankAccountUuid;
         return this;
     }
 
-    public PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder requestBody(PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder companyBankAccountVerifyRequest(CompanyBankAccountVerifyRequest companyBankAccountVerifyRequest) {
+        Utils.checkNotNull(companyBankAccountVerifyRequest, "companyBankAccountVerifyRequest");
+        this.companyBankAccountVerifyRequest = companyBankAccountVerifyRequest;
         return this;
     }
 
@@ -67,10 +67,10 @@ public class PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompaniesCompanyIdBankAccountsVerifyRequest request = new PutV1CompaniesCompanyIdBankAccountsVerifyRequest(bankAccountUuid,
+        PutV1CompaniesCompanyIdBankAccountsVerifyRequest request = new PutV1CompaniesCompanyIdBankAccountsVerifyRequest(xGustoAPIVersion,
             companyId,
-            xGustoAPIVersion,
-            requestBody);
+            bankAccountUuid,
+            companyBankAccountVerifyRequest);
 
         return request;
     }
@@ -84,9 +84,9 @@ public class PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion>>() {});
 }

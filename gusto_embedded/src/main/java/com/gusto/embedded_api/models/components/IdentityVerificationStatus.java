@@ -8,17 +8,6 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * IdentityVerificationStatus
- * 
- * <p>|   |   |
- * |---|---|
- * |__Status__| __Description__ |
- * | Pass | Signatory can sign all forms |
- * | Fail | Signatory cannot sign forms |
- * | Skipped | Signatory cannot sign Form 8655 until the form is manually uploaded as wet-signed |
- * | null | Identity verification process has not been completed |
- */
 public enum IdentityVerificationStatus {
     PASS("Pass"),
     FAIL("Fail"),

@@ -5,8 +5,8 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
+import com.gusto.embedded_api.models.components.PayrollCalculateAccruingTimeOffHoursRequest;
 import com.gusto.embedded_api.models.components.TimeOffPolicyRequest;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidTimeOffPoliciesRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder;
@@ -19,8 +19,8 @@ import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidTimeOf
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidTimeOffPoliciesRequest;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidTimeOffPoliciesResponse;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest;
-import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody;
 import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBuilder;
 import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse;
 import com.gusto.embedded_api.models.operations.PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVersion;
@@ -86,15 +86,18 @@ public class TimeOffPolicies {
      * <p>Returns a list of accruing time off for each time off policy associated with the employee.
      * 
      * <p>Factors affecting the accrued hours:
-     * * the time off policy accrual method (whether they get pay per hour worked, per hour paid, with /
+     * 
+     * <p>- the time off policy accrual method (whether they get pay per hour worked, per hour paid, with /
      * without overtime, accumulate time off based on pay period / calendar year / anniversary)
-     * * how many hours of work during this pay period
-     * * how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
-     * * company pay schedule frequency (for per pay period)
+     * - how many hours of work during this pay period
+     * - how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
+     * - company pay schedule frequency (for per pay period)
      * 
      * <p>If none of the parameters is passed in, the accrued time off hour will be 0.
      * 
      * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -108,27 +111,27 @@ public class TimeOffPolicies {
      * <p>Returns a list of accruing time off for each time off policy associated with the employee.
      * 
      * <p>Factors affecting the accrued hours:
-     * * the time off policy accrual method (whether they get pay per hour worked, per hour paid, with /
+     * 
+     * <p>- the time off policy accrual method (whether they get pay per hour worked, per hour paid, with /
      * without overtime, accumulate time off based on pay period / calendar year / anniversary)
-     * * how many hours of work during this pay period
-     * * how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
-     * * company pay schedule frequency (for per pay period)
+     * - how many hours of work during this pay period
+     * - how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
+     * - company pay schedule frequency (for per pay period)
      * 
      * <p>If none of the parameters is passed in, the accrued time off hour will be 0.
      * 
      * <p>scope: `payrolls:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param payrollId The UUID of the payroll
      * @param employeeId The UUID of the employee
-     * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse calculateAccruingTimeOffHours(
-            String payrollId, String employeeId,
-            PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody requestBody) {
-        return calculateAccruingTimeOffHours(payrollId, employeeId, Optional.empty(),
-            requestBody);
+    public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse calculateAccruingTimeOffHours(String payrollId, String employeeId) {
+        return calculateAccruingTimeOffHours(Optional.empty(), payrollId, employeeId,
+            Optional.empty());
     }
 
     /**
@@ -137,33 +140,36 @@ public class TimeOffPolicies {
      * <p>Returns a list of accruing time off for each time off policy associated with the employee.
      * 
      * <p>Factors affecting the accrued hours:
-     * * the time off policy accrual method (whether they get pay per hour worked, per hour paid, with /
+     * 
+     * <p>- the time off policy accrual method (whether they get pay per hour worked, per hour paid, with /
      * without overtime, accumulate time off based on pay period / calendar year / anniversary)
-     * * how many hours of work during this pay period
-     * * how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
-     * * company pay schedule frequency (for per pay period)
+     * - how many hours of work during this pay period
+     * - how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
+     * - company pay schedule frequency (for per pay period)
      * 
      * <p>If none of the parameters is passed in, the accrued time off hour will be 0.
      * 
      * <p>scope: `payrolls:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param payrollId The UUID of the payroll
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param payrollCalculateAccruingTimeOffHoursRequest Request body for calculating accruing time off hours
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse calculateAccruingTimeOffHours(
-            String payrollId, String employeeId,
-            Optional<? extends VersionHeader> xGustoAPIVersion, PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody requestBody) {
+            Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollId,
+            String employeeId, Optional<? extends PayrollCalculateAccruingTimeOffHoursRequest> payrollCalculateAccruingTimeOffHoursRequest) {
         PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest request =
             PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .payrollId(payrollId)
                 .employeeId(employeeId)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .payrollCalculateAccruingTimeOffHoursRequest(payrollCalculateAccruingTimeOffHoursRequest)
                 .build();
         RequestOperation<PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest, PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse> operation
               = new PostV1PayrollsPayrollIdCalculateAccruingTimeOffHours.Sync(sdkConfiguration, _headers);
@@ -177,6 +183,8 @@ public class TimeOffPolicies {
      * 
      * <p>scope: `time_off_policies:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public GetV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder get() {
@@ -189,6 +197,8 @@ public class TimeOffPolicies {
      * <p>Get a time off policy
      * 
      * <p>scope: `time_off_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param timeOffPolicyUuid The UUID of the time off policy
      * @return The response from the API call
@@ -204,6 +214,8 @@ public class TimeOffPolicies {
      * <p>Get a time off policy
      * 
      * <p>scope: `time_off_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param timeOffPolicyUuid The UUID of the time off policy
@@ -229,6 +241,8 @@ public class TimeOffPolicies {
      * 
      * <p>scope: `time_off_policies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder update() {
@@ -241,6 +255,8 @@ public class TimeOffPolicies {
      * <p>Update a time off policy
      * 
      * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param timeOffPolicyUuid The UUID of the time off policy
      * @param requestBody Request body for updating a time off policy
@@ -257,6 +273,8 @@ public class TimeOffPolicies {
      * <p>Update a time off policy
      * 
      * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param timeOffPolicyUuid The UUID of the time off policy
@@ -286,6 +304,8 @@ public class TimeOffPolicies {
      * 
      * <p>scope: `time_off_policies:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder getAll() {
@@ -298,6 +318,8 @@ public class TimeOffPolicies {
      * <p>Get all time off policies for a company
      * 
      * <p>scope: `time_off_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @return The response from the API call
@@ -313,6 +335,8 @@ public class TimeOffPolicies {
      * <p>Get all time off policies for a company
      * 
      * <p>scope: `time_off_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
@@ -338,6 +362,8 @@ public class TimeOffPolicies {
      * 
      * <p>scope: `time_off_policies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder create() {
@@ -350,6 +376,8 @@ public class TimeOffPolicies {
      * <p>Create a time off policy
      * 
      * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @param timeOffPolicyRequest Request body for creating a time off policy
@@ -366,6 +394,8 @@ public class TimeOffPolicies {
      * <p>Create a time off policy
      * 
      * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
@@ -396,6 +426,8 @@ public class TimeOffPolicies {
      * 
      * <p>scope: `time_off_policies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBuilder addEmployees() {
@@ -409,6 +441,8 @@ public class TimeOffPolicies {
      * time off policy. Accepts starting balances for non-unlimited policies
      * 
      * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param timeOffPolicyUuid The UUID of the time off policy
      * @param requestBody 
@@ -426,6 +460,8 @@ public class TimeOffPolicies {
      * time off policy. Accepts starting balances for non-unlimited policies
      * 
      * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param timeOffPolicyUuid The UUID of the time off policy
@@ -455,6 +491,8 @@ public class TimeOffPolicies {
      * 
      * <p>scope: `time_off_policies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBuilder removeEmployees() {
@@ -467,6 +505,8 @@ public class TimeOffPolicies {
      * <p>Remove employees from a time off policy
      * 
      * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param timeOffPolicyUuid The UUID of the time off policy
      * @param requestBody 
@@ -483,6 +523,8 @@ public class TimeOffPolicies {
      * <p>Remove employees from a time off policy
      * 
      * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param timeOffPolicyUuid The UUID of the time off policy
@@ -512,6 +554,8 @@ public class TimeOffPolicies {
      * 
      * <p>scope: `time_off_policies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBuilder updateBalance() {
@@ -524,6 +568,8 @@ public class TimeOffPolicies {
      * <p>Updates time off hours balances for employees for a time off policy.
      * 
      * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param timeOffPolicyUuid The UUID of the time off policy
      * @param requestBody 
@@ -540,6 +586,8 @@ public class TimeOffPolicies {
      * <p>Updates time off hours balances for employees for a time off policy.
      * 
      * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param timeOffPolicyUuid The UUID of the time off policy
@@ -569,6 +617,8 @@ public class TimeOffPolicies {
      * 
      * <p>scope: `time_off_policies:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequestBuilder deactivate() {
@@ -581,6 +631,8 @@ public class TimeOffPolicies {
      * <p>Deactivate a time off policy
      * 
      * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param timeOffPolicyUuid The UUID of the time off policy
      * @return The response from the API call
@@ -596,6 +648,8 @@ public class TimeOffPolicies {
      * <p>Deactivate a time off policy
      * 
      * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param timeOffPolicyUuid The UUID of the time off policy

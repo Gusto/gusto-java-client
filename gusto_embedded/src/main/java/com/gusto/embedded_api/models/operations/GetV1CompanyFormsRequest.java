@@ -6,7 +6,6 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.CompanyFormsSortBy;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
@@ -25,10 +24,11 @@ public class GetV1CompanyFormsRequest {
     private String companyId;
 
     /**
-     * Sort company forms. Options: name, year, quarter, draft, document_content_type
+     * Sort company forms. Options: name, year, quarter, draft, document_content_type, created_at
+     * (optionally with :asc or :desc suffix)
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort_by")
-    private Optional<? extends CompanyFormsSortBy> sortBy;
+    private Optional<String> sortBy;
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -41,7 +41,7 @@ public class GetV1CompanyFormsRequest {
     @JsonCreator
     public GetV1CompanyFormsRequest(
             String companyId,
-            Optional<? extends CompanyFormsSortBy> sortBy,
+            Optional<String> sortBy,
             Optional<? extends VersionHeader> xGustoAPIVersion) {
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(sortBy, "sortBy");
@@ -65,12 +65,12 @@ public class GetV1CompanyFormsRequest {
     }
 
     /**
-     * Sort company forms. Options: name, year, quarter, draft, document_content_type
+     * Sort company forms. Options: name, year, quarter, draft, document_content_type, created_at
+     * (optionally with :asc or :desc suffix)
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<CompanyFormsSortBy> sortBy() {
-        return (Optional<CompanyFormsSortBy>) sortBy;
+    public Optional<String> sortBy() {
+        return sortBy;
     }
 
     /**
@@ -99,9 +99,10 @@ public class GetV1CompanyFormsRequest {
     }
 
     /**
-     * Sort company forms. Options: name, year, quarter, draft, document_content_type
+     * Sort company forms. Options: name, year, quarter, draft, document_content_type, created_at
+     * (optionally with :asc or :desc suffix)
      */
-    public GetV1CompanyFormsRequest withSortBy(CompanyFormsSortBy sortBy) {
+    public GetV1CompanyFormsRequest withSortBy(String sortBy) {
         Utils.checkNotNull(sortBy, "sortBy");
         this.sortBy = Optional.ofNullable(sortBy);
         return this;
@@ -109,9 +110,10 @@ public class GetV1CompanyFormsRequest {
 
 
     /**
-     * Sort company forms. Options: name, year, quarter, draft, document_content_type
+     * Sort company forms. Options: name, year, quarter, draft, document_content_type, created_at
+     * (optionally with :asc or :desc suffix)
      */
-    public GetV1CompanyFormsRequest withSortBy(Optional<? extends CompanyFormsSortBy> sortBy) {
+    public GetV1CompanyFormsRequest withSortBy(Optional<String> sortBy) {
         Utils.checkNotNull(sortBy, "sortBy");
         this.sortBy = sortBy;
         return this;
@@ -174,7 +176,7 @@ public class GetV1CompanyFormsRequest {
 
         private String companyId;
 
-        private Optional<? extends CompanyFormsSortBy> sortBy = Optional.empty();
+        private Optional<String> sortBy = Optional.empty();
 
         private Optional<? extends VersionHeader> xGustoAPIVersion;
 
@@ -194,18 +196,20 @@ public class GetV1CompanyFormsRequest {
 
 
         /**
-         * Sort company forms. Options: name, year, quarter, draft, document_content_type
+         * Sort company forms. Options: name, year, quarter, draft, document_content_type, created_at
+         * (optionally with :asc or :desc suffix)
          */
-        public Builder sortBy(CompanyFormsSortBy sortBy) {
+        public Builder sortBy(String sortBy) {
             Utils.checkNotNull(sortBy, "sortBy");
             this.sortBy = Optional.ofNullable(sortBy);
             return this;
         }
 
         /**
-         * Sort company forms. Options: name, year, quarter, draft, document_content_type
+         * Sort company forms. Options: name, year, quarter, draft, document_content_type, created_at
+         * (optionally with :asc or :desc suffix)
          */
-        public Builder sortBy(Optional<? extends CompanyFormsSortBy> sortBy) {
+        public Builder sortBy(Optional<String> sortBy) {
             Utils.checkNotNull(sortBy, "sortBy");
             this.sortBy = sortBy;
             return this;

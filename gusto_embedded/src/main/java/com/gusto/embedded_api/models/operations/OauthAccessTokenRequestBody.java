@@ -25,12 +25,12 @@ public class OauthAccessTokenRequestBody {
         this.value = value;
     }
 
-    public static OauthAccessTokenRequestBody of(One value) {
+    public static OauthAccessTokenRequestBody of(RefreshTokenRequest value) {
         Utils.checkNotNull(value, "value");
         return new OauthAccessTokenRequestBody(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
-    public static OauthAccessTokenRequestBody of(RequestBody2 value) {
+    public static OauthAccessTokenRequestBody of(SystemAccessTokenRequest value) {
         Utils.checkNotNull(value, "value");
         return new OauthAccessTokenRequestBody(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
@@ -38,8 +38,8 @@ public class OauthAccessTokenRequestBody {
     /**
      * Returns an instance of one of these types:
      * <ul>
-     * <li>{@code com.gusto.embedded_api.models.operations.One}</li>
-     * <li>{@code com.gusto.embedded_api.models.operations.RequestBody2}</li>
+     * <li>{@code com.gusto.embedded_api.models.operations.RefreshTokenRequest}</li>
+     * <li>{@code com.gusto.embedded_api.models.operations.SystemAccessTokenRequest}</li>
      * </ul>
      * 
      * <p>Use {@code instanceof} to determine what type is returned. For example:
@@ -79,8 +79,8 @@ public class OauthAccessTokenRequestBody {
 
         public _Deserializer() {
             super(OauthAccessTokenRequestBody.class, false,
-                  TypeReferenceWithShape.of(new TypeReference<One>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<RequestBody2>() {}, JsonShape.DEFAULT));
+                  TypeReferenceWithShape.of(new TypeReference<RefreshTokenRequest>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<SystemAccessTokenRequest>() {}, JsonShape.DEFAULT));
         }
     }
     

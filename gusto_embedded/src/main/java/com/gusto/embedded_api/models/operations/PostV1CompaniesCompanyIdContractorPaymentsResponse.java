@@ -34,7 +34,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentsResponse implements Respo
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * successful
      */
     private Optional<? extends ContractorPayment> contractorPayment;
 
@@ -87,7 +87,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentsResponse implements Respo
     }
 
     /**
-     * Example response
+     * successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentsResponse implements Respo
     }
 
     /**
-     * Example response
+     * successful
      */
     public PostV1CompaniesCompanyIdContractorPaymentsResponse withContractorPayment(ContractorPayment contractorPayment) {
         Utils.checkNotNull(contractorPayment, "contractorPayment");
@@ -138,7 +138,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentsResponse implements Respo
 
 
     /**
-     * Example response
+     * successful
      */
     public PostV1CompaniesCompanyIdContractorPaymentsResponse withContractorPayment(Optional<? extends ContractorPayment> contractorPayment) {
         Utils.checkNotNull(contractorPayment, "contractorPayment");
@@ -225,7 +225,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentsResponse implements Respo
 
 
         /**
-         * Example response
+         * successful
          */
         public Builder contractorPayment(ContractorPayment contractorPayment) {
             Utils.checkNotNull(contractorPayment, "contractorPayment");
@@ -234,7 +234,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentsResponse implements Respo
         }
 
         /**
-         * Example response
+         * successful
          */
         public Builder contractorPayment(Optional<? extends ContractorPayment> contractorPayment) {
             Utils.checkNotNull(contractorPayment, "contractorPayment");

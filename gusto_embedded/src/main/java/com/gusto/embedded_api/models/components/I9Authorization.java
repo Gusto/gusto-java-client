@@ -13,7 +13,7 @@ import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * I9Authorization
@@ -33,7 +33,7 @@ public class I9Authorization {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("form_uuid")
-    private Optional<String> formUuid;
+    private JsonNullable<String> formUuid;
 
     /**
      * The current version of the object. See the [versioning
@@ -54,28 +54,28 @@ public class I9Authorization {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("document_type")
-    private Optional<? extends I9AuthorizationDocumentType> documentType;
+    private JsonNullable<? extends I9AuthorizationDocumentType> documentType;
 
     /**
      * Whether or not a `document_number` exists for this document.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("has_document_number")
-    private Optional<Boolean> hasDocumentNumber;
+    private JsonNullable<Boolean> hasDocumentNumber;
 
     /**
      * The document's expiration date
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiration_date")
-    private Optional<String> expirationDate;
+    private JsonNullable<String> expirationDate;
 
     /**
      * The document's country of issuance
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("country")
-    private Optional<String> country;
+    private JsonNullable<String> country;
 
     /**
      * Whether the employer has signed the Form I-9
@@ -94,29 +94,29 @@ public class I9Authorization {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("additional_info")
-    private Optional<String> additionalInfo;
+    private JsonNullable<String> additionalInfo;
 
     /**
      * Whether an alternative procedure authorized by DHS to examine documents was used
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("alt_procedure")
-    private Optional<Boolean> altProcedure;
+    private JsonNullable<Boolean> altProcedure;
 
     @JsonCreator
     public I9Authorization(
             @JsonProperty("uuid") String uuid,
-            @JsonProperty("form_uuid") Optional<String> formUuid,
+            @JsonProperty("form_uuid") JsonNullable<String> formUuid,
             @JsonProperty("version") String version,
             @JsonProperty("authorization_status") AuthorizationStatus authorizationStatus,
-            @JsonProperty("document_type") Optional<? extends I9AuthorizationDocumentType> documentType,
-            @JsonProperty("has_document_number") Optional<Boolean> hasDocumentNumber,
-            @JsonProperty("expiration_date") Optional<String> expirationDate,
-            @JsonProperty("country") Optional<String> country,
+            @JsonProperty("document_type") JsonNullable<? extends I9AuthorizationDocumentType> documentType,
+            @JsonProperty("has_document_number") JsonNullable<Boolean> hasDocumentNumber,
+            @JsonProperty("expiration_date") JsonNullable<String> expirationDate,
+            @JsonProperty("country") JsonNullable<String> country,
             @JsonProperty("employer_signed") boolean employerSigned,
             @JsonProperty("employee_signed") boolean employeeSigned,
-            @JsonProperty("additional_info") Optional<String> additionalInfo,
-            @JsonProperty("alt_procedure") Optional<Boolean> altProcedure) {
+            @JsonProperty("additional_info") JsonNullable<String> additionalInfo,
+            @JsonProperty("alt_procedure") JsonNullable<Boolean> altProcedure) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(formUuid, "formUuid");
         Utils.checkNotNull(version, "version");
@@ -149,10 +149,10 @@ public class I9Authorization {
             AuthorizationStatus authorizationStatus,
             boolean employerSigned,
             boolean employeeSigned) {
-        this(uuid, Optional.empty(), version,
-            authorizationStatus, Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), employerSigned,
-            employeeSigned, Optional.empty(), Optional.empty());
+        this(uuid, JsonNullable.undefined(), version,
+            authorizationStatus, JsonNullable.undefined(), JsonNullable.undefined(),
+            JsonNullable.undefined(), JsonNullable.undefined(), employerSigned,
+            employeeSigned, JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
@@ -168,7 +168,7 @@ public class I9Authorization {
      * endpoints.
      */
     @JsonIgnore
-    public Optional<String> formUuid() {
+    public JsonNullable<String> formUuid() {
         return formUuid;
     }
 
@@ -195,15 +195,15 @@ public class I9Authorization {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<I9AuthorizationDocumentType> documentType() {
-        return (Optional<I9AuthorizationDocumentType>) documentType;
+    public JsonNullable<I9AuthorizationDocumentType> documentType() {
+        return (JsonNullable<I9AuthorizationDocumentType>) documentType;
     }
 
     /**
      * Whether or not a `document_number` exists for this document.
      */
     @JsonIgnore
-    public Optional<Boolean> hasDocumentNumber() {
+    public JsonNullable<Boolean> hasDocumentNumber() {
         return hasDocumentNumber;
     }
 
@@ -211,7 +211,7 @@ public class I9Authorization {
      * The document's expiration date
      */
     @JsonIgnore
-    public Optional<String> expirationDate() {
+    public JsonNullable<String> expirationDate() {
         return expirationDate;
     }
 
@@ -219,7 +219,7 @@ public class I9Authorization {
      * The document's country of issuance
      */
     @JsonIgnore
-    public Optional<String> country() {
+    public JsonNullable<String> country() {
         return country;
     }
 
@@ -243,7 +243,7 @@ public class I9Authorization {
      * Any additional notes
      */
     @JsonIgnore
-    public Optional<String> additionalInfo() {
+    public JsonNullable<String> additionalInfo() {
         return additionalInfo;
     }
 
@@ -251,7 +251,7 @@ public class I9Authorization {
      * Whether an alternative procedure authorized by DHS to examine documents was used
      */
     @JsonIgnore
-    public Optional<Boolean> altProcedure() {
+    public JsonNullable<Boolean> altProcedure() {
         return altProcedure;
     }
 
@@ -275,16 +275,15 @@ public class I9Authorization {
      */
     public I9Authorization withFormUuid(String formUuid) {
         Utils.checkNotNull(formUuid, "formUuid");
-        this.formUuid = Optional.ofNullable(formUuid);
+        this.formUuid = JsonNullable.of(formUuid);
         return this;
     }
-
 
     /**
      * The UUID of the Form associated with this I-9 authorization. Use this with "Employee Forms" API
      * endpoints.
      */
-    public I9Authorization withFormUuid(Optional<String> formUuid) {
+    public I9Authorization withFormUuid(JsonNullable<String> formUuid) {
         Utils.checkNotNull(formUuid, "formUuid");
         this.formUuid = formUuid;
         return this;
@@ -315,15 +314,14 @@ public class I9Authorization {
      */
     public I9Authorization withDocumentType(I9AuthorizationDocumentType documentType) {
         Utils.checkNotNull(documentType, "documentType");
-        this.documentType = Optional.ofNullable(documentType);
+        this.documentType = JsonNullable.of(documentType);
         return this;
     }
-
 
     /**
      * The document's document type
      */
-    public I9Authorization withDocumentType(Optional<? extends I9AuthorizationDocumentType> documentType) {
+    public I9Authorization withDocumentType(JsonNullable<? extends I9AuthorizationDocumentType> documentType) {
         Utils.checkNotNull(documentType, "documentType");
         this.documentType = documentType;
         return this;
@@ -334,15 +332,14 @@ public class I9Authorization {
      */
     public I9Authorization withHasDocumentNumber(boolean hasDocumentNumber) {
         Utils.checkNotNull(hasDocumentNumber, "hasDocumentNumber");
-        this.hasDocumentNumber = Optional.ofNullable(hasDocumentNumber);
+        this.hasDocumentNumber = JsonNullable.of(hasDocumentNumber);
         return this;
     }
-
 
     /**
      * Whether or not a `document_number` exists for this document.
      */
-    public I9Authorization withHasDocumentNumber(Optional<Boolean> hasDocumentNumber) {
+    public I9Authorization withHasDocumentNumber(JsonNullable<Boolean> hasDocumentNumber) {
         Utils.checkNotNull(hasDocumentNumber, "hasDocumentNumber");
         this.hasDocumentNumber = hasDocumentNumber;
         return this;
@@ -353,15 +350,14 @@ public class I9Authorization {
      */
     public I9Authorization withExpirationDate(String expirationDate) {
         Utils.checkNotNull(expirationDate, "expirationDate");
-        this.expirationDate = Optional.ofNullable(expirationDate);
+        this.expirationDate = JsonNullable.of(expirationDate);
         return this;
     }
-
 
     /**
      * The document's expiration date
      */
-    public I9Authorization withExpirationDate(Optional<String> expirationDate) {
+    public I9Authorization withExpirationDate(JsonNullable<String> expirationDate) {
         Utils.checkNotNull(expirationDate, "expirationDate");
         this.expirationDate = expirationDate;
         return this;
@@ -372,15 +368,14 @@ public class I9Authorization {
      */
     public I9Authorization withCountry(String country) {
         Utils.checkNotNull(country, "country");
-        this.country = Optional.ofNullable(country);
+        this.country = JsonNullable.of(country);
         return this;
     }
-
 
     /**
      * The document's country of issuance
      */
-    public I9Authorization withCountry(Optional<String> country) {
+    public I9Authorization withCountry(JsonNullable<String> country) {
         Utils.checkNotNull(country, "country");
         this.country = country;
         return this;
@@ -409,15 +404,14 @@ public class I9Authorization {
      */
     public I9Authorization withAdditionalInfo(String additionalInfo) {
         Utils.checkNotNull(additionalInfo, "additionalInfo");
-        this.additionalInfo = Optional.ofNullable(additionalInfo);
+        this.additionalInfo = JsonNullable.of(additionalInfo);
         return this;
     }
-
 
     /**
      * Any additional notes
      */
-    public I9Authorization withAdditionalInfo(Optional<String> additionalInfo) {
+    public I9Authorization withAdditionalInfo(JsonNullable<String> additionalInfo) {
         Utils.checkNotNull(additionalInfo, "additionalInfo");
         this.additionalInfo = additionalInfo;
         return this;
@@ -428,15 +422,14 @@ public class I9Authorization {
      */
     public I9Authorization withAltProcedure(boolean altProcedure) {
         Utils.checkNotNull(altProcedure, "altProcedure");
-        this.altProcedure = Optional.ofNullable(altProcedure);
+        this.altProcedure = JsonNullable.of(altProcedure);
         return this;
     }
-
 
     /**
      * Whether an alternative procedure authorized by DHS to examine documents was used
      */
-    public I9Authorization withAltProcedure(Optional<Boolean> altProcedure) {
+    public I9Authorization withAltProcedure(JsonNullable<Boolean> altProcedure) {
         Utils.checkNotNull(altProcedure, "altProcedure");
         this.altProcedure = altProcedure;
         return this;
@@ -497,27 +490,27 @@ public class I9Authorization {
 
         private String uuid;
 
-        private Optional<String> formUuid = Optional.empty();
+        private JsonNullable<String> formUuid = JsonNullable.undefined();
 
         private String version;
 
         private AuthorizationStatus authorizationStatus;
 
-        private Optional<? extends I9AuthorizationDocumentType> documentType = Optional.empty();
+        private JsonNullable<? extends I9AuthorizationDocumentType> documentType = JsonNullable.undefined();
 
-        private Optional<Boolean> hasDocumentNumber = Optional.empty();
+        private JsonNullable<Boolean> hasDocumentNumber = JsonNullable.undefined();
 
-        private Optional<String> expirationDate = Optional.empty();
+        private JsonNullable<String> expirationDate = JsonNullable.undefined();
 
-        private Optional<String> country = Optional.empty();
+        private JsonNullable<String> country = JsonNullable.undefined();
 
         private Boolean employerSigned;
 
         private Boolean employeeSigned;
 
-        private Optional<String> additionalInfo = Optional.empty();
+        private JsonNullable<String> additionalInfo = JsonNullable.undefined();
 
-        private Optional<Boolean> altProcedure = Optional.empty();
+        private JsonNullable<Boolean> altProcedure = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -540,7 +533,7 @@ public class I9Authorization {
          */
         public Builder formUuid(String formUuid) {
             Utils.checkNotNull(formUuid, "formUuid");
-            this.formUuid = Optional.ofNullable(formUuid);
+            this.formUuid = JsonNullable.of(formUuid);
             return this;
         }
 
@@ -548,7 +541,7 @@ public class I9Authorization {
          * The UUID of the Form associated with this I-9 authorization. Use this with "Employee Forms" API
          * endpoints.
          */
-        public Builder formUuid(Optional<String> formUuid) {
+        public Builder formUuid(JsonNullable<String> formUuid) {
             Utils.checkNotNull(formUuid, "formUuid");
             this.formUuid = formUuid;
             return this;
@@ -582,14 +575,14 @@ public class I9Authorization {
          */
         public Builder documentType(I9AuthorizationDocumentType documentType) {
             Utils.checkNotNull(documentType, "documentType");
-            this.documentType = Optional.ofNullable(documentType);
+            this.documentType = JsonNullable.of(documentType);
             return this;
         }
 
         /**
          * The document's document type
          */
-        public Builder documentType(Optional<? extends I9AuthorizationDocumentType> documentType) {
+        public Builder documentType(JsonNullable<? extends I9AuthorizationDocumentType> documentType) {
             Utils.checkNotNull(documentType, "documentType");
             this.documentType = documentType;
             return this;
@@ -601,14 +594,14 @@ public class I9Authorization {
          */
         public Builder hasDocumentNumber(boolean hasDocumentNumber) {
             Utils.checkNotNull(hasDocumentNumber, "hasDocumentNumber");
-            this.hasDocumentNumber = Optional.ofNullable(hasDocumentNumber);
+            this.hasDocumentNumber = JsonNullable.of(hasDocumentNumber);
             return this;
         }
 
         /**
          * Whether or not a `document_number` exists for this document.
          */
-        public Builder hasDocumentNumber(Optional<Boolean> hasDocumentNumber) {
+        public Builder hasDocumentNumber(JsonNullable<Boolean> hasDocumentNumber) {
             Utils.checkNotNull(hasDocumentNumber, "hasDocumentNumber");
             this.hasDocumentNumber = hasDocumentNumber;
             return this;
@@ -620,14 +613,14 @@ public class I9Authorization {
          */
         public Builder expirationDate(String expirationDate) {
             Utils.checkNotNull(expirationDate, "expirationDate");
-            this.expirationDate = Optional.ofNullable(expirationDate);
+            this.expirationDate = JsonNullable.of(expirationDate);
             return this;
         }
 
         /**
          * The document's expiration date
          */
-        public Builder expirationDate(Optional<String> expirationDate) {
+        public Builder expirationDate(JsonNullable<String> expirationDate) {
             Utils.checkNotNull(expirationDate, "expirationDate");
             this.expirationDate = expirationDate;
             return this;
@@ -639,14 +632,14 @@ public class I9Authorization {
          */
         public Builder country(String country) {
             Utils.checkNotNull(country, "country");
-            this.country = Optional.ofNullable(country);
+            this.country = JsonNullable.of(country);
             return this;
         }
 
         /**
          * The document's country of issuance
          */
-        public Builder country(Optional<String> country) {
+        public Builder country(JsonNullable<String> country) {
             Utils.checkNotNull(country, "country");
             this.country = country;
             return this;
@@ -678,14 +671,14 @@ public class I9Authorization {
          */
         public Builder additionalInfo(String additionalInfo) {
             Utils.checkNotNull(additionalInfo, "additionalInfo");
-            this.additionalInfo = Optional.ofNullable(additionalInfo);
+            this.additionalInfo = JsonNullable.of(additionalInfo);
             return this;
         }
 
         /**
          * Any additional notes
          */
-        public Builder additionalInfo(Optional<String> additionalInfo) {
+        public Builder additionalInfo(JsonNullable<String> additionalInfo) {
             Utils.checkNotNull(additionalInfo, "additionalInfo");
             this.additionalInfo = additionalInfo;
             return this;
@@ -697,14 +690,14 @@ public class I9Authorization {
          */
         public Builder altProcedure(boolean altProcedure) {
             Utils.checkNotNull(altProcedure, "altProcedure");
-            this.altProcedure = Optional.ofNullable(altProcedure);
+            this.altProcedure = JsonNullable.of(altProcedure);
             return this;
         }
 
         /**
          * Whether an alternative procedure authorized by DHS to examine documents was used
          */
-        public Builder altProcedure(Optional<Boolean> altProcedure) {
+        public Builder altProcedure(JsonNullable<Boolean> altProcedure) {
             Utils.checkNotNull(altProcedure, "altProcedure");
             this.altProcedure = altProcedure;
             return this;

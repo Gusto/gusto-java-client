@@ -18,12 +18,6 @@ import java.util.Optional;
 
 public class PostV1CompaniesCompanyIdBankAccountsRequest {
     /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
-    private String companyId;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,35 +25,33 @@ public class PostV1CompaniesCompanyIdBankAccountsRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
+    private String companyId;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private CompanyBankAccountRequest companyBankAccountRequest;
 
     @JsonCreator
     public PostV1CompaniesCompanyIdBankAccountsRequest(
-            String companyId,
             Optional<? extends PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyId,
             CompanyBankAccountRequest companyBankAccountRequest) {
-        Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(companyBankAccountRequest, "companyBankAccountRequest");
-        this.companyId = companyId;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyId = companyId;
         this.companyBankAccountRequest = companyBankAccountRequest;
     }
     
     public PostV1CompaniesCompanyIdBankAccountsRequest(
             String companyId,
             CompanyBankAccountRequest companyBankAccountRequest) {
-        this(companyId, Optional.empty(), companyBankAccountRequest);
-    }
-
-    /**
-     * The UUID of the company
-     */
-    @JsonIgnore
-    public String companyId() {
-        return companyId;
+        this(Optional.empty(), companyId, companyBankAccountRequest);
     }
 
     /**
@@ -73,6 +65,14 @@ public class PostV1CompaniesCompanyIdBankAccountsRequest {
         return (Optional<PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the company
+     */
+    @JsonIgnore
+    public String companyId() {
+        return companyId;
+    }
+
     @JsonIgnore
     public CompanyBankAccountRequest companyBankAccountRequest() {
         return companyBankAccountRequest;
@@ -82,15 +82,6 @@ public class PostV1CompaniesCompanyIdBankAccountsRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public PostV1CompaniesCompanyIdBankAccountsRequest withCompanyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -115,6 +106,15 @@ public class PostV1CompaniesCompanyIdBankAccountsRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public PostV1CompaniesCompanyIdBankAccountsRequest withCompanyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
     public PostV1CompaniesCompanyIdBankAccountsRequest withCompanyBankAccountRequest(CompanyBankAccountRequest companyBankAccountRequest) {
         Utils.checkNotNull(companyBankAccountRequest, "companyBankAccountRequest");
         this.companyBankAccountRequest = companyBankAccountRequest;
@@ -131,46 +131,36 @@ public class PostV1CompaniesCompanyIdBankAccountsRequest {
         }
         PostV1CompaniesCompanyIdBankAccountsRequest other = (PostV1CompaniesCompanyIdBankAccountsRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.companyBankAccountRequest, other.companyBankAccountRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, xGustoAPIVersion, companyBankAccountRequest);
+            xGustoAPIVersion, companyId, companyBankAccountRequest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostV1CompaniesCompanyIdBankAccountsRequest.class,
-                "companyId", companyId,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "companyId", companyId,
                 "companyBankAccountRequest", companyBankAccountRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String companyId;
-
         private Optional<? extends PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String companyId;
 
         private CompanyBankAccountRequest companyBankAccountRequest;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyId(String companyId) {
-            Utils.checkNotNull(companyId, "companyId");
-            this.companyId = companyId;
-            return this;
         }
 
 
@@ -197,6 +187,16 @@ public class PostV1CompaniesCompanyIdBankAccountsRequest {
         }
 
 
+        /**
+         * The UUID of the company
+         */
+        public Builder companyId(String companyId) {
+            Utils.checkNotNull(companyId, "companyId");
+            this.companyId = companyId;
+            return this;
+        }
+
+
         public Builder companyBankAccountRequest(CompanyBankAccountRequest companyBankAccountRequest) {
             Utils.checkNotNull(companyBankAccountRequest, "companyBankAccountRequest");
             this.companyBankAccountRequest = companyBankAccountRequest;
@@ -209,7 +209,7 @@ public class PostV1CompaniesCompanyIdBankAccountsRequest {
             }
 
             return new PostV1CompaniesCompanyIdBankAccountsRequest(
-                companyId, xGustoAPIVersion, companyBankAccountRequest);
+                xGustoAPIVersion, companyId, companyBankAccountRequest);
         }
 
 

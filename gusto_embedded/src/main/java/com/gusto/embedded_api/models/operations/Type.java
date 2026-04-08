@@ -11,12 +11,12 @@ import java.util.Optional;
 /**
  * Type
  * 
- * <p>The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated.
- * If type is Direct Deposit, `split_by` and `splits` are required.
+ * <p>The payment method type. If type is Check, split_by and splits do not need to be populated. If type
+ * is Direct Deposit, split_by and splits are required.
  */
 public enum Type {
-    DIRECT_DEPOSIT("Direct Deposit"),
-    CHECK("Check");
+    CHECK("Check"),
+    DIRECT_DEPOSIT("Direct Deposit");
 
     @JsonValue
     private final String value;

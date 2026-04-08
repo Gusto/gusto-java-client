@@ -6,7 +6,7 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.CompanyBenefitUpdateRequest;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -18,40 +18,51 @@ import java.util.Optional;
 
 public class PutV1CompanyBenefitsCompanyBenefitIdRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company benefit
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_benefit_id")
     private String companyBenefitId;
+
+
+    @SpeakeasyMetadata("request:mediaType=application/json")
+    private CompanyBenefitUpdateRequest companyBenefitUpdateRequest;
+
+    @JsonCreator
+    public PutV1CompanyBenefitsCompanyBenefitIdRequest(
+            Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyBenefitId,
+            CompanyBenefitUpdateRequest companyBenefitUpdateRequest) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyBenefitId, "companyBenefitId");
+        Utils.checkNotNull(companyBenefitUpdateRequest, "companyBenefitUpdateRequest");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyBenefitId = companyBenefitId;
+        this.companyBenefitUpdateRequest = companyBenefitUpdateRequest;
+    }
+    
+    public PutV1CompanyBenefitsCompanyBenefitIdRequest(
+            String companyBenefitId,
+            CompanyBenefitUpdateRequest companyBenefitUpdateRequest) {
+        this(Optional.empty(), companyBenefitId, companyBenefitUpdateRequest);
+    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-
-    @SpeakeasyMetadata("request:mediaType=application/json")
-    private PutV1CompanyBenefitsCompanyBenefitIdRequestBody requestBody;
-
-    @JsonCreator
-    public PutV1CompanyBenefitsCompanyBenefitIdRequest(
-            String companyBenefitId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1CompanyBenefitsCompanyBenefitIdRequestBody requestBody) {
-        Utils.checkNotNull(companyBenefitId, "companyBenefitId");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.companyBenefitId = companyBenefitId;
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        this.requestBody = requestBody;
-    }
-    
-    public PutV1CompanyBenefitsCompanyBenefitIdRequest(
-            String companyBenefitId,
-            PutV1CompanyBenefitsCompanyBenefitIdRequestBody requestBody) {
-        this(companyBenefitId, Optional.empty(), requestBody);
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PutV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -62,20 +73,9 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequest {
         return companyBenefitId;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
-    }
-
-    @JsonIgnore
-    public PutV1CompanyBenefitsCompanyBenefitIdRequestBody requestBody() {
-        return requestBody;
+    public CompanyBenefitUpdateRequest companyBenefitUpdateRequest() {
+        return companyBenefitUpdateRequest;
     }
 
     public static Builder builder() {
@@ -84,20 +84,11 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequest {
 
 
     /**
-     * The UUID of the company benefit
-     */
-    public PutV1CompanyBenefitsCompanyBenefitIdRequest withCompanyBenefitId(String companyBenefitId) {
-        Utils.checkNotNull(companyBenefitId, "companyBenefitId");
-        this.companyBenefitId = companyBenefitId;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1CompanyBenefitsCompanyBenefitIdRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1CompanyBenefitsCompanyBenefitIdRequest withXGustoAPIVersion(PutV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -109,15 +100,24 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1CompanyBenefitsCompanyBenefitIdRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1CompanyBenefitsCompanyBenefitIdRequest withXGustoAPIVersion(Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PutV1CompanyBenefitsCompanyBenefitIdRequest withRequestBody(PutV1CompanyBenefitsCompanyBenefitIdRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    /**
+     * The UUID of the company benefit
+     */
+    public PutV1CompanyBenefitsCompanyBenefitIdRequest withCompanyBenefitId(String companyBenefitId) {
+        Utils.checkNotNull(companyBenefitId, "companyBenefitId");
+        this.companyBenefitId = companyBenefitId;
+        return this;
+    }
+
+    public PutV1CompanyBenefitsCompanyBenefitIdRequest withCompanyBenefitUpdateRequest(CompanyBenefitUpdateRequest companyBenefitUpdateRequest) {
+        Utils.checkNotNull(companyBenefitUpdateRequest, "companyBenefitUpdateRequest");
+        this.companyBenefitUpdateRequest = companyBenefitUpdateRequest;
         return this;
     }
 
@@ -131,36 +131,59 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequest {
         }
         PutV1CompanyBenefitsCompanyBenefitIdRequest other = (PutV1CompanyBenefitsCompanyBenefitIdRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyBenefitId, other.companyBenefitId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
-            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.companyBenefitId, other.companyBenefitId) &&
+            Utils.enhancedDeepEquals(this.companyBenefitUpdateRequest, other.companyBenefitUpdateRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyBenefitId, xGustoAPIVersion, requestBody);
+            xGustoAPIVersion, companyBenefitId, companyBenefitUpdateRequest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1CompanyBenefitsCompanyBenefitIdRequest.class,
-                "companyBenefitId", companyBenefitId,
                 "xGustoAPIVersion", xGustoAPIVersion,
-                "requestBody", requestBody);
+                "companyBenefitId", companyBenefitId,
+                "companyBenefitUpdateRequest", companyBenefitUpdateRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String companyBenefitId;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
-
-        private PutV1CompanyBenefitsCompanyBenefitIdRequestBody requestBody;
+        private CompanyBenefitUpdateRequest companyBenefitUpdateRequest;
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(PutV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -174,32 +197,9 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequest {
         }
 
 
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
-
-
-        public Builder requestBody(PutV1CompanyBenefitsCompanyBenefitIdRequestBody requestBody) {
-            Utils.checkNotNull(requestBody, "requestBody");
-            this.requestBody = requestBody;
+        public Builder companyBenefitUpdateRequest(CompanyBenefitUpdateRequest companyBenefitUpdateRequest) {
+            Utils.checkNotNull(companyBenefitUpdateRequest, "companyBenefitUpdateRequest");
+            this.companyBenefitUpdateRequest = companyBenefitUpdateRequest;
             return this;
         }
 
@@ -209,14 +209,14 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequest {
             }
 
             return new PutV1CompanyBenefitsCompanyBenefitIdRequest(
-                companyBenefitId, xGustoAPIVersion, requestBody);
+                xGustoAPIVersion, companyBenefitId, companyBenefitUpdateRequest);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion>>() {});
     }
 }

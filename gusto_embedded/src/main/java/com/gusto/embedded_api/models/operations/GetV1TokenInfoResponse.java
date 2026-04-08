@@ -5,6 +5,7 @@ package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gusto.embedded_api.models.components.TokenInfo;
 import com.gusto.embedded_api.utils.Response;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
@@ -33,24 +34,24 @@ public class GetV1TokenInfoResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Success
      */
-    private Optional<? extends GetV1TokenInfoResponseBody> object;
+    private Optional<? extends TokenInfo> tokenInfo;
 
     @JsonCreator
     public GetV1TokenInfoResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends GetV1TokenInfoResponseBody> object) {
+            Optional<? extends TokenInfo> tokenInfo) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(object, "object");
+        Utils.checkNotNull(tokenInfo, "tokenInfo");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.object = object;
+        this.tokenInfo = tokenInfo;
     }
     
     public GetV1TokenInfoResponse(
@@ -86,12 +87,12 @@ public class GetV1TokenInfoResponse implements Response {
     }
 
     /**
-     * Example response
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetV1TokenInfoResponseBody> object() {
-        return (Optional<GetV1TokenInfoResponseBody>) object;
+    public Optional<TokenInfo> tokenInfo() {
+        return (Optional<TokenInfo>) tokenInfo;
     }
 
     public static Builder builder() {
@@ -127,21 +128,21 @@ public class GetV1TokenInfoResponse implements Response {
     }
 
     /**
-     * Example response
+     * Success
      */
-    public GetV1TokenInfoResponse withObject(GetV1TokenInfoResponseBody object) {
-        Utils.checkNotNull(object, "object");
-        this.object = Optional.ofNullable(object);
+    public GetV1TokenInfoResponse withTokenInfo(TokenInfo tokenInfo) {
+        Utils.checkNotNull(tokenInfo, "tokenInfo");
+        this.tokenInfo = Optional.ofNullable(tokenInfo);
         return this;
     }
 
 
     /**
-     * Example response
+     * Success
      */
-    public GetV1TokenInfoResponse withObject(Optional<? extends GetV1TokenInfoResponseBody> object) {
-        Utils.checkNotNull(object, "object");
-        this.object = object;
+    public GetV1TokenInfoResponse withTokenInfo(Optional<? extends TokenInfo> tokenInfo) {
+        Utils.checkNotNull(tokenInfo, "tokenInfo");
+        this.tokenInfo = tokenInfo;
         return this;
     }
 
@@ -158,14 +159,14 @@ public class GetV1TokenInfoResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.object, other.object);
+            Utils.enhancedDeepEquals(this.tokenInfo, other.tokenInfo);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            object);
+            tokenInfo);
     }
     
     @Override
@@ -174,7 +175,7 @@ public class GetV1TokenInfoResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "object", object);
+                "tokenInfo", tokenInfo);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -186,7 +187,7 @@ public class GetV1TokenInfoResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends GetV1TokenInfoResponseBody> object = Optional.empty();
+        private Optional<? extends TokenInfo> tokenInfo = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -224,20 +225,20 @@ public class GetV1TokenInfoResponse implements Response {
 
 
         /**
-         * Example response
+         * Success
          */
-        public Builder object(GetV1TokenInfoResponseBody object) {
-            Utils.checkNotNull(object, "object");
-            this.object = Optional.ofNullable(object);
+        public Builder tokenInfo(TokenInfo tokenInfo) {
+            Utils.checkNotNull(tokenInfo, "tokenInfo");
+            this.tokenInfo = Optional.ofNullable(tokenInfo);
             return this;
         }
 
         /**
-         * Example response
+         * Success
          */
-        public Builder object(Optional<? extends GetV1TokenInfoResponseBody> object) {
-            Utils.checkNotNull(object, "object");
-            this.object = object;
+        public Builder tokenInfo(Optional<? extends TokenInfo> tokenInfo) {
+            Utils.checkNotNull(tokenInfo, "tokenInfo");
+            this.tokenInfo = tokenInfo;
             return this;
         }
 
@@ -245,7 +246,7 @@ public class GetV1TokenInfoResponse implements Response {
 
             return new GetV1TokenInfoResponse(
                 contentType, statusCode, rawResponse,
-                object);
+                tokenInfo);
         }
 
     }

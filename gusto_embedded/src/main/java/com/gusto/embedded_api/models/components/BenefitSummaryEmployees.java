@@ -12,6 +12,7 @@ import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -71,7 +72,7 @@ public class BenefitSummaryEmployees {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payroll_benefits")
-    private Optional<? extends PayrollBenefits> payrollBenefits;
+    private Optional<? extends List<PayrollBenefits>> payrollBenefits;
 
     @JsonCreator
     public BenefitSummaryEmployees(
@@ -82,7 +83,7 @@ public class BenefitSummaryEmployees {
             @JsonProperty("benefit_contribution") Optional<String> benefitContribution,
             @JsonProperty("gross_pay") Optional<String> grossPay,
             @JsonProperty("imputed_pay") Optional<String> imputedPay,
-            @JsonProperty("payroll_benefits") Optional<? extends PayrollBenefits> payrollBenefits) {
+            @JsonProperty("payroll_benefits") Optional<? extends List<PayrollBenefits>> payrollBenefits) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(companyBenefitDeduction, "companyBenefitDeduction");
         Utils.checkNotNull(companyBenefitContribution, "companyBenefitContribution");
@@ -168,8 +169,8 @@ public class BenefitSummaryEmployees {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PayrollBenefits> payrollBenefits() {
-        return (Optional<PayrollBenefits>) payrollBenefits;
+    public Optional<List<PayrollBenefits>> payrollBenefits() {
+        return (Optional<List<PayrollBenefits>>) payrollBenefits;
     }
 
     public static Builder builder() {
@@ -316,14 +317,14 @@ public class BenefitSummaryEmployees {
         return this;
     }
 
-    public BenefitSummaryEmployees withPayrollBenefits(PayrollBenefits payrollBenefits) {
+    public BenefitSummaryEmployees withPayrollBenefits(List<PayrollBenefits> payrollBenefits) {
         Utils.checkNotNull(payrollBenefits, "payrollBenefits");
         this.payrollBenefits = Optional.ofNullable(payrollBenefits);
         return this;
     }
 
 
-    public BenefitSummaryEmployees withPayrollBenefits(Optional<? extends PayrollBenefits> payrollBenefits) {
+    public BenefitSummaryEmployees withPayrollBenefits(Optional<? extends List<PayrollBenefits>> payrollBenefits) {
         Utils.checkNotNull(payrollBenefits, "payrollBenefits");
         this.payrollBenefits = payrollBenefits;
         return this;
@@ -387,7 +388,7 @@ public class BenefitSummaryEmployees {
 
         private Optional<String> imputedPay = Optional.empty();
 
-        private Optional<? extends PayrollBenefits> payrollBenefits = Optional.empty();
+        private Optional<? extends List<PayrollBenefits>> payrollBenefits = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -533,13 +534,13 @@ public class BenefitSummaryEmployees {
         }
 
 
-        public Builder payrollBenefits(PayrollBenefits payrollBenefits) {
+        public Builder payrollBenefits(List<PayrollBenefits> payrollBenefits) {
             Utils.checkNotNull(payrollBenefits, "payrollBenefits");
             this.payrollBenefits = Optional.ofNullable(payrollBenefits);
             return this;
         }
 
-        public Builder payrollBenefits(Optional<? extends PayrollBenefits> payrollBenefits) {
+        public Builder payrollBenefits(Optional<? extends List<PayrollBenefits>> payrollBenefits) {
             Utils.checkNotNull(payrollBenefits, "payrollBenefits");
             this.payrollBenefits = payrollBenefits;
             return this;

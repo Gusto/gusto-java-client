@@ -2,6 +2,14 @@
 
 The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.RehireEmploymentStatus;
+
+RehireEmploymentStatus value = RehireEmploymentStatus.PART_TIME;
+```
+
 
 ## Values
 

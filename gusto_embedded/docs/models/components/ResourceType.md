@@ -2,6 +2,14 @@
 
 Name of the parent resource of the described entity.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.ResourceType;
+
+ResourceType value = ResourceType.COMPANY;
+```
+
 
 ## Values
 

@@ -84,8 +84,17 @@ public class EventStream<ResponseT extends AsyncResponse, ItemT> implements Publ
             TypeReference<ItemT> typeReference,
             ObjectMapper objectMapper,
             String terminalMessage) {
-        return new EventStream<>(asyncResponseFuture, typeReference, objectMapper, 
-                                new SSEProtocol<>(terminalMessage));
+        return forSSE(asyncResponseFuture, typeReference, objectMapper, terminalMessage, true);
+    }
+
+    public static <ResponseT extends AsyncResponse, ItemT> EventStream<ResponseT, ItemT> forSSE(
+            CompletableFuture<ResponseT> asyncResponseFuture,
+            TypeReference<ItemT> typeReference,
+            ObjectMapper objectMapper,
+            String terminalMessage,
+            boolean dataRequired) {
+        return new EventStream<>(asyncResponseFuture, typeReference, objectMapper,
+                                new SSEProtocol<>(terminalMessage, dataRequired));
     }
 
     /**
@@ -322,9 +331,11 @@ public class EventStream<ResponseT extends AsyncResponse, ItemT> implements Publ
      */
     private static class SSEProtocol<ItemT> implements Protocol<EventStreamMessage, ItemT> {
         private final String terminalMessage;
+        private final boolean dataRequired;
 
-        public SSEProtocol(String terminalMessage) {
+        public SSEProtocol(String terminalMessage, boolean dataRequired) {
             this.terminalMessage = terminalMessage;
+            this.dataRequired = dataRequired;
         }
 
         @Override
@@ -334,8 +345,8 @@ public class EventStream<ResponseT extends AsyncResponse, ItemT> implements Publ
 
         @Override
         public ItemT processItem(EventStreamMessage message, ObjectMapper objectMapper, TypeReference<ItemT> typeReference) {
-            // Skip empty data messages
-            if (message.data().isEmpty()) {
+            // Skip events without data when data is required
+            if (dataRequired && message.data().isEmpty()) {
                 return null;
             }
             return Utils.asType(message, objectMapper, typeReference);
@@ -344,7 +355,7 @@ public class EventStream<ResponseT extends AsyncResponse, ItemT> implements Publ
         @Override
         public boolean shouldStop(EventStreamMessage message) {
             // Check if this is a terminal message
-            return terminalMessage != null && terminalMessage.equals(message.data());
+            return terminalMessage != null && message.data().map(terminalMessage::equals).orElse(false);
         }
     }
 

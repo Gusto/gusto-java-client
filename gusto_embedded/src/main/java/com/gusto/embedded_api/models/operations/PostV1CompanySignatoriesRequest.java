@@ -6,7 +6,7 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.SignatoryCreateRequest;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -29,29 +29,29 @@ public class PostV1CompanySignatoriesRequest {
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    private Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion;
 
 
     @SpeakeasyMetadata("request:mediaType=application/json")
-    private PostV1CompanySignatoriesRequestBody requestBody;
+    private SignatoryCreateRequest signatoryCreateRequest;
 
     @JsonCreator
     public PostV1CompanySignatoriesRequest(
             String companyUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1CompanySignatoriesRequestBody requestBody) {
+            Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            SignatoryCreateRequest signatoryCreateRequest) {
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        Utils.checkNotNull(requestBody, "requestBody");
+        Utils.checkNotNull(signatoryCreateRequest, "signatoryCreateRequest");
         this.companyUuid = companyUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
-        this.requestBody = requestBody;
+        this.signatoryCreateRequest = signatoryCreateRequest;
     }
     
     public PostV1CompanySignatoriesRequest(
             String companyUuid,
-            PostV1CompanySignatoriesRequestBody requestBody) {
-        this(companyUuid, Optional.empty(), requestBody);
+            SignatoryCreateRequest signatoryCreateRequest) {
+        this(companyUuid, Optional.empty(), signatoryCreateRequest);
     }
 
     /**
@@ -69,13 +69,13 @@ public class PostV1CompanySignatoriesRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PostV1CompanySignatoriesHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     @JsonIgnore
-    public PostV1CompanySignatoriesRequestBody requestBody() {
-        return requestBody;
+    public SignatoryCreateRequest signatoryCreateRequest() {
+        return signatoryCreateRequest;
     }
 
     public static Builder builder() {
@@ -97,7 +97,7 @@ public class PostV1CompanySignatoriesRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PostV1CompanySignatoriesRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PostV1CompanySignatoriesRequest withXGustoAPIVersion(PostV1CompanySignatoriesHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -109,15 +109,15 @@ public class PostV1CompanySignatoriesRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PostV1CompanySignatoriesRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PostV1CompanySignatoriesRequest withXGustoAPIVersion(Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PostV1CompanySignatoriesRequest withRequestBody(PostV1CompanySignatoriesRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PostV1CompanySignatoriesRequest withSignatoryCreateRequest(SignatoryCreateRequest signatoryCreateRequest) {
+        Utils.checkNotNull(signatoryCreateRequest, "signatoryCreateRequest");
+        this.signatoryCreateRequest = signatoryCreateRequest;
         return this;
     }
 
@@ -133,13 +133,13 @@ public class PostV1CompanySignatoriesRequest {
         return 
             Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
-            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.signatoryCreateRequest, other.signatoryCreateRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, xGustoAPIVersion, requestBody);
+            companyUuid, xGustoAPIVersion, signatoryCreateRequest);
     }
     
     @Override
@@ -147,7 +147,7 @@ public class PostV1CompanySignatoriesRequest {
         return Utils.toString(PostV1CompanySignatoriesRequest.class,
                 "companyUuid", companyUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
-                "requestBody", requestBody);
+                "signatoryCreateRequest", signatoryCreateRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -155,9 +155,9 @@ public class PostV1CompanySignatoriesRequest {
 
         private String companyUuid;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion;
 
-        private PostV1CompanySignatoriesRequestBody requestBody;
+        private SignatoryCreateRequest signatoryCreateRequest;
 
         private Builder() {
           // force use of static builder() method
@@ -179,7 +179,7 @@ public class PostV1CompanySignatoriesRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(PostV1CompanySignatoriesHeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -190,16 +190,16 @@ public class PostV1CompanySignatoriesRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
         }
 
 
-        public Builder requestBody(PostV1CompanySignatoriesRequestBody requestBody) {
-            Utils.checkNotNull(requestBody, "requestBody");
-            this.requestBody = requestBody;
+        public Builder signatoryCreateRequest(SignatoryCreateRequest signatoryCreateRequest) {
+            Utils.checkNotNull(signatoryCreateRequest, "signatoryCreateRequest");
+            this.signatoryCreateRequest = signatoryCreateRequest;
             return this;
         }
 
@@ -209,14 +209,14 @@ public class PostV1CompanySignatoriesRequest {
             }
 
             return new PostV1CompanySignatoriesRequest(
-                companyUuid, xGustoAPIVersion, requestBody);
+                companyUuid, xGustoAPIVersion, signatoryCreateRequest);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion>>() {});
     }
 }

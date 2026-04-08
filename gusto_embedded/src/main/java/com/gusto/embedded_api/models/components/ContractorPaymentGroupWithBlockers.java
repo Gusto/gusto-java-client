@@ -83,14 +83,14 @@ public class ContractorPaymentGroupWithBlockers {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("submission_blockers")
-    private Optional<? extends List<List<PayrollSubmissionBlockersType>>> submissionBlockers;
+    private Optional<? extends List<PayrollSubmissionBlockerType>> submissionBlockers;
 
     /**
      * List of credit blockers for the contractor payment group.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("credit_blockers")
-    private Optional<? extends List<List<PayrollCreditBlockersType>>> creditBlockers;
+    private Optional<? extends List<PayrollCreditBlockerType>> creditBlockers;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -106,8 +106,8 @@ public class ContractorPaymentGroupWithBlockers {
             @JsonProperty("status") Optional<? extends ContractorPaymentGroupWithBlockersStatus> status,
             @JsonProperty("creation_token") JsonNullable<String> creationToken,
             @JsonProperty("partner_owned_disbursement") JsonNullable<Boolean> partnerOwnedDisbursement,
-            @JsonProperty("submission_blockers") Optional<? extends List<List<PayrollSubmissionBlockersType>>> submissionBlockers,
-            @JsonProperty("credit_blockers") Optional<? extends List<List<PayrollCreditBlockersType>>> creditBlockers,
+            @JsonProperty("submission_blockers") Optional<? extends List<PayrollSubmissionBlockerType>> submissionBlockers,
+            @JsonProperty("credit_blockers") Optional<? extends List<PayrollCreditBlockerType>> creditBlockers,
             @JsonProperty("totals") Optional<? extends ContractorPaymentGroupWithBlockersTotals> totals) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(companyUuid, "companyUuid");
@@ -205,8 +205,8 @@ public class ContractorPaymentGroupWithBlockers {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<List<PayrollSubmissionBlockersType>>> submissionBlockers() {
-        return (Optional<List<List<PayrollSubmissionBlockersType>>>) submissionBlockers;
+    public Optional<List<PayrollSubmissionBlockerType>> submissionBlockers() {
+        return (Optional<List<PayrollSubmissionBlockerType>>) submissionBlockers;
     }
 
     /**
@@ -214,8 +214,8 @@ public class ContractorPaymentGroupWithBlockers {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<List<PayrollCreditBlockersType>>> creditBlockers() {
-        return (Optional<List<List<PayrollCreditBlockersType>>>) creditBlockers;
+    public Optional<List<PayrollCreditBlockerType>> creditBlockers() {
+        return (Optional<List<PayrollCreditBlockerType>>) creditBlockers;
     }
 
     @SuppressWarnings("unchecked")
@@ -373,7 +373,7 @@ public class ContractorPaymentGroupWithBlockers {
     /**
      * List of submission blockers for the contractor payment group.
      */
-    public ContractorPaymentGroupWithBlockers withSubmissionBlockers(List<List<PayrollSubmissionBlockersType>> submissionBlockers) {
+    public ContractorPaymentGroupWithBlockers withSubmissionBlockers(List<PayrollSubmissionBlockerType> submissionBlockers) {
         Utils.checkNotNull(submissionBlockers, "submissionBlockers");
         this.submissionBlockers = Optional.ofNullable(submissionBlockers);
         return this;
@@ -383,7 +383,7 @@ public class ContractorPaymentGroupWithBlockers {
     /**
      * List of submission blockers for the contractor payment group.
      */
-    public ContractorPaymentGroupWithBlockers withSubmissionBlockers(Optional<? extends List<List<PayrollSubmissionBlockersType>>> submissionBlockers) {
+    public ContractorPaymentGroupWithBlockers withSubmissionBlockers(Optional<? extends List<PayrollSubmissionBlockerType>> submissionBlockers) {
         Utils.checkNotNull(submissionBlockers, "submissionBlockers");
         this.submissionBlockers = submissionBlockers;
         return this;
@@ -392,7 +392,7 @@ public class ContractorPaymentGroupWithBlockers {
     /**
      * List of credit blockers for the contractor payment group.
      */
-    public ContractorPaymentGroupWithBlockers withCreditBlockers(List<List<PayrollCreditBlockersType>> creditBlockers) {
+    public ContractorPaymentGroupWithBlockers withCreditBlockers(List<PayrollCreditBlockerType> creditBlockers) {
         Utils.checkNotNull(creditBlockers, "creditBlockers");
         this.creditBlockers = Optional.ofNullable(creditBlockers);
         return this;
@@ -402,7 +402,7 @@ public class ContractorPaymentGroupWithBlockers {
     /**
      * List of credit blockers for the contractor payment group.
      */
-    public ContractorPaymentGroupWithBlockers withCreditBlockers(Optional<? extends List<List<PayrollCreditBlockersType>>> creditBlockers) {
+    public ContractorPaymentGroupWithBlockers withCreditBlockers(Optional<? extends List<PayrollCreditBlockerType>> creditBlockers) {
         Utils.checkNotNull(creditBlockers, "creditBlockers");
         this.creditBlockers = creditBlockers;
         return this;
@@ -484,9 +484,9 @@ public class ContractorPaymentGroupWithBlockers {
 
         private JsonNullable<Boolean> partnerOwnedDisbursement = JsonNullable.undefined();
 
-        private Optional<? extends List<List<PayrollSubmissionBlockersType>>> submissionBlockers = Optional.empty();
+        private Optional<? extends List<PayrollSubmissionBlockerType>> submissionBlockers = Optional.empty();
 
-        private Optional<? extends List<List<PayrollCreditBlockersType>>> creditBlockers = Optional.empty();
+        private Optional<? extends List<PayrollCreditBlockerType>> creditBlockers = Optional.empty();
 
         private Optional<? extends ContractorPaymentGroupWithBlockersTotals> totals = Optional.empty();
 
@@ -641,7 +641,7 @@ public class ContractorPaymentGroupWithBlockers {
         /**
          * List of submission blockers for the contractor payment group.
          */
-        public Builder submissionBlockers(List<List<PayrollSubmissionBlockersType>> submissionBlockers) {
+        public Builder submissionBlockers(List<PayrollSubmissionBlockerType> submissionBlockers) {
             Utils.checkNotNull(submissionBlockers, "submissionBlockers");
             this.submissionBlockers = Optional.ofNullable(submissionBlockers);
             return this;
@@ -650,7 +650,7 @@ public class ContractorPaymentGroupWithBlockers {
         /**
          * List of submission blockers for the contractor payment group.
          */
-        public Builder submissionBlockers(Optional<? extends List<List<PayrollSubmissionBlockersType>>> submissionBlockers) {
+        public Builder submissionBlockers(Optional<? extends List<PayrollSubmissionBlockerType>> submissionBlockers) {
             Utils.checkNotNull(submissionBlockers, "submissionBlockers");
             this.submissionBlockers = submissionBlockers;
             return this;
@@ -660,7 +660,7 @@ public class ContractorPaymentGroupWithBlockers {
         /**
          * List of credit blockers for the contractor payment group.
          */
-        public Builder creditBlockers(List<List<PayrollCreditBlockersType>> creditBlockers) {
+        public Builder creditBlockers(List<PayrollCreditBlockerType> creditBlockers) {
             Utils.checkNotNull(creditBlockers, "creditBlockers");
             this.creditBlockers = Optional.ofNullable(creditBlockers);
             return this;
@@ -669,7 +669,7 @@ public class ContractorPaymentGroupWithBlockers {
         /**
          * List of credit blockers for the contractor payment group.
          */
-        public Builder creditBlockers(Optional<? extends List<List<PayrollCreditBlockersType>>> creditBlockers) {
+        public Builder creditBlockers(Optional<? extends List<PayrollCreditBlockerType>> creditBlockers) {
             Utils.checkNotNull(creditBlockers, "creditBlockers");
             this.creditBlockers = creditBlockers;
             return this;

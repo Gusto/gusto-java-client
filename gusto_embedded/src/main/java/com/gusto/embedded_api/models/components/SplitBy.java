@@ -8,11 +8,6 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * SplitBy
- * 
- * <p>How the payment is split. This field is applicable when `payment_method` is "Direct Deposit".
- */
 public enum SplitBy {
     PERCENTAGE("Percentage"),
     AMOUNT("Amount");

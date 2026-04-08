@@ -1,5 +1,13 @@
 # SubscriptionTypes
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.SubscriptionTypes;
+
+SubscriptionTypes value = SubscriptionTypes.BANK_ACCOUNT;
+```
+
 
 ## Values
 

@@ -20,9 +20,46 @@ Creates a new external payroll for the company.
 
 scope: `external_payrolls:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="post-v1-external-payroll" method="post" path="/v1/companies/{company_uuid}/external_payrolls" -->
+<!-- UsageSnippet language="java" operationID="post-v1-external-payroll" method="post" path="/v1/companies/{company_uuid}/external_payrolls" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1ExternalPayrollRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1ExternalPayrollResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1ExternalPayrollResponse res = sdk.externalPayrolls().create()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1ExternalPayrollRequestBody.builder()
+                    .checkDate("<value>")
+                    .paymentPeriodStartDate("<value>")
+                    .paymentPeriodEndDate("<value>")
+                    .build())
+                .call();
+
+        if (res.externalPayroll().isPresent()) {
+            System.out.println(res.externalPayroll().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="post-v1-external-payroll" method="post" path="/v1/companies/{company_uuid}/external_payrolls" example="Example" -->
 ```java
 package hello.world;
 
@@ -52,7 +89,81 @@ public class Application {
                 .call();
 
         if (res.externalPayroll().isPresent()) {
-            // handle response
+            System.out.println(res.externalPayroll().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="post-v1-external-payroll" method="post" path="/v1/companies/{company_uuid}/external_payrolls" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1ExternalPayrollRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1ExternalPayrollResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1ExternalPayrollResponse res = sdk.externalPayrolls().create()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1ExternalPayrollRequestBody.builder()
+                    .checkDate("<value>")
+                    .paymentPeriodStartDate("<value>")
+                    .paymentPeriodEndDate("<value>")
+                    .build())
+                .call();
+
+        if (res.externalPayroll().isPresent()) {
+            System.out.println(res.externalPayroll().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="post-v1-external-payroll" method="post" path="/v1/companies/{company_uuid}/external_payrolls" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1ExternalPayrollRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1ExternalPayrollResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1ExternalPayrollResponse res = sdk.externalPayrolls().create()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1ExternalPayrollRequestBody.builder()
+                    .checkDate("<value>")
+                    .paymentPeriodStartDate("<value>")
+                    .paymentPeriodEndDate("<value>")
+                    .build())
+                .call();
+
+        if (res.externalPayroll().isPresent()) {
+            System.out.println(res.externalPayroll().get());
         }
     }
 }
@@ -85,7 +196,7 @@ scope: `external_payrolls:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-company-external-payrolls" method="get" path="/v1/companies/{company_uuid}/external_payrolls" -->
+<!-- UsageSnippet language="java" operationID="get-v1-company-external-payrolls" method="get" path="/v1/companies/{company_uuid}/external_payrolls" example="Example" -->
 ```java
 package hello.world;
 
@@ -108,7 +219,7 @@ public class Application {
                 .call();
 
         if (res.externalPayrollList().isPresent()) {
-            // handle response
+            System.out.println(res.externalPayrollList().get());
         }
     }
 }
@@ -139,7 +250,7 @@ scope: `external_payrolls:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-external-payroll" method="get" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}" -->
+<!-- UsageSnippet language="java" operationID="get-v1-external-payroll" method="get" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}" example="Example" -->
 ```java
 package hello.world;
 
@@ -163,7 +274,7 @@ public class Application {
                 .call();
 
         if (res.externalPayroll().isPresent()) {
-            // handle response
+            System.out.println(res.externalPayroll().get());
         }
     }
 }
@@ -201,12 +312,13 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.DeleteV1ExternalPayrollResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -237,9 +349,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## update
 
@@ -247,9 +360,44 @@ Update an external payroll with a list of external payroll items
 
 scope: `external_payrolls:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="put-v1-external-payroll" method="put" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}" -->
+<!-- UsageSnippet language="java" operationID="put-v1-external-payroll" method="put" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1ExternalPayrollRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1ExternalPayrollResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1ExternalPayrollResponse res = sdk.externalPayrolls().update()
+                .companyUuid("<id>")
+                .externalPayrollId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1ExternalPayrollRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.externalPayroll().isPresent()) {
+            System.out.println(res.externalPayroll().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-external-payroll" method="put" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}" example="Example" -->
 ```java
 package hello.world;
 
@@ -315,7 +463,77 @@ public class Application {
                 .call();
 
         if (res.externalPayroll().isPresent()) {
-            // handle response
+            System.out.println(res.externalPayroll().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-v1-external-payroll" method="put" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1ExternalPayrollRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1ExternalPayrollResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1ExternalPayrollResponse res = sdk.externalPayrolls().update()
+                .companyUuid("<id>")
+                .externalPayrollId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1ExternalPayrollRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.externalPayroll().isPresent()) {
+            System.out.println(res.externalPayroll().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-v1-external-payroll" method="put" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1ExternalPayrollRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1ExternalPayrollResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1ExternalPayrollResponse res = sdk.externalPayrolls().update()
+                .companyUuid("<id>")
+                .externalPayrollId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1ExternalPayrollRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.externalPayroll().isPresent()) {
+            System.out.println(res.externalPayroll().get());
         }
     }
 }
@@ -351,18 +569,19 @@ scope: `external_payrolls:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-external-payroll-calculate-taxes" method="get" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}/calculate_taxes" -->
+<!-- UsageSnippet language="java" operationID="get-v1-external-payroll-calculate-taxes" method="get" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}/calculate_taxes" example="Example" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1ExternalPayrollCalculateTaxesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -375,7 +594,7 @@ public class Application {
                 .call();
 
         if (res.externalPayrollTaxSuggestionsList().isPresent()) {
-            // handle response
+            System.out.println(res.externalPayrollTaxSuggestionsList().get());
         }
     }
 }
@@ -395,9 +614,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## listTaxLiabilities
 
@@ -407,7 +627,7 @@ scope: `external_payrolls:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-tax-liabilities" method="get" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" -->
+<!-- UsageSnippet language="java" operationID="get-v1-tax-liabilities" method="get" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Example" -->
 ```java
 package hello.world;
 
@@ -430,7 +650,7 @@ public class Application {
                 .call();
 
         if (res.taxLiabilitiesList().isPresent()) {
-            // handle response
+            System.out.println(res.taxLiabilitiesList().get());
         }
     }
 }
@@ -459,9 +679,43 @@ Update tax liabilities for a company.
 
 scope: `external_payrolls:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" -->
+<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1TaxLiabilitiesResponse res = sdk.externalPayrolls().updateTaxLiabilities()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1TaxLiabilitiesRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.taxLiabilitiesList().isPresent()) {
+            System.out.println(res.taxLiabilitiesList().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Example" -->
 ```java
 package hello.world;
 
@@ -505,7 +759,75 @@ public class Application {
                 .call();
 
         if (res.taxLiabilitiesList().isPresent()) {
-            // handle response
+            System.out.println(res.taxLiabilitiesList().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1TaxLiabilitiesResponse res = sdk.externalPayrolls().updateTaxLiabilities()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1TaxLiabilitiesRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.taxLiabilitiesList().isPresent()) {
+            System.out.println(res.taxLiabilitiesList().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesRequestBody;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1TaxLiabilitiesResponse res = sdk.externalPayrolls().updateTaxLiabilities()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutV1TaxLiabilitiesRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.taxLiabilitiesList().isPresent()) {
+            System.out.println(res.taxLiabilitiesList().get());
         }
     }
 }

@@ -5,10 +5,11 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation;
 
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.FederalTaxDetailsUpdate;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdFederalTaxDetailsRequest;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsRequest;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody;
 import com.gusto.embedded_api.models.operations.async.GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder;
 import com.gusto.embedded_api.models.operations.async.GetV1CompaniesCompanyIdFederalTaxDetailsResponse;
 import com.gusto.embedded_api.models.operations.async.PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder;
@@ -42,11 +43,14 @@ public class AsyncFederalTaxDetails {
 
 
     /**
-     * Get Federal Tax Details
+     * Get a company's federal tax details
      * 
-     * <p>Fetches attributes relevant for a company's federal taxes.
+     * <p>Retrieves a company's federal tax details including EIN verification status, tax payer type, filing
+     * form, and other federal tax configuration.
      * 
      * <p>scope: `company_federal_taxes:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -55,11 +59,14 @@ public class AsyncFederalTaxDetails {
     }
 
     /**
-     * Get Federal Tax Details
+     * Get a company's federal tax details
      * 
-     * <p>Fetches attributes relevant for a company's federal taxes.
+     * <p>Retrieves a company's federal tax details including EIN verification status, tax payer type, filing
+     * form, and other federal tax configuration.
      * 
      * <p>scope: `company_federal_taxes:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdFederalTaxDetailsResponse>} - The async response
@@ -69,17 +76,20 @@ public class AsyncFederalTaxDetails {
     }
 
     /**
-     * Get Federal Tax Details
+     * Get a company's federal tax details
      * 
-     * <p>Fetches attributes relevant for a company's federal taxes.
+     * <p>Retrieves a company's federal tax details including EIN verification status, tax payer type, filing
+     * form, and other federal tax configuration.
      * 
      * <p>scope: `company_federal_taxes:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdFederalTaxDetailsResponse>} - The async response
      */
-    public CompletableFuture<GetV1CompaniesCompanyIdFederalTaxDetailsResponse> get(String companyId, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public CompletableFuture<GetV1CompaniesCompanyIdFederalTaxDetailsResponse> get(String companyId, Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         GetV1CompaniesCompanyIdFederalTaxDetailsRequest request =
             GetV1CompaniesCompanyIdFederalTaxDetailsRequest
                 .builder()
@@ -94,12 +104,26 @@ public class AsyncFederalTaxDetails {
 
 
     /**
-     * Update Federal Tax Details
+     * Update a company's federal tax details
      * 
-     * <p>Updates attributes relevant for a company's federal taxes.
-     * This information is required is to onboard a company for use with Gusto Embedded Payroll.
+     * <p>Updates a company's federal tax details including EIN, legal name, tax payer type, filing form, and
+     * S-Corp
+     * taxation status. This information is required to onboard a company for use with Gusto Embedded
+     * Payroll.
+     * 
+     * <p>### Prerequisites
+     * Before calling this endpoint, retrieve the current federal tax details and `version` via [GET
+     * /v1/companies/{company_id}/federal_tax_details](ref:get-v1-companies-company_id-federal_tax_details)
+     * 
+     * <p>### Webhooks
+     * - `company.updated`: Fires when federal tax details for a company are successfully updated
+     * 
+     * <p>**Setup:** [POST /v1/webhook_subscriptions](ref:post-v1-webhook-subscription) with
+     * `subscription_types`: `["Company"]`
      * 
      * <p>scope: `company_federal_taxes:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -108,43 +132,71 @@ public class AsyncFederalTaxDetails {
     }
 
     /**
-     * Update Federal Tax Details
+     * Update a company's federal tax details
      * 
-     * <p>Updates attributes relevant for a company's federal taxes.
-     * This information is required is to onboard a company for use with Gusto Embedded Payroll.
+     * <p>Updates a company's federal tax details including EIN, legal name, tax payer type, filing form, and
+     * S-Corp
+     * taxation status. This information is required to onboard a company for use with Gusto Embedded
+     * Payroll.
+     * 
+     * <p>### Prerequisites
+     * Before calling this endpoint, retrieve the current federal tax details and `version` via [GET
+     * /v1/companies/{company_id}/federal_tax_details](ref:get-v1-companies-company_id-federal_tax_details)
+     * 
+     * <p>### Webhooks
+     * - `company.updated`: Fires when federal tax details for a company are successfully updated
+     * 
+     * <p>**Setup:** [POST /v1/webhook_subscriptions](ref:post-v1-webhook-subscription) with
+     * `subscription_types`: `["Company"]`
      * 
      * <p>scope: `company_federal_taxes:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
-     * @param requestBody Attributes related to federal tax details that can be updated via this endpoint include:
+     * @param federalTaxDetailsUpdate 
      * @return {@code CompletableFuture<PutV1CompaniesCompanyIdFederalTaxDetailsResponse>} - The async response
      */
-    public CompletableFuture<PutV1CompaniesCompanyIdFederalTaxDetailsResponse> update(String companyId, PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody requestBody) {
-        return update(companyId, Optional.empty(), requestBody);
+    public CompletableFuture<PutV1CompaniesCompanyIdFederalTaxDetailsResponse> update(String companyId, FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
+        return update(companyId, Optional.empty(), federalTaxDetailsUpdate);
     }
 
     /**
-     * Update Federal Tax Details
+     * Update a company's federal tax details
      * 
-     * <p>Updates attributes relevant for a company's federal taxes.
-     * This information is required is to onboard a company for use with Gusto Embedded Payroll.
+     * <p>Updates a company's federal tax details including EIN, legal name, tax payer type, filing form, and
+     * S-Corp
+     * taxation status. This information is required to onboard a company for use with Gusto Embedded
+     * Payroll.
+     * 
+     * <p>### Prerequisites
+     * Before calling this endpoint, retrieve the current federal tax details and `version` via [GET
+     * /v1/companies/{company_id}/federal_tax_details](ref:get-v1-companies-company_id-federal_tax_details)
+     * 
+     * <p>### Webhooks
+     * - `company.updated`: Fires when federal tax details for a company are successfully updated
+     * 
+     * <p>**Setup:** [POST /v1/webhook_subscriptions](ref:post-v1-webhook-subscription) with
+     * `subscription_types`: `["Company"]`
      * 
      * <p>scope: `company_federal_taxes:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyId The UUID of the company
-     * @param xGustoAPIVersion 
-     * @param requestBody Attributes related to federal tax details that can be updated via this endpoint include:
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param federalTaxDetailsUpdate 
      * @return {@code CompletableFuture<PutV1CompaniesCompanyIdFederalTaxDetailsResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesCompanyIdFederalTaxDetailsResponse> update(
-            String companyId, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody requestBody) {
+            String companyId, Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
         PutV1CompaniesCompanyIdFederalTaxDetailsRequest request =
             PutV1CompaniesCompanyIdFederalTaxDetailsRequest
                 .builder()
                 .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .federalTaxDetailsUpdate(federalTaxDetailsUpdate)
                 .build();
         AsyncRequestOperation<PutV1CompaniesCompanyIdFederalTaxDetailsRequest, PutV1CompaniesCompanyIdFederalTaxDetailsResponse> operation
               = new PutV1CompaniesCompanyIdFederalTaxDetails.Async(sdkConfiguration, _headers);

@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * LimitOption
@@ -38,19 +39,19 @@ public class LimitOption {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("default_value")
-    private Optional<? extends BenefitTypeRequirementsLimitOptionDefaultValue> defaultValue;
+    private JsonNullable<? extends BenefitTypeRequirementsLimitOptionDefaultValue> defaultValue;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("choices")
-    private Optional<? extends List<String>> choices;
+    private JsonNullable<? extends List<String>> choices;
 
     @JsonCreator
     public LimitOption(
             @JsonProperty("required") Optional<Boolean> required,
             @JsonProperty("editable") Optional<Boolean> editable,
-            @JsonProperty("default_value") Optional<? extends BenefitTypeRequirementsLimitOptionDefaultValue> defaultValue,
-            @JsonProperty("choices") Optional<? extends List<String>> choices) {
+            @JsonProperty("default_value") JsonNullable<? extends BenefitTypeRequirementsLimitOptionDefaultValue> defaultValue,
+            @JsonProperty("choices") JsonNullable<? extends List<String>> choices) {
         Utils.checkNotNull(required, "required");
         Utils.checkNotNull(editable, "editable");
         Utils.checkNotNull(defaultValue, "defaultValue");
@@ -62,8 +63,8 @@ public class LimitOption {
     }
     
     public LimitOption() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
+            JsonNullable.undefined());
     }
 
     @JsonIgnore
@@ -78,14 +79,14 @@ public class LimitOption {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<BenefitTypeRequirementsLimitOptionDefaultValue> defaultValue() {
-        return (Optional<BenefitTypeRequirementsLimitOptionDefaultValue>) defaultValue;
+    public JsonNullable<BenefitTypeRequirementsLimitOptionDefaultValue> defaultValue() {
+        return (JsonNullable<BenefitTypeRequirementsLimitOptionDefaultValue>) defaultValue;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<String>> choices() {
-        return (Optional<List<String>>) choices;
+    public JsonNullable<List<String>> choices() {
+        return (JsonNullable<List<String>>) choices;
     }
 
     public static Builder builder() {
@@ -121,12 +122,11 @@ public class LimitOption {
 
     public LimitOption withDefaultValue(BenefitTypeRequirementsLimitOptionDefaultValue defaultValue) {
         Utils.checkNotNull(defaultValue, "defaultValue");
-        this.defaultValue = Optional.ofNullable(defaultValue);
+        this.defaultValue = JsonNullable.of(defaultValue);
         return this;
     }
 
-
-    public LimitOption withDefaultValue(Optional<? extends BenefitTypeRequirementsLimitOptionDefaultValue> defaultValue) {
+    public LimitOption withDefaultValue(JsonNullable<? extends BenefitTypeRequirementsLimitOptionDefaultValue> defaultValue) {
         Utils.checkNotNull(defaultValue, "defaultValue");
         this.defaultValue = defaultValue;
         return this;
@@ -134,12 +134,11 @@ public class LimitOption {
 
     public LimitOption withChoices(List<String> choices) {
         Utils.checkNotNull(choices, "choices");
-        this.choices = Optional.ofNullable(choices);
+        this.choices = JsonNullable.of(choices);
         return this;
     }
 
-
-    public LimitOption withChoices(Optional<? extends List<String>> choices) {
+    public LimitOption withChoices(JsonNullable<? extends List<String>> choices) {
         Utils.checkNotNull(choices, "choices");
         this.choices = choices;
         return this;
@@ -184,9 +183,9 @@ public class LimitOption {
 
         private Optional<Boolean> editable = Optional.empty();
 
-        private Optional<? extends BenefitTypeRequirementsLimitOptionDefaultValue> defaultValue = Optional.empty();
+        private JsonNullable<? extends BenefitTypeRequirementsLimitOptionDefaultValue> defaultValue = JsonNullable.undefined();
 
-        private Optional<? extends List<String>> choices = Optional.empty();
+        private JsonNullable<? extends List<String>> choices = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -221,11 +220,11 @@ public class LimitOption {
 
         public Builder defaultValue(BenefitTypeRequirementsLimitOptionDefaultValue defaultValue) {
             Utils.checkNotNull(defaultValue, "defaultValue");
-            this.defaultValue = Optional.ofNullable(defaultValue);
+            this.defaultValue = JsonNullable.of(defaultValue);
             return this;
         }
 
-        public Builder defaultValue(Optional<? extends BenefitTypeRequirementsLimitOptionDefaultValue> defaultValue) {
+        public Builder defaultValue(JsonNullable<? extends BenefitTypeRequirementsLimitOptionDefaultValue> defaultValue) {
             Utils.checkNotNull(defaultValue, "defaultValue");
             this.defaultValue = defaultValue;
             return this;
@@ -234,11 +233,11 @@ public class LimitOption {
 
         public Builder choices(List<String> choices) {
             Utils.checkNotNull(choices, "choices");
-            this.choices = Optional.ofNullable(choices);
+            this.choices = JsonNullable.of(choices);
             return this;
         }
 
-        public Builder choices(Optional<? extends List<String>> choices) {
+        public Builder choices(JsonNullable<? extends List<String>> choices) {
             Utils.checkNotNull(choices, "choices");
             this.choices = choices;
             return this;

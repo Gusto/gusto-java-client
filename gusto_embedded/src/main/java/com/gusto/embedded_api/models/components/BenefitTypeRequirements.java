@@ -14,11 +14,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-/**
- * BenefitTypeRequirements
- * 
- * <p>Benefit type requirements response
- */
+
 public class BenefitTypeRequirements {
     /**
      * The amount to be deducted, per pay period, from the employee's pay.

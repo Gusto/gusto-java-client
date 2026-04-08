@@ -126,6 +126,8 @@ public class AsyncNotifications {
      * 
      * <p>scope: `notifications:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetCompanyNotificationsRequestBuilder getCompanyNotifications() {
@@ -138,6 +140,8 @@ public class AsyncNotifications {
      * <p>Returns all notifications relevant for the given company.
      * 
      * <p>scope: `notifications:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return {@code CompletableFuture<GetCompanyNotificationsResponse>} - The async response

@@ -3,6 +3,8 @@
  */
 package com.gusto.embedded_api.models.components;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -11,10 +13,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Double;
+import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -34,15 +39,6 @@ public class EmployeeCompensations {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("excluded")
     private Optional<Boolean> excluded;
-
-    /**
-     * The current version of this employee compensation. This field is only available for prepared
-     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-     * information on how to use this field.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("version")
-    private Optional<String> version;
 
     /**
      * The first name of the employee. Requires `employees:read` scope.
@@ -134,18 +130,28 @@ public class EmployeeCompensations {
     private Optional<? extends List<PayrollShowPaidTimeOff>> paidTimeOff;
 
     /**
-     * An array of employee deductions for the pay period.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("deductions")
-    private Optional<? extends List<PayrollShowDeductions>> deductions;
-
-    /**
      * An array of reimbursements for the employee.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("reimbursements")
     private Optional<? extends List<PayrollShowReimbursements>> reimbursements;
+
+    /**
+     * The current version of this employee compensation. This field is only available for prepared
+     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
+     * information on how to use this field.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("version")
+    private Optional<? extends Object> version;
+
+    /**
+     * An array of employee deductions for the pay period. Only included when `deductions` is present in
+     * the `include` parameter.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("deductions")
+    private Optional<? extends List<PayrollShowDeductions>> deductions;
 
     /**
      * An array of employer and employee taxes for the pay period. Only included for processed or
@@ -163,11 +169,14 @@ public class EmployeeCompensations {
     @JsonProperty("benefits")
     private Optional<? extends List<PayrollShowBenefits>> benefits;
 
+
+    @JsonIgnore
+    private Map<String, Object> additionalProperties;
+
     @JsonCreator
     public EmployeeCompensations(
             @JsonProperty("employee_uuid") Optional<String> employeeUuid,
             @JsonProperty("excluded") Optional<Boolean> excluded,
-            @JsonProperty("version") Optional<String> version,
             @JsonProperty("first_name") JsonNullable<String> firstName,
             @JsonProperty("preferred_first_name") JsonNullable<String> preferredFirstName,
             @JsonProperty("last_name") JsonNullable<String> lastName,
@@ -179,13 +188,13 @@ public class EmployeeCompensations {
             @JsonProperty("fixed_compensations") Optional<? extends List<PayrollShowFixedCompensations>> fixedCompensations,
             @JsonProperty("hourly_compensations") Optional<? extends List<PayrollShowHourlyCompensations>> hourlyCompensations,
             @JsonProperty("paid_time_off") Optional<? extends List<PayrollShowPaidTimeOff>> paidTimeOff,
-            @JsonProperty("deductions") Optional<? extends List<PayrollShowDeductions>> deductions,
             @JsonProperty("reimbursements") Optional<? extends List<PayrollShowReimbursements>> reimbursements,
+            @JsonProperty("version") Optional<? extends Object> version,
+            @JsonProperty("deductions") Optional<? extends List<PayrollShowDeductions>> deductions,
             @JsonProperty("taxes") Optional<? extends List<PayrollShowTaxes>> taxes,
             @JsonProperty("benefits") Optional<? extends List<PayrollShowBenefits>> benefits) {
         Utils.checkNotNull(employeeUuid, "employeeUuid");
         Utils.checkNotNull(excluded, "excluded");
-        Utils.checkNotNull(version, "version");
         Utils.checkNotNull(firstName, "firstName");
         Utils.checkNotNull(preferredFirstName, "preferredFirstName");
         Utils.checkNotNull(lastName, "lastName");
@@ -197,13 +206,13 @@ public class EmployeeCompensations {
         Utils.checkNotNull(fixedCompensations, "fixedCompensations");
         Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
         Utils.checkNotNull(paidTimeOff, "paidTimeOff");
-        Utils.checkNotNull(deductions, "deductions");
         Utils.checkNotNull(reimbursements, "reimbursements");
+        Utils.checkNotNull(version, "version");
+        Utils.checkNotNull(deductions, "deductions");
         Utils.checkNotNull(taxes, "taxes");
         Utils.checkNotNull(benefits, "benefits");
         this.employeeUuid = employeeUuid;
         this.excluded = excluded;
-        this.version = version;
         this.firstName = firstName;
         this.preferredFirstName = preferredFirstName;
         this.lastName = lastName;
@@ -215,17 +224,19 @@ public class EmployeeCompensations {
         this.fixedCompensations = fixedCompensations;
         this.hourlyCompensations = hourlyCompensations;
         this.paidTimeOff = paidTimeOff;
-        this.deductions = deductions;
         this.reimbursements = reimbursements;
+        this.version = version;
+        this.deductions = deductions;
         this.taxes = taxes;
         this.benefits = benefits;
+        this.additionalProperties = new HashMap<>();
     }
     
     public EmployeeCompensations() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
+        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
-            JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
+            JsonNullable.undefined(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty());
     }
@@ -245,16 +256,6 @@ public class EmployeeCompensations {
     @JsonIgnore
     public Optional<Boolean> excluded() {
         return excluded;
-    }
-
-    /**
-     * The current version of this employee compensation. This field is only available for prepared
-     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-     * information on how to use this field.
-     */
-    @JsonIgnore
-    public Optional<String> version() {
-        return version;
     }
 
     /**
@@ -362,21 +363,33 @@ public class EmployeeCompensations {
     }
 
     /**
-     * An array of employee deductions for the pay period.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<PayrollShowDeductions>> deductions() {
-        return (Optional<List<PayrollShowDeductions>>) deductions;
-    }
-
-    /**
      * An array of reimbursements for the employee.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<PayrollShowReimbursements>> reimbursements() {
         return (Optional<List<PayrollShowReimbursements>>) reimbursements;
+    }
+
+    /**
+     * The current version of this employee compensation. This field is only available for prepared
+     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
+     * information on how to use this field.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> version() {
+        return (Optional<Object>) version;
+    }
+
+    /**
+     * An array of employee deductions for the pay period. Only included when `deductions` is present in
+     * the `include` parameter.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<PayrollShowDeductions>> deductions() {
+        return (Optional<List<PayrollShowDeductions>>) deductions;
     }
 
     /**
@@ -397,6 +410,11 @@ public class EmployeeCompensations {
     @JsonIgnore
     public Optional<List<PayrollShowBenefits>> benefits() {
         return (Optional<List<PayrollShowBenefits>>) benefits;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> additionalProperties() {
+        return additionalProperties;
     }
 
     public static Builder builder() {
@@ -441,29 +459,6 @@ public class EmployeeCompensations {
     public EmployeeCompensations withExcluded(Optional<Boolean> excluded) {
         Utils.checkNotNull(excluded, "excluded");
         this.excluded = excluded;
-        return this;
-    }
-
-    /**
-     * The current version of this employee compensation. This field is only available for prepared
-     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-     * information on how to use this field.
-     */
-    public EmployeeCompensations withVersion(String version) {
-        Utils.checkNotNull(version, "version");
-        this.version = Optional.ofNullable(version);
-        return this;
-    }
-
-
-    /**
-     * The current version of this employee compensation. This field is only available for prepared
-     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-     * information on how to use this field.
-     */
-    public EmployeeCompensations withVersion(Optional<String> version) {
-        Utils.checkNotNull(version, "version");
-        this.version = version;
         return this;
     }
 
@@ -693,25 +688,6 @@ public class EmployeeCompensations {
     }
 
     /**
-     * An array of employee deductions for the pay period.
-     */
-    public EmployeeCompensations withDeductions(List<PayrollShowDeductions> deductions) {
-        Utils.checkNotNull(deductions, "deductions");
-        this.deductions = Optional.ofNullable(deductions);
-        return this;
-    }
-
-
-    /**
-     * An array of employee deductions for the pay period.
-     */
-    public EmployeeCompensations withDeductions(Optional<? extends List<PayrollShowDeductions>> deductions) {
-        Utils.checkNotNull(deductions, "deductions");
-        this.deductions = deductions;
-        return this;
-    }
-
-    /**
      * An array of reimbursements for the employee.
      */
     public EmployeeCompensations withReimbursements(List<PayrollShowReimbursements> reimbursements) {
@@ -727,6 +703,50 @@ public class EmployeeCompensations {
     public EmployeeCompensations withReimbursements(Optional<? extends List<PayrollShowReimbursements>> reimbursements) {
         Utils.checkNotNull(reimbursements, "reimbursements");
         this.reimbursements = reimbursements;
+        return this;
+    }
+
+    /**
+     * The current version of this employee compensation. This field is only available for prepared
+     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
+     * information on how to use this field.
+     */
+    public EmployeeCompensations withVersion(Object version) {
+        Utils.checkNotNull(version, "version");
+        this.version = Optional.ofNullable(version);
+        return this;
+    }
+
+
+    /**
+     * The current version of this employee compensation. This field is only available for prepared
+     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
+     * information on how to use this field.
+     */
+    public EmployeeCompensations withVersion(Optional<? extends Object> version) {
+        Utils.checkNotNull(version, "version");
+        this.version = version;
+        return this;
+    }
+
+    /**
+     * An array of employee deductions for the pay period. Only included when `deductions` is present in
+     * the `include` parameter.
+     */
+    public EmployeeCompensations withDeductions(List<PayrollShowDeductions> deductions) {
+        Utils.checkNotNull(deductions, "deductions");
+        this.deductions = Optional.ofNullable(deductions);
+        return this;
+    }
+
+
+    /**
+     * An array of employee deductions for the pay period. Only included when `deductions` is present in
+     * the `include` parameter.
+     */
+    public EmployeeCompensations withDeductions(Optional<? extends List<PayrollShowDeductions>> deductions) {
+        Utils.checkNotNull(deductions, "deductions");
+        this.deductions = deductions;
         return this;
     }
 
@@ -772,6 +792,19 @@ public class EmployeeCompensations {
         return this;
     }
 
+    @JsonAnySetter
+    public EmployeeCompensations withAdditionalProperty(String key, Object value) {
+        // note that value can be null because of the way JsonAnySetter works
+        Utils.checkNotNull(key, "key");
+        additionalProperties.put(key, value); 
+        return this;
+    }
+    public EmployeeCompensations withAdditionalProperties(Map<String, Object> additionalProperties) {
+        Utils.checkNotNull(additionalProperties, "additionalProperties");
+        this.additionalProperties = additionalProperties;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -784,7 +817,6 @@ public class EmployeeCompensations {
         return 
             Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
             Utils.enhancedDeepEquals(this.excluded, other.excluded) &&
-            Utils.enhancedDeepEquals(this.version, other.version) &&
             Utils.enhancedDeepEquals(this.firstName, other.firstName) &&
             Utils.enhancedDeepEquals(this.preferredFirstName, other.preferredFirstName) &&
             Utils.enhancedDeepEquals(this.lastName, other.lastName) &&
@@ -796,21 +828,24 @@ public class EmployeeCompensations {
             Utils.enhancedDeepEquals(this.fixedCompensations, other.fixedCompensations) &&
             Utils.enhancedDeepEquals(this.hourlyCompensations, other.hourlyCompensations) &&
             Utils.enhancedDeepEquals(this.paidTimeOff, other.paidTimeOff) &&
-            Utils.enhancedDeepEquals(this.deductions, other.deductions) &&
             Utils.enhancedDeepEquals(this.reimbursements, other.reimbursements) &&
+            Utils.enhancedDeepEquals(this.version, other.version) &&
+            Utils.enhancedDeepEquals(this.deductions, other.deductions) &&
             Utils.enhancedDeepEquals(this.taxes, other.taxes) &&
-            Utils.enhancedDeepEquals(this.benefits, other.benefits);
+            Utils.enhancedDeepEquals(this.benefits, other.benefits) &&
+            Utils.enhancedDeepEquals(this.additionalProperties, other.additionalProperties);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            employeeUuid, excluded, version,
-            firstName, preferredFirstName, lastName,
-            grossPay, netPay, checkAmount,
-            paymentMethod, memo, fixedCompensations,
-            hourlyCompensations, paidTimeOff, deductions,
-            reimbursements, taxes, benefits);
+            employeeUuid, excluded, firstName,
+            preferredFirstName, lastName, grossPay,
+            netPay, checkAmount, paymentMethod,
+            memo, fixedCompensations, hourlyCompensations,
+            paidTimeOff, reimbursements, version,
+            deductions, taxes, benefits,
+            additionalProperties);
     }
     
     @Override
@@ -818,7 +853,6 @@ public class EmployeeCompensations {
         return Utils.toString(EmployeeCompensations.class,
                 "employeeUuid", employeeUuid,
                 "excluded", excluded,
-                "version", version,
                 "firstName", firstName,
                 "preferredFirstName", preferredFirstName,
                 "lastName", lastName,
@@ -830,10 +864,12 @@ public class EmployeeCompensations {
                 "fixedCompensations", fixedCompensations,
                 "hourlyCompensations", hourlyCompensations,
                 "paidTimeOff", paidTimeOff,
-                "deductions", deductions,
                 "reimbursements", reimbursements,
+                "version", version,
+                "deductions", deductions,
                 "taxes", taxes,
-                "benefits", benefits);
+                "benefits", benefits,
+                "additionalProperties", additionalProperties);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -842,8 +878,6 @@ public class EmployeeCompensations {
         private Optional<String> employeeUuid = Optional.empty();
 
         private Optional<Boolean> excluded = Optional.empty();
-
-        private Optional<String> version = Optional.empty();
 
         private JsonNullable<String> firstName = JsonNullable.undefined();
 
@@ -867,13 +901,17 @@ public class EmployeeCompensations {
 
         private Optional<? extends List<PayrollShowPaidTimeOff>> paidTimeOff = Optional.empty();
 
-        private Optional<? extends List<PayrollShowDeductions>> deductions = Optional.empty();
-
         private Optional<? extends List<PayrollShowReimbursements>> reimbursements = Optional.empty();
+
+        private Optional<? extends Object> version = Optional.empty();
+
+        private Optional<? extends List<PayrollShowDeductions>> deductions = Optional.empty();
 
         private Optional<? extends List<PayrollShowTaxes>> taxes = Optional.empty();
 
         private Optional<? extends List<PayrollShowBenefits>> benefits = Optional.empty();
+
+        private Map<String, Object> additionalProperties = new HashMap<>();
 
         private Builder() {
           // force use of static builder() method
@@ -916,29 +954,6 @@ public class EmployeeCompensations {
         public Builder excluded(Optional<Boolean> excluded) {
             Utils.checkNotNull(excluded, "excluded");
             this.excluded = excluded;
-            return this;
-        }
-
-
-        /**
-         * The current version of this employee compensation. This field is only available for prepared
-         * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-         * information on how to use this field.
-         */
-        public Builder version(String version) {
-            Utils.checkNotNull(version, "version");
-            this.version = Optional.ofNullable(version);
-            return this;
-        }
-
-        /**
-         * The current version of this employee compensation. This field is only available for prepared
-         * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-         * information on how to use this field.
-         */
-        public Builder version(Optional<String> version) {
-            Utils.checkNotNull(version, "version");
-            this.version = version;
             return this;
         }
 
@@ -1177,25 +1192,6 @@ public class EmployeeCompensations {
 
 
         /**
-         * An array of employee deductions for the pay period.
-         */
-        public Builder deductions(List<PayrollShowDeductions> deductions) {
-            Utils.checkNotNull(deductions, "deductions");
-            this.deductions = Optional.ofNullable(deductions);
-            return this;
-        }
-
-        /**
-         * An array of employee deductions for the pay period.
-         */
-        public Builder deductions(Optional<? extends List<PayrollShowDeductions>> deductions) {
-            Utils.checkNotNull(deductions, "deductions");
-            this.deductions = deductions;
-            return this;
-        }
-
-
-        /**
          * An array of reimbursements for the employee.
          */
         public Builder reimbursements(List<PayrollShowReimbursements> reimbursements) {
@@ -1210,6 +1206,50 @@ public class EmployeeCompensations {
         public Builder reimbursements(Optional<? extends List<PayrollShowReimbursements>> reimbursements) {
             Utils.checkNotNull(reimbursements, "reimbursements");
             this.reimbursements = reimbursements;
+            return this;
+        }
+
+
+        /**
+         * The current version of this employee compensation. This field is only available for prepared
+         * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
+         * information on how to use this field.
+         */
+        public Builder version(Object version) {
+            Utils.checkNotNull(version, "version");
+            this.version = Optional.ofNullable(version);
+            return this;
+        }
+
+        /**
+         * The current version of this employee compensation. This field is only available for prepared
+         * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
+         * information on how to use this field.
+         */
+        public Builder version(Optional<? extends Object> version) {
+            Utils.checkNotNull(version, "version");
+            this.version = version;
+            return this;
+        }
+
+
+        /**
+         * An array of employee deductions for the pay period. Only included when `deductions` is present in
+         * the `include` parameter.
+         */
+        public Builder deductions(List<PayrollShowDeductions> deductions) {
+            Utils.checkNotNull(deductions, "deductions");
+            this.deductions = Optional.ofNullable(deductions);
+            return this;
+        }
+
+        /**
+         * An array of employee deductions for the pay period. Only included when `deductions` is present in
+         * the `include` parameter.
+         */
+        public Builder deductions(Optional<? extends List<PayrollShowDeductions>> deductions) {
+            Utils.checkNotNull(deductions, "deductions");
+            this.deductions = deductions;
             return this;
         }
 
@@ -1255,15 +1295,32 @@ public class EmployeeCompensations {
             return this;
         }
 
+        public Builder additionalProperty(String key, Object value) {
+            Utils.checkNotNull(key, "key");
+            // we could be strict about null values (force the user
+            // to pass `JsonNullable.of(null)`) but likely to be a bit 
+            // annoying for additional properties building so we'll 
+            // relax preconditions.
+            this.additionalProperties.put(key, value);
+            return this;
+        }
+
+        public Builder additionalProperties(Map<String, Object> additionalProperties) {
+            Utils.checkNotNull(additionalProperties, "additionalProperties");
+            this.additionalProperties = additionalProperties;
+            return this;
+        }
+
         public EmployeeCompensations build() {
 
             return new EmployeeCompensations(
-                employeeUuid, excluded, version,
-                firstName, preferredFirstName, lastName,
-                grossPay, netPay, checkAmount,
-                paymentMethod, memo, fixedCompensations,
-                hourlyCompensations, paidTimeOff, deductions,
-                reimbursements, taxes, benefits);
+                employeeUuid, excluded, firstName,
+                preferredFirstName, lastName, grossPay,
+                netPay, checkAmount, paymentMethod,
+                memo, fixedCompensations, hourlyCompensations,
+                paidTimeOff, reimbursements, version,
+                deductions, taxes, benefits)
+                .withAdditionalProperties(additionalProperties);
         }
 
     }

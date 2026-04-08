@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.ContractorCreateRequestBody;
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyUuidContractors;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,17 +17,29 @@ import java.util.Optional;
 
 public class PostV1CompaniesCompanyUuidContractorsRequestBuilder {
 
-    private String companyUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PostV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PostV1CompaniesCompanyUuidContractorsRequestBody requestBody;
+                            new TypeReference<Optional<? extends PostV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private ContractorCreateRequestBody contractorCreateRequestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1CompaniesCompanyUuidContractorsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PostV1CompaniesCompanyUuidContractorsRequestBuilder xGustoAPIVersion(PostV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyUuidContractorsRequestBuilder xGustoAPIVersion(Optional<? extends PostV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PostV1CompaniesCompanyUuidContractorsRequestBuilder companyUuid(String companyUuid) {
@@ -35,22 +47,10 @@ public class PostV1CompaniesCompanyUuidContractorsRequestBuilder {
         this.companyUuid = companyUuid;
         return this;
     }
-                
-    public PostV1CompaniesCompanyUuidContractorsRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
 
-    public PostV1CompaniesCompanyUuidContractorsRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PostV1CompaniesCompanyUuidContractorsRequestBuilder requestBody(PostV1CompaniesCompanyUuidContractorsRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PostV1CompaniesCompanyUuidContractorsRequestBuilder contractorCreateRequestBody(ContractorCreateRequestBody contractorCreateRequestBody) {
+        Utils.checkNotNull(contractorCreateRequestBody, "contractorCreateRequestBody");
+        this.contractorCreateRequestBody = contractorCreateRequestBody;
         return this;
     }
 
@@ -60,9 +60,9 @@ public class PostV1CompaniesCompanyUuidContractorsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1CompaniesCompanyUuidContractorsRequest request = new PostV1CompaniesCompanyUuidContractorsRequest(companyUuid,
-            xGustoAPIVersion,
-            requestBody);
+        PostV1CompaniesCompanyUuidContractorsRequest request = new PostV1CompaniesCompanyUuidContractorsRequest(xGustoAPIVersion,
+            companyUuid,
+            contractorCreateRequestBody);
 
         return request;
     }
@@ -76,9 +76,9 @@ public class PostV1CompaniesCompanyUuidContractorsRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PostV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PostV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion>>() {});
 }

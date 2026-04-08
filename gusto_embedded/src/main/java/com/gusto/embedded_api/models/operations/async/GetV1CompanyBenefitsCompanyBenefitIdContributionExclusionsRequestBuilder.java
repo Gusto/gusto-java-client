@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest;
 import com.gusto.embedded_api.operations.GetV1CompanyBenefitsCompanyBenefitIdContributionExclusions;
 import com.gusto.embedded_api.utils.Headers;
@@ -19,33 +19,33 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder {
 
-    private String companyBenefitId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion>>() {});
+    private String companyBenefitId;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
-    public GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder companyBenefitId(String companyBenefitId) {
-        Utils.checkNotNull(companyBenefitId, "companyBenefitId");
-        this.companyBenefitId = companyBenefitId;
-        return this;
-    }
                 
-    public GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder xGustoAPIVersion(GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder companyBenefitId(String companyBenefitId) {
+        Utils.checkNotNull(companyBenefitId, "companyBenefitId");
+        this.companyBenefitId = companyBenefitId;
         return this;
     }
 
@@ -55,8 +55,8 @@ public class GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBu
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest request = new GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest(companyBenefitId,
-            xGustoAPIVersion);
+        GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest request = new GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest(xGustoAPIVersion,
+            companyBenefitId);
 
         return request;
     }
@@ -71,9 +71,9 @@ public class GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBu
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion>>() {});
 }

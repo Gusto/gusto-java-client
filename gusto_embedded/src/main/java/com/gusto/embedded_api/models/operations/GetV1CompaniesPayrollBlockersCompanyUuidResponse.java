@@ -35,24 +35,24 @@ public class GetV1CompaniesPayrollBlockersCompanyUuidResponse implements Respons
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
-    private Optional<? extends List<PayrollBlocker>> payrollBlockerList;
+    private Optional<? extends List<PayrollBlocker>> payrollBlockers;
 
     @JsonCreator
     public GetV1CompaniesPayrollBlockersCompanyUuidResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<PayrollBlocker>> payrollBlockerList) {
+            Optional<? extends List<PayrollBlocker>> payrollBlockers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(payrollBlockerList, "payrollBlockerList");
+        Utils.checkNotNull(payrollBlockers, "payrollBlockers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.payrollBlockerList = payrollBlockerList;
+        this.payrollBlockers = payrollBlockers;
     }
     
     public GetV1CompaniesPayrollBlockersCompanyUuidResponse(
@@ -88,12 +88,12 @@ public class GetV1CompaniesPayrollBlockersCompanyUuidResponse implements Respons
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PayrollBlocker>> payrollBlockerList() {
-        return (Optional<List<PayrollBlocker>>) payrollBlockerList;
+    public Optional<List<PayrollBlocker>> payrollBlockers() {
+        return (Optional<List<PayrollBlocker>>) payrollBlockers;
     }
 
     public static Builder builder() {
@@ -129,21 +129,21 @@ public class GetV1CompaniesPayrollBlockersCompanyUuidResponse implements Respons
     }
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesPayrollBlockersCompanyUuidResponse withPayrollBlockerList(List<PayrollBlocker> payrollBlockerList) {
-        Utils.checkNotNull(payrollBlockerList, "payrollBlockerList");
-        this.payrollBlockerList = Optional.ofNullable(payrollBlockerList);
+    public GetV1CompaniesPayrollBlockersCompanyUuidResponse withPayrollBlockers(List<PayrollBlocker> payrollBlockers) {
+        Utils.checkNotNull(payrollBlockers, "payrollBlockers");
+        this.payrollBlockers = Optional.ofNullable(payrollBlockers);
         return this;
     }
 
 
     /**
-     * Example response
+     * Successful
      */
-    public GetV1CompaniesPayrollBlockersCompanyUuidResponse withPayrollBlockerList(Optional<? extends List<PayrollBlocker>> payrollBlockerList) {
-        Utils.checkNotNull(payrollBlockerList, "payrollBlockerList");
-        this.payrollBlockerList = payrollBlockerList;
+    public GetV1CompaniesPayrollBlockersCompanyUuidResponse withPayrollBlockers(Optional<? extends List<PayrollBlocker>> payrollBlockers) {
+        Utils.checkNotNull(payrollBlockers, "payrollBlockers");
+        this.payrollBlockers = payrollBlockers;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1CompaniesPayrollBlockersCompanyUuidResponse implements Respons
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.payrollBlockerList, other.payrollBlockerList);
+            Utils.enhancedDeepEquals(this.payrollBlockers, other.payrollBlockers);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            payrollBlockerList);
+            payrollBlockers);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1CompaniesPayrollBlockersCompanyUuidResponse implements Respons
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "payrollBlockerList", payrollBlockerList);
+                "payrollBlockers", payrollBlockers);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1CompaniesPayrollBlockersCompanyUuidResponse implements Respons
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends List<PayrollBlocker>> payrollBlockerList = Optional.empty();
+        private Optional<? extends List<PayrollBlocker>> payrollBlockers = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,20 +226,20 @@ public class GetV1CompaniesPayrollBlockersCompanyUuidResponse implements Respons
 
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder payrollBlockerList(List<PayrollBlocker> payrollBlockerList) {
-            Utils.checkNotNull(payrollBlockerList, "payrollBlockerList");
-            this.payrollBlockerList = Optional.ofNullable(payrollBlockerList);
+        public Builder payrollBlockers(List<PayrollBlocker> payrollBlockers) {
+            Utils.checkNotNull(payrollBlockers, "payrollBlockers");
+            this.payrollBlockers = Optional.ofNullable(payrollBlockers);
             return this;
         }
 
         /**
-         * Example response
+         * Successful
          */
-        public Builder payrollBlockerList(Optional<? extends List<PayrollBlocker>> payrollBlockerList) {
-            Utils.checkNotNull(payrollBlockerList, "payrollBlockerList");
-            this.payrollBlockerList = payrollBlockerList;
+        public Builder payrollBlockers(Optional<? extends List<PayrollBlocker>> payrollBlockers) {
+            Utils.checkNotNull(payrollBlockers, "payrollBlockers");
+            this.payrollBlockers = payrollBlockers;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1CompaniesPayrollBlockersCompanyUuidResponse implements Respons
 
             return new GetV1CompaniesPayrollBlockersCompanyUuidResponse(
                 contentType, statusCode, rawResponse,
-                payrollBlockerList);
+                payrollBlockers);
         }
 
     }

@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.PayScheduleUpdateRequest;
 import com.gusto.embedded_api.operations.PutV1CompaniesCompanyIdPaySchedulesPayScheduleId;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,18 +17,30 @@ import java.util.Optional;
 
 public class PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder {
 
-    private String companyId;
-    private String payScheduleId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody requestBody;
+                            new TypeReference<Optional<? extends PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private String payScheduleId;
+    private PayScheduleUpdateRequest payScheduleUpdateRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder xGustoAPIVersion(PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder xGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder companyId(String companyId) {
@@ -42,22 +54,10 @@ public class PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder {
         this.payScheduleId = payScheduleId;
         return this;
     }
-                
-    public PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
 
-    public PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder requestBody(PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder payScheduleUpdateRequest(PayScheduleUpdateRequest payScheduleUpdateRequest) {
+        Utils.checkNotNull(payScheduleUpdateRequest, "payScheduleUpdateRequest");
+        this.payScheduleUpdateRequest = payScheduleUpdateRequest;
         return this;
     }
 
@@ -67,10 +67,10 @@ public class PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest request = new PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest(companyId,
+        PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest request = new PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest(xGustoAPIVersion,
+            companyId,
             payScheduleId,
-            xGustoAPIVersion,
-            requestBody);
+            payScheduleUpdateRequest);
 
         return request;
     }
@@ -84,9 +84,9 @@ public class PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion>>() {});
 }

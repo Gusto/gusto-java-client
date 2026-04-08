@@ -5,6 +5,7 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
+import com.gusto.embedded_api.models.components.EmployeeOnboardingDocumentsConfigRequest;
 import com.gusto.embedded_api.models.components.HistoricalEmployeeBody;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.DeleteV1EmployeeHeaderXGustoAPIVersion;
@@ -39,8 +40,8 @@ import com.gusto.embedded_api.models.operations.PostV1EmployeesResponse;
 import com.gusto.embedded_api.models.operations.PostV1HistoricalEmployeesRequest;
 import com.gusto.embedded_api.models.operations.PostV1HistoricalEmployeesRequestBuilder;
 import com.gusto.embedded_api.models.operations.PostV1HistoricalEmployeesResponse;
+import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest;
-import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse;
 import com.gusto.embedded_api.models.operations.PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion;
@@ -97,7 +98,14 @@ public class Employees {
      * 
      * <p>Get all of the employees, onboarding, active and terminated, for a given company.
      * 
+     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -110,7 +118,14 @@ public class Employees {
      * 
      * <p>Get all of the employees, onboarding, active and terminated, for a given company.
      * 
+     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
@@ -129,6 +144,8 @@ public class Employees {
      * 
      * <p>scope: `employees:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PostV1EmployeesRequestBuilder create() {
@@ -141,6 +158,8 @@ public class Employees {
      * <p>Create an employee.
      * 
      * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId Company ID
      * @return The response from the API call
@@ -156,6 +175,8 @@ public class Employees {
      * <p>Create an employee.
      * 
      * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId Company ID
@@ -291,7 +312,14 @@ public class Employees {
      * 
      * <p>Get an employee.
      * 
+     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -304,7 +332,14 @@ public class Employees {
      * 
      * <p>Get an employee.
      * 
+     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
@@ -319,7 +354,14 @@ public class Employees {
      * 
      * <p>Get an employee.
      * 
+     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
@@ -349,6 +391,8 @@ public class Employees {
      * 
      * <p>scope: `employees:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PutV1EmployeesRequestBuilder update() {
@@ -361,6 +405,8 @@ public class Employees {
      * <p>Update an employee.
      * 
      * <p>scope: `employees:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @param requestBody 
@@ -377,6 +423,8 @@ public class Employees {
      * <p>Update an employee.
      * 
      * <p>scope: `employees:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
@@ -409,6 +457,8 @@ public class Employees {
      * 
      * <p>scope: `employees:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public DeleteV1EmployeeRequestBuilder delete() {
@@ -424,6 +474,8 @@ public class Employees {
      * if you need to terminate an onboarded employee.
      * 
      * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
@@ -442,6 +494,8 @@ public class Employees {
      * if you need to terminate an onboarded employee.
      * 
      * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
@@ -520,11 +574,17 @@ public class Employees {
     }
 
     /**
-     * Update an employee's onboarding documents config
+     * Update employee onboarding documents config
      * 
      * <p>Indicate whether to include the Form I-9 for an employee during the onboarding process.
+     * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
+     * 
+     * <p>## Related guides
+     * - [Employee onboarding](doc:employee-onboarding)
      * 
      * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -533,43 +593,54 @@ public class Employees {
     }
 
     /**
-     * Update an employee's onboarding documents config
+     * Update employee onboarding documents config
      * 
      * <p>Indicate whether to include the Form I-9 for an employee during the onboarding process.
+     * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
+     * 
+     * <p>## Related guides
+     * - [Employee onboarding](doc:employee-onboarding)
      * 
      * <p>scope: `employees:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param employeeId The UUID of the employee
-     * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse updateOnboardingDocumentsConfig(String employeeId, PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody requestBody) {
-        return updateOnboardingDocumentsConfig(employeeId, Optional.empty(), requestBody);
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse updateOnboardingDocumentsConfig(String employeeId) {
+        return updateOnboardingDocumentsConfig(Optional.empty(), employeeId, Optional.empty());
     }
 
     /**
-     * Update an employee's onboarding documents config
+     * Update employee onboarding documents config
      * 
      * <p>Indicate whether to include the Form I-9 for an employee during the onboarding process.
+     * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
+     * 
+     * <p>## Related guides
+     * - [Employee onboarding](doc:employee-onboarding)
      * 
      * <p>scope: `employees:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param employeeOnboardingDocumentsConfigRequest Request body for updating an employee's onboarding documents configuration.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse updateOnboardingDocumentsConfig(
-            String employeeId, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody requestBody) {
+            Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<? extends EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest) {
         PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest request =
             PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .employeeId(employeeId)
+                .employeeOnboardingDocumentsConfigRequest(employeeOnboardingDocumentsConfigRequest)
                 .build();
         RequestOperation<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest, PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse> operation
               = new PutV1EmployeesEmployeeIdOnboardingDocumentsConfig.Sync(sdkConfiguration, _headers);
@@ -628,6 +699,8 @@ public class Employees {
      * 
      * <p>scope: `employees:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public GetV1EmployeesEmployeeIdOnboardingStatusRequestBuilder getOnboardingStatus() {
@@ -685,6 +758,8 @@ public class Employees {
      * self-onboarding) |
      * 
      * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @return The response from the API call
@@ -746,6 +821,8 @@ public class Employees {
      * 
      * <p>scope: `employees:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
      * @return The response from the API call
@@ -785,6 +862,8 @@ public class Employees {
      * 
      * <p>scope: `employees:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PutV1EmployeesEmployeeIdOnboardingStatusRequestBuilder updateOnboardingStatus() {
@@ -812,6 +891,8 @@ public class Employees {
      * `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
      * 
      * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param employeeId The UUID of the employee
      * @param requestBody 
@@ -843,6 +924,8 @@ public class Employees {
      * `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
      * 
      * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee

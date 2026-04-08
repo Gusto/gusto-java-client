@@ -14,7 +14,7 @@ scope: `generated_documents:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-generated_documents-document_type-request_uuid" method="get" path="/v1/generated_documents/{document_type}/{request_uuid}" -->
+<!-- UsageSnippet language="java" operationID="get-v1-generated_documents-document_type-request_uuid" method="get" path="/v1/generated_documents/{document_type}/{request_uuid}" example="Example" -->
 ```java
 package hello.world;
 
@@ -39,7 +39,7 @@ public class Application {
                 .call();
 
         if (res.generatedDocument().isPresent()) {
-            // handle response
+            System.out.println(res.generatedDocument().get());
         }
     }
 }

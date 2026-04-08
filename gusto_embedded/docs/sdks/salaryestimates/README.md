@@ -30,6 +30,7 @@ scope: `salary_estimates:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -37,14 +38,14 @@ import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1EmployeesEmployeeIdSalaryEstimatesResponse res = sdk.salaryEstimates().postV1EmployeesEmployeeIdSalaryEstimates()
-                .xGustoAPIVersion(PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .employeeId("<id>")
                 .requestBody(PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody.builder()
                     .zipCode("94107")
@@ -54,7 +55,7 @@ public class Application {
                 .call();
 
         if (res.salaryEstimate().isPresent()) {
-            // handle response
+            System.out.println(res.salaryEstimate().get());
         }
     }
 }
@@ -76,7 +77,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## getV1SalaryEstimatesId
@@ -92,26 +94,26 @@ scope: `salary_estimates:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1SalaryEstimatesIdHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1SalaryEstimatesIdResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         GetV1SalaryEstimatesIdResponse res = sdk.salaryEstimates().getV1SalaryEstimatesId()
-                .xGustoAPIVersion(GetV1SalaryEstimatesIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(GetV1SalaryEstimatesIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .uuid("3c9d1f7e-adda-44fb-ba0e-7e5843661514")
                 .call();
 
         if (res.salaryEstimate().isPresent()) {
-            // handle response
+            System.out.println(res.salaryEstimate().get());
         }
     }
 }
@@ -130,10 +132,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
-| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## putV1SalaryEstimatesId
 
@@ -150,6 +152,7 @@ scope: `salary_estimates:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -157,14 +160,14 @@ import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1SalaryEstimatesIdResponse res = sdk.salaryEstimates().putV1SalaryEstimatesId()
-                .xGustoAPIVersion(PutV1SalaryEstimatesIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(PutV1SalaryEstimatesIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .uuid("969f5dac-57dd-4091-b195-2546171d3a76")
                 .requestBody(PutV1SalaryEstimatesIdRequestBody.builder()
                     .zipCode("94107")
@@ -180,7 +183,7 @@ public class Application {
                 .call();
 
         if (res.salaryEstimate().isPresent()) {
-            // handle response
+            System.out.println(res.salaryEstimate().get());
         }
     }
 }
@@ -202,7 +205,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## postV1SalaryEstimatesUuidAccept
@@ -220,20 +224,21 @@ scope: `salary_estimates:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1SalaryEstimatesUuidAcceptResponse res = sdk.salaryEstimates().postV1SalaryEstimatesUuidAccept()
-                .xGustoAPIVersion(PostV1SalaryEstimatesUuidAcceptHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(PostV1SalaryEstimatesUuidAcceptHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .uuid("22c00075-fa4c-4bdc-91e3-f72ab8ec7a1d")
                 .requestBody(PostV1SalaryEstimatesUuidAcceptRequestBody.builder()
                     .employeeJobUuid("7f5d3d93-6d6f-48c0-9f4e-cd12c2d3e4b2")
@@ -241,7 +246,7 @@ public class Application {
                 .call();
 
         if (res.salaryEstimate().isPresent()) {
-            // handle response
+            System.out.println(res.salaryEstimate().get());
         }
     }
 }
@@ -263,7 +268,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## getV1SalaryEstimatesOccupations
@@ -300,12 +306,12 @@ public class Application {
                 .security(GetV1SalaryEstimatesOccupationsSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .xGustoAPIVersion(GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FOUR_MINUS04_MINUS01)
+                .xGustoAPIVersion(GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .search("software")
                 .call();
 
         if (res.blsOccupations().isPresent()) {
-            // handle response
+            System.out.println(res.blsOccupations().get());
         }
     }
 }

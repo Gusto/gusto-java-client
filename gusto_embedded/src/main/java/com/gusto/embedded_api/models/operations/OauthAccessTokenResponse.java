@@ -34,7 +34,7 @@ public class OauthAccessTokenResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Refresh access token
+     * Success
      */
     private Optional<? extends Authentication> authentication;
 
@@ -87,7 +87,7 @@ public class OauthAccessTokenResponse implements Response {
     }
 
     /**
-     * Refresh access token
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class OauthAccessTokenResponse implements Response {
     }
 
     /**
-     * Refresh access token
+     * Success
      */
     public OauthAccessTokenResponse withAuthentication(Authentication authentication) {
         Utils.checkNotNull(authentication, "authentication");
@@ -138,7 +138,7 @@ public class OauthAccessTokenResponse implements Response {
 
 
     /**
-     * Refresh access token
+     * Success
      */
     public OauthAccessTokenResponse withAuthentication(Optional<? extends Authentication> authentication) {
         Utils.checkNotNull(authentication, "authentication");
@@ -225,7 +225,7 @@ public class OauthAccessTokenResponse implements Response {
 
 
         /**
-         * Refresh access token
+         * Success
          */
         public Builder authentication(Authentication authentication) {
             Utils.checkNotNull(authentication, "authentication");
@@ -234,7 +234,7 @@ public class OauthAccessTokenResponse implements Response {
         }
 
         /**
-         * Refresh access token
+         * Success
          */
         public Builder authentication(Optional<? extends Authentication> authentication) {
             Utils.checkNotNull(authentication, "authentication");

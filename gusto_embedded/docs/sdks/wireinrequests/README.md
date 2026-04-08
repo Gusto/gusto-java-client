@@ -16,7 +16,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-wire_in_requests-wire_in_request_uuid" method="get" path="/v1/wire_in_requests/{wire_in_request_uuid}" -->
+<!-- UsageSnippet language="java" operationID="get-wire_in_requests-wire_in_request_uuid" method="get" path="/v1/wire_in_requests/{wire_in_request_uuid}" example="example" -->
 ```java
 package hello.world;
 
@@ -39,7 +39,7 @@ public class Application {
                 .call();
 
         if (res.wireInRequest().isPresent()) {
-            // handle response
+            System.out.println(res.wireInRequest().get());
         }
     }
 }
@@ -68,9 +68,46 @@ Submit a wire in request for a payment
 
 scope: `payrolls:run`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="put-wire_in_requests-wire_in_request_uuid" method="put" path="/v1/wire_in_requests/{wire_in_request_uuid}" -->
+<!-- UsageSnippet language="java" operationID="put-wire_in_requests-wire_in_request_uuid" method="put" path="/v1/wire_in_requests/{wire_in_request_uuid}" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutWireInRequestsWireInRequestUuidRequestBody;
+import com.gusto.embedded_api.models.operations.PutWireInRequestsWireInRequestUuidResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutWireInRequestsWireInRequestUuidResponse res = sdk.wireInRequests().submit()
+                .wireInRequestUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutWireInRequestsWireInRequestUuidRequestBody.builder()
+                    .dateSent("<value>")
+                    .bankName("<value>")
+                    .amountSent("<value>")
+                    .build())
+                .call();
+
+        if (res.wireInRequest().isPresent()) {
+            System.out.println(res.wireInRequest().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-wire_in_requests-wire_in_request_uuid" method="put" path="/v1/wire_in_requests/{wire_in_request_uuid}" example="Example" -->
 ```java
 package hello.world;
 
@@ -101,7 +138,118 @@ public class Application {
                 .call();
 
         if (res.wireInRequest().isPresent()) {
-            // handle response
+            System.out.println(res.wireInRequest().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-wire_in_requests-wire_in_request_uuid" method="put" path="/v1/wire_in_requests/{wire_in_request_uuid}" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutWireInRequestsWireInRequestUuidRequestBody;
+import com.gusto.embedded_api.models.operations.PutWireInRequestsWireInRequestUuidResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutWireInRequestsWireInRequestUuidResponse res = sdk.wireInRequests().submit()
+                .wireInRequestUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutWireInRequestsWireInRequestUuidRequestBody.builder()
+                    .dateSent("<value>")
+                    .bankName("<value>")
+                    .amountSent("<value>")
+                    .build())
+                .call();
+
+        if (res.wireInRequest().isPresent()) {
+            System.out.println(res.wireInRequest().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-wire_in_requests-wire_in_request_uuid" method="put" path="/v1/wire_in_requests/{wire_in_request_uuid}" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutWireInRequestsWireInRequestUuidRequestBody;
+import com.gusto.embedded_api.models.operations.PutWireInRequestsWireInRequestUuidResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutWireInRequestsWireInRequestUuidResponse res = sdk.wireInRequests().submit()
+                .wireInRequestUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutWireInRequestsWireInRequestUuidRequestBody.builder()
+                    .dateSent("<value>")
+                    .bankName("<value>")
+                    .amountSent("<value>")
+                    .build())
+                .call();
+
+        if (res.wireInRequest().isPresent()) {
+            System.out.println(res.wireInRequest().get());
+        }
+    }
+}
+```
+### Example Usage: example
+
+<!-- UsageSnippet language="java" operationID="put-wire_in_requests-wire_in_request_uuid" method="put" path="/v1/wire_in_requests/{wire_in_request_uuid}" example="example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutWireInRequestsWireInRequestUuidRequestBody;
+import com.gusto.embedded_api.models.operations.PutWireInRequestsWireInRequestUuidResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutWireInRequestsWireInRequestUuidResponse res = sdk.wireInRequests().submit()
+                .wireInRequestUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutWireInRequestsWireInRequestUuidRequestBody.builder()
+                    .dateSent("<value>")
+                    .bankName("<value>")
+                    .amountSent("<value>")
+                    .build())
+                .call();
+
+        if (res.wireInRequest().isPresent()) {
+            System.out.println(res.wireInRequest().get());
         }
     }
 }
@@ -134,7 +282,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-wire_in_request_uuid" method="get" path="/v1/companies/{company_uuid}/wire_in_requests" -->
+<!-- UsageSnippet language="java" operationID="get-companies-company_uuid-wire_in_request_uuid" method="get" path="/v1/companies/{company_uuid}/wire_in_requests" example="Example" -->
 ```java
 package hello.world;
 
@@ -157,7 +305,7 @@ public class Application {
                 .call();
 
         if (res.wireInRequestList().isPresent()) {
-            // handle response
+            System.out.println(res.wireInRequestList().get());
         }
     }
 }

@@ -2,6 +2,14 @@
 
 Status of the wire in
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.WireInRequestStatus;
+
+WireInRequestStatus value = WireInRequestStatus.AWAITING_FUNDS;
+```
+
 
 ## Values
 

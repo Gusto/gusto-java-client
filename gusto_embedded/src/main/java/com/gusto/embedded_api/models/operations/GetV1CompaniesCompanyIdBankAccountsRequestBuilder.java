@@ -16,22 +16,16 @@ import java.util.Optional;
 
 public class GetV1CompaniesCompanyIdBankAccountsRequestBuilder {
 
-    private String companyId;
     private Optional<? extends GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompaniesCompanyIdBankAccountsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1CompaniesCompanyIdBankAccountsRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public GetV1CompaniesCompanyIdBankAccountsRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,14 +40,20 @@ public class GetV1CompaniesCompanyIdBankAccountsRequestBuilder {
         return this;
     }
 
+    public GetV1CompaniesCompanyIdBankAccountsRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
 
     private GetV1CompaniesCompanyIdBankAccountsRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompaniesCompanyIdBankAccountsRequest request = new GetV1CompaniesCompanyIdBankAccountsRequest(companyId,
-            xGustoAPIVersion);
+        GetV1CompaniesCompanyIdBankAccountsRequest request = new GetV1CompaniesCompanyIdBankAccountsRequest(xGustoAPIVersion,
+            companyId);
 
         return request;
     }

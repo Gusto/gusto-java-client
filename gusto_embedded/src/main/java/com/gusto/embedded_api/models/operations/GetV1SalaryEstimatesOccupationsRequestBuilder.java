@@ -19,7 +19,7 @@ public class GetV1SalaryEstimatesOccupationsRequestBuilder {
     private GetV1SalaryEstimatesOccupationsSecurity security;
     private Optional<? extends GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
-                            "\"2024-04-01\"",
+                            "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion>>() {});
     private String search;
     private final SDKConfiguration sdkConfiguration;
@@ -77,6 +77,6 @@ public class GetV1SalaryEstimatesOccupationsRequestBuilder {
     private static final LazySingletonValue<Optional<? extends GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
-                    "\"2024-04-01\"",
+                    "\"2025-06-15\"",
                     new TypeReference<Optional<? extends GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion>>() {});
 }

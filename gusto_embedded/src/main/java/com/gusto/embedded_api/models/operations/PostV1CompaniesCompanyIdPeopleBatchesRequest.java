@@ -215,7 +215,7 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequest {
         private static final LazySingletonValue<Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
-                        "\"2025-11-15\"",
+                        "\"2025-06-15\"",
                         new TypeReference<Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion>>() {});
     }
 }

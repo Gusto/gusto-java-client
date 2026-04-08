@@ -7,10 +7,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.EntityErrorObject;
 import com.gusto.embedded_api.utils.Blob;
 import com.gusto.embedded_api.utils.Utils;
-import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -98,7 +96,7 @@ public class NotFoundErrorObject extends GustoEmbeddedException {
     }
 
     @Deprecated
-    public Optional<List<EntityErrorObject>> errors() {
+    public Optional<List<Errors>> errors() {
         return data().map(Data::errors);
     }
 
@@ -122,17 +120,17 @@ public class NotFoundErrorObject extends GustoEmbeddedException {
     public static class Data {
 
         @JsonProperty("errors")
-        private List<EntityErrorObject> errors;
+        private List<Errors> errors;
 
         @JsonCreator
         public Data(
-                @JsonProperty("errors") List<EntityErrorObject> errors) {
+                @JsonProperty("errors") List<Errors> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = errors;
         }
 
         @JsonIgnore
-        public List<EntityErrorObject> errors() {
+        public List<Errors> errors() {
             return errors;
         }
 
@@ -141,7 +139,7 @@ public class NotFoundErrorObject extends GustoEmbeddedException {
         }
 
 
-        public Data withErrors(List<EntityErrorObject> errors) {
+        public Data withErrors(List<Errors> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = errors;
             return this;
@@ -175,14 +173,14 @@ public class NotFoundErrorObject extends GustoEmbeddedException {
         @SuppressWarnings("UnusedReturnValue")
         public final static class Builder {
 
-            private List<EntityErrorObject> errors;
+            private List<Errors> errors;
 
             private Builder() {
               // force use of static builder() method
             }
 
 
-            public Builder errors(List<EntityErrorObject> errors) {
+            public Builder errors(List<Errors> errors) {
                 Utils.checkNotNull(errors, "errors");
                 this.errors = errors;
                 return this;

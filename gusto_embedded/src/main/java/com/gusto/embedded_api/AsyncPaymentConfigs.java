@@ -5,10 +5,11 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation;
 
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.PaymentConfigsUpdateRequest;
+import com.gusto.embedded_api.models.operations.GetV1CompanyPaymentConfigsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompanyPaymentConfigsRequest;
+import com.gusto.embedded_api.models.operations.PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompanyPaymentConfigsRequest;
-import com.gusto.embedded_api.models.operations.PutV1CompanyPaymentConfigsRequestBody;
 import com.gusto.embedded_api.models.operations.async.GetV1CompanyPaymentConfigsRequestBuilder;
 import com.gusto.embedded_api.models.operations.async.GetV1CompanyPaymentConfigsResponse;
 import com.gusto.embedded_api.models.operations.async.PutV1CompanyPaymentConfigsRequestBuilder;
@@ -44,10 +45,16 @@ public class AsyncPaymentConfigs {
     /**
      * Get a company's payment configs
      * 
-     * <p>Get payment speed configurations for the company and fast payment limit (1-day is only applicable to
-     * partners that opt in).
+     * <p>Get payment speed configurations for the company: payment speed (1-day, 2-day, or 4-day ACH), fast
+     * payment limit, partner-owned disbursement setting, and earned fast ACH blockers when applicable.
+     * 1-day is only available to partners that opt in.
+     * 
+     * <p>### Related guides
+     * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
      * 
      * <p>scope: `company_payment_configs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -58,36 +65,48 @@ public class AsyncPaymentConfigs {
     /**
      * Get a company's payment configs
      * 
-     * <p>Get payment speed configurations for the company and fast payment limit (1-day is only applicable to
-     * partners that opt in).
+     * <p>Get payment speed configurations for the company: payment speed (1-day, 2-day, or 4-day ACH), fast
+     * payment limit, partner-owned disbursement setting, and earned fast ACH blockers when applicable.
+     * 1-day is only available to partners that opt in.
+     * 
+     * <p>### Related guides
+     * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
      * 
      * <p>scope: `company_payment_configs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyUuid The UUID of the company
      * @return {@code CompletableFuture<GetV1CompanyPaymentConfigsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompanyPaymentConfigsResponse> get(String companyUuid) {
-        return get(companyUuid, Optional.empty());
+        return get(Optional.empty(), companyUuid);
     }
 
     /**
      * Get a company's payment configs
      * 
-     * <p>Get payment speed configurations for the company and fast payment limit (1-day is only applicable to
-     * partners that opt in).
+     * <p>Get payment speed configurations for the company: payment speed (1-day, 2-day, or 4-day ACH), fast
+     * payment limit, partner-owned disbursement setting, and earned fast ACH blockers when applicable.
+     * 1-day is only available to partners that opt in.
+     * 
+     * <p>### Related guides
+     * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
      * 
      * <p>scope: `company_payment_configs:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion 
      * @return {@code CompletableFuture<GetV1CompanyPaymentConfigsResponse>} - The async response
      */
-    public CompletableFuture<GetV1CompanyPaymentConfigsResponse> get(String companyUuid, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public CompletableFuture<GetV1CompanyPaymentConfigsResponse> get(Optional<? extends GetV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
         GetV1CompanyPaymentConfigsRequest request =
             GetV1CompanyPaymentConfigsRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .build();
         AsyncRequestOperation<GetV1CompanyPaymentConfigsRequest, GetV1CompanyPaymentConfigsResponse> operation
               = new GetV1CompanyPaymentConfigs.Async(sdkConfiguration, _headers);
@@ -99,11 +118,18 @@ public class AsyncPaymentConfigs {
     /**
      * Update a company's payment configs
      * 
-     * <p>Update payment speed and fast payment limit for a company. At least one of `payment_speed` or
-     * `fast_payment_limit` parameters is required. 1-day option is only applicable to partners that opt
-     * in.
+     * <p>Update payment speed, fast payment limit, and/or partner-owned disbursement for a company.
+     * 
+     * <p>At least one of `payment_speed`, `fast_payment_limit`, or `partner_owned_disbursement` is required.
+     * 1-day payment speed is only applicable to partners that opt in. 1-day is not allowed when AutoPilot
+     * is enabled.
+     * 
+     * <p>### Related guides
+     * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
      * 
      * <p>scope: `company_payment_configs:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
@@ -114,43 +140,57 @@ public class AsyncPaymentConfigs {
     /**
      * Update a company's payment configs
      * 
-     * <p>Update payment speed and fast payment limit for a company. At least one of `payment_speed` or
-     * `fast_payment_limit` parameters is required. 1-day option is only applicable to partners that opt
-     * in.
+     * <p>Update payment speed, fast payment limit, and/or partner-owned disbursement for a company.
+     * 
+     * <p>At least one of `payment_speed`, `fast_payment_limit`, or `partner_owned_disbursement` is required.
+     * 1-day payment speed is only applicable to partners that opt in. 1-day is not allowed when AutoPilot
+     * is enabled.
+     * 
+     * <p>### Related guides
+     * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
      * 
      * <p>scope: `company_payment_configs:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody 
+     * @param paymentConfigsUpdateRequest Request body for updating company payment configs. At least one of payment_speed, fast_payment_limit, or partner_owned_disbursement is required.
      * @return {@code CompletableFuture<PutV1CompanyPaymentConfigsResponse>} - The async response
      */
-    public CompletableFuture<PutV1CompanyPaymentConfigsResponse> update(String companyUuid, PutV1CompanyPaymentConfigsRequestBody requestBody) {
-        return update(companyUuid, Optional.empty(), requestBody);
+    public CompletableFuture<PutV1CompanyPaymentConfigsResponse> update(String companyUuid, PaymentConfigsUpdateRequest paymentConfigsUpdateRequest) {
+        return update(Optional.empty(), companyUuid, paymentConfigsUpdateRequest);
     }
 
     /**
      * Update a company's payment configs
      * 
-     * <p>Update payment speed and fast payment limit for a company. At least one of `payment_speed` or
-     * `fast_payment_limit` parameters is required. 1-day option is only applicable to partners that opt
-     * in.
+     * <p>Update payment speed, fast payment limit, and/or partner-owned disbursement for a company.
+     * 
+     * <p>At least one of `payment_speed`, `fast_payment_limit`, or `partner_owned_disbursement` is required.
+     * 1-day payment speed is only applicable to partners that opt in. 1-day is not allowed when AutoPilot
+     * is enabled.
+     * 
+     * <p>### Related guides
+     * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
      * 
      * <p>scope: `company_payment_configs:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param paymentConfigsUpdateRequest Request body for updating company payment configs. At least one of payment_speed, fast_payment_limit, or partner_owned_disbursement is required.
      * @return {@code CompletableFuture<PutV1CompanyPaymentConfigsResponse>} - The async response
      */
     public CompletableFuture<PutV1CompanyPaymentConfigsResponse> update(
-            String companyUuid, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1CompanyPaymentConfigsRequestBody requestBody) {
+            Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            PaymentConfigsUpdateRequest paymentConfigsUpdateRequest) {
         PutV1CompanyPaymentConfigsRequest request =
             PutV1CompanyPaymentConfigsRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .companyUuid(companyUuid)
+                .paymentConfigsUpdateRequest(paymentConfigsUpdateRequest)
                 .build();
         AsyncRequestOperation<PutV1CompanyPaymentConfigsRequest, PutV1CompanyPaymentConfigsResponse> operation
               = new PutV1CompanyPaymentConfigs.Async(sdkConfiguration, _headers);

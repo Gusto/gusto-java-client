@@ -5,6 +5,7 @@ package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gusto.embedded_api.models.components.PeopleBatchResults;
 import com.gusto.embedded_api.utils.Response;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
@@ -35,22 +36,22 @@ public class GetV1PeopleBatchesPeopleBatchUuidResponse implements Response {
     /**
      * successful
      */
-    private Optional<? extends GetV1PeopleBatchesPeopleBatchUuidResponseBody> object;
+    private Optional<? extends PeopleBatchResults> peopleBatchResults;
 
     @JsonCreator
     public GetV1PeopleBatchesPeopleBatchUuidResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends GetV1PeopleBatchesPeopleBatchUuidResponseBody> object) {
+            Optional<? extends PeopleBatchResults> peopleBatchResults) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(object, "object");
+        Utils.checkNotNull(peopleBatchResults, "peopleBatchResults");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.object = object;
+        this.peopleBatchResults = peopleBatchResults;
     }
     
     public GetV1PeopleBatchesPeopleBatchUuidResponse(
@@ -90,8 +91,8 @@ public class GetV1PeopleBatchesPeopleBatchUuidResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetV1PeopleBatchesPeopleBatchUuidResponseBody> object() {
-        return (Optional<GetV1PeopleBatchesPeopleBatchUuidResponseBody>) object;
+    public Optional<PeopleBatchResults> peopleBatchResults() {
+        return (Optional<PeopleBatchResults>) peopleBatchResults;
     }
 
     public static Builder builder() {
@@ -129,9 +130,9 @@ public class GetV1PeopleBatchesPeopleBatchUuidResponse implements Response {
     /**
      * successful
      */
-    public GetV1PeopleBatchesPeopleBatchUuidResponse withObject(GetV1PeopleBatchesPeopleBatchUuidResponseBody object) {
-        Utils.checkNotNull(object, "object");
-        this.object = Optional.ofNullable(object);
+    public GetV1PeopleBatchesPeopleBatchUuidResponse withPeopleBatchResults(PeopleBatchResults peopleBatchResults) {
+        Utils.checkNotNull(peopleBatchResults, "peopleBatchResults");
+        this.peopleBatchResults = Optional.ofNullable(peopleBatchResults);
         return this;
     }
 
@@ -139,9 +140,9 @@ public class GetV1PeopleBatchesPeopleBatchUuidResponse implements Response {
     /**
      * successful
      */
-    public GetV1PeopleBatchesPeopleBatchUuidResponse withObject(Optional<? extends GetV1PeopleBatchesPeopleBatchUuidResponseBody> object) {
-        Utils.checkNotNull(object, "object");
-        this.object = object;
+    public GetV1PeopleBatchesPeopleBatchUuidResponse withPeopleBatchResults(Optional<? extends PeopleBatchResults> peopleBatchResults) {
+        Utils.checkNotNull(peopleBatchResults, "peopleBatchResults");
+        this.peopleBatchResults = peopleBatchResults;
         return this;
     }
 
@@ -158,14 +159,14 @@ public class GetV1PeopleBatchesPeopleBatchUuidResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.object, other.object);
+            Utils.enhancedDeepEquals(this.peopleBatchResults, other.peopleBatchResults);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            object);
+            peopleBatchResults);
     }
     
     @Override
@@ -174,7 +175,7 @@ public class GetV1PeopleBatchesPeopleBatchUuidResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "object", object);
+                "peopleBatchResults", peopleBatchResults);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -186,7 +187,7 @@ public class GetV1PeopleBatchesPeopleBatchUuidResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends GetV1PeopleBatchesPeopleBatchUuidResponseBody> object = Optional.empty();
+        private Optional<? extends PeopleBatchResults> peopleBatchResults = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,18 +227,18 @@ public class GetV1PeopleBatchesPeopleBatchUuidResponse implements Response {
         /**
          * successful
          */
-        public Builder object(GetV1PeopleBatchesPeopleBatchUuidResponseBody object) {
-            Utils.checkNotNull(object, "object");
-            this.object = Optional.ofNullable(object);
+        public Builder peopleBatchResults(PeopleBatchResults peopleBatchResults) {
+            Utils.checkNotNull(peopleBatchResults, "peopleBatchResults");
+            this.peopleBatchResults = Optional.ofNullable(peopleBatchResults);
             return this;
         }
 
         /**
          * successful
          */
-        public Builder object(Optional<? extends GetV1PeopleBatchesPeopleBatchUuidResponseBody> object) {
-            Utils.checkNotNull(object, "object");
-            this.object = object;
+        public Builder peopleBatchResults(Optional<? extends PeopleBatchResults> peopleBatchResults) {
+            Utils.checkNotNull(peopleBatchResults, "peopleBatchResults");
+            this.peopleBatchResults = peopleBatchResults;
             return this;
         }
 
@@ -245,7 +246,7 @@ public class GetV1PeopleBatchesPeopleBatchUuidResponse implements Response {
 
             return new GetV1PeopleBatchesPeopleBatchUuidResponse(
                 contentType, statusCode, rawResponse,
-                object);
+                peopleBatchResults);
         }
 
     }

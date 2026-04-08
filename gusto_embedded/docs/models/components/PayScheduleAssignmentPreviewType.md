@@ -1,6 +1,12 @@
 # PayScheduleAssignmentPreviewType
 
-The pay schedule assignment type.
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.PayScheduleAssignmentPreviewType;
+
+PayScheduleAssignmentPreviewType value = PayScheduleAssignmentPreviewType.SINGLE;
+```
 
 
 ## Values

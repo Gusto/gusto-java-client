@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.ContractorPaymentBody;
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyIdContractorPayments;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,17 +17,29 @@ import java.util.Optional;
 
 public class PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder {
 
-    private String companyId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PostV1CompaniesCompanyIdContractorPaymentsRequestBody requestBody;
+                            new TypeReference<Optional<? extends PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private ContractorPaymentBody contractorPaymentBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder xGustoAPIVersion(PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder xGustoAPIVersion(Optional<? extends PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder companyId(String companyId) {
@@ -35,22 +47,10 @@ public class PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder {
         this.companyId = companyId;
         return this;
     }
-                
-    public PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
 
-    public PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder requestBody(PostV1CompaniesCompanyIdContractorPaymentsRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder contractorPaymentBody(ContractorPaymentBody contractorPaymentBody) {
+        Utils.checkNotNull(contractorPaymentBody, "contractorPaymentBody");
+        this.contractorPaymentBody = contractorPaymentBody;
         return this;
     }
 
@@ -60,9 +60,9 @@ public class PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1CompaniesCompanyIdContractorPaymentsRequest request = new PostV1CompaniesCompanyIdContractorPaymentsRequest(companyId,
-            xGustoAPIVersion,
-            requestBody);
+        PostV1CompaniesCompanyIdContractorPaymentsRequest request = new PostV1CompaniesCompanyIdContractorPaymentsRequest(xGustoAPIVersion,
+            companyId,
+            contractorPaymentBody);
 
         return request;
     }
@@ -76,9 +76,9 @@ public class PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion>>() {});
 }

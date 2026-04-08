@@ -11,12 +11,10 @@ import java.util.Optional;
 /**
  * EntityType
  * 
- * <p>the type of target entity applicable to the flow. This field is optional for company flows, please
- * refer to the flow_types table above for more details.
+ * <p>The type of entity to create
  */
 public enum EntityType {
-    COMPANY("Company"),
-    EMPLOYEE("Employee");
+    EMPLOYEE("employee");
 
     @JsonValue
     private final String value;

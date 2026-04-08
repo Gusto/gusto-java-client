@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
+import java.lang.Double;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -18,42 +19,42 @@ import org.openapitools.jackson.nullable.JsonNullable;
 
 public class Splits {
     /**
-     * The bank account UUID
+     * The bank account UUID.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("uuid")
     private Optional<String> uuid;
 
     /**
-     * The bank account name
+     * The bank account name.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
     private Optional<String> name;
 
     /**
-     * The order of priority for each payment split, with priority 1 being the first bank account paid.
-     * Priority must be unique and sequential.
+     * Order of priority for each payment split; priority 1 is the first account paid. Must be unique and
+     * sequential.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("priority")
     private Optional<Long> priority;
 
     /**
-     * If `split_by` is 'Amount', this is in cents (e.g., 500 for $5.00) and exactly one account must have
-     * a `split_amount` of `null` to capture the remainder. If `split_by` is 'Percentage', this is the
-     * percentage value (e.g., 60 for 60%).
+     * If split_by is Amount, value is in cents (e.g., 500 for $5.00) and exactly one account must have
+     * null to capture the remainder. If split_by is Percentage, value is the percentage (e.g., 60 for
+     * 60%).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("split_amount")
-    private JsonNullable<Long> splitAmount;
+    private JsonNullable<Double> splitAmount;
 
     @JsonCreator
     public Splits(
             @JsonProperty("uuid") Optional<String> uuid,
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("priority") Optional<Long> priority,
-            @JsonProperty("split_amount") JsonNullable<Long> splitAmount) {
+            @JsonProperty("split_amount") JsonNullable<Double> splitAmount) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(priority, "priority");
@@ -70,7 +71,7 @@ public class Splits {
     }
 
     /**
-     * The bank account UUID
+     * The bank account UUID.
      */
     @JsonIgnore
     public Optional<String> uuid() {
@@ -78,7 +79,7 @@ public class Splits {
     }
 
     /**
-     * The bank account name
+     * The bank account name.
      */
     @JsonIgnore
     public Optional<String> name() {
@@ -86,8 +87,8 @@ public class Splits {
     }
 
     /**
-     * The order of priority for each payment split, with priority 1 being the first bank account paid.
-     * Priority must be unique and sequential.
+     * Order of priority for each payment split; priority 1 is the first account paid. Must be unique and
+     * sequential.
      */
     @JsonIgnore
     public Optional<Long> priority() {
@@ -95,12 +96,12 @@ public class Splits {
     }
 
     /**
-     * If `split_by` is 'Amount', this is in cents (e.g., 500 for $5.00) and exactly one account must have
-     * a `split_amount` of `null` to capture the remainder. If `split_by` is 'Percentage', this is the
-     * percentage value (e.g., 60 for 60%).
+     * If split_by is Amount, value is in cents (e.g., 500 for $5.00) and exactly one account must have
+     * null to capture the remainder. If split_by is Percentage, value is the percentage (e.g., 60 for
+     * 60%).
      */
     @JsonIgnore
-    public JsonNullable<Long> splitAmount() {
+    public JsonNullable<Double> splitAmount() {
         return splitAmount;
     }
 
@@ -110,7 +111,7 @@ public class Splits {
 
 
     /**
-     * The bank account UUID
+     * The bank account UUID.
      */
     public Splits withUuid(String uuid) {
         Utils.checkNotNull(uuid, "uuid");
@@ -120,7 +121,7 @@ public class Splits {
 
 
     /**
-     * The bank account UUID
+     * The bank account UUID.
      */
     public Splits withUuid(Optional<String> uuid) {
         Utils.checkNotNull(uuid, "uuid");
@@ -129,7 +130,7 @@ public class Splits {
     }
 
     /**
-     * The bank account name
+     * The bank account name.
      */
     public Splits withName(String name) {
         Utils.checkNotNull(name, "name");
@@ -139,7 +140,7 @@ public class Splits {
 
 
     /**
-     * The bank account name
+     * The bank account name.
      */
     public Splits withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
@@ -148,8 +149,8 @@ public class Splits {
     }
 
     /**
-     * The order of priority for each payment split, with priority 1 being the first bank account paid.
-     * Priority must be unique and sequential.
+     * Order of priority for each payment split; priority 1 is the first account paid. Must be unique and
+     * sequential.
      */
     public Splits withPriority(long priority) {
         Utils.checkNotNull(priority, "priority");
@@ -159,8 +160,8 @@ public class Splits {
 
 
     /**
-     * The order of priority for each payment split, with priority 1 being the first bank account paid.
-     * Priority must be unique and sequential.
+     * Order of priority for each payment split; priority 1 is the first account paid. Must be unique and
+     * sequential.
      */
     public Splits withPriority(Optional<Long> priority) {
         Utils.checkNotNull(priority, "priority");
@@ -169,22 +170,22 @@ public class Splits {
     }
 
     /**
-     * If `split_by` is 'Amount', this is in cents (e.g., 500 for $5.00) and exactly one account must have
-     * a `split_amount` of `null` to capture the remainder. If `split_by` is 'Percentage', this is the
-     * percentage value (e.g., 60 for 60%).
+     * If split_by is Amount, value is in cents (e.g., 500 for $5.00) and exactly one account must have
+     * null to capture the remainder. If split_by is Percentage, value is the percentage (e.g., 60 for
+     * 60%).
      */
-    public Splits withSplitAmount(long splitAmount) {
+    public Splits withSplitAmount(double splitAmount) {
         Utils.checkNotNull(splitAmount, "splitAmount");
         this.splitAmount = JsonNullable.of(splitAmount);
         return this;
     }
 
     /**
-     * If `split_by` is 'Amount', this is in cents (e.g., 500 for $5.00) and exactly one account must have
-     * a `split_amount` of `null` to capture the remainder. If `split_by` is 'Percentage', this is the
-     * percentage value (e.g., 60 for 60%).
+     * If split_by is Amount, value is in cents (e.g., 500 for $5.00) and exactly one account must have
+     * null to capture the remainder. If split_by is Percentage, value is the percentage (e.g., 60 for
+     * 60%).
      */
-    public Splits withSplitAmount(JsonNullable<Long> splitAmount) {
+    public Splits withSplitAmount(JsonNullable<Double> splitAmount) {
         Utils.checkNotNull(splitAmount, "splitAmount");
         this.splitAmount = splitAmount;
         return this;
@@ -231,7 +232,7 @@ public class Splits {
 
         private Optional<Long> priority = Optional.empty();
 
-        private JsonNullable<Long> splitAmount = JsonNullable.undefined();
+        private JsonNullable<Double> splitAmount = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -239,7 +240,7 @@ public class Splits {
 
 
         /**
-         * The bank account UUID
+         * The bank account UUID.
          */
         public Builder uuid(String uuid) {
             Utils.checkNotNull(uuid, "uuid");
@@ -248,7 +249,7 @@ public class Splits {
         }
 
         /**
-         * The bank account UUID
+         * The bank account UUID.
          */
         public Builder uuid(Optional<String> uuid) {
             Utils.checkNotNull(uuid, "uuid");
@@ -258,7 +259,7 @@ public class Splits {
 
 
         /**
-         * The bank account name
+         * The bank account name.
          */
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
@@ -267,7 +268,7 @@ public class Splits {
         }
 
         /**
-         * The bank account name
+         * The bank account name.
          */
         public Builder name(Optional<String> name) {
             Utils.checkNotNull(name, "name");
@@ -277,8 +278,8 @@ public class Splits {
 
 
         /**
-         * The order of priority for each payment split, with priority 1 being the first bank account paid.
-         * Priority must be unique and sequential.
+         * Order of priority for each payment split; priority 1 is the first account paid. Must be unique and
+         * sequential.
          */
         public Builder priority(long priority) {
             Utils.checkNotNull(priority, "priority");
@@ -287,8 +288,8 @@ public class Splits {
         }
 
         /**
-         * The order of priority for each payment split, with priority 1 being the first bank account paid.
-         * Priority must be unique and sequential.
+         * Order of priority for each payment split; priority 1 is the first account paid. Must be unique and
+         * sequential.
          */
         public Builder priority(Optional<Long> priority) {
             Utils.checkNotNull(priority, "priority");
@@ -298,22 +299,22 @@ public class Splits {
 
 
         /**
-         * If `split_by` is 'Amount', this is in cents (e.g., 500 for $5.00) and exactly one account must have
-         * a `split_amount` of `null` to capture the remainder. If `split_by` is 'Percentage', this is the
-         * percentage value (e.g., 60 for 60%).
+         * If split_by is Amount, value is in cents (e.g., 500 for $5.00) and exactly one account must have
+         * null to capture the remainder. If split_by is Percentage, value is the percentage (e.g., 60 for
+         * 60%).
          */
-        public Builder splitAmount(long splitAmount) {
+        public Builder splitAmount(double splitAmount) {
             Utils.checkNotNull(splitAmount, "splitAmount");
             this.splitAmount = JsonNullable.of(splitAmount);
             return this;
         }
 
         /**
-         * If `split_by` is 'Amount', this is in cents (e.g., 500 for $5.00) and exactly one account must have
-         * a `split_amount` of `null` to capture the remainder. If `split_by` is 'Percentage', this is the
-         * percentage value (e.g., 60 for 60%).
+         * If split_by is Amount, value is in cents (e.g., 500 for $5.00) and exactly one account must have
+         * null to capture the remainder. If split_by is Percentage, value is the percentage (e.g., 60 for
+         * 60%).
          */
-        public Builder splitAmount(JsonNullable<Long> splitAmount) {
+        public Builder splitAmount(JsonNullable<Double> splitAmount) {
             Utils.checkNotNull(splitAmount, "splitAmount");
             this.splitAmount = splitAmount;
             return this;

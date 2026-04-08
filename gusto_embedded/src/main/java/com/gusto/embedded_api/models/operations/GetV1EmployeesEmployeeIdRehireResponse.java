@@ -34,7 +34,7 @@ public class GetV1EmployeesEmployeeIdRehireResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * Example response
+     * Success
      */
     private Optional<? extends Rehire> rehire;
 
@@ -87,7 +87,7 @@ public class GetV1EmployeesEmployeeIdRehireResponse implements Response {
     }
 
     /**
-     * Example response
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1EmployeesEmployeeIdRehireResponse implements Response {
     }
 
     /**
-     * Example response
+     * Success
      */
     public GetV1EmployeesEmployeeIdRehireResponse withRehire(Rehire rehire) {
         Utils.checkNotNull(rehire, "rehire");
@@ -138,7 +138,7 @@ public class GetV1EmployeesEmployeeIdRehireResponse implements Response {
 
 
     /**
-     * Example response
+     * Success
      */
     public GetV1EmployeesEmployeeIdRehireResponse withRehire(Optional<? extends Rehire> rehire) {
         Utils.checkNotNull(rehire, "rehire");
@@ -225,7 +225,7 @@ public class GetV1EmployeesEmployeeIdRehireResponse implements Response {
 
 
         /**
-         * Example response
+         * Success
          */
         public Builder rehire(Rehire rehire) {
             Utils.checkNotNull(rehire, "rehire");
@@ -234,7 +234,7 @@ public class GetV1EmployeesEmployeeIdRehireResponse implements Response {
         }
 
         /**
-         * Example response
+         * Success
          */
         public Builder rehire(Optional<? extends Rehire> rehire) {
             Utils.checkNotNull(rehire, "rehire");

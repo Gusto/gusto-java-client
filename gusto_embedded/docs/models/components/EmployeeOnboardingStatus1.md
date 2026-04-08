@@ -1,6 +1,12 @@
 # EmployeeOnboardingStatus1
 
-The current onboarding status of the employee
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.EmployeeOnboardingStatus1;
+
+EmployeeOnboardingStatus1 value = EmployeeOnboardingStatus1.ONBOARDING_COMPLETED;
+```
 
 
 ## Values

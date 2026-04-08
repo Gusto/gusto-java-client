@@ -18,9 +18,43 @@ Create a department
 
 scope: `departments:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="post-departments" method="post" path="/v1/companies/{company_uuid}/departments" -->
+<!-- UsageSnippet language="java" operationID="post-departments" method="post" path="/v1/companies/{company_uuid}/departments" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostDepartmentsRequestBody;
+import com.gusto.embedded_api.models.operations.PostDepartmentsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostDepartmentsResponse res = sdk.departments().create()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostDepartmentsRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.department().isPresent()) {
+            System.out.println(res.department().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="post-departments" method="post" path="/v1/companies/{company_uuid}/departments" example="Example" -->
 ```java
 package hello.world;
 
@@ -48,7 +82,75 @@ public class Application {
                 .call();
 
         if (res.department().isPresent()) {
-            // handle response
+            System.out.println(res.department().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="post-departments" method="post" path="/v1/companies/{company_uuid}/departments" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostDepartmentsRequestBody;
+import com.gusto.embedded_api.models.operations.PostDepartmentsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostDepartmentsResponse res = sdk.departments().create()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostDepartmentsRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.department().isPresent()) {
+            System.out.println(res.department().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="post-departments" method="post" path="/v1/companies/{company_uuid}/departments" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostDepartmentsRequestBody;
+import com.gusto.embedded_api.models.operations.PostDepartmentsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostDepartmentsResponse res = sdk.departments().create()
+                .companyUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostDepartmentsRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.department().isPresent()) {
+            System.out.println(res.department().get());
         }
     }
 }
@@ -81,7 +183,7 @@ scope: `departments:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-companies-departments" method="get" path="/v1/companies/{company_uuid}/departments" -->
+<!-- UsageSnippet language="java" operationID="get-companies-departments" method="get" path="/v1/companies/{company_uuid}/departments" example="Example" -->
 ```java
 package hello.world;
 
@@ -104,7 +206,7 @@ public class Application {
                 .call();
 
         if (res.departmentList().isPresent()) {
-            // handle response
+            System.out.println(res.departmentList().get());
         }
     }
 }
@@ -136,7 +238,7 @@ scope: `departments:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-department" method="get" path="/v1/departments/{department_uuid}" -->
+<!-- UsageSnippet language="java" operationID="get-department" method="get" path="/v1/departments/{department_uuid}" example="Example" -->
 ```java
 package hello.world;
 
@@ -159,7 +261,7 @@ public class Application {
                 .call();
 
         if (res.department().isPresent()) {
-            // handle response
+            System.out.println(res.department().get());
         }
     }
 }
@@ -188,9 +290,44 @@ Update a department
 
 scope: `departments:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="put-departments" method="put" path="/v1/departments/{department_uuid}" -->
+<!-- UsageSnippet language="java" operationID="put-departments" method="put" path="/v1/departments/{department_uuid}" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutDepartmentsRequestBody;
+import com.gusto.embedded_api.models.operations.PutDepartmentsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutDepartmentsResponse res = sdk.departments().update()
+                .departmentUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutDepartmentsRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.department().isPresent()) {
+            System.out.println(res.department().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-departments" method="put" path="/v1/departments/{department_uuid}" example="Example" -->
 ```java
 package hello.world;
 
@@ -219,7 +356,77 @@ public class Application {
                 .call();
 
         if (res.department().isPresent()) {
-            // handle response
+            System.out.println(res.department().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-departments" method="put" path="/v1/departments/{department_uuid}" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutDepartmentsRequestBody;
+import com.gusto.embedded_api.models.operations.PutDepartmentsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutDepartmentsResponse res = sdk.departments().update()
+                .departmentUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutDepartmentsRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.department().isPresent()) {
+            System.out.println(res.department().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-departments" method="put" path="/v1/departments/{department_uuid}" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutDepartmentsRequestBody;
+import com.gusto.embedded_api.models.operations.PutDepartmentsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutDepartmentsResponse res = sdk.departments().update()
+                .departmentUuid("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PutDepartmentsRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.department().isPresent()) {
+            System.out.println(res.department().get());
         }
     }
 }
@@ -308,7 +515,7 @@ scope: `departments:write`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="put-add-people-to-department" method="put" path="/v1/departments/{department_uuid}/add" -->
+<!-- UsageSnippet language="java" operationID="put-add-people-to-department" method="put" path="/v1/departments/{department_uuid}/add" example="Example" -->
 ```java
 package hello.world;
 
@@ -334,7 +541,7 @@ public class Application {
                 .call();
 
         if (res.department().isPresent()) {
-            // handle response
+            System.out.println(res.department().get());
         }
     }
 }
@@ -367,7 +574,7 @@ scope: `departments:write`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="put-remove-people-from-department" method="put" path="/v1/departments/{department_uuid}/remove" -->
+<!-- UsageSnippet language="java" operationID="put-remove-people-from-department" method="put" path="/v1/departments/{department_uuid}/remove" example="Example" -->
 ```java
 package hello.world;
 
@@ -393,7 +600,7 @@ public class Application {
                 .call();
 
         if (res.department().isPresent()) {
-            // handle response
+            System.out.println(res.department().get());
         }
     }
 }

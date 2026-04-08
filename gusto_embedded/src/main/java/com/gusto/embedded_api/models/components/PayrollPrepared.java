@@ -18,7 +18,12 @@ import java.util.List;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
-
+/**
+ * PayrollPrepared
+ * 
+ * <p>The response from preparing a payroll for update. Contains refreshed employee compensations, updated
+ * payroll dates, and version information needed for subsequent payroll updates.
+ */
 public class PayrollPrepared {
     /**
      * A timestamp that is the deadline for the payroll to be run in order for employees to be paid on
@@ -125,7 +130,7 @@ public class PayrollPrepared {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("withholding_pay_period")
-    private Optional<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod;
+    private JsonNullable<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod;
 
     /**
      * Block regular deductions and contributions for this payroll. Only included for off-cycle payrolls.
@@ -208,7 +213,7 @@ public class PayrollPrepared {
             @JsonProperty("auto_pilot") Optional<Boolean> autoPilot,
             @JsonProperty("external") Optional<Boolean> external,
             @JsonProperty("final_termination_payroll") Optional<Boolean> finalTerminationPayroll,
-            @JsonProperty("withholding_pay_period") Optional<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod,
+            @JsonProperty("withholding_pay_period") JsonNullable<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod,
             @JsonProperty("skip_regular_deductions") JsonNullable<Boolean> skipRegularDeductions,
             @JsonProperty("fixed_withholding_rate") JsonNullable<Boolean> fixedWithholdingRate,
             @JsonProperty("pay_period") Optional<? extends PayrollPayPeriodType> payPeriod,
@@ -274,7 +279,7 @@ public class PayrollPrepared {
             JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             JsonNullable.undefined(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), JsonNullable.undefined(),
+            Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
             JsonNullable.undefined(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined());
@@ -399,8 +404,8 @@ public class PayrollPrepared {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PayrollWithholdingPayPeriodType> withholdingPayPeriod() {
-        return (Optional<PayrollWithholdingPayPeriodType>) withholdingPayPeriod;
+    public JsonNullable<PayrollWithholdingPayPeriodType> withholdingPayPeriod() {
+        return (JsonNullable<PayrollWithholdingPayPeriodType>) withholdingPayPeriod;
     }
 
     /**
@@ -753,15 +758,14 @@ public class PayrollPrepared {
      */
     public PayrollPrepared withWithholdingPayPeriod(PayrollWithholdingPayPeriodType withholdingPayPeriod) {
         Utils.checkNotNull(withholdingPayPeriod, "withholdingPayPeriod");
-        this.withholdingPayPeriod = Optional.ofNullable(withholdingPayPeriod);
+        this.withholdingPayPeriod = JsonNullable.of(withholdingPayPeriod);
         return this;
     }
-
 
     /**
      * The payment schedule tax rate the payroll is based on. Only included for off-cycle payrolls.
      */
-    public PayrollPrepared withWithholdingPayPeriod(Optional<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod) {
+    public PayrollPrepared withWithholdingPayPeriod(JsonNullable<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod) {
         Utils.checkNotNull(withholdingPayPeriod, "withholdingPayPeriod");
         this.withholdingPayPeriod = withholdingPayPeriod;
         return this;
@@ -1044,7 +1048,7 @@ public class PayrollPrepared {
 
         private Optional<Boolean> finalTerminationPayroll = Optional.empty();
 
-        private Optional<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod = Optional.empty();
+        private JsonNullable<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod = JsonNullable.undefined();
 
         private JsonNullable<Boolean> skipRegularDeductions = JsonNullable.undefined();
 
@@ -1341,14 +1345,14 @@ public class PayrollPrepared {
          */
         public Builder withholdingPayPeriod(PayrollWithholdingPayPeriodType withholdingPayPeriod) {
             Utils.checkNotNull(withholdingPayPeriod, "withholdingPayPeriod");
-            this.withholdingPayPeriod = Optional.ofNullable(withholdingPayPeriod);
+            this.withholdingPayPeriod = JsonNullable.of(withholdingPayPeriod);
             return this;
         }
 
         /**
          * The payment schedule tax rate the payroll is based on. Only included for off-cycle payrolls.
          */
-        public Builder withholdingPayPeriod(Optional<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod) {
+        public Builder withholdingPayPeriod(JsonNullable<? extends PayrollWithholdingPayPeriodType> withholdingPayPeriod) {
             Utils.checkNotNull(withholdingPayPeriod, "withholdingPayPeriod");
             this.withholdingPayPeriod = withholdingPayPeriod;
             return this;

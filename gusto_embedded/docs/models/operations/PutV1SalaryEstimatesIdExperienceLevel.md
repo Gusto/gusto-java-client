@@ -2,6 +2,14 @@
 
 Experience level for this occupation
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.operations.PutV1SalaryEstimatesIdExperienceLevel;
+
+PutV1SalaryEstimatesIdExperienceLevel value = PutV1SalaryEstimatesIdExperienceLevel.NOVICE;
+```
+
 
 ## Values
 

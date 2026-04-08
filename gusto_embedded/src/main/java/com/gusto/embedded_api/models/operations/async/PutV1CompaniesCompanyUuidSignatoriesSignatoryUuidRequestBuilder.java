@@ -7,9 +7,9 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.SignatoryUpdateRequest;
+import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest;
-import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody;
 import com.gusto.embedded_api.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuid;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -22,11 +22,11 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder {
 
     private String companyUuid;
     private String signatoryUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody requestBody;
+                            new TypeReference<Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion>>() {});
+    private SignatoryUpdateRequest signatoryUpdateRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -46,21 +46,21 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder {
         return this;
     }
                 
-    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder xGustoAPIVersion(PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder xGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder requestBody(PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder signatoryUpdateRequest(SignatoryUpdateRequest signatoryUpdateRequest) {
+        Utils.checkNotNull(signatoryUpdateRequest, "signatoryUpdateRequest");
+        this.signatoryUpdateRequest = signatoryUpdateRequest;
         return this;
     }
 
@@ -73,7 +73,7 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder {
         PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request = new PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(companyUuid,
             signatoryUuid,
             xGustoAPIVersion,
-            requestBody);
+            signatoryUpdateRequest);
 
         return request;
     }
@@ -88,9 +88,9 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion>>() {});
 }

@@ -41,10 +41,10 @@ public class AsyncEvents {
      * for. Note that a partner does NOT have to have verified webhook subscriptions in order to utilize
      * this endpoint.
      * 
-     * <p>&gt; 📘 System Access Authentication
-     * &gt;
-     * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
-     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
      * 
      * <p>scope: `events:read`
      * 
@@ -61,10 +61,10 @@ public class AsyncEvents {
      * for. Note that a partner does NOT have to have verified webhook subscriptions in order to utilize
      * this endpoint.
      * 
-     * <p>&gt; 📘 System Access Authentication
-     * &gt;
-     * &gt; This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
-     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
      * 
      * <p>scope: `events:read`
      * 

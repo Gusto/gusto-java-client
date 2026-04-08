@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * BenefitTypeRequirementsContribution
@@ -35,19 +36,19 @@ public class BenefitTypeRequirementsContribution {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("default_value")
-    private Optional<? extends BenefitTypeRequirementsDefaultValue> defaultValue;
+    private JsonNullable<? extends BenefitTypeRequirementsDefaultValue> defaultValue;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("choices")
-    private Optional<? extends List<String>> choices;
+    private JsonNullable<? extends List<String>> choices;
 
     @JsonCreator
     public BenefitTypeRequirementsContribution(
             @JsonProperty("required") Optional<Boolean> required,
             @JsonProperty("editable") Optional<Boolean> editable,
-            @JsonProperty("default_value") Optional<? extends BenefitTypeRequirementsDefaultValue> defaultValue,
-            @JsonProperty("choices") Optional<? extends List<String>> choices) {
+            @JsonProperty("default_value") JsonNullable<? extends BenefitTypeRequirementsDefaultValue> defaultValue,
+            @JsonProperty("choices") JsonNullable<? extends List<String>> choices) {
         Utils.checkNotNull(required, "required");
         Utils.checkNotNull(editable, "editable");
         Utils.checkNotNull(defaultValue, "defaultValue");
@@ -59,8 +60,8 @@ public class BenefitTypeRequirementsContribution {
     }
     
     public BenefitTypeRequirementsContribution() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
+            JsonNullable.undefined());
     }
 
     @JsonIgnore
@@ -75,14 +76,14 @@ public class BenefitTypeRequirementsContribution {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<BenefitTypeRequirementsDefaultValue> defaultValue() {
-        return (Optional<BenefitTypeRequirementsDefaultValue>) defaultValue;
+    public JsonNullable<BenefitTypeRequirementsDefaultValue> defaultValue() {
+        return (JsonNullable<BenefitTypeRequirementsDefaultValue>) defaultValue;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<String>> choices() {
-        return (Optional<List<String>>) choices;
+    public JsonNullable<List<String>> choices() {
+        return (JsonNullable<List<String>>) choices;
     }
 
     public static Builder builder() {
@@ -118,12 +119,11 @@ public class BenefitTypeRequirementsContribution {
 
     public BenefitTypeRequirementsContribution withDefaultValue(BenefitTypeRequirementsDefaultValue defaultValue) {
         Utils.checkNotNull(defaultValue, "defaultValue");
-        this.defaultValue = Optional.ofNullable(defaultValue);
+        this.defaultValue = JsonNullable.of(defaultValue);
         return this;
     }
 
-
-    public BenefitTypeRequirementsContribution withDefaultValue(Optional<? extends BenefitTypeRequirementsDefaultValue> defaultValue) {
+    public BenefitTypeRequirementsContribution withDefaultValue(JsonNullable<? extends BenefitTypeRequirementsDefaultValue> defaultValue) {
         Utils.checkNotNull(defaultValue, "defaultValue");
         this.defaultValue = defaultValue;
         return this;
@@ -131,12 +131,11 @@ public class BenefitTypeRequirementsContribution {
 
     public BenefitTypeRequirementsContribution withChoices(List<String> choices) {
         Utils.checkNotNull(choices, "choices");
-        this.choices = Optional.ofNullable(choices);
+        this.choices = JsonNullable.of(choices);
         return this;
     }
 
-
-    public BenefitTypeRequirementsContribution withChoices(Optional<? extends List<String>> choices) {
+    public BenefitTypeRequirementsContribution withChoices(JsonNullable<? extends List<String>> choices) {
         Utils.checkNotNull(choices, "choices");
         this.choices = choices;
         return this;
@@ -181,9 +180,9 @@ public class BenefitTypeRequirementsContribution {
 
         private Optional<Boolean> editable = Optional.empty();
 
-        private Optional<? extends BenefitTypeRequirementsDefaultValue> defaultValue = Optional.empty();
+        private JsonNullable<? extends BenefitTypeRequirementsDefaultValue> defaultValue = JsonNullable.undefined();
 
-        private Optional<? extends List<String>> choices = Optional.empty();
+        private JsonNullable<? extends List<String>> choices = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -218,11 +217,11 @@ public class BenefitTypeRequirementsContribution {
 
         public Builder defaultValue(BenefitTypeRequirementsDefaultValue defaultValue) {
             Utils.checkNotNull(defaultValue, "defaultValue");
-            this.defaultValue = Optional.ofNullable(defaultValue);
+            this.defaultValue = JsonNullable.of(defaultValue);
             return this;
         }
 
-        public Builder defaultValue(Optional<? extends BenefitTypeRequirementsDefaultValue> defaultValue) {
+        public Builder defaultValue(JsonNullable<? extends BenefitTypeRequirementsDefaultValue> defaultValue) {
             Utils.checkNotNull(defaultValue, "defaultValue");
             this.defaultValue = defaultValue;
             return this;
@@ -231,11 +230,11 @@ public class BenefitTypeRequirementsContribution {
 
         public Builder choices(List<String> choices) {
             Utils.checkNotNull(choices, "choices");
-            this.choices = Optional.ofNullable(choices);
+            this.choices = JsonNullable.of(choices);
             return this;
         }
 
-        public Builder choices(Optional<? extends List<String>> choices) {
+        public Builder choices(JsonNullable<? extends List<String>> choices) {
             Utils.checkNotNull(choices, "choices");
             this.choices = choices;
             return this;

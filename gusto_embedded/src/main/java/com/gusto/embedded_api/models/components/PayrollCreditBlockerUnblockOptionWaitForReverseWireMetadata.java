@@ -23,15 +23,25 @@ public class PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata {
     @JsonProperty("reverse_wire_detail_id")
     private JsonNullable<Long> reverseWireDetailId;
 
+    /**
+     * Last 4 digits of the bank account number for the reverse wire
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("bank_account_last_four_digits")
+    private JsonNullable<String> bankAccountLastFourDigits;
+
     @JsonCreator
     public PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata(
-            @JsonProperty("reverse_wire_detail_id") JsonNullable<Long> reverseWireDetailId) {
+            @JsonProperty("reverse_wire_detail_id") JsonNullable<Long> reverseWireDetailId,
+            @JsonProperty("bank_account_last_four_digits") JsonNullable<String> bankAccountLastFourDigits) {
         Utils.checkNotNull(reverseWireDetailId, "reverseWireDetailId");
+        Utils.checkNotNull(bankAccountLastFourDigits, "bankAccountLastFourDigits");
         this.reverseWireDetailId = reverseWireDetailId;
+        this.bankAccountLastFourDigits = bankAccountLastFourDigits;
     }
     
     public PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata() {
-        this(JsonNullable.undefined());
+        this(JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
@@ -40,6 +50,14 @@ public class PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata {
     @JsonIgnore
     public JsonNullable<Long> reverseWireDetailId() {
         return reverseWireDetailId;
+    }
+
+    /**
+     * Last 4 digits of the bank account number for the reverse wire
+     */
+    @JsonIgnore
+    public JsonNullable<String> bankAccountLastFourDigits() {
+        return bankAccountLastFourDigits;
     }
 
     public static Builder builder() {
@@ -65,6 +83,24 @@ public class PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata {
         return this;
     }
 
+    /**
+     * Last 4 digits of the bank account number for the reverse wire
+     */
+    public PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata withBankAccountLastFourDigits(String bankAccountLastFourDigits) {
+        Utils.checkNotNull(bankAccountLastFourDigits, "bankAccountLastFourDigits");
+        this.bankAccountLastFourDigits = JsonNullable.of(bankAccountLastFourDigits);
+        return this;
+    }
+
+    /**
+     * Last 4 digits of the bank account number for the reverse wire
+     */
+    public PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata withBankAccountLastFourDigits(JsonNullable<String> bankAccountLastFourDigits) {
+        Utils.checkNotNull(bankAccountLastFourDigits, "bankAccountLastFourDigits");
+        this.bankAccountLastFourDigits = bankAccountLastFourDigits;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -75,25 +111,29 @@ public class PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata {
         }
         PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata other = (PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata) o;
         return 
-            Utils.enhancedDeepEquals(this.reverseWireDetailId, other.reverseWireDetailId);
+            Utils.enhancedDeepEquals(this.reverseWireDetailId, other.reverseWireDetailId) &&
+            Utils.enhancedDeepEquals(this.bankAccountLastFourDigits, other.bankAccountLastFourDigits);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            reverseWireDetailId);
+            reverseWireDetailId, bankAccountLastFourDigits);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata.class,
-                "reverseWireDetailId", reverseWireDetailId);
+                "reverseWireDetailId", reverseWireDetailId,
+                "bankAccountLastFourDigits", bankAccountLastFourDigits);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private JsonNullable<Long> reverseWireDetailId = JsonNullable.undefined();
+
+        private JsonNullable<String> bankAccountLastFourDigits = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -118,10 +158,29 @@ public class PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata {
             return this;
         }
 
+
+        /**
+         * Last 4 digits of the bank account number for the reverse wire
+         */
+        public Builder bankAccountLastFourDigits(String bankAccountLastFourDigits) {
+            Utils.checkNotNull(bankAccountLastFourDigits, "bankAccountLastFourDigits");
+            this.bankAccountLastFourDigits = JsonNullable.of(bankAccountLastFourDigits);
+            return this;
+        }
+
+        /**
+         * Last 4 digits of the bank account number for the reverse wire
+         */
+        public Builder bankAccountLastFourDigits(JsonNullable<String> bankAccountLastFourDigits) {
+            Utils.checkNotNull(bankAccountLastFourDigits, "bankAccountLastFourDigits");
+            this.bankAccountLastFourDigits = bankAccountLastFourDigits;
+            return this;
+        }
+
         public PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata build() {
 
             return new PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata(
-                reverseWireDetailId);
+                reverseWireDetailId, bankAccountLastFourDigits);
         }
 
     }

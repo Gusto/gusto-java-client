@@ -5,10 +5,13 @@ package com.gusto.embedded_api.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata {
@@ -18,11 +21,26 @@ public class PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata {
     @JsonProperty("information_request_uuid")
     private String informationRequestUuid;
 
+    /**
+     * Last 4 digits of the bank account number for the bank screenshot RFI
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("bank_account_last_four_digits")
+    private JsonNullable<String> bankAccountLastFourDigits;
+
     @JsonCreator
     public PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata(
-            @JsonProperty("information_request_uuid") String informationRequestUuid) {
+            @JsonProperty("information_request_uuid") String informationRequestUuid,
+            @JsonProperty("bank_account_last_four_digits") JsonNullable<String> bankAccountLastFourDigits) {
         Utils.checkNotNull(informationRequestUuid, "informationRequestUuid");
+        Utils.checkNotNull(bankAccountLastFourDigits, "bankAccountLastFourDigits");
         this.informationRequestUuid = informationRequestUuid;
+        this.bankAccountLastFourDigits = bankAccountLastFourDigits;
+    }
+    
+    public PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata(
+            String informationRequestUuid) {
+        this(informationRequestUuid, JsonNullable.undefined());
     }
 
     /**
@@ -31,6 +49,14 @@ public class PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata {
     @JsonIgnore
     public String informationRequestUuid() {
         return informationRequestUuid;
+    }
+
+    /**
+     * Last 4 digits of the bank account number for the bank screenshot RFI
+     */
+    @JsonIgnore
+    public JsonNullable<String> bankAccountLastFourDigits() {
+        return bankAccountLastFourDigits;
     }
 
     public static Builder builder() {
@@ -47,6 +73,24 @@ public class PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata {
         return this;
     }
 
+    /**
+     * Last 4 digits of the bank account number for the bank screenshot RFI
+     */
+    public PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata withBankAccountLastFourDigits(String bankAccountLastFourDigits) {
+        Utils.checkNotNull(bankAccountLastFourDigits, "bankAccountLastFourDigits");
+        this.bankAccountLastFourDigits = JsonNullable.of(bankAccountLastFourDigits);
+        return this;
+    }
+
+    /**
+     * Last 4 digits of the bank account number for the bank screenshot RFI
+     */
+    public PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata withBankAccountLastFourDigits(JsonNullable<String> bankAccountLastFourDigits) {
+        Utils.checkNotNull(bankAccountLastFourDigits, "bankAccountLastFourDigits");
+        this.bankAccountLastFourDigits = bankAccountLastFourDigits;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -57,25 +101,29 @@ public class PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata {
         }
         PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata other = (PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata) o;
         return 
-            Utils.enhancedDeepEquals(this.informationRequestUuid, other.informationRequestUuid);
+            Utils.enhancedDeepEquals(this.informationRequestUuid, other.informationRequestUuid) &&
+            Utils.enhancedDeepEquals(this.bankAccountLastFourDigits, other.bankAccountLastFourDigits);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            informationRequestUuid);
+            informationRequestUuid, bankAccountLastFourDigits);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata.class,
-                "informationRequestUuid", informationRequestUuid);
+                "informationRequestUuid", informationRequestUuid,
+                "bankAccountLastFourDigits", bankAccountLastFourDigits);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private String informationRequestUuid;
+
+        private JsonNullable<String> bankAccountLastFourDigits = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -91,10 +139,29 @@ public class PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata {
             return this;
         }
 
+
+        /**
+         * Last 4 digits of the bank account number for the bank screenshot RFI
+         */
+        public Builder bankAccountLastFourDigits(String bankAccountLastFourDigits) {
+            Utils.checkNotNull(bankAccountLastFourDigits, "bankAccountLastFourDigits");
+            this.bankAccountLastFourDigits = JsonNullable.of(bankAccountLastFourDigits);
+            return this;
+        }
+
+        /**
+         * Last 4 digits of the bank account number for the bank screenshot RFI
+         */
+        public Builder bankAccountLastFourDigits(JsonNullable<String> bankAccountLastFourDigits) {
+            Utils.checkNotNull(bankAccountLastFourDigits, "bankAccountLastFourDigits");
+            this.bankAccountLastFourDigits = bankAccountLastFourDigits;
+            return this;
+        }
+
         public PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata build() {
 
             return new PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata(
-                informationRequestUuid);
+                informationRequestUuid, bankAccountLastFourDigits);
         }
 
     }

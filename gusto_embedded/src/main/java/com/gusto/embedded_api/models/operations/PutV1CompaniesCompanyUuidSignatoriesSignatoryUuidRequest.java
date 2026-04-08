@@ -6,7 +6,7 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.SignatoryUpdateRequest;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -35,34 +35,34 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    private Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
 
     @SpeakeasyMetadata("request:mediaType=application/json")
-    private PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody requestBody;
+    private SignatoryUpdateRequest signatoryUpdateRequest;
 
     @JsonCreator
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(
             String companyUuid,
             String signatoryUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody requestBody) {
+            Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            SignatoryUpdateRequest signatoryUpdateRequest) {
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(signatoryUuid, "signatoryUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        Utils.checkNotNull(requestBody, "requestBody");
+        Utils.checkNotNull(signatoryUpdateRequest, "signatoryUpdateRequest");
         this.companyUuid = companyUuid;
         this.signatoryUuid = signatoryUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
-        this.requestBody = requestBody;
+        this.signatoryUpdateRequest = signatoryUpdateRequest;
     }
     
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(
             String companyUuid,
             String signatoryUuid,
-            PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody requestBody) {
+            SignatoryUpdateRequest signatoryUpdateRequest) {
         this(companyUuid, signatoryUuid, Optional.empty(),
-            requestBody);
+            signatoryUpdateRequest);
     }
 
     /**
@@ -88,13 +88,13 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     @JsonIgnore
-    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody requestBody() {
-        return requestBody;
+    public SignatoryUpdateRequest signatoryUpdateRequest() {
+        return signatoryUpdateRequest;
     }
 
     public static Builder builder() {
@@ -125,7 +125,7 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withXGustoAPIVersion(PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -137,15 +137,15 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withXGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withRequestBody(PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withSignatoryUpdateRequest(SignatoryUpdateRequest signatoryUpdateRequest) {
+        Utils.checkNotNull(signatoryUpdateRequest, "signatoryUpdateRequest");
+        this.signatoryUpdateRequest = signatoryUpdateRequest;
         return this;
     }
 
@@ -162,14 +162,14 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
             Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.signatoryUuid, other.signatoryUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
-            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.signatoryUpdateRequest, other.signatoryUpdateRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             companyUuid, signatoryUuid, xGustoAPIVersion,
-            requestBody);
+            signatoryUpdateRequest);
     }
     
     @Override
@@ -178,7 +178,7 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
                 "companyUuid", companyUuid,
                 "signatoryUuid", signatoryUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
-                "requestBody", requestBody);
+                "signatoryUpdateRequest", signatoryUpdateRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,9 +188,9 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
 
         private String signatoryUuid;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
-        private PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody requestBody;
+        private SignatoryUpdateRequest signatoryUpdateRequest;
 
         private Builder() {
           // force use of static builder() method
@@ -222,7 +222,7 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -233,16 +233,16 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
         }
 
 
-        public Builder requestBody(PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody requestBody) {
-            Utils.checkNotNull(requestBody, "requestBody");
-            this.requestBody = requestBody;
+        public Builder signatoryUpdateRequest(SignatoryUpdateRequest signatoryUpdateRequest) {
+            Utils.checkNotNull(signatoryUpdateRequest, "signatoryUpdateRequest");
+            this.signatoryUpdateRequest = signatoryUpdateRequest;
             return this;
         }
 
@@ -253,14 +253,14 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
 
             return new PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(
                 companyUuid, signatoryUuid, xGustoAPIVersion,
-                requestBody);
+                signatoryUpdateRequest);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion>>() {});
     }
 }

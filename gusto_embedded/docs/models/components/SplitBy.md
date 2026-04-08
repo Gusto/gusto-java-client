@@ -1,6 +1,12 @@
 # SplitBy
 
-How the payment is split. This field is applicable when `payment_method` is "Direct Deposit".
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.SplitBy;
+
+SplitBy value = SplitBy.PERCENTAGE;
+```
 
 
 ## Values

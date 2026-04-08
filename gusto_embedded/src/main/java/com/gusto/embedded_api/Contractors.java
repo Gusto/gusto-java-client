@@ -5,7 +5,10 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
+import com.gusto.embedded_api.models.components.ContractorCreateRequestBody;
+import com.gusto.embedded_api.models.components.ContractorUpdateRequestBody;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.DeleteV1ContractorsContractorUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1ContractorsContractorUuidRequest;
 import com.gusto.embedded_api.models.operations.DeleteV1ContractorsContractorUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.DeleteV1ContractorsContractorUuidResponse;
@@ -19,26 +22,28 @@ import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidContrac
 import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidAddressRequest;
 import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidAddressRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidAddressResponse;
+import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidOnboardingStatusRequest;
 import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidOnboardingStatusRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidOnboardingStatusResponse;
+import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidQueryParamInclude;
 import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidRequest;
 import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidResponse;
+import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidContractorsRequest;
-import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidContractorsRequestBody;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidContractorsRequestBuilder;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidContractorsResponse;
 import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidAddressRequest;
 import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidAddressRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidAddressRequestBuilder;
 import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidAddressResponse;
+import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidOnboardingStatusRequest;
 import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidOnboardingStatusRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidOnboardingStatusRequestBuilder;
 import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidOnboardingStatusResponse;
 import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidRequest;
-import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.PutV1ContractorsContractorUuidResponse;
 import com.gusto.embedded_api.operations.DeleteV1ContractorsContractorUuid;
@@ -53,6 +58,7 @@ import com.gusto.embedded_api.operations.PutV1ContractorsContractorUuidAddress;
 import com.gusto.embedded_api.operations.PutV1ContractorsContractorUuidOnboardingStatus;
 import com.gusto.embedded_api.utils.Headers;
 import java.lang.String;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -82,6 +88,8 @@ public class Contractors {
      * 
      * <p>scope: `contractors:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PostV1CompaniesCompanyUuidContractorsRequestBuilder create() {
@@ -95,13 +103,15 @@ public class Contractors {
      * 
      * <p>scope: `contractors:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param companyUuid The UUID of the company
-     * @param requestBody Create an individual or business contractor.
+     * @param contractorCreateRequestBody Request body for creating a contractor.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PostV1CompaniesCompanyUuidContractorsResponse create(String companyUuid, PostV1CompaniesCompanyUuidContractorsRequestBody requestBody) {
-        return create(companyUuid, Optional.empty(), requestBody);
+    public PostV1CompaniesCompanyUuidContractorsResponse create(String companyUuid, ContractorCreateRequestBody contractorCreateRequestBody) {
+        return create(Optional.empty(), companyUuid, contractorCreateRequestBody);
     }
 
     /**
@@ -111,21 +121,23 @@ public class Contractors {
      * 
      * <p>scope: `contractors:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion 
-     * @param requestBody Create an individual or business contractor.
+     * @param contractorCreateRequestBody Request body for creating a contractor.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompaniesCompanyUuidContractorsResponse create(
-            String companyUuid, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1CompaniesCompanyUuidContractorsRequestBody requestBody) {
+            Optional<? extends PostV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            ContractorCreateRequestBody contractorCreateRequestBody) {
         PostV1CompaniesCompanyUuidContractorsRequest request =
             PostV1CompaniesCompanyUuidContractorsRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .companyUuid(companyUuid)
+                .contractorCreateRequestBody(contractorCreateRequestBody)
                 .build();
         RequestOperation<PostV1CompaniesCompanyUuidContractorsRequest, PostV1CompaniesCompanyUuidContractorsResponse> operation
               = new PostV1CompaniesCompanyUuidContractors.Sync(sdkConfiguration, _headers);
@@ -139,6 +151,8 @@ public class Contractors {
      * 
      * <p>scope: `contractors:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyUuidContractorsRequestBuilder list() {
@@ -151,6 +165,8 @@ public class Contractors {
      * <p>Get all contractors, active and inactive, individual and business, for a company.
      * 
      * <p>scope: `contractors:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
@@ -169,6 +185,8 @@ public class Contractors {
      * 
      * <p>scope: `contractors:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public GetV1ContractorsContractorUuidRequestBuilder get() {
@@ -182,12 +200,14 @@ public class Contractors {
      * 
      * <p>scope: `contractors:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param contractorUuid The UUID of the contractor
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1ContractorsContractorUuidResponse get(String contractorUuid) {
-        return get(contractorUuid, Optional.empty());
+        return get(Optional.empty(), contractorUuid, Optional.empty());
     }
 
     /**
@@ -197,17 +217,23 @@ public class Contractors {
      * 
      * <p>scope: `contractors:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion 
+     * @param include Include the requested attribute(s) in each contractor response. Multiple options are comma separated.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1ContractorsContractorUuidResponse get(String contractorUuid, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1ContractorsContractorUuidResponse get(
+            Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
+            Optional<? extends List<GetV1ContractorsContractorUuidQueryParamInclude>> include) {
         GetV1ContractorsContractorUuidRequest request =
             GetV1ContractorsContractorUuidRequest
                 .builder()
-                .contractorUuid(contractorUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .contractorUuid(contractorUuid)
+                .include(include)
                 .build();
         RequestOperation<GetV1ContractorsContractorUuidRequest, GetV1ContractorsContractorUuidResponse> operation
               = new GetV1ContractorsContractorUuid.Sync(sdkConfiguration, _headers);
@@ -219,13 +245,15 @@ public class Contractors {
      * 
      * <p>Update a contractor.
      * 
-     * <p>scope: `contractors:write`
-     * 
      * <p>&gt; 🚧 Warning
      * &gt;
      * &gt; Watch out when changing a contractor's type (when the contractor is finished onboarding).
-     * Specifically, changing contractor type can be dangerous since Gusto won’t recognize and file two
+     * Specifically, changing contractor type can be dangerous since Gusto won't recognize and file two
      * separate 1099s if they simply change from business to individual
+     * 
+     * <p>scope: `contractors:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -238,21 +266,23 @@ public class Contractors {
      * 
      * <p>Update a contractor.
      * 
-     * <p>scope: `contractors:write`
-     * 
      * <p>&gt; 🚧 Warning
      * &gt;
      * &gt; Watch out when changing a contractor's type (when the contractor is finished onboarding).
-     * Specifically, changing contractor type can be dangerous since Gusto won’t recognize and file two
+     * Specifically, changing contractor type can be dangerous since Gusto won't recognize and file two
      * separate 1099s if they simply change from business to individual
      * 
+     * <p>scope: `contractors:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param contractorUuid The UUID of the contractor
-     * @param requestBody 
+     * @param contractorUpdateRequestBody Request body for updating a contractor.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PutV1ContractorsContractorUuidResponse update(String contractorUuid, PutV1ContractorsContractorUuidRequestBody requestBody) {
-        return update(contractorUuid, Optional.empty(), requestBody);
+    public PutV1ContractorsContractorUuidResponse update(String contractorUuid, ContractorUpdateRequestBody contractorUpdateRequestBody) {
+        return update(Optional.empty(), contractorUuid, contractorUpdateRequestBody);
     }
 
     /**
@@ -260,29 +290,31 @@ public class Contractors {
      * 
      * <p>Update a contractor.
      * 
-     * <p>scope: `contractors:write`
-     * 
      * <p>&gt; 🚧 Warning
      * &gt;
      * &gt; Watch out when changing a contractor's type (when the contractor is finished onboarding).
-     * Specifically, changing contractor type can be dangerous since Gusto won’t recognize and file two
+     * Specifically, changing contractor type can be dangerous since Gusto won't recognize and file two
      * separate 1099s if they simply change from business to individual
      * 
+     * <p>scope: `contractors:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param contractorUpdateRequestBody Request body for updating a contractor.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1ContractorsContractorUuidResponse update(
-            String contractorUuid, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1ContractorsContractorUuidRequestBody requestBody) {
+            Optional<? extends PutV1ContractorsContractorUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
+            ContractorUpdateRequestBody contractorUpdateRequestBody) {
         PutV1ContractorsContractorUuidRequest request =
             PutV1ContractorsContractorUuidRequest
                 .builder()
-                .contractorUuid(contractorUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .contractorUuid(contractorUuid)
+                .contractorUpdateRequestBody(contractorUpdateRequestBody)
                 .build();
         RequestOperation<PutV1ContractorsContractorUuidRequest, PutV1ContractorsContractorUuidResponse> operation
               = new PutV1ContractorsContractorUuid.Sync(sdkConfiguration, _headers);
@@ -295,6 +327,8 @@ public class Contractors {
      * <p>A contractor can only be deleted when there are no contractor payments.
      * 
      * <p>scope: `contractors:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
@@ -309,12 +343,14 @@ public class Contractors {
      * 
      * <p>scope: `contractors:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param contractorUuid The UUID of the contractor
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1ContractorsContractorUuidResponse delete(String contractorUuid) {
-        return delete(contractorUuid, Optional.empty());
+        return delete(Optional.empty(), contractorUuid);
     }
 
     /**
@@ -324,17 +360,19 @@ public class Contractors {
      * 
      * <p>scope: `contractors:manage`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param contractorUuid The UUID of the contractor
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public DeleteV1ContractorsContractorUuidResponse delete(String contractorUuid, Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public DeleteV1ContractorsContractorUuidResponse delete(Optional<? extends DeleteV1ContractorsContractorUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid) {
         DeleteV1ContractorsContractorUuidRequest request =
             DeleteV1ContractorsContractorUuidRequest
                 .builder()
-                .contractorUuid(contractorUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .contractorUuid(contractorUuid)
                 .build();
         RequestOperation<DeleteV1ContractorsContractorUuidRequest, DeleteV1ContractorsContractorUuidResponse> operation
               = new DeleteV1ContractorsContractorUuid.Sync(sdkConfiguration, _headers);
@@ -380,7 +418,7 @@ public class Contractors {
      * Business name and EIN depending on the contractor type |
      * | `add_address` | Add contractor address. |
      * | `compensation_details` | Add contractor compensation. |
-     * | `payment_details` | Set up contractor's direct deposit or set to check. |
+     * | `payment_details` | (optional) Set up contractor's direct deposit or set to check. |
      * | `sign_documents` | Contractor forms (e.g., W9) are generated &amp; signed. |
      * | `file_new_hire_report` | Contractor new hire report is generated. |
      * 
@@ -429,7 +467,7 @@ public class Contractors {
      * Business name and EIN depending on the contractor type |
      * | `add_address` | Add contractor address. |
      * | `compensation_details` | Add contractor compensation. |
-     * | `payment_details` | Set up contractor's direct deposit or set to check. |
+     * | `payment_details` | (optional) Set up contractor's direct deposit or set to check. |
      * | `sign_documents` | Contractor forms (e.g., W9) are generated &amp; signed. |
      * | `file_new_hire_report` | Contractor new hire report is generated. |
      * 
@@ -480,7 +518,7 @@ public class Contractors {
      * Business name and EIN depending on the contractor type |
      * | `add_address` | Add contractor address. |
      * | `compensation_details` | Add contractor compensation. |
-     * | `payment_details` | Set up contractor's direct deposit or set to check. |
+     * | `payment_details` | (optional) Set up contractor's direct deposit or set to check. |
      * | `sign_documents` | Contractor forms (e.g., W9) are generated &amp; signed. |
      * | `file_new_hire_report` | Contractor new hire report is generated. |
      * 
@@ -765,6 +803,8 @@ public class Contractors {
      * 
      * <p>scope: `contractor_payment_methods:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder getV1CompaniesCompanyIdContractorsPaymentDetails() {
@@ -802,6 +842,8 @@ public class Contractors {
      * `contractor_payment_methods:read:account_numbers`.
      * 
      * <p>scope: `contractor_payment_methods:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company. This identifies the company whose contractor payment details you want to retrieve.
      * @return The response from the API call
@@ -843,6 +885,8 @@ public class Contractors {
      * `contractor_payment_methods:read:account_numbers`.
      * 
      * <p>scope: `contractor_payment_methods:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company. This identifies the company whose contractor payment details you want to retrieve.
      * @param contractorUuid Optional filter to get payment details for a specific contractor. When provided, the response will only include payment details for this contractor.

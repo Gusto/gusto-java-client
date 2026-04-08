@@ -2,6 +2,14 @@
 
 The name of the paid time off type.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.Name;
+
+Name value = Name.VACATION_HOURS;
+```
+
 
 ## Values
 

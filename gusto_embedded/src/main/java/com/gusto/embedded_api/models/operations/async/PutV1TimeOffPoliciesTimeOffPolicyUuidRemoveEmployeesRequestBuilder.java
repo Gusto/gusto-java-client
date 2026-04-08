@@ -22,7 +22,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBuilder 
 
     private Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
-                            "\"2024-04-01\"",
+                            "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion>>() {});
     private String timeOffPolicyUuid;
     private PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody requestBody;
@@ -83,6 +83,6 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBuilder 
     private static final LazySingletonValue<Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
-                    "\"2024-04-01\"",
+                    "\"2025-06-15\"",
                     new TypeReference<Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion>>() {});
 }

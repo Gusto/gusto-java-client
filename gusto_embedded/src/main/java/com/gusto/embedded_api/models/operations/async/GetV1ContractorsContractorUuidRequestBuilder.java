@@ -7,28 +7,43 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidQueryParamInclude;
 import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidRequest;
 import com.gusto.embedded_api.operations.GetV1ContractorsContractorUuid;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetV1ContractorsContractorUuidRequestBuilder {
 
-    private String contractorUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion>>() {});
+    private String contractorUuid;
+    private Optional<? extends List<GetV1ContractorsContractorUuidQueryParamInclude>> include = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1ContractorsContractorUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public GetV1ContractorsContractorUuidRequestBuilder xGustoAPIVersion(GetV1ContractorsContractorUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public GetV1ContractorsContractorUuidRequestBuilder xGustoAPIVersion(Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public GetV1ContractorsContractorUuidRequestBuilder contractorUuid(String contractorUuid) {
@@ -37,15 +52,15 @@ public class GetV1ContractorsContractorUuidRequestBuilder {
         return this;
     }
                 
-    public GetV1ContractorsContractorUuidRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+    public GetV1ContractorsContractorUuidRequestBuilder include(List<GetV1ContractorsContractorUuidQueryParamInclude> include) {
+        Utils.checkNotNull(include, "include");
+        this.include = Optional.of(include);
         return this;
     }
 
-    public GetV1ContractorsContractorUuidRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
+    public GetV1ContractorsContractorUuidRequestBuilder include(Optional<? extends List<GetV1ContractorsContractorUuidQueryParamInclude>> include) {
+        Utils.checkNotNull(include, "include");
+        this.include = include;
         return this;
     }
 
@@ -55,8 +70,9 @@ public class GetV1ContractorsContractorUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1ContractorsContractorUuidRequest request = new GetV1ContractorsContractorUuidRequest(contractorUuid,
-            xGustoAPIVersion);
+        GetV1ContractorsContractorUuidRequest request = new GetV1ContractorsContractorUuidRequest(xGustoAPIVersion,
+            contractorUuid,
+            include);
 
         return request;
     }
@@ -71,9 +87,9 @@ public class GetV1ContractorsContractorUuidRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion>>() {});
 }

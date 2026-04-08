@@ -26,14 +26,14 @@ scope: `payrolls:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdContractorPaymentGroupsRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdContractorPaymentGroupsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -50,7 +50,7 @@ public class Application {
                 .call();
 
         if (res.contractorPaymentGroupWithBlockers().isPresent()) {
-            // handle response
+            System.out.println(res.contractorPaymentGroupWithBlockers().get());
         }
     }
 }
@@ -68,10 +68,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
-| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## create
 
@@ -86,6 +86,7 @@ scope: `payrolls:run`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -94,7 +95,7 @@ import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -111,7 +112,7 @@ public class Application {
                 .call();
 
         if (res.contractorPaymentGroup().isPresent()) {
-            // handle response
+            System.out.println(res.contractorPaymentGroup().get());
         }
     }
 }
@@ -133,7 +134,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## preview
@@ -174,7 +176,7 @@ public class Application {
                 .call();
 
         if (res.contractorPaymentGroupPreview().isPresent()) {
-            // handle response
+            System.out.println(res.contractorPaymentGroupPreview().get());
         }
     }
 }
@@ -232,7 +234,7 @@ public class Application {
                 .call();
 
         if (res.contractorPaymentGroup().isPresent()) {
-            // handle response
+            System.out.println(res.contractorPaymentGroup().get());
         }
     }
 }
@@ -269,6 +271,7 @@ scope: `payrolls:run`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse;
@@ -276,7 +279,7 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -307,7 +310,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404, 422                                     | application/json                             |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## fund
@@ -346,7 +350,7 @@ public class Application {
                 .call();
 
         if (res.contractorPaymentGroup().isPresent()) {
-            // handle response
+            System.out.println(res.contractorPaymentGroup().get());
         }
     }
 }
@@ -384,14 +388,14 @@ scope: `partner_disbursements:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -403,7 +407,7 @@ public class Application {
                 .call();
 
         if (res.contractorPaymentGroupPartnerDisbursements().isPresent()) {
-            // handle response
+            System.out.println(res.contractorPaymentGroupPartnerDisbursements().get());
         }
     }
 }
@@ -422,10 +426,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
-| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## patchV1ContractorPaymentGroupsIdPartnerDisbursements
 
@@ -466,7 +470,7 @@ public class Application {
                 .call();
 
         if (res.contractorPaymentGroupPartnerDisbursements().isPresent()) {
-            // handle response
+            System.out.println(res.contractorPaymentGroupPartnerDisbursements().get());
         }
     }
 }

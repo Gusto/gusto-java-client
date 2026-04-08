@@ -18,7 +18,7 @@ public class PutV1SalaryEstimatesIdRequestBuilder {
 
     private Optional<? extends PutV1SalaryEstimatesIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
-                            "\"2024-04-01\"",
+                            "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PutV1SalaryEstimatesIdHeaderXGustoAPIVersion>>() {});
     private String uuid;
     private PutV1SalaryEstimatesIdRequestBody requestBody;
@@ -78,6 +78,6 @@ public class PutV1SalaryEstimatesIdRequestBuilder {
     private static final LazySingletonValue<Optional<? extends PutV1SalaryEstimatesIdHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
-                    "\"2024-04-01\"",
+                    "\"2025-06-15\"",
                     new TypeReference<Optional<? extends PutV1SalaryEstimatesIdHeaderXGustoAPIVersion>>() {});
 }

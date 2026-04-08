@@ -6,7 +6,6 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -24,7 +23,7 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
     private String companyUuid;
 
     /**
-     * 2-letter US state abbreviation
+     * The two-letter state abbreviation
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=state")
     private String state;
@@ -35,7 +34,7 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    private Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion;
 
 
     @SpeakeasyMetadata("request:mediaType=application/json")
@@ -45,7 +44,7 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
     public PutV1CompaniesCompanyUuidTaxRequirementsStateRequest(
             String companyUuid,
             String state,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
+            Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion,
             PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody) {
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(state, "state");
@@ -74,7 +73,7 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
     }
 
     /**
-     * 2-letter US state abbreviation
+     * The two-letter state abbreviation
      */
     @JsonIgnore
     public String state() {
@@ -88,8 +87,8 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     @JsonIgnore
@@ -112,7 +111,7 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
     }
 
     /**
-     * 2-letter US state abbreviation
+     * The two-letter state abbreviation
      */
     public PutV1CompaniesCompanyUuidTaxRequirementsStateRequest withState(String state) {
         Utils.checkNotNull(state, "state");
@@ -125,7 +124,7 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequest withXGustoAPIVersion(PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -137,7 +136,7 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequest withXGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -188,7 +187,7 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
 
         private String state;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody;
 
@@ -208,7 +207,7 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
 
 
         /**
-         * 2-letter US state abbreviation
+         * The two-letter state abbreviation
          */
         public Builder state(String state) {
             Utils.checkNotNull(state, "state");
@@ -222,7 +221,7 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -233,7 +232,7 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
@@ -257,10 +256,10 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion>>() {});
     }
 }

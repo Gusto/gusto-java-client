@@ -34,7 +34,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsResponse implements AsyncRes
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Created
      */
     private Optional<? extends CompanyBenefit> companyBenefit;
 
@@ -87,7 +87,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsResponse implements AsyncRes
     }
 
     /**
-     * Example response
+     * Created
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsResponse implements AsyncRes
     }
 
     /**
-     * Example response
+     * Created
      */
     public PostV1CompaniesCompanyIdCompanyBenefitsResponse withCompanyBenefit(CompanyBenefit companyBenefit) {
         Utils.checkNotNull(companyBenefit, "companyBenefit");
@@ -138,7 +138,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsResponse implements AsyncRes
 
 
     /**
-     * Example response
+     * Created
      */
     public PostV1CompaniesCompanyIdCompanyBenefitsResponse withCompanyBenefit(Optional<? extends CompanyBenefit> companyBenefit) {
         Utils.checkNotNull(companyBenefit, "companyBenefit");
@@ -225,7 +225,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsResponse implements AsyncRes
 
 
         /**
-         * Example response
+         * Created
          */
         public Builder companyBenefit(CompanyBenefit companyBenefit) {
             Utils.checkNotNull(companyBenefit, "companyBenefit");
@@ -234,7 +234,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsResponse implements AsyncRes
         }
 
         /**
-         * Example response
+         * Created
          */
         public Builder companyBenefit(Optional<? extends CompanyBenefit> companyBenefit) {
             Utils.checkNotNull(companyBenefit, "companyBenefit");

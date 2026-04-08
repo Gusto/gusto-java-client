@@ -11,13 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
-/**
- * HomeAddress
- * 
- * <p>The signatory's home address
- */
+
 public class HomeAddress {
 
     @JsonProperty("street_1")
@@ -26,7 +22,7 @@ public class HomeAddress {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("street_2")
-    private Optional<String> street2;
+    private JsonNullable<String> street2;
 
 
     @JsonProperty("city")
@@ -43,7 +39,7 @@ public class HomeAddress {
     @JsonCreator
     public HomeAddress(
             @JsonProperty("street_1") String street1,
-            @JsonProperty("street_2") Optional<String> street2,
+            @JsonProperty("street_2") JsonNullable<String> street2,
             @JsonProperty("city") String city,
             @JsonProperty("state") String state,
             @JsonProperty("zip") String zip) {
@@ -64,7 +60,7 @@ public class HomeAddress {
             String city,
             String state,
             String zip) {
-        this(street1, Optional.empty(), city,
+        this(street1, JsonNullable.undefined(), city,
             state, zip);
     }
 
@@ -74,7 +70,7 @@ public class HomeAddress {
     }
 
     @JsonIgnore
-    public Optional<String> street2() {
+    public JsonNullable<String> street2() {
         return street2;
     }
 
@@ -106,12 +102,11 @@ public class HomeAddress {
 
     public HomeAddress withStreet2(String street2) {
         Utils.checkNotNull(street2, "street2");
-        this.street2 = Optional.ofNullable(street2);
+        this.street2 = JsonNullable.of(street2);
         return this;
     }
 
-
-    public HomeAddress withStreet2(Optional<String> street2) {
+    public HomeAddress withStreet2(JsonNullable<String> street2) {
         Utils.checkNotNull(street2, "street2");
         this.street2 = street2;
         return this;
@@ -174,7 +169,7 @@ public class HomeAddress {
 
         private String street1;
 
-        private Optional<String> street2 = Optional.empty();
+        private JsonNullable<String> street2 = JsonNullable.undefined();
 
         private String city;
 
@@ -196,11 +191,11 @@ public class HomeAddress {
 
         public Builder street2(String street2) {
             Utils.checkNotNull(street2, "street2");
-            this.street2 = Optional.ofNullable(street2);
+            this.street2 = JsonNullable.of(street2);
             return this;
         }
 
-        public Builder street2(Optional<String> street2) {
+        public Builder street2(JsonNullable<String> street2) {
             Utils.checkNotNull(street2, "street2");
             this.street2 = street2;
             return this;

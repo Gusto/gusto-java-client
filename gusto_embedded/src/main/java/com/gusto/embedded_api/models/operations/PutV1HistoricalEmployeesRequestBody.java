@@ -60,7 +60,7 @@ public class PutV1HistoricalEmployeesRequestBody {
 
 
     @JsonProperty("home_address")
-    private PutV1HistoricalEmployeesHomeAddress homeAddress;
+    private HomeAddress homeAddress;
 
 
     @JsonProperty("termination")
@@ -92,7 +92,7 @@ public class PutV1HistoricalEmployeesRequestBody {
             @JsonProperty("date_of_birth") String dateOfBirth,
             @JsonProperty("ssn") String ssn,
             @JsonProperty("work_address") WorkAddress workAddress,
-            @JsonProperty("home_address") PutV1HistoricalEmployeesHomeAddress homeAddress,
+            @JsonProperty("home_address") HomeAddress homeAddress,
             @JsonProperty("termination") Termination termination,
             @JsonProperty("email") Optional<String> email,
             @JsonProperty("job") Job job,
@@ -132,7 +132,7 @@ public class PutV1HistoricalEmployeesRequestBody {
             String dateOfBirth,
             String ssn,
             WorkAddress workAddress,
-            PutV1HistoricalEmployeesHomeAddress homeAddress,
+            HomeAddress homeAddress,
             Termination termination,
             Job job) {
         this(version, firstName, Optional.empty(),
@@ -188,7 +188,7 @@ public class PutV1HistoricalEmployeesRequestBody {
     }
 
     @JsonIgnore
-    public PutV1HistoricalEmployeesHomeAddress homeAddress() {
+    public HomeAddress homeAddress() {
         return homeAddress;
     }
 
@@ -288,7 +288,7 @@ public class PutV1HistoricalEmployeesRequestBody {
         return this;
     }
 
-    public PutV1HistoricalEmployeesRequestBody withHomeAddress(PutV1HistoricalEmployeesHomeAddress homeAddress) {
+    public PutV1HistoricalEmployeesRequestBody withHomeAddress(HomeAddress homeAddress) {
         Utils.checkNotNull(homeAddress, "homeAddress");
         this.homeAddress = homeAddress;
         return this;
@@ -410,7 +410,7 @@ public class PutV1HistoricalEmployeesRequestBody {
 
         private WorkAddress workAddress;
 
-        private PutV1HistoricalEmployeesHomeAddress homeAddress;
+        private HomeAddress homeAddress;
 
         private Termination termination;
 
@@ -498,7 +498,7 @@ public class PutV1HistoricalEmployeesRequestBody {
         }
 
 
-        public Builder homeAddress(PutV1HistoricalEmployeesHomeAddress homeAddress) {
+        public Builder homeAddress(HomeAddress homeAddress) {
             Utils.checkNotNull(homeAddress, "homeAddress");
             this.homeAddress = homeAddress;
             return this;

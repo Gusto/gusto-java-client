@@ -8,11 +8,6 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * OnboardingStatus
- * 
- * <p>The current onboarding status of the employee
- */
 public enum OnboardingStatus {
     ONBOARDING_COMPLETED("onboarding_completed"),
     ADMIN_ONBOARDING_INCOMPLETE("admin_onboarding_incomplete"),

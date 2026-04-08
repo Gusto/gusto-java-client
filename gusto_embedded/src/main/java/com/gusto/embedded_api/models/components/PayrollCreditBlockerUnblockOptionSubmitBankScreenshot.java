@@ -15,7 +15,7 @@ import java.lang.String;
  * 
  * <p>Unblock option to resolve a credit blocker by submitting a bank screenshot
  */
-public class PayrollCreditBlockerUnblockOptionSubmitBankScreenshot implements PayrollCreditBlockersTypeUnblockOptions {
+public class PayrollCreditBlockerUnblockOptionSubmitBankScreenshot implements PayrollCreditBlockerTypeUnblockOptions {
     /**
      * The type of unblock option for the credit blocker
      */

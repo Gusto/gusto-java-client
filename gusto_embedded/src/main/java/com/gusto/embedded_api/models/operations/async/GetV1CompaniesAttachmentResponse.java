@@ -34,7 +34,7 @@ public class GetV1CompaniesAttachmentResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
     private Optional<? extends CompanyAttachment> companyAttachment;
 
@@ -87,7 +87,7 @@ public class GetV1CompaniesAttachmentResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetV1CompaniesAttachmentResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
     public GetV1CompaniesAttachmentResponse withCompanyAttachment(CompanyAttachment companyAttachment) {
         Utils.checkNotNull(companyAttachment, "companyAttachment");
@@ -138,7 +138,7 @@ public class GetV1CompaniesAttachmentResponse implements AsyncResponse {
 
 
     /**
-     * Example response
+     * Successful
      */
     public GetV1CompaniesAttachmentResponse withCompanyAttachment(Optional<? extends CompanyAttachment> companyAttachment) {
         Utils.checkNotNull(companyAttachment, "companyAttachment");
@@ -225,7 +225,7 @@ public class GetV1CompaniesAttachmentResponse implements AsyncResponse {
 
 
         /**
-         * Example response
+         * Successful
          */
         public Builder companyAttachment(CompanyAttachment companyAttachment) {
             Utils.checkNotNull(companyAttachment, "companyAttachment");
@@ -234,7 +234,7 @@ public class GetV1CompaniesAttachmentResponse implements AsyncResponse {
         }
 
         /**
-         * Example response
+         * Successful
          */
         public Builder companyAttachment(Optional<? extends CompanyAttachment> companyAttachment) {
             Utils.checkNotNull(companyAttachment, "companyAttachment");

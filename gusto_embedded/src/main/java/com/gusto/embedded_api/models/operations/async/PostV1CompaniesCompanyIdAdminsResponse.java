@@ -34,7 +34,7 @@ public class PostV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Success
      */
     private Optional<? extends Admin> admin;
 
@@ -87,7 +87,7 @@ public class PostV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Success
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PostV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Success
      */
     public PostV1CompaniesCompanyIdAdminsResponse withAdmin(Admin admin) {
         Utils.checkNotNull(admin, "admin");
@@ -138,7 +138,7 @@ public class PostV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
 
 
     /**
-     * Example response
+     * Success
      */
     public PostV1CompaniesCompanyIdAdminsResponse withAdmin(Optional<? extends Admin> admin) {
         Utils.checkNotNull(admin, "admin");
@@ -225,7 +225,7 @@ public class PostV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
 
 
         /**
-         * Example response
+         * Success
          */
         public Builder admin(Admin admin) {
             Utils.checkNotNull(admin, "admin");
@@ -234,7 +234,7 @@ public class PostV1CompaniesCompanyIdAdminsResponse implements AsyncResponse {
         }
 
         /**
-         * Example response
+         * Success
          */
         public Builder admin(Optional<? extends Admin> admin) {
             Utils.checkNotNull(admin, "admin");

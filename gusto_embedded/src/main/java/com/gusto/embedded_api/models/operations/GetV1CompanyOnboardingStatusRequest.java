@@ -6,7 +6,6 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -24,8 +23,8 @@ public class GetV1CompanyOnboardingStatusRequest {
     private String companyUuid;
 
     /**
-     * Comma delimited string indicating whether to include any additional steps of onboarding. Currently
-     * only supports the value "external_payroll".
+     * Comma-delimited string of additional onboarding steps to include. Currently only supports the value
+     * "external_payroll".
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=additional_steps")
     private Optional<String> additionalSteps;
@@ -36,13 +35,13 @@ public class GetV1CompanyOnboardingStatusRequest {
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    private Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion;
 
     @JsonCreator
     public GetV1CompanyOnboardingStatusRequest(
             String companyUuid,
             Optional<String> additionalSteps,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(additionalSteps, "additionalSteps");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
@@ -65,8 +64,8 @@ public class GetV1CompanyOnboardingStatusRequest {
     }
 
     /**
-     * Comma delimited string indicating whether to include any additional steps of onboarding. Currently
-     * only supports the value "external_payroll".
+     * Comma-delimited string of additional onboarding steps to include. Currently only supports the value
+     * "external_payroll".
      */
     @JsonIgnore
     public Optional<String> additionalSteps() {
@@ -80,8 +79,8 @@ public class GetV1CompanyOnboardingStatusRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     public static Builder builder() {
@@ -99,8 +98,8 @@ public class GetV1CompanyOnboardingStatusRequest {
     }
 
     /**
-     * Comma delimited string indicating whether to include any additional steps of onboarding. Currently
-     * only supports the value "external_payroll".
+     * Comma-delimited string of additional onboarding steps to include. Currently only supports the value
+     * "external_payroll".
      */
     public GetV1CompanyOnboardingStatusRequest withAdditionalSteps(String additionalSteps) {
         Utils.checkNotNull(additionalSteps, "additionalSteps");
@@ -110,8 +109,8 @@ public class GetV1CompanyOnboardingStatusRequest {
 
 
     /**
-     * Comma delimited string indicating whether to include any additional steps of onboarding. Currently
-     * only supports the value "external_payroll".
+     * Comma-delimited string of additional onboarding steps to include. Currently only supports the value
+     * "external_payroll".
      */
     public GetV1CompanyOnboardingStatusRequest withAdditionalSteps(Optional<String> additionalSteps) {
         Utils.checkNotNull(additionalSteps, "additionalSteps");
@@ -124,7 +123,7 @@ public class GetV1CompanyOnboardingStatusRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1CompanyOnboardingStatusRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public GetV1CompanyOnboardingStatusRequest withXGustoAPIVersion(GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -136,7 +135,7 @@ public class GetV1CompanyOnboardingStatusRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1CompanyOnboardingStatusRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public GetV1CompanyOnboardingStatusRequest withXGustoAPIVersion(Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -178,7 +177,7 @@ public class GetV1CompanyOnboardingStatusRequest {
 
         private Optional<String> additionalSteps = Optional.empty();
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private Builder() {
           // force use of static builder() method
@@ -196,8 +195,8 @@ public class GetV1CompanyOnboardingStatusRequest {
 
 
         /**
-         * Comma delimited string indicating whether to include any additional steps of onboarding. Currently
-         * only supports the value "external_payroll".
+         * Comma-delimited string of additional onboarding steps to include. Currently only supports the value
+         * "external_payroll".
          */
         public Builder additionalSteps(String additionalSteps) {
             Utils.checkNotNull(additionalSteps, "additionalSteps");
@@ -206,8 +205,8 @@ public class GetV1CompanyOnboardingStatusRequest {
         }
 
         /**
-         * Comma delimited string indicating whether to include any additional steps of onboarding. Currently
-         * only supports the value "external_payroll".
+         * Comma-delimited string of additional onboarding steps to include. Currently only supports the value
+         * "external_payroll".
          */
         public Builder additionalSteps(Optional<String> additionalSteps) {
             Utils.checkNotNull(additionalSteps, "additionalSteps");
@@ -221,7 +220,7 @@ public class GetV1CompanyOnboardingStatusRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -232,7 +231,7 @@ public class GetV1CompanyOnboardingStatusRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
@@ -248,10 +247,10 @@ public class GetV1CompanyOnboardingStatusRequest {
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion>>() {});
     }
 }

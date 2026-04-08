@@ -12,6 +12,7 @@ import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class PayrollUpdatePaidTimeOff {
@@ -42,14 +43,14 @@ public class PayrollUpdatePaidTimeOff {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("final_payout_unused_hours_input")
-    private Optional<String> finalPayoutUnusedHoursInput;
+    private JsonNullable<String> finalPayoutUnusedHoursInput;
 
     @JsonCreator
     public PayrollUpdatePaidTimeOff(
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("hours") Optional<String> hours,
             @JsonProperty("policy_uuid") Optional<String> policyUuid,
-            @JsonProperty("final_payout_unused_hours_input") Optional<String> finalPayoutUnusedHoursInput) {
+            @JsonProperty("final_payout_unused_hours_input") JsonNullable<String> finalPayoutUnusedHoursInput) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(hours, "hours");
         Utils.checkNotNull(policyUuid, "policyUuid");
@@ -62,7 +63,7 @@ public class PayrollUpdatePaidTimeOff {
     
     public PayrollUpdatePaidTimeOff() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            JsonNullable.undefined());
     }
 
     /**
@@ -94,7 +95,7 @@ public class PayrollUpdatePaidTimeOff {
      * The outstanding hours paid upon termination. This field is only applicable for termination payrolls.
      */
     @JsonIgnore
-    public Optional<String> finalPayoutUnusedHoursInput() {
+    public JsonNullable<String> finalPayoutUnusedHoursInput() {
         return finalPayoutUnusedHoursInput;
     }
 
@@ -167,15 +168,14 @@ public class PayrollUpdatePaidTimeOff {
      */
     public PayrollUpdatePaidTimeOff withFinalPayoutUnusedHoursInput(String finalPayoutUnusedHoursInput) {
         Utils.checkNotNull(finalPayoutUnusedHoursInput, "finalPayoutUnusedHoursInput");
-        this.finalPayoutUnusedHoursInput = Optional.ofNullable(finalPayoutUnusedHoursInput);
+        this.finalPayoutUnusedHoursInput = JsonNullable.of(finalPayoutUnusedHoursInput);
         return this;
     }
-
 
     /**
      * The outstanding hours paid upon termination. This field is only applicable for termination payrolls.
      */
-    public PayrollUpdatePaidTimeOff withFinalPayoutUnusedHoursInput(Optional<String> finalPayoutUnusedHoursInput) {
+    public PayrollUpdatePaidTimeOff withFinalPayoutUnusedHoursInput(JsonNullable<String> finalPayoutUnusedHoursInput) {
         Utils.checkNotNull(finalPayoutUnusedHoursInput, "finalPayoutUnusedHoursInput");
         this.finalPayoutUnusedHoursInput = finalPayoutUnusedHoursInput;
         return this;
@@ -222,7 +222,7 @@ public class PayrollUpdatePaidTimeOff {
 
         private Optional<String> policyUuid = Optional.empty();
 
-        private Optional<String> finalPayoutUnusedHoursInput = Optional.empty();
+        private JsonNullable<String> finalPayoutUnusedHoursInput = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -293,14 +293,14 @@ public class PayrollUpdatePaidTimeOff {
          */
         public Builder finalPayoutUnusedHoursInput(String finalPayoutUnusedHoursInput) {
             Utils.checkNotNull(finalPayoutUnusedHoursInput, "finalPayoutUnusedHoursInput");
-            this.finalPayoutUnusedHoursInput = Optional.ofNullable(finalPayoutUnusedHoursInput);
+            this.finalPayoutUnusedHoursInput = JsonNullable.of(finalPayoutUnusedHoursInput);
             return this;
         }
 
         /**
          * The outstanding hours paid upon termination. This field is only applicable for termination payrolls.
          */
-        public Builder finalPayoutUnusedHoursInput(Optional<String> finalPayoutUnusedHoursInput) {
+        public Builder finalPayoutUnusedHoursInput(JsonNullable<String> finalPayoutUnusedHoursInput) {
             Utils.checkNotNull(finalPayoutUnusedHoursInput, "finalPayoutUnusedHoursInput");
             this.finalPayoutUnusedHoursInput = finalPayoutUnusedHoursInput;
             return this;

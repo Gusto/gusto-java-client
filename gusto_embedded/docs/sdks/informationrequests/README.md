@@ -15,7 +15,7 @@ scope: `information_requests:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-information-requests" method="get" path="/v1/companies/{company_uuid}/information_requests" -->
+<!-- UsageSnippet language="java" operationID="get-information-requests" method="get" path="/v1/companies/{company_uuid}/information_requests" example="Example" -->
 ```java
 package hello.world;
 
@@ -38,7 +38,7 @@ public class Application {
                 .call();
 
         if (res.informationRequestList().isPresent()) {
-            // handle response
+            System.out.println(res.informationRequestList().get());
         }
     }
 }
@@ -69,9 +69,9 @@ Maximum file size: 120MB.
 
 scope: `information_requests:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="java" operationID="submit-information-request" method="put" path="/v1/information_requests/{information_request_uuid}/submit" -->
+<!-- UsageSnippet language="java" operationID="submit-information-request" method="put" path="/v1/information_requests/{information_request_uuid}/submit" example="Basic" -->
 ```java
 package hello.world;
 
@@ -96,7 +96,71 @@ public class Application {
                 .call();
 
         if (res.informationRequest().isPresent()) {
-            // handle response
+            System.out.println(res.informationRequest().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="submit-information-request" method="put" path="/v1/information_requests/{information_request_uuid}/submit" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.SubmitInformationRequestRequestBody;
+import com.gusto.embedded_api.models.operations.SubmitInformationRequestResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        SubmitInformationRequestResponse res = sdk.informationRequests().submit()
+                .informationRequestUuid("<id>")
+                .requestBody(SubmitInformationRequestRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.informationRequest().isPresent()) {
+            System.out.println(res.informationRequest().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="submit-information-request" method="put" path="/v1/information_requests/{information_request_uuid}/submit" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.SubmitInformationRequestRequestBody;
+import com.gusto.embedded_api.models.operations.SubmitInformationRequestResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        SubmitInformationRequestResponse res = sdk.informationRequests().submit()
+                .informationRequestUuid("<id>")
+                .requestBody(SubmitInformationRequestRequestBody.builder()
+                    .build())
+                .call();
+
+        if (res.informationRequest().isPresent()) {
+            System.out.println(res.informationRequest().get());
         }
     }
 }

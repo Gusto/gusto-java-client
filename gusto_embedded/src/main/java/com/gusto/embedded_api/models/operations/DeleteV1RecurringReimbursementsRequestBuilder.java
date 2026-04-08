@@ -18,7 +18,7 @@ public class DeleteV1RecurringReimbursementsRequestBuilder {
 
     private Optional<? extends DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
-                            "\"2024-04-01\"",
+                            "\"2025-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion>>() {});
     private String id;
     private final SDKConfiguration sdkConfiguration;
@@ -70,6 +70,6 @@ public class DeleteV1RecurringReimbursementsRequestBuilder {
     private static final LazySingletonValue<Optional<? extends DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
-                    "\"2024-04-01\"",
+                    "\"2025-06-15\"",
                     new TypeReference<Optional<? extends DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion>>() {});
 }

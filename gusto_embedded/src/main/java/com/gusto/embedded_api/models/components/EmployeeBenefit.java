@@ -3,6 +3,8 @@
  */
 package com.gusto.embedded_api.models.components;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -13,10 +15,13 @@ import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Deprecated;
+import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -111,7 +116,7 @@ public class EmployeeBenefit {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("retirement_loan_identifier")
-    private Optional<String> retirementLoanIdentifier;
+    private JsonNullable<String> retirementLoanIdentifier;
 
     /**
      * The amount that the employee is insured for. Note: company contribution cannot be present if
@@ -194,6 +199,10 @@ public class EmployeeBenefit {
     @JsonProperty("uuid")
     private String uuid;
 
+
+    @JsonIgnore
+    private Map<String, Object> additionalProperties;
+
     @JsonCreator
     public EmployeeBenefit(
             @JsonProperty("version") Optional<String> version,
@@ -206,7 +215,7 @@ public class EmployeeBenefit {
             @JsonProperty("company_contribution_annual_maximum") JsonNullable<String> companyContributionAnnualMaximum,
             @JsonProperty("limit_option") JsonNullable<String> limitOption,
             @JsonProperty("catch_up") JsonNullable<Boolean> catchUp,
-            @JsonProperty("retirement_loan_identifier") Optional<String> retirementLoanIdentifier,
+            @JsonProperty("retirement_loan_identifier") JsonNullable<String> retirementLoanIdentifier,
             @JsonProperty("coverage_amount") JsonNullable<String> coverageAmount,
             @JsonProperty("deduction_reduces_taxable_income") JsonNullable<? extends DeductionReducesTaxableIncome> deductionReducesTaxableIncome,
             @JsonProperty("coverage_salary_multiplier") JsonNullable<String> coverageSalaryMultiplier,
@@ -259,6 +268,7 @@ public class EmployeeBenefit {
         this.employeeUuid = employeeUuid;
         this.companyBenefitUuid = companyBenefitUuid;
         this.uuid = uuid;
+        this.additionalProperties = new HashMap<>();
     }
     
     public EmployeeBenefit(
@@ -266,7 +276,7 @@ public class EmployeeBenefit {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), JsonNullable.undefined(), Optional.empty(),
             Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
-            JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(),
+            JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
             JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
             Optional.empty(), Optional.empty(), JsonNullable.undefined(),
             Optional.empty(), Optional.empty(), uuid);
@@ -367,7 +377,7 @@ public class EmployeeBenefit {
      * Identifier for a 401(k) loan assigned by the 401(k) provider
      */
     @JsonIgnore
-    public Optional<String> retirementLoanIdentifier() {
+    public JsonNullable<String> retirementLoanIdentifier() {
         return retirementLoanIdentifier;
     }
 
@@ -462,6 +472,11 @@ public class EmployeeBenefit {
     @JsonIgnore
     public String uuid() {
         return uuid;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> additionalProperties() {
+        return additionalProperties;
     }
 
     public static Builder builder() {
@@ -680,15 +695,14 @@ public class EmployeeBenefit {
      */
     public EmployeeBenefit withRetirementLoanIdentifier(String retirementLoanIdentifier) {
         Utils.checkNotNull(retirementLoanIdentifier, "retirementLoanIdentifier");
-        this.retirementLoanIdentifier = Optional.ofNullable(retirementLoanIdentifier);
+        this.retirementLoanIdentifier = JsonNullable.of(retirementLoanIdentifier);
         return this;
     }
-
 
     /**
      * Identifier for a 401(k) loan assigned by the 401(k) provider
      */
-    public EmployeeBenefit withRetirementLoanIdentifier(Optional<String> retirementLoanIdentifier) {
+    public EmployeeBenefit withRetirementLoanIdentifier(JsonNullable<String> retirementLoanIdentifier) {
         Utils.checkNotNull(retirementLoanIdentifier, "retirementLoanIdentifier");
         this.retirementLoanIdentifier = retirementLoanIdentifier;
         return this;
@@ -894,6 +908,19 @@ public class EmployeeBenefit {
         return this;
     }
 
+    @JsonAnySetter
+    public EmployeeBenefit withAdditionalProperty(String key, Object value) {
+        // note that value can be null because of the way JsonAnySetter works
+        Utils.checkNotNull(key, "key");
+        additionalProperties.put(key, value); 
+        return this;
+    }
+    public EmployeeBenefit withAdditionalProperties(Map<String, Object> additionalProperties) {
+        Utils.checkNotNull(additionalProperties, "additionalProperties");
+        this.additionalProperties = additionalProperties;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -924,7 +951,8 @@ public class EmployeeBenefit {
             Utils.enhancedDeepEquals(this.expirationDate, other.expirationDate) &&
             Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
             Utils.enhancedDeepEquals(this.companyBenefitUuid, other.companyBenefitUuid) &&
-            Utils.enhancedDeepEquals(this.uuid, other.uuid);
+            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
+            Utils.enhancedDeepEquals(this.additionalProperties, other.additionalProperties);
     }
     
     @Override
@@ -936,7 +964,8 @@ public class EmployeeBenefit {
             catchUp, retirementLoanIdentifier, coverageAmount,
             deductionReducesTaxableIncome, coverageSalaryMultiplier, companyContribution,
             contributeAsPercentage, effectiveDate, expirationDate,
-            employeeUuid, companyBenefitUuid, uuid);
+            employeeUuid, companyBenefitUuid, uuid,
+            additionalProperties);
     }
     
     @Override
@@ -962,7 +991,8 @@ public class EmployeeBenefit {
                 "expirationDate", expirationDate,
                 "employeeUuid", employeeUuid,
                 "companyBenefitUuid", companyBenefitUuid,
-                "uuid", uuid);
+                "uuid", uuid,
+                "additionalProperties", additionalProperties);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -988,7 +1018,7 @@ public class EmployeeBenefit {
 
         private JsonNullable<Boolean> catchUp;
 
-        private Optional<String> retirementLoanIdentifier = Optional.empty();
+        private JsonNullable<String> retirementLoanIdentifier = JsonNullable.undefined();
 
         private JsonNullable<String> coverageAmount = JsonNullable.undefined();
 
@@ -1011,6 +1041,8 @@ public class EmployeeBenefit {
         private Optional<String> companyBenefitUuid = Optional.empty();
 
         private String uuid;
+
+        private Map<String, Object> additionalProperties = new HashMap<>();
 
         private Builder() {
           // force use of static builder() method
@@ -1232,14 +1264,14 @@ public class EmployeeBenefit {
          */
         public Builder retirementLoanIdentifier(String retirementLoanIdentifier) {
             Utils.checkNotNull(retirementLoanIdentifier, "retirementLoanIdentifier");
-            this.retirementLoanIdentifier = Optional.ofNullable(retirementLoanIdentifier);
+            this.retirementLoanIdentifier = JsonNullable.of(retirementLoanIdentifier);
             return this;
         }
 
         /**
          * Identifier for a 401(k) loan assigned by the 401(k) provider
          */
-        public Builder retirementLoanIdentifier(Optional<String> retirementLoanIdentifier) {
+        public Builder retirementLoanIdentifier(JsonNullable<String> retirementLoanIdentifier) {
             Utils.checkNotNull(retirementLoanIdentifier, "retirementLoanIdentifier");
             this.retirementLoanIdentifier = retirementLoanIdentifier;
             return this;
@@ -1450,6 +1482,22 @@ public class EmployeeBenefit {
             return this;
         }
 
+        public Builder additionalProperty(String key, Object value) {
+            Utils.checkNotNull(key, "key");
+            // we could be strict about null values (force the user
+            // to pass `JsonNullable.of(null)`) but likely to be a bit 
+            // annoying for additional properties building so we'll 
+            // relax preconditions.
+            this.additionalProperties.put(key, value);
+            return this;
+        }
+
+        public Builder additionalProperties(Map<String, Object> additionalProperties) {
+            Utils.checkNotNull(additionalProperties, "additionalProperties");
+            this.additionalProperties = additionalProperties;
+            return this;
+        }
+
         public EmployeeBenefit build() {
             if (active == null) {
                 active = _SINGLETON_VALUE_Active.value();
@@ -1486,7 +1534,8 @@ public class EmployeeBenefit {
                 catchUp, retirementLoanIdentifier, coverageAmount,
                 deductionReducesTaxableIncome, coverageSalaryMultiplier, companyContribution,
                 contributeAsPercentage, effectiveDate, expirationDate,
-                employeeUuid, companyBenefitUuid, uuid);
+                employeeUuid, companyBenefitUuid, uuid)
+                .withAdditionalProperties(additionalProperties);
         }
 
 

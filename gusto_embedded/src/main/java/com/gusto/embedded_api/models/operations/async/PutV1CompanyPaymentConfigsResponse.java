@@ -34,7 +34,7 @@ public class PutV1CompanyPaymentConfigsResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
     private Optional<? extends PaymentConfigs> paymentConfigs;
 
@@ -87,7 +87,7 @@ public class PutV1CompanyPaymentConfigsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PutV1CompanyPaymentConfigsResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
     public PutV1CompanyPaymentConfigsResponse withPaymentConfigs(PaymentConfigs paymentConfigs) {
         Utils.checkNotNull(paymentConfigs, "paymentConfigs");
@@ -138,7 +138,7 @@ public class PutV1CompanyPaymentConfigsResponse implements AsyncResponse {
 
 
     /**
-     * Example response
+     * Successful
      */
     public PutV1CompanyPaymentConfigsResponse withPaymentConfigs(Optional<? extends PaymentConfigs> paymentConfigs) {
         Utils.checkNotNull(paymentConfigs, "paymentConfigs");
@@ -225,7 +225,7 @@ public class PutV1CompanyPaymentConfigsResponse implements AsyncResponse {
 
 
         /**
-         * Example response
+         * Successful
          */
         public Builder paymentConfigs(PaymentConfigs paymentConfigs) {
             Utils.checkNotNull(paymentConfigs, "paymentConfigs");
@@ -234,7 +234,7 @@ public class PutV1CompanyPaymentConfigsResponse implements AsyncResponse {
         }
 
         /**
-         * Example response
+         * Successful
          */
         public Builder paymentConfigs(Optional<? extends PaymentConfigs> paymentConfigs) {
             Utils.checkNotNull(paymentConfigs, "paymentConfigs");

@@ -261,7 +261,7 @@ public class PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYe
         private static final LazySingletonValue<Optional<? extends PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
-                        "\"2024-04-01\"",
+                        "\"2025-06-15\"",
                         new TypeReference<Optional<? extends PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion>>() {});
     }
 }

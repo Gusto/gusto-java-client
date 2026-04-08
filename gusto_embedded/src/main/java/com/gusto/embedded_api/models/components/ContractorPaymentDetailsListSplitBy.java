@@ -8,13 +8,6 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * ContractorPaymentDetailsListSplitBy
- * 
- * <p>Describes how the payment will be split. If split_by is Percentage, then the split amounts must add
- * up to exactly 100. If split_by is Amount, then the amount represents cents and the last split amount
- * must be `null` to capture the remainder.
- */
 public enum ContractorPaymentDetailsListSplitBy {
     AMOUNT("Amount"),
     PERCENTAGE("Percentage");

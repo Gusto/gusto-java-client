@@ -12,63 +12,59 @@ import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.List;
 import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class Errors {
     /**
-     * The key identifying the error source
+     * Error key
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("error_key")
     private Optional<String> errorKey;
 
     /**
-     * The error category
+     * Error category
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("category")
     private Optional<String> category;
 
     /**
-     * Human-readable error message
+     * Blocker message
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("message")
-    private JsonNullable<String> message;
+    private Optional<String> message;
 
-    /**
-     * Nested errors for sub-operations
-     */
+
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("errors")
-    private JsonNullable<? extends List<GetV1PeopleBatchesPeopleBatchUuidErrors>> errors;
+    @JsonProperty("metadata")
+    private Optional<? extends Metadata> metadata;
 
     @JsonCreator
     public Errors(
             @JsonProperty("error_key") Optional<String> errorKey,
             @JsonProperty("category") Optional<String> category,
-            @JsonProperty("message") JsonNullable<String> message,
-            @JsonProperty("errors") JsonNullable<? extends List<GetV1PeopleBatchesPeopleBatchUuidErrors>> errors) {
+            @JsonProperty("message") Optional<String> message,
+            @JsonProperty("metadata") Optional<? extends Metadata> metadata) {
         Utils.checkNotNull(errorKey, "errorKey");
         Utils.checkNotNull(category, "category");
         Utils.checkNotNull(message, "message");
-        Utils.checkNotNull(errors, "errors");
+        Utils.checkNotNull(metadata, "metadata");
         this.errorKey = errorKey;
         this.category = category;
         this.message = message;
-        this.errors = errors;
+        this.metadata = metadata;
     }
     
     public Errors() {
-        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            JsonNullable.undefined());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
-     * The key identifying the error source
+     * Error key
      */
     @JsonIgnore
     public Optional<String> errorKey() {
@@ -76,7 +72,7 @@ public class Errors {
     }
 
     /**
-     * The error category
+     * Error category
      */
     @JsonIgnore
     public Optional<String> category() {
@@ -84,20 +80,17 @@ public class Errors {
     }
 
     /**
-     * Human-readable error message
+     * Blocker message
      */
     @JsonIgnore
-    public JsonNullable<String> message() {
+    public Optional<String> message() {
         return message;
     }
 
-    /**
-     * Nested errors for sub-operations
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<List<GetV1PeopleBatchesPeopleBatchUuidErrors>> errors() {
-        return (JsonNullable<List<GetV1PeopleBatchesPeopleBatchUuidErrors>>) errors;
+    public Optional<Metadata> metadata() {
+        return (Optional<Metadata>) metadata;
     }
 
     public static Builder builder() {
@@ -106,7 +99,7 @@ public class Errors {
 
 
     /**
-     * The key identifying the error source
+     * Error key
      */
     public Errors withErrorKey(String errorKey) {
         Utils.checkNotNull(errorKey, "errorKey");
@@ -116,7 +109,7 @@ public class Errors {
 
 
     /**
-     * The key identifying the error source
+     * Error key
      */
     public Errors withErrorKey(Optional<String> errorKey) {
         Utils.checkNotNull(errorKey, "errorKey");
@@ -125,7 +118,7 @@ public class Errors {
     }
 
     /**
-     * The error category
+     * Error category
      */
     public Errors withCategory(String category) {
         Utils.checkNotNull(category, "category");
@@ -135,7 +128,7 @@ public class Errors {
 
 
     /**
-     * The error category
+     * Error category
      */
     public Errors withCategory(Optional<String> category) {
         Utils.checkNotNull(category, "category");
@@ -144,38 +137,34 @@ public class Errors {
     }
 
     /**
-     * Human-readable error message
+     * Blocker message
      */
     public Errors withMessage(String message) {
         Utils.checkNotNull(message, "message");
-        this.message = JsonNullable.of(message);
+        this.message = Optional.ofNullable(message);
         return this;
     }
 
+
     /**
-     * Human-readable error message
+     * Blocker message
      */
-    public Errors withMessage(JsonNullable<String> message) {
+    public Errors withMessage(Optional<String> message) {
         Utils.checkNotNull(message, "message");
         this.message = message;
         return this;
     }
 
-    /**
-     * Nested errors for sub-operations
-     */
-    public Errors withErrors(List<GetV1PeopleBatchesPeopleBatchUuidErrors> errors) {
-        Utils.checkNotNull(errors, "errors");
-        this.errors = JsonNullable.of(errors);
+    public Errors withMetadata(Metadata metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = Optional.ofNullable(metadata);
         return this;
     }
 
-    /**
-     * Nested errors for sub-operations
-     */
-    public Errors withErrors(JsonNullable<? extends List<GetV1PeopleBatchesPeopleBatchUuidErrors>> errors) {
-        Utils.checkNotNull(errors, "errors");
-        this.errors = errors;
+
+    public Errors withMetadata(Optional<? extends Metadata> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = metadata;
         return this;
     }
 
@@ -192,14 +181,14 @@ public class Errors {
             Utils.enhancedDeepEquals(this.errorKey, other.errorKey) &&
             Utils.enhancedDeepEquals(this.category, other.category) &&
             Utils.enhancedDeepEquals(this.message, other.message) &&
-            Utils.enhancedDeepEquals(this.errors, other.errors);
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             errorKey, category, message,
-            errors);
+            metadata);
     }
     
     @Override
@@ -208,7 +197,7 @@ public class Errors {
                 "errorKey", errorKey,
                 "category", category,
                 "message", message,
-                "errors", errors);
+                "metadata", metadata);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -218,9 +207,9 @@ public class Errors {
 
         private Optional<String> category = Optional.empty();
 
-        private JsonNullable<String> message = JsonNullable.undefined();
+        private Optional<String> message = Optional.empty();
 
-        private JsonNullable<? extends List<GetV1PeopleBatchesPeopleBatchUuidErrors>> errors = JsonNullable.undefined();
+        private Optional<? extends Metadata> metadata = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -228,7 +217,7 @@ public class Errors {
 
 
         /**
-         * The key identifying the error source
+         * Error key
          */
         public Builder errorKey(String errorKey) {
             Utils.checkNotNull(errorKey, "errorKey");
@@ -237,7 +226,7 @@ public class Errors {
         }
 
         /**
-         * The key identifying the error source
+         * Error key
          */
         public Builder errorKey(Optional<String> errorKey) {
             Utils.checkNotNull(errorKey, "errorKey");
@@ -247,7 +236,7 @@ public class Errors {
 
 
         /**
-         * The error category
+         * Error category
          */
         public Builder category(String category) {
             Utils.checkNotNull(category, "category");
@@ -256,7 +245,7 @@ public class Errors {
         }
 
         /**
-         * The error category
+         * Error category
          */
         public Builder category(Optional<String> category) {
             Utils.checkNotNull(category, "category");
@@ -266,39 +255,33 @@ public class Errors {
 
 
         /**
-         * Human-readable error message
+         * Blocker message
          */
         public Builder message(String message) {
             Utils.checkNotNull(message, "message");
-            this.message = JsonNullable.of(message);
+            this.message = Optional.ofNullable(message);
             return this;
         }
 
         /**
-         * Human-readable error message
+         * Blocker message
          */
-        public Builder message(JsonNullable<String> message) {
+        public Builder message(Optional<String> message) {
             Utils.checkNotNull(message, "message");
             this.message = message;
             return this;
         }
 
 
-        /**
-         * Nested errors for sub-operations
-         */
-        public Builder errors(List<GetV1PeopleBatchesPeopleBatchUuidErrors> errors) {
-            Utils.checkNotNull(errors, "errors");
-            this.errors = JsonNullable.of(errors);
+        public Builder metadata(Metadata metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Optional.ofNullable(metadata);
             return this;
         }
 
-        /**
-         * Nested errors for sub-operations
-         */
-        public Builder errors(JsonNullable<? extends List<GetV1PeopleBatchesPeopleBatchUuidErrors>> errors) {
-            Utils.checkNotNull(errors, "errors");
-            this.errors = errors;
+        public Builder metadata(Optional<? extends Metadata> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = metadata;
             return this;
         }
 
@@ -306,7 +289,7 @@ public class Errors {
 
             return new Errors(
                 errorKey, category, message,
-                errors);
+                metadata);
         }
 
     }

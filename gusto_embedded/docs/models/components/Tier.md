@@ -2,6 +2,14 @@
 
 The Gusto product tier of the company (not applicable to Embedded partner managed companies).
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.Tier;
+
+Tier value = Tier.SIMPLE;
+```
+
 
 ## Values
 

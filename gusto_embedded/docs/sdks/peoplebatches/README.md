@@ -22,15 +22,14 @@ scope: `people_batches:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.PostV1CompaniesCompanyIdPeopleBatchesResponseBody;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.errors.*;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws PostV1CompaniesCompanyIdPeopleBatchesResponseBody, UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, PeopleBatchConflictError, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -38,7 +37,7 @@ public class Application {
 
         PostV1CompaniesCompanyIdPeopleBatchesResponse res = sdk.peopleBatches().postV1CompaniesCompanyIdPeopleBatches()
                 .companyId("<id>")
-                .xGustoAPIVersion(PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
+                .xGustoAPIVersion(PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostV1CompaniesCompanyIdPeopleBatchesRequestBody.builder()
                     .idempotencyKey("550e8400-e29b-41d4-a716-446655440000")
                     .batchAction(BatchAction.CREATE)
@@ -46,8 +45,8 @@ public class Application {
                     .build())
                 .call();
 
-        if (res.object().isPresent()) {
-            // handle response
+        if (res.peopleBatch().isPresent()) {
+            System.out.println(res.peopleBatch().get());
         }
     }
 }
@@ -67,11 +66,12 @@ public class Application {
 
 ### Errors
 
-| Error Type                                                      | Status Code                                                     | Content Type                                                    |
-| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
-| models/errors/PostV1CompaniesCompanyIdPeopleBatchesResponseBody | 409                                                             | application/json                                                |
-| models/errors/UnprocessableEntityErrorObject                    | 404, 422                                                        | application/json                                                |
-| models/errors/APIException                                      | 4XX, 5XX                                                        | \*/\*                                                           |
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/PeopleBatchConflictError       | 409                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## getV1PeopleBatchesPeopleBatchUuid
 
@@ -88,14 +88,14 @@ scope: `people_batches:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1PeopleBatchesPeopleBatchUuidResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -103,11 +103,11 @@ public class Application {
 
         GetV1PeopleBatchesPeopleBatchUuidResponse res = sdk.peopleBatches().getV1PeopleBatchesPeopleBatchUuid()
                 .peopleBatchUuid("<id>")
-                .xGustoAPIVersion(GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
+                .xGustoAPIVersion(GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
-        if (res.object().isPresent()) {
-            // handle response
+        if (res.peopleBatchResults().isPresent()) {
+            System.out.println(res.peopleBatchResults().get());
         }
     }
 }
@@ -126,7 +126,7 @@ public class Application {
 
 ### Errors
 
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UnprocessableEntityErrorObject | 404                                          | application/json                             |
-| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |

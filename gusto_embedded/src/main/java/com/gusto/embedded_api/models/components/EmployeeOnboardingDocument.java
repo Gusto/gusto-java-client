@@ -9,39 +9,62 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * EmployeeOnboardingDocument
  * 
- * <p>Configuration for an employee onboarding documents during onboarding
+ * <p>Configuration for which onboarding documents (e.g. Form I-9) are required for an employee during
+ * onboarding.
  */
 public class EmployeeOnboardingDocument {
     /**
-     * Whether to include Form I-9 for an employee during onboarding
+     * The UUID of the onboarding documents config record. Null when no config has been saved yet.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("uuid")
+    private JsonNullable<String> uuid;
+
+    /**
+     * Whether to include Form I-9 for this employee during onboarding.
+     * When true, the employee will be prompted to complete Form I-9 as part of their onboarding.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("i9_document")
-    private Optional<String> i9Document;
+    private Optional<Boolean> i9Document;
 
     @JsonCreator
     public EmployeeOnboardingDocument(
-            @JsonProperty("i9_document") Optional<String> i9Document) {
+            @JsonProperty("uuid") JsonNullable<String> uuid,
+            @JsonProperty("i9_document") Optional<Boolean> i9Document) {
+        Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(i9Document, "i9Document");
+        this.uuid = uuid;
         this.i9Document = i9Document;
     }
     
     public EmployeeOnboardingDocument() {
-        this(Optional.empty());
+        this(JsonNullable.undefined(), Optional.empty());
     }
 
     /**
-     * Whether to include Form I-9 for an employee during onboarding
+     * The UUID of the onboarding documents config record. Null when no config has been saved yet.
      */
     @JsonIgnore
-    public Optional<String> i9Document() {
+    public JsonNullable<String> uuid() {
+        return uuid;
+    }
+
+    /**
+     * Whether to include Form I-9 for this employee during onboarding.
+     * When true, the employee will be prompted to complete Form I-9 as part of their onboarding.
+     */
+    @JsonIgnore
+    public Optional<Boolean> i9Document() {
         return i9Document;
     }
 
@@ -51,9 +74,28 @@ public class EmployeeOnboardingDocument {
 
 
     /**
-     * Whether to include Form I-9 for an employee during onboarding
+     * The UUID of the onboarding documents config record. Null when no config has been saved yet.
      */
-    public EmployeeOnboardingDocument withI9Document(String i9Document) {
+    public EmployeeOnboardingDocument withUuid(String uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = JsonNullable.of(uuid);
+        return this;
+    }
+
+    /**
+     * The UUID of the onboarding documents config record. Null when no config has been saved yet.
+     */
+    public EmployeeOnboardingDocument withUuid(JsonNullable<String> uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = uuid;
+        return this;
+    }
+
+    /**
+     * Whether to include Form I-9 for this employee during onboarding.
+     * When true, the employee will be prompted to complete Form I-9 as part of their onboarding.
+     */
+    public EmployeeOnboardingDocument withI9Document(boolean i9Document) {
         Utils.checkNotNull(i9Document, "i9Document");
         this.i9Document = Optional.ofNullable(i9Document);
         return this;
@@ -61,9 +103,10 @@ public class EmployeeOnboardingDocument {
 
 
     /**
-     * Whether to include Form I-9 for an employee during onboarding
+     * Whether to include Form I-9 for this employee during onboarding.
+     * When true, the employee will be prompted to complete Form I-9 as part of their onboarding.
      */
-    public EmployeeOnboardingDocument withI9Document(Optional<String> i9Document) {
+    public EmployeeOnboardingDocument withI9Document(Optional<Boolean> i9Document) {
         Utils.checkNotNull(i9Document, "i9Document");
         this.i9Document = i9Document;
         return this;
@@ -79,25 +122,29 @@ public class EmployeeOnboardingDocument {
         }
         EmployeeOnboardingDocument other = (EmployeeOnboardingDocument) o;
         return 
+            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
             Utils.enhancedDeepEquals(this.i9Document, other.i9Document);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            i9Document);
+            uuid, i9Document);
     }
     
     @Override
     public String toString() {
         return Utils.toString(EmployeeOnboardingDocument.class,
+                "uuid", uuid,
                 "i9Document", i9Document);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> i9Document = Optional.empty();
+        private JsonNullable<String> uuid = JsonNullable.undefined();
+
+        private Optional<Boolean> i9Document = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -105,18 +152,39 @@ public class EmployeeOnboardingDocument {
 
 
         /**
-         * Whether to include Form I-9 for an employee during onboarding
+         * The UUID of the onboarding documents config record. Null when no config has been saved yet.
          */
-        public Builder i9Document(String i9Document) {
+        public Builder uuid(String uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = JsonNullable.of(uuid);
+            return this;
+        }
+
+        /**
+         * The UUID of the onboarding documents config record. Null when no config has been saved yet.
+         */
+        public Builder uuid(JsonNullable<String> uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = uuid;
+            return this;
+        }
+
+
+        /**
+         * Whether to include Form I-9 for this employee during onboarding.
+         * When true, the employee will be prompted to complete Form I-9 as part of their onboarding.
+         */
+        public Builder i9Document(boolean i9Document) {
             Utils.checkNotNull(i9Document, "i9Document");
             this.i9Document = Optional.ofNullable(i9Document);
             return this;
         }
 
         /**
-         * Whether to include Form I-9 for an employee during onboarding
+         * Whether to include Form I-9 for this employee during onboarding.
+         * When true, the employee will be prompted to complete Form I-9 as part of their onboarding.
          */
-        public Builder i9Document(Optional<String> i9Document) {
+        public Builder i9Document(Optional<Boolean> i9Document) {
             Utils.checkNotNull(i9Document, "i9Document");
             this.i9Document = i9Document;
             return this;
@@ -125,7 +193,7 @@ public class EmployeeOnboardingDocument {
         public EmployeeOnboardingDocument build() {
 
             return new EmployeeOnboardingDocument(
-                i9Document);
+                uuid, i9Document);
         }
 
     }

@@ -7,7 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.CompanyBenefitCreateRequest;
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyIdCompanyBenefits;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
@@ -17,17 +17,29 @@ import java.util.Optional;
 
 public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder {
 
-    private String companyId;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
-    private PostV1CompaniesCompanyIdCompanyBenefitsRequestBody requestBody;
+                            new TypeReference<Optional<? extends PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private CompanyBenefitCreateRequest companyBenefitCreateRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder xGustoAPIVersion(PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder xGustoAPIVersion(Optional<? extends PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder companyId(String companyId) {
@@ -35,22 +47,10 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder {
         this.companyId = companyId;
         return this;
     }
-                
-    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
 
-    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
-    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder requestBody(PostV1CompaniesCompanyIdCompanyBenefitsRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder companyBenefitCreateRequest(CompanyBenefitCreateRequest companyBenefitCreateRequest) {
+        Utils.checkNotNull(companyBenefitCreateRequest, "companyBenefitCreateRequest");
+        this.companyBenefitCreateRequest = companyBenefitCreateRequest;
         return this;
     }
 
@@ -60,9 +60,9 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1CompaniesCompanyIdCompanyBenefitsRequest request = new PostV1CompaniesCompanyIdCompanyBenefitsRequest(companyId,
-            xGustoAPIVersion,
-            requestBody);
+        PostV1CompaniesCompanyIdCompanyBenefitsRequest request = new PostV1CompaniesCompanyIdCompanyBenefitsRequest(xGustoAPIVersion,
+            companyId,
+            companyBenefitCreateRequest);
 
         return request;
     }
@@ -76,9 +76,9 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion>>() {});
 }

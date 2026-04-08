@@ -34,7 +34,7 @@ public class PostV1CompanySignatoriesResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * Example response
+     * Successful
      */
     private Optional<? extends Signatory> signatory;
 
@@ -87,7 +87,7 @@ public class PostV1CompanySignatoriesResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PostV1CompanySignatoriesResponse implements AsyncResponse {
     }
 
     /**
-     * Example response
+     * Successful
      */
     public PostV1CompanySignatoriesResponse withSignatory(Signatory signatory) {
         Utils.checkNotNull(signatory, "signatory");
@@ -138,7 +138,7 @@ public class PostV1CompanySignatoriesResponse implements AsyncResponse {
 
 
     /**
-     * Example response
+     * Successful
      */
     public PostV1CompanySignatoriesResponse withSignatory(Optional<? extends Signatory> signatory) {
         Utils.checkNotNull(signatory, "signatory");
@@ -225,7 +225,7 @@ public class PostV1CompanySignatoriesResponse implements AsyncResponse {
 
 
         /**
-         * Example response
+         * Successful
          */
         public Builder signatory(Signatory signatory) {
             Utils.checkNotNull(signatory, "signatory");
@@ -234,7 +234,7 @@ public class PostV1CompanySignatoriesResponse implements AsyncResponse {
         }
 
         /**
-         * Example response
+         * Successful
          */
         public Builder signatory(Optional<? extends Signatory> signatory) {
             Utils.checkNotNull(signatory, "signatory");

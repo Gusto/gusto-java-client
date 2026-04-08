@@ -45,7 +45,7 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
      * multiple attributes comma separate the values, i.e. `?payroll_types=regular,off_cycle`
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=payroll_types")
-    private Optional<? extends List<PayrollTypes>> payrollTypes;
+    private Optional<? extends List<QueryParamPayrollTypes>> payrollTypes;
 
     /**
      * Whether to return processed or unprocessed payrolls
@@ -66,8 +66,6 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
      * 
      * <p>In v2023-04-01 totals are no longer included by default. For multiple attributes comma separate the
      * values, i.e. `?include=totals,payroll_status_meta`.
-     * 
-     * <p>Results are paginated, with a maximum page size of 100 payrolls.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=include")
     private Optional<? extends List<GetV1CompaniesCompanyIdPayrollsQueryParamInclude>> include;
@@ -116,7 +114,7 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
             String companyId,
             Optional<? extends GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion,
             Optional<? extends List<ProcessingStatuses>> processingStatuses,
-            Optional<? extends List<PayrollTypes>> payrollTypes,
+            Optional<? extends List<QueryParamPayrollTypes>> payrollTypes,
             Optional<Boolean> processed,
             Optional<Boolean> includeOffCycle,
             Optional<? extends List<GetV1CompaniesCompanyIdPayrollsQueryParamInclude>> include,
@@ -198,8 +196,8 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PayrollTypes>> payrollTypes() {
-        return (Optional<List<PayrollTypes>>) payrollTypes;
+    public Optional<List<QueryParamPayrollTypes>> payrollTypes() {
+        return (Optional<List<QueryParamPayrollTypes>>) payrollTypes;
     }
 
     /**
@@ -225,8 +223,6 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
      * 
      * <p>In v2023-04-01 totals are no longer included by default. For multiple attributes comma separate the
      * values, i.e. `?include=totals,payroll_status_meta`.
-     * 
-     * <p>Results are paginated, with a maximum page size of 100 payrolls.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -349,7 +345,7 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
      * Whether to include regular and/or off_cycle payrolls in the response, defaults to regular, for
      * multiple attributes comma separate the values, i.e. `?payroll_types=regular,off_cycle`
      */
-    public GetV1CompaniesCompanyIdPayrollsRequest withPayrollTypes(List<PayrollTypes> payrollTypes) {
+    public GetV1CompaniesCompanyIdPayrollsRequest withPayrollTypes(List<QueryParamPayrollTypes> payrollTypes) {
         Utils.checkNotNull(payrollTypes, "payrollTypes");
         this.payrollTypes = Optional.ofNullable(payrollTypes);
         return this;
@@ -360,7 +356,7 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
      * Whether to include regular and/or off_cycle payrolls in the response, defaults to regular, for
      * multiple attributes comma separate the values, i.e. `?payroll_types=regular,off_cycle`
      */
-    public GetV1CompaniesCompanyIdPayrollsRequest withPayrollTypes(Optional<? extends List<PayrollTypes>> payrollTypes) {
+    public GetV1CompaniesCompanyIdPayrollsRequest withPayrollTypes(Optional<? extends List<QueryParamPayrollTypes>> payrollTypes) {
         Utils.checkNotNull(payrollTypes, "payrollTypes");
         this.payrollTypes = payrollTypes;
         return this;
@@ -411,8 +407,6 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
      * 
      * <p>In v2023-04-01 totals are no longer included by default. For multiple attributes comma separate the
      * values, i.e. `?include=totals,payroll_status_meta`.
-     * 
-     * <p>Results are paginated, with a maximum page size of 100 payrolls.
      */
     public GetV1CompaniesCompanyIdPayrollsRequest withInclude(List<GetV1CompaniesCompanyIdPayrollsQueryParamInclude> include) {
         Utils.checkNotNull(include, "include");
@@ -428,8 +422,6 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
      * 
      * <p>In v2023-04-01 totals are no longer included by default. For multiple attributes comma separate the
      * values, i.e. `?include=totals,payroll_status_meta`.
-     * 
-     * <p>Results are paginated, with a maximum page size of 100 payrolls.
      */
     public GetV1CompaniesCompanyIdPayrollsRequest withInclude(Optional<? extends List<GetV1CompaniesCompanyIdPayrollsQueryParamInclude>> include) {
         Utils.checkNotNull(include, "include");
@@ -619,7 +611,7 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
 
         private Optional<? extends List<ProcessingStatuses>> processingStatuses = Optional.empty();
 
-        private Optional<? extends List<PayrollTypes>> payrollTypes = Optional.empty();
+        private Optional<? extends List<QueryParamPayrollTypes>> payrollTypes = Optional.empty();
 
         private Optional<Boolean> processed = Optional.empty();
 
@@ -702,7 +694,7 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
          * Whether to include regular and/or off_cycle payrolls in the response, defaults to regular, for
          * multiple attributes comma separate the values, i.e. `?payroll_types=regular,off_cycle`
          */
-        public Builder payrollTypes(List<PayrollTypes> payrollTypes) {
+        public Builder payrollTypes(List<QueryParamPayrollTypes> payrollTypes) {
             Utils.checkNotNull(payrollTypes, "payrollTypes");
             this.payrollTypes = Optional.ofNullable(payrollTypes);
             return this;
@@ -712,7 +704,7 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
          * Whether to include regular and/or off_cycle payrolls in the response, defaults to regular, for
          * multiple attributes comma separate the values, i.e. `?payroll_types=regular,off_cycle`
          */
-        public Builder payrollTypes(Optional<? extends List<PayrollTypes>> payrollTypes) {
+        public Builder payrollTypes(Optional<? extends List<QueryParamPayrollTypes>> payrollTypes) {
             Utils.checkNotNull(payrollTypes, "payrollTypes");
             this.payrollTypes = payrollTypes;
             return this;
@@ -764,8 +756,6 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
          * 
          * <p>In v2023-04-01 totals are no longer included by default. For multiple attributes comma separate the
          * values, i.e. `?include=totals,payroll_status_meta`.
-         * 
-         * <p>Results are paginated, with a maximum page size of 100 payrolls.
          */
         public Builder include(List<GetV1CompaniesCompanyIdPayrollsQueryParamInclude> include) {
             Utils.checkNotNull(include, "include");
@@ -780,8 +770,6 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
          * 
          * <p>In v2023-04-01 totals are no longer included by default. For multiple attributes comma separate the
          * values, i.e. `?include=totals,payroll_status_meta`.
-         * 
-         * <p>Results are paginated, with a maximum page size of 100 payrolls.
          */
         public Builder include(Optional<? extends List<GetV1CompaniesCompanyIdPayrollsQueryParamInclude>> include) {
             Utils.checkNotNull(include, "include");

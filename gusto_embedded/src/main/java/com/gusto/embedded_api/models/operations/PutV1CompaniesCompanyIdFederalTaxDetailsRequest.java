@@ -6,7 +6,7 @@ package com.gusto.embedded_api.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.FederalTaxDetailsUpdate;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api.utils.Utils;
@@ -29,31 +29,29 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
+    private Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
-    /**
-     * Attributes related to federal tax details that can be updated via this endpoint include:
-     */
+
     @SpeakeasyMetadata("request:mediaType=application/json")
-    private PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody requestBody;
+    private FederalTaxDetailsUpdate federalTaxDetailsUpdate;
 
     @JsonCreator
     public PutV1CompaniesCompanyIdFederalTaxDetailsRequest(
             String companyId,
-            Optional<? extends VersionHeader> xGustoAPIVersion,
-            PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody requestBody) {
+            Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        Utils.checkNotNull(requestBody, "requestBody");
+        Utils.checkNotNull(federalTaxDetailsUpdate, "federalTaxDetailsUpdate");
         this.companyId = companyId;
         this.xGustoAPIVersion = xGustoAPIVersion;
-        this.requestBody = requestBody;
+        this.federalTaxDetailsUpdate = federalTaxDetailsUpdate;
     }
     
     public PutV1CompaniesCompanyIdFederalTaxDetailsRequest(
             String companyId,
-            PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody requestBody) {
-        this(companyId, Optional.empty(), requestBody);
+            FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
+        this(companyId, Optional.empty(), federalTaxDetailsUpdate);
     }
 
     /**
@@ -71,16 +69,13 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public Optional<PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
-    /**
-     * Attributes related to federal tax details that can be updated via this endpoint include:
-     */
     @JsonIgnore
-    public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody requestBody() {
-        return requestBody;
+    public FederalTaxDetailsUpdate federalTaxDetailsUpdate() {
+        return federalTaxDetailsUpdate;
     }
 
     public static Builder builder() {
@@ -102,7 +97,7 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1CompaniesCompanyIdFederalTaxDetailsRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+    public PutV1CompaniesCompanyIdFederalTaxDetailsRequest withXGustoAPIVersion(PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -114,18 +109,15 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public PutV1CompaniesCompanyIdFederalTaxDetailsRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+    public PutV1CompaniesCompanyIdFederalTaxDetailsRequest withXGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
 
-    /**
-     * Attributes related to federal tax details that can be updated via this endpoint include:
-     */
-    public PutV1CompaniesCompanyIdFederalTaxDetailsRequest withRequestBody(PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public PutV1CompaniesCompanyIdFederalTaxDetailsRequest withFederalTaxDetailsUpdate(FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
+        Utils.checkNotNull(federalTaxDetailsUpdate, "federalTaxDetailsUpdate");
+        this.federalTaxDetailsUpdate = federalTaxDetailsUpdate;
         return this;
     }
 
@@ -141,13 +133,13 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
         return 
             Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
-            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.federalTaxDetailsUpdate, other.federalTaxDetailsUpdate);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, xGustoAPIVersion, requestBody);
+            companyId, xGustoAPIVersion, federalTaxDetailsUpdate);
     }
     
     @Override
@@ -155,7 +147,7 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
         return Utils.toString(PutV1CompaniesCompanyIdFederalTaxDetailsRequest.class,
                 "companyId", companyId,
                 "xGustoAPIVersion", xGustoAPIVersion,
-                "requestBody", requestBody);
+                "federalTaxDetailsUpdate", federalTaxDetailsUpdate);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -163,9 +155,9 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
 
         private String companyId;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
+        private Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
-        private PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody requestBody;
+        private FederalTaxDetailsUpdate federalTaxDetailsUpdate;
 
         private Builder() {
           // force use of static builder() method
@@ -187,7 +179,7 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -198,19 +190,16 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
         }
 
 
-        /**
-         * Attributes related to federal tax details that can be updated via this endpoint include:
-         */
-        public Builder requestBody(PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody requestBody) {
-            Utils.checkNotNull(requestBody, "requestBody");
-            this.requestBody = requestBody;
+        public Builder federalTaxDetailsUpdate(FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
+            Utils.checkNotNull(federalTaxDetailsUpdate, "federalTaxDetailsUpdate");
+            this.federalTaxDetailsUpdate = federalTaxDetailsUpdate;
             return this;
         }
 
@@ -220,14 +209,14 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
             }
 
             return new PutV1CompaniesCompanyIdFederalTaxDetailsRequest(
-                companyId, xGustoAPIVersion, requestBody);
+                companyId, xGustoAPIVersion, federalTaxDetailsUpdate);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>>() {});
     }
 }

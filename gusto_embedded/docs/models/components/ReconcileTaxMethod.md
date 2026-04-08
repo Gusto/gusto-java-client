@@ -2,6 +2,14 @@
 
 How Gusto will handle taxes already collected.
 
+## Example Usage
+
+```java
+import com.gusto.embedded_api.models.components.ReconcileTaxMethod;
+
+ReconcileTaxMethod value = ReconcileTaxMethod.PAY_TAXES;
+```
+
 
 ## Values
 

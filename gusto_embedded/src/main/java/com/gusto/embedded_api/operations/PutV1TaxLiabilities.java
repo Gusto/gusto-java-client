@@ -174,7 +174,7 @@ public class PutV1TaxLiabilities {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withTaxLiabilitiesList(Utils.unmarshal(response, new TypeReference<List<List<TaxLiabilitiesSelections>>>() {}));
+                    return res.withTaxLiabilitiesList(Utils.unmarshal(response, new TypeReference<List<TaxLiabilitiesSelections>>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
@@ -251,7 +251,7 @@ public class PutV1TaxLiabilities {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return Utils.unmarshalAsync(response, new TypeReference<List<List<TaxLiabilitiesSelections>>>() {})
+                    return Utils.unmarshalAsync(response, new TypeReference<List<TaxLiabilitiesSelections>>() {})
                             .thenApply(res::withTaxLiabilitiesList);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);

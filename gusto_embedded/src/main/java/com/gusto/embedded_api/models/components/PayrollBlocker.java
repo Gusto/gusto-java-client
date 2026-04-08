@@ -5,61 +5,52 @@ package com.gusto.embedded_api.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Optional;
 
-/**
- * PayrollBlocker
- * 
- * <p>Example response
- */
+
 public class PayrollBlocker {
     /**
-     * The unique identifier of the reason
+     * A unique identifier for the payroll blocker reason. For a complete list of blockers and their
+     * meanings, see the [Payroll Blockers
+     * guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers).
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
-    private Optional<String> key;
+    private Key key;
 
     /**
-     * User-friendly message describing the payroll blocker.
+     * A human-readable message describing the payroll blocker and what action is needed to resolve it.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("message")
-    private Optional<String> message;
+    private String message;
 
     @JsonCreator
     public PayrollBlocker(
-            @JsonProperty("key") Optional<String> key,
-            @JsonProperty("message") Optional<String> message) {
+            @JsonProperty("key") Key key,
+            @JsonProperty("message") String message) {
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(message, "message");
         this.key = key;
         this.message = message;
     }
-    
-    public PayrollBlocker() {
-        this(Optional.empty(), Optional.empty());
-    }
 
     /**
-     * The unique identifier of the reason
+     * A unique identifier for the payroll blocker reason. For a complete list of blockers and their
+     * meanings, see the [Payroll Blockers
+     * guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers).
      */
     @JsonIgnore
-    public Optional<String> key() {
+    public Key key() {
         return key;
     }
 
     /**
-     * User-friendly message describing the payroll blocker.
+     * A human-readable message describing the payroll blocker and what action is needed to resolve it.
      */
     @JsonIgnore
-    public Optional<String> message() {
+    public String message() {
         return message;
     }
 
@@ -69,38 +60,20 @@ public class PayrollBlocker {
 
 
     /**
-     * The unique identifier of the reason
+     * A unique identifier for the payroll blocker reason. For a complete list of blockers and their
+     * meanings, see the [Payroll Blockers
+     * guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers).
      */
-    public PayrollBlocker withKey(String key) {
-        Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
-        return this;
-    }
-
-
-    /**
-     * The unique identifier of the reason
-     */
-    public PayrollBlocker withKey(Optional<String> key) {
+    public PayrollBlocker withKey(Key key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
     }
 
     /**
-     * User-friendly message describing the payroll blocker.
+     * A human-readable message describing the payroll blocker and what action is needed to resolve it.
      */
     public PayrollBlocker withMessage(String message) {
-        Utils.checkNotNull(message, "message");
-        this.message = Optional.ofNullable(message);
-        return this;
-    }
-
-
-    /**
-     * User-friendly message describing the payroll blocker.
-     */
-    public PayrollBlocker withMessage(Optional<String> message) {
         Utils.checkNotNull(message, "message");
         this.message = message;
         return this;
@@ -136,9 +109,9 @@ public class PayrollBlocker {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> key = Optional.empty();
+        private Key key;
 
-        private Optional<String> message = Optional.empty();
+        private String message;
 
         private Builder() {
           // force use of static builder() method
@@ -146,18 +119,11 @@ public class PayrollBlocker {
 
 
         /**
-         * The unique identifier of the reason
+         * A unique identifier for the payroll blocker reason. For a complete list of blockers and their
+         * meanings, see the [Payroll Blockers
+         * guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers).
          */
-        public Builder key(String key) {
-            Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
-            return this;
-        }
-
-        /**
-         * The unique identifier of the reason
-         */
-        public Builder key(Optional<String> key) {
+        public Builder key(Key key) {
             Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
@@ -165,18 +131,9 @@ public class PayrollBlocker {
 
 
         /**
-         * User-friendly message describing the payroll blocker.
+         * A human-readable message describing the payroll blocker and what action is needed to resolve it.
          */
         public Builder message(String message) {
-            Utils.checkNotNull(message, "message");
-            this.message = Optional.ofNullable(message);
-            return this;
-        }
-
-        /**
-         * User-friendly message describing the payroll blocker.
-         */
-        public Builder message(Optional<String> message) {
             Utils.checkNotNull(message, "message");
             this.message = message;
             return this;

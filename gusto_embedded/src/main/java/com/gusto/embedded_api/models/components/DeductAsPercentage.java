@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * DeductAsPercentage
@@ -36,19 +37,19 @@ public class DeductAsPercentage {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("default_value")
-    private Optional<? extends BenefitTypeRequirementsDeductAsPercentageDefaultValue> defaultValue;
+    private JsonNullable<? extends BenefitTypeRequirementsDeductAsPercentageDefaultValue> defaultValue;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("choices")
-    private Optional<? extends List<String>> choices;
+    private JsonNullable<? extends List<String>> choices;
 
     @JsonCreator
     public DeductAsPercentage(
             @JsonProperty("required") Optional<Boolean> required,
             @JsonProperty("editable") Optional<Boolean> editable,
-            @JsonProperty("default_value") Optional<? extends BenefitTypeRequirementsDeductAsPercentageDefaultValue> defaultValue,
-            @JsonProperty("choices") Optional<? extends List<String>> choices) {
+            @JsonProperty("default_value") JsonNullable<? extends BenefitTypeRequirementsDeductAsPercentageDefaultValue> defaultValue,
+            @JsonProperty("choices") JsonNullable<? extends List<String>> choices) {
         Utils.checkNotNull(required, "required");
         Utils.checkNotNull(editable, "editable");
         Utils.checkNotNull(defaultValue, "defaultValue");
@@ -60,8 +61,8 @@ public class DeductAsPercentage {
     }
     
     public DeductAsPercentage() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
+            JsonNullable.undefined());
     }
 
     @JsonIgnore
@@ -76,14 +77,14 @@ public class DeductAsPercentage {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<BenefitTypeRequirementsDeductAsPercentageDefaultValue> defaultValue() {
-        return (Optional<BenefitTypeRequirementsDeductAsPercentageDefaultValue>) defaultValue;
+    public JsonNullable<BenefitTypeRequirementsDeductAsPercentageDefaultValue> defaultValue() {
+        return (JsonNullable<BenefitTypeRequirementsDeductAsPercentageDefaultValue>) defaultValue;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<String>> choices() {
-        return (Optional<List<String>>) choices;
+    public JsonNullable<List<String>> choices() {
+        return (JsonNullable<List<String>>) choices;
     }
 
     public static Builder builder() {
@@ -119,12 +120,11 @@ public class DeductAsPercentage {
 
     public DeductAsPercentage withDefaultValue(BenefitTypeRequirementsDeductAsPercentageDefaultValue defaultValue) {
         Utils.checkNotNull(defaultValue, "defaultValue");
-        this.defaultValue = Optional.ofNullable(defaultValue);
+        this.defaultValue = JsonNullable.of(defaultValue);
         return this;
     }
 
-
-    public DeductAsPercentage withDefaultValue(Optional<? extends BenefitTypeRequirementsDeductAsPercentageDefaultValue> defaultValue) {
+    public DeductAsPercentage withDefaultValue(JsonNullable<? extends BenefitTypeRequirementsDeductAsPercentageDefaultValue> defaultValue) {
         Utils.checkNotNull(defaultValue, "defaultValue");
         this.defaultValue = defaultValue;
         return this;
@@ -132,12 +132,11 @@ public class DeductAsPercentage {
 
     public DeductAsPercentage withChoices(List<String> choices) {
         Utils.checkNotNull(choices, "choices");
-        this.choices = Optional.ofNullable(choices);
+        this.choices = JsonNullable.of(choices);
         return this;
     }
 
-
-    public DeductAsPercentage withChoices(Optional<? extends List<String>> choices) {
+    public DeductAsPercentage withChoices(JsonNullable<? extends List<String>> choices) {
         Utils.checkNotNull(choices, "choices");
         this.choices = choices;
         return this;
@@ -182,9 +181,9 @@ public class DeductAsPercentage {
 
         private Optional<Boolean> editable = Optional.empty();
 
-        private Optional<? extends BenefitTypeRequirementsDeductAsPercentageDefaultValue> defaultValue = Optional.empty();
+        private JsonNullable<? extends BenefitTypeRequirementsDeductAsPercentageDefaultValue> defaultValue = JsonNullable.undefined();
 
-        private Optional<? extends List<String>> choices = Optional.empty();
+        private JsonNullable<? extends List<String>> choices = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -219,11 +218,11 @@ public class DeductAsPercentage {
 
         public Builder defaultValue(BenefitTypeRequirementsDeductAsPercentageDefaultValue defaultValue) {
             Utils.checkNotNull(defaultValue, "defaultValue");
-            this.defaultValue = Optional.ofNullable(defaultValue);
+            this.defaultValue = JsonNullable.of(defaultValue);
             return this;
         }
 
-        public Builder defaultValue(Optional<? extends BenefitTypeRequirementsDeductAsPercentageDefaultValue> defaultValue) {
+        public Builder defaultValue(JsonNullable<? extends BenefitTypeRequirementsDeductAsPercentageDefaultValue> defaultValue) {
             Utils.checkNotNull(defaultValue, "defaultValue");
             this.defaultValue = defaultValue;
             return this;
@@ -232,11 +231,11 @@ public class DeductAsPercentage {
 
         public Builder choices(List<String> choices) {
             Utils.checkNotNull(choices, "choices");
-            this.choices = Optional.ofNullable(choices);
+            this.choices = JsonNullable.of(choices);
             return this;
         }
 
-        public Builder choices(Optional<? extends List<String>> choices) {
+        public Builder choices(JsonNullable<? extends List<String>> choices) {
             Utils.checkNotNull(choices, "choices");
             this.choices = choices;
             return this;
