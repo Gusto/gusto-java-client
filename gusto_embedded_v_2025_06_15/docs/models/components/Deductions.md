@@ -1,0 +1,11 @@
+# Deductions
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `name`                                                                                      | *Optional\<String>*                                                                         | :heavy_minus_sign:                                                                          | The name of the deduction.                                                                  |
+| `amount`                                                                                    | *Optional\<Double>*                                                                         | :heavy_minus_sign:                                                                          | The amount of the deduction for the pay period.                                             |
+| `amountType`                                                                                | [Optional\<AmountType>](../../models/components/AmountType.md)                              | :heavy_minus_sign:                                                                          | The amount type of the deduction for the pay period. Only present for unprocessed payrolls. |
+| `uuid`                                                                                      | *Optional\<String>*                                                                         | :heavy_minus_sign:                                                                          | The UUID of the deduction. Only present for unprocessed payrolls.                           |

@@ -1,0 +1,488 @@
+# EmployeeForms
+
+## Overview
+
+### Available Operations
+
+* [generateW2](#generatew2) - Generate a W2 form [DEMO]
+* [list](#list) - Get all employee forms
+* [get](#get) - Get an employee form
+* [getPdf](#getpdf) - Get the employee form pdf
+* [sign](#sign) - Sign an employee form
+
+## generateW2
+
+> 🚧 Demo action
+>
+> This action is only available in the Demo environment
+
+Generates a W2 document for testing purposes.
+
+scope: `employees:write`
+
+### Example Usage: Basic
+
+<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_w2" method="post" path="/v1/sandbox/generate_w2" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerateW2RequestBody;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerateW2Response;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1SandboxGenerateW2Response res = sdk.employeeForms().generateW2()
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1SandboxGenerateW2RequestBody.builder()
+                    .employeeId("<id>")
+                    .build())
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_w2" method="post" path="/v1/sandbox/generate_w2" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerateW2RequestBody;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerateW2Response;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1SandboxGenerateW2Response res = sdk.employeeForms().generateW2()
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1SandboxGenerateW2RequestBody.builder()
+                    .employeeId("<id>")
+                    .build())
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_w2" method="post" path="/v1/sandbox/generate_w2" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerateW2RequestBody;
+import com.gusto.embedded_api.models.operations.PostV1SandboxGenerateW2Response;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1SandboxGenerateW2Response res = sdk.employeeForms().generateW2()
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .requestBody(PostV1SandboxGenerateW2RequestBody.builder()
+                    .employeeId("<id>")
+                    .build())
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `requestBody`                                                                                                                                                                                                                | [PostV1SandboxGenerateW2RequestBody](../../models/operations/PostV1SandboxGenerateW2RequestBody.md)                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PostV1SandboxGenerateW2Response](../../models/operations/PostV1SandboxGenerateW2Response.md)**
+
+### Errors
+
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
+
+## list
+
+Get a list of all employee's forms
+
+scope: `employee_forms:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-employee-forms" method="get" path="/v1/employees/{employee_id}/forms" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1EmployeeFormsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1EmployeeFormsResponse res = sdk.employeeForms().list()
+                .employeeId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .call();
+
+        if (res.formList().isPresent()) {
+            System.out.println(res.formList().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `employeeId`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+
+### Response
+
+**[GetV1EmployeeFormsResponse](../../models/operations/GetV1EmployeeFormsResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## get
+
+Get an employee form
+
+scope: `employee_forms:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-employee-form" method="get" path="/v1/employees/{employee_id}/forms/{form_id}" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1EmployeeFormResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1EmployeeFormResponse res = sdk.employeeForms().get()
+                .employeeId("<id>")
+                .formId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `employeeId`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
+| `formId`                                                                                                                                                                                                                     | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the form                                                                                                                                                                                                         |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+
+### Response
+
+**[GetV1EmployeeFormResponse](../../models/operations/GetV1EmployeeFormResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## getPdf
+
+Get the link to the employee form PDF
+
+scope: `employee_forms:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-employee-form-pdf" method="get" path="/v1/employees/{employee_id}/forms/{form_id}/pdf" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.operations.GetV1EmployeeFormPdfResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1EmployeeFormPdfResponse res = sdk.employeeForms().getPdf()
+                .employeeId("<id>")
+                .formId("<id>")
+                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .call();
+
+        if (res.formPdf().isPresent()) {
+            System.out.println(res.formPdf().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `employeeId`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
+| `formId`                                                                                                                                                                                                                     | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the form                                                                                                                                                                                                         |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+
+### Response
+
+**[GetV1EmployeeFormPdfResponse](../../models/operations/GetV1EmployeeFormPdfResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## sign
+
+Sign an employee form.
+
+The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
+first name, last name, street address, city, state, and zip for that preparer are all required.
+
+scope: `employee_forms:sign`
+
+### Example Usage: Basic
+
+<!-- UsageSnippet language="java" operationID="put-v1-employee-form-sign" method="put" path="/v1/employees/{employee_id}/forms/{form_id}/sign" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1EmployeeFormSignRequest req = PutV1EmployeeFormSignRequest.builder()
+                .employeeId("<id>")
+                .formId("<id>")
+                .requestBody(PutV1EmployeeFormSignRequestBody.builder()
+                    .signatureText("<value>")
+                    .agree(true)
+                    .build())
+                .build();
+
+        PutV1EmployeeFormSignResponse res = sdk.employeeForms().sign()
+                .request(req)
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-employee-form-sign" method="put" path="/v1/employees/{employee_id}/forms/{form_id}/sign" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1EmployeeFormSignRequest req = PutV1EmployeeFormSignRequest.builder()
+                .employeeId("<id>")
+                .formId("<id>")
+                .requestBody(PutV1EmployeeFormSignRequestBody.builder()
+                    .signatureText("Jane Smith")
+                    .agree(true)
+                    .signedByIpAddress("192.168.0.1")
+                    .build())
+                .build();
+
+        PutV1EmployeeFormSignResponse res = sdk.employeeForms().sign()
+                .request(req)
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-v1-employee-form-sign" method="put" path="/v1/employees/{employee_id}/forms/{form_id}/sign" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1EmployeeFormSignRequest req = PutV1EmployeeFormSignRequest.builder()
+                .employeeId("<id>")
+                .formId("<id>")
+                .requestBody(PutV1EmployeeFormSignRequestBody.builder()
+                    .signatureText("<value>")
+                    .agree(true)
+                    .build())
+                .build();
+
+        PutV1EmployeeFormSignResponse res = sdk.employeeForms().sign()
+                .request(req)
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-v1-employee-form-sign" method="put" path="/v1/employees/{employee_id}/forms/{form_id}/sign" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1EmployeeFormSignRequest req = PutV1EmployeeFormSignRequest.builder()
+                .employeeId("<id>")
+                .formId("<id>")
+                .requestBody(PutV1EmployeeFormSignRequestBody.builder()
+                    .signatureText("<value>")
+                    .agree(true)
+                    .build())
+                .build();
+
+        PutV1EmployeeFormSignResponse res = sdk.employeeForms().sign()
+                .request(req)
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `request`                                                                               | [PutV1EmployeeFormSignRequest](../../models/operations/PutV1EmployeeFormSignRequest.md) | :heavy_check_mark:                                                                      | The request object to use for the request.                                              |
+
+### Response
+
+**[PutV1EmployeeFormSignResponse](../../models/operations/PutV1EmployeeFormSignResponse.md)**
+
+### Errors
+
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
