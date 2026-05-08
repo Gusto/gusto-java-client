@@ -9,17 +9,17 @@
 * [updateSubscription](#updatesubscription) - Update a webhook subscription
 * [getSubscription](#getsubscription) - Get a webhook subscription
 * [deleteSubscription](#deletesubscription) - Delete a webhook subscription
-* [verify](#verify) - Verify the webhook subscription
-* [requestVerificationToken](#requestverificationtoken) - Request the webhook subscription verification_token
+* [verify](#verify) - Verify a webhook subscription
+* [requestVerificationToken](#requestverificationtoken) - Request a verification token for a webhook subscription
 * [getV1WebhooksHealthCheck](#getv1webhookshealthcheck) - Get the webhooks health status
 
 ## createSubscription
 
 Create a webhook subscription to receive events of the specified subscription_types whenever there is a state change.
 
-> 📘 System Access Authentication
->
-> This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+📘 System Access Authentication
+
+This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
 
 scope: `webhook_subscriptions:write`
 
@@ -30,7 +30,6 @@ scope: `webhook_subscriptions:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -47,7 +46,7 @@ public class Application {
                 .security(PostV1WebhookSubscriptionSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(PostV1WebhookSubscriptionHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostV1WebhookSubscriptionRequestBody.builder()
                     .url("https://slow-median.com")
                     .subscriptionTypes(List.of(
@@ -68,7 +67,6 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -85,7 +83,7 @@ public class Application {
                 .security(PostV1WebhookSubscriptionSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(PostV1WebhookSubscriptionHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostV1WebhookSubscriptionRequestBody.builder()
                     .url("https://partner-app.com/subscriber")
                     .subscriptionTypes(List.of(
@@ -107,7 +105,6 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -124,7 +121,7 @@ public class Application {
                 .security(PostV1WebhookSubscriptionSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(PostV1WebhookSubscriptionHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostV1WebhookSubscriptionRequestBody.builder()
                     .url("https://slow-median.com")
                     .subscriptionTypes(List.of(
@@ -145,7 +142,6 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -162,7 +158,7 @@ public class Application {
                 .security(PostV1WebhookSubscriptionSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(PostV1WebhookSubscriptionHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PostV1WebhookSubscriptionRequestBody.builder()
                     .url("https://slow-median.com")
                     .subscriptionTypes(List.of(
@@ -182,7 +178,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.PostV1WebhookSubscriptionSecurity](../../models/operations/PostV1WebhookSubscriptionSecurity.md)                                                                                   | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1WebhookSubscriptionHeaderXGustoAPIVersion>](../../models/operations/PostV1WebhookSubscriptionHeaderXGustoAPIVersion.md)                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `requestBody`                                                                                                                                                                                                                | [PostV1WebhookSubscriptionRequestBody](../../models/operations/PostV1WebhookSubscriptionRequestBody.md)                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -200,9 +196,9 @@ public class Application {
 
 Returns all webhook subscriptions associated with the provided Partner API token.
 
-> 📘 System Access Authentication
->
-> This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+📘 System Access Authentication
+
+This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
 
 scope: `webhook_subscriptions:read`
 
@@ -213,9 +209,7 @@ scope: `webhook_subscriptions:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.GetV1WebhookSubscriptionsResponse;
-import com.gusto.embedded_api.models.operations.GetV1WebhookSubscriptionsSecurity;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -229,11 +223,11 @@ public class Application {
                 .security(GetV1WebhookSubscriptionsSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(GetV1WebhookSubscriptionsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
-        if (res.webhookSubscriptionsList().isPresent()) {
-            System.out.println(res.webhookSubscriptionsList().get());
+        if (res.webhookSubscriptions().isPresent()) {
+            System.out.println(res.webhookSubscriptions().get());
         }
     }
 }
@@ -244,7 +238,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.GetV1WebhookSubscriptionsSecurity](../../models/operations/GetV1WebhookSubscriptionsSecurity.md)                                                                                   | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1WebhookSubscriptionsHeaderXGustoAPIVersion>](../../models/operations/GetV1WebhookSubscriptionsHeaderXGustoAPIVersion.md)                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -260,12 +254,11 @@ public class Application {
 
 Updates the Webhook Subscription associated with the provided UUID.
 
-> 📘 System Access Authentication
->
-> This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+📘 System Access Authentication
+
+This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
 
 scope: `webhook_subscriptions:write`
-
 
 ### Example Usage: Basic
 
@@ -274,7 +267,7 @@ scope: `webhook_subscriptions:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -282,7 +275,7 @@ import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
@@ -292,7 +285,7 @@ public class Application {
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1WebhookSubscriptionUuidRequestBody.builder()
                     .subscriptionTypes(List.of(
                         PutV1WebhookSubscriptionUuidSubscriptionTypes.PAYROLL))
@@ -312,7 +305,7 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -320,7 +313,7 @@ import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
@@ -330,7 +323,7 @@ public class Application {
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1WebhookSubscriptionUuidRequestBody.builder()
                     .subscriptionTypes(List.of(
                         PutV1WebhookSubscriptionUuidSubscriptionTypes.COMPANY,
@@ -351,7 +344,7 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -359,7 +352,7 @@ import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
@@ -369,7 +362,7 @@ public class Application {
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1WebhookSubscriptionUuidRequestBody.builder()
                     .subscriptionTypes(List.of(
                         PutV1WebhookSubscriptionUuidSubscriptionTypes.PAYROLL))
@@ -389,7 +382,7 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -397,7 +390,7 @@ import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
@@ -407,7 +400,7 @@ public class Application {
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1WebhookSubscriptionUuidRequestBody.builder()
                     .subscriptionTypes(List.of(
                         PutV1WebhookSubscriptionUuidSubscriptionTypes.PAYROLL))
@@ -427,7 +420,7 @@ public class Application {
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.PutV1WebhookSubscriptionUuidSecurity](../../models/operations/PutV1WebhookSubscriptionUuidSecurity.md)                                                                             | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
 | `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion>](../../models/operations/PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.md)                                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `requestBody`                                                                                                                                                                                                                | [PutV1WebhookSubscriptionUuidRequestBody](../../models/operations/PutV1WebhookSubscriptionUuidRequestBody.md)                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -438,6 +431,7 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
 | models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
@@ -445,12 +439,11 @@ public class Application {
 
 Returns the Webhook Subscription associated with the provided UUID.
 
-> 📘 System Access Authentication
->
-> This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+📘 System Access Authentication
+
+This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
 
 scope: `webhook_subscriptions:read`
-
 
 ### Example Usage
 
@@ -459,14 +452,13 @@ scope: `webhook_subscriptions:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.GetV1WebhookSubscriptionUuidResponse;
-import com.gusto.embedded_api.models.operations.GetV1WebhookSubscriptionUuidSecurity;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
@@ -476,7 +468,7 @@ public class Application {
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(GetV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.webhookSubscription().isPresent()) {
@@ -492,7 +484,7 @@ public class Application {
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.GetV1WebhookSubscriptionUuidSecurity](../../models/operations/GetV1WebhookSubscriptionUuidSecurity.md)                                                                             | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
 | `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1WebhookSubscriptionUuidHeaderXGustoAPIVersion>](../../models/operations/GetV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.md)                                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -500,20 +492,20 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## deleteSubscription
 
 Deletes the Webhook Subscription associated with the provided UUID.
 
-> 📘 System Access Authentication
->
-> This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+📘 System Access Authentication
+
+This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
 
 scope: `webhook_subscriptions:write`
-
 
 ### Example Usage
 
@@ -522,14 +514,13 @@ scope: `webhook_subscriptions:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.DeleteV1WebhookSubscriptionUuidResponse;
-import com.gusto.embedded_api.models.operations.DeleteV1WebhookSubscriptionUuidSecurity;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
@@ -539,7 +530,7 @@ public class Application {
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         // handle response
@@ -553,7 +544,7 @@ public class Application {
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.DeleteV1WebhookSubscriptionUuidSecurity](../../models/operations/DeleteV1WebhookSubscriptionUuidSecurity.md)                                                                       | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
 | `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion>](../../models/operations/DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.md)                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -561,9 +552,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## verify
 
@@ -571,12 +563,11 @@ When a webhook subscription is created, a `verification_token` is POSTed to the 
 
 Use the /v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token API to resend the `verification_token` to the Subscriber.
 
-> 📘 System Access Authentication
->
-> This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+📘 System Access Authentication
+
+This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
 
 scope: `webhook_subscriptions:write`
-
 
 ### Example Usage: Basic
 
@@ -585,14 +576,14 @@ scope: `webhook_subscriptions:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
@@ -602,7 +593,7 @@ public class Application {
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody.builder()
                     .verificationToken("<value>")
                     .build())
@@ -621,14 +612,14 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
@@ -638,7 +629,7 @@ public class Application {
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody.builder()
                     .verificationToken("asefasedfe23e234easd")
                     .build())
@@ -657,14 +648,14 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
@@ -674,7 +665,7 @@ public class Application {
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody.builder()
                     .verificationToken("<value>")
                     .build())
@@ -693,14 +684,14 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
@@ -710,7 +701,7 @@ public class Application {
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody.builder()
                     .verificationToken("<value>")
                     .build())
@@ -729,7 +720,7 @@ public class Application {
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.PutV1VerifyWebhookSubscriptionUuidSecurity](../../models/operations/PutV1VerifyWebhookSubscriptionUuidSecurity.md)                                                                 | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
 | `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion>](../../models/operations/PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion.md)                                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `requestBody`                                                                                                                                                                                                                | [PutV1VerifyWebhookSubscriptionUuidRequestBody](../../models/operations/PutV1VerifyWebhookSubscriptionUuidRequestBody.md)                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -740,6 +731,7 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
 | models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
@@ -747,12 +739,11 @@ public class Application {
 
 Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
 
-> 📘 System Access Authentication
->
-> This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+📘 System Access Authentication
+
+This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
 
 scope: `webhook_subscriptions:read`
-
 
 ### Example Usage
 
@@ -761,14 +752,13 @@ scope: `webhook_subscriptions:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.GetV1WebhookSubscriptionVerificationTokenUuidResponse;
-import com.gusto.embedded_api.models.operations.GetV1WebhookSubscriptionVerificationTokenUuidSecurity;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
             .build();
@@ -778,10 +768,12 @@ public class Application {
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
                 .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
-        // handle response
+        if (res.webhookVerificationTokenResponse().isPresent()) {
+            System.out.println(res.webhookVerificationTokenResponse().get());
+        }
     }
 }
 ```
@@ -792,7 +784,7 @@ public class Application {
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.GetV1WebhookSubscriptionVerificationTokenUuidSecurity](../../models/operations/GetV1WebhookSubscriptionVerificationTokenUuidSecurity.md)                                           | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
 | `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion>](../../models/operations/GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion.md)                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -800,9 +792,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## getV1WebhooksHealthCheck
 

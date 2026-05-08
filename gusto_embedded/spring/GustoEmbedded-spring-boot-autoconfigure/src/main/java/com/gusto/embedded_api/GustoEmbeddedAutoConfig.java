@@ -805,6 +805,17 @@ public class GustoEmbeddedAutoConfig {
     public PeopleBatches peopleBatches(GustoEmbedded gustoEmbedded) {
         return gustoEmbedded.peopleBatches();
     }
+    /**
+     * Creates a TimeOffRequests sub-SDK bean if none exists.
+     *
+     * @param gustoEmbedded the main SDK instance
+     * @return A configured TimeOffRequests instance
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public TimeOffRequests timeOffRequests(GustoEmbedded gustoEmbedded) {
+        return gustoEmbedded.timeOffRequests();
+    }
 
     /**
      * Creates the async SDK bean if none exists.
@@ -1400,5 +1411,16 @@ public class GustoEmbeddedAutoConfig {
     @ConditionalOnMissingBean
     public AsyncPeopleBatches asyncPeopleBatches(AsyncGustoEmbedded asyncGustoEmbedded) {
         return asyncGustoEmbedded.peopleBatches();
+    }
+    /**
+     * Creates an AsyncTimeOffRequests sub-SDK bean if none exists.
+     *
+     * @param asyncGustoEmbedded the async SDK instance
+     * @return A configured AsyncTimeOffRequests instance
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public AsyncTimeOffRequests asyncTimeOffRequests(AsyncGustoEmbedded asyncGustoEmbedded) {
+        return asyncGustoEmbedded.timeOffRequests();
     }
 }

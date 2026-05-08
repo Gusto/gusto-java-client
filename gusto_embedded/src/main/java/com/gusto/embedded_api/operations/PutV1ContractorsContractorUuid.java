@@ -144,7 +144,7 @@ public class PutV1ContractorsContractorUuid {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "404", "422", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "4XX", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -186,7 +186,7 @@ public class PutV1ContractorsContractorUuid {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "422")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "409", "422")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     throw UnprocessableEntityErrorObject.from(response);
                 } else {
@@ -231,7 +231,7 @@ public class PutV1ContractorsContractorUuid {
                         if (err != null) {
                             return onError(null, err);
                         }
-                        if (Utils.statusCodeMatches(resp.statusCode(), "404", "422", "4XX", "5XX")) {
+                        if (Utils.statusCodeMatches(resp.statusCode(), "4XX", "5XX")) {
                             return onError(resp, null);
                         }
                         return CompletableFuture.completedFuture(resp);
@@ -272,7 +272,7 @@ public class PutV1ContractorsContractorUuid {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "422")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "409", "422")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     return UnprocessableEntityErrorObject.fromAsync(response)
                             .thenCompose(CompletableFuture::failedFuture);

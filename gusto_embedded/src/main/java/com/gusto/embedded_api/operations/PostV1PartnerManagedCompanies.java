@@ -10,11 +10,11 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.SecuritySource;
+import com.gusto.embedded_api.models.components.PartnerManagedCompany;
 import com.gusto.embedded_api.models.errors.APIException;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesRequest;
 import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesResponse;
-import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesResponseBody;
 import com.gusto.embedded_api.models.operations.PostV1PartnerManagedCompaniesSecurity;
 import com.gusto.embedded_api.utils.Blob;
 import com.gusto.embedded_api.utils.HTTPClient;
@@ -102,7 +102,7 @@ public class PostV1PartnerManagedCompanies {
                     typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
-                    "requestBody",
+                    "partnerManagedCompanyCreateRequest",
                     "json",
                     false);
             if (serializedRequestBody == null) {
@@ -151,7 +151,7 @@ public class PostV1PartnerManagedCompanies {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "401", "422", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "4XX", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -181,7 +181,7 @@ public class PostV1PartnerManagedCompanies {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withObject(Utils.unmarshal(response, new TypeReference<PostV1PartnerManagedCompaniesResponseBody>() {}));
+                    return res.withPartnerManagedCompany(Utils.unmarshal(response, new TypeReference<PartnerManagedCompany>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
@@ -193,7 +193,7 @@ public class PostV1PartnerManagedCompanies {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "401", "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
                 // no content
                 throw APIException.from("API error occurred", response);
             }
@@ -235,7 +235,7 @@ public class PostV1PartnerManagedCompanies {
                         if (err != null) {
                             return onError(null, err);
                         }
-                        if (Utils.statusCodeMatches(resp.statusCode(), "401", "422", "4XX", "5XX")) {
+                        if (Utils.statusCodeMatches(resp.statusCode(), "4XX", "5XX")) {
                             return onError(resp, null);
                         }
                         return CompletableFuture.completedFuture(resp);
@@ -262,8 +262,8 @@ public class PostV1PartnerManagedCompanies {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return Utils.unmarshalAsync(response, new TypeReference<PostV1PartnerManagedCompaniesResponseBody>() {})
-                            .thenApply(res::withObject);
+                    return Utils.unmarshalAsync(response, new TypeReference<PartnerManagedCompany>() {})
+                            .thenApply(res::withPartnerManagedCompany);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }
@@ -276,7 +276,7 @@ public class PostV1PartnerManagedCompanies {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "401", "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
                 // no content
                 return Utils.createAsyncApiError(response, "API error occurred");
             }

@@ -7,6 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
 import com.gusto.embedded_api.models.components.PayrollGrossUpRequest;
 import com.gusto.embedded_api.models.components.PayrollUpdate;
+import com.gusto.embedded_api.models.components.PrintablePayrollChecksBody;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyIdPayrollsRequest;
@@ -46,6 +47,11 @@ import com.gusto.embedded_api.models.operations.PatchV1CompaniesCompanyIdPayroll
 import com.gusto.embedded_api.models.operations.PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody;
 import com.gusto.embedded_api.models.operations.PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder;
 import com.gusto.embedded_api.models.operations.PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse;
+import com.gusto.embedded_api.models.operations.PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostCompaniesPayrollSkipCompanyUuidRequest;
+import com.gusto.embedded_api.models.operations.PostCompaniesPayrollSkipCompanyUuidRequestBody;
+import com.gusto.embedded_api.models.operations.PostCompaniesPayrollSkipCompanyUuidRequestBuilder;
+import com.gusto.embedded_api.models.operations.PostCompaniesPayrollSkipCompanyUuidResponse;
 import com.gusto.embedded_api.models.operations.PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostPayrollsGrossUpPayrollUuidRequest;
 import com.gusto.embedded_api.models.operations.PostPayrollsGrossUpPayrollUuidRequestBuilder;
@@ -55,8 +61,8 @@ import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPayrolls
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPayrollsRequestBody;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPayrollsRequestBuilder;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPayrollsResponse;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest;
-import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody;
 import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBuilder;
 import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse;
 import com.gusto.embedded_api.models.operations.PutAPIV1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion;
@@ -89,6 +95,7 @@ import com.gusto.embedded_api.operations.GetV1EmployeesEmployeeUuidPayStubs;
 import com.gusto.embedded_api.operations.GetV1PaymentReceiptsPayrollsPayrollUuid;
 import com.gusto.embedded_api.operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStub;
 import com.gusto.embedded_api.operations.PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements;
+import com.gusto.embedded_api.operations.PostCompaniesPayrollSkipCompanyUuid;
 import com.gusto.embedded_api.operations.PostPayrollsGrossUpPayrollUuid;
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyIdPayrolls;
 import com.gusto.embedded_api.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecks;
@@ -268,6 +275,8 @@ public class Payrolls {
      * 
      * <p>scope: `payrolls:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder getApprovedReversals() {
@@ -280,6 +289,8 @@ public class Payrolls {
      * <p>Returns all approved Payroll Reversals for a Company.
      * 
      * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @return The response from the API call
@@ -296,6 +307,8 @@ public class Payrolls {
      * <p>Returns all approved Payroll Reversals for a Company.
      * 
      * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
@@ -743,6 +756,87 @@ public class Payrolls {
     }
 
     /**
+     * Skip a payroll
+     * 
+     * <p>Submits a $0 payroll for employees associated with the pay schedule to skip payroll. This submission
+     * is asynchronous and a successful request responds with a 202 HTTP status. Upon success, the payroll
+     * is transitioned to the `processed` state.
+     * 
+     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
+     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
+     * categorization of the blockers as described in the error responses.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public PostCompaniesPayrollSkipCompanyUuidRequestBuilder skip() {
+        return new PostCompaniesPayrollSkipCompanyUuidRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Skip a payroll
+     * 
+     * <p>Submits a $0 payroll for employees associated with the pay schedule to skip payroll. This submission
+     * is asynchronous and a successful request responds with a 202 HTTP status. Upon success, the payroll
+     * is transitioned to the `processed` state.
+     * 
+     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
+     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
+     * categorization of the blockers as described in the error responses.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyUuid The UUID of the company
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostCompaniesPayrollSkipCompanyUuidResponse skip(String companyUuid, PostCompaniesPayrollSkipCompanyUuidRequestBody requestBody) {
+        return skip(Optional.empty(), companyUuid, requestBody);
+    }
+
+    /**
+     * Skip a payroll
+     * 
+     * <p>Submits a $0 payroll for employees associated with the pay schedule to skip payroll. This submission
+     * is asynchronous and a successful request responds with a 202 HTTP status. Upon success, the payroll
+     * is transitioned to the `processed` state.
+     * 
+     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
+     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
+     * categorization of the blockers as described in the error responses.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostCompaniesPayrollSkipCompanyUuidResponse skip(
+            Optional<? extends PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            PostCompaniesPayrollSkipCompanyUuidRequestBody requestBody) {
+        PostCompaniesPayrollSkipCompanyUuidRequest request =
+            PostCompaniesPayrollSkipCompanyUuidRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
+                .requestBody(requestBody)
+                .build();
+        RequestOperation<PostCompaniesPayrollSkipCompanyUuidRequest, PostCompaniesPayrollSkipCompanyUuidResponse> operation
+              = new PostCompaniesPayrollSkipCompanyUuid.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
      * Calculate gross up for a payroll
      * 
      * <p>Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only
@@ -1147,7 +1241,9 @@ public class Payrolls {
     /**
      * Get an employee's pay stubs
      * 
-     * <p>Get an employee's pay stubs
+     * <p>Get an employee's pay stubs.
+     * 
+     * <p>Results are returned in reverse chronological order (newest first).
      * 
      * <p>scope: `pay_stubs:read`
      * 
@@ -1162,7 +1258,9 @@ public class Payrolls {
     /**
      * Get an employee's pay stubs
      * 
-     * <p>Get an employee's pay stubs
+     * <p>Get an employee's pay stubs.
+     * 
+     * <p>Results are returned in reverse chronological order (newest first).
      * 
      * <p>scope: `pay_stubs:read`
      * 
@@ -1180,7 +1278,9 @@ public class Payrolls {
     /**
      * Get an employee's pay stubs
      * 
-     * <p>Get an employee's pay stubs
+     * <p>Get an employee's pay stubs.
+     * 
+     * <p>Results are returned in reverse chronological order (newest first).
      * 
      * <p>scope: `pay_stubs:read`
      * 
@@ -1219,6 +1319,8 @@ public class Payrolls {
      * 
      * <p>scope: `generated_documents:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The call builder
      */
     public PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBuilder generatePrintableChecks() {
@@ -1235,13 +1337,15 @@ public class Payrolls {
      * 
      * <p>scope: `generated_documents:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param payrollUuid The UUID of the payroll
-     * @param requestBody 
+     * @param printablePayrollChecksBody Request body for generating printable payroll checks.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse generatePrintableChecks(String payrollUuid, PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody requestBody) {
-        return generatePrintableChecks(payrollUuid, Optional.empty(), requestBody);
+    public PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse generatePrintableChecks(String payrollUuid, PrintablePayrollChecksBody printablePayrollChecksBody) {
+        return generatePrintableChecks(Optional.empty(), payrollUuid, printablePayrollChecksBody);
     }
 
     /**
@@ -1254,21 +1358,23 @@ public class Payrolls {
      * 
      * <p>scope: `generated_documents:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param payrollUuid The UUID of the payroll
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param printablePayrollChecksBody Request body for generating printable payroll checks.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse generatePrintableChecks(
-            String payrollUuid, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody requestBody) {
+            Optional<? extends PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
+            PrintablePayrollChecksBody printablePayrollChecksBody) {
         PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest request =
             PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest
                 .builder()
-                .payrollUuid(payrollUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .payrollUuid(payrollUuid)
+                .printablePayrollChecksBody(printablePayrollChecksBody)
                 .build();
         RequestOperation<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest, PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse> operation
               = new PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecks.Sync(sdkConfiguration, _headers);

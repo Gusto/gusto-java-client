@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -108,6 +109,16 @@ public class CompanyBankAccount {
     @JsonProperty("name")
     private Optional<String> name;
 
+    /**
+     * Whether the company has at least one bank account with active reverse-wire
+     * funding. The same value is returned on every bank-account row in this
+     * response. Only present when the emb_reverse_wire_enabled_field feature is
+     * enabled for the partner.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("reverse_wire_enabled")
+    private JsonNullable<Boolean> reverseWireEnabled;
+
     @JsonCreator
     public CompanyBankAccount(
             @JsonProperty("uuid") String uuid,
@@ -120,7 +131,8 @@ public class CompanyBankAccount {
             @JsonProperty("plaid_status") JsonNullable<? extends PlaidStatus> plaidStatus,
             @JsonProperty("last_cached_balance") JsonNullable<String> lastCachedBalance,
             @JsonProperty("balance_fetched_date") JsonNullable<String> balanceFetchedDate,
-            @JsonProperty("name") Optional<String> name) {
+            @JsonProperty("name") Optional<String> name,
+            @JsonProperty("reverse_wire_enabled") JsonNullable<Boolean> reverseWireEnabled) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(accountType, "accountType");
@@ -132,6 +144,7 @@ public class CompanyBankAccount {
         Utils.checkNotNull(lastCachedBalance, "lastCachedBalance");
         Utils.checkNotNull(balanceFetchedDate, "balanceFetchedDate");
         Utils.checkNotNull(name, "name");
+        Utils.checkNotNull(reverseWireEnabled, "reverseWireEnabled");
         this.uuid = uuid;
         this.companyUuid = companyUuid;
         this.accountType = accountType;
@@ -143,6 +156,7 @@ public class CompanyBankAccount {
         this.lastCachedBalance = lastCachedBalance;
         this.balanceFetchedDate = balanceFetchedDate;
         this.name = name;
+        this.reverseWireEnabled = reverseWireEnabled;
     }
     
     public CompanyBankAccount(
@@ -150,7 +164,7 @@ public class CompanyBankAccount {
         this(uuid, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
-            JsonNullable.undefined(), Optional.empty());
+            JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined());
     }
 
     /**
@@ -254,6 +268,17 @@ public class CompanyBankAccount {
     @JsonIgnore
     public Optional<String> name() {
         return name;
+    }
+
+    /**
+     * Whether the company has at least one bank account with active reverse-wire
+     * funding. The same value is returned on every bank-account row in this
+     * response. Only present when the emb_reverse_wire_enabled_field feature is
+     * enabled for the partner.
+     */
+    @JsonIgnore
+    public JsonNullable<Boolean> reverseWireEnabled() {
+        return reverseWireEnabled;
     }
 
     public static Builder builder() {
@@ -479,6 +504,30 @@ public class CompanyBankAccount {
         return this;
     }
 
+    /**
+     * Whether the company has at least one bank account with active reverse-wire
+     * funding. The same value is returned on every bank-account row in this
+     * response. Only present when the emb_reverse_wire_enabled_field feature is
+     * enabled for the partner.
+     */
+    public CompanyBankAccount withReverseWireEnabled(boolean reverseWireEnabled) {
+        Utils.checkNotNull(reverseWireEnabled, "reverseWireEnabled");
+        this.reverseWireEnabled = JsonNullable.of(reverseWireEnabled);
+        return this;
+    }
+
+    /**
+     * Whether the company has at least one bank account with active reverse-wire
+     * funding. The same value is returned on every bank-account row in this
+     * response. Only present when the emb_reverse_wire_enabled_field feature is
+     * enabled for the partner.
+     */
+    public CompanyBankAccount withReverseWireEnabled(JsonNullable<Boolean> reverseWireEnabled) {
+        Utils.checkNotNull(reverseWireEnabled, "reverseWireEnabled");
+        this.reverseWireEnabled = reverseWireEnabled;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -499,7 +548,8 @@ public class CompanyBankAccount {
             Utils.enhancedDeepEquals(this.plaidStatus, other.plaidStatus) &&
             Utils.enhancedDeepEquals(this.lastCachedBalance, other.lastCachedBalance) &&
             Utils.enhancedDeepEquals(this.balanceFetchedDate, other.balanceFetchedDate) &&
-            Utils.enhancedDeepEquals(this.name, other.name);
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.reverseWireEnabled, other.reverseWireEnabled);
     }
     
     @Override
@@ -508,7 +558,7 @@ public class CompanyBankAccount {
             uuid, companyUuid, accountType,
             routingNumber, hiddenAccountNumber, verificationStatus,
             verificationType, plaidStatus, lastCachedBalance,
-            balanceFetchedDate, name);
+            balanceFetchedDate, name, reverseWireEnabled);
     }
     
     @Override
@@ -524,7 +574,8 @@ public class CompanyBankAccount {
                 "plaidStatus", plaidStatus,
                 "lastCachedBalance", lastCachedBalance,
                 "balanceFetchedDate", balanceFetchedDate,
-                "name", name);
+                "name", name,
+                "reverseWireEnabled", reverseWireEnabled);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -551,6 +602,8 @@ public class CompanyBankAccount {
         private JsonNullable<String> balanceFetchedDate = JsonNullable.undefined();
 
         private Optional<String> name = Optional.empty();
+
+        private JsonNullable<Boolean> reverseWireEnabled = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -778,13 +831,38 @@ public class CompanyBankAccount {
             return this;
         }
 
+
+        /**
+         * Whether the company has at least one bank account with active reverse-wire
+         * funding. The same value is returned on every bank-account row in this
+         * response. Only present when the emb_reverse_wire_enabled_field feature is
+         * enabled for the partner.
+         */
+        public Builder reverseWireEnabled(boolean reverseWireEnabled) {
+            Utils.checkNotNull(reverseWireEnabled, "reverseWireEnabled");
+            this.reverseWireEnabled = JsonNullable.of(reverseWireEnabled);
+            return this;
+        }
+
+        /**
+         * Whether the company has at least one bank account with active reverse-wire
+         * funding. The same value is returned on every bank-account row in this
+         * response. Only present when the emb_reverse_wire_enabled_field feature is
+         * enabled for the partner.
+         */
+        public Builder reverseWireEnabled(JsonNullable<Boolean> reverseWireEnabled) {
+            Utils.checkNotNull(reverseWireEnabled, "reverseWireEnabled");
+            this.reverseWireEnabled = reverseWireEnabled;
+            return this;
+        }
+
         public CompanyBankAccount build() {
 
             return new CompanyBankAccount(
                 uuid, companyUuid, accountType,
                 routingNumber, hiddenAccountNumber, verificationStatus,
                 verificationType, plaidStatus, lastCachedBalance,
-                balanceFetchedDate, name);
+                balanceFetchedDate, name, reverseWireEnabled);
         }
 
     }

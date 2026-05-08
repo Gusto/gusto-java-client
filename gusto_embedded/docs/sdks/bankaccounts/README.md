@@ -339,14 +339,14 @@ public class Application {
 
 This endpoint creates a new **verified** bank account by using a plaid processor token to retrieve its information.
 
-scope: `plaid_processor:write`
-
 > 📘
 > To create a token please use the [plaid api](https://plaid.com/docs/api/processors/#processortokencreate) and select "gusto" as processor.
 
 > 🚧 Warning - Company Bank Accounts
 >
 > If a default company bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
+
+scope: `plaid_processor:write`
 
 ### Example Usage: Basic
 
@@ -355,39 +355,33 @@ scope: `plaid_processor:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.CompanyBankAccount;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.OwnerType;
+import com.gusto.embedded_api.models.components.PlaidProcessorTokenRequest;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PostV1PlaidProcessorTokenHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostV1PlaidProcessorTokenResponse;
 import java.lang.Exception;
-import java.lang.Object;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1PlaidProcessorTokenResponse res = sdk.bankAccounts().createFromPlaidToken()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PostV1PlaidProcessorTokenRequestBody.builder()
+                .xGustoAPIVersion(PostV1PlaidProcessorTokenHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .plaidProcessorTokenRequest(PlaidProcessorTokenRequest.builder()
                     .ownerType(OwnerType.COMPANY)
                     .ownerId("<id>")
                     .processorToken("<value>")
                     .build())
                 .call();
 
-        if (res.oneOf().isPresent()) {
-            PostV1PlaidProcessorTokenResponseBody unionValue = res.oneOf().get();
-            Object raw = unionValue.value();
-            if (raw instanceof CompanyBankAccount) {
-                CompanyBankAccount companyBankAccountValue = (CompanyBankAccount) raw;
-                // Handle companyBankAccount variant
-            } else {
-                // Unknown or unsupported variant
-            }
+        if (res.companyBankAccount().isPresent()) {
+            System.out.println(res.companyBankAccount().get());
         }
     }
 }
@@ -399,39 +393,33 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.CompanyBankAccount;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.OwnerType;
+import com.gusto.embedded_api.models.components.PlaidProcessorTokenRequest;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PostV1PlaidProcessorTokenHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostV1PlaidProcessorTokenResponse;
 import java.lang.Exception;
-import java.lang.Object;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1PlaidProcessorTokenResponse res = sdk.bankAccounts().createFromPlaidToken()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PostV1PlaidProcessorTokenRequestBody.builder()
+                .xGustoAPIVersion(PostV1PlaidProcessorTokenHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .plaidProcessorTokenRequest(PlaidProcessorTokenRequest.builder()
                     .ownerType(OwnerType.COMPANY)
                     .ownerId("ef279fbd-0fc6-4cf1-a977-6939d621c429")
                     .processorToken("processor-sandbox-0asd1-a92nc")
                     .build())
                 .call();
 
-        if (res.oneOf().isPresent()) {
-            PostV1PlaidProcessorTokenResponseBody unionValue = res.oneOf().get();
-            Object raw = unionValue.value();
-            if (raw instanceof CompanyBankAccount) {
-                CompanyBankAccount companyBankAccountValue = (CompanyBankAccount) raw;
-                // Handle companyBankAccount variant
-            } else {
-                // Unknown or unsupported variant
-            }
+        if (res.companyBankAccount().isPresent()) {
+            System.out.println(res.companyBankAccount().get());
         }
     }
 }
@@ -443,39 +431,33 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.CompanyBankAccount;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.OwnerType;
+import com.gusto.embedded_api.models.components.PlaidProcessorTokenRequest;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PostV1PlaidProcessorTokenHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostV1PlaidProcessorTokenResponse;
 import java.lang.Exception;
-import java.lang.Object;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1PlaidProcessorTokenResponse res = sdk.bankAccounts().createFromPlaidToken()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PostV1PlaidProcessorTokenRequestBody.builder()
+                .xGustoAPIVersion(PostV1PlaidProcessorTokenHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .plaidProcessorTokenRequest(PlaidProcessorTokenRequest.builder()
                     .ownerType(OwnerType.COMPANY)
                     .ownerId("<id>")
                     .processorToken("<value>")
                     .build())
                 .call();
 
-        if (res.oneOf().isPresent()) {
-            PostV1PlaidProcessorTokenResponseBody unionValue = res.oneOf().get();
-            Object raw = unionValue.value();
-            if (raw instanceof CompanyBankAccount) {
-                CompanyBankAccount companyBankAccountValue = (CompanyBankAccount) raw;
-                // Handle companyBankAccount variant
-            } else {
-                // Unknown or unsupported variant
-            }
+        if (res.companyBankAccount().isPresent()) {
+            System.out.println(res.companyBankAccount().get());
         }
     }
 }
@@ -487,39 +469,33 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.CompanyBankAccount;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.OwnerType;
+import com.gusto.embedded_api.models.components.PlaidProcessorTokenRequest;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PostV1PlaidProcessorTokenHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostV1PlaidProcessorTokenResponse;
 import java.lang.Exception;
-import java.lang.Object;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1PlaidProcessorTokenResponse res = sdk.bankAccounts().createFromPlaidToken()
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PostV1PlaidProcessorTokenRequestBody.builder()
+                .xGustoAPIVersion(PostV1PlaidProcessorTokenHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .plaidProcessorTokenRequest(PlaidProcessorTokenRequest.builder()
                     .ownerType(OwnerType.COMPANY)
                     .ownerId("<id>")
                     .processorToken("<value>")
                     .build())
                 .call();
 
-        if (res.oneOf().isPresent()) {
-            PostV1PlaidProcessorTokenResponseBody unionValue = res.oneOf().get();
-            Object raw = unionValue.value();
-            if (raw instanceof CompanyBankAccount) {
-                CompanyBankAccount companyBankAccountValue = (CompanyBankAccount) raw;
-                // Handle companyBankAccount variant
-            } else {
-                // Unknown or unsupported variant
-            }
+        if (res.companyBankAccount().isPresent()) {
+            System.out.println(res.companyBankAccount().get());
         }
     }
 }
@@ -529,8 +505,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PostV1PlaidProcessorTokenRequestBody](../../models/operations/PostV1PlaidProcessorTokenRequestBody.md)                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1PlaidProcessorTokenHeaderXGustoAPIVersion>](../../models/operations/PostV1PlaidProcessorTokenHeaderXGustoAPIVersion.md)                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `plaidProcessorTokenRequest`                                                                                                                                                                                                 | [PlaidProcessorTokenRequest](../../models/components/PlaidProcessorTokenRequest.md)                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
@@ -540,6 +516,7 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
 | models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 

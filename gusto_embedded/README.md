@@ -51,7 +51,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.gusto:embedded-api:0.3.2'
+implementation 'com.gusto:embedded-api:0.3.3'
 ```
 
 Maven:
@@ -59,7 +59,7 @@ Maven:
 <dependency>
     <groupId>com.gusto</groupId>
     <artifactId>embedded-api</artifactId>
-    <version>0.3.2</version>
+    <version>0.3.3</version>
 </dependency>
 ```
 
@@ -266,7 +266,7 @@ Some operations in this SDK require the security scheme to be specified at the r
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.*;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
 import java.lang.Exception;
@@ -282,15 +282,15 @@ public class Application {
                 .security(PostV1PartnerManagedCompaniesSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PostV1PartnerManagedCompaniesRequestBody.builder()
+                .xGustoAPIVersion(PostV1PartnerManagedCompaniesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .partnerManagedCompanyCreateRequest(PartnerManagedCompanyCreateRequest.builder()
                     .user(User.builder()
                         .firstName("Frank")
                         .lastName("Ocean")
                         .email("frank@example.com")
                         .phone("2345558899")
                         .build())
-                    .company(Company.builder()
+                    .company(PartnerManagedCompanyCreateRequestCompany.builder()
                         .name("Frank's Ocean, LLC")
                         .tradeName("Frank’s Ocean")
                         .ein("123456789")
@@ -299,8 +299,8 @@ public class Application {
                     .build())
                 .call();
 
-        if (res.object().isPresent()) {
-            System.out.println(res.object().get());
+        if (res.partnerManagedCompany().isPresent()) {
+            System.out.println(res.partnerManagedCompany().get());
         }
     }
 }
@@ -330,6 +330,7 @@ public class Application {
 * [createPartnerManaged](docs/sdks/companies/README.md#createpartnermanaged) - Create a partner managed company
 * [get](docs/sdks/companies/README.md#get) - Get a company
 * [update](docs/sdks/companies/README.md#update) - Update a company
+* [migrate](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
 * [getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 * [acceptTermsOfService](docs/sdks/companies/README.md#accepttermsofservice) - Accept terms of service for a company user
 * [retrieveTermsOfService](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
@@ -421,6 +422,7 @@ public class Application {
 * [get](docs/sdks/contractorpayments/README.md#get) - Get a single contractor payment
 * [delete](docs/sdks/contractorpayments/README.md#delete) - Cancel a contractor payment
 * [preview](docs/sdks/contractorpayments/README.md#preview) - Preview contractor payment debit date
+* [getV1ContractorPaymentsContractorPaymentIdPdf](docs/sdks/contractorpayments/README.md#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
 
 ### [Contractors](docs/sdks/contractors/README.md)
 
@@ -434,6 +436,10 @@ public class Application {
 * [getAddress](docs/sdks/contractors/README.md#getaddress) - Get a contractor address
 * [updateAddress](docs/sdks/contractors/README.md#updateaddress) - Create or update a contractor's address
 * [getV1CompaniesCompanyIdContractorsPaymentDetails](docs/sdks/contractors/README.md#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
+* [postV1ContractorsContractorUuidRehire](docs/sdks/contractors/README.md#postv1contractorscontractoruuidrehire) - Schedule a contractor rehire
+* [deleteV1ContractorsContractorUuidRehire](docs/sdks/contractors/README.md#deletev1contractorscontractoruuidrehire) - Cancel a pending contractor rehire
+* [postV1ContractorsContractorUuidTermination](docs/sdks/contractors/README.md#postv1contractorscontractoruuidtermination) - Schedule a contractor termination
+* [deleteV1ContractorsContractorUuidTermination](docs/sdks/contractors/README.md#deletev1contractorscontractoruuidtermination) - Cancel a pending contractor termination
 
 ### [Departments](docs/sdks/departments/README.md)
 
@@ -490,6 +496,7 @@ public class Application {
 * [getRehire](docs/sdks/employeeemployments/README.md#getrehire) - Get an employee rehire
 * [deleteRehire](docs/sdks/employeeemployments/README.md#deleterehire) - Delete an employee rehire
 * [getHistory](docs/sdks/employeeemployments/README.md#gethistory) - Get employment history for an employee
+* [getV1TerminationsEmployeeId](docs/sdks/employeeemployments/README.md#getv1terminationsemployeeid) - Get an employee termination
 
 ### [EmployeeForms](docs/sdks/employeeforms/README.md)
 
@@ -509,7 +516,7 @@ public class Application {
 
 ### [EmployeePaymentMethods](docs/sdks/employeepaymentmethods/README.md)
 
-* [getBankAccounts](docs/sdks/employeepaymentmethods/README.md#getbankaccounts) - Get all employee bank accounts
+* [getBankAccounts](docs/sdks/employeepaymentmethods/README.md#getbankaccounts) - List employee bank accounts
 
 ### [Employees](docs/sdks/employees/README.md)
 
@@ -539,7 +546,7 @@ public class Application {
 
 ### [ExternalPayrolls](docs/sdks/externalpayrolls/README.md)
 
-* [create](docs/sdks/externalpayrolls/README.md#create) - Create a new external payroll for a company
+* [create](docs/sdks/externalpayrolls/README.md#create) - Create an external payroll for a company
 * [get](docs/sdks/externalpayrolls/README.md#get) - Get external payrolls for a company
 * [retrieve](docs/sdks/externalpayrolls/README.md#retrieve) - Get an external payroll
 * [delete](docs/sdks/externalpayrolls/README.md#delete) - Delete an external payroll
@@ -655,6 +662,7 @@ public class Application {
 * [prepare](docs/sdks/payrolls/README.md#prepare) - Prepare a payroll for update
 * [getReceipt](docs/sdks/payrolls/README.md#getreceipt) - Get a single payroll receipt
 * [getBlockers](docs/sdks/payrolls/README.md#getblockers) - Get all payroll blockers for a company
+* [skip](docs/sdks/payrolls/README.md#skip) - Skip a payroll
 * [calculateGrossUp](docs/sdks/payrolls/README.md#calculategrossup) - Calculate gross up for a payroll
 * [calculate](docs/sdks/payrolls/README.md#calculate) - Calculate a payroll
 * [submit](docs/sdks/payrolls/README.md#submit) - Submit payroll
@@ -726,6 +734,18 @@ public class Application {
 * [updateState](docs/sdks/taxrequirements/README.md#updatestate) - Update tax requirements for a state
 * [getAll](docs/sdks/taxrequirements/README.md#getall) - Get all tax requirements for a company
 
+### [TimeOffRequests](docs/sdks/timeoffrequests/README.md)
+
+* [postV1CompaniesCompanyUuidTimeOffAdminApprovedRequests](docs/sdks/timeoffrequests/README.md#postv1companiescompanyuuidtimeoffadminapprovedrequests) - Create an admin-approved time off request
+* [getV1CompaniesCompanyUuidTimeOffBalances](docs/sdks/timeoffrequests/README.md#getv1companiescompanyuuidtimeoffbalances) - Get time off balances for a company
+* [getV1CompaniesCompanyUuidTimeOffRequests](docs/sdks/timeoffrequests/README.md#getv1companiescompanyuuidtimeoffrequests) - List time off requests for a company
+* [postV1CompaniesCompanyUuidTimeOffRequests](docs/sdks/timeoffrequests/README.md#postv1companiescompanyuuidtimeoffrequests) - Create a time off request
+* [postV1CompaniesCompanyUuidTimeOffRequestsPreview](docs/sdks/timeoffrequests/README.md#postv1companiescompanyuuidtimeoffrequestspreview) - Preview a time off request
+* [getV1TimeOffRequestsTimeOffRequestUuid](docs/sdks/timeoffrequests/README.md#getv1timeoffrequeststimeoffrequestuuid) - Get a time off request
+* [deleteV1TimeOffRequestsTimeOffRequestUuid](docs/sdks/timeoffrequests/README.md#deletev1timeoffrequeststimeoffrequestuuid) - Delete a time off request
+* [putV1TimeOffRequestsTimeOffRequestUuidApprove](docs/sdks/timeoffrequests/README.md#putv1timeoffrequeststimeoffrequestuuidapprove) - Approve a time off request
+* [putV1TimeOffRequestsTimeOffRequestUuidDecline](docs/sdks/timeoffrequests/README.md#putv1timeoffrequeststimeoffrequestuuiddecline) - Decline a time off request
+
 ### [TimeOffPolicies](docs/sdks/timeoffpolicies/README.md)
 
 * [calculateAccruingTimeOffHours](docs/sdks/timeoffpolicies/README.md#calculateaccruingtimeoffhours) - Calculate accruing time off hours
@@ -745,8 +765,8 @@ public class Application {
 * [updateSubscription](docs/sdks/webhooks/README.md#updatesubscription) - Update a webhook subscription
 * [getSubscription](docs/sdks/webhooks/README.md#getsubscription) - Get a webhook subscription
 * [deleteSubscription](docs/sdks/webhooks/README.md#deletesubscription) - Delete a webhook subscription
-* [verify](docs/sdks/webhooks/README.md#verify) - Verify the webhook subscription
-* [requestVerificationToken](docs/sdks/webhooks/README.md#requestverificationtoken) - Request the webhook subscription verification_token
+* [verify](docs/sdks/webhooks/README.md#verify) - Verify a webhook subscription
+* [requestVerificationToken](docs/sdks/webhooks/README.md#requestverificationtoken) - Request a verification token for a webhook subscription
 * [getV1WebhooksHealthCheck](docs/sdks/webhooks/README.md#getv1webhookshealthcheck) - Get the webhooks health status
 
 ### [WireInRequests](docs/sdks/wireinrequests/README.md)
@@ -780,8 +800,7 @@ Handling errors in this SDK should largely match your expectations. All operatio
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.EntityErrorObject;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.*;
 import com.gusto.embedded_api.models.errors.GustoEmbeddedException;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
 import com.gusto.embedded_api.models.operations.*;
@@ -802,15 +821,15 @@ public class Application {
                     .security(PostV1PartnerManagedCompaniesSecurity.builder()
                         .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                         .build())
-                    .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                    .requestBody(PostV1PartnerManagedCompaniesRequestBody.builder()
+                    .xGustoAPIVersion(PostV1PartnerManagedCompaniesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                    .partnerManagedCompanyCreateRequest(PartnerManagedCompanyCreateRequest.builder()
                         .user(User.builder()
                             .firstName("Frank")
                             .lastName("Ocean")
                             .email("frank@example.com")
                             .phone("2345558899")
                             .build())
-                        .company(Company.builder()
+                        .company(PartnerManagedCompanyCreateRequestCompany.builder()
                             .name("Frank's Ocean, LLC")
                             .tradeName("Frank’s Ocean")
                             .ein("123456789")
@@ -819,8 +838,8 @@ public class Application {
                         .build())
                     .call();
 
-            if (res.object().isPresent()) {
-                System.out.println(res.object().get());
+            if (res.partnerManagedCompany().isPresent()) {
+                System.out.println(res.partnerManagedCompany().get());
             }
         } catch (GustoEmbeddedException ex) { // all SDK exceptions inherit from GustoEmbeddedException
 
@@ -858,8 +877,9 @@ public class Application {
 ```
 
 ### Error Classes
-**Primary error:**
+**Primary errors:**
 * [`GustoEmbeddedException`](./src/main/java/models/errors/GustoEmbeddedException.java): The base class for HTTP error responses.
+  * [`com.gusto.embedded_api.models.errors.NotFoundErrorObject`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.NotFoundErrorObject.java): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. *
 
 <details><summary>Less common errors (11)</summary>
 
@@ -871,11 +891,11 @@ public class Application {
 many more subclasses in the JDK platform).
 
 **Inherit from [`GustoEmbeddedException`](./src/main/java/models/errors/GustoEmbeddedException.java)**:
-* [`com.gusto.embedded_api.models.errors.NotFoundErrorObject`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.NotFoundErrorObject.java): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 162 of 280 methods.*
-* [`com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject.java): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 143 of 280 methods.*
-* [`com.gusto.embedded_api.models.errors.PeopleBatchConflictError`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.PeopleBatchConflictError.java): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 280 methods.*
-* [`com.gusto.embedded_api.models.errors.GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.GetCompaniesCompanyUuidContractorPaymentsPreviewResponseBody.java): Unprocessable Entity (WebDAV). Status code `422`. Applicable to 1 of 280 methods.*
-* [`com.gusto.embedded_api.models.errors.CompanySuspensionCreationErrors`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.CompanySuspensionCreationErrors.java): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 280 methods.*
+* [`com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject.java): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 151 of 297 methods.*
+* [`com.gusto.embedded_api.models.errors.ConflictErrorObject`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.ConflictErrorObject.java): Conflict    This error occurs when the resource version provided does not match the current version. Retrieve the latest version and retry. Status code `409`. Applicable to 2 of 297 methods.*
+* [`com.gusto.embedded_api.models.errors.PeopleBatchConflictError`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.PeopleBatchConflictError.java): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 297 methods.*
+* [`com.gusto.embedded_api.models.errors.PayrollBlockersError`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.PayrollBlockersError.java): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 297 methods.*
+* [`com.gusto.embedded_api.models.errors.CompanySuspensionCreationErrors`](./src/main/java/models/errors/com.gusto.embedded_api.models.errors.CompanySuspensionCreationErrors.java): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 297 methods.*
 
 
 </details>

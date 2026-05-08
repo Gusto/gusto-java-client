@@ -22,6 +22,7 @@ public enum SubscriptionTypes {
     LOCATION("Location"),
     NOTIFICATION("Notification"),
     PAYROLL("Payroll"),
+    PAYROLL_SYNC("PayrollSync"),
     PAY_SCHEDULE("PaySchedule"),
     SIGNATORY("Signatory");
 

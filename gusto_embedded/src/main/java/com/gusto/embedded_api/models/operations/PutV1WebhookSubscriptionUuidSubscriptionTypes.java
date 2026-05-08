@@ -22,6 +22,7 @@ public enum PutV1WebhookSubscriptionUuidSubscriptionTypes {
     LOCATION("Location"),
     NOTIFICATION("Notification"),
     PAYROLL("Payroll"),
+    PAYROLL_SYNC("PayrollSync"),
     PAY_SCHEDULE("PaySchedule"),
     SIGNATORY("Signatory");
 

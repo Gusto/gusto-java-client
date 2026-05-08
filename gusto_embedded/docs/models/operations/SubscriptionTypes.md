@@ -26,5 +26,6 @@ SubscriptionTypes value = SubscriptionTypes.BANK_ACCOUNT;
 | `LOCATION`                  | Location                    |
 | `NOTIFICATION`              | Notification                |
 | `PAYROLL`                   | Payroll                     |
+| `PAYROLL_SYNC`              | PayrollSync                 |
 | `PAY_SCHEDULE`              | PaySchedule                 |
 | `SIGNATORY`                 | Signatory                   |

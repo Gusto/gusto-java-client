@@ -7,6 +7,7 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 
 import com.gusto.embedded_api.models.components.PayrollGrossUpRequest;
 import com.gusto.embedded_api.models.components.PayrollUpdate;
+import com.gusto.embedded_api.models.components.PrintablePayrollChecksBody;
 import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyIdPayrollsRequest;
@@ -26,13 +27,16 @@ import com.gusto.embedded_api.models.operations.GetV1PayrollsPayrollUuidEmployee
 import com.gusto.embedded_api.models.operations.PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest;
 import com.gusto.embedded_api.models.operations.PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody;
+import com.gusto.embedded_api.models.operations.PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostCompaniesPayrollSkipCompanyUuidRequest;
+import com.gusto.embedded_api.models.operations.PostCompaniesPayrollSkipCompanyUuidRequestBody;
 import com.gusto.embedded_api.models.operations.PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostPayrollsGrossUpPayrollUuidRequest;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPayrollsRequest;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdPayrollsRequestBody;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest;
-import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody;
 import com.gusto.embedded_api.models.operations.PutAPIV1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion;
@@ -63,6 +67,8 @@ import com.gusto.embedded_api.models.operations.async.GetV1PayrollsPayrollUuidEm
 import com.gusto.embedded_api.models.operations.async.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse;
 import com.gusto.embedded_api.models.operations.async.PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder;
 import com.gusto.embedded_api.models.operations.async.PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse;
+import com.gusto.embedded_api.models.operations.async.PostCompaniesPayrollSkipCompanyUuidRequestBuilder;
+import com.gusto.embedded_api.models.operations.async.PostCompaniesPayrollSkipCompanyUuidResponse;
 import com.gusto.embedded_api.models.operations.async.PostPayrollsGrossUpPayrollUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.async.PostPayrollsGrossUpPayrollUuidResponse;
 import com.gusto.embedded_api.models.operations.async.PostV1CompaniesCompanyIdPayrollsRequestBuilder;
@@ -89,6 +95,7 @@ import com.gusto.embedded_api.operations.GetV1EmployeesEmployeeUuidPayStubs;
 import com.gusto.embedded_api.operations.GetV1PaymentReceiptsPayrollsPayrollUuid;
 import com.gusto.embedded_api.operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStub;
 import com.gusto.embedded_api.operations.PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements;
+import com.gusto.embedded_api.operations.PostCompaniesPayrollSkipCompanyUuid;
 import com.gusto.embedded_api.operations.PostPayrollsGrossUpPayrollUuid;
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyIdPayrolls;
 import com.gusto.embedded_api.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecks;
@@ -271,6 +278,8 @@ public class AsyncPayrolls {
      * 
      * <p>scope: `payrolls:read`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder getApprovedReversals() {
@@ -283,6 +292,8 @@ public class AsyncPayrolls {
      * <p>Returns all approved Payroll Reversals for a Company.
      * 
      * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayrollReversalsResponse>} - The async response
@@ -299,6 +310,8 @@ public class AsyncPayrolls {
      * <p>Returns all approved Payroll Reversals for a Company.
      * 
      * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
@@ -751,6 +764,87 @@ public class AsyncPayrolls {
 
 
     /**
+     * Skip a payroll
+     * 
+     * <p>Submits a $0 payroll for employees associated with the pay schedule to skip payroll. This submission
+     * is asynchronous and a successful request responds with a 202 HTTP status. Upon success, the payroll
+     * is transitioned to the `processed` state.
+     * 
+     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
+     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
+     * categorization of the blockers as described in the error responses.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public PostCompaniesPayrollSkipCompanyUuidRequestBuilder skip() {
+        return new PostCompaniesPayrollSkipCompanyUuidRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Skip a payroll
+     * 
+     * <p>Submits a $0 payroll for employees associated with the pay schedule to skip payroll. This submission
+     * is asynchronous and a successful request responds with a 202 HTTP status. Upon success, the payroll
+     * is transitioned to the `processed` state.
+     * 
+     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
+     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
+     * categorization of the blockers as described in the error responses.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyUuid The UUID of the company
+     * @param requestBody 
+     * @return {@code CompletableFuture<PostCompaniesPayrollSkipCompanyUuidResponse>} - The async response
+     */
+    public CompletableFuture<PostCompaniesPayrollSkipCompanyUuidResponse> skip(String companyUuid, PostCompaniesPayrollSkipCompanyUuidRequestBody requestBody) {
+        return skip(Optional.empty(), companyUuid, requestBody);
+    }
+
+    /**
+     * Skip a payroll
+     * 
+     * <p>Submits a $0 payroll for employees associated with the pay schedule to skip payroll. This submission
+     * is asynchronous and a successful request responds with a 202 HTTP status. Upon success, the payroll
+     * is transitioned to the `processed` state.
+     * 
+     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
+     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
+     * categorization of the blockers as described in the error responses.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param requestBody 
+     * @return {@code CompletableFuture<PostCompaniesPayrollSkipCompanyUuidResponse>} - The async response
+     */
+    public CompletableFuture<PostCompaniesPayrollSkipCompanyUuidResponse> skip(
+            Optional<? extends PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            PostCompaniesPayrollSkipCompanyUuidRequestBody requestBody) {
+        PostCompaniesPayrollSkipCompanyUuidRequest request =
+            PostCompaniesPayrollSkipCompanyUuidRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
+                .requestBody(requestBody)
+                .build();
+        AsyncRequestOperation<PostCompaniesPayrollSkipCompanyUuidRequest, PostCompaniesPayrollSkipCompanyUuidResponse> operation
+              = new PostCompaniesPayrollSkipCompanyUuid.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
      * Calculate gross up for a payroll
      * 
      * <p>Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only
@@ -1156,7 +1250,9 @@ public class AsyncPayrolls {
     /**
      * Get an employee's pay stubs
      * 
-     * <p>Get an employee's pay stubs
+     * <p>Get an employee's pay stubs.
+     * 
+     * <p>Results are returned in reverse chronological order (newest first).
      * 
      * <p>scope: `pay_stubs:read`
      * 
@@ -1171,7 +1267,9 @@ public class AsyncPayrolls {
     /**
      * Get an employee's pay stubs
      * 
-     * <p>Get an employee's pay stubs
+     * <p>Get an employee's pay stubs.
+     * 
+     * <p>Results are returned in reverse chronological order (newest first).
      * 
      * <p>scope: `pay_stubs:read`
      * 
@@ -1189,7 +1287,9 @@ public class AsyncPayrolls {
     /**
      * Get an employee's pay stubs
      * 
-     * <p>Get an employee's pay stubs
+     * <p>Get an employee's pay stubs.
+     * 
+     * <p>Results are returned in reverse chronological order (newest first).
      * 
      * <p>scope: `pay_stubs:read`
      * 
@@ -1229,6 +1329,8 @@ public class AsyncPayrolls {
      * 
      * <p>scope: `generated_documents:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @return The async call builder
      */
     public PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBuilder generatePrintableChecks() {
@@ -1245,12 +1347,14 @@ public class AsyncPayrolls {
      * 
      * <p>scope: `generated_documents:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
      * @param payrollUuid The UUID of the payroll
-     * @param requestBody 
+     * @param printablePayrollChecksBody Request body for generating printable payroll checks.
      * @return {@code CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse>} - The async response
      */
-    public CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse> generatePrintableChecks(String payrollUuid, PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody requestBody) {
-        return generatePrintableChecks(payrollUuid, Optional.empty(), requestBody);
+    public CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse> generatePrintableChecks(String payrollUuid, PrintablePayrollChecksBody printablePayrollChecksBody) {
+        return generatePrintableChecks(Optional.empty(), payrollUuid, printablePayrollChecksBody);
     }
 
     /**
@@ -1263,20 +1367,22 @@ public class AsyncPayrolls {
      * 
      * <p>scope: `generated_documents:write`
      * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param payrollUuid The UUID of the payroll
-     * @param xGustoAPIVersion 
-     * @param requestBody 
+     * @param printablePayrollChecksBody Request body for generating printable payroll checks.
      * @return {@code CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse>} - The async response
      */
     public CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse> generatePrintableChecks(
-            String payrollUuid, Optional<? extends VersionHeader> xGustoAPIVersion,
-            PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody requestBody) {
+            Optional<? extends PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
+            PrintablePayrollChecksBody printablePayrollChecksBody) {
         PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest request =
             PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest
                 .builder()
-                .payrollUuid(payrollUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
+                .payrollUuid(payrollUuid)
+                .printablePayrollChecksBody(printablePayrollChecksBody)
                 .build();
         AsyncRequestOperation<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest, PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse> operation
               = new PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecks.Async(sdkConfiguration, _headers);

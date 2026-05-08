@@ -10,7 +10,7 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.SecuritySource;
-import com.gusto.embedded_api.models.components.PaySchedule;
+import com.gusto.embedded_api.models.components.PayScheduleShow;
 import com.gusto.embedded_api.models.errors.APIException;
 import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
@@ -144,7 +144,7 @@ public class PostV1CompaniesCompanyIdPaySchedules {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "404", "422", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "4XX", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -174,7 +174,7 @@ public class PostV1CompaniesCompanyIdPaySchedules {
             
             if (Utils.statusCodeMatches(response.statusCode(), "201")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withPaySchedule(Utils.unmarshal(response, new TypeReference<PaySchedule>() {}));
+                    return res.withPayScheduleShow(Utils.unmarshal(response, new TypeReference<PayScheduleShow>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
@@ -231,7 +231,7 @@ public class PostV1CompaniesCompanyIdPaySchedules {
                         if (err != null) {
                             return onError(null, err);
                         }
-                        if (Utils.statusCodeMatches(resp.statusCode(), "404", "422", "4XX", "5XX")) {
+                        if (Utils.statusCodeMatches(resp.statusCode(), "4XX", "5XX")) {
                             return onError(resp, null);
                         }
                         return CompletableFuture.completedFuture(resp);
@@ -258,8 +258,8 @@ public class PostV1CompaniesCompanyIdPaySchedules {
             
             if (Utils.statusCodeMatches(response.statusCode(), "201")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return Utils.unmarshalAsync(response, new TypeReference<PaySchedule>() {})
-                            .thenApply(res::withPaySchedule);
+                    return Utils.unmarshalAsync(response, new TypeReference<PayScheduleShow>() {})
+                            .thenApply(res::withPayScheduleShow);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }

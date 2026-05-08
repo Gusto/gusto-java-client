@@ -140,7 +140,11 @@ public class ContractorCreateRequestBody {
 
     /**
      * The status of the contractor. If the contractor's start date is in the future, updating this field
-     * to true means we are setting the start date to today.
+     * to true means we are setting the start date to today. Attempting to deactivate a contractor while a
+     * dismissal is already scheduled, or reactivate while a rehire is already scheduled, will return a 422
+     * error.
+     * 
+     * <p>Cancel the pending transition first using the appropriate cancel endpoint.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("is_active")
@@ -338,7 +342,11 @@ public class ContractorCreateRequestBody {
 
     /**
      * The status of the contractor. If the contractor's start date is in the future, updating this field
-     * to true means we are setting the start date to today.
+     * to true means we are setting the start date to today. Attempting to deactivate a contractor while a
+     * dismissal is already scheduled, or reactivate while a rehire is already scheduled, will return a 422
+     * error.
+     * 
+     * <p>Cancel the pending transition first using the appropriate cancel endpoint.
      */
     @JsonIgnore
     public Optional<Boolean> isActive() {
@@ -633,7 +641,11 @@ public class ContractorCreateRequestBody {
 
     /**
      * The status of the contractor. If the contractor's start date is in the future, updating this field
-     * to true means we are setting the start date to today.
+     * to true means we are setting the start date to today. Attempting to deactivate a contractor while a
+     * dismissal is already scheduled, or reactivate while a rehire is already scheduled, will return a 422
+     * error.
+     * 
+     * <p>Cancel the pending transition first using the appropriate cancel endpoint.
      */
     public ContractorCreateRequestBody withIsActive(boolean isActive) {
         Utils.checkNotNull(isActive, "isActive");
@@ -644,7 +656,11 @@ public class ContractorCreateRequestBody {
 
     /**
      * The status of the contractor. If the contractor's start date is in the future, updating this field
-     * to true means we are setting the start date to today.
+     * to true means we are setting the start date to today. Attempting to deactivate a contractor while a
+     * dismissal is already scheduled, or reactivate while a rehire is already scheduled, will return a 422
+     * error.
+     * 
+     * <p>Cancel the pending transition first using the appropriate cancel endpoint.
      */
     public ContractorCreateRequestBody withIsActive(Optional<Boolean> isActive) {
         Utils.checkNotNull(isActive, "isActive");
@@ -1033,7 +1049,11 @@ public class ContractorCreateRequestBody {
 
         /**
          * The status of the contractor. If the contractor's start date is in the future, updating this field
-         * to true means we are setting the start date to today.
+         * to true means we are setting the start date to today. Attempting to deactivate a contractor while a
+         * dismissal is already scheduled, or reactivate while a rehire is already scheduled, will return a 422
+         * error.
+         * 
+         * <p>Cancel the pending transition first using the appropriate cancel endpoint.
          */
         public Builder isActive(boolean isActive) {
             Utils.checkNotNull(isActive, "isActive");
@@ -1043,7 +1063,11 @@ public class ContractorCreateRequestBody {
 
         /**
          * The status of the contractor. If the contractor's start date is in the future, updating this field
-         * to true means we are setting the start date to today.
+         * to true means we are setting the start date to today. Attempting to deactivate a contractor while a
+         * dismissal is already scheduled, or reactivate while a rehire is already scheduled, will return a 422
+         * error.
+         * 
+         * <p>Cancel the pending transition first using the appropriate cancel endpoint.
          */
         public Builder isActive(Optional<Boolean> isActive) {
             Utils.checkNotNull(isActive, "isActive");

@@ -25,15 +25,16 @@ scope: `departments:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.DepartmentCreateRequestBody;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PostDepartmentsRequestBody;
+import com.gusto.embedded_api.models.operations.PostDepartmentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostDepartmentsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -41,8 +42,9 @@ public class Application {
 
         PostDepartmentsResponse res = sdk.departments().create()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PostDepartmentsRequestBody.builder()
+                .xGustoAPIVersion(PostDepartmentsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .departmentCreateRequestBody(DepartmentCreateRequestBody.builder()
+                    .title("Stage Hand")
                     .build())
                 .call();
 
@@ -59,15 +61,16 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.DepartmentCreateRequestBody;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PostDepartmentsRequestBody;
+import com.gusto.embedded_api.models.operations.PostDepartmentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostDepartmentsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -75,8 +78,8 @@ public class Application {
 
         PostDepartmentsResponse res = sdk.departments().create()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PostDepartmentsRequestBody.builder()
+                .xGustoAPIVersion(PostDepartmentsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .departmentCreateRequestBody(DepartmentCreateRequestBody.builder()
                     .title("Stage Hand")
                     .build())
                 .call();
@@ -94,15 +97,16 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.DepartmentCreateRequestBody;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PostDepartmentsRequestBody;
+import com.gusto.embedded_api.models.operations.PostDepartmentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostDepartmentsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -110,8 +114,9 @@ public class Application {
 
         PostDepartmentsResponse res = sdk.departments().create()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PostDepartmentsRequestBody.builder()
+                .xGustoAPIVersion(PostDepartmentsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .departmentCreateRequestBody(DepartmentCreateRequestBody.builder()
+                    .title("Stage Hand")
                     .build())
                 .call();
 
@@ -128,15 +133,16 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.DepartmentCreateRequestBody;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PostDepartmentsRequestBody;
+import com.gusto.embedded_api.models.operations.PostDepartmentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostDepartmentsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -144,8 +150,9 @@ public class Application {
 
         PostDepartmentsResponse res = sdk.departments().create()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PostDepartmentsRequestBody.builder()
+                .xGustoAPIVersion(PostDepartmentsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .departmentCreateRequestBody(DepartmentCreateRequestBody.builder()
+                    .title("Stage Hand")
                     .build())
                 .call();
 
@@ -161,8 +168,8 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PostDepartmentsRequestBody](../../models/operations/PostDepartmentsRequestBody.md)                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostDepartmentsHeaderXGustoAPIVersion>](../../models/operations/PostDepartmentsHeaderXGustoAPIVersion.md)                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `departmentCreateRequestBody`                                                                                                                                                                                                | [DepartmentCreateRequestBody](../../models/components/DepartmentCreateRequestBody.md)                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
@@ -172,6 +179,7 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
 | models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
@@ -188,13 +196,14 @@ scope: `departments:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.GetCompaniesDepartmentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetCompaniesDepartmentsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -202,7 +211,7 @@ public class Application {
 
         GetCompaniesDepartmentsResponse res = sdk.departments().getAll()
                 .companyUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(GetCompaniesDepartmentsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.departmentList().isPresent()) {
@@ -217,7 +226,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetCompaniesDepartmentsHeaderXGustoAPIVersion>](../../models/operations/GetCompaniesDepartmentsHeaderXGustoAPIVersion.md)                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -225,16 +234,16 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## get
 
 Get a department given the UUID
 
 scope: `departments:read`
-
 
 ### Example Usage
 
@@ -243,13 +252,14 @@ scope: `departments:read`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.GetDepartmentHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetDepartmentResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -257,7 +267,7 @@ public class Application {
 
         GetDepartmentResponse res = sdk.departments().get()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(GetDepartmentHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.department().isPresent()) {
@@ -272,7 +282,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `departmentUuid`                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the department                                                                                                                                                                                                   |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetDepartmentHeaderXGustoAPIVersion>](../../models/operations/GetDepartmentHeaderXGustoAPIVersion.md)                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -280,9 +290,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## update
 
@@ -297,15 +308,15 @@ scope: `departments:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutDepartmentsRequestBody;
+import com.gusto.embedded_api.models.components.DepartmentUpdateRequestBody;
+import com.gusto.embedded_api.models.errors.*;
+import com.gusto.embedded_api.models.operations.PutDepartmentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutDepartmentsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, ConflictErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -313,9 +324,10 @@ public class Application {
 
         PutDepartmentsResponse res = sdk.departments().update()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PutDepartmentsRequestBody.builder()
+                .xGustoAPIVersion(PutDepartmentsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .departmentUpdateRequestBody(DepartmentUpdateRequestBody.builder()
                     .version("<value>")
+                    .title("Stage Hand")
                     .build())
                 .call();
 
@@ -332,15 +344,15 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutDepartmentsRequestBody;
+import com.gusto.embedded_api.models.components.DepartmentUpdateRequestBody;
+import com.gusto.embedded_api.models.errors.*;
+import com.gusto.embedded_api.models.operations.PutDepartmentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutDepartmentsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, ConflictErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -348,8 +360,8 @@ public class Application {
 
         PutDepartmentsResponse res = sdk.departments().update()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PutDepartmentsRequestBody.builder()
+                .xGustoAPIVersion(PutDepartmentsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .departmentUpdateRequestBody(DepartmentUpdateRequestBody.builder()
                     .version("db0edd04aaac4506f7edab03ac855d56")
                     .title("Backup Dancer")
                     .build())
@@ -368,15 +380,15 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutDepartmentsRequestBody;
+import com.gusto.embedded_api.models.components.DepartmentUpdateRequestBody;
+import com.gusto.embedded_api.models.errors.*;
+import com.gusto.embedded_api.models.operations.PutDepartmentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutDepartmentsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, ConflictErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -384,9 +396,10 @@ public class Application {
 
         PutDepartmentsResponse res = sdk.departments().update()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PutDepartmentsRequestBody.builder()
+                .xGustoAPIVersion(PutDepartmentsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .departmentUpdateRequestBody(DepartmentUpdateRequestBody.builder()
                     .version("<value>")
+                    .title("Stage Hand")
                     .build())
                 .call();
 
@@ -403,15 +416,15 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.PutDepartmentsRequestBody;
+import com.gusto.embedded_api.models.components.DepartmentUpdateRequestBody;
+import com.gusto.embedded_api.models.errors.*;
+import com.gusto.embedded_api.models.operations.PutDepartmentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutDepartmentsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, ConflictErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -419,9 +432,10 @@ public class Application {
 
         PutDepartmentsResponse res = sdk.departments().update()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PutDepartmentsRequestBody.builder()
+                .xGustoAPIVersion(PutDepartmentsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .departmentUpdateRequestBody(DepartmentUpdateRequestBody.builder()
                     .version("<value>")
+                    .title("Stage Hand")
                     .build())
                 .call();
 
@@ -437,8 +451,8 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `departmentUuid`                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the department                                                                                                                                                                                                   |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PutDepartmentsRequestBody](../../models/operations/PutDepartmentsRequestBody.md)                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutDepartmentsHeaderXGustoAPIVersion>](../../models/operations/PutDepartmentsHeaderXGustoAPIVersion.md)                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `departmentUpdateRequestBody`                                                                                                                                                                                                | [DepartmentUpdateRequestBody](../../models/components/DepartmentUpdateRequestBody.md)                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
@@ -448,6 +462,8 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/ConflictErrorObject            | 409                                          | application/json                             |
 | models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
@@ -457,7 +473,6 @@ Delete a department. You cannot delete a department until all employees and cont
 
 scope: `departments:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="java" operationID="delete-department" method="delete" path="/v1/departments/{department_uuid}" -->
@@ -465,14 +480,15 @@ scope: `departments:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.DeleteDepartmentHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteDepartmentResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -480,7 +496,7 @@ public class Application {
 
         DeleteDepartmentResponse res = sdk.departments().delete()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .xGustoAPIVersion(DeleteDepartmentHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         // handle response
@@ -493,7 +509,7 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `departmentUuid`                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the department                                                                                                                                                                                                   |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<DeleteDepartmentHeaderXGustoAPIVersion>](../../models/operations/DeleteDepartmentHeaderXGustoAPIVersion.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -503,6 +519,7 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
 | models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
@@ -512,7 +529,6 @@ Add employees and contractors to a department
 
 scope: `departments:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="java" operationID="put-add-people-to-department" method="put" path="/v1/departments/{department_uuid}/add" example="Example" -->
@@ -520,14 +536,16 @@ scope: `departments:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.PutAddPeopleToDepartmentRequestBody;
+import com.gusto.embedded_api.models.components.DepartmentPeopleRequestBody;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutAddPeopleToDepartmentHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutAddPeopleToDepartmentResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -535,8 +553,9 @@ public class Application {
 
         PutAddPeopleToDepartmentResponse res = sdk.departments().addPeople()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PutAddPeopleToDepartmentRequestBody.builder()
+                .xGustoAPIVersion(PutAddPeopleToDepartmentHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .departmentPeopleRequestBody(DepartmentPeopleRequestBody.builder()
+                    .version("56d00c178bc7393b2a206ed6a86afcb4")
                     .build())
                 .call();
 
@@ -552,8 +571,8 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `departmentUuid`                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the department                                                                                                                                                                                                   |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PutAddPeopleToDepartmentRequestBody](../../models/operations/PutAddPeopleToDepartmentRequestBody.md)                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutAddPeopleToDepartmentHeaderXGustoAPIVersion>](../../models/operations/PutAddPeopleToDepartmentHeaderXGustoAPIVersion.md)                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `departmentPeopleRequestBody`                                                                                                                                                                                                | [DepartmentPeopleRequestBody](../../models/components/DepartmentPeopleRequestBody.md)                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
@@ -561,16 +580,17 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
 ## removePeople
 
 Remove employees and contractors from a department
 
 scope: `departments:write`
-
 
 ### Example Usage
 
@@ -579,14 +599,16 @@ scope: `departments:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
-import com.gusto.embedded_api.models.operations.PutRemovePeopleFromDepartmentRequestBody;
+import com.gusto.embedded_api.models.components.DepartmentPeopleRequestBody;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
+import com.gusto.embedded_api.models.operations.PutRemovePeopleFromDepartmentHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutRemovePeopleFromDepartmentResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -594,8 +616,9 @@ public class Application {
 
         PutRemovePeopleFromDepartmentResponse res = sdk.departments().removePeople()
                 .departmentUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PutRemovePeopleFromDepartmentRequestBody.builder()
+                .xGustoAPIVersion(PutRemovePeopleFromDepartmentHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .departmentPeopleRequestBody(DepartmentPeopleRequestBody.builder()
+                    .version("56d00c178bc7393b2a206ed6a86afcb4")
                     .build())
                 .call();
 
@@ -611,8 +634,8 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `departmentUuid`                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the department                                                                                                                                                                                                   |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PutRemovePeopleFromDepartmentRequestBody](../../models/operations/PutRemovePeopleFromDepartmentRequestBody.md)                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutRemovePeopleFromDepartmentHeaderXGustoAPIVersion>](../../models/operations/PutRemovePeopleFromDepartmentHeaderXGustoAPIVersion.md)                                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `departmentPeopleRequestBody`                                                                                                                                                                                                | [DepartmentPeopleRequestBody](../../models/components/DepartmentPeopleRequestBody.md)                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
@@ -620,6 +643,8 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
+| models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
+| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |

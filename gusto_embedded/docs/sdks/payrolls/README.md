@@ -13,6 +13,7 @@
 * [prepare](#prepare) - Prepare a payroll for update
 * [getReceipt](#getreceipt) - Get a single payroll receipt
 * [getBlockers](#getblockers) - Get all payroll blockers for a company
+* [skip](#skip) - Skip a payroll
 * [calculateGrossUp](#calculategrossup) - Calculate gross up for a payroll
 * [calculate](#calculate) - Calculate a payroll
 * [submit](#submit) - Submit payroll
@@ -170,12 +171,13 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdPayrollReversalsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -186,8 +188,8 @@ public class Application {
                 .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
-        if (res.payrollReversal().isPresent()) {
-            System.out.println(res.payrollReversal().get());
+        if (res.payrollReversalList().isPresent()) {
+            System.out.println(res.payrollReversalList().get());
         }
     }
 }
@@ -208,9 +210,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## get
 
@@ -595,6 +598,67 @@ public class Application {
 | models/errors/NotFoundErrorObject | 404                               | application/json                  |
 | models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
+## skip
+
+Submits a $0 payroll for employees associated with the pay schedule to skip payroll. This submission is asynchronous and a successful request responds with a 202 HTTP status. Upon success, the payroll is transitioned to the `processed` state.
+
+If the company is blocked from running payroll due to issues like incomplete setup, missing information or other compliance issues, the response will be 422 Unprocessable Entity with a categorization of the blockers as described in the error responses.
+
+scope: `payrolls:run`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="post-companies-payroll-skip-company_uuid" method="post" path="/v1/companies/{company_uuid}/payrolls/skip" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.errors.PayrollBlockersError;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, PayrollBlockersError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostCompaniesPayrollSkipCompanyUuidResponse res = sdk.payrolls().skip()
+                .xGustoAPIVersion(PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
+                .requestBody(PostCompaniesPayrollSkipCompanyUuidRequestBody.builder()
+                    .payrollType(PayrollType.TRANSITION_FROM_OLD_PAY_SCHEDULE)
+                    .build())
+                .call();
+
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion>](../../models/operations/PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion.md)                                                                 | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `requestBody`                                                                                                                                                                                                                | [PostCompaniesPayrollSkipCompanyUuidRequestBody](../../models/operations/PostCompaniesPayrollSkipCompanyUuidRequestBody.md)                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PostCompaniesPayrollSkipCompanyUuidResponse](../../models/operations/PostCompaniesPayrollSkipCompanyUuidResponse.md)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| models/errors/NotFoundErrorObject  | 404                                | application/json                   |
+| models/errors/PayrollBlockersError | 422                                | application/json                   |
+| models/errors/APIException         | 4XX, 5XX                           | \*/\*                              |
+
 ## calculateGrossUp
 
 Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only applicable to off-cycle unprocessed payrolls.
@@ -942,7 +1006,9 @@ public class Application {
 
 ## getPayStubs
 
-Get an employee's pay stubs
+Get an employee's pay stubs.
+
+Results are returned in reverse chronological order (newest first).
 
 scope: `pay_stubs:read`
 
@@ -1011,23 +1077,26 @@ scope: `generated_documents:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.PrintablePayrollChecksBody;
+import com.gusto.embedded_api.models.components.PrintingFormat;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse res = sdk.payrolls().generatePrintableChecks()
+                .xGustoAPIVersion(PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .payrollUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody.builder()
+                .printablePayrollChecksBody(PrintablePayrollChecksBody.builder()
                     .printingFormat(PrintingFormat.TOP)
                     .build())
                 .call();
@@ -1045,23 +1114,26 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.PrintablePayrollChecksBody;
+import com.gusto.embedded_api.models.components.PrintingFormat;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse res = sdk.payrolls().generatePrintableChecks()
+                .xGustoAPIVersion(PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .payrollUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody.builder()
+                .printablePayrollChecksBody(PrintablePayrollChecksBody.builder()
                     .printingFormat(PrintingFormat.TOP)
                     .build())
                 .call();
@@ -1079,23 +1151,26 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.PrintablePayrollChecksBody;
+import com.gusto.embedded_api.models.components.PrintingFormat;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse res = sdk.payrolls().generatePrintableChecks()
+                .xGustoAPIVersion(PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .payrollUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody.builder()
+                .printablePayrollChecksBody(PrintablePayrollChecksBody.builder()
                     .printingFormat(PrintingFormat.TOP)
                     .build())
                 .call();
@@ -1113,23 +1188,26 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.VersionHeader;
+import com.gusto.embedded_api.models.components.PrintablePayrollChecksBody;
+import com.gusto.embedded_api.models.components.PrintingFormat;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityErrorObject;
-import com.gusto.embedded_api.models.operations.*;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws UnprocessableEntityErrorObject, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse res = sdk.payrolls().generatePrintableChecks()
+                .xGustoAPIVersion(PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .payrollUuid("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .requestBody(PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody.builder()
+                .printablePayrollChecksBody(PrintablePayrollChecksBody.builder()
                     .printingFormat(PrintingFormat.TOP)
                     .build())
                 .call();
@@ -1145,9 +1223,9 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion>](../../models/operations/PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion.md)     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `payrollUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the payroll                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody](../../models/operations/PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody.md)                                      | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `printablePayrollChecksBody`                                                                                                                                                                                                 | [PrintablePayrollChecksBody](../../models/components/PrintablePayrollChecksBody.md)                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
@@ -1157,6 +1235,7 @@ public class Application {
 
 | Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/NotFoundErrorObject            | 404                                          | application/json                             |
 | models/errors/UnprocessableEntityErrorObject | 422                                          | application/json                             |
 | models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |
 
