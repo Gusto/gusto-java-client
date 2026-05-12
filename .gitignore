@@ -3,8 +3,10 @@
 # Ignore Gradle build output directory
 build
 bin/
+!bin/setup-local
 # Ignore IDE-specific configs
 .project
 .settings/
 .DS_Store
 .speakeasy/reports
+.speakeasy/workflow.local.yaml
