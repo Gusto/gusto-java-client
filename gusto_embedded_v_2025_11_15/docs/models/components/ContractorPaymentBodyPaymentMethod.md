@@ -1,0 +1,18 @@
+# ContractorPaymentBodyPaymentMethod
+
+## Example Usage
+
+```java
+import org.openapis.openapi.models.components.ContractorPaymentBodyPaymentMethod;
+
+ContractorPaymentBodyPaymentMethod value = ContractorPaymentBodyPaymentMethod.DIRECT_DEPOSIT;
+```
+
+
+## Values
+
+| Name                 | Value                |
+| -------------------- | -------------------- |
+| `DIRECT_DEPOSIT`     | Direct Deposit       |
+| `CHECK`              | Check                |
+| `HISTORICAL_PAYMENT` | Historical Payment   |

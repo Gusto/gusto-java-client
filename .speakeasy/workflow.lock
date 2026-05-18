@@ -1,20 +1,34 @@
-speakeasyVersion: 1.761.1
+speakeasyVersion: 1.763.1
 sources:
     GustoEmbedded-OAS:
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:c6f707099f79dedb9c265fb0374b8f0eaccbbc0d0e90afa298a5825510f326bd
-        sourceBlobDigest: sha256:d89ac8c83e443e6d0c35f3087c1768e619a9d2dbf246516f022796881fe85699
+        sourceRevisionDigest: sha256:a1f972b80e5c4a2374d4758bd1f678c880fcc06ebcd6129dbcd83f9b97773037
+        sourceBlobDigest: sha256:c3002f5a44afacc5652cfe528e3b440312951787f508792d5ac455467de2c764
         tags:
             - latest
             - "2025-06-15"
+    GustoEmbedded-OAS-v2025-11-15:
+        sourceNamespace: gusto-embedded-oas-v2025-11-15
+        sourceRevisionDigest: sha256:abcaa956bb1a0221f15e7fccecf443c48fe60e1d425b5e9b5cd40106f31f70c6
+        sourceBlobDigest: sha256:a903ddd4b02dbac0dc4cfd107fff2c665669459a8d01e8047974609dd10075c2
+        tags:
+            - latest
+            - "2025-11-15"
 targets:
     gusto-embedded:
         source: GustoEmbedded-OAS
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:c6f707099f79dedb9c265fb0374b8f0eaccbbc0d0e90afa298a5825510f326bd
-        sourceBlobDigest: sha256:d89ac8c83e443e6d0c35f3087c1768e619a9d2dbf246516f022796881fe85699
+        sourceRevisionDigest: sha256:a1f972b80e5c4a2374d4758bd1f678c880fcc06ebcd6129dbcd83f9b97773037
+        sourceBlobDigest: sha256:c3002f5a44afacc5652cfe528e3b440312951787f508792d5ac455467de2c764
         codeSamplesNamespace: gusto-embedded-oas-java-code-samples
-        codeSamplesRevisionDigest: sha256:3cf569ffe6f12a56c15d44e51ef36494851a0510c9fb8fba23d6b545508b3850
+        codeSamplesRevisionDigest: sha256:455d84dbf5456bd7d4bd1c088495cbade9fa358282e1ab78c8b3c67de2086062
+    gusto-embedded-v2025-11-15:
+        source: GustoEmbedded-OAS-v2025-11-15
+        sourceNamespace: gusto-embedded-oas-v2025-11-15
+        sourceRevisionDigest: sha256:abcaa956bb1a0221f15e7fccecf443c48fe60e1d425b5e9b5cd40106f31f70c6
+        sourceBlobDigest: sha256:a903ddd4b02dbac0dc4cfd107fff2c665669459a8d01e8047974609dd10075c2
+        codeSamplesNamespace: gusto-embedded-oas-java-code-samples-v2025-11-15-code-samples
+        codeSamplesRevisionDigest: sha256:131645fa2790b5a9d5b1e7937d47714f162011c8633c51ac5e474d0a64334dd2
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -30,6 +44,17 @@ workflow:
                   authSecret: $openapi_doc_auth_token
             registry:
                 location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
+        GustoEmbedded-OAS-v2025-11-15:
+            inputs:
+                - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2025-11-15.embedded.yaml
+                  authHeader: Authorization
+                  authSecret: $openapi_doc_auth_token
+            overlays:
+                - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/.speakeasy/speakeasy-modifications-overlay.yaml
+                  authHeader: Authorization
+                  authSecret: $openapi_doc_auth_token
+            registry:
+                location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-v2025-11-15
     targets:
         gusto-embedded:
             target: java
@@ -38,6 +63,16 @@ workflow:
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-java-code-samples
+                labelOverride:
+                    fixedValue: Java (SDK)
+                blocking: false
+        gusto-embedded-v2025-11-15:
+            target: java
+            source: GustoEmbedded-OAS-v2025-11-15
+            output: ./gusto_embedded_v_2025_11_15
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-java-code-samples-v2025-11-15-code-samples
                 labelOverride:
                     fixedValue: Java (SDK)
                 blocking: false
