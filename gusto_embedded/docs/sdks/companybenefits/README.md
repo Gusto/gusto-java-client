@@ -800,8 +800,7 @@ scope: `employee_benefits:write`
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.EmployeeBenefitBulkUpdateRequest;
-import com.gusto.embedded_api.models.components.EmployeeBenefitForCompanyBenefit;
+import com.gusto.embedded_api.models.components.*;
 import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
 import com.gusto.embedded_api.models.operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion;
@@ -824,6 +823,7 @@ public class Application {
                     .employeeBenefits(List.of(
                         EmployeeBenefitForCompanyBenefit.builder()
                             .employeeUuid("<id>")
+                            .deductionReducesTaxableIncome(EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome.UNSET)
                             .build()))
                     .build())
                 .call();
@@ -841,8 +841,7 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.EmployeeBenefitBulkUpdateRequest;
-import com.gusto.embedded_api.models.components.EmployeeBenefitForCompanyBenefit;
+import com.gusto.embedded_api.models.components.*;
 import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
 import com.gusto.embedded_api.models.operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion;
@@ -867,6 +866,7 @@ public class Application {
                             .employeeUuid("8f9f3f68-8fd3-499d-ade7-4a052e56494e")
                             .version("09j3d29jqdpj92109j9j2d90dq")
                             .employeeDeduction("250.00")
+                            .deductionReducesTaxableIncome(EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome.UNSET)
                             .build()))
                     .build())
                 .call();
@@ -884,8 +884,7 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.EmployeeBenefitBulkUpdateRequest;
-import com.gusto.embedded_api.models.components.EmployeeBenefitForCompanyBenefit;
+import com.gusto.embedded_api.models.components.*;
 import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
 import com.gusto.embedded_api.models.operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion;
@@ -908,6 +907,7 @@ public class Application {
                     .employeeBenefits(List.of(
                         EmployeeBenefitForCompanyBenefit.builder()
                             .employeeUuid("<id>")
+                            .deductionReducesTaxableIncome(EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome.UNSET)
                             .build()))
                     .build())
                 .call();
@@ -925,8 +925,7 @@ public class Application {
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.EmployeeBenefitBulkUpdateRequest;
-import com.gusto.embedded_api.models.components.EmployeeBenefitForCompanyBenefit;
+import com.gusto.embedded_api.models.components.*;
 import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
 import com.gusto.embedded_api.models.operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion;
@@ -949,6 +948,7 @@ public class Application {
                     .employeeBenefits(List.of(
                         EmployeeBenefitForCompanyBenefit.builder()
                             .employeeUuid("<id>")
+                            .deductionReducesTaxableIncome(EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome.UNSET)
                             .build()))
                     .build())
                 .call();

@@ -583,8 +583,7 @@ scope: `employee_benefits:write`
 package hello.world;
 
 import com.gusto.embedded_api_v_2025_11_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2025_11_15.models.components.EmployeeBenefitBulkUpdateRequest;
-import com.gusto.embedded_api_v_2025_11_15.models.components.EmployeeBenefitForCompanyBenefit;
+import com.gusto.embedded_api_v_2025_11_15.models.components.*;
 import com.gusto.embedded_api_v_2025_11_15.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api_v_2025_11_15.models.errors.UnprocessableEntityError;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsHeaderXGustoAPIVersion;
@@ -607,6 +606,7 @@ public class Application {
                     .employeeBenefits(List.of(
                         EmployeeBenefitForCompanyBenefit.builder()
                             .employeeUuid("<id>")
+                            .deductionReducesTaxableIncome(EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome.UNSET)
                             .build()))
                     .build())
                 .call();
