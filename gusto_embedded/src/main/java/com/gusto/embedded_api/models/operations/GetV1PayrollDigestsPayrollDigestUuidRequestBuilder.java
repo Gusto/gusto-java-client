@@ -17,11 +17,11 @@ import java.util.Optional;
 public class GetV1PayrollDigestsPayrollDigestUuidRequestBuilder {
 
     private GetV1PayrollDigestsPayrollDigestUuidSecurity security;
-    private String payrollDigestUuid;
     private Optional<? extends GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion>>() {});
+    private String payrollDigestUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -32,12 +32,6 @@ public class GetV1PayrollDigestsPayrollDigestUuidRequestBuilder {
     public GetV1PayrollDigestsPayrollDigestUuidRequestBuilder security(GetV1PayrollDigestsPayrollDigestUuidSecurity security) {
         Utils.checkNotNull(security, "security");
         this.security = security;
-        return this;
-    }
-
-    public GetV1PayrollDigestsPayrollDigestUuidRequestBuilder payrollDigestUuid(String payrollDigestUuid) {
-        Utils.checkNotNull(payrollDigestUuid, "payrollDigestUuid");
-        this.payrollDigestUuid = payrollDigestUuid;
         return this;
     }
                 
@@ -53,14 +47,20 @@ public class GetV1PayrollDigestsPayrollDigestUuidRequestBuilder {
         return this;
     }
 
+    public GetV1PayrollDigestsPayrollDigestUuidRequestBuilder payrollDigestUuid(String payrollDigestUuid) {
+        Utils.checkNotNull(payrollDigestUuid, "payrollDigestUuid");
+        this.payrollDigestUuid = payrollDigestUuid;
+        return this;
+    }
+
 
     private GetV1PayrollDigestsPayrollDigestUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1PayrollDigestsPayrollDigestUuidRequest request = new GetV1PayrollDigestsPayrollDigestUuidRequest(payrollDigestUuid,
-            xGustoAPIVersion);
+        GetV1PayrollDigestsPayrollDigestUuidRequest request = new GetV1PayrollDigestsPayrollDigestUuidRequest(xGustoAPIVersion,
+            payrollDigestUuid);
 
         return request;
     }

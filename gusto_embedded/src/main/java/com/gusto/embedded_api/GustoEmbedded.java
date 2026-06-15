@@ -650,7 +650,7 @@ public class GustoEmbedded {
         return new Builder();
     }
 
-    public GustoEmbedded(SDKConfiguration sdkConfiguration) {
+    private GustoEmbedded(SDKConfiguration sdkConfiguration) {
         sdkConfiguration.initialize();
         this.introspection = new Introspection(sdkConfiguration);
         this.companies = new Companies(sdkConfiguration);

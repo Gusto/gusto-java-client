@@ -71,6 +71,17 @@ public class PayrollUpdateEmployeeCompensations {
     private Optional<? extends List<PayrollUpdateDeductions>> deductions;
 
     /**
+     * Optional per-payroll one-time custom withholdings for federal and/or state income tax.
+     * When provided, the supplied override takes precedence over any persistent withholding schedule for
+     * this run.
+     * This field is in limited release; if your application does not have access, requests including it
+     * are silently ignored.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("custom_withholdings")
+    private Optional<? extends CustomWithholdings> customWithholdings;
+
+    /**
      * An array of all paid time off the employee is eligible for this pay period. Each paid time off
      * object can be the name or the specific policy_uuid.
      */
@@ -95,6 +106,7 @@ public class PayrollUpdateEmployeeCompensations {
             @JsonProperty("fixed_compensations") Optional<? extends List<PayrollUpdateFixedCompensations>> fixedCompensations,
             @JsonProperty("hourly_compensations") Optional<? extends List<PayrollUpdateHourlyCompensations>> hourlyCompensations,
             @JsonProperty("deductions") Optional<? extends List<PayrollUpdateDeductions>> deductions,
+            @JsonProperty("custom_withholdings") Optional<? extends CustomWithholdings> customWithholdings,
             @JsonProperty("paid_time_off") Optional<? extends List<PayrollUpdatePaidTimeOff>> paidTimeOff,
             @JsonProperty("reimbursements") Optional<? extends List<PayrollUpdateReimbursements>> reimbursements) {
         Utils.checkNotNull(employeeUuid, "employeeUuid");
@@ -105,6 +117,7 @@ public class PayrollUpdateEmployeeCompensations {
         Utils.checkNotNull(fixedCompensations, "fixedCompensations");
         Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
         Utils.checkNotNull(deductions, "deductions");
+        Utils.checkNotNull(customWithholdings, "customWithholdings");
         Utils.checkNotNull(paidTimeOff, "paidTimeOff");
         Utils.checkNotNull(reimbursements, "reimbursements");
         this.employeeUuid = employeeUuid;
@@ -115,6 +128,7 @@ public class PayrollUpdateEmployeeCompensations {
         this.fixedCompensations = fixedCompensations;
         this.hourlyCompensations = hourlyCompensations;
         this.deductions = deductions;
+        this.customWithholdings = customWithholdings;
         this.paidTimeOff = paidTimeOff;
         this.reimbursements = reimbursements;
     }
@@ -123,7 +137,7 @@ public class PayrollUpdateEmployeeCompensations {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -185,6 +199,19 @@ public class PayrollUpdateEmployeeCompensations {
     @JsonIgnore
     public Optional<List<PayrollUpdateDeductions>> deductions() {
         return (Optional<List<PayrollUpdateDeductions>>) deductions;
+    }
+
+    /**
+     * Optional per-payroll one-time custom withholdings for federal and/or state income tax.
+     * When provided, the supplied override takes precedence over any persistent withholding schedule for
+     * this run.
+     * This field is in limited release; if your application does not have access, requests including it
+     * are silently ignored.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<CustomWithholdings> customWithholdings() {
+        return (Optional<CustomWithholdings>) customWithholdings;
     }
 
     /**
@@ -350,6 +377,33 @@ public class PayrollUpdateEmployeeCompensations {
     }
 
     /**
+     * Optional per-payroll one-time custom withholdings for federal and/or state income tax.
+     * When provided, the supplied override takes precedence over any persistent withholding schedule for
+     * this run.
+     * This field is in limited release; if your application does not have access, requests including it
+     * are silently ignored.
+     */
+    public PayrollUpdateEmployeeCompensations withCustomWithholdings(CustomWithholdings customWithholdings) {
+        Utils.checkNotNull(customWithholdings, "customWithholdings");
+        this.customWithholdings = Optional.ofNullable(customWithholdings);
+        return this;
+    }
+
+
+    /**
+     * Optional per-payroll one-time custom withholdings for federal and/or state income tax.
+     * When provided, the supplied override takes precedence over any persistent withholding schedule for
+     * this run.
+     * This field is in limited release; if your application does not have access, requests including it
+     * are silently ignored.
+     */
+    public PayrollUpdateEmployeeCompensations withCustomWithholdings(Optional<? extends CustomWithholdings> customWithholdings) {
+        Utils.checkNotNull(customWithholdings, "customWithholdings");
+        this.customWithholdings = customWithholdings;
+        return this;
+    }
+
+    /**
      * An array of all paid time off the employee is eligible for this pay period. Each paid time off
      * object can be the name or the specific policy_uuid.
      */
@@ -407,6 +461,7 @@ public class PayrollUpdateEmployeeCompensations {
             Utils.enhancedDeepEquals(this.fixedCompensations, other.fixedCompensations) &&
             Utils.enhancedDeepEquals(this.hourlyCompensations, other.hourlyCompensations) &&
             Utils.enhancedDeepEquals(this.deductions, other.deductions) &&
+            Utils.enhancedDeepEquals(this.customWithholdings, other.customWithholdings) &&
             Utils.enhancedDeepEquals(this.paidTimeOff, other.paidTimeOff) &&
             Utils.enhancedDeepEquals(this.reimbursements, other.reimbursements);
     }
@@ -416,8 +471,8 @@ public class PayrollUpdateEmployeeCompensations {
         return Utils.enhancedHash(
             employeeUuid, version, excluded,
             paymentMethod, memo, fixedCompensations,
-            hourlyCompensations, deductions, paidTimeOff,
-            reimbursements);
+            hourlyCompensations, deductions, customWithholdings,
+            paidTimeOff, reimbursements);
     }
     
     @Override
@@ -431,6 +486,7 @@ public class PayrollUpdateEmployeeCompensations {
                 "fixedCompensations", fixedCompensations,
                 "hourlyCompensations", hourlyCompensations,
                 "deductions", deductions,
+                "customWithholdings", customWithholdings,
                 "paidTimeOff", paidTimeOff,
                 "reimbursements", reimbursements);
     }
@@ -453,6 +509,8 @@ public class PayrollUpdateEmployeeCompensations {
         private Optional<? extends List<PayrollUpdateHourlyCompensations>> hourlyCompensations = Optional.empty();
 
         private Optional<? extends List<PayrollUpdateDeductions>> deductions = Optional.empty();
+
+        private Optional<? extends CustomWithholdings> customWithholdings = Optional.empty();
 
         private Optional<? extends List<PayrollUpdatePaidTimeOff>> paidTimeOff = Optional.empty();
 
@@ -602,6 +660,33 @@ public class PayrollUpdateEmployeeCompensations {
 
 
         /**
+         * Optional per-payroll one-time custom withholdings for federal and/or state income tax.
+         * When provided, the supplied override takes precedence over any persistent withholding schedule for
+         * this run.
+         * This field is in limited release; if your application does not have access, requests including it
+         * are silently ignored.
+         */
+        public Builder customWithholdings(CustomWithholdings customWithholdings) {
+            Utils.checkNotNull(customWithholdings, "customWithholdings");
+            this.customWithholdings = Optional.ofNullable(customWithholdings);
+            return this;
+        }
+
+        /**
+         * Optional per-payroll one-time custom withholdings for federal and/or state income tax.
+         * When provided, the supplied override takes precedence over any persistent withholding schedule for
+         * this run.
+         * This field is in limited release; if your application does not have access, requests including it
+         * are silently ignored.
+         */
+        public Builder customWithholdings(Optional<? extends CustomWithholdings> customWithholdings) {
+            Utils.checkNotNull(customWithholdings, "customWithholdings");
+            this.customWithholdings = customWithholdings;
+            return this;
+        }
+
+
+        /**
          * An array of all paid time off the employee is eligible for this pay period. Each paid time off
          * object can be the name or the specific policy_uuid.
          */
@@ -645,8 +730,8 @@ public class PayrollUpdateEmployeeCompensations {
             return new PayrollUpdateEmployeeCompensations(
                 employeeUuid, version, excluded,
                 paymentMethod, memo, fixedCompensations,
-                hourlyCompensations, deductions, paidTimeOff,
-                reimbursements);
+                hourlyCompensations, deductions, customWithholdings,
+                paidTimeOff, reimbursements);
         }
 
     }

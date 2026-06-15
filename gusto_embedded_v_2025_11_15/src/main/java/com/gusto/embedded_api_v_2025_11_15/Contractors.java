@@ -899,7 +899,7 @@ public class Contractors {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse getV1CompaniesCompanyIdContractorsPaymentDetails(String companyId) {
-        return getV1CompaniesCompanyIdContractorsPaymentDetails(companyId, Optional.empty(), Optional.empty(),
+        return getV1CompaniesCompanyIdContractorsPaymentDetails(Optional.empty(), companyId, Optional.empty(),
             Optional.empty());
     }
 
@@ -937,23 +937,23 @@ public class Contractors {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company. This identifies the company whose contractor payment details you want to retrieve.
      * @param contractorUuid Optional filter to get payment details for a specific contractor. When provided, the response will only include payment details for this contractor.
      * @param contractorPaymentGroupUuid Optional filter to get payment details for contractors in a specific payment group. When provided, the response will only include payment details for contractors in this group.
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse getV1CompaniesCompanyIdContractorsPaymentDetails(
-            String companyId, Optional<String> contractorUuid,
-            Optional<String> contractorPaymentGroupUuid, Optional<? extends GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<? extends GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<String> contractorUuid, Optional<String> contractorPaymentGroupUuid) {
         GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest request =
             GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .contractorUuid(contractorUuid)
                 .contractorPaymentGroupUuid(contractorPaymentGroupUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest, GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse> operation
               = new GetV1CompaniesCompanyIdContractorsPaymentDetails.Sync(sdkConfiguration, _headers);
@@ -1007,7 +1007,7 @@ public class Contractors {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1ContractorsContractorUuidRehireResponse postV1ContractorsContractorUuidRehire(String contractorUuid) {
-        return postV1ContractorsContractorUuidRehire(contractorUuid, Optional.empty(), Optional.empty());
+        return postV1ContractorsContractorUuidRehire(Optional.empty(), contractorUuid, Optional.empty());
     }
 
     /**
@@ -1028,20 +1028,20 @@ public class Contractors {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param contractorUuid The UUID of the contractor
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorUuid The UUID of the contractor
      * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1ContractorsContractorUuidRehireResponse postV1ContractorsContractorUuidRehire(
-            String contractorUuid, Optional<? extends PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
             Optional<? extends PostV1ContractorsContractorUuidRehireRequestBody> requestBody) {
         PostV1ContractorsContractorUuidRehireRequest request =
             PostV1ContractorsContractorUuidRehireRequest
                 .builder()
-                .contractorUuid(contractorUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .contractorUuid(contractorUuid)
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1ContractorsContractorUuidRehireRequest, PostV1ContractorsContractorUuidRehireResponse> operation
@@ -1098,7 +1098,7 @@ public class Contractors {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1ContractorsContractorUuidRehireResponse deleteV1ContractorsContractorUuidRehire(String contractorUuid) {
-        return deleteV1ContractorsContractorUuidRehire(contractorUuid, Optional.empty());
+        return deleteV1ContractorsContractorUuidRehire(Optional.empty(), contractorUuid);
     }
 
     /**
@@ -1120,17 +1120,17 @@ public class Contractors {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param contractorUuid The UUID of the contractor
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorUuid The UUID of the contractor
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public DeleteV1ContractorsContractorUuidRehireResponse deleteV1ContractorsContractorUuidRehire(String contractorUuid, Optional<? extends DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public DeleteV1ContractorsContractorUuidRehireResponse deleteV1ContractorsContractorUuidRehire(Optional<? extends DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid) {
         DeleteV1ContractorsContractorUuidRehireRequest request =
             DeleteV1ContractorsContractorUuidRehireRequest
                 .builder()
-                .contractorUuid(contractorUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .contractorUuid(contractorUuid)
                 .build();
         RequestOperation<DeleteV1ContractorsContractorUuidRehireRequest, DeleteV1ContractorsContractorUuidRehireResponse> operation
               = new DeleteV1ContractorsContractorUuidRehire.Sync(sdkConfiguration, _headers);
@@ -1186,7 +1186,7 @@ public class Contractors {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1ContractorsContractorUuidTerminationResponse postV1ContractorsContractorUuidTermination(String contractorUuid) {
-        return postV1ContractorsContractorUuidTermination(contractorUuid, Optional.empty(), Optional.empty());
+        return postV1ContractorsContractorUuidTermination(Optional.empty(), contractorUuid, Optional.empty());
     }
 
     /**
@@ -1208,20 +1208,20 @@ public class Contractors {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param contractorUuid The UUID of the contractor
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorUuid The UUID of the contractor
      * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1ContractorsContractorUuidTerminationResponse postV1ContractorsContractorUuidTermination(
-            String contractorUuid, Optional<? extends PostV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
             Optional<? extends PostV1ContractorsContractorUuidTerminationRequestBody> requestBody) {
         PostV1ContractorsContractorUuidTerminationRequest request =
             PostV1ContractorsContractorUuidTerminationRequest
                 .builder()
-                .contractorUuid(contractorUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .contractorUuid(contractorUuid)
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1ContractorsContractorUuidTerminationRequest, PostV1ContractorsContractorUuidTerminationResponse> operation
@@ -1278,7 +1278,7 @@ public class Contractors {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1ContractorsContractorUuidTerminationResponse deleteV1ContractorsContractorUuidTermination(String contractorUuid) {
-        return deleteV1ContractorsContractorUuidTermination(contractorUuid, Optional.empty());
+        return deleteV1ContractorsContractorUuidTermination(Optional.empty(), contractorUuid);
     }
 
     /**
@@ -1300,17 +1300,17 @@ public class Contractors {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param contractorUuid The UUID of the contractor
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorUuid The UUID of the contractor
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public DeleteV1ContractorsContractorUuidTerminationResponse deleteV1ContractorsContractorUuidTermination(String contractorUuid, Optional<? extends DeleteV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public DeleteV1ContractorsContractorUuidTerminationResponse deleteV1ContractorsContractorUuidTermination(Optional<? extends DeleteV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid) {
         DeleteV1ContractorsContractorUuidTerminationRequest request =
             DeleteV1ContractorsContractorUuidTerminationRequest
                 .builder()
-                .contractorUuid(contractorUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .contractorUuid(contractorUuid)
                 .build();
         RequestOperation<DeleteV1ContractorsContractorUuidTerminationRequest, DeleteV1ContractorsContractorUuidTerminationResponse> operation
               = new DeleteV1ContractorsContractorUuidTermination.Sync(sdkConfiguration, _headers);

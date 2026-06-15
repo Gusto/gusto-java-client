@@ -85,7 +85,7 @@ public class Notifications {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetNotificationsNotificationUuidResponse getDetails(String notificationUuid) {
-        return getDetails(notificationUuid, Optional.empty());
+        return getDetails(Optional.empty(), notificationUuid);
     }
 
     /**
@@ -106,17 +106,17 @@ public class Notifications {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param notificationUuid The notification entity_uuid
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param notificationUuid The notification entity_uuid
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetNotificationsNotificationUuidResponse getDetails(String notificationUuid, Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetNotificationsNotificationUuidResponse getDetails(Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String notificationUuid) {
         GetNotificationsNotificationUuidRequest request =
             GetNotificationsNotificationUuidRequest
                 .builder()
-                .notificationUuid(notificationUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .notificationUuid(notificationUuid)
                 .build();
         RequestOperation<GetNotificationsNotificationUuidRequest, GetNotificationsNotificationUuidResponse> operation
               = new GetNotificationsNotificationUuid.Sync(sdkConfiguration, _headers);

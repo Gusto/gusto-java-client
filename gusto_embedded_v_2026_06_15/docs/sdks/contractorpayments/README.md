@@ -12,6 +12,7 @@
 * [getReceipt](#getreceipt) - Get a single contractor payment receipt
 * [fund](#fund) - Fund a contractor payment [DEMO]
 * [getV1ContractorPaymentsContractorPaymentIdPdf](#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
+* [getV1ContractorsContractorUuidPayments](#getv1contractorscontractoruuidpayments) - Get contractor payments
 
 ## list
 
@@ -518,3 +519,66 @@ public class Application {
 | --------------------------------- | --------------------------------- | --------------------------------- |
 | models/errors/NotFoundErrorObject | 404                               | application/json                  |
 | models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
+
+## getV1ContractorsContractorUuidPayments
+
+Returns a paginated list of payments for a single contractor.
+
+Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction (e.g., `check_date:desc`).
+
+scope: `contractor_pay_stubs:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-contractors-contractor_uuid-payments" method="get" path="/v1/contractors/{contractor_uuid}/payments" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorsContractorUuidPaymentsRequest;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorsContractorUuidPaymentsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1ContractorsContractorUuidPaymentsRequest req = GetV1ContractorsContractorUuidPaymentsRequest.builder()
+                .contractorUuid("<id>")
+                .sortBy("check_date:desc")
+                .build();
+
+        GetV1ContractorsContractorUuidPaymentsResponse res = sdk.contractorPayments().getV1ContractorsContractorUuidPayments()
+                .request(req)
+                .call();
+
+        if (res.contractorPaymentListings().isPresent()) {
+            System.out.println(res.contractorPaymentListings().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                 | [GetV1ContractorsContractorUuidPaymentsRequest](../../models/operations/GetV1ContractorsContractorUuidPaymentsRequest.md) | :heavy_check_mark:                                                                                                        | The request object to use for the request.                                                                                |
+
+### Response
+
+**[GetV1ContractorsContractorUuidPaymentsResponse](../../models/operations/GetV1ContractorsContractorUuidPaymentsResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |

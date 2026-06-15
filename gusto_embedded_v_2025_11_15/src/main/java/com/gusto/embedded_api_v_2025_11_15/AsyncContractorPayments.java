@@ -20,6 +20,7 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1ContractorPaym
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1ContractorPaymentsContractorPaymentUuidFundRequest;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1ContractorsContractorUuidPaymentsRequest;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.PostV1CompaniesCompanyIdContractorPaymentsRequest;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.async.DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder;
@@ -36,6 +37,8 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1Contract
 import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1ContractorPaymentsContractorPaymentUuidFundResponse;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequestBuilder;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1ContractorsContractorUuidPaymentsRequestBuilder;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1ContractorsContractorUuidPaymentsResponse;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.async.PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.async.PostV1CompaniesCompanyIdContractorPaymentsResponse;
 import com.gusto.embedded_api_v_2025_11_15.operations.DeleteV1CompaniesCompanyIdContractorPaymentContractorPayment;
@@ -45,6 +48,7 @@ import com.gusto.embedded_api_v_2025_11_15.operations.GetV1CompaniesCompanyIdCon
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1ContractorPaymentsContractorPaymentIdPdf;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1ContractorPaymentsContractorPaymentUuidFund;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1ContractorPaymentsContractorPaymentUuidReceipt;
+import com.gusto.embedded_api_v_2025_11_15.operations.GetV1ContractorsContractorUuidPayments;
 import com.gusto.embedded_api_v_2025_11_15.operations.PostV1CompaniesCompanyIdContractorPayments;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import java.lang.String;
@@ -597,6 +601,47 @@ public class AsyncContractorPayments {
                 .build();
         AsyncRequestOperation<GetV1ContractorPaymentsContractorPaymentIdPdfRequest, GetV1ContractorPaymentsContractorPaymentIdPdfResponse> operation
               = new GetV1ContractorPaymentsContractorPaymentIdPdf.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get contractor payments
+     * 
+     * <p>Returns a paginated list of payments for a single contractor.
+     * 
+     * <p>Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction
+     * (e.g., `check_date:desc`).
+     * 
+     * <p>scope: `contractor_pay_stubs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetV1ContractorsContractorUuidPaymentsRequestBuilder getV1ContractorsContractorUuidPayments() {
+        return new GetV1ContractorsContractorUuidPaymentsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get contractor payments
+     * 
+     * <p>Returns a paginated list of payments for a single contractor.
+     * 
+     * <p>Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction
+     * (e.g., `check_date:desc`).
+     * 
+     * <p>scope: `contractor_pay_stubs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return {@code CompletableFuture<GetV1ContractorsContractorUuidPaymentsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1ContractorsContractorUuidPaymentsResponse> getV1ContractorsContractorUuidPayments(GetV1ContractorsContractorUuidPaymentsRequest request) {
+        AsyncRequestOperation<GetV1ContractorsContractorUuidPaymentsRequest, GetV1ContractorsContractorUuidPaymentsResponse> operation
+              = new GetV1ContractorsContractorUuidPayments.Async(sdkConfiguration, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

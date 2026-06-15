@@ -16,22 +16,16 @@ import java.util.Optional;
 
 public class GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder {
 
-    private String payrollUuid;
     private Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion>>() {});
+    private String payrollUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder payrollUuid(String payrollUuid) {
-        Utils.checkNotNull(payrollUuid, "payrollUuid");
-        this.payrollUuid = payrollUuid;
-        return this;
     }
                 
     public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder xGustoAPIVersion(GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,14 +40,20 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder {
         return this;
     }
 
+    public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder payrollUuid(String payrollUuid) {
+        Utils.checkNotNull(payrollUuid, "payrollUuid");
+        this.payrollUuid = payrollUuid;
+        return this;
+    }
+
 
     private GetV1PaymentReceiptsPayrollsPayrollUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1PaymentReceiptsPayrollsPayrollUuidRequest request = new GetV1PaymentReceiptsPayrollsPayrollUuidRequest(payrollUuid,
-            xGustoAPIVersion);
+        GetV1PaymentReceiptsPayrollsPayrollUuidRequest request = new GetV1PaymentReceiptsPayrollsPayrollUuidRequest(xGustoAPIVersion,
+            payrollUuid);
 
         return request;
     }

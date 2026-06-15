@@ -34,6 +34,9 @@ import com.gusto.embedded_api.models.operations.GetV1ContractorPaymentsContracto
 import com.gusto.embedded_api.models.operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest;
 import com.gusto.embedded_api.models.operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse;
+import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidPaymentsRequest;
+import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidPaymentsRequestBuilder;
+import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidPaymentsResponse;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentsRequest;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder;
@@ -45,6 +48,7 @@ import com.gusto.embedded_api.operations.GetV1CompaniesCompanyIdContractorPaymen
 import com.gusto.embedded_api.operations.GetV1ContractorPaymentsContractorPaymentIdPdf;
 import com.gusto.embedded_api.operations.GetV1ContractorPaymentsContractorPaymentUuidFund;
 import com.gusto.embedded_api.operations.GetV1ContractorPaymentsContractorPaymentUuidReceipt;
+import com.gusto.embedded_api.operations.GetV1ContractorsContractorUuidPayments;
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyIdContractorPayments;
 import com.gusto.embedded_api.utils.Headers;
 import java.lang.String;
@@ -596,6 +600,46 @@ public class ContractorPayments {
                 .build();
         RequestOperation<GetV1ContractorPaymentsContractorPaymentIdPdfRequest, GetV1ContractorPaymentsContractorPaymentIdPdfResponse> operation
               = new GetV1ContractorPaymentsContractorPaymentIdPdf.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get contractor payments
+     * 
+     * <p>Returns a paginated list of payments for a single contractor.
+     * 
+     * <p>Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction
+     * (e.g., `check_date:desc`).
+     * 
+     * <p>scope: `contractor_pay_stubs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1ContractorsContractorUuidPaymentsRequestBuilder getV1ContractorsContractorUuidPayments() {
+        return new GetV1ContractorsContractorUuidPaymentsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get contractor payments
+     * 
+     * <p>Returns a paginated list of payments for a single contractor.
+     * 
+     * <p>Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction
+     * (e.g., `check_date:desc`).
+     * 
+     * <p>scope: `contractor_pay_stubs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1ContractorsContractorUuidPaymentsResponse getV1ContractorsContractorUuidPayments(GetV1ContractorsContractorUuidPaymentsRequest request) {
+        RequestOperation<GetV1ContractorsContractorUuidPaymentsRequest, GetV1ContractorsContractorUuidPaymentsResponse> operation
+              = new GetV1ContractorsContractorUuidPayments.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -98,11 +98,12 @@ public class PayrollEmployeeCompensationsType {
     private JsonNullable<String> memo;
 
     /**
-     * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-     * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-     * greater than 0.00 are returned.
+     * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On
+     * regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead.
      * 
-     * <p>For an unprocessed payroll, all active fixed compensations are returned.
+     * <p>Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has
+     * been processed, only fixed compensations with a value greater than 0.00 are returned. For an
+     * unprocessed payroll, all active fixed compensations are returned.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fixed_compensations")
@@ -300,11 +301,12 @@ public class PayrollEmployeeCompensationsType {
     }
 
     /**
-     * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-     * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-     * greater than 0.00 are returned.
+     * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On
+     * regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead.
      * 
-     * <p>For an unprocessed payroll, all active fixed compensations are returned.
+     * <p>Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has
+     * been processed, only fixed compensations with a value greater than 0.00 are returned. For an
+     * unprocessed payroll, all active fixed compensations are returned.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -566,11 +568,12 @@ public class PayrollEmployeeCompensationsType {
     }
 
     /**
-     * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-     * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-     * greater than 0.00 are returned.
+     * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On
+     * regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead.
      * 
-     * <p>For an unprocessed payroll, all active fixed compensations are returned.
+     * <p>Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has
+     * been processed, only fixed compensations with a value greater than 0.00 are returned. For an
+     * unprocessed payroll, all active fixed compensations are returned.
      */
     public PayrollEmployeeCompensationsType withFixedCompensations(List<FixedCompensations> fixedCompensations) {
         Utils.checkNotNull(fixedCompensations, "fixedCompensations");
@@ -580,11 +583,12 @@ public class PayrollEmployeeCompensationsType {
 
 
     /**
-     * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-     * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-     * greater than 0.00 are returned.
+     * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On
+     * regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead.
      * 
-     * <p>For an unprocessed payroll, all active fixed compensations are returned.
+     * <p>Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has
+     * been processed, only fixed compensations with a value greater than 0.00 are returned. For an
+     * unprocessed payroll, all active fixed compensations are returned.
      */
     public PayrollEmployeeCompensationsType withFixedCompensations(Optional<? extends List<FixedCompensations>> fixedCompensations) {
         Utils.checkNotNull(fixedCompensations, "fixedCompensations");
@@ -1006,11 +1010,12 @@ public class PayrollEmployeeCompensationsType {
 
 
         /**
-         * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-         * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-         * greater than 0.00 are returned.
+         * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On
+         * regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead.
          * 
-         * <p>For an unprocessed payroll, all active fixed compensations are returned.
+         * <p>Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has
+         * been processed, only fixed compensations with a value greater than 0.00 are returned. For an
+         * unprocessed payroll, all active fixed compensations are returned.
          */
         public Builder fixedCompensations(List<FixedCompensations> fixedCompensations) {
             Utils.checkNotNull(fixedCompensations, "fixedCompensations");
@@ -1019,11 +1024,12 @@ public class PayrollEmployeeCompensationsType {
         }
 
         /**
-         * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-         * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-         * greater than 0.00 are returned.
+         * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On
+         * regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead.
          * 
-         * <p>For an unprocessed payroll, all active fixed compensations are returned.
+         * <p>Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has
+         * been processed, only fixed compensations with a value greater than 0.00 are returned. For an
+         * unprocessed payroll, all active fixed compensations are returned.
          */
         public Builder fixedCompensations(Optional<? extends List<FixedCompensations>> fixedCompensations) {
             Utils.checkNotNull(fixedCompensations, "fixedCompensations");

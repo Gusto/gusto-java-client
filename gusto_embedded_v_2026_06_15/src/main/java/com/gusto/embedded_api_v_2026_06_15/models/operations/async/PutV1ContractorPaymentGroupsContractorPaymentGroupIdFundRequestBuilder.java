@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder {
 
-    private String contractorPaymentGroupUuid;
     private Optional<? extends PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGustoAPIVersion>>() {});
+    private String contractorPaymentGroupUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
-        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
-        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
-        return this;
     }
                 
     public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder xGustoAPIVersion(PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuil
         return this;
     }
 
+    public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
+        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
+        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
+        return this;
+    }
+
 
     private PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest request = new PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest(contractorPaymentGroupUuid,
-            xGustoAPIVersion);
+        PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest request = new PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest(xGustoAPIVersion,
+            contractorPaymentGroupUuid);
 
         return request;
     }

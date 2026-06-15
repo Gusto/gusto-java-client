@@ -292,7 +292,7 @@ public class AsyncCompanies {
      * @return {@code CompletableFuture<GetV1CompaniesResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesResponse> get(String companyId) {
-        return get(companyId, Optional.empty());
+        return get(Optional.empty(), companyId);
     }
 
     /**
@@ -308,16 +308,16 @@ public class AsyncCompanies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyId The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @return {@code CompletableFuture<GetV1CompaniesResponse>} - The async response
      */
-    public CompletableFuture<GetV1CompaniesResponse> get(String companyId, Optional<? extends GetV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1CompaniesResponse> get(Optional<? extends GetV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
         GetV1CompaniesRequest request =
             GetV1CompaniesRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .build();
         AsyncRequestOperation<GetV1CompaniesRequest, GetV1CompaniesResponse> operation
               = new GetV1Companies.Async(sdkConfiguration, _headers);
@@ -355,7 +355,7 @@ public class AsyncCompanies {
      * @return {@code CompletableFuture<PutV1CompaniesResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesResponse> update(String companyId, PutV1CompaniesRequestBody requestBody) {
-        return update(companyId, Optional.empty(), requestBody);
+        return update(Optional.empty(), companyId, requestBody);
     }
 
     /**
@@ -367,19 +367,19 @@ public class AsyncCompanies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyId The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @param requestBody 
      * @return {@code CompletableFuture<PutV1CompaniesResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesResponse> update(
-            String companyId, Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             PutV1CompaniesRequestBody requestBody) {
         PutV1CompaniesRequest request =
             PutV1CompaniesRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1CompaniesRequest, PutV1CompaniesResponse> operation
@@ -488,7 +488,7 @@ public class AsyncCompanies {
      * @return {@code CompletableFuture<GetV1CompanyOnboardingStatusResponse>} - The async response
      */
     public CompletableFuture<GetV1CompanyOnboardingStatusResponse> getOnboardingStatus(String companyUuid) {
-        return getOnboardingStatus(companyUuid, Optional.empty(), Optional.empty());
+        return getOnboardingStatus(Optional.empty(), companyUuid, Optional.empty());
     }
 
     /**
@@ -501,20 +501,20 @@ public class AsyncCompanies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
      * @param additionalSteps Comma-delimited string of additional onboarding steps to include. Currently only supports the value "external_payroll".
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return {@code CompletableFuture<GetV1CompanyOnboardingStatusResponse>} - The async response
      */
     public CompletableFuture<GetV1CompanyOnboardingStatusResponse> getOnboardingStatus(
-            String companyUuid, Optional<String> additionalSteps,
-            Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            Optional<String> additionalSteps) {
         GetV1CompanyOnboardingStatusRequest request =
             GetV1CompanyOnboardingStatusRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyUuid(companyUuid)
                 .additionalSteps(additionalSteps)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         AsyncRequestOperation<GetV1CompanyOnboardingStatusRequest, GetV1CompanyOnboardingStatusResponse> operation
               = new GetV1CompanyOnboardingStatus.Async(sdkConfiguration, _headers);
@@ -585,7 +585,7 @@ public class AsyncCompanies {
      * @return {@code CompletableFuture<GetV1CompanyFinishOnboardingResponse>} - The async response
      */
     public CompletableFuture<GetV1CompanyFinishOnboardingResponse> finishOnboarding(String companyUuid) {
-        return finishOnboarding(companyUuid, Optional.empty());
+        return finishOnboarding(Optional.empty(), companyUuid);
     }
 
     /**
@@ -614,16 +614,16 @@ public class AsyncCompanies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @return {@code CompletableFuture<GetV1CompanyFinishOnboardingResponse>} - The async response
      */
-    public CompletableFuture<GetV1CompanyFinishOnboardingResponse> finishOnboarding(String companyUuid, Optional<? extends GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1CompanyFinishOnboardingResponse> finishOnboarding(Optional<? extends GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
         GetV1CompanyFinishOnboardingRequest request =
             GetV1CompanyFinishOnboardingRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .build();
         AsyncRequestOperation<GetV1CompanyFinishOnboardingRequest, GetV1CompanyFinishOnboardingResponse> operation
               = new GetV1CompanyFinishOnboarding.Async(sdkConfiguration, _headers);
@@ -680,7 +680,7 @@ public class AsyncCompanies {
      * @return {@code CompletableFuture<PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse>} - The async response
      */
     public CompletableFuture<PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse> migrate(String companyUuid, PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest) {
-        return migrate(companyUuid, Optional.empty(), partnerManagedCompanyMigrateRequest);
+        return migrate(Optional.empty(), companyUuid, partnerManagedCompanyMigrateRequest);
     }
 
     /**
@@ -701,20 +701,20 @@ public class AsyncCompanies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @param partnerManagedCompanyMigrateRequest Request body is optional in API version 2026-02-01 and later. The Terms of Service signer is resolved from the authenticated payroll-admin user; the previously required `email`, `ip_address`, and `external_user_id` parameters are no longer accepted.
      *         
      * @return {@code CompletableFuture<PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse>} - The async response
      */
     public CompletableFuture<PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse> migrate(
-            String companyUuid, Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest) {
         PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest request =
             PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .partnerManagedCompanyMigrateRequest(partnerManagedCompanyMigrateRequest)
                 .build();
         AsyncRequestOperation<PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest, PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse> operation
@@ -851,7 +851,7 @@ public class AsyncCompanies {
      * @return {@code CompletableFuture<GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse>} - The async response
      */
     public CompletableFuture<GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse> getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(String companyUuid) {
-        return getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(companyUuid, Optional.empty());
+        return getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(Optional.empty(), companyUuid);
     }
 
     /**
@@ -865,16 +865,16 @@ public class AsyncCompanies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @return {@code CompletableFuture<GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse>} - The async response
      */
-    public CompletableFuture<GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse> getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(String companyUuid, Optional<? extends GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse> getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(Optional<? extends GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
         GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest request =
             GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .build();
         AsyncRequestOperation<GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest, GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse> operation
               = new GetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness.Async(sdkConfiguration, _headers);
@@ -924,7 +924,7 @@ public class AsyncCompanies {
      */
     @Deprecated
     public CompletableFuture<PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse> acceptTermsOfService(String companyUuid, PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest) {
-        return acceptTermsOfService(companyUuid, Optional.empty(), partnerManagedCompanyAcceptTermsOfServiceRequest);
+        return acceptTermsOfService(Optional.empty(), companyUuid, partnerManagedCompanyAcceptTermsOfServiceRequest);
     }
 
     /**
@@ -940,21 +940,21 @@ public class AsyncCompanies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @param partnerManagedCompanyAcceptTermsOfServiceRequest 
      * @return {@code CompletableFuture<PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse>} - The async response
      * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
     public CompletableFuture<PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse> acceptTermsOfService(
-            String companyUuid, Optional<? extends PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest) {
         PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest request =
             PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .partnerManagedCompanyAcceptTermsOfServiceRequest(partnerManagedCompanyAcceptTermsOfServiceRequest)
                 .build();
         AsyncRequestOperation<PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest, PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse> operation
@@ -1011,7 +1011,7 @@ public class AsyncCompanies {
      */
     @Deprecated
     public CompletableFuture<PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse> retrieveTermsOfService(String companyUuid, PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest) {
-        return retrieveTermsOfService(companyUuid, Optional.empty(), partnerManagedCompanyRetrieveTermsOfServiceRequest);
+        return retrieveTermsOfService(Optional.empty(), companyUuid, partnerManagedCompanyRetrieveTermsOfServiceRequest);
     }
 
     /**
@@ -1030,21 +1030,21 @@ public class AsyncCompanies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @param partnerManagedCompanyRetrieveTermsOfServiceRequest 
      * @return {@code CompletableFuture<PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse>} - The async response
      * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
     public CompletableFuture<PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse> retrieveTermsOfService(
-            String companyUuid, Optional<? extends PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest) {
         PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest request =
             PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .partnerManagedCompanyRetrieveTermsOfServiceRequest(partnerManagedCompanyRetrieveTermsOfServiceRequest)
                 .build();
         AsyncRequestOperation<PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest, PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse> operation
@@ -1090,7 +1090,7 @@ public class AsyncCompanies {
      * @return {@code CompletableFuture<GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse>} - The async response
      */
     public CompletableFuture<GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse> getV1PartnerManagedCompaniesCompanyUuidTermsOfService(String companyUuid) {
-        return getV1PartnerManagedCompaniesCompanyUuidTermsOfService(companyUuid, Optional.empty());
+        return getV1PartnerManagedCompaniesCompanyUuidTermsOfService(Optional.empty(), companyUuid);
     }
 
     /**
@@ -1106,16 +1106,16 @@ public class AsyncCompanies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @return {@code CompletableFuture<GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse>} - The async response
      */
-    public CompletableFuture<GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse> getV1PartnerManagedCompaniesCompanyUuidTermsOfService(String companyUuid, Optional<? extends GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse> getV1PartnerManagedCompaniesCompanyUuidTermsOfService(Optional<? extends GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
         GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest request =
             GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .build();
         AsyncRequestOperation<GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest, GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse> operation
               = new GetV1PartnerManagedCompaniesCompanyUuidTermsOfService.Async(sdkConfiguration, _headers);
@@ -1165,7 +1165,7 @@ public class AsyncCompanies {
      * @return {@code CompletableFuture<PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse>} - The async response
      */
     public CompletableFuture<PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse> putV1PartnerManagedCompaniesCompanyUuidTermsOfService(String companyUuid, PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest) {
-        return putV1PartnerManagedCompaniesCompanyUuidTermsOfService(companyUuid, Optional.empty(), partnerManagedCompanyRetrieveTermsOfServiceRequest);
+        return putV1PartnerManagedCompaniesCompanyUuidTermsOfService(Optional.empty(), companyUuid, partnerManagedCompanyRetrieveTermsOfServiceRequest);
     }
 
     /**
@@ -1183,19 +1183,19 @@ public class AsyncCompanies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @param partnerManagedCompanyRetrieveTermsOfServiceRequest 
      * @return {@code CompletableFuture<PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse>} - The async response
      */
     public CompletableFuture<PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse> putV1PartnerManagedCompaniesCompanyUuidTermsOfService(
-            String companyUuid, Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest) {
         PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest request =
             PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .partnerManagedCompanyRetrieveTermsOfServiceRequest(partnerManagedCompanyRetrieveTermsOfServiceRequest)
                 .build();
         AsyncRequestOperation<PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest, PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse> operation
@@ -1236,7 +1236,7 @@ public class AsyncCompanies {
      * @return {@code CompletableFuture<PostV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse>} - The async response
      */
     public CompletableFuture<PostV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse> postV1PartnerManagedCompaniesCompanyUuidTermsOfService(String companyUuid, PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest) {
-        return postV1PartnerManagedCompaniesCompanyUuidTermsOfService(companyUuid, Optional.empty(), partnerManagedCompanyAcceptTermsOfServiceRequest);
+        return postV1PartnerManagedCompaniesCompanyUuidTermsOfService(Optional.empty(), companyUuid, partnerManagedCompanyAcceptTermsOfServiceRequest);
     }
 
     /**
@@ -1249,19 +1249,19 @@ public class AsyncCompanies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @param partnerManagedCompanyAcceptTermsOfServiceRequest 
      * @return {@code CompletableFuture<PostV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse>} - The async response
      */
     public CompletableFuture<PostV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse> postV1PartnerManagedCompaniesCompanyUuidTermsOfService(
-            String companyUuid, Optional<? extends PostV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest) {
         PostV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest request =
             PostV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .partnerManagedCompanyAcceptTermsOfServiceRequest(partnerManagedCompanyAcceptTermsOfServiceRequest)
                 .build();
         AsyncRequestOperation<PostV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest, PostV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse> operation

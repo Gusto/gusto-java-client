@@ -8,11 +8,11 @@ import static com.gusto.embedded_api_v_2026_06_15.operations.Operations.RequestO
 import com.gusto.embedded_api_v_2026_06_15.models.components.PayrollGrossUpRequest;
 import com.gusto.embedded_api_v_2026_06_15.models.components.PayrollUpdate;
 import com.gusto.embedded_api_v_2026_06_15.models.components.PrintablePayrollChecksBody;
-import com.gusto.embedded_api_v_2026_06_15.models.components.VersionHeader;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1CompaniesCompanyIdPayrollsRequest;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1CompaniesCompanyIdPayrollsRequestBuilder;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1CompaniesCompanyIdPayrollsResponse;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollReversalsRequest;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollReversalsResponse;
@@ -369,7 +369,7 @@ public class Payrolls {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(String companyId, String id) {
-        return getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(companyId, id, Optional.empty());
+        return getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(Optional.empty(), companyId, id);
     }
 
     /**
@@ -381,21 +381,21 @@ public class Payrolls {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param id The UUID of the payroll
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-            String companyId, String id,
-            Optional<? extends GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<? extends GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String id) {
         GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request =
             GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .id(id)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest, GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> operation
               = new GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.Sync(sdkConfiguration, _headers);
@@ -432,7 +432,7 @@ public class Payrolls {
      * @throws RuntimeException subclass if the API call fails
      */
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(String companyId, String id) {
-        return patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(companyId, id, Optional.empty(),
+        return patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(Optional.empty(), companyId, id,
             Optional.empty());
     }
 
@@ -445,22 +445,22 @@ public class Payrolls {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param id The UUID of the payroll
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-            String companyId, String id,
-            Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody> requestBody) {
+            Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String id, Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody> requestBody) {
         PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request =
             PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .id(id)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest, PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> operation
@@ -497,7 +497,7 @@ public class Payrolls {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdPayrollReversalsResponse getApprovedReversals(String companyId) {
-        return getApprovedReversals(companyId, Optional.empty(), Optional.empty(),
+        return getApprovedReversals(Optional.empty(), companyId, Optional.empty(),
             Optional.empty());
     }
 
@@ -510,23 +510,23 @@ public class Payrolls {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdPayrollReversalsResponse getApprovedReversals(
-            String companyId, Optional<Long> page,
-            Optional<Long> per, Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<Long> page, Optional<Long> per) {
         GetV1CompaniesCompanyIdPayrollReversalsRequest request =
             GetV1CompaniesCompanyIdPayrollReversalsRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .page(page)
                 .per(per)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<GetV1CompaniesCompanyIdPayrollReversalsRequest, GetV1CompaniesCompanyIdPayrollReversalsResponse> operation
               = new GetV1CompaniesCompanyIdPayrollReversals.Sync(sdkConfiguration, _headers);
@@ -730,7 +730,7 @@ public class Payrolls {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1CompaniesCompanyIdPayrollsResponse delete(String companyId, String payrollId) {
-        return delete(companyId, payrollId, Optional.empty(),
+        return delete(Optional.empty(), companyId, payrollId,
             Optional.empty());
     }
 
@@ -751,23 +751,23 @@ public class Payrolls {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param payrollId The UUID of the payroll
      * @param async When true, request an asynchronous delete of the payroll.
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1CompaniesCompanyIdPayrollsResponse delete(
-            String companyId, String payrollId,
-            Optional<Boolean> async, Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String payrollId, Optional<Boolean> async) {
         DeleteV1CompaniesCompanyIdPayrollsRequest request =
             DeleteV1CompaniesCompanyIdPayrollsRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .payrollId(payrollId)
                 .async(async)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<DeleteV1CompaniesCompanyIdPayrollsRequest, DeleteV1CompaniesCompanyIdPayrollsResponse> operation
               = new DeleteV1CompaniesCompanyIdPayrolls.Sync(sdkConfiguration, _headers);
@@ -923,6 +923,7 @@ public class Payrolls {
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Dollar amounts are represented to the cent.
      * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+     * * Results are paginated. Maximum page size is 100 employee compensations per request.
      * 
      * <p>scope: `payrolls:read`
      * 
@@ -943,6 +944,7 @@ public class Payrolls {
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Dollar amounts are represented to the cent.
      * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+     * * Results are paginated. Maximum page size is 100 employee compensations per request.
      * 
      * <p>scope: `payrolls:read`
      * 
@@ -953,7 +955,8 @@ public class Payrolls {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1PaymentReceiptsPayrollsPayrollUuidResponse getReceipt(String payrollUuid) {
-        return getReceipt(payrollUuid, Optional.empty());
+        return getReceipt(Optional.empty(), payrollUuid, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -965,22 +968,29 @@ public class Payrolls {
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Dollar amounts are represented to the cent.
      * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+     * * Results are paginated. Maximum page size is 100 employee compensations per request.
      * 
      * <p>scope: `payrolls:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param payrollUuid The UUID of the payroll
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollUuid The UUID of the payroll
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1PaymentReceiptsPayrollsPayrollUuidResponse getReceipt(String payrollUuid, Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1PaymentReceiptsPayrollsPayrollUuidResponse getReceipt(
+            Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
+            Optional<Long> page, Optional<Long> per) {
         GetV1PaymentReceiptsPayrollsPayrollUuidRequest request =
             GetV1PaymentReceiptsPayrollsPayrollUuidRequest
                 .builder()
-                .payrollUuid(payrollUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .payrollUuid(payrollUuid)
+                .page(page)
+                .per(per)
                 .build();
         RequestOperation<GetV1PaymentReceiptsPayrollsPayrollUuidRequest, GetV1PaymentReceiptsPayrollsPayrollUuidResponse> operation
               = new GetV1PaymentReceiptsPayrollsPayrollUuid.Sync(sdkConfiguration, _headers);

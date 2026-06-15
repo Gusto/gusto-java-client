@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder {
 
-    private String id;
     private Optional<? extends GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion>>() {});
+    private String id;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder id(String id) {
-        Utils.checkNotNull(id, "id");
-        this.id = id;
-        return this;
     }
                 
     public GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder xGustoAPIVersion(GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder {
         return this;
     }
 
+    public GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder id(String id) {
+        Utils.checkNotNull(id, "id");
+        this.id = id;
+        return this;
+    }
+
 
     private GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest request = new GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest(id,
-            xGustoAPIVersion);
+        GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest request = new GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest(xGustoAPIVersion,
+            id);
 
         return request;
     }

@@ -20,23 +20,17 @@ import java.util.concurrent.CompletableFuture;
 
 public class PutDepartmentsRequestBuilder {
 
-    private String departmentUuid;
     private Optional<? extends PutDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutDepartmentsHeaderXGustoAPIVersion>>() {});
+    private String departmentUuid;
     private DepartmentUpdateRequestBody departmentUpdateRequestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutDepartmentsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutDepartmentsRequestBuilder departmentUuid(String departmentUuid) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
-        this.departmentUuid = departmentUuid;
-        return this;
     }
                 
     public PutDepartmentsRequestBuilder xGustoAPIVersion(PutDepartmentsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,6 +42,12 @@ public class PutDepartmentsRequestBuilder {
     public PutDepartmentsRequestBuilder xGustoAPIVersion(Optional<? extends PutDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutDepartmentsRequestBuilder departmentUuid(String departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = departmentUuid;
         return this;
     }
 
@@ -63,8 +63,8 @@ public class PutDepartmentsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutDepartmentsRequest request = new PutDepartmentsRequest(departmentUuid,
-            xGustoAPIVersion,
+        PutDepartmentsRequest request = new PutDepartmentsRequest(xGustoAPIVersion,
+            departmentUuid,
             departmentUpdateRequestBody);
 
         return request;

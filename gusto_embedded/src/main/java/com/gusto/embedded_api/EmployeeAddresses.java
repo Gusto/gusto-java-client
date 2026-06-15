@@ -118,7 +118,7 @@ public class EmployeeAddresses {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1EmployeesEmployeeIdHomeAddressesResponse get(String employeeId) {
-        return get(employeeId, Optional.empty());
+        return get(Optional.empty(), employeeId);
     }
 
     /**
@@ -133,17 +133,17 @@ public class EmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1EmployeesEmployeeIdHomeAddressesResponse get(String employeeId, Optional<? extends GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1EmployeesEmployeeIdHomeAddressesResponse get(Optional<? extends GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
         GetV1EmployeesEmployeeIdHomeAddressesRequest request =
             GetV1EmployeesEmployeeIdHomeAddressesRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         RequestOperation<GetV1EmployeesEmployeeIdHomeAddressesRequest, GetV1EmployeesEmployeeIdHomeAddressesResponse> operation
               = new GetV1EmployeesEmployeeIdHomeAddresses.Sync(sdkConfiguration, _headers);
@@ -186,7 +186,7 @@ public class EmployeeAddresses {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1EmployeesEmployeeIdHomeAddressesResponse create(String employeeId, PostV1EmployeesEmployeeIdHomeAddressesRequestBody requestBody) {
-        return create(employeeId, Optional.empty(), requestBody);
+        return create(Optional.empty(), employeeId, requestBody);
     }
 
     /**
@@ -201,20 +201,20 @@ public class EmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
      * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1EmployeesEmployeeIdHomeAddressesResponse create(
-            String employeeId, Optional<? extends PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             PostV1EmployeesEmployeeIdHomeAddressesRequestBody requestBody) {
         PostV1EmployeesEmployeeIdHomeAddressesRequest request =
             PostV1EmployeesEmployeeIdHomeAddressesRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1EmployeesEmployeeIdHomeAddressesRequest, PostV1EmployeesEmployeeIdHomeAddressesResponse> operation
@@ -257,7 +257,7 @@ public class EmployeeAddresses {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1HomeAddressesHomeAddressUuidResponse retrieveHomeAddress(String homeAddressUuid) {
-        return retrieveHomeAddress(homeAddressUuid, Optional.empty());
+        return retrieveHomeAddress(Optional.empty(), homeAddressUuid);
     }
 
     /**
@@ -272,17 +272,17 @@ public class EmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param homeAddressUuid The UUID of the home address
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param homeAddressUuid The UUID of the home address
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1HomeAddressesHomeAddressUuidResponse retrieveHomeAddress(String homeAddressUuid, Optional<? extends GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1HomeAddressesHomeAddressUuidResponse retrieveHomeAddress(Optional<? extends GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String homeAddressUuid) {
         GetV1HomeAddressesHomeAddressUuidRequest request =
             GetV1HomeAddressesHomeAddressUuidRequest
                 .builder()
-                .homeAddressUuid(homeAddressUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .homeAddressUuid(homeAddressUuid)
                 .build();
         RequestOperation<GetV1HomeAddressesHomeAddressUuidRequest, GetV1HomeAddressesHomeAddressUuidResponse> operation
               = new GetV1HomeAddressesHomeAddressUuid.Sync(sdkConfiguration, _headers);
@@ -450,7 +450,7 @@ public class EmployeeAddresses {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1EmployeesEmployeeIdWorkAddressesResponse getWorkAddresses(String employeeId) {
-        return getWorkAddresses(employeeId, Optional.empty());
+        return getWorkAddresses(Optional.empty(), employeeId);
     }
 
     /**
@@ -463,17 +463,17 @@ public class EmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1EmployeesEmployeeIdWorkAddressesResponse getWorkAddresses(String employeeId, Optional<? extends GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1EmployeesEmployeeIdWorkAddressesResponse getWorkAddresses(Optional<? extends GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
         GetV1EmployeesEmployeeIdWorkAddressesRequest request =
             GetV1EmployeesEmployeeIdWorkAddressesRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         RequestOperation<GetV1EmployeesEmployeeIdWorkAddressesRequest, GetV1EmployeesEmployeeIdWorkAddressesResponse> operation
               = new GetV1EmployeesEmployeeIdWorkAddresses.Sync(sdkConfiguration, _headers);
@@ -512,7 +512,7 @@ public class EmployeeAddresses {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1EmployeesEmployeeIdWorkAddressesResponse createWorkAddress(String employeeId, PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody) {
-        return createWorkAddress(employeeId, Optional.empty(), requestBody);
+        return createWorkAddress(Optional.empty(), employeeId, requestBody);
     }
 
     /**
@@ -525,20 +525,20 @@ public class EmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
      * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1EmployeesEmployeeIdWorkAddressesResponse createWorkAddress(
-            String employeeId, Optional<? extends PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody) {
         PostV1EmployeesEmployeeIdWorkAddressesRequest request =
             PostV1EmployeesEmployeeIdWorkAddressesRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1EmployeesEmployeeIdWorkAddressesRequest, PostV1EmployeesEmployeeIdWorkAddressesResponse> operation
@@ -575,7 +575,7 @@ public class EmployeeAddresses {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1WorkAddressesWorkAddressUuidResponse retrieveWorkAddress(String workAddressUuid) {
-        return retrieveWorkAddress(workAddressUuid, Optional.empty());
+        return retrieveWorkAddress(Optional.empty(), workAddressUuid);
     }
 
     /**
@@ -587,17 +587,17 @@ public class EmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param workAddressUuid The UUID of the work address
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param workAddressUuid The UUID of the work address
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1WorkAddressesWorkAddressUuidResponse retrieveWorkAddress(String workAddressUuid, Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1WorkAddressesWorkAddressUuidResponse retrieveWorkAddress(Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String workAddressUuid) {
         GetV1WorkAddressesWorkAddressUuidRequest request =
             GetV1WorkAddressesWorkAddressUuidRequest
                 .builder()
-                .workAddressUuid(workAddressUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .workAddressUuid(workAddressUuid)
                 .build();
         RequestOperation<GetV1WorkAddressesWorkAddressUuidRequest, GetV1WorkAddressesWorkAddressUuidResponse> operation
               = new GetV1WorkAddressesWorkAddressUuid.Sync(sdkConfiguration, _headers);
@@ -634,7 +634,7 @@ public class EmployeeAddresses {
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1WorkAddressesWorkAddressUuidResponse updateWorkAddress(String workAddressUuid, PutV1WorkAddressesWorkAddressUuidRequestBody requestBody) {
-        return updateWorkAddress(workAddressUuid, Optional.empty(), requestBody);
+        return updateWorkAddress(Optional.empty(), workAddressUuid, requestBody);
     }
 
     /**
@@ -646,20 +646,20 @@ public class EmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param workAddressUuid The UUID of the work address
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param workAddressUuid The UUID of the work address
      * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1WorkAddressesWorkAddressUuidResponse updateWorkAddress(
-            String workAddressUuid, Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String workAddressUuid,
             PutV1WorkAddressesWorkAddressUuidRequestBody requestBody) {
         PutV1WorkAddressesWorkAddressUuidRequest request =
             PutV1WorkAddressesWorkAddressUuidRequest
                 .builder()
-                .workAddressUuid(workAddressUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .workAddressUuid(workAddressUuid)
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PutV1WorkAddressesWorkAddressUuidRequest, PutV1WorkAddressesWorkAddressUuidResponse> operation
@@ -696,7 +696,7 @@ public class EmployeeAddresses {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1WorkAddressesWorkAddressUuidResponse deleteWorkAddress(String workAddressUuid) {
-        return deleteWorkAddress(workAddressUuid, Optional.empty());
+        return deleteWorkAddress(Optional.empty(), workAddressUuid);
     }
 
     /**
@@ -708,17 +708,17 @@ public class EmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param workAddressUuid The UUID of the work address
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param workAddressUuid The UUID of the work address
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public DeleteV1WorkAddressesWorkAddressUuidResponse deleteWorkAddress(String workAddressUuid, Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public DeleteV1WorkAddressesWorkAddressUuidResponse deleteWorkAddress(Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String workAddressUuid) {
         DeleteV1WorkAddressesWorkAddressUuidRequest request =
             DeleteV1WorkAddressesWorkAddressUuidRequest
                 .builder()
-                .workAddressUuid(workAddressUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .workAddressUuid(workAddressUuid)
                 .build();
         RequestOperation<DeleteV1WorkAddressesWorkAddressUuidRequest, DeleteV1WorkAddressesWorkAddressUuidResponse> operation
               = new DeleteV1WorkAddressesWorkAddressUuid.Sync(sdkConfiguration, _headers);

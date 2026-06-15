@@ -370,7 +370,7 @@ public class AsyncLocations {
      * @return {@code CompletableFuture<GetV1LocationsLocationUuidMinimumWagesResponse>} - The async response
      */
     public CompletableFuture<GetV1LocationsLocationUuidMinimumWagesResponse> getMinimumWages(String locationUuid) {
-        return getMinimumWages(locationUuid, Optional.empty(), Optional.empty());
+        return getMinimumWages(Optional.empty(), locationUuid, Optional.empty());
     }
 
     /**
@@ -382,19 +382,19 @@ public class AsyncLocations {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param locationUuid The UUID of the location
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param locationUuid The UUID of the location
      * @param effectiveDate 
      * @return {@code CompletableFuture<GetV1LocationsLocationUuidMinimumWagesResponse>} - The async response
      */
     public CompletableFuture<GetV1LocationsLocationUuidMinimumWagesResponse> getMinimumWages(
-            String locationUuid, Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion, String locationUuid,
             Optional<String> effectiveDate) {
         GetV1LocationsLocationUuidMinimumWagesRequest request =
             GetV1LocationsLocationUuidMinimumWagesRequest
                 .builder()
-                .locationUuid(locationUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .locationUuid(locationUuid)
                 .effectiveDate(effectiveDate)
                 .build();
         AsyncRequestOperation<GetV1LocationsLocationUuidMinimumWagesRequest, GetV1LocationsLocationUuidMinimumWagesResponse> operation

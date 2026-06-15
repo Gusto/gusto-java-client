@@ -18,6 +18,14 @@ import java.util.Optional;
 
 public class GetV1CompaniesCompanyIdContractorPaymentGroupsRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
@@ -48,40 +56,43 @@ public class GetV1CompaniesCompanyIdContractorPaymentGroupsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=per")
     private Optional<Long> per;
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion> xGustoAPIVersion;
-
     @JsonCreator
     public GetV1CompaniesCompanyIdContractorPaymentGroupsRequest(
+            Optional<? extends GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyId,
             Optional<String> startDate,
             Optional<String> endDate,
             Optional<Long> page,
-            Optional<Long> per,
-            Optional<? extends GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<Long> per) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(startDate, "startDate");
         Utils.checkNotNull(endDate, "endDate");
         Utils.checkNotNull(page, "page");
         Utils.checkNotNull(per, "per");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyId = companyId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.page = page;
         this.per = per;
-        this.xGustoAPIVersion = xGustoAPIVersion;
     }
     
     public GetV1CompaniesCompanyIdContractorPaymentGroupsRequest(
             String companyId) {
-        this(companyId, Optional.empty(), Optional.empty(),
+        this(Optional.empty(), companyId, Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -125,21 +136,33 @@ public class GetV1CompaniesCompanyIdContractorPaymentGroupsRequest {
         return per;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
+
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion>) xGustoAPIVersion;
+    public GetV1CompaniesCompanyIdContractorPaymentGroupsRequest withXGustoAPIVersion(GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        return this;
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
 
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public GetV1CompaniesCompanyIdContractorPaymentGroupsRequest withXGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
 
     /**
      * The UUID of the company
@@ -228,29 +251,6 @@ public class GetV1CompaniesCompanyIdContractorPaymentGroupsRequest {
         return this;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public GetV1CompaniesCompanyIdContractorPaymentGroupsRequest withXGustoAPIVersion(GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-        return this;
-    }
-
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public GetV1CompaniesCompanyIdContractorPaymentGroupsRequest withXGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -261,34 +261,36 @@ public class GetV1CompaniesCompanyIdContractorPaymentGroupsRequest {
         }
         GetV1CompaniesCompanyIdContractorPaymentGroupsRequest other = (GetV1CompaniesCompanyIdContractorPaymentGroupsRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.startDate, other.startDate) &&
             Utils.enhancedDeepEquals(this.endDate, other.endDate) &&
             Utils.enhancedDeepEquals(this.page, other.page) &&
-            Utils.enhancedDeepEquals(this.per, other.per) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.per, other.per);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, startDate, endDate,
-            page, per, xGustoAPIVersion);
+            xGustoAPIVersion, companyId, startDate,
+            endDate, page, per);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1CompaniesCompanyIdContractorPaymentGroupsRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyId", companyId,
                 "startDate", startDate,
                 "endDate", endDate,
                 "page", page,
-                "per", per,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "per", per);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
+
+        private Optional<? extends GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private String companyId;
 
@@ -300,10 +302,31 @@ public class GetV1CompaniesCompanyIdContractorPaymentGroupsRequest {
 
         private Optional<Long> per = Optional.empty();
 
-        private Optional<? extends GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion> xGustoAPIVersion;
-
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -394,37 +417,14 @@ public class GetV1CompaniesCompanyIdContractorPaymentGroupsRequest {
             return this;
         }
 
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
-
         public GetV1CompaniesCompanyIdContractorPaymentGroupsRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1CompaniesCompanyIdContractorPaymentGroupsRequest(
-                companyId, startDate, endDate,
-                page, per, xGustoAPIVersion);
+                xGustoAPIVersion, companyId, startDate,
+                endDate, page, per);
         }
 
 

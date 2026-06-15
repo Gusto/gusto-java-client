@@ -17,23 +17,17 @@ import java.util.Optional;
 
 public class PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
 
-    private String companyId;
     private Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
     private FederalTaxDetailsUpdate federalTaxDetailsUpdate;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder xGustoAPIVersion(PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -45,6 +39,12 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
     public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder xGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
         return this;
     }
 
@@ -60,8 +60,8 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompaniesCompanyIdFederalTaxDetailsRequest request = new PutV1CompaniesCompanyIdFederalTaxDetailsRequest(companyId,
-            xGustoAPIVersion,
+        PutV1CompaniesCompanyIdFederalTaxDetailsRequest request = new PutV1CompaniesCompanyIdFederalTaxDetailsRequest(xGustoAPIVersion,
+            companyId,
             federalTaxDetailsUpdate);
 
         return request;

@@ -257,8 +257,8 @@ public class Application {
             .build();
 
         GetV1CompaniesResponse res = sdk.companies().get()
-                .companyId("<id>")
                 .xGustoAPIVersion(GetV1CompaniesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .call();
 
         if (res.company().isPresent()) {
@@ -272,8 +272,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompaniesHeaderXGustoAPIVersion>](../../models/operations/GetV1CompaniesHeaderXGustoAPIVersion.md)                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 
 ### Response
 
@@ -313,8 +313,8 @@ public class Application {
             .build();
 
         PutV1CompaniesResponse res = sdk.companies().update()
-                .companyId("<id>")
                 .xGustoAPIVersion(PutV1CompaniesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .requestBody(PutV1CompaniesRequestBody.builder()
                     .contractorOnly(true)
                     .build())
@@ -347,8 +347,8 @@ public class Application {
             .build();
 
         PutV1CompaniesResponse res = sdk.companies().update()
-                .companyId("<id>")
                 .xGustoAPIVersion(PutV1CompaniesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .requestBody(PutV1CompaniesRequestBody.builder()
                     .contractorOnly(false)
                     .build())
@@ -381,8 +381,8 @@ public class Application {
             .build();
 
         PutV1CompaniesResponse res = sdk.companies().update()
-                .companyId("<id>")
                 .xGustoAPIVersion(PutV1CompaniesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .requestBody(PutV1CompaniesRequestBody.builder()
                     .contractorOnly(true)
                     .build())
@@ -415,8 +415,8 @@ public class Application {
             .build();
 
         PutV1CompaniesResponse res = sdk.companies().update()
-                .companyId("<id>")
                 .xGustoAPIVersion(PutV1CompaniesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .requestBody(PutV1CompaniesRequestBody.builder()
                     .contractorOnly(true)
                     .build())
@@ -433,8 +433,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1CompaniesHeaderXGustoAPIVersion>](../../models/operations/PutV1CompaniesHeaderXGustoAPIVersion.md)                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `requestBody`                                                                                                                                                                                                                | [PutV1CompaniesRequestBody](../../models/operations/PutV1CompaniesRequestBody.md)                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -486,8 +486,8 @@ public class Application {
             .build();
 
         PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse res = sdk.companies().migrate()
-                .companyUuid("<id>")
                 .xGustoAPIVersion(PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
                 .partnerManagedCompanyMigrateRequest(PartnerManagedCompanyMigrateRequest.builder()
                     .email("Janice18@gmail.com")
                     .ipAddress("75.249.55.210")
@@ -524,8 +524,8 @@ public class Application {
             .build();
 
         PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse res = sdk.companies().migrate()
-                .companyUuid("<id>")
                 .xGustoAPIVersion(PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
                 .partnerManagedCompanyMigrateRequest(PartnerManagedCompanyMigrateRequest.builder()
                     .email("Janice18@gmail.com")
                     .ipAddress("75.249.55.210")
@@ -562,8 +562,8 @@ public class Application {
             .build();
 
         PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse res = sdk.companies().migrate()
-                .companyUuid("<id>")
                 .xGustoAPIVersion(PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
                 .partnerManagedCompanyMigrateRequest(PartnerManagedCompanyMigrateRequest.builder()
                     .email("Janice18@gmail.com")
                     .ipAddress("75.249.55.210")
@@ -582,8 +582,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion>](../../models/operations/PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion.md)                                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `partnerManagedCompanyMigrateRequest`                                                                                                                                                                                        | [PartnerManagedCompanyMigrateRequest](../../models/components/PartnerManagedCompanyMigrateRequest.md)                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -625,8 +625,8 @@ public class Application {
             .build();
 
         GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse res = sdk.companies().getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness()
-                .companyUuid("<id>")
                 .xGustoAPIVersion(GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
                 .call();
 
         if (res.partnerManagedCompanyMigrationReadinessResponse().isPresent()) {
@@ -640,8 +640,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion>](../../models/operations/GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion.md)                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 
 ### Response
 
@@ -684,8 +684,8 @@ public class Application {
             .build();
 
         PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse res = sdk.companies().acceptTermsOfService()
-                .companyUuid("<id>")
                 .xGustoAPIVersion(PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
                 .partnerManagedCompanyAcceptTermsOfServiceRequest(PartnerManagedCompanyAcceptTermsOfServiceRequest.builder()
                     .email("Mary_Welch@hotmail.com")
                     .ipAddress("ad95:edec:dbf8:daea:be73:caca:2bf2:c269")
@@ -722,8 +722,8 @@ public class Application {
             .build();
 
         PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse res = sdk.companies().acceptTermsOfService()
-                .companyUuid("<id>")
                 .xGustoAPIVersion(PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
                 .partnerManagedCompanyAcceptTermsOfServiceRequest(PartnerManagedCompanyAcceptTermsOfServiceRequest.builder()
                     .email("jsmith99@gmail.com")
                     .ipAddress("192.168.1.2")
@@ -760,8 +760,8 @@ public class Application {
             .build();
 
         PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse res = sdk.companies().acceptTermsOfService()
-                .companyUuid("<id>")
                 .xGustoAPIVersion(PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
                 .partnerManagedCompanyAcceptTermsOfServiceRequest(PartnerManagedCompanyAcceptTermsOfServiceRequest.builder()
                     .email("Mary_Welch@hotmail.com")
                     .ipAddress("ad95:edec:dbf8:daea:be73:caca:2bf2:c269")
@@ -798,8 +798,8 @@ public class Application {
             .build();
 
         PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse res = sdk.companies().acceptTermsOfService()
-                .companyUuid("<id>")
                 .xGustoAPIVersion(PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
                 .partnerManagedCompanyAcceptTermsOfServiceRequest(PartnerManagedCompanyAcceptTermsOfServiceRequest.builder()
                     .email("Mary_Welch@hotmail.com")
                     .ipAddress("ad95:edec:dbf8:daea:be73:caca:2bf2:c269")
@@ -818,8 +818,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion>](../../models/operations/PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion.md)                   | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `partnerManagedCompanyAcceptTermsOfServiceRequest`                                                                                                                                                                           | [PartnerManagedCompanyAcceptTermsOfServiceRequest](../../models/components/PartnerManagedCompanyAcceptTermsOfServiceRequest.md)                                                                                              | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -863,8 +863,8 @@ public class Application {
             .build();
 
         PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse res = sdk.companies().retrieveTermsOfService()
-                .companyUuid("<id>")
                 .xGustoAPIVersion(PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
                 .partnerManagedCompanyRetrieveTermsOfServiceRequest(PartnerManagedCompanyRetrieveTermsOfServiceRequest.builder()
                     .email("Valentin_Ziemann@yahoo.com")
                     .build())
@@ -899,8 +899,8 @@ public class Application {
             .build();
 
         PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse res = sdk.companies().retrieveTermsOfService()
-                .companyUuid("<id>")
                 .xGustoAPIVersion(PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
                 .partnerManagedCompanyRetrieveTermsOfServiceRequest(PartnerManagedCompanyRetrieveTermsOfServiceRequest.builder()
                     .email("jsmith99@gmail.com")
                     .build())
@@ -935,8 +935,8 @@ public class Application {
             .build();
 
         PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse res = sdk.companies().retrieveTermsOfService()
-                .companyUuid("<id>")
                 .xGustoAPIVersion(PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
                 .partnerManagedCompanyRetrieveTermsOfServiceRequest(PartnerManagedCompanyRetrieveTermsOfServiceRequest.builder()
                     .email("Valentin_Ziemann@yahoo.com")
                     .build())
@@ -971,8 +971,8 @@ public class Application {
             .build();
 
         PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse res = sdk.companies().retrieveTermsOfService()
-                .companyUuid("<id>")
                 .xGustoAPIVersion(PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
                 .partnerManagedCompanyRetrieveTermsOfServiceRequest(PartnerManagedCompanyRetrieveTermsOfServiceRequest.builder()
                     .email("Valentin_Ziemann@yahoo.com")
                     .build())
@@ -989,8 +989,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion>](../../models/operations/PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion.md)               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `partnerManagedCompanyRetrieveTermsOfServiceRequest`                                                                                                                                                                         | [PartnerManagedCompanyRetrieveTermsOfServiceRequest](../../models/components/PartnerManagedCompanyRetrieveTermsOfServiceRequest.md)                                                                                          | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -1271,9 +1271,9 @@ public class Application {
             .build();
 
         GetV1CompanyOnboardingStatusResponse res = sdk.companies().getOnboardingStatus()
+                .xGustoAPIVersion(GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .companyUuid("<id>")
                 .additionalSteps("external_payroll")
-                .xGustoAPIVersion(GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
                 .call();
 
         if (res.companyOnboardingStatus().isPresent()) {
@@ -1287,9 +1287,9 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  | Example                                                                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion>](../../models/operations/GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion.md)                                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |                                                                                                                                                                                                                              |
 | `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      | 7b1d0df1-6403-4a06-8768-c1dd7d24d27a                                                                                                                                                                                         |
 | `additionalSteps`                                                                                                                                                                                                            | *Optional\<String>*                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                           | Comma-delimited string of additional onboarding steps to include. Currently only supports the value "external_payroll".                                                                                                      | external_payroll                                                                                                                                                                                                             |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion>](../../models/operations/GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion.md)                                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |                                                                                                                                                                                                                              |
 
 ### Response
 
@@ -1344,8 +1344,8 @@ public class Application {
             .build();
 
         GetV1CompanyFinishOnboardingResponse res = sdk.companies().finishOnboarding()
-                .companyUuid("<id>")
                 .xGustoAPIVersion(GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
                 .call();
 
         if (res.companyOnboardingStatus().isPresent()) {
@@ -1359,8 +1359,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  | Example                                                                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      | 7b1d0df1-6403-4a06-8768-c1dd7d24d27a                                                                                                                                                                                         |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion>](../../models/operations/GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion.md)                                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |                                                                                                                                                                                                                              |
+| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      | 7b1d0df1-6403-4a06-8768-c1dd7d24d27a                                                                                                                                                                                         |
 
 ### Response
 

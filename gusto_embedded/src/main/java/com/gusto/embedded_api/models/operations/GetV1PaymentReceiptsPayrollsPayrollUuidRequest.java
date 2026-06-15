@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetV1PaymentReceiptsPayrollsPayrollUuidRequest {
     /**
-     * The UUID of the payroll
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=payroll_uuid")
-    private String payrollUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the payroll
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=payroll_uuid")
+    private String payrollUuid;
+
     @JsonCreator
     public GetV1PaymentReceiptsPayrollsPayrollUuidRequest(
-            String payrollUuid,
-            Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(payrollUuid, "payrollUuid");
+            Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String payrollUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.payrollUuid = payrollUuid;
+        Utils.checkNotNull(payrollUuid, "payrollUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.payrollUuid = payrollUuid;
     }
     
     public GetV1PaymentReceiptsPayrollsPayrollUuidRequest(
             String payrollUuid) {
-        this(payrollUuid, Optional.empty());
-    }
-
-    /**
-     * The UUID of the payroll
-     */
-    @JsonIgnore
-    public String payrollUuid() {
-        return payrollUuid;
+        this(Optional.empty(), payrollUuid);
     }
 
     /**
@@ -64,19 +56,18 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidRequest {
         return (Optional<GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the payroll
+     */
+    @JsonIgnore
+    public String payrollUuid() {
+        return payrollUuid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the payroll
-     */
-    public GetV1PaymentReceiptsPayrollsPayrollUuidRequest withPayrollUuid(String payrollUuid) {
-        Utils.checkNotNull(payrollUuid, "payrollUuid");
-        this.payrollUuid = payrollUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidRequest {
         return this;
     }
 
+    /**
+     * The UUID of the payroll
+     */
+    public GetV1PaymentReceiptsPayrollsPayrollUuidRequest withPayrollUuid(String payrollUuid) {
+        Utils.checkNotNull(payrollUuid, "payrollUuid");
+        this.payrollUuid = payrollUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidRequest {
         }
         GetV1PaymentReceiptsPayrollsPayrollUuidRequest other = (GetV1PaymentReceiptsPayrollsPayrollUuidRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.payrollUuid, other.payrollUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.payrollUuid, other.payrollUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            payrollUuid, xGustoAPIVersion);
+            xGustoAPIVersion, payrollUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1PaymentReceiptsPayrollsPayrollUuidRequest.class,
-                "payrollUuid", payrollUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "payrollUuid", payrollUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String payrollUuid;
-
         private Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String payrollUuid;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the payroll
-         */
-        public Builder payrollUuid(String payrollUuid) {
-            Utils.checkNotNull(payrollUuid, "payrollUuid");
-            this.payrollUuid = payrollUuid;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the payroll
+         */
+        public Builder payrollUuid(String payrollUuid) {
+            Utils.checkNotNull(payrollUuid, "payrollUuid");
+            this.payrollUuid = payrollUuid;
+            return this;
+        }
+
         public GetV1PaymentReceiptsPayrollsPayrollUuidRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1PaymentReceiptsPayrollsPayrollUuidRequest(
-                payrollUuid, xGustoAPIVersion);
+                xGustoAPIVersion, payrollUuid);
         }
 
 

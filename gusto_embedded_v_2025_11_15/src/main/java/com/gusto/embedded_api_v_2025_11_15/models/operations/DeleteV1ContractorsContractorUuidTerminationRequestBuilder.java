@@ -16,22 +16,16 @@ import java.util.Optional;
 
 public class DeleteV1ContractorsContractorUuidTerminationRequestBuilder {
 
-    private String contractorUuid;
     private Optional<? extends DeleteV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends DeleteV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion>>() {});
+    private String contractorUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1ContractorsContractorUuidTerminationRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public DeleteV1ContractorsContractorUuidTerminationRequestBuilder contractorUuid(String contractorUuid) {
-        Utils.checkNotNull(contractorUuid, "contractorUuid");
-        this.contractorUuid = contractorUuid;
-        return this;
     }
                 
     public DeleteV1ContractorsContractorUuidTerminationRequestBuilder xGustoAPIVersion(DeleteV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,14 +40,20 @@ public class DeleteV1ContractorsContractorUuidTerminationRequestBuilder {
         return this;
     }
 
+    public DeleteV1ContractorsContractorUuidTerminationRequestBuilder contractorUuid(String contractorUuid) {
+        Utils.checkNotNull(contractorUuid, "contractorUuid");
+        this.contractorUuid = contractorUuid;
+        return this;
+    }
+
 
     private DeleteV1ContractorsContractorUuidTerminationRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1ContractorsContractorUuidTerminationRequest request = new DeleteV1ContractorsContractorUuidTerminationRequest(contractorUuid,
-            xGustoAPIVersion);
+        DeleteV1ContractorsContractorUuidTerminationRequest request = new DeleteV1ContractorsContractorUuidTerminationRequest(xGustoAPIVersion,
+            contractorUuid);
 
         return request;
     }
