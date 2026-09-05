@@ -21,30 +21,18 @@ import java.util.concurrent.CompletableFuture;
 
 public class PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder {
 
-    private String employeeUuid;
-    private Long effectiveYear;
     private Optional<? extends PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion>>() {});
+    private String employeeUuid;
+    private Long effectiveYear;
     private EmployeeSection603HighEarnerStatusUpdateRequest employeeSection603HighEarnerStatusUpdateRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder employeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
-        return this;
-    }
-
-    public PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder effectiveYear(long effectiveYear) {
-        Utils.checkNotNull(effectiveYear, "effectiveYear");
-        this.effectiveYear = effectiveYear;
-        return this;
     }
                 
     public PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder xGustoAPIVersion(PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -56,6 +44,18 @@ public class PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYe
     public PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder xGustoAPIVersion(Optional<? extends PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder employeeUuid(String employeeUuid) {
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
+        this.employeeUuid = employeeUuid;
+        return this;
+    }
+
+    public PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder effectiveYear(long effectiveYear) {
+        Utils.checkNotNull(effectiveYear, "effectiveYear");
+        this.effectiveYear = effectiveYear;
         return this;
     }
 
@@ -71,9 +71,9 @@ public class PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYe
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest request = new PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest(employeeUuid,
+        PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest request = new PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest(xGustoAPIVersion,
+            employeeUuid,
             effectiveYear,
-            xGustoAPIVersion,
             employeeSection603HighEarnerStatusUpdateRequest);
 
         return request;

@@ -55,76 +55,6 @@ public class EmployeeForms {
     }
 
     /**
-     * Generate a W2 form [DEMO]
-     * 
-     * <p>&gt; 🚧 Demo action
-     * &gt;
-     * &gt; This action is only available in the Demo environment
-     * 
-     * <p>Generates a W2 document for testing purposes.
-     * 
-     * <p>scope: `employees:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public PostV1SandboxGenerateW2RequestBuilder generateW2() {
-        return new PostV1SandboxGenerateW2RequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Generate a W2 form [DEMO]
-     * 
-     * <p>&gt; 🚧 Demo action
-     * &gt;
-     * &gt; This action is only available in the Demo environment
-     * 
-     * <p>Generates a W2 document for testing purposes.
-     * 
-     * <p>scope: `employees:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param requestBody 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PostV1SandboxGenerateW2Response generateW2(PostV1SandboxGenerateW2RequestBody requestBody) {
-        return generateW2(Optional.empty(), requestBody);
-    }
-
-    /**
-     * Generate a W2 form [DEMO]
-     * 
-     * <p>&gt; 🚧 Demo action
-     * &gt;
-     * &gt; This action is only available in the Demo environment
-     * 
-     * <p>Generates a W2 document for testing purposes.
-     * 
-     * <p>scope: `employees:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param requestBody 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PostV1SandboxGenerateW2Response generateW2(Optional<? extends PostV1SandboxGenerateW2HeaderXGustoAPIVersion> xGustoAPIVersion, PostV1SandboxGenerateW2RequestBody requestBody) {
-        PostV1SandboxGenerateW2Request request =
-            PostV1SandboxGenerateW2Request
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
-                .build();
-        RequestOperation<PostV1SandboxGenerateW2Request, PostV1SandboxGenerateW2Response> operation
-              = new PostV1SandboxGenerateW2.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
      * Get all employee forms
      * 
      * <p>Get a list of all employee's forms
@@ -345,6 +275,76 @@ public class EmployeeForms {
     public PutV1EmployeeFormSignResponse sign(PutV1EmployeeFormSignRequest request) {
         RequestOperation<PutV1EmployeeFormSignRequest, PutV1EmployeeFormSignResponse> operation
               = new PutV1EmployeeFormSign.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Generate a W2 form [DEMO]
+     * 
+     * <p>&gt; 🚧 Demo action
+     * &gt;
+     * &gt; This action is only available in the Demo environment
+     * 
+     * <p>Generates a W2 document for testing purposes.
+     * 
+     * <p>scope: `employees:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public PostV1SandboxGenerateW2RequestBuilder generateW2() {
+        return new PostV1SandboxGenerateW2RequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Generate a W2 form [DEMO]
+     * 
+     * <p>&gt; 🚧 Demo action
+     * &gt;
+     * &gt; This action is only available in the Demo environment
+     * 
+     * <p>Generates a W2 document for testing purposes.
+     * 
+     * <p>scope: `employees:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1SandboxGenerateW2Response generateW2(PostV1SandboxGenerateW2RequestBody requestBody) {
+        return generateW2(Optional.empty(), requestBody);
+    }
+
+    /**
+     * Generate a W2 form [DEMO]
+     * 
+     * <p>&gt; 🚧 Demo action
+     * &gt;
+     * &gt; This action is only available in the Demo environment
+     * 
+     * <p>Generates a W2 document for testing purposes.
+     * 
+     * <p>scope: `employees:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1SandboxGenerateW2Response generateW2(Optional<? extends PostV1SandboxGenerateW2HeaderXGustoAPIVersion> xGustoAPIVersion, PostV1SandboxGenerateW2RequestBody requestBody) {
+        PostV1SandboxGenerateW2Request request =
+            PostV1SandboxGenerateW2Request
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .requestBody(requestBody)
+                .build();
+        RequestOperation<PostV1SandboxGenerateW2Request, PostV1SandboxGenerateW2Response> operation
+              = new PostV1SandboxGenerateW2.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

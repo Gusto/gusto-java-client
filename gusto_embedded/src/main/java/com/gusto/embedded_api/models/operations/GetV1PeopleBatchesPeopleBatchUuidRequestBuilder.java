@@ -16,22 +16,16 @@ import java.util.Optional;
 
 public class GetV1PeopleBatchesPeopleBatchUuidRequestBuilder {
 
-    private String peopleBatchUuid;
     private Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion>>() {});
+    private String peopleBatchUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1PeopleBatchesPeopleBatchUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1PeopleBatchesPeopleBatchUuidRequestBuilder peopleBatchUuid(String peopleBatchUuid) {
-        Utils.checkNotNull(peopleBatchUuid, "peopleBatchUuid");
-        this.peopleBatchUuid = peopleBatchUuid;
-        return this;
     }
                 
     public GetV1PeopleBatchesPeopleBatchUuidRequestBuilder xGustoAPIVersion(GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,14 +40,20 @@ public class GetV1PeopleBatchesPeopleBatchUuidRequestBuilder {
         return this;
     }
 
+    public GetV1PeopleBatchesPeopleBatchUuidRequestBuilder peopleBatchUuid(String peopleBatchUuid) {
+        Utils.checkNotNull(peopleBatchUuid, "peopleBatchUuid");
+        this.peopleBatchUuid = peopleBatchUuid;
+        return this;
+    }
+
 
     private GetV1PeopleBatchesPeopleBatchUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1PeopleBatchesPeopleBatchUuidRequest request = new GetV1PeopleBatchesPeopleBatchUuidRequest(peopleBatchUuid,
-            xGustoAPIVersion);
+        GetV1PeopleBatchesPeopleBatchUuidRequest request = new GetV1PeopleBatchesPeopleBatchUuidRequest(xGustoAPIVersion,
+            peopleBatchUuid);
 
         return request;
     }

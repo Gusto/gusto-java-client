@@ -23,7 +23,7 @@ public class GetV1CompaniesCompanyIdAdminsRequest {
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion;
+    private Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion;
 
     /**
      * The UUID of the company
@@ -46,7 +46,7 @@ public class GetV1CompaniesCompanyIdAdminsRequest {
 
     @JsonCreator
     public GetV1CompaniesCompanyIdAdminsRequest(
-            Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyId,
             Optional<Long> page,
             Optional<Long> per) {
@@ -73,8 +73,8 @@ public class GetV1CompaniesCompanyIdAdminsRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>) xGustoAPIVersion;
+    public Optional<HeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<HeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -112,7 +112,7 @@ public class GetV1CompaniesCompanyIdAdminsRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1CompaniesCompanyIdAdminsRequest withXGustoAPIVersion(GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion xGustoAPIVersion) {
+    public GetV1CompaniesCompanyIdAdminsRequest withXGustoAPIVersion(HeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -124,7 +124,7 @@ public class GetV1CompaniesCompanyIdAdminsRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetV1CompaniesCompanyIdAdminsRequest withXGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1CompaniesCompanyIdAdminsRequest withXGustoAPIVersion(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -214,7 +214,7 @@ public class GetV1CompaniesCompanyIdAdminsRequest {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion;
+        private Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private String companyId;
 
@@ -232,7 +232,7 @@ public class GetV1CompaniesCompanyIdAdminsRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(HeaderXGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -243,7 +243,7 @@ public class GetV1CompaniesCompanyIdAdminsRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
@@ -310,10 +310,10 @@ public class GetV1CompaniesCompanyIdAdminsRequest {
         }
 
 
-        private static final LazySingletonValue<Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends HeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-06-15\"",
-                        new TypeReference<Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>>() {});
+                        new TypeReference<Optional<? extends HeaderXGustoAPIVersion>>() {});
     }
 }

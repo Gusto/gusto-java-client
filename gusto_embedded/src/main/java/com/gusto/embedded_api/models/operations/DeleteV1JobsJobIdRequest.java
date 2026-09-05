@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class DeleteV1JobsJobIdRequest {
     /**
-     * The UUID of the job
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=job_id")
-    private String jobId;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class DeleteV1JobsJobIdRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends DeleteV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the job
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=job_id")
+    private String jobId;
+
     @JsonCreator
     public DeleteV1JobsJobIdRequest(
-            String jobId,
-            Optional<? extends DeleteV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(jobId, "jobId");
+            Optional<? extends DeleteV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String jobId) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.jobId = jobId;
+        Utils.checkNotNull(jobId, "jobId");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.jobId = jobId;
     }
     
     public DeleteV1JobsJobIdRequest(
             String jobId) {
-        this(jobId, Optional.empty());
-    }
-
-    /**
-     * The UUID of the job
-     */
-    @JsonIgnore
-    public String jobId() {
-        return jobId;
+        this(Optional.empty(), jobId);
     }
 
     /**
@@ -64,19 +56,18 @@ public class DeleteV1JobsJobIdRequest {
         return (Optional<DeleteV1JobsJobIdHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the job
+     */
+    @JsonIgnore
+    public String jobId() {
+        return jobId;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the job
-     */
-    public DeleteV1JobsJobIdRequest withJobId(String jobId) {
-        Utils.checkNotNull(jobId, "jobId");
-        this.jobId = jobId;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class DeleteV1JobsJobIdRequest {
         return this;
     }
 
+    /**
+     * The UUID of the job
+     */
+    public DeleteV1JobsJobIdRequest withJobId(String jobId) {
+        Utils.checkNotNull(jobId, "jobId");
+        this.jobId = jobId;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class DeleteV1JobsJobIdRequest {
         }
         DeleteV1JobsJobIdRequest other = (DeleteV1JobsJobIdRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.jobId, other.jobId) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.jobId, other.jobId);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            jobId, xGustoAPIVersion);
+            xGustoAPIVersion, jobId);
     }
     
     @Override
     public String toString() {
         return Utils.toString(DeleteV1JobsJobIdRequest.class,
-                "jobId", jobId,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "jobId", jobId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String jobId;
-
         private Optional<? extends DeleteV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String jobId;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the job
-         */
-        public Builder jobId(String jobId) {
-            Utils.checkNotNull(jobId, "jobId");
-            this.jobId = jobId;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class DeleteV1JobsJobIdRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the job
+         */
+        public Builder jobId(String jobId) {
+            Utils.checkNotNull(jobId, "jobId");
+            this.jobId = jobId;
+            return this;
+        }
+
         public DeleteV1JobsJobIdRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new DeleteV1JobsJobIdRequest(
-                jobId, xGustoAPIVersion);
+                xGustoAPIVersion, jobId);
         }
 
 

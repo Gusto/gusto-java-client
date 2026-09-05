@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * FileType
  * 
- * <p>The type of file to generate
+ * <p>The type of file to generate.
  */
 public enum FileType {
     CSV("csv"),

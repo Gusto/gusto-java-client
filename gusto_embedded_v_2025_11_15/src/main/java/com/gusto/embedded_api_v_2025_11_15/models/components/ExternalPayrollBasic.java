@@ -61,7 +61,7 @@ public class ExternalPayrollBasic {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
-    private Optional<? extends Status> status;
+    private Optional<? extends ExternalPayrollBasicStatus> status;
 
     @JsonCreator
     public ExternalPayrollBasic(
@@ -70,7 +70,7 @@ public class ExternalPayrollBasic {
             @JsonProperty("check_date") Optional<String> checkDate,
             @JsonProperty("payment_period_start_date") Optional<String> paymentPeriodStartDate,
             @JsonProperty("payment_period_end_date") Optional<String> paymentPeriodEndDate,
-            @JsonProperty("status") Optional<? extends Status> status) {
+            @JsonProperty("status") Optional<? extends ExternalPayrollBasicStatus> status) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(checkDate, "checkDate");
@@ -138,8 +138,8 @@ public class ExternalPayrollBasic {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Status> status() {
-        return (Optional<Status>) status;
+    public Optional<ExternalPayrollBasicStatus> status() {
+        return (Optional<ExternalPayrollBasicStatus>) status;
     }
 
     public static Builder builder() {
@@ -237,7 +237,7 @@ public class ExternalPayrollBasic {
      * created and transition to `processed` once tax liabilities are entered and finalized. Once in the
      * `processed` status all actions that can edit an external payroll will be disabled.
      */
-    public ExternalPayrollBasic withStatus(Status status) {
+    public ExternalPayrollBasic withStatus(ExternalPayrollBasicStatus status) {
         Utils.checkNotNull(status, "status");
         this.status = Optional.ofNullable(status);
         return this;
@@ -249,7 +249,7 @@ public class ExternalPayrollBasic {
      * created and transition to `processed` once tax liabilities are entered and finalized. Once in the
      * `processed` status all actions that can edit an external payroll will be disabled.
      */
-    public ExternalPayrollBasic withStatus(Optional<? extends Status> status) {
+    public ExternalPayrollBasic withStatus(Optional<? extends ExternalPayrollBasicStatus> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -304,7 +304,7 @@ public class ExternalPayrollBasic {
 
         private Optional<String> paymentPeriodEndDate = Optional.empty();
 
-        private Optional<? extends Status> status = Optional.empty();
+        private Optional<? extends ExternalPayrollBasicStatus> status = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -402,7 +402,7 @@ public class ExternalPayrollBasic {
          * created and transition to `processed` once tax liabilities are entered and finalized. Once in the
          * `processed` status all actions that can edit an external payroll will be disabled.
          */
-        public Builder status(Status status) {
+        public Builder status(ExternalPayrollBasicStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = Optional.ofNullable(status);
             return this;
@@ -413,7 +413,7 @@ public class ExternalPayrollBasic {
          * created and transition to `processed` once tax liabilities are entered and finalized. Once in the
          * `processed` status all actions that can edit an external payroll will be disabled.
          */
-        public Builder status(Optional<? extends Status> status) {
+        public Builder status(Optional<? extends ExternalPayrollBasicStatus> status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;

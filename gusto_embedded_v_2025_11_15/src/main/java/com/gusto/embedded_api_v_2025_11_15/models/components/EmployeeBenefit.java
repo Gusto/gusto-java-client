@@ -74,7 +74,7 @@ public class EmployeeBenefit {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contribution")
-    private Optional<? extends Contribution> contribution;
+    private Optional<? extends EmployeeBenefitContribution> contribution;
 
     /**
      * Whether the company contribution is elective (aka matching). For "tiered" contribution types, this
@@ -210,7 +210,7 @@ public class EmployeeBenefit {
             @JsonProperty("employee_deduction") Optional<String> employeeDeduction,
             @JsonProperty("deduct_as_percentage") Optional<Boolean> deductAsPercentage,
             @JsonProperty("employee_deduction_annual_maximum") JsonNullable<String> employeeDeductionAnnualMaximum,
-            @JsonProperty("contribution") Optional<? extends Contribution> contribution,
+            @JsonProperty("contribution") Optional<? extends EmployeeBenefitContribution> contribution,
             @JsonProperty("elective") Optional<Boolean> elective,
             @JsonProperty("company_contribution_annual_maximum") JsonNullable<String> companyContributionAnnualMaximum,
             @JsonProperty("limit_option") JsonNullable<String> limitOption,
@@ -330,8 +330,8 @@ public class EmployeeBenefit {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Contribution> contribution() {
-        return (Optional<Contribution>) contribution;
+    public Optional<EmployeeBenefitContribution> contribution() {
+        return (Optional<EmployeeBenefitContribution>) contribution;
     }
 
     /**
@@ -587,7 +587,7 @@ public class EmployeeBenefit {
     /**
      * An object representing the type and value of the company contribution.
      */
-    public EmployeeBenefit withContribution(Contribution contribution) {
+    public EmployeeBenefit withContribution(EmployeeBenefitContribution contribution) {
         Utils.checkNotNull(contribution, "contribution");
         this.contribution = Optional.ofNullable(contribution);
         return this;
@@ -597,7 +597,7 @@ public class EmployeeBenefit {
     /**
      * An object representing the type and value of the company contribution.
      */
-    public EmployeeBenefit withContribution(Optional<? extends Contribution> contribution) {
+    public EmployeeBenefit withContribution(Optional<? extends EmployeeBenefitContribution> contribution) {
         Utils.checkNotNull(contribution, "contribution");
         this.contribution = contribution;
         return this;
@@ -1008,7 +1008,7 @@ public class EmployeeBenefit {
 
         private JsonNullable<String> employeeDeductionAnnualMaximum = JsonNullable.undefined();
 
-        private Optional<? extends Contribution> contribution = Optional.empty();
+        private Optional<? extends EmployeeBenefitContribution> contribution = Optional.empty();
 
         private Optional<Boolean> elective;
 
@@ -1153,7 +1153,7 @@ public class EmployeeBenefit {
         /**
          * An object representing the type and value of the company contribution.
          */
-        public Builder contribution(Contribution contribution) {
+        public Builder contribution(EmployeeBenefitContribution contribution) {
             Utils.checkNotNull(contribution, "contribution");
             this.contribution = Optional.ofNullable(contribution);
             return this;
@@ -1162,7 +1162,7 @@ public class EmployeeBenefit {
         /**
          * An object representing the type and value of the company contribution.
          */
-        public Builder contribution(Optional<? extends Contribution> contribution) {
+        public Builder contribution(Optional<? extends EmployeeBenefitContribution> contribution) {
             Utils.checkNotNull(contribution, "contribution");
             this.contribution = contribution;
             return this;

@@ -200,7 +200,7 @@ public class AsyncPayrollDigests {
      * @return {@code CompletableFuture<GetV1PayrollDigestsPayrollDigestUuidResponse>} - The async response
      */
     public CompletableFuture<GetV1PayrollDigestsPayrollDigestUuidResponse> getV1PayrollDigestsPayrollDigestUuid(GetV1PayrollDigestsPayrollDigestUuidSecurity security, String payrollDigestUuid) {
-        return getV1PayrollDigestsPayrollDigestUuid(security, payrollDigestUuid, Optional.empty());
+        return getV1PayrollDigestsPayrollDigestUuid(security, Optional.empty(), payrollDigestUuid);
     }
 
     /**
@@ -229,18 +229,18 @@ public class AsyncPayrollDigests {
      * <p>scope: `payroll_digests:read`
      * 
      * @param security The security details to use for authentication.
-     * @param payrollDigestUuid The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollDigestUuid The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
      * @return {@code CompletableFuture<GetV1PayrollDigestsPayrollDigestUuidResponse>} - The async response
      */
     public CompletableFuture<GetV1PayrollDigestsPayrollDigestUuidResponse> getV1PayrollDigestsPayrollDigestUuid(
-            GetV1PayrollDigestsPayrollDigestUuidSecurity security, String payrollDigestUuid,
-            Optional<? extends GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            GetV1PayrollDigestsPayrollDigestUuidSecurity security, Optional<? extends GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String payrollDigestUuid) {
         GetV1PayrollDigestsPayrollDigestUuidRequest request =
             GetV1PayrollDigestsPayrollDigestUuidRequest
                 .builder()
-                .payrollDigestUuid(payrollDigestUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .payrollDigestUuid(payrollDigestUuid)
                 .build();
         AsyncRequestOperation<GetV1PayrollDigestsPayrollDigestUuidRequest, GetV1PayrollDigestsPayrollDigestUuidResponse> operation
               = new GetV1PayrollDigestsPayrollDigestUuid.Async(sdkConfiguration, security, _headers);

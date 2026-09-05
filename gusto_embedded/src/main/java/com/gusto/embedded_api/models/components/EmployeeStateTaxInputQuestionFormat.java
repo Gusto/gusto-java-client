@@ -28,12 +28,12 @@ public class EmployeeStateTaxInputQuestionFormat {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("options")
-    private Optional<? extends List<Options>> options;
+    private Optional<? extends List<EmployeeStateTaxInputQuestionFormatOptions>> options;
 
     @JsonCreator
     public EmployeeStateTaxInputQuestionFormat(
             @JsonProperty("type") String type,
-            @JsonProperty("options") Optional<? extends List<Options>> options) {
+            @JsonProperty("options") Optional<? extends List<EmployeeStateTaxInputQuestionFormatOptions>> options) {
         Utils.checkNotNull(type, "type");
         Utils.checkNotNull(options, "options");
         this.type = type;
@@ -58,8 +58,8 @@ public class EmployeeStateTaxInputQuestionFormat {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Options>> options() {
-        return (Optional<List<Options>>) options;
+    public Optional<List<EmployeeStateTaxInputQuestionFormatOptions>> options() {
+        return (Optional<List<EmployeeStateTaxInputQuestionFormatOptions>>) options;
     }
 
     public static Builder builder() {
@@ -79,7 +79,7 @@ public class EmployeeStateTaxInputQuestionFormat {
     /**
      * For "Select" type questions, the allowed values and display labels.
      */
-    public EmployeeStateTaxInputQuestionFormat withOptions(List<Options> options) {
+    public EmployeeStateTaxInputQuestionFormat withOptions(List<EmployeeStateTaxInputQuestionFormatOptions> options) {
         Utils.checkNotNull(options, "options");
         this.options = Optional.ofNullable(options);
         return this;
@@ -89,7 +89,7 @@ public class EmployeeStateTaxInputQuestionFormat {
     /**
      * For "Select" type questions, the allowed values and display labels.
      */
-    public EmployeeStateTaxInputQuestionFormat withOptions(Optional<? extends List<Options>> options) {
+    public EmployeeStateTaxInputQuestionFormat withOptions(Optional<? extends List<EmployeeStateTaxInputQuestionFormatOptions>> options) {
         Utils.checkNotNull(options, "options");
         this.options = options;
         return this;
@@ -127,7 +127,7 @@ public class EmployeeStateTaxInputQuestionFormat {
 
         private String type;
 
-        private Optional<? extends List<Options>> options = Optional.empty();
+        private Optional<? extends List<EmployeeStateTaxInputQuestionFormatOptions>> options = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -147,7 +147,7 @@ public class EmployeeStateTaxInputQuestionFormat {
         /**
          * For "Select" type questions, the allowed values and display labels.
          */
-        public Builder options(List<Options> options) {
+        public Builder options(List<EmployeeStateTaxInputQuestionFormatOptions> options) {
             Utils.checkNotNull(options, "options");
             this.options = Optional.ofNullable(options);
             return this;
@@ -156,7 +156,7 @@ public class EmployeeStateTaxInputQuestionFormat {
         /**
          * For "Select" type questions, the allowed values and display labels.
          */
-        public Builder options(Optional<? extends List<Options>> options) {
+        public Builder options(Optional<? extends List<EmployeeStateTaxInputQuestionFormatOptions>> options) {
             Utils.checkNotNull(options, "options");
             this.options = options;
             return this;

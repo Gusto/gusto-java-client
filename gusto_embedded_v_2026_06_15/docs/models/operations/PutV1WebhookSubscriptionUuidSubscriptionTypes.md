@@ -30,3 +30,4 @@ PutV1WebhookSubscriptionUuidSubscriptionTypes value = PutV1WebhookSubscriptionUu
 | `PAY_SCHEDULE`              | PaySchedule                 |
 | `PEOPLE_BATCH`              | PeopleBatch                 |
 | `SIGNATORY`                 | Signatory                   |
+| `TIME_OFF_REQUEST`          | TimeOffRequest              |

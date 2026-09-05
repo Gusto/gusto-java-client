@@ -14,6 +14,8 @@ import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -129,6 +131,14 @@ public class Location {
     @JsonProperty("inactive")
     private Optional<Boolean> inactive;
 
+    /**
+     * An array of warning objects that provide additional information about the address. Warnings do not
+     * prevent the address from being saved.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("warnings")
+    private Optional<? extends List<WarningObject>> warnings;
+
     @JsonCreator
     public Location(
             @JsonProperty("uuid") String uuid,
@@ -146,7 +156,8 @@ public class Location {
             @JsonProperty("created_at") Optional<String> createdAt,
             @JsonProperty("updated_at") Optional<String> updatedAt,
             @JsonProperty("active") Optional<Boolean> active,
-            @JsonProperty("inactive") Optional<Boolean> inactive) {
+            @JsonProperty("inactive") Optional<Boolean> inactive,
+            @JsonProperty("warnings") Optional<? extends List<WarningObject>> warnings) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(companyUuid, "companyUuid");
@@ -163,6 +174,7 @@ public class Location {
         Utils.checkNotNull(updatedAt, "updatedAt");
         Utils.checkNotNull(active, "active");
         Utils.checkNotNull(inactive, "inactive");
+        Utils.checkNotNull(warnings, "warnings");
         this.uuid = uuid;
         this.version = version;
         this.companyUuid = companyUuid;
@@ -179,6 +191,7 @@ public class Location {
         this.updatedAt = updatedAt;
         this.active = active;
         this.inactive = inactive;
+        this.warnings = warnings;
     }
     
     public Location(
@@ -188,7 +201,7 @@ public class Location {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -306,6 +319,16 @@ public class Location {
     @JsonIgnore
     public Optional<Boolean> inactive() {
         return inactive;
+    }
+
+    /**
+     * An array of warning objects that provide additional information about the address. Warnings do not
+     * prevent the address from being saved.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<WarningObject>> warnings() {
+        return (Optional<List<WarningObject>>) warnings;
     }
 
     public static Builder builder() {
@@ -584,6 +607,27 @@ public class Location {
         return this;
     }
 
+    /**
+     * An array of warning objects that provide additional information about the address. Warnings do not
+     * prevent the address from being saved.
+     */
+    public Location withWarnings(List<WarningObject> warnings) {
+        Utils.checkNotNull(warnings, "warnings");
+        this.warnings = Optional.ofNullable(warnings);
+        return this;
+    }
+
+
+    /**
+     * An array of warning objects that provide additional information about the address. Warnings do not
+     * prevent the address from being saved.
+     */
+    public Location withWarnings(Optional<? extends List<WarningObject>> warnings) {
+        Utils.checkNotNull(warnings, "warnings");
+        this.warnings = warnings;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -609,7 +653,8 @@ public class Location {
             Utils.enhancedDeepEquals(this.createdAt, other.createdAt) &&
             Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
             Utils.enhancedDeepEquals(this.active, other.active) &&
-            Utils.enhancedDeepEquals(this.inactive, other.inactive);
+            Utils.enhancedDeepEquals(this.inactive, other.inactive) &&
+            Utils.enhancedDeepEquals(this.warnings, other.warnings);
     }
     
     @Override
@@ -620,7 +665,7 @@ public class Location {
             city, state, zip,
             country, mailingAddress, filingAddress,
             createdAt, updatedAt, active,
-            inactive);
+            inactive, warnings);
     }
     
     @Override
@@ -641,7 +686,8 @@ public class Location {
                 "createdAt", createdAt,
                 "updatedAt", updatedAt,
                 "active", active,
-                "inactive", inactive);
+                "inactive", inactive,
+                "warnings", warnings);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -678,6 +724,8 @@ public class Location {
         private Optional<Boolean> active = Optional.empty();
 
         private Optional<Boolean> inactive = Optional.empty();
+
+        private Optional<? extends List<WarningObject>> warnings = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -956,6 +1004,27 @@ public class Location {
             return this;
         }
 
+
+        /**
+         * An array of warning objects that provide additional information about the address. Warnings do not
+         * prevent the address from being saved.
+         */
+        public Builder warnings(List<WarningObject> warnings) {
+            Utils.checkNotNull(warnings, "warnings");
+            this.warnings = Optional.ofNullable(warnings);
+            return this;
+        }
+
+        /**
+         * An array of warning objects that provide additional information about the address. Warnings do not
+         * prevent the address from being saved.
+         */
+        public Builder warnings(Optional<? extends List<WarningObject>> warnings) {
+            Utils.checkNotNull(warnings, "warnings");
+            this.warnings = warnings;
+            return this;
+        }
+
         public Location build() {
             if (country == null) {
                 country = _SINGLETON_VALUE_Country.value();
@@ -967,7 +1036,7 @@ public class Location {
                 city, state, zip,
                 country, mailingAddress, filingAddress,
                 createdAt, updatedAt, active,
-                inactive);
+                inactive, warnings);
         }
 
 

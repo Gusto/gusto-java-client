@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetDepartmentRequestBuilder {
 
-    private String departmentUuid;
     private Optional<? extends GetDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetDepartmentHeaderXGustoAPIVersion>>() {});
+    private String departmentUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetDepartmentRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetDepartmentRequestBuilder departmentUuid(String departmentUuid) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
-        this.departmentUuid = departmentUuid;
-        return this;
     }
                 
     public GetDepartmentRequestBuilder xGustoAPIVersion(GetDepartmentHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class GetDepartmentRequestBuilder {
         return this;
     }
 
+    public GetDepartmentRequestBuilder departmentUuid(String departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = departmentUuid;
+        return this;
+    }
+
 
     private GetDepartmentRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetDepartmentRequest request = new GetDepartmentRequest(departmentUuid,
-            xGustoAPIVersion);
+        GetDepartmentRequest request = new GetDepartmentRequest(xGustoAPIVersion,
+            departmentUuid);
 
         return request;
     }

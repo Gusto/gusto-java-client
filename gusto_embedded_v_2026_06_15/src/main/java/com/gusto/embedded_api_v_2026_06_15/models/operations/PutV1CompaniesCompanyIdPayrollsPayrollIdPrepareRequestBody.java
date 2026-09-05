@@ -18,7 +18,17 @@ import org.openapitools.jackson.nullable.JsonNullable;
 
 public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody {
     /**
-     * An array of employee UUIDs. If passed, only those employees payroll items will be prepared.
+     * The employees to prepare, identified by UUID. If omitted, every employee currently on the payroll is
+     * prepared.
+     * 
+     * <p>**Off-cycle payrolls that support multiple employees (`Bonus`, `Correction`, `Adhoc`):** passing
+     * `employee_uuids` also adds eligible employees who aren't yet on the payroll - a listed employee not
+     * on the payroll is added, while one already on it is simply prepared. A request may include up to 100
+     * UUIDs, of which at most 25 may be employees not already on the payroll; an ineligible or unknown
+     * UUID, or more than 25 new employees, is rejected with a 422.
+     * 
+     * <p>**All other payrolls:** `employee_uuids` selects which of the payroll's existing employees to
+     * prepare; a UUID for an employee not on the payroll is rejected with a 422.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("employee_uuids")
@@ -36,7 +46,17 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody {
     }
 
     /**
-     * An array of employee UUIDs. If passed, only those employees payroll items will be prepared.
+     * The employees to prepare, identified by UUID. If omitted, every employee currently on the payroll is
+     * prepared.
+     * 
+     * <p>**Off-cycle payrolls that support multiple employees (`Bonus`, `Correction`, `Adhoc`):** passing
+     * `employee_uuids` also adds eligible employees who aren't yet on the payroll - a listed employee not
+     * on the payroll is added, while one already on it is simply prepared. A request may include up to 100
+     * UUIDs, of which at most 25 may be employees not already on the payroll; an ineligible or unknown
+     * UUID, or more than 25 new employees, is rejected with a 422.
+     * 
+     * <p>**All other payrolls:** `employee_uuids` selects which of the payroll's existing employees to
+     * prepare; a UUID for an employee not on the payroll is rejected with a 422.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -50,7 +70,17 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody {
 
 
     /**
-     * An array of employee UUIDs. If passed, only those employees payroll items will be prepared.
+     * The employees to prepare, identified by UUID. If omitted, every employee currently on the payroll is
+     * prepared.
+     * 
+     * <p>**Off-cycle payrolls that support multiple employees (`Bonus`, `Correction`, `Adhoc`):** passing
+     * `employee_uuids` also adds eligible employees who aren't yet on the payroll - a listed employee not
+     * on the payroll is added, while one already on it is simply prepared. A request may include up to 100
+     * UUIDs, of which at most 25 may be employees not already on the payroll; an ineligible or unknown
+     * UUID, or more than 25 new employees, is rejected with a 422.
+     * 
+     * <p>**All other payrolls:** `employee_uuids` selects which of the payroll's existing employees to
+     * prepare; a UUID for an employee not on the payroll is rejected with a 422.
      */
     public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody withEmployeeUuids(List<String> employeeUuids) {
         Utils.checkNotNull(employeeUuids, "employeeUuids");
@@ -59,7 +89,17 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody {
     }
 
     /**
-     * An array of employee UUIDs. If passed, only those employees payroll items will be prepared.
+     * The employees to prepare, identified by UUID. If omitted, every employee currently on the payroll is
+     * prepared.
+     * 
+     * <p>**Off-cycle payrolls that support multiple employees (`Bonus`, `Correction`, `Adhoc`):** passing
+     * `employee_uuids` also adds eligible employees who aren't yet on the payroll - a listed employee not
+     * on the payroll is added, while one already on it is simply prepared. A request may include up to 100
+     * UUIDs, of which at most 25 may be employees not already on the payroll; an ineligible or unknown
+     * UUID, or more than 25 new employees, is rejected with a 422.
+     * 
+     * <p>**All other payrolls:** `employee_uuids` selects which of the payroll's existing employees to
+     * prepare; a UUID for an employee not on the payroll is rejected with a 422.
      */
     public PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody withEmployeeUuids(JsonNullable<? extends List<String>> employeeUuids) {
         Utils.checkNotNull(employeeUuids, "employeeUuids");
@@ -103,7 +143,17 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody {
 
 
         /**
-         * An array of employee UUIDs. If passed, only those employees payroll items will be prepared.
+         * The employees to prepare, identified by UUID. If omitted, every employee currently on the payroll is
+         * prepared.
+         * 
+         * <p>**Off-cycle payrolls that support multiple employees (`Bonus`, `Correction`, `Adhoc`):** passing
+         * `employee_uuids` also adds eligible employees who aren't yet on the payroll - a listed employee not
+         * on the payroll is added, while one already on it is simply prepared. A request may include up to 100
+         * UUIDs, of which at most 25 may be employees not already on the payroll; an ineligible or unknown
+         * UUID, or more than 25 new employees, is rejected with a 422.
+         * 
+         * <p>**All other payrolls:** `employee_uuids` selects which of the payroll's existing employees to
+         * prepare; a UUID for an employee not on the payroll is rejected with a 422.
          */
         public Builder employeeUuids(List<String> employeeUuids) {
             Utils.checkNotNull(employeeUuids, "employeeUuids");
@@ -112,7 +162,17 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody {
         }
 
         /**
-         * An array of employee UUIDs. If passed, only those employees payroll items will be prepared.
+         * The employees to prepare, identified by UUID. If omitted, every employee currently on the payroll is
+         * prepared.
+         * 
+         * <p>**Off-cycle payrolls that support multiple employees (`Bonus`, `Correction`, `Adhoc`):** passing
+         * `employee_uuids` also adds eligible employees who aren't yet on the payroll - a listed employee not
+         * on the payroll is added, while one already on it is simply prepared. A request may include up to 100
+         * UUIDs, of which at most 25 may be employees not already on the payroll; an ineligible or unknown
+         * UUID, or more than 25 new employees, is rejected with a 422.
+         * 
+         * <p>**All other payrolls:** `employee_uuids` selects which of the payroll's existing employees to
+         * prepare; a UUID for an employee not on the payroll is rejected with a 422.
          */
         public Builder employeeUuids(JsonNullable<? extends List<String>> employeeUuids) {
             Utils.checkNotNull(employeeUuids, "employeeUuids");

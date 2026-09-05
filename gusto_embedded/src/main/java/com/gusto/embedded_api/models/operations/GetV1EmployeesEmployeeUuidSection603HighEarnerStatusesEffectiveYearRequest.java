@@ -18,6 +18,14 @@ import java.util.Optional;
 
 public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the employee
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_uuid")
@@ -29,31 +37,34 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=effective_year")
     private long effectiveYear;
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion;
-
     @JsonCreator
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest(
+            Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion,
             String employeeUuid,
-            long effectiveYear,
-            Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            long effectiveYear) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(employeeUuid, "employeeUuid");
         Utils.checkNotNull(effectiveYear, "effectiveYear");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.employeeUuid = employeeUuid;
         this.effectiveYear = effectiveYear;
-        this.xGustoAPIVersion = xGustoAPIVersion;
     }
     
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest(
             String employeeUuid,
             long effectiveYear) {
-        this(employeeUuid, effectiveYear, Optional.empty());
+        this(Optional.empty(), employeeUuid, effectiveYear);
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -72,39 +83,10 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear
         return effectiveYear;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion>) xGustoAPIVersion;
-    }
-
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the employee
-     */
-    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest withEmployeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
-        return this;
-    }
-
-    /**
-     * The effective year for the Section 603 status
-     */
-    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest withEffectiveYear(long effectiveYear) {
-        Utils.checkNotNull(effectiveYear, "effectiveYear");
-        this.effectiveYear = effectiveYear;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -129,6 +111,24 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear
         return this;
     }
 
+    /**
+     * The UUID of the employee
+     */
+    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest withEmployeeUuid(String employeeUuid) {
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
+        this.employeeUuid = employeeUuid;
+        return this;
+    }
+
+    /**
+     * The effective year for the Section 603 status
+     */
+    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest withEffectiveYear(long effectiveYear) {
+        Utils.checkNotNull(effectiveYear, "effectiveYear");
+        this.effectiveYear = effectiveYear;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -139,56 +139,36 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear
         }
         GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest other = (GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
-            Utils.enhancedDeepEquals(this.effectiveYear, other.effectiveYear) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.effectiveYear, other.effectiveYear);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            employeeUuid, effectiveYear, xGustoAPIVersion);
+            xGustoAPIVersion, employeeUuid, effectiveYear);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "employeeUuid", employeeUuid,
-                "effectiveYear", effectiveYear,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "effectiveYear", effectiveYear);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String employeeUuid;
 
         private Long effectiveYear;
 
-        private Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion;
-
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the employee
-         */
-        public Builder employeeUuid(String employeeUuid) {
-            Utils.checkNotNull(employeeUuid, "employeeUuid");
-            this.employeeUuid = employeeUuid;
-            return this;
-        }
-
-
-        /**
-         * The effective year for the Section 603 status
-         */
-        public Builder effectiveYear(long effectiveYear) {
-            Utils.checkNotNull(effectiveYear, "effectiveYear");
-            this.effectiveYear = effectiveYear;
-            return this;
         }
 
 
@@ -214,13 +194,33 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear
             return this;
         }
 
+
+        /**
+         * The UUID of the employee
+         */
+        public Builder employeeUuid(String employeeUuid) {
+            Utils.checkNotNull(employeeUuid, "employeeUuid");
+            this.employeeUuid = employeeUuid;
+            return this;
+        }
+
+
+        /**
+         * The effective year for the Section 603 status
+         */
+        public Builder effectiveYear(long effectiveYear) {
+            Utils.checkNotNull(effectiveYear, "effectiveYear");
+            this.effectiveYear = effectiveYear;
+            return this;
+        }
+
         public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest(
-                employeeUuid, effectiveYear, xGustoAPIVersion);
+                xGustoAPIVersion, employeeUuid, effectiveYear);
         }
 
 

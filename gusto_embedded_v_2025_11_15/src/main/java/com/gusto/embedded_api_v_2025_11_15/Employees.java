@@ -26,6 +26,7 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeesEmplo
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeesEmployeeIdOnboardingStatusRequestBuilder;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeesEmployeeIdOnboardingStatusResponse;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeesHeaderXGustoAPIVersion;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeesQueryParamInclude;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeesRequest;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeesRequestBuilder;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeesResponse;
@@ -56,7 +57,6 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.PutV1EmployeesReque
 import com.gusto.embedded_api_v_2025_11_15.models.operations.PutV1EmployeesRequestBody;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.PutV1EmployeesRequestBuilder;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.PutV1EmployeesResponse;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.QueryParamInclude;
 import com.gusto.embedded_api_v_2025_11_15.operations.DeleteV1Employee;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1CompaniesCompanyIdEmployees;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1CompaniesCompanyIdEmployeesPaymentDetails;
@@ -96,14 +96,9 @@ public class Employees {
     }
 
     /**
-     * Get employees of a company
+     * Get an employee's custom fields
      * 
-     * <p>Get all of the employees, onboarding, active and terminated, for a given company.
-     * 
-     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
-     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
-     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
-     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * <p>Returns a list of the employee's custom fields.
      * 
      * <p>scope: `employees:read`
      * 
@@ -111,93 +106,57 @@ public class Employees {
      * 
      * @return The call builder
      */
-    public GetV1CompaniesCompanyIdEmployeesRequestBuilder list() {
-        return new GetV1CompaniesCompanyIdEmployeesRequestBuilder(sdkConfiguration);
+    public GetV1EmployeesEmployeeIdCustomFieldsRequestBuilder getCustomFields() {
+        return new GetV1EmployeesEmployeeIdCustomFieldsRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get employees of a company
+     * Get an employee's custom fields
      * 
-     * <p>Get all of the employees, onboarding, active and terminated, for a given company.
-     * 
-     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
-     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
-     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
-     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * <p>Returns a list of the employee's custom fields.
      * 
      * <p>scope: `employees:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param request The request object containing all the parameters for the API call.
+     * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1CompaniesCompanyIdEmployeesResponse list(GetV1CompaniesCompanyIdEmployeesRequest request) {
-        RequestOperation<GetV1CompaniesCompanyIdEmployeesRequest, GetV1CompaniesCompanyIdEmployeesResponse> operation
-              = new GetV1CompaniesCompanyIdEmployees.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
+    public GetV1EmployeesEmployeeIdCustomFieldsResponse getCustomFields(String employeeId) {
+        return getCustomFields(Optional.empty(), employeeId, Optional.empty(),
+            Optional.empty());
     }
 
     /**
-     * Create an employee
+     * Get an employee's custom fields
      * 
-     * <p>Create an employee.
+     * <p>Returns a list of the employee's custom fields.
      * 
-     * <p>scope: `employees:manage`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public PostV1EmployeesRequestBuilder create() {
-        return new PostV1EmployeesRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Create an employee
-     * 
-     * <p>Create an employee.
-     * 
-     * <p>scope: `employees:manage`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId Company ID
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PostV1EmployeesResponse create(String companyId) {
-        return create(Optional.empty(), companyId, Optional.empty());
-    }
-
-    /**
-     * Create an employee
-     * 
-     * <p>Create an employee.
-     * 
-     * <p>scope: `employees:manage`
+     * <p>scope: `employees:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyId Company ID
-     * @param requestBody 
+     * @param employeeId The UUID of the employee
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PostV1EmployeesResponse create(
-            Optional<? extends PostV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
-            Optional<? extends PostV1EmployeesRequestBody> requestBody) {
-        PostV1EmployeesRequest request =
-            PostV1EmployeesRequest
+    public GetV1EmployeesEmployeeIdCustomFieldsResponse getCustomFields(
+            Optional<? extends GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<Long> page, Optional<Long> per) {
+        GetV1EmployeesEmployeeIdCustomFieldsRequest request =
+            GetV1EmployeesEmployeeIdCustomFieldsRequest
                 .builder()
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .companyId(companyId)
-                .requestBody(requestBody)
+                .employeeId(employeeId)
+                .page(page)
+                .per(per)
                 .build();
-        RequestOperation<PostV1EmployeesRequest, PostV1EmployeesResponse> operation
-              = new PostV1Employees.Sync(sdkConfiguration, _headers);
+        RequestOperation<GetV1EmployeesEmployeeIdCustomFieldsRequest, GetV1EmployeesEmployeeIdCustomFieldsResponse> operation
+              = new GetV1EmployeesEmployeeIdCustomFields.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -254,74 +213,65 @@ public class Employees {
     }
 
     /**
-     * Create a historical employee
+     * Get employee time off activities
      * 
-     * <p>Create a historical employee, an employee that was previously dismissed from the company in the
-     * current year.
+     * <p>Get employee time off activities.
      * 
-     * <p>scope: `employees:manage`
+     * <p>scope: `employee_time_off_activities:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
-    public PostV1HistoricalEmployeesRequestBuilder createHistorical() {
-        return new PostV1HistoricalEmployeesRequestBuilder(sdkConfiguration);
+    public GetVersionEmployeesTimeOffActivitiesRequestBuilder getTimeOffActivities() {
+        return new GetVersionEmployeesTimeOffActivitiesRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Create a historical employee
+     * Get employee time off activities
      * 
-     * <p>Create a historical employee, an employee that was previously dismissed from the company in the
-     * current year.
+     * <p>Get employee time off activities.
      * 
-     * <p>scope: `employees:manage`
+     * <p>scope: `employee_time_off_activities:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company that will employ this historical record.
-     * @param historicalEmployeeBody Request body for creating or updating a **historical employee**—someone who already separated from the company and must appear on year-to-date or tax filings without receiving ongoing payroll.
-     *         
-     *         Send this object under the JSON root key `employee`. All dates are ISO 8601 (`YYYY-MM-DD`). Use a `work_address.location_uuid` returned from your company locations API for an active work site.
-     *         
+     * @param employeeUuid The UUID of the employee
+     * @param timeOffType The time off type name you want to query data for. ex: 'sick' or 'vacation'
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PostV1HistoricalEmployeesResponse createHistorical(String companyUuid, HistoricalEmployeeBody historicalEmployeeBody) {
-        return createHistorical(Optional.empty(), companyUuid, historicalEmployeeBody);
+    public GetVersionEmployeesTimeOffActivitiesResponse getTimeOffActivities(String employeeUuid, String timeOffType) {
+        return getTimeOffActivities(Optional.empty(), employeeUuid, timeOffType);
     }
 
     /**
-     * Create a historical employee
+     * Get employee time off activities
      * 
-     * <p>Create a historical employee, an employee that was previously dismissed from the company in the
-     * current year.
+     * <p>Get employee time off activities.
      * 
-     * <p>scope: `employees:manage`
+     * <p>scope: `employee_time_off_activities:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyUuid The UUID of the company that will employ this historical record.
-     * @param historicalEmployeeBody Request body for creating or updating a **historical employee**—someone who already separated from the company and must appear on year-to-date or tax filings without receiving ongoing payroll.
-     *         
-     *         Send this object under the JSON root key `employee`. All dates are ISO 8601 (`YYYY-MM-DD`). Use a `work_address.location_uuid` returned from your company locations API for an active work site.
-     *         
+     * @param employeeUuid The UUID of the employee
+     * @param timeOffType The time off type name you want to query data for. ex: 'sick' or 'vacation'
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PostV1HistoricalEmployeesResponse createHistorical(
-            Optional<? extends PostV1HistoricalEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
-            HistoricalEmployeeBody historicalEmployeeBody) {
-        PostV1HistoricalEmployeesRequest request =
-            PostV1HistoricalEmployeesRequest
+    public GetVersionEmployeesTimeOffActivitiesResponse getTimeOffActivities(
+            Optional<? extends GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
+            String timeOffType) {
+        GetVersionEmployeesTimeOffActivitiesRequest request =
+            GetVersionEmployeesTimeOffActivitiesRequest
                 .builder()
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .companyUuid(companyUuid)
-                .historicalEmployeeBody(historicalEmployeeBody)
+                .employeeUuid(employeeUuid)
+                .timeOffType(timeOffType)
                 .build();
-        RequestOperation<PostV1HistoricalEmployeesRequest, PostV1HistoricalEmployeesResponse> operation
-              = new PostV1HistoricalEmployees.Sync(sdkConfiguration, _headers);
+        RequestOperation<GetVersionEmployeesTimeOffActivitiesRequest, GetVersionEmployeesTimeOffActivitiesResponse> operation
+              = new GetVersionEmployeesTimeOffActivities.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -389,7 +339,7 @@ public class Employees {
      */
     public GetV1EmployeesResponse get(
             Optional<? extends GetV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
-            Optional<? extends List<QueryParamInclude>> include) {
+            Optional<? extends List<GetV1EmployeesQueryParamInclude>> include) {
         GetV1EmployeesRequest request =
             GetV1EmployeesRequest
                 .builder()
@@ -533,9 +483,14 @@ public class Employees {
     }
 
     /**
-     * Get an employee's custom fields
+     * Get employees of a company
      * 
-     * <p>Returns a list of the employee's custom fields.
+     * <p>Get all of the employees, onboarding, active and terminated, for a given company.
+     * 
+     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
      * 
      * <p>scope: `employees:read`
      * 
@@ -543,68 +498,38 @@ public class Employees {
      * 
      * @return The call builder
      */
-    public GetV1EmployeesEmployeeIdCustomFieldsRequestBuilder getCustomFields() {
-        return new GetV1EmployeesEmployeeIdCustomFieldsRequestBuilder(sdkConfiguration);
+    public GetV1CompaniesCompanyIdEmployeesRequestBuilder list() {
+        return new GetV1CompaniesCompanyIdEmployeesRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get an employee's custom fields
+     * Get employees of a company
      * 
-     * <p>Returns a list of the employee's custom fields.
+     * <p>Get all of the employees, onboarding, active and terminated, for a given company.
+     * 
+     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
      * 
      * <p>scope: `employees:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeId The UUID of the employee
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1EmployeesEmployeeIdCustomFieldsResponse getCustomFields(String employeeId) {
-        return getCustomFields(employeeId, Optional.empty(), Optional.empty(),
-            Optional.empty());
-    }
-
-    /**
-     * Get an employee's custom fields
-     * 
-     * <p>Returns a list of the employee's custom fields.
-     * 
-     * <p>scope: `employees:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param employeeId The UUID of the employee
-     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
-     * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1EmployeesEmployeeIdCustomFieldsResponse getCustomFields(
-            String employeeId, Optional<Long> page,
-            Optional<Long> per, Optional<? extends GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        GetV1EmployeesEmployeeIdCustomFieldsRequest request =
-            GetV1EmployeesEmployeeIdCustomFieldsRequest
-                .builder()
-                .employeeId(employeeId)
-                .page(page)
-                .per(per)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .build();
-        RequestOperation<GetV1EmployeesEmployeeIdCustomFieldsRequest, GetV1EmployeesEmployeeIdCustomFieldsResponse> operation
-              = new GetV1EmployeesEmployeeIdCustomFields.Sync(sdkConfiguration, _headers);
+    public GetV1CompaniesCompanyIdEmployeesResponse list(GetV1CompaniesCompanyIdEmployeesRequest request) {
+        RequestOperation<GetV1CompaniesCompanyIdEmployeesRequest, GetV1CompaniesCompanyIdEmployeesResponse> operation
+              = new GetV1CompaniesCompanyIdEmployees.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
-     * Update employee onboarding documents config
+     * Create an employee
      * 
-     * <p>Indicate whether to include the Form I-9 for an employee during the onboarding process.
-     * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
-     * 
-     * <p>## Related guides
-     * - [Employee onboarding](doc:employee-onboarding)
+     * <p>Create an employee.
      * 
      * <p>scope: `employees:manage`
      * 
@@ -612,62 +537,54 @@ public class Employees {
      * 
      * @return The call builder
      */
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder updateOnboardingDocumentsConfig() {
-        return new PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder(sdkConfiguration);
+    public PostV1EmployeesRequestBuilder create() {
+        return new PostV1EmployeesRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Update employee onboarding documents config
+     * Create an employee
      * 
-     * <p>Indicate whether to include the Form I-9 for an employee during the onboarding process.
-     * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
-     * 
-     * <p>## Related guides
-     * - [Employee onboarding](doc:employee-onboarding)
+     * <p>Create an employee.
      * 
      * <p>scope: `employees:manage`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeId The UUID of the employee
+     * @param companyId Company ID
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse updateOnboardingDocumentsConfig(String employeeId) {
-        return updateOnboardingDocumentsConfig(Optional.empty(), employeeId, Optional.empty());
+    public PostV1EmployeesResponse create(String companyId) {
+        return create(Optional.empty(), companyId, Optional.empty());
     }
 
     /**
-     * Update employee onboarding documents config
+     * Create an employee
      * 
-     * <p>Indicate whether to include the Form I-9 for an employee during the onboarding process.
-     * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
-     * 
-     * <p>## Related guides
-     * - [Employee onboarding](doc:employee-onboarding)
+     * <p>Create an employee.
      * 
      * <p>scope: `employees:manage`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param employeeId The UUID of the employee
-     * @param employeeOnboardingDocumentsConfigRequest Request body for updating an employee's onboarding documents configuration.
+     * @param companyId Company ID
+     * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse updateOnboardingDocumentsConfig(
-            Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
-            Optional<? extends EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest) {
-        PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest request =
-            PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest
+    public PostV1EmployeesResponse create(
+            Optional<? extends PostV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<? extends PostV1EmployeesRequestBody> requestBody) {
+        PostV1EmployeesRequest request =
+            PostV1EmployeesRequest
                 .builder()
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .employeeId(employeeId)
-                .employeeOnboardingDocumentsConfigRequest(employeeOnboardingDocumentsConfigRequest)
+                .companyId(companyId)
+                .requestBody(requestBody)
                 .build();
-        RequestOperation<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest, PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse> operation
-              = new PutV1EmployeesEmployeeIdOnboardingDocumentsConfig.Sync(sdkConfiguration, _headers);
+        RequestOperation<PostV1EmployeesRequest, PostV1EmployeesResponse> operation
+              = new PostV1Employees.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -973,65 +890,148 @@ public class Employees {
     }
 
     /**
-     * Get employee time off activities
+     * Update employee onboarding documents config
      * 
-     * <p>Get employee time off activities.
+     * <p>Indicate whether to include the Form I-9 for an employee during the onboarding process.
+     * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
      * 
-     * <p>scope: `employee_time_off_activities:read`
+     * <p>## Related guides
+     * - [Employee onboarding](doc:employee-onboarding)
+     * 
+     * <p>scope: `employees:manage`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The call builder
      */
-    public GetVersionEmployeesTimeOffActivitiesRequestBuilder getTimeOffActivities() {
-        return new GetVersionEmployeesTimeOffActivitiesRequestBuilder(sdkConfiguration);
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder updateOnboardingDocumentsConfig() {
+        return new PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get employee time off activities
+     * Update employee onboarding documents config
      * 
-     * <p>Get employee time off activities.
+     * <p>Indicate whether to include the Form I-9 for an employee during the onboarding process.
+     * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
      * 
-     * <p>scope: `employee_time_off_activities:read`
+     * <p>## Related guides
+     * - [Employee onboarding](doc:employee-onboarding)
+     * 
+     * <p>scope: `employees:manage`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeUuid The UUID of the employee
-     * @param timeOffType The time off type name you want to query data for. ex: 'sick' or 'vacation'
+     * @param employeeId The UUID of the employee
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetVersionEmployeesTimeOffActivitiesResponse getTimeOffActivities(String employeeUuid, String timeOffType) {
-        return getTimeOffActivities(Optional.empty(), employeeUuid, timeOffType);
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse updateOnboardingDocumentsConfig(String employeeId) {
+        return updateOnboardingDocumentsConfig(Optional.empty(), employeeId, Optional.empty());
     }
 
     /**
-     * Get employee time off activities
+     * Update employee onboarding documents config
      * 
-     * <p>Get employee time off activities.
+     * <p>Indicate whether to include the Form I-9 for an employee during the onboarding process.
+     * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
      * 
-     * <p>scope: `employee_time_off_activities:read`
+     * <p>## Related guides
+     * - [Employee onboarding](doc:employee-onboarding)
+     * 
+     * <p>scope: `employees:manage`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param employeeUuid The UUID of the employee
-     * @param timeOffType The time off type name you want to query data for. ex: 'sick' or 'vacation'
+     * @param employeeId The UUID of the employee
+     * @param employeeOnboardingDocumentsConfigRequest Request body for updating an employee's onboarding documents configuration.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetVersionEmployeesTimeOffActivitiesResponse getTimeOffActivities(
-            Optional<? extends GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
-            String timeOffType) {
-        GetVersionEmployeesTimeOffActivitiesRequest request =
-            GetVersionEmployeesTimeOffActivitiesRequest
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse updateOnboardingDocumentsConfig(
+            Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<? extends EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest) {
+        PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest request =
+            PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest
                 .builder()
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .employeeUuid(employeeUuid)
-                .timeOffType(timeOffType)
+                .employeeId(employeeId)
+                .employeeOnboardingDocumentsConfigRequest(employeeOnboardingDocumentsConfigRequest)
                 .build();
-        RequestOperation<GetVersionEmployeesTimeOffActivitiesRequest, GetVersionEmployeesTimeOffActivitiesResponse> operation
-              = new GetVersionEmployeesTimeOffActivities.Sync(sdkConfiguration, _headers);
+        RequestOperation<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest, PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse> operation
+              = new PutV1EmployeesEmployeeIdOnboardingDocumentsConfig.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Create a historical employee
+     * 
+     * <p>Create a historical employee, an employee that was previously dismissed from the company in the
+     * current year.
+     * 
+     * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public PostV1HistoricalEmployeesRequestBuilder createHistorical() {
+        return new PostV1HistoricalEmployeesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a historical employee
+     * 
+     * <p>Create a historical employee, an employee that was previously dismissed from the company in the
+     * current year.
+     * 
+     * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyUuid The UUID of the company that will employ this historical record.
+     * @param historicalEmployeeBody Request body for creating or updating a **historical employee**—someone who already separated from the company and must appear on year-to-date or tax filings without receiving ongoing payroll.
+     *         
+     *         Send this object under the JSON root key `employee`. All dates are ISO 8601 (`YYYY-MM-DD`). Use a `work_address.location_uuid` returned from your company locations API for an active work site.
+     *         
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1HistoricalEmployeesResponse createHistorical(String companyUuid, HistoricalEmployeeBody historicalEmployeeBody) {
+        return createHistorical(Optional.empty(), companyUuid, historicalEmployeeBody);
+    }
+
+    /**
+     * Create a historical employee
+     * 
+     * <p>Create a historical employee, an employee that was previously dismissed from the company in the
+     * current year.
+     * 
+     * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company that will employ this historical record.
+     * @param historicalEmployeeBody Request body for creating or updating a **historical employee**—someone who already separated from the company and must appear on year-to-date or tax filings without receiving ongoing payroll.
+     *         
+     *         Send this object under the JSON root key `employee`. All dates are ISO 8601 (`YYYY-MM-DD`). Use a `work_address.location_uuid` returned from your company locations API for an active work site.
+     *         
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1HistoricalEmployeesResponse createHistorical(
+            Optional<? extends PostV1HistoricalEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            HistoricalEmployeeBody historicalEmployeeBody) {
+        PostV1HistoricalEmployeesRequest request =
+            PostV1HistoricalEmployeesRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
+                .historicalEmployeeBody(historicalEmployeeBody)
+                .build();
+        RequestOperation<PostV1HistoricalEmployeesRequest, PostV1HistoricalEmployeesResponse> operation
+              = new PostV1HistoricalEmployees.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

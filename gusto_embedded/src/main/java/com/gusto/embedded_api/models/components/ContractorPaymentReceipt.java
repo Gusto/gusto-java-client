@@ -99,14 +99,14 @@ public class ContractorPaymentReceipt {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contractor_payments")
-    private Optional<? extends List<ContractorPayments>> contractorPayments;
+    private Optional<? extends List<ContractorPaymentReceiptContractorPayments>> contractorPayments;
 
     /**
      * The licensed payroll processor
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("licensee")
-    private Optional<? extends ContractorPaymentReceiptLicensee> licensee;
+    private Optional<? extends Licensee> licensee;
 
     @JsonCreator
     public ContractorPaymentReceipt(
@@ -120,8 +120,8 @@ public class ContractorPaymentReceipt {
             @JsonProperty("right_to_refund") Optional<String> rightToRefund,
             @JsonProperty("liability_of_licensee") Optional<String> liabilityOfLicensee,
             @JsonProperty("totals") Optional<? extends ContractorPaymentReceiptTotals> totals,
-            @JsonProperty("contractor_payments") Optional<? extends List<ContractorPayments>> contractorPayments,
-            @JsonProperty("licensee") Optional<? extends ContractorPaymentReceiptLicensee> licensee) {
+            @JsonProperty("contractor_payments") Optional<? extends List<ContractorPaymentReceiptContractorPayments>> contractorPayments,
+            @JsonProperty("licensee") Optional<? extends Licensee> licensee) {
         Utils.checkNotNull(contractorPaymentUuid, "contractorPaymentUuid");
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(nameOfSender, "nameOfSender");
@@ -247,8 +247,8 @@ public class ContractorPaymentReceipt {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<ContractorPayments>> contractorPayments() {
-        return (Optional<List<ContractorPayments>>) contractorPayments;
+    public Optional<List<ContractorPaymentReceiptContractorPayments>> contractorPayments() {
+        return (Optional<List<ContractorPaymentReceiptContractorPayments>>) contractorPayments;
     }
 
     /**
@@ -256,8 +256,8 @@ public class ContractorPaymentReceipt {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<ContractorPaymentReceiptLicensee> licensee() {
-        return (Optional<ContractorPaymentReceiptLicensee>) licensee;
+    public Optional<Licensee> licensee() {
+        return (Optional<Licensee>) licensee;
     }
 
     public static Builder builder() {
@@ -470,7 +470,7 @@ public class ContractorPaymentReceipt {
     /**
      * An array of contractor payments for this contractor payment.
      */
-    public ContractorPaymentReceipt withContractorPayments(List<ContractorPayments> contractorPayments) {
+    public ContractorPaymentReceipt withContractorPayments(List<ContractorPaymentReceiptContractorPayments> contractorPayments) {
         Utils.checkNotNull(contractorPayments, "contractorPayments");
         this.contractorPayments = Optional.ofNullable(contractorPayments);
         return this;
@@ -480,7 +480,7 @@ public class ContractorPaymentReceipt {
     /**
      * An array of contractor payments for this contractor payment.
      */
-    public ContractorPaymentReceipt withContractorPayments(Optional<? extends List<ContractorPayments>> contractorPayments) {
+    public ContractorPaymentReceipt withContractorPayments(Optional<? extends List<ContractorPaymentReceiptContractorPayments>> contractorPayments) {
         Utils.checkNotNull(contractorPayments, "contractorPayments");
         this.contractorPayments = contractorPayments;
         return this;
@@ -489,7 +489,7 @@ public class ContractorPaymentReceipt {
     /**
      * The licensed payroll processor
      */
-    public ContractorPaymentReceipt withLicensee(ContractorPaymentReceiptLicensee licensee) {
+    public ContractorPaymentReceipt withLicensee(Licensee licensee) {
         Utils.checkNotNull(licensee, "licensee");
         this.licensee = Optional.ofNullable(licensee);
         return this;
@@ -499,7 +499,7 @@ public class ContractorPaymentReceipt {
     /**
      * The licensed payroll processor
      */
-    public ContractorPaymentReceipt withLicensee(Optional<? extends ContractorPaymentReceiptLicensee> licensee) {
+    public ContractorPaymentReceipt withLicensee(Optional<? extends Licensee> licensee) {
         Utils.checkNotNull(licensee, "licensee");
         this.licensee = licensee;
         return this;
@@ -578,9 +578,9 @@ public class ContractorPaymentReceipt {
 
         private Optional<? extends ContractorPaymentReceiptTotals> totals = Optional.empty();
 
-        private Optional<? extends List<ContractorPayments>> contractorPayments = Optional.empty();
+        private Optional<? extends List<ContractorPaymentReceiptContractorPayments>> contractorPayments = Optional.empty();
 
-        private Optional<? extends ContractorPaymentReceiptLicensee> licensee = Optional.empty();
+        private Optional<? extends Licensee> licensee = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -792,7 +792,7 @@ public class ContractorPaymentReceipt {
         /**
          * An array of contractor payments for this contractor payment.
          */
-        public Builder contractorPayments(List<ContractorPayments> contractorPayments) {
+        public Builder contractorPayments(List<ContractorPaymentReceiptContractorPayments> contractorPayments) {
             Utils.checkNotNull(contractorPayments, "contractorPayments");
             this.contractorPayments = Optional.ofNullable(contractorPayments);
             return this;
@@ -801,7 +801,7 @@ public class ContractorPaymentReceipt {
         /**
          * An array of contractor payments for this contractor payment.
          */
-        public Builder contractorPayments(Optional<? extends List<ContractorPayments>> contractorPayments) {
+        public Builder contractorPayments(Optional<? extends List<ContractorPaymentReceiptContractorPayments>> contractorPayments) {
             Utils.checkNotNull(contractorPayments, "contractorPayments");
             this.contractorPayments = contractorPayments;
             return this;
@@ -811,7 +811,7 @@ public class ContractorPaymentReceipt {
         /**
          * The licensed payroll processor
          */
-        public Builder licensee(ContractorPaymentReceiptLicensee licensee) {
+        public Builder licensee(Licensee licensee) {
             Utils.checkNotNull(licensee, "licensee");
             this.licensee = Optional.ofNullable(licensee);
             return this;
@@ -820,7 +820,7 @@ public class ContractorPaymentReceipt {
         /**
          * The licensed payroll processor
          */
-        public Builder licensee(Optional<? extends ContractorPaymentReceiptLicensee> licensee) {
+        public Builder licensee(Optional<? extends Licensee> licensee) {
             Utils.checkNotNull(licensee, "licensee");
             this.licensee = licensee;
             return this;
