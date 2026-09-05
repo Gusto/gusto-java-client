@@ -11,52 +11,166 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 
 public class Employees {
     /**
-     * Employee UUID
+     * The UUID of the employee
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("employee_uuid")
-    private Optional<String> employeeUuid;
+    @JsonProperty("uuid")
+    private Optional<String> uuid;
 
     /**
-     * Pay schedule UUID
+     * The sum of employee deduction for this employee given the period of time and the specific company
+     * benefit.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("pay_schedule_uuid")
-    private Optional<String> payScheduleUuid;
+    @JsonProperty("company_benefit_deduction")
+    private Optional<String> companyBenefitDeduction;
+
+    /**
+     * The sum of company contribution for this employee given the period of time and the specific company
+     * benefit.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("company_benefit_contribution")
+    private Optional<String> companyBenefitContribution;
+
+    /**
+     * The sum of employee benefit deduction for this employee given the period of time and the benefit
+     * type.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("benefit_deduction")
+    private Optional<String> benefitDeduction;
+
+    /**
+     * The sum of company contribution for this employee given the period of time and the benefit type.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("benefit_contribution")
+    private Optional<String> benefitContribution;
+
+    /**
+     * Gross pay for this employee given the period of time.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("gross_pay")
+    private Optional<String> grossPay;
+
+    /**
+     * Total imputed pay for this employee given the period of time (not scoped to a benefit type).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("imputed_pay")
+    private Optional<String> imputedPay;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("payroll_benefits")
+    private Optional<? extends List<PayrollBenefits>> payrollBenefits;
 
     @JsonCreator
     public Employees(
-            @JsonProperty("employee_uuid") Optional<String> employeeUuid,
-            @JsonProperty("pay_schedule_uuid") Optional<String> payScheduleUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        Utils.checkNotNull(payScheduleUuid, "payScheduleUuid");
-        this.employeeUuid = employeeUuid;
-        this.payScheduleUuid = payScheduleUuid;
+            @JsonProperty("uuid") Optional<String> uuid,
+            @JsonProperty("company_benefit_deduction") Optional<String> companyBenefitDeduction,
+            @JsonProperty("company_benefit_contribution") Optional<String> companyBenefitContribution,
+            @JsonProperty("benefit_deduction") Optional<String> benefitDeduction,
+            @JsonProperty("benefit_contribution") Optional<String> benefitContribution,
+            @JsonProperty("gross_pay") Optional<String> grossPay,
+            @JsonProperty("imputed_pay") Optional<String> imputedPay,
+            @JsonProperty("payroll_benefits") Optional<? extends List<PayrollBenefits>> payrollBenefits) {
+        Utils.checkNotNull(uuid, "uuid");
+        Utils.checkNotNull(companyBenefitDeduction, "companyBenefitDeduction");
+        Utils.checkNotNull(companyBenefitContribution, "companyBenefitContribution");
+        Utils.checkNotNull(benefitDeduction, "benefitDeduction");
+        Utils.checkNotNull(benefitContribution, "benefitContribution");
+        Utils.checkNotNull(grossPay, "grossPay");
+        Utils.checkNotNull(imputedPay, "imputedPay");
+        Utils.checkNotNull(payrollBenefits, "payrollBenefits");
+        this.uuid = uuid;
+        this.companyBenefitDeduction = companyBenefitDeduction;
+        this.companyBenefitContribution = companyBenefitContribution;
+        this.benefitDeduction = benefitDeduction;
+        this.benefitContribution = benefitContribution;
+        this.grossPay = grossPay;
+        this.imputedPay = imputedPay;
+        this.payrollBenefits = payrollBenefits;
     }
     
     public Employees() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
-     * Employee UUID
+     * The UUID of the employee
      */
     @JsonIgnore
-    public Optional<String> employeeUuid() {
-        return employeeUuid;
+    public Optional<String> uuid() {
+        return uuid;
     }
 
     /**
-     * Pay schedule UUID
+     * The sum of employee deduction for this employee given the period of time and the specific company
+     * benefit.
      */
     @JsonIgnore
-    public Optional<String> payScheduleUuid() {
-        return payScheduleUuid;
+    public Optional<String> companyBenefitDeduction() {
+        return companyBenefitDeduction;
+    }
+
+    /**
+     * The sum of company contribution for this employee given the period of time and the specific company
+     * benefit.
+     */
+    @JsonIgnore
+    public Optional<String> companyBenefitContribution() {
+        return companyBenefitContribution;
+    }
+
+    /**
+     * The sum of employee benefit deduction for this employee given the period of time and the benefit
+     * type.
+     */
+    @JsonIgnore
+    public Optional<String> benefitDeduction() {
+        return benefitDeduction;
+    }
+
+    /**
+     * The sum of company contribution for this employee given the period of time and the benefit type.
+     */
+    @JsonIgnore
+    public Optional<String> benefitContribution() {
+        return benefitContribution;
+    }
+
+    /**
+     * Gross pay for this employee given the period of time.
+     */
+    @JsonIgnore
+    public Optional<String> grossPay() {
+        return grossPay;
+    }
+
+    /**
+     * Total imputed pay for this employee given the period of time (not scoped to a benefit type).
+     */
+    @JsonIgnore
+    public Optional<String> imputedPay() {
+        return imputedPay;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<PayrollBenefits>> payrollBenefits() {
+        return (Optional<List<PayrollBenefits>>) payrollBenefits;
     }
 
     public static Builder builder() {
@@ -65,40 +179,154 @@ public class Employees {
 
 
     /**
-     * Employee UUID
+     * The UUID of the employee
      */
-    public Employees withEmployeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = Optional.ofNullable(employeeUuid);
+    public Employees withUuid(String uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = Optional.ofNullable(uuid);
         return this;
     }
 
 
     /**
-     * Employee UUID
+     * The UUID of the employee
      */
-    public Employees withEmployeeUuid(Optional<String> employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
+    public Employees withUuid(Optional<String> uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = uuid;
         return this;
     }
 
     /**
-     * Pay schedule UUID
+     * The sum of employee deduction for this employee given the period of time and the specific company
+     * benefit.
      */
-    public Employees withPayScheduleUuid(String payScheduleUuid) {
-        Utils.checkNotNull(payScheduleUuid, "payScheduleUuid");
-        this.payScheduleUuid = Optional.ofNullable(payScheduleUuid);
+    public Employees withCompanyBenefitDeduction(String companyBenefitDeduction) {
+        Utils.checkNotNull(companyBenefitDeduction, "companyBenefitDeduction");
+        this.companyBenefitDeduction = Optional.ofNullable(companyBenefitDeduction);
         return this;
     }
 
 
     /**
-     * Pay schedule UUID
+     * The sum of employee deduction for this employee given the period of time and the specific company
+     * benefit.
      */
-    public Employees withPayScheduleUuid(Optional<String> payScheduleUuid) {
-        Utils.checkNotNull(payScheduleUuid, "payScheduleUuid");
-        this.payScheduleUuid = payScheduleUuid;
+    public Employees withCompanyBenefitDeduction(Optional<String> companyBenefitDeduction) {
+        Utils.checkNotNull(companyBenefitDeduction, "companyBenefitDeduction");
+        this.companyBenefitDeduction = companyBenefitDeduction;
+        return this;
+    }
+
+    /**
+     * The sum of company contribution for this employee given the period of time and the specific company
+     * benefit.
+     */
+    public Employees withCompanyBenefitContribution(String companyBenefitContribution) {
+        Utils.checkNotNull(companyBenefitContribution, "companyBenefitContribution");
+        this.companyBenefitContribution = Optional.ofNullable(companyBenefitContribution);
+        return this;
+    }
+
+
+    /**
+     * The sum of company contribution for this employee given the period of time and the specific company
+     * benefit.
+     */
+    public Employees withCompanyBenefitContribution(Optional<String> companyBenefitContribution) {
+        Utils.checkNotNull(companyBenefitContribution, "companyBenefitContribution");
+        this.companyBenefitContribution = companyBenefitContribution;
+        return this;
+    }
+
+    /**
+     * The sum of employee benefit deduction for this employee given the period of time and the benefit
+     * type.
+     */
+    public Employees withBenefitDeduction(String benefitDeduction) {
+        Utils.checkNotNull(benefitDeduction, "benefitDeduction");
+        this.benefitDeduction = Optional.ofNullable(benefitDeduction);
+        return this;
+    }
+
+
+    /**
+     * The sum of employee benefit deduction for this employee given the period of time and the benefit
+     * type.
+     */
+    public Employees withBenefitDeduction(Optional<String> benefitDeduction) {
+        Utils.checkNotNull(benefitDeduction, "benefitDeduction");
+        this.benefitDeduction = benefitDeduction;
+        return this;
+    }
+
+    /**
+     * The sum of company contribution for this employee given the period of time and the benefit type.
+     */
+    public Employees withBenefitContribution(String benefitContribution) {
+        Utils.checkNotNull(benefitContribution, "benefitContribution");
+        this.benefitContribution = Optional.ofNullable(benefitContribution);
+        return this;
+    }
+
+
+    /**
+     * The sum of company contribution for this employee given the period of time and the benefit type.
+     */
+    public Employees withBenefitContribution(Optional<String> benefitContribution) {
+        Utils.checkNotNull(benefitContribution, "benefitContribution");
+        this.benefitContribution = benefitContribution;
+        return this;
+    }
+
+    /**
+     * Gross pay for this employee given the period of time.
+     */
+    public Employees withGrossPay(String grossPay) {
+        Utils.checkNotNull(grossPay, "grossPay");
+        this.grossPay = Optional.ofNullable(grossPay);
+        return this;
+    }
+
+
+    /**
+     * Gross pay for this employee given the period of time.
+     */
+    public Employees withGrossPay(Optional<String> grossPay) {
+        Utils.checkNotNull(grossPay, "grossPay");
+        this.grossPay = grossPay;
+        return this;
+    }
+
+    /**
+     * Total imputed pay for this employee given the period of time (not scoped to a benefit type).
+     */
+    public Employees withImputedPay(String imputedPay) {
+        Utils.checkNotNull(imputedPay, "imputedPay");
+        this.imputedPay = Optional.ofNullable(imputedPay);
+        return this;
+    }
+
+
+    /**
+     * Total imputed pay for this employee given the period of time (not scoped to a benefit type).
+     */
+    public Employees withImputedPay(Optional<String> imputedPay) {
+        Utils.checkNotNull(imputedPay, "imputedPay");
+        this.imputedPay = imputedPay;
+        return this;
+    }
+
+    public Employees withPayrollBenefits(List<PayrollBenefits> payrollBenefits) {
+        Utils.checkNotNull(payrollBenefits, "payrollBenefits");
+        this.payrollBenefits = Optional.ofNullable(payrollBenefits);
+        return this;
+    }
+
+
+    public Employees withPayrollBenefits(Optional<? extends List<PayrollBenefits>> payrollBenefits) {
+        Utils.checkNotNull(payrollBenefits, "payrollBenefits");
+        this.payrollBenefits = payrollBenefits;
         return this;
     }
 
@@ -112,29 +340,55 @@ public class Employees {
         }
         Employees other = (Employees) o;
         return 
-            Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
-            Utils.enhancedDeepEquals(this.payScheduleUuid, other.payScheduleUuid);
+            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
+            Utils.enhancedDeepEquals(this.companyBenefitDeduction, other.companyBenefitDeduction) &&
+            Utils.enhancedDeepEquals(this.companyBenefitContribution, other.companyBenefitContribution) &&
+            Utils.enhancedDeepEquals(this.benefitDeduction, other.benefitDeduction) &&
+            Utils.enhancedDeepEquals(this.benefitContribution, other.benefitContribution) &&
+            Utils.enhancedDeepEquals(this.grossPay, other.grossPay) &&
+            Utils.enhancedDeepEquals(this.imputedPay, other.imputedPay) &&
+            Utils.enhancedDeepEquals(this.payrollBenefits, other.payrollBenefits);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            employeeUuid, payScheduleUuid);
+            uuid, companyBenefitDeduction, companyBenefitContribution,
+            benefitDeduction, benefitContribution, grossPay,
+            imputedPay, payrollBenefits);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Employees.class,
-                "employeeUuid", employeeUuid,
-                "payScheduleUuid", payScheduleUuid);
+                "uuid", uuid,
+                "companyBenefitDeduction", companyBenefitDeduction,
+                "companyBenefitContribution", companyBenefitContribution,
+                "benefitDeduction", benefitDeduction,
+                "benefitContribution", benefitContribution,
+                "grossPay", grossPay,
+                "imputedPay", imputedPay,
+                "payrollBenefits", payrollBenefits);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> employeeUuid = Optional.empty();
+        private Optional<String> uuid = Optional.empty();
 
-        private Optional<String> payScheduleUuid = Optional.empty();
+        private Optional<String> companyBenefitDeduction = Optional.empty();
+
+        private Optional<String> companyBenefitContribution = Optional.empty();
+
+        private Optional<String> benefitDeduction = Optional.empty();
+
+        private Optional<String> benefitContribution = Optional.empty();
+
+        private Optional<String> grossPay = Optional.empty();
+
+        private Optional<String> imputedPay = Optional.empty();
+
+        private Optional<? extends List<PayrollBenefits>> payrollBenefits = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -142,46 +396,162 @@ public class Employees {
 
 
         /**
-         * Employee UUID
+         * The UUID of the employee
          */
-        public Builder employeeUuid(String employeeUuid) {
-            Utils.checkNotNull(employeeUuid, "employeeUuid");
-            this.employeeUuid = Optional.ofNullable(employeeUuid);
+        public Builder uuid(String uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = Optional.ofNullable(uuid);
             return this;
         }
 
         /**
-         * Employee UUID
+         * The UUID of the employee
          */
-        public Builder employeeUuid(Optional<String> employeeUuid) {
-            Utils.checkNotNull(employeeUuid, "employeeUuid");
-            this.employeeUuid = employeeUuid;
+        public Builder uuid(Optional<String> uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = uuid;
             return this;
         }
 
 
         /**
-         * Pay schedule UUID
+         * The sum of employee deduction for this employee given the period of time and the specific company
+         * benefit.
          */
-        public Builder payScheduleUuid(String payScheduleUuid) {
-            Utils.checkNotNull(payScheduleUuid, "payScheduleUuid");
-            this.payScheduleUuid = Optional.ofNullable(payScheduleUuid);
+        public Builder companyBenefitDeduction(String companyBenefitDeduction) {
+            Utils.checkNotNull(companyBenefitDeduction, "companyBenefitDeduction");
+            this.companyBenefitDeduction = Optional.ofNullable(companyBenefitDeduction);
             return this;
         }
 
         /**
-         * Pay schedule UUID
+         * The sum of employee deduction for this employee given the period of time and the specific company
+         * benefit.
          */
-        public Builder payScheduleUuid(Optional<String> payScheduleUuid) {
-            Utils.checkNotNull(payScheduleUuid, "payScheduleUuid");
-            this.payScheduleUuid = payScheduleUuid;
+        public Builder companyBenefitDeduction(Optional<String> companyBenefitDeduction) {
+            Utils.checkNotNull(companyBenefitDeduction, "companyBenefitDeduction");
+            this.companyBenefitDeduction = companyBenefitDeduction;
+            return this;
+        }
+
+
+        /**
+         * The sum of company contribution for this employee given the period of time and the specific company
+         * benefit.
+         */
+        public Builder companyBenefitContribution(String companyBenefitContribution) {
+            Utils.checkNotNull(companyBenefitContribution, "companyBenefitContribution");
+            this.companyBenefitContribution = Optional.ofNullable(companyBenefitContribution);
+            return this;
+        }
+
+        /**
+         * The sum of company contribution for this employee given the period of time and the specific company
+         * benefit.
+         */
+        public Builder companyBenefitContribution(Optional<String> companyBenefitContribution) {
+            Utils.checkNotNull(companyBenefitContribution, "companyBenefitContribution");
+            this.companyBenefitContribution = companyBenefitContribution;
+            return this;
+        }
+
+
+        /**
+         * The sum of employee benefit deduction for this employee given the period of time and the benefit
+         * type.
+         */
+        public Builder benefitDeduction(String benefitDeduction) {
+            Utils.checkNotNull(benefitDeduction, "benefitDeduction");
+            this.benefitDeduction = Optional.ofNullable(benefitDeduction);
+            return this;
+        }
+
+        /**
+         * The sum of employee benefit deduction for this employee given the period of time and the benefit
+         * type.
+         */
+        public Builder benefitDeduction(Optional<String> benefitDeduction) {
+            Utils.checkNotNull(benefitDeduction, "benefitDeduction");
+            this.benefitDeduction = benefitDeduction;
+            return this;
+        }
+
+
+        /**
+         * The sum of company contribution for this employee given the period of time and the benefit type.
+         */
+        public Builder benefitContribution(String benefitContribution) {
+            Utils.checkNotNull(benefitContribution, "benefitContribution");
+            this.benefitContribution = Optional.ofNullable(benefitContribution);
+            return this;
+        }
+
+        /**
+         * The sum of company contribution for this employee given the period of time and the benefit type.
+         */
+        public Builder benefitContribution(Optional<String> benefitContribution) {
+            Utils.checkNotNull(benefitContribution, "benefitContribution");
+            this.benefitContribution = benefitContribution;
+            return this;
+        }
+
+
+        /**
+         * Gross pay for this employee given the period of time.
+         */
+        public Builder grossPay(String grossPay) {
+            Utils.checkNotNull(grossPay, "grossPay");
+            this.grossPay = Optional.ofNullable(grossPay);
+            return this;
+        }
+
+        /**
+         * Gross pay for this employee given the period of time.
+         */
+        public Builder grossPay(Optional<String> grossPay) {
+            Utils.checkNotNull(grossPay, "grossPay");
+            this.grossPay = grossPay;
+            return this;
+        }
+
+
+        /**
+         * Total imputed pay for this employee given the period of time (not scoped to a benefit type).
+         */
+        public Builder imputedPay(String imputedPay) {
+            Utils.checkNotNull(imputedPay, "imputedPay");
+            this.imputedPay = Optional.ofNullable(imputedPay);
+            return this;
+        }
+
+        /**
+         * Total imputed pay for this employee given the period of time (not scoped to a benefit type).
+         */
+        public Builder imputedPay(Optional<String> imputedPay) {
+            Utils.checkNotNull(imputedPay, "imputedPay");
+            this.imputedPay = imputedPay;
+            return this;
+        }
+
+
+        public Builder payrollBenefits(List<PayrollBenefits> payrollBenefits) {
+            Utils.checkNotNull(payrollBenefits, "payrollBenefits");
+            this.payrollBenefits = Optional.ofNullable(payrollBenefits);
+            return this;
+        }
+
+        public Builder payrollBenefits(Optional<? extends List<PayrollBenefits>> payrollBenefits) {
+            Utils.checkNotNull(payrollBenefits, "payrollBenefits");
+            this.payrollBenefits = payrollBenefits;
             return this;
         }
 
         public Employees build() {
 
             return new Employees(
-                employeeUuid, payScheduleUuid);
+                uuid, companyBenefitDeduction, companyBenefitContribution,
+                benefitDeduction, benefitContribution, grossPay,
+                imputedPay, payrollBenefits);
         }
 
     }

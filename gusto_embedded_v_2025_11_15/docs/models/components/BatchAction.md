@@ -7,7 +7,7 @@ The action being performed on the batch.
 ```java
 import com.gusto.embedded_api_v_2025_11_15.models.components.BatchAction;
 
-BatchAction value = BatchAction.CREATE;
+BatchAction value = BatchAction.CANCEL;
 ```
 
 
@@ -15,4 +15,4 @@ BatchAction value = BatchAction.CREATE;
 
 | Name     | Value    |
 | -------- | -------- |
-| `CREATE` | create   |
+| `CANCEL` | cancel   |

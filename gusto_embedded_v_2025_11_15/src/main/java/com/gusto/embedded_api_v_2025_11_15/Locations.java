@@ -58,6 +58,189 @@ public class Locations {
     }
 
     /**
+     * Get minimum wages for a location
+     * 
+     * <p>Get minimum wages for a location
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1LocationsLocationUuidMinimumWagesRequestBuilder getMinimumWages() {
+        return new GetV1LocationsLocationUuidMinimumWagesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get minimum wages for a location
+     * 
+     * <p>Get minimum wages for a location
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param locationUuid The UUID of the location
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1LocationsLocationUuidMinimumWagesResponse getMinimumWages(String locationUuid) {
+        return getMinimumWages(Optional.empty(), locationUuid, Optional.empty());
+    }
+
+    /**
+     * Get minimum wages for a location
+     * 
+     * <p>Get minimum wages for a location
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param locationUuid The UUID of the location
+     * @param effectiveDate 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1LocationsLocationUuidMinimumWagesResponse getMinimumWages(
+            Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion, String locationUuid,
+            Optional<String> effectiveDate) {
+        GetV1LocationsLocationUuidMinimumWagesRequest request =
+            GetV1LocationsLocationUuidMinimumWagesRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .locationUuid(locationUuid)
+                .effectiveDate(effectiveDate)
+                .build();
+        RequestOperation<GetV1LocationsLocationUuidMinimumWagesRequest, GetV1LocationsLocationUuidMinimumWagesResponse> operation
+              = new GetV1LocationsLocationUuidMinimumWages.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a location
+     * 
+     * <p>Get a location.
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1LocationsLocationIdRequestBuilder retrieve() {
+        return new GetV1LocationsLocationIdRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a location
+     * 
+     * <p>Get a location.
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param locationId The UUID of the location
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1LocationsLocationIdResponse retrieve(String locationId) {
+        return retrieve(Optional.empty(), locationId);
+    }
+
+    /**
+     * Get a location
+     * 
+     * <p>Get a location.
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param locationId The UUID of the location
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1LocationsLocationIdResponse retrieve(Optional<? extends GetV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion, String locationId) {
+        GetV1LocationsLocationIdRequest request =
+            GetV1LocationsLocationIdRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .locationId(locationId)
+                .build();
+        RequestOperation<GetV1LocationsLocationIdRequest, GetV1LocationsLocationIdResponse> operation
+              = new GetV1LocationsLocationId.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Update a location
+     * 
+     * <p>Update a location.
+     * 
+     * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public PutV1LocationsLocationIdRequestBuilder update() {
+        return new PutV1LocationsLocationIdRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Update a location
+     * 
+     * <p>Update a location.
+     * 
+     * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param locationId The UUID of the location
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1LocationsLocationIdResponse update(String locationId, PutV1LocationsLocationIdRequestBody requestBody) {
+        return update(Optional.empty(), locationId, requestBody);
+    }
+
+    /**
+     * Update a location
+     * 
+     * <p>Update a location.
+     * 
+     * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param locationId The UUID of the location
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1LocationsLocationIdResponse update(
+            Optional<? extends PutV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion, String locationId,
+            PutV1LocationsLocationIdRequestBody requestBody) {
+        PutV1LocationsLocationIdRequest request =
+            PutV1LocationsLocationIdRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .locationId(locationId)
+                .requestBody(requestBody)
+                .build();
+        RequestOperation<PutV1LocationsLocationIdRequest, PutV1LocationsLocationIdResponse> operation
+              = new PutV1LocationsLocationId.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
      * Get all company locations
      * 
      * <p>Retrieves all company locations (addresses) associated with a company: mailing addresses, filing
@@ -215,189 +398,6 @@ public class Locations {
                 .build();
         RequestOperation<PostV1CompaniesCompanyIdLocationsRequest, PostV1CompaniesCompanyIdLocationsResponse> operation
               = new PostV1CompaniesCompanyIdLocations.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get a location
-     * 
-     * <p>Get a location.
-     * 
-     * <p>scope: `companies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1LocationsLocationIdRequestBuilder retrieve() {
-        return new GetV1LocationsLocationIdRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get a location
-     * 
-     * <p>Get a location.
-     * 
-     * <p>scope: `companies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param locationId The UUID of the location
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1LocationsLocationIdResponse retrieve(String locationId) {
-        return retrieve(Optional.empty(), locationId);
-    }
-
-    /**
-     * Get a location
-     * 
-     * <p>Get a location.
-     * 
-     * <p>scope: `companies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param locationId The UUID of the location
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1LocationsLocationIdResponse retrieve(Optional<? extends GetV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion, String locationId) {
-        GetV1LocationsLocationIdRequest request =
-            GetV1LocationsLocationIdRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .locationId(locationId)
-                .build();
-        RequestOperation<GetV1LocationsLocationIdRequest, GetV1LocationsLocationIdResponse> operation
-              = new GetV1LocationsLocationId.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Update a location
-     * 
-     * <p>Update a location.
-     * 
-     * <p>scope: `companies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public PutV1LocationsLocationIdRequestBuilder update() {
-        return new PutV1LocationsLocationIdRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Update a location
-     * 
-     * <p>Update a location.
-     * 
-     * <p>scope: `companies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param locationId The UUID of the location
-     * @param requestBody 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PutV1LocationsLocationIdResponse update(String locationId, PutV1LocationsLocationIdRequestBody requestBody) {
-        return update(Optional.empty(), locationId, requestBody);
-    }
-
-    /**
-     * Update a location
-     * 
-     * <p>Update a location.
-     * 
-     * <p>scope: `companies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param locationId The UUID of the location
-     * @param requestBody 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PutV1LocationsLocationIdResponse update(
-            Optional<? extends PutV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion, String locationId,
-            PutV1LocationsLocationIdRequestBody requestBody) {
-        PutV1LocationsLocationIdRequest request =
-            PutV1LocationsLocationIdRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .locationId(locationId)
-                .requestBody(requestBody)
-                .build();
-        RequestOperation<PutV1LocationsLocationIdRequest, PutV1LocationsLocationIdResponse> operation
-              = new PutV1LocationsLocationId.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get minimum wages for a location
-     * 
-     * <p>Get minimum wages for a location
-     * 
-     * <p>scope: `companies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1LocationsLocationUuidMinimumWagesRequestBuilder getMinimumWages() {
-        return new GetV1LocationsLocationUuidMinimumWagesRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get minimum wages for a location
-     * 
-     * <p>Get minimum wages for a location
-     * 
-     * <p>scope: `companies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param locationUuid The UUID of the location
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1LocationsLocationUuidMinimumWagesResponse getMinimumWages(String locationUuid) {
-        return getMinimumWages(locationUuid, Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * Get minimum wages for a location
-     * 
-     * <p>Get minimum wages for a location
-     * 
-     * <p>scope: `companies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param locationUuid The UUID of the location
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param effectiveDate 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1LocationsLocationUuidMinimumWagesResponse getMinimumWages(
-            String locationUuid, Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion,
-            Optional<String> effectiveDate) {
-        GetV1LocationsLocationUuidMinimumWagesRequest request =
-            GetV1LocationsLocationUuidMinimumWagesRequest
-                .builder()
-                .locationUuid(locationUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .effectiveDate(effectiveDate)
-                .build();
-        RequestOperation<GetV1LocationsLocationUuidMinimumWagesRequest, GetV1LocationsLocationUuidMinimumWagesResponse> operation
-              = new GetV1LocationsLocationUuidMinimumWages.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

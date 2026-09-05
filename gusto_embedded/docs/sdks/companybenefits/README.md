@@ -4,19 +4,181 @@
 
 ### Available Operations
 
+* [getAll](#getall) - Get all supported benefits
+* [getSupported](#getsupported) - Get a supported benefit
+* [getRequirements](#getrequirements) - Get benefit fields requirements by benefit type
 * [list](#list) - Get benefits for a company
 * [create](#create) - Create a company benefit
 * [get](#get) - Get a company benefit
 * [update](#update) - Update a company benefit
 * [delete](#delete) - Delete a company benefit
-* [getAll](#getall) - Get all supported benefits
-* [getSupported](#getsupported) - Get a supported benefit
-* [getSummary](#getsummary) - Get company benefit summary by company benefit id.
 * [getEmployeeBenefits](#getemployeebenefits) - Get all employee benefits for a company benefit
 * [updateEmployeeBenefits](#updateemployeebenefits) - Bulk update employee benefits for a company benefit
-* [getRequirements](#getrequirements) - Get benefit fields requirements by benefit type
+* [getSummary](#getsummary) - Get company benefit summary by company benefit id.
 * [getV1CompanyBenefitsCompanyBenefitIdContributionExclusions](#getv1companybenefitscompanybenefitidcontributionexclusions) - Get contribution exclusions for a company benefit
 * [putV1CompanyBenefitsCompanyBenefitIdContributionExclusions](#putv1companybenefitscompanybenefitidcontributionexclusions) - Update contribution exclusions for a company benefit
+
+## getAll
+
+Returns all benefits supported by Gusto. The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+
+scope: `benefits:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-benefits" method="get" path="/v1/benefits" example="Supported Benefits" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.operations.GetV1BenefitsHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.GetV1BenefitsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1BenefitsResponse res = sdk.companyBenefits().getAll()
+                .xGustoAPIVersion(GetV1BenefitsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .call();
+
+        if (res.supportedBenefitList().isPresent()) {
+            System.out.println(res.supportedBenefitList().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1BenefitsHeaderXGustoAPIVersion>](../../models/operations/GetV1BenefitsHeaderXGustoAPIVersion.md)                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+
+### Response
+
+**[GetV1BenefitsResponse](../../models/operations/GetV1BenefitsResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## getSupported
+
+Returns a benefit supported by Gusto. The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+
+scope: `benefits:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-benefits-benefit_id" method="get" path="/v1/benefits/{benefit_id}" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.operations.GetV1BenefitsBenefitIdHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.GetV1BenefitsBenefitIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1BenefitsBenefitIdResponse res = sdk.companyBenefits().getSupported()
+                .xGustoAPIVersion(GetV1BenefitsBenefitIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .benefitId("<id>")
+                .call();
+
+        if (res.supportedBenefit().isPresent()) {
+            System.out.println(res.supportedBenefit().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1BenefitsBenefitIdHeaderXGustoAPIVersion>](../../models/operations/GetV1BenefitsBenefitIdHeaderXGustoAPIVersion.md)                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `benefitId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The benefit type in Gusto.                                                                                                                                                                                                   |
+
+### Response
+
+**[GetV1BenefitsBenefitIdResponse](../../models/operations/GetV1BenefitsBenefitIdResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## getRequirements
+
+Returns the field requirements for a given benefit type.
+
+scope: `benefits:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-benefits-benefits_id-requirements" method="get" path="/v1/benefits/{benefit_id}/requirements" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.GetV1BenefitsBenefitsIdRequirementsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1BenefitsBenefitsIdRequirementsResponse res = sdk.companyBenefits().getRequirements()
+                .xGustoAPIVersion(GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .benefitId("<id>")
+                .call();
+
+        if (res.benefitTypeRequirements().isPresent()) {
+            System.out.println(res.benefitTypeRequirements().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion>](../../models/operations/GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion.md)                                                                 | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `benefitId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The benefit type in Gusto.                                                                                                                                                                                                   |
+
+### Response
+
+**[GetV1BenefitsBenefitsIdRequirementsResponse](../../models/operations/GetV1BenefitsBenefitsIdRequirementsResponse.md)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## list
 
@@ -304,7 +466,7 @@ public class Application {
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion>](../../models/operations/GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion.md)                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `companyBenefitId`                                                                                                                                                                                                           | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company benefit                                                                                                                                                                                              |
 | `withEmployeeBenefits`                                                                                                                                                                                                       | *Optional\<Boolean>*                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Whether to return employee benefits associated with the benefit                                                                                                                                                              |
-| `include`                                                                                                                                                                                                                    | [Optional\<GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude>](../../models/operations/GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude.md)                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Available options:<br/>- all_benefits: If with_employee_benefits=true, include all effective dated benefits for each employee instead of only the current benefits.                                                          |
+| `include`                                                                                                                                                                                                                    | [Optional\<Include>](../../models/operations/Include.md)                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Available options:<br/>- all_benefits: If with_employee_benefits=true, include all effective dated benefits for each employee instead of only the current benefits.                                                          |
 
 ### Response
 
@@ -554,174 +716,6 @@ public class Application {
 | models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
 | models/errors/UnprocessableEntityError | 422                                    | application/json                       |
 | models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
-
-## getAll
-
-Returns all benefits supported by Gusto. The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
-
-scope: `benefits:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="get-v1-benefits" method="get" path="/v1/benefits" example="Supported Benefits" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.operations.GetV1BenefitsHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.GetV1BenefitsResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        GetV1BenefitsResponse res = sdk.companyBenefits().getAll()
-                .xGustoAPIVersion(GetV1BenefitsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .call();
-
-        if (res.supportedBenefits().isPresent()) {
-            System.out.println(res.supportedBenefits().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1BenefitsHeaderXGustoAPIVersion>](../../models/operations/GetV1BenefitsHeaderXGustoAPIVersion.md)                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-
-### Response
-
-**[GetV1BenefitsResponse](../../models/operations/GetV1BenefitsResponse.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
-
-## getSupported
-
-Returns a benefit supported by Gusto. The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
-
-scope: `benefits:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="get-v1-benefits-benefit_id" method="get" path="/v1/benefits/{benefit_id}" example="Example" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.operations.GetV1BenefitsBenefitIdHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.GetV1BenefitsBenefitIdResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        GetV1BenefitsBenefitIdResponse res = sdk.companyBenefits().getSupported()
-                .xGustoAPIVersion(GetV1BenefitsBenefitIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .benefitId("<id>")
-                .call();
-
-        if (res.supportedBenefit().isPresent()) {
-            System.out.println(res.supportedBenefit().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1BenefitsBenefitIdHeaderXGustoAPIVersion>](../../models/operations/GetV1BenefitsBenefitIdHeaderXGustoAPIVersion.md)                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `benefitId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The benefit type in Gusto.                                                                                                                                                                                                   |
-
-### Response
-
-**[GetV1BenefitsBenefitIdResponse](../../models/operations/GetV1BenefitsBenefitIdResponse.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
-
-## getSummary
-
-Returns summary benefit data for the requested company benefit id.
-
-Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
-
-scope: `company_benefits:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="get-v1-benefits-company_benefit_id-summary" method="get" path="/v1/company_benefits/{company_benefit_id}/summary" example="Example" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.operations.GetV1BenefitsCompanyBenefitIdSummaryRequest;
-import com.gusto.embedded_api.models.operations.GetV1BenefitsCompanyBenefitIdSummaryResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        GetV1BenefitsCompanyBenefitIdSummaryRequest req = GetV1BenefitsCompanyBenefitIdSummaryRequest.builder()
-                .companyBenefitId("<id>")
-                .startDate("2022-01-01")
-                .endDate("2022-12-31")
-                .build();
-
-        GetV1BenefitsCompanyBenefitIdSummaryResponse res = sdk.companyBenefits().getSummary()
-                .request(req)
-                .call();
-
-        if (res.benefitSummary().isPresent()) {
-            System.out.println(res.benefitSummary().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                             | [GetV1BenefitsCompanyBenefitIdSummaryRequest](../../models/operations/GetV1BenefitsCompanyBenefitIdSummaryRequest.md) | :heavy_check_mark:                                                                                                    | The request object to use for the request.                                                                            |
-
-### Response
-
-**[GetV1BenefitsCompanyBenefitIdSummaryResponse](../../models/operations/GetV1BenefitsCompanyBenefitIdSummaryResponse.md)**
-
-### Errors
-
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| models/errors/NotFoundErrorObject | 404                               | application/json                  |
-| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## getEmployeeBenefits
 
@@ -984,22 +978,24 @@ public class Application {
 | models/errors/UnprocessableEntityError | 422                                    | application/json                       |
 | models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
 
-## getRequirements
+## getSummary
 
-Returns the field requirements for a given benefit type.
+Returns summary benefit data for the requested company benefit id.
 
-scope: `benefits:read`
+Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
+
+scope: `company_benefits:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="get-v1-benefits-benefits_id-requirements" method="get" path="/v1/benefits/{benefit_id}/requirements" example="Example" -->
+<!-- UsageSnippet language="java" operationID="get-v1-benefits-company_benefit_id-summary" method="get" path="/v1/company_benefits/{company_benefit_id}/summary" example="Example" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.operations.GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.GetV1BenefitsBenefitsIdRequirementsResponse;
+import com.gusto.embedded_api.models.operations.GetV1BenefitsCompanyBenefitIdSummaryRequest;
+import com.gusto.embedded_api.models.operations.GetV1BenefitsCompanyBenefitIdSummaryResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -1010,13 +1006,18 @@ public class Application {
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
-        GetV1BenefitsBenefitsIdRequirementsResponse res = sdk.companyBenefits().getRequirements()
-                .xGustoAPIVersion(GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .benefitId("<id>")
+        GetV1BenefitsCompanyBenefitIdSummaryRequest req = GetV1BenefitsCompanyBenefitIdSummaryRequest.builder()
+                .companyBenefitId("<id>")
+                .startDate("2022-01-01")
+                .endDate("2022-12-31")
+                .build();
+
+        GetV1BenefitsCompanyBenefitIdSummaryResponse res = sdk.companyBenefits().getSummary()
+                .request(req)
                 .call();
 
-        if (res.benefitTypeRequirements().isPresent()) {
-            System.out.println(res.benefitTypeRequirements().get());
+        if (res.benefitSummary().isPresent()) {
+            System.out.println(res.benefitSummary().get());
         }
     }
 }
@@ -1024,14 +1025,13 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion>](../../models/operations/GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion.md)                                                                 | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `benefitId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The benefit type in Gusto.                                                                                                                                                                                                   |
+| Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                             | [GetV1BenefitsCompanyBenefitIdSummaryRequest](../../models/operations/GetV1BenefitsCompanyBenefitIdSummaryRequest.md) | :heavy_check_mark:                                                                                                    | The request object to use for the request.                                                                            |
 
 ### Response
 
-**[GetV1BenefitsBenefitsIdRequirementsResponse](../../models/operations/GetV1BenefitsBenefitsIdRequirementsResponse.md)**
+**[GetV1BenefitsCompanyBenefitIdSummaryResponse](../../models/operations/GetV1BenefitsCompanyBenefitIdSummaryResponse.md)**
 
 ### Errors
 

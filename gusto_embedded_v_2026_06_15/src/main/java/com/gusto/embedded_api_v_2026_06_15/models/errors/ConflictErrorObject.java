@@ -115,8 +115,10 @@ public class ConflictErrorObject extends GustoEmbeddedException {
      * 
      * <p>Conflict
      * 
-     * <p>This error occurs when the resource version provided does not match the current version. Retrieve
-     * the latest version and retry.
+     * <p>This may happen when the resource version provided does not match the current version — retrieve the
+     * latest version and retry — or when the request conflicts with another in-progress operation on the
+     * same resource. See the [Errors
+     * Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
      */
     public static class Data {
 

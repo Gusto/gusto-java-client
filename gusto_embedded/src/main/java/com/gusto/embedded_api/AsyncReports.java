@@ -5,16 +5,23 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation;
 
+import com.gusto.embedded_api.models.components.BulkReportBody;
 import com.gusto.embedded_api.models.components.CreateReportBody;
 import com.gusto.embedded_api.models.components.GeneralLedgerReportBody;
 import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidReportTemplatesReportTypeHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidReportTemplatesReportTypeRequest;
 import com.gusto.embedded_api.models.operations.GetReportsRequestUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetReportsRequestUuidRequest;
+import com.gusto.embedded_api.models.operations.GetV1BulkReportsRequestUuidHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.GetV1BulkReportsRequestUuidRequest;
+import com.gusto.embedded_api.models.operations.GetV1BulkReportsRequestUuidSecurity;
 import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidReportsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostCompaniesCompanyUuidReportsRequest;
 import com.gusto.embedded_api.models.operations.PostPayrollsPayrollUuidReportsGeneralLedgerHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostPayrollsPayrollUuidReportsGeneralLedgerRequest;
+import com.gusto.embedded_api.models.operations.PostV1BulkReportsHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostV1BulkReportsRequest;
+import com.gusto.embedded_api.models.operations.PostV1BulkReportsSecurity;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest;
 import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody;
@@ -22,16 +29,22 @@ import com.gusto.embedded_api.models.operations.async.GetCompaniesCompanyUuidRep
 import com.gusto.embedded_api.models.operations.async.GetCompaniesCompanyUuidReportTemplatesReportTypeResponse;
 import com.gusto.embedded_api.models.operations.async.GetReportsRequestUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.async.GetReportsRequestUuidResponse;
+import com.gusto.embedded_api.models.operations.async.GetV1BulkReportsRequestUuidRequestBuilder;
+import com.gusto.embedded_api.models.operations.async.GetV1BulkReportsRequestUuidResponse;
 import com.gusto.embedded_api.models.operations.async.PostCompaniesCompanyUuidReportsRequestBuilder;
 import com.gusto.embedded_api.models.operations.async.PostCompaniesCompanyUuidReportsResponse;
 import com.gusto.embedded_api.models.operations.async.PostPayrollsPayrollUuidReportsGeneralLedgerRequestBuilder;
 import com.gusto.embedded_api.models.operations.async.PostPayrollsPayrollUuidReportsGeneralLedgerResponse;
+import com.gusto.embedded_api.models.operations.async.PostV1BulkReportsRequestBuilder;
+import com.gusto.embedded_api.models.operations.async.PostV1BulkReportsResponse;
 import com.gusto.embedded_api.models.operations.async.PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBuilder;
 import com.gusto.embedded_api.models.operations.async.PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse;
 import com.gusto.embedded_api.operations.GetCompaniesCompanyUuidReportTemplatesReportType;
 import com.gusto.embedded_api.operations.GetReportsRequestUuid;
+import com.gusto.embedded_api.operations.GetV1BulkReportsRequestUuid;
 import com.gusto.embedded_api.operations.PostCompaniesCompanyUuidReports;
 import com.gusto.embedded_api.operations.PostPayrollsPayrollUuidReportsGeneralLedger;
+import com.gusto.embedded_api.operations.PostV1BulkReports;
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage;
 import com.gusto.embedded_api.utils.Headers;
 import java.lang.String;
@@ -56,6 +69,280 @@ public class AsyncReports {
      */
     public Reports sync() {
         return syncSDK;
+    }
+
+
+    /**
+     * Create a bulk report batch
+     * 
+     * <p>Triggers asynchronous generation of up to 25 reports across companies the partner is mapped to. Each
+     * `batch` item is a `custom_report` (same parameters as [create a custom
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-companies-company_uuid-reports)) or a
+     * `general_ledger` report (same parameters as [create a general ledger
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-payrolls-payroll_uuid-reports-general_ledger)),
+     * keyed by `company_uuid` and `report_type`. Items are validated synchronously; if any is invalid, the
+     * entire batch is rejected.
+     * 
+     * <p>Poll the [bulk report GET
+     * endpoint](https://docs.gusto.com/embedded-payroll/reference/get-v1-bulk_reports-request_uuid) with
+     * the returned `uuid` for status and the report URL, which is valid for 10 minutes.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * @return The async call builder
+     */
+    public PostV1BulkReportsRequestBuilder postV1BulkReports() {
+        return new PostV1BulkReportsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a bulk report batch
+     * 
+     * <p>Triggers asynchronous generation of up to 25 reports across companies the partner is mapped to. Each
+     * `batch` item is a `custom_report` (same parameters as [create a custom
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-companies-company_uuid-reports)) or a
+     * `general_ledger` report (same parameters as [create a general ledger
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-payrolls-payroll_uuid-reports-general_ledger)),
+     * keyed by `company_uuid` and `report_type`. Items are validated synchronously; if any is invalid, the
+     * entire batch is rejected.
+     * 
+     * <p>Poll the [bulk report GET
+     * endpoint](https://docs.gusto.com/embedded-payroll/reference/get-v1-bulk_reports-request_uuid) with
+     * the returned `uuid` for status and the report URL, which is valid for 10 minutes.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * @param security The security details to use for authentication.
+     * @param bulkReportBody Each `batch` item is a `custom_report` or a `general_ledger` report.
+     * @return {@code CompletableFuture<PostV1BulkReportsResponse>} - The async response
+     */
+    public CompletableFuture<PostV1BulkReportsResponse> postV1BulkReports(PostV1BulkReportsSecurity security, BulkReportBody bulkReportBody) {
+        return postV1BulkReports(security, Optional.empty(), bulkReportBody);
+    }
+
+    /**
+     * Create a bulk report batch
+     * 
+     * <p>Triggers asynchronous generation of up to 25 reports across companies the partner is mapped to. Each
+     * `batch` item is a `custom_report` (same parameters as [create a custom
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-companies-company_uuid-reports)) or a
+     * `general_ledger` report (same parameters as [create a general ledger
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-payrolls-payroll_uuid-reports-general_ledger)),
+     * keyed by `company_uuid` and `report_type`. Items are validated synchronously; if any is invalid, the
+     * entire batch is rejected.
+     * 
+     * <p>Poll the [bulk report GET
+     * endpoint](https://docs.gusto.com/embedded-payroll/reference/get-v1-bulk_reports-request_uuid) with
+     * the returned `uuid` for status and the report URL, which is valid for 10 minutes.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * @param security The security details to use for authentication.
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param bulkReportBody Each `batch` item is a `custom_report` or a `general_ledger` report.
+     * @return {@code CompletableFuture<PostV1BulkReportsResponse>} - The async response
+     */
+    public CompletableFuture<PostV1BulkReportsResponse> postV1BulkReports(
+            PostV1BulkReportsSecurity security, Optional<? extends PostV1BulkReportsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            BulkReportBody bulkReportBody) {
+        PostV1BulkReportsRequest request =
+            PostV1BulkReportsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .bulkReportBody(bulkReportBody)
+                .build();
+        AsyncRequestOperation<PostV1BulkReportsRequest, PostV1BulkReportsResponse> operation
+              = new PostV1BulkReports.Async(sdkConfiguration, security, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get a bulk report batch
+     * 
+     * <p>Get a bulk report batch's status and results given the `request_uuid`. While in progress, only batch
+     * metadata is returned; once complete, it also includes a signed `report_url` (a zip of all generated
+     * reports, valid for 10 minutes) and a per-company breakdown.
+     * 
+     * <p>Reports containing PHI are inaccessible with `company_reports:read:tier_2_only` data scope.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:read`
+     * 
+     * @return The async call builder
+     */
+    public GetV1BulkReportsRequestUuidRequestBuilder getV1BulkReportsRequestUuid() {
+        return new GetV1BulkReportsRequestUuidRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a bulk report batch
+     * 
+     * <p>Get a bulk report batch's status and results given the `request_uuid`. While in progress, only batch
+     * metadata is returned; once complete, it also includes a signed `report_url` (a zip of all generated
+     * reports, valid for 10 minutes) and a per-company breakdown.
+     * 
+     * <p>Reports containing PHI are inaccessible with `company_reports:read:tier_2_only` data scope.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:read`
+     * 
+     * @param security The security details to use for authentication.
+     * @param requestUuid The UUID of the bulk report batch.
+     * @return {@code CompletableFuture<GetV1BulkReportsRequestUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetV1BulkReportsRequestUuidResponse> getV1BulkReportsRequestUuid(GetV1BulkReportsRequestUuidSecurity security, String requestUuid) {
+        return getV1BulkReportsRequestUuid(security, Optional.empty(), requestUuid);
+    }
+
+    /**
+     * Get a bulk report batch
+     * 
+     * <p>Get a bulk report batch's status and results given the `request_uuid`. While in progress, only batch
+     * metadata is returned; once complete, it also includes a signed `report_url` (a zip of all generated
+     * reports, valid for 10 minutes) and a per-company breakdown.
+     * 
+     * <p>Reports containing PHI are inaccessible with `company_reports:read:tier_2_only` data scope.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:read`
+     * 
+     * @param security The security details to use for authentication.
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param requestUuid The UUID of the bulk report batch.
+     * @return {@code CompletableFuture<GetV1BulkReportsRequestUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetV1BulkReportsRequestUuidResponse> getV1BulkReportsRequestUuid(
+            GetV1BulkReportsRequestUuidSecurity security, Optional<? extends GetV1BulkReportsRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String requestUuid) {
+        GetV1BulkReportsRequestUuidRequest request =
+            GetV1BulkReportsRequestUuidRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .requestUuid(requestUuid)
+                .build();
+        AsyncRequestOperation<GetV1BulkReportsRequestUuidRequest, GetV1BulkReportsRequestUuidResponse> operation
+              = new GetV1BulkReportsRequestUuid.Async(sdkConfiguration, security, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Create an employees annual FICA wage report
+     * 
+     * <p>Generates a report containing annual FICA (Federal Insurance Contributions Act) wage data for all
+     * employees in a company over a specified year range.
+     * 
+     * <p>This report provides detailed wage information subject to Social Security and Medicare taxes, useful
+     * for benefits integrations that need to verify employee earnings for compliance and benefit
+     * calculations.
+     * 
+     * <p>The report is generated asynchronously. After making this request, you will receive a `request_uuid`
+     * which can be used to poll the [Get a report](ref:get-v1-reports-request_uuid) endpoint to check the
+     * status and retrieve the report when complete.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBuilder postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage() {
+        return new PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create an employees annual FICA wage report
+     * 
+     * <p>Generates a report containing annual FICA (Federal Insurance Contributions Act) wage data for all
+     * employees in a company over a specified year range.
+     * 
+     * <p>This report provides detailed wage information subject to Social Security and Medicare taxes, useful
+     * for benefits integrations that need to verify employee earnings for compliance and benefit
+     * calculations.
+     * 
+     * <p>The report is generated asynchronously. After making this request, you will receive a `request_uuid`
+     * which can be used to poll the [Get a report](ref:get-v1-reports-request_uuid) endpoint to check the
+     * status and retrieve the report when complete.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @param requestBody 
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse> postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(String companyId, PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody requestBody) {
+        return postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(Optional.empty(), companyId, requestBody);
+    }
+
+    /**
+     * Create an employees annual FICA wage report
+     * 
+     * <p>Generates a report containing annual FICA (Federal Insurance Contributions Act) wage data for all
+     * employees in a company over a specified year range.
+     * 
+     * <p>This report provides detailed wage information subject to Social Security and Medicare taxes, useful
+     * for benefits integrations that need to verify employee earnings for compliance and benefit
+     * calculations.
+     * 
+     * <p>The report is generated asynchronously. After making this request, you will receive a `request_uuid`
+     * which can be used to poll the [Get a report](ref:get-v1-reports-request_uuid) endpoint to check the
+     * status and retrieve the report when complete.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param requestBody 
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse> postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(
+            Optional<? extends PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody requestBody) {
+        PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest request =
+            PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .requestBody(requestBody)
+                .build();
+        AsyncRequestOperation<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest, PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse> operation
+              = new PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
     }
 
 
@@ -346,96 +633,6 @@ public class AsyncReports {
                 .build();
         AsyncRequestOperation<GetCompaniesCompanyUuidReportTemplatesReportTypeRequest, GetCompaniesCompanyUuidReportTemplatesReportTypeResponse> operation
               = new GetCompaniesCompanyUuidReportTemplatesReportType.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Create an employees annual FICA wage report
-     * 
-     * <p>Generates a report containing annual FICA (Federal Insurance Contributions Act) wage data for all
-     * employees in a company over a specified year range.
-     * 
-     * <p>This report provides detailed wage information subject to Social Security and Medicare taxes, useful
-     * for benefits integrations that need to verify employee earnings for compliance and benefit
-     * calculations.
-     * 
-     * <p>The report is generated asynchronously. After making this request, you will receive a `request_uuid`
-     * which can be used to poll the [Get a report](ref:get-v1-reports-request_uuid) endpoint to check the
-     * status and retrieve the report when complete.
-     * 
-     * <p>scope: `company_reports:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBuilder postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage() {
-        return new PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Create an employees annual FICA wage report
-     * 
-     * <p>Generates a report containing annual FICA (Federal Insurance Contributions Act) wage data for all
-     * employees in a company over a specified year range.
-     * 
-     * <p>This report provides detailed wage information subject to Social Security and Medicare taxes, useful
-     * for benefits integrations that need to verify employee earnings for compliance and benefit
-     * calculations.
-     * 
-     * <p>The report is generated asynchronously. After making this request, you will receive a `request_uuid`
-     * which can be used to poll the [Get a report](ref:get-v1-reports-request_uuid) endpoint to check the
-     * status and retrieve the report when complete.
-     * 
-     * <p>scope: `company_reports:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param requestBody 
-     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse>} - The async response
-     */
-    public CompletableFuture<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse> postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(String companyId, PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody requestBody) {
-        return postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(Optional.empty(), companyId, requestBody);
-    }
-
-    /**
-     * Create an employees annual FICA wage report
-     * 
-     * <p>Generates a report containing annual FICA (Federal Insurance Contributions Act) wage data for all
-     * employees in a company over a specified year range.
-     * 
-     * <p>This report provides detailed wage information subject to Social Security and Medicare taxes, useful
-     * for benefits integrations that need to verify employee earnings for compliance and benefit
-     * calculations.
-     * 
-     * <p>The report is generated asynchronously. After making this request, you will receive a `request_uuid`
-     * which can be used to poll the [Get a report](ref:get-v1-reports-request_uuid) endpoint to check the
-     * status and retrieve the report when complete.
-     * 
-     * <p>scope: `company_reports:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyId The UUID of the company
-     * @param requestBody 
-     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse>} - The async response
-     */
-    public CompletableFuture<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse> postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(
-            Optional<? extends PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
-            PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody requestBody) {
-        PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest request =
-            PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .companyId(companyId)
-                .requestBody(requestBody)
-                .build();
-        AsyncRequestOperation<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest, PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse> operation
-              = new PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage.Async(sdkConfiguration, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

@@ -46,7 +46,7 @@ public class Document {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("recipient_type")
-    private Optional<? extends RecipientType> recipientType;
+    private Optional<? extends DocumentRecipientType> recipientType;
 
     /**
      * Unique identifier for the recipient associated with the document
@@ -120,7 +120,7 @@ public class Document {
             @JsonProperty("uuid") Optional<String> uuid,
             @JsonProperty("title") Optional<String> title,
             @JsonProperty("name") Optional<String> name,
-            @JsonProperty("recipient_type") Optional<? extends RecipientType> recipientType,
+            @JsonProperty("recipient_type") Optional<? extends DocumentRecipientType> recipientType,
             @JsonProperty("recipient_uuid") Optional<String> recipientUuid,
             @JsonProperty("pages") Optional<? extends List<Pages>> pages,
             @JsonProperty("fields") Optional<? extends List<Fields>> fields,
@@ -195,8 +195,8 @@ public class Document {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<RecipientType> recipientType() {
-        return (Optional<RecipientType>) recipientType;
+    public Optional<DocumentRecipientType> recipientType() {
+        return (Optional<DocumentRecipientType>) recipientType;
     }
 
     /**
@@ -342,7 +342,7 @@ public class Document {
     /**
      * The type of recipient associated with the document (will be `Contractor` for Contractor Documents)
      */
-    public Document withRecipientType(RecipientType recipientType) {
+    public Document withRecipientType(DocumentRecipientType recipientType) {
         Utils.checkNotNull(recipientType, "recipientType");
         this.recipientType = Optional.ofNullable(recipientType);
         return this;
@@ -352,7 +352,7 @@ public class Document {
     /**
      * The type of recipient associated with the document (will be `Contractor` for Contractor Documents)
      */
-    public Document withRecipientType(Optional<? extends RecipientType> recipientType) {
+    public Document withRecipientType(Optional<? extends DocumentRecipientType> recipientType) {
         Utils.checkNotNull(recipientType, "recipientType");
         this.recipientType = recipientType;
         return this;
@@ -596,7 +596,7 @@ public class Document {
 
         private Optional<String> name = Optional.empty();
 
-        private Optional<? extends RecipientType> recipientType = Optional.empty();
+        private Optional<? extends DocumentRecipientType> recipientType = Optional.empty();
 
         private Optional<String> recipientUuid = Optional.empty();
 
@@ -681,7 +681,7 @@ public class Document {
         /**
          * The type of recipient associated with the document (will be `Contractor` for Contractor Documents)
          */
-        public Builder recipientType(RecipientType recipientType) {
+        public Builder recipientType(DocumentRecipientType recipientType) {
             Utils.checkNotNull(recipientType, "recipientType");
             this.recipientType = Optional.ofNullable(recipientType);
             return this;
@@ -690,7 +690,7 @@ public class Document {
         /**
          * The type of recipient associated with the document (will be `Contractor` for Contractor Documents)
          */
-        public Builder recipientType(Optional<? extends RecipientType> recipientType) {
+        public Builder recipientType(Optional<? extends DocumentRecipientType> recipientType) {
             Utils.checkNotNull(recipientType, "recipientType");
             this.recipientType = recipientType;
             return this;

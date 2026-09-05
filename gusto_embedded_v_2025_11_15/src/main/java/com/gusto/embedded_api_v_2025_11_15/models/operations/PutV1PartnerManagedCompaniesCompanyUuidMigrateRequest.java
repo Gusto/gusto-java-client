@@ -18,12 +18,6 @@ import java.util.Optional;
 
 public class PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest {
     /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
-    private String companyUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,35 +25,33 @@ public class PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
+    private String companyUuid;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest;
 
     @JsonCreator
     public PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest(
-            String companyUuid,
             Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyUuid,
             PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(partnerManagedCompanyMigrateRequest, "partnerManagedCompanyMigrateRequest");
-        this.companyUuid = companyUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyUuid = companyUuid;
         this.partnerManagedCompanyMigrateRequest = partnerManagedCompanyMigrateRequest;
     }
     
     public PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest(
             String companyUuid,
             PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest) {
-        this(companyUuid, Optional.empty(), partnerManagedCompanyMigrateRequest);
-    }
-
-    /**
-     * The UUID of the company
-     */
-    @JsonIgnore
-    public String companyUuid() {
-        return companyUuid;
+        this(Optional.empty(), companyUuid, partnerManagedCompanyMigrateRequest);
     }
 
     /**
@@ -73,6 +65,14 @@ public class PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest {
         return (Optional<PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the company
+     */
+    @JsonIgnore
+    public String companyUuid() {
+        return companyUuid;
+    }
+
     @JsonIgnore
     public PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest() {
         return partnerManagedCompanyMigrateRequest;
@@ -82,15 +82,6 @@ public class PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest withCompanyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -115,6 +106,15 @@ public class PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
     public PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest withPartnerManagedCompanyMigrateRequest(PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest) {
         Utils.checkNotNull(partnerManagedCompanyMigrateRequest, "partnerManagedCompanyMigrateRequest");
         this.partnerManagedCompanyMigrateRequest = partnerManagedCompanyMigrateRequest;
@@ -131,46 +131,36 @@ public class PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest {
         }
         PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest other = (PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.partnerManagedCompanyMigrateRequest, other.partnerManagedCompanyMigrateRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, xGustoAPIVersion, partnerManagedCompanyMigrateRequest);
+            xGustoAPIVersion, companyUuid, partnerManagedCompanyMigrateRequest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest.class,
-                "companyUuid", companyUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "companyUuid", companyUuid,
                 "partnerManagedCompanyMigrateRequest", partnerManagedCompanyMigrateRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String companyUuid;
-
         private Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String companyUuid;
 
         private PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyUuid(String companyUuid) {
-            Utils.checkNotNull(companyUuid, "companyUuid");
-            this.companyUuid = companyUuid;
-            return this;
         }
 
 
@@ -197,6 +187,16 @@ public class PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest {
         }
 
 
+        /**
+         * The UUID of the company
+         */
+        public Builder companyUuid(String companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = companyUuid;
+            return this;
+        }
+
+
         public Builder partnerManagedCompanyMigrateRequest(PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest) {
             Utils.checkNotNull(partnerManagedCompanyMigrateRequest, "partnerManagedCompanyMigrateRequest");
             this.partnerManagedCompanyMigrateRequest = partnerManagedCompanyMigrateRequest;
@@ -209,7 +209,7 @@ public class PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest {
             }
 
             return new PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest(
-                companyUuid, xGustoAPIVersion, partnerManagedCompanyMigrateRequest);
+                xGustoAPIVersion, companyUuid, partnerManagedCompanyMigrateRequest);
         }
 
 

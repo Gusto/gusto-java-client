@@ -41,6 +41,41 @@ public class AsyncNotifications {
 
 
     /**
+     * Get notifications for company
+     * 
+     * <p>Returns all notifications relevant for the given company.
+     * 
+     * <p>scope: `notifications:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetCompanyNotificationsRequestBuilder getCompanyNotifications() {
+        return new GetCompanyNotificationsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get notifications for company
+     * 
+     * <p>Returns all notifications relevant for the given company.
+     * 
+     * <p>scope: `notifications:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return {@code CompletableFuture<GetCompanyNotificationsResponse>} - The async response
+     */
+    public CompletableFuture<GetCompanyNotificationsResponse> getCompanyNotifications(GetCompanyNotificationsRequest request) {
+        AsyncRequestOperation<GetCompanyNotificationsRequest, GetCompanyNotificationsResponse> operation
+              = new GetCompanyNotifications.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
      * Get a notification's details
      * 
      * <p>Upon receiving a notification webhook event, use this endpoint to fetch the notification's details.
@@ -86,7 +121,7 @@ public class AsyncNotifications {
      * @return {@code CompletableFuture<GetNotificationsNotificationUuidResponse>} - The async response
      */
     public CompletableFuture<GetNotificationsNotificationUuidResponse> getDetails(String notificationUuid) {
-        return getDetails(notificationUuid, Optional.empty());
+        return getDetails(Optional.empty(), notificationUuid);
     }
 
     /**
@@ -107,54 +142,19 @@ public class AsyncNotifications {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param notificationUuid The notification entity_uuid
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param notificationUuid The notification entity_uuid
      * @return {@code CompletableFuture<GetNotificationsNotificationUuidResponse>} - The async response
      */
-    public CompletableFuture<GetNotificationsNotificationUuidResponse> getDetails(String notificationUuid, Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetNotificationsNotificationUuidResponse> getDetails(Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String notificationUuid) {
         GetNotificationsNotificationUuidRequest request =
             GetNotificationsNotificationUuidRequest
                 .builder()
-                .notificationUuid(notificationUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .notificationUuid(notificationUuid)
                 .build();
         AsyncRequestOperation<GetNotificationsNotificationUuidRequest, GetNotificationsNotificationUuidResponse> operation
               = new GetNotificationsNotificationUuid.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get notifications for company
-     * 
-     * <p>Returns all notifications relevant for the given company.
-     * 
-     * <p>scope: `notifications:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public GetCompanyNotificationsRequestBuilder getCompanyNotifications() {
-        return new GetCompanyNotificationsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get notifications for company
-     * 
-     * <p>Returns all notifications relevant for the given company.
-     * 
-     * <p>scope: `notifications:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param request The request object containing all the parameters for the API call.
-     * @return {@code CompletableFuture<GetCompanyNotificationsResponse>} - The async response
-     */
-    public CompletableFuture<GetCompanyNotificationsResponse> getCompanyNotifications(GetCompanyNotificationsRequest request) {
-        AsyncRequestOperation<GetCompanyNotificationsRequest, GetCompanyNotificationsResponse> operation
-              = new GetCompanyNotifications.Async(sdkConfiguration, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

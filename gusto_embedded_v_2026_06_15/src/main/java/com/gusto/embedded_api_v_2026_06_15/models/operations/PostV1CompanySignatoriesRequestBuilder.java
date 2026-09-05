@@ -17,23 +17,17 @@ import java.util.Optional;
 
 public class PostV1CompanySignatoriesRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private SignatoryCreateRequest signatoryCreateRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1CompanySignatoriesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1CompanySignatoriesRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public PostV1CompanySignatoriesRequestBuilder xGustoAPIVersion(PostV1CompanySignatoriesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -45,6 +39,12 @@ public class PostV1CompanySignatoriesRequestBuilder {
     public PostV1CompanySignatoriesRequestBuilder xGustoAPIVersion(Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PostV1CompanySignatoriesRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
         return this;
     }
 
@@ -60,8 +60,8 @@ public class PostV1CompanySignatoriesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1CompanySignatoriesRequest request = new PostV1CompanySignatoriesRequest(companyUuid,
-            xGustoAPIVersion,
+        PostV1CompanySignatoriesRequest request = new PostV1CompanySignatoriesRequest(xGustoAPIVersion,
+            companyUuid,
             signatoryCreateRequest);
 
         return request;

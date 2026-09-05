@@ -95,7 +95,7 @@ public class Signatory {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("home_address")
-    private JsonNullable<? extends HomeAddress> homeAddress;
+    private JsonNullable<? extends SignatoryHomeAddress> homeAddress;
 
     @JsonCreator
     public Signatory(
@@ -110,7 +110,7 @@ public class Signatory {
             @JsonProperty("has_ssn") Optional<Boolean> hasSsn,
             @JsonProperty("version") Optional<String> version,
             @JsonProperty("identity_verification_status") JsonNullable<? extends IdentityVerificationStatus> identityVerificationStatus,
-            @JsonProperty("home_address") JsonNullable<? extends HomeAddress> homeAddress) {
+            @JsonProperty("home_address") JsonNullable<? extends SignatoryHomeAddress> homeAddress) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(firstName, "firstName");
         Utils.checkNotNull(lastName, "lastName");
@@ -223,8 +223,8 @@ public class Signatory {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<HomeAddress> homeAddress() {
-        return (JsonNullable<HomeAddress>) homeAddress;
+    public JsonNullable<SignatoryHomeAddress> homeAddress() {
+        return (JsonNullable<SignatoryHomeAddress>) homeAddress;
     }
 
     public static Builder builder() {
@@ -402,13 +402,13 @@ public class Signatory {
         return this;
     }
 
-    public Signatory withHomeAddress(HomeAddress homeAddress) {
+    public Signatory withHomeAddress(SignatoryHomeAddress homeAddress) {
         Utils.checkNotNull(homeAddress, "homeAddress");
         this.homeAddress = JsonNullable.of(homeAddress);
         return this;
     }
 
-    public Signatory withHomeAddress(JsonNullable<? extends HomeAddress> homeAddress) {
+    public Signatory withHomeAddress(JsonNullable<? extends SignatoryHomeAddress> homeAddress) {
         Utils.checkNotNull(homeAddress, "homeAddress");
         this.homeAddress = homeAddress;
         return this;
@@ -489,7 +489,7 @@ public class Signatory {
 
         private JsonNullable<? extends IdentityVerificationStatus> identityVerificationStatus = JsonNullable.undefined();
 
-        private JsonNullable<? extends HomeAddress> homeAddress = JsonNullable.undefined();
+        private JsonNullable<? extends SignatoryHomeAddress> homeAddress = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -673,13 +673,13 @@ public class Signatory {
         }
 
 
-        public Builder homeAddress(HomeAddress homeAddress) {
+        public Builder homeAddress(SignatoryHomeAddress homeAddress) {
             Utils.checkNotNull(homeAddress, "homeAddress");
             this.homeAddress = JsonNullable.of(homeAddress);
             return this;
         }
 
-        public Builder homeAddress(JsonNullable<? extends HomeAddress> homeAddress) {
+        public Builder homeAddress(JsonNullable<? extends SignatoryHomeAddress> homeAddress) {
             Utils.checkNotNull(homeAddress, "homeAddress");
             this.homeAddress = homeAddress;
             return this;

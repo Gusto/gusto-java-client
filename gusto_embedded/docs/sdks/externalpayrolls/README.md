@@ -6,13 +6,13 @@
 
 * [get](#get) - Get external payrolls for a company
 * [create](#create) - Create an external payroll for a company
+* [listTaxLiabilities](#listtaxliabilities) - Get tax liabilities
+* [updateTaxLiabilities](#updatetaxliabilities) - Update tax liabilities
+* [finalizeTaxLiabilities](#finalizetaxliabilities) - Finalize tax liabilities options and convert into processed payrolls
 * [retrieve](#retrieve) - Get an external payroll
 * [update](#update) - Update an external payroll
 * [delete](#delete) - Delete an external payroll
 * [calculateTaxes](#calculatetaxes) - Get tax suggestions for an external payroll
-* [listTaxLiabilities](#listtaxliabilities) - Get tax liabilities
-* [updateTaxLiabilities](#updatetaxliabilities) - Update tax liabilities
-* [finalizeTaxLiabilities](#finalizetaxliabilities) - Finalize tax liabilities options and convert into processed payrolls
 
 ## get
 
@@ -246,6 +246,320 @@ public class Application {
 ### Response
 
 **[PostV1ExternalPayrollResponse](../../models/operations/PostV1ExternalPayrollResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+
+## listTaxLiabilities
+
+Get tax liabilities from aggregate external payrolls for a company.
+
+scope: `external_payrolls:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-tax-liabilities" method="get" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.GetV1TaxLiabilitiesHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.GetV1TaxLiabilitiesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1TaxLiabilitiesResponse res = sdk.externalPayrolls().listTaxLiabilities()
+                .xGustoAPIVersion(GetV1TaxLiabilitiesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
+                .call();
+
+        if (res.taxLiabilitiesSelections().isPresent()) {
+            System.out.println(res.taxLiabilitiesSelections().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1TaxLiabilitiesHeaderXGustoAPIVersion>](../../models/operations/GetV1TaxLiabilitiesHeaderXGustoAPIVersion.md)                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+
+### Response
+
+**[GetV1TaxLiabilitiesResponse](../../models/operations/GetV1TaxLiabilitiesResponse.md)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
+
+## updateTaxLiabilities
+
+Update tax liabilities for a company.
+
+scope: `external_payrolls:write`
+
+### Example Usage: Basic
+
+<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.TaxLiabilitySelectionsRequest;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesResponse;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1TaxLiabilitiesResponse res = sdk.externalPayrolls().updateTaxLiabilities()
+                .xGustoAPIVersion(PutV1TaxLiabilitiesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
+                .taxLiabilitySelectionsRequest(TaxLiabilitySelectionsRequest.builder()
+                    .liabilitySelections(List.of())
+                    .build())
+                .call();
+
+        if (res.taxLiabilitiesSelections().isPresent()) {
+            System.out.println(res.taxLiabilitiesSelections().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.LiabilitySelections;
+import com.gusto.embedded_api.models.components.TaxLiabilitySelectionsRequest;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesResponse;
+import java.lang.Exception;
+import java.util.List;
+import java.util.Optional;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1TaxLiabilitiesResponse res = sdk.externalPayrolls().updateTaxLiabilities()
+                .xGustoAPIVersion(PutV1TaxLiabilitiesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
+                .taxLiabilitySelectionsRequest(TaxLiabilitySelectionsRequest.builder()
+                    .liabilitySelections(List.of(
+                        LiabilitySelections.builder()
+                            .taxId(1L)
+                            .lastUnpaidExternalPayrollUuid("7985032c-ee3a-4e98-af27-d56551eb5f1c")
+                            .unpaidLiabilityAmount("50")
+                            .build(),
+                        LiabilitySelections.builder()
+                            .taxId(2L)
+                            .lastUnpaidExternalPayrollUuid("5ed14dbb-958f-47c8-b16e-c4fed82dc486")
+                            .unpaidLiabilityAmount("400")
+                            .build(),
+                        LiabilitySelections.builder()
+                            .taxId(8L)
+                            .lastUnpaidExternalPayrollUuid(Optional.empty())
+                            .unpaidLiabilityAmount("0")
+                            .build()))
+                    .build())
+                .call();
+
+        if (res.taxLiabilitiesSelections().isPresent()) {
+            System.out.println(res.taxLiabilitiesSelections().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.LiabilitySelections;
+import com.gusto.embedded_api.models.components.TaxLiabilitySelectionsRequest;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesResponse;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1TaxLiabilitiesResponse res = sdk.externalPayrolls().updateTaxLiabilities()
+                .xGustoAPIVersion(PutV1TaxLiabilitiesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
+                .taxLiabilitySelectionsRequest(TaxLiabilitySelectionsRequest.builder()
+                    .liabilitySelections(List.of(
+                        LiabilitySelections.builder()
+                            .taxId(1L)
+                            .lastUnpaidExternalPayrollUuid("1bf1efe1-72d4-4e6e-a181-611f3ea66435")
+                            .unpaidLiabilityAmount("47.5")
+                            .build()))
+                    .build())
+                .call();
+
+        if (res.taxLiabilitiesSelections().isPresent()) {
+            System.out.println(res.taxLiabilitiesSelections().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.LiabilitySelections;
+import com.gusto.embedded_api.models.components.TaxLiabilitySelectionsRequest;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesResponse;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1TaxLiabilitiesResponse res = sdk.externalPayrolls().updateTaxLiabilities()
+                .xGustoAPIVersion(PutV1TaxLiabilitiesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
+                .taxLiabilitySelectionsRequest(TaxLiabilitySelectionsRequest.builder()
+                    .liabilitySelections(List.of(
+                        LiabilitySelections.builder()
+                            .taxId(1L)
+                            .lastUnpaidExternalPayrollUuid("1bf1efe1-72d4-4e6e-a181-611f3ea66435")
+                            .unpaidLiabilityAmount("47.5")
+                            .build()))
+                    .build())
+                .call();
+
+        if (res.taxLiabilitiesSelections().isPresent()) {
+            System.out.println(res.taxLiabilitiesSelections().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1TaxLiabilitiesHeaderXGustoAPIVersion>](../../models/operations/PutV1TaxLiabilitiesHeaderXGustoAPIVersion.md)                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `taxLiabilitySelectionsRequest`                                                                                                                                                                                              | [TaxLiabilitySelectionsRequest](../../models/components/TaxLiabilitySelectionsRequest.md)                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PutV1TaxLiabilitiesResponse](../../models/operations/PutV1TaxLiabilitiesResponse.md)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
+
+## finalizeTaxLiabilities
+
+Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
+
+### Asynchronous processing
+This endpoint triggers an asynchronous operation. The external payrolls will be processed in the background after finalization.
+
+scope: `external_payrolls:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities-finish" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities/finish" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesFinishHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesFinishResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1TaxLiabilitiesFinishResponse res = sdk.externalPayrolls().finalizeTaxLiabilities()
+                .xGustoAPIVersion(PutV1TaxLiabilitiesFinishHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyUuid("<id>")
+                .call();
+
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1TaxLiabilitiesFinishHeaderXGustoAPIVersion>](../../models/operations/PutV1TaxLiabilitiesFinishHeaderXGustoAPIVersion.md)                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+
+### Response
+
+**[PutV1TaxLiabilitiesFinishResponse](../../models/operations/PutV1TaxLiabilitiesFinishResponse.md)**
 
 ### Errors
 
@@ -681,320 +995,6 @@ public class Application {
 ### Response
 
 **[GetV1ExternalPayrollCalculateTaxesResponse](../../models/operations/GetV1ExternalPayrollCalculateTaxesResponse.md)**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
-| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
-| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
-
-## listTaxLiabilities
-
-Get tax liabilities from aggregate external payrolls for a company.
-
-scope: `external_payrolls:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="get-v1-tax-liabilities" method="get" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Example" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.operations.GetV1TaxLiabilitiesHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.GetV1TaxLiabilitiesResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        GetV1TaxLiabilitiesResponse res = sdk.externalPayrolls().listTaxLiabilities()
-                .xGustoAPIVersion(GetV1TaxLiabilitiesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .companyUuid("<id>")
-                .call();
-
-        if (res.taxLiabilitiesSelections().isPresent()) {
-            System.out.println(res.taxLiabilitiesSelections().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1TaxLiabilitiesHeaderXGustoAPIVersion>](../../models/operations/GetV1TaxLiabilitiesHeaderXGustoAPIVersion.md)                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-
-### Response
-
-**[GetV1TaxLiabilitiesResponse](../../models/operations/GetV1TaxLiabilitiesResponse.md)**
-
-### Errors
-
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| models/errors/NotFoundErrorObject | 404                               | application/json                  |
-| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
-
-## updateTaxLiabilities
-
-Update tax liabilities for a company.
-
-scope: `external_payrolls:write`
-
-### Example Usage: Basic
-
-<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Basic" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.TaxLiabilitySelectionsRequest;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesResponse;
-import java.lang.Exception;
-import java.util.List;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PutV1TaxLiabilitiesResponse res = sdk.externalPayrolls().updateTaxLiabilities()
-                .xGustoAPIVersion(PutV1TaxLiabilitiesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .companyUuid("<id>")
-                .taxLiabilitySelectionsRequest(TaxLiabilitySelectionsRequest.builder()
-                    .liabilitySelections(List.of())
-                    .build())
-                .call();
-
-        if (res.taxLiabilitiesSelections().isPresent()) {
-            System.out.println(res.taxLiabilitiesSelections().get());
-        }
-    }
-}
-```
-### Example Usage: Example
-
-<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Example" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.LiabilitySelections;
-import com.gusto.embedded_api.models.components.TaxLiabilitySelectionsRequest;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesResponse;
-import java.lang.Exception;
-import java.util.List;
-import java.util.Optional;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PutV1TaxLiabilitiesResponse res = sdk.externalPayrolls().updateTaxLiabilities()
-                .xGustoAPIVersion(PutV1TaxLiabilitiesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .companyUuid("<id>")
-                .taxLiabilitySelectionsRequest(TaxLiabilitySelectionsRequest.builder()
-                    .liabilitySelections(List.of(
-                        LiabilitySelections.builder()
-                            .taxId(1L)
-                            .lastUnpaidExternalPayrollUuid("7985032c-ee3a-4e98-af27-d56551eb5f1c")
-                            .unpaidLiabilityAmount("50")
-                            .build(),
-                        LiabilitySelections.builder()
-                            .taxId(2L)
-                            .lastUnpaidExternalPayrollUuid("5ed14dbb-958f-47c8-b16e-c4fed82dc486")
-                            .unpaidLiabilityAmount("400")
-                            .build(),
-                        LiabilitySelections.builder()
-                            .taxId(8L)
-                            .lastUnpaidExternalPayrollUuid(Optional.empty())
-                            .unpaidLiabilityAmount("0")
-                            .build()))
-                    .build())
-                .call();
-
-        if (res.taxLiabilitiesSelections().isPresent()) {
-            System.out.println(res.taxLiabilitiesSelections().get());
-        }
-    }
-}
-```
-### Example Usage: Nested
-
-<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Nested" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.LiabilitySelections;
-import com.gusto.embedded_api.models.components.TaxLiabilitySelectionsRequest;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesResponse;
-import java.lang.Exception;
-import java.util.List;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PutV1TaxLiabilitiesResponse res = sdk.externalPayrolls().updateTaxLiabilities()
-                .xGustoAPIVersion(PutV1TaxLiabilitiesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .companyUuid("<id>")
-                .taxLiabilitySelectionsRequest(TaxLiabilitySelectionsRequest.builder()
-                    .liabilitySelections(List.of(
-                        LiabilitySelections.builder()
-                            .taxId(1L)
-                            .lastUnpaidExternalPayrollUuid("1bf1efe1-72d4-4e6e-a181-611f3ea66435")
-                            .unpaidLiabilityAmount("47.5")
-                            .build()))
-                    .build())
-                .call();
-
-        if (res.taxLiabilitiesSelections().isPresent()) {
-            System.out.println(res.taxLiabilitiesSelections().get());
-        }
-    }
-}
-```
-### Example Usage: Resource
-
-<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" example="Resource" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.LiabilitySelections;
-import com.gusto.embedded_api.models.components.TaxLiabilitySelectionsRequest;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesResponse;
-import java.lang.Exception;
-import java.util.List;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PutV1TaxLiabilitiesResponse res = sdk.externalPayrolls().updateTaxLiabilities()
-                .xGustoAPIVersion(PutV1TaxLiabilitiesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .companyUuid("<id>")
-                .taxLiabilitySelectionsRequest(TaxLiabilitySelectionsRequest.builder()
-                    .liabilitySelections(List.of(
-                        LiabilitySelections.builder()
-                            .taxId(1L)
-                            .lastUnpaidExternalPayrollUuid("1bf1efe1-72d4-4e6e-a181-611f3ea66435")
-                            .unpaidLiabilityAmount("47.5")
-                            .build()))
-                    .build())
-                .call();
-
-        if (res.taxLiabilitiesSelections().isPresent()) {
-            System.out.println(res.taxLiabilitiesSelections().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1TaxLiabilitiesHeaderXGustoAPIVersion>](../../models/operations/PutV1TaxLiabilitiesHeaderXGustoAPIVersion.md)                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `taxLiabilitySelectionsRequest`                                                                                                                                                                                              | [TaxLiabilitySelectionsRequest](../../models/components/TaxLiabilitySelectionsRequest.md)                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
-
-### Response
-
-**[PutV1TaxLiabilitiesResponse](../../models/operations/PutV1TaxLiabilitiesResponse.md)**
-
-### Errors
-
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| models/errors/NotFoundErrorObject | 404                               | application/json                  |
-| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
-
-## finalizeTaxLiabilities
-
-Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
-
-### Asynchronous processing
-This endpoint triggers an asynchronous operation. The external payrolls will be processed in the background after finalization.
-
-scope: `external_payrolls:write`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="put-v1-tax-liabilities-finish" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities/finish" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
-import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesFinishHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.PutV1TaxLiabilitiesFinishResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PutV1TaxLiabilitiesFinishResponse res = sdk.externalPayrolls().finalizeTaxLiabilities()
-                .xGustoAPIVersion(PutV1TaxLiabilitiesFinishHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .companyUuid("<id>")
-                .call();
-
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1TaxLiabilitiesFinishHeaderXGustoAPIVersion>](../../models/operations/PutV1TaxLiabilitiesFinishHeaderXGustoAPIVersion.md)                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `companyUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-
-### Response
-
-**[PutV1TaxLiabilitiesFinishResponse](../../models/operations/PutV1TaxLiabilitiesFinishResponse.md)**
 
 ### Errors
 

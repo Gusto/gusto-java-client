@@ -105,7 +105,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fixed_compensations")
-    private Optional<? extends List<FixedCompensations>> fixedCompensations;
+    private Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations>> fixedCompensations;
 
     /**
      * An array of hourly compensations for the employee. Hourly compensations include regular, overtime,
@@ -116,7 +116,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hourly_compensations")
-    private Optional<? extends List<HourlyCompensations>> hourlyCompensations;
+    private Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations>> hourlyCompensations;
 
     /**
      * An array of all paid time off the employee is eligible for this pay period.
@@ -130,7 +130,16 @@ public class PayrollUnprocessedEmployeeCompensationsType {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("reimbursements")
-    private Optional<? extends List<Reimbursements>> reimbursements;
+    private Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeReimbursements>> reimbursements;
+
+    /**
+     * The one-time custom withholding overrides applied to this payroll for this employee.
+     * `federal` is null when no federal one-time override is set; `state` is an empty
+     * array when no state one-time overrides are set.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("custom_withholdings")
+    private Optional<? extends PayrollUnprocessedEmployeeCompensationsTypeCustomWithholdings> customWithholdings;
 
     /**
      * The current version of this employee compensation. This field is only available for prepared
@@ -154,10 +163,11 @@ public class PayrollUnprocessedEmployeeCompensationsType {
             @JsonProperty("check_amount") JsonNullable<Double> checkAmount,
             @JsonProperty("payment_method") JsonNullable<? extends PayrollUnprocessedEmployeeCompensationsTypePaymentMethod> paymentMethod,
             @JsonProperty("memo") JsonNullable<String> memo,
-            @JsonProperty("fixed_compensations") Optional<? extends List<FixedCompensations>> fixedCompensations,
-            @JsonProperty("hourly_compensations") Optional<? extends List<HourlyCompensations>> hourlyCompensations,
+            @JsonProperty("fixed_compensations") Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations>> fixedCompensations,
+            @JsonProperty("hourly_compensations") Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations>> hourlyCompensations,
             @JsonProperty("paid_time_off") Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypePaidTimeOff>> paidTimeOff,
-            @JsonProperty("reimbursements") Optional<? extends List<Reimbursements>> reimbursements,
+            @JsonProperty("reimbursements") Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeReimbursements>> reimbursements,
+            @JsonProperty("custom_withholdings") Optional<? extends PayrollUnprocessedEmployeeCompensationsTypeCustomWithholdings> customWithholdings,
             @JsonProperty("version") Optional<? extends Object> version) {
         Utils.checkNotNull(employeeUuid, "employeeUuid");
         Utils.checkNotNull(excluded, "excluded");
@@ -173,6 +183,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
         Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
         Utils.checkNotNull(paidTimeOff, "paidTimeOff");
         Utils.checkNotNull(reimbursements, "reimbursements");
+        Utils.checkNotNull(customWithholdings, "customWithholdings");
         Utils.checkNotNull(version, "version");
         this.employeeUuid = employeeUuid;
         this.excluded = excluded;
@@ -188,6 +199,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
         this.hourlyCompensations = hourlyCompensations;
         this.paidTimeOff = paidTimeOff;
         this.reimbursements = reimbursements;
+        this.customWithholdings = customWithholdings;
         this.version = version;
     }
     
@@ -196,7 +208,8 @@ public class PayrollUnprocessedEmployeeCompensationsType {
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
             JsonNullable.undefined(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -294,8 +307,8 @@ public class PayrollUnprocessedEmployeeCompensationsType {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<FixedCompensations>> fixedCompensations() {
-        return (Optional<List<FixedCompensations>>) fixedCompensations;
+    public Optional<List<PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations>> fixedCompensations() {
+        return (Optional<List<PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations>>) fixedCompensations;
     }
 
     /**
@@ -307,8 +320,8 @@ public class PayrollUnprocessedEmployeeCompensationsType {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<HourlyCompensations>> hourlyCompensations() {
-        return (Optional<List<HourlyCompensations>>) hourlyCompensations;
+    public Optional<List<PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations>> hourlyCompensations() {
+        return (Optional<List<PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations>>) hourlyCompensations;
     }
 
     /**
@@ -325,8 +338,19 @@ public class PayrollUnprocessedEmployeeCompensationsType {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Reimbursements>> reimbursements() {
-        return (Optional<List<Reimbursements>>) reimbursements;
+    public Optional<List<PayrollUnprocessedEmployeeCompensationsTypeReimbursements>> reimbursements() {
+        return (Optional<List<PayrollUnprocessedEmployeeCompensationsTypeReimbursements>>) reimbursements;
+    }
+
+    /**
+     * The one-time custom withholding overrides applied to this payroll for this employee.
+     * `federal` is null when no federal one-time override is set; `state` is an empty
+     * array when no state one-time overrides are set.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PayrollUnprocessedEmployeeCompensationsTypeCustomWithholdings> customWithholdings() {
+        return (Optional<PayrollUnprocessedEmployeeCompensationsTypeCustomWithholdings>) customWithholdings;
     }
 
     /**
@@ -545,7 +569,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
      * 
      * <p>For an unprocessed payroll, all active fixed compensations are returned.
      */
-    public PayrollUnprocessedEmployeeCompensationsType withFixedCompensations(List<FixedCompensations> fixedCompensations) {
+    public PayrollUnprocessedEmployeeCompensationsType withFixedCompensations(List<PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations> fixedCompensations) {
         Utils.checkNotNull(fixedCompensations, "fixedCompensations");
         this.fixedCompensations = Optional.ofNullable(fixedCompensations);
         return this;
@@ -559,7 +583,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
      * 
      * <p>For an unprocessed payroll, all active fixed compensations are returned.
      */
-    public PayrollUnprocessedEmployeeCompensationsType withFixedCompensations(Optional<? extends List<FixedCompensations>> fixedCompensations) {
+    public PayrollUnprocessedEmployeeCompensationsType withFixedCompensations(Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations>> fixedCompensations) {
         Utils.checkNotNull(fixedCompensations, "fixedCompensations");
         this.fixedCompensations = fixedCompensations;
         return this;
@@ -572,7 +596,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
      * 
      * <p>For an unprocessed payroll, all active hourly compensations are returned.
      */
-    public PayrollUnprocessedEmployeeCompensationsType withHourlyCompensations(List<HourlyCompensations> hourlyCompensations) {
+    public PayrollUnprocessedEmployeeCompensationsType withHourlyCompensations(List<PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations> hourlyCompensations) {
         Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
         this.hourlyCompensations = Optional.ofNullable(hourlyCompensations);
         return this;
@@ -586,7 +610,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
      * 
      * <p>For an unprocessed payroll, all active hourly compensations are returned.
      */
-    public PayrollUnprocessedEmployeeCompensationsType withHourlyCompensations(Optional<? extends List<HourlyCompensations>> hourlyCompensations) {
+    public PayrollUnprocessedEmployeeCompensationsType withHourlyCompensations(Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations>> hourlyCompensations) {
         Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
         this.hourlyCompensations = hourlyCompensations;
         return this;
@@ -614,7 +638,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
     /**
      * An array of reimbursements for the employee.
      */
-    public PayrollUnprocessedEmployeeCompensationsType withReimbursements(List<Reimbursements> reimbursements) {
+    public PayrollUnprocessedEmployeeCompensationsType withReimbursements(List<PayrollUnprocessedEmployeeCompensationsTypeReimbursements> reimbursements) {
         Utils.checkNotNull(reimbursements, "reimbursements");
         this.reimbursements = Optional.ofNullable(reimbursements);
         return this;
@@ -624,9 +648,32 @@ public class PayrollUnprocessedEmployeeCompensationsType {
     /**
      * An array of reimbursements for the employee.
      */
-    public PayrollUnprocessedEmployeeCompensationsType withReimbursements(Optional<? extends List<Reimbursements>> reimbursements) {
+    public PayrollUnprocessedEmployeeCompensationsType withReimbursements(Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeReimbursements>> reimbursements) {
         Utils.checkNotNull(reimbursements, "reimbursements");
         this.reimbursements = reimbursements;
+        return this;
+    }
+
+    /**
+     * The one-time custom withholding overrides applied to this payroll for this employee.
+     * `federal` is null when no federal one-time override is set; `state` is an empty
+     * array when no state one-time overrides are set.
+     */
+    public PayrollUnprocessedEmployeeCompensationsType withCustomWithholdings(PayrollUnprocessedEmployeeCompensationsTypeCustomWithholdings customWithholdings) {
+        Utils.checkNotNull(customWithholdings, "customWithholdings");
+        this.customWithholdings = Optional.ofNullable(customWithholdings);
+        return this;
+    }
+
+
+    /**
+     * The one-time custom withholding overrides applied to this payroll for this employee.
+     * `federal` is null when no federal one-time override is set; `state` is an empty
+     * array when no state one-time overrides are set.
+     */
+    public PayrollUnprocessedEmployeeCompensationsType withCustomWithholdings(Optional<? extends PayrollUnprocessedEmployeeCompensationsTypeCustomWithholdings> customWithholdings) {
+        Utils.checkNotNull(customWithholdings, "customWithholdings");
+        this.customWithholdings = customWithholdings;
         return this;
     }
 
@@ -679,6 +726,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
             Utils.enhancedDeepEquals(this.hourlyCompensations, other.hourlyCompensations) &&
             Utils.enhancedDeepEquals(this.paidTimeOff, other.paidTimeOff) &&
             Utils.enhancedDeepEquals(this.reimbursements, other.reimbursements) &&
+            Utils.enhancedDeepEquals(this.customWithholdings, other.customWithholdings) &&
             Utils.enhancedDeepEquals(this.version, other.version);
     }
     
@@ -689,7 +737,8 @@ public class PayrollUnprocessedEmployeeCompensationsType {
             preferredFirstName, lastName, grossPay,
             netPay, checkAmount, paymentMethod,
             memo, fixedCompensations, hourlyCompensations,
-            paidTimeOff, reimbursements, version);
+            paidTimeOff, reimbursements, customWithholdings,
+            version);
     }
     
     @Override
@@ -709,6 +758,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
                 "hourlyCompensations", hourlyCompensations,
                 "paidTimeOff", paidTimeOff,
                 "reimbursements", reimbursements,
+                "customWithholdings", customWithholdings,
                 "version", version);
     }
 
@@ -735,13 +785,15 @@ public class PayrollUnprocessedEmployeeCompensationsType {
 
         private JsonNullable<String> memo = JsonNullable.undefined();
 
-        private Optional<? extends List<FixedCompensations>> fixedCompensations = Optional.empty();
+        private Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations>> fixedCompensations = Optional.empty();
 
-        private Optional<? extends List<HourlyCompensations>> hourlyCompensations = Optional.empty();
+        private Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations>> hourlyCompensations = Optional.empty();
 
         private Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypePaidTimeOff>> paidTimeOff = Optional.empty();
 
-        private Optional<? extends List<Reimbursements>> reimbursements = Optional.empty();
+        private Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeReimbursements>> reimbursements = Optional.empty();
+
+        private Optional<? extends PayrollUnprocessedEmployeeCompensationsTypeCustomWithholdings> customWithholdings = Optional.empty();
 
         private Optional<? extends Object> version = Optional.empty();
 
@@ -957,7 +1009,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
          * 
          * <p>For an unprocessed payroll, all active fixed compensations are returned.
          */
-        public Builder fixedCompensations(List<FixedCompensations> fixedCompensations) {
+        public Builder fixedCompensations(List<PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations> fixedCompensations) {
             Utils.checkNotNull(fixedCompensations, "fixedCompensations");
             this.fixedCompensations = Optional.ofNullable(fixedCompensations);
             return this;
@@ -970,7 +1022,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
          * 
          * <p>For an unprocessed payroll, all active fixed compensations are returned.
          */
-        public Builder fixedCompensations(Optional<? extends List<FixedCompensations>> fixedCompensations) {
+        public Builder fixedCompensations(Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeFixedCompensations>> fixedCompensations) {
             Utils.checkNotNull(fixedCompensations, "fixedCompensations");
             this.fixedCompensations = fixedCompensations;
             return this;
@@ -984,7 +1036,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
          * 
          * <p>For an unprocessed payroll, all active hourly compensations are returned.
          */
-        public Builder hourlyCompensations(List<HourlyCompensations> hourlyCompensations) {
+        public Builder hourlyCompensations(List<PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations> hourlyCompensations) {
             Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
             this.hourlyCompensations = Optional.ofNullable(hourlyCompensations);
             return this;
@@ -997,7 +1049,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
          * 
          * <p>For an unprocessed payroll, all active hourly compensations are returned.
          */
-        public Builder hourlyCompensations(Optional<? extends List<HourlyCompensations>> hourlyCompensations) {
+        public Builder hourlyCompensations(Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeHourlyCompensations>> hourlyCompensations) {
             Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
             this.hourlyCompensations = hourlyCompensations;
             return this;
@@ -1026,7 +1078,7 @@ public class PayrollUnprocessedEmployeeCompensationsType {
         /**
          * An array of reimbursements for the employee.
          */
-        public Builder reimbursements(List<Reimbursements> reimbursements) {
+        public Builder reimbursements(List<PayrollUnprocessedEmployeeCompensationsTypeReimbursements> reimbursements) {
             Utils.checkNotNull(reimbursements, "reimbursements");
             this.reimbursements = Optional.ofNullable(reimbursements);
             return this;
@@ -1035,9 +1087,32 @@ public class PayrollUnprocessedEmployeeCompensationsType {
         /**
          * An array of reimbursements for the employee.
          */
-        public Builder reimbursements(Optional<? extends List<Reimbursements>> reimbursements) {
+        public Builder reimbursements(Optional<? extends List<PayrollUnprocessedEmployeeCompensationsTypeReimbursements>> reimbursements) {
             Utils.checkNotNull(reimbursements, "reimbursements");
             this.reimbursements = reimbursements;
+            return this;
+        }
+
+
+        /**
+         * The one-time custom withholding overrides applied to this payroll for this employee.
+         * `federal` is null when no federal one-time override is set; `state` is an empty
+         * array when no state one-time overrides are set.
+         */
+        public Builder customWithholdings(PayrollUnprocessedEmployeeCompensationsTypeCustomWithholdings customWithholdings) {
+            Utils.checkNotNull(customWithholdings, "customWithholdings");
+            this.customWithholdings = Optional.ofNullable(customWithholdings);
+            return this;
+        }
+
+        /**
+         * The one-time custom withholding overrides applied to this payroll for this employee.
+         * `federal` is null when no federal one-time override is set; `state` is an empty
+         * array when no state one-time overrides are set.
+         */
+        public Builder customWithholdings(Optional<? extends PayrollUnprocessedEmployeeCompensationsTypeCustomWithholdings> customWithholdings) {
+            Utils.checkNotNull(customWithholdings, "customWithholdings");
+            this.customWithholdings = customWithholdings;
             return this;
         }
 
@@ -1073,7 +1148,8 @@ public class PayrollUnprocessedEmployeeCompensationsType {
                 preferredFirstName, lastName, grossPay,
                 netPay, checkAmount, paymentMethod,
                 memo, fixedCompensations, hourlyCompensations,
-                paidTimeOff, reimbursements, version);
+                paidTimeOff, reimbursements, customWithholdings,
+                version);
         }
 
     }

@@ -33,12 +33,12 @@ public class ContractorPaymentSummary {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contractor_payments")
-    private Optional<? extends List<ContractorPaymentSummaryContractorPayments>> contractorPayments;
+    private Optional<? extends List<ContractorPayments>> contractorPayments;
 
     @JsonCreator
     public ContractorPaymentSummary(
             @JsonProperty("total") Optional<? extends Total> total,
-            @JsonProperty("contractor_payments") Optional<? extends List<ContractorPaymentSummaryContractorPayments>> contractorPayments) {
+            @JsonProperty("contractor_payments") Optional<? extends List<ContractorPayments>> contractorPayments) {
         Utils.checkNotNull(total, "total");
         Utils.checkNotNull(contractorPayments, "contractorPayments");
         this.total = total;
@@ -63,8 +63,8 @@ public class ContractorPaymentSummary {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<ContractorPaymentSummaryContractorPayments>> contractorPayments() {
-        return (Optional<List<ContractorPaymentSummaryContractorPayments>>) contractorPayments;
+    public Optional<List<ContractorPayments>> contractorPayments() {
+        return (Optional<List<ContractorPayments>>) contractorPayments;
     }
 
     public static Builder builder() {
@@ -94,7 +94,7 @@ public class ContractorPaymentSummary {
     /**
      * The individual contractor payments, within a given time period, grouped by contractor.
      */
-    public ContractorPaymentSummary withContractorPayments(List<ContractorPaymentSummaryContractorPayments> contractorPayments) {
+    public ContractorPaymentSummary withContractorPayments(List<ContractorPayments> contractorPayments) {
         Utils.checkNotNull(contractorPayments, "contractorPayments");
         this.contractorPayments = Optional.ofNullable(contractorPayments);
         return this;
@@ -104,7 +104,7 @@ public class ContractorPaymentSummary {
     /**
      * The individual contractor payments, within a given time period, grouped by contractor.
      */
-    public ContractorPaymentSummary withContractorPayments(Optional<? extends List<ContractorPaymentSummaryContractorPayments>> contractorPayments) {
+    public ContractorPaymentSummary withContractorPayments(Optional<? extends List<ContractorPayments>> contractorPayments) {
         Utils.checkNotNull(contractorPayments, "contractorPayments");
         this.contractorPayments = contractorPayments;
         return this;
@@ -142,7 +142,7 @@ public class ContractorPaymentSummary {
 
         private Optional<? extends Total> total = Optional.empty();
 
-        private Optional<? extends List<ContractorPaymentSummaryContractorPayments>> contractorPayments = Optional.empty();
+        private Optional<? extends List<ContractorPayments>> contractorPayments = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -171,7 +171,7 @@ public class ContractorPaymentSummary {
         /**
          * The individual contractor payments, within a given time period, grouped by contractor.
          */
-        public Builder contractorPayments(List<ContractorPaymentSummaryContractorPayments> contractorPayments) {
+        public Builder contractorPayments(List<ContractorPayments> contractorPayments) {
             Utils.checkNotNull(contractorPayments, "contractorPayments");
             this.contractorPayments = Optional.ofNullable(contractorPayments);
             return this;
@@ -180,7 +180,7 @@ public class ContractorPaymentSummary {
         /**
          * The individual contractor payments, within a given time period, grouped by contractor.
          */
-        public Builder contractorPayments(Optional<? extends List<ContractorPaymentSummaryContractorPayments>> contractorPayments) {
+        public Builder contractorPayments(Optional<? extends List<ContractorPayments>> contractorPayments) {
             Utils.checkNotNull(contractorPayments, "contractorPayments");
             this.contractorPayments = contractorPayments;
             return this;

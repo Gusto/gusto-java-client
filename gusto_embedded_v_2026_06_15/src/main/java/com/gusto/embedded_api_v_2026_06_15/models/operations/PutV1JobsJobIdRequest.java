@@ -18,12 +18,6 @@ import java.util.Optional;
 
 public class PutV1JobsJobIdRequest {
     /**
-     * The UUID of the job
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=job_id")
-    private String jobId;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,35 +25,33 @@ public class PutV1JobsJobIdRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the job
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=job_id")
+    private String jobId;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private JobsUpdateRequestBody jobsUpdateRequestBody;
 
     @JsonCreator
     public PutV1JobsJobIdRequest(
-            String jobId,
             Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String jobId,
             JobsUpdateRequestBody jobsUpdateRequestBody) {
-        Utils.checkNotNull(jobId, "jobId");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(jobId, "jobId");
         Utils.checkNotNull(jobsUpdateRequestBody, "jobsUpdateRequestBody");
-        this.jobId = jobId;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.jobId = jobId;
         this.jobsUpdateRequestBody = jobsUpdateRequestBody;
     }
     
     public PutV1JobsJobIdRequest(
             String jobId,
             JobsUpdateRequestBody jobsUpdateRequestBody) {
-        this(jobId, Optional.empty(), jobsUpdateRequestBody);
-    }
-
-    /**
-     * The UUID of the job
-     */
-    @JsonIgnore
-    public String jobId() {
-        return jobId;
+        this(Optional.empty(), jobId, jobsUpdateRequestBody);
     }
 
     /**
@@ -73,6 +65,14 @@ public class PutV1JobsJobIdRequest {
         return (Optional<PutV1JobsJobIdHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the job
+     */
+    @JsonIgnore
+    public String jobId() {
+        return jobId;
+    }
+
     @JsonIgnore
     public JobsUpdateRequestBody jobsUpdateRequestBody() {
         return jobsUpdateRequestBody;
@@ -82,15 +82,6 @@ public class PutV1JobsJobIdRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the job
-     */
-    public PutV1JobsJobIdRequest withJobId(String jobId) {
-        Utils.checkNotNull(jobId, "jobId");
-        this.jobId = jobId;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -115,6 +106,15 @@ public class PutV1JobsJobIdRequest {
         return this;
     }
 
+    /**
+     * The UUID of the job
+     */
+    public PutV1JobsJobIdRequest withJobId(String jobId) {
+        Utils.checkNotNull(jobId, "jobId");
+        this.jobId = jobId;
+        return this;
+    }
+
     public PutV1JobsJobIdRequest withJobsUpdateRequestBody(JobsUpdateRequestBody jobsUpdateRequestBody) {
         Utils.checkNotNull(jobsUpdateRequestBody, "jobsUpdateRequestBody");
         this.jobsUpdateRequestBody = jobsUpdateRequestBody;
@@ -131,46 +131,36 @@ public class PutV1JobsJobIdRequest {
         }
         PutV1JobsJobIdRequest other = (PutV1JobsJobIdRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.jobId, other.jobId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.jobId, other.jobId) &&
             Utils.enhancedDeepEquals(this.jobsUpdateRequestBody, other.jobsUpdateRequestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            jobId, xGustoAPIVersion, jobsUpdateRequestBody);
+            xGustoAPIVersion, jobId, jobsUpdateRequestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1JobsJobIdRequest.class,
-                "jobId", jobId,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "jobId", jobId,
                 "jobsUpdateRequestBody", jobsUpdateRequestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String jobId;
-
         private Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String jobId;
 
         private JobsUpdateRequestBody jobsUpdateRequestBody;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the job
-         */
-        public Builder jobId(String jobId) {
-            Utils.checkNotNull(jobId, "jobId");
-            this.jobId = jobId;
-            return this;
         }
 
 
@@ -197,6 +187,16 @@ public class PutV1JobsJobIdRequest {
         }
 
 
+        /**
+         * The UUID of the job
+         */
+        public Builder jobId(String jobId) {
+            Utils.checkNotNull(jobId, "jobId");
+            this.jobId = jobId;
+            return this;
+        }
+
+
         public Builder jobsUpdateRequestBody(JobsUpdateRequestBody jobsUpdateRequestBody) {
             Utils.checkNotNull(jobsUpdateRequestBody, "jobsUpdateRequestBody");
             this.jobsUpdateRequestBody = jobsUpdateRequestBody;
@@ -209,7 +209,7 @@ public class PutV1JobsJobIdRequest {
             }
 
             return new PutV1JobsJobIdRequest(
-                jobId, xGustoAPIVersion, jobsUpdateRequestBody);
+                xGustoAPIVersion, jobId, jobsUpdateRequestBody);
         }
 
 

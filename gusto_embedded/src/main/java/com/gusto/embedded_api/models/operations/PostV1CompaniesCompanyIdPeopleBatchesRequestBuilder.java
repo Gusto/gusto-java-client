@@ -16,23 +16,17 @@ import java.util.Optional;
 
 public class PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder {
 
-    private String companyId;
     private Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion>>() {});
+    private String companyId;
     private PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder xGustoAPIVersion(PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -44,6 +38,12 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder {
     public PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder xGustoAPIVersion(Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
         return this;
     }
 
@@ -59,8 +59,8 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1CompaniesCompanyIdPeopleBatchesRequest request = new PostV1CompaniesCompanyIdPeopleBatchesRequest(companyId,
-            xGustoAPIVersion,
+        PostV1CompaniesCompanyIdPeopleBatchesRequest request = new PostV1CompaniesCompanyIdPeopleBatchesRequest(xGustoAPIVersion,
+            companyId,
             requestBody);
 
         return request;

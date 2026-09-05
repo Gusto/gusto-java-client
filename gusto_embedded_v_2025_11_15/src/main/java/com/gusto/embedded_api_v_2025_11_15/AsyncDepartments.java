@@ -70,130 +70,6 @@ public class AsyncDepartments {
 
 
     /**
-     * Get all departments of a company
-     * 
-     * <p>Get all of the departments for a given company with the employees and contractors assigned to that
-     * department.
-     * 
-     * <p>scope: `departments:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public GetCompaniesDepartmentsRequestBuilder getAll() {
-        return new GetCompaniesDepartmentsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get all departments of a company
-     * 
-     * <p>Get all of the departments for a given company with the employees and contractors assigned to that
-     * department.
-     * 
-     * <p>scope: `departments:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyUuid The UUID of the company
-     * @return {@code CompletableFuture<GetCompaniesDepartmentsResponse>} - The async response
-     */
-    public CompletableFuture<GetCompaniesDepartmentsResponse> getAll(String companyUuid) {
-        return getAll(companyUuid, Optional.empty());
-    }
-
-    /**
-     * Get all departments of a company
-     * 
-     * <p>Get all of the departments for a given company with the employees and contractors assigned to that
-     * department.
-     * 
-     * <p>scope: `departments:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @return {@code CompletableFuture<GetCompaniesDepartmentsResponse>} - The async response
-     */
-    public CompletableFuture<GetCompaniesDepartmentsResponse> getAll(String companyUuid, Optional<? extends GetCompaniesDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        GetCompaniesDepartmentsRequest request =
-            GetCompaniesDepartmentsRequest
-                .builder()
-                .companyUuid(companyUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .build();
-        AsyncRequestOperation<GetCompaniesDepartmentsRequest, GetCompaniesDepartmentsResponse> operation
-              = new GetCompaniesDepartments.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Create a department
-     * 
-     * <p>Create a department
-     * 
-     * <p>scope: `departments:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public PostDepartmentsRequestBuilder create() {
-        return new PostDepartmentsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Create a department
-     * 
-     * <p>Create a department
-     * 
-     * <p>scope: `departments:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyUuid The UUID of the company
-     * @param departmentCreateRequestBody 
-     * @return {@code CompletableFuture<PostDepartmentsResponse>} - The async response
-     */
-    public CompletableFuture<PostDepartmentsResponse> create(String companyUuid, DepartmentCreateRequestBody departmentCreateRequestBody) {
-        return create(companyUuid, Optional.empty(), departmentCreateRequestBody);
-    }
-
-    /**
-     * Create a department
-     * 
-     * <p>Create a department
-     * 
-     * <p>scope: `departments:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param departmentCreateRequestBody 
-     * @return {@code CompletableFuture<PostDepartmentsResponse>} - The async response
-     */
-    public CompletableFuture<PostDepartmentsResponse> create(
-            String companyUuid, Optional<? extends PostDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion,
-            DepartmentCreateRequestBody departmentCreateRequestBody) {
-        PostDepartmentsRequest request =
-            PostDepartmentsRequest
-                .builder()
-                .companyUuid(companyUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .departmentCreateRequestBody(departmentCreateRequestBody)
-                .build();
-        AsyncRequestOperation<PostDepartmentsRequest, PostDepartmentsResponse> operation
-              = new PostDepartments.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
      * Get a department
      * 
      * <p>Get a department given the UUID
@@ -221,7 +97,7 @@ public class AsyncDepartments {
      * @return {@code CompletableFuture<GetDepartmentResponse>} - The async response
      */
     public CompletableFuture<GetDepartmentResponse> get(String departmentUuid) {
-        return get(departmentUuid, Optional.empty());
+        return get(Optional.empty(), departmentUuid);
     }
 
     /**
@@ -233,16 +109,16 @@ public class AsyncDepartments {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param departmentUuid The UUID of the department
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param departmentUuid The UUID of the department
      * @return {@code CompletableFuture<GetDepartmentResponse>} - The async response
      */
-    public CompletableFuture<GetDepartmentResponse> get(String departmentUuid, Optional<? extends GetDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetDepartmentResponse> get(Optional<? extends GetDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion, String departmentUuid) {
         GetDepartmentRequest request =
             GetDepartmentRequest
                 .builder()
-                .departmentUuid(departmentUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .departmentUuid(departmentUuid)
                 .build();
         AsyncRequestOperation<GetDepartmentRequest, GetDepartmentResponse> operation
               = new GetDepartment.Async(sdkConfiguration, _headers);
@@ -280,7 +156,7 @@ public class AsyncDepartments {
      * @return {@code CompletableFuture<PutDepartmentsResponse>} - The async response
      */
     public CompletableFuture<PutDepartmentsResponse> update(String departmentUuid, DepartmentUpdateRequestBody departmentUpdateRequestBody) {
-        return update(departmentUuid, Optional.empty(), departmentUpdateRequestBody);
+        return update(Optional.empty(), departmentUuid, departmentUpdateRequestBody);
     }
 
     /**
@@ -292,19 +168,19 @@ public class AsyncDepartments {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param departmentUuid The UUID of the department
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param departmentUuid The UUID of the department
      * @param departmentUpdateRequestBody 
      * @return {@code CompletableFuture<PutDepartmentsResponse>} - The async response
      */
     public CompletableFuture<PutDepartmentsResponse> update(
-            String departmentUuid, Optional<? extends PutDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion, String departmentUuid,
             DepartmentUpdateRequestBody departmentUpdateRequestBody) {
         PutDepartmentsRequest request =
             PutDepartmentsRequest
                 .builder()
-                .departmentUuid(departmentUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .departmentUuid(departmentUuid)
                 .departmentUpdateRequestBody(departmentUpdateRequestBody)
                 .build();
         AsyncRequestOperation<PutDepartmentsRequest, PutDepartmentsResponse> operation
@@ -344,7 +220,7 @@ public class AsyncDepartments {
      * @return {@code CompletableFuture<DeleteDepartmentResponse>} - The async response
      */
     public CompletableFuture<DeleteDepartmentResponse> delete(String departmentUuid) {
-        return delete(departmentUuid, Optional.empty());
+        return delete(Optional.empty(), departmentUuid);
     }
 
     /**
@@ -357,16 +233,16 @@ public class AsyncDepartments {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param departmentUuid The UUID of the department
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param departmentUuid The UUID of the department
      * @return {@code CompletableFuture<DeleteDepartmentResponse>} - The async response
      */
-    public CompletableFuture<DeleteDepartmentResponse> delete(String departmentUuid, Optional<? extends DeleteDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<DeleteDepartmentResponse> delete(Optional<? extends DeleteDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion, String departmentUuid) {
         DeleteDepartmentRequest request =
             DeleteDepartmentRequest
                 .builder()
-                .departmentUuid(departmentUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .departmentUuid(departmentUuid)
                 .build();
         AsyncRequestOperation<DeleteDepartmentRequest, DeleteDepartmentResponse> operation
               = new DeleteDepartment.Async(sdkConfiguration, _headers);
@@ -404,7 +280,7 @@ public class AsyncDepartments {
      * @return {@code CompletableFuture<PutAddPeopleToDepartmentResponse>} - The async response
      */
     public CompletableFuture<PutAddPeopleToDepartmentResponse> addPeople(String departmentUuid, DepartmentPeopleRequestBody departmentPeopleRequestBody) {
-        return addPeople(departmentUuid, Optional.empty(), departmentPeopleRequestBody);
+        return addPeople(Optional.empty(), departmentUuid, departmentPeopleRequestBody);
     }
 
     /**
@@ -416,19 +292,19 @@ public class AsyncDepartments {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param departmentUuid The UUID of the department
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param departmentUuid The UUID of the department
      * @param departmentPeopleRequestBody 
      * @return {@code CompletableFuture<PutAddPeopleToDepartmentResponse>} - The async response
      */
     public CompletableFuture<PutAddPeopleToDepartmentResponse> addPeople(
-            String departmentUuid, Optional<? extends PutAddPeopleToDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutAddPeopleToDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion, String departmentUuid,
             DepartmentPeopleRequestBody departmentPeopleRequestBody) {
         PutAddPeopleToDepartmentRequest request =
             PutAddPeopleToDepartmentRequest
                 .builder()
-                .departmentUuid(departmentUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .departmentUuid(departmentUuid)
                 .departmentPeopleRequestBody(departmentPeopleRequestBody)
                 .build();
         AsyncRequestOperation<PutAddPeopleToDepartmentRequest, PutAddPeopleToDepartmentResponse> operation
@@ -467,7 +343,7 @@ public class AsyncDepartments {
      * @return {@code CompletableFuture<PutRemovePeopleFromDepartmentResponse>} - The async response
      */
     public CompletableFuture<PutRemovePeopleFromDepartmentResponse> removePeople(String departmentUuid, DepartmentPeopleRequestBody departmentPeopleRequestBody) {
-        return removePeople(departmentUuid, Optional.empty(), departmentPeopleRequestBody);
+        return removePeople(Optional.empty(), departmentUuid, departmentPeopleRequestBody);
     }
 
     /**
@@ -479,23 +355,147 @@ public class AsyncDepartments {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param departmentUuid The UUID of the department
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param departmentUuid The UUID of the department
      * @param departmentPeopleRequestBody 
      * @return {@code CompletableFuture<PutRemovePeopleFromDepartmentResponse>} - The async response
      */
     public CompletableFuture<PutRemovePeopleFromDepartmentResponse> removePeople(
-            String departmentUuid, Optional<? extends PutRemovePeopleFromDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutRemovePeopleFromDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion, String departmentUuid,
             DepartmentPeopleRequestBody departmentPeopleRequestBody) {
         PutRemovePeopleFromDepartmentRequest request =
             PutRemovePeopleFromDepartmentRequest
                 .builder()
-                .departmentUuid(departmentUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .departmentUuid(departmentUuid)
                 .departmentPeopleRequestBody(departmentPeopleRequestBody)
                 .build();
         AsyncRequestOperation<PutRemovePeopleFromDepartmentRequest, PutRemovePeopleFromDepartmentResponse> operation
               = new PutRemovePeopleFromDepartment.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get all departments of a company
+     * 
+     * <p>Get all of the departments for a given company with the employees and contractors assigned to that
+     * department.
+     * 
+     * <p>scope: `departments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetCompaniesDepartmentsRequestBuilder getAll() {
+        return new GetCompaniesDepartmentsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get all departments of a company
+     * 
+     * <p>Get all of the departments for a given company with the employees and contractors assigned to that
+     * department.
+     * 
+     * <p>scope: `departments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyUuid The UUID of the company
+     * @return {@code CompletableFuture<GetCompaniesDepartmentsResponse>} - The async response
+     */
+    public CompletableFuture<GetCompaniesDepartmentsResponse> getAll(String companyUuid) {
+        return getAll(Optional.empty(), companyUuid);
+    }
+
+    /**
+     * Get all departments of a company
+     * 
+     * <p>Get all of the departments for a given company with the employees and contractors assigned to that
+     * department.
+     * 
+     * <p>scope: `departments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @return {@code CompletableFuture<GetCompaniesDepartmentsResponse>} - The async response
+     */
+    public CompletableFuture<GetCompaniesDepartmentsResponse> getAll(Optional<? extends GetCompaniesDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
+        GetCompaniesDepartmentsRequest request =
+            GetCompaniesDepartmentsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
+                .build();
+        AsyncRequestOperation<GetCompaniesDepartmentsRequest, GetCompaniesDepartmentsResponse> operation
+              = new GetCompaniesDepartments.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Create a department
+     * 
+     * <p>Create a department
+     * 
+     * <p>scope: `departments:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public PostDepartmentsRequestBuilder create() {
+        return new PostDepartmentsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a department
+     * 
+     * <p>Create a department
+     * 
+     * <p>scope: `departments:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyUuid The UUID of the company
+     * @param departmentCreateRequestBody 
+     * @return {@code CompletableFuture<PostDepartmentsResponse>} - The async response
+     */
+    public CompletableFuture<PostDepartmentsResponse> create(String companyUuid, DepartmentCreateRequestBody departmentCreateRequestBody) {
+        return create(Optional.empty(), companyUuid, departmentCreateRequestBody);
+    }
+
+    /**
+     * Create a department
+     * 
+     * <p>Create a department
+     * 
+     * <p>scope: `departments:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param departmentCreateRequestBody 
+     * @return {@code CompletableFuture<PostDepartmentsResponse>} - The async response
+     */
+    public CompletableFuture<PostDepartmentsResponse> create(
+            Optional<? extends PostDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            DepartmentCreateRequestBody departmentCreateRequestBody) {
+        PostDepartmentsRequest request =
+            PostDepartmentsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
+                .departmentCreateRequestBody(departmentCreateRequestBody)
+                .build();
+        AsyncRequestOperation<PostDepartmentsRequest, PostDepartmentsResponse> operation
+              = new PostDepartments.Async(sdkConfiguration, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

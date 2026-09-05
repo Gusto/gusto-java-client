@@ -74,7 +74,7 @@ public class PeopleBatches {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompaniesCompanyIdPeopleBatchesResponse postV1CompaniesCompanyIdPeopleBatches(String companyId, PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody) {
-        return postV1CompaniesCompanyIdPeopleBatches(companyId, Optional.empty(), requestBody);
+        return postV1CompaniesCompanyIdPeopleBatches(Optional.empty(), companyId, requestBody);
     }
 
     /**
@@ -88,20 +88,20 @@ public class PeopleBatches {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyId The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompaniesCompanyIdPeopleBatchesResponse postV1CompaniesCompanyIdPeopleBatches(
-            String companyId, Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody) {
         PostV1CompaniesCompanyIdPeopleBatchesRequest request =
             PostV1CompaniesCompanyIdPeopleBatchesRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1CompaniesCompanyIdPeopleBatchesRequest, PostV1CompaniesCompanyIdPeopleBatchesResponse> operation
@@ -142,7 +142,7 @@ public class PeopleBatches {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1PeopleBatchesPeopleBatchUuidResponse getV1PeopleBatchesPeopleBatchUuid(String peopleBatchUuid) {
-        return getV1PeopleBatchesPeopleBatchUuid(peopleBatchUuid, Optional.empty());
+        return getV1PeopleBatchesPeopleBatchUuid(Optional.empty(), peopleBatchUuid);
     }
 
     /**
@@ -156,17 +156,17 @@ public class PeopleBatches {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param peopleBatchUuid The UUID of the people batch
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param peopleBatchUuid The UUID of the people batch
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1PeopleBatchesPeopleBatchUuidResponse getV1PeopleBatchesPeopleBatchUuid(String peopleBatchUuid, Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1PeopleBatchesPeopleBatchUuidResponse getV1PeopleBatchesPeopleBatchUuid(Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String peopleBatchUuid) {
         GetV1PeopleBatchesPeopleBatchUuidRequest request =
             GetV1PeopleBatchesPeopleBatchUuidRequest
                 .builder()
-                .peopleBatchUuid(peopleBatchUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .peopleBatchUuid(peopleBatchUuid)
                 .build();
         RequestOperation<GetV1PeopleBatchesPeopleBatchUuidRequest, GetV1PeopleBatchesPeopleBatchUuidResponse> operation
               = new GetV1PeopleBatchesPeopleBatchUuid.Sync(sdkConfiguration, _headers);

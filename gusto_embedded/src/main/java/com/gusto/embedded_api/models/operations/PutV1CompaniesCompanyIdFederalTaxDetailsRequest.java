@@ -18,12 +18,6 @@ import java.util.Optional;
 
 public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
     /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
-    private String companyId;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,35 +25,33 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
+    private String companyId;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private FederalTaxDetailsUpdate federalTaxDetailsUpdate;
 
     @JsonCreator
     public PutV1CompaniesCompanyIdFederalTaxDetailsRequest(
-            String companyId,
             Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyId,
             FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
-        Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(federalTaxDetailsUpdate, "federalTaxDetailsUpdate");
-        this.companyId = companyId;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyId = companyId;
         this.federalTaxDetailsUpdate = federalTaxDetailsUpdate;
     }
     
     public PutV1CompaniesCompanyIdFederalTaxDetailsRequest(
             String companyId,
             FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
-        this(companyId, Optional.empty(), federalTaxDetailsUpdate);
-    }
-
-    /**
-     * The UUID of the company
-     */
-    @JsonIgnore
-    public String companyId() {
-        return companyId;
+        this(Optional.empty(), companyId, federalTaxDetailsUpdate);
     }
 
     /**
@@ -73,6 +65,14 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
         return (Optional<PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the company
+     */
+    @JsonIgnore
+    public String companyId() {
+        return companyId;
+    }
+
     @JsonIgnore
     public FederalTaxDetailsUpdate federalTaxDetailsUpdate() {
         return federalTaxDetailsUpdate;
@@ -82,15 +82,6 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public PutV1CompaniesCompanyIdFederalTaxDetailsRequest withCompanyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -115,6 +106,15 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public PutV1CompaniesCompanyIdFederalTaxDetailsRequest withCompanyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
     public PutV1CompaniesCompanyIdFederalTaxDetailsRequest withFederalTaxDetailsUpdate(FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
         Utils.checkNotNull(federalTaxDetailsUpdate, "federalTaxDetailsUpdate");
         this.federalTaxDetailsUpdate = federalTaxDetailsUpdate;
@@ -131,46 +131,36 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
         }
         PutV1CompaniesCompanyIdFederalTaxDetailsRequest other = (PutV1CompaniesCompanyIdFederalTaxDetailsRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.federalTaxDetailsUpdate, other.federalTaxDetailsUpdate);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, xGustoAPIVersion, federalTaxDetailsUpdate);
+            xGustoAPIVersion, companyId, federalTaxDetailsUpdate);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1CompaniesCompanyIdFederalTaxDetailsRequest.class,
-                "companyId", companyId,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "companyId", companyId,
                 "federalTaxDetailsUpdate", federalTaxDetailsUpdate);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String companyId;
-
         private Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String companyId;
 
         private FederalTaxDetailsUpdate federalTaxDetailsUpdate;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyId(String companyId) {
-            Utils.checkNotNull(companyId, "companyId");
-            this.companyId = companyId;
-            return this;
         }
 
 
@@ -197,6 +187,16 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
         }
 
 
+        /**
+         * The UUID of the company
+         */
+        public Builder companyId(String companyId) {
+            Utils.checkNotNull(companyId, "companyId");
+            this.companyId = companyId;
+            return this;
+        }
+
+
         public Builder federalTaxDetailsUpdate(FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
             Utils.checkNotNull(federalTaxDetailsUpdate, "federalTaxDetailsUpdate");
             this.federalTaxDetailsUpdate = federalTaxDetailsUpdate;
@@ -209,7 +209,7 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequest {
             }
 
             return new PutV1CompaniesCompanyIdFederalTaxDetailsRequest(
-                companyId, xGustoAPIVersion, federalTaxDetailsUpdate);
+                xGustoAPIVersion, companyId, federalTaxDetailsUpdate);
         }
 
 

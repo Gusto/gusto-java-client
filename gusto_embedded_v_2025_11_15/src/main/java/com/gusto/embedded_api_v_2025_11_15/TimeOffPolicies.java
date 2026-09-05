@@ -177,6 +177,127 @@ public class TimeOffPolicies {
     }
 
     /**
+     * Get all time off policies for a company
+     * 
+     * <p>Get all time off policies for a company
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder getAll() {
+        return new GetV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get all time off policies for a company
+     * 
+     * <p>Get all time off policies for a company
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyUuid The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyUuidTimeOffPoliciesResponse getAll(String companyUuid) {
+        return getAll(Optional.empty(), companyUuid);
+    }
+
+    /**
+     * Get all time off policies for a company
+     * 
+     * <p>Get all time off policies for a company
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyUuidTimeOffPoliciesResponse getAll(Optional<? extends GetV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
+        GetV1CompaniesCompanyUuidTimeOffPoliciesRequest request =
+            GetV1CompaniesCompanyUuidTimeOffPoliciesRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
+                .build();
+        RequestOperation<GetV1CompaniesCompanyUuidTimeOffPoliciesRequest, GetV1CompaniesCompanyUuidTimeOffPoliciesResponse> operation
+              = new GetV1CompaniesCompanyUuidTimeOffPolicies.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Create a time off policy
+     * 
+     * <p>Create a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public PostV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder create() {
+        return new PostV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a time off policy
+     * 
+     * <p>Create a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyUuid The UUID of the company
+     * @param timeOffPolicyRequest Request body for creating a time off policy
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1CompaniesCompanyUuidTimeOffPoliciesResponse create(String companyUuid, TimeOffPolicyRequest timeOffPolicyRequest) {
+        return create(Optional.empty(), companyUuid, timeOffPolicyRequest);
+    }
+
+    /**
+     * Create a time off policy
+     * 
+     * <p>Create a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param timeOffPolicyRequest Request body for creating a time off policy
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1CompaniesCompanyUuidTimeOffPoliciesResponse create(
+            Optional<? extends PostV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            TimeOffPolicyRequest timeOffPolicyRequest) {
+        PostV1CompaniesCompanyUuidTimeOffPoliciesRequest request =
+            PostV1CompaniesCompanyUuidTimeOffPoliciesRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
+                .timeOffPolicyRequest(timeOffPolicyRequest)
+                .build();
+        RequestOperation<PostV1CompaniesCompanyUuidTimeOffPoliciesRequest, PostV1CompaniesCompanyUuidTimeOffPoliciesResponse> operation
+              = new PostV1CompaniesCompanyUuidTimeOffPolicies.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
      * Get a time off policy
      * 
      * <p>Get a time off policy
@@ -298,67 +419,9 @@ public class TimeOffPolicies {
     }
 
     /**
-     * Get all time off policies for a company
+     * Deactivate a time off policy
      * 
-     * <p>Get all time off policies for a company
-     * 
-     * <p>scope: `time_off_policies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder getAll() {
-        return new GetV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get all time off policies for a company
-     * 
-     * <p>Get all time off policies for a company
-     * 
-     * <p>scope: `time_off_policies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyUuid The UUID of the company
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesCompanyUuidTimeOffPoliciesResponse getAll(String companyUuid) {
-        return getAll(Optional.empty(), companyUuid);
-    }
-
-    /**
-     * Get all time off policies for a company
-     * 
-     * <p>Get all time off policies for a company
-     * 
-     * <p>scope: `time_off_policies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyUuid The UUID of the company
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesCompanyUuidTimeOffPoliciesResponse getAll(Optional<? extends GetV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
-        GetV1CompaniesCompanyUuidTimeOffPoliciesRequest request =
-            GetV1CompaniesCompanyUuidTimeOffPoliciesRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .companyUuid(companyUuid)
-                .build();
-        RequestOperation<GetV1CompaniesCompanyUuidTimeOffPoliciesRequest, GetV1CompaniesCompanyUuidTimeOffPoliciesResponse> operation
-              = new GetV1CompaniesCompanyUuidTimeOffPolicies.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Create a time off policy
-     * 
-     * <p>Create a time off policy
+     * <p>Deactivate a time off policy
      * 
      * <p>scope: `time_off_policies:write`
      * 
@@ -366,55 +429,50 @@ public class TimeOffPolicies {
      * 
      * @return The call builder
      */
-    public PostV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder create() {
-        return new PostV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder(sdkConfiguration);
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequestBuilder deactivate() {
+        return new PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Create a time off policy
+     * Deactivate a time off policy
      * 
-     * <p>Create a time off policy
+     * <p>Deactivate a time off policy
      * 
      * <p>scope: `time_off_policies:write`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
-     * @param timeOffPolicyRequest Request body for creating a time off policy
+     * @param timeOffPolicyUuid The UUID of the time off policy
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PostV1CompaniesCompanyUuidTimeOffPoliciesResponse create(String companyUuid, TimeOffPolicyRequest timeOffPolicyRequest) {
-        return create(Optional.empty(), companyUuid, timeOffPolicyRequest);
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse deactivate(String timeOffPolicyUuid) {
+        return deactivate(Optional.empty(), timeOffPolicyUuid);
     }
 
     /**
-     * Create a time off policy
+     * Deactivate a time off policy
      * 
-     * <p>Create a time off policy
+     * <p>Deactivate a time off policy
      * 
      * <p>scope: `time_off_policies:write`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyUuid The UUID of the company
-     * @param timeOffPolicyRequest Request body for creating a time off policy
+     * @param timeOffPolicyUuid The UUID of the time off policy
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public PostV1CompaniesCompanyUuidTimeOffPoliciesResponse create(
-            Optional<? extends PostV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
-            TimeOffPolicyRequest timeOffPolicyRequest) {
-        PostV1CompaniesCompanyUuidTimeOffPoliciesRequest request =
-            PostV1CompaniesCompanyUuidTimeOffPoliciesRequest
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse deactivate(Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid) {
+        PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest request =
+            PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest
                 .builder()
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .companyUuid(companyUuid)
-                .timeOffPolicyRequest(timeOffPolicyRequest)
+                .timeOffPolicyUuid(timeOffPolicyUuid)
                 .build();
-        RequestOperation<PostV1CompaniesCompanyUuidTimeOffPoliciesRequest, PostV1CompaniesCompanyUuidTimeOffPoliciesResponse> operation
-              = new PostV1CompaniesCompanyUuidTimeOffPolicies.Sync(sdkConfiguration, _headers);
+        RequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> operation
+              = new PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -607,64 +665,6 @@ public class TimeOffPolicies {
                 .build();
         RequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse> operation
               = new PutV1TimeOffPoliciesTimeOffPolicyUuidBalance.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Deactivate a time off policy
-     * 
-     * <p>Deactivate a time off policy
-     * 
-     * <p>scope: `time_off_policies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequestBuilder deactivate() {
-        return new PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Deactivate a time off policy
-     * 
-     * <p>Deactivate a time off policy
-     * 
-     * <p>scope: `time_off_policies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param timeOffPolicyUuid The UUID of the time off policy
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse deactivate(String timeOffPolicyUuid) {
-        return deactivate(Optional.empty(), timeOffPolicyUuid);
-    }
-
-    /**
-     * Deactivate a time off policy
-     * 
-     * <p>Deactivate a time off policy
-     * 
-     * <p>scope: `time_off_policies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param timeOffPolicyUuid The UUID of the time off policy
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse deactivate(Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid) {
-        PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest request =
-            PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .timeOffPolicyUuid(timeOffPolicyUuid)
-                .build();
-        RequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> operation
-              = new PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

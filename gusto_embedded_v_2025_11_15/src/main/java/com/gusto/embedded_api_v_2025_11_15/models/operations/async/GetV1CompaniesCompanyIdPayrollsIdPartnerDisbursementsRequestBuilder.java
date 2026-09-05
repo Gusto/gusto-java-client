@@ -19,29 +19,17 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder {
 
-    private String companyId;
-    private String id;
     private Optional<? extends GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private String id;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
-
-    public GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder id(String id) {
-        Utils.checkNotNull(id, "id");
-        this.id = id;
-        return this;
     }
                 
     public GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -56,15 +44,27 @@ public class GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder
         return this;
     }
 
+    public GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
+    public GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder id(String id) {
+        Utils.checkNotNull(id, "id");
+        this.id = id;
+        return this;
+    }
+
 
     private GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request = new GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest(companyId,
-            id,
-            xGustoAPIVersion);
+        GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request = new GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest(xGustoAPIVersion,
+            companyId,
+            id);
 
         return request;
     }

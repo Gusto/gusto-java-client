@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class PostV1EmployeesEmployeeIdWorkAddressesRequest {
     /**
-     * The UUID of the employee
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_id")
-    private String employeeId;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,35 +24,33 @@ public class PostV1EmployeesEmployeeIdWorkAddressesRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the employee
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_id")
+    private String employeeId;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody;
 
     @JsonCreator
     public PostV1EmployeesEmployeeIdWorkAddressesRequest(
-            String employeeId,
             Optional<? extends PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeId,
             PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody) {
-        Utils.checkNotNull(employeeId, "employeeId");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(employeeId, "employeeId");
         Utils.checkNotNull(requestBody, "requestBody");
-        this.employeeId = employeeId;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.employeeId = employeeId;
         this.requestBody = requestBody;
     }
     
     public PostV1EmployeesEmployeeIdWorkAddressesRequest(
             String employeeId,
             PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody) {
-        this(employeeId, Optional.empty(), requestBody);
-    }
-
-    /**
-     * The UUID of the employee
-     */
-    @JsonIgnore
-    public String employeeId() {
-        return employeeId;
+        this(Optional.empty(), employeeId, requestBody);
     }
 
     /**
@@ -72,6 +64,14 @@ public class PostV1EmployeesEmployeeIdWorkAddressesRequest {
         return (Optional<PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the employee
+     */
+    @JsonIgnore
+    public String employeeId() {
+        return employeeId;
+    }
+
     @JsonIgnore
     public PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody() {
         return requestBody;
@@ -81,15 +81,6 @@ public class PostV1EmployeesEmployeeIdWorkAddressesRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the employee
-     */
-    public PostV1EmployeesEmployeeIdWorkAddressesRequest withEmployeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -114,6 +105,15 @@ public class PostV1EmployeesEmployeeIdWorkAddressesRequest {
         return this;
     }
 
+    /**
+     * The UUID of the employee
+     */
+    public PostV1EmployeesEmployeeIdWorkAddressesRequest withEmployeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
+        return this;
+    }
+
     public PostV1EmployeesEmployeeIdWorkAddressesRequest withRequestBody(PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
@@ -130,46 +130,36 @@ public class PostV1EmployeesEmployeeIdWorkAddressesRequest {
         }
         PostV1EmployeesEmployeeIdWorkAddressesRequest other = (PostV1EmployeesEmployeeIdWorkAddressesRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.employeeId, other.employeeId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.employeeId, other.employeeId) &&
             Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            employeeId, xGustoAPIVersion, requestBody);
+            xGustoAPIVersion, employeeId, requestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostV1EmployeesEmployeeIdWorkAddressesRequest.class,
-                "employeeId", employeeId,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "employeeId", employeeId,
                 "requestBody", requestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String employeeId;
-
         private Optional<? extends PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String employeeId;
 
         private PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the employee
-         */
-        public Builder employeeId(String employeeId) {
-            Utils.checkNotNull(employeeId, "employeeId");
-            this.employeeId = employeeId;
-            return this;
         }
 
 
@@ -196,6 +186,16 @@ public class PostV1EmployeesEmployeeIdWorkAddressesRequest {
         }
 
 
+        /**
+         * The UUID of the employee
+         */
+        public Builder employeeId(String employeeId) {
+            Utils.checkNotNull(employeeId, "employeeId");
+            this.employeeId = employeeId;
+            return this;
+        }
+
+
         public Builder requestBody(PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody) {
             Utils.checkNotNull(requestBody, "requestBody");
             this.requestBody = requestBody;
@@ -208,7 +208,7 @@ public class PostV1EmployeesEmployeeIdWorkAddressesRequest {
             }
 
             return new PostV1EmployeesEmployeeIdWorkAddressesRequest(
-                employeeId, xGustoAPIVersion, requestBody);
+                xGustoAPIVersion, employeeId, requestBody);
         }
 
 

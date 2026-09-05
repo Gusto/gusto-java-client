@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
     /**
-     * The UUID of the employee
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_uuid")
-    private String employeeUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the employee
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_uuid")
+    private String employeeUuid;
+
     @JsonCreator
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(
-            String employeeUuid,
-            Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
+            Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.employeeUuid = employeeUuid;
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.employeeUuid = employeeUuid;
     }
     
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(
             String employeeUuid) {
-        this(employeeUuid, Optional.empty());
-    }
-
-    /**
-     * The UUID of the employee
-     */
-    @JsonIgnore
-    public String employeeUuid() {
-        return employeeUuid;
+        this(Optional.empty(), employeeUuid);
     }
 
     /**
@@ -64,19 +56,18 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
         return (Optional<GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the employee
+     */
+    @JsonIgnore
+    public String employeeUuid() {
+        return employeeUuid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the employee
-     */
-    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest withEmployeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
         return this;
     }
 
+    /**
+     * The UUID of the employee
+     */
+    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest withEmployeeUuid(String employeeUuid) {
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
+        this.employeeUuid = employeeUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
         }
         GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest other = (GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            employeeUuid, xGustoAPIVersion);
+            xGustoAPIVersion, employeeUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest.class,
-                "employeeUuid", employeeUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "employeeUuid", employeeUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String employeeUuid;
-
         private Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String employeeUuid;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the employee
-         */
-        public Builder employeeUuid(String employeeUuid) {
-            Utils.checkNotNull(employeeUuid, "employeeUuid");
-            this.employeeUuid = employeeUuid;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the employee
+         */
+        public Builder employeeUuid(String employeeUuid) {
+            Utils.checkNotNull(employeeUuid, "employeeUuid");
+            this.employeeUuid = employeeUuid;
+            return this;
+        }
+
         public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(
-                employeeUuid, xGustoAPIVersion);
+                xGustoAPIVersion, employeeUuid);
         }
 
 

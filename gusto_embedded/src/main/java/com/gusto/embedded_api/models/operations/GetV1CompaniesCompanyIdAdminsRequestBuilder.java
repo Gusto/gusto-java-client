@@ -17,10 +17,10 @@ import java.util.Optional;
 
 public class GetV1CompaniesCompanyIdAdminsRequestBuilder {
 
-    private Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
-                            new TypeReference<Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>>() {});
+                            new TypeReference<Optional<? extends HeaderXGustoAPIVersion>>() {});
     private String companyId;
     private Optional<Long> page = Optional.empty();
     private Optional<Long> per = Optional.empty();
@@ -31,13 +31,13 @@ public class GetV1CompaniesCompanyIdAdminsRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
                 
-    public GetV1CompaniesCompanyIdAdminsRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion xGustoAPIVersion) {
+    public GetV1CompaniesCompanyIdAdminsRequestBuilder xGustoAPIVersion(HeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public GetV1CompaniesCompanyIdAdminsRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1CompaniesCompanyIdAdminsRequestBuilder xGustoAPIVersion(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -96,9 +96,9 @@ public class GetV1CompaniesCompanyIdAdminsRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends HeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-06-15\"",
-                    new TypeReference<Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>>() {});
+                    new TypeReference<Optional<? extends HeaderXGustoAPIVersion>>() {});
 }

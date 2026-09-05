@@ -17,11 +17,11 @@ import java.util.Optional;
 public class GetV1WebhookSubscriptionUuidRequestBuilder {
 
     private GetV1WebhookSubscriptionUuidSecurity security;
-    private String webhookSubscriptionUuid;
     private Optional<? extends GetV1WebhookSubscriptionUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetV1WebhookSubscriptionUuidHeaderXGustoAPIVersion>>() {});
+    private String webhookSubscriptionUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -32,12 +32,6 @@ public class GetV1WebhookSubscriptionUuidRequestBuilder {
     public GetV1WebhookSubscriptionUuidRequestBuilder security(GetV1WebhookSubscriptionUuidSecurity security) {
         Utils.checkNotNull(security, "security");
         this.security = security;
-        return this;
-    }
-
-    public GetV1WebhookSubscriptionUuidRequestBuilder webhookSubscriptionUuid(String webhookSubscriptionUuid) {
-        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
-        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
         return this;
     }
                 
@@ -53,14 +47,20 @@ public class GetV1WebhookSubscriptionUuidRequestBuilder {
         return this;
     }
 
+    public GetV1WebhookSubscriptionUuidRequestBuilder webhookSubscriptionUuid(String webhookSubscriptionUuid) {
+        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
+        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
+        return this;
+    }
+
 
     private GetV1WebhookSubscriptionUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1WebhookSubscriptionUuidRequest request = new GetV1WebhookSubscriptionUuidRequest(webhookSubscriptionUuid,
-            xGustoAPIVersion);
+        GetV1WebhookSubscriptionUuidRequest request = new GetV1WebhookSubscriptionUuidRequest(xGustoAPIVersion,
+            webhookSubscriptionUuid);
 
         return request;
     }

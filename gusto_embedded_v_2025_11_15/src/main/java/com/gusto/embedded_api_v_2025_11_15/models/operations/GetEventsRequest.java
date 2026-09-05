@@ -55,7 +55,7 @@ public class GetEventsRequest {
      * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort_order")
-    private Optional<? extends QueryParamSortOrder> sortOrder;
+    private Optional<? extends SortOrder> sortOrder;
 
     @JsonCreator
     public GetEventsRequest(
@@ -64,7 +64,7 @@ public class GetEventsRequest {
             Optional<String> resourceUuid,
             Optional<String> limit,
             Optional<String> eventType,
-            Optional<? extends QueryParamSortOrder> sortOrder) {
+            Optional<? extends SortOrder> sortOrder) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(startingAfterUuid, "startingAfterUuid");
         Utils.checkNotNull(resourceUuid, "resourceUuid");
@@ -135,8 +135,8 @@ public class GetEventsRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<QueryParamSortOrder> sortOrder() {
-        return (Optional<QueryParamSortOrder>) sortOrder;
+    public Optional<SortOrder> sortOrder() {
+        return (Optional<SortOrder>) sortOrder;
     }
 
     public static Builder builder() {
@@ -251,7 +251,7 @@ public class GetEventsRequest {
      * A string indicating whether to sort resulting events in ascending (asc) or descending (desc)
      * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
      */
-    public GetEventsRequest withSortOrder(QueryParamSortOrder sortOrder) {
+    public GetEventsRequest withSortOrder(SortOrder sortOrder) {
         Utils.checkNotNull(sortOrder, "sortOrder");
         this.sortOrder = Optional.ofNullable(sortOrder);
         return this;
@@ -262,7 +262,7 @@ public class GetEventsRequest {
      * A string indicating whether to sort resulting events in ascending (asc) or descending (desc)
      * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
      */
-    public GetEventsRequest withSortOrder(Optional<? extends QueryParamSortOrder> sortOrder) {
+    public GetEventsRequest withSortOrder(Optional<? extends SortOrder> sortOrder) {
         Utils.checkNotNull(sortOrder, "sortOrder");
         this.sortOrder = sortOrder;
         return this;
@@ -317,7 +317,7 @@ public class GetEventsRequest {
 
         private Optional<String> eventType = Optional.empty();
 
-        private Optional<? extends QueryParamSortOrder> sortOrder = Optional.empty();
+        private Optional<? extends SortOrder> sortOrder = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -431,7 +431,7 @@ public class GetEventsRequest {
          * A string indicating whether to sort resulting events in ascending (asc) or descending (desc)
          * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
          */
-        public Builder sortOrder(QueryParamSortOrder sortOrder) {
+        public Builder sortOrder(SortOrder sortOrder) {
             Utils.checkNotNull(sortOrder, "sortOrder");
             this.sortOrder = Optional.ofNullable(sortOrder);
             return this;
@@ -441,7 +441,7 @@ public class GetEventsRequest {
          * A string indicating whether to sort resulting events in ascending (asc) or descending (desc)
          * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
          */
-        public Builder sortOrder(Optional<? extends QueryParamSortOrder> sortOrder) {
+        public Builder sortOrder(Optional<? extends SortOrder> sortOrder) {
             Utils.checkNotNull(sortOrder, "sortOrder");
             this.sortOrder = sortOrder;
             return this;

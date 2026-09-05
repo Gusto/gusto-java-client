@@ -7,8 +7,8 @@ import static com.gusto.embedded_api_v_2025_11_15.operations.Operations.AsyncReq
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1CompaniesCompanyIdAdminsRequest;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.HeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1CompaniesCompanyIdAdmins;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
@@ -20,10 +20,10 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompaniesCompanyIdAdminsRequestBuilder {
 
-    private Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
-                            new TypeReference<Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>>() {});
+                            new TypeReference<Optional<? extends HeaderXGustoAPIVersion>>() {});
     private String companyId;
     private Optional<Long> page = Optional.empty();
     private Optional<Long> per = Optional.empty();
@@ -34,13 +34,13 @@ public class GetV1CompaniesCompanyIdAdminsRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
                 
-    public GetV1CompaniesCompanyIdAdminsRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion xGustoAPIVersion) {
+    public GetV1CompaniesCompanyIdAdminsRequestBuilder xGustoAPIVersion(HeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public GetV1CompaniesCompanyIdAdminsRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1CompaniesCompanyIdAdminsRequestBuilder xGustoAPIVersion(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -100,9 +100,9 @@ public class GetV1CompaniesCompanyIdAdminsRequestBuilder {
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends HeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-11-15\"",
-                    new TypeReference<Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion>>() {});
+                    new TypeReference<Optional<? extends HeaderXGustoAPIVersion>>() {});
 }
