@@ -16,22 +16,16 @@ import java.util.Optional;
 
 public class GetV1WorkAddressesWorkAddressUuidRequestBuilder {
 
-    private String workAddressUuid;
     private Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>>() {});
+    private String workAddressUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1WorkAddressesWorkAddressUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1WorkAddressesWorkAddressUuidRequestBuilder workAddressUuid(String workAddressUuid) {
-        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
-        this.workAddressUuid = workAddressUuid;
-        return this;
     }
                 
     public GetV1WorkAddressesWorkAddressUuidRequestBuilder xGustoAPIVersion(GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,14 +40,20 @@ public class GetV1WorkAddressesWorkAddressUuidRequestBuilder {
         return this;
     }
 
+    public GetV1WorkAddressesWorkAddressUuidRequestBuilder workAddressUuid(String workAddressUuid) {
+        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
+        this.workAddressUuid = workAddressUuid;
+        return this;
+    }
+
 
     private GetV1WorkAddressesWorkAddressUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1WorkAddressesWorkAddressUuidRequest request = new GetV1WorkAddressesWorkAddressUuidRequest(workAddressUuid,
-            xGustoAPIVersion);
+        GetV1WorkAddressesWorkAddressUuidRequest request = new GetV1WorkAddressesWorkAddressUuidRequest(xGustoAPIVersion,
+            workAddressUuid);
 
         return request;
     }

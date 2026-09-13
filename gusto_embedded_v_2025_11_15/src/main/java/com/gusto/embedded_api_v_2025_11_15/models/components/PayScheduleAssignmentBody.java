@@ -59,7 +59,7 @@ public class PayScheduleAssignmentBody {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("employees")
-    private Optional<? extends List<Employees>> employees;
+    private Optional<? extends List<PayScheduleAssignmentBodyEmployees>> employees;
 
     /**
      * List of departments and their pay schedules.
@@ -75,7 +75,7 @@ public class PayScheduleAssignmentBody {
             @JsonProperty("salaried_pay_schedule_uuid") Optional<String> salariedPayScheduleUuid,
             @JsonProperty("default_pay_schedule_uuid") Optional<String> defaultPayScheduleUuid,
             @JsonProperty("partial_assignment") Optional<Boolean> partialAssignment,
-            @JsonProperty("employees") Optional<? extends List<Employees>> employees,
+            @JsonProperty("employees") Optional<? extends List<PayScheduleAssignmentBodyEmployees>> employees,
             @JsonProperty("departments") Optional<? extends List<Departments>> departments) {
         Utils.checkNotNull(type, "type");
         Utils.checkNotNull(hourlyPayScheduleUuid, "hourlyPayScheduleUuid");
@@ -146,8 +146,8 @@ public class PayScheduleAssignmentBody {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Employees>> employees() {
-        return (Optional<List<Employees>>) employees;
+    public Optional<List<PayScheduleAssignmentBodyEmployees>> employees() {
+        return (Optional<List<PayScheduleAssignmentBodyEmployees>>) employees;
     }
 
     /**
@@ -264,7 +264,7 @@ public class PayScheduleAssignmentBody {
     /**
      * List of employees and their pay schedules.
      */
-    public PayScheduleAssignmentBody withEmployees(List<Employees> employees) {
+    public PayScheduleAssignmentBody withEmployees(List<PayScheduleAssignmentBodyEmployees> employees) {
         Utils.checkNotNull(employees, "employees");
         this.employees = Optional.ofNullable(employees);
         return this;
@@ -274,7 +274,7 @@ public class PayScheduleAssignmentBody {
     /**
      * List of employees and their pay schedules.
      */
-    public PayScheduleAssignmentBody withEmployees(Optional<? extends List<Employees>> employees) {
+    public PayScheduleAssignmentBody withEmployees(Optional<? extends List<PayScheduleAssignmentBodyEmployees>> employees) {
         Utils.checkNotNull(employees, "employees");
         this.employees = employees;
         return this;
@@ -351,7 +351,7 @@ public class PayScheduleAssignmentBody {
 
         private Optional<Boolean> partialAssignment = Optional.empty();
 
-        private Optional<? extends List<Employees>> employees = Optional.empty();
+        private Optional<? extends List<PayScheduleAssignmentBodyEmployees>> employees = Optional.empty();
 
         private Optional<? extends List<Departments>> departments = Optional.empty();
 
@@ -460,7 +460,7 @@ public class PayScheduleAssignmentBody {
         /**
          * List of employees and their pay schedules.
          */
-        public Builder employees(List<Employees> employees) {
+        public Builder employees(List<PayScheduleAssignmentBodyEmployees> employees) {
             Utils.checkNotNull(employees, "employees");
             this.employees = Optional.ofNullable(employees);
             return this;
@@ -469,7 +469,7 @@ public class PayScheduleAssignmentBody {
         /**
          * List of employees and their pay schedules.
          */
-        public Builder employees(Optional<? extends List<Employees>> employees) {
+        public Builder employees(Optional<? extends List<PayScheduleAssignmentBodyEmployees>> employees) {
             Utils.checkNotNull(employees, "employees");
             this.employees = employees;
             return this;

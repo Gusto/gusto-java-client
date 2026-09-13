@@ -123,6 +123,16 @@ public class Contractor {
     private JsonNullable<String> email;
 
     /**
+     * The work email address of the contractor. This is provided to support syncing users between our
+     * system and yours. You may not use this email address for any other purpose (e.g.
+     * 
+     * <p>marketing).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("work_email")
+    private JsonNullable<String> workEmail;
+
+    /**
      * The contractor's start date.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -266,6 +276,7 @@ public class Contractor {
             @JsonProperty("ein") JsonNullable<String> ein,
             @JsonProperty("has_ein") JsonNullable<Boolean> hasEin,
             @JsonProperty("email") JsonNullable<String> email,
+            @JsonProperty("work_email") JsonNullable<String> workEmail,
             @JsonProperty("start_date") Optional<String> startDate,
             @JsonProperty("address") JsonNullable<? extends Address> address,
             @JsonProperty("hourly_rate") Optional<String> hourlyRate,
@@ -297,6 +308,7 @@ public class Contractor {
         Utils.checkNotNull(ein, "ein");
         Utils.checkNotNull(hasEin, "hasEin");
         Utils.checkNotNull(email, "email");
+        Utils.checkNotNull(workEmail, "workEmail");
         Utils.checkNotNull(startDate, "startDate");
         Utils.checkNotNull(address, "address");
         Utils.checkNotNull(hourlyRate, "hourlyRate");
@@ -328,6 +340,7 @@ public class Contractor {
         this.ein = ein;
         this.hasEin = hasEin;
         this.email = email;
+        this.workEmail = workEmail;
         this.startDate = startDate;
         this.address = address;
         this.hourlyRate = hourlyRate;
@@ -354,13 +367,13 @@ public class Contractor {
             Optional.empty(), Optional.empty(), Optional.empty(),
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
+            JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
             JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(),
-            Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
-            Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
+            JsonNullable.undefined(), Optional.empty(), Optional.empty(),
+            JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(),
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
-            Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            JsonNullable.undefined());
+            JsonNullable.undefined(), Optional.empty(), Optional.empty(),
+            JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
@@ -475,6 +488,17 @@ public class Contractor {
     @JsonIgnore
     public JsonNullable<String> email() {
         return email;
+    }
+
+    /**
+     * The work email address of the contractor. This is provided to support syncing users between our
+     * system and yours. You may not use this email address for any other purpose (e.g.
+     * 
+     * <p>marketing).
+     */
+    @JsonIgnore
+    public JsonNullable<String> workEmail() {
+        return workEmail;
     }
 
     /**
@@ -881,6 +905,30 @@ public class Contractor {
     }
 
     /**
+     * The work email address of the contractor. This is provided to support syncing users between our
+     * system and yours. You may not use this email address for any other purpose (e.g.
+     * 
+     * <p>marketing).
+     */
+    public Contractor withWorkEmail(String workEmail) {
+        Utils.checkNotNull(workEmail, "workEmail");
+        this.workEmail = JsonNullable.of(workEmail);
+        return this;
+    }
+
+    /**
+     * The work email address of the contractor. This is provided to support syncing users between our
+     * system and yours. You may not use this email address for any other purpose (e.g.
+     * 
+     * <p>marketing).
+     */
+    public Contractor withWorkEmail(JsonNullable<String> workEmail) {
+        Utils.checkNotNull(workEmail, "workEmail");
+        this.workEmail = workEmail;
+        return this;
+    }
+
+    /**
      * The contractor's start date.
      */
     public Contractor withStartDate(String startDate) {
@@ -1240,6 +1288,7 @@ public class Contractor {
             Utils.enhancedDeepEquals(this.ein, other.ein) &&
             Utils.enhancedDeepEquals(this.hasEin, other.hasEin) &&
             Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.workEmail, other.workEmail) &&
             Utils.enhancedDeepEquals(this.startDate, other.startDate) &&
             Utils.enhancedDeepEquals(this.address, other.address) &&
             Utils.enhancedDeepEquals(this.hourlyRate, other.hourlyRate) &&
@@ -1267,13 +1316,13 @@ public class Contractor {
             isActive, version, type,
             firstName, lastName, middleInitial,
             businessName, ein, hasEin,
-            email, startDate, address,
-            hourlyRate, fileNewHireReport, workState,
-            onboarded, onboardingStatus, paymentMethod,
-            hasSsn, departmentUuid, department,
-            departmentTitle, dismissalDate, upcomingEmployment,
-            dismissalCancellationEligible, rehireCancellationEligible, memberPortalInvitationStatus,
-            partnerPortalInvitationSent);
+            email, workEmail, startDate,
+            address, hourlyRate, fileNewHireReport,
+            workState, onboarded, onboardingStatus,
+            paymentMethod, hasSsn, departmentUuid,
+            department, departmentTitle, dismissalDate,
+            upcomingEmployment, dismissalCancellationEligible, rehireCancellationEligible,
+            memberPortalInvitationStatus, partnerPortalInvitationSent);
     }
     
     @Override
@@ -1292,6 +1341,7 @@ public class Contractor {
                 "ein", ein,
                 "hasEin", hasEin,
                 "email", email,
+                "workEmail", workEmail,
                 "startDate", startDate,
                 "address", address,
                 "hourlyRate", hourlyRate,
@@ -1340,6 +1390,8 @@ public class Contractor {
         private JsonNullable<Boolean> hasEin = JsonNullable.undefined();
 
         private JsonNullable<String> email = JsonNullable.undefined();
+
+        private JsonNullable<String> workEmail = JsonNullable.undefined();
 
         private Optional<String> startDate = Optional.empty();
 
@@ -1632,6 +1684,31 @@ public class Contractor {
         public Builder email(JsonNullable<String> email) {
             Utils.checkNotNull(email, "email");
             this.email = email;
+            return this;
+        }
+
+
+        /**
+         * The work email address of the contractor. This is provided to support syncing users between our
+         * system and yours. You may not use this email address for any other purpose (e.g.
+         * 
+         * <p>marketing).
+         */
+        public Builder workEmail(String workEmail) {
+            Utils.checkNotNull(workEmail, "workEmail");
+            this.workEmail = JsonNullable.of(workEmail);
+            return this;
+        }
+
+        /**
+         * The work email address of the contractor. This is provided to support syncing users between our
+         * system and yours. You may not use this email address for any other purpose (e.g.
+         * 
+         * <p>marketing).
+         */
+        public Builder workEmail(JsonNullable<String> workEmail) {
+            Utils.checkNotNull(workEmail, "workEmail");
+            this.workEmail = workEmail;
             return this;
         }
 
@@ -1993,13 +2070,13 @@ public class Contractor {
                 isActive, version, type,
                 firstName, lastName, middleInitial,
                 businessName, ein, hasEin,
-                email, startDate, address,
-                hourlyRate, fileNewHireReport, workState,
-                onboarded, onboardingStatus, paymentMethod,
-                hasSsn, departmentUuid, department,
-                departmentTitle, dismissalDate, upcomingEmployment,
-                dismissalCancellationEligible, rehireCancellationEligible, memberPortalInvitationStatus,
-                partnerPortalInvitationSent);
+                email, workEmail, startDate,
+                address, hourlyRate, fileNewHireReport,
+                workState, onboarded, onboardingStatus,
+                paymentMethod, hasSsn, departmentUuid,
+                department, departmentTitle, dismissalDate,
+                upcomingEmployment, dismissalCancellationEligible, rehireCancellationEligible,
+                memberPortalInvitationStatus, partnerPortalInvitationSent);
         }
 
 

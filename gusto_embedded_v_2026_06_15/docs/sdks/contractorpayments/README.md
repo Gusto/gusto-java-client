@@ -4,6 +4,8 @@
 
 ### Available Operations
 
+* [getV1ContractorsContractorUuidPayments](#getv1contractorscontractoruuidpayments) - Get contractor payments
+* [getV1ContractorPaymentsContractorPaymentIdPdf](#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
 * [list](#list) - Get contractor payments for a company
 * [create](#create) - Create a contractor payment
 * [get](#get) - Get a single contractor payment
@@ -11,7 +13,123 @@
 * [preview](#preview) - Preview contractor payment debit date
 * [getReceipt](#getreceipt) - Get a single contractor payment receipt
 * [fund](#fund) - Fund a contractor payment [DEMO]
-* [getV1ContractorPaymentsContractorPaymentIdPdf](#getv1contractorpaymentscontractorpaymentidpdf) - Get a contractor payment PDF
+
+## getV1ContractorsContractorUuidPayments
+
+Returns a paginated list of payments for a single contractor.
+
+Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction (e.g., `check_date:desc`).
+
+scope: `contractor_pay_stubs:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-contractors-contractor_uuid-payments" method="get" path="/v1/contractors/{contractor_uuid}/payments" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorsContractorUuidPaymentsRequest;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorsContractorUuidPaymentsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1ContractorsContractorUuidPaymentsRequest req = GetV1ContractorsContractorUuidPaymentsRequest.builder()
+                .contractorUuid("<id>")
+                .sortBy("check_date:desc")
+                .build();
+
+        GetV1ContractorsContractorUuidPaymentsResponse res = sdk.contractorPayments().getV1ContractorsContractorUuidPayments()
+                .request(req)
+                .call();
+
+        if (res.contractorPaymentListings().isPresent()) {
+            System.out.println(res.contractorPaymentListings().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                 | [GetV1ContractorsContractorUuidPaymentsRequest](../../models/operations/GetV1ContractorsContractorUuidPaymentsRequest.md) | :heavy_check_mark:                                                                                                        | The request object to use for the request.                                                                                |
+
+### Response
+
+**[GetV1ContractorsContractorUuidPaymentsResponse](../../models/operations/GetV1ContractorsContractorUuidPaymentsResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+
+## getV1ContractorPaymentsContractorPaymentIdPdf
+
+Get a PDF document for a single contractor payment.
+
+scope: `payrolls:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-contractor_payments-contractor_payment_id-pdf" method="get" path="/v1/contractor_payments/{contractor_payment_id}/pdf" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorPaymentsContractorPaymentIdPdfHeaderXGustoAPIVersion;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorPaymentsContractorPaymentIdPdfResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1ContractorPaymentsContractorPaymentIdPdfResponse res = sdk.contractorPayments().getV1ContractorPaymentsContractorPaymentIdPdf()
+                .xGustoAPIVersion(GetV1ContractorPaymentsContractorPaymentIdPdfHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
+                .contractorPaymentId("<id>")
+                .call();
+
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1ContractorPaymentsContractorPaymentIdPdfHeaderXGustoAPIVersion>](../../models/operations/GetV1ContractorPaymentsContractorPaymentIdPdfHeaderXGustoAPIVersion.md)                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `contractorPaymentId`                                                                                                                                                                                                        | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the contractor payment                                                                                                                                                                                           |
+
+### Response
+
+**[GetV1ContractorPaymentsContractorPaymentIdPdfResponse](../../models/operations/GetV1ContractorPaymentsContractorPaymentIdPdfResponse.md)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## list
 
@@ -464,57 +582,3 @@ public class Application {
 | models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
 | models/errors/UnprocessableEntityError | 422                                    | application/json                       |
 | models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
-
-## getV1ContractorPaymentsContractorPaymentIdPdf
-
-Get a PDF document for a single contractor payment.
-
-scope: `payrolls:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="get-v1-contractor_payments-contractor_payment_id-pdf" method="get" path="/v1/contractor_payments/{contractor_payment_id}/pdf" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorPaymentsContractorPaymentIdPdfHeaderXGustoAPIVersion;
-import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorPaymentsContractorPaymentIdPdfResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        GetV1ContractorPaymentsContractorPaymentIdPdfResponse res = sdk.contractorPayments().getV1ContractorPaymentsContractorPaymentIdPdf()
-                .xGustoAPIVersion(GetV1ContractorPaymentsContractorPaymentIdPdfHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
-                .contractorPaymentId("<id>")
-                .call();
-
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1ContractorPaymentsContractorPaymentIdPdfHeaderXGustoAPIVersion>](../../models/operations/GetV1ContractorPaymentsContractorPaymentIdPdfHeaderXGustoAPIVersion.md)                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `contractorPaymentId`                                                                                                                                                                                                        | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the contractor payment                                                                                                                                                                                           |
-
-### Response
-
-**[GetV1ContractorPaymentsContractorPaymentIdPdfResponse](../../models/operations/GetV1ContractorPaymentsContractorPaymentIdPdfResponse.md)**
-
-### Errors
-
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| models/errors/NotFoundErrorObject | 404                               | application/json                  |
-| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |

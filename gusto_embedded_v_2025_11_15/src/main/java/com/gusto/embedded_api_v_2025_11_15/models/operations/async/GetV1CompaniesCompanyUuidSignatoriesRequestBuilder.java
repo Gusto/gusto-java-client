@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompaniesCompanyUuidSignatoriesRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompaniesCompanyUuidSignatoriesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1CompaniesCompanyUuidSignatoriesRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public GetV1CompaniesCompanyUuidSignatoriesRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class GetV1CompaniesCompanyUuidSignatoriesRequestBuilder {
         return this;
     }
 
+    public GetV1CompaniesCompanyUuidSignatoriesRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
 
     private GetV1CompaniesCompanyUuidSignatoriesRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompaniesCompanyUuidSignatoriesRequest request = new GetV1CompaniesCompanyUuidSignatoriesRequest(companyUuid,
-            xGustoAPIVersion);
+        GetV1CompaniesCompanyUuidSignatoriesRequest request = new GetV1CompaniesCompanyUuidSignatoriesRequest(xGustoAPIVersion,
+            companyUuid);
 
         return request;
     }

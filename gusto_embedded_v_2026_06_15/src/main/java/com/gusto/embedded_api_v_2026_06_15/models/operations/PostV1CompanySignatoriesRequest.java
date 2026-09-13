@@ -18,12 +18,6 @@ import java.util.Optional;
 
 public class PostV1CompanySignatoriesRequest {
     /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
-    private String companyUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,35 +25,33 @@ public class PostV1CompanySignatoriesRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
+    private String companyUuid;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private SignatoryCreateRequest signatoryCreateRequest;
 
     @JsonCreator
     public PostV1CompanySignatoriesRequest(
-            String companyUuid,
             Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyUuid,
             SignatoryCreateRequest signatoryCreateRequest) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(signatoryCreateRequest, "signatoryCreateRequest");
-        this.companyUuid = companyUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyUuid = companyUuid;
         this.signatoryCreateRequest = signatoryCreateRequest;
     }
     
     public PostV1CompanySignatoriesRequest(
             String companyUuid,
             SignatoryCreateRequest signatoryCreateRequest) {
-        this(companyUuid, Optional.empty(), signatoryCreateRequest);
-    }
-
-    /**
-     * The UUID of the company
-     */
-    @JsonIgnore
-    public String companyUuid() {
-        return companyUuid;
+        this(Optional.empty(), companyUuid, signatoryCreateRequest);
     }
 
     /**
@@ -73,6 +65,14 @@ public class PostV1CompanySignatoriesRequest {
         return (Optional<PostV1CompanySignatoriesHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the company
+     */
+    @JsonIgnore
+    public String companyUuid() {
+        return companyUuid;
+    }
+
     @JsonIgnore
     public SignatoryCreateRequest signatoryCreateRequest() {
         return signatoryCreateRequest;
@@ -82,15 +82,6 @@ public class PostV1CompanySignatoriesRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public PostV1CompanySignatoriesRequest withCompanyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -115,6 +106,15 @@ public class PostV1CompanySignatoriesRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public PostV1CompanySignatoriesRequest withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
     public PostV1CompanySignatoriesRequest withSignatoryCreateRequest(SignatoryCreateRequest signatoryCreateRequest) {
         Utils.checkNotNull(signatoryCreateRequest, "signatoryCreateRequest");
         this.signatoryCreateRequest = signatoryCreateRequest;
@@ -131,46 +131,36 @@ public class PostV1CompanySignatoriesRequest {
         }
         PostV1CompanySignatoriesRequest other = (PostV1CompanySignatoriesRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.signatoryCreateRequest, other.signatoryCreateRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, xGustoAPIVersion, signatoryCreateRequest);
+            xGustoAPIVersion, companyUuid, signatoryCreateRequest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostV1CompanySignatoriesRequest.class,
-                "companyUuid", companyUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "companyUuid", companyUuid,
                 "signatoryCreateRequest", signatoryCreateRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String companyUuid;
-
         private Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String companyUuid;
 
         private SignatoryCreateRequest signatoryCreateRequest;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyUuid(String companyUuid) {
-            Utils.checkNotNull(companyUuid, "companyUuid");
-            this.companyUuid = companyUuid;
-            return this;
         }
 
 
@@ -197,6 +187,16 @@ public class PostV1CompanySignatoriesRequest {
         }
 
 
+        /**
+         * The UUID of the company
+         */
+        public Builder companyUuid(String companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = companyUuid;
+            return this;
+        }
+
+
         public Builder signatoryCreateRequest(SignatoryCreateRequest signatoryCreateRequest) {
             Utils.checkNotNull(signatoryCreateRequest, "signatoryCreateRequest");
             this.signatoryCreateRequest = signatoryCreateRequest;
@@ -209,7 +209,7 @@ public class PostV1CompanySignatoriesRequest {
             }
 
             return new PostV1CompanySignatoriesRequest(
-                companyUuid, xGustoAPIVersion, signatoryCreateRequest);
+                xGustoAPIVersion, companyUuid, signatoryCreateRequest);
         }
 
 

@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetV1PeopleBatchesPeopleBatchUuidRequest {
     /**
-     * The UUID of the people batch
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=people_batch_uuid")
-    private String peopleBatchUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class GetV1PeopleBatchesPeopleBatchUuidRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the people batch
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=people_batch_uuid")
+    private String peopleBatchUuid;
+
     @JsonCreator
     public GetV1PeopleBatchesPeopleBatchUuidRequest(
-            String peopleBatchUuid,
-            Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(peopleBatchUuid, "peopleBatchUuid");
+            Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String peopleBatchUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.peopleBatchUuid = peopleBatchUuid;
+        Utils.checkNotNull(peopleBatchUuid, "peopleBatchUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.peopleBatchUuid = peopleBatchUuid;
     }
     
     public GetV1PeopleBatchesPeopleBatchUuidRequest(
             String peopleBatchUuid) {
-        this(peopleBatchUuid, Optional.empty());
-    }
-
-    /**
-     * The UUID of the people batch
-     */
-    @JsonIgnore
-    public String peopleBatchUuid() {
-        return peopleBatchUuid;
+        this(Optional.empty(), peopleBatchUuid);
     }
 
     /**
@@ -64,19 +56,18 @@ public class GetV1PeopleBatchesPeopleBatchUuidRequest {
         return (Optional<GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the people batch
+     */
+    @JsonIgnore
+    public String peopleBatchUuid() {
+        return peopleBatchUuid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the people batch
-     */
-    public GetV1PeopleBatchesPeopleBatchUuidRequest withPeopleBatchUuid(String peopleBatchUuid) {
-        Utils.checkNotNull(peopleBatchUuid, "peopleBatchUuid");
-        this.peopleBatchUuid = peopleBatchUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class GetV1PeopleBatchesPeopleBatchUuidRequest {
         return this;
     }
 
+    /**
+     * The UUID of the people batch
+     */
+    public GetV1PeopleBatchesPeopleBatchUuidRequest withPeopleBatchUuid(String peopleBatchUuid) {
+        Utils.checkNotNull(peopleBatchUuid, "peopleBatchUuid");
+        this.peopleBatchUuid = peopleBatchUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class GetV1PeopleBatchesPeopleBatchUuidRequest {
         }
         GetV1PeopleBatchesPeopleBatchUuidRequest other = (GetV1PeopleBatchesPeopleBatchUuidRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.peopleBatchUuid, other.peopleBatchUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.peopleBatchUuid, other.peopleBatchUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            peopleBatchUuid, xGustoAPIVersion);
+            xGustoAPIVersion, peopleBatchUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1PeopleBatchesPeopleBatchUuidRequest.class,
-                "peopleBatchUuid", peopleBatchUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "peopleBatchUuid", peopleBatchUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String peopleBatchUuid;
-
         private Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String peopleBatchUuid;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the people batch
-         */
-        public Builder peopleBatchUuid(String peopleBatchUuid) {
-            Utils.checkNotNull(peopleBatchUuid, "peopleBatchUuid");
-            this.peopleBatchUuid = peopleBatchUuid;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class GetV1PeopleBatchesPeopleBatchUuidRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the people batch
+         */
+        public Builder peopleBatchUuid(String peopleBatchUuid) {
+            Utils.checkNotNull(peopleBatchUuid, "peopleBatchUuid");
+            this.peopleBatchUuid = peopleBatchUuid;
+            return this;
+        }
+
         public GetV1PeopleBatchesPeopleBatchUuidRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1PeopleBatchesPeopleBatchUuidRequest(
-                peopleBatchUuid, xGustoAPIVersion);
+                xGustoAPIVersion, peopleBatchUuid);
         }
 
 

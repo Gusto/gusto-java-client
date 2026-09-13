@@ -20,30 +20,18 @@ import java.util.concurrent.CompletableFuture;
 
 public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder {
 
-    private String companyId;
-    private String id;
     private Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private String id;
     private Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody> requestBody = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
-
-    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder id(String id) {
-        Utils.checkNotNull(id, "id");
-        this.id = id;
-        return this;
     }
                 
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder xGustoAPIVersion(PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -55,6 +43,18 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuild
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder xGustoAPIVersion(Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
+    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder id(String id) {
+        Utils.checkNotNull(id, "id");
+        this.id = id;
         return this;
     }
                 
@@ -76,9 +76,9 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuild
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request = new PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest(companyId,
+        PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request = new PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest(xGustoAPIVersion,
+            companyId,
             id,
-            xGustoAPIVersion,
             requestBody);
 
         return request;

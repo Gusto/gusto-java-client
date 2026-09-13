@@ -35,13 +35,13 @@ public class GetV1EmployeesRequest {
      * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=include")
-    private Optional<? extends List<QueryParamInclude>> include;
+    private Optional<? extends List<GetV1EmployeesQueryParamInclude>> include;
 
     @JsonCreator
     public GetV1EmployeesRequest(
             Optional<? extends GetV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion,
             String employeeId,
-            Optional<? extends List<QueryParamInclude>> include) {
+            Optional<? extends List<GetV1EmployeesQueryParamInclude>> include) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(employeeId, "employeeId");
         Utils.checkNotNull(include, "include");
@@ -79,8 +79,8 @@ public class GetV1EmployeesRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<QueryParamInclude>> include() {
-        return (Optional<List<QueryParamInclude>>) include;
+    public Optional<List<GetV1EmployeesQueryParamInclude>> include() {
+        return (Optional<List<GetV1EmployeesQueryParamInclude>>) include;
     }
 
     public static Builder builder() {
@@ -123,7 +123,7 @@ public class GetV1EmployeesRequest {
     /**
      * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
      */
-    public GetV1EmployeesRequest withInclude(List<QueryParamInclude> include) {
+    public GetV1EmployeesRequest withInclude(List<GetV1EmployeesQueryParamInclude> include) {
         Utils.checkNotNull(include, "include");
         this.include = Optional.ofNullable(include);
         return this;
@@ -133,7 +133,7 @@ public class GetV1EmployeesRequest {
     /**
      * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
      */
-    public GetV1EmployeesRequest withInclude(Optional<? extends List<QueryParamInclude>> include) {
+    public GetV1EmployeesRequest withInclude(Optional<? extends List<GetV1EmployeesQueryParamInclude>> include) {
         Utils.checkNotNull(include, "include");
         this.include = include;
         return this;
@@ -175,7 +175,7 @@ public class GetV1EmployeesRequest {
 
         private String employeeId;
 
-        private Optional<? extends List<QueryParamInclude>> include = Optional.empty();
+        private Optional<? extends List<GetV1EmployeesQueryParamInclude>> include = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -218,7 +218,7 @@ public class GetV1EmployeesRequest {
         /**
          * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
          */
-        public Builder include(List<QueryParamInclude> include) {
+        public Builder include(List<GetV1EmployeesQueryParamInclude> include) {
             Utils.checkNotNull(include, "include");
             this.include = Optional.ofNullable(include);
             return this;
@@ -227,7 +227,7 @@ public class GetV1EmployeesRequest {
         /**
          * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
          */
-        public Builder include(Optional<? extends List<QueryParamInclude>> include) {
+        public Builder include(Optional<? extends List<GetV1EmployeesQueryParamInclude>> include) {
             Utils.checkNotNull(include, "include");
             this.include = include;
             return this;

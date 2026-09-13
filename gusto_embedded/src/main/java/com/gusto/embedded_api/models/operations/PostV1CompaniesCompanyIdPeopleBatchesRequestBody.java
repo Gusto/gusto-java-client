@@ -23,19 +23,19 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBody {
      * The action to perform on the batch
      */
     @JsonProperty("batch_action")
-    private BatchAction batchAction;
+    private PostV1CompaniesCompanyIdPeopleBatchesBatchAction batchAction;
 
     /**
      * Array of people to create
      */
     @JsonProperty("batch")
-    private List<Batch> batch;
+    private List<PostV1CompaniesCompanyIdPeopleBatchesBatch> batch;
 
     @JsonCreator
     public PostV1CompaniesCompanyIdPeopleBatchesRequestBody(
             @JsonProperty("idempotency_key") String idempotencyKey,
-            @JsonProperty("batch_action") BatchAction batchAction,
-            @JsonProperty("batch") List<Batch> batch) {
+            @JsonProperty("batch_action") PostV1CompaniesCompanyIdPeopleBatchesBatchAction batchAction,
+            @JsonProperty("batch") List<PostV1CompaniesCompanyIdPeopleBatchesBatch> batch) {
         Utils.checkNotNull(idempotencyKey, "idempotencyKey");
         Utils.checkNotNull(batchAction, "batchAction");
         Utils.checkNotNull(batch, "batch");
@@ -56,7 +56,7 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBody {
      * The action to perform on the batch
      */
     @JsonIgnore
-    public BatchAction batchAction() {
+    public PostV1CompaniesCompanyIdPeopleBatchesBatchAction batchAction() {
         return batchAction;
     }
 
@@ -64,7 +64,7 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBody {
      * Array of people to create
      */
     @JsonIgnore
-    public List<Batch> batch() {
+    public List<PostV1CompaniesCompanyIdPeopleBatchesBatch> batch() {
         return batch;
     }
 
@@ -85,7 +85,7 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBody {
     /**
      * The action to perform on the batch
      */
-    public PostV1CompaniesCompanyIdPeopleBatchesRequestBody withBatchAction(BatchAction batchAction) {
+    public PostV1CompaniesCompanyIdPeopleBatchesRequestBody withBatchAction(PostV1CompaniesCompanyIdPeopleBatchesBatchAction batchAction) {
         Utils.checkNotNull(batchAction, "batchAction");
         this.batchAction = batchAction;
         return this;
@@ -94,7 +94,7 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBody {
     /**
      * Array of people to create
      */
-    public PostV1CompaniesCompanyIdPeopleBatchesRequestBody withBatch(List<Batch> batch) {
+    public PostV1CompaniesCompanyIdPeopleBatchesRequestBody withBatch(List<PostV1CompaniesCompanyIdPeopleBatchesBatch> batch) {
         Utils.checkNotNull(batch, "batch");
         this.batch = batch;
         return this;
@@ -134,9 +134,9 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBody {
 
         private String idempotencyKey;
 
-        private BatchAction batchAction;
+        private PostV1CompaniesCompanyIdPeopleBatchesBatchAction batchAction;
 
-        private List<Batch> batch;
+        private List<PostV1CompaniesCompanyIdPeopleBatchesBatch> batch;
 
         private Builder() {
           // force use of static builder() method
@@ -156,7 +156,7 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBody {
         /**
          * The action to perform on the batch
          */
-        public Builder batchAction(BatchAction batchAction) {
+        public Builder batchAction(PostV1CompaniesCompanyIdPeopleBatchesBatchAction batchAction) {
             Utils.checkNotNull(batchAction, "batchAction");
             this.batchAction = batchAction;
             return this;
@@ -166,7 +166,7 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBody {
         /**
          * Array of people to create
          */
-        public Builder batch(List<Batch> batch) {
+        public Builder batch(List<PostV1CompaniesCompanyIdPeopleBatchesBatch> batch) {
             Utils.checkNotNull(batch, "batch");
             this.batch = batch;
             return this;

@@ -16,22 +16,16 @@ import java.util.Optional;
 
 public class GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder {
 
-    private String employeeId;
     private Optional<? extends GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder employeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
     }
                 
     public GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder xGustoAPIVersion(GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,14 +40,20 @@ public class GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder {
         return this;
     }
 
+    public GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder employeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
+        return this;
+    }
+
 
     private GetV1EmployeesEmployeeIdHomeAddressesRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1EmployeesEmployeeIdHomeAddressesRequest request = new GetV1EmployeesEmployeeIdHomeAddressesRequest(employeeId,
-            xGustoAPIVersion);
+        GetV1EmployeesEmployeeIdHomeAddressesRequest request = new GetV1EmployeesEmployeeIdHomeAddressesRequest(xGustoAPIVersion,
+            employeeId);
 
         return request;
     }

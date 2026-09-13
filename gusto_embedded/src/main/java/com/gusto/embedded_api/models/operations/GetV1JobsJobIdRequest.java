@@ -17,6 +17,14 @@ import java.util.Optional;
 
 public class GetV1JobsJobIdRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the job
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=job_id")
@@ -30,30 +38,33 @@ public class GetV1JobsJobIdRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=include")
     private Optional<? extends GetV1JobsJobIdQueryParamInclude> include;
 
+    @JsonCreator
+    public GetV1JobsJobIdRequest(
+            Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String jobId,
+            Optional<? extends GetV1JobsJobIdQueryParamInclude> include) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(jobId, "jobId");
+        Utils.checkNotNull(include, "include");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        this.jobId = jobId;
+        this.include = include;
+    }
+    
+    public GetV1JobsJobIdRequest(
+            String jobId) {
+        this(Optional.empty(), jobId, Optional.empty());
+    }
+
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion;
-
-    @JsonCreator
-    public GetV1JobsJobIdRequest(
-            String jobId,
-            Optional<? extends GetV1JobsJobIdQueryParamInclude> include,
-            Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(jobId, "jobId");
-        Utils.checkNotNull(include, "include");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.jobId = jobId;
-        this.include = include;
-        this.xGustoAPIVersion = xGustoAPIVersion;
-    }
-    
-    public GetV1JobsJobIdRequest(
-            String jobId) {
-        this(jobId, Optional.empty(), Optional.empty());
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetV1JobsJobIdHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -75,21 +86,33 @@ public class GetV1JobsJobIdRequest {
         return (Optional<GetV1JobsJobIdQueryParamInclude>) include;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
+
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<GetV1JobsJobIdHeaderXGustoAPIVersion>) xGustoAPIVersion;
+    public GetV1JobsJobIdRequest withXGustoAPIVersion(GetV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        return this;
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
 
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public GetV1JobsJobIdRequest withXGustoAPIVersion(Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
 
     /**
      * The UUID of the job
@@ -123,29 +146,6 @@ public class GetV1JobsJobIdRequest {
         return this;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public GetV1JobsJobIdRequest withXGustoAPIVersion(GetV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-        return this;
-    }
-
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public GetV1JobsJobIdRequest withXGustoAPIVersion(Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -156,36 +156,59 @@ public class GetV1JobsJobIdRequest {
         }
         GetV1JobsJobIdRequest other = (GetV1JobsJobIdRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.jobId, other.jobId) &&
-            Utils.enhancedDeepEquals(this.include, other.include) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.include, other.include);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            jobId, include, xGustoAPIVersion);
+            xGustoAPIVersion, jobId, include);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1JobsJobIdRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "jobId", jobId,
-                "include", include,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "include", include);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String jobId;
 
         private Optional<? extends GetV1JobsJobIdQueryParamInclude> include = Optional.empty();
 
-        private Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion;
-
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(GetV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -221,36 +244,13 @@ public class GetV1JobsJobIdRequest {
             return this;
         }
 
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(GetV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
-
         public GetV1JobsJobIdRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1JobsJobIdRequest(
-                jobId, include, xGustoAPIVersion);
+                xGustoAPIVersion, jobId, include);
         }
 
 

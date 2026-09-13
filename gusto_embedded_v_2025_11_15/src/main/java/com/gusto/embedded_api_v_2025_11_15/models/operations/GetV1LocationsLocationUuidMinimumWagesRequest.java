@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetV1LocationsLocationUuidMinimumWagesRequest {
     /**
-     * The UUID of the location
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=location_uuid")
-    private String locationUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,34 +24,32 @@ public class GetV1LocationsLocationUuidMinimumWagesRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the location
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=location_uuid")
+    private String locationUuid;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=effective_date")
     private Optional<String> effectiveDate;
 
     @JsonCreator
     public GetV1LocationsLocationUuidMinimumWagesRequest(
-            String locationUuid,
             Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String locationUuid,
             Optional<String> effectiveDate) {
-        Utils.checkNotNull(locationUuid, "locationUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(locationUuid, "locationUuid");
         Utils.checkNotNull(effectiveDate, "effectiveDate");
-        this.locationUuid = locationUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.locationUuid = locationUuid;
         this.effectiveDate = effectiveDate;
     }
     
     public GetV1LocationsLocationUuidMinimumWagesRequest(
             String locationUuid) {
-        this(locationUuid, Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * The UUID of the location
-     */
-    @JsonIgnore
-    public String locationUuid() {
-        return locationUuid;
+        this(Optional.empty(), locationUuid, Optional.empty());
     }
 
     /**
@@ -71,6 +63,14 @@ public class GetV1LocationsLocationUuidMinimumWagesRequest {
         return (Optional<GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the location
+     */
+    @JsonIgnore
+    public String locationUuid() {
+        return locationUuid;
+    }
+
     @JsonIgnore
     public Optional<String> effectiveDate() {
         return effectiveDate;
@@ -80,15 +80,6 @@ public class GetV1LocationsLocationUuidMinimumWagesRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the location
-     */
-    public GetV1LocationsLocationUuidMinimumWagesRequest withLocationUuid(String locationUuid) {
-        Utils.checkNotNull(locationUuid, "locationUuid");
-        this.locationUuid = locationUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -110,6 +101,15 @@ public class GetV1LocationsLocationUuidMinimumWagesRequest {
     public GetV1LocationsLocationUuidMinimumWagesRequest withXGustoAPIVersion(Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * The UUID of the location
+     */
+    public GetV1LocationsLocationUuidMinimumWagesRequest withLocationUuid(String locationUuid) {
+        Utils.checkNotNull(locationUuid, "locationUuid");
+        this.locationUuid = locationUuid;
         return this;
     }
 
@@ -136,46 +136,36 @@ public class GetV1LocationsLocationUuidMinimumWagesRequest {
         }
         GetV1LocationsLocationUuidMinimumWagesRequest other = (GetV1LocationsLocationUuidMinimumWagesRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.locationUuid, other.locationUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.locationUuid, other.locationUuid) &&
             Utils.enhancedDeepEquals(this.effectiveDate, other.effectiveDate);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            locationUuid, xGustoAPIVersion, effectiveDate);
+            xGustoAPIVersion, locationUuid, effectiveDate);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1LocationsLocationUuidMinimumWagesRequest.class,
-                "locationUuid", locationUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "locationUuid", locationUuid,
                 "effectiveDate", effectiveDate);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String locationUuid;
-
         private Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String locationUuid;
 
         private Optional<String> effectiveDate = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the location
-         */
-        public Builder locationUuid(String locationUuid) {
-            Utils.checkNotNull(locationUuid, "locationUuid");
-            this.locationUuid = locationUuid;
-            return this;
         }
 
 
@@ -202,6 +192,16 @@ public class GetV1LocationsLocationUuidMinimumWagesRequest {
         }
 
 
+        /**
+         * The UUID of the location
+         */
+        public Builder locationUuid(String locationUuid) {
+            Utils.checkNotNull(locationUuid, "locationUuid");
+            this.locationUuid = locationUuid;
+            return this;
+        }
+
+
         public Builder effectiveDate(String effectiveDate) {
             Utils.checkNotNull(effectiveDate, "effectiveDate");
             this.effectiveDate = Optional.ofNullable(effectiveDate);
@@ -220,7 +220,7 @@ public class GetV1LocationsLocationUuidMinimumWagesRequest {
             }
 
             return new GetV1LocationsLocationUuidMinimumWagesRequest(
-                locationUuid, xGustoAPIVersion, effectiveDate);
+                xGustoAPIVersion, locationUuid, effectiveDate);
         }
 
 

@@ -23,7 +23,7 @@ public class GetAchTransactionsRequest {
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends GetAchTransactionsHeaderXGustoAPIVersion> xGustoAPIVersion;
+    private Optional<? extends XGustoAPIVersion> xGustoAPIVersion;
 
     /**
      * The UUID of the company
@@ -72,7 +72,7 @@ public class GetAchTransactionsRequest {
 
     @JsonCreator
     public GetAchTransactionsRequest(
-            Optional<? extends GetAchTransactionsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends XGustoAPIVersion> xGustoAPIVersion,
             String companyUuid,
             Optional<String> contractorPaymentUuid,
             Optional<String> payrollUuid,
@@ -112,8 +112,8 @@ public class GetAchTransactionsRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetAchTransactionsHeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<GetAchTransactionsHeaderXGustoAPIVersion>) xGustoAPIVersion;
+    public Optional<XGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<XGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -185,7 +185,7 @@ public class GetAchTransactionsRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetAchTransactionsRequest withXGustoAPIVersion(GetAchTransactionsHeaderXGustoAPIVersion xGustoAPIVersion) {
+    public GetAchTransactionsRequest withXGustoAPIVersion(XGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
         return this;
@@ -197,7 +197,7 @@ public class GetAchTransactionsRequest {
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    public GetAchTransactionsRequest withXGustoAPIVersion(Optional<? extends GetAchTransactionsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetAchTransactionsRequest withXGustoAPIVersion(Optional<? extends XGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -376,7 +376,7 @@ public class GetAchTransactionsRequest {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends GetAchTransactionsHeaderXGustoAPIVersion> xGustoAPIVersion;
+        private Optional<? extends XGustoAPIVersion> xGustoAPIVersion;
 
         private String companyUuid;
 
@@ -402,7 +402,7 @@ public class GetAchTransactionsRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(GetAchTransactionsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(XGustoAPIVersion xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
             return this;
@@ -413,7 +413,7 @@ public class GetAchTransactionsRequest {
          * application's [minimum API
          * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
          */
-        public Builder xGustoAPIVersion(Optional<? extends GetAchTransactionsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        public Builder xGustoAPIVersion(Optional<? extends XGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
             return this;
@@ -561,10 +561,10 @@ public class GetAchTransactionsRequest {
         }
 
 
-        private static final LazySingletonValue<Optional<? extends GetAchTransactionsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends XGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-11-15\"",
-                        new TypeReference<Optional<? extends GetAchTransactionsHeaderXGustoAPIVersion>>() {});
+                        new TypeReference<Optional<? extends XGustoAPIVersion>>() {});
     }
 }

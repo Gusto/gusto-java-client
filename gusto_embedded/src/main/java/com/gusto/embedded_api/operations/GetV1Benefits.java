@@ -154,7 +154,7 @@ public class GetV1Benefits {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withSupportedBenefits(Utils.unmarshal(response, new TypeReference<List<SupportedBenefit>>() {}));
+                    return res.withSupportedBenefitList(Utils.unmarshal(response, new TypeReference<List<SupportedBenefit>>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
@@ -225,7 +225,7 @@ public class GetV1Benefits {
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     return Utils.unmarshalAsync(response, new TypeReference<List<SupportedBenefit>>() {})
-                            .thenApply(res::withSupportedBenefits);
+                            .thenApply(res::withSupportedBenefitList);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }
