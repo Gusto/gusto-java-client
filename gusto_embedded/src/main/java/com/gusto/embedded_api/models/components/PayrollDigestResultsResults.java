@@ -60,7 +60,7 @@ public class PayrollDigestResultsResults {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("blockers")
-    private Optional<? extends List<Blockers>> blockers;
+    private Optional<? extends List<PayrollDigestResultsBlockers>> blockers;
 
     /**
      * Payrolls for this company within the digest date window (7 days past, 30–60 days future). May be
@@ -77,7 +77,7 @@ public class PayrollDigestResultsResults {
             @JsonProperty("uuid") Optional<String> uuid,
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("status") Optional<? extends PayrollDigestResultsResultsStatus> status,
-            @JsonProperty("blockers") Optional<? extends List<Blockers>> blockers,
+            @JsonProperty("blockers") Optional<? extends List<PayrollDigestResultsBlockers>> blockers,
             @JsonProperty("payrolls") Optional<? extends List<Payrolls>> payrolls) {
         Utils.checkNotNull(idx, "idx");
         Utils.checkNotNull(entityType, "entityType");
@@ -150,8 +150,8 @@ public class PayrollDigestResultsResults {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Blockers>> blockers() {
-        return (Optional<List<Blockers>>) blockers;
+    public Optional<List<PayrollDigestResultsBlockers>> blockers() {
+        return (Optional<List<PayrollDigestResultsBlockers>>) blockers;
     }
 
     /**
@@ -269,7 +269,7 @@ public class PayrollDigestResultsResults {
      * `payrolls` array — blockers are evaluated at the company level, not per payroll. Empty when there
      * are no blockers.
      */
-    public PayrollDigestResultsResults withBlockers(List<Blockers> blockers) {
+    public PayrollDigestResultsResults withBlockers(List<PayrollDigestResultsBlockers> blockers) {
         Utils.checkNotNull(blockers, "blockers");
         this.blockers = Optional.ofNullable(blockers);
         return this;
@@ -281,7 +281,7 @@ public class PayrollDigestResultsResults {
      * `payrolls` array — blockers are evaluated at the company level, not per payroll. Empty when there
      * are no blockers.
      */
-    public PayrollDigestResultsResults withBlockers(Optional<? extends List<Blockers>> blockers) {
+    public PayrollDigestResultsResults withBlockers(Optional<? extends List<PayrollDigestResultsBlockers>> blockers) {
         Utils.checkNotNull(blockers, "blockers");
         this.blockers = blockers;
         return this;
@@ -360,7 +360,7 @@ public class PayrollDigestResultsResults {
 
         private Optional<? extends PayrollDigestResultsResultsStatus> status = Optional.empty();
 
-        private Optional<? extends List<Blockers>> blockers = Optional.empty();
+        private Optional<? extends List<PayrollDigestResultsBlockers>> blockers = Optional.empty();
 
         private Optional<? extends List<Payrolls>> payrolls = Optional.empty();
 
@@ -469,7 +469,7 @@ public class PayrollDigestResultsResults {
          * `payrolls` array — blockers are evaluated at the company level, not per payroll. Empty when there
          * are no blockers.
          */
-        public Builder blockers(List<Blockers> blockers) {
+        public Builder blockers(List<PayrollDigestResultsBlockers> blockers) {
             Utils.checkNotNull(blockers, "blockers");
             this.blockers = Optional.ofNullable(blockers);
             return this;
@@ -480,7 +480,7 @@ public class PayrollDigestResultsResults {
          * `payrolls` array — blockers are evaluated at the company level, not per payroll. Empty when there
          * are no blockers.
          */
-        public Builder blockers(Optional<? extends List<Blockers>> blockers) {
+        public Builder blockers(Optional<? extends List<PayrollDigestResultsBlockers>> blockers) {
             Utils.checkNotNull(blockers, "blockers");
             this.blockers = blockers;
             return this;

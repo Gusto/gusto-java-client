@@ -18,12 +18,6 @@ import java.util.Optional;
 
 public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest {
     /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
-    private String companyUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,35 +25,33 @@ public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
+    private String companyUuid;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest;
 
     @JsonCreator
     public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest(
-            String companyUuid,
             Optional<? extends PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyUuid,
             PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(partnerManagedCompanyAcceptTermsOfServiceRequest, "partnerManagedCompanyAcceptTermsOfServiceRequest");
-        this.companyUuid = companyUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyUuid = companyUuid;
         this.partnerManagedCompanyAcceptTermsOfServiceRequest = partnerManagedCompanyAcceptTermsOfServiceRequest;
     }
     
     public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest(
             String companyUuid,
             PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest) {
-        this(companyUuid, Optional.empty(), partnerManagedCompanyAcceptTermsOfServiceRequest);
-    }
-
-    /**
-     * The UUID of the company
-     */
-    @JsonIgnore
-    public String companyUuid() {
-        return companyUuid;
+        this(Optional.empty(), companyUuid, partnerManagedCompanyAcceptTermsOfServiceRequest);
     }
 
     /**
@@ -73,6 +65,14 @@ public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest {
         return (Optional<PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the company
+     */
+    @JsonIgnore
+    public String companyUuid() {
+        return companyUuid;
+    }
+
     @JsonIgnore
     public PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest() {
         return partnerManagedCompanyAcceptTermsOfServiceRequest;
@@ -82,15 +82,6 @@ public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest withCompanyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -115,6 +106,15 @@ public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
     public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest withPartnerManagedCompanyAcceptTermsOfServiceRequest(PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest) {
         Utils.checkNotNull(partnerManagedCompanyAcceptTermsOfServiceRequest, "partnerManagedCompanyAcceptTermsOfServiceRequest");
         this.partnerManagedCompanyAcceptTermsOfServiceRequest = partnerManagedCompanyAcceptTermsOfServiceRequest;
@@ -131,46 +131,36 @@ public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest {
         }
         PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest other = (PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.partnerManagedCompanyAcceptTermsOfServiceRequest, other.partnerManagedCompanyAcceptTermsOfServiceRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, xGustoAPIVersion, partnerManagedCompanyAcceptTermsOfServiceRequest);
+            xGustoAPIVersion, companyUuid, partnerManagedCompanyAcceptTermsOfServiceRequest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest.class,
-                "companyUuid", companyUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "companyUuid", companyUuid,
                 "partnerManagedCompanyAcceptTermsOfServiceRequest", partnerManagedCompanyAcceptTermsOfServiceRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String companyUuid;
-
         private Optional<? extends PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String companyUuid;
 
         private PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyUuid(String companyUuid) {
-            Utils.checkNotNull(companyUuid, "companyUuid");
-            this.companyUuid = companyUuid;
-            return this;
         }
 
 
@@ -197,6 +187,16 @@ public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest {
         }
 
 
+        /**
+         * The UUID of the company
+         */
+        public Builder companyUuid(String companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = companyUuid;
+            return this;
+        }
+
+
         public Builder partnerManagedCompanyAcceptTermsOfServiceRequest(PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest) {
             Utils.checkNotNull(partnerManagedCompanyAcceptTermsOfServiceRequest, "partnerManagedCompanyAcceptTermsOfServiceRequest");
             this.partnerManagedCompanyAcceptTermsOfServiceRequest = partnerManagedCompanyAcceptTermsOfServiceRequest;
@@ -209,7 +209,7 @@ public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest {
             }
 
             return new PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest(
-                companyUuid, xGustoAPIVersion, partnerManagedCompanyAcceptTermsOfServiceRequest);
+                xGustoAPIVersion, companyUuid, partnerManagedCompanyAcceptTermsOfServiceRequest);
         }
 
 

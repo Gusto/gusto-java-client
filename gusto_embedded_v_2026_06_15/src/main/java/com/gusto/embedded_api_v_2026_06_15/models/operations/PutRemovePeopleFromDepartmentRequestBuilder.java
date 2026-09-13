@@ -17,23 +17,17 @@ import java.util.Optional;
 
 public class PutRemovePeopleFromDepartmentRequestBuilder {
 
-    private String departmentUuid;
     private Optional<? extends PutRemovePeopleFromDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutRemovePeopleFromDepartmentHeaderXGustoAPIVersion>>() {});
+    private String departmentUuid;
     private DepartmentPeopleRequestBody departmentPeopleRequestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutRemovePeopleFromDepartmentRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutRemovePeopleFromDepartmentRequestBuilder departmentUuid(String departmentUuid) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
-        this.departmentUuid = departmentUuid;
-        return this;
     }
                 
     public PutRemovePeopleFromDepartmentRequestBuilder xGustoAPIVersion(PutRemovePeopleFromDepartmentHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -45,6 +39,12 @@ public class PutRemovePeopleFromDepartmentRequestBuilder {
     public PutRemovePeopleFromDepartmentRequestBuilder xGustoAPIVersion(Optional<? extends PutRemovePeopleFromDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutRemovePeopleFromDepartmentRequestBuilder departmentUuid(String departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = departmentUuid;
         return this;
     }
 
@@ -60,8 +60,8 @@ public class PutRemovePeopleFromDepartmentRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutRemovePeopleFromDepartmentRequest request = new PutRemovePeopleFromDepartmentRequest(departmentUuid,
-            xGustoAPIVersion,
+        PutRemovePeopleFromDepartmentRequest request = new PutRemovePeopleFromDepartmentRequest(xGustoAPIVersion,
+            departmentUuid,
             departmentPeopleRequestBody);
 
         return request;

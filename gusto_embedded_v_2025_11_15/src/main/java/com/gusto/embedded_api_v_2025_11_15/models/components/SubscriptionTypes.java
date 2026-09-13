@@ -24,7 +24,8 @@ public enum SubscriptionTypes {
     PAYROLL("Payroll"),
     PAYROLL_SYNC("PayrollSync"),
     PAY_SCHEDULE("PaySchedule"),
-    SIGNATORY("Signatory");
+    SIGNATORY("Signatory"),
+    TIME_OFF_REQUEST("TimeOffRequest");
 
     @JsonValue
     private final String value;

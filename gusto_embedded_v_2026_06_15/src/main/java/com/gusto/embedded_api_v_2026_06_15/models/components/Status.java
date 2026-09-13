@@ -11,14 +11,17 @@ import java.util.Optional;
 /**
  * Status
  * 
- * <p>Represents the notification's status as managed by our system. It is updated based on observable
- * system events and internal business logic, and does not reflect resolution steps taken outside our
- * system. This field is read-only and cannot be modified via the API.
+ * <p>The batch's processing state.
+ * - `pending`: accepted, not yet started
+ * - `processing`: reports are being generated
+ * - `completed`: all reports finished
+ * - `failed`: the batch failed before completing
  */
 public enum Status {
-    OPEN("open"),
-    RESOLVED("resolved"),
-    EXPIRED("expired");
+    PENDING("pending"),
+    PROCESSING("processing"),
+    COMPLETED("completed"),
+    FAILED("failed");
 
     @JsonValue
     private final String value;

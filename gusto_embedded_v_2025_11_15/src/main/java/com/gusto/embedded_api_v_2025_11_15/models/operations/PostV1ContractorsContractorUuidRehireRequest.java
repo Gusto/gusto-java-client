@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class PostV1ContractorsContractorUuidRehireRequest {
     /**
-     * The UUID of the contractor
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=contractor_uuid")
-    private String contractorUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,34 +24,32 @@ public class PostV1ContractorsContractorUuidRehireRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the contractor
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=contractor_uuid")
+    private String contractorUuid;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private Optional<? extends PostV1ContractorsContractorUuidRehireRequestBody> requestBody;
 
     @JsonCreator
     public PostV1ContractorsContractorUuidRehireRequest(
-            String contractorUuid,
             Optional<? extends PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String contractorUuid,
             Optional<? extends PostV1ContractorsContractorUuidRehireRequestBody> requestBody) {
-        Utils.checkNotNull(contractorUuid, "contractorUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(contractorUuid, "contractorUuid");
         Utils.checkNotNull(requestBody, "requestBody");
-        this.contractorUuid = contractorUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.contractorUuid = contractorUuid;
         this.requestBody = requestBody;
     }
     
     public PostV1ContractorsContractorUuidRehireRequest(
             String contractorUuid) {
-        this(contractorUuid, Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * The UUID of the contractor
-     */
-    @JsonIgnore
-    public String contractorUuid() {
-        return contractorUuid;
+        this(Optional.empty(), contractorUuid, Optional.empty());
     }
 
     /**
@@ -71,6 +63,14 @@ public class PostV1ContractorsContractorUuidRehireRequest {
         return (Optional<PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the contractor
+     */
+    @JsonIgnore
+    public String contractorUuid() {
+        return contractorUuid;
+    }
+
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<PostV1ContractorsContractorUuidRehireRequestBody> requestBody() {
@@ -81,15 +81,6 @@ public class PostV1ContractorsContractorUuidRehireRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the contractor
-     */
-    public PostV1ContractorsContractorUuidRehireRequest withContractorUuid(String contractorUuid) {
-        Utils.checkNotNull(contractorUuid, "contractorUuid");
-        this.contractorUuid = contractorUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -111,6 +102,15 @@ public class PostV1ContractorsContractorUuidRehireRequest {
     public PostV1ContractorsContractorUuidRehireRequest withXGustoAPIVersion(Optional<? extends PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * The UUID of the contractor
+     */
+    public PostV1ContractorsContractorUuidRehireRequest withContractorUuid(String contractorUuid) {
+        Utils.checkNotNull(contractorUuid, "contractorUuid");
+        this.contractorUuid = contractorUuid;
         return this;
     }
 
@@ -137,46 +137,36 @@ public class PostV1ContractorsContractorUuidRehireRequest {
         }
         PostV1ContractorsContractorUuidRehireRequest other = (PostV1ContractorsContractorUuidRehireRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.contractorUuid, other.contractorUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.contractorUuid, other.contractorUuid) &&
             Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            contractorUuid, xGustoAPIVersion, requestBody);
+            xGustoAPIVersion, contractorUuid, requestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostV1ContractorsContractorUuidRehireRequest.class,
-                "contractorUuid", contractorUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "contractorUuid", contractorUuid,
                 "requestBody", requestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String contractorUuid;
-
         private Optional<? extends PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String contractorUuid;
 
         private Optional<? extends PostV1ContractorsContractorUuidRehireRequestBody> requestBody = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the contractor
-         */
-        public Builder contractorUuid(String contractorUuid) {
-            Utils.checkNotNull(contractorUuid, "contractorUuid");
-            this.contractorUuid = contractorUuid;
-            return this;
         }
 
 
@@ -203,6 +193,16 @@ public class PostV1ContractorsContractorUuidRehireRequest {
         }
 
 
+        /**
+         * The UUID of the contractor
+         */
+        public Builder contractorUuid(String contractorUuid) {
+            Utils.checkNotNull(contractorUuid, "contractorUuid");
+            this.contractorUuid = contractorUuid;
+            return this;
+        }
+
+
         public Builder requestBody(PostV1ContractorsContractorUuidRehireRequestBody requestBody) {
             Utils.checkNotNull(requestBody, "requestBody");
             this.requestBody = Optional.ofNullable(requestBody);
@@ -221,7 +221,7 @@ public class PostV1ContractorsContractorUuidRehireRequest {
             }
 
             return new PostV1ContractorsContractorUuidRehireRequest(
-                contractorUuid, xGustoAPIVersion, requestBody);
+                xGustoAPIVersion, contractorUuid, requestBody);
         }
 
 

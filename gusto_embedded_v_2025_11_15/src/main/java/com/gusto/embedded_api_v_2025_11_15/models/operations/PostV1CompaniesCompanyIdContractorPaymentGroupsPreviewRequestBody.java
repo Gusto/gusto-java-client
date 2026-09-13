@@ -19,7 +19,7 @@ import java.util.Optional;
 public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody {
 
     @JsonProperty("contractor_payments")
-    private List<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments> contractorPayments;
+    private List<ContractorPayments> contractorPayments;
 
     /**
      * Date when payments should be processed
@@ -30,7 +30,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody {
 
     @JsonCreator
     public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody(
-            @JsonProperty("contractor_payments") List<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments> contractorPayments,
+            @JsonProperty("contractor_payments") List<ContractorPayments> contractorPayments,
             @JsonProperty("check_date") Optional<LocalDate> checkDate) {
         Utils.checkNotNull(contractorPayments, "contractorPayments");
         Utils.checkNotNull(checkDate, "checkDate");
@@ -39,12 +39,12 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody {
     }
     
     public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody(
-            List<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments> contractorPayments) {
+            List<ContractorPayments> contractorPayments) {
         this(contractorPayments, Optional.empty());
     }
 
     @JsonIgnore
-    public List<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments> contractorPayments() {
+    public List<ContractorPayments> contractorPayments() {
         return contractorPayments;
     }
 
@@ -61,7 +61,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody {
     }
 
 
-    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody withContractorPayments(List<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments> contractorPayments) {
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody withContractorPayments(List<ContractorPayments> contractorPayments) {
         Utils.checkNotNull(contractorPayments, "contractorPayments");
         this.contractorPayments = contractorPayments;
         return this;
@@ -116,7 +116,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private List<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments> contractorPayments;
+        private List<ContractorPayments> contractorPayments;
 
         private Optional<LocalDate> checkDate = Optional.empty();
 
@@ -125,7 +125,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody {
         }
 
 
-        public Builder contractorPayments(List<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments> contractorPayments) {
+        public Builder contractorPayments(List<ContractorPayments> contractorPayments) {
             Utils.checkNotNull(contractorPayments, "contractorPayments");
             this.contractorPayments = contractorPayments;
             return this;

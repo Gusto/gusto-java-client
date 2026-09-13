@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompanyFinishOnboardingRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompanyFinishOnboardingRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1CompanyFinishOnboardingRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public GetV1CompanyFinishOnboardingRequestBuilder xGustoAPIVersion(GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class GetV1CompanyFinishOnboardingRequestBuilder {
         return this;
     }
 
+    public GetV1CompanyFinishOnboardingRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
 
     private GetV1CompanyFinishOnboardingRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompanyFinishOnboardingRequest request = new GetV1CompanyFinishOnboardingRequest(companyUuid,
-            xGustoAPIVersion);
+        GetV1CompanyFinishOnboardingRequest request = new GetV1CompanyFinishOnboardingRequest(xGustoAPIVersion,
+            companyUuid);
 
         return request;
     }

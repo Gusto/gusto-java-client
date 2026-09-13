@@ -18,12 +18,6 @@ import java.util.Optional;
 
 public class PostV1EmployeesEmployeeIdJobsRequest {
     /**
-     * The UUID of the employee
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_id")
-    private String employeeId;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,35 +25,33 @@ public class PostV1EmployeesEmployeeIdJobsRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the employee
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_id")
+    private String employeeId;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private JobsCreateRequestBody jobsCreateRequestBody;
 
     @JsonCreator
     public PostV1EmployeesEmployeeIdJobsRequest(
-            String employeeId,
             Optional<? extends PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeId,
             JobsCreateRequestBody jobsCreateRequestBody) {
-        Utils.checkNotNull(employeeId, "employeeId");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(employeeId, "employeeId");
         Utils.checkNotNull(jobsCreateRequestBody, "jobsCreateRequestBody");
-        this.employeeId = employeeId;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.employeeId = employeeId;
         this.jobsCreateRequestBody = jobsCreateRequestBody;
     }
     
     public PostV1EmployeesEmployeeIdJobsRequest(
             String employeeId,
             JobsCreateRequestBody jobsCreateRequestBody) {
-        this(employeeId, Optional.empty(), jobsCreateRequestBody);
-    }
-
-    /**
-     * The UUID of the employee
-     */
-    @JsonIgnore
-    public String employeeId() {
-        return employeeId;
+        this(Optional.empty(), employeeId, jobsCreateRequestBody);
     }
 
     /**
@@ -73,6 +65,14 @@ public class PostV1EmployeesEmployeeIdJobsRequest {
         return (Optional<PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the employee
+     */
+    @JsonIgnore
+    public String employeeId() {
+        return employeeId;
+    }
+
     @JsonIgnore
     public JobsCreateRequestBody jobsCreateRequestBody() {
         return jobsCreateRequestBody;
@@ -82,15 +82,6 @@ public class PostV1EmployeesEmployeeIdJobsRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the employee
-     */
-    public PostV1EmployeesEmployeeIdJobsRequest withEmployeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -115,6 +106,15 @@ public class PostV1EmployeesEmployeeIdJobsRequest {
         return this;
     }
 
+    /**
+     * The UUID of the employee
+     */
+    public PostV1EmployeesEmployeeIdJobsRequest withEmployeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
+        return this;
+    }
+
     public PostV1EmployeesEmployeeIdJobsRequest withJobsCreateRequestBody(JobsCreateRequestBody jobsCreateRequestBody) {
         Utils.checkNotNull(jobsCreateRequestBody, "jobsCreateRequestBody");
         this.jobsCreateRequestBody = jobsCreateRequestBody;
@@ -131,46 +131,36 @@ public class PostV1EmployeesEmployeeIdJobsRequest {
         }
         PostV1EmployeesEmployeeIdJobsRequest other = (PostV1EmployeesEmployeeIdJobsRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.employeeId, other.employeeId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.employeeId, other.employeeId) &&
             Utils.enhancedDeepEquals(this.jobsCreateRequestBody, other.jobsCreateRequestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            employeeId, xGustoAPIVersion, jobsCreateRequestBody);
+            xGustoAPIVersion, employeeId, jobsCreateRequestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostV1EmployeesEmployeeIdJobsRequest.class,
-                "employeeId", employeeId,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "employeeId", employeeId,
                 "jobsCreateRequestBody", jobsCreateRequestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String employeeId;
-
         private Optional<? extends PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String employeeId;
 
         private JobsCreateRequestBody jobsCreateRequestBody;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the employee
-         */
-        public Builder employeeId(String employeeId) {
-            Utils.checkNotNull(employeeId, "employeeId");
-            this.employeeId = employeeId;
-            return this;
         }
 
 
@@ -197,6 +187,16 @@ public class PostV1EmployeesEmployeeIdJobsRequest {
         }
 
 
+        /**
+         * The UUID of the employee
+         */
+        public Builder employeeId(String employeeId) {
+            Utils.checkNotNull(employeeId, "employeeId");
+            this.employeeId = employeeId;
+            return this;
+        }
+
+
         public Builder jobsCreateRequestBody(JobsCreateRequestBody jobsCreateRequestBody) {
             Utils.checkNotNull(jobsCreateRequestBody, "jobsCreateRequestBody");
             this.jobsCreateRequestBody = jobsCreateRequestBody;
@@ -209,7 +209,7 @@ public class PostV1EmployeesEmployeeIdJobsRequest {
             }
 
             return new PostV1EmployeesEmployeeIdJobsRequest(
-                employeeId, xGustoAPIVersion, jobsCreateRequestBody);
+                xGustoAPIVersion, employeeId, jobsCreateRequestBody);
         }
 
 

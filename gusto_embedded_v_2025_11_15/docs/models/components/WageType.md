@@ -1,13 +1,13 @@
 # WageType
 
-The contractor's wage type, either "Fixed" or "Hourly".
+The wage type for the payment.
 
 ## Example Usage
 
 ```java
 import com.gusto.embedded_api_v_2025_11_15.models.components.WageType;
 
-WageType value = WageType.FIXED;
+WageType value = WageType.HOURLY;
 ```
 
 
@@ -15,5 +15,5 @@ WageType value = WageType.FIXED;
 
 | Name     | Value    |
 | -------- | -------- |
-| `FIXED`  | Fixed    |
 | `HOURLY` | Hourly   |
+| `FIXED`  | Fixed    |

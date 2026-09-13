@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetWireInRequestsWireInRequestUuidRequest {
     /**
-     * The UUID of the Wire In Request
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=wire_in_request_uuid")
-    private String wireInRequestUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class GetWireInRequestsWireInRequestUuidRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the Wire In Request
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=wire_in_request_uuid")
+    private String wireInRequestUuid;
+
     @JsonCreator
     public GetWireInRequestsWireInRequestUuidRequest(
-            String wireInRequestUuid,
-            Optional<? extends GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
+            Optional<? extends GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String wireInRequestUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.wireInRequestUuid = wireInRequestUuid;
+        Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.wireInRequestUuid = wireInRequestUuid;
     }
     
     public GetWireInRequestsWireInRequestUuidRequest(
             String wireInRequestUuid) {
-        this(wireInRequestUuid, Optional.empty());
-    }
-
-    /**
-     * The UUID of the Wire In Request
-     */
-    @JsonIgnore
-    public String wireInRequestUuid() {
-        return wireInRequestUuid;
+        this(Optional.empty(), wireInRequestUuid);
     }
 
     /**
@@ -64,19 +56,18 @@ public class GetWireInRequestsWireInRequestUuidRequest {
         return (Optional<GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the Wire In Request
+     */
+    @JsonIgnore
+    public String wireInRequestUuid() {
+        return wireInRequestUuid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the Wire In Request
-     */
-    public GetWireInRequestsWireInRequestUuidRequest withWireInRequestUuid(String wireInRequestUuid) {
-        Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
-        this.wireInRequestUuid = wireInRequestUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class GetWireInRequestsWireInRequestUuidRequest {
         return this;
     }
 
+    /**
+     * The UUID of the Wire In Request
+     */
+    public GetWireInRequestsWireInRequestUuidRequest withWireInRequestUuid(String wireInRequestUuid) {
+        Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
+        this.wireInRequestUuid = wireInRequestUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class GetWireInRequestsWireInRequestUuidRequest {
         }
         GetWireInRequestsWireInRequestUuidRequest other = (GetWireInRequestsWireInRequestUuidRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.wireInRequestUuid, other.wireInRequestUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.wireInRequestUuid, other.wireInRequestUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            wireInRequestUuid, xGustoAPIVersion);
+            xGustoAPIVersion, wireInRequestUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetWireInRequestsWireInRequestUuidRequest.class,
-                "wireInRequestUuid", wireInRequestUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "wireInRequestUuid", wireInRequestUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String wireInRequestUuid;
-
         private Optional<? extends GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String wireInRequestUuid;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the Wire In Request
-         */
-        public Builder wireInRequestUuid(String wireInRequestUuid) {
-            Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
-            this.wireInRequestUuid = wireInRequestUuid;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class GetWireInRequestsWireInRequestUuidRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the Wire In Request
+         */
+        public Builder wireInRequestUuid(String wireInRequestUuid) {
+            Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
+            this.wireInRequestUuid = wireInRequestUuid;
+            return this;
+        }
+
         public GetWireInRequestsWireInRequestUuidRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetWireInRequestsWireInRequestUuidRequest(
-                wireInRequestUuid, xGustoAPIVersion);
+                xGustoAPIVersion, wireInRequestUuid);
         }
 
 

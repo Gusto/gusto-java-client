@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetDepartmentRequest {
     /**
-     * The UUID of the department
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=department_uuid")
-    private String departmentUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class GetDepartmentRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the department
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=department_uuid")
+    private String departmentUuid;
+
     @JsonCreator
     public GetDepartmentRequest(
-            String departmentUuid,
-            Optional<? extends GetDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
+            Optional<? extends GetDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String departmentUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.departmentUuid = departmentUuid;
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.departmentUuid = departmentUuid;
     }
     
     public GetDepartmentRequest(
             String departmentUuid) {
-        this(departmentUuid, Optional.empty());
-    }
-
-    /**
-     * The UUID of the department
-     */
-    @JsonIgnore
-    public String departmentUuid() {
-        return departmentUuid;
+        this(Optional.empty(), departmentUuid);
     }
 
     /**
@@ -64,19 +56,18 @@ public class GetDepartmentRequest {
         return (Optional<GetDepartmentHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the department
+     */
+    @JsonIgnore
+    public String departmentUuid() {
+        return departmentUuid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the department
-     */
-    public GetDepartmentRequest withDepartmentUuid(String departmentUuid) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
-        this.departmentUuid = departmentUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class GetDepartmentRequest {
         return this;
     }
 
+    /**
+     * The UUID of the department
+     */
+    public GetDepartmentRequest withDepartmentUuid(String departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = departmentUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class GetDepartmentRequest {
         }
         GetDepartmentRequest other = (GetDepartmentRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.departmentUuid, other.departmentUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.departmentUuid, other.departmentUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            departmentUuid, xGustoAPIVersion);
+            xGustoAPIVersion, departmentUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetDepartmentRequest.class,
-                "departmentUuid", departmentUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "departmentUuid", departmentUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String departmentUuid;
-
         private Optional<? extends GetDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String departmentUuid;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the department
-         */
-        public Builder departmentUuid(String departmentUuid) {
-            Utils.checkNotNull(departmentUuid, "departmentUuid");
-            this.departmentUuid = departmentUuid;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class GetDepartmentRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the department
+         */
+        public Builder departmentUuid(String departmentUuid) {
+            Utils.checkNotNull(departmentUuid, "departmentUuid");
+            this.departmentUuid = departmentUuid;
+            return this;
+        }
+
         public GetDepartmentRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetDepartmentRequest(
-                departmentUuid, xGustoAPIVersion);
+                xGustoAPIVersion, departmentUuid);
         }
 
 

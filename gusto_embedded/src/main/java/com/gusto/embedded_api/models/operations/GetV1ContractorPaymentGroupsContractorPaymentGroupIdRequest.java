@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest {
     /**
-     * The UUID of the contractor payment group
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=contractor_payment_group_uuid")
-    private String contractorPaymentGroupUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the contractor payment group
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=contractor_payment_group_uuid")
+    private String contractorPaymentGroupUuid;
+
     @JsonCreator
     public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest(
-            String contractorPaymentGroupUuid,
-            Optional<? extends GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
+            Optional<? extends GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String contractorPaymentGroupUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
+        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
     }
     
     public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest(
             String contractorPaymentGroupUuid) {
-        this(contractorPaymentGroupUuid, Optional.empty());
-    }
-
-    /**
-     * The UUID of the contractor payment group
-     */
-    @JsonIgnore
-    public String contractorPaymentGroupUuid() {
-        return contractorPaymentGroupUuid;
+        this(Optional.empty(), contractorPaymentGroupUuid);
     }
 
     /**
@@ -64,19 +56,18 @@ public class GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest {
         return (Optional<GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the contractor payment group
+     */
+    @JsonIgnore
+    public String contractorPaymentGroupUuid() {
+        return contractorPaymentGroupUuid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the contractor payment group
-     */
-    public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest withContractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
-        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
-        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest {
         return this;
     }
 
+    /**
+     * The UUID of the contractor payment group
+     */
+    public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest withContractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
+        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
+        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest {
         }
         GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest other = (GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.contractorPaymentGroupUuid, other.contractorPaymentGroupUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.contractorPaymentGroupUuid, other.contractorPaymentGroupUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            contractorPaymentGroupUuid, xGustoAPIVersion);
+            xGustoAPIVersion, contractorPaymentGroupUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest.class,
-                "contractorPaymentGroupUuid", contractorPaymentGroupUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "contractorPaymentGroupUuid", contractorPaymentGroupUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String contractorPaymentGroupUuid;
-
         private Optional<? extends GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String contractorPaymentGroupUuid;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the contractor payment group
-         */
-        public Builder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
-            Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
-            this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the contractor payment group
+         */
+        public Builder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
+            Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
+            this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
+            return this;
+        }
+
         public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest(
-                contractorPaymentGroupUuid, xGustoAPIVersion);
+                xGustoAPIVersion, contractorPaymentGroupUuid);
         }
 
 

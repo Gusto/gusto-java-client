@@ -94,7 +94,7 @@ public class ContractorPaymentGroupPreview {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("totals")
-    private Optional<? extends ContractorPaymentGroupPreviewTotals> totals;
+    private Optional<? extends Totals> totals;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -112,7 +112,7 @@ public class ContractorPaymentGroupPreview {
             @JsonProperty("partner_owned_disbursement") JsonNullable<Boolean> partnerOwnedDisbursement,
             @JsonProperty("submission_blockers") Optional<? extends List<PayrollSubmissionBlockerType>> submissionBlockers,
             @JsonProperty("credit_blockers") Optional<? extends List<PayrollCreditBlockerType>> creditBlockers,
-            @JsonProperty("totals") Optional<? extends ContractorPaymentGroupPreviewTotals> totals,
+            @JsonProperty("totals") Optional<? extends Totals> totals,
             @JsonProperty("contractor_payments") Optional<? extends List<ContractorPaymentForGroupPreview>> contractorPayments) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(companyUuid, "companyUuid");
@@ -227,8 +227,8 @@ public class ContractorPaymentGroupPreview {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<ContractorPaymentGroupPreviewTotals> totals() {
-        return (Optional<ContractorPaymentGroupPreviewTotals>) totals;
+    public Optional<Totals> totals() {
+        return (Optional<Totals>) totals;
     }
 
     @SuppressWarnings("unchecked")
@@ -420,14 +420,14 @@ public class ContractorPaymentGroupPreview {
         return this;
     }
 
-    public ContractorPaymentGroupPreview withTotals(ContractorPaymentGroupPreviewTotals totals) {
+    public ContractorPaymentGroupPreview withTotals(Totals totals) {
         Utils.checkNotNull(totals, "totals");
         this.totals = Optional.ofNullable(totals);
         return this;
     }
 
 
-    public ContractorPaymentGroupPreview withTotals(Optional<? extends ContractorPaymentGroupPreviewTotals> totals) {
+    public ContractorPaymentGroupPreview withTotals(Optional<? extends Totals> totals) {
         Utils.checkNotNull(totals, "totals");
         this.totals = totals;
         return this;
@@ -515,7 +515,7 @@ public class ContractorPaymentGroupPreview {
 
         private Optional<? extends List<PayrollCreditBlockerType>> creditBlockers = Optional.empty();
 
-        private Optional<? extends ContractorPaymentGroupPreviewTotals> totals = Optional.empty();
+        private Optional<? extends Totals> totals = Optional.empty();
 
         private Optional<? extends List<ContractorPaymentForGroupPreview>> contractorPayments = Optional.empty();
 
@@ -705,13 +705,13 @@ public class ContractorPaymentGroupPreview {
         }
 
 
-        public Builder totals(ContractorPaymentGroupPreviewTotals totals) {
+        public Builder totals(Totals totals) {
             Utils.checkNotNull(totals, "totals");
             this.totals = Optional.ofNullable(totals);
             return this;
         }
 
-        public Builder totals(Optional<? extends ContractorPaymentGroupPreviewTotals> totals) {
+        public Builder totals(Optional<? extends Totals> totals) {
             Utils.checkNotNull(totals, "totals");
             this.totals = totals;
             return this;

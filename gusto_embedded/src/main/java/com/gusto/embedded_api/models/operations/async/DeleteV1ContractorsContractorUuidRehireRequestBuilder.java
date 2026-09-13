@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class DeleteV1ContractorsContractorUuidRehireRequestBuilder {
 
-    private String contractorUuid;
     private Optional<? extends DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion>>() {});
+    private String contractorUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1ContractorsContractorUuidRehireRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public DeleteV1ContractorsContractorUuidRehireRequestBuilder contractorUuid(String contractorUuid) {
-        Utils.checkNotNull(contractorUuid, "contractorUuid");
-        this.contractorUuid = contractorUuid;
-        return this;
     }
                 
     public DeleteV1ContractorsContractorUuidRehireRequestBuilder xGustoAPIVersion(DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class DeleteV1ContractorsContractorUuidRehireRequestBuilder {
         return this;
     }
 
+    public DeleteV1ContractorsContractorUuidRehireRequestBuilder contractorUuid(String contractorUuid) {
+        Utils.checkNotNull(contractorUuid, "contractorUuid");
+        this.contractorUuid = contractorUuid;
+        return this;
+    }
+
 
     private DeleteV1ContractorsContractorUuidRehireRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1ContractorsContractorUuidRehireRequest request = new DeleteV1ContractorsContractorUuidRehireRequest(contractorUuid,
-            xGustoAPIVersion);
+        DeleteV1ContractorsContractorUuidRehireRequest request = new DeleteV1ContractorsContractorUuidRehireRequest(xGustoAPIVersion,
+            contractorUuid);
 
         return request;
     }

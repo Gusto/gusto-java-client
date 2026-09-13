@@ -54,14 +54,14 @@ public class EmployeePaymentDetailsList {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("split_by")
-    private JsonNullable<? extends SplitBy> splitBy;
+    private JsonNullable<? extends EmployeePaymentDetailsListSplitBy> splitBy;
 
     /**
      * An array of payment splits. This field is applicable when `payment_method` is "Direct Deposit".
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("splits")
-    private JsonNullable<? extends List<Splits>> splits;
+    private JsonNullable<? extends List<EmployeePaymentDetailsListSplits>> splits;
 
     @JsonCreator
     public EmployeePaymentDetailsList(
@@ -69,8 +69,8 @@ public class EmployeePaymentDetailsList {
             @JsonProperty("first_name") Optional<String> firstName,
             @JsonProperty("last_name") Optional<String> lastName,
             @JsonProperty("payment_method") Optional<? extends EmployeePaymentDetailsListPaymentMethod> paymentMethod,
-            @JsonProperty("split_by") JsonNullable<? extends SplitBy> splitBy,
-            @JsonProperty("splits") JsonNullable<? extends List<Splits>> splits) {
+            @JsonProperty("split_by") JsonNullable<? extends EmployeePaymentDetailsListSplitBy> splitBy,
+            @JsonProperty("splits") JsonNullable<? extends List<EmployeePaymentDetailsListSplits>> splits) {
         Utils.checkNotNull(employeeUuid, "employeeUuid");
         Utils.checkNotNull(firstName, "firstName");
         Utils.checkNotNull(lastName, "lastName");
@@ -131,8 +131,8 @@ public class EmployeePaymentDetailsList {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<SplitBy> splitBy() {
-        return (JsonNullable<SplitBy>) splitBy;
+    public JsonNullable<EmployeePaymentDetailsListSplitBy> splitBy() {
+        return (JsonNullable<EmployeePaymentDetailsListSplitBy>) splitBy;
     }
 
     /**
@@ -140,8 +140,8 @@ public class EmployeePaymentDetailsList {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<List<Splits>> splits() {
-        return (JsonNullable<List<Splits>>) splits;
+    public JsonNullable<List<EmployeePaymentDetailsListSplits>> splits() {
+        return (JsonNullable<List<EmployeePaymentDetailsListSplits>>) splits;
     }
 
     public static Builder builder() {
@@ -231,7 +231,7 @@ public class EmployeePaymentDetailsList {
      * 
      * <p>If `split_by` is Amount, the last split amount must be `null` to capture the remainder.
      */
-    public EmployeePaymentDetailsList withSplitBy(SplitBy splitBy) {
+    public EmployeePaymentDetailsList withSplitBy(EmployeePaymentDetailsListSplitBy splitBy) {
         Utils.checkNotNull(splitBy, "splitBy");
         this.splitBy = JsonNullable.of(splitBy);
         return this;
@@ -243,7 +243,7 @@ public class EmployeePaymentDetailsList {
      * 
      * <p>If `split_by` is Amount, the last split amount must be `null` to capture the remainder.
      */
-    public EmployeePaymentDetailsList withSplitBy(JsonNullable<? extends SplitBy> splitBy) {
+    public EmployeePaymentDetailsList withSplitBy(JsonNullable<? extends EmployeePaymentDetailsListSplitBy> splitBy) {
         Utils.checkNotNull(splitBy, "splitBy");
         this.splitBy = splitBy;
         return this;
@@ -252,7 +252,7 @@ public class EmployeePaymentDetailsList {
     /**
      * An array of payment splits. This field is applicable when `payment_method` is "Direct Deposit".
      */
-    public EmployeePaymentDetailsList withSplits(List<Splits> splits) {
+    public EmployeePaymentDetailsList withSplits(List<EmployeePaymentDetailsListSplits> splits) {
         Utils.checkNotNull(splits, "splits");
         this.splits = JsonNullable.of(splits);
         return this;
@@ -261,7 +261,7 @@ public class EmployeePaymentDetailsList {
     /**
      * An array of payment splits. This field is applicable when `payment_method` is "Direct Deposit".
      */
-    public EmployeePaymentDetailsList withSplits(JsonNullable<? extends List<Splits>> splits) {
+    public EmployeePaymentDetailsList withSplits(JsonNullable<? extends List<EmployeePaymentDetailsListSplits>> splits) {
         Utils.checkNotNull(splits, "splits");
         this.splits = splits;
         return this;
@@ -314,9 +314,9 @@ public class EmployeePaymentDetailsList {
 
         private Optional<? extends EmployeePaymentDetailsListPaymentMethod> paymentMethod = Optional.empty();
 
-        private JsonNullable<? extends SplitBy> splitBy = JsonNullable.undefined();
+        private JsonNullable<? extends EmployeePaymentDetailsListSplitBy> splitBy = JsonNullable.undefined();
 
-        private JsonNullable<? extends List<Splits>> splits = JsonNullable.undefined();
+        private JsonNullable<? extends List<EmployeePaymentDetailsListSplits>> splits = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -405,7 +405,7 @@ public class EmployeePaymentDetailsList {
          * 
          * <p>If `split_by` is Amount, the last split amount must be `null` to capture the remainder.
          */
-        public Builder splitBy(SplitBy splitBy) {
+        public Builder splitBy(EmployeePaymentDetailsListSplitBy splitBy) {
             Utils.checkNotNull(splitBy, "splitBy");
             this.splitBy = JsonNullable.of(splitBy);
             return this;
@@ -417,7 +417,7 @@ public class EmployeePaymentDetailsList {
          * 
          * <p>If `split_by` is Amount, the last split amount must be `null` to capture the remainder.
          */
-        public Builder splitBy(JsonNullable<? extends SplitBy> splitBy) {
+        public Builder splitBy(JsonNullable<? extends EmployeePaymentDetailsListSplitBy> splitBy) {
             Utils.checkNotNull(splitBy, "splitBy");
             this.splitBy = splitBy;
             return this;
@@ -427,7 +427,7 @@ public class EmployeePaymentDetailsList {
         /**
          * An array of payment splits. This field is applicable when `payment_method` is "Direct Deposit".
          */
-        public Builder splits(List<Splits> splits) {
+        public Builder splits(List<EmployeePaymentDetailsListSplits> splits) {
             Utils.checkNotNull(splits, "splits");
             this.splits = JsonNullable.of(splits);
             return this;
@@ -436,7 +436,7 @@ public class EmployeePaymentDetailsList {
         /**
          * An array of payment splits. This field is applicable when `payment_method` is "Direct Deposit".
          */
-        public Builder splits(JsonNullable<? extends List<Splits>> splits) {
+        public Builder splits(JsonNullable<? extends List<EmployeePaymentDetailsListSplits>> splits) {
             Utils.checkNotNull(splits, "splits");
             this.splits = splits;
             return this;

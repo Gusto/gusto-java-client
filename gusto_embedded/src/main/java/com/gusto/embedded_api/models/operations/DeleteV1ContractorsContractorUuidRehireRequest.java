@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class DeleteV1ContractorsContractorUuidRehireRequest {
     /**
-     * The UUID of the contractor
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=contractor_uuid")
-    private String contractorUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class DeleteV1ContractorsContractorUuidRehireRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the contractor
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=contractor_uuid")
+    private String contractorUuid;
+
     @JsonCreator
     public DeleteV1ContractorsContractorUuidRehireRequest(
-            String contractorUuid,
-            Optional<? extends DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(contractorUuid, "contractorUuid");
+            Optional<? extends DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String contractorUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.contractorUuid = contractorUuid;
+        Utils.checkNotNull(contractorUuid, "contractorUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.contractorUuid = contractorUuid;
     }
     
     public DeleteV1ContractorsContractorUuidRehireRequest(
             String contractorUuid) {
-        this(contractorUuid, Optional.empty());
-    }
-
-    /**
-     * The UUID of the contractor
-     */
-    @JsonIgnore
-    public String contractorUuid() {
-        return contractorUuid;
+        this(Optional.empty(), contractorUuid);
     }
 
     /**
@@ -64,19 +56,18 @@ public class DeleteV1ContractorsContractorUuidRehireRequest {
         return (Optional<DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the contractor
+     */
+    @JsonIgnore
+    public String contractorUuid() {
+        return contractorUuid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the contractor
-     */
-    public DeleteV1ContractorsContractorUuidRehireRequest withContractorUuid(String contractorUuid) {
-        Utils.checkNotNull(contractorUuid, "contractorUuid");
-        this.contractorUuid = contractorUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class DeleteV1ContractorsContractorUuidRehireRequest {
         return this;
     }
 
+    /**
+     * The UUID of the contractor
+     */
+    public DeleteV1ContractorsContractorUuidRehireRequest withContractorUuid(String contractorUuid) {
+        Utils.checkNotNull(contractorUuid, "contractorUuid");
+        this.contractorUuid = contractorUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class DeleteV1ContractorsContractorUuidRehireRequest {
         }
         DeleteV1ContractorsContractorUuidRehireRequest other = (DeleteV1ContractorsContractorUuidRehireRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.contractorUuid, other.contractorUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.contractorUuid, other.contractorUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            contractorUuid, xGustoAPIVersion);
+            xGustoAPIVersion, contractorUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(DeleteV1ContractorsContractorUuidRehireRequest.class,
-                "contractorUuid", contractorUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "contractorUuid", contractorUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String contractorUuid;
-
         private Optional<? extends DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String contractorUuid;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the contractor
-         */
-        public Builder contractorUuid(String contractorUuid) {
-            Utils.checkNotNull(contractorUuid, "contractorUuid");
-            this.contractorUuid = contractorUuid;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class DeleteV1ContractorsContractorUuidRehireRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the contractor
+         */
+        public Builder contractorUuid(String contractorUuid) {
+            Utils.checkNotNull(contractorUuid, "contractorUuid");
+            this.contractorUuid = contractorUuid;
+            return this;
+        }
+
         public DeleteV1ContractorsContractorUuidRehireRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new DeleteV1ContractorsContractorUuidRehireRequest(
-                contractorUuid, xGustoAPIVersion);
+                xGustoAPIVersion, contractorUuid);
         }
 
 

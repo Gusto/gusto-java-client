@@ -291,7 +291,7 @@ public class Application {
                 .employeeId("<id>")
                 .requestBody(PutV1EmployeesEmployeeIdPaymentMethodRequestBody.builder()
                     .version("63859768485e218ccf8a449bb60f14ed")
-                    .type(Type.CHECK)
+                    .type(PutV1EmployeesEmployeeIdPaymentMethodType.CHECK)
                     .build())
                 .call();
 

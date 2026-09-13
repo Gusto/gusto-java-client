@@ -47,8 +47,8 @@ public class Application {
                 .xGustoAPIVersion(GetV1BenefitsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
                 .call();
 
-        if (res.supportedBenefits().isPresent()) {
-            System.out.println(res.supportedBenefits().get());
+        if (res.supportedBenefitList().isPresent()) {
+            System.out.println(res.supportedBenefitList().get());
         }
     }
 }

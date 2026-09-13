@@ -82,14 +82,14 @@ public class PeopleBatchResults {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("results")
-    private Optional<? extends List<Results>> results;
+    private Optional<? extends List<PeopleBatchResultsResults>> results;
 
     /**
      * Items excluded from processing due to validation errors.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("exclusions")
-    private JsonNullable<? extends List<Exclusions>> exclusions;
+    private JsonNullable<? extends List<PeopleBatchResultsExclusions>> exclusions;
 
     @JsonCreator
     public PeopleBatchResults(
@@ -101,8 +101,8 @@ public class PeopleBatchResults {
             @JsonProperty("submitted_items") JsonNullable<Long> submittedItems,
             @JsonProperty("processed_items") Optional<Long> processedItems,
             @JsonProperty("excluded_items") Optional<Long> excludedItems,
-            @JsonProperty("results") Optional<? extends List<Results>> results,
-            @JsonProperty("exclusions") JsonNullable<? extends List<Exclusions>> exclusions) {
+            @JsonProperty("results") Optional<? extends List<PeopleBatchResultsResults>> results,
+            @JsonProperty("exclusions") JsonNullable<? extends List<PeopleBatchResultsExclusions>> exclusions) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(idempotencyKey, "idempotencyKey");
         Utils.checkNotNull(status, "status");
@@ -204,8 +204,8 @@ public class PeopleBatchResults {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Results>> results() {
-        return (Optional<List<Results>>) results;
+    public Optional<List<PeopleBatchResultsResults>> results() {
+        return (Optional<List<PeopleBatchResultsResults>>) results;
     }
 
     /**
@@ -213,8 +213,8 @@ public class PeopleBatchResults {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<List<Exclusions>> exclusions() {
-        return (JsonNullable<List<Exclusions>>) exclusions;
+    public JsonNullable<List<PeopleBatchResultsExclusions>> exclusions() {
+        return (JsonNullable<List<PeopleBatchResultsExclusions>>) exclusions;
     }
 
     public static Builder builder() {
@@ -345,7 +345,7 @@ public class PeopleBatchResults {
     /**
      * The results for each batch item.
      */
-    public PeopleBatchResults withResults(List<Results> results) {
+    public PeopleBatchResults withResults(List<PeopleBatchResultsResults> results) {
         Utils.checkNotNull(results, "results");
         this.results = Optional.ofNullable(results);
         return this;
@@ -355,7 +355,7 @@ public class PeopleBatchResults {
     /**
      * The results for each batch item.
      */
-    public PeopleBatchResults withResults(Optional<? extends List<Results>> results) {
+    public PeopleBatchResults withResults(Optional<? extends List<PeopleBatchResultsResults>> results) {
         Utils.checkNotNull(results, "results");
         this.results = results;
         return this;
@@ -364,7 +364,7 @@ public class PeopleBatchResults {
     /**
      * Items excluded from processing due to validation errors.
      */
-    public PeopleBatchResults withExclusions(List<Exclusions> exclusions) {
+    public PeopleBatchResults withExclusions(List<PeopleBatchResultsExclusions> exclusions) {
         Utils.checkNotNull(exclusions, "exclusions");
         this.exclusions = JsonNullable.of(exclusions);
         return this;
@@ -373,7 +373,7 @@ public class PeopleBatchResults {
     /**
      * Items excluded from processing due to validation errors.
      */
-    public PeopleBatchResults withExclusions(JsonNullable<? extends List<Exclusions>> exclusions) {
+    public PeopleBatchResults withExclusions(JsonNullable<? extends List<PeopleBatchResultsExclusions>> exclusions) {
         Utils.checkNotNull(exclusions, "exclusions");
         this.exclusions = exclusions;
         return this;
@@ -444,9 +444,9 @@ public class PeopleBatchResults {
 
         private Optional<Long> excludedItems = Optional.empty();
 
-        private Optional<? extends List<Results>> results = Optional.empty();
+        private Optional<? extends List<PeopleBatchResultsResults>> results = Optional.empty();
 
-        private JsonNullable<? extends List<Exclusions>> exclusions = JsonNullable.undefined();
+        private JsonNullable<? extends List<PeopleBatchResultsExclusions>> exclusions = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -581,7 +581,7 @@ public class PeopleBatchResults {
         /**
          * The results for each batch item.
          */
-        public Builder results(List<Results> results) {
+        public Builder results(List<PeopleBatchResultsResults> results) {
             Utils.checkNotNull(results, "results");
             this.results = Optional.ofNullable(results);
             return this;
@@ -590,7 +590,7 @@ public class PeopleBatchResults {
         /**
          * The results for each batch item.
          */
-        public Builder results(Optional<? extends List<Results>> results) {
+        public Builder results(Optional<? extends List<PeopleBatchResultsResults>> results) {
             Utils.checkNotNull(results, "results");
             this.results = results;
             return this;
@@ -600,7 +600,7 @@ public class PeopleBatchResults {
         /**
          * Items excluded from processing due to validation errors.
          */
-        public Builder exclusions(List<Exclusions> exclusions) {
+        public Builder exclusions(List<PeopleBatchResultsExclusions> exclusions) {
             Utils.checkNotNull(exclusions, "exclusions");
             this.exclusions = JsonNullable.of(exclusions);
             return this;
@@ -609,7 +609,7 @@ public class PeopleBatchResults {
         /**
          * Items excluded from processing due to validation errors.
          */
-        public Builder exclusions(JsonNullable<? extends List<Exclusions>> exclusions) {
+        public Builder exclusions(JsonNullable<? extends List<PeopleBatchResultsExclusions>> exclusions) {
             Utils.checkNotNull(exclusions, "exclusions");
             this.exclusions = exclusions;
             return this;

@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetV1PayrollDigestsPayrollDigestUuidRequest {
     /**
-     * The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=payroll_digest_uuid")
-    private String payrollDigestUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class GetV1PayrollDigestsPayrollDigestUuidRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=payroll_digest_uuid")
+    private String payrollDigestUuid;
+
     @JsonCreator
     public GetV1PayrollDigestsPayrollDigestUuidRequest(
-            String payrollDigestUuid,
-            Optional<? extends GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(payrollDigestUuid, "payrollDigestUuid");
+            Optional<? extends GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String payrollDigestUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.payrollDigestUuid = payrollDigestUuid;
+        Utils.checkNotNull(payrollDigestUuid, "payrollDigestUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.payrollDigestUuid = payrollDigestUuid;
     }
     
     public GetV1PayrollDigestsPayrollDigestUuidRequest(
             String payrollDigestUuid) {
-        this(payrollDigestUuid, Optional.empty());
-    }
-
-    /**
-     * The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
-     */
-    @JsonIgnore
-    public String payrollDigestUuid() {
-        return payrollDigestUuid;
+        this(Optional.empty(), payrollDigestUuid);
     }
 
     /**
@@ -64,19 +56,18 @@ public class GetV1PayrollDigestsPayrollDigestUuidRequest {
         return (Optional<GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
+     */
+    @JsonIgnore
+    public String payrollDigestUuid() {
+        return payrollDigestUuid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
-     */
-    public GetV1PayrollDigestsPayrollDigestUuidRequest withPayrollDigestUuid(String payrollDigestUuid) {
-        Utils.checkNotNull(payrollDigestUuid, "payrollDigestUuid");
-        this.payrollDigestUuid = payrollDigestUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class GetV1PayrollDigestsPayrollDigestUuidRequest {
         return this;
     }
 
+    /**
+     * The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
+     */
+    public GetV1PayrollDigestsPayrollDigestUuidRequest withPayrollDigestUuid(String payrollDigestUuid) {
+        Utils.checkNotNull(payrollDigestUuid, "payrollDigestUuid");
+        this.payrollDigestUuid = payrollDigestUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class GetV1PayrollDigestsPayrollDigestUuidRequest {
         }
         GetV1PayrollDigestsPayrollDigestUuidRequest other = (GetV1PayrollDigestsPayrollDigestUuidRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.payrollDigestUuid, other.payrollDigestUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.payrollDigestUuid, other.payrollDigestUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            payrollDigestUuid, xGustoAPIVersion);
+            xGustoAPIVersion, payrollDigestUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1PayrollDigestsPayrollDigestUuidRequest.class,
-                "payrollDigestUuid", payrollDigestUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "payrollDigestUuid", payrollDigestUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String payrollDigestUuid;
-
         private Optional<? extends GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String payrollDigestUuid;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
-         */
-        public Builder payrollDigestUuid(String payrollDigestUuid) {
-            Utils.checkNotNull(payrollDigestUuid, "payrollDigestUuid");
-            this.payrollDigestUuid = payrollDigestUuid;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class GetV1PayrollDigestsPayrollDigestUuidRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
+         */
+        public Builder payrollDigestUuid(String payrollDigestUuid) {
+            Utils.checkNotNull(payrollDigestUuid, "payrollDigestUuid");
+            this.payrollDigestUuid = payrollDigestUuid;
+            return this;
+        }
+
         public GetV1PayrollDigestsPayrollDigestUuidRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1PayrollDigestsPayrollDigestUuidRequest(
-                payrollDigestUuid, xGustoAPIVersion);
+                xGustoAPIVersion, payrollDigestUuid);
         }
 
 

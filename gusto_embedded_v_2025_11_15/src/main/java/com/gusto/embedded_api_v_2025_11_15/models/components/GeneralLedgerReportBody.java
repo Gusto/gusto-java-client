@@ -25,7 +25,7 @@ public class GeneralLedgerReportBody {
      * The breakdown of the report. Use 'default' for no split.
      */
     @JsonProperty("aggregation")
-    private Aggregation aggregation;
+    private GeneralLedgerReportBodyAggregation aggregation;
 
     /**
      * The kind of integration set up for the company. Required when `aggregation` is 'integration'. Must
@@ -37,7 +37,7 @@ public class GeneralLedgerReportBody {
 
     @JsonCreator
     public GeneralLedgerReportBody(
-            @JsonProperty("aggregation") Aggregation aggregation,
+            @JsonProperty("aggregation") GeneralLedgerReportBodyAggregation aggregation,
             @JsonProperty("integration_type") JsonNullable<? extends IntegrationType> integrationType) {
         Utils.checkNotNull(aggregation, "aggregation");
         Utils.checkNotNull(integrationType, "integrationType");
@@ -46,7 +46,7 @@ public class GeneralLedgerReportBody {
     }
     
     public GeneralLedgerReportBody(
-            Aggregation aggregation) {
+            GeneralLedgerReportBodyAggregation aggregation) {
         this(aggregation, JsonNullable.undefined());
     }
 
@@ -54,7 +54,7 @@ public class GeneralLedgerReportBody {
      * The breakdown of the report. Use 'default' for no split.
      */
     @JsonIgnore
-    public Aggregation aggregation() {
+    public GeneralLedgerReportBodyAggregation aggregation() {
         return aggregation;
     }
 
@@ -76,7 +76,7 @@ public class GeneralLedgerReportBody {
     /**
      * The breakdown of the report. Use 'default' for no split.
      */
-    public GeneralLedgerReportBody withAggregation(Aggregation aggregation) {
+    public GeneralLedgerReportBody withAggregation(GeneralLedgerReportBodyAggregation aggregation) {
         Utils.checkNotNull(aggregation, "aggregation");
         this.aggregation = aggregation;
         return this;
@@ -132,7 +132,7 @@ public class GeneralLedgerReportBody {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Aggregation aggregation;
+        private GeneralLedgerReportBodyAggregation aggregation;
 
         private JsonNullable<? extends IntegrationType> integrationType = JsonNullable.undefined();
 
@@ -144,7 +144,7 @@ public class GeneralLedgerReportBody {
         /**
          * The breakdown of the report. Use 'default' for no split.
          */
-        public Builder aggregation(Aggregation aggregation) {
+        public Builder aggregation(GeneralLedgerReportBodyAggregation aggregation) {
             Utils.checkNotNull(aggregation, "aggregation");
             this.aggregation = aggregation;
             return this;

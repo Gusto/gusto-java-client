@@ -10,7 +10,6 @@ import com.gusto.embedded_api.models.components.PartnerManagedCompanyAcceptTerms
 import com.gusto.embedded_api.models.components.PartnerManagedCompanyCreateRequest;
 import com.gusto.embedded_api.models.components.PartnerManagedCompanyMigrateRequest;
 import com.gusto.embedded_api.models.components.PartnerManagedCompanyRetrieveTermsOfServiceRequest;
-import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdAdminsRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdAdminsRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdAdminsResponse;
@@ -34,6 +33,7 @@ import com.gusto.embedded_api.models.operations.GetV1PartnerManagedCompaniesComp
 import com.gusto.embedded_api.models.operations.GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest;
 import com.gusto.embedded_api.models.operations.GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse;
+import com.gusto.embedded_api.models.operations.HeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest;
 import com.gusto.embedded_api.models.operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder;
@@ -56,6 +56,11 @@ import com.gusto.embedded_api.models.operations.PutV1CompaniesRequest;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesRequestBody;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesRequestBuilder;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesResponse;
+import com.gusto.embedded_api.models.operations.PutV1PartnerManagedCompaniesCompanyUuidDisassociateHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PutV1PartnerManagedCompaniesCompanyUuidDisassociateRequest;
+import com.gusto.embedded_api.models.operations.PutV1PartnerManagedCompaniesCompanyUuidDisassociateRequestBuilder;
+import com.gusto.embedded_api.models.operations.PutV1PartnerManagedCompaniesCompanyUuidDisassociateResponse;
+import com.gusto.embedded_api.models.operations.PutV1PartnerManagedCompaniesCompanyUuidDisassociateSecurity;
 import com.gusto.embedded_api.models.operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest;
 import com.gusto.embedded_api.models.operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder;
@@ -71,6 +76,7 @@ import com.gusto.embedded_api.operations.PostPartnerManagedCompaniesCompanyUuidR
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyIdAdmins;
 import com.gusto.embedded_api.operations.PostV1PartnerManagedCompanies;
 import com.gusto.embedded_api.operations.PutV1Companies;
+import com.gusto.embedded_api.operations.PutV1PartnerManagedCompaniesCompanyUuidDisassociate;
 import com.gusto.embedded_api.operations.PutV1PartnerManagedCompaniesCompanyUuidMigrate;
 import com.gusto.embedded_api.utils.Headers;
 import java.lang.Long;
@@ -101,6 +107,679 @@ public class Companies {
      */
     public AsyncCompanies async() {
         return asyncSDK;
+    }
+
+    /**
+     * Get all the admins at a company
+     * 
+     * <p>Returns a list of all the admins at a company
+     * 
+     * <p>scope: `company_admin:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1CompaniesCompanyIdAdminsRequestBuilder listAdmins() {
+        return new GetV1CompaniesCompanyIdAdminsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get all the admins at a company
+     * 
+     * <p>Returns a list of all the admins at a company
+     * 
+     * <p>scope: `company_admin:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyIdAdminsResponse listAdmins(String companyId) {
+        return listAdmins(Optional.empty(), companyId, Optional.empty(),
+            Optional.empty());
+    }
+
+    /**
+     * Get all the admins at a company
+     * 
+     * <p>Returns a list of all the admins at a company
+     * 
+     * <p>scope: `company_admin:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyIdAdminsResponse listAdmins(
+            Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<Long> page, Optional<Long> per) {
+        GetV1CompaniesCompanyIdAdminsRequest request =
+            GetV1CompaniesCompanyIdAdminsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .page(page)
+                .per(per)
+                .build();
+        RequestOperation<GetV1CompaniesCompanyIdAdminsRequest, GetV1CompaniesCompanyIdAdminsResponse> operation
+              = new GetV1CompaniesCompanyIdAdmins.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Create an admin for the company
+     * 
+     * <p>Creates a new admin for a company.
+     * If the email matches an existing user, this will create an admin account for the current user.
+     * Otherwise, this will create a new user.
+     * 
+     * <p>scope: `company_admin:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public PostV1CompaniesCompanyIdAdminsRequestBuilder createAdmin() {
+        return new PostV1CompaniesCompanyIdAdminsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create an admin for the company
+     * 
+     * <p>Creates a new admin for a company.
+     * If the email matches an existing user, this will create an admin account for the current user.
+     * Otherwise, this will create a new user.
+     * 
+     * <p>scope: `company_admin:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @param adminCreateRequest The request body for creating a company admin.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1CompaniesCompanyIdAdminsResponse createAdmin(String companyId, AdminCreateRequest adminCreateRequest) {
+        return createAdmin(Optional.empty(), companyId, adminCreateRequest);
+    }
+
+    /**
+     * Create an admin for the company
+     * 
+     * <p>Creates a new admin for a company.
+     * If the email matches an existing user, this will create an admin account for the current user.
+     * Otherwise, this will create a new user.
+     * 
+     * <p>scope: `company_admin:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param adminCreateRequest The request body for creating a company admin.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1CompaniesCompanyIdAdminsResponse createAdmin(
+            Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            AdminCreateRequest adminCreateRequest) {
+        PostV1CompaniesCompanyIdAdminsRequest request =
+            PostV1CompaniesCompanyIdAdminsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .adminCreateRequest(adminCreateRequest)
+                .build();
+        RequestOperation<PostV1CompaniesCompanyIdAdminsRequest, PostV1CompaniesCompanyIdAdminsResponse> operation
+              = new PostV1CompaniesCompanyIdAdmins.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a company
+     * 
+     * <p>Get a company.
+     * 
+     * <p>The employees:read scope is required to return home_address and non-work locations.
+     * The company_admin:read scope is required to return primary_payroll_admin.
+     * The signatories:read scope is required to return primary_signatory.
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1CompaniesRequestBuilder get() {
+        return new GetV1CompaniesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a company
+     * 
+     * <p>Get a company.
+     * 
+     * <p>The employees:read scope is required to return home_address and non-work locations.
+     * The company_admin:read scope is required to return primary_payroll_admin.
+     * The signatories:read scope is required to return primary_signatory.
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesResponse get(String companyId) {
+        return get(Optional.empty(), companyId);
+    }
+
+    /**
+     * Get a company
+     * 
+     * <p>Get a company.
+     * 
+     * <p>The employees:read scope is required to return home_address and non-work locations.
+     * The company_admin:read scope is required to return primary_payroll_admin.
+     * The signatories:read scope is required to return primary_signatory.
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesResponse get(Optional<? extends GetV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
+        GetV1CompaniesRequest request =
+            GetV1CompaniesRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .build();
+        RequestOperation<GetV1CompaniesRequest, GetV1CompaniesResponse> operation
+              = new GetV1Companies.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Update a company
+     * 
+     * <p>Update a company.
+     * 
+     * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public PutV1CompaniesRequestBuilder update() {
+        return new PutV1CompaniesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Update a company
+     * 
+     * <p>Update a company.
+     * 
+     * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1CompaniesResponse update(String companyId, PutV1CompaniesRequestBody requestBody) {
+        return update(Optional.empty(), companyId, requestBody);
+    }
+
+    /**
+     * Update a company
+     * 
+     * <p>Update a company.
+     * 
+     * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1CompaniesResponse update(
+            Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            PutV1CompaniesRequestBody requestBody) {
+        PutV1CompaniesRequest request =
+            PutV1CompaniesRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .requestBody(requestBody)
+                .build();
+        RequestOperation<PutV1CompaniesRequest, PutV1CompaniesResponse> operation
+              = new PutV1Companies.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get the custom fields of a company
+     * 
+     * <p>Returns a list of the custom fields of the company. Useful when you need to know the schema of
+     * custom fields for an entire company.
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1CompaniesCompanyIdCustomFieldsRequestBuilder getCustomFields() {
+        return new GetV1CompaniesCompanyIdCustomFieldsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get the custom fields of a company
+     * 
+     * <p>Returns a list of the custom fields of the company. Useful when you need to know the schema of
+     * custom fields for an entire company.
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyIdCustomFieldsResponse getCustomFields(String companyId) {
+        return getCustomFields(Optional.empty(), companyId, Optional.empty(),
+            Optional.empty());
+    }
+
+    /**
+     * Get the custom fields of a company
+     * 
+     * <p>Returns a list of the custom fields of the company. Useful when you need to know the schema of
+     * custom fields for an entire company.
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyIdCustomFieldsResponse getCustomFields(
+            Optional<? extends GetV1CompaniesCompanyIdCustomFieldsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<Long> page, Optional<Long> per) {
+        GetV1CompaniesCompanyIdCustomFieldsRequest request =
+            GetV1CompaniesCompanyIdCustomFieldsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .page(page)
+                .per(per)
+                .build();
+        RequestOperation<GetV1CompaniesCompanyIdCustomFieldsRequest, GetV1CompaniesCompanyIdCustomFieldsResponse> operation
+              = new GetV1CompaniesCompanyIdCustomFields.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get company onboarding status
+     * 
+     * <p>Retrieves a company's onboarding status, including whether onboarding is complete and the list of
+     * required onboarding steps with their respective completion state.
+     * 
+     * <p>scope: `company_onboarding_status:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1CompanyOnboardingStatusRequestBuilder getOnboardingStatus() {
+        return new GetV1CompanyOnboardingStatusRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get company onboarding status
+     * 
+     * <p>Retrieves a company's onboarding status, including whether onboarding is complete and the list of
+     * required onboarding steps with their respective completion state.
+     * 
+     * <p>scope: `company_onboarding_status:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyUuid The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompanyOnboardingStatusResponse getOnboardingStatus(String companyUuid) {
+        return getOnboardingStatus(Optional.empty(), companyUuid, Optional.empty());
+    }
+
+    /**
+     * Get company onboarding status
+     * 
+     * <p>Retrieves a company's onboarding status, including whether onboarding is complete and the list of
+     * required onboarding steps with their respective completion state.
+     * 
+     * <p>scope: `company_onboarding_status:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param additionalSteps Comma-delimited string of additional onboarding steps to include. Currently only supports the value "external_payroll".
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompanyOnboardingStatusResponse getOnboardingStatus(
+            Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            Optional<String> additionalSteps) {
+        GetV1CompanyOnboardingStatusRequest request =
+            GetV1CompanyOnboardingStatusRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
+                .additionalSteps(additionalSteps)
+                .build();
+        RequestOperation<GetV1CompanyOnboardingStatusRequest, GetV1CompanyOnboardingStatusResponse> operation
+              = new GetV1CompanyOnboardingStatus.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Finish company onboarding
+     * 
+     * <p>Finalize a company's onboarding process.
+     * 
+     * <p>### Approve a company in demo
+     * 
+     * <p>After a company is finished onboarding, Gusto requires an additional step to review and approve that
+     * company.
+     * The company onboarding status is "onboarding_completed": false, until the API call is made to finish
+     * company
+     * onboarding. In production environments, this step is required for risk-analysis purposes.
+     * 
+     * <p>We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals
+     * in the demo environment.
+     * 
+     * <p>```shell
+     * PUT '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/approve'
+     * 
+     * <p># Response: Company object, with company_status: 'Approved'
+     * ```
+     * 
+     * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1CompanyFinishOnboardingRequestBuilder finishOnboarding() {
+        return new GetV1CompanyFinishOnboardingRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Finish company onboarding
+     * 
+     * <p>Finalize a company's onboarding process.
+     * 
+     * <p>### Approve a company in demo
+     * 
+     * <p>After a company is finished onboarding, Gusto requires an additional step to review and approve that
+     * company.
+     * The company onboarding status is "onboarding_completed": false, until the API call is made to finish
+     * company
+     * onboarding. In production environments, this step is required for risk-analysis purposes.
+     * 
+     * <p>We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals
+     * in the demo environment.
+     * 
+     * <p>```shell
+     * PUT '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/approve'
+     * 
+     * <p># Response: Company object, with company_status: 'Approved'
+     * ```
+     * 
+     * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyUuid The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompanyFinishOnboardingResponse finishOnboarding(String companyUuid) {
+        return finishOnboarding(Optional.empty(), companyUuid);
+    }
+
+    /**
+     * Finish company onboarding
+     * 
+     * <p>Finalize a company's onboarding process.
+     * 
+     * <p>### Approve a company in demo
+     * 
+     * <p>After a company is finished onboarding, Gusto requires an additional step to review and approve that
+     * company.
+     * The company onboarding status is "onboarding_completed": false, until the API call is made to finish
+     * company
+     * onboarding. In production environments, this step is required for risk-analysis purposes.
+     * 
+     * <p>We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals
+     * in the demo environment.
+     * 
+     * <p>```shell
+     * PUT '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/approve'
+     * 
+     * <p># Response: Company object, with company_status: 'Approved'
+     * ```
+     * 
+     * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompanyFinishOnboardingResponse finishOnboarding(Optional<? extends GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
+        GetV1CompanyFinishOnboardingRequest request =
+            GetV1CompanyFinishOnboardingRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
+                .build();
+        RequestOperation<GetV1CompanyFinishOnboardingRequest, GetV1CompanyFinishOnboardingResponse> operation
+              = new GetV1CompanyFinishOnboarding.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Disassociate a partner managed company
+     * 
+     * <p>Disassociate a company from your embedded payroll product, reversing an earlier association or
+     * migration. You can only disassociate a company that is currently associated with your application.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `partner_managed_companies:disassociate`
+     * 
+     * @return The call builder
+     */
+    public PutV1PartnerManagedCompaniesCompanyUuidDisassociateRequestBuilder putV1PartnerManagedCompaniesCompanyUuidDisassociate() {
+        return new PutV1PartnerManagedCompaniesCompanyUuidDisassociateRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Disassociate a partner managed company
+     * 
+     * <p>Disassociate a company from your embedded payroll product, reversing an earlier association or
+     * migration. You can only disassociate a company that is currently associated with your application.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `partner_managed_companies:disassociate`
+     * 
+     * @param security The security details to use for authentication.
+     * @param companyUuid The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1PartnerManagedCompaniesCompanyUuidDisassociateResponse putV1PartnerManagedCompaniesCompanyUuidDisassociate(PutV1PartnerManagedCompaniesCompanyUuidDisassociateSecurity security, String companyUuid) {
+        return putV1PartnerManagedCompaniesCompanyUuidDisassociate(security, Optional.empty(), companyUuid);
+    }
+
+    /**
+     * Disassociate a partner managed company
+     * 
+     * <p>Disassociate a company from your embedded payroll product, reversing an earlier association or
+     * migration. You can only disassociate a company that is currently associated with your application.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `partner_managed_companies:disassociate`
+     * 
+     * @param security The security details to use for authentication.
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1PartnerManagedCompaniesCompanyUuidDisassociateResponse putV1PartnerManagedCompaniesCompanyUuidDisassociate(
+            PutV1PartnerManagedCompaniesCompanyUuidDisassociateSecurity security, Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidDisassociateHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyUuid) {
+        PutV1PartnerManagedCompaniesCompanyUuidDisassociateRequest request =
+            PutV1PartnerManagedCompaniesCompanyUuidDisassociateRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
+                .build();
+        RequestOperation<PutV1PartnerManagedCompaniesCompanyUuidDisassociateRequest, PutV1PartnerManagedCompaniesCompanyUuidDisassociateResponse> operation
+              = new PutV1PartnerManagedCompaniesCompanyUuidDisassociate.Sync(sdkConfiguration, security, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Migrate company to embedded payroll
+     * 
+     * <p>Migrate an existing Gusto customer to your embedded payroll product.
+     * 
+     * <p>### Prerequisites
+     * Before calling this endpoint:
+     * 1. The customer must connect their Gusto account to your application using [OAuth2](doc:oauth2)
+     * 2. The customer must view and [accept the Embedded Payroll Terms of
+     * Service](ref:post-partner-managed-companies-company_uuid-accept_terms_of_service)
+     * 
+     * <p>### Related guides
+     * - [Migrate an existing company](doc:migrate-existing-company)
+     * 
+     * <p>scope: `partner_managed_companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder migrate() {
+        return new PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Migrate company to embedded payroll
+     * 
+     * <p>Migrate an existing Gusto customer to your embedded payroll product.
+     * 
+     * <p>### Prerequisites
+     * Before calling this endpoint:
+     * 1. The customer must connect their Gusto account to your application using [OAuth2](doc:oauth2)
+     * 2. The customer must view and [accept the Embedded Payroll Terms of
+     * Service](ref:post-partner-managed-companies-company_uuid-accept_terms_of_service)
+     * 
+     * <p>### Related guides
+     * - [Migrate an existing company](doc:migrate-existing-company)
+     * 
+     * <p>scope: `partner_managed_companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyUuid The UUID of the company
+     * @param partnerManagedCompanyMigrateRequest 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse migrate(String companyUuid, PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest) {
+        return migrate(Optional.empty(), companyUuid, partnerManagedCompanyMigrateRequest);
+    }
+
+    /**
+     * Migrate company to embedded payroll
+     * 
+     * <p>Migrate an existing Gusto customer to your embedded payroll product.
+     * 
+     * <p>### Prerequisites
+     * Before calling this endpoint:
+     * 1. The customer must connect their Gusto account to your application using [OAuth2](doc:oauth2)
+     * 2. The customer must view and [accept the Embedded Payroll Terms of
+     * Service](ref:post-partner-managed-companies-company_uuid-accept_terms_of_service)
+     * 
+     * <p>### Related guides
+     * - [Migrate an existing company](doc:migrate-existing-company)
+     * 
+     * <p>scope: `partner_managed_companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param partnerManagedCompanyMigrateRequest 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse migrate(
+            Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest) {
+        PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest request =
+            PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
+                .partnerManagedCompanyMigrateRequest(partnerManagedCompanyMigrateRequest)
+                .build();
+        RequestOperation<PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest, PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse> operation
+              = new PutV1PartnerManagedCompaniesCompanyUuidMigrate.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
@@ -199,229 +878,6 @@ public class Companies {
     }
 
     /**
-     * Get a company
-     * 
-     * <p>Get a company.
-     * 
-     * <p>The employees:read scope is required to return home_address and non-work locations.
-     * The company_admin:read scope is required to return primary_payroll_admin.
-     * The signatories:read scope is required to return primary_signatory.
-     * 
-     * <p>scope: `companies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1CompaniesRequestBuilder get() {
-        return new GetV1CompaniesRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get a company
-     * 
-     * <p>Get a company.
-     * 
-     * <p>The employees:read scope is required to return home_address and non-work locations.
-     * The company_admin:read scope is required to return primary_payroll_admin.
-     * The signatories:read scope is required to return primary_signatory.
-     * 
-     * <p>scope: `companies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesResponse get(String companyId) {
-        return get(companyId, Optional.empty());
-    }
-
-    /**
-     * Get a company
-     * 
-     * <p>Get a company.
-     * 
-     * <p>The employees:read scope is required to return home_address and non-work locations.
-     * The company_admin:read scope is required to return primary_payroll_admin.
-     * The signatories:read scope is required to return primary_signatory.
-     * 
-     * <p>scope: `companies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesResponse get(String companyId, Optional<? extends GetV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        GetV1CompaniesRequest request =
-            GetV1CompaniesRequest
-                .builder()
-                .companyId(companyId)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .build();
-        RequestOperation<GetV1CompaniesRequest, GetV1CompaniesResponse> operation
-              = new GetV1Companies.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Update a company
-     * 
-     * <p>Update a company.
-     * 
-     * <p>scope: `companies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public PutV1CompaniesRequestBuilder update() {
-        return new PutV1CompaniesRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Update a company
-     * 
-     * <p>Update a company.
-     * 
-     * <p>scope: `companies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param requestBody 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PutV1CompaniesResponse update(String companyId, PutV1CompaniesRequestBody requestBody) {
-        return update(companyId, Optional.empty(), requestBody);
-    }
-
-    /**
-     * Update a company
-     * 
-     * <p>Update a company.
-     * 
-     * <p>scope: `companies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param requestBody 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PutV1CompaniesResponse update(
-            String companyId, Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion,
-            PutV1CompaniesRequestBody requestBody) {
-        PutV1CompaniesRequest request =
-            PutV1CompaniesRequest
-                .builder()
-                .companyId(companyId)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
-                .build();
-        RequestOperation<PutV1CompaniesRequest, PutV1CompaniesResponse> operation
-              = new PutV1Companies.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Migrate company to embedded payroll
-     * 
-     * <p>Migrate an existing Gusto customer to your embedded payroll product.
-     * 
-     * <p>### Prerequisites
-     * Before calling this endpoint:
-     * 1. The customer must connect their Gusto account to your application using [OAuth2](doc:oauth2)
-     * 2. The customer must view and [accept the Embedded Payroll Terms of
-     * Service](ref:post-partner-managed-companies-company_uuid-accept_terms_of_service)
-     * 
-     * <p>### Related guides
-     * - [Migrate an existing company](doc:migrate-existing-company)
-     * 
-     * <p>scope: `partner_managed_companies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder migrate() {
-        return new PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Migrate company to embedded payroll
-     * 
-     * <p>Migrate an existing Gusto customer to your embedded payroll product.
-     * 
-     * <p>### Prerequisites
-     * Before calling this endpoint:
-     * 1. The customer must connect their Gusto account to your application using [OAuth2](doc:oauth2)
-     * 2. The customer must view and [accept the Embedded Payroll Terms of
-     * Service](ref:post-partner-managed-companies-company_uuid-accept_terms_of_service)
-     * 
-     * <p>### Related guides
-     * - [Migrate an existing company](doc:migrate-existing-company)
-     * 
-     * <p>scope: `partner_managed_companies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyUuid The UUID of the company
-     * @param partnerManagedCompanyMigrateRequest 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse migrate(String companyUuid, PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest) {
-        return migrate(companyUuid, Optional.empty(), partnerManagedCompanyMigrateRequest);
-    }
-
-    /**
-     * Migrate company to embedded payroll
-     * 
-     * <p>Migrate an existing Gusto customer to your embedded payroll product.
-     * 
-     * <p>### Prerequisites
-     * Before calling this endpoint:
-     * 1. The customer must connect their Gusto account to your application using [OAuth2](doc:oauth2)
-     * 2. The customer must view and [accept the Embedded Payroll Terms of
-     * Service](ref:post-partner-managed-companies-company_uuid-accept_terms_of_service)
-     * 
-     * <p>### Related guides
-     * - [Migrate an existing company](doc:migrate-existing-company)
-     * 
-     * <p>scope: `partner_managed_companies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param partnerManagedCompanyMigrateRequest 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse migrate(
-            String companyUuid, Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion> xGustoAPIVersion,
-            PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest) {
-        PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest request =
-            PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest
-                .builder()
-                .companyUuid(companyUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .partnerManagedCompanyMigrateRequest(partnerManagedCompanyMigrateRequest)
-                .build();
-        RequestOperation<PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest, PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse> operation
-              = new PutV1PartnerManagedCompaniesCompanyUuidMigrate.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
      * Check company migration readiness
      * 
      * <p>Check if an existing Gusto customer is ready to be migrated to embedded payroll. This endpoint
@@ -454,7 +910,7 @@ public class Companies {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(String companyUuid) {
-        return getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(companyUuid, Optional.empty());
+        return getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(Optional.empty(), companyUuid);
     }
 
     /**
@@ -468,17 +924,17 @@ public class Companies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(String companyUuid, Optional<? extends GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(Optional<? extends GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
         GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest request =
             GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .build();
         RequestOperation<GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest, GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse> operation
               = new GetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness.Sync(sdkConfiguration, _headers);
@@ -517,7 +973,7 @@ public class Companies {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse acceptTermsOfService(String companyUuid, PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest) {
-        return acceptTermsOfService(companyUuid, Optional.empty(), partnerManagedCompanyAcceptTermsOfServiceRequest);
+        return acceptTermsOfService(Optional.empty(), companyUuid, partnerManagedCompanyAcceptTermsOfServiceRequest);
     }
 
     /**
@@ -530,20 +986,20 @@ public class Companies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @param partnerManagedCompanyAcceptTermsOfServiceRequest 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse acceptTermsOfService(
-            String companyUuid, Optional<? extends PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest) {
         PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest request =
             PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .partnerManagedCompanyAcceptTermsOfServiceRequest(partnerManagedCompanyAcceptTermsOfServiceRequest)
                 .build();
         RequestOperation<PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest, PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse> operation
@@ -583,7 +1039,7 @@ public class Companies {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse retrieveTermsOfService(String companyUuid, PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest) {
-        return retrieveTermsOfService(companyUuid, Optional.empty(), partnerManagedCompanyRetrieveTermsOfServiceRequest);
+        return retrieveTermsOfService(Optional.empty(), companyUuid, partnerManagedCompanyRetrieveTermsOfServiceRequest);
     }
 
     /**
@@ -596,400 +1052,24 @@ public class Companies {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @param partnerManagedCompanyRetrieveTermsOfServiceRequest 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse retrieveTermsOfService(
-            String companyUuid, Optional<? extends PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest) {
         PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest request =
             PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .partnerManagedCompanyRetrieveTermsOfServiceRequest(partnerManagedCompanyRetrieveTermsOfServiceRequest)
                 .build();
         RequestOperation<PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest, PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse> operation
               = new PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfService.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get all the admins at a company
-     * 
-     * <p>Returns a list of all the admins at a company
-     * 
-     * <p>scope: `company_admin:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1CompaniesCompanyIdAdminsRequestBuilder listAdmins() {
-        return new GetV1CompaniesCompanyIdAdminsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get all the admins at a company
-     * 
-     * <p>Returns a list of all the admins at a company
-     * 
-     * <p>scope: `company_admin:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesCompanyIdAdminsResponse listAdmins(String companyId) {
-        return listAdmins(Optional.empty(), companyId, Optional.empty(),
-            Optional.empty());
-    }
-
-    /**
-     * Get all the admins at a company
-     * 
-     * <p>Returns a list of all the admins at a company
-     * 
-     * <p>scope: `company_admin:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyId The UUID of the company
-     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
-     * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesCompanyIdAdminsResponse listAdmins(
-            Optional<? extends GetV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
-            Optional<Long> page, Optional<Long> per) {
-        GetV1CompaniesCompanyIdAdminsRequest request =
-            GetV1CompaniesCompanyIdAdminsRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .companyId(companyId)
-                .page(page)
-                .per(per)
-                .build();
-        RequestOperation<GetV1CompaniesCompanyIdAdminsRequest, GetV1CompaniesCompanyIdAdminsResponse> operation
-              = new GetV1CompaniesCompanyIdAdmins.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Create an admin for the company
-     * 
-     * <p>Creates a new admin for a company.
-     * If the email matches an existing user, this will create an admin account for the current user.
-     * Otherwise, this will create a new user.
-     * 
-     * <p>scope: `company_admin:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public PostV1CompaniesCompanyIdAdminsRequestBuilder createAdmin() {
-        return new PostV1CompaniesCompanyIdAdminsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Create an admin for the company
-     * 
-     * <p>Creates a new admin for a company.
-     * If the email matches an existing user, this will create an admin account for the current user.
-     * Otherwise, this will create a new user.
-     * 
-     * <p>scope: `company_admin:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param adminCreateRequest The request body for creating a company admin.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PostV1CompaniesCompanyIdAdminsResponse createAdmin(String companyId, AdminCreateRequest adminCreateRequest) {
-        return createAdmin(Optional.empty(), companyId, adminCreateRequest);
-    }
-
-    /**
-     * Create an admin for the company
-     * 
-     * <p>Creates a new admin for a company.
-     * If the email matches an existing user, this will create an admin account for the current user.
-     * Otherwise, this will create a new user.
-     * 
-     * <p>scope: `company_admin:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyId The UUID of the company
-     * @param adminCreateRequest The request body for creating a company admin.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PostV1CompaniesCompanyIdAdminsResponse createAdmin(
-            Optional<? extends PostV1CompaniesCompanyIdAdminsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
-            AdminCreateRequest adminCreateRequest) {
-        PostV1CompaniesCompanyIdAdminsRequest request =
-            PostV1CompaniesCompanyIdAdminsRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .companyId(companyId)
-                .adminCreateRequest(adminCreateRequest)
-                .build();
-        RequestOperation<PostV1CompaniesCompanyIdAdminsRequest, PostV1CompaniesCompanyIdAdminsResponse> operation
-              = new PostV1CompaniesCompanyIdAdmins.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get company onboarding status
-     * 
-     * <p>Retrieves a company's onboarding status, including whether onboarding is complete and the list of
-     * required onboarding steps with their respective completion state.
-     * 
-     * <p>scope: `company_onboarding_status:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1CompanyOnboardingStatusRequestBuilder getOnboardingStatus() {
-        return new GetV1CompanyOnboardingStatusRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get company onboarding status
-     * 
-     * <p>Retrieves a company's onboarding status, including whether onboarding is complete and the list of
-     * required onboarding steps with their respective completion state.
-     * 
-     * <p>scope: `company_onboarding_status:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyUuid The UUID of the company
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompanyOnboardingStatusResponse getOnboardingStatus(String companyUuid) {
-        return getOnboardingStatus(companyUuid, Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * Get company onboarding status
-     * 
-     * <p>Retrieves a company's onboarding status, including whether onboarding is complete and the list of
-     * required onboarding steps with their respective completion state.
-     * 
-     * <p>scope: `company_onboarding_status:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyUuid The UUID of the company
-     * @param additionalSteps Comma-delimited string of additional onboarding steps to include. Currently only supports the value "external_payroll".
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompanyOnboardingStatusResponse getOnboardingStatus(
-            String companyUuid, Optional<String> additionalSteps,
-            Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        GetV1CompanyOnboardingStatusRequest request =
-            GetV1CompanyOnboardingStatusRequest
-                .builder()
-                .companyUuid(companyUuid)
-                .additionalSteps(additionalSteps)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .build();
-        RequestOperation<GetV1CompanyOnboardingStatusRequest, GetV1CompanyOnboardingStatusResponse> operation
-              = new GetV1CompanyOnboardingStatus.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Finish company onboarding
-     * 
-     * <p>Finalize a company's onboarding process.
-     * 
-     * <p>### Approve a company in demo
-     * 
-     * <p>After a company is finished onboarding, Gusto requires an additional step to review and approve that
-     * company.
-     * The company onboarding status is "onboarding_completed": false, until the API call is made to finish
-     * company
-     * onboarding. In production environments, this step is required for risk-analysis purposes.
-     * 
-     * <p>We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals
-     * in the demo environment.
-     * 
-     * <p>```shell
-     * PUT '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/approve'
-     * 
-     * <p># Response: Company object, with company_status: 'Approved'
-     * ```
-     * 
-     * <p>scope: `companies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1CompanyFinishOnboardingRequestBuilder finishOnboarding() {
-        return new GetV1CompanyFinishOnboardingRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Finish company onboarding
-     * 
-     * <p>Finalize a company's onboarding process.
-     * 
-     * <p>### Approve a company in demo
-     * 
-     * <p>After a company is finished onboarding, Gusto requires an additional step to review and approve that
-     * company.
-     * The company onboarding status is "onboarding_completed": false, until the API call is made to finish
-     * company
-     * onboarding. In production environments, this step is required for risk-analysis purposes.
-     * 
-     * <p>We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals
-     * in the demo environment.
-     * 
-     * <p>```shell
-     * PUT '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/approve'
-     * 
-     * <p># Response: Company object, with company_status: 'Approved'
-     * ```
-     * 
-     * <p>scope: `companies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyUuid The UUID of the company
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompanyFinishOnboardingResponse finishOnboarding(String companyUuid) {
-        return finishOnboarding(companyUuid, Optional.empty());
-    }
-
-    /**
-     * Finish company onboarding
-     * 
-     * <p>Finalize a company's onboarding process.
-     * 
-     * <p>### Approve a company in demo
-     * 
-     * <p>After a company is finished onboarding, Gusto requires an additional step to review and approve that
-     * company.
-     * The company onboarding status is "onboarding_completed": false, until the API call is made to finish
-     * company
-     * onboarding. In production environments, this step is required for risk-analysis purposes.
-     * 
-     * <p>We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals
-     * in the demo environment.
-     * 
-     * <p>```shell
-     * PUT '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/approve'
-     * 
-     * <p># Response: Company object, with company_status: 'Approved'
-     * ```
-     * 
-     * <p>scope: `companies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompanyFinishOnboardingResponse finishOnboarding(String companyUuid, Optional<? extends GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        GetV1CompanyFinishOnboardingRequest request =
-            GetV1CompanyFinishOnboardingRequest
-                .builder()
-                .companyUuid(companyUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .build();
-        RequestOperation<GetV1CompanyFinishOnboardingRequest, GetV1CompanyFinishOnboardingResponse> operation
-              = new GetV1CompanyFinishOnboarding.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get the custom fields of a company
-     * 
-     * <p>Returns a list of the custom fields of the company. Useful when you need to know the schema of
-     * custom fields for an entire company.
-     * 
-     * <p>scope: `companies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1CompaniesCompanyIdCustomFieldsRequestBuilder getCustomFields() {
-        return new GetV1CompaniesCompanyIdCustomFieldsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get the custom fields of a company
-     * 
-     * <p>Returns a list of the custom fields of the company. Useful when you need to know the schema of
-     * custom fields for an entire company.
-     * 
-     * <p>scope: `companies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesCompanyIdCustomFieldsResponse getCustomFields(String companyId) {
-        return getCustomFields(Optional.empty(), companyId, Optional.empty(),
-            Optional.empty());
-    }
-
-    /**
-     * Get the custom fields of a company
-     * 
-     * <p>Returns a list of the custom fields of the company. Useful when you need to know the schema of
-     * custom fields for an entire company.
-     * 
-     * <p>scope: `companies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyId The UUID of the company
-     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
-     * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesCompanyIdCustomFieldsResponse getCustomFields(
-            Optional<? extends GetV1CompaniesCompanyIdCustomFieldsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
-            Optional<Long> page, Optional<Long> per) {
-        GetV1CompaniesCompanyIdCustomFieldsRequest request =
-            GetV1CompaniesCompanyIdCustomFieldsRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .companyId(companyId)
-                .page(page)
-                .per(per)
-                .build();
-        RequestOperation<GetV1CompaniesCompanyIdCustomFieldsRequest, GetV1CompaniesCompanyIdCustomFieldsResponse> operation
-              = new GetV1CompaniesCompanyIdCustomFields.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
