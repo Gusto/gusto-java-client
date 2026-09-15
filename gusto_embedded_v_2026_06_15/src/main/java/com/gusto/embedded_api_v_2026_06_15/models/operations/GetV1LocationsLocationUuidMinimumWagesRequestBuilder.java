@@ -16,23 +16,17 @@ import java.util.Optional;
 
 public class GetV1LocationsLocationUuidMinimumWagesRequestBuilder {
 
-    private String locationUuid;
     private Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion>>() {});
+    private String locationUuid;
     private Optional<String> effectiveDate = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1LocationsLocationUuidMinimumWagesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1LocationsLocationUuidMinimumWagesRequestBuilder locationUuid(String locationUuid) {
-        Utils.checkNotNull(locationUuid, "locationUuid");
-        this.locationUuid = locationUuid;
-        return this;
     }
                 
     public GetV1LocationsLocationUuidMinimumWagesRequestBuilder xGustoAPIVersion(GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -44,6 +38,12 @@ public class GetV1LocationsLocationUuidMinimumWagesRequestBuilder {
     public GetV1LocationsLocationUuidMinimumWagesRequestBuilder xGustoAPIVersion(Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public GetV1LocationsLocationUuidMinimumWagesRequestBuilder locationUuid(String locationUuid) {
+        Utils.checkNotNull(locationUuid, "locationUuid");
+        this.locationUuid = locationUuid;
         return this;
     }
                 
@@ -65,8 +65,8 @@ public class GetV1LocationsLocationUuidMinimumWagesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1LocationsLocationUuidMinimumWagesRequest request = new GetV1LocationsLocationUuidMinimumWagesRequest(locationUuid,
-            xGustoAPIVersion,
+        GetV1LocationsLocationUuidMinimumWagesRequest request = new GetV1LocationsLocationUuidMinimumWagesRequest(xGustoAPIVersion,
+            locationUuid,
             effectiveDate);
 
         return request;

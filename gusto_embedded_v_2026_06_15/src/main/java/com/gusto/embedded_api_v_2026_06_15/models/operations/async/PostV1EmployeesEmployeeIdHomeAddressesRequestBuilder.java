@@ -20,23 +20,17 @@ import java.util.concurrent.CompletableFuture;
 
 public class PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder {
 
-    private String employeeId;
     private Optional<? extends PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
     private PostV1EmployeesEmployeeIdHomeAddressesRequestBody requestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder employeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
     }
                 
     public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder xGustoAPIVersion(PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,6 +42,12 @@ public class PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder {
     public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder xGustoAPIVersion(Optional<? extends PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder employeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
         return this;
     }
 
@@ -63,8 +63,8 @@ public class PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1EmployeesEmployeeIdHomeAddressesRequest request = new PostV1EmployeesEmployeeIdHomeAddressesRequest(employeeId,
-            xGustoAPIVersion,
+        PostV1EmployeesEmployeeIdHomeAddressesRequest request = new PostV1EmployeesEmployeeIdHomeAddressesRequest(xGustoAPIVersion,
+            employeeId,
             requestBody);
 
         return request;

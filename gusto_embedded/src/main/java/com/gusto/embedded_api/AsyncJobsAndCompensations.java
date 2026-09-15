@@ -85,322 +85,6 @@ public class AsyncJobsAndCompensations {
 
 
     /**
-     * Get jobs for an employee
-     * 
-     * <p>Get all of the jobs that an employee holds.
-     * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
-     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
-     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
-     * is included. This allows you to access employee and job metadata without exposing pay rates.
-     * 
-     * <p>Compensation data in the response requires the `compensations:read` scope.
-     * 
-     * <p>scope: `jobs:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public GetV1EmployeesEmployeeIdJobsRequestBuilder getJobs() {
-        return new GetV1EmployeesEmployeeIdJobsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get jobs for an employee
-     * 
-     * <p>Get all of the jobs that an employee holds.
-     * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
-     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
-     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
-     * is included. This allows you to access employee and job metadata without exposing pay rates.
-     * 
-     * <p>Compensation data in the response requires the `compensations:read` scope.
-     * 
-     * <p>scope: `jobs:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param request The request object containing all the parameters for the API call.
-     * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdJobsResponse>} - The async response
-     */
-    public CompletableFuture<GetV1EmployeesEmployeeIdJobsResponse> getJobs(GetV1EmployeesEmployeeIdJobsRequest request) {
-        AsyncRequestOperation<GetV1EmployeesEmployeeIdJobsRequest, GetV1EmployeesEmployeeIdJobsResponse> operation
-              = new GetV1EmployeesEmployeeIdJobs.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Create a job
-     * 
-     * <p>Create a job.
-     * 
-     * <p>scope: `jobs:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public PostV1EmployeesEmployeeIdJobsRequestBuilder createJob() {
-        return new PostV1EmployeesEmployeeIdJobsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Create a job
-     * 
-     * <p>Create a job.
-     * 
-     * <p>scope: `jobs:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param employeeId The UUID of the employee
-     * @param jobsCreateRequestBody Request body for creating a job.
-     * @return {@code CompletableFuture<PostV1EmployeesEmployeeIdJobsResponse>} - The async response
-     */
-    public CompletableFuture<PostV1EmployeesEmployeeIdJobsResponse> createJob(String employeeId, JobsCreateRequestBody jobsCreateRequestBody) {
-        return createJob(employeeId, Optional.empty(), jobsCreateRequestBody);
-    }
-
-    /**
-     * Create a job
-     * 
-     * <p>Create a job.
-     * 
-     * <p>scope: `jobs:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param employeeId The UUID of the employee
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param jobsCreateRequestBody Request body for creating a job.
-     * @return {@code CompletableFuture<PostV1EmployeesEmployeeIdJobsResponse>} - The async response
-     */
-    public CompletableFuture<PostV1EmployeesEmployeeIdJobsResponse> createJob(
-            String employeeId, Optional<? extends PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion> xGustoAPIVersion,
-            JobsCreateRequestBody jobsCreateRequestBody) {
-        PostV1EmployeesEmployeeIdJobsRequest request =
-            PostV1EmployeesEmployeeIdJobsRequest
-                .builder()
-                .employeeId(employeeId)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .jobsCreateRequestBody(jobsCreateRequestBody)
-                .build();
-        AsyncRequestOperation<PostV1EmployeesEmployeeIdJobsRequest, PostV1EmployeesEmployeeIdJobsResponse> operation
-              = new PostV1EmployeesEmployeeIdJobs.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get a job
-     * 
-     * <p>Get a job.
-     * 
-     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
-     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
-     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
-     * is included. This allows you to access employee and job metadata without exposing pay rates.
-     * 
-     * <p>Compensation data in the response requires the `compensations:read` scope.
-     * 
-     * <p>scope: `jobs:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public GetV1JobsJobIdRequestBuilder getJob() {
-        return new GetV1JobsJobIdRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get a job
-     * 
-     * <p>Get a job.
-     * 
-     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
-     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
-     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
-     * is included. This allows you to access employee and job metadata without exposing pay rates.
-     * 
-     * <p>Compensation data in the response requires the `compensations:read` scope.
-     * 
-     * <p>scope: `jobs:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param jobId The UUID of the job
-     * @return {@code CompletableFuture<GetV1JobsJobIdResponse>} - The async response
-     */
-    public CompletableFuture<GetV1JobsJobIdResponse> getJob(String jobId) {
-        return getJob(jobId, Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * Get a job
-     * 
-     * <p>Get a job.
-     * 
-     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
-     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
-     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
-     * is included. This allows you to access employee and job metadata without exposing pay rates.
-     * 
-     * <p>Compensation data in the response requires the `compensations:read` scope.
-     * 
-     * <p>scope: `jobs:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param jobId The UUID of the job
-     * @param include Available options:
-     *         - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
-     *         
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @return {@code CompletableFuture<GetV1JobsJobIdResponse>} - The async response
-     */
-    public CompletableFuture<GetV1JobsJobIdResponse> getJob(
-            String jobId, Optional<? extends GetV1JobsJobIdQueryParamInclude> include,
-            Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        GetV1JobsJobIdRequest request =
-            GetV1JobsJobIdRequest
-                .builder()
-                .jobId(jobId)
-                .include(include)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .build();
-        AsyncRequestOperation<GetV1JobsJobIdRequest, GetV1JobsJobIdResponse> operation
-              = new GetV1JobsJobId.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Update a job
-     * 
-     * <p>Update a job.
-     * 
-     * <p>scope: `jobs:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public PutV1JobsJobIdRequestBuilder update() {
-        return new PutV1JobsJobIdRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Update a job
-     * 
-     * <p>Update a job.
-     * 
-     * <p>scope: `jobs:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param jobId The UUID of the job
-     * @param jobsUpdateRequestBody Request body for updating a job.
-     * @return {@code CompletableFuture<PutV1JobsJobIdResponse>} - The async response
-     */
-    public CompletableFuture<PutV1JobsJobIdResponse> update(String jobId, JobsUpdateRequestBody jobsUpdateRequestBody) {
-        return update(jobId, Optional.empty(), jobsUpdateRequestBody);
-    }
-
-    /**
-     * Update a job
-     * 
-     * <p>Update a job.
-     * 
-     * <p>scope: `jobs:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param jobId The UUID of the job
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param jobsUpdateRequestBody Request body for updating a job.
-     * @return {@code CompletableFuture<PutV1JobsJobIdResponse>} - The async response
-     */
-    public CompletableFuture<PutV1JobsJobIdResponse> update(
-            String jobId, Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion,
-            JobsUpdateRequestBody jobsUpdateRequestBody) {
-        PutV1JobsJobIdRequest request =
-            PutV1JobsJobIdRequest
-                .builder()
-                .jobId(jobId)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .jobsUpdateRequestBody(jobsUpdateRequestBody)
-                .build();
-        AsyncRequestOperation<PutV1JobsJobIdRequest, PutV1JobsJobIdResponse> operation
-              = new PutV1JobsJobId.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Delete an individual job
-     * 
-     * <p>Deletes a specific job that an employee holds.
-     * 
-     * <p>scope: `jobs:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public DeleteV1JobsJobIdRequestBuilder delete() {
-        return new DeleteV1JobsJobIdRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Delete an individual job
-     * 
-     * <p>Deletes a specific job that an employee holds.
-     * 
-     * <p>scope: `jobs:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param jobId The UUID of the job
-     * @return {@code CompletableFuture<DeleteV1JobsJobIdResponse>} - The async response
-     */
-    public CompletableFuture<DeleteV1JobsJobIdResponse> delete(String jobId) {
-        return delete(jobId, Optional.empty());
-    }
-
-    /**
-     * Delete an individual job
-     * 
-     * <p>Deletes a specific job that an employee holds.
-     * 
-     * <p>scope: `jobs:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param jobId The UUID of the job
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @return {@code CompletableFuture<DeleteV1JobsJobIdResponse>} - The async response
-     */
-    public CompletableFuture<DeleteV1JobsJobIdResponse> delete(String jobId, Optional<? extends DeleteV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        DeleteV1JobsJobIdRequest request =
-            DeleteV1JobsJobIdRequest
-                .builder()
-                .jobId(jobId)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .build();
-        AsyncRequestOperation<DeleteV1JobsJobIdRequest, DeleteV1JobsJobIdResponse> operation
-              = new DeleteV1JobsJobId.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
      * Get compensations for a job
      * 
      * <p>Compensations contain information on how much is paid out for a job. Jobs may have many
@@ -759,6 +443,322 @@ public class AsyncJobsAndCompensations {
                 .build();
         AsyncRequestOperation<DeleteV1CompensationsCompensationIdRequest, DeleteV1CompensationsCompensationIdResponse> operation
               = new DeleteV1CompensationsCompensationId.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get a job
+     * 
+     * <p>Get a job.
+     * 
+     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * 
+     * <p>Compensation data in the response requires the `compensations:read` scope.
+     * 
+     * <p>scope: `jobs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetV1JobsJobIdRequestBuilder getJob() {
+        return new GetV1JobsJobIdRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a job
+     * 
+     * <p>Get a job.
+     * 
+     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * 
+     * <p>Compensation data in the response requires the `compensations:read` scope.
+     * 
+     * <p>scope: `jobs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param jobId The UUID of the job
+     * @return {@code CompletableFuture<GetV1JobsJobIdResponse>} - The async response
+     */
+    public CompletableFuture<GetV1JobsJobIdResponse> getJob(String jobId) {
+        return getJob(Optional.empty(), jobId, Optional.empty());
+    }
+
+    /**
+     * Get a job
+     * 
+     * <p>Get a job.
+     * 
+     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * 
+     * <p>Compensation data in the response requires the `compensations:read` scope.
+     * 
+     * <p>scope: `jobs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param jobId The UUID of the job
+     * @param include Available options:
+     *         - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
+     *         
+     * @return {@code CompletableFuture<GetV1JobsJobIdResponse>} - The async response
+     */
+    public CompletableFuture<GetV1JobsJobIdResponse> getJob(
+            Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion, String jobId,
+            Optional<? extends GetV1JobsJobIdQueryParamInclude> include) {
+        GetV1JobsJobIdRequest request =
+            GetV1JobsJobIdRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .jobId(jobId)
+                .include(include)
+                .build();
+        AsyncRequestOperation<GetV1JobsJobIdRequest, GetV1JobsJobIdResponse> operation
+              = new GetV1JobsJobId.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Update a job
+     * 
+     * <p>Update a job.
+     * 
+     * <p>scope: `jobs:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public PutV1JobsJobIdRequestBuilder update() {
+        return new PutV1JobsJobIdRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Update a job
+     * 
+     * <p>Update a job.
+     * 
+     * <p>scope: `jobs:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param jobId The UUID of the job
+     * @param jobsUpdateRequestBody Request body for updating a job.
+     * @return {@code CompletableFuture<PutV1JobsJobIdResponse>} - The async response
+     */
+    public CompletableFuture<PutV1JobsJobIdResponse> update(String jobId, JobsUpdateRequestBody jobsUpdateRequestBody) {
+        return update(Optional.empty(), jobId, jobsUpdateRequestBody);
+    }
+
+    /**
+     * Update a job
+     * 
+     * <p>Update a job.
+     * 
+     * <p>scope: `jobs:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param jobId The UUID of the job
+     * @param jobsUpdateRequestBody Request body for updating a job.
+     * @return {@code CompletableFuture<PutV1JobsJobIdResponse>} - The async response
+     */
+    public CompletableFuture<PutV1JobsJobIdResponse> update(
+            Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion, String jobId,
+            JobsUpdateRequestBody jobsUpdateRequestBody) {
+        PutV1JobsJobIdRequest request =
+            PutV1JobsJobIdRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .jobId(jobId)
+                .jobsUpdateRequestBody(jobsUpdateRequestBody)
+                .build();
+        AsyncRequestOperation<PutV1JobsJobIdRequest, PutV1JobsJobIdResponse> operation
+              = new PutV1JobsJobId.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Delete an individual job
+     * 
+     * <p>Deletes a specific job that an employee holds.
+     * 
+     * <p>scope: `jobs:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public DeleteV1JobsJobIdRequestBuilder delete() {
+        return new DeleteV1JobsJobIdRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete an individual job
+     * 
+     * <p>Deletes a specific job that an employee holds.
+     * 
+     * <p>scope: `jobs:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param jobId The UUID of the job
+     * @return {@code CompletableFuture<DeleteV1JobsJobIdResponse>} - The async response
+     */
+    public CompletableFuture<DeleteV1JobsJobIdResponse> delete(String jobId) {
+        return delete(Optional.empty(), jobId);
+    }
+
+    /**
+     * Delete an individual job
+     * 
+     * <p>Deletes a specific job that an employee holds.
+     * 
+     * <p>scope: `jobs:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param jobId The UUID of the job
+     * @return {@code CompletableFuture<DeleteV1JobsJobIdResponse>} - The async response
+     */
+    public CompletableFuture<DeleteV1JobsJobIdResponse> delete(Optional<? extends DeleteV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion, String jobId) {
+        DeleteV1JobsJobIdRequest request =
+            DeleteV1JobsJobIdRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .jobId(jobId)
+                .build();
+        AsyncRequestOperation<DeleteV1JobsJobIdRequest, DeleteV1JobsJobIdResponse> operation
+              = new DeleteV1JobsJobId.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get jobs for an employee
+     * 
+     * <p>Get all of the jobs that an employee holds.
+     * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * 
+     * <p>Compensation data in the response requires the `compensations:read` scope.
+     * 
+     * <p>scope: `jobs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetV1EmployeesEmployeeIdJobsRequestBuilder getJobs() {
+        return new GetV1EmployeesEmployeeIdJobsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get jobs for an employee
+     * 
+     * <p>Get all of the jobs that an employee holds.
+     * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * 
+     * <p>Compensation data in the response requires the `compensations:read` scope.
+     * 
+     * <p>scope: `jobs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdJobsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1EmployeesEmployeeIdJobsResponse> getJobs(GetV1EmployeesEmployeeIdJobsRequest request) {
+        AsyncRequestOperation<GetV1EmployeesEmployeeIdJobsRequest, GetV1EmployeesEmployeeIdJobsResponse> operation
+              = new GetV1EmployeesEmployeeIdJobs.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Create a job
+     * 
+     * <p>Create a job.
+     * 
+     * <p>scope: `jobs:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public PostV1EmployeesEmployeeIdJobsRequestBuilder createJob() {
+        return new PostV1EmployeesEmployeeIdJobsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a job
+     * 
+     * <p>Create a job.
+     * 
+     * <p>scope: `jobs:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param employeeId The UUID of the employee
+     * @param jobsCreateRequestBody Request body for creating a job.
+     * @return {@code CompletableFuture<PostV1EmployeesEmployeeIdJobsResponse>} - The async response
+     */
+    public CompletableFuture<PostV1EmployeesEmployeeIdJobsResponse> createJob(String employeeId, JobsCreateRequestBody jobsCreateRequestBody) {
+        return createJob(Optional.empty(), employeeId, jobsCreateRequestBody);
+    }
+
+    /**
+     * Create a job
+     * 
+     * <p>Create a job.
+     * 
+     * <p>scope: `jobs:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param jobsCreateRequestBody Request body for creating a job.
+     * @return {@code CompletableFuture<PostV1EmployeesEmployeeIdJobsResponse>} - The async response
+     */
+    public CompletableFuture<PostV1EmployeesEmployeeIdJobsResponse> createJob(
+            Optional<? extends PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            JobsCreateRequestBody jobsCreateRequestBody) {
+        PostV1EmployeesEmployeeIdJobsRequest request =
+            PostV1EmployeesEmployeeIdJobsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
+                .jobsCreateRequestBody(jobsCreateRequestBody)
+                .build();
+        AsyncRequestOperation<PostV1EmployeesEmployeeIdJobsRequest, PostV1EmployeesEmployeeIdJobsResponse> operation
+              = new PostV1EmployeesEmployeeIdJobs.Async(sdkConfiguration, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

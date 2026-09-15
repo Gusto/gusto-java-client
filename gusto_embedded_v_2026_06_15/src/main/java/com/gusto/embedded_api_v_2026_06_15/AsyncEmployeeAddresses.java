@@ -119,7 +119,7 @@ public class AsyncEmployeeAddresses {
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdHomeAddressesResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdHomeAddressesResponse> get(String employeeId) {
-        return get(employeeId, Optional.empty());
+        return get(Optional.empty(), employeeId);
     }
 
     /**
@@ -134,16 +134,16 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdHomeAddressesResponse>} - The async response
      */
-    public CompletableFuture<GetV1EmployeesEmployeeIdHomeAddressesResponse> get(String employeeId, Optional<? extends GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1EmployeesEmployeeIdHomeAddressesResponse> get(Optional<? extends GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
         GetV1EmployeesEmployeeIdHomeAddressesRequest request =
             GetV1EmployeesEmployeeIdHomeAddressesRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         AsyncRequestOperation<GetV1EmployeesEmployeeIdHomeAddressesRequest, GetV1EmployeesEmployeeIdHomeAddressesResponse> operation
               = new GetV1EmployeesEmployeeIdHomeAddresses.Async(sdkConfiguration, _headers);
@@ -187,7 +187,7 @@ public class AsyncEmployeeAddresses {
      * @return {@code CompletableFuture<PostV1EmployeesEmployeeIdHomeAddressesResponse>} - The async response
      */
     public CompletableFuture<PostV1EmployeesEmployeeIdHomeAddressesResponse> create(String employeeId, PostV1EmployeesEmployeeIdHomeAddressesRequestBody requestBody) {
-        return create(employeeId, Optional.empty(), requestBody);
+        return create(Optional.empty(), employeeId, requestBody);
     }
 
     /**
@@ -202,19 +202,19 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
      * @param requestBody 
      * @return {@code CompletableFuture<PostV1EmployeesEmployeeIdHomeAddressesResponse>} - The async response
      */
     public CompletableFuture<PostV1EmployeesEmployeeIdHomeAddressesResponse> create(
-            String employeeId, Optional<? extends PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             PostV1EmployeesEmployeeIdHomeAddressesRequestBody requestBody) {
         PostV1EmployeesEmployeeIdHomeAddressesRequest request =
             PostV1EmployeesEmployeeIdHomeAddressesRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PostV1EmployeesEmployeeIdHomeAddressesRequest, PostV1EmployeesEmployeeIdHomeAddressesResponse> operation
@@ -258,7 +258,7 @@ public class AsyncEmployeeAddresses {
      * @return {@code CompletableFuture<GetV1HomeAddressesHomeAddressUuidResponse>} - The async response
      */
     public CompletableFuture<GetV1HomeAddressesHomeAddressUuidResponse> retrieveHomeAddress(String homeAddressUuid) {
-        return retrieveHomeAddress(homeAddressUuid, Optional.empty());
+        return retrieveHomeAddress(Optional.empty(), homeAddressUuid);
     }
 
     /**
@@ -273,16 +273,16 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param homeAddressUuid The UUID of the home address
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param homeAddressUuid The UUID of the home address
      * @return {@code CompletableFuture<GetV1HomeAddressesHomeAddressUuidResponse>} - The async response
      */
-    public CompletableFuture<GetV1HomeAddressesHomeAddressUuidResponse> retrieveHomeAddress(String homeAddressUuid, Optional<? extends GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1HomeAddressesHomeAddressUuidResponse> retrieveHomeAddress(Optional<? extends GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String homeAddressUuid) {
         GetV1HomeAddressesHomeAddressUuidRequest request =
             GetV1HomeAddressesHomeAddressUuidRequest
                 .builder()
-                .homeAddressUuid(homeAddressUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .homeAddressUuid(homeAddressUuid)
                 .build();
         AsyncRequestOperation<GetV1HomeAddressesHomeAddressUuidRequest, GetV1HomeAddressesHomeAddressUuidResponse> operation
               = new GetV1HomeAddressesHomeAddressUuid.Async(sdkConfiguration, _headers);
@@ -451,7 +451,7 @@ public class AsyncEmployeeAddresses {
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdWorkAddressesResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdWorkAddressesResponse> getWorkAddresses(String employeeId) {
-        return getWorkAddresses(employeeId, Optional.empty());
+        return getWorkAddresses(Optional.empty(), employeeId);
     }
 
     /**
@@ -464,16 +464,16 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdWorkAddressesResponse>} - The async response
      */
-    public CompletableFuture<GetV1EmployeesEmployeeIdWorkAddressesResponse> getWorkAddresses(String employeeId, Optional<? extends GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1EmployeesEmployeeIdWorkAddressesResponse> getWorkAddresses(Optional<? extends GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
         GetV1EmployeesEmployeeIdWorkAddressesRequest request =
             GetV1EmployeesEmployeeIdWorkAddressesRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .build();
         AsyncRequestOperation<GetV1EmployeesEmployeeIdWorkAddressesRequest, GetV1EmployeesEmployeeIdWorkAddressesResponse> operation
               = new GetV1EmployeesEmployeeIdWorkAddresses.Async(sdkConfiguration, _headers);
@@ -513,7 +513,7 @@ public class AsyncEmployeeAddresses {
      * @return {@code CompletableFuture<PostV1EmployeesEmployeeIdWorkAddressesResponse>} - The async response
      */
     public CompletableFuture<PostV1EmployeesEmployeeIdWorkAddressesResponse> createWorkAddress(String employeeId, PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody) {
-        return createWorkAddress(employeeId, Optional.empty(), requestBody);
+        return createWorkAddress(Optional.empty(), employeeId, requestBody);
     }
 
     /**
@@ -526,19 +526,19 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
      * @param requestBody 
      * @return {@code CompletableFuture<PostV1EmployeesEmployeeIdWorkAddressesResponse>} - The async response
      */
     public CompletableFuture<PostV1EmployeesEmployeeIdWorkAddressesResponse> createWorkAddress(
-            String employeeId, Optional<? extends PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody) {
         PostV1EmployeesEmployeeIdWorkAddressesRequest request =
             PostV1EmployeesEmployeeIdWorkAddressesRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PostV1EmployeesEmployeeIdWorkAddressesRequest, PostV1EmployeesEmployeeIdWorkAddressesResponse> operation
@@ -576,7 +576,7 @@ public class AsyncEmployeeAddresses {
      * @return {@code CompletableFuture<GetV1WorkAddressesWorkAddressUuidResponse>} - The async response
      */
     public CompletableFuture<GetV1WorkAddressesWorkAddressUuidResponse> retrieveWorkAddress(String workAddressUuid) {
-        return retrieveWorkAddress(workAddressUuid, Optional.empty());
+        return retrieveWorkAddress(Optional.empty(), workAddressUuid);
     }
 
     /**
@@ -588,16 +588,16 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param workAddressUuid The UUID of the work address
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param workAddressUuid The UUID of the work address
      * @return {@code CompletableFuture<GetV1WorkAddressesWorkAddressUuidResponse>} - The async response
      */
-    public CompletableFuture<GetV1WorkAddressesWorkAddressUuidResponse> retrieveWorkAddress(String workAddressUuid, Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1WorkAddressesWorkAddressUuidResponse> retrieveWorkAddress(Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String workAddressUuid) {
         GetV1WorkAddressesWorkAddressUuidRequest request =
             GetV1WorkAddressesWorkAddressUuidRequest
                 .builder()
-                .workAddressUuid(workAddressUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .workAddressUuid(workAddressUuid)
                 .build();
         AsyncRequestOperation<GetV1WorkAddressesWorkAddressUuidRequest, GetV1WorkAddressesWorkAddressUuidResponse> operation
               = new GetV1WorkAddressesWorkAddressUuid.Async(sdkConfiguration, _headers);
@@ -635,7 +635,7 @@ public class AsyncEmployeeAddresses {
      * @return {@code CompletableFuture<PutV1WorkAddressesWorkAddressUuidResponse>} - The async response
      */
     public CompletableFuture<PutV1WorkAddressesWorkAddressUuidResponse> updateWorkAddress(String workAddressUuid, PutV1WorkAddressesWorkAddressUuidRequestBody requestBody) {
-        return updateWorkAddress(workAddressUuid, Optional.empty(), requestBody);
+        return updateWorkAddress(Optional.empty(), workAddressUuid, requestBody);
     }
 
     /**
@@ -647,19 +647,19 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param workAddressUuid The UUID of the work address
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param workAddressUuid The UUID of the work address
      * @param requestBody 
      * @return {@code CompletableFuture<PutV1WorkAddressesWorkAddressUuidResponse>} - The async response
      */
     public CompletableFuture<PutV1WorkAddressesWorkAddressUuidResponse> updateWorkAddress(
-            String workAddressUuid, Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String workAddressUuid,
             PutV1WorkAddressesWorkAddressUuidRequestBody requestBody) {
         PutV1WorkAddressesWorkAddressUuidRequest request =
             PutV1WorkAddressesWorkAddressUuidRequest
                 .builder()
-                .workAddressUuid(workAddressUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .workAddressUuid(workAddressUuid)
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1WorkAddressesWorkAddressUuidRequest, PutV1WorkAddressesWorkAddressUuidResponse> operation
@@ -697,7 +697,7 @@ public class AsyncEmployeeAddresses {
      * @return {@code CompletableFuture<DeleteV1WorkAddressesWorkAddressUuidResponse>} - The async response
      */
     public CompletableFuture<DeleteV1WorkAddressesWorkAddressUuidResponse> deleteWorkAddress(String workAddressUuid) {
-        return deleteWorkAddress(workAddressUuid, Optional.empty());
+        return deleteWorkAddress(Optional.empty(), workAddressUuid);
     }
 
     /**
@@ -709,16 +709,16 @@ public class AsyncEmployeeAddresses {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param workAddressUuid The UUID of the work address
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param workAddressUuid The UUID of the work address
      * @return {@code CompletableFuture<DeleteV1WorkAddressesWorkAddressUuidResponse>} - The async response
      */
-    public CompletableFuture<DeleteV1WorkAddressesWorkAddressUuidResponse> deleteWorkAddress(String workAddressUuid, Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<DeleteV1WorkAddressesWorkAddressUuidResponse> deleteWorkAddress(Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String workAddressUuid) {
         DeleteV1WorkAddressesWorkAddressUuidRequest request =
             DeleteV1WorkAddressesWorkAddressUuidRequest
                 .builder()
-                .workAddressUuid(workAddressUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .workAddressUuid(workAddressUuid)
                 .build();
         AsyncRequestOperation<DeleteV1WorkAddressesWorkAddressUuidRequest, DeleteV1WorkAddressesWorkAddressUuidResponse> operation
               = new DeleteV1WorkAddressesWorkAddressUuid.Async(sdkConfiguration, _headers);

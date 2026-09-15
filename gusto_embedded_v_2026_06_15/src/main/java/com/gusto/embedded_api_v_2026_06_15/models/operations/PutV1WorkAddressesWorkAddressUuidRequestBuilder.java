@@ -16,23 +16,17 @@ import java.util.Optional;
 
 public class PutV1WorkAddressesWorkAddressUuidRequestBuilder {
 
-    private String workAddressUuid;
     private Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>>() {});
+    private String workAddressUuid;
     private PutV1WorkAddressesWorkAddressUuidRequestBody requestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1WorkAddressesWorkAddressUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1WorkAddressesWorkAddressUuidRequestBuilder workAddressUuid(String workAddressUuid) {
-        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
-        this.workAddressUuid = workAddressUuid;
-        return this;
     }
                 
     public PutV1WorkAddressesWorkAddressUuidRequestBuilder xGustoAPIVersion(PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -44,6 +38,12 @@ public class PutV1WorkAddressesWorkAddressUuidRequestBuilder {
     public PutV1WorkAddressesWorkAddressUuidRequestBuilder xGustoAPIVersion(Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutV1WorkAddressesWorkAddressUuidRequestBuilder workAddressUuid(String workAddressUuid) {
+        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
+        this.workAddressUuid = workAddressUuid;
         return this;
     }
 
@@ -59,8 +59,8 @@ public class PutV1WorkAddressesWorkAddressUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1WorkAddressesWorkAddressUuidRequest request = new PutV1WorkAddressesWorkAddressUuidRequest(workAddressUuid,
-            xGustoAPIVersion,
+        PutV1WorkAddressesWorkAddressUuidRequest request = new PutV1WorkAddressesWorkAddressUuidRequest(xGustoAPIVersion,
+            workAddressUuid,
             requestBody);
 
         return request;

@@ -34,6 +34,7 @@ public enum LeavingFor {
     NAMELY("namely"),
     ONPAY("onpay"),
     OTHER("other"),
+    OTHER_PEO("other_peo"),
     OYSTER("oyster"),
     PATRIOT("patriot"),
     PAYCHEX("paychex"),
@@ -43,6 +44,7 @@ public enum LeavingFor {
     RIPPLING("rippling"),
     SQUARE("square"),
     SUREPAYROLL("surepayroll"),
+    TOAST("toast"),
     TRINET("trinet"),
     VELOCITY_GLOBAL("velocity_global"),
     ZENEFITS("zenefits");

@@ -20,23 +20,17 @@ import java.util.concurrent.CompletableFuture;
 
 public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder {
 
-    private String employeeUuid;
     private Optional<? extends PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion>>() {});
+    private String employeeUuid;
     private EmployeeSection603HighEarnerStatusCreateRequest employeeSection603HighEarnerStatusCreateRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder employeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
-        return this;
     }
                 
     public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder xGustoAPIVersion(PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,6 +42,12 @@ public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuild
     public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder xGustoAPIVersion(Optional<? extends PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder employeeUuid(String employeeUuid) {
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
+        this.employeeUuid = employeeUuid;
         return this;
     }
 
@@ -63,8 +63,8 @@ public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuild
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest request = new PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(employeeUuid,
-            xGustoAPIVersion,
+        PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest request = new PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(xGustoAPIVersion,
+            employeeUuid,
             employeeSection603HighEarnerStatusCreateRequest);
 
         return request;

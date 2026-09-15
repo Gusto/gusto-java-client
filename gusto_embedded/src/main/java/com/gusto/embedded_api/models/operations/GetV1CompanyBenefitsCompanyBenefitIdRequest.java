@@ -43,14 +43,14 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequest {
      * employee instead of only the current benefits.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=include")
-    private Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude> include;
+    private Optional<? extends Include> include;
 
     @JsonCreator
     public GetV1CompanyBenefitsCompanyBenefitIdRequest(
             Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyBenefitId,
             Optional<Boolean> withEmployeeBenefits,
-            Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude> include) {
+            Optional<? extends Include> include) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyBenefitId, "companyBenefitId");
         Utils.checkNotNull(withEmployeeBenefits, "withEmployeeBenefits");
@@ -101,8 +101,8 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude> include() {
-        return (Optional<GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude>) include;
+    public Optional<Include> include() {
+        return (Optional<Include>) include;
     }
 
     public static Builder builder() {
@@ -166,7 +166,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequest {
      * - all_benefits: If with_employee_benefits=true, include all effective dated benefits for each
      * employee instead of only the current benefits.
      */
-    public GetV1CompanyBenefitsCompanyBenefitIdRequest withInclude(GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude include) {
+    public GetV1CompanyBenefitsCompanyBenefitIdRequest withInclude(Include include) {
         Utils.checkNotNull(include, "include");
         this.include = Optional.ofNullable(include);
         return this;
@@ -178,7 +178,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequest {
      * - all_benefits: If with_employee_benefits=true, include all effective dated benefits for each
      * employee instead of only the current benefits.
      */
-    public GetV1CompanyBenefitsCompanyBenefitIdRequest withInclude(Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude> include) {
+    public GetV1CompanyBenefitsCompanyBenefitIdRequest withInclude(Optional<? extends Include> include) {
         Utils.checkNotNull(include, "include");
         this.include = include;
         return this;
@@ -225,7 +225,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequest {
 
         private Optional<Boolean> withEmployeeBenefits = Optional.empty();
 
-        private Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude> include = Optional.empty();
+        private Optional<? extends Include> include = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -289,7 +289,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequest {
          * - all_benefits: If with_employee_benefits=true, include all effective dated benefits for each
          * employee instead of only the current benefits.
          */
-        public Builder include(GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude include) {
+        public Builder include(Include include) {
             Utils.checkNotNull(include, "include");
             this.include = Optional.ofNullable(include);
             return this;
@@ -300,7 +300,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequest {
          * - all_benefits: If with_employee_benefits=true, include all effective dated benefits for each
          * employee instead of only the current benefits.
          */
-        public Builder include(Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude> include) {
+        public Builder include(Optional<? extends Include> include) {
             Utils.checkNotNull(include, "include");
             this.include = include;
             return this;

@@ -16,23 +16,17 @@ import java.util.Optional;
 
 public class PutV1CompaniesRequestBuilder {
 
-    private String companyId;
     private Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion>>() {});
+    private String companyId;
     private PutV1CompaniesRequestBody requestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompaniesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1CompaniesRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public PutV1CompaniesRequestBuilder xGustoAPIVersion(PutV1CompaniesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -44,6 +38,12 @@ public class PutV1CompaniesRequestBuilder {
     public PutV1CompaniesRequestBuilder xGustoAPIVersion(Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutV1CompaniesRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
         return this;
     }
 
@@ -59,8 +59,8 @@ public class PutV1CompaniesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompaniesRequest request = new PutV1CompaniesRequest(companyId,
-            xGustoAPIVersion,
+        PutV1CompaniesRequest request = new PutV1CompaniesRequest(xGustoAPIVersion,
+            companyId,
             requestBody);
 
         return request;

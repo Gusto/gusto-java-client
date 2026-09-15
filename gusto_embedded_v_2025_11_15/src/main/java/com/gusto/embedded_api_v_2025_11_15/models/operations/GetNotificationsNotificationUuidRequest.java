@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetNotificationsNotificationUuidRequest {
     /**
-     * The notification entity_uuid
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=notification_uuid")
-    private String notificationUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class GetNotificationsNotificationUuidRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The notification entity_uuid
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=notification_uuid")
+    private String notificationUuid;
+
     @JsonCreator
     public GetNotificationsNotificationUuidRequest(
-            String notificationUuid,
-            Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(notificationUuid, "notificationUuid");
+            Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String notificationUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.notificationUuid = notificationUuid;
+        Utils.checkNotNull(notificationUuid, "notificationUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.notificationUuid = notificationUuid;
     }
     
     public GetNotificationsNotificationUuidRequest(
             String notificationUuid) {
-        this(notificationUuid, Optional.empty());
-    }
-
-    /**
-     * The notification entity_uuid
-     */
-    @JsonIgnore
-    public String notificationUuid() {
-        return notificationUuid;
+        this(Optional.empty(), notificationUuid);
     }
 
     /**
@@ -64,19 +56,18 @@ public class GetNotificationsNotificationUuidRequest {
         return (Optional<GetNotificationsNotificationUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The notification entity_uuid
+     */
+    @JsonIgnore
+    public String notificationUuid() {
+        return notificationUuid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The notification entity_uuid
-     */
-    public GetNotificationsNotificationUuidRequest withNotificationUuid(String notificationUuid) {
-        Utils.checkNotNull(notificationUuid, "notificationUuid");
-        this.notificationUuid = notificationUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class GetNotificationsNotificationUuidRequest {
         return this;
     }
 
+    /**
+     * The notification entity_uuid
+     */
+    public GetNotificationsNotificationUuidRequest withNotificationUuid(String notificationUuid) {
+        Utils.checkNotNull(notificationUuid, "notificationUuid");
+        this.notificationUuid = notificationUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class GetNotificationsNotificationUuidRequest {
         }
         GetNotificationsNotificationUuidRequest other = (GetNotificationsNotificationUuidRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.notificationUuid, other.notificationUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.notificationUuid, other.notificationUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            notificationUuid, xGustoAPIVersion);
+            xGustoAPIVersion, notificationUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetNotificationsNotificationUuidRequest.class,
-                "notificationUuid", notificationUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "notificationUuid", notificationUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String notificationUuid;
-
         private Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String notificationUuid;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The notification entity_uuid
-         */
-        public Builder notificationUuid(String notificationUuid) {
-            Utils.checkNotNull(notificationUuid, "notificationUuid");
-            this.notificationUuid = notificationUuid;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class GetNotificationsNotificationUuidRequest {
             return this;
         }
 
+
+        /**
+         * The notification entity_uuid
+         */
+        public Builder notificationUuid(String notificationUuid) {
+            Utils.checkNotNull(notificationUuid, "notificationUuid");
+            this.notificationUuid = notificationUuid;
+            return this;
+        }
+
         public GetNotificationsNotificationUuidRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetNotificationsNotificationUuidRequest(
-                notificationUuid, xGustoAPIVersion);
+                xGustoAPIVersion, notificationUuid);
         }
 
 

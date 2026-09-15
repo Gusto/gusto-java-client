@@ -18,12 +18,6 @@ import java.util.Optional;
 
 public class PutAddPeopleToDepartmentRequest {
     /**
-     * The UUID of the department
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=department_uuid")
-    private String departmentUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,35 +25,33 @@ public class PutAddPeopleToDepartmentRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PutAddPeopleToDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the department
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=department_uuid")
+    private String departmentUuid;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private DepartmentPeopleRequestBody departmentPeopleRequestBody;
 
     @JsonCreator
     public PutAddPeopleToDepartmentRequest(
-            String departmentUuid,
             Optional<? extends PutAddPeopleToDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String departmentUuid,
             DepartmentPeopleRequestBody departmentPeopleRequestBody) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
         Utils.checkNotNull(departmentPeopleRequestBody, "departmentPeopleRequestBody");
-        this.departmentUuid = departmentUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.departmentUuid = departmentUuid;
         this.departmentPeopleRequestBody = departmentPeopleRequestBody;
     }
     
     public PutAddPeopleToDepartmentRequest(
             String departmentUuid,
             DepartmentPeopleRequestBody departmentPeopleRequestBody) {
-        this(departmentUuid, Optional.empty(), departmentPeopleRequestBody);
-    }
-
-    /**
-     * The UUID of the department
-     */
-    @JsonIgnore
-    public String departmentUuid() {
-        return departmentUuid;
+        this(Optional.empty(), departmentUuid, departmentPeopleRequestBody);
     }
 
     /**
@@ -73,6 +65,14 @@ public class PutAddPeopleToDepartmentRequest {
         return (Optional<PutAddPeopleToDepartmentHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the department
+     */
+    @JsonIgnore
+    public String departmentUuid() {
+        return departmentUuid;
+    }
+
     @JsonIgnore
     public DepartmentPeopleRequestBody departmentPeopleRequestBody() {
         return departmentPeopleRequestBody;
@@ -82,15 +82,6 @@ public class PutAddPeopleToDepartmentRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the department
-     */
-    public PutAddPeopleToDepartmentRequest withDepartmentUuid(String departmentUuid) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
-        this.departmentUuid = departmentUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -115,6 +106,15 @@ public class PutAddPeopleToDepartmentRequest {
         return this;
     }
 
+    /**
+     * The UUID of the department
+     */
+    public PutAddPeopleToDepartmentRequest withDepartmentUuid(String departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = departmentUuid;
+        return this;
+    }
+
     public PutAddPeopleToDepartmentRequest withDepartmentPeopleRequestBody(DepartmentPeopleRequestBody departmentPeopleRequestBody) {
         Utils.checkNotNull(departmentPeopleRequestBody, "departmentPeopleRequestBody");
         this.departmentPeopleRequestBody = departmentPeopleRequestBody;
@@ -131,46 +131,36 @@ public class PutAddPeopleToDepartmentRequest {
         }
         PutAddPeopleToDepartmentRequest other = (PutAddPeopleToDepartmentRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.departmentUuid, other.departmentUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.departmentUuid, other.departmentUuid) &&
             Utils.enhancedDeepEquals(this.departmentPeopleRequestBody, other.departmentPeopleRequestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            departmentUuid, xGustoAPIVersion, departmentPeopleRequestBody);
+            xGustoAPIVersion, departmentUuid, departmentPeopleRequestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutAddPeopleToDepartmentRequest.class,
-                "departmentUuid", departmentUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "departmentUuid", departmentUuid,
                 "departmentPeopleRequestBody", departmentPeopleRequestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String departmentUuid;
-
         private Optional<? extends PutAddPeopleToDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String departmentUuid;
 
         private DepartmentPeopleRequestBody departmentPeopleRequestBody;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the department
-         */
-        public Builder departmentUuid(String departmentUuid) {
-            Utils.checkNotNull(departmentUuid, "departmentUuid");
-            this.departmentUuid = departmentUuid;
-            return this;
         }
 
 
@@ -197,6 +187,16 @@ public class PutAddPeopleToDepartmentRequest {
         }
 
 
+        /**
+         * The UUID of the department
+         */
+        public Builder departmentUuid(String departmentUuid) {
+            Utils.checkNotNull(departmentUuid, "departmentUuid");
+            this.departmentUuid = departmentUuid;
+            return this;
+        }
+
+
         public Builder departmentPeopleRequestBody(DepartmentPeopleRequestBody departmentPeopleRequestBody) {
             Utils.checkNotNull(departmentPeopleRequestBody, "departmentPeopleRequestBody");
             this.departmentPeopleRequestBody = departmentPeopleRequestBody;
@@ -209,7 +209,7 @@ public class PutAddPeopleToDepartmentRequest {
             }
 
             return new PutAddPeopleToDepartmentRequest(
-                departmentUuid, xGustoAPIVersion, departmentPeopleRequestBody);
+                xGustoAPIVersion, departmentUuid, departmentPeopleRequestBody);
         }
 
 

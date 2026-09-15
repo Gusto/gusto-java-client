@@ -11,10 +11,10 @@ import java.util.Optional;
 /**
  * EntityType
  * 
- * <p>The type of entity to create
+ * <p>The type of entity to act on.
  */
 public enum EntityType {
-    EMPLOYEE("employee");
+    PAYROLL("payroll");
 
     @JsonValue
     private final String value;
