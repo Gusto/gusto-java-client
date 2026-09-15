@@ -34,8 +34,8 @@ public class Application {
             .build();
 
         GetV1CompanyIndustryResponse res = sdk.industrySelection().get()
-                .companyId("<id>")
                 .xGustoAPIVersion(GetV1CompanyIndustryHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .call();
 
         if (res.industry().isPresent()) {
@@ -49,8 +49,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompanyIndustryHeaderXGustoAPIVersion>](../../models/operations/GetV1CompanyIndustryHeaderXGustoAPIVersion.md)                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 
 ### Response
 
@@ -98,8 +98,8 @@ public class Application {
             .build();
 
         PutV1CompanyIndustryResponse res = sdk.industrySelection().update()
-                .companyId("<id>")
                 .xGustoAPIVersion(PutV1CompanyIndustryHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .companyIndustrySelectionRequiredBody(CompanyIndustrySelectionRequiredBody.builder()
                     .naicsCode("<value>")
                     .build())
@@ -135,8 +135,8 @@ public class Application {
             .build();
 
         PutV1CompanyIndustryResponse res = sdk.industrySelection().update()
-                .companyId("<id>")
                 .xGustoAPIVersion(PutV1CompanyIndustryHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .companyIndustrySelectionRequiredBody(CompanyIndustrySelectionRequiredBody.builder()
                     .naicsCode("611420")
                     .title("Computer Training")
@@ -174,8 +174,8 @@ public class Application {
             .build();
 
         PutV1CompanyIndustryResponse res = sdk.industrySelection().update()
-                .companyId("<id>")
                 .xGustoAPIVersion(PutV1CompanyIndustryHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .companyIndustrySelectionRequiredBody(CompanyIndustrySelectionRequiredBody.builder()
                     .naicsCode("<value>")
                     .build())
@@ -210,8 +210,8 @@ public class Application {
             .build();
 
         PutV1CompanyIndustryResponse res = sdk.industrySelection().update()
-                .companyId("<id>")
                 .xGustoAPIVersion(PutV1CompanyIndustryHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .companyIndustrySelectionRequiredBody(CompanyIndustrySelectionRequiredBody.builder()
                     .naicsCode("<value>")
                     .build())
@@ -228,8 +228,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1CompanyIndustryHeaderXGustoAPIVersion>](../../models/operations/PutV1CompanyIndustryHeaderXGustoAPIVersion.md)                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `companyIndustrySelectionRequiredBody`                                                                                                                                                                                       | [CompanyIndustrySelectionRequiredBody](../../models/components/CompanyIndustrySelectionRequiredBody.md)                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response

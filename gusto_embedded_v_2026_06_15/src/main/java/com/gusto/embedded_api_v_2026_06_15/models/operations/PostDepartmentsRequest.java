@@ -18,12 +18,6 @@ import java.util.Optional;
 
 public class PostDepartmentsRequest {
     /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
-    private String companyUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,35 +25,33 @@ public class PostDepartmentsRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PostDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
+    private String companyUuid;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private DepartmentCreateRequestBody departmentCreateRequestBody;
 
     @JsonCreator
     public PostDepartmentsRequest(
-            String companyUuid,
             Optional<? extends PostDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyUuid,
             DepartmentCreateRequestBody departmentCreateRequestBody) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(departmentCreateRequestBody, "departmentCreateRequestBody");
-        this.companyUuid = companyUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyUuid = companyUuid;
         this.departmentCreateRequestBody = departmentCreateRequestBody;
     }
     
     public PostDepartmentsRequest(
             String companyUuid,
             DepartmentCreateRequestBody departmentCreateRequestBody) {
-        this(companyUuid, Optional.empty(), departmentCreateRequestBody);
-    }
-
-    /**
-     * The UUID of the company
-     */
-    @JsonIgnore
-    public String companyUuid() {
-        return companyUuid;
+        this(Optional.empty(), companyUuid, departmentCreateRequestBody);
     }
 
     /**
@@ -73,6 +65,14 @@ public class PostDepartmentsRequest {
         return (Optional<PostDepartmentsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the company
+     */
+    @JsonIgnore
+    public String companyUuid() {
+        return companyUuid;
+    }
+
     @JsonIgnore
     public DepartmentCreateRequestBody departmentCreateRequestBody() {
         return departmentCreateRequestBody;
@@ -82,15 +82,6 @@ public class PostDepartmentsRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public PostDepartmentsRequest withCompanyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -115,6 +106,15 @@ public class PostDepartmentsRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public PostDepartmentsRequest withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
     public PostDepartmentsRequest withDepartmentCreateRequestBody(DepartmentCreateRequestBody departmentCreateRequestBody) {
         Utils.checkNotNull(departmentCreateRequestBody, "departmentCreateRequestBody");
         this.departmentCreateRequestBody = departmentCreateRequestBody;
@@ -131,46 +131,36 @@ public class PostDepartmentsRequest {
         }
         PostDepartmentsRequest other = (PostDepartmentsRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.departmentCreateRequestBody, other.departmentCreateRequestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, xGustoAPIVersion, departmentCreateRequestBody);
+            xGustoAPIVersion, companyUuid, departmentCreateRequestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostDepartmentsRequest.class,
-                "companyUuid", companyUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "companyUuid", companyUuid,
                 "departmentCreateRequestBody", departmentCreateRequestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String companyUuid;
-
         private Optional<? extends PostDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String companyUuid;
 
         private DepartmentCreateRequestBody departmentCreateRequestBody;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyUuid(String companyUuid) {
-            Utils.checkNotNull(companyUuid, "companyUuid");
-            this.companyUuid = companyUuid;
-            return this;
         }
 
 
@@ -197,6 +187,16 @@ public class PostDepartmentsRequest {
         }
 
 
+        /**
+         * The UUID of the company
+         */
+        public Builder companyUuid(String companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = companyUuid;
+            return this;
+        }
+
+
         public Builder departmentCreateRequestBody(DepartmentCreateRequestBody departmentCreateRequestBody) {
             Utils.checkNotNull(departmentCreateRequestBody, "departmentCreateRequestBody");
             this.departmentCreateRequestBody = departmentCreateRequestBody;
@@ -209,7 +209,7 @@ public class PostDepartmentsRequest {
             }
 
             return new PostDepartmentsRequest(
-                companyUuid, xGustoAPIVersion, departmentCreateRequestBody);
+                xGustoAPIVersion, companyUuid, departmentCreateRequestBody);
         }
 
 

@@ -84,6 +84,137 @@ public class AsyncPaySchedules {
 
 
     /**
+     * Get pay periods for a company
+     * 
+     * <p>Pay periods are the foundation of payroll. Compensation, time &amp; attendance, taxes, and expense
+     * reports all rely on when they happened.
+     * 
+     * <p>To begin submitting information for a given payroll, we need to agree on the time period.
+     * 
+     * <p>By default, this endpoint returns pay periods starting from 6 months ago to the date today. Use the
+     * `start_date` and `end_date` parameters to change the scope of the response. End dates can be up to 3
+     * months in the future and there is no limit on start dates.
+     * 
+     * <p>Starting in version 2023-04-01, the `eligible_employees` attribute was removed from the response.
+     * The eligible employees for a payroll are determined by the employee_compensations returned from the
+     * [PUT
+     * /v1/companies/{company_id}/payrolls/{payroll_id}/prepare](ref:put-v1-companies-company_id-payrolls-payroll_id-prepare)
+     * endpoint.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetV1CompaniesCompanyIdPayPeriodsRequestBuilder getPayPeriods() {
+        return new GetV1CompaniesCompanyIdPayPeriodsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get pay periods for a company
+     * 
+     * <p>Pay periods are the foundation of payroll. Compensation, time &amp; attendance, taxes, and expense
+     * reports all rely on when they happened.
+     * 
+     * <p>To begin submitting information for a given payroll, we need to agree on the time period.
+     * 
+     * <p>By default, this endpoint returns pay periods starting from 6 months ago to the date today. Use the
+     * `start_date` and `end_date` parameters to change the scope of the response. End dates can be up to 3
+     * months in the future and there is no limit on start dates.
+     * 
+     * <p>Starting in version 2023-04-01, the `eligible_employees` attribute was removed from the response.
+     * The eligible employees for a payroll are determined by the employee_compensations returned from the
+     * [PUT
+     * /v1/companies/{company_id}/payrolls/{payroll_id}/prepare](ref:put-v1-companies-company_id-payrolls-payroll_id-prepare)
+     * endpoint.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayPeriodsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdPayPeriodsResponse> getPayPeriods(GetV1CompaniesCompanyIdPayPeriodsRequest request) {
+        AsyncRequestOperation<GetV1CompaniesCompanyIdPayPeriodsRequest, GetV1CompaniesCompanyIdPayPeriodsResponse> operation
+              = new GetV1CompaniesCompanyIdPayPeriods.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get termination pay periods for a company
+     * 
+     * <p>When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final
+     * payroll, their last pay period will appear on the list.
+     * 
+     * <p>This endpoint returns the unprocessed pay periods for past and future terminated employees in a
+     * given company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequestBuilder getUnprocessedTerminationPeriods() {
+        return new GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get termination pay periods for a company
+     * 
+     * <p>When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final
+     * payroll, their last pay period will appear on the list.
+     * 
+     * <p>This endpoint returns the unprocessed pay periods for past and future terminated employees in a
+     * given company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse> getUnprocessedTerminationPeriods(String companyId) {
+        return getUnprocessedTerminationPeriods(Optional.empty(), companyId);
+    }
+
+    /**
+     * Get termination pay periods for a company
+     * 
+     * <p>When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final
+     * payroll, their last pay period will appear on the list.
+     * 
+     * <p>This endpoint returns the unprocessed pay periods for past and future terminated employees in a
+     * given company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse> getUnprocessedTerminationPeriods(Optional<? extends GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
+        GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest request =
+            GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .build();
+        AsyncRequestOperation<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest, GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse> operation
+              = new GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriods.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
      * Get the pay schedules for a company
      * 
      * <p>Returns all pay schedules for a company. The pay schedule object captures the details of when
@@ -509,198 +640,6 @@ public class AsyncPaySchedules {
 
 
     /**
-     * Get pay periods for a company
-     * 
-     * <p>Pay periods are the foundation of payroll. Compensation, time &amp; attendance, taxes, and expense
-     * reports all rely on when they happened.
-     * 
-     * <p>To begin submitting information for a given payroll, we need to agree on the time period.
-     * 
-     * <p>By default, this endpoint returns pay periods starting from 6 months ago to the date today. Use the
-     * `start_date` and `end_date` parameters to change the scope of the response. End dates can be up to 3
-     * months in the future and there is no limit on start dates.
-     * 
-     * <p>Starting in version 2023-04-01, the `eligible_employees` attribute was removed from the response.
-     * The eligible employees for a payroll are determined by the employee_compensations returned from the
-     * [PUT
-     * /v1/companies/{company_id}/payrolls/{payroll_id}/prepare](ref:put-v1-companies-company_id-payrolls-payroll_id-prepare)
-     * endpoint.
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public GetV1CompaniesCompanyIdPayPeriodsRequestBuilder getPayPeriods() {
-        return new GetV1CompaniesCompanyIdPayPeriodsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get pay periods for a company
-     * 
-     * <p>Pay periods are the foundation of payroll. Compensation, time &amp; attendance, taxes, and expense
-     * reports all rely on when they happened.
-     * 
-     * <p>To begin submitting information for a given payroll, we need to agree on the time period.
-     * 
-     * <p>By default, this endpoint returns pay periods starting from 6 months ago to the date today. Use the
-     * `start_date` and `end_date` parameters to change the scope of the response. End dates can be up to 3
-     * months in the future and there is no limit on start dates.
-     * 
-     * <p>Starting in version 2023-04-01, the `eligible_employees` attribute was removed from the response.
-     * The eligible employees for a payroll are determined by the employee_compensations returned from the
-     * [PUT
-     * /v1/companies/{company_id}/payrolls/{payroll_id}/prepare](ref:put-v1-companies-company_id-payrolls-payroll_id-prepare)
-     * endpoint.
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param request The request object containing all the parameters for the API call.
-     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayPeriodsResponse>} - The async response
-     */
-    public CompletableFuture<GetV1CompaniesCompanyIdPayPeriodsResponse> getPayPeriods(GetV1CompaniesCompanyIdPayPeriodsRequest request) {
-        AsyncRequestOperation<GetV1CompaniesCompanyIdPayPeriodsRequest, GetV1CompaniesCompanyIdPayPeriodsResponse> operation
-              = new GetV1CompaniesCompanyIdPayPeriods.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get termination pay periods for a company
-     * 
-     * <p>When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final
-     * payroll, their last pay period will appear on the list.
-     * 
-     * <p>This endpoint returns the unprocessed pay periods for past and future terminated employees in a
-     * given company.
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequestBuilder getUnprocessedTerminationPeriods() {
-        return new GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get termination pay periods for a company
-     * 
-     * <p>When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final
-     * payroll, their last pay period will appear on the list.
-     * 
-     * <p>This endpoint returns the unprocessed pay periods for past and future terminated employees in a
-     * given company.
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse>} - The async response
-     */
-    public CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse> getUnprocessedTerminationPeriods(String companyId) {
-        return getUnprocessedTerminationPeriods(Optional.empty(), companyId);
-    }
-
-    /**
-     * Get termination pay periods for a company
-     * 
-     * <p>When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final
-     * payroll, their last pay period will appear on the list.
-     * 
-     * <p>This endpoint returns the unprocessed pay periods for past and future terminated employees in a
-     * given company.
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyId The UUID of the company
-     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse>} - The async response
-     */
-    public CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse> getUnprocessedTerminationPeriods(Optional<? extends GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
-        GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest request =
-            GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .companyId(companyId)
-                .build();
-        AsyncRequestOperation<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest, GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse> operation
-              = new GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriods.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get pay schedule assignments for a company
-     * 
-     * <p>This endpoint returns the current pay schedule assignment for a company, with pay schedule and
-     * employee/department mappings depending on the pay schedule type.
-     * 
-     * <p>scope: `pay_schedules:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequestBuilder getAssignments() {
-        return new GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get pay schedule assignments for a company
-     * 
-     * <p>This endpoint returns the current pay schedule assignment for a company, with pay schedule and
-     * employee/department mappings depending on the pay schedule type.
-     * 
-     * <p>scope: `pay_schedules:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse>} - The async response
-     */
-    public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> getAssignments(String companyId) {
-        return getAssignments(Optional.empty(), companyId);
-    }
-
-    /**
-     * Get pay schedule assignments for a company
-     * 
-     * <p>This endpoint returns the current pay schedule assignment for a company, with pay schedule and
-     * employee/department mappings depending on the pay schedule type.
-     * 
-     * <p>scope: `pay_schedules:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyId The UUID of the company
-     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse>} - The async response
-     */
-    public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> getAssignments(Optional<? extends GetV1CompaniesCompanyIdPaySchedulesAssignmentsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
-        GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest request =
-            GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .companyId(companyId)
-                .build();
-        AsyncRequestOperation<GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest, GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> operation
-              = new GetV1CompaniesCompanyIdPaySchedulesAssignments.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
      * Preview pay schedule assignments for a company
      * 
      * <p>This endpoint returns the employee changes, including pay period and transition pay periods, for
@@ -833,6 +772,67 @@ public class AsyncPaySchedules {
                 .build();
         AsyncRequestOperation<PostV1CompaniesCompanyIdPaySchedulesAssignRequest, PostV1CompaniesCompanyIdPaySchedulesAssignResponse> operation
               = new PostV1CompaniesCompanyIdPaySchedulesAssign.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get pay schedule assignments for a company
+     * 
+     * <p>This endpoint returns the current pay schedule assignment for a company, with pay schedule and
+     * employee/department mappings depending on the pay schedule type.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequestBuilder getAssignments() {
+        return new GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get pay schedule assignments for a company
+     * 
+     * <p>This endpoint returns the current pay schedule assignment for a company, with pay schedule and
+     * employee/department mappings depending on the pay schedule type.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> getAssignments(String companyId) {
+        return getAssignments(Optional.empty(), companyId);
+    }
+
+    /**
+     * Get pay schedule assignments for a company
+     * 
+     * <p>This endpoint returns the current pay schedule assignment for a company, with pay schedule and
+     * employee/department mappings depending on the pay schedule type.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> getAssignments(Optional<? extends GetV1CompaniesCompanyIdPaySchedulesAssignmentsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
+        GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest request =
+            GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .build();
+        AsyncRequestOperation<GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest, GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> operation
+              = new GetV1CompaniesCompanyIdPaySchedulesAssignments.Async(sdkConfiguration, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

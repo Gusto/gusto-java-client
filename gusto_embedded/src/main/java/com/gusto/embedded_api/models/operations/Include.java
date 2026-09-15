@@ -8,13 +8,15 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Include
+ * 
+ * <p>Available options:
+ * - all_benefits: If with_employee_benefits=true, include all effective dated benefits for each
+ * employee instead of only the current benefits.
+ */
 public enum Include {
-    ALL_COMPENSATIONS("all_compensations"),
-    ALL_HOME_ADDRESSES("all_home_addresses"),
-    COMPANY_NAME("company_name"),
-    CURRENT_HOME_ADDRESS("current_home_address"),
-    CUSTOM_FIELDS("custom_fields"),
-    PORTAL_INVITATIONS("portal_invitations");
+    ALL_BENEFITS("all_benefits");
 
     @JsonValue
     private final String value;

@@ -26,7 +26,7 @@ public class ContractorPaymentDetailsList {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payment_method")
-    private Optional<? extends PaymentMethod> paymentMethod;
+    private Optional<? extends ContractorPaymentDetailsListPaymentMethod> paymentMethod;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -55,7 +55,7 @@ public class ContractorPaymentDetailsList {
     @JsonCreator
     public ContractorPaymentDetailsList(
             @JsonProperty("contractor_uuid") Optional<String> contractorUuid,
-            @JsonProperty("payment_method") Optional<? extends PaymentMethod> paymentMethod,
+            @JsonProperty("payment_method") Optional<? extends ContractorPaymentDetailsListPaymentMethod> paymentMethod,
             @JsonProperty("first_name") Optional<String> firstName,
             @JsonProperty("last_name") Optional<String> lastName,
             @JsonProperty("split_by") JsonNullable<? extends SplitBy> splitBy,
@@ -86,8 +86,8 @@ public class ContractorPaymentDetailsList {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PaymentMethod> paymentMethod() {
-        return (Optional<PaymentMethod>) paymentMethod;
+    public Optional<ContractorPaymentDetailsListPaymentMethod> paymentMethod() {
+        return (Optional<ContractorPaymentDetailsListPaymentMethod>) paymentMethod;
     }
 
     @JsonIgnore
@@ -135,14 +135,14 @@ public class ContractorPaymentDetailsList {
         return this;
     }
 
-    public ContractorPaymentDetailsList withPaymentMethod(PaymentMethod paymentMethod) {
+    public ContractorPaymentDetailsList withPaymentMethod(ContractorPaymentDetailsListPaymentMethod paymentMethod) {
         Utils.checkNotNull(paymentMethod, "paymentMethod");
         this.paymentMethod = Optional.ofNullable(paymentMethod);
         return this;
     }
 
 
-    public ContractorPaymentDetailsList withPaymentMethod(Optional<? extends PaymentMethod> paymentMethod) {
+    public ContractorPaymentDetailsList withPaymentMethod(Optional<? extends ContractorPaymentDetailsListPaymentMethod> paymentMethod) {
         Utils.checkNotNull(paymentMethod, "paymentMethod");
         this.paymentMethod = paymentMethod;
         return this;
@@ -249,7 +249,7 @@ public class ContractorPaymentDetailsList {
 
         private Optional<String> contractorUuid = Optional.empty();
 
-        private Optional<? extends PaymentMethod> paymentMethod = Optional.empty();
+        private Optional<? extends ContractorPaymentDetailsListPaymentMethod> paymentMethod = Optional.empty();
 
         private Optional<String> firstName = Optional.empty();
 
@@ -277,13 +277,13 @@ public class ContractorPaymentDetailsList {
         }
 
 
-        public Builder paymentMethod(PaymentMethod paymentMethod) {
+        public Builder paymentMethod(ContractorPaymentDetailsListPaymentMethod paymentMethod) {
             Utils.checkNotNull(paymentMethod, "paymentMethod");
             this.paymentMethod = Optional.ofNullable(paymentMethod);
             return this;
         }
 
-        public Builder paymentMethod(Optional<? extends PaymentMethod> paymentMethod) {
+        public Builder paymentMethod(Optional<? extends ContractorPaymentDetailsListPaymentMethod> paymentMethod) {
             Utils.checkNotNull(paymentMethod, "paymentMethod");
             this.paymentMethod = paymentMethod;
             return this;

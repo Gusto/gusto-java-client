@@ -74,6 +74,163 @@ public class AsyncContractorPaymentGroups {
 
 
     /**
+     * Preview a contractor payment group
+     * 
+     * <p>Preview a group of contractor payments. Request will validate inputs and return preview of the
+     * contractor payment group including the expected `debit_date`. The `uuid` field will be null in the
+     * response.
+     * 
+     * <p>The returned `creation_token` is a required parameter in order to create the contractor payment
+     * group.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBuilder preview() {
+        return new PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Preview a contractor payment group
+     * 
+     * <p>Preview a group of contractor payments. Request will validate inputs and return preview of the
+     * contractor payment group including the expected `debit_date`. The `uuid` field will be null in the
+     * response.
+     * 
+     * <p>The returned `creation_token` is a required parameter in order to create the contractor payment
+     * group.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @param requestBody 
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse> preview(String companyId, PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody requestBody) {
+        return preview(Optional.empty(), companyId, requestBody);
+    }
+
+    /**
+     * Preview a contractor payment group
+     * 
+     * <p>Preview a group of contractor payments. Request will validate inputs and return preview of the
+     * contractor payment group including the expected `debit_date`. The `uuid` field will be null in the
+     * response.
+     * 
+     * <p>The returned `creation_token` is a required parameter in order to create the contractor payment
+     * group.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param requestBody 
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse> preview(
+            Optional<? extends PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody requestBody) {
+        PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest request =
+            PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .requestBody(requestBody)
+                .build();
+        AsyncRequestOperation<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest, PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse> operation
+              = new PostV1CompaniesCompanyIdContractorPaymentGroupsPreview.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Fund a contractor payment group [DEMO]
+     * 
+     * <p>&gt; 🚧 Demo action
+     * &gt; This action is only available in the Demo environment
+     * 
+     * <p>Simulate funding a contractor payment group. Funding only occurs automatically in the production
+     * environment when bank transactions are generated. Use this action in the demo environment to
+     * transition a contractor payment group's `status` from `Unfunded` to `Funded`.
+     * 
+     * <p>A `Funded` status is required for generating a contractor payment receipt.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder fund() {
+        return new PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Fund a contractor payment group [DEMO]
+     * 
+     * <p>&gt; 🚧 Demo action
+     * &gt; This action is only available in the Demo environment
+     * 
+     * <p>Simulate funding a contractor payment group. Funding only occurs automatically in the production
+     * environment when bank transactions are generated. Use this action in the demo environment to
+     * transition a contractor payment group's `status` from `Unfunded` to `Funded`.
+     * 
+     * <p>A `Funded` status is required for generating a contractor payment receipt.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param contractorPaymentGroupUuid The UUID of the contractor payment group
+     * @return {@code CompletableFuture<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse>} - The async response
+     */
+    public CompletableFuture<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse> fund(String contractorPaymentGroupUuid) {
+        return fund(Optional.empty(), contractorPaymentGroupUuid);
+    }
+
+    /**
+     * Fund a contractor payment group [DEMO]
+     * 
+     * <p>&gt; 🚧 Demo action
+     * &gt; This action is only available in the Demo environment
+     * 
+     * <p>Simulate funding a contractor payment group. Funding only occurs automatically in the production
+     * environment when bank transactions are generated. Use this action in the demo environment to
+     * transition a contractor payment group's `status` from `Unfunded` to `Funded`.
+     * 
+     * <p>A `Funded` status is required for generating a contractor payment receipt.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorPaymentGroupUuid The UUID of the contractor payment group
+     * @return {@code CompletableFuture<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse>} - The async response
+     */
+    public CompletableFuture<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse> fund(Optional<? extends PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentGroupUuid) {
+        PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest request =
+            PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .contractorPaymentGroupUuid(contractorPaymentGroupUuid)
+                .build();
+        AsyncRequestOperation<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest, PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse> operation
+              = new PutV1ContractorPaymentGroupsContractorPaymentGroupIdFund.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
      * Get contractor payment groups for a company
      * 
      * <p>Returns a list of minimal contractor payment groups within a given time period, including totals but
@@ -177,84 +334,6 @@ public class AsyncContractorPaymentGroups {
 
 
     /**
-     * Preview a contractor payment group
-     * 
-     * <p>Preview a group of contractor payments. Request will validate inputs and return preview of the
-     * contractor payment group including the expected `debit_date`. The `uuid` field will be null in the
-     * response.
-     * 
-     * <p>The returned `creation_token` is a required parameter in order to create the contractor payment
-     * group.
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBuilder preview() {
-        return new PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Preview a contractor payment group
-     * 
-     * <p>Preview a group of contractor payments. Request will validate inputs and return preview of the
-     * contractor payment group including the expected `debit_date`. The `uuid` field will be null in the
-     * response.
-     * 
-     * <p>The returned `creation_token` is a required parameter in order to create the contractor payment
-     * group.
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param requestBody 
-     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse>} - The async response
-     */
-    public CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse> preview(String companyId, PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody requestBody) {
-        return preview(Optional.empty(), companyId, requestBody);
-    }
-
-    /**
-     * Preview a contractor payment group
-     * 
-     * <p>Preview a group of contractor payments. Request will validate inputs and return preview of the
-     * contractor payment group including the expected `debit_date`. The `uuid` field will be null in the
-     * response.
-     * 
-     * <p>The returned `creation_token` is a required parameter in order to create the contractor payment
-     * group.
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyId The UUID of the company
-     * @param requestBody 
-     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse>} - The async response
-     */
-    public CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse> preview(
-            Optional<? extends PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
-            PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody requestBody) {
-        PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest request =
-            PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .companyId(companyId)
-                .requestBody(requestBody)
-                .build();
-        AsyncRequestOperation<PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest, PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse> operation
-              = new PostV1CompaniesCompanyIdContractorPaymentGroupsPreview.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
      * Get a contractor payment group
      * 
      * <p>Returns a contractor payment group with all associated contractor payments.
@@ -282,7 +361,7 @@ public class AsyncContractorPaymentGroups {
      * @return {@code CompletableFuture<GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse>} - The async response
      */
     public CompletableFuture<GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse> get(String contractorPaymentGroupUuid) {
-        return get(contractorPaymentGroupUuid, Optional.empty());
+        return get(Optional.empty(), contractorPaymentGroupUuid);
     }
 
     /**
@@ -294,16 +373,16 @@ public class AsyncContractorPaymentGroups {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param contractorPaymentGroupUuid The UUID of the contractor payment group
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorPaymentGroupUuid The UUID of the contractor payment group
      * @return {@code CompletableFuture<GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse>} - The async response
      */
-    public CompletableFuture<GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse> get(String contractorPaymentGroupUuid, Optional<? extends GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse> get(Optional<? extends GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentGroupUuid) {
         GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest request =
             GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest
                 .builder()
-                .contractorPaymentGroupUuid(contractorPaymentGroupUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .contractorPaymentGroupUuid(contractorPaymentGroupUuid)
                 .build();
         AsyncRequestOperation<GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest, GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse> operation
               = new GetV1ContractorPaymentGroupsContractorPaymentGroupId.Async(sdkConfiguration, _headers);
@@ -342,7 +421,7 @@ public class AsyncContractorPaymentGroups {
      * @return {@code CompletableFuture<DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse>} - The async response
      */
     public CompletableFuture<DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse> delete(String contractorPaymentGroupUuid) {
-        return delete(contractorPaymentGroupUuid, Optional.empty());
+        return delete(Optional.empty(), contractorPaymentGroupUuid);
     }
 
     /**
@@ -355,98 +434,19 @@ public class AsyncContractorPaymentGroups {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param contractorPaymentGroupUuid The UUID of the contractor payment group
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorPaymentGroupUuid The UUID of the contractor payment group
      * @return {@code CompletableFuture<DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse>} - The async response
      */
-    public CompletableFuture<DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse> delete(String contractorPaymentGroupUuid, Optional<? extends DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse> delete(Optional<? extends DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentGroupUuid) {
         DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest request =
             DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest
                 .builder()
-                .contractorPaymentGroupUuid(contractorPaymentGroupUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .contractorPaymentGroupUuid(contractorPaymentGroupUuid)
                 .build();
         AsyncRequestOperation<DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest, DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse> operation
               = new DeleteV1ContractorPaymentGroupsContractorPaymentGroupId.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Fund a contractor payment group [DEMO]
-     * 
-     * <p>&gt; 🚧 Demo action
-     * &gt; This action is only available in the Demo environment
-     * 
-     * <p>Simulate funding a contractor payment group. Funding only occurs automatically in the production
-     * environment when bank transactions are generated. Use this action in the demo environment to
-     * transition a contractor payment group's `status` from `Unfunded` to `Funded`.
-     * 
-     * <p>A `Funded` status is required for generating a contractor payment receipt.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder fund() {
-        return new PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Fund a contractor payment group [DEMO]
-     * 
-     * <p>&gt; 🚧 Demo action
-     * &gt; This action is only available in the Demo environment
-     * 
-     * <p>Simulate funding a contractor payment group. Funding only occurs automatically in the production
-     * environment when bank transactions are generated. Use this action in the demo environment to
-     * transition a contractor payment group's `status` from `Unfunded` to `Funded`.
-     * 
-     * <p>A `Funded` status is required for generating a contractor payment receipt.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param contractorPaymentGroupUuid The UUID of the contractor payment group
-     * @return {@code CompletableFuture<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse>} - The async response
-     */
-    public CompletableFuture<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse> fund(String contractorPaymentGroupUuid) {
-        return fund(contractorPaymentGroupUuid, Optional.empty());
-    }
-
-    /**
-     * Fund a contractor payment group [DEMO]
-     * 
-     * <p>&gt; 🚧 Demo action
-     * &gt; This action is only available in the Demo environment
-     * 
-     * <p>Simulate funding a contractor payment group. Funding only occurs automatically in the production
-     * environment when bank transactions are generated. Use this action in the demo environment to
-     * transition a contractor payment group's `status` from `Unfunded` to `Funded`.
-     * 
-     * <p>A `Funded` status is required for generating a contractor payment receipt.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param contractorPaymentGroupUuid The UUID of the contractor payment group
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @return {@code CompletableFuture<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse>} - The async response
-     */
-    public CompletableFuture<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse> fund(String contractorPaymentGroupUuid, Optional<? extends PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest request =
-            PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest
-                .builder()
-                .contractorPaymentGroupUuid(contractorPaymentGroupUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .build();
-        AsyncRequestOperation<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest, PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse> operation
-              = new PutV1ContractorPaymentGroupsContractorPaymentGroupIdFund.Async(sdkConfiguration, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -480,7 +480,7 @@ public class AsyncContractorPaymentGroups {
      * @return {@code CompletableFuture<GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse>} - The async response
      */
     public CompletableFuture<GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse> getV1ContractorPaymentGroupsIdPartnerDisbursements(String id) {
-        return getV1ContractorPaymentGroupsIdPartnerDisbursements(id, Optional.empty());
+        return getV1ContractorPaymentGroupsIdPartnerDisbursements(Optional.empty(), id);
     }
 
     /**
@@ -492,16 +492,16 @@ public class AsyncContractorPaymentGroups {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param id The UUID of the contractor payment group
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param id The UUID of the contractor payment group
      * @return {@code CompletableFuture<GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse>} - The async response
      */
-    public CompletableFuture<GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse> getV1ContractorPaymentGroupsIdPartnerDisbursements(String id, Optional<? extends GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse> getV1ContractorPaymentGroupsIdPartnerDisbursements(Optional<? extends GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String id) {
         GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest request =
             GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest
                 .builder()
-                .id(id)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .id(id)
                 .build();
         AsyncRequestOperation<GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest, GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse> operation
               = new GetV1ContractorPaymentGroupsIdPartnerDisbursements.Async(sdkConfiguration, _headers);
@@ -538,7 +538,7 @@ public class AsyncContractorPaymentGroups {
      * @return {@code CompletableFuture<PatchV1ContractorPaymentGroupsIdPartnerDisbursementsResponse>} - The async response
      */
     public CompletableFuture<PatchV1ContractorPaymentGroupsIdPartnerDisbursementsResponse> patchV1ContractorPaymentGroupsIdPartnerDisbursements(String id) {
-        return patchV1ContractorPaymentGroupsIdPartnerDisbursements(id, Optional.empty(), Optional.empty());
+        return patchV1ContractorPaymentGroupsIdPartnerDisbursements(Optional.empty(), id, Optional.empty());
     }
 
     /**
@@ -550,19 +550,19 @@ public class AsyncContractorPaymentGroups {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param id The UUID of the contractor payment group
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param id The UUID of the contractor payment group
      * @param requestBody 
      * @return {@code CompletableFuture<PatchV1ContractorPaymentGroupsIdPartnerDisbursementsResponse>} - The async response
      */
     public CompletableFuture<PatchV1ContractorPaymentGroupsIdPartnerDisbursementsResponse> patchV1ContractorPaymentGroupsIdPartnerDisbursements(
-            String id, Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String id,
             Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBody> requestBody) {
         PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest request =
             PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest
                 .builder()
-                .id(id)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .id(id)
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest, PatchV1ContractorPaymentGroupsIdPartnerDisbursementsResponse> operation

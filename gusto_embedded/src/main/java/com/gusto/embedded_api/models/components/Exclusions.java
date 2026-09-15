@@ -12,89 +12,156 @@ import com.gusto.embedded_api.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 
 public class Exclusions {
     /**
-     * The external ID of the excluded item(s).
+     * The index of this payroll in the original POST batch array.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("external_id")
-    private Optional<String> externalId;
+    @JsonProperty("idx")
+    private Optional<Long> idx;
 
     /**
-     * The exclusion category.
+     * The type of entity this exclusion represents.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("entity_type")
+    private Optional<? extends PayrollBatchResultsEntityType> entityType;
+
+    /**
+     * The UUID of the excluded payroll.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("uuid")
+    private Optional<String> uuid;
+
+    /**
+     * The UUID of the company asserted to own the payroll.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("company_uuid")
+    private Optional<String> companyUuid;
+
+    /**
+     * Always `failed` for an excluded payroll.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("status")
+    private Optional<? extends PayrollBatchResultsExclusionsStatus> status;
+
+    /**
+     * Machine-readable category for why the payroll was excluded.
+     * - `not_found`: the payroll does not exist, or is not associated with a company the partner is mapped
+     * to
+     * - `duplicate_operation`: the same payroll UUID appeared more than once in the request; only the
+     * first occurrence is processed
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("category")
-    private Optional<String> category;
+    private Optional<? extends PayrollBatchResultsCategory> category;
 
     /**
-     * Human-readable explanation for exclusion.
+     * Human-readable explanation for the exclusion.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("message")
     private Optional<String> message;
 
-    /**
-     * Number of items affected by this exclusion.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("item_count")
-    private Optional<Long> itemCount;
-
     @JsonCreator
     public Exclusions(
-            @JsonProperty("external_id") Optional<String> externalId,
-            @JsonProperty("category") Optional<String> category,
-            @JsonProperty("message") Optional<String> message,
-            @JsonProperty("item_count") Optional<Long> itemCount) {
-        Utils.checkNotNull(externalId, "externalId");
+            @JsonProperty("idx") Optional<Long> idx,
+            @JsonProperty("entity_type") Optional<? extends PayrollBatchResultsEntityType> entityType,
+            @JsonProperty("uuid") Optional<String> uuid,
+            @JsonProperty("company_uuid") Optional<String> companyUuid,
+            @JsonProperty("status") Optional<? extends PayrollBatchResultsExclusionsStatus> status,
+            @JsonProperty("category") Optional<? extends PayrollBatchResultsCategory> category,
+            @JsonProperty("message") Optional<String> message) {
+        Utils.checkNotNull(idx, "idx");
+        Utils.checkNotNull(entityType, "entityType");
+        Utils.checkNotNull(uuid, "uuid");
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        Utils.checkNotNull(status, "status");
         Utils.checkNotNull(category, "category");
         Utils.checkNotNull(message, "message");
-        Utils.checkNotNull(itemCount, "itemCount");
-        this.externalId = externalId;
+        this.idx = idx;
+        this.entityType = entityType;
+        this.uuid = uuid;
+        this.companyUuid = companyUuid;
+        this.status = status;
         this.category = category;
         this.message = message;
-        this.itemCount = itemCount;
     }
     
     public Exclusions() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
     }
 
     /**
-     * The external ID of the excluded item(s).
+     * The index of this payroll in the original POST batch array.
      */
     @JsonIgnore
-    public Optional<String> externalId() {
-        return externalId;
+    public Optional<Long> idx() {
+        return idx;
     }
 
     /**
-     * The exclusion category.
+     * The type of entity this exclusion represents.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> category() {
-        return category;
+    public Optional<PayrollBatchResultsEntityType> entityType() {
+        return (Optional<PayrollBatchResultsEntityType>) entityType;
     }
 
     /**
-     * Human-readable explanation for exclusion.
+     * The UUID of the excluded payroll.
+     */
+    @JsonIgnore
+    public Optional<String> uuid() {
+        return uuid;
+    }
+
+    /**
+     * The UUID of the company asserted to own the payroll.
+     */
+    @JsonIgnore
+    public Optional<String> companyUuid() {
+        return companyUuid;
+    }
+
+    /**
+     * Always `failed` for an excluded payroll.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PayrollBatchResultsExclusionsStatus> status() {
+        return (Optional<PayrollBatchResultsExclusionsStatus>) status;
+    }
+
+    /**
+     * Machine-readable category for why the payroll was excluded.
+     * - `not_found`: the payroll does not exist, or is not associated with a company the partner is mapped
+     * to
+     * - `duplicate_operation`: the same payroll UUID appeared more than once in the request; only the
+     * first occurrence is processed
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PayrollBatchResultsCategory> category() {
+        return (Optional<PayrollBatchResultsCategory>) category;
+    }
+
+    /**
+     * Human-readable explanation for the exclusion.
      */
     @JsonIgnore
     public Optional<String> message() {
         return message;
-    }
-
-    /**
-     * Number of items affected by this exclusion.
-     */
-    @JsonIgnore
-    public Optional<Long> itemCount() {
-        return itemCount;
     }
 
     public static Builder builder() {
@@ -103,28 +170,108 @@ public class Exclusions {
 
 
     /**
-     * The external ID of the excluded item(s).
+     * The index of this payroll in the original POST batch array.
      */
-    public Exclusions withExternalId(String externalId) {
-        Utils.checkNotNull(externalId, "externalId");
-        this.externalId = Optional.ofNullable(externalId);
+    public Exclusions withIdx(long idx) {
+        Utils.checkNotNull(idx, "idx");
+        this.idx = Optional.ofNullable(idx);
         return this;
     }
 
 
     /**
-     * The external ID of the excluded item(s).
+     * The index of this payroll in the original POST batch array.
      */
-    public Exclusions withExternalId(Optional<String> externalId) {
-        Utils.checkNotNull(externalId, "externalId");
-        this.externalId = externalId;
+    public Exclusions withIdx(Optional<Long> idx) {
+        Utils.checkNotNull(idx, "idx");
+        this.idx = idx;
         return this;
     }
 
     /**
-     * The exclusion category.
+     * The type of entity this exclusion represents.
      */
-    public Exclusions withCategory(String category) {
+    public Exclusions withEntityType(PayrollBatchResultsEntityType entityType) {
+        Utils.checkNotNull(entityType, "entityType");
+        this.entityType = Optional.ofNullable(entityType);
+        return this;
+    }
+
+
+    /**
+     * The type of entity this exclusion represents.
+     */
+    public Exclusions withEntityType(Optional<? extends PayrollBatchResultsEntityType> entityType) {
+        Utils.checkNotNull(entityType, "entityType");
+        this.entityType = entityType;
+        return this;
+    }
+
+    /**
+     * The UUID of the excluded payroll.
+     */
+    public Exclusions withUuid(String uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = Optional.ofNullable(uuid);
+        return this;
+    }
+
+
+    /**
+     * The UUID of the excluded payroll.
+     */
+    public Exclusions withUuid(Optional<String> uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = uuid;
+        return this;
+    }
+
+    /**
+     * The UUID of the company asserted to own the payroll.
+     */
+    public Exclusions withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = Optional.ofNullable(companyUuid);
+        return this;
+    }
+
+
+    /**
+     * The UUID of the company asserted to own the payroll.
+     */
+    public Exclusions withCompanyUuid(Optional<String> companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
+    /**
+     * Always `failed` for an excluded payroll.
+     */
+    public Exclusions withStatus(PayrollBatchResultsExclusionsStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = Optional.ofNullable(status);
+        return this;
+    }
+
+
+    /**
+     * Always `failed` for an excluded payroll.
+     */
+    public Exclusions withStatus(Optional<? extends PayrollBatchResultsExclusionsStatus> status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
+        return this;
+    }
+
+    /**
+     * Machine-readable category for why the payroll was excluded.
+     * - `not_found`: the payroll does not exist, or is not associated with a company the partner is mapped
+     * to
+     * - `duplicate_operation`: the same payroll UUID appeared more than once in the request; only the
+     * first occurrence is processed
+     */
+    public Exclusions withCategory(PayrollBatchResultsCategory category) {
         Utils.checkNotNull(category, "category");
         this.category = Optional.ofNullable(category);
         return this;
@@ -132,16 +279,20 @@ public class Exclusions {
 
 
     /**
-     * The exclusion category.
+     * Machine-readable category for why the payroll was excluded.
+     * - `not_found`: the payroll does not exist, or is not associated with a company the partner is mapped
+     * to
+     * - `duplicate_operation`: the same payroll UUID appeared more than once in the request; only the
+     * first occurrence is processed
      */
-    public Exclusions withCategory(Optional<String> category) {
+    public Exclusions withCategory(Optional<? extends PayrollBatchResultsCategory> category) {
         Utils.checkNotNull(category, "category");
         this.category = category;
         return this;
     }
 
     /**
-     * Human-readable explanation for exclusion.
+     * Human-readable explanation for the exclusion.
      */
     public Exclusions withMessage(String message) {
         Utils.checkNotNull(message, "message");
@@ -151,30 +302,11 @@ public class Exclusions {
 
 
     /**
-     * Human-readable explanation for exclusion.
+     * Human-readable explanation for the exclusion.
      */
     public Exclusions withMessage(Optional<String> message) {
         Utils.checkNotNull(message, "message");
         this.message = message;
-        return this;
-    }
-
-    /**
-     * Number of items affected by this exclusion.
-     */
-    public Exclusions withItemCount(long itemCount) {
-        Utils.checkNotNull(itemCount, "itemCount");
-        this.itemCount = Optional.ofNullable(itemCount);
-        return this;
-    }
-
-
-    /**
-     * Number of items affected by this exclusion.
-     */
-    public Exclusions withItemCount(Optional<Long> itemCount) {
-        Utils.checkNotNull(itemCount, "itemCount");
-        this.itemCount = itemCount;
         return this;
     }
 
@@ -188,38 +320,51 @@ public class Exclusions {
         }
         Exclusions other = (Exclusions) o;
         return 
-            Utils.enhancedDeepEquals(this.externalId, other.externalId) &&
+            Utils.enhancedDeepEquals(this.idx, other.idx) &&
+            Utils.enhancedDeepEquals(this.entityType, other.entityType) &&
+            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
+            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.category, other.category) &&
-            Utils.enhancedDeepEquals(this.message, other.message) &&
-            Utils.enhancedDeepEquals(this.itemCount, other.itemCount);
+            Utils.enhancedDeepEquals(this.message, other.message);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            externalId, category, message,
-            itemCount);
+            idx, entityType, uuid,
+            companyUuid, status, category,
+            message);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Exclusions.class,
-                "externalId", externalId,
+                "idx", idx,
+                "entityType", entityType,
+                "uuid", uuid,
+                "companyUuid", companyUuid,
+                "status", status,
                 "category", category,
-                "message", message,
-                "itemCount", itemCount);
+                "message", message);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> externalId = Optional.empty();
+        private Optional<Long> idx = Optional.empty();
 
-        private Optional<String> category = Optional.empty();
+        private Optional<? extends PayrollBatchResultsEntityType> entityType = Optional.empty();
+
+        private Optional<String> uuid = Optional.empty();
+
+        private Optional<String> companyUuid = Optional.empty();
+
+        private Optional<? extends PayrollBatchResultsExclusionsStatus> status = Optional.empty();
+
+        private Optional<? extends PayrollBatchResultsCategory> category = Optional.empty();
 
         private Optional<String> message = Optional.empty();
-
-        private Optional<Long> itemCount = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -227,37 +372,121 @@ public class Exclusions {
 
 
         /**
-         * The external ID of the excluded item(s).
+         * The index of this payroll in the original POST batch array.
          */
-        public Builder externalId(String externalId) {
-            Utils.checkNotNull(externalId, "externalId");
-            this.externalId = Optional.ofNullable(externalId);
+        public Builder idx(long idx) {
+            Utils.checkNotNull(idx, "idx");
+            this.idx = Optional.ofNullable(idx);
             return this;
         }
 
         /**
-         * The external ID of the excluded item(s).
+         * The index of this payroll in the original POST batch array.
          */
-        public Builder externalId(Optional<String> externalId) {
-            Utils.checkNotNull(externalId, "externalId");
-            this.externalId = externalId;
+        public Builder idx(Optional<Long> idx) {
+            Utils.checkNotNull(idx, "idx");
+            this.idx = idx;
             return this;
         }
 
 
         /**
-         * The exclusion category.
+         * The type of entity this exclusion represents.
          */
-        public Builder category(String category) {
+        public Builder entityType(PayrollBatchResultsEntityType entityType) {
+            Utils.checkNotNull(entityType, "entityType");
+            this.entityType = Optional.ofNullable(entityType);
+            return this;
+        }
+
+        /**
+         * The type of entity this exclusion represents.
+         */
+        public Builder entityType(Optional<? extends PayrollBatchResultsEntityType> entityType) {
+            Utils.checkNotNull(entityType, "entityType");
+            this.entityType = entityType;
+            return this;
+        }
+
+
+        /**
+         * The UUID of the excluded payroll.
+         */
+        public Builder uuid(String uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = Optional.ofNullable(uuid);
+            return this;
+        }
+
+        /**
+         * The UUID of the excluded payroll.
+         */
+        public Builder uuid(Optional<String> uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = uuid;
+            return this;
+        }
+
+
+        /**
+         * The UUID of the company asserted to own the payroll.
+         */
+        public Builder companyUuid(String companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = Optional.ofNullable(companyUuid);
+            return this;
+        }
+
+        /**
+         * The UUID of the company asserted to own the payroll.
+         */
+        public Builder companyUuid(Optional<String> companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = companyUuid;
+            return this;
+        }
+
+
+        /**
+         * Always `failed` for an excluded payroll.
+         */
+        public Builder status(PayrollBatchResultsExclusionsStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = Optional.ofNullable(status);
+            return this;
+        }
+
+        /**
+         * Always `failed` for an excluded payroll.
+         */
+        public Builder status(Optional<? extends PayrollBatchResultsExclusionsStatus> status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
+            return this;
+        }
+
+
+        /**
+         * Machine-readable category for why the payroll was excluded.
+         * - `not_found`: the payroll does not exist, or is not associated with a company the partner is mapped
+         * to
+         * - `duplicate_operation`: the same payroll UUID appeared more than once in the request; only the
+         * first occurrence is processed
+         */
+        public Builder category(PayrollBatchResultsCategory category) {
             Utils.checkNotNull(category, "category");
             this.category = Optional.ofNullable(category);
             return this;
         }
 
         /**
-         * The exclusion category.
+         * Machine-readable category for why the payroll was excluded.
+         * - `not_found`: the payroll does not exist, or is not associated with a company the partner is mapped
+         * to
+         * - `duplicate_operation`: the same payroll UUID appeared more than once in the request; only the
+         * first occurrence is processed
          */
-        public Builder category(Optional<String> category) {
+        public Builder category(Optional<? extends PayrollBatchResultsCategory> category) {
             Utils.checkNotNull(category, "category");
             this.category = category;
             return this;
@@ -265,7 +494,7 @@ public class Exclusions {
 
 
         /**
-         * Human-readable explanation for exclusion.
+         * Human-readable explanation for the exclusion.
          */
         public Builder message(String message) {
             Utils.checkNotNull(message, "message");
@@ -274,7 +503,7 @@ public class Exclusions {
         }
 
         /**
-         * Human-readable explanation for exclusion.
+         * Human-readable explanation for the exclusion.
          */
         public Builder message(Optional<String> message) {
             Utils.checkNotNull(message, "message");
@@ -282,30 +511,12 @@ public class Exclusions {
             return this;
         }
 
-
-        /**
-         * Number of items affected by this exclusion.
-         */
-        public Builder itemCount(long itemCount) {
-            Utils.checkNotNull(itemCount, "itemCount");
-            this.itemCount = Optional.ofNullable(itemCount);
-            return this;
-        }
-
-        /**
-         * Number of items affected by this exclusion.
-         */
-        public Builder itemCount(Optional<Long> itemCount) {
-            Utils.checkNotNull(itemCount, "itemCount");
-            this.itemCount = itemCount;
-            return this;
-        }
-
         public Exclusions build() {
 
             return new Exclusions(
-                externalId, category, message,
-                itemCount);
+                idx, entityType, uuid,
+                companyUuid, status, category,
+                message);
         }
 
     }

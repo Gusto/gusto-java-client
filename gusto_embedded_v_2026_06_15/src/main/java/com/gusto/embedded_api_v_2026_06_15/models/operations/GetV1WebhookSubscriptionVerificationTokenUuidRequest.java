@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetV1WebhookSubscriptionVerificationTokenUuidRequest {
     /**
-     * The webhook subscription UUID.
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=webhook_subscription_uuid")
-    private String webhookSubscriptionUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class GetV1WebhookSubscriptionVerificationTokenUuidRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The webhook subscription UUID.
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=webhook_subscription_uuid")
+    private String webhookSubscriptionUuid;
+
     @JsonCreator
     public GetV1WebhookSubscriptionVerificationTokenUuidRequest(
-            String webhookSubscriptionUuid,
-            Optional<? extends GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
+            Optional<? extends GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String webhookSubscriptionUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
+        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
     }
     
     public GetV1WebhookSubscriptionVerificationTokenUuidRequest(
             String webhookSubscriptionUuid) {
-        this(webhookSubscriptionUuid, Optional.empty());
-    }
-
-    /**
-     * The webhook subscription UUID.
-     */
-    @JsonIgnore
-    public String webhookSubscriptionUuid() {
-        return webhookSubscriptionUuid;
+        this(Optional.empty(), webhookSubscriptionUuid);
     }
 
     /**
@@ -64,19 +56,18 @@ public class GetV1WebhookSubscriptionVerificationTokenUuidRequest {
         return (Optional<GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The webhook subscription UUID.
+     */
+    @JsonIgnore
+    public String webhookSubscriptionUuid() {
+        return webhookSubscriptionUuid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The webhook subscription UUID.
-     */
-    public GetV1WebhookSubscriptionVerificationTokenUuidRequest withWebhookSubscriptionUuid(String webhookSubscriptionUuid) {
-        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
-        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class GetV1WebhookSubscriptionVerificationTokenUuidRequest {
         return this;
     }
 
+    /**
+     * The webhook subscription UUID.
+     */
+    public GetV1WebhookSubscriptionVerificationTokenUuidRequest withWebhookSubscriptionUuid(String webhookSubscriptionUuid) {
+        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
+        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class GetV1WebhookSubscriptionVerificationTokenUuidRequest {
         }
         GetV1WebhookSubscriptionVerificationTokenUuidRequest other = (GetV1WebhookSubscriptionVerificationTokenUuidRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.webhookSubscriptionUuid, other.webhookSubscriptionUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.webhookSubscriptionUuid, other.webhookSubscriptionUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            webhookSubscriptionUuid, xGustoAPIVersion);
+            xGustoAPIVersion, webhookSubscriptionUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1WebhookSubscriptionVerificationTokenUuidRequest.class,
-                "webhookSubscriptionUuid", webhookSubscriptionUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "webhookSubscriptionUuid", webhookSubscriptionUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String webhookSubscriptionUuid;
-
         private Optional<? extends GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String webhookSubscriptionUuid;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The webhook subscription UUID.
-         */
-        public Builder webhookSubscriptionUuid(String webhookSubscriptionUuid) {
-            Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
-            this.webhookSubscriptionUuid = webhookSubscriptionUuid;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class GetV1WebhookSubscriptionVerificationTokenUuidRequest {
             return this;
         }
 
+
+        /**
+         * The webhook subscription UUID.
+         */
+        public Builder webhookSubscriptionUuid(String webhookSubscriptionUuid) {
+            Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
+            this.webhookSubscriptionUuid = webhookSubscriptionUuid;
+            return this;
+        }
+
         public GetV1WebhookSubscriptionVerificationTokenUuidRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1WebhookSubscriptionVerificationTokenUuidRequest(
-                webhookSubscriptionUuid, xGustoAPIVersion);
+                xGustoAPIVersion, webhookSubscriptionUuid);
         }
 
 

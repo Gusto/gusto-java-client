@@ -53,7 +53,7 @@ public class AchTransaction {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("recipient_type")
-    private JsonNullable<? extends AchTransactionRecipientType> recipientType;
+    private JsonNullable<? extends RecipientType> recipientType;
 
     /**
      * Unique identifier for the recipient associated with the ACH transaction
@@ -128,7 +128,7 @@ public class AchTransaction {
             @JsonProperty("company_uuid") Optional<String> companyUuid,
             @JsonProperty("payment_event_type") Optional<? extends PaymentEventType> paymentEventType,
             @JsonProperty("payment_event_uuid") Optional<String> paymentEventUuid,
-            @JsonProperty("recipient_type") JsonNullable<? extends AchTransactionRecipientType> recipientType,
+            @JsonProperty("recipient_type") JsonNullable<? extends RecipientType> recipientType,
             @JsonProperty("recipient_uuid") Optional<String> recipientUuid,
             @JsonProperty("error_code") JsonNullable<String> errorCode,
             @JsonProperty("transaction_type") Optional<String> transactionType,
@@ -215,8 +215,8 @@ public class AchTransaction {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<AchTransactionRecipientType> recipientType() {
-        return (JsonNullable<AchTransactionRecipientType>) recipientType;
+    public JsonNullable<RecipientType> recipientType() {
+        return (JsonNullable<RecipientType>) recipientType;
     }
 
     /**
@@ -371,7 +371,7 @@ public class AchTransaction {
     /**
      * The type of recipient associated with the ACH transaction
      */
-    public AchTransaction withRecipientType(AchTransactionRecipientType recipientType) {
+    public AchTransaction withRecipientType(RecipientType recipientType) {
         Utils.checkNotNull(recipientType, "recipientType");
         this.recipientType = JsonNullable.of(recipientType);
         return this;
@@ -380,7 +380,7 @@ public class AchTransaction {
     /**
      * The type of recipient associated with the ACH transaction
      */
-    public AchTransaction withRecipientType(JsonNullable<? extends AchTransactionRecipientType> recipientType) {
+    public AchTransaction withRecipientType(JsonNullable<? extends RecipientType> recipientType) {
         Utils.checkNotNull(recipientType, "recipientType");
         this.recipientType = recipientType;
         return this;
@@ -630,7 +630,7 @@ public class AchTransaction {
 
         private Optional<String> paymentEventUuid = Optional.empty();
 
-        private JsonNullable<? extends AchTransactionRecipientType> recipientType = JsonNullable.undefined();
+        private JsonNullable<? extends RecipientType> recipientType = JsonNullable.undefined();
 
         private Optional<String> recipientUuid = Optional.empty();
 
@@ -725,7 +725,7 @@ public class AchTransaction {
         /**
          * The type of recipient associated with the ACH transaction
          */
-        public Builder recipientType(AchTransactionRecipientType recipientType) {
+        public Builder recipientType(RecipientType recipientType) {
             Utils.checkNotNull(recipientType, "recipientType");
             this.recipientType = JsonNullable.of(recipientType);
             return this;
@@ -734,7 +734,7 @@ public class AchTransaction {
         /**
          * The type of recipient associated with the ACH transaction
          */
-        public Builder recipientType(JsonNullable<? extends AchTransactionRecipientType> recipientType) {
+        public Builder recipientType(JsonNullable<? extends RecipientType> recipientType) {
             Utils.checkNotNull(recipientType, "recipientType");
             this.recipientType = recipientType;
             return this;

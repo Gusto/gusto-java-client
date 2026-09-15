@@ -67,6 +67,16 @@ public class ContractorCreateRequestBody {
     private Optional<String> email;
 
     /**
+     * The work email address of the contractor. This is provided to support syncing users between our
+     * system and yours. You may not use this email address for any other purpose (e.g.
+     * 
+     * <p>marketing).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("work_email")
+    private Optional<String> workEmail;
+
+    /**
      * The contractor’s first name.
      * This attribute is required for `Individual` contractors and will be ignored for `Business`
      * contractors.
@@ -158,6 +168,7 @@ public class ContractorCreateRequestBody {
             @JsonProperty("hourly_rate") Optional<String> hourlyRate,
             @JsonProperty("self_onboarding") Optional<Boolean> selfOnboarding,
             @JsonProperty("email") Optional<String> email,
+            @JsonProperty("work_email") Optional<String> workEmail,
             @JsonProperty("first_name") Optional<String> firstName,
             @JsonProperty("last_name") Optional<String> lastName,
             @JsonProperty("middle_initial") Optional<String> middleInitial,
@@ -173,6 +184,7 @@ public class ContractorCreateRequestBody {
         Utils.checkNotNull(hourlyRate, "hourlyRate");
         Utils.checkNotNull(selfOnboarding, "selfOnboarding");
         Utils.checkNotNull(email, "email");
+        Utils.checkNotNull(workEmail, "workEmail");
         Utils.checkNotNull(firstName, "firstName");
         Utils.checkNotNull(lastName, "lastName");
         Utils.checkNotNull(middleInitial, "middleInitial");
@@ -188,6 +200,7 @@ public class ContractorCreateRequestBody {
         this.hourlyRate = hourlyRate;
         this.selfOnboarding = selfOnboarding;
         this.email = email;
+        this.workEmail = workEmail;
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleInitial = middleInitial;
@@ -205,8 +218,9 @@ public class ContractorCreateRequestBody {
         this(Optional.empty(), wageType, startDate,
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), JsonNullable.undefined(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), JsonNullable.undefined(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -258,6 +272,17 @@ public class ContractorCreateRequestBody {
     @JsonIgnore
     public Optional<String> email() {
         return email;
+    }
+
+    /**
+     * The work email address of the contractor. This is provided to support syncing users between our
+     * system and yours. You may not use this email address for any other purpose (e.g.
+     * 
+     * <p>marketing).
+     */
+    @JsonIgnore
+    public Optional<String> workEmail() {
+        return workEmail;
     }
 
     /**
@@ -453,6 +478,31 @@ public class ContractorCreateRequestBody {
     public ContractorCreateRequestBody withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
+        return this;
+    }
+
+    /**
+     * The work email address of the contractor. This is provided to support syncing users between our
+     * system and yours. You may not use this email address for any other purpose (e.g.
+     * 
+     * <p>marketing).
+     */
+    public ContractorCreateRequestBody withWorkEmail(String workEmail) {
+        Utils.checkNotNull(workEmail, "workEmail");
+        this.workEmail = Optional.ofNullable(workEmail);
+        return this;
+    }
+
+
+    /**
+     * The work email address of the contractor. This is provided to support syncing users between our
+     * system and yours. You may not use this email address for any other purpose (e.g.
+     * 
+     * <p>marketing).
+     */
+    public ContractorCreateRequestBody withWorkEmail(Optional<String> workEmail) {
+        Utils.checkNotNull(workEmail, "workEmail");
+        this.workEmail = workEmail;
         return this;
     }
 
@@ -684,6 +734,7 @@ public class ContractorCreateRequestBody {
             Utils.enhancedDeepEquals(this.hourlyRate, other.hourlyRate) &&
             Utils.enhancedDeepEquals(this.selfOnboarding, other.selfOnboarding) &&
             Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.workEmail, other.workEmail) &&
             Utils.enhancedDeepEquals(this.firstName, other.firstName) &&
             Utils.enhancedDeepEquals(this.lastName, other.lastName) &&
             Utils.enhancedDeepEquals(this.middleInitial, other.middleInitial) &&
@@ -700,9 +751,10 @@ public class ContractorCreateRequestBody {
         return Utils.enhancedHash(
             type, wageType, startDate,
             hourlyRate, selfOnboarding, email,
-            firstName, lastName, middleInitial,
-            fileNewHireReport, workState, ssn,
-            businessName, ein, isActive);
+            workEmail, firstName, lastName,
+            middleInitial, fileNewHireReport, workState,
+            ssn, businessName, ein,
+            isActive);
     }
     
     @Override
@@ -714,6 +766,7 @@ public class ContractorCreateRequestBody {
                 "hourlyRate", hourlyRate,
                 "selfOnboarding", selfOnboarding,
                 "email", email,
+                "workEmail", workEmail,
                 "firstName", firstName,
                 "lastName", lastName,
                 "middleInitial", middleInitial,
@@ -739,6 +792,8 @@ public class ContractorCreateRequestBody {
         private Optional<Boolean> selfOnboarding;
 
         private Optional<String> email = Optional.empty();
+
+        private Optional<String> workEmail = Optional.empty();
 
         private Optional<String> firstName = Optional.empty();
 
@@ -859,6 +914,31 @@ public class ContractorCreateRequestBody {
         public Builder email(Optional<String> email) {
             Utils.checkNotNull(email, "email");
             this.email = email;
+            return this;
+        }
+
+
+        /**
+         * The work email address of the contractor. This is provided to support syncing users between our
+         * system and yours. You may not use this email address for any other purpose (e.g.
+         * 
+         * <p>marketing).
+         */
+        public Builder workEmail(String workEmail) {
+            Utils.checkNotNull(workEmail, "workEmail");
+            this.workEmail = Optional.ofNullable(workEmail);
+            return this;
+        }
+
+        /**
+         * The work email address of the contractor. This is provided to support syncing users between our
+         * system and yours. You may not use this email address for any other purpose (e.g.
+         * 
+         * <p>marketing).
+         */
+        public Builder workEmail(Optional<String> workEmail) {
+            Utils.checkNotNull(workEmail, "workEmail");
+            this.workEmail = workEmail;
             return this;
         }
 
@@ -1089,9 +1169,10 @@ public class ContractorCreateRequestBody {
             return new ContractorCreateRequestBody(
                 type, wageType, startDate,
                 hourlyRate, selfOnboarding, email,
-                firstName, lastName, middleInitial,
-                fileNewHireReport, workState, ssn,
-                businessName, ein, isActive);
+                workEmail, firstName, lastName,
+                middleInitial, fileNewHireReport, workState,
+                ssn, businessName, ein,
+                isActive);
         }
 
 

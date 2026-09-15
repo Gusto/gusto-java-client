@@ -17,23 +17,17 @@ import java.util.Optional;
 
 public class PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private PartnerManagedCompanyMigrateRequest partnerManagedCompanyMigrateRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder xGustoAPIVersion(PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -45,6 +39,12 @@ public class PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder {
     public PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder xGustoAPIVersion(Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidMigrateHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
         return this;
     }
 
@@ -60,8 +60,8 @@ public class PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest request = new PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest(companyUuid,
-            xGustoAPIVersion,
+        PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest request = new PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest(xGustoAPIVersion,
+            companyUuid,
             partnerManagedCompanyMigrateRequest);
 
         return request;

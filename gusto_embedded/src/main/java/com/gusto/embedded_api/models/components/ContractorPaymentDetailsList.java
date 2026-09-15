@@ -45,12 +45,12 @@ public class ContractorPaymentDetailsList {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("split_by")
-    private JsonNullable<? extends ContractorPaymentDetailsListSplitBy> splitBy;
+    private JsonNullable<? extends SplitBy> splitBy;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("splits")
-    private JsonNullable<? extends List<ContractorPaymentDetailsListSplits>> splits;
+    private JsonNullable<? extends List<Splits>> splits;
 
     @JsonCreator
     public ContractorPaymentDetailsList(
@@ -58,8 +58,8 @@ public class ContractorPaymentDetailsList {
             @JsonProperty("payment_method") Optional<? extends ContractorPaymentDetailsListPaymentMethod> paymentMethod,
             @JsonProperty("first_name") Optional<String> firstName,
             @JsonProperty("last_name") Optional<String> lastName,
-            @JsonProperty("split_by") JsonNullable<? extends ContractorPaymentDetailsListSplitBy> splitBy,
-            @JsonProperty("splits") JsonNullable<? extends List<ContractorPaymentDetailsListSplits>> splits) {
+            @JsonProperty("split_by") JsonNullable<? extends SplitBy> splitBy,
+            @JsonProperty("splits") JsonNullable<? extends List<Splits>> splits) {
         Utils.checkNotNull(contractorUuid, "contractorUuid");
         Utils.checkNotNull(paymentMethod, "paymentMethod");
         Utils.checkNotNull(firstName, "firstName");
@@ -107,14 +107,14 @@ public class ContractorPaymentDetailsList {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<ContractorPaymentDetailsListSplitBy> splitBy() {
-        return (JsonNullable<ContractorPaymentDetailsListSplitBy>) splitBy;
+    public JsonNullable<SplitBy> splitBy() {
+        return (JsonNullable<SplitBy>) splitBy;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<List<ContractorPaymentDetailsListSplits>> splits() {
-        return (JsonNullable<List<ContractorPaymentDetailsListSplits>>) splits;
+    public JsonNullable<List<Splits>> splits() {
+        return (JsonNullable<List<Splits>>) splits;
     }
 
     public static Builder builder() {
@@ -179,7 +179,7 @@ public class ContractorPaymentDetailsList {
      * up to exactly 100. If split_by is Amount, then the amount represents cents and the last split amount
      * must be `null` to capture the remainder.
      */
-    public ContractorPaymentDetailsList withSplitBy(ContractorPaymentDetailsListSplitBy splitBy) {
+    public ContractorPaymentDetailsList withSplitBy(SplitBy splitBy) {
         Utils.checkNotNull(splitBy, "splitBy");
         this.splitBy = JsonNullable.of(splitBy);
         return this;
@@ -190,19 +190,19 @@ public class ContractorPaymentDetailsList {
      * up to exactly 100. If split_by is Amount, then the amount represents cents and the last split amount
      * must be `null` to capture the remainder.
      */
-    public ContractorPaymentDetailsList withSplitBy(JsonNullable<? extends ContractorPaymentDetailsListSplitBy> splitBy) {
+    public ContractorPaymentDetailsList withSplitBy(JsonNullable<? extends SplitBy> splitBy) {
         Utils.checkNotNull(splitBy, "splitBy");
         this.splitBy = splitBy;
         return this;
     }
 
-    public ContractorPaymentDetailsList withSplits(List<ContractorPaymentDetailsListSplits> splits) {
+    public ContractorPaymentDetailsList withSplits(List<Splits> splits) {
         Utils.checkNotNull(splits, "splits");
         this.splits = JsonNullable.of(splits);
         return this;
     }
 
-    public ContractorPaymentDetailsList withSplits(JsonNullable<? extends List<ContractorPaymentDetailsListSplits>> splits) {
+    public ContractorPaymentDetailsList withSplits(JsonNullable<? extends List<Splits>> splits) {
         Utils.checkNotNull(splits, "splits");
         this.splits = splits;
         return this;
@@ -255,9 +255,9 @@ public class ContractorPaymentDetailsList {
 
         private Optional<String> lastName = Optional.empty();
 
-        private JsonNullable<? extends ContractorPaymentDetailsListSplitBy> splitBy = JsonNullable.undefined();
+        private JsonNullable<? extends SplitBy> splitBy = JsonNullable.undefined();
 
-        private JsonNullable<? extends List<ContractorPaymentDetailsListSplits>> splits = JsonNullable.undefined();
+        private JsonNullable<? extends List<Splits>> splits = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -321,7 +321,7 @@ public class ContractorPaymentDetailsList {
          * up to exactly 100. If split_by is Amount, then the amount represents cents and the last split amount
          * must be `null` to capture the remainder.
          */
-        public Builder splitBy(ContractorPaymentDetailsListSplitBy splitBy) {
+        public Builder splitBy(SplitBy splitBy) {
             Utils.checkNotNull(splitBy, "splitBy");
             this.splitBy = JsonNullable.of(splitBy);
             return this;
@@ -332,20 +332,20 @@ public class ContractorPaymentDetailsList {
          * up to exactly 100. If split_by is Amount, then the amount represents cents and the last split amount
          * must be `null` to capture the remainder.
          */
-        public Builder splitBy(JsonNullable<? extends ContractorPaymentDetailsListSplitBy> splitBy) {
+        public Builder splitBy(JsonNullable<? extends SplitBy> splitBy) {
             Utils.checkNotNull(splitBy, "splitBy");
             this.splitBy = splitBy;
             return this;
         }
 
 
-        public Builder splits(List<ContractorPaymentDetailsListSplits> splits) {
+        public Builder splits(List<Splits> splits) {
             Utils.checkNotNull(splits, "splits");
             this.splits = JsonNullable.of(splits);
             return this;
         }
 
-        public Builder splits(JsonNullable<? extends List<ContractorPaymentDetailsListSplits>> splits) {
+        public Builder splits(JsonNullable<? extends List<Splits>> splits) {
             Utils.checkNotNull(splits, "splits");
             this.splits = splits;
             return this;
