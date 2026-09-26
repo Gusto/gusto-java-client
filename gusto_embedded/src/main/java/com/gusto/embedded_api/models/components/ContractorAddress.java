@@ -14,6 +14,8 @@ import com.gusto.embedded_api.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -73,6 +75,14 @@ public class ContractorAddress {
     @JsonProperty("version")
     private Optional<String> version;
 
+    /**
+     * An array of warning objects that provide additional information about the address. Warnings do not
+     * prevent the address from being saved.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("warnings")
+    private Optional<? extends List<WarningObject>> warnings;
+
     @JsonCreator
     public ContractorAddress(
             @JsonProperty("contractor_uuid") Optional<String> contractorUuid,
@@ -83,7 +93,8 @@ public class ContractorAddress {
             @JsonProperty("zip") JsonNullable<String> zip,
             @JsonProperty("country") JsonNullable<String> country,
             @JsonProperty("active") Optional<Boolean> active,
-            @JsonProperty("version") Optional<String> version) {
+            @JsonProperty("version") Optional<String> version,
+            @JsonProperty("warnings") Optional<? extends List<WarningObject>> warnings) {
         Utils.checkNotNull(contractorUuid, "contractorUuid");
         Utils.checkNotNull(street1, "street1");
         Utils.checkNotNull(street2, "street2");
@@ -93,6 +104,7 @@ public class ContractorAddress {
         Utils.checkNotNull(country, "country");
         Utils.checkNotNull(active, "active");
         Utils.checkNotNull(version, "version");
+        Utils.checkNotNull(warnings, "warnings");
         this.contractorUuid = contractorUuid;
         this.street1 = street1;
         this.street2 = street2;
@@ -102,12 +114,14 @@ public class ContractorAddress {
         this.country = country;
         this.active = active;
         this.version = version;
+        this.warnings = warnings;
     }
     
     public ContractorAddress() {
         this(Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
-            JsonNullable.undefined(), Optional.empty(), Optional.empty());
+            JsonNullable.undefined(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -165,6 +179,16 @@ public class ContractorAddress {
     @JsonIgnore
     public Optional<String> version() {
         return version;
+    }
+
+    /**
+     * An array of warning objects that provide additional information about the address. Warnings do not
+     * prevent the address from being saved.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<WarningObject>> warnings() {
+        return (Optional<List<WarningObject>>) warnings;
     }
 
     public static Builder builder() {
@@ -307,6 +331,27 @@ public class ContractorAddress {
         return this;
     }
 
+    /**
+     * An array of warning objects that provide additional information about the address. Warnings do not
+     * prevent the address from being saved.
+     */
+    public ContractorAddress withWarnings(List<WarningObject> warnings) {
+        Utils.checkNotNull(warnings, "warnings");
+        this.warnings = Optional.ofNullable(warnings);
+        return this;
+    }
+
+
+    /**
+     * An array of warning objects that provide additional information about the address. Warnings do not
+     * prevent the address from being saved.
+     */
+    public ContractorAddress withWarnings(Optional<? extends List<WarningObject>> warnings) {
+        Utils.checkNotNull(warnings, "warnings");
+        this.warnings = warnings;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -325,7 +370,8 @@ public class ContractorAddress {
             Utils.enhancedDeepEquals(this.zip, other.zip) &&
             Utils.enhancedDeepEquals(this.country, other.country) &&
             Utils.enhancedDeepEquals(this.active, other.active) &&
-            Utils.enhancedDeepEquals(this.version, other.version);
+            Utils.enhancedDeepEquals(this.version, other.version) &&
+            Utils.enhancedDeepEquals(this.warnings, other.warnings);
     }
     
     @Override
@@ -333,7 +379,8 @@ public class ContractorAddress {
         return Utils.enhancedHash(
             contractorUuid, street1, street2,
             city, state, zip,
-            country, active, version);
+            country, active, version,
+            warnings);
     }
     
     @Override
@@ -347,7 +394,8 @@ public class ContractorAddress {
                 "zip", zip,
                 "country", country,
                 "active", active,
-                "version", version);
+                "version", version,
+                "warnings", warnings);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -370,6 +418,8 @@ public class ContractorAddress {
         private Optional<Boolean> active = Optional.empty();
 
         private Optional<String> version = Optional.empty();
+
+        private Optional<? extends List<WarningObject>> warnings = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -516,6 +566,27 @@ public class ContractorAddress {
             return this;
         }
 
+
+        /**
+         * An array of warning objects that provide additional information about the address. Warnings do not
+         * prevent the address from being saved.
+         */
+        public Builder warnings(List<WarningObject> warnings) {
+            Utils.checkNotNull(warnings, "warnings");
+            this.warnings = Optional.ofNullable(warnings);
+            return this;
+        }
+
+        /**
+         * An array of warning objects that provide additional information about the address. Warnings do not
+         * prevent the address from being saved.
+         */
+        public Builder warnings(Optional<? extends List<WarningObject>> warnings) {
+            Utils.checkNotNull(warnings, "warnings");
+            this.warnings = warnings;
+            return this;
+        }
+
         public ContractorAddress build() {
             if (country == null) {
                 country = _SINGLETON_VALUE_Country.value();
@@ -524,7 +595,8 @@ public class ContractorAddress {
             return new ContractorAddress(
                 contractorUuid, street1, street2,
                 city, state, zip,
-                country, active, version);
+                country, active, version,
+                warnings);
         }
 
 

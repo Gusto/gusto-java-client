@@ -20,18 +20,18 @@ import java.util.Optional;
 
 public class GetV1CompaniesCompanyIdPayrollsRequest {
     /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
-    private String companyId;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
+    private String companyId;
 
     /**
      * Whether to include processed and/or unprocessed payrolls in the response, defaults to processed, for
@@ -103,12 +103,12 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
      * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort_order")
-    private Optional<? extends SortOrder> sortOrder;
+    private Optional<? extends QueryParamSortOrder> sortOrder;
 
     @JsonCreator
     public GetV1CompaniesCompanyIdPayrollsRequest(
-            String companyId,
             Optional<? extends GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyId,
             Optional<? extends List<ProcessingStatuses>> processingStatuses,
             Optional<? extends List<QueryParamPayrollTypes>> payrollTypes,
             Optional<Boolean> processed,
@@ -119,9 +119,9 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
             Optional<? extends DateFilterBy> dateFilterBy,
             Optional<Long> page,
             Optional<Long> per,
-            Optional<? extends SortOrder> sortOrder) {
-        Utils.checkNotNull(companyId, "companyId");
+            Optional<? extends QueryParamSortOrder> sortOrder) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(processingStatuses, "processingStatuses");
         Utils.checkNotNull(payrollTypes, "payrollTypes");
         Utils.checkNotNull(processed, "processed");
@@ -133,8 +133,8 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
         Utils.checkNotNull(page, "page");
         Utils.checkNotNull(per, "per");
         Utils.checkNotNull(sortOrder, "sortOrder");
-        this.companyId = companyId;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyId = companyId;
         this.processingStatuses = processingStatuses;
         this.payrollTypes = payrollTypes;
         this.processed = processed;
@@ -150,19 +150,11 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
     
     public GetV1CompaniesCompanyIdPayrollsRequest(
             String companyId) {
-        this(companyId, Optional.empty(), Optional.empty(),
+        this(Optional.empty(), companyId, Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
-    }
-
-    /**
-     * The UUID of the company
-     */
-    @JsonIgnore
-    public String companyId() {
-        return companyId;
     }
 
     /**
@@ -174,6 +166,14 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
     @JsonIgnore
     public Optional<GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion() {
         return (Optional<GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion>) xGustoAPIVersion;
+    }
+
+    /**
+     * The UUID of the company
+     */
+    @JsonIgnore
+    public String companyId() {
+        return companyId;
     }
 
     /**
@@ -271,23 +271,14 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<SortOrder> sortOrder() {
-        return (Optional<SortOrder>) sortOrder;
+    public Optional<QueryParamSortOrder> sortOrder() {
+        return (Optional<QueryParamSortOrder>) sortOrder;
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public GetV1CompaniesCompanyIdPayrollsRequest withCompanyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -309,6 +300,15 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
     public GetV1CompaniesCompanyIdPayrollsRequest withXGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * The UUID of the company
+     */
+    public GetV1CompaniesCompanyIdPayrollsRequest withCompanyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
         return this;
     }
 
@@ -516,7 +516,7 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
      * A string indicating whether to sort resulting events in ascending (asc) or descending (desc)
      * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
      */
-    public GetV1CompaniesCompanyIdPayrollsRequest withSortOrder(SortOrder sortOrder) {
+    public GetV1CompaniesCompanyIdPayrollsRequest withSortOrder(QueryParamSortOrder sortOrder) {
         Utils.checkNotNull(sortOrder, "sortOrder");
         this.sortOrder = Optional.ofNullable(sortOrder);
         return this;
@@ -527,7 +527,7 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
      * A string indicating whether to sort resulting events in ascending (asc) or descending (desc)
      * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
      */
-    public GetV1CompaniesCompanyIdPayrollsRequest withSortOrder(Optional<? extends SortOrder> sortOrder) {
+    public GetV1CompaniesCompanyIdPayrollsRequest withSortOrder(Optional<? extends QueryParamSortOrder> sortOrder) {
         Utils.checkNotNull(sortOrder, "sortOrder");
         this.sortOrder = sortOrder;
         return this;
@@ -543,8 +543,8 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
         }
         GetV1CompaniesCompanyIdPayrollsRequest other = (GetV1CompaniesCompanyIdPayrollsRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.processingStatuses, other.processingStatuses) &&
             Utils.enhancedDeepEquals(this.payrollTypes, other.payrollTypes) &&
             Utils.enhancedDeepEquals(this.processed, other.processed) &&
@@ -561,7 +561,7 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, xGustoAPIVersion, processingStatuses,
+            xGustoAPIVersion, companyId, processingStatuses,
             payrollTypes, processed, includeOffCycle,
             include, startDate, endDate,
             dateFilterBy, page, per,
@@ -571,8 +571,8 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
     @Override
     public String toString() {
         return Utils.toString(GetV1CompaniesCompanyIdPayrollsRequest.class,
-                "companyId", companyId,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "companyId", companyId,
                 "processingStatuses", processingStatuses,
                 "payrollTypes", payrollTypes,
                 "processed", processed,
@@ -589,9 +589,9 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String companyId;
-
         private Optional<? extends GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String companyId;
 
         private Optional<? extends List<ProcessingStatuses>> processingStatuses = Optional.empty();
 
@@ -613,20 +613,10 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
 
         private Optional<Long> per = Optional.empty();
 
-        private Optional<? extends SortOrder> sortOrder = Optional.empty();
+        private Optional<? extends QueryParamSortOrder> sortOrder = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyId(String companyId) {
-            Utils.checkNotNull(companyId, "companyId");
-            this.companyId = companyId;
-            return this;
         }
 
 
@@ -649,6 +639,16 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
         public Builder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
+        }
+
+
+        /**
+         * The UUID of the company
+         */
+        public Builder companyId(String companyId) {
+            Utils.checkNotNull(companyId, "companyId");
+            this.companyId = companyId;
             return this;
         }
 
@@ -857,7 +857,7 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
          * A string indicating whether to sort resulting events in ascending (asc) or descending (desc)
          * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
          */
-        public Builder sortOrder(SortOrder sortOrder) {
+        public Builder sortOrder(QueryParamSortOrder sortOrder) {
             Utils.checkNotNull(sortOrder, "sortOrder");
             this.sortOrder = Optional.ofNullable(sortOrder);
             return this;
@@ -867,7 +867,7 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
          * A string indicating whether to sort resulting events in ascending (asc) or descending (desc)
          * chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
          */
-        public Builder sortOrder(Optional<? extends SortOrder> sortOrder) {
+        public Builder sortOrder(Optional<? extends QueryParamSortOrder> sortOrder) {
             Utils.checkNotNull(sortOrder, "sortOrder");
             this.sortOrder = sortOrder;
             return this;
@@ -879,7 +879,7 @@ public class GetV1CompaniesCompanyIdPayrollsRequest {
             }
 
             return new GetV1CompaniesCompanyIdPayrollsRequest(
-                companyId, xGustoAPIVersion, processingStatuses,
+                xGustoAPIVersion, companyId, processingStatuses,
                 payrollTypes, processed, includeOffCycle,
                 include, startDate, endDate,
                 dateFilterBy, page, per,

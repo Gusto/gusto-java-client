@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
-import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -43,52 +42,43 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("wage")
-    private Optional<Long> wage;
+    private Optional<String> wage;
 
     /**
      * Number of hours worked for the payment.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hours")
-    private Optional<Long> hours;
-
-    /**
-     * Hourly rate for the payment.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("hourly_rate")
-    private Optional<Long> hourlyRate;
+    private Optional<String> hours;
 
     /**
      * Bonus amount for the payment.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bonus")
-    private Optional<Long> bonus;
+    private Optional<String> bonus;
 
     /**
      * Reimbursement amount for the payment.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("reimbursement")
-    private Optional<Long> reimbursement;
+    private Optional<String> reimbursement;
 
     @JsonCreator
     public ContractorPaymentsPreviewBodyContractorPayments(
             @JsonProperty("contractor_uuid") Optional<String> contractorUuid,
             @JsonProperty("date") Optional<String> date,
             @JsonProperty("payment_method") Optional<? extends ContractorPaymentsPreviewBodyPaymentMethod> paymentMethod,
-            @JsonProperty("wage") Optional<Long> wage,
-            @JsonProperty("hours") Optional<Long> hours,
-            @JsonProperty("hourly_rate") Optional<Long> hourlyRate,
-            @JsonProperty("bonus") Optional<Long> bonus,
-            @JsonProperty("reimbursement") Optional<Long> reimbursement) {
+            @JsonProperty("wage") Optional<String> wage,
+            @JsonProperty("hours") Optional<String> hours,
+            @JsonProperty("bonus") Optional<String> bonus,
+            @JsonProperty("reimbursement") Optional<String> reimbursement) {
         Utils.checkNotNull(contractorUuid, "contractorUuid");
         Utils.checkNotNull(date, "date");
         Utils.checkNotNull(paymentMethod, "paymentMethod");
         Utils.checkNotNull(wage, "wage");
         Utils.checkNotNull(hours, "hours");
-        Utils.checkNotNull(hourlyRate, "hourlyRate");
         Utils.checkNotNull(bonus, "bonus");
         Utils.checkNotNull(reimbursement, "reimbursement");
         this.contractorUuid = contractorUuid;
@@ -96,7 +86,6 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
         this.paymentMethod = paymentMethod;
         this.wage = wage;
         this.hours = hours;
-        this.hourlyRate = hourlyRate;
         this.bonus = bonus;
         this.reimbursement = reimbursement;
     }
@@ -104,7 +93,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
     public ContractorPaymentsPreviewBodyContractorPayments() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty());
     }
 
     /**
@@ -136,7 +125,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
      * Fixed wage amount for the payment.
      */
     @JsonIgnore
-    public Optional<Long> wage() {
+    public Optional<String> wage() {
         return wage;
     }
 
@@ -144,23 +133,15 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
      * Number of hours worked for the payment.
      */
     @JsonIgnore
-    public Optional<Long> hours() {
+    public Optional<String> hours() {
         return hours;
-    }
-
-    /**
-     * Hourly rate for the payment.
-     */
-    @JsonIgnore
-    public Optional<Long> hourlyRate() {
-        return hourlyRate;
     }
 
     /**
      * Bonus amount for the payment.
      */
     @JsonIgnore
-    public Optional<Long> bonus() {
+    public Optional<String> bonus() {
         return bonus;
     }
 
@@ -168,7 +149,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
      * Reimbursement amount for the payment.
      */
     @JsonIgnore
-    public Optional<Long> reimbursement() {
+    public Optional<String> reimbursement() {
         return reimbursement;
     }
 
@@ -237,7 +218,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
     /**
      * Fixed wage amount for the payment.
      */
-    public ContractorPaymentsPreviewBodyContractorPayments withWage(long wage) {
+    public ContractorPaymentsPreviewBodyContractorPayments withWage(String wage) {
         Utils.checkNotNull(wage, "wage");
         this.wage = Optional.ofNullable(wage);
         return this;
@@ -247,7 +228,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
     /**
      * Fixed wage amount for the payment.
      */
-    public ContractorPaymentsPreviewBodyContractorPayments withWage(Optional<Long> wage) {
+    public ContractorPaymentsPreviewBodyContractorPayments withWage(Optional<String> wage) {
         Utils.checkNotNull(wage, "wage");
         this.wage = wage;
         return this;
@@ -256,7 +237,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
     /**
      * Number of hours worked for the payment.
      */
-    public ContractorPaymentsPreviewBodyContractorPayments withHours(long hours) {
+    public ContractorPaymentsPreviewBodyContractorPayments withHours(String hours) {
         Utils.checkNotNull(hours, "hours");
         this.hours = Optional.ofNullable(hours);
         return this;
@@ -266,35 +247,16 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
     /**
      * Number of hours worked for the payment.
      */
-    public ContractorPaymentsPreviewBodyContractorPayments withHours(Optional<Long> hours) {
+    public ContractorPaymentsPreviewBodyContractorPayments withHours(Optional<String> hours) {
         Utils.checkNotNull(hours, "hours");
         this.hours = hours;
         return this;
     }
 
     /**
-     * Hourly rate for the payment.
-     */
-    public ContractorPaymentsPreviewBodyContractorPayments withHourlyRate(long hourlyRate) {
-        Utils.checkNotNull(hourlyRate, "hourlyRate");
-        this.hourlyRate = Optional.ofNullable(hourlyRate);
-        return this;
-    }
-
-
-    /**
-     * Hourly rate for the payment.
-     */
-    public ContractorPaymentsPreviewBodyContractorPayments withHourlyRate(Optional<Long> hourlyRate) {
-        Utils.checkNotNull(hourlyRate, "hourlyRate");
-        this.hourlyRate = hourlyRate;
-        return this;
-    }
-
-    /**
      * Bonus amount for the payment.
      */
-    public ContractorPaymentsPreviewBodyContractorPayments withBonus(long bonus) {
+    public ContractorPaymentsPreviewBodyContractorPayments withBonus(String bonus) {
         Utils.checkNotNull(bonus, "bonus");
         this.bonus = Optional.ofNullable(bonus);
         return this;
@@ -304,7 +266,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
     /**
      * Bonus amount for the payment.
      */
-    public ContractorPaymentsPreviewBodyContractorPayments withBonus(Optional<Long> bonus) {
+    public ContractorPaymentsPreviewBodyContractorPayments withBonus(Optional<String> bonus) {
         Utils.checkNotNull(bonus, "bonus");
         this.bonus = bonus;
         return this;
@@ -313,7 +275,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
     /**
      * Reimbursement amount for the payment.
      */
-    public ContractorPaymentsPreviewBodyContractorPayments withReimbursement(long reimbursement) {
+    public ContractorPaymentsPreviewBodyContractorPayments withReimbursement(String reimbursement) {
         Utils.checkNotNull(reimbursement, "reimbursement");
         this.reimbursement = Optional.ofNullable(reimbursement);
         return this;
@@ -323,7 +285,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
     /**
      * Reimbursement amount for the payment.
      */
-    public ContractorPaymentsPreviewBodyContractorPayments withReimbursement(Optional<Long> reimbursement) {
+    public ContractorPaymentsPreviewBodyContractorPayments withReimbursement(Optional<String> reimbursement) {
         Utils.checkNotNull(reimbursement, "reimbursement");
         this.reimbursement = reimbursement;
         return this;
@@ -344,7 +306,6 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
             Utils.enhancedDeepEquals(this.paymentMethod, other.paymentMethod) &&
             Utils.enhancedDeepEquals(this.wage, other.wage) &&
             Utils.enhancedDeepEquals(this.hours, other.hours) &&
-            Utils.enhancedDeepEquals(this.hourlyRate, other.hourlyRate) &&
             Utils.enhancedDeepEquals(this.bonus, other.bonus) &&
             Utils.enhancedDeepEquals(this.reimbursement, other.reimbursement);
     }
@@ -353,8 +314,8 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
     public int hashCode() {
         return Utils.enhancedHash(
             contractorUuid, date, paymentMethod,
-            wage, hours, hourlyRate,
-            bonus, reimbursement);
+            wage, hours, bonus,
+            reimbursement);
     }
     
     @Override
@@ -365,7 +326,6 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
                 "paymentMethod", paymentMethod,
                 "wage", wage,
                 "hours", hours,
-                "hourlyRate", hourlyRate,
                 "bonus", bonus,
                 "reimbursement", reimbursement);
     }
@@ -379,15 +339,13 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
 
         private Optional<? extends ContractorPaymentsPreviewBodyPaymentMethod> paymentMethod = Optional.empty();
 
-        private Optional<Long> wage = Optional.empty();
+        private Optional<String> wage = Optional.empty();
 
-        private Optional<Long> hours = Optional.empty();
+        private Optional<String> hours = Optional.empty();
 
-        private Optional<Long> hourlyRate = Optional.empty();
+        private Optional<String> bonus = Optional.empty();
 
-        private Optional<Long> bonus = Optional.empty();
-
-        private Optional<Long> reimbursement = Optional.empty();
+        private Optional<String> reimbursement = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -454,7 +412,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
         /**
          * Fixed wage amount for the payment.
          */
-        public Builder wage(long wage) {
+        public Builder wage(String wage) {
             Utils.checkNotNull(wage, "wage");
             this.wage = Optional.ofNullable(wage);
             return this;
@@ -463,7 +421,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
         /**
          * Fixed wage amount for the payment.
          */
-        public Builder wage(Optional<Long> wage) {
+        public Builder wage(Optional<String> wage) {
             Utils.checkNotNull(wage, "wage");
             this.wage = wage;
             return this;
@@ -473,7 +431,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
         /**
          * Number of hours worked for the payment.
          */
-        public Builder hours(long hours) {
+        public Builder hours(String hours) {
             Utils.checkNotNull(hours, "hours");
             this.hours = Optional.ofNullable(hours);
             return this;
@@ -482,7 +440,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
         /**
          * Number of hours worked for the payment.
          */
-        public Builder hours(Optional<Long> hours) {
+        public Builder hours(Optional<String> hours) {
             Utils.checkNotNull(hours, "hours");
             this.hours = hours;
             return this;
@@ -490,28 +448,9 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
 
 
         /**
-         * Hourly rate for the payment.
-         */
-        public Builder hourlyRate(long hourlyRate) {
-            Utils.checkNotNull(hourlyRate, "hourlyRate");
-            this.hourlyRate = Optional.ofNullable(hourlyRate);
-            return this;
-        }
-
-        /**
-         * Hourly rate for the payment.
-         */
-        public Builder hourlyRate(Optional<Long> hourlyRate) {
-            Utils.checkNotNull(hourlyRate, "hourlyRate");
-            this.hourlyRate = hourlyRate;
-            return this;
-        }
-
-
-        /**
          * Bonus amount for the payment.
          */
-        public Builder bonus(long bonus) {
+        public Builder bonus(String bonus) {
             Utils.checkNotNull(bonus, "bonus");
             this.bonus = Optional.ofNullable(bonus);
             return this;
@@ -520,7 +459,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
         /**
          * Bonus amount for the payment.
          */
-        public Builder bonus(Optional<Long> bonus) {
+        public Builder bonus(Optional<String> bonus) {
             Utils.checkNotNull(bonus, "bonus");
             this.bonus = bonus;
             return this;
@@ -530,7 +469,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
         /**
          * Reimbursement amount for the payment.
          */
-        public Builder reimbursement(long reimbursement) {
+        public Builder reimbursement(String reimbursement) {
             Utils.checkNotNull(reimbursement, "reimbursement");
             this.reimbursement = Optional.ofNullable(reimbursement);
             return this;
@@ -539,7 +478,7 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
         /**
          * Reimbursement amount for the payment.
          */
-        public Builder reimbursement(Optional<Long> reimbursement) {
+        public Builder reimbursement(Optional<String> reimbursement) {
             Utils.checkNotNull(reimbursement, "reimbursement");
             this.reimbursement = reimbursement;
             return this;
@@ -549,8 +488,8 @@ public class ContractorPaymentsPreviewBodyContractorPayments {
 
             return new ContractorPaymentsPreviewBodyContractorPayments(
                 contractorUuid, date, paymentMethod,
-                wage, hours, hourlyRate,
-                bonus, reimbursement);
+                wage, hours, bonus,
+                reimbursement);
         }
 
     }

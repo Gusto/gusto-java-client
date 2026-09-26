@@ -74,6 +74,22 @@ public class TaxRequirement {
     @JsonProperty("editable")
     private Optional<Boolean> editable;
 
+    /**
+     * Whether this requirement, when blank, would block payroll processing for the company in this state.
+     * Stable across changes to the field's value: a `payroll_blocking: true` field reports `true` whether
+     * currently empty or populated.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("payroll_blocking")
+    private Optional<Boolean> payrollBlocking;
+
+    /**
+     * Whether the current `value` is a default rather than an explicitly set one.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("default_value_applied")
+    private Optional<Boolean> defaultValueApplied;
+
     @JsonCreator
     public TaxRequirement(
             @JsonProperty("key") Optional<String> key,
@@ -82,7 +98,9 @@ public class TaxRequirement {
             @JsonProperty("description") JsonNullable<String> description,
             @JsonProperty("value") JsonNullable<? extends TaxRequirementsValue> value,
             @JsonProperty("metadata") Optional<? extends TaxRequirementMetadata> metadata,
-            @JsonProperty("editable") Optional<Boolean> editable) {
+            @JsonProperty("editable") Optional<Boolean> editable,
+            @JsonProperty("payroll_blocking") Optional<Boolean> payrollBlocking,
+            @JsonProperty("default_value_applied") Optional<Boolean> defaultValueApplied) {
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(applicableIf, "applicableIf");
         Utils.checkNotNull(label, "label");
@@ -90,6 +108,8 @@ public class TaxRequirement {
         Utils.checkNotNull(value, "value");
         Utils.checkNotNull(metadata, "metadata");
         Utils.checkNotNull(editable, "editable");
+        Utils.checkNotNull(payrollBlocking, "payrollBlocking");
+        Utils.checkNotNull(defaultValueApplied, "defaultValueApplied");
         this.key = key;
         this.applicableIf = applicableIf;
         this.label = label;
@@ -97,12 +117,14 @@ public class TaxRequirement {
         this.value = value;
         this.metadata = metadata;
         this.editable = editable;
+        this.payrollBlocking = payrollBlocking;
+        this.defaultValueApplied = defaultValueApplied;
     }
     
     public TaxRequirement() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -167,6 +189,24 @@ public class TaxRequirement {
     @JsonIgnore
     public Optional<Boolean> editable() {
         return editable;
+    }
+
+    /**
+     * Whether this requirement, when blank, would block payroll processing for the company in this state.
+     * Stable across changes to the field's value: a `payroll_blocking: true` field reports `true` whether
+     * currently empty or populated.
+     */
+    @JsonIgnore
+    public Optional<Boolean> payrollBlocking() {
+        return payrollBlocking;
+    }
+
+    /**
+     * Whether the current `value` is a default rather than an explicitly set one.
+     */
+    @JsonIgnore
+    public Optional<Boolean> defaultValueApplied() {
+        return defaultValueApplied;
     }
 
     public static Builder builder() {
@@ -315,6 +355,48 @@ public class TaxRequirement {
         return this;
     }
 
+    /**
+     * Whether this requirement, when blank, would block payroll processing for the company in this state.
+     * Stable across changes to the field's value: a `payroll_blocking: true` field reports `true` whether
+     * currently empty or populated.
+     */
+    public TaxRequirement withPayrollBlocking(boolean payrollBlocking) {
+        Utils.checkNotNull(payrollBlocking, "payrollBlocking");
+        this.payrollBlocking = Optional.ofNullable(payrollBlocking);
+        return this;
+    }
+
+
+    /**
+     * Whether this requirement, when blank, would block payroll processing for the company in this state.
+     * Stable across changes to the field's value: a `payroll_blocking: true` field reports `true` whether
+     * currently empty or populated.
+     */
+    public TaxRequirement withPayrollBlocking(Optional<Boolean> payrollBlocking) {
+        Utils.checkNotNull(payrollBlocking, "payrollBlocking");
+        this.payrollBlocking = payrollBlocking;
+        return this;
+    }
+
+    /**
+     * Whether the current `value` is a default rather than an explicitly set one.
+     */
+    public TaxRequirement withDefaultValueApplied(boolean defaultValueApplied) {
+        Utils.checkNotNull(defaultValueApplied, "defaultValueApplied");
+        this.defaultValueApplied = Optional.ofNullable(defaultValueApplied);
+        return this;
+    }
+
+
+    /**
+     * Whether the current `value` is a default rather than an explicitly set one.
+     */
+    public TaxRequirement withDefaultValueApplied(Optional<Boolean> defaultValueApplied) {
+        Utils.checkNotNull(defaultValueApplied, "defaultValueApplied");
+        this.defaultValueApplied = defaultValueApplied;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -331,7 +413,9 @@ public class TaxRequirement {
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.value, other.value) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
-            Utils.enhancedDeepEquals(this.editable, other.editable);
+            Utils.enhancedDeepEquals(this.editable, other.editable) &&
+            Utils.enhancedDeepEquals(this.payrollBlocking, other.payrollBlocking) &&
+            Utils.enhancedDeepEquals(this.defaultValueApplied, other.defaultValueApplied);
     }
     
     @Override
@@ -339,7 +423,7 @@ public class TaxRequirement {
         return Utils.enhancedHash(
             key, applicableIf, label,
             description, value, metadata,
-            editable);
+            editable, payrollBlocking, defaultValueApplied);
     }
     
     @Override
@@ -351,7 +435,9 @@ public class TaxRequirement {
                 "description", description,
                 "value", value,
                 "metadata", metadata,
-                "editable", editable);
+                "editable", editable,
+                "payrollBlocking", payrollBlocking,
+                "defaultValueApplied", defaultValueApplied);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -370,6 +456,10 @@ public class TaxRequirement {
         private Optional<? extends TaxRequirementMetadata> metadata = Optional.empty();
 
         private Optional<Boolean> editable = Optional.empty();
+
+        private Optional<Boolean> payrollBlocking = Optional.empty();
+
+        private Optional<Boolean> defaultValueApplied = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -518,12 +608,54 @@ public class TaxRequirement {
             return this;
         }
 
+
+        /**
+         * Whether this requirement, when blank, would block payroll processing for the company in this state.
+         * Stable across changes to the field's value: a `payroll_blocking: true` field reports `true` whether
+         * currently empty or populated.
+         */
+        public Builder payrollBlocking(boolean payrollBlocking) {
+            Utils.checkNotNull(payrollBlocking, "payrollBlocking");
+            this.payrollBlocking = Optional.ofNullable(payrollBlocking);
+            return this;
+        }
+
+        /**
+         * Whether this requirement, when blank, would block payroll processing for the company in this state.
+         * Stable across changes to the field's value: a `payroll_blocking: true` field reports `true` whether
+         * currently empty or populated.
+         */
+        public Builder payrollBlocking(Optional<Boolean> payrollBlocking) {
+            Utils.checkNotNull(payrollBlocking, "payrollBlocking");
+            this.payrollBlocking = payrollBlocking;
+            return this;
+        }
+
+
+        /**
+         * Whether the current `value` is a default rather than an explicitly set one.
+         */
+        public Builder defaultValueApplied(boolean defaultValueApplied) {
+            Utils.checkNotNull(defaultValueApplied, "defaultValueApplied");
+            this.defaultValueApplied = Optional.ofNullable(defaultValueApplied);
+            return this;
+        }
+
+        /**
+         * Whether the current `value` is a default rather than an explicitly set one.
+         */
+        public Builder defaultValueApplied(Optional<Boolean> defaultValueApplied) {
+            Utils.checkNotNull(defaultValueApplied, "defaultValueApplied");
+            this.defaultValueApplied = defaultValueApplied;
+            return this;
+        }
+
         public TaxRequirement build() {
 
             return new TaxRequirement(
                 key, applicableIf, label,
                 description, value, metadata,
-                editable);
+                editable, payrollBlocking, defaultValueApplied);
         }
 
     }

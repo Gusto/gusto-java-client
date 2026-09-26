@@ -622,7 +622,7 @@ public class EmployeeBenefits {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse getV1EmployeesEmployeeUuidSection603HighEarnerStatuses(String employeeUuid) {
-        return getV1EmployeesEmployeeUuidSection603HighEarnerStatuses(employeeUuid, Optional.empty());
+        return getV1EmployeesEmployeeUuidSection603HighEarnerStatuses(Optional.empty(), employeeUuid);
     }
 
     /**
@@ -639,17 +639,17 @@ public class EmployeeBenefits {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeUuid The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeUuid The UUID of the employee
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse getV1EmployeesEmployeeUuidSection603HighEarnerStatuses(String employeeUuid, Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse getV1EmployeesEmployeeUuidSection603HighEarnerStatuses(Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid) {
         GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest request =
             GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest
                 .builder()
-                .employeeUuid(employeeUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeUuid(employeeUuid)
                 .build();
         RequestOperation<GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest, GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse> operation
               = new GetV1EmployeesEmployeeUuidSection603HighEarnerStatuses.Sync(sdkConfiguration, _headers);
@@ -696,7 +696,7 @@ public class EmployeeBenefits {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse postV1EmployeesEmployeeUuidSection603HighEarnerStatuses(String employeeUuid, EmployeeSection603HighEarnerStatusCreateRequest employeeSection603HighEarnerStatusCreateRequest) {
-        return postV1EmployeesEmployeeUuidSection603HighEarnerStatuses(employeeUuid, Optional.empty(), employeeSection603HighEarnerStatusCreateRequest);
+        return postV1EmployeesEmployeeUuidSection603HighEarnerStatuses(Optional.empty(), employeeUuid, employeeSection603HighEarnerStatusCreateRequest);
     }
 
     /**
@@ -713,20 +713,20 @@ public class EmployeeBenefits {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeUuid The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeUuid The UUID of the employee
      * @param employeeSection603HighEarnerStatusCreateRequest Request body for creating an employee's Section 603 high earner status
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse postV1EmployeesEmployeeUuidSection603HighEarnerStatuses(
-            String employeeUuid, Optional<? extends PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
             EmployeeSection603HighEarnerStatusCreateRequest employeeSection603HighEarnerStatusCreateRequest) {
         PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest request =
             PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest
                 .builder()
-                .employeeUuid(employeeUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeUuid(employeeUuid)
                 .employeeSection603HighEarnerStatusCreateRequest(employeeSection603HighEarnerStatusCreateRequest)
                 .build();
         RequestOperation<PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest, PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse> operation
@@ -774,7 +774,7 @@ public class EmployeeBenefits {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(String employeeUuid, long effectiveYear) {
-        return getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(employeeUuid, effectiveYear, Optional.empty());
+        return getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(Optional.empty(), employeeUuid, effectiveYear);
     }
 
     /**
@@ -791,21 +791,21 @@ public class EmployeeBenefits {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeUuid The UUID of the employee
      * @param effectiveYear The effective year for the Section 603 status
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(
-            String employeeUuid, long effectiveYear,
-            Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
+            long effectiveYear) {
         GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest request =
             GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .employeeUuid(employeeUuid)
                 .effectiveYear(effectiveYear)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest, GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse> operation
               = new GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear.Sync(sdkConfiguration, _headers);
@@ -855,7 +855,7 @@ public class EmployeeBenefits {
     public PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse patchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(
             String employeeUuid, long effectiveYear,
             EmployeeSection603HighEarnerStatusUpdateRequest employeeSection603HighEarnerStatusUpdateRequest) {
-        return patchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(employeeUuid, effectiveYear, Optional.empty(),
+        return patchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(Optional.empty(), employeeUuid, effectiveYear,
             employeeSection603HighEarnerStatusUpdateRequest);
     }
 
@@ -873,22 +873,22 @@ public class EmployeeBenefits {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeUuid The UUID of the employee
      * @param effectiveYear The effective year for the Section 603 status
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeSection603HighEarnerStatusUpdateRequest Request body for updating an employee's Section 603 high earner status
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse patchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(
-            String employeeUuid, long effectiveYear,
-            Optional<? extends PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion, EmployeeSection603HighEarnerStatusUpdateRequest employeeSection603HighEarnerStatusUpdateRequest) {
+            Optional<? extends PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
+            long effectiveYear, EmployeeSection603HighEarnerStatusUpdateRequest employeeSection603HighEarnerStatusUpdateRequest) {
         PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest request =
             PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .employeeUuid(employeeUuid)
                 .effectiveYear(effectiveYear)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .employeeSection603HighEarnerStatusUpdateRequest(employeeSection603HighEarnerStatusUpdateRequest)
                 .build();
         RequestOperation<PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest, PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse> operation

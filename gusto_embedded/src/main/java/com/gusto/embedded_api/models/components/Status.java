@@ -11,13 +11,17 @@ import java.util.Optional;
 /**
  * Status
  * 
- * <p>The status of the external payroll. The status will be `unprocessed` when the external payroll is
- * created and transition to `processed` once tax liabilities are entered and finalized. Once in the
- * `processed` status all actions that can edit an external payroll will be disabled.
+ * <p>The batch's processing state.
+ * - `pending`: accepted, not yet started
+ * - `processing`: reports are being generated
+ * - `completed`: all reports finished
+ * - `failed`: the batch failed before completing
  */
 public enum Status {
-    UNPROCESSED("unprocessed"),
-    PROCESSED("processed");
+    PENDING("pending"),
+    PROCESSING("processing"),
+    COMPLETED("completed"),
+    FAILED("failed");
 
     @JsonValue
     private final String value;

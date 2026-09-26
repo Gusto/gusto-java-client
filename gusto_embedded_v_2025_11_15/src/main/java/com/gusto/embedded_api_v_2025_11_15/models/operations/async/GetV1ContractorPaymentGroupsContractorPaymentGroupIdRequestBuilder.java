@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder {
 
-    private String contractorPaymentGroupUuid;
     private Optional<? extends GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion>>() {});
+    private String contractorPaymentGroupUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
-        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
-        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
-        return this;
     }
                 
     public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder xGustoAPIVersion(GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder 
         return this;
     }
 
+    public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
+        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
+        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
+        return this;
+    }
+
 
     private GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest request = new GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest(contractorPaymentGroupUuid,
-            xGustoAPIVersion);
+        GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest request = new GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest(xGustoAPIVersion,
+            contractorPaymentGroupUuid);
 
         return request;
     }

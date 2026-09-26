@@ -11,10 +11,10 @@ import java.util.Optional;
 /**
  * BatchAction
  * 
- * <p>The action to perform on the batch
+ * <p>The action to perform on the batch. Only `cancel` is supported.
  */
 public enum BatchAction {
-    CREATE("create");
+    CANCEL("cancel");
 
     @JsonValue
     private final String value;

@@ -16,17 +16,29 @@ import java.util.Optional;
 
 public class GetV1JobsJobIdRequestBuilder {
 
-    private String jobId;
-    private Optional<? extends GetV1JobsJobIdQueryParamInclude> include = Optional.empty();
     private Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion>>() {});
+    private String jobId;
+    private Optional<? extends GetV1JobsJobIdQueryParamInclude> include = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1JobsJobIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public GetV1JobsJobIdRequestBuilder xGustoAPIVersion(GetV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public GetV1JobsJobIdRequestBuilder xGustoAPIVersion(Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public GetV1JobsJobIdRequestBuilder jobId(String jobId) {
@@ -46,18 +58,6 @@ public class GetV1JobsJobIdRequestBuilder {
         this.include = include;
         return this;
     }
-                
-    public GetV1JobsJobIdRequestBuilder xGustoAPIVersion(GetV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
-
-    public GetV1JobsJobIdRequestBuilder xGustoAPIVersion(Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
 
 
     private GetV1JobsJobIdRequest buildRequest() {
@@ -65,9 +65,9 @@ public class GetV1JobsJobIdRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1JobsJobIdRequest request = new GetV1JobsJobIdRequest(jobId,
-            include,
-            xGustoAPIVersion);
+        GetV1JobsJobIdRequest request = new GetV1JobsJobIdRequest(xGustoAPIVersion,
+            jobId,
+            include);
 
         return request;
     }

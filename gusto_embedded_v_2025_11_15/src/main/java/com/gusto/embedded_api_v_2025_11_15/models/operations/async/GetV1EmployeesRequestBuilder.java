@@ -8,8 +8,8 @@ import static com.gusto.embedded_api_v_2025_11_15.operations.Operations.AsyncReq
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeesHeaderXGustoAPIVersion;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeesQueryParamInclude;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeesRequest;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.QueryParamInclude;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1Employees;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
@@ -26,7 +26,7 @@ public class GetV1EmployeesRequestBuilder {
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1EmployeesHeaderXGustoAPIVersion>>() {});
     private String employeeId;
-    private Optional<? extends List<QueryParamInclude>> include = Optional.empty();
+    private Optional<? extends List<GetV1EmployeesQueryParamInclude>> include = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,13 +52,13 @@ public class GetV1EmployeesRequestBuilder {
         return this;
     }
                 
-    public GetV1EmployeesRequestBuilder include(List<QueryParamInclude> include) {
+    public GetV1EmployeesRequestBuilder include(List<GetV1EmployeesQueryParamInclude> include) {
         Utils.checkNotNull(include, "include");
         this.include = Optional.of(include);
         return this;
     }
 
-    public GetV1EmployeesRequestBuilder include(Optional<? extends List<QueryParamInclude>> include) {
+    public GetV1EmployeesRequestBuilder include(Optional<? extends List<GetV1EmployeesQueryParamInclude>> include) {
         Utils.checkNotNull(include, "include");
         this.include = include;
         return this;

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
@@ -22,15 +23,42 @@ public class PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody {
     @JsonProperty("name")
     private Optional<String> name;
 
+    /**
+     * The earning type category. Set at creation and immutable afterward — submitting a value that differs
+     * from the current one returns a 422. Submitting the current value (e.g.
+     * 
+     * <p>when echoing back the full resource) is allowed.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("category")
+    private Optional<String> category;
+
+    /**
+     * Whether earnings of this type are included in overtime pay calculations. Set at creation and
+     * immutable afterward — submitting a value that differs from the current one returns a 422. Submitting
+     * the current value (e.g.
+     * 
+     * <p>when echoing back the full resource) is allowed.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("included_in_overtime_pay")
+    private Optional<Boolean> includedInOvertimePay;
+
     @JsonCreator
     public PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody(
-            @JsonProperty("name") Optional<String> name) {
+            @JsonProperty("name") Optional<String> name,
+            @JsonProperty("category") Optional<String> category,
+            @JsonProperty("included_in_overtime_pay") Optional<Boolean> includedInOvertimePay) {
         Utils.checkNotNull(name, "name");
+        Utils.checkNotNull(category, "category");
+        Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
         this.name = name;
+        this.category = category;
+        this.includedInOvertimePay = includedInOvertimePay;
     }
     
     public PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody() {
-        this(Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -39,6 +67,29 @@ public class PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody {
     @JsonIgnore
     public Optional<String> name() {
         return name;
+    }
+
+    /**
+     * The earning type category. Set at creation and immutable afterward — submitting a value that differs
+     * from the current one returns a 422. Submitting the current value (e.g.
+     * 
+     * <p>when echoing back the full resource) is allowed.
+     */
+    @JsonIgnore
+    public Optional<String> category() {
+        return category;
+    }
+
+    /**
+     * Whether earnings of this type are included in overtime pay calculations. Set at creation and
+     * immutable afterward — submitting a value that differs from the current one returns a 422. Submitting
+     * the current value (e.g.
+     * 
+     * <p>when echoing back the full resource) is allowed.
+     */
+    @JsonIgnore
+    public Optional<Boolean> includedInOvertimePay() {
+        return includedInOvertimePay;
     }
 
     public static Builder builder() {
@@ -65,6 +116,58 @@ public class PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody {
         return this;
     }
 
+    /**
+     * The earning type category. Set at creation and immutable afterward — submitting a value that differs
+     * from the current one returns a 422. Submitting the current value (e.g.
+     * 
+     * <p>when echoing back the full resource) is allowed.
+     */
+    public PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody withCategory(String category) {
+        Utils.checkNotNull(category, "category");
+        this.category = Optional.ofNullable(category);
+        return this;
+    }
+
+
+    /**
+     * The earning type category. Set at creation and immutable afterward — submitting a value that differs
+     * from the current one returns a 422. Submitting the current value (e.g.
+     * 
+     * <p>when echoing back the full resource) is allowed.
+     */
+    public PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody withCategory(Optional<String> category) {
+        Utils.checkNotNull(category, "category");
+        this.category = category;
+        return this;
+    }
+
+    /**
+     * Whether earnings of this type are included in overtime pay calculations. Set at creation and
+     * immutable afterward — submitting a value that differs from the current one returns a 422. Submitting
+     * the current value (e.g.
+     * 
+     * <p>when echoing back the full resource) is allowed.
+     */
+    public PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody withIncludedInOvertimePay(boolean includedInOvertimePay) {
+        Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
+        this.includedInOvertimePay = Optional.ofNullable(includedInOvertimePay);
+        return this;
+    }
+
+
+    /**
+     * Whether earnings of this type are included in overtime pay calculations. Set at creation and
+     * immutable afterward — submitting a value that differs from the current one returns a 422. Submitting
+     * the current value (e.g.
+     * 
+     * <p>when echoing back the full resource) is allowed.
+     */
+    public PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody withIncludedInOvertimePay(Optional<Boolean> includedInOvertimePay) {
+        Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
+        this.includedInOvertimePay = includedInOvertimePay;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -75,25 +178,33 @@ public class PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody {
         }
         PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody other = (PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody) o;
         return 
-            Utils.enhancedDeepEquals(this.name, other.name);
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.category, other.category) &&
+            Utils.enhancedDeepEquals(this.includedInOvertimePay, other.includedInOvertimePay);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name);
+            name, category, includedInOvertimePay);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody.class,
-                "name", name);
+                "name", name,
+                "category", category,
+                "includedInOvertimePay", includedInOvertimePay);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private Optional<String> name = Optional.empty();
+
+        private Optional<String> category = Optional.empty();
+
+        private Optional<Boolean> includedInOvertimePay = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -118,10 +229,62 @@ public class PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody {
             return this;
         }
 
+
+        /**
+         * The earning type category. Set at creation and immutable afterward — submitting a value that differs
+         * from the current one returns a 422. Submitting the current value (e.g.
+         * 
+         * <p>when echoing back the full resource) is allowed.
+         */
+        public Builder category(String category) {
+            Utils.checkNotNull(category, "category");
+            this.category = Optional.ofNullable(category);
+            return this;
+        }
+
+        /**
+         * The earning type category. Set at creation and immutable afterward — submitting a value that differs
+         * from the current one returns a 422. Submitting the current value (e.g.
+         * 
+         * <p>when echoing back the full resource) is allowed.
+         */
+        public Builder category(Optional<String> category) {
+            Utils.checkNotNull(category, "category");
+            this.category = category;
+            return this;
+        }
+
+
+        /**
+         * Whether earnings of this type are included in overtime pay calculations. Set at creation and
+         * immutable afterward — submitting a value that differs from the current one returns a 422. Submitting
+         * the current value (e.g.
+         * 
+         * <p>when echoing back the full resource) is allowed.
+         */
+        public Builder includedInOvertimePay(boolean includedInOvertimePay) {
+            Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
+            this.includedInOvertimePay = Optional.ofNullable(includedInOvertimePay);
+            return this;
+        }
+
+        /**
+         * Whether earnings of this type are included in overtime pay calculations. Set at creation and
+         * immutable afterward — submitting a value that differs from the current one returns a 422. Submitting
+         * the current value (e.g.
+         * 
+         * <p>when echoing back the full resource) is allowed.
+         */
+        public Builder includedInOvertimePay(Optional<Boolean> includedInOvertimePay) {
+            Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
+            this.includedInOvertimePay = includedInOvertimePay;
+            return this;
+        }
+
         public PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody build() {
 
             return new PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody(
-                name);
+                name, category, includedInOvertimePay);
         }
 
     }
