@@ -11,126 +11,138 @@ import com.gusto.embedded_api.utils.Headers;
 public class AsyncGustoEmbedded {
     private static final Headers _headers = Headers.EMPTY;
 
-    private final AsyncIntrospection introspection;
+    private final AsyncAchTransactions achTransactions;
 
     private final AsyncCompanies companies;
 
-    private final AsyncInvoices invoices;
+    private final AsyncCompanyBenefits companyBenefits;
+
+    private final AsyncReports reports;
 
     private final AsyncCompanyAttachments companyAttachments;
 
     private final AsyncCompanyAttachment companyAttachment;
 
-    private final AsyncFederalTaxDetails federalTaxDetails;
+    private final AsyncBankAccounts bankAccounts;
+
+    private final AsyncCompanyForms companyForms;
 
     private final AsyncIndustrySelection industrySelection;
 
-    private final AsyncSignatories signatories;
-
-    private final AsyncFlows flows;
-
-    private final AsyncLocations locations;
-
-    private final AsyncBankAccounts bankAccounts;
-
-    private final AsyncExternalPayrolls externalPayrolls;
+    private final AsyncNotifications notifications;
 
     private final AsyncPaymentConfigs paymentConfigs;
 
-    private final AsyncPaySchedules paySchedules;
+    private final AsyncTaxRequirements taxRequirements;
 
-    private final AsyncEmployees employees;
-
-    private final AsyncHistoricalEmployees historicalEmployees;
-
-    private final AsyncDepartments departments;
-
-    private final AsyncEmployeeEmployments employeeEmployments;
-
-    private final AsyncEmployeeAddresses employeeAddresses;
-
-    private final AsyncEmployeeTaxSetup employeeTaxSetup;
-
-    private final AsyncEmployeePaymentMethods employeePaymentMethods;
-
-    private final AsyncEmployeePaymentMethod employeePaymentMethod;
+    private final AsyncFederalTaxDetails federalTaxDetails;
 
     private final AsyncJobsAndCompensations jobsAndCompensations;
-
-    private final AsyncEarningTypes earningTypes;
-
-    private final AsyncContractors contractors;
 
     private final AsyncContractorPaymentMethod contractorPaymentMethod;
 
     private final AsyncContractorPaymentMethods contractorPaymentMethods;
 
-    private final AsyncWebhooks webhooks;
-
     private final AsyncContractorForms contractorForms;
 
-    private final AsyncContractorDocuments contractorDocuments;
-
-    private final AsyncEmployeeForms employeeForms;
-
-    private final AsyncPayrolls payrolls;
-
-    private final AsyncTimeOffPolicies timeOffPolicies;
-
-    private final AsyncContractorPayments contractorPayments;
+    private final AsyncContractors contractors;
 
     private final AsyncContractorPaymentGroups contractorPaymentGroups;
 
-    private final AsyncCompanyForms companyForms;
+    private final AsyncContractorPayments contractorPayments;
 
-    private final AsyncGeneratedDocuments generatedDocuments;
+    private final AsyncDepartments departments;
 
-    private final AsyncReports reports;
+    private final AsyncContractorDocuments contractorDocuments;
 
-    private final AsyncCompanyBenefits companyBenefits;
+    private final AsyncEarningTypes earningTypes;
+
+    private final AsyncEmployeePaymentMethods employeePaymentMethods;
+
+    private final AsyncEmployeePaymentMethod employeePaymentMethod;
 
     private final AsyncEmployeeBenefits employeeBenefits;
 
-    private final AsyncGarnishments garnishments;
+    private final AsyncEmployees employees;
 
-    private final AsyncI9Verification i9Verification;
+    private final AsyncEmployeeTaxSetup employeeTaxSetup;
 
-    private final AsyncTaxRequirements taxRequirements;
+    private final AsyncEmployeeForms employeeForms;
 
-    private final AsyncHolidayPayPolicies holidayPayPolicies;
-
-    private final AsyncNotifications notifications;
+    private final AsyncEmployeeEmployments employeeEmployments;
 
     private final AsyncEvents events;
 
+    private final AsyncExternalPayrolls externalPayrolls;
+
+    private final AsyncFlows flows;
+
+    private final AsyncGarnishments garnishments;
+
+    private final AsyncPayrolls payrolls;
+
+    private final AsyncGeneratedDocuments generatedDocuments;
+
+    private final AsyncHistoricalEmployees historicalEmployees;
+
+    private final AsyncHolidayPayPolicies holidayPayPolicies;
+
+    private final AsyncEmployeeAddresses employeeAddresses;
+
+    private final AsyncI9Verification i9Verification;
+
     private final AsyncInformationRequests informationRequests;
 
-    private final AsyncRecoveryCases recoveryCases;
+    private final AsyncInvoices invoices;
 
-    private final AsyncAchTransactions achTransactions;
+    private final AsyncLocations locations;
 
-    private final AsyncWireInRequests wireInRequests;
+    private final AsyncMemberPortalInvitations memberPortalInvitations;
 
-    private final AsyncSalaryEstimates salaryEstimates;
+    private final AsyncPaySchedules paySchedules;
 
-    private final AsyncReimbursements reimbursements;
-
-    private final AsyncPeopleBatches peopleBatches;
-
-    private final AsyncTimeOffRequests timeOffRequests;
+    private final AsyncPayrollCancellations payrollCancellations;
 
     private final AsyncPayrollDigests payrollDigests;
 
-    public AsyncIntrospection introspection() {
-        return introspection;
+    private final AsyncTimeOffPolicies timeOffPolicies;
+
+    private final AsyncPeopleBatches peopleBatches;
+
+    private final AsyncRecoveryCases recoveryCases;
+
+    private final AsyncReimbursements reimbursements;
+
+    private final AsyncReverseWireTransactions reverseWireTransactions;
+
+    private final AsyncSalaryEstimates salaryEstimates;
+
+    private final AsyncSignatories signatories;
+
+    private final AsyncTaxPayments taxPayments;
+
+    private final AsyncTimeOffRequests timeOffRequests;
+
+    private final AsyncIntrospection introspection;
+
+    private final AsyncWebhooks webhooks;
+
+    private final AsyncWireInRequests wireInRequests;
+
+    public AsyncAchTransactions achTransactions() {
+        return achTransactions;
     }
 
     public AsyncCompanies companies() {
         return companies;
     }
 
-    public AsyncInvoices invoices() {
-        return invoices;
+    public AsyncCompanyBenefits companyBenefits() {
+        return companyBenefits;
+    }
+
+    public AsyncReports reports() {
+        return reports;
     }
 
     public AsyncCompanyAttachments companyAttachments() {
@@ -141,84 +153,36 @@ public class AsyncGustoEmbedded {
         return companyAttachment;
     }
 
-    public AsyncFederalTaxDetails federalTaxDetails() {
-        return federalTaxDetails;
+    public AsyncBankAccounts bankAccounts() {
+        return bankAccounts;
+    }
+
+    public AsyncCompanyForms companyForms() {
+        return companyForms;
     }
 
     public AsyncIndustrySelection industrySelection() {
         return industrySelection;
     }
 
-    public AsyncSignatories signatories() {
-        return signatories;
-    }
-
-    public AsyncFlows flows() {
-        return flows;
-    }
-
-    public AsyncLocations locations() {
-        return locations;
-    }
-
-    public AsyncBankAccounts bankAccounts() {
-        return bankAccounts;
-    }
-
-    public AsyncExternalPayrolls externalPayrolls() {
-        return externalPayrolls;
+    public AsyncNotifications notifications() {
+        return notifications;
     }
 
     public AsyncPaymentConfigs paymentConfigs() {
         return paymentConfigs;
     }
 
-    public AsyncPaySchedules paySchedules() {
-        return paySchedules;
+    public AsyncTaxRequirements taxRequirements() {
+        return taxRequirements;
     }
 
-    public AsyncEmployees employees() {
-        return employees;
-    }
-
-    public AsyncHistoricalEmployees historicalEmployees() {
-        return historicalEmployees;
-    }
-
-    public AsyncDepartments departments() {
-        return departments;
-    }
-
-    public AsyncEmployeeEmployments employeeEmployments() {
-        return employeeEmployments;
-    }
-
-    public AsyncEmployeeAddresses employeeAddresses() {
-        return employeeAddresses;
-    }
-
-    public AsyncEmployeeTaxSetup employeeTaxSetup() {
-        return employeeTaxSetup;
-    }
-
-    public AsyncEmployeePaymentMethods employeePaymentMethods() {
-        return employeePaymentMethods;
-    }
-
-    public AsyncEmployeePaymentMethod employeePaymentMethod() {
-        return employeePaymentMethod;
+    public AsyncFederalTaxDetails federalTaxDetails() {
+        return federalTaxDetails;
     }
 
     public AsyncJobsAndCompensations jobsAndCompensations() {
         return jobsAndCompensations;
-    }
-
-    public AsyncEarningTypes earningTypes() {
-        return earningTypes;
-    }
-
-    public AsyncContractors contractors() {
-        return contractors;
     }
 
     public AsyncContractorPaymentMethod contractorPaymentMethod() {
@@ -229,116 +193,176 @@ public class AsyncGustoEmbedded {
         return contractorPaymentMethods;
     }
 
-    public AsyncWebhooks webhooks() {
-        return webhooks;
-    }
-
     public AsyncContractorForms contractorForms() {
         return contractorForms;
     }
 
-    public AsyncContractorDocuments contractorDocuments() {
-        return contractorDocuments;
-    }
-
-    public AsyncEmployeeForms employeeForms() {
-        return employeeForms;
-    }
-
-    public AsyncPayrolls payrolls() {
-        return payrolls;
-    }
-
-    public AsyncTimeOffPolicies timeOffPolicies() {
-        return timeOffPolicies;
-    }
-
-    public AsyncContractorPayments contractorPayments() {
-        return contractorPayments;
+    public AsyncContractors contractors() {
+        return contractors;
     }
 
     public AsyncContractorPaymentGroups contractorPaymentGroups() {
         return contractorPaymentGroups;
     }
 
-    public AsyncCompanyForms companyForms() {
-        return companyForms;
+    public AsyncContractorPayments contractorPayments() {
+        return contractorPayments;
     }
 
-    public AsyncGeneratedDocuments generatedDocuments() {
-        return generatedDocuments;
+    public AsyncDepartments departments() {
+        return departments;
     }
 
-    public AsyncReports reports() {
-        return reports;
+    public AsyncContractorDocuments contractorDocuments() {
+        return contractorDocuments;
     }
 
-    public AsyncCompanyBenefits companyBenefits() {
-        return companyBenefits;
+    public AsyncEarningTypes earningTypes() {
+        return earningTypes;
+    }
+
+    public AsyncEmployeePaymentMethods employeePaymentMethods() {
+        return employeePaymentMethods;
+    }
+
+    public AsyncEmployeePaymentMethod employeePaymentMethod() {
+        return employeePaymentMethod;
     }
 
     public AsyncEmployeeBenefits employeeBenefits() {
         return employeeBenefits;
     }
 
-    public AsyncGarnishments garnishments() {
-        return garnishments;
+    public AsyncEmployees employees() {
+        return employees;
     }
 
-    public AsyncI9Verification i9Verification() {
-        return i9Verification;
+    public AsyncEmployeeTaxSetup employeeTaxSetup() {
+        return employeeTaxSetup;
     }
 
-    public AsyncTaxRequirements taxRequirements() {
-        return taxRequirements;
+    public AsyncEmployeeForms employeeForms() {
+        return employeeForms;
     }
 
-    public AsyncHolidayPayPolicies holidayPayPolicies() {
-        return holidayPayPolicies;
-    }
-
-    public AsyncNotifications notifications() {
-        return notifications;
+    public AsyncEmployeeEmployments employeeEmployments() {
+        return employeeEmployments;
     }
 
     public AsyncEvents events() {
         return events;
     }
 
+    public AsyncExternalPayrolls externalPayrolls() {
+        return externalPayrolls;
+    }
+
+    public AsyncFlows flows() {
+        return flows;
+    }
+
+    public AsyncGarnishments garnishments() {
+        return garnishments;
+    }
+
+    public AsyncPayrolls payrolls() {
+        return payrolls;
+    }
+
+    public AsyncGeneratedDocuments generatedDocuments() {
+        return generatedDocuments;
+    }
+
+    public AsyncHistoricalEmployees historicalEmployees() {
+        return historicalEmployees;
+    }
+
+    public AsyncHolidayPayPolicies holidayPayPolicies() {
+        return holidayPayPolicies;
+    }
+
+    public AsyncEmployeeAddresses employeeAddresses() {
+        return employeeAddresses;
+    }
+
+    public AsyncI9Verification i9Verification() {
+        return i9Verification;
+    }
+
     public AsyncInformationRequests informationRequests() {
         return informationRequests;
     }
 
-    public AsyncRecoveryCases recoveryCases() {
-        return recoveryCases;
+    public AsyncInvoices invoices() {
+        return invoices;
     }
 
-    public AsyncAchTransactions achTransactions() {
-        return achTransactions;
+    public AsyncLocations locations() {
+        return locations;
     }
 
-    public AsyncWireInRequests wireInRequests() {
-        return wireInRequests;
+    public AsyncMemberPortalInvitations memberPortalInvitations() {
+        return memberPortalInvitations;
     }
 
-    public AsyncSalaryEstimates salaryEstimates() {
-        return salaryEstimates;
+    public AsyncPaySchedules paySchedules() {
+        return paySchedules;
     }
 
-    public AsyncReimbursements reimbursements() {
-        return reimbursements;
+    public AsyncPayrollCancellations payrollCancellations() {
+        return payrollCancellations;
+    }
+
+    public AsyncPayrollDigests payrollDigests() {
+        return payrollDigests;
+    }
+
+    public AsyncTimeOffPolicies timeOffPolicies() {
+        return timeOffPolicies;
     }
 
     public AsyncPeopleBatches peopleBatches() {
         return peopleBatches;
     }
 
+    public AsyncRecoveryCases recoveryCases() {
+        return recoveryCases;
+    }
+
+    public AsyncReimbursements reimbursements() {
+        return reimbursements;
+    }
+
+    public AsyncReverseWireTransactions reverseWireTransactions() {
+        return reverseWireTransactions;
+    }
+
+    public AsyncSalaryEstimates salaryEstimates() {
+        return salaryEstimates;
+    }
+
+    public AsyncSignatories signatories() {
+        return signatories;
+    }
+
+    public AsyncTaxPayments taxPayments() {
+        return taxPayments;
+    }
+
     public AsyncTimeOffRequests timeOffRequests() {
         return timeOffRequests;
     }
 
-    public AsyncPayrollDigests payrollDigests() {
-        return payrollDigests;
+    public AsyncIntrospection introspection() {
+        return introspection;
+    }
+
+    public AsyncWebhooks webhooks() {
+        return webhooks;
+    }
+
+    public AsyncWireInRequests wireInRequests() {
+        return wireInRequests;
     }
 
     private final SDKConfiguration sdkConfiguration;
@@ -347,61 +371,65 @@ public class AsyncGustoEmbedded {
     AsyncGustoEmbedded(GustoEmbedded syncSDK, SDKConfiguration sdkConfiguration) {
         this.syncSDK = syncSDK;
         this.sdkConfiguration = sdkConfiguration;
-        this.introspection = new AsyncIntrospection(syncSDK.introspection(), sdkConfiguration);
+        this.achTransactions = new AsyncAchTransactions(syncSDK.achTransactions(), sdkConfiguration);
         this.companies = new AsyncCompanies(syncSDK.companies(), sdkConfiguration);
-        this.invoices = new AsyncInvoices(syncSDK.invoices(), sdkConfiguration);
+        this.companyBenefits = new AsyncCompanyBenefits(syncSDK.companyBenefits(), sdkConfiguration);
+        this.reports = new AsyncReports(syncSDK.reports(), sdkConfiguration);
         this.companyAttachments = new AsyncCompanyAttachments(syncSDK.companyAttachments(), sdkConfiguration);
         this.companyAttachment = new AsyncCompanyAttachment(syncSDK.companyAttachment(), sdkConfiguration);
-        this.federalTaxDetails = new AsyncFederalTaxDetails(syncSDK.federalTaxDetails(), sdkConfiguration);
-        this.industrySelection = new AsyncIndustrySelection(syncSDK.industrySelection(), sdkConfiguration);
-        this.signatories = new AsyncSignatories(syncSDK.signatories(), sdkConfiguration);
-        this.flows = new AsyncFlows(syncSDK.flows(), sdkConfiguration);
-        this.locations = new AsyncLocations(syncSDK.locations(), sdkConfiguration);
         this.bankAccounts = new AsyncBankAccounts(syncSDK.bankAccounts(), sdkConfiguration);
-        this.externalPayrolls = new AsyncExternalPayrolls(syncSDK.externalPayrolls(), sdkConfiguration);
+        this.companyForms = new AsyncCompanyForms(syncSDK.companyForms(), sdkConfiguration);
+        this.industrySelection = new AsyncIndustrySelection(syncSDK.industrySelection(), sdkConfiguration);
+        this.notifications = new AsyncNotifications(syncSDK.notifications(), sdkConfiguration);
         this.paymentConfigs = new AsyncPaymentConfigs(syncSDK.paymentConfigs(), sdkConfiguration);
-        this.paySchedules = new AsyncPaySchedules(syncSDK.paySchedules(), sdkConfiguration);
-        this.employees = new AsyncEmployees(syncSDK.employees(), sdkConfiguration);
-        this.historicalEmployees = new AsyncHistoricalEmployees(syncSDK.historicalEmployees(), sdkConfiguration);
-        this.departments = new AsyncDepartments(syncSDK.departments(), sdkConfiguration);
-        this.employeeEmployments = new AsyncEmployeeEmployments(syncSDK.employeeEmployments(), sdkConfiguration);
-        this.employeeAddresses = new AsyncEmployeeAddresses(syncSDK.employeeAddresses(), sdkConfiguration);
-        this.employeeTaxSetup = new AsyncEmployeeTaxSetup(syncSDK.employeeTaxSetup(), sdkConfiguration);
-        this.employeePaymentMethods = new AsyncEmployeePaymentMethods(syncSDK.employeePaymentMethods(), sdkConfiguration);
-        this.employeePaymentMethod = new AsyncEmployeePaymentMethod(syncSDK.employeePaymentMethod(), sdkConfiguration);
+        this.taxRequirements = new AsyncTaxRequirements(syncSDK.taxRequirements(), sdkConfiguration);
+        this.federalTaxDetails = new AsyncFederalTaxDetails(syncSDK.federalTaxDetails(), sdkConfiguration);
         this.jobsAndCompensations = new AsyncJobsAndCompensations(syncSDK.jobsAndCompensations(), sdkConfiguration);
-        this.earningTypes = new AsyncEarningTypes(syncSDK.earningTypes(), sdkConfiguration);
-        this.contractors = new AsyncContractors(syncSDK.contractors(), sdkConfiguration);
         this.contractorPaymentMethod = new AsyncContractorPaymentMethod(syncSDK.contractorPaymentMethod(), sdkConfiguration);
         this.contractorPaymentMethods = new AsyncContractorPaymentMethods(syncSDK.contractorPaymentMethods(), sdkConfiguration);
-        this.webhooks = new AsyncWebhooks(syncSDK.webhooks(), sdkConfiguration);
         this.contractorForms = new AsyncContractorForms(syncSDK.contractorForms(), sdkConfiguration);
-        this.contractorDocuments = new AsyncContractorDocuments(syncSDK.contractorDocuments(), sdkConfiguration);
-        this.employeeForms = new AsyncEmployeeForms(syncSDK.employeeForms(), sdkConfiguration);
-        this.payrolls = new AsyncPayrolls(syncSDK.payrolls(), sdkConfiguration);
-        this.timeOffPolicies = new AsyncTimeOffPolicies(syncSDK.timeOffPolicies(), sdkConfiguration);
-        this.contractorPayments = new AsyncContractorPayments(syncSDK.contractorPayments(), sdkConfiguration);
+        this.contractors = new AsyncContractors(syncSDK.contractors(), sdkConfiguration);
         this.contractorPaymentGroups = new AsyncContractorPaymentGroups(syncSDK.contractorPaymentGroups(), sdkConfiguration);
-        this.companyForms = new AsyncCompanyForms(syncSDK.companyForms(), sdkConfiguration);
-        this.generatedDocuments = new AsyncGeneratedDocuments(syncSDK.generatedDocuments(), sdkConfiguration);
-        this.reports = new AsyncReports(syncSDK.reports(), sdkConfiguration);
-        this.companyBenefits = new AsyncCompanyBenefits(syncSDK.companyBenefits(), sdkConfiguration);
+        this.contractorPayments = new AsyncContractorPayments(syncSDK.contractorPayments(), sdkConfiguration);
+        this.departments = new AsyncDepartments(syncSDK.departments(), sdkConfiguration);
+        this.contractorDocuments = new AsyncContractorDocuments(syncSDK.contractorDocuments(), sdkConfiguration);
+        this.earningTypes = new AsyncEarningTypes(syncSDK.earningTypes(), sdkConfiguration);
+        this.employeePaymentMethods = new AsyncEmployeePaymentMethods(syncSDK.employeePaymentMethods(), sdkConfiguration);
+        this.employeePaymentMethod = new AsyncEmployeePaymentMethod(syncSDK.employeePaymentMethod(), sdkConfiguration);
         this.employeeBenefits = new AsyncEmployeeBenefits(syncSDK.employeeBenefits(), sdkConfiguration);
-        this.garnishments = new AsyncGarnishments(syncSDK.garnishments(), sdkConfiguration);
-        this.i9Verification = new AsyncI9Verification(syncSDK.i9Verification(), sdkConfiguration);
-        this.taxRequirements = new AsyncTaxRequirements(syncSDK.taxRequirements(), sdkConfiguration);
-        this.holidayPayPolicies = new AsyncHolidayPayPolicies(syncSDK.holidayPayPolicies(), sdkConfiguration);
-        this.notifications = new AsyncNotifications(syncSDK.notifications(), sdkConfiguration);
+        this.employees = new AsyncEmployees(syncSDK.employees(), sdkConfiguration);
+        this.employeeTaxSetup = new AsyncEmployeeTaxSetup(syncSDK.employeeTaxSetup(), sdkConfiguration);
+        this.employeeForms = new AsyncEmployeeForms(syncSDK.employeeForms(), sdkConfiguration);
+        this.employeeEmployments = new AsyncEmployeeEmployments(syncSDK.employeeEmployments(), sdkConfiguration);
         this.events = new AsyncEvents(syncSDK.events(), sdkConfiguration);
+        this.externalPayrolls = new AsyncExternalPayrolls(syncSDK.externalPayrolls(), sdkConfiguration);
+        this.flows = new AsyncFlows(syncSDK.flows(), sdkConfiguration);
+        this.garnishments = new AsyncGarnishments(syncSDK.garnishments(), sdkConfiguration);
+        this.payrolls = new AsyncPayrolls(syncSDK.payrolls(), sdkConfiguration);
+        this.generatedDocuments = new AsyncGeneratedDocuments(syncSDK.generatedDocuments(), sdkConfiguration);
+        this.historicalEmployees = new AsyncHistoricalEmployees(syncSDK.historicalEmployees(), sdkConfiguration);
+        this.holidayPayPolicies = new AsyncHolidayPayPolicies(syncSDK.holidayPayPolicies(), sdkConfiguration);
+        this.employeeAddresses = new AsyncEmployeeAddresses(syncSDK.employeeAddresses(), sdkConfiguration);
+        this.i9Verification = new AsyncI9Verification(syncSDK.i9Verification(), sdkConfiguration);
         this.informationRequests = new AsyncInformationRequests(syncSDK.informationRequests(), sdkConfiguration);
-        this.recoveryCases = new AsyncRecoveryCases(syncSDK.recoveryCases(), sdkConfiguration);
-        this.achTransactions = new AsyncAchTransactions(syncSDK.achTransactions(), sdkConfiguration);
-        this.wireInRequests = new AsyncWireInRequests(syncSDK.wireInRequests(), sdkConfiguration);
-        this.salaryEstimates = new AsyncSalaryEstimates(syncSDK.salaryEstimates(), sdkConfiguration);
-        this.reimbursements = new AsyncReimbursements(syncSDK.reimbursements(), sdkConfiguration);
-        this.peopleBatches = new AsyncPeopleBatches(syncSDK.peopleBatches(), sdkConfiguration);
-        this.timeOffRequests = new AsyncTimeOffRequests(syncSDK.timeOffRequests(), sdkConfiguration);
+        this.invoices = new AsyncInvoices(syncSDK.invoices(), sdkConfiguration);
+        this.locations = new AsyncLocations(syncSDK.locations(), sdkConfiguration);
+        this.memberPortalInvitations = new AsyncMemberPortalInvitations(syncSDK.memberPortalInvitations(), sdkConfiguration);
+        this.paySchedules = new AsyncPaySchedules(syncSDK.paySchedules(), sdkConfiguration);
+        this.payrollCancellations = new AsyncPayrollCancellations(syncSDK.payrollCancellations(), sdkConfiguration);
         this.payrollDigests = new AsyncPayrollDigests(syncSDK.payrollDigests(), sdkConfiguration);
+        this.timeOffPolicies = new AsyncTimeOffPolicies(syncSDK.timeOffPolicies(), sdkConfiguration);
+        this.peopleBatches = new AsyncPeopleBatches(syncSDK.peopleBatches(), sdkConfiguration);
+        this.recoveryCases = new AsyncRecoveryCases(syncSDK.recoveryCases(), sdkConfiguration);
+        this.reimbursements = new AsyncReimbursements(syncSDK.reimbursements(), sdkConfiguration);
+        this.reverseWireTransactions = new AsyncReverseWireTransactions(syncSDK.reverseWireTransactions(), sdkConfiguration);
+        this.salaryEstimates = new AsyncSalaryEstimates(syncSDK.salaryEstimates(), sdkConfiguration);
+        this.signatories = new AsyncSignatories(syncSDK.signatories(), sdkConfiguration);
+        this.taxPayments = new AsyncTaxPayments(syncSDK.taxPayments(), sdkConfiguration);
+        this.timeOffRequests = new AsyncTimeOffRequests(syncSDK.timeOffRequests(), sdkConfiguration);
+        this.introspection = new AsyncIntrospection(syncSDK.introspection(), sdkConfiguration);
+        this.webhooks = new AsyncWebhooks(syncSDK.webhooks(), sdkConfiguration);
+        this.wireInRequests = new AsyncWireInRequests(syncSDK.wireInRequests(), sdkConfiguration);
     }
 
     /**

@@ -16,23 +16,17 @@ import java.util.Optional;
 
 public class PostV1ContractorsContractorUuidTerminationRequestBuilder {
 
-    private String contractorUuid;
     private Optional<? extends PostV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PostV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion>>() {});
+    private String contractorUuid;
     private Optional<? extends PostV1ContractorsContractorUuidTerminationRequestBody> requestBody = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1ContractorsContractorUuidTerminationRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1ContractorsContractorUuidTerminationRequestBuilder contractorUuid(String contractorUuid) {
-        Utils.checkNotNull(contractorUuid, "contractorUuid");
-        this.contractorUuid = contractorUuid;
-        return this;
     }
                 
     public PostV1ContractorsContractorUuidTerminationRequestBuilder xGustoAPIVersion(PostV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -44,6 +38,12 @@ public class PostV1ContractorsContractorUuidTerminationRequestBuilder {
     public PostV1ContractorsContractorUuidTerminationRequestBuilder xGustoAPIVersion(Optional<? extends PostV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PostV1ContractorsContractorUuidTerminationRequestBuilder contractorUuid(String contractorUuid) {
+        Utils.checkNotNull(contractorUuid, "contractorUuid");
+        this.contractorUuid = contractorUuid;
         return this;
     }
                 
@@ -65,8 +65,8 @@ public class PostV1ContractorsContractorUuidTerminationRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1ContractorsContractorUuidTerminationRequest request = new PostV1ContractorsContractorUuidTerminationRequest(contractorUuid,
-            xGustoAPIVersion,
+        PostV1ContractorsContractorUuidTerminationRequest request = new PostV1ContractorsContractorUuidTerminationRequest(xGustoAPIVersion,
+            contractorUuid,
             requestBody);
 
         return request;

@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
 
-    private String companyId;
     private Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
         return this;
     }
 
+    public GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
 
     private GetV1CompaniesCompanyIdFederalTaxDetailsRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompaniesCompanyIdFederalTaxDetailsRequest request = new GetV1CompaniesCompanyIdFederalTaxDetailsRequest(companyId,
-            xGustoAPIVersion);
+        GetV1CompaniesCompanyIdFederalTaxDetailsRequest request = new GetV1CompaniesCompanyIdFederalTaxDetailsRequest(xGustoAPIVersion,
+            companyId);
 
         return request;
     }

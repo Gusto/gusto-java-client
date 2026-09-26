@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 
@@ -21,14 +20,14 @@ public class PayrollPayPeriodType {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("start_date")
-    private Optional<String> startDate;
+    private JsonNullable<String> startDate;
 
     /**
      * The start date, inclusive, of the pay period.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("end_date")
-    private Optional<String> endDate;
+    private JsonNullable<String> endDate;
 
     /**
      * The UUID of the pay schedule for the payroll.
@@ -39,8 +38,8 @@ public class PayrollPayPeriodType {
 
     @JsonCreator
     public PayrollPayPeriodType(
-            @JsonProperty("start_date") Optional<String> startDate,
-            @JsonProperty("end_date") Optional<String> endDate,
+            @JsonProperty("start_date") JsonNullable<String> startDate,
+            @JsonProperty("end_date") JsonNullable<String> endDate,
             @JsonProperty("pay_schedule_uuid") JsonNullable<String> payScheduleUuid) {
         Utils.checkNotNull(startDate, "startDate");
         Utils.checkNotNull(endDate, "endDate");
@@ -51,14 +50,14 @@ public class PayrollPayPeriodType {
     }
     
     public PayrollPayPeriodType() {
-        this(Optional.empty(), Optional.empty(), JsonNullable.undefined());
+        this(JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
      * The start date, inclusive, of the pay period.
      */
     @JsonIgnore
-    public Optional<String> startDate() {
+    public JsonNullable<String> startDate() {
         return startDate;
     }
 
@@ -66,7 +65,7 @@ public class PayrollPayPeriodType {
      * The start date, inclusive, of the pay period.
      */
     @JsonIgnore
-    public Optional<String> endDate() {
+    public JsonNullable<String> endDate() {
         return endDate;
     }
 
@@ -88,15 +87,14 @@ public class PayrollPayPeriodType {
      */
     public PayrollPayPeriodType withStartDate(String startDate) {
         Utils.checkNotNull(startDate, "startDate");
-        this.startDate = Optional.ofNullable(startDate);
+        this.startDate = JsonNullable.of(startDate);
         return this;
     }
-
 
     /**
      * The start date, inclusive, of the pay period.
      */
-    public PayrollPayPeriodType withStartDate(Optional<String> startDate) {
+    public PayrollPayPeriodType withStartDate(JsonNullable<String> startDate) {
         Utils.checkNotNull(startDate, "startDate");
         this.startDate = startDate;
         return this;
@@ -107,15 +105,14 @@ public class PayrollPayPeriodType {
      */
     public PayrollPayPeriodType withEndDate(String endDate) {
         Utils.checkNotNull(endDate, "endDate");
-        this.endDate = Optional.ofNullable(endDate);
+        this.endDate = JsonNullable.of(endDate);
         return this;
     }
-
 
     /**
      * The start date, inclusive, of the pay period.
      */
-    public PayrollPayPeriodType withEndDate(Optional<String> endDate) {
+    public PayrollPayPeriodType withEndDate(JsonNullable<String> endDate) {
         Utils.checkNotNull(endDate, "endDate");
         this.endDate = endDate;
         return this;
@@ -171,9 +168,9 @@ public class PayrollPayPeriodType {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> startDate = Optional.empty();
+        private JsonNullable<String> startDate = JsonNullable.undefined();
 
-        private Optional<String> endDate = Optional.empty();
+        private JsonNullable<String> endDate = JsonNullable.undefined();
 
         private JsonNullable<String> payScheduleUuid = JsonNullable.undefined();
 
@@ -187,14 +184,14 @@ public class PayrollPayPeriodType {
          */
         public Builder startDate(String startDate) {
             Utils.checkNotNull(startDate, "startDate");
-            this.startDate = Optional.ofNullable(startDate);
+            this.startDate = JsonNullable.of(startDate);
             return this;
         }
 
         /**
          * The start date, inclusive, of the pay period.
          */
-        public Builder startDate(Optional<String> startDate) {
+        public Builder startDate(JsonNullable<String> startDate) {
             Utils.checkNotNull(startDate, "startDate");
             this.startDate = startDate;
             return this;
@@ -206,14 +203,14 @@ public class PayrollPayPeriodType {
          */
         public Builder endDate(String endDate) {
             Utils.checkNotNull(endDate, "endDate");
-            this.endDate = Optional.ofNullable(endDate);
+            this.endDate = JsonNullable.of(endDate);
             return this;
         }
 
         /**
          * The start date, inclusive, of the pay period.
          */
-        public Builder endDate(Optional<String> endDate) {
+        public Builder endDate(JsonNullable<String> endDate) {
             Utils.checkNotNull(endDate, "endDate");
             this.endDate = endDate;
             return this;

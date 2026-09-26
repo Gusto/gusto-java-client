@@ -11,54 +11,70 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
-import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class Options {
     /**
-     * An allowed value to answer the question
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("value")
-    private Optional<? extends EmployeeStateTaxInputQuestionFormatValue> value;
-
-    /**
-     * A display label that corresponds to the answer value
+     * A customer facing label for the answer
      */
     @JsonProperty("label")
     private String label;
 
+    /**
+     * The actual value to be submitted
+     */
+    @JsonProperty("value")
+    private TaxRequirementMetadataValue value;
+
+    /**
+     * A less verbose label that may sometimes be available
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("short_label")
+    private JsonNullable<String> shortLabel;
+
     @JsonCreator
     public Options(
-            @JsonProperty("value") Optional<? extends EmployeeStateTaxInputQuestionFormatValue> value,
-            @JsonProperty("label") String label) {
-        Utils.checkNotNull(value, "value");
+            @JsonProperty("label") String label,
+            @JsonProperty("value") TaxRequirementMetadataValue value,
+            @JsonProperty("short_label") JsonNullable<String> shortLabel) {
         Utils.checkNotNull(label, "label");
-        this.value = value;
+        Utils.checkNotNull(value, "value");
+        Utils.checkNotNull(shortLabel, "shortLabel");
         this.label = label;
+        this.value = value;
+        this.shortLabel = shortLabel;
     }
     
     public Options(
-            String label) {
-        this(Optional.empty(), label);
+            String label,
+            TaxRequirementMetadataValue value) {
+        this(label, value, JsonNullable.undefined());
     }
 
     /**
-     * An allowed value to answer the question
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<EmployeeStateTaxInputQuestionFormatValue> value() {
-        return (Optional<EmployeeStateTaxInputQuestionFormatValue>) value;
-    }
-
-    /**
-     * A display label that corresponds to the answer value
+     * A customer facing label for the answer
      */
     @JsonIgnore
     public String label() {
         return label;
+    }
+
+    /**
+     * The actual value to be submitted
+     */
+    @JsonIgnore
+    public TaxRequirementMetadataValue value() {
+        return value;
+    }
+
+    /**
+     * A less verbose label that may sometimes be available
+     */
+    @JsonIgnore
+    public JsonNullable<String> shortLabel() {
+        return shortLabel;
     }
 
     public static Builder builder() {
@@ -67,30 +83,38 @@ public class Options {
 
 
     /**
-     * An allowed value to answer the question
+     * A customer facing label for the answer
      */
-    public Options withValue(EmployeeStateTaxInputQuestionFormatValue value) {
-        Utils.checkNotNull(value, "value");
-        this.value = Optional.ofNullable(value);
+    public Options withLabel(String label) {
+        Utils.checkNotNull(label, "label");
+        this.label = label;
         return this;
     }
 
-
     /**
-     * An allowed value to answer the question
+     * The actual value to be submitted
      */
-    public Options withValue(Optional<? extends EmployeeStateTaxInputQuestionFormatValue> value) {
+    public Options withValue(TaxRequirementMetadataValue value) {
         Utils.checkNotNull(value, "value");
         this.value = value;
         return this;
     }
 
     /**
-     * A display label that corresponds to the answer value
+     * A less verbose label that may sometimes be available
      */
-    public Options withLabel(String label) {
-        Utils.checkNotNull(label, "label");
-        this.label = label;
+    public Options withShortLabel(String shortLabel) {
+        Utils.checkNotNull(shortLabel, "shortLabel");
+        this.shortLabel = JsonNullable.of(shortLabel);
+        return this;
+    }
+
+    /**
+     * A less verbose label that may sometimes be available
+     */
+    public Options withShortLabel(JsonNullable<String> shortLabel) {
+        Utils.checkNotNull(shortLabel, "shortLabel");
+        this.shortLabel = shortLabel;
         return this;
     }
 
@@ -104,29 +128,33 @@ public class Options {
         }
         Options other = (Options) o;
         return 
+            Utils.enhancedDeepEquals(this.label, other.label) &&
             Utils.enhancedDeepEquals(this.value, other.value) &&
-            Utils.enhancedDeepEquals(this.label, other.label);
+            Utils.enhancedDeepEquals(this.shortLabel, other.shortLabel);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            value, label);
+            label, value, shortLabel);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Options.class,
+                "label", label,
                 "value", value,
-                "label", label);
+                "shortLabel", shortLabel);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends EmployeeStateTaxInputQuestionFormatValue> value = Optional.empty();
-
         private String label;
+
+        private TaxRequirementMetadataValue value;
+
+        private JsonNullable<String> shortLabel = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -134,26 +162,7 @@ public class Options {
 
 
         /**
-         * An allowed value to answer the question
-         */
-        public Builder value(EmployeeStateTaxInputQuestionFormatValue value) {
-            Utils.checkNotNull(value, "value");
-            this.value = Optional.ofNullable(value);
-            return this;
-        }
-
-        /**
-         * An allowed value to answer the question
-         */
-        public Builder value(Optional<? extends EmployeeStateTaxInputQuestionFormatValue> value) {
-            Utils.checkNotNull(value, "value");
-            this.value = value;
-            return this;
-        }
-
-
-        /**
-         * A display label that corresponds to the answer value
+         * A customer facing label for the answer
          */
         public Builder label(String label) {
             Utils.checkNotNull(label, "label");
@@ -161,10 +170,39 @@ public class Options {
             return this;
         }
 
+
+        /**
+         * The actual value to be submitted
+         */
+        public Builder value(TaxRequirementMetadataValue value) {
+            Utils.checkNotNull(value, "value");
+            this.value = value;
+            return this;
+        }
+
+
+        /**
+         * A less verbose label that may sometimes be available
+         */
+        public Builder shortLabel(String shortLabel) {
+            Utils.checkNotNull(shortLabel, "shortLabel");
+            this.shortLabel = JsonNullable.of(shortLabel);
+            return this;
+        }
+
+        /**
+         * A less verbose label that may sometimes be available
+         */
+        public Builder shortLabel(JsonNullable<String> shortLabel) {
+            Utils.checkNotNull(shortLabel, "shortLabel");
+            this.shortLabel = shortLabel;
+            return this;
+        }
+
         public Options build() {
 
             return new Options(
-                value, label);
+                label, value, shortLabel);
         }
 
     }

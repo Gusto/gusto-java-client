@@ -46,78 +46,6 @@ public class CompanyAttachments {
     }
 
     /**
-     * Get Company Attachment Details
-     * 
-     * <p>Retrieve the detail of an attachment uploaded by the company.
-     * 
-     * <p>### Related guides
-     * - [Manage company attachments](doc:manage-company-attachments)
-     * 
-     * <p>scope: `company_attachments:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1CompaniesAttachmentRequestBuilder getDetails() {
-        return new GetV1CompaniesAttachmentRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Company Attachment Details
-     * 
-     * <p>Retrieve the detail of an attachment uploaded by the company.
-     * 
-     * <p>### Related guides
-     * - [Manage company attachments](doc:manage-company-attachments)
-     * 
-     * <p>scope: `company_attachments:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param companyAttachmentUuid The UUID of the company attachment
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesAttachmentResponse getDetails(String companyId, String companyAttachmentUuid) {
-        return getDetails(Optional.empty(), companyId, companyAttachmentUuid);
-    }
-
-    /**
-     * Get Company Attachment Details
-     * 
-     * <p>Retrieve the detail of an attachment uploaded by the company.
-     * 
-     * <p>### Related guides
-     * - [Manage company attachments](doc:manage-company-attachments)
-     * 
-     * <p>scope: `company_attachments:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyId The UUID of the company
-     * @param companyAttachmentUuid The UUID of the company attachment
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesAttachmentResponse getDetails(
-            Optional<? extends GetV1CompaniesAttachmentHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
-            String companyAttachmentUuid) {
-        GetV1CompaniesAttachmentRequest request =
-            GetV1CompaniesAttachmentRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .companyId(companyId)
-                .companyAttachmentUuid(companyAttachmentUuid)
-                .build();
-        RequestOperation<GetV1CompaniesAttachmentRequest, GetV1CompaniesAttachmentResponse> operation
-              = new GetV1CompaniesAttachment.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
      * Get List of Company Attachments
      * 
      * <p>Retrieve a list of all the attachments uploaded by the company.
@@ -259,6 +187,78 @@ public class CompanyAttachments {
                 .build();
         RequestOperation<PostV1CompaniesAttachmentRequest, PostV1CompaniesAttachmentResponse> operation
               = new PostV1CompaniesAttachment.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get Company Attachment Details
+     * 
+     * <p>Retrieve the detail of an attachment uploaded by the company.
+     * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
+     * 
+     * <p>scope: `company_attachments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1CompaniesAttachmentRequestBuilder getDetails() {
+        return new GetV1CompaniesAttachmentRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get Company Attachment Details
+     * 
+     * <p>Retrieve the detail of an attachment uploaded by the company.
+     * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
+     * 
+     * <p>scope: `company_attachments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @param companyAttachmentUuid The UUID of the company attachment
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesAttachmentResponse getDetails(String companyId, String companyAttachmentUuid) {
+        return getDetails(Optional.empty(), companyId, companyAttachmentUuid);
+    }
+
+    /**
+     * Get Company Attachment Details
+     * 
+     * <p>Retrieve the detail of an attachment uploaded by the company.
+     * 
+     * <p>### Related guides
+     * - [Manage company attachments](doc:manage-company-attachments)
+     * 
+     * <p>scope: `company_attachments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param companyAttachmentUuid The UUID of the company attachment
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesAttachmentResponse getDetails(
+            Optional<? extends GetV1CompaniesAttachmentHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String companyAttachmentUuid) {
+        GetV1CompaniesAttachmentRequest request =
+            GetV1CompaniesAttachmentRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .companyAttachmentUuid(companyAttachmentUuid)
+                .build();
+        RequestOperation<GetV1CompaniesAttachmentRequest, GetV1CompaniesAttachmentResponse> operation
+              = new GetV1CompaniesAttachment.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

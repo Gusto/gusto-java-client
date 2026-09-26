@@ -6,7 +6,6 @@ package com.gusto.embedded_api_v_2025_11_15.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api_v_2025_11_15.models.components.VersionHeader;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
 import com.gusto.embedded_api_v_2025_11_15.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
@@ -17,6 +16,14 @@ import java.util.Optional;
 
 
 public class GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest {
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
     /**
      * The type of document being generated
      */
@@ -30,31 +37,34 @@ public class GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=request_uuid")
     private String requestUuid;
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends VersionHeader> xGustoAPIVersion;
-
     @JsonCreator
     public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest(
+            Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
             DocumentType documentType,
-            String requestUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            String requestUuid) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(documentType, "documentType");
         Utils.checkNotNull(requestUuid, "requestUuid");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.documentType = documentType;
         this.requestUuid = requestUuid;
-        this.xGustoAPIVersion = xGustoAPIVersion;
     }
     
     public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest(
             DocumentType documentType,
             String requestUuid) {
-        this(documentType, requestUuid, Optional.empty());
+        this(Optional.empty(), documentType, requestUuid);
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -74,21 +84,33 @@ public class GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest {
         return requestUuid;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
+
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<VersionHeader> xGustoAPIVersion() {
-        return (Optional<VersionHeader>) xGustoAPIVersion;
+    public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest withXGustoAPIVersion(GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        return this;
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
 
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest withXGustoAPIVersion(Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
 
     /**
      * The type of document being generated
@@ -109,29 +131,6 @@ public class GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest {
         return this;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest withXGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-        return this;
-    }
-
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest withXGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -142,36 +141,59 @@ public class GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest {
         }
         GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest other = (GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.documentType, other.documentType) &&
-            Utils.enhancedDeepEquals(this.requestUuid, other.requestUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.requestUuid, other.requestUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            documentType, requestUuid, xGustoAPIVersion);
+            xGustoAPIVersion, documentType, requestUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "documentType", documentType,
-                "requestUuid", requestUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "requestUuid", requestUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private DocumentType documentType;
 
         private String requestUuid;
 
-        private Optional<? extends VersionHeader> xGustoAPIVersion;
-
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -195,43 +217,20 @@ public class GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest {
             return this;
         }
 
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
-
         public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest(
-                documentType, requestUuid, xGustoAPIVersion);
+                xGustoAPIVersion, documentType, requestUuid);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+        private static final LazySingletonValue<Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
                 new LazySingletonValue<>(
                         "X-Gusto-API-Version",
                         "\"2025-11-15\"",
-                        new TypeReference<Optional<? extends VersionHeader>>() {});
+                        new TypeReference<Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion>>() {});
     }
 }

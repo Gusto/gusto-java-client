@@ -17,23 +17,17 @@ import java.util.Optional;
 
 public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder xGustoAPIVersion(PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -45,6 +39,12 @@ public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBu
     public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder xGustoAPIVersion(Optional<? extends PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
         return this;
     }
 
@@ -60,8 +60,8 @@ public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBu
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest request = new PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest(companyUuid,
-            xGustoAPIVersion,
+        PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest request = new PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest(xGustoAPIVersion,
+            companyUuid,
             partnerManagedCompanyAcceptTermsOfServiceRequest);
 
         return request;
