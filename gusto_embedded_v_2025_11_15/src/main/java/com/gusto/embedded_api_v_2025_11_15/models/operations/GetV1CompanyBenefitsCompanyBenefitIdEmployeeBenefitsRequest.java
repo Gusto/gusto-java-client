@@ -50,7 +50,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest {
      * benefits.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=include")
-    private Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude> include;
+    private Optional<? extends QueryParamInclude> include;
 
     @JsonCreator
     public GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest(
@@ -58,7 +58,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest {
             String companyBenefitId,
             Optional<Long> page,
             Optional<Long> per,
-            Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude> include) {
+            Optional<? extends QueryParamInclude> include) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyBenefitId, "companyBenefitId");
         Utils.checkNotNull(page, "page");
@@ -120,8 +120,8 @@ public class GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude> include() {
-        return (Optional<GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude>) include;
+    public Optional<QueryParamInclude> include() {
+        return (Optional<QueryParamInclude>) include;
     }
 
     public static Builder builder() {
@@ -206,7 +206,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest {
      * - all_benefits: Include all effective dated benefits for each employee instead of only the current
      * benefits.
      */
-    public GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest withInclude(GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude include) {
+    public GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest withInclude(QueryParamInclude include) {
         Utils.checkNotNull(include, "include");
         this.include = Optional.ofNullable(include);
         return this;
@@ -218,7 +218,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest {
      * - all_benefits: Include all effective dated benefits for each employee instead of only the current
      * benefits.
      */
-    public GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest withInclude(Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude> include) {
+    public GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest withInclude(Optional<? extends QueryParamInclude> include) {
         Utils.checkNotNull(include, "include");
         this.include = include;
         return this;
@@ -269,7 +269,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest {
 
         private Optional<Long> per = Optional.empty();
 
-        private Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude> include = Optional.empty();
+        private Optional<? extends QueryParamInclude> include = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -354,7 +354,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest {
          * - all_benefits: Include all effective dated benefits for each employee instead of only the current
          * benefits.
          */
-        public Builder include(GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude include) {
+        public Builder include(QueryParamInclude include) {
             Utils.checkNotNull(include, "include");
             this.include = Optional.ofNullable(include);
             return this;
@@ -365,7 +365,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest {
          * - all_benefits: Include all effective dated benefits for each employee instead of only the current
          * benefits.
          */
-        public Builder include(Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude> include) {
+        public Builder include(Optional<? extends QueryParamInclude> include) {
             Utils.checkNotNull(include, "include");
             this.include = include;
             return this;

@@ -15,118 +15,64 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class Results {
     /**
-     * The external ID provided in the batch request.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("external_id")
-    private Optional<String> externalId;
-
-    /**
-     * The type of person created.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("role")
-    private Optional<? extends Role> role;
-
-    /**
-     * The status of this batch item.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("status")
-    private Optional<? extends PeopleBatchResultsResultsStatus> status;
-
-    /**
-     * The index of this item in the original batch request.
+     * The index of this payroll in the original POST batch array.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("idx")
     private Optional<Long> idx;
 
     /**
-     * The UUID of the created person.
+     * The UUID of the payroll.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("uuid")
     private Optional<String> uuid;
 
     /**
-     * The UUID of the created employee (if role is employee).
+     * The outcome of cancelling this payroll. A cancel is atomic — there is no per-payroll
+     * `partial_success`.
+     * - `success`: the payroll was cancelled, or required no action (already cancelled / never run)
+     * - `failed`: the payroll could not be cancelled; see `errors`
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("employee_uuid")
-    private Optional<String> employeeUuid;
+    @JsonProperty("status")
+    private Optional<? extends PayrollBatchResultsResultsStatus> status;
 
     /**
-     * Errors encountered while processing this batch item.
+     * Present only when `status` is `failed`. A cancel is a single atomic operation, so this is a flat
+     * array with exactly one error.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("errors")
-    private JsonNullable<? extends List<PeopleBatchResultsErrors>> errors;
+    private Optional<? extends List<PayrollBatchResultsErrors>> errors;
 
     @JsonCreator
     public Results(
-            @JsonProperty("external_id") Optional<String> externalId,
-            @JsonProperty("role") Optional<? extends Role> role,
-            @JsonProperty("status") Optional<? extends PeopleBatchResultsResultsStatus> status,
             @JsonProperty("idx") Optional<Long> idx,
             @JsonProperty("uuid") Optional<String> uuid,
-            @JsonProperty("employee_uuid") Optional<String> employeeUuid,
-            @JsonProperty("errors") JsonNullable<? extends List<PeopleBatchResultsErrors>> errors) {
-        Utils.checkNotNull(externalId, "externalId");
-        Utils.checkNotNull(role, "role");
-        Utils.checkNotNull(status, "status");
+            @JsonProperty("status") Optional<? extends PayrollBatchResultsResultsStatus> status,
+            @JsonProperty("errors") Optional<? extends List<PayrollBatchResultsErrors>> errors) {
         Utils.checkNotNull(idx, "idx");
         Utils.checkNotNull(uuid, "uuid");
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
+        Utils.checkNotNull(status, "status");
         Utils.checkNotNull(errors, "errors");
-        this.externalId = externalId;
-        this.role = role;
-        this.status = status;
         this.idx = idx;
         this.uuid = uuid;
-        this.employeeUuid = employeeUuid;
+        this.status = status;
         this.errors = errors;
     }
     
     public Results() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            JsonNullable.undefined());
+            Optional.empty());
     }
 
     /**
-     * The external ID provided in the batch request.
-     */
-    @JsonIgnore
-    public Optional<String> externalId() {
-        return externalId;
-    }
-
-    /**
-     * The type of person created.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Role> role() {
-        return (Optional<Role>) role;
-    }
-
-    /**
-     * The status of this batch item.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<PeopleBatchResultsResultsStatus> status() {
-        return (Optional<PeopleBatchResultsResultsStatus>) status;
-    }
-
-    /**
-     * The index of this item in the original batch request.
+     * The index of this payroll in the original POST batch array.
      */
     @JsonIgnore
     public Optional<Long> idx() {
@@ -134,7 +80,7 @@ public class Results {
     }
 
     /**
-     * The UUID of the created person.
+     * The UUID of the payroll.
      */
     @JsonIgnore
     public Optional<String> uuid() {
@@ -142,20 +88,25 @@ public class Results {
     }
 
     /**
-     * The UUID of the created employee (if role is employee).
-     */
-    @JsonIgnore
-    public Optional<String> employeeUuid() {
-        return employeeUuid;
-    }
-
-    /**
-     * Errors encountered while processing this batch item.
+     * The outcome of cancelling this payroll. A cancel is atomic — there is no per-payroll
+     * `partial_success`.
+     * - `success`: the payroll was cancelled, or required no action (already cancelled / never run)
+     * - `failed`: the payroll could not be cancelled; see `errors`
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<List<PeopleBatchResultsErrors>> errors() {
-        return (JsonNullable<List<PeopleBatchResultsErrors>>) errors;
+    public Optional<PayrollBatchResultsResultsStatus> status() {
+        return (Optional<PayrollBatchResultsResultsStatus>) status;
+    }
+
+    /**
+     * Present only when `status` is `failed`. A cancel is a single atomic operation, so this is a flat
+     * array with exactly one error.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<PayrollBatchResultsErrors>> errors() {
+        return (Optional<List<PayrollBatchResultsErrors>>) errors;
     }
 
     public static Builder builder() {
@@ -164,64 +115,7 @@ public class Results {
 
 
     /**
-     * The external ID provided in the batch request.
-     */
-    public Results withExternalId(String externalId) {
-        Utils.checkNotNull(externalId, "externalId");
-        this.externalId = Optional.ofNullable(externalId);
-        return this;
-    }
-
-
-    /**
-     * The external ID provided in the batch request.
-     */
-    public Results withExternalId(Optional<String> externalId) {
-        Utils.checkNotNull(externalId, "externalId");
-        this.externalId = externalId;
-        return this;
-    }
-
-    /**
-     * The type of person created.
-     */
-    public Results withRole(Role role) {
-        Utils.checkNotNull(role, "role");
-        this.role = Optional.ofNullable(role);
-        return this;
-    }
-
-
-    /**
-     * The type of person created.
-     */
-    public Results withRole(Optional<? extends Role> role) {
-        Utils.checkNotNull(role, "role");
-        this.role = role;
-        return this;
-    }
-
-    /**
-     * The status of this batch item.
-     */
-    public Results withStatus(PeopleBatchResultsResultsStatus status) {
-        Utils.checkNotNull(status, "status");
-        this.status = Optional.ofNullable(status);
-        return this;
-    }
-
-
-    /**
-     * The status of this batch item.
-     */
-    public Results withStatus(Optional<? extends PeopleBatchResultsResultsStatus> status) {
-        Utils.checkNotNull(status, "status");
-        this.status = status;
-        return this;
-    }
-
-    /**
-     * The index of this item in the original batch request.
+     * The index of this payroll in the original POST batch array.
      */
     public Results withIdx(long idx) {
         Utils.checkNotNull(idx, "idx");
@@ -231,7 +125,7 @@ public class Results {
 
 
     /**
-     * The index of this item in the original batch request.
+     * The index of this payroll in the original POST batch array.
      */
     public Results withIdx(Optional<Long> idx) {
         Utils.checkNotNull(idx, "idx");
@@ -240,7 +134,7 @@ public class Results {
     }
 
     /**
-     * The UUID of the created person.
+     * The UUID of the payroll.
      */
     public Results withUuid(String uuid) {
         Utils.checkNotNull(uuid, "uuid");
@@ -250,7 +144,7 @@ public class Results {
 
 
     /**
-     * The UUID of the created person.
+     * The UUID of the payroll.
      */
     public Results withUuid(Optional<String> uuid) {
         Utils.checkNotNull(uuid, "uuid");
@@ -259,37 +153,46 @@ public class Results {
     }
 
     /**
-     * The UUID of the created employee (if role is employee).
+     * The outcome of cancelling this payroll. A cancel is atomic — there is no per-payroll
+     * `partial_success`.
+     * - `success`: the payroll was cancelled, or required no action (already cancelled / never run)
+     * - `failed`: the payroll could not be cancelled; see `errors`
      */
-    public Results withEmployeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = Optional.ofNullable(employeeUuid);
+    public Results withStatus(PayrollBatchResultsResultsStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = Optional.ofNullable(status);
         return this;
     }
 
 
     /**
-     * The UUID of the created employee (if role is employee).
+     * The outcome of cancelling this payroll. A cancel is atomic — there is no per-payroll
+     * `partial_success`.
+     * - `success`: the payroll was cancelled, or required no action (already cancelled / never run)
+     * - `failed`: the payroll could not be cancelled; see `errors`
      */
-    public Results withEmployeeUuid(Optional<String> employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
+    public Results withStatus(Optional<? extends PayrollBatchResultsResultsStatus> status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
         return this;
     }
 
     /**
-     * Errors encountered while processing this batch item.
+     * Present only when `status` is `failed`. A cancel is a single atomic operation, so this is a flat
+     * array with exactly one error.
      */
-    public Results withErrors(List<PeopleBatchResultsErrors> errors) {
+    public Results withErrors(List<PayrollBatchResultsErrors> errors) {
         Utils.checkNotNull(errors, "errors");
-        this.errors = JsonNullable.of(errors);
+        this.errors = Optional.ofNullable(errors);
         return this;
     }
 
+
     /**
-     * Errors encountered while processing this batch item.
+     * Present only when `status` is `failed`. A cancel is a single atomic operation, so this is a flat
+     * array with exactly one error.
      */
-    public Results withErrors(JsonNullable<? extends List<PeopleBatchResultsErrors>> errors) {
+    public Results withErrors(Optional<? extends List<PayrollBatchResultsErrors>> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = errors;
         return this;
@@ -305,51 +208,38 @@ public class Results {
         }
         Results other = (Results) o;
         return 
-            Utils.enhancedDeepEquals(this.externalId, other.externalId) &&
-            Utils.enhancedDeepEquals(this.role, other.role) &&
-            Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.idx, other.idx) &&
             Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
-            Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.errors, other.errors);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            externalId, role, status,
-            idx, uuid, employeeUuid,
+            idx, uuid, status,
             errors);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Results.class,
-                "externalId", externalId,
-                "role", role,
-                "status", status,
                 "idx", idx,
                 "uuid", uuid,
-                "employeeUuid", employeeUuid,
+                "status", status,
                 "errors", errors);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> externalId = Optional.empty();
-
-        private Optional<? extends Role> role = Optional.empty();
-
-        private Optional<? extends PeopleBatchResultsResultsStatus> status = Optional.empty();
-
         private Optional<Long> idx = Optional.empty();
 
         private Optional<String> uuid = Optional.empty();
 
-        private Optional<String> employeeUuid = Optional.empty();
+        private Optional<? extends PayrollBatchResultsResultsStatus> status = Optional.empty();
 
-        private JsonNullable<? extends List<PeopleBatchResultsErrors>> errors = JsonNullable.undefined();
+        private Optional<? extends List<PayrollBatchResultsErrors>> errors = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -357,64 +247,7 @@ public class Results {
 
 
         /**
-         * The external ID provided in the batch request.
-         */
-        public Builder externalId(String externalId) {
-            Utils.checkNotNull(externalId, "externalId");
-            this.externalId = Optional.ofNullable(externalId);
-            return this;
-        }
-
-        /**
-         * The external ID provided in the batch request.
-         */
-        public Builder externalId(Optional<String> externalId) {
-            Utils.checkNotNull(externalId, "externalId");
-            this.externalId = externalId;
-            return this;
-        }
-
-
-        /**
-         * The type of person created.
-         */
-        public Builder role(Role role) {
-            Utils.checkNotNull(role, "role");
-            this.role = Optional.ofNullable(role);
-            return this;
-        }
-
-        /**
-         * The type of person created.
-         */
-        public Builder role(Optional<? extends Role> role) {
-            Utils.checkNotNull(role, "role");
-            this.role = role;
-            return this;
-        }
-
-
-        /**
-         * The status of this batch item.
-         */
-        public Builder status(PeopleBatchResultsResultsStatus status) {
-            Utils.checkNotNull(status, "status");
-            this.status = Optional.ofNullable(status);
-            return this;
-        }
-
-        /**
-         * The status of this batch item.
-         */
-        public Builder status(Optional<? extends PeopleBatchResultsResultsStatus> status) {
-            Utils.checkNotNull(status, "status");
-            this.status = status;
-            return this;
-        }
-
-
-        /**
-         * The index of this item in the original batch request.
+         * The index of this payroll in the original POST batch array.
          */
         public Builder idx(long idx) {
             Utils.checkNotNull(idx, "idx");
@@ -423,7 +256,7 @@ public class Results {
         }
 
         /**
-         * The index of this item in the original batch request.
+         * The index of this payroll in the original POST batch array.
          */
         public Builder idx(Optional<Long> idx) {
             Utils.checkNotNull(idx, "idx");
@@ -433,7 +266,7 @@ public class Results {
 
 
         /**
-         * The UUID of the created person.
+         * The UUID of the payroll.
          */
         public Builder uuid(String uuid) {
             Utils.checkNotNull(uuid, "uuid");
@@ -442,7 +275,7 @@ public class Results {
         }
 
         /**
-         * The UUID of the created person.
+         * The UUID of the payroll.
          */
         public Builder uuid(Optional<String> uuid) {
             Utils.checkNotNull(uuid, "uuid");
@@ -452,37 +285,45 @@ public class Results {
 
 
         /**
-         * The UUID of the created employee (if role is employee).
+         * The outcome of cancelling this payroll. A cancel is atomic — there is no per-payroll
+         * `partial_success`.
+         * - `success`: the payroll was cancelled, or required no action (already cancelled / never run)
+         * - `failed`: the payroll could not be cancelled; see `errors`
          */
-        public Builder employeeUuid(String employeeUuid) {
-            Utils.checkNotNull(employeeUuid, "employeeUuid");
-            this.employeeUuid = Optional.ofNullable(employeeUuid);
+        public Builder status(PayrollBatchResultsResultsStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = Optional.ofNullable(status);
             return this;
         }
 
         /**
-         * The UUID of the created employee (if role is employee).
+         * The outcome of cancelling this payroll. A cancel is atomic — there is no per-payroll
+         * `partial_success`.
+         * - `success`: the payroll was cancelled, or required no action (already cancelled / never run)
+         * - `failed`: the payroll could not be cancelled; see `errors`
          */
-        public Builder employeeUuid(Optional<String> employeeUuid) {
-            Utils.checkNotNull(employeeUuid, "employeeUuid");
-            this.employeeUuid = employeeUuid;
+        public Builder status(Optional<? extends PayrollBatchResultsResultsStatus> status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
             return this;
         }
 
 
         /**
-         * Errors encountered while processing this batch item.
+         * Present only when `status` is `failed`. A cancel is a single atomic operation, so this is a flat
+         * array with exactly one error.
          */
-        public Builder errors(List<PeopleBatchResultsErrors> errors) {
+        public Builder errors(List<PayrollBatchResultsErrors> errors) {
             Utils.checkNotNull(errors, "errors");
-            this.errors = JsonNullable.of(errors);
+            this.errors = Optional.ofNullable(errors);
             return this;
         }
 
         /**
-         * Errors encountered while processing this batch item.
+         * Present only when `status` is `failed`. A cancel is a single atomic operation, so this is a flat
+         * array with exactly one error.
          */
-        public Builder errors(JsonNullable<? extends List<PeopleBatchResultsErrors>> errors) {
+        public Builder errors(Optional<? extends List<PayrollBatchResultsErrors>> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = errors;
             return this;
@@ -491,8 +332,7 @@ public class Results {
         public Results build() {
 
             return new Results(
-                externalId, role, status,
-                idx, uuid, employeeUuid,
+                idx, uuid, status,
                 errors);
         }
 

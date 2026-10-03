@@ -17,23 +17,17 @@ import java.util.Optional;
 
 public class PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder xGustoAPIVersion(PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -45,6 +39,12 @@ public class PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest
     public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder xGustoAPIVersion(Optional<? extends PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
         return this;
     }
 
@@ -60,8 +60,8 @@ public class PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest request = new PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest(companyUuid,
-            xGustoAPIVersion,
+        PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest request = new PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest(xGustoAPIVersion,
+            companyUuid,
             partnerManagedCompanyRetrieveTermsOfServiceRequest);
 
         return request;

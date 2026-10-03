@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class PutV1WorkAddressesWorkAddressUuidRequest {
     /**
-     * The UUID of the work address
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=work_address_uuid")
-    private String workAddressUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,35 +24,33 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the work address
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=work_address_uuid")
+    private String workAddressUuid;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private PutV1WorkAddressesWorkAddressUuidRequestBody requestBody;
 
     @JsonCreator
     public PutV1WorkAddressesWorkAddressUuidRequest(
-            String workAddressUuid,
             Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String workAddressUuid,
             PutV1WorkAddressesWorkAddressUuidRequestBody requestBody) {
-        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
         Utils.checkNotNull(requestBody, "requestBody");
-        this.workAddressUuid = workAddressUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.workAddressUuid = workAddressUuid;
         this.requestBody = requestBody;
     }
     
     public PutV1WorkAddressesWorkAddressUuidRequest(
             String workAddressUuid,
             PutV1WorkAddressesWorkAddressUuidRequestBody requestBody) {
-        this(workAddressUuid, Optional.empty(), requestBody);
-    }
-
-    /**
-     * The UUID of the work address
-     */
-    @JsonIgnore
-    public String workAddressUuid() {
-        return workAddressUuid;
+        this(Optional.empty(), workAddressUuid, requestBody);
     }
 
     /**
@@ -72,6 +64,14 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
         return (Optional<PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the work address
+     */
+    @JsonIgnore
+    public String workAddressUuid() {
+        return workAddressUuid;
+    }
+
     @JsonIgnore
     public PutV1WorkAddressesWorkAddressUuidRequestBody requestBody() {
         return requestBody;
@@ -81,15 +81,6 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the work address
-     */
-    public PutV1WorkAddressesWorkAddressUuidRequest withWorkAddressUuid(String workAddressUuid) {
-        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
-        this.workAddressUuid = workAddressUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -114,6 +105,15 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
         return this;
     }
 
+    /**
+     * The UUID of the work address
+     */
+    public PutV1WorkAddressesWorkAddressUuidRequest withWorkAddressUuid(String workAddressUuid) {
+        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
+        this.workAddressUuid = workAddressUuid;
+        return this;
+    }
+
     public PutV1WorkAddressesWorkAddressUuidRequest withRequestBody(PutV1WorkAddressesWorkAddressUuidRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
@@ -130,46 +130,36 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
         }
         PutV1WorkAddressesWorkAddressUuidRequest other = (PutV1WorkAddressesWorkAddressUuidRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.workAddressUuid, other.workAddressUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.workAddressUuid, other.workAddressUuid) &&
             Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            workAddressUuid, xGustoAPIVersion, requestBody);
+            xGustoAPIVersion, workAddressUuid, requestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1WorkAddressesWorkAddressUuidRequest.class,
-                "workAddressUuid", workAddressUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "workAddressUuid", workAddressUuid,
                 "requestBody", requestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String workAddressUuid;
-
         private Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String workAddressUuid;
 
         private PutV1WorkAddressesWorkAddressUuidRequestBody requestBody;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the work address
-         */
-        public Builder workAddressUuid(String workAddressUuid) {
-            Utils.checkNotNull(workAddressUuid, "workAddressUuid");
-            this.workAddressUuid = workAddressUuid;
-            return this;
         }
 
 
@@ -196,6 +186,16 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
         }
 
 
+        /**
+         * The UUID of the work address
+         */
+        public Builder workAddressUuid(String workAddressUuid) {
+            Utils.checkNotNull(workAddressUuid, "workAddressUuid");
+            this.workAddressUuid = workAddressUuid;
+            return this;
+        }
+
+
         public Builder requestBody(PutV1WorkAddressesWorkAddressUuidRequestBody requestBody) {
             Utils.checkNotNull(requestBody, "requestBody");
             this.requestBody = requestBody;
@@ -208,7 +208,7 @@ public class PutV1WorkAddressesWorkAddressUuidRequest {
             }
 
             return new PutV1WorkAddressesWorkAddressUuidRequest(
-                workAddressUuid, xGustoAPIVersion, requestBody);
+                xGustoAPIVersion, workAddressUuid, requestBody);
         }
 
 

@@ -16,22 +16,16 @@ import java.util.Optional;
 
 public class DeleteV1WorkAddressesWorkAddressUuidRequestBuilder {
 
-    private String workAddressUuid;
     private Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>>() {});
+    private String workAddressUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1WorkAddressesWorkAddressUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public DeleteV1WorkAddressesWorkAddressUuidRequestBuilder workAddressUuid(String workAddressUuid) {
-        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
-        this.workAddressUuid = workAddressUuid;
-        return this;
     }
                 
     public DeleteV1WorkAddressesWorkAddressUuidRequestBuilder xGustoAPIVersion(DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,14 +40,20 @@ public class DeleteV1WorkAddressesWorkAddressUuidRequestBuilder {
         return this;
     }
 
+    public DeleteV1WorkAddressesWorkAddressUuidRequestBuilder workAddressUuid(String workAddressUuid) {
+        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
+        this.workAddressUuid = workAddressUuid;
+        return this;
+    }
+
 
     private DeleteV1WorkAddressesWorkAddressUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1WorkAddressesWorkAddressUuidRequest request = new DeleteV1WorkAddressesWorkAddressUuidRequest(workAddressUuid,
-            xGustoAPIVersion);
+        DeleteV1WorkAddressesWorkAddressUuidRequest request = new DeleteV1WorkAddressesWorkAddressUuidRequest(xGustoAPIVersion,
+            workAddressUuid);
 
         return request;
     }

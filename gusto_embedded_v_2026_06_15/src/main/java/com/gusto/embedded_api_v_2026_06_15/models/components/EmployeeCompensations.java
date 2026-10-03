@@ -62,8 +62,7 @@ public class EmployeeCompensations {
 
     /**
      * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages +
-     * cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is
-     * only available for processed payrolls.
+     * cash tips + payroll tips + any other additional earnings, excluding imputed income.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("gross_pay")
@@ -102,11 +101,12 @@ public class EmployeeCompensations {
     private JsonNullable<String> memo;
 
     /**
-     * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-     * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-     * greater than 0.00 are returned.
+     * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On
+     * regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead.
      * 
-     * <p>For an unprocessed payroll, all active fixed compensations are returned.
+     * <p>Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has
+     * been processed, only fixed compensations with a value greater than 0.00 are returned. For an
+     * unprocessed payroll, all active fixed compensations are returned.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fixed_compensations")
@@ -136,6 +136,15 @@ public class EmployeeCompensations {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("reimbursements")
     private Optional<? extends List<PayrollShowReimbursements>> reimbursements;
+
+    /**
+     * The one-time custom withholding overrides applied to this payroll for this employee.
+     * `federal` is null when no federal one-time override is set; `state` is an empty
+     * array when no state one-time overrides are set.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("custom_withholdings")
+    private Optional<? extends PayrollShowCustomWithholdings> customWithholdings;
 
     /**
      * The current version of this employee compensation. This field is only available for prepared
@@ -170,6 +179,15 @@ public class EmployeeCompensations {
     @JsonProperty("benefits")
     private Optional<? extends List<PayrollShowBenefits>> benefits;
 
+    /**
+     * Adjustments applied when calculating the employee's regular rate of pay for
+     * overtime purposes (e.g. a discretionary bonus allocated across workweeks),
+     * on calculated or processed payrolls.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("pay_adjustments")
+    private Optional<? extends List<PayAdjustments>> payAdjustments;
+
 
     @JsonIgnore
     private Map<String, Object> additionalProperties;
@@ -190,10 +208,12 @@ public class EmployeeCompensations {
             @JsonProperty("hourly_compensations") Optional<? extends List<PayrollShowHourlyCompensations>> hourlyCompensations,
             @JsonProperty("paid_time_off") Optional<? extends List<PayrollShowPaidTimeOff>> paidTimeOff,
             @JsonProperty("reimbursements") Optional<? extends List<PayrollShowReimbursements>> reimbursements,
+            @JsonProperty("custom_withholdings") Optional<? extends PayrollShowCustomWithholdings> customWithholdings,
             @JsonProperty("version") Optional<? extends Object> version,
             @JsonProperty("deductions") Optional<? extends List<PayrollShowDeductions>> deductions,
             @JsonProperty("taxes") Optional<? extends List<PayrollShowTaxes>> taxes,
-            @JsonProperty("benefits") Optional<? extends List<PayrollShowBenefits>> benefits) {
+            @JsonProperty("benefits") Optional<? extends List<PayrollShowBenefits>> benefits,
+            @JsonProperty("pay_adjustments") Optional<? extends List<PayAdjustments>> payAdjustments) {
         Utils.checkNotNull(employeeUuid, "employeeUuid");
         Utils.checkNotNull(excluded, "excluded");
         Utils.checkNotNull(firstName, "firstName");
@@ -208,10 +228,12 @@ public class EmployeeCompensations {
         Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
         Utils.checkNotNull(paidTimeOff, "paidTimeOff");
         Utils.checkNotNull(reimbursements, "reimbursements");
+        Utils.checkNotNull(customWithholdings, "customWithholdings");
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(deductions, "deductions");
         Utils.checkNotNull(taxes, "taxes");
         Utils.checkNotNull(benefits, "benefits");
+        Utils.checkNotNull(payAdjustments, "payAdjustments");
         this.employeeUuid = employeeUuid;
         this.excluded = excluded;
         this.firstName = firstName;
@@ -226,10 +248,12 @@ public class EmployeeCompensations {
         this.hourlyCompensations = hourlyCompensations;
         this.paidTimeOff = paidTimeOff;
         this.reimbursements = reimbursements;
+        this.customWithholdings = customWithholdings;
         this.version = version;
         this.deductions = deductions;
         this.taxes = taxes;
         this.benefits = benefits;
+        this.payAdjustments = payAdjustments;
         this.additionalProperties = new HashMap<>();
     }
     
@@ -239,7 +263,8 @@ public class EmployeeCompensations {
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
             JsonNullable.undefined(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -285,8 +310,7 @@ public class EmployeeCompensations {
 
     /**
      * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages +
-     * cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is
-     * only available for processed payrolls.
+     * cash tips + payroll tips + any other additional earnings, excluding imputed income.
      */
     @JsonIgnore
     public JsonNullable<String> grossPay() {
@@ -331,11 +355,12 @@ public class EmployeeCompensations {
     }
 
     /**
-     * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-     * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-     * greater than 0.00 are returned.
+     * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On
+     * regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead.
      * 
-     * <p>For an unprocessed payroll, all active fixed compensations are returned.
+     * <p>Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has
+     * been processed, only fixed compensations with a value greater than 0.00 are returned. For an
+     * unprocessed payroll, all active fixed compensations are returned.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -372,6 +397,17 @@ public class EmployeeCompensations {
     @JsonIgnore
     public Optional<List<PayrollShowReimbursements>> reimbursements() {
         return (Optional<List<PayrollShowReimbursements>>) reimbursements;
+    }
+
+    /**
+     * The one-time custom withholding overrides applied to this payroll for this employee.
+     * `federal` is null when no federal one-time override is set; `state` is an empty
+     * array when no state one-time overrides are set.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PayrollShowCustomWithholdings> customWithholdings() {
+        return (Optional<PayrollShowCustomWithholdings>) customWithholdings;
     }
 
     /**
@@ -413,6 +449,17 @@ public class EmployeeCompensations {
     @JsonIgnore
     public Optional<List<PayrollShowBenefits>> benefits() {
         return (Optional<List<PayrollShowBenefits>>) benefits;
+    }
+
+    /**
+     * Adjustments applied when calculating the employee's regular rate of pay for
+     * overtime purposes (e.g. a discretionary bonus allocated across workweeks),
+     * on calculated or processed payrolls.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<PayAdjustments>> payAdjustments() {
+        return (Optional<List<PayAdjustments>>) payAdjustments;
     }
 
     @JsonAnyGetter
@@ -521,8 +568,7 @@ public class EmployeeCompensations {
 
     /**
      * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages +
-     * cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is
-     * only available for processed payrolls.
+     * cash tips + payroll tips + any other additional earnings, excluding imputed income.
      */
     public EmployeeCompensations withGrossPay(String grossPay) {
         Utils.checkNotNull(grossPay, "grossPay");
@@ -532,8 +578,7 @@ public class EmployeeCompensations {
 
     /**
      * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages +
-     * cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is
-     * only available for processed payrolls.
+     * cash tips + payroll tips + any other additional earnings, excluding imputed income.
      */
     public EmployeeCompensations withGrossPay(JsonNullable<String> grossPay) {
         Utils.checkNotNull(grossPay, "grossPay");
@@ -622,11 +667,12 @@ public class EmployeeCompensations {
     }
 
     /**
-     * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-     * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-     * greater than 0.00 are returned.
+     * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On
+     * regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead.
      * 
-     * <p>For an unprocessed payroll, all active fixed compensations are returned.
+     * <p>Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has
+     * been processed, only fixed compensations with a value greater than 0.00 are returned. For an
+     * unprocessed payroll, all active fixed compensations are returned.
      */
     public EmployeeCompensations withFixedCompensations(List<PayrollShowFixedCompensations> fixedCompensations) {
         Utils.checkNotNull(fixedCompensations, "fixedCompensations");
@@ -636,11 +682,12 @@ public class EmployeeCompensations {
 
 
     /**
-     * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-     * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-     * greater than 0.00 are returned.
+     * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On
+     * regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead.
      * 
-     * <p>For an unprocessed payroll, all active fixed compensations are returned.
+     * <p>Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has
+     * been processed, only fixed compensations with a value greater than 0.00 are returned. For an
+     * unprocessed payroll, all active fixed compensations are returned.
      */
     public EmployeeCompensations withFixedCompensations(Optional<? extends List<PayrollShowFixedCompensations>> fixedCompensations) {
         Utils.checkNotNull(fixedCompensations, "fixedCompensations");
@@ -710,6 +757,29 @@ public class EmployeeCompensations {
     public EmployeeCompensations withReimbursements(Optional<? extends List<PayrollShowReimbursements>> reimbursements) {
         Utils.checkNotNull(reimbursements, "reimbursements");
         this.reimbursements = reimbursements;
+        return this;
+    }
+
+    /**
+     * The one-time custom withholding overrides applied to this payroll for this employee.
+     * `federal` is null when no federal one-time override is set; `state` is an empty
+     * array when no state one-time overrides are set.
+     */
+    public EmployeeCompensations withCustomWithholdings(PayrollShowCustomWithholdings customWithholdings) {
+        Utils.checkNotNull(customWithholdings, "customWithholdings");
+        this.customWithholdings = Optional.ofNullable(customWithholdings);
+        return this;
+    }
+
+
+    /**
+     * The one-time custom withholding overrides applied to this payroll for this employee.
+     * `federal` is null when no federal one-time override is set; `state` is an empty
+     * array when no state one-time overrides are set.
+     */
+    public EmployeeCompensations withCustomWithholdings(Optional<? extends PayrollShowCustomWithholdings> customWithholdings) {
+        Utils.checkNotNull(customWithholdings, "customWithholdings");
+        this.customWithholdings = customWithholdings;
         return this;
     }
 
@@ -799,6 +869,29 @@ public class EmployeeCompensations {
         return this;
     }
 
+    /**
+     * Adjustments applied when calculating the employee's regular rate of pay for
+     * overtime purposes (e.g. a discretionary bonus allocated across workweeks),
+     * on calculated or processed payrolls.
+     */
+    public EmployeeCompensations withPayAdjustments(List<PayAdjustments> payAdjustments) {
+        Utils.checkNotNull(payAdjustments, "payAdjustments");
+        this.payAdjustments = Optional.ofNullable(payAdjustments);
+        return this;
+    }
+
+
+    /**
+     * Adjustments applied when calculating the employee's regular rate of pay for
+     * overtime purposes (e.g. a discretionary bonus allocated across workweeks),
+     * on calculated or processed payrolls.
+     */
+    public EmployeeCompensations withPayAdjustments(Optional<? extends List<PayAdjustments>> payAdjustments) {
+        Utils.checkNotNull(payAdjustments, "payAdjustments");
+        this.payAdjustments = payAdjustments;
+        return this;
+    }
+
     @JsonAnySetter
     public EmployeeCompensations withAdditionalProperty(String key, Object value) {
         // note that value can be null because of the way JsonAnySetter works
@@ -836,10 +929,12 @@ public class EmployeeCompensations {
             Utils.enhancedDeepEquals(this.hourlyCompensations, other.hourlyCompensations) &&
             Utils.enhancedDeepEquals(this.paidTimeOff, other.paidTimeOff) &&
             Utils.enhancedDeepEquals(this.reimbursements, other.reimbursements) &&
+            Utils.enhancedDeepEquals(this.customWithholdings, other.customWithholdings) &&
             Utils.enhancedDeepEquals(this.version, other.version) &&
             Utils.enhancedDeepEquals(this.deductions, other.deductions) &&
             Utils.enhancedDeepEquals(this.taxes, other.taxes) &&
             Utils.enhancedDeepEquals(this.benefits, other.benefits) &&
+            Utils.enhancedDeepEquals(this.payAdjustments, other.payAdjustments) &&
             Utils.enhancedDeepEquals(this.additionalProperties, other.additionalProperties);
     }
     
@@ -850,9 +945,9 @@ public class EmployeeCompensations {
             preferredFirstName, lastName, grossPay,
             netPay, checkAmount, paymentMethod,
             memo, fixedCompensations, hourlyCompensations,
-            paidTimeOff, reimbursements, version,
-            deductions, taxes, benefits,
-            additionalProperties);
+            paidTimeOff, reimbursements, customWithholdings,
+            version, deductions, taxes,
+            benefits, payAdjustments, additionalProperties);
     }
     
     @Override
@@ -872,10 +967,12 @@ public class EmployeeCompensations {
                 "hourlyCompensations", hourlyCompensations,
                 "paidTimeOff", paidTimeOff,
                 "reimbursements", reimbursements,
+                "customWithholdings", customWithholdings,
                 "version", version,
                 "deductions", deductions,
                 "taxes", taxes,
                 "benefits", benefits,
+                "payAdjustments", payAdjustments,
                 "additionalProperties", additionalProperties);
     }
 
@@ -910,6 +1007,8 @@ public class EmployeeCompensations {
 
         private Optional<? extends List<PayrollShowReimbursements>> reimbursements = Optional.empty();
 
+        private Optional<? extends PayrollShowCustomWithholdings> customWithholdings = Optional.empty();
+
         private Optional<? extends Object> version = Optional.empty();
 
         private Optional<? extends List<PayrollShowDeductions>> deductions = Optional.empty();
@@ -917,6 +1016,8 @@ public class EmployeeCompensations {
         private Optional<? extends List<PayrollShowTaxes>> taxes = Optional.empty();
 
         private Optional<? extends List<PayrollShowBenefits>> benefits = Optional.empty();
+
+        private Optional<? extends List<PayAdjustments>> payAdjustments = Optional.empty();
 
         private Map<String, Object> additionalProperties = new HashMap<>();
 
@@ -1024,8 +1125,7 @@ public class EmployeeCompensations {
 
         /**
          * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages +
-         * cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is
-         * only available for processed payrolls.
+         * cash tips + payroll tips + any other additional earnings, excluding imputed income.
          */
         public Builder grossPay(String grossPay) {
             Utils.checkNotNull(grossPay, "grossPay");
@@ -1035,8 +1135,7 @@ public class EmployeeCompensations {
 
         /**
          * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages +
-         * cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is
-         * only available for processed payrolls.
+         * cash tips + payroll tips + any other additional earnings, excluding imputed income.
          */
         public Builder grossPay(JsonNullable<String> grossPay) {
             Utils.checkNotNull(grossPay, "grossPay");
@@ -1130,11 +1229,12 @@ public class EmployeeCompensations {
 
 
         /**
-         * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-         * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-         * greater than 0.00 are returned.
+         * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On
+         * regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead.
          * 
-         * <p>For an unprocessed payroll, all active fixed compensations are returned.
+         * <p>Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has
+         * been processed, only fixed compensations with a value greater than 0.00 are returned. For an
+         * unprocessed payroll, all active fixed compensations are returned.
          */
         public Builder fixedCompensations(List<PayrollShowFixedCompensations> fixedCompensations) {
             Utils.checkNotNull(fixedCompensations, "fixedCompensations");
@@ -1143,11 +1243,12 @@ public class EmployeeCompensations {
         }
 
         /**
-         * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-         * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-         * greater than 0.00 are returned.
+         * An array of fixed compensations for the employee. Fixed compensations include tips and bonuses. On
+         * regular payrolls, reimbursements are sent via the dedicated `reimbursements` array instead.
          * 
-         * <p>For an unprocessed payroll, all active fixed compensations are returned.
+         * <p>Off-cycle payrolls continue to include reimbursements in `fixed_compensations`. If this payroll has
+         * been processed, only fixed compensations with a value greater than 0.00 are returned. For an
+         * unprocessed payroll, all active fixed compensations are returned.
          */
         public Builder fixedCompensations(Optional<? extends List<PayrollShowFixedCompensations>> fixedCompensations) {
             Utils.checkNotNull(fixedCompensations, "fixedCompensations");
@@ -1217,6 +1318,29 @@ public class EmployeeCompensations {
         public Builder reimbursements(Optional<? extends List<PayrollShowReimbursements>> reimbursements) {
             Utils.checkNotNull(reimbursements, "reimbursements");
             this.reimbursements = reimbursements;
+            return this;
+        }
+
+
+        /**
+         * The one-time custom withholding overrides applied to this payroll for this employee.
+         * `federal` is null when no federal one-time override is set; `state` is an empty
+         * array when no state one-time overrides are set.
+         */
+        public Builder customWithholdings(PayrollShowCustomWithholdings customWithholdings) {
+            Utils.checkNotNull(customWithholdings, "customWithholdings");
+            this.customWithholdings = Optional.ofNullable(customWithholdings);
+            return this;
+        }
+
+        /**
+         * The one-time custom withholding overrides applied to this payroll for this employee.
+         * `federal` is null when no federal one-time override is set; `state` is an empty
+         * array when no state one-time overrides are set.
+         */
+        public Builder customWithholdings(Optional<? extends PayrollShowCustomWithholdings> customWithholdings) {
+            Utils.checkNotNull(customWithholdings, "customWithholdings");
+            this.customWithholdings = customWithholdings;
             return this;
         }
 
@@ -1306,6 +1430,29 @@ public class EmployeeCompensations {
             return this;
         }
 
+
+        /**
+         * Adjustments applied when calculating the employee's regular rate of pay for
+         * overtime purposes (e.g. a discretionary bonus allocated across workweeks),
+         * on calculated or processed payrolls.
+         */
+        public Builder payAdjustments(List<PayAdjustments> payAdjustments) {
+            Utils.checkNotNull(payAdjustments, "payAdjustments");
+            this.payAdjustments = Optional.ofNullable(payAdjustments);
+            return this;
+        }
+
+        /**
+         * Adjustments applied when calculating the employee's regular rate of pay for
+         * overtime purposes (e.g. a discretionary bonus allocated across workweeks),
+         * on calculated or processed payrolls.
+         */
+        public Builder payAdjustments(Optional<? extends List<PayAdjustments>> payAdjustments) {
+            Utils.checkNotNull(payAdjustments, "payAdjustments");
+            this.payAdjustments = payAdjustments;
+            return this;
+        }
+
         public Builder additionalProperty(String key, Object value) {
             Utils.checkNotNull(key, "key");
             // we could be strict about null values (force the user
@@ -1329,8 +1476,9 @@ public class EmployeeCompensations {
                 preferredFirstName, lastName, grossPay,
                 netPay, checkAmount, paymentMethod,
                 memo, fixedCompensations, hourlyCompensations,
-                paidTimeOff, reimbursements, version,
-                deductions, taxes, benefits)
+                paidTimeOff, reimbursements, customWithholdings,
+                version, deductions, taxes,
+                benefits, payAdjustments)
                 .withAdditionalProperties(additionalProperties);
         }
 

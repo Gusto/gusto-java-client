@@ -18,12 +18,6 @@ import java.util.Optional;
 
 public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
     /**
-     * The UUID of the employee
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_uuid")
-    private String employeeUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,35 +25,33 @@ public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the employee
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_uuid")
+    private String employeeUuid;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private EmployeeSection603HighEarnerStatusCreateRequest employeeSection603HighEarnerStatusCreateRequest;
 
     @JsonCreator
     public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(
-            String employeeUuid,
             Optional<? extends PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeUuid,
             EmployeeSection603HighEarnerStatusCreateRequest employeeSection603HighEarnerStatusCreateRequest) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
         Utils.checkNotNull(employeeSection603HighEarnerStatusCreateRequest, "employeeSection603HighEarnerStatusCreateRequest");
-        this.employeeUuid = employeeUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.employeeUuid = employeeUuid;
         this.employeeSection603HighEarnerStatusCreateRequest = employeeSection603HighEarnerStatusCreateRequest;
     }
     
     public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(
             String employeeUuid,
             EmployeeSection603HighEarnerStatusCreateRequest employeeSection603HighEarnerStatusCreateRequest) {
-        this(employeeUuid, Optional.empty(), employeeSection603HighEarnerStatusCreateRequest);
-    }
-
-    /**
-     * The UUID of the employee
-     */
-    @JsonIgnore
-    public String employeeUuid() {
-        return employeeUuid;
+        this(Optional.empty(), employeeUuid, employeeSection603HighEarnerStatusCreateRequest);
     }
 
     /**
@@ -73,6 +65,14 @@ public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
         return (Optional<PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the employee
+     */
+    @JsonIgnore
+    public String employeeUuid() {
+        return employeeUuid;
+    }
+
     @JsonIgnore
     public EmployeeSection603HighEarnerStatusCreateRequest employeeSection603HighEarnerStatusCreateRequest() {
         return employeeSection603HighEarnerStatusCreateRequest;
@@ -82,15 +82,6 @@ public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the employee
-     */
-    public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest withEmployeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -115,6 +106,15 @@ public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
         return this;
     }
 
+    /**
+     * The UUID of the employee
+     */
+    public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest withEmployeeUuid(String employeeUuid) {
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
+        this.employeeUuid = employeeUuid;
+        return this;
+    }
+
     public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest withEmployeeSection603HighEarnerStatusCreateRequest(EmployeeSection603HighEarnerStatusCreateRequest employeeSection603HighEarnerStatusCreateRequest) {
         Utils.checkNotNull(employeeSection603HighEarnerStatusCreateRequest, "employeeSection603HighEarnerStatusCreateRequest");
         this.employeeSection603HighEarnerStatusCreateRequest = employeeSection603HighEarnerStatusCreateRequest;
@@ -131,46 +131,36 @@ public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
         }
         PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest other = (PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
             Utils.enhancedDeepEquals(this.employeeSection603HighEarnerStatusCreateRequest, other.employeeSection603HighEarnerStatusCreateRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            employeeUuid, xGustoAPIVersion, employeeSection603HighEarnerStatusCreateRequest);
+            xGustoAPIVersion, employeeUuid, employeeSection603HighEarnerStatusCreateRequest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest.class,
-                "employeeUuid", employeeUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "employeeUuid", employeeUuid,
                 "employeeSection603HighEarnerStatusCreateRequest", employeeSection603HighEarnerStatusCreateRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String employeeUuid;
-
         private Optional<? extends PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String employeeUuid;
 
         private EmployeeSection603HighEarnerStatusCreateRequest employeeSection603HighEarnerStatusCreateRequest;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the employee
-         */
-        public Builder employeeUuid(String employeeUuid) {
-            Utils.checkNotNull(employeeUuid, "employeeUuid");
-            this.employeeUuid = employeeUuid;
-            return this;
         }
 
 
@@ -197,6 +187,16 @@ public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
         }
 
 
+        /**
+         * The UUID of the employee
+         */
+        public Builder employeeUuid(String employeeUuid) {
+            Utils.checkNotNull(employeeUuid, "employeeUuid");
+            this.employeeUuid = employeeUuid;
+            return this;
+        }
+
+
         public Builder employeeSection603HighEarnerStatusCreateRequest(EmployeeSection603HighEarnerStatusCreateRequest employeeSection603HighEarnerStatusCreateRequest) {
             Utils.checkNotNull(employeeSection603HighEarnerStatusCreateRequest, "employeeSection603HighEarnerStatusCreateRequest");
             this.employeeSection603HighEarnerStatusCreateRequest = employeeSection603HighEarnerStatusCreateRequest;
@@ -209,7 +209,7 @@ public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest {
             }
 
             return new PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(
-                employeeUuid, xGustoAPIVersion, employeeSection603HighEarnerStatusCreateRequest);
+                xGustoAPIVersion, employeeUuid, employeeSection603HighEarnerStatusCreateRequest);
         }
 
 

@@ -18,12 +18,6 @@ import java.util.Optional;
 
 public class PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest {
     /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
-    private String companyUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,35 +25,33 @@ public class PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
+    private String companyUuid;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest;
 
     @JsonCreator
     public PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest(
-            String companyUuid,
             Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyUuid,
             PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(partnerManagedCompanyRetrieveTermsOfServiceRequest, "partnerManagedCompanyRetrieveTermsOfServiceRequest");
-        this.companyUuid = companyUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyUuid = companyUuid;
         this.partnerManagedCompanyRetrieveTermsOfServiceRequest = partnerManagedCompanyRetrieveTermsOfServiceRequest;
     }
     
     public PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest(
             String companyUuid,
             PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest) {
-        this(companyUuid, Optional.empty(), partnerManagedCompanyRetrieveTermsOfServiceRequest);
-    }
-
-    /**
-     * The UUID of the company
-     */
-    @JsonIgnore
-    public String companyUuid() {
-        return companyUuid;
+        this(Optional.empty(), companyUuid, partnerManagedCompanyRetrieveTermsOfServiceRequest);
     }
 
     /**
@@ -73,6 +65,14 @@ public class PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest {
         return (Optional<PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the company
+     */
+    @JsonIgnore
+    public String companyUuid() {
+        return companyUuid;
+    }
+
     @JsonIgnore
     public PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest() {
         return partnerManagedCompanyRetrieveTermsOfServiceRequest;
@@ -82,15 +82,6 @@ public class PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest withCompanyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -115,6 +106,15 @@ public class PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
     public PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest withPartnerManagedCompanyRetrieveTermsOfServiceRequest(PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest) {
         Utils.checkNotNull(partnerManagedCompanyRetrieveTermsOfServiceRequest, "partnerManagedCompanyRetrieveTermsOfServiceRequest");
         this.partnerManagedCompanyRetrieveTermsOfServiceRequest = partnerManagedCompanyRetrieveTermsOfServiceRequest;
@@ -131,46 +131,36 @@ public class PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest {
         }
         PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest other = (PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.partnerManagedCompanyRetrieveTermsOfServiceRequest, other.partnerManagedCompanyRetrieveTermsOfServiceRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, xGustoAPIVersion, partnerManagedCompanyRetrieveTermsOfServiceRequest);
+            xGustoAPIVersion, companyUuid, partnerManagedCompanyRetrieveTermsOfServiceRequest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest.class,
-                "companyUuid", companyUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "companyUuid", companyUuid,
                 "partnerManagedCompanyRetrieveTermsOfServiceRequest", partnerManagedCompanyRetrieveTermsOfServiceRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String companyUuid;
-
         private Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String companyUuid;
 
         private PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyUuid(String companyUuid) {
-            Utils.checkNotNull(companyUuid, "companyUuid");
-            this.companyUuid = companyUuid;
-            return this;
         }
 
 
@@ -197,6 +187,16 @@ public class PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest {
         }
 
 
+        /**
+         * The UUID of the company
+         */
+        public Builder companyUuid(String companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = companyUuid;
+            return this;
+        }
+
+
         public Builder partnerManagedCompanyRetrieveTermsOfServiceRequest(PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest) {
             Utils.checkNotNull(partnerManagedCompanyRetrieveTermsOfServiceRequest, "partnerManagedCompanyRetrieveTermsOfServiceRequest");
             this.partnerManagedCompanyRetrieveTermsOfServiceRequest = partnerManagedCompanyRetrieveTermsOfServiceRequest;
@@ -209,7 +209,7 @@ public class PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest {
             }
 
             return new PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest(
-                companyUuid, xGustoAPIVersion, partnerManagedCompanyRetrieveTermsOfServiceRequest);
+                xGustoAPIVersion, companyUuid, partnerManagedCompanyRetrieveTermsOfServiceRequest);
         }
 
 

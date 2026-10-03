@@ -15,7 +15,9 @@ import java.util.Optional;
  */
 public enum PatchV1ContractorPaymentGroupsIdPartnerDisbursementsPaymentMethod {
     DIRECT_DEPOSIT("Direct Deposit"),
-    CHECK("Check");
+    CHECK("Check"),
+    HISTORICAL_PAYMENT("Historical Payment"),
+    CORRECTION_PAYMENT("Correction Payment");
 
     @JsonValue
     private final String value;

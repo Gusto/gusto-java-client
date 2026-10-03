@@ -25,12 +25,12 @@ public class PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody {
      * An array of employee objects, each containing an employee_uuid.
      */
     @JsonProperty("employees")
-    private List<PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees> employees;
+    private List<Employees> employees;
 
     @JsonCreator
     public PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody(
             @JsonProperty("version") String version,
-            @JsonProperty("employees") List<PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees> employees) {
+            @JsonProperty("employees") List<Employees> employees) {
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(employees, "employees");
         this.version = version;
@@ -51,7 +51,7 @@ public class PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody {
      * An array of employee objects, each containing an employee_uuid.
      */
     @JsonIgnore
-    public List<PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees> employees() {
+    public List<Employees> employees() {
         return employees;
     }
 
@@ -74,7 +74,7 @@ public class PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody {
     /**
      * An array of employee objects, each containing an employee_uuid.
      */
-    public PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody withEmployees(List<PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees> employees) {
+    public PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody withEmployees(List<Employees> employees) {
         Utils.checkNotNull(employees, "employees");
         this.employees = employees;
         return this;
@@ -112,7 +112,7 @@ public class PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody {
 
         private String version;
 
-        private List<PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees> employees;
+        private List<Employees> employees;
 
         private Builder() {
           // force use of static builder() method
@@ -134,7 +134,7 @@ public class PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody {
         /**
          * An array of employee objects, each containing an employee_uuid.
          */
-        public Builder employees(List<PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees> employees) {
+        public Builder employees(List<Employees> employees) {
             Utils.checkNotNull(employees, "employees");
             this.employees = employees;
             return this;

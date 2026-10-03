@@ -17,6 +17,8 @@ public class AsyncGustoEmbedded {
 
     private final AsyncCompanyBenefits companyBenefits;
 
+    private final AsyncReports reports;
+
     private final AsyncCompanyAttachments companyAttachments;
 
     private final AsyncCompanyAttachment companyAttachment;
@@ -69,8 +71,6 @@ public class AsyncGustoEmbedded {
 
     private final AsyncEmployeeEmployments employeeEmployments;
 
-    private final AsyncReports reports;
-
     private final AsyncEvents events;
 
     private final AsyncExternalPayrolls externalPayrolls;
@@ -97,7 +97,13 @@ public class AsyncGustoEmbedded {
 
     private final AsyncLocations locations;
 
+    private final AsyncMemberPortalInvitations memberPortalInvitations;
+
     private final AsyncPaySchedules paySchedules;
+
+    private final AsyncPayrollCancellations payrollCancellations;
+
+    private final AsyncPayrollDigests payrollDigests;
 
     private final AsyncTimeOffPolicies timeOffPolicies;
 
@@ -107,9 +113,13 @@ public class AsyncGustoEmbedded {
 
     private final AsyncReimbursements reimbursements;
 
+    private final AsyncReverseWireTransactions reverseWireTransactions;
+
     private final AsyncSalaryEstimates salaryEstimates;
 
     private final AsyncSignatories signatories;
+
+    private final AsyncTaxPayments taxPayments;
 
     private final AsyncTimeOffRequests timeOffRequests;
 
@@ -118,8 +128,6 @@ public class AsyncGustoEmbedded {
     private final AsyncWebhooks webhooks;
 
     private final AsyncWireInRequests wireInRequests;
-
-    private final AsyncPayrollDigests payrollDigests;
 
     public AsyncAchTransactions achTransactions() {
         return achTransactions;
@@ -131,6 +139,10 @@ public class AsyncGustoEmbedded {
 
     public AsyncCompanyBenefits companyBenefits() {
         return companyBenefits;
+    }
+
+    public AsyncReports reports() {
+        return reports;
     }
 
     public AsyncCompanyAttachments companyAttachments() {
@@ -237,10 +249,6 @@ public class AsyncGustoEmbedded {
         return employeeEmployments;
     }
 
-    public AsyncReports reports() {
-        return reports;
-    }
-
     public AsyncEvents events() {
         return events;
     }
@@ -293,8 +301,20 @@ public class AsyncGustoEmbedded {
         return locations;
     }
 
+    public AsyncMemberPortalInvitations memberPortalInvitations() {
+        return memberPortalInvitations;
+    }
+
     public AsyncPaySchedules paySchedules() {
         return paySchedules;
+    }
+
+    public AsyncPayrollCancellations payrollCancellations() {
+        return payrollCancellations;
+    }
+
+    public AsyncPayrollDigests payrollDigests() {
+        return payrollDigests;
     }
 
     public AsyncTimeOffPolicies timeOffPolicies() {
@@ -313,12 +333,20 @@ public class AsyncGustoEmbedded {
         return reimbursements;
     }
 
+    public AsyncReverseWireTransactions reverseWireTransactions() {
+        return reverseWireTransactions;
+    }
+
     public AsyncSalaryEstimates salaryEstimates() {
         return salaryEstimates;
     }
 
     public AsyncSignatories signatories() {
         return signatories;
+    }
+
+    public AsyncTaxPayments taxPayments() {
+        return taxPayments;
     }
 
     public AsyncTimeOffRequests timeOffRequests() {
@@ -337,10 +365,6 @@ public class AsyncGustoEmbedded {
         return wireInRequests;
     }
 
-    public AsyncPayrollDigests payrollDigests() {
-        return payrollDigests;
-    }
-
     private SDKConfiguration sdkConfiguration;
     private final GustoEmbedded syncSDK;
 
@@ -350,6 +374,7 @@ public class AsyncGustoEmbedded {
         this.achTransactions = new AsyncAchTransactions(syncSDK.achTransactions(), sdkConfiguration);
         this.companies = new AsyncCompanies(syncSDK.companies(), sdkConfiguration);
         this.companyBenefits = new AsyncCompanyBenefits(syncSDK.companyBenefits(), sdkConfiguration);
+        this.reports = new AsyncReports(syncSDK.reports(), sdkConfiguration);
         this.companyAttachments = new AsyncCompanyAttachments(syncSDK.companyAttachments(), sdkConfiguration);
         this.companyAttachment = new AsyncCompanyAttachment(syncSDK.companyAttachment(), sdkConfiguration);
         this.bankAccounts = new AsyncBankAccounts(syncSDK.bankAccounts(), sdkConfiguration);
@@ -376,7 +401,6 @@ public class AsyncGustoEmbedded {
         this.employeeTaxSetup = new AsyncEmployeeTaxSetup(syncSDK.employeeTaxSetup(), sdkConfiguration);
         this.employeeForms = new AsyncEmployeeForms(syncSDK.employeeForms(), sdkConfiguration);
         this.employeeEmployments = new AsyncEmployeeEmployments(syncSDK.employeeEmployments(), sdkConfiguration);
-        this.reports = new AsyncReports(syncSDK.reports(), sdkConfiguration);
         this.events = new AsyncEvents(syncSDK.events(), sdkConfiguration);
         this.externalPayrolls = new AsyncExternalPayrolls(syncSDK.externalPayrolls(), sdkConfiguration);
         this.flows = new AsyncFlows(syncSDK.flows(), sdkConfiguration);
@@ -390,18 +414,22 @@ public class AsyncGustoEmbedded {
         this.informationRequests = new AsyncInformationRequests(syncSDK.informationRequests(), sdkConfiguration);
         this.invoices = new AsyncInvoices(syncSDK.invoices(), sdkConfiguration);
         this.locations = new AsyncLocations(syncSDK.locations(), sdkConfiguration);
+        this.memberPortalInvitations = new AsyncMemberPortalInvitations(syncSDK.memberPortalInvitations(), sdkConfiguration);
         this.paySchedules = new AsyncPaySchedules(syncSDK.paySchedules(), sdkConfiguration);
+        this.payrollCancellations = new AsyncPayrollCancellations(syncSDK.payrollCancellations(), sdkConfiguration);
+        this.payrollDigests = new AsyncPayrollDigests(syncSDK.payrollDigests(), sdkConfiguration);
         this.timeOffPolicies = new AsyncTimeOffPolicies(syncSDK.timeOffPolicies(), sdkConfiguration);
         this.peopleBatches = new AsyncPeopleBatches(syncSDK.peopleBatches(), sdkConfiguration);
         this.recoveryCases = new AsyncRecoveryCases(syncSDK.recoveryCases(), sdkConfiguration);
         this.reimbursements = new AsyncReimbursements(syncSDK.reimbursements(), sdkConfiguration);
+        this.reverseWireTransactions = new AsyncReverseWireTransactions(syncSDK.reverseWireTransactions(), sdkConfiguration);
         this.salaryEstimates = new AsyncSalaryEstimates(syncSDK.salaryEstimates(), sdkConfiguration);
         this.signatories = new AsyncSignatories(syncSDK.signatories(), sdkConfiguration);
+        this.taxPayments = new AsyncTaxPayments(syncSDK.taxPayments(), sdkConfiguration);
         this.timeOffRequests = new AsyncTimeOffRequests(syncSDK.timeOffRequests(), sdkConfiguration);
         this.introspection = new AsyncIntrospection(syncSDK.introspection(), sdkConfiguration);
         this.webhooks = new AsyncWebhooks(syncSDK.webhooks(), sdkConfiguration);
         this.wireInRequests = new AsyncWireInRequests(syncSDK.wireInRequests(), sdkConfiguration);
-        this.payrollDigests = new AsyncPayrollDigests(syncSDK.payrollDigests(), sdkConfiguration);
     }
 
     /**

@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetV1HomeAddressesHomeAddressUuidRequest {
     /**
-     * The UUID of the home address
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=home_address_uuid")
-    private String homeAddressUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class GetV1HomeAddressesHomeAddressUuidRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the home address
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=home_address_uuid")
+    private String homeAddressUuid;
+
     @JsonCreator
     public GetV1HomeAddressesHomeAddressUuidRequest(
-            String homeAddressUuid,
-            Optional<? extends GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(homeAddressUuid, "homeAddressUuid");
+            Optional<? extends GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String homeAddressUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.homeAddressUuid = homeAddressUuid;
+        Utils.checkNotNull(homeAddressUuid, "homeAddressUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.homeAddressUuid = homeAddressUuid;
     }
     
     public GetV1HomeAddressesHomeAddressUuidRequest(
             String homeAddressUuid) {
-        this(homeAddressUuid, Optional.empty());
-    }
-
-    /**
-     * The UUID of the home address
-     */
-    @JsonIgnore
-    public String homeAddressUuid() {
-        return homeAddressUuid;
+        this(Optional.empty(), homeAddressUuid);
     }
 
     /**
@@ -64,19 +56,18 @@ public class GetV1HomeAddressesHomeAddressUuidRequest {
         return (Optional<GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the home address
+     */
+    @JsonIgnore
+    public String homeAddressUuid() {
+        return homeAddressUuid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the home address
-     */
-    public GetV1HomeAddressesHomeAddressUuidRequest withHomeAddressUuid(String homeAddressUuid) {
-        Utils.checkNotNull(homeAddressUuid, "homeAddressUuid");
-        this.homeAddressUuid = homeAddressUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class GetV1HomeAddressesHomeAddressUuidRequest {
         return this;
     }
 
+    /**
+     * The UUID of the home address
+     */
+    public GetV1HomeAddressesHomeAddressUuidRequest withHomeAddressUuid(String homeAddressUuid) {
+        Utils.checkNotNull(homeAddressUuid, "homeAddressUuid");
+        this.homeAddressUuid = homeAddressUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class GetV1HomeAddressesHomeAddressUuidRequest {
         }
         GetV1HomeAddressesHomeAddressUuidRequest other = (GetV1HomeAddressesHomeAddressUuidRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.homeAddressUuid, other.homeAddressUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.homeAddressUuid, other.homeAddressUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            homeAddressUuid, xGustoAPIVersion);
+            xGustoAPIVersion, homeAddressUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1HomeAddressesHomeAddressUuidRequest.class,
-                "homeAddressUuid", homeAddressUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "homeAddressUuid", homeAddressUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String homeAddressUuid;
-
         private Optional<? extends GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String homeAddressUuid;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the home address
-         */
-        public Builder homeAddressUuid(String homeAddressUuid) {
-            Utils.checkNotNull(homeAddressUuid, "homeAddressUuid");
-            this.homeAddressUuid = homeAddressUuid;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class GetV1HomeAddressesHomeAddressUuidRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the home address
+         */
+        public Builder homeAddressUuid(String homeAddressUuid) {
+            Utils.checkNotNull(homeAddressUuid, "homeAddressUuid");
+            this.homeAddressUuid = homeAddressUuid;
+            return this;
+        }
+
         public GetV1HomeAddressesHomeAddressUuidRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1HomeAddressesHomeAddressUuidRequest(
-                homeAddressUuid, xGustoAPIVersion);
+                xGustoAPIVersion, homeAddressUuid);
         }
 
 

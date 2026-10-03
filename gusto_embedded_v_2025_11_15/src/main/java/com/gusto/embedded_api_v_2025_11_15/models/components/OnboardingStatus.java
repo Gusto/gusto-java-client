@@ -8,15 +8,19 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * OnboardingStatus
+ * 
+ * <p>One of the "onboarding_status" enum values.
+ */
 public enum OnboardingStatus {
-    ONBOARDING_COMPLETED("onboarding_completed"),
     ADMIN_ONBOARDING_INCOMPLETE("admin_onboarding_incomplete"),
-    SELF_ONBOARDING_PENDING_INVITE("self_onboarding_pending_invite"),
+    ADMIN_ONBOARDING_REVIEW("admin_onboarding_review"),
+    SELF_ONBOARDING_NOT_INVITED("self_onboarding_not_invited"),
     SELF_ONBOARDING_INVITED("self_onboarding_invited"),
-    SELF_ONBOARDING_INVITED_STARTED("self_onboarding_invited_started"),
-    SELF_ONBOARDING_INVITED_OVERDUE("self_onboarding_invited_overdue"),
-    SELF_ONBOARDING_COMPLETED_BY_EMPLOYEE("self_onboarding_completed_by_employee"),
-    SELF_ONBOARDING_AWAITING_ADMIN_REVIEW("self_onboarding_awaiting_admin_review");
+    SELF_ONBOARDING_STARTED("self_onboarding_started"),
+    SELF_ONBOARDING_REVIEW("self_onboarding_review"),
+    ONBOARDING_COMPLETED("onboarding_completed");
 
     @JsonValue
     private final String value;
