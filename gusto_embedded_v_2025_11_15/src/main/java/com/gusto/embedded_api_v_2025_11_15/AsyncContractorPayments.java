@@ -20,6 +20,7 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1ContractorPaym
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1ContractorPaymentsContractorPaymentUuidFundRequest;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1ContractorsContractorUuidPaymentsRequest;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.PostV1CompaniesCompanyIdContractorPaymentsRequest;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.async.DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder;
@@ -36,6 +37,8 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1Contract
 import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1ContractorPaymentsContractorPaymentUuidFundResponse;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequestBuilder;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1ContractorsContractorUuidPaymentsRequestBuilder;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1ContractorsContractorUuidPaymentsResponse;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.async.PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.async.PostV1CompaniesCompanyIdContractorPaymentsResponse;
 import com.gusto.embedded_api_v_2025_11_15.operations.DeleteV1CompaniesCompanyIdContractorPaymentContractorPayment;
@@ -45,6 +48,7 @@ import com.gusto.embedded_api_v_2025_11_15.operations.GetV1CompaniesCompanyIdCon
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1ContractorPaymentsContractorPaymentIdPdf;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1ContractorPaymentsContractorPaymentUuidFund;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1ContractorPaymentsContractorPaymentUuidReceipt;
+import com.gusto.embedded_api_v_2025_11_15.operations.GetV1ContractorsContractorUuidPayments;
 import com.gusto.embedded_api_v_2025_11_15.operations.PostV1CompaniesCompanyIdContractorPayments;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import java.lang.String;
@@ -73,167 +77,99 @@ public class AsyncContractorPayments {
 
 
     /**
-     * Get a single contractor payment receipt
+     * Get contractor payments
      * 
-     * <p>Returns a contractor payment receipt.
+     * <p>Returns a paginated list of payments for a single contractor.
      * 
-     * <p>Notes:
-     * * Receipts are only available for direct deposit payments and are only available once those payments
-     * have been funded.
-     * * Payroll Receipt requests for payrolls which do not have receipts available (e.g. payment by check)
-     * will return a 404 status.
-     * * Hour and dollar amounts are returned as string representations of numeric decimals.
-     * * Dollar amounts are represented to the cent.
-     * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
+     * <p>Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction
+     * (e.g., `check_date:desc`).
      * 
-     * <p>scope: `payrolls:read`
+     * <p>scope: `contractor_pay_stubs:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
-    public GetV1ContractorPaymentsContractorPaymentUuidReceiptRequestBuilder getReceipt() {
-        return new GetV1ContractorPaymentsContractorPaymentUuidReceiptRequestBuilder(sdkConfiguration);
+    public GetV1ContractorsContractorUuidPaymentsRequestBuilder getV1ContractorsContractorUuidPayments() {
+        return new GetV1ContractorsContractorUuidPaymentsRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get a single contractor payment receipt
+     * Get contractor payments
      * 
-     * <p>Returns a contractor payment receipt.
+     * <p>Returns a paginated list of payments for a single contractor.
      * 
-     * <p>Notes:
-     * * Receipts are only available for direct deposit payments and are only available once those payments
-     * have been funded.
-     * * Payroll Receipt requests for payrolls which do not have receipts available (e.g. payment by check)
-     * will return a 404 status.
-     * * Hour and dollar amounts are returned as string representations of numeric decimals.
-     * * Dollar amounts are represented to the cent.
-     * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
+     * <p>Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction
+     * (e.g., `check_date:desc`).
      * 
-     * <p>scope: `payrolls:read`
+     * <p>scope: `contractor_pay_stubs:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param contractorPaymentUuid The UUID of the contractor payment
-     * @return {@code CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse>} - The async response
+     * @param request The request object containing all the parameters for the API call.
+     * @return {@code CompletableFuture<GetV1ContractorsContractorUuidPaymentsResponse>} - The async response
      */
-    public CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse> getReceipt(String contractorPaymentUuid) {
-        return getReceipt(Optional.empty(), contractorPaymentUuid);
-    }
-
-    /**
-     * Get a single contractor payment receipt
-     * 
-     * <p>Returns a contractor payment receipt.
-     * 
-     * <p>Notes:
-     * * Receipts are only available for direct deposit payments and are only available once those payments
-     * have been funded.
-     * * Payroll Receipt requests for payrolls which do not have receipts available (e.g. payment by check)
-     * will return a 404 status.
-     * * Hour and dollar amounts are returned as string representations of numeric decimals.
-     * * Dollar amounts are represented to the cent.
-     * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param contractorPaymentUuid The UUID of the contractor payment
-     * @return {@code CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse>} - The async response
-     */
-    public CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse> getReceipt(Optional<? extends GetV1ContractorPaymentsContractorPaymentUuidReceiptHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentUuid) {
-        GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest request =
-            GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .contractorPaymentUuid(contractorPaymentUuid)
-                .build();
-        AsyncRequestOperation<GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest, GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse> operation
-              = new GetV1ContractorPaymentsContractorPaymentUuidReceipt.Async(sdkConfiguration, _headers);
+    public CompletableFuture<GetV1ContractorsContractorUuidPaymentsResponse> getV1ContractorsContractorUuidPayments(GetV1ContractorsContractorUuidPaymentsRequest request) {
+        AsyncRequestOperation<GetV1ContractorsContractorUuidPaymentsRequest, GetV1ContractorsContractorUuidPaymentsResponse> operation
+              = new GetV1ContractorsContractorUuidPayments.Async(sdkConfiguration, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
 
     /**
-     * Fund a contractor payment [DEMO]
+     * Get a contractor payment PDF
      * 
-     * <p>&gt; 🚧 Demo action
-     * &gt;
-     * &gt; This action is only available in the Demo environment
+     * <p>Get a PDF document for a single contractor payment.
      * 
-     * <p>Simulate funding a contractor payment. Funding only occurs automatically in the production
-     * environment when bank transactions are generated. Use this action in the demo environment to
-     * transition a contractor payment's `status` from `Unfunded` to `Funded`.
-     * 
-     * <p>A `Funded` status is required for generating a contractor payment receipt.
-     * 
-     * <p>scope: `payrolls:run`
+     * <p>scope: `payrolls:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
-    public GetV1ContractorPaymentsContractorPaymentUuidFundRequestBuilder fund() {
-        return new GetV1ContractorPaymentsContractorPaymentUuidFundRequestBuilder(sdkConfiguration);
+    public GetV1ContractorPaymentsContractorPaymentIdPdfRequestBuilder getV1ContractorPaymentsContractorPaymentIdPdf() {
+        return new GetV1ContractorPaymentsContractorPaymentIdPdfRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Fund a contractor payment [DEMO]
+     * Get a contractor payment PDF
      * 
-     * <p>&gt; 🚧 Demo action
-     * &gt;
-     * &gt; This action is only available in the Demo environment
+     * <p>Get a PDF document for a single contractor payment.
      * 
-     * <p>Simulate funding a contractor payment. Funding only occurs automatically in the production
-     * environment when bank transactions are generated. Use this action in the demo environment to
-     * transition a contractor payment's `status` from `Unfunded` to `Funded`.
-     * 
-     * <p>A `Funded` status is required for generating a contractor payment receipt.
-     * 
-     * <p>scope: `payrolls:run`
+     * <p>scope: `payrolls:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param contractorPaymentUuid The UUID of the contractor payment
-     * @return {@code CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidFundResponse>} - The async response
+     * @param contractorPaymentId The UUID of the contractor payment
+     * @return {@code CompletableFuture<GetV1ContractorPaymentsContractorPaymentIdPdfResponse>} - The async response
      */
-    public CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidFundResponse> fund(String contractorPaymentUuid) {
-        return fund(Optional.empty(), contractorPaymentUuid);
+    public CompletableFuture<GetV1ContractorPaymentsContractorPaymentIdPdfResponse> getV1ContractorPaymentsContractorPaymentIdPdf(String contractorPaymentId) {
+        return getV1ContractorPaymentsContractorPaymentIdPdf(Optional.empty(), contractorPaymentId);
     }
 
     /**
-     * Fund a contractor payment [DEMO]
+     * Get a contractor payment PDF
      * 
-     * <p>&gt; 🚧 Demo action
-     * &gt;
-     * &gt; This action is only available in the Demo environment
+     * <p>Get a PDF document for a single contractor payment.
      * 
-     * <p>Simulate funding a contractor payment. Funding only occurs automatically in the production
-     * environment when bank transactions are generated. Use this action in the demo environment to
-     * transition a contractor payment's `status` from `Unfunded` to `Funded`.
-     * 
-     * <p>A `Funded` status is required for generating a contractor payment receipt.
-     * 
-     * <p>scope: `payrolls:run`
+     * <p>scope: `payrolls:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param contractorPaymentUuid The UUID of the contractor payment
-     * @return {@code CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidFundResponse>} - The async response
+     * @param contractorPaymentId The UUID of the contractor payment
+     * @return {@code CompletableFuture<GetV1ContractorPaymentsContractorPaymentIdPdfResponse>} - The async response
      */
-    public CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidFundResponse> fund(Optional<? extends GetV1ContractorPaymentsContractorPaymentUuidFundHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentUuid) {
-        GetV1ContractorPaymentsContractorPaymentUuidFundRequest request =
-            GetV1ContractorPaymentsContractorPaymentUuidFundRequest
+    public CompletableFuture<GetV1ContractorPaymentsContractorPaymentIdPdfResponse> getV1ContractorPaymentsContractorPaymentIdPdf(Optional<? extends GetV1ContractorPaymentsContractorPaymentIdPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentId) {
+        GetV1ContractorPaymentsContractorPaymentIdPdfRequest request =
+            GetV1ContractorPaymentsContractorPaymentIdPdfRequest
                 .builder()
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .contractorPaymentUuid(contractorPaymentUuid)
+                .contractorPaymentId(contractorPaymentId)
                 .build();
-        AsyncRequestOperation<GetV1ContractorPaymentsContractorPaymentUuidFundRequest, GetV1ContractorPaymentsContractorPaymentUuidFundResponse> operation
-              = new GetV1ContractorPaymentsContractorPaymentUuidFund.Async(sdkConfiguration, _headers);
+        AsyncRequestOperation<GetV1ContractorPaymentsContractorPaymentIdPdfRequest, GetV1ContractorPaymentsContractorPaymentIdPdfResponse> operation
+              = new GetV1ContractorPaymentsContractorPaymentIdPdf.Async(sdkConfiguration, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -545,9 +481,18 @@ public class AsyncContractorPayments {
 
 
     /**
-     * Get a contractor payment PDF
+     * Get a single contractor payment receipt
      * 
-     * <p>Get a PDF document for a single contractor payment.
+     * <p>Returns a contractor payment receipt.
+     * 
+     * <p>Notes:
+     * * Receipts are only available for direct deposit payments and are only available once those payments
+     * have been funded.
+     * * Payroll Receipt requests for payrolls which do not have receipts available (e.g. payment by check)
+     * will return a 404 status.
+     * * Hour and dollar amounts are returned as string representations of numeric decimals.
+     * * Dollar amounts are represented to the cent.
+     * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
      * 
      * <p>scope: `payrolls:read`
      * 
@@ -555,48 +500,148 @@ public class AsyncContractorPayments {
      * 
      * @return The async call builder
      */
-    public GetV1ContractorPaymentsContractorPaymentIdPdfRequestBuilder getV1ContractorPaymentsContractorPaymentIdPdf() {
-        return new GetV1ContractorPaymentsContractorPaymentIdPdfRequestBuilder(sdkConfiguration);
+    public GetV1ContractorPaymentsContractorPaymentUuidReceiptRequestBuilder getReceipt() {
+        return new GetV1ContractorPaymentsContractorPaymentUuidReceiptRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get a contractor payment PDF
+     * Get a single contractor payment receipt
      * 
-     * <p>Get a PDF document for a single contractor payment.
+     * <p>Returns a contractor payment receipt.
+     * 
+     * <p>Notes:
+     * * Receipts are only available for direct deposit payments and are only available once those payments
+     * have been funded.
+     * * Payroll Receipt requests for payrolls which do not have receipts available (e.g. payment by check)
+     * will return a 404 status.
+     * * Hour and dollar amounts are returned as string representations of numeric decimals.
+     * * Dollar amounts are represented to the cent.
+     * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
      * 
      * <p>scope: `payrolls:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param contractorPaymentId The UUID of the contractor payment
-     * @return {@code CompletableFuture<GetV1ContractorPaymentsContractorPaymentIdPdfResponse>} - The async response
+     * @param contractorPaymentUuid The UUID of the contractor payment
+     * @return {@code CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse>} - The async response
      */
-    public CompletableFuture<GetV1ContractorPaymentsContractorPaymentIdPdfResponse> getV1ContractorPaymentsContractorPaymentIdPdf(String contractorPaymentId) {
-        return getV1ContractorPaymentsContractorPaymentIdPdf(Optional.empty(), contractorPaymentId);
+    public CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse> getReceipt(String contractorPaymentUuid) {
+        return getReceipt(Optional.empty(), contractorPaymentUuid);
     }
 
     /**
-     * Get a contractor payment PDF
+     * Get a single contractor payment receipt
      * 
-     * <p>Get a PDF document for a single contractor payment.
+     * <p>Returns a contractor payment receipt.
+     * 
+     * <p>Notes:
+     * * Receipts are only available for direct deposit payments and are only available once those payments
+     * have been funded.
+     * * Payroll Receipt requests for payrolls which do not have receipts available (e.g. payment by check)
+     * will return a 404 status.
+     * * Hour and dollar amounts are returned as string representations of numeric decimals.
+     * * Dollar amounts are represented to the cent.
+     * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
      * 
      * <p>scope: `payrolls:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param contractorPaymentId The UUID of the contractor payment
-     * @return {@code CompletableFuture<GetV1ContractorPaymentsContractorPaymentIdPdfResponse>} - The async response
+     * @param contractorPaymentUuid The UUID of the contractor payment
+     * @return {@code CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse>} - The async response
      */
-    public CompletableFuture<GetV1ContractorPaymentsContractorPaymentIdPdfResponse> getV1ContractorPaymentsContractorPaymentIdPdf(Optional<? extends GetV1ContractorPaymentsContractorPaymentIdPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentId) {
-        GetV1ContractorPaymentsContractorPaymentIdPdfRequest request =
-            GetV1ContractorPaymentsContractorPaymentIdPdfRequest
+    public CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse> getReceipt(Optional<? extends GetV1ContractorPaymentsContractorPaymentUuidReceiptHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentUuid) {
+        GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest request =
+            GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest
                 .builder()
                 .xGustoAPIVersion(xGustoAPIVersion)
-                .contractorPaymentId(contractorPaymentId)
+                .contractorPaymentUuid(contractorPaymentUuid)
                 .build();
-        AsyncRequestOperation<GetV1ContractorPaymentsContractorPaymentIdPdfRequest, GetV1ContractorPaymentsContractorPaymentIdPdfResponse> operation
-              = new GetV1ContractorPaymentsContractorPaymentIdPdf.Async(sdkConfiguration, _headers);
+        AsyncRequestOperation<GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest, GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse> operation
+              = new GetV1ContractorPaymentsContractorPaymentUuidReceipt.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Fund a contractor payment [DEMO]
+     * 
+     * <p>&gt; 🚧 Demo action
+     * &gt;
+     * &gt; This action is only available in the Demo environment
+     * 
+     * <p>Simulate funding a contractor payment. Funding only occurs automatically in the production
+     * environment when bank transactions are generated. Use this action in the demo environment to
+     * transition a contractor payment's `status` from `Unfunded` to `Funded`.
+     * 
+     * <p>A `Funded` status is required for generating a contractor payment receipt.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetV1ContractorPaymentsContractorPaymentUuidFundRequestBuilder fund() {
+        return new GetV1ContractorPaymentsContractorPaymentUuidFundRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Fund a contractor payment [DEMO]
+     * 
+     * <p>&gt; 🚧 Demo action
+     * &gt;
+     * &gt; This action is only available in the Demo environment
+     * 
+     * <p>Simulate funding a contractor payment. Funding only occurs automatically in the production
+     * environment when bank transactions are generated. Use this action in the demo environment to
+     * transition a contractor payment's `status` from `Unfunded` to `Funded`.
+     * 
+     * <p>A `Funded` status is required for generating a contractor payment receipt.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param contractorPaymentUuid The UUID of the contractor payment
+     * @return {@code CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidFundResponse>} - The async response
+     */
+    public CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidFundResponse> fund(String contractorPaymentUuid) {
+        return fund(Optional.empty(), contractorPaymentUuid);
+    }
+
+    /**
+     * Fund a contractor payment [DEMO]
+     * 
+     * <p>&gt; 🚧 Demo action
+     * &gt;
+     * &gt; This action is only available in the Demo environment
+     * 
+     * <p>Simulate funding a contractor payment. Funding only occurs automatically in the production
+     * environment when bank transactions are generated. Use this action in the demo environment to
+     * transition a contractor payment's `status` from `Unfunded` to `Funded`.
+     * 
+     * <p>A `Funded` status is required for generating a contractor payment receipt.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorPaymentUuid The UUID of the contractor payment
+     * @return {@code CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidFundResponse>} - The async response
+     */
+    public CompletableFuture<GetV1ContractorPaymentsContractorPaymentUuidFundResponse> fund(Optional<? extends GetV1ContractorPaymentsContractorPaymentUuidFundHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentUuid) {
+        GetV1ContractorPaymentsContractorPaymentUuidFundRequest request =
+            GetV1ContractorPaymentsContractorPaymentUuidFundRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .contractorPaymentUuid(contractorPaymentUuid)
+                .build();
+        AsyncRequestOperation<GetV1ContractorPaymentsContractorPaymentUuidFundRequest, GetV1ContractorPaymentsContractorPaymentUuidFundResponse> operation
+              = new GetV1ContractorPaymentsContractorPaymentUuidFund.Async(sdkConfiguration, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

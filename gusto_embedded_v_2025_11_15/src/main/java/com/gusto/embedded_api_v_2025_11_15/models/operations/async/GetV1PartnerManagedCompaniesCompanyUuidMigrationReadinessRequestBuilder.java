@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBuilder xGustoAPIVersion(GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBui
         return this;
     }
 
+    public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
 
     private GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest request = new GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest(companyUuid,
-            xGustoAPIVersion);
+        GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest request = new GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest(xGustoAPIVersion,
+            companyUuid);
 
         return request;
     }

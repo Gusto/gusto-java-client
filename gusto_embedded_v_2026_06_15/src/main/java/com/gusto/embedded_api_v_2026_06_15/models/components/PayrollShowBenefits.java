@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
@@ -25,12 +24,12 @@ public class PayrollShowBenefits {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("employee_deduction")
-    private Optional<Double> employeeDeduction;
+    private Optional<String> employeeDeduction;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("company_contribution")
-    private Optional<Double> companyContribution;
+    private Optional<String> companyContribution;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -40,8 +39,8 @@ public class PayrollShowBenefits {
     @JsonCreator
     public PayrollShowBenefits(
             @JsonProperty("name") Optional<String> name,
-            @JsonProperty("employee_deduction") Optional<Double> employeeDeduction,
-            @JsonProperty("company_contribution") Optional<Double> companyContribution,
+            @JsonProperty("employee_deduction") Optional<String> employeeDeduction,
+            @JsonProperty("company_contribution") Optional<String> companyContribution,
             @JsonProperty("imputed") Optional<Boolean> imputed) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(employeeDeduction, "employeeDeduction");
@@ -64,12 +63,12 @@ public class PayrollShowBenefits {
     }
 
     @JsonIgnore
-    public Optional<Double> employeeDeduction() {
+    public Optional<String> employeeDeduction() {
         return employeeDeduction;
     }
 
     @JsonIgnore
-    public Optional<Double> companyContribution() {
+    public Optional<String> companyContribution() {
         return companyContribution;
     }
 
@@ -96,27 +95,27 @@ public class PayrollShowBenefits {
         return this;
     }
 
-    public PayrollShowBenefits withEmployeeDeduction(double employeeDeduction) {
+    public PayrollShowBenefits withEmployeeDeduction(String employeeDeduction) {
         Utils.checkNotNull(employeeDeduction, "employeeDeduction");
         this.employeeDeduction = Optional.ofNullable(employeeDeduction);
         return this;
     }
 
 
-    public PayrollShowBenefits withEmployeeDeduction(Optional<Double> employeeDeduction) {
+    public PayrollShowBenefits withEmployeeDeduction(Optional<String> employeeDeduction) {
         Utils.checkNotNull(employeeDeduction, "employeeDeduction");
         this.employeeDeduction = employeeDeduction;
         return this;
     }
 
-    public PayrollShowBenefits withCompanyContribution(double companyContribution) {
+    public PayrollShowBenefits withCompanyContribution(String companyContribution) {
         Utils.checkNotNull(companyContribution, "companyContribution");
         this.companyContribution = Optional.ofNullable(companyContribution);
         return this;
     }
 
 
-    public PayrollShowBenefits withCompanyContribution(Optional<Double> companyContribution) {
+    public PayrollShowBenefits withCompanyContribution(Optional<String> companyContribution) {
         Utils.checkNotNull(companyContribution, "companyContribution");
         this.companyContribution = companyContribution;
         return this;
@@ -172,9 +171,9 @@ public class PayrollShowBenefits {
 
         private Optional<String> name = Optional.empty();
 
-        private Optional<Double> employeeDeduction = Optional.empty();
+        private Optional<String> employeeDeduction = Optional.empty();
 
-        private Optional<Double> companyContribution = Optional.empty();
+        private Optional<String> companyContribution = Optional.empty();
 
         private Optional<Boolean> imputed = Optional.empty();
 
@@ -196,26 +195,26 @@ public class PayrollShowBenefits {
         }
 
 
-        public Builder employeeDeduction(double employeeDeduction) {
+        public Builder employeeDeduction(String employeeDeduction) {
             Utils.checkNotNull(employeeDeduction, "employeeDeduction");
             this.employeeDeduction = Optional.ofNullable(employeeDeduction);
             return this;
         }
 
-        public Builder employeeDeduction(Optional<Double> employeeDeduction) {
+        public Builder employeeDeduction(Optional<String> employeeDeduction) {
             Utils.checkNotNull(employeeDeduction, "employeeDeduction");
             this.employeeDeduction = employeeDeduction;
             return this;
         }
 
 
-        public Builder companyContribution(double companyContribution) {
+        public Builder companyContribution(String companyContribution) {
             Utils.checkNotNull(companyContribution, "companyContribution");
             this.companyContribution = Optional.ofNullable(companyContribution);
             return this;
         }
 
-        public Builder companyContribution(Optional<Double> companyContribution) {
+        public Builder companyContribution(Optional<String> companyContribution) {
             Utils.checkNotNull(companyContribution, "companyContribution");
             this.companyContribution = companyContribution;
             return this;

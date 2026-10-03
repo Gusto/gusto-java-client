@@ -17,6 +17,14 @@ import java.util.Optional;
 
 public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
@@ -28,39 +36,42 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=id")
     private String id;
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion;
-
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody> requestBody;
 
     @JsonCreator
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest(
+            Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyId,
             String id,
-            Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion,
             Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody> requestBody) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(requestBody, "requestBody");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyId = companyId;
         this.id = id;
-        this.xGustoAPIVersion = xGustoAPIVersion;
         this.requestBody = requestBody;
     }
     
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest(
             String companyId,
             String id) {
-        this(companyId, id, Optional.empty(),
+        this(Optional.empty(), companyId, id,
             Optional.empty());
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -79,17 +90,6 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest {
         return id;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion>) xGustoAPIVersion;
-    }
-
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody> requestBody() {
@@ -100,24 +100,6 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest withCompanyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
-
-    /**
-     * The UUID of the payroll
-     */
-    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest withId(String id) {
-        Utils.checkNotNull(id, "id");
-        this.id = id;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -139,6 +121,24 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest {
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest withXGustoAPIVersion(Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * The UUID of the company
+     */
+    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest withCompanyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
+    /**
+     * The UUID of the payroll
+     */
+    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest withId(String id) {
+        Utils.checkNotNull(id, "id");
+        this.id = id;
         return this;
     }
 
@@ -165,61 +165,41 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest {
         }
         PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest other = (PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.id, other.id) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, id, xGustoAPIVersion,
+            xGustoAPIVersion, companyId, id,
             requestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyId", companyId,
                 "id", id,
-                "xGustoAPIVersion", xGustoAPIVersion,
                 "requestBody", requestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String companyId;
 
         private String id;
-
-        private Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody> requestBody = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyId(String companyId) {
-            Utils.checkNotNull(companyId, "companyId");
-            this.companyId = companyId;
-            return this;
-        }
-
-
-        /**
-         * The UUID of the payroll
-         */
-        public Builder id(String id) {
-            Utils.checkNotNull(id, "id");
-            this.id = id;
-            return this;
         }
 
 
@@ -246,6 +226,26 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest {
         }
 
 
+        /**
+         * The UUID of the company
+         */
+        public Builder companyId(String companyId) {
+            Utils.checkNotNull(companyId, "companyId");
+            this.companyId = companyId;
+            return this;
+        }
+
+
+        /**
+         * The UUID of the payroll
+         */
+        public Builder id(String id) {
+            Utils.checkNotNull(id, "id");
+            this.id = id;
+            return this;
+        }
+
+
         public Builder requestBody(PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody requestBody) {
             Utils.checkNotNull(requestBody, "requestBody");
             this.requestBody = Optional.ofNullable(requestBody);
@@ -264,7 +264,7 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest {
             }
 
             return new PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest(
-                companyId, id, xGustoAPIVersion,
+                xGustoAPIVersion, companyId, id,
                 requestBody);
         }
 

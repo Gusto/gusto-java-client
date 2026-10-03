@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder {
 
-    private String employeeUuid;
     private Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion>>() {});
+    private String employeeUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder employeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
-        return this;
     }
                 
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder xGustoAPIVersion(GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilde
         return this;
     }
 
+    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder employeeUuid(String employeeUuid) {
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
+        this.employeeUuid = employeeUuid;
+        return this;
+    }
+
 
     private GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest request = new GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(employeeUuid,
-            xGustoAPIVersion);
+        GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest request = new GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(xGustoAPIVersion,
+            employeeUuid);
 
         return request;
     }

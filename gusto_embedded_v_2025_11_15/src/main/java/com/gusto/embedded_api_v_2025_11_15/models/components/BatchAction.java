@@ -14,7 +14,7 @@ import java.util.Optional;
  * <p>The action being performed on the batch.
  */
 public enum BatchAction {
-    CREATE("create");
+    CANCEL("cancel");
 
     @JsonValue
     private final String value;

@@ -488,7 +488,7 @@ public class JobsAndCompensations {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1JobsJobIdResponse getJob(String jobId) {
-        return getJob(jobId, Optional.empty(), Optional.empty());
+        return getJob(Optional.empty(), jobId, Optional.empty());
     }
 
     /**
@@ -507,23 +507,23 @@ public class JobsAndCompensations {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param jobId The UUID of the job
      * @param include Available options:
      *         - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
      *         
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1JobsJobIdResponse getJob(
-            String jobId, Optional<? extends GetV1JobsJobIdQueryParamInclude> include,
-            Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion, String jobId,
+            Optional<? extends GetV1JobsJobIdQueryParamInclude> include) {
         GetV1JobsJobIdRequest request =
             GetV1JobsJobIdRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .jobId(jobId)
                 .include(include)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<GetV1JobsJobIdRequest, GetV1JobsJobIdResponse> operation
               = new GetV1JobsJobId.Sync(sdkConfiguration, _headers);
@@ -560,7 +560,7 @@ public class JobsAndCompensations {
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1JobsJobIdResponse update(String jobId, JobsUpdateRequestBody jobsUpdateRequestBody) {
-        return update(jobId, Optional.empty(), jobsUpdateRequestBody);
+        return update(Optional.empty(), jobId, jobsUpdateRequestBody);
     }
 
     /**
@@ -572,20 +572,20 @@ public class JobsAndCompensations {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param jobId The UUID of the job
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param jobId The UUID of the job
      * @param jobsUpdateRequestBody Request body for updating a job.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1JobsJobIdResponse update(
-            String jobId, Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion, String jobId,
             JobsUpdateRequestBody jobsUpdateRequestBody) {
         PutV1JobsJobIdRequest request =
             PutV1JobsJobIdRequest
                 .builder()
-                .jobId(jobId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .jobId(jobId)
                 .jobsUpdateRequestBody(jobsUpdateRequestBody)
                 .build();
         RequestOperation<PutV1JobsJobIdRequest, PutV1JobsJobIdResponse> operation
@@ -622,7 +622,7 @@ public class JobsAndCompensations {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1JobsJobIdResponse delete(String jobId) {
-        return delete(jobId, Optional.empty());
+        return delete(Optional.empty(), jobId);
     }
 
     /**
@@ -634,17 +634,17 @@ public class JobsAndCompensations {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param jobId The UUID of the job
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param jobId The UUID of the job
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public DeleteV1JobsJobIdResponse delete(String jobId, Optional<? extends DeleteV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public DeleteV1JobsJobIdResponse delete(Optional<? extends DeleteV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion, String jobId) {
         DeleteV1JobsJobIdRequest request =
             DeleteV1JobsJobIdRequest
                 .builder()
-                .jobId(jobId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .jobId(jobId)
                 .build();
         RequestOperation<DeleteV1JobsJobIdRequest, DeleteV1JobsJobIdResponse> operation
               = new DeleteV1JobsJobId.Sync(sdkConfiguration, _headers);
@@ -727,7 +727,7 @@ public class JobsAndCompensations {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1EmployeesEmployeeIdJobsResponse createJob(String employeeId, JobsCreateRequestBody jobsCreateRequestBody) {
-        return createJob(employeeId, Optional.empty(), jobsCreateRequestBody);
+        return createJob(Optional.empty(), employeeId, jobsCreateRequestBody);
     }
 
     /**
@@ -739,20 +739,20 @@ public class JobsAndCompensations {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param employeeId The UUID of the employee
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
      * @param jobsCreateRequestBody Request body for creating a job.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1EmployeesEmployeeIdJobsResponse createJob(
-            String employeeId, Optional<? extends PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             JobsCreateRequestBody jobsCreateRequestBody) {
         PostV1EmployeesEmployeeIdJobsRequest request =
             PostV1EmployeesEmployeeIdJobsRequest
                 .builder()
-                .employeeId(employeeId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
                 .jobsCreateRequestBody(jobsCreateRequestBody)
                 .build();
         RequestOperation<PostV1EmployeesEmployeeIdJobsRequest, PostV1EmployeesEmployeeIdJobsResponse> operation

@@ -40,14 +40,14 @@ public class PayrollBlockersErrorErrors {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metadata")
-    private Optional<? extends Metadata> metadata;
+    private Optional<? extends PayrollBlockersErrorMetadata> metadata;
 
     @JsonCreator
     public PayrollBlockersErrorErrors(
             @JsonProperty("error_key") Optional<String> errorKey,
             @JsonProperty("category") Optional<String> category,
             @JsonProperty("message") Optional<String> message,
-            @JsonProperty("metadata") Optional<? extends Metadata> metadata) {
+            @JsonProperty("metadata") Optional<? extends PayrollBlockersErrorMetadata> metadata) {
         Utils.checkNotNull(errorKey, "errorKey");
         Utils.checkNotNull(category, "category");
         Utils.checkNotNull(message, "message");
@@ -89,8 +89,8 @@ public class PayrollBlockersErrorErrors {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Metadata> metadata() {
-        return (Optional<Metadata>) metadata;
+    public Optional<PayrollBlockersErrorMetadata> metadata() {
+        return (Optional<PayrollBlockersErrorMetadata>) metadata;
     }
 
     public static Builder builder() {
@@ -155,14 +155,14 @@ public class PayrollBlockersErrorErrors {
         return this;
     }
 
-    public PayrollBlockersErrorErrors withMetadata(Metadata metadata) {
+    public PayrollBlockersErrorErrors withMetadata(PayrollBlockersErrorMetadata metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = Optional.ofNullable(metadata);
         return this;
     }
 
 
-    public PayrollBlockersErrorErrors withMetadata(Optional<? extends Metadata> metadata) {
+    public PayrollBlockersErrorErrors withMetadata(Optional<? extends PayrollBlockersErrorMetadata> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
@@ -209,7 +209,7 @@ public class PayrollBlockersErrorErrors {
 
         private Optional<String> message = Optional.empty();
 
-        private Optional<? extends Metadata> metadata = Optional.empty();
+        private Optional<? extends PayrollBlockersErrorMetadata> metadata = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -273,13 +273,13 @@ public class PayrollBlockersErrorErrors {
         }
 
 
-        public Builder metadata(Metadata metadata) {
+        public Builder metadata(PayrollBlockersErrorMetadata metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
             return this;
         }
 
-        public Builder metadata(Optional<? extends Metadata> metadata) {
+        public Builder metadata(Optional<? extends PayrollBlockersErrorMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;

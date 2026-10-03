@@ -88,6 +88,11 @@ public class PayScheduleUpdateRequest {
     @JsonProperty("custom_name")
     private JsonNullable<String> customName;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("workweek_start_day")
+    private Optional<? extends PayScheduleUpdateRequestWorkweekStartDay> workweekStartDay;
+
     @JsonCreator
     public PayScheduleUpdateRequest(
             @JsonProperty("version") String version,
@@ -97,7 +102,8 @@ public class PayScheduleUpdateRequest {
             @JsonProperty("anchor_end_of_pay_period") Optional<LocalDate> anchorEndOfPayPeriod,
             @JsonProperty("day_1") JsonNullable<Long> day1,
             @JsonProperty("day_2") JsonNullable<Long> day2,
-            @JsonProperty("custom_name") JsonNullable<String> customName) {
+            @JsonProperty("custom_name") JsonNullable<String> customName,
+            @JsonProperty("workweek_start_day") Optional<? extends PayScheduleUpdateRequestWorkweekStartDay> workweekStartDay) {
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(autoPayroll, "autoPayroll");
         Utils.checkNotNull(frequency, "frequency");
@@ -106,6 +112,7 @@ public class PayScheduleUpdateRequest {
         Utils.checkNotNull(day1, "day1");
         Utils.checkNotNull(day2, "day2");
         Utils.checkNotNull(customName, "customName");
+        Utils.checkNotNull(workweekStartDay, "workweekStartDay");
         this.version = version;
         this.autoPayroll = autoPayroll;
         this.frequency = frequency;
@@ -114,13 +121,14 @@ public class PayScheduleUpdateRequest {
         this.day1 = day1;
         this.day2 = day2;
         this.customName = customName;
+        this.workweekStartDay = workweekStartDay;
     }
     
     public PayScheduleUpdateRequest(
             String version) {
         this(version, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            JsonNullable.undefined(), JsonNullable.undefined());
+            JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty());
     }
 
     /**
@@ -188,6 +196,12 @@ public class PayScheduleUpdateRequest {
     @JsonIgnore
     public JsonNullable<String> customName() {
         return customName;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PayScheduleUpdateRequestWorkweekStartDay> workweekStartDay() {
+        return (Optional<PayScheduleUpdateRequestWorkweekStartDay>) workweekStartDay;
     }
 
     public static Builder builder() {
@@ -337,6 +351,19 @@ public class PayScheduleUpdateRequest {
         return this;
     }
 
+    public PayScheduleUpdateRequest withWorkweekStartDay(PayScheduleUpdateRequestWorkweekStartDay workweekStartDay) {
+        Utils.checkNotNull(workweekStartDay, "workweekStartDay");
+        this.workweekStartDay = Optional.ofNullable(workweekStartDay);
+        return this;
+    }
+
+
+    public PayScheduleUpdateRequest withWorkweekStartDay(Optional<? extends PayScheduleUpdateRequestWorkweekStartDay> workweekStartDay) {
+        Utils.checkNotNull(workweekStartDay, "workweekStartDay");
+        this.workweekStartDay = workweekStartDay;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -354,7 +381,8 @@ public class PayScheduleUpdateRequest {
             Utils.enhancedDeepEquals(this.anchorEndOfPayPeriod, other.anchorEndOfPayPeriod) &&
             Utils.enhancedDeepEquals(this.day1, other.day1) &&
             Utils.enhancedDeepEquals(this.day2, other.day2) &&
-            Utils.enhancedDeepEquals(this.customName, other.customName);
+            Utils.enhancedDeepEquals(this.customName, other.customName) &&
+            Utils.enhancedDeepEquals(this.workweekStartDay, other.workweekStartDay);
     }
     
     @Override
@@ -362,7 +390,7 @@ public class PayScheduleUpdateRequest {
         return Utils.enhancedHash(
             version, autoPayroll, frequency,
             anchorPayDate, anchorEndOfPayPeriod, day1,
-            day2, customName);
+            day2, customName, workweekStartDay);
     }
     
     @Override
@@ -375,7 +403,8 @@ public class PayScheduleUpdateRequest {
                 "anchorEndOfPayPeriod", anchorEndOfPayPeriod,
                 "day1", day1,
                 "day2", day2,
-                "customName", customName);
+                "customName", customName,
+                "workweekStartDay", workweekStartDay);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -396,6 +425,8 @@ public class PayScheduleUpdateRequest {
         private JsonNullable<Long> day2 = JsonNullable.undefined();
 
         private JsonNullable<String> customName = JsonNullable.undefined();
+
+        private Optional<? extends PayScheduleUpdateRequestWorkweekStartDay> workweekStartDay = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -547,12 +578,25 @@ public class PayScheduleUpdateRequest {
             return this;
         }
 
+
+        public Builder workweekStartDay(PayScheduleUpdateRequestWorkweekStartDay workweekStartDay) {
+            Utils.checkNotNull(workweekStartDay, "workweekStartDay");
+            this.workweekStartDay = Optional.ofNullable(workweekStartDay);
+            return this;
+        }
+
+        public Builder workweekStartDay(Optional<? extends PayScheduleUpdateRequestWorkweekStartDay> workweekStartDay) {
+            Utils.checkNotNull(workweekStartDay, "workweekStartDay");
+            this.workweekStartDay = workweekStartDay;
+            return this;
+        }
+
         public PayScheduleUpdateRequest build() {
 
             return new PayScheduleUpdateRequest(
                 version, autoPayroll, frequency,
                 anchorPayDate, anchorEndOfPayPeriod, day1,
-                day2, customName);
+                day2, customName, workweekStartDay);
         }
 
     }

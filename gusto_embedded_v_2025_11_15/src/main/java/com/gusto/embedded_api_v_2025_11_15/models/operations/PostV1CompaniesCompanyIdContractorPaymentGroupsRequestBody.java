@@ -41,14 +41,14 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
 
 
     @JsonProperty("contractor_payments")
-    private List<ContractorPayments> contractorPayments;
+    private List<PostV1CompaniesCompanyIdContractorPaymentGroupsContractorPayments> contractorPayments;
 
     @JsonCreator
     public PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody(
             @JsonProperty("check_date") LocalDate checkDate,
             @JsonProperty("creation_token") String creationToken,
             @JsonProperty("submission_blockers") Optional<? extends List<SubmissionBlockers>> submissionBlockers,
-            @JsonProperty("contractor_payments") List<ContractorPayments> contractorPayments) {
+            @JsonProperty("contractor_payments") List<PostV1CompaniesCompanyIdContractorPaymentGroupsContractorPayments> contractorPayments) {
         Utils.checkNotNull(checkDate, "checkDate");
         Utils.checkNotNull(creationToken, "creationToken");
         Utils.checkNotNull(submissionBlockers, "submissionBlockers");
@@ -62,7 +62,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
     public PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody(
             LocalDate checkDate,
             String creationToken,
-            List<ContractorPayments> contractorPayments) {
+            List<PostV1CompaniesCompanyIdContractorPaymentGroupsContractorPayments> contractorPayments) {
         this(checkDate, creationToken, Optional.empty(),
             contractorPayments);
     }
@@ -95,7 +95,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
     }
 
     @JsonIgnore
-    public List<ContractorPayments> contractorPayments() {
+    public List<PostV1CompaniesCompanyIdContractorPaymentGroupsContractorPayments> contractorPayments() {
         return contractorPayments;
     }
 
@@ -144,7 +144,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
         return this;
     }
 
-    public PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody withContractorPayments(List<ContractorPayments> contractorPayments) {
+    public PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody withContractorPayments(List<PostV1CompaniesCompanyIdContractorPaymentGroupsContractorPayments> contractorPayments) {
         Utils.checkNotNull(contractorPayments, "contractorPayments");
         this.contractorPayments = contractorPayments;
         return this;
@@ -191,7 +191,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
 
         private Optional<? extends List<SubmissionBlockers>> submissionBlockers = Optional.empty();
 
-        private List<ContractorPayments> contractorPayments;
+        private List<PostV1CompaniesCompanyIdContractorPaymentGroupsContractorPayments> contractorPayments;
 
         private Builder() {
           // force use of static builder() method
@@ -240,7 +240,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody {
         }
 
 
-        public Builder contractorPayments(List<ContractorPayments> contractorPayments) {
+        public Builder contractorPayments(List<PostV1CompaniesCompanyIdContractorPaymentGroupsContractorPayments> contractorPayments) {
             Utils.checkNotNull(contractorPayments, "contractorPayments");
             this.contractorPayments = contractorPayments;
             return this;

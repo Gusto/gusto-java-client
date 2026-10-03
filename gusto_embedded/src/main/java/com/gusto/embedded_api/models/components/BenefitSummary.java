@@ -57,7 +57,7 @@ public class BenefitSummary {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("employees")
-    private Optional<? extends List<BenefitSummaryEmployees>> employees;
+    private Optional<? extends List<Employees>> employees;
 
     @JsonCreator
     public BenefitSummary(
@@ -66,7 +66,7 @@ public class BenefitSummary {
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("company_benefit_deduction") Optional<String> companyBenefitDeduction,
             @JsonProperty("company_benefit_contribution") Optional<String> companyBenefitContribution,
-            @JsonProperty("employees") Optional<? extends List<BenefitSummaryEmployees>> employees) {
+            @JsonProperty("employees") Optional<? extends List<Employees>> employees) {
         Utils.checkNotNull(startDate, "startDate");
         Utils.checkNotNull(endDate, "endDate");
         Utils.checkNotNull(description, "description");
@@ -130,8 +130,8 @@ public class BenefitSummary {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<BenefitSummaryEmployees>> employees() {
-        return (Optional<List<BenefitSummaryEmployees>>) employees;
+    public Optional<List<Employees>> employees() {
+        return (Optional<List<Employees>>) employees;
     }
 
     public static Builder builder() {
@@ -238,14 +238,14 @@ public class BenefitSummary {
         return this;
     }
 
-    public BenefitSummary withEmployees(List<BenefitSummaryEmployees> employees) {
+    public BenefitSummary withEmployees(List<Employees> employees) {
         Utils.checkNotNull(employees, "employees");
         this.employees = Optional.ofNullable(employees);
         return this;
     }
 
 
-    public BenefitSummary withEmployees(Optional<? extends List<BenefitSummaryEmployees>> employees) {
+    public BenefitSummary withEmployees(Optional<? extends List<Employees>> employees) {
         Utils.checkNotNull(employees, "employees");
         this.employees = employees;
         return this;
@@ -300,7 +300,7 @@ public class BenefitSummary {
 
         private Optional<String> companyBenefitContribution = Optional.empty();
 
-        private Optional<? extends List<BenefitSummaryEmployees>> employees = Optional.empty();
+        private Optional<? extends List<Employees>> employees = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -406,13 +406,13 @@ public class BenefitSummary {
         }
 
 
-        public Builder employees(List<BenefitSummaryEmployees> employees) {
+        public Builder employees(List<Employees> employees) {
             Utils.checkNotNull(employees, "employees");
             this.employees = Optional.ofNullable(employees);
             return this;
         }
 
-        public Builder employees(Optional<? extends List<BenefitSummaryEmployees>> employees) {
+        public Builder employees(Optional<? extends List<Employees>> employees) {
             Utils.checkNotNull(employees, "employees");
             this.employees = employees;
             return this;

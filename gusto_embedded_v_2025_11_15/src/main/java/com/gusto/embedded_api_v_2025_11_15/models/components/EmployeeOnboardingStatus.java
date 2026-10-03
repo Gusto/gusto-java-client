@@ -41,22 +41,43 @@ public class EmployeeOnboardingStatus {
     @JsonProperty("onboarding_steps")
     private Optional<? extends List<EmployeeOnboardingStatusOnboardingStep>> onboardingSteps;
 
+    /**
+     * Validation issues that should be resolved before this employee's onboarding is complete. Each entry
+     * identifies an affected field, a category describing the type of problem, and a human-readable
+     * message.
+     * 
+     * <p>Supported categories:
+     * 
+     * <p>- `duplicate_value`: Another employee in the same company already has this value. To resolve, cancel
+     * this onboarding and initiate a rehire if it's a returning employee, or contact support to
+     * investigate the conflict.
+     * 
+     * <p>This list may grow over time as new validation rules are added.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("blockers")
+    private Optional<? extends List<Blockers>> blockers;
+
     @JsonCreator
     public EmployeeOnboardingStatus(
             @JsonProperty("uuid") String uuid,
             @JsonProperty("onboarding_status") Optional<String> onboardingStatus,
-            @JsonProperty("onboarding_steps") Optional<? extends List<EmployeeOnboardingStatusOnboardingStep>> onboardingSteps) {
+            @JsonProperty("onboarding_steps") Optional<? extends List<EmployeeOnboardingStatusOnboardingStep>> onboardingSteps,
+            @JsonProperty("blockers") Optional<? extends List<Blockers>> blockers) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(onboardingStatus, "onboardingStatus");
         Utils.checkNotNull(onboardingSteps, "onboardingSteps");
+        Utils.checkNotNull(blockers, "blockers");
         this.uuid = uuid;
         this.onboardingStatus = onboardingStatus;
         this.onboardingSteps = onboardingSteps;
+        this.blockers = blockers;
     }
     
     public EmployeeOnboardingStatus(
             String uuid) {
-        this(uuid, Optional.empty(), Optional.empty());
+        this(uuid, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -82,6 +103,25 @@ public class EmployeeOnboardingStatus {
     @JsonIgnore
     public Optional<List<EmployeeOnboardingStatusOnboardingStep>> onboardingSteps() {
         return (Optional<List<EmployeeOnboardingStatusOnboardingStep>>) onboardingSteps;
+    }
+
+    /**
+     * Validation issues that should be resolved before this employee's onboarding is complete. Each entry
+     * identifies an affected field, a category describing the type of problem, and a human-readable
+     * message.
+     * 
+     * <p>Supported categories:
+     * 
+     * <p>- `duplicate_value`: Another employee in the same company already has this value. To resolve, cancel
+     * this onboarding and initiate a rehire if it's a returning employee, or contact support to
+     * investigate the conflict.
+     * 
+     * <p>This list may grow over time as new validation rules are added.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Blockers>> blockers() {
+        return (Optional<List<Blockers>>) blockers;
     }
 
     public static Builder builder() {
@@ -136,6 +176,45 @@ public class EmployeeOnboardingStatus {
         return this;
     }
 
+    /**
+     * Validation issues that should be resolved before this employee's onboarding is complete. Each entry
+     * identifies an affected field, a category describing the type of problem, and a human-readable
+     * message.
+     * 
+     * <p>Supported categories:
+     * 
+     * <p>- `duplicate_value`: Another employee in the same company already has this value. To resolve, cancel
+     * this onboarding and initiate a rehire if it's a returning employee, or contact support to
+     * investigate the conflict.
+     * 
+     * <p>This list may grow over time as new validation rules are added.
+     */
+    public EmployeeOnboardingStatus withBlockers(List<Blockers> blockers) {
+        Utils.checkNotNull(blockers, "blockers");
+        this.blockers = Optional.ofNullable(blockers);
+        return this;
+    }
+
+
+    /**
+     * Validation issues that should be resolved before this employee's onboarding is complete. Each entry
+     * identifies an affected field, a category describing the type of problem, and a human-readable
+     * message.
+     * 
+     * <p>Supported categories:
+     * 
+     * <p>- `duplicate_value`: Another employee in the same company already has this value. To resolve, cancel
+     * this onboarding and initiate a rehire if it's a returning employee, or contact support to
+     * investigate the conflict.
+     * 
+     * <p>This list may grow over time as new validation rules are added.
+     */
+    public EmployeeOnboardingStatus withBlockers(Optional<? extends List<Blockers>> blockers) {
+        Utils.checkNotNull(blockers, "blockers");
+        this.blockers = blockers;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -148,13 +227,15 @@ public class EmployeeOnboardingStatus {
         return 
             Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
             Utils.enhancedDeepEquals(this.onboardingStatus, other.onboardingStatus) &&
-            Utils.enhancedDeepEquals(this.onboardingSteps, other.onboardingSteps);
+            Utils.enhancedDeepEquals(this.onboardingSteps, other.onboardingSteps) &&
+            Utils.enhancedDeepEquals(this.blockers, other.blockers);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            uuid, onboardingStatus, onboardingSteps);
+            uuid, onboardingStatus, onboardingSteps,
+            blockers);
     }
     
     @Override
@@ -162,7 +243,8 @@ public class EmployeeOnboardingStatus {
         return Utils.toString(EmployeeOnboardingStatus.class,
                 "uuid", uuid,
                 "onboardingStatus", onboardingStatus,
-                "onboardingSteps", onboardingSteps);
+                "onboardingSteps", onboardingSteps,
+                "blockers", blockers);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -173,6 +255,8 @@ public class EmployeeOnboardingStatus {
         private Optional<String> onboardingStatus = Optional.empty();
 
         private Optional<? extends List<EmployeeOnboardingStatusOnboardingStep>> onboardingSteps = Optional.empty();
+
+        private Optional<? extends List<Blockers>> blockers = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -226,10 +310,50 @@ public class EmployeeOnboardingStatus {
             return this;
         }
 
+
+        /**
+         * Validation issues that should be resolved before this employee's onboarding is complete. Each entry
+         * identifies an affected field, a category describing the type of problem, and a human-readable
+         * message.
+         * 
+         * <p>Supported categories:
+         * 
+         * <p>- `duplicate_value`: Another employee in the same company already has this value. To resolve, cancel
+         * this onboarding and initiate a rehire if it's a returning employee, or contact support to
+         * investigate the conflict.
+         * 
+         * <p>This list may grow over time as new validation rules are added.
+         */
+        public Builder blockers(List<Blockers> blockers) {
+            Utils.checkNotNull(blockers, "blockers");
+            this.blockers = Optional.ofNullable(blockers);
+            return this;
+        }
+
+        /**
+         * Validation issues that should be resolved before this employee's onboarding is complete. Each entry
+         * identifies an affected field, a category describing the type of problem, and a human-readable
+         * message.
+         * 
+         * <p>Supported categories:
+         * 
+         * <p>- `duplicate_value`: Another employee in the same company already has this value. To resolve, cancel
+         * this onboarding and initiate a rehire if it's a returning employee, or contact support to
+         * investigate the conflict.
+         * 
+         * <p>This list may grow over time as new validation rules are added.
+         */
+        public Builder blockers(Optional<? extends List<Blockers>> blockers) {
+            Utils.checkNotNull(blockers, "blockers");
+            this.blockers = blockers;
+            return this;
+        }
+
         public EmployeeOnboardingStatus build() {
 
             return new EmployeeOnboardingStatus(
-                uuid, onboardingStatus, onboardingSteps);
+                uuid, onboardingStatus, onboardingSteps,
+                blockers);
         }
 
     }

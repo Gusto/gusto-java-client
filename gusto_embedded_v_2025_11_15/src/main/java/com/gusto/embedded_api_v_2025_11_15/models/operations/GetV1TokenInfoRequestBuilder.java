@@ -15,10 +15,10 @@ import java.util.Optional;
 
 public class GetV1TokenInfoRequestBuilder {
 
-    private Optional<? extends XGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends GetV1TokenInfoHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
-                            new TypeReference<Optional<? extends XGustoAPIVersion>>() {});
+                            new TypeReference<Optional<? extends GetV1TokenInfoHeaderXGustoAPIVersion>>() {});
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,13 +26,13 @@ public class GetV1TokenInfoRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
                 
-    public GetV1TokenInfoRequestBuilder xGustoAPIVersion(XGustoAPIVersion xGustoAPIVersion) {
+    public GetV1TokenInfoRequestBuilder xGustoAPIVersion(GetV1TokenInfoHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public GetV1TokenInfoRequestBuilder xGustoAPIVersion(Optional<? extends XGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1TokenInfoRequestBuilder xGustoAPIVersion(Optional<? extends GetV1TokenInfoHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -58,9 +58,9 @@ public class GetV1TokenInfoRequestBuilder {
         return operation.handleResponse(operation.doRequest(request));
     }
 
-    private static final LazySingletonValue<Optional<? extends XGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends GetV1TokenInfoHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-11-15\"",
-                    new TypeReference<Optional<? extends XGustoAPIVersion>>() {});
+                    new TypeReference<Optional<? extends GetV1TokenInfoHeaderXGustoAPIVersion>>() {});
 }

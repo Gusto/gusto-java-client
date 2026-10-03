@@ -153,7 +153,7 @@ public class Application {
                 .contractorUuid("<id>")
                 .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
                     .version("56d00c178bc7393b2a206ed6a86afcb4")
-                    .type(PutV1ContractorsContractorIdPaymentMethodType.DIRECT_DEPOSIT)
+                    .type(Type.DIRECT_DEPOSIT)
                     .build())
                 .call();
 
@@ -187,7 +187,7 @@ public class Application {
                 .contractorUuid("<id>")
                 .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
                     .version("56d00c178bc7393b2a206ed6a86afcb4")
-                    .type(PutV1ContractorsContractorIdPaymentMethodType.DIRECT_DEPOSIT)
+                    .type(Type.DIRECT_DEPOSIT)
                     .build())
                 .call();
 
@@ -221,7 +221,7 @@ public class Application {
                 .contractorUuid("<id>")
                 .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
                     .version("56d00c178bc7393b2a206ed6a86afcb4")
-                    .type(PutV1ContractorsContractorIdPaymentMethodType.DIRECT_DEPOSIT)
+                    .type(Type.DIRECT_DEPOSIT)
                     .build())
                 .call();
 
@@ -255,7 +255,7 @@ public class Application {
                 .contractorUuid("<id>")
                 .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
                     .version("56d00c178bc7393b2a206ed6a86afcb4")
-                    .type(PutV1ContractorsContractorIdPaymentMethodType.DIRECT_DEPOSIT)
+                    .type(Type.DIRECT_DEPOSIT)
                     .build())
                 .call();
 
@@ -289,7 +289,7 @@ public class Application {
                 .contractorUuid("<id>")
                 .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
                     .version("63859768485e218ccf8a449bb60f14ed")
-                    .type(PutV1ContractorsContractorIdPaymentMethodType.DIRECT_DEPOSIT)
+                    .type(Type.DIRECT_DEPOSIT)
                     .build())
                 .call();
 
@@ -323,7 +323,7 @@ public class Application {
                 .contractorUuid("<id>")
                 .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
                     .version("63859768485e218ccf8a449bb60f14ed")
-                    .type(PutV1ContractorsContractorIdPaymentMethodType.CHECK)
+                    .type(Type.CHECK)
                     .build())
                 .call();
 
