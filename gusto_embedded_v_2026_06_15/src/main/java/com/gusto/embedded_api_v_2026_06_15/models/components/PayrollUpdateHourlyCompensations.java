@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -42,21 +44,36 @@ public class PayrollUpdateHourlyCompensations {
     @JsonProperty("job_uuid")
     private Optional<String> jobUuid;
 
+    /**
+     * Per-workweek hours to record for this compensation. Submitted
+     * breakdowns must tile the pay period's workweeks exactly (no gaps
+     * or overlaps). Either every hourly compensation for a job must
+     * include breakdowns, or none of them may. Hours must sum to the
+     * compensation's total `hours`.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("breakdowns")
+    private Optional<? extends List<PayrollUpdateEmployeeCompensationsBreakdowns>> breakdowns;
+
     @JsonCreator
     public PayrollUpdateHourlyCompensations(
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("hours") Optional<String> hours,
-            @JsonProperty("job_uuid") Optional<String> jobUuid) {
+            @JsonProperty("job_uuid") Optional<String> jobUuid,
+            @JsonProperty("breakdowns") Optional<? extends List<PayrollUpdateEmployeeCompensationsBreakdowns>> breakdowns) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(hours, "hours");
         Utils.checkNotNull(jobUuid, "jobUuid");
+        Utils.checkNotNull(breakdowns, "breakdowns");
         this.name = name;
         this.hours = hours;
         this.jobUuid = jobUuid;
+        this.breakdowns = breakdowns;
     }
     
     public PayrollUpdateHourlyCompensations() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -82,6 +99,19 @@ public class PayrollUpdateHourlyCompensations {
     @JsonIgnore
     public Optional<String> jobUuid() {
         return jobUuid;
+    }
+
+    /**
+     * Per-workweek hours to record for this compensation. Submitted
+     * breakdowns must tile the pay period's workweeks exactly (no gaps
+     * or overlaps). Either every hourly compensation for a job must
+     * include breakdowns, or none of them may. Hours must sum to the
+     * compensation's total `hours`.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<PayrollUpdateEmployeeCompensationsBreakdowns>> breakdowns() {
+        return (Optional<List<PayrollUpdateEmployeeCompensationsBreakdowns>>) breakdowns;
     }
 
     public static Builder builder() {
@@ -148,6 +178,33 @@ public class PayrollUpdateHourlyCompensations {
         return this;
     }
 
+    /**
+     * Per-workweek hours to record for this compensation. Submitted
+     * breakdowns must tile the pay period's workweeks exactly (no gaps
+     * or overlaps). Either every hourly compensation for a job must
+     * include breakdowns, or none of them may. Hours must sum to the
+     * compensation's total `hours`.
+     */
+    public PayrollUpdateHourlyCompensations withBreakdowns(List<PayrollUpdateEmployeeCompensationsBreakdowns> breakdowns) {
+        Utils.checkNotNull(breakdowns, "breakdowns");
+        this.breakdowns = Optional.ofNullable(breakdowns);
+        return this;
+    }
+
+
+    /**
+     * Per-workweek hours to record for this compensation. Submitted
+     * breakdowns must tile the pay period's workweeks exactly (no gaps
+     * or overlaps). Either every hourly compensation for a job must
+     * include breakdowns, or none of them may. Hours must sum to the
+     * compensation's total `hours`.
+     */
+    public PayrollUpdateHourlyCompensations withBreakdowns(Optional<? extends List<PayrollUpdateEmployeeCompensationsBreakdowns>> breakdowns) {
+        Utils.checkNotNull(breakdowns, "breakdowns");
+        this.breakdowns = breakdowns;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -160,13 +217,15 @@ public class PayrollUpdateHourlyCompensations {
         return 
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.hours, other.hours) &&
-            Utils.enhancedDeepEquals(this.jobUuid, other.jobUuid);
+            Utils.enhancedDeepEquals(this.jobUuid, other.jobUuid) &&
+            Utils.enhancedDeepEquals(this.breakdowns, other.breakdowns);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name, hours, jobUuid);
+            name, hours, jobUuid,
+            breakdowns);
     }
     
     @Override
@@ -174,7 +233,8 @@ public class PayrollUpdateHourlyCompensations {
         return Utils.toString(PayrollUpdateHourlyCompensations.class,
                 "name", name,
                 "hours", hours,
-                "jobUuid", jobUuid);
+                "jobUuid", jobUuid,
+                "breakdowns", breakdowns);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -185,6 +245,8 @@ public class PayrollUpdateHourlyCompensations {
         private Optional<String> hours = Optional.empty();
 
         private Optional<String> jobUuid = Optional.empty();
+
+        private Optional<? extends List<PayrollUpdateEmployeeCompensationsBreakdowns>> breakdowns = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -249,10 +311,38 @@ public class PayrollUpdateHourlyCompensations {
             return this;
         }
 
+
+        /**
+         * Per-workweek hours to record for this compensation. Submitted
+         * breakdowns must tile the pay period's workweeks exactly (no gaps
+         * or overlaps). Either every hourly compensation for a job must
+         * include breakdowns, or none of them may. Hours must sum to the
+         * compensation's total `hours`.
+         */
+        public Builder breakdowns(List<PayrollUpdateEmployeeCompensationsBreakdowns> breakdowns) {
+            Utils.checkNotNull(breakdowns, "breakdowns");
+            this.breakdowns = Optional.ofNullable(breakdowns);
+            return this;
+        }
+
+        /**
+         * Per-workweek hours to record for this compensation. Submitted
+         * breakdowns must tile the pay period's workweeks exactly (no gaps
+         * or overlaps). Either every hourly compensation for a job must
+         * include breakdowns, or none of them may. Hours must sum to the
+         * compensation's total `hours`.
+         */
+        public Builder breakdowns(Optional<? extends List<PayrollUpdateEmployeeCompensationsBreakdowns>> breakdowns) {
+            Utils.checkNotNull(breakdowns, "breakdowns");
+            this.breakdowns = breakdowns;
+            return this;
+        }
+
         public PayrollUpdateHourlyCompensations build() {
 
             return new PayrollUpdateHourlyCompensations(
-                name, hours, jobUuid);
+                name, hours, jobUuid,
+                breakdowns);
         }
 
     }

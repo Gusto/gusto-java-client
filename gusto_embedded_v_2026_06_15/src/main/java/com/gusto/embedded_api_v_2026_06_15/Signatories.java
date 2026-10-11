@@ -92,7 +92,7 @@ public class Signatories {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyUuidSignatoriesResponse list(String companyUuid) {
-        return list(companyUuid, Optional.empty());
+        return list(Optional.empty(), companyUuid);
     }
 
     /**
@@ -107,17 +107,17 @@ public class Signatories {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1CompaniesCompanyUuidSignatoriesResponse list(String companyUuid, Optional<? extends GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1CompaniesCompanyUuidSignatoriesResponse list(Optional<? extends GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
         GetV1CompaniesCompanyUuidSignatoriesRequest request =
             GetV1CompaniesCompanyUuidSignatoriesRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .build();
         RequestOperation<GetV1CompaniesCompanyUuidSignatoriesRequest, GetV1CompaniesCompanyUuidSignatoriesResponse> operation
               = new GetV1CompaniesCompanyUuidSignatories.Sync(sdkConfiguration, _headers);
@@ -182,7 +182,7 @@ public class Signatories {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompanySignatoriesResponse create(String companyUuid, SignatoryCreateRequest signatoryCreateRequest) {
-        return create(companyUuid, Optional.empty(), signatoryCreateRequest);
+        return create(Optional.empty(), companyUuid, signatoryCreateRequest);
     }
 
     /**
@@ -208,20 +208,20 @@ public class Signatories {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @param signatoryCreateRequest Request body for creating a signatory with complete information. All listed required fields must be provided.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompanySignatoriesResponse create(
-            String companyUuid, Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             SignatoryCreateRequest signatoryCreateRequest) {
         PostV1CompanySignatoriesRequest request =
             PostV1CompanySignatoriesRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .signatoryCreateRequest(signatoryCreateRequest)
                 .build();
         RequestOperation<PostV1CompanySignatoriesRequest, PostV1CompanySignatoriesResponse> operation
@@ -271,7 +271,7 @@ public class Signatories {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompaniesCompanyUuidSignatoriesInviteResponse invite(String companyUuid, SignatoryInviteRequest signatoryInviteRequest) {
-        return invite(companyUuid, Optional.empty(), signatoryInviteRequest);
+        return invite(Optional.empty(), companyUuid, signatoryInviteRequest);
     }
 
     /**
@@ -289,20 +289,20 @@ public class Signatories {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @param signatoryInviteRequest Request body for inviting a signatory.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompaniesCompanyUuidSignatoriesInviteResponse invite(
-            String companyUuid, Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             SignatoryInviteRequest signatoryInviteRequest) {
         PostV1CompaniesCompanyUuidSignatoriesInviteRequest request =
             PostV1CompaniesCompanyUuidSignatoriesInviteRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .signatoryInviteRequest(signatoryInviteRequest)
                 .build();
         RequestOperation<PostV1CompaniesCompanyUuidSignatoriesInviteRequest, PostV1CompaniesCompanyUuidSignatoriesInviteResponse> operation
@@ -357,7 +357,7 @@ public class Signatories {
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse update(
             String companyUuid, String signatoryUuid,
             SignatoryUpdateRequest signatoryUpdateRequest) {
-        return update(companyUuid, signatoryUuid, Optional.empty(),
+        return update(Optional.empty(), companyUuid, signatoryUuid,
             signatoryUpdateRequest);
     }
 
@@ -377,22 +377,22 @@ public class Signatories {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
      * @param signatoryUuid The UUID of the signatory
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param signatoryUpdateRequest Request body for updating a signatory. Email cannot be updated.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse update(
-            String companyUuid, String signatoryUuid,
-            Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion, SignatoryUpdateRequest signatoryUpdateRequest) {
+            Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            String signatoryUuid, SignatoryUpdateRequest signatoryUpdateRequest) {
         PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request =
             PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyUuid(companyUuid)
                 .signatoryUuid(signatoryUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .signatoryUpdateRequest(signatoryUpdateRequest)
                 .build();
         RequestOperation<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest, PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse> operation
@@ -436,7 +436,7 @@ public class Signatories {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse delete(String companyUuid, String signatoryUuid) {
-        return delete(companyUuid, signatoryUuid, Optional.empty());
+        return delete(Optional.empty(), companyUuid, signatoryUuid);
     }
 
     /**
@@ -451,21 +451,21 @@ public class Signatories {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
      * @param signatoryUuid The UUID of the signatory
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse delete(
-            String companyUuid, String signatoryUuid,
-            Optional<? extends DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<? extends DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            String signatoryUuid) {
         DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request =
             DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyUuid(companyUuid)
                 .signatoryUuid(signatoryUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest, DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse> operation
               = new DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuid.Sync(sdkConfiguration, _headers);

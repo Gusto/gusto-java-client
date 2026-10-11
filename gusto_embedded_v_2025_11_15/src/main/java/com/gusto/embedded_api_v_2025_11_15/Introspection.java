@@ -5,15 +5,15 @@ package com.gusto.embedded_api_v_2025_11_15;
 
 import static com.gusto.embedded_api_v_2025_11_15.operations.Operations.RequestOperation;
 
+import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1TokenInfoHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1TokenInfoRequest;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1TokenInfoRequestBuilder;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1TokenInfoResponse;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.HeaderXGustoAPIVersion;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.OauthAccessTokenHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.OauthAccessTokenRequest;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.OauthAccessTokenRequestBody;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.OauthAccessTokenRequestBuilder;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.OauthAccessTokenResponse;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.XGustoAPIVersion;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1TokenInfo;
 import com.gusto.embedded_api_v_2025_11_15.operations.OauthAccessToken;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
@@ -37,6 +37,52 @@ public class Introspection {
      */
     public AsyncIntrospection async() {
         return asyncSDK;
+    }
+
+    /**
+     * Create a System Access Token or Refresh an Access Token
+     * 
+     * <p>Creates a system access token or refreshes an oauth access token
+     * 
+     * @return The call builder
+     */
+    public OauthAccessTokenRequestBuilder oauthAccessToken() {
+        return new OauthAccessTokenRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a System Access Token or Refresh an Access Token
+     * 
+     * <p>Creates a system access token or refreshes an oauth access token
+     * 
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public OauthAccessTokenResponse oauthAccessToken(OauthAccessTokenRequestBody requestBody) {
+        return oauthAccessToken(Optional.empty(), requestBody);
+    }
+
+    /**
+     * Create a System Access Token or Refresh an Access Token
+     * 
+     * <p>Creates a system access token or refreshes an oauth access token
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public OauthAccessTokenResponse oauthAccessToken(Optional<? extends OauthAccessTokenHeaderXGustoAPIVersion> xGustoAPIVersion, OauthAccessTokenRequestBody requestBody) {
+        OauthAccessTokenRequest request =
+            OauthAccessTokenRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .requestBody(requestBody)
+                .build();
+        RequestOperation<OauthAccessTokenRequest, OauthAccessTokenResponse> operation
+              = new OauthAccessToken.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
@@ -86,7 +132,7 @@ public class Introspection {
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1TokenInfoResponse getInfo(Optional<? extends XGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1TokenInfoResponse getInfo(Optional<? extends GetV1TokenInfoHeaderXGustoAPIVersion> xGustoAPIVersion) {
         GetV1TokenInfoRequest request =
             GetV1TokenInfoRequest
                 .builder()
@@ -94,52 +140,6 @@ public class Introspection {
                 .build();
         RequestOperation<GetV1TokenInfoRequest, GetV1TokenInfoResponse> operation
               = new GetV1TokenInfo.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Create a System Access Token or Refresh an Access Token
-     * 
-     * <p>Creates a system access token or refreshes an oauth access token
-     * 
-     * @return The call builder
-     */
-    public OauthAccessTokenRequestBuilder oauthAccessToken() {
-        return new OauthAccessTokenRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Create a System Access Token or Refresh an Access Token
-     * 
-     * <p>Creates a system access token or refreshes an oauth access token
-     * 
-     * @param requestBody 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public OauthAccessTokenResponse oauthAccessToken(OauthAccessTokenRequestBody requestBody) {
-        return oauthAccessToken(Optional.empty(), requestBody);
-    }
-
-    /**
-     * Create a System Access Token or Refresh an Access Token
-     * 
-     * <p>Creates a system access token or refreshes an oauth access token
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param requestBody 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public OauthAccessTokenResponse oauthAccessToken(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion, OauthAccessTokenRequestBody requestBody) {
-        OauthAccessTokenRequest request =
-            OauthAccessTokenRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
-                .build();
-        RequestOperation<OauthAccessTokenRequest, OauthAccessTokenResponse> operation
-              = new OauthAccessToken.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -16,22 +16,16 @@ import java.util.Optional;
 
 public class GetNotificationsNotificationUuidRequestBuilder {
 
-    private String notificationUuid;
     private Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion>>() {});
+    private String notificationUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetNotificationsNotificationUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetNotificationsNotificationUuidRequestBuilder notificationUuid(String notificationUuid) {
-        Utils.checkNotNull(notificationUuid, "notificationUuid");
-        this.notificationUuid = notificationUuid;
-        return this;
     }
                 
     public GetNotificationsNotificationUuidRequestBuilder xGustoAPIVersion(GetNotificationsNotificationUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,14 +40,20 @@ public class GetNotificationsNotificationUuidRequestBuilder {
         return this;
     }
 
+    public GetNotificationsNotificationUuidRequestBuilder notificationUuid(String notificationUuid) {
+        Utils.checkNotNull(notificationUuid, "notificationUuid");
+        this.notificationUuid = notificationUuid;
+        return this;
+    }
+
 
     private GetNotificationsNotificationUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetNotificationsNotificationUuidRequest request = new GetNotificationsNotificationUuidRequest(notificationUuid,
-            xGustoAPIVersion);
+        GetNotificationsNotificationUuidRequest request = new GetNotificationsNotificationUuidRequest(xGustoAPIVersion,
+            notificationUuid);
 
         return request;
     }

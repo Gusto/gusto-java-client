@@ -76,6 +76,15 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=end_date")
     private Optional<LocalDate> endDate;
 
+    /**
+     * Optional UUID of an existing pay schedule. When supplied, the preview is seeded from the persisted
+     * schedule — including internal flags (such as arrears handling) that affect period boundaries but are
+     * not exposed as request parameters. Any other query parameters override individual attributes on top
+     * of the loaded schedule.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=pay_schedule_uuid")
+    private Optional<String> payScheduleUuid;
+
     @JsonCreator
     public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest(
             Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPreviewHeaderXGustoAPIVersion> xGustoAPIVersion,
@@ -85,7 +94,8 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
             LocalDate anchorEndOfPayPeriod,
             Optional<Long> day1,
             Optional<Long> day2,
-            Optional<LocalDate> endDate) {
+            Optional<LocalDate> endDate,
+            Optional<String> payScheduleUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(frequency, "frequency");
@@ -94,6 +104,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
         Utils.checkNotNull(day1, "day1");
         Utils.checkNotNull(day2, "day2");
         Utils.checkNotNull(endDate, "endDate");
+        Utils.checkNotNull(payScheduleUuid, "payScheduleUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyId = companyId;
         this.frequency = frequency;
@@ -102,6 +113,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
         this.day1 = day1;
         this.day2 = day2;
         this.endDate = endDate;
+        this.payScheduleUuid = payScheduleUuid;
     }
     
     public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest(
@@ -111,7 +123,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
             LocalDate anchorEndOfPayPeriod) {
         this(Optional.empty(), companyId, frequency,
             anchorPayDate, anchorEndOfPayPeriod, Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -187,6 +199,17 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
     @JsonIgnore
     public Optional<LocalDate> endDate() {
         return endDate;
+    }
+
+    /**
+     * Optional UUID of an existing pay schedule. When supplied, the preview is seeded from the persisted
+     * schedule — including internal flags (such as arrears handling) that affect period boundaries but are
+     * not exposed as request parameters. Any other query parameters override individual attributes on top
+     * of the loaded schedule.
+     */
+    @JsonIgnore
+    public Optional<String> payScheduleUuid() {
+        return payScheduleUuid;
     }
 
     public static Builder builder() {
@@ -326,6 +349,31 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
         return this;
     }
 
+    /**
+     * Optional UUID of an existing pay schedule. When supplied, the preview is seeded from the persisted
+     * schedule — including internal flags (such as arrears handling) that affect period boundaries but are
+     * not exposed as request parameters. Any other query parameters override individual attributes on top
+     * of the loaded schedule.
+     */
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withPayScheduleUuid(String payScheduleUuid) {
+        Utils.checkNotNull(payScheduleUuid, "payScheduleUuid");
+        this.payScheduleUuid = Optional.ofNullable(payScheduleUuid);
+        return this;
+    }
+
+
+    /**
+     * Optional UUID of an existing pay schedule. When supplied, the preview is seeded from the persisted
+     * schedule — including internal flags (such as arrears handling) that affect period boundaries but are
+     * not exposed as request parameters. Any other query parameters override individual attributes on top
+     * of the loaded schedule.
+     */
+    public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest withPayScheduleUuid(Optional<String> payScheduleUuid) {
+        Utils.checkNotNull(payScheduleUuid, "payScheduleUuid");
+        this.payScheduleUuid = payScheduleUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -343,7 +391,8 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
             Utils.enhancedDeepEquals(this.anchorEndOfPayPeriod, other.anchorEndOfPayPeriod) &&
             Utils.enhancedDeepEquals(this.day1, other.day1) &&
             Utils.enhancedDeepEquals(this.day2, other.day2) &&
-            Utils.enhancedDeepEquals(this.endDate, other.endDate);
+            Utils.enhancedDeepEquals(this.endDate, other.endDate) &&
+            Utils.enhancedDeepEquals(this.payScheduleUuid, other.payScheduleUuid);
     }
     
     @Override
@@ -351,7 +400,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
         return Utils.enhancedHash(
             xGustoAPIVersion, companyId, frequency,
             anchorPayDate, anchorEndOfPayPeriod, day1,
-            day2, endDate);
+            day2, endDate, payScheduleUuid);
     }
     
     @Override
@@ -364,7 +413,8 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
                 "anchorEndOfPayPeriod", anchorEndOfPayPeriod,
                 "day1", day1,
                 "day2", day2,
-                "endDate", endDate);
+                "endDate", endDate,
+                "payScheduleUuid", payScheduleUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -385,6 +435,8 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
         private Optional<Long> day2 = Optional.empty();
 
         private Optional<LocalDate> endDate = Optional.empty();
+
+        private Optional<String> payScheduleUuid = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -526,6 +578,31 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
             return this;
         }
 
+
+        /**
+         * Optional UUID of an existing pay schedule. When supplied, the preview is seeded from the persisted
+         * schedule — including internal flags (such as arrears handling) that affect period boundaries but are
+         * not exposed as request parameters. Any other query parameters override individual attributes on top
+         * of the loaded schedule.
+         */
+        public Builder payScheduleUuid(String payScheduleUuid) {
+            Utils.checkNotNull(payScheduleUuid, "payScheduleUuid");
+            this.payScheduleUuid = Optional.ofNullable(payScheduleUuid);
+            return this;
+        }
+
+        /**
+         * Optional UUID of an existing pay schedule. When supplied, the preview is seeded from the persisted
+         * schedule — including internal flags (such as arrears handling) that affect period boundaries but are
+         * not exposed as request parameters. Any other query parameters override individual attributes on top
+         * of the loaded schedule.
+         */
+        public Builder payScheduleUuid(Optional<String> payScheduleUuid) {
+            Utils.checkNotNull(payScheduleUuid, "payScheduleUuid");
+            this.payScheduleUuid = payScheduleUuid;
+            return this;
+        }
+
         public GetV1CompaniesCompanyIdPaySchedulesPreviewRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
@@ -534,7 +611,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesPreviewRequest {
             return new GetV1CompaniesCompanyIdPaySchedulesPreviewRequest(
                 xGustoAPIVersion, companyId, frequency,
                 anchorPayDate, anchorEndOfPayPeriod, day1,
-                day2, endDate);
+                day2, endDate, payScheduleUuid);
         }
 
 

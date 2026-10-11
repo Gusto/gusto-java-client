@@ -9,10 +9,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * Contribution
@@ -20,71 +23,67 @@ import java.util.Optional;
  * <p>An object representing the type and value of the company contribution.
  */
 public class Contribution {
-    /**
-     * The company contribution scheme.
-     * 
-     * <p>"amount": The company contributes a fixed amount per payroll. If elective is true, the contribution
-     * is matching, dollar-for-dollar.
-     * 
-     * <p>"percentage": The company contributes a percentage of the payroll amount per payroll period. If
-     * elective is true, the contribution is matching, dollar-for-dollar.
-     * 
-     * <p>"tiered": The company contribution varies according to the size of the employee deduction.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("type")
-    private Optional<String> type;
 
-    /**
-     * For the `amount` and `percentage` contribution types, the value of the corresponding amount or
-     * percentage.
-     * 
-     * <p>For the `tiered` contribution type, an array of tiers.
-     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("value")
-    private Optional<? extends EmployeeBenefitValue> value;
+    @JsonProperty("required")
+    private Optional<Boolean> required;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("editable")
+    private Optional<Boolean> editable;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("default_value")
+    private JsonNullable<? extends BenefitTypeRequirementsDefaultValue> defaultValue;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("choices")
+    private JsonNullable<? extends List<String>> choices;
 
     @JsonCreator
     public Contribution(
-            @JsonProperty("type") Optional<String> type,
-            @JsonProperty("value") Optional<? extends EmployeeBenefitValue> value) {
-        Utils.checkNotNull(type, "type");
-        Utils.checkNotNull(value, "value");
-        this.type = type;
-        this.value = value;
+            @JsonProperty("required") Optional<Boolean> required,
+            @JsonProperty("editable") Optional<Boolean> editable,
+            @JsonProperty("default_value") JsonNullable<? extends BenefitTypeRequirementsDefaultValue> defaultValue,
+            @JsonProperty("choices") JsonNullable<? extends List<String>> choices) {
+        Utils.checkNotNull(required, "required");
+        Utils.checkNotNull(editable, "editable");
+        Utils.checkNotNull(defaultValue, "defaultValue");
+        Utils.checkNotNull(choices, "choices");
+        this.required = required;
+        this.editable = editable;
+        this.defaultValue = defaultValue;
+        this.choices = choices;
     }
     
     public Contribution() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
+            JsonNullable.undefined());
     }
 
-    /**
-     * The company contribution scheme.
-     * 
-     * <p>"amount": The company contributes a fixed amount per payroll. If elective is true, the contribution
-     * is matching, dollar-for-dollar.
-     * 
-     * <p>"percentage": The company contributes a percentage of the payroll amount per payroll period. If
-     * elective is true, the contribution is matching, dollar-for-dollar.
-     * 
-     * <p>"tiered": The company contribution varies according to the size of the employee deduction.
-     */
     @JsonIgnore
-    public Optional<String> type() {
-        return type;
+    public Optional<Boolean> required() {
+        return required;
     }
 
-    /**
-     * For the `amount` and `percentage` contribution types, the value of the corresponding amount or
-     * percentage.
-     * 
-     * <p>For the `tiered` contribution type, an array of tiers.
-     */
+    @JsonIgnore
+    public Optional<Boolean> editable() {
+        return editable;
+    }
+
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<EmployeeBenefitValue> value() {
-        return (Optional<EmployeeBenefitValue>) value;
+    public JsonNullable<BenefitTypeRequirementsDefaultValue> defaultValue() {
+        return (JsonNullable<BenefitTypeRequirementsDefaultValue>) defaultValue;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public JsonNullable<List<String>> choices() {
+        return (JsonNullable<List<String>>) choices;
     }
 
     public static Builder builder() {
@@ -92,63 +91,53 @@ public class Contribution {
     }
 
 
-    /**
-     * The company contribution scheme.
-     * 
-     * <p>"amount": The company contributes a fixed amount per payroll. If elective is true, the contribution
-     * is matching, dollar-for-dollar.
-     * 
-     * <p>"percentage": The company contributes a percentage of the payroll amount per payroll period. If
-     * elective is true, the contribution is matching, dollar-for-dollar.
-     * 
-     * <p>"tiered": The company contribution varies according to the size of the employee deduction.
-     */
-    public Contribution withType(String type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
+    public Contribution withRequired(boolean required) {
+        Utils.checkNotNull(required, "required");
+        this.required = Optional.ofNullable(required);
         return this;
     }
 
 
-    /**
-     * The company contribution scheme.
-     * 
-     * <p>"amount": The company contributes a fixed amount per payroll. If elective is true, the contribution
-     * is matching, dollar-for-dollar.
-     * 
-     * <p>"percentage": The company contributes a percentage of the payroll amount per payroll period. If
-     * elective is true, the contribution is matching, dollar-for-dollar.
-     * 
-     * <p>"tiered": The company contribution varies according to the size of the employee deduction.
-     */
-    public Contribution withType(Optional<String> type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
+    public Contribution withRequired(Optional<Boolean> required) {
+        Utils.checkNotNull(required, "required");
+        this.required = required;
         return this;
     }
 
-    /**
-     * For the `amount` and `percentage` contribution types, the value of the corresponding amount or
-     * percentage.
-     * 
-     * <p>For the `tiered` contribution type, an array of tiers.
-     */
-    public Contribution withValue(EmployeeBenefitValue value) {
-        Utils.checkNotNull(value, "value");
-        this.value = Optional.ofNullable(value);
+    public Contribution withEditable(boolean editable) {
+        Utils.checkNotNull(editable, "editable");
+        this.editable = Optional.ofNullable(editable);
         return this;
     }
 
 
-    /**
-     * For the `amount` and `percentage` contribution types, the value of the corresponding amount or
-     * percentage.
-     * 
-     * <p>For the `tiered` contribution type, an array of tiers.
-     */
-    public Contribution withValue(Optional<? extends EmployeeBenefitValue> value) {
-        Utils.checkNotNull(value, "value");
-        this.value = value;
+    public Contribution withEditable(Optional<Boolean> editable) {
+        Utils.checkNotNull(editable, "editable");
+        this.editable = editable;
+        return this;
+    }
+
+    public Contribution withDefaultValue(BenefitTypeRequirementsDefaultValue defaultValue) {
+        Utils.checkNotNull(defaultValue, "defaultValue");
+        this.defaultValue = JsonNullable.of(defaultValue);
+        return this;
+    }
+
+    public Contribution withDefaultValue(JsonNullable<? extends BenefitTypeRequirementsDefaultValue> defaultValue) {
+        Utils.checkNotNull(defaultValue, "defaultValue");
+        this.defaultValue = defaultValue;
+        return this;
+    }
+
+    public Contribution withChoices(List<String> choices) {
+        Utils.checkNotNull(choices, "choices");
+        this.choices = JsonNullable.of(choices);
+        return this;
+    }
+
+    public Contribution withChoices(JsonNullable<? extends List<String>> choices) {
+        Utils.checkNotNull(choices, "choices");
+        this.choices = choices;
         return this;
     }
 
@@ -162,98 +151,100 @@ public class Contribution {
         }
         Contribution other = (Contribution) o;
         return 
-            Utils.enhancedDeepEquals(this.type, other.type) &&
-            Utils.enhancedDeepEquals(this.value, other.value);
+            Utils.enhancedDeepEquals(this.required, other.required) &&
+            Utils.enhancedDeepEquals(this.editable, other.editable) &&
+            Utils.enhancedDeepEquals(this.defaultValue, other.defaultValue) &&
+            Utils.enhancedDeepEquals(this.choices, other.choices);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            type, value);
+            required, editable, defaultValue,
+            choices);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Contribution.class,
-                "type", type,
-                "value", value);
+                "required", required,
+                "editable", editable,
+                "defaultValue", defaultValue,
+                "choices", choices);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> type = Optional.empty();
+        private Optional<Boolean> required = Optional.empty();
 
-        private Optional<? extends EmployeeBenefitValue> value = Optional.empty();
+        private Optional<Boolean> editable = Optional.empty();
+
+        private JsonNullable<? extends BenefitTypeRequirementsDefaultValue> defaultValue = JsonNullable.undefined();
+
+        private JsonNullable<? extends List<String>> choices = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        /**
-         * The company contribution scheme.
-         * 
-         * <p>"amount": The company contributes a fixed amount per payroll. If elective is true, the contribution
-         * is matching, dollar-for-dollar.
-         * 
-         * <p>"percentage": The company contributes a percentage of the payroll amount per payroll period. If
-         * elective is true, the contribution is matching, dollar-for-dollar.
-         * 
-         * <p>"tiered": The company contribution varies according to the size of the employee deduction.
-         */
-        public Builder type(String type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
+        public Builder required(boolean required) {
+            Utils.checkNotNull(required, "required");
+            this.required = Optional.ofNullable(required);
             return this;
         }
 
-        /**
-         * The company contribution scheme.
-         * 
-         * <p>"amount": The company contributes a fixed amount per payroll. If elective is true, the contribution
-         * is matching, dollar-for-dollar.
-         * 
-         * <p>"percentage": The company contributes a percentage of the payroll amount per payroll period. If
-         * elective is true, the contribution is matching, dollar-for-dollar.
-         * 
-         * <p>"tiered": The company contribution varies according to the size of the employee deduction.
-         */
-        public Builder type(Optional<String> type) {
-            Utils.checkNotNull(type, "type");
-            this.type = type;
+        public Builder required(Optional<Boolean> required) {
+            Utils.checkNotNull(required, "required");
+            this.required = required;
             return this;
         }
 
 
-        /**
-         * For the `amount` and `percentage` contribution types, the value of the corresponding amount or
-         * percentage.
-         * 
-         * <p>For the `tiered` contribution type, an array of tiers.
-         */
-        public Builder value(EmployeeBenefitValue value) {
-            Utils.checkNotNull(value, "value");
-            this.value = Optional.ofNullable(value);
+        public Builder editable(boolean editable) {
+            Utils.checkNotNull(editable, "editable");
+            this.editable = Optional.ofNullable(editable);
             return this;
         }
 
-        /**
-         * For the `amount` and `percentage` contribution types, the value of the corresponding amount or
-         * percentage.
-         * 
-         * <p>For the `tiered` contribution type, an array of tiers.
-         */
-        public Builder value(Optional<? extends EmployeeBenefitValue> value) {
-            Utils.checkNotNull(value, "value");
-            this.value = value;
+        public Builder editable(Optional<Boolean> editable) {
+            Utils.checkNotNull(editable, "editable");
+            this.editable = editable;
+            return this;
+        }
+
+
+        public Builder defaultValue(BenefitTypeRequirementsDefaultValue defaultValue) {
+            Utils.checkNotNull(defaultValue, "defaultValue");
+            this.defaultValue = JsonNullable.of(defaultValue);
+            return this;
+        }
+
+        public Builder defaultValue(JsonNullable<? extends BenefitTypeRequirementsDefaultValue> defaultValue) {
+            Utils.checkNotNull(defaultValue, "defaultValue");
+            this.defaultValue = defaultValue;
+            return this;
+        }
+
+
+        public Builder choices(List<String> choices) {
+            Utils.checkNotNull(choices, "choices");
+            this.choices = JsonNullable.of(choices);
+            return this;
+        }
+
+        public Builder choices(JsonNullable<? extends List<String>> choices) {
+            Utils.checkNotNull(choices, "choices");
+            this.choices = choices;
             return this;
         }
 
         public Contribution build() {
 
             return new Contribution(
-                type, value);
+                required, editable, defaultValue,
+                choices);
         }
 
     }

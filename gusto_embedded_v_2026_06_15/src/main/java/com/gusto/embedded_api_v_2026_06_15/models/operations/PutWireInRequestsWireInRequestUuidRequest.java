@@ -18,12 +18,6 @@ import java.util.Optional;
 
 public class PutWireInRequestsWireInRequestUuidRequest {
     /**
-     * The UUID of the Wire In Request
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=wire_in_request_uuid")
-    private String wireInRequestUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,35 +25,33 @@ public class PutWireInRequestsWireInRequestUuidRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the Wire In Request
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=wire_in_request_uuid")
+    private String wireInRequestUuid;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private WireInRequestUpdateRequestBody wireInRequestUpdateRequestBody;
 
     @JsonCreator
     public PutWireInRequestsWireInRequestUuidRequest(
-            String wireInRequestUuid,
             Optional<? extends PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String wireInRequestUuid,
             WireInRequestUpdateRequestBody wireInRequestUpdateRequestBody) {
-        Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
         Utils.checkNotNull(wireInRequestUpdateRequestBody, "wireInRequestUpdateRequestBody");
-        this.wireInRequestUuid = wireInRequestUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.wireInRequestUuid = wireInRequestUuid;
         this.wireInRequestUpdateRequestBody = wireInRequestUpdateRequestBody;
     }
     
     public PutWireInRequestsWireInRequestUuidRequest(
             String wireInRequestUuid,
             WireInRequestUpdateRequestBody wireInRequestUpdateRequestBody) {
-        this(wireInRequestUuid, Optional.empty(), wireInRequestUpdateRequestBody);
-    }
-
-    /**
-     * The UUID of the Wire In Request
-     */
-    @JsonIgnore
-    public String wireInRequestUuid() {
-        return wireInRequestUuid;
+        this(Optional.empty(), wireInRequestUuid, wireInRequestUpdateRequestBody);
     }
 
     /**
@@ -73,6 +65,14 @@ public class PutWireInRequestsWireInRequestUuidRequest {
         return (Optional<PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the Wire In Request
+     */
+    @JsonIgnore
+    public String wireInRequestUuid() {
+        return wireInRequestUuid;
+    }
+
     @JsonIgnore
     public WireInRequestUpdateRequestBody wireInRequestUpdateRequestBody() {
         return wireInRequestUpdateRequestBody;
@@ -82,15 +82,6 @@ public class PutWireInRequestsWireInRequestUuidRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the Wire In Request
-     */
-    public PutWireInRequestsWireInRequestUuidRequest withWireInRequestUuid(String wireInRequestUuid) {
-        Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
-        this.wireInRequestUuid = wireInRequestUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -115,6 +106,15 @@ public class PutWireInRequestsWireInRequestUuidRequest {
         return this;
     }
 
+    /**
+     * The UUID of the Wire In Request
+     */
+    public PutWireInRequestsWireInRequestUuidRequest withWireInRequestUuid(String wireInRequestUuid) {
+        Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
+        this.wireInRequestUuid = wireInRequestUuid;
+        return this;
+    }
+
     public PutWireInRequestsWireInRequestUuidRequest withWireInRequestUpdateRequestBody(WireInRequestUpdateRequestBody wireInRequestUpdateRequestBody) {
         Utils.checkNotNull(wireInRequestUpdateRequestBody, "wireInRequestUpdateRequestBody");
         this.wireInRequestUpdateRequestBody = wireInRequestUpdateRequestBody;
@@ -131,46 +131,36 @@ public class PutWireInRequestsWireInRequestUuidRequest {
         }
         PutWireInRequestsWireInRequestUuidRequest other = (PutWireInRequestsWireInRequestUuidRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.wireInRequestUuid, other.wireInRequestUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.wireInRequestUuid, other.wireInRequestUuid) &&
             Utils.enhancedDeepEquals(this.wireInRequestUpdateRequestBody, other.wireInRequestUpdateRequestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            wireInRequestUuid, xGustoAPIVersion, wireInRequestUpdateRequestBody);
+            xGustoAPIVersion, wireInRequestUuid, wireInRequestUpdateRequestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutWireInRequestsWireInRequestUuidRequest.class,
-                "wireInRequestUuid", wireInRequestUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "wireInRequestUuid", wireInRequestUuid,
                 "wireInRequestUpdateRequestBody", wireInRequestUpdateRequestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String wireInRequestUuid;
-
         private Optional<? extends PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String wireInRequestUuid;
 
         private WireInRequestUpdateRequestBody wireInRequestUpdateRequestBody;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the Wire In Request
-         */
-        public Builder wireInRequestUuid(String wireInRequestUuid) {
-            Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
-            this.wireInRequestUuid = wireInRequestUuid;
-            return this;
         }
 
 
@@ -197,6 +187,16 @@ public class PutWireInRequestsWireInRequestUuidRequest {
         }
 
 
+        /**
+         * The UUID of the Wire In Request
+         */
+        public Builder wireInRequestUuid(String wireInRequestUuid) {
+            Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
+            this.wireInRequestUuid = wireInRequestUuid;
+            return this;
+        }
+
+
         public Builder wireInRequestUpdateRequestBody(WireInRequestUpdateRequestBody wireInRequestUpdateRequestBody) {
             Utils.checkNotNull(wireInRequestUpdateRequestBody, "wireInRequestUpdateRequestBody");
             this.wireInRequestUpdateRequestBody = wireInRequestUpdateRequestBody;
@@ -209,7 +209,7 @@ public class PutWireInRequestsWireInRequestUuidRequest {
             }
 
             return new PutWireInRequestsWireInRequestUuidRequest(
-                wireInRequestUuid, xGustoAPIVersion, wireInRequestUpdateRequestBody);
+                xGustoAPIVersion, wireInRequestUuid, wireInRequestUpdateRequestBody);
         }
 
 

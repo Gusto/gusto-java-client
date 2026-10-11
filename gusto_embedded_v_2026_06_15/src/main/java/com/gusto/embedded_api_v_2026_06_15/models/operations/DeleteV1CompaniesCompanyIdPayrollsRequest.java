@@ -18,6 +18,14 @@ import java.util.Optional;
 
 public class DeleteV1CompaniesCompanyIdPayrollsRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
@@ -35,35 +43,38 @@ public class DeleteV1CompaniesCompanyIdPayrollsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=async")
     private Optional<Boolean> async;
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion;
-
     @JsonCreator
     public DeleteV1CompaniesCompanyIdPayrollsRequest(
+            Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyId,
             String payrollId,
-            Optional<Boolean> async,
-            Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<Boolean> async) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(payrollId, "payrollId");
         Utils.checkNotNull(async, "async");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyId = companyId;
         this.payrollId = payrollId;
         this.async = async;
-        this.xGustoAPIVersion = xGustoAPIVersion;
     }
     
     public DeleteV1CompaniesCompanyIdPayrollsRequest(
             String companyId,
             String payrollId) {
-        this(companyId, payrollId, Optional.empty(),
+        this(Optional.empty(), companyId, payrollId,
             Optional.empty());
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -90,21 +101,33 @@ public class DeleteV1CompaniesCompanyIdPayrollsRequest {
         return async;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
+
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion>) xGustoAPIVersion;
+    public DeleteV1CompaniesCompanyIdPayrollsRequest withXGustoAPIVersion(DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+        return this;
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
 
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    public DeleteV1CompaniesCompanyIdPayrollsRequest withXGustoAPIVersion(Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
 
     /**
      * The UUID of the company
@@ -143,29 +166,6 @@ public class DeleteV1CompaniesCompanyIdPayrollsRequest {
         return this;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public DeleteV1CompaniesCompanyIdPayrollsRequest withXGustoAPIVersion(DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-        return this;
-    }
-
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    public DeleteV1CompaniesCompanyIdPayrollsRequest withXGustoAPIVersion(Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -176,30 +176,32 @@ public class DeleteV1CompaniesCompanyIdPayrollsRequest {
         }
         DeleteV1CompaniesCompanyIdPayrollsRequest other = (DeleteV1CompaniesCompanyIdPayrollsRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.payrollId, other.payrollId) &&
-            Utils.enhancedDeepEquals(this.async, other.async) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.async, other.async);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, payrollId, async,
-            xGustoAPIVersion);
+            xGustoAPIVersion, companyId, payrollId,
+            async);
     }
     
     @Override
     public String toString() {
         return Utils.toString(DeleteV1CompaniesCompanyIdPayrollsRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyId", companyId,
                 "payrollId", payrollId,
-                "async", async,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "async", async);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
+
+        private Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private String companyId;
 
@@ -207,10 +209,31 @@ public class DeleteV1CompaniesCompanyIdPayrollsRequest {
 
         private Optional<Boolean> async = Optional.empty();
 
-        private Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion;
-
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
+            return this;
+        }
+
+        /**
+         * Determines the date-based API version associated with your API call. If none is provided, your
+         * application's [minimum API
+         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+         */
+        public Builder xGustoAPIVersion(Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+            this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
         }
 
 
@@ -252,37 +275,14 @@ public class DeleteV1CompaniesCompanyIdPayrollsRequest {
             return this;
         }
 
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = Optional.ofNullable(xGustoAPIVersion);
-            return this;
-        }
-
-        /**
-         * Determines the date-based API version associated with your API call. If none is provided, your
-         * application's [minimum API
-         * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-         */
-        public Builder xGustoAPIVersion(Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-            Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-            this.xGustoAPIVersion = xGustoAPIVersion;
-            return this;
-        }
-
         public DeleteV1CompaniesCompanyIdPayrollsRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new DeleteV1CompaniesCompanyIdPayrollsRequest(
-                companyId, payrollId, async,
-                xGustoAPIVersion);
+                xGustoAPIVersion, companyId, payrollId,
+                async);
         }
 
 
