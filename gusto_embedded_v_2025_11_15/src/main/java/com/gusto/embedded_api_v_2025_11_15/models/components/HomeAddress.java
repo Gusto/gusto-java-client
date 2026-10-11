@@ -8,100 +8,114 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
-
+/**
+ * HomeAddress
+ * 
+ * <p>Residential address on file for tax withholding and compliance mail.
+ */
 public class HomeAddress {
-
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * Street address line 1.
+     */
     @JsonProperty("street_1")
-    private Optional<String> street1;
+    private String street1;
 
-
+    /**
+     * Apartment, suite, unit, or building (optional).
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("street_2")
-    private Optional<String> street2;
+    private JsonNullable<String> street2;
 
-
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * City.
+     */
     @JsonProperty("city")
-    private Optional<String> city;
+    private String city;
 
-
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * Two-letter U.S. state or territory postal abbreviation.
+     */
     @JsonProperty("state")
-    private Optional<String> state;
+    private String state;
 
-
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * ZIP or ZIP+4.
+     */
     @JsonProperty("zip")
-    private Optional<String> zip;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("country")
-    private Optional<String> country;
+    private String zip;
 
     @JsonCreator
     public HomeAddress(
-            @JsonProperty("street_1") Optional<String> street1,
-            @JsonProperty("street_2") Optional<String> street2,
-            @JsonProperty("city") Optional<String> city,
-            @JsonProperty("state") Optional<String> state,
-            @JsonProperty("zip") Optional<String> zip,
-            @JsonProperty("country") Optional<String> country) {
+            @JsonProperty("street_1") String street1,
+            @JsonProperty("street_2") JsonNullable<String> street2,
+            @JsonProperty("city") String city,
+            @JsonProperty("state") String state,
+            @JsonProperty("zip") String zip) {
         Utils.checkNotNull(street1, "street1");
         Utils.checkNotNull(street2, "street2");
         Utils.checkNotNull(city, "city");
         Utils.checkNotNull(state, "state");
         Utils.checkNotNull(zip, "zip");
-        Utils.checkNotNull(country, "country");
         this.street1 = street1;
         this.street2 = street2;
         this.city = city;
         this.state = state;
         this.zip = zip;
-        this.country = country;
     }
     
-    public HomeAddress() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+    public HomeAddress(
+            String street1,
+            String city,
+            String state,
+            String zip) {
+        this(street1, JsonNullable.undefined(), city,
+            state, zip);
     }
 
+    /**
+     * Street address line 1.
+     */
     @JsonIgnore
-    public Optional<String> street1() {
+    public String street1() {
         return street1;
     }
 
+    /**
+     * Apartment, suite, unit, or building (optional).
+     */
     @JsonIgnore
-    public Optional<String> street2() {
+    public JsonNullable<String> street2() {
         return street2;
     }
 
+    /**
+     * City.
+     */
     @JsonIgnore
-    public Optional<String> city() {
+    public String city() {
         return city;
     }
 
+    /**
+     * Two-letter U.S. state or territory postal abbreviation.
+     */
     @JsonIgnore
-    public Optional<String> state() {
+    public String state() {
         return state;
     }
 
+    /**
+     * ZIP or ZIP+4.
+     */
     @JsonIgnore
-    public Optional<String> zip() {
+    public String zip() {
         return zip;
-    }
-
-    @JsonIgnore
-    public Optional<String> country() {
-        return country;
     }
 
     public static Builder builder() {
@@ -109,81 +123,57 @@ public class HomeAddress {
     }
 
 
+    /**
+     * Street address line 1.
+     */
     public HomeAddress withStreet1(String street1) {
-        Utils.checkNotNull(street1, "street1");
-        this.street1 = Optional.ofNullable(street1);
-        return this;
-    }
-
-
-    public HomeAddress withStreet1(Optional<String> street1) {
         Utils.checkNotNull(street1, "street1");
         this.street1 = street1;
         return this;
     }
 
+    /**
+     * Apartment, suite, unit, or building (optional).
+     */
     public HomeAddress withStreet2(String street2) {
         Utils.checkNotNull(street2, "street2");
-        this.street2 = Optional.ofNullable(street2);
+        this.street2 = JsonNullable.of(street2);
         return this;
     }
 
-
-    public HomeAddress withStreet2(Optional<String> street2) {
+    /**
+     * Apartment, suite, unit, or building (optional).
+     */
+    public HomeAddress withStreet2(JsonNullable<String> street2) {
         Utils.checkNotNull(street2, "street2");
         this.street2 = street2;
         return this;
     }
 
+    /**
+     * City.
+     */
     public HomeAddress withCity(String city) {
-        Utils.checkNotNull(city, "city");
-        this.city = Optional.ofNullable(city);
-        return this;
-    }
-
-
-    public HomeAddress withCity(Optional<String> city) {
         Utils.checkNotNull(city, "city");
         this.city = city;
         return this;
     }
 
+    /**
+     * Two-letter U.S. state or territory postal abbreviation.
+     */
     public HomeAddress withState(String state) {
-        Utils.checkNotNull(state, "state");
-        this.state = Optional.ofNullable(state);
-        return this;
-    }
-
-
-    public HomeAddress withState(Optional<String> state) {
         Utils.checkNotNull(state, "state");
         this.state = state;
         return this;
     }
 
+    /**
+     * ZIP or ZIP+4.
+     */
     public HomeAddress withZip(String zip) {
         Utils.checkNotNull(zip, "zip");
-        this.zip = Optional.ofNullable(zip);
-        return this;
-    }
-
-
-    public HomeAddress withZip(Optional<String> zip) {
-        Utils.checkNotNull(zip, "zip");
         this.zip = zip;
-        return this;
-    }
-
-    public HomeAddress withCountry(String country) {
-        Utils.checkNotNull(country, "country");
-        this.country = Optional.ofNullable(country);
-        return this;
-    }
-
-
-    public HomeAddress withCountry(Optional<String> country) {
-        Utils.checkNotNull(country, "country");
-        this.country = country;
         return this;
     }
 
@@ -201,15 +191,14 @@ public class HomeAddress {
             Utils.enhancedDeepEquals(this.street2, other.street2) &&
             Utils.enhancedDeepEquals(this.city, other.city) &&
             Utils.enhancedDeepEquals(this.state, other.state) &&
-            Utils.enhancedDeepEquals(this.zip, other.zip) &&
-            Utils.enhancedDeepEquals(this.country, other.country);
+            Utils.enhancedDeepEquals(this.zip, other.zip);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             street1, street2, city,
-            state, zip, country);
+            state, zip);
     }
     
     @Override
@@ -219,122 +208,91 @@ public class HomeAddress {
                 "street2", street2,
                 "city", city,
                 "state", state,
-                "zip", zip,
-                "country", country);
+                "zip", zip);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> street1 = Optional.empty();
+        private String street1;
 
-        private Optional<String> street2 = Optional.empty();
+        private JsonNullable<String> street2 = JsonNullable.undefined();
 
-        private Optional<String> city = Optional.empty();
+        private String city;
 
-        private Optional<String> state = Optional.empty();
+        private String state;
 
-        private Optional<String> zip = Optional.empty();
-
-        private Optional<String> country;
+        private String zip;
 
         private Builder() {
           // force use of static builder() method
         }
 
 
+        /**
+         * Street address line 1.
+         */
         public Builder street1(String street1) {
-            Utils.checkNotNull(street1, "street1");
-            this.street1 = Optional.ofNullable(street1);
-            return this;
-        }
-
-        public Builder street1(Optional<String> street1) {
             Utils.checkNotNull(street1, "street1");
             this.street1 = street1;
             return this;
         }
 
 
+        /**
+         * Apartment, suite, unit, or building (optional).
+         */
         public Builder street2(String street2) {
             Utils.checkNotNull(street2, "street2");
-            this.street2 = Optional.ofNullable(street2);
+            this.street2 = JsonNullable.of(street2);
             return this;
         }
 
-        public Builder street2(Optional<String> street2) {
+        /**
+         * Apartment, suite, unit, or building (optional).
+         */
+        public Builder street2(JsonNullable<String> street2) {
             Utils.checkNotNull(street2, "street2");
             this.street2 = street2;
             return this;
         }
 
 
+        /**
+         * City.
+         */
         public Builder city(String city) {
-            Utils.checkNotNull(city, "city");
-            this.city = Optional.ofNullable(city);
-            return this;
-        }
-
-        public Builder city(Optional<String> city) {
             Utils.checkNotNull(city, "city");
             this.city = city;
             return this;
         }
 
 
+        /**
+         * Two-letter U.S. state or territory postal abbreviation.
+         */
         public Builder state(String state) {
-            Utils.checkNotNull(state, "state");
-            this.state = Optional.ofNullable(state);
-            return this;
-        }
-
-        public Builder state(Optional<String> state) {
             Utils.checkNotNull(state, "state");
             this.state = state;
             return this;
         }
 
 
+        /**
+         * ZIP or ZIP+4.
+         */
         public Builder zip(String zip) {
-            Utils.checkNotNull(zip, "zip");
-            this.zip = Optional.ofNullable(zip);
-            return this;
-        }
-
-        public Builder zip(Optional<String> zip) {
             Utils.checkNotNull(zip, "zip");
             this.zip = zip;
             return this;
         }
 
-
-        public Builder country(String country) {
-            Utils.checkNotNull(country, "country");
-            this.country = Optional.ofNullable(country);
-            return this;
-        }
-
-        public Builder country(Optional<String> country) {
-            Utils.checkNotNull(country, "country");
-            this.country = country;
-            return this;
-        }
-
         public HomeAddress build() {
-            if (country == null) {
-                country = _SINGLETON_VALUE_Country.value();
-            }
 
             return new HomeAddress(
                 street1, street2, city,
-                state, zip, country);
+                state, zip);
         }
 
-
-        private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_Country =
-                new LazySingletonValue<>(
-                        "country",
-                        "\"USA\"",
-                        new TypeReference<Optional<String>>() {});
     }
 }

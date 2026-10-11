@@ -11,11 +11,11 @@ import java.util.Optional;
 /**
  * PaymentMethod
  * 
- * <p>The employee's payment method
+ * <p>Payment method to filter by.
  */
 public enum PaymentMethod {
-    DIRECT_DEPOSIT("Direct Deposit"),
-    CHECK("Check");
+    CHECK("check"),
+    DIRECT_DEPOSIT("direct_deposit");
 
     @JsonValue
     private final String value;

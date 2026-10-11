@@ -20,18 +20,30 @@ import java.util.concurrent.CompletableFuture;
 
 public class DeleteV1CompaniesCompanyIdPayrollsRequestBuilder {
 
-    private String companyId;
-    private String payrollId;
-    private Optional<Boolean> async = Optional.empty();
     private Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private String payrollId;
+    private Optional<Boolean> async = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder xGustoAPIVersion(DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder xGustoAPIVersion(Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder companyId(String companyId) {
@@ -57,18 +69,6 @@ public class DeleteV1CompaniesCompanyIdPayrollsRequestBuilder {
         this.async = async;
         return this;
     }
-                
-    public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder xGustoAPIVersion(DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
-
-    public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder xGustoAPIVersion(Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
 
 
     private DeleteV1CompaniesCompanyIdPayrollsRequest buildRequest() {
@@ -76,10 +76,10 @@ public class DeleteV1CompaniesCompanyIdPayrollsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1CompaniesCompanyIdPayrollsRequest request = new DeleteV1CompaniesCompanyIdPayrollsRequest(companyId,
+        DeleteV1CompaniesCompanyIdPayrollsRequest request = new DeleteV1CompaniesCompanyIdPayrollsRequest(xGustoAPIVersion,
+            companyId,
             payrollId,
-            async,
-            xGustoAPIVersion);
+            async);
 
         return request;
     }

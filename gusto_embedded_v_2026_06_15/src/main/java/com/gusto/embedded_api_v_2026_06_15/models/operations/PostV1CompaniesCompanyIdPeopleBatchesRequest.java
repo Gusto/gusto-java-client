@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class PostV1CompaniesCompanyIdPeopleBatchesRequest {
     /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
-    private String companyId;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,35 +24,33 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
+    private String companyId;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody;
 
     @JsonCreator
     public PostV1CompaniesCompanyIdPeopleBatchesRequest(
-            String companyId,
             Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyId,
             PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody) {
-        Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(requestBody, "requestBody");
-        this.companyId = companyId;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyId = companyId;
         this.requestBody = requestBody;
     }
     
     public PostV1CompaniesCompanyIdPeopleBatchesRequest(
             String companyId,
             PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody) {
-        this(companyId, Optional.empty(), requestBody);
-    }
-
-    /**
-     * The UUID of the company
-     */
-    @JsonIgnore
-    public String companyId() {
-        return companyId;
+        this(Optional.empty(), companyId, requestBody);
     }
 
     /**
@@ -72,6 +64,14 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequest {
         return (Optional<PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the company
+     */
+    @JsonIgnore
+    public String companyId() {
+        return companyId;
+    }
+
     @JsonIgnore
     public PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody() {
         return requestBody;
@@ -81,15 +81,6 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public PostV1CompaniesCompanyIdPeopleBatchesRequest withCompanyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -114,6 +105,15 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public PostV1CompaniesCompanyIdPeopleBatchesRequest withCompanyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
     public PostV1CompaniesCompanyIdPeopleBatchesRequest withRequestBody(PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
@@ -130,46 +130,36 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequest {
         }
         PostV1CompaniesCompanyIdPeopleBatchesRequest other = (PostV1CompaniesCompanyIdPeopleBatchesRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, xGustoAPIVersion, requestBody);
+            xGustoAPIVersion, companyId, requestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostV1CompaniesCompanyIdPeopleBatchesRequest.class,
-                "companyId", companyId,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "companyId", companyId,
                 "requestBody", requestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String companyId;
-
         private Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String companyId;
 
         private PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyId(String companyId) {
-            Utils.checkNotNull(companyId, "companyId");
-            this.companyId = companyId;
-            return this;
         }
 
 
@@ -196,6 +186,16 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequest {
         }
 
 
+        /**
+         * The UUID of the company
+         */
+        public Builder companyId(String companyId) {
+            Utils.checkNotNull(companyId, "companyId");
+            this.companyId = companyId;
+            return this;
+        }
+
+
         public Builder requestBody(PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody) {
             Utils.checkNotNull(requestBody, "requestBody");
             this.requestBody = requestBody;
@@ -208,7 +208,7 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequest {
             }
 
             return new PostV1CompaniesCompanyIdPeopleBatchesRequest(
-                companyId, xGustoAPIVersion, requestBody);
+                xGustoAPIVersion, companyId, requestBody);
         }
 
 

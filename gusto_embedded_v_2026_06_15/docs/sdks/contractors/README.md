@@ -193,8 +193,8 @@ public class Application {
             .build();
 
         GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse res = sdk.contractors().getV1CompaniesCompanyIdContractorsPaymentDetails()
-                .companyId("<id>")
                 .xGustoAPIVersion(GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
+                .companyId("<id>")
                 .call();
 
         if (res.contractorPaymentDetailsList().isPresent()) {
@@ -208,10 +208,10 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion>](../../models/operations/GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion.md)                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company. This identifies the company whose contractor payment details you want to retrieve.                                                                                                                  |
 | `contractorUuid`                                                                                                                                                                                                             | *Optional\<String>*                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                           | Optional filter to get payment details for a specific contractor. When provided, the response will only include payment details for this contractor.                                                                         |
 | `contractorPaymentGroupUuid`                                                                                                                                                                                                 | *Optional\<String>*                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                           | Optional filter to get payment details for contractors in a specific payment group. When provided, the response will only include payment details for contractors in this group.                                             |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion>](../../models/operations/GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion.md)                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -235,7 +235,8 @@ Before calling this endpoint:
 2. The contractor must not already have an upcoming employment
 
 ## Related webhooks
-- `contractor.reactivated`: Fires when the contractor becomes active again (on or after start_date)
+- `contractor.reactivated`: Fires when the rehire is recorded
+- `contractor.reactivation_effective`: Fires when the rehire takes effect (on start_date)
 
 scope: `contractors:write`
 
@@ -246,21 +247,22 @@ scope: `contractors:write`
 package hello.world;
 
 import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.UnprocessableEntityError;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.*;
 import java.lang.Exception;
 import java.time.LocalDate;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityError, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1ContractorsContractorUuidRehireResponse res = sdk.contractors().postV1ContractorsContractorUuidRehire()
-                .contractorUuid("<id>")
                 .xGustoAPIVersion(PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
+                .contractorUuid("<id>")
                 .requestBody(PostV1ContractorsContractorUuidRehireRequestBody.builder()
                     .startDate(LocalDate.parse("2025-07-01"))
                     .build())
@@ -275,8 +277,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `contractorUuid`                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the contractor                                                                                                                                                                                                   |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion>](../../models/operations/PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion.md)                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `contractorUuid`                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the contractor                                                                                                                                                                                                   |
 | `requestBody`                                                                                                                                                                                                                | [Optional\<PostV1ContractorsContractorUuidRehireRequestBody>](../../models/operations/PostV1ContractorsContractorUuidRehireRequestBody.md)                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -285,9 +287,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
 
 ## deleteV1ContractorsContractorUuidRehire
 
@@ -300,7 +303,7 @@ Before calling this endpoint:
 - The contractor must have a pending rehire (upcoming employment)
 
 ## Related webhooks
-- `contractor.deactivated`: Fires when the contractor returns to inactive state after cancellation
+- `contractor.reactivation_cancelled`: Fires when the pending rehire is cancelled
 
 scope: `contractors:write`
 
@@ -311,21 +314,22 @@ scope: `contractors:write`
 package hello.world;
 
 import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.UnprocessableEntityError;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1ContractorsContractorUuidRehireResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityError, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1ContractorsContractorUuidRehireResponse res = sdk.contractors().deleteV1ContractorsContractorUuidRehire()
-                .contractorUuid("<id>")
                 .xGustoAPIVersion(DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
+                .contractorUuid("<id>")
                 .call();
 
         // handle response
@@ -337,8 +341,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `contractorUuid`                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the contractor                                                                                                                                                                                                   |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion>](../../models/operations/DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion.md)                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `contractorUuid`                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the contractor                                                                                                                                                                                                   |
 
 ### Response
 
@@ -346,9 +350,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
 
 ## postV1ContractorsContractorUuidTermination
 
@@ -361,7 +366,8 @@ Before calling this endpoint:
 2. The contractor must have a current employment
 
 ## Related webhooks
-- `contractor.deactivated`: Fires when the contractor becomes inactive (on or after end_date)
+- `contractor.deactivated`: Fires when the dismissal is recorded
+- `contractor.deactivation_effective`: Fires when the dismissal takes effect (the day after end_date)
 
 scope: `contractors:write`
 
@@ -372,21 +378,22 @@ scope: `contractors:write`
 package hello.world;
 
 import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.UnprocessableEntityError;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.*;
 import java.lang.Exception;
 import java.time.LocalDate;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityError, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PostV1ContractorsContractorUuidTerminationResponse res = sdk.contractors().postV1ContractorsContractorUuidTermination()
-                .contractorUuid("<id>")
                 .xGustoAPIVersion(PostV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
+                .contractorUuid("<id>")
                 .requestBody(PostV1ContractorsContractorUuidTerminationRequestBody.builder()
                     .endDate(LocalDate.parse("2025-06-15"))
                     .build())
@@ -401,8 +408,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `contractorUuid`                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the contractor                                                                                                                                                                                                   |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion>](../../models/operations/PostV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion.md)                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `contractorUuid`                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the contractor                                                                                                                                                                                                   |
 | `requestBody`                                                                                                                                                                                                                | [Optional\<PostV1ContractorsContractorUuidTerminationRequestBody>](../../models/operations/PostV1ContractorsContractorUuidTerminationRequestBody.md)                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -411,9 +418,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
 
 ## deleteV1ContractorsContractorUuidTermination
 
@@ -426,7 +434,7 @@ Before calling this endpoint:
 - The contractor must have a pending dismissal (scheduled or within the grace period)
 
 ## Related webhooks
-- `contractor.reactivated`: Fires when the contractor becomes active again after cancellation
+- `contractor.deactivation_cancelled`: Fires when the pending dismissal is cancelled
 
 scope: `contractors:write`
 
@@ -437,21 +445,22 @@ scope: `contractors:write`
 package hello.world;
 
 import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.UnprocessableEntityError;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1ContractorsContractorUuidTerminationResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws UnprocessableEntityError, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         DeleteV1ContractorsContractorUuidTerminationResponse res = sdk.contractors().deleteV1ContractorsContractorUuidTermination()
-                .contractorUuid("<id>")
                 .xGustoAPIVersion(DeleteV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
+                .contractorUuid("<id>")
                 .call();
 
         // handle response
@@ -463,8 +472,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `contractorUuid`                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the contractor                                                                                                                                                                                                   |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<DeleteV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion>](../../models/operations/DeleteV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion.md)                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `contractorUuid`                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the contractor                                                                                                                                                                                                   |
 
 ### Response
 
@@ -472,9 +481,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
 
 ## get
 

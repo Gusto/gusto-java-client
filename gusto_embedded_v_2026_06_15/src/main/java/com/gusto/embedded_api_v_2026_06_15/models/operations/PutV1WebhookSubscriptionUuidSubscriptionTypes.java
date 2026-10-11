@@ -25,7 +25,8 @@ public enum PutV1WebhookSubscriptionUuidSubscriptionTypes {
     PAYROLL_SYNC("PayrollSync"),
     PAY_SCHEDULE("PaySchedule"),
     PEOPLE_BATCH("PeopleBatch"),
-    SIGNATORY("Signatory");
+    SIGNATORY("Signatory"),
+    TIME_OFF_REQUEST("TimeOffRequest");
 
     @JsonValue
     private final String value;

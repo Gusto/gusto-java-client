@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetV1WorkAddressesWorkAddressUuidRequest {
     /**
-     * The UUID of the work address
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=work_address_uuid")
-    private String workAddressUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class GetV1WorkAddressesWorkAddressUuidRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the work address
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=work_address_uuid")
+    private String workAddressUuid;
+
     @JsonCreator
     public GetV1WorkAddressesWorkAddressUuidRequest(
-            String workAddressUuid,
-            Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
+            Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String workAddressUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.workAddressUuid = workAddressUuid;
+        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.workAddressUuid = workAddressUuid;
     }
     
     public GetV1WorkAddressesWorkAddressUuidRequest(
             String workAddressUuid) {
-        this(workAddressUuid, Optional.empty());
-    }
-
-    /**
-     * The UUID of the work address
-     */
-    @JsonIgnore
-    public String workAddressUuid() {
-        return workAddressUuid;
+        this(Optional.empty(), workAddressUuid);
     }
 
     /**
@@ -64,19 +56,18 @@ public class GetV1WorkAddressesWorkAddressUuidRequest {
         return (Optional<GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the work address
+     */
+    @JsonIgnore
+    public String workAddressUuid() {
+        return workAddressUuid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the work address
-     */
-    public GetV1WorkAddressesWorkAddressUuidRequest withWorkAddressUuid(String workAddressUuid) {
-        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
-        this.workAddressUuid = workAddressUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class GetV1WorkAddressesWorkAddressUuidRequest {
         return this;
     }
 
+    /**
+     * The UUID of the work address
+     */
+    public GetV1WorkAddressesWorkAddressUuidRequest withWorkAddressUuid(String workAddressUuid) {
+        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
+        this.workAddressUuid = workAddressUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class GetV1WorkAddressesWorkAddressUuidRequest {
         }
         GetV1WorkAddressesWorkAddressUuidRequest other = (GetV1WorkAddressesWorkAddressUuidRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.workAddressUuid, other.workAddressUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.workAddressUuid, other.workAddressUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            workAddressUuid, xGustoAPIVersion);
+            xGustoAPIVersion, workAddressUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1WorkAddressesWorkAddressUuidRequest.class,
-                "workAddressUuid", workAddressUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "workAddressUuid", workAddressUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String workAddressUuid;
-
         private Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String workAddressUuid;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the work address
-         */
-        public Builder workAddressUuid(String workAddressUuid) {
-            Utils.checkNotNull(workAddressUuid, "workAddressUuid");
-            this.workAddressUuid = workAddressUuid;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class GetV1WorkAddressesWorkAddressUuidRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the work address
+         */
+        public Builder workAddressUuid(String workAddressUuid) {
+            Utils.checkNotNull(workAddressUuid, "workAddressUuid");
+            this.workAddressUuid = workAddressUuid;
+            return this;
+        }
+
         public GetV1WorkAddressesWorkAddressUuidRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1WorkAddressesWorkAddressUuidRequest(
-                workAddressUuid, xGustoAPIVersion);
+                xGustoAPIVersion, workAddressUuid);
         }
 
 

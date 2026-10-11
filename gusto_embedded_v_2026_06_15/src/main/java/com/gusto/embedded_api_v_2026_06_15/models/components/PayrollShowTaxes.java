@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
 
@@ -24,13 +23,13 @@ public class PayrollShowTaxes {
 
 
     @JsonProperty("amount")
-    private double amount;
+    private String amount;
 
     @JsonCreator
     public PayrollShowTaxes(
             @JsonProperty("name") String name,
             @JsonProperty("employer") boolean employer,
-            @JsonProperty("amount") double amount) {
+            @JsonProperty("amount") String amount) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(employer, "employer");
         Utils.checkNotNull(amount, "amount");
@@ -50,7 +49,7 @@ public class PayrollShowTaxes {
     }
 
     @JsonIgnore
-    public double amount() {
+    public String amount() {
         return amount;
     }
 
@@ -71,7 +70,7 @@ public class PayrollShowTaxes {
         return this;
     }
 
-    public PayrollShowTaxes withAmount(double amount) {
+    public PayrollShowTaxes withAmount(String amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
         return this;
@@ -113,7 +112,7 @@ public class PayrollShowTaxes {
 
         private Boolean employer;
 
-        private Double amount;
+        private String amount;
 
         private Builder() {
           // force use of static builder() method
@@ -134,7 +133,7 @@ public class PayrollShowTaxes {
         }
 
 
-        public Builder amount(double amount) {
+        public Builder amount(String amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;

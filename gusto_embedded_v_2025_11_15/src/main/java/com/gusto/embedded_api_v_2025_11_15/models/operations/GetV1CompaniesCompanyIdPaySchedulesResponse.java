@@ -5,7 +5,7 @@ package com.gusto.embedded_api_v_2025_11_15.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api_v_2025_11_15.models.components.PayScheduleShow;
+import com.gusto.embedded_api_v_2025_11_15.models.components.PayScheduleListItem;
 import com.gusto.embedded_api_v_2025_11_15.utils.Response;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.io.InputStream;
@@ -37,14 +37,14 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
     /**
      * Successful
      */
-    private Optional<? extends List<PayScheduleShow>> payScheduleShowResponse;
+    private Optional<? extends List<PayScheduleListItem>> payScheduleShowResponse;
 
     @JsonCreator
     public GetV1CompaniesCompanyIdPaySchedulesResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<PayScheduleShow>> payScheduleShowResponse) {
+            Optional<? extends List<PayScheduleListItem>> payScheduleShowResponse) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
@@ -92,8 +92,8 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PayScheduleShow>> payScheduleShowResponse() {
-        return (Optional<List<PayScheduleShow>>) payScheduleShowResponse;
+    public Optional<List<PayScheduleListItem>> payScheduleShowResponse() {
+        return (Optional<List<PayScheduleListItem>>) payScheduleShowResponse;
     }
 
     public static Builder builder() {
@@ -131,7 +131,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
     /**
      * Successful
      */
-    public GetV1CompaniesCompanyIdPaySchedulesResponse withPayScheduleShowResponse(List<PayScheduleShow> payScheduleShowResponse) {
+    public GetV1CompaniesCompanyIdPaySchedulesResponse withPayScheduleShowResponse(List<PayScheduleListItem> payScheduleShowResponse) {
         Utils.checkNotNull(payScheduleShowResponse, "payScheduleShowResponse");
         this.payScheduleShowResponse = Optional.ofNullable(payScheduleShowResponse);
         return this;
@@ -141,7 +141,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
     /**
      * Successful
      */
-    public GetV1CompaniesCompanyIdPaySchedulesResponse withPayScheduleShowResponse(Optional<? extends List<PayScheduleShow>> payScheduleShowResponse) {
+    public GetV1CompaniesCompanyIdPaySchedulesResponse withPayScheduleShowResponse(Optional<? extends List<PayScheduleListItem>> payScheduleShowResponse) {
         Utils.checkNotNull(payScheduleShowResponse, "payScheduleShowResponse");
         this.payScheduleShowResponse = payScheduleShowResponse;
         return this;
@@ -188,7 +188,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends List<PayScheduleShow>> payScheduleShowResponse = Optional.empty();
+        private Optional<? extends List<PayScheduleListItem>> payScheduleShowResponse = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -228,7 +228,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
         /**
          * Successful
          */
-        public Builder payScheduleShowResponse(List<PayScheduleShow> payScheduleShowResponse) {
+        public Builder payScheduleShowResponse(List<PayScheduleListItem> payScheduleShowResponse) {
             Utils.checkNotNull(payScheduleShowResponse, "payScheduleShowResponse");
             this.payScheduleShowResponse = Optional.ofNullable(payScheduleShowResponse);
             return this;
@@ -237,7 +237,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesResponse implements Response {
         /**
          * Successful
          */
-        public Builder payScheduleShowResponse(Optional<? extends List<PayScheduleShow>> payScheduleShowResponse) {
+        public Builder payScheduleShowResponse(Optional<? extends List<PayScheduleListItem>> payScheduleShowResponse) {
             Utils.checkNotNull(payScheduleShowResponse, "payScheduleShowResponse");
             this.payScheduleShowResponse = payScheduleShowResponse;
             return this;

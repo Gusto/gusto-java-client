@@ -8,8 +8,8 @@ import static com.gusto.embedded_api_v_2025_11_15.operations.Operations.AsyncReq
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1CompanyBenefitsCompanyBenefitIdRequest;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.Include;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1CompanyBenefitsCompanyBenefitId;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
@@ -27,7 +27,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder {
                             new TypeReference<Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion>>() {});
     private String companyBenefitId;
     private Optional<Boolean> withEmployeeBenefits = Optional.empty();
-    private Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude> include = Optional.empty();
+    private Optional<? extends Include> include = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -65,13 +65,13 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder {
         return this;
     }
                 
-    public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder include(GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude include) {
+    public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder include(Include include) {
         Utils.checkNotNull(include, "include");
         this.include = Optional.of(include);
         return this;
     }
 
-    public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder include(Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude> include) {
+    public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder include(Optional<? extends Include> include) {
         Utils.checkNotNull(include, "include");
         this.include = include;
         return this;

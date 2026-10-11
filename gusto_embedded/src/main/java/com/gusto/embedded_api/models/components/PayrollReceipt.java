@@ -92,7 +92,7 @@ public class PayrollReceipt {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("totals")
-    private Optional<? extends Totals> totals;
+    private Optional<? extends PayrollReceiptTotals> totals;
 
     /**
      * An array of totaled employer and employee taxes for the pay period.
@@ -113,7 +113,7 @@ public class PayrollReceipt {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("licensee")
-    private Optional<? extends Licensee> licensee;
+    private Optional<? extends PayrollReceiptLicensee> licensee;
 
     @JsonCreator
     public PayrollReceipt(
@@ -127,10 +127,10 @@ public class PayrollReceipt {
             @JsonProperty("license_uri") Optional<String> licenseUri,
             @JsonProperty("right_to_refund") Optional<String> rightToRefund,
             @JsonProperty("liability_of_licensee") Optional<String> liabilityOfLicensee,
-            @JsonProperty("totals") Optional<? extends Totals> totals,
+            @JsonProperty("totals") Optional<? extends PayrollReceiptTotals> totals,
             @JsonProperty("taxes") Optional<? extends List<Taxes>> taxes,
             @JsonProperty("employee_compensations") Optional<? extends List<PayrollReceiptEmployeeCompensations>> employeeCompensations,
-            @JsonProperty("licensee") Optional<? extends Licensee> licensee) {
+            @JsonProperty("licensee") Optional<? extends PayrollReceiptLicensee> licensee) {
         Utils.checkNotNull(payrollUuid, "payrollUuid");
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(nameOfSender, "nameOfSender");
@@ -252,8 +252,8 @@ public class PayrollReceipt {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Totals> totals() {
-        return (Optional<Totals>) totals;
+    public Optional<PayrollReceiptTotals> totals() {
+        return (Optional<PayrollReceiptTotals>) totals;
     }
 
     /**
@@ -279,8 +279,8 @@ public class PayrollReceipt {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Licensee> licensee() {
-        return (Optional<Licensee>) licensee;
+    public Optional<PayrollReceiptLicensee> licensee() {
+        return (Optional<PayrollReceiptLicensee>) licensee;
     }
 
     public static Builder builder() {
@@ -477,7 +477,7 @@ public class PayrollReceipt {
     /**
      * The subtotals for the payroll.
      */
-    public PayrollReceipt withTotals(Totals totals) {
+    public PayrollReceipt withTotals(PayrollReceiptTotals totals) {
         Utils.checkNotNull(totals, "totals");
         this.totals = Optional.ofNullable(totals);
         return this;
@@ -487,7 +487,7 @@ public class PayrollReceipt {
     /**
      * The subtotals for the payroll.
      */
-    public PayrollReceipt withTotals(Optional<? extends Totals> totals) {
+    public PayrollReceipt withTotals(Optional<? extends PayrollReceiptTotals> totals) {
         Utils.checkNotNull(totals, "totals");
         this.totals = totals;
         return this;
@@ -534,7 +534,7 @@ public class PayrollReceipt {
     /**
      * The licensed payroll processor
      */
-    public PayrollReceipt withLicensee(Licensee licensee) {
+    public PayrollReceipt withLicensee(PayrollReceiptLicensee licensee) {
         Utils.checkNotNull(licensee, "licensee");
         this.licensee = Optional.ofNullable(licensee);
         return this;
@@ -544,7 +544,7 @@ public class PayrollReceipt {
     /**
      * The licensed payroll processor
      */
-    public PayrollReceipt withLicensee(Optional<? extends Licensee> licensee) {
+    public PayrollReceipt withLicensee(Optional<? extends PayrollReceiptLicensee> licensee) {
         Utils.checkNotNull(licensee, "licensee");
         this.licensee = licensee;
         return this;
@@ -628,13 +628,13 @@ public class PayrollReceipt {
 
         private Optional<String> liabilityOfLicensee = Optional.empty();
 
-        private Optional<? extends Totals> totals = Optional.empty();
+        private Optional<? extends PayrollReceiptTotals> totals = Optional.empty();
 
         private Optional<? extends List<Taxes>> taxes = Optional.empty();
 
         private Optional<? extends List<PayrollReceiptEmployeeCompensations>> employeeCompensations = Optional.empty();
 
-        private Optional<? extends Licensee> licensee = Optional.empty();
+        private Optional<? extends PayrollReceiptLicensee> licensee = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -830,7 +830,7 @@ public class PayrollReceipt {
         /**
          * The subtotals for the payroll.
          */
-        public Builder totals(Totals totals) {
+        public Builder totals(PayrollReceiptTotals totals) {
             Utils.checkNotNull(totals, "totals");
             this.totals = Optional.ofNullable(totals);
             return this;
@@ -839,7 +839,7 @@ public class PayrollReceipt {
         /**
          * The subtotals for the payroll.
          */
-        public Builder totals(Optional<? extends Totals> totals) {
+        public Builder totals(Optional<? extends PayrollReceiptTotals> totals) {
             Utils.checkNotNull(totals, "totals");
             this.totals = totals;
             return this;
@@ -887,7 +887,7 @@ public class PayrollReceipt {
         /**
          * The licensed payroll processor
          */
-        public Builder licensee(Licensee licensee) {
+        public Builder licensee(PayrollReceiptLicensee licensee) {
             Utils.checkNotNull(licensee, "licensee");
             this.licensee = Optional.ofNullable(licensee);
             return this;
@@ -896,7 +896,7 @@ public class PayrollReceipt {
         /**
          * The licensed payroll processor
          */
-        public Builder licensee(Optional<? extends Licensee> licensee) {
+        public Builder licensee(Optional<? extends PayrollReceiptLicensee> licensee) {
             Utils.checkNotNull(licensee, "licensee");
             this.licensee = licensee;
             return this;

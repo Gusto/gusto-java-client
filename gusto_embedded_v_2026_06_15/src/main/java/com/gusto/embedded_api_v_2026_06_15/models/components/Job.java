@@ -86,12 +86,12 @@ public class Job {
     private JsonNullable<String> paymentUnit;
 
     /**
-     * The UUID of the current active compensation record for this job. Requires the `compensations:read`
-     * scope.
+     * The UUID of the current active compensation record for this job. Null when the job has no current
+     * compensation. Requires the `compensations:read` scope.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("current_compensation_uuid")
-    private Optional<String> currentCompensationUuid;
+    private JsonNullable<String> currentCompensationUuid;
 
     /**
      * Whether the employee owns at least 2% of the company.
@@ -149,7 +149,7 @@ public class Job {
             @JsonProperty("primary") Optional<Boolean> primary,
             @JsonProperty("rate") Optional<String> rate,
             @JsonProperty("payment_unit") JsonNullable<String> paymentUnit,
-            @JsonProperty("current_compensation_uuid") Optional<String> currentCompensationUuid,
+            @JsonProperty("current_compensation_uuid") JsonNullable<String> currentCompensationUuid,
             @JsonProperty("two_percent_shareholder") Optional<Boolean> twoPercentShareholder,
             @JsonProperty("state_wc_covered") JsonNullable<Boolean> stateWcCovered,
             @JsonProperty("state_wc_class_code") JsonNullable<String> stateWcClassCode,
@@ -192,7 +192,7 @@ public class Job {
             String uuid) {
         this(uuid, Optional.empty(), Optional.empty(),
             Optional.empty(), JsonNullable.undefined(), Optional.empty(),
-            Optional.empty(), JsonNullable.undefined(), Optional.empty(),
+            Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
             Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
             Optional.empty(), Optional.empty(), Optional.empty());
     }
@@ -267,11 +267,11 @@ public class Job {
     }
 
     /**
-     * The UUID of the current active compensation record for this job. Requires the `compensations:read`
-     * scope.
+     * The UUID of the current active compensation record for this job. Null when the job has no current
+     * compensation. Requires the `compensations:read` scope.
      */
     @JsonIgnore
-    public Optional<String> currentCompensationUuid() {
+    public JsonNullable<String> currentCompensationUuid() {
         return currentCompensationUuid;
     }
 
@@ -485,21 +485,20 @@ public class Job {
     }
 
     /**
-     * The UUID of the current active compensation record for this job. Requires the `compensations:read`
-     * scope.
+     * The UUID of the current active compensation record for this job. Null when the job has no current
+     * compensation. Requires the `compensations:read` scope.
      */
     public Job withCurrentCompensationUuid(String currentCompensationUuid) {
         Utils.checkNotNull(currentCompensationUuid, "currentCompensationUuid");
-        this.currentCompensationUuid = Optional.ofNullable(currentCompensationUuid);
+        this.currentCompensationUuid = JsonNullable.of(currentCompensationUuid);
         return this;
     }
 
-
     /**
-     * The UUID of the current active compensation record for this job. Requires the `compensations:read`
-     * scope.
+     * The UUID of the current active compensation record for this job. Null when the job has no current
+     * compensation. Requires the `compensations:read` scope.
      */
-    public Job withCurrentCompensationUuid(Optional<String> currentCompensationUuid) {
+    public Job withCurrentCompensationUuid(JsonNullable<String> currentCompensationUuid) {
         Utils.checkNotNull(currentCompensationUuid, "currentCompensationUuid");
         this.currentCompensationUuid = currentCompensationUuid;
         return this;
@@ -701,7 +700,7 @@ public class Job {
 
         private JsonNullable<String> paymentUnit = JsonNullable.undefined();
 
-        private Optional<String> currentCompensationUuid = Optional.empty();
+        private JsonNullable<String> currentCompensationUuid = JsonNullable.undefined();
 
         private Optional<Boolean> twoPercentShareholder = Optional.empty();
 
@@ -874,20 +873,20 @@ public class Job {
 
 
         /**
-         * The UUID of the current active compensation record for this job. Requires the `compensations:read`
-         * scope.
+         * The UUID of the current active compensation record for this job. Null when the job has no current
+         * compensation. Requires the `compensations:read` scope.
          */
         public Builder currentCompensationUuid(String currentCompensationUuid) {
             Utils.checkNotNull(currentCompensationUuid, "currentCompensationUuid");
-            this.currentCompensationUuid = Optional.ofNullable(currentCompensationUuid);
+            this.currentCompensationUuid = JsonNullable.of(currentCompensationUuid);
             return this;
         }
 
         /**
-         * The UUID of the current active compensation record for this job. Requires the `compensations:read`
-         * scope.
+         * The UUID of the current active compensation record for this job. Null when the job has no current
+         * compensation. Requires the `compensations:read` scope.
          */
-        public Builder currentCompensationUuid(Optional<String> currentCompensationUuid) {
+        public Builder currentCompensationUuid(JsonNullable<String> currentCompensationUuid) {
             Utils.checkNotNull(currentCompensationUuid, "currentCompensationUuid");
             this.currentCompensationUuid = currentCompensationUuid;
             return this;

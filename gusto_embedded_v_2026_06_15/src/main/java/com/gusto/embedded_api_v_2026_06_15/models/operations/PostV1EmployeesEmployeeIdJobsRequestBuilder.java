@@ -17,23 +17,17 @@ import java.util.Optional;
 
 public class PostV1EmployeesEmployeeIdJobsRequestBuilder {
 
-    private String employeeId;
     private Optional<? extends PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
     private JobsCreateRequestBody jobsCreateRequestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1EmployeesEmployeeIdJobsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1EmployeesEmployeeIdJobsRequestBuilder employeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
     }
                 
     public PostV1EmployeesEmployeeIdJobsRequestBuilder xGustoAPIVersion(PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -45,6 +39,12 @@ public class PostV1EmployeesEmployeeIdJobsRequestBuilder {
     public PostV1EmployeesEmployeeIdJobsRequestBuilder xGustoAPIVersion(Optional<? extends PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PostV1EmployeesEmployeeIdJobsRequestBuilder employeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
         return this;
     }
 
@@ -60,8 +60,8 @@ public class PostV1EmployeesEmployeeIdJobsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1EmployeesEmployeeIdJobsRequest request = new PostV1EmployeesEmployeeIdJobsRequest(employeeId,
-            xGustoAPIVersion,
+        PostV1EmployeesEmployeeIdJobsRequest request = new PostV1EmployeesEmployeeIdJobsRequest(xGustoAPIVersion,
+            employeeId,
             jobsCreateRequestBody);
 
         return request;
