@@ -71,7 +71,7 @@ public class IndustrySelection {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompanyIndustryResponse get(String companyId) {
-        return get(companyId, Optional.empty());
+        return get(Optional.empty(), companyId);
     }
 
     /**
@@ -84,17 +84,17 @@ public class IndustrySelection {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyId The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1CompanyIndustryResponse get(String companyId, Optional<? extends GetV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1CompanyIndustryResponse get(Optional<? extends GetV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
         GetV1CompanyIndustryRequest request =
             GetV1CompanyIndustryRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .build();
         RequestOperation<GetV1CompanyIndustryRequest, GetV1CompanyIndustryResponse> operation
               = new GetV1CompanyIndustry.Sync(sdkConfiguration, _headers);
@@ -149,7 +149,7 @@ public class IndustrySelection {
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1CompanyIndustryResponse update(String companyId, CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody) {
-        return update(companyId, Optional.empty(), companyIndustrySelectionRequiredBody);
+        return update(Optional.empty(), companyId, companyIndustrySelectionRequiredBody);
     }
 
     /**
@@ -170,20 +170,20 @@ public class IndustrySelection {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyId The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @param companyIndustrySelectionRequiredBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1CompanyIndustryResponse update(
-            String companyId, Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody) {
         PutV1CompanyIndustryRequest request =
             PutV1CompanyIndustryRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .companyIndustrySelectionRequiredBody(companyIndustrySelectionRequiredBody)
                 .build();
         RequestOperation<PutV1CompanyIndustryRequest, PutV1CompanyIndustryResponse> operation

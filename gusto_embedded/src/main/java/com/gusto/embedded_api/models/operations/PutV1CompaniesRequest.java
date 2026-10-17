@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class PutV1CompaniesRequest {
     /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
-    private String companyId;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,35 +24,33 @@ public class PutV1CompaniesRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
+    private String companyId;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private PutV1CompaniesRequestBody requestBody;
 
     @JsonCreator
     public PutV1CompaniesRequest(
-            String companyId,
             Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyId,
             PutV1CompaniesRequestBody requestBody) {
-        Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(requestBody, "requestBody");
-        this.companyId = companyId;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyId = companyId;
         this.requestBody = requestBody;
     }
     
     public PutV1CompaniesRequest(
             String companyId,
             PutV1CompaniesRequestBody requestBody) {
-        this(companyId, Optional.empty(), requestBody);
-    }
-
-    /**
-     * The UUID of the company
-     */
-    @JsonIgnore
-    public String companyId() {
-        return companyId;
+        this(Optional.empty(), companyId, requestBody);
     }
 
     /**
@@ -72,6 +64,14 @@ public class PutV1CompaniesRequest {
         return (Optional<PutV1CompaniesHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the company
+     */
+    @JsonIgnore
+    public String companyId() {
+        return companyId;
+    }
+
     @JsonIgnore
     public PutV1CompaniesRequestBody requestBody() {
         return requestBody;
@@ -81,15 +81,6 @@ public class PutV1CompaniesRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public PutV1CompaniesRequest withCompanyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -114,6 +105,15 @@ public class PutV1CompaniesRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public PutV1CompaniesRequest withCompanyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
     public PutV1CompaniesRequest withRequestBody(PutV1CompaniesRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
@@ -130,46 +130,36 @@ public class PutV1CompaniesRequest {
         }
         PutV1CompaniesRequest other = (PutV1CompaniesRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, xGustoAPIVersion, requestBody);
+            xGustoAPIVersion, companyId, requestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1CompaniesRequest.class,
-                "companyId", companyId,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "companyId", companyId,
                 "requestBody", requestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String companyId;
-
         private Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String companyId;
 
         private PutV1CompaniesRequestBody requestBody;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyId(String companyId) {
-            Utils.checkNotNull(companyId, "companyId");
-            this.companyId = companyId;
-            return this;
         }
 
 
@@ -196,6 +186,16 @@ public class PutV1CompaniesRequest {
         }
 
 
+        /**
+         * The UUID of the company
+         */
+        public Builder companyId(String companyId) {
+            Utils.checkNotNull(companyId, "companyId");
+            this.companyId = companyId;
+            return this;
+        }
+
+
         public Builder requestBody(PutV1CompaniesRequestBody requestBody) {
             Utils.checkNotNull(requestBody, "requestBody");
             this.requestBody = requestBody;
@@ -208,7 +208,7 @@ public class PutV1CompaniesRequest {
             }
 
             return new PutV1CompaniesRequest(
-                companyId, xGustoAPIVersion, requestBody);
+                xGustoAPIVersion, companyId, requestBody);
         }
 
 

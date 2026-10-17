@@ -17,6 +17,14 @@ import java.util.Optional;
 
 public class DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
@@ -28,31 +36,34 @@ public class DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=signatory_uuid")
     private String signatoryUuid;
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
-
     @JsonCreator
     public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(
+            Optional<? extends DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyUuid,
-            String signatoryUuid,
-            Optional<? extends DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            String signatoryUuid) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(signatoryUuid, "signatoryUuid");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyUuid = companyUuid;
         this.signatoryUuid = signatoryUuid;
-        this.xGustoAPIVersion = xGustoAPIVersion;
     }
     
     public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(
             String companyUuid,
             String signatoryUuid) {
-        this(companyUuid, signatoryUuid, Optional.empty());
+        this(Optional.empty(), companyUuid, signatoryUuid);
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -71,39 +82,10 @@ public class DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
         return signatoryUuid;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
-    }
-
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withCompanyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
-
-    /**
-     * The UUID of the signatory
-     */
-    public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withSignatoryUuid(String signatoryUuid) {
-        Utils.checkNotNull(signatoryUuid, "signatoryUuid");
-        this.signatoryUuid = signatoryUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -128,6 +110,24 @@ public class DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
+    /**
+     * The UUID of the signatory
+     */
+    public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withSignatoryUuid(String signatoryUuid) {
+        Utils.checkNotNull(signatoryUuid, "signatoryUuid");
+        this.signatoryUuid = signatoryUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -138,56 +138,36 @@ public class DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
         }
         DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest other = (DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
-            Utils.enhancedDeepEquals(this.signatoryUuid, other.signatoryUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.signatoryUuid, other.signatoryUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, signatoryUuid, xGustoAPIVersion);
+            xGustoAPIVersion, companyUuid, signatoryUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyUuid", companyUuid,
-                "signatoryUuid", signatoryUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "signatoryUuid", signatoryUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String companyUuid;
 
         private String signatoryUuid;
 
-        private Optional<? extends DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
-
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyUuid(String companyUuid) {
-            Utils.checkNotNull(companyUuid, "companyUuid");
-            this.companyUuid = companyUuid;
-            return this;
-        }
-
-
-        /**
-         * The UUID of the signatory
-         */
-        public Builder signatoryUuid(String signatoryUuid) {
-            Utils.checkNotNull(signatoryUuid, "signatoryUuid");
-            this.signatoryUuid = signatoryUuid;
-            return this;
         }
 
 
@@ -213,13 +193,33 @@ public class DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the company
+         */
+        public Builder companyUuid(String companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = companyUuid;
+            return this;
+        }
+
+
+        /**
+         * The UUID of the signatory
+         */
+        public Builder signatoryUuid(String signatoryUuid) {
+            Utils.checkNotNull(signatoryUuid, "signatoryUuid");
+            this.signatoryUuid = signatoryUuid;
+            return this;
+        }
+
         public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(
-                companyUuid, signatoryUuid, xGustoAPIVersion);
+                xGustoAPIVersion, companyUuid, signatoryUuid);
         }
 
 

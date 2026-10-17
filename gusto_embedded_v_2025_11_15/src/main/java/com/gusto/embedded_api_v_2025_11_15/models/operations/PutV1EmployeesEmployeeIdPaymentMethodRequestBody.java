@@ -30,7 +30,7 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
      * is Direct Deposit, split_by and splits are required.
      */
     @JsonProperty("type")
-    private Type type;
+    private PutV1EmployeesEmployeeIdPaymentMethodType type;
 
     /**
      * How the payment will be split. If Percentage, split amounts must add up to exactly 100. If Amount,
@@ -50,7 +50,7 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
     @JsonCreator
     public PutV1EmployeesEmployeeIdPaymentMethodRequestBody(
             @JsonProperty("version") String version,
-            @JsonProperty("type") Type type,
+            @JsonProperty("type") PutV1EmployeesEmployeeIdPaymentMethodType type,
             @JsonProperty("split_by") JsonNullable<? extends SplitBy> splitBy,
             @JsonProperty("splits") JsonNullable<? extends List<Splits>> splits) {
         Utils.checkNotNull(version, "version");
@@ -65,7 +65,7 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
     
     public PutV1EmployeesEmployeeIdPaymentMethodRequestBody(
             String version,
-            Type type) {
+            PutV1EmployeesEmployeeIdPaymentMethodType type) {
         this(version, type, JsonNullable.undefined(),
             JsonNullable.undefined());
     }
@@ -85,7 +85,7 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
      * is Direct Deposit, split_by and splits are required.
      */
     @JsonIgnore
-    public Type type() {
+    public PutV1EmployeesEmployeeIdPaymentMethodType type() {
         return type;
     }
 
@@ -128,7 +128,7 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
      * The payment method type. If type is Check, split_by and splits do not need to be populated. If type
      * is Direct Deposit, split_by and splits are required.
      */
-    public PutV1EmployeesEmployeeIdPaymentMethodRequestBody withType(Type type) {
+    public PutV1EmployeesEmployeeIdPaymentMethodRequestBody withType(PutV1EmployeesEmployeeIdPaymentMethodType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -209,7 +209,7 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
 
         private String version;
 
-        private Type type;
+        private PutV1EmployeesEmployeeIdPaymentMethodType type;
 
         private JsonNullable<? extends SplitBy> splitBy = JsonNullable.undefined();
 
@@ -236,7 +236,7 @@ public class PutV1EmployeesEmployeeIdPaymentMethodRequestBody {
          * The payment method type. If type is Check, split_by and splits do not need to be populated. If type
          * is Direct Deposit, split_by and splits are required.
          */
-        public Builder type(Type type) {
+        public Builder type(PutV1EmployeesEmployeeIdPaymentMethodType type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;

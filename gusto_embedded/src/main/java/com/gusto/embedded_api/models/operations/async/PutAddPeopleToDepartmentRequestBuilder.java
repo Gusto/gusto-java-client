@@ -20,23 +20,17 @@ import java.util.concurrent.CompletableFuture;
 
 public class PutAddPeopleToDepartmentRequestBuilder {
 
-    private String departmentUuid;
     private Optional<? extends PutAddPeopleToDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PutAddPeopleToDepartmentHeaderXGustoAPIVersion>>() {});
+    private String departmentUuid;
     private DepartmentPeopleRequestBody departmentPeopleRequestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutAddPeopleToDepartmentRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutAddPeopleToDepartmentRequestBuilder departmentUuid(String departmentUuid) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
-        this.departmentUuid = departmentUuid;
-        return this;
     }
                 
     public PutAddPeopleToDepartmentRequestBuilder xGustoAPIVersion(PutAddPeopleToDepartmentHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,6 +42,12 @@ public class PutAddPeopleToDepartmentRequestBuilder {
     public PutAddPeopleToDepartmentRequestBuilder xGustoAPIVersion(Optional<? extends PutAddPeopleToDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutAddPeopleToDepartmentRequestBuilder departmentUuid(String departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = departmentUuid;
         return this;
     }
 
@@ -63,8 +63,8 @@ public class PutAddPeopleToDepartmentRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutAddPeopleToDepartmentRequest request = new PutAddPeopleToDepartmentRequest(departmentUuid,
-            xGustoAPIVersion,
+        PutAddPeopleToDepartmentRequest request = new PutAddPeopleToDepartmentRequest(xGustoAPIVersion,
+            departmentUuid,
             departmentPeopleRequestBody);
 
         return request;

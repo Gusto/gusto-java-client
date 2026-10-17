@@ -18,12 +18,6 @@ import java.util.Optional;
 
 public class PostV1CompaniesCompanyUuidSignatoriesInviteRequest {
     /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
-    private String companyUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -31,35 +25,33 @@ public class PostV1CompaniesCompanyUuidSignatoriesInviteRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
+    private String companyUuid;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private SignatoryInviteRequest signatoryInviteRequest;
 
     @JsonCreator
     public PostV1CompaniesCompanyUuidSignatoriesInviteRequest(
-            String companyUuid,
             Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyUuid,
             SignatoryInviteRequest signatoryInviteRequest) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(signatoryInviteRequest, "signatoryInviteRequest");
-        this.companyUuid = companyUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyUuid = companyUuid;
         this.signatoryInviteRequest = signatoryInviteRequest;
     }
     
     public PostV1CompaniesCompanyUuidSignatoriesInviteRequest(
             String companyUuid,
             SignatoryInviteRequest signatoryInviteRequest) {
-        this(companyUuid, Optional.empty(), signatoryInviteRequest);
-    }
-
-    /**
-     * The UUID of the company
-     */
-    @JsonIgnore
-    public String companyUuid() {
-        return companyUuid;
+        this(Optional.empty(), companyUuid, signatoryInviteRequest);
     }
 
     /**
@@ -73,6 +65,14 @@ public class PostV1CompaniesCompanyUuidSignatoriesInviteRequest {
         return (Optional<PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the company
+     */
+    @JsonIgnore
+    public String companyUuid() {
+        return companyUuid;
+    }
+
     @JsonIgnore
     public SignatoryInviteRequest signatoryInviteRequest() {
         return signatoryInviteRequest;
@@ -82,15 +82,6 @@ public class PostV1CompaniesCompanyUuidSignatoriesInviteRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public PostV1CompaniesCompanyUuidSignatoriesInviteRequest withCompanyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -115,6 +106,15 @@ public class PostV1CompaniesCompanyUuidSignatoriesInviteRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public PostV1CompaniesCompanyUuidSignatoriesInviteRequest withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
     public PostV1CompaniesCompanyUuidSignatoriesInviteRequest withSignatoryInviteRequest(SignatoryInviteRequest signatoryInviteRequest) {
         Utils.checkNotNull(signatoryInviteRequest, "signatoryInviteRequest");
         this.signatoryInviteRequest = signatoryInviteRequest;
@@ -131,46 +131,36 @@ public class PostV1CompaniesCompanyUuidSignatoriesInviteRequest {
         }
         PostV1CompaniesCompanyUuidSignatoriesInviteRequest other = (PostV1CompaniesCompanyUuidSignatoriesInviteRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.signatoryInviteRequest, other.signatoryInviteRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, xGustoAPIVersion, signatoryInviteRequest);
+            xGustoAPIVersion, companyUuid, signatoryInviteRequest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostV1CompaniesCompanyUuidSignatoriesInviteRequest.class,
-                "companyUuid", companyUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "companyUuid", companyUuid,
                 "signatoryInviteRequest", signatoryInviteRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String companyUuid;
-
         private Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String companyUuid;
 
         private SignatoryInviteRequest signatoryInviteRequest;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyUuid(String companyUuid) {
-            Utils.checkNotNull(companyUuid, "companyUuid");
-            this.companyUuid = companyUuid;
-            return this;
         }
 
 
@@ -197,6 +187,16 @@ public class PostV1CompaniesCompanyUuidSignatoriesInviteRequest {
         }
 
 
+        /**
+         * The UUID of the company
+         */
+        public Builder companyUuid(String companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = companyUuid;
+            return this;
+        }
+
+
         public Builder signatoryInviteRequest(SignatoryInviteRequest signatoryInviteRequest) {
             Utils.checkNotNull(signatoryInviteRequest, "signatoryInviteRequest");
             this.signatoryInviteRequest = signatoryInviteRequest;
@@ -209,7 +209,7 @@ public class PostV1CompaniesCompanyUuidSignatoriesInviteRequest {
             }
 
             return new PostV1CompaniesCompanyUuidSignatoriesInviteRequest(
-                companyUuid, xGustoAPIVersion, signatoryInviteRequest);
+                xGustoAPIVersion, companyUuid, signatoryInviteRequest);
         }
 
 

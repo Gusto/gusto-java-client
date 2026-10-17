@@ -47,12 +47,17 @@ public class ConflictErrorObject extends GustoEmbeddedException {
     * the resulting ConflictErrorObject instance will have a null data() value and a non-null deserializationException().
     */
     public static ConflictErrorObject from(HttpResponse<InputStream> response) {
+        byte[] bytes;
         try {
-            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            bytes = Utils.extractByteArrayFromBody(response);
+        } catch (Exception e) {
+            return new ConflictErrorObject(response.statusCode(), null, response, null, e);
+        }
+        try {
             Data data = Utils.mapper().readValue(bytes, Data.class);
             return new ConflictErrorObject(response.statusCode(), bytes, response, data, null);
         } catch (Exception e) {
-            return new ConflictErrorObject(response.statusCode(), null, response, null, e);
+            return new ConflictErrorObject(response.statusCode(), bytes, response, null, e);
         }
     }
 
@@ -115,8 +120,10 @@ public class ConflictErrorObject extends GustoEmbeddedException {
      * 
      * <p>Conflict
      * 
-     * <p>This error occurs when the resource version provided does not match the current version. Retrieve
-     * the latest version and retry.
+     * <p>This may happen when the resource version provided does not match the current version — retrieve the
+     * latest version and retry — or when the request conflicts with another in-progress operation on the
+     * same resource. See the [Errors
+     * Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
      */
     public static class Data {
 

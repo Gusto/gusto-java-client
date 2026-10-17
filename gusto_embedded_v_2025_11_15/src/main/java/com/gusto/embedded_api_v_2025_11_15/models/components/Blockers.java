@@ -11,52 +11,73 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 
 public class Blockers {
     /**
-     * A machine-readable blocker key (e.g. `missing_bank_account`).
+     * The employee field affected.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("type")
-    private Optional<String> type;
+    @JsonProperty("field")
+    private Optional<? extends Field> field;
+
+    /**
+     * Category of the blocker. See the array-level description for resolution guidance.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("category")
+    private Optional<? extends EmployeeOnboardingStatusCategory> category;
 
     /**
      * Human-readable description of the blocker.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("description")
-    private Optional<String> description;
+    @JsonProperty("message")
+    private Optional<String> message;
 
     @JsonCreator
     public Blockers(
-            @JsonProperty("type") Optional<String> type,
-            @JsonProperty("description") Optional<String> description) {
-        Utils.checkNotNull(type, "type");
-        Utils.checkNotNull(description, "description");
-        this.type = type;
-        this.description = description;
+            @JsonProperty("field") Optional<? extends Field> field,
+            @JsonProperty("category") Optional<? extends EmployeeOnboardingStatusCategory> category,
+            @JsonProperty("message") Optional<String> message) {
+        Utils.checkNotNull(field, "field");
+        Utils.checkNotNull(category, "category");
+        Utils.checkNotNull(message, "message");
+        this.field = field;
+        this.category = category;
+        this.message = message;
     }
     
     public Blockers() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
-     * A machine-readable blocker key (e.g. `missing_bank_account`).
+     * The employee field affected.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> type() {
-        return type;
+    public Optional<Field> field() {
+        return (Optional<Field>) field;
+    }
+
+    /**
+     * Category of the blocker. See the array-level description for resolution guidance.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<EmployeeOnboardingStatusCategory> category() {
+        return (Optional<EmployeeOnboardingStatusCategory>) category;
     }
 
     /**
      * Human-readable description of the blocker.
      */
     @JsonIgnore
-    public Optional<String> description() {
-        return description;
+    public Optional<String> message() {
+        return message;
     }
 
     public static Builder builder() {
@@ -65,30 +86,49 @@ public class Blockers {
 
 
     /**
-     * A machine-readable blocker key (e.g. `missing_bank_account`).
+     * The employee field affected.
      */
-    public Blockers withType(String type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
+    public Blockers withField(Field field) {
+        Utils.checkNotNull(field, "field");
+        this.field = Optional.ofNullable(field);
         return this;
     }
 
 
     /**
-     * A machine-readable blocker key (e.g. `missing_bank_account`).
+     * The employee field affected.
      */
-    public Blockers withType(Optional<String> type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
+    public Blockers withField(Optional<? extends Field> field) {
+        Utils.checkNotNull(field, "field");
+        this.field = field;
+        return this;
+    }
+
+    /**
+     * Category of the blocker. See the array-level description for resolution guidance.
+     */
+    public Blockers withCategory(EmployeeOnboardingStatusCategory category) {
+        Utils.checkNotNull(category, "category");
+        this.category = Optional.ofNullable(category);
+        return this;
+    }
+
+
+    /**
+     * Category of the blocker. See the array-level description for resolution guidance.
+     */
+    public Blockers withCategory(Optional<? extends EmployeeOnboardingStatusCategory> category) {
+        Utils.checkNotNull(category, "category");
+        this.category = category;
         return this;
     }
 
     /**
      * Human-readable description of the blocker.
      */
-    public Blockers withDescription(String description) {
-        Utils.checkNotNull(description, "description");
-        this.description = Optional.ofNullable(description);
+    public Blockers withMessage(String message) {
+        Utils.checkNotNull(message, "message");
+        this.message = Optional.ofNullable(message);
         return this;
     }
 
@@ -96,9 +136,9 @@ public class Blockers {
     /**
      * Human-readable description of the blocker.
      */
-    public Blockers withDescription(Optional<String> description) {
-        Utils.checkNotNull(description, "description");
-        this.description = description;
+    public Blockers withMessage(Optional<String> message) {
+        Utils.checkNotNull(message, "message");
+        this.message = message;
         return this;
     }
 
@@ -112,29 +152,33 @@ public class Blockers {
         }
         Blockers other = (Blockers) o;
         return 
-            Utils.enhancedDeepEquals(this.type, other.type) &&
-            Utils.enhancedDeepEquals(this.description, other.description);
+            Utils.enhancedDeepEquals(this.field, other.field) &&
+            Utils.enhancedDeepEquals(this.category, other.category) &&
+            Utils.enhancedDeepEquals(this.message, other.message);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            type, description);
+            field, category, message);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Blockers.class,
-                "type", type,
-                "description", description);
+                "field", field,
+                "category", category,
+                "message", message);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> type = Optional.empty();
+        private Optional<? extends Field> field = Optional.empty();
 
-        private Optional<String> description = Optional.empty();
+        private Optional<? extends EmployeeOnboardingStatusCategory> category = Optional.empty();
+
+        private Optional<String> message = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -142,20 +186,39 @@ public class Blockers {
 
 
         /**
-         * A machine-readable blocker key (e.g. `missing_bank_account`).
+         * The employee field affected.
          */
-        public Builder type(String type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
+        public Builder field(Field field) {
+            Utils.checkNotNull(field, "field");
+            this.field = Optional.ofNullable(field);
             return this;
         }
 
         /**
-         * A machine-readable blocker key (e.g. `missing_bank_account`).
+         * The employee field affected.
          */
-        public Builder type(Optional<String> type) {
-            Utils.checkNotNull(type, "type");
-            this.type = type;
+        public Builder field(Optional<? extends Field> field) {
+            Utils.checkNotNull(field, "field");
+            this.field = field;
+            return this;
+        }
+
+
+        /**
+         * Category of the blocker. See the array-level description for resolution guidance.
+         */
+        public Builder category(EmployeeOnboardingStatusCategory category) {
+            Utils.checkNotNull(category, "category");
+            this.category = Optional.ofNullable(category);
+            return this;
+        }
+
+        /**
+         * Category of the blocker. See the array-level description for resolution guidance.
+         */
+        public Builder category(Optional<? extends EmployeeOnboardingStatusCategory> category) {
+            Utils.checkNotNull(category, "category");
+            this.category = category;
             return this;
         }
 
@@ -163,25 +226,25 @@ public class Blockers {
         /**
          * Human-readable description of the blocker.
          */
-        public Builder description(String description) {
-            Utils.checkNotNull(description, "description");
-            this.description = Optional.ofNullable(description);
+        public Builder message(String message) {
+            Utils.checkNotNull(message, "message");
+            this.message = Optional.ofNullable(message);
             return this;
         }
 
         /**
          * Human-readable description of the blocker.
          */
-        public Builder description(Optional<String> description) {
-            Utils.checkNotNull(description, "description");
-            this.description = description;
+        public Builder message(Optional<String> message) {
+            Utils.checkNotNull(message, "message");
+            this.message = message;
             return this;
         }
 
         public Blockers build() {
 
             return new Blockers(
-                type, description);
+                field, category, message);
         }
 
     }

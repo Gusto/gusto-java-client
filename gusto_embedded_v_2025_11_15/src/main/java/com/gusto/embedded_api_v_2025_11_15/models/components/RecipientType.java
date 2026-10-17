@@ -8,13 +8,7 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * RecipientType
- * 
- * <p>The type of recipient associated with the document (will be `Contractor` for Contractor Documents)
- */
 public enum RecipientType {
-    COMPANY("Company"),
     EMPLOYEE("Employee"),
     CONTRACTOR("Contractor");
 
