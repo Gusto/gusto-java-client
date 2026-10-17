@@ -156,6 +156,15 @@ public class PayrollPrepared {
     private Optional<? extends PayrollPayPeriodType> payPeriod;
 
     /**
+     * The workweeks overlapping this payroll's pay period, one entry per workweek.
+     * Null when workweek boundaries can't be determined for this payroll (e.g. some
+     * off-cycle payrolls without a defined payment period).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("workweeks")
+    private JsonNullable<? extends List<Workweeks>> workweeks;
+
+    /**
      * Information about the payroll's status and expected dates
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -217,6 +226,7 @@ public class PayrollPrepared {
             @JsonProperty("skip_regular_deductions") JsonNullable<Boolean> skipRegularDeductions,
             @JsonProperty("fixed_withholding_rate") JsonNullable<Boolean> fixedWithholdingRate,
             @JsonProperty("pay_period") Optional<? extends PayrollPayPeriodType> payPeriod,
+            @JsonProperty("workweeks") JsonNullable<? extends List<Workweeks>> workweeks,
             @JsonProperty("payroll_status_meta") Optional<? extends PayrollPayrollStatusMetaType> payrollStatusMeta,
             @JsonProperty("employee_compensations") Optional<? extends List<PayrollEmployeeCompensationsType>> employeeCompensations,
             @JsonProperty("payment_speed_changed") Optional<? extends PayrollPaymentSpeedChangedType> paymentSpeedChanged,
@@ -241,6 +251,7 @@ public class PayrollPrepared {
         Utils.checkNotNull(skipRegularDeductions, "skipRegularDeductions");
         Utils.checkNotNull(fixedWithholdingRate, "fixedWithholdingRate");
         Utils.checkNotNull(payPeriod, "payPeriod");
+        Utils.checkNotNull(workweeks, "workweeks");
         Utils.checkNotNull(payrollStatusMeta, "payrollStatusMeta");
         Utils.checkNotNull(employeeCompensations, "employeeCompensations");
         Utils.checkNotNull(paymentSpeedChanged, "paymentSpeedChanged");
@@ -265,6 +276,7 @@ public class PayrollPrepared {
         this.skipRegularDeductions = skipRegularDeductions;
         this.fixedWithholdingRate = fixedWithholdingRate;
         this.payPeriod = payPeriod;
+        this.workweeks = workweeks;
         this.payrollStatusMeta = payrollStatusMeta;
         this.employeeCompensations = employeeCompensations;
         this.paymentSpeedChanged = paymentSpeedChanged;
@@ -280,9 +292,10 @@ public class PayrollPrepared {
             Optional.empty(), Optional.empty(), Optional.empty(),
             JsonNullable.undefined(), Optional.empty(), Optional.empty(),
             Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
-            JsonNullable.undefined(), Optional.empty(), Optional.empty(),
+            JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined());
+            Optional.empty(), Optional.empty(), JsonNullable.undefined(),
+            JsonNullable.undefined());
     }
 
     /**
@@ -432,6 +445,17 @@ public class PayrollPrepared {
     @JsonIgnore
     public Optional<PayrollPayPeriodType> payPeriod() {
         return (Optional<PayrollPayPeriodType>) payPeriod;
+    }
+
+    /**
+     * The workweeks overlapping this payroll's pay period, one entry per workweek.
+     * Null when workweek boundaries can't be determined for this payroll (e.g. some
+     * off-cycle payrolls without a defined payment period).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public JsonNullable<List<Workweeks>> workweeks() {
+        return (JsonNullable<List<Workweeks>>) workweeks;
     }
 
     /**
@@ -829,6 +853,28 @@ public class PayrollPrepared {
     }
 
     /**
+     * The workweeks overlapping this payroll's pay period, one entry per workweek.
+     * Null when workweek boundaries can't be determined for this payroll (e.g. some
+     * off-cycle payrolls without a defined payment period).
+     */
+    public PayrollPrepared withWorkweeks(List<Workweeks> workweeks) {
+        Utils.checkNotNull(workweeks, "workweeks");
+        this.workweeks = JsonNullable.of(workweeks);
+        return this;
+    }
+
+    /**
+     * The workweeks overlapping this payroll's pay period, one entry per workweek.
+     * Null when workweek boundaries can't be determined for this payroll (e.g. some
+     * off-cycle payrolls without a defined payment period).
+     */
+    public PayrollPrepared withWorkweeks(JsonNullable<? extends List<Workweeks>> workweeks) {
+        Utils.checkNotNull(workweeks, "workweeks");
+        this.workweeks = workweeks;
+        return this;
+    }
+
+    /**
      * Information about the payroll's status and expected dates
      */
     public PayrollPrepared withPayrollStatusMeta(PayrollPayrollStatusMetaType payrollStatusMeta) {
@@ -968,6 +1014,7 @@ public class PayrollPrepared {
             Utils.enhancedDeepEquals(this.skipRegularDeductions, other.skipRegularDeductions) &&
             Utils.enhancedDeepEquals(this.fixedWithholdingRate, other.fixedWithholdingRate) &&
             Utils.enhancedDeepEquals(this.payPeriod, other.payPeriod) &&
+            Utils.enhancedDeepEquals(this.workweeks, other.workweeks) &&
             Utils.enhancedDeepEquals(this.payrollStatusMeta, other.payrollStatusMeta) &&
             Utils.enhancedDeepEquals(this.employeeCompensations, other.employeeCompensations) &&
             Utils.enhancedDeepEquals(this.paymentSpeedChanged, other.paymentSpeedChanged) &&
@@ -985,9 +1032,10 @@ public class PayrollPrepared {
             payrollUuid, companyUuid, offCycle,
             offCycleReason, autoPayroll, external,
             finalTerminationPayroll, withholdingPayPeriod, skipRegularDeductions,
-            fixedWithholdingRate, payPeriod, payrollStatusMeta,
-            employeeCompensations, paymentSpeedChanged, createdAt,
-            fixedCompensationTypes, processingRequest, partnerOwnedDisbursement);
+            fixedWithholdingRate, payPeriod, workweeks,
+            payrollStatusMeta, employeeCompensations, paymentSpeedChanged,
+            createdAt, fixedCompensationTypes, processingRequest,
+            partnerOwnedDisbursement);
     }
     
     @Override
@@ -1010,6 +1058,7 @@ public class PayrollPrepared {
                 "skipRegularDeductions", skipRegularDeductions,
                 "fixedWithholdingRate", fixedWithholdingRate,
                 "payPeriod", payPeriod,
+                "workweeks", workweeks,
                 "payrollStatusMeta", payrollStatusMeta,
                 "employeeCompensations", employeeCompensations,
                 "paymentSpeedChanged", paymentSpeedChanged,
@@ -1055,6 +1104,8 @@ public class PayrollPrepared {
         private JsonNullable<Boolean> fixedWithholdingRate = JsonNullable.undefined();
 
         private Optional<? extends PayrollPayPeriodType> payPeriod = Optional.empty();
+
+        private JsonNullable<? extends List<Workweeks>> workweeks = JsonNullable.undefined();
 
         private Optional<? extends PayrollPayrollStatusMetaType> payrollStatusMeta = Optional.empty();
 
@@ -1419,6 +1470,29 @@ public class PayrollPrepared {
 
 
         /**
+         * The workweeks overlapping this payroll's pay period, one entry per workweek.
+         * Null when workweek boundaries can't be determined for this payroll (e.g. some
+         * off-cycle payrolls without a defined payment period).
+         */
+        public Builder workweeks(List<Workweeks> workweeks) {
+            Utils.checkNotNull(workweeks, "workweeks");
+            this.workweeks = JsonNullable.of(workweeks);
+            return this;
+        }
+
+        /**
+         * The workweeks overlapping this payroll's pay period, one entry per workweek.
+         * Null when workweek boundaries can't be determined for this payroll (e.g. some
+         * off-cycle payrolls without a defined payment period).
+         */
+        public Builder workweeks(JsonNullable<? extends List<Workweeks>> workweeks) {
+            Utils.checkNotNull(workweeks, "workweeks");
+            this.workweeks = workweeks;
+            return this;
+        }
+
+
+        /**
          * Information about the payroll's status and expected dates
          */
         public Builder payrollStatusMeta(PayrollPayrollStatusMetaType payrollStatusMeta) {
@@ -1540,9 +1614,10 @@ public class PayrollPrepared {
                 payrollUuid, companyUuid, offCycle,
                 offCycleReason, autoPayroll, external,
                 finalTerminationPayroll, withholdingPayPeriod, skipRegularDeductions,
-                fixedWithholdingRate, payPeriod, payrollStatusMeta,
-                employeeCompensations, paymentSpeedChanged, createdAt,
-                fixedCompensationTypes, processingRequest, partnerOwnedDisbursement);
+                fixedWithholdingRate, payPeriod, workweeks,
+                payrollStatusMeta, employeeCompensations, paymentSpeedChanged,
+                createdAt, fixedCompensationTypes, processingRequest,
+                partnerOwnedDisbursement);
         }
 
     }

@@ -17,23 +17,17 @@ import java.util.Optional;
 
 public class PutV1CompanyIndustryRequestBuilder {
 
-    private String companyId;
     private Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion>>() {});
+    private String companyId;
     private CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompanyIndustryRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1CompanyIndustryRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public PutV1CompanyIndustryRequestBuilder xGustoAPIVersion(PutV1CompanyIndustryHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -45,6 +39,12 @@ public class PutV1CompanyIndustryRequestBuilder {
     public PutV1CompanyIndustryRequestBuilder xGustoAPIVersion(Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutV1CompanyIndustryRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
         return this;
     }
 
@@ -60,8 +60,8 @@ public class PutV1CompanyIndustryRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompanyIndustryRequest request = new PutV1CompanyIndustryRequest(companyId,
-            xGustoAPIVersion,
+        PutV1CompanyIndustryRequest request = new PutV1CompanyIndustryRequest(xGustoAPIVersion,
+            companyId,
             companyIndustrySelectionRequiredBody);
 
         return request;

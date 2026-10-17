@@ -26,7 +26,7 @@ public class PayScheduleAssignment {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
-    private JsonNullable<? extends Type> type;
+    private JsonNullable<? extends PayScheduleAssignmentType> type;
 
     /**
      * Pay schedule for hourly employees.
@@ -65,7 +65,7 @@ public class PayScheduleAssignment {
 
     @JsonCreator
     public PayScheduleAssignment(
-            @JsonProperty("type") JsonNullable<? extends Type> type,
+            @JsonProperty("type") JsonNullable<? extends PayScheduleAssignmentType> type,
             @JsonProperty("hourly_pay_schedule_uuid") JsonNullable<String> hourlyPayScheduleUuid,
             @JsonProperty("salaried_pay_schedule_uuid") JsonNullable<String> salariedPayScheduleUuid,
             @JsonProperty("default_pay_schedule_uuid") JsonNullable<String> defaultPayScheduleUuid,
@@ -95,8 +95,8 @@ public class PayScheduleAssignment {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<Type> type() {
-        return (JsonNullable<Type>) type;
+    public JsonNullable<PayScheduleAssignmentType> type() {
+        return (JsonNullable<PayScheduleAssignmentType>) type;
     }
 
     /**
@@ -149,7 +149,7 @@ public class PayScheduleAssignment {
     /**
      * The pay schedule assignment type.
      */
-    public PayScheduleAssignment withType(Type type) {
+    public PayScheduleAssignment withType(PayScheduleAssignmentType type) {
         Utils.checkNotNull(type, "type");
         this.type = JsonNullable.of(type);
         return this;
@@ -158,7 +158,7 @@ public class PayScheduleAssignment {
     /**
      * The pay schedule assignment type.
      */
-    public PayScheduleAssignment withType(JsonNullable<? extends Type> type) {
+    public PayScheduleAssignment withType(JsonNullable<? extends PayScheduleAssignmentType> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -293,7 +293,7 @@ public class PayScheduleAssignment {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private JsonNullable<? extends Type> type = JsonNullable.undefined();
+        private JsonNullable<? extends PayScheduleAssignmentType> type = JsonNullable.undefined();
 
         private JsonNullable<String> hourlyPayScheduleUuid = JsonNullable.undefined();
 
@@ -313,7 +313,7 @@ public class PayScheduleAssignment {
         /**
          * The pay schedule assignment type.
          */
-        public Builder type(Type type) {
+        public Builder type(PayScheduleAssignmentType type) {
             Utils.checkNotNull(type, "type");
             this.type = JsonNullable.of(type);
             return this;
@@ -322,7 +322,7 @@ public class PayScheduleAssignment {
         /**
          * The pay schedule assignment type.
          */
-        public Builder type(JsonNullable<? extends Type> type) {
+        public Builder type(JsonNullable<? extends PayScheduleAssignmentType> type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;

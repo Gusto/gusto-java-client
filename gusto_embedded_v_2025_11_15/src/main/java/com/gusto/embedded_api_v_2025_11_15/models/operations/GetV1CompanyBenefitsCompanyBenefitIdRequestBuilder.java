@@ -23,7 +23,7 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder {
                             new TypeReference<Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion>>() {});
     private String companyBenefitId;
     private Optional<Boolean> withEmployeeBenefits = Optional.empty();
-    private Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude> include = Optional.empty();
+    private Optional<? extends Include> include = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -61,13 +61,13 @@ public class GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder {
         return this;
     }
                 
-    public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder include(GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude include) {
+    public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder include(Include include) {
         Utils.checkNotNull(include, "include");
         this.include = Optional.of(include);
         return this;
     }
 
-    public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder include(Optional<? extends GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude> include) {
+    public GetV1CompanyBenefitsCompanyBenefitIdRequestBuilder include(Optional<? extends Include> include) {
         Utils.checkNotNull(include, "include");
         this.include = include;
         return this;

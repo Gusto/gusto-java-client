@@ -47,12 +47,17 @@ public class NotFoundErrorObject extends GustoEmbeddedException {
     * the resulting NotFoundErrorObject instance will have a null data() value and a non-null deserializationException().
     */
     public static NotFoundErrorObject from(HttpResponse<InputStream> response) {
+        byte[] bytes;
         try {
-            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            bytes = Utils.extractByteArrayFromBody(response);
+        } catch (Exception e) {
+            return new NotFoundErrorObject(response.statusCode(), null, response, null, e);
+        }
+        try {
             Data data = Utils.mapper().readValue(bytes, Data.class);
             return new NotFoundErrorObject(response.statusCode(), bytes, response, data, null);
         } catch (Exception e) {
-            return new NotFoundErrorObject(response.statusCode(), null, response, null, e);
+            return new NotFoundErrorObject(response.statusCode(), bytes, response, null, e);
         }
     }
 

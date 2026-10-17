@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class DeleteV1JobsJobIdRequestBuilder {
 
-    private String jobId;
     private Optional<? extends DeleteV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1JobsJobIdHeaderXGustoAPIVersion>>() {});
+    private String jobId;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1JobsJobIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public DeleteV1JobsJobIdRequestBuilder jobId(String jobId) {
-        Utils.checkNotNull(jobId, "jobId");
-        this.jobId = jobId;
-        return this;
     }
                 
     public DeleteV1JobsJobIdRequestBuilder xGustoAPIVersion(DeleteV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class DeleteV1JobsJobIdRequestBuilder {
         return this;
     }
 
+    public DeleteV1JobsJobIdRequestBuilder jobId(String jobId) {
+        Utils.checkNotNull(jobId, "jobId");
+        this.jobId = jobId;
+        return this;
+    }
+
 
     private DeleteV1JobsJobIdRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1JobsJobIdRequest request = new DeleteV1JobsJobIdRequest(jobId,
-            xGustoAPIVersion);
+        DeleteV1JobsJobIdRequest request = new DeleteV1JobsJobIdRequest(xGustoAPIVersion,
+            jobId);
 
         return request;
     }

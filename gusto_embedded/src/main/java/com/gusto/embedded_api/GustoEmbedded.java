@@ -61,13 +61,16 @@ public class GustoEmbedded {
     }};
 
 
-    private final Introspection introspection;
+    private final AchTransactions achTransactions;
 
 
     private final Companies companies;
 
 
-    private final Invoices invoices;
+    private final CompanyBenefits companyBenefits;
+
+
+    private final Reports reports;
 
 
     private final CompanyAttachments companyAttachments;
@@ -76,64 +79,28 @@ public class GustoEmbedded {
     private final CompanyAttachment companyAttachment;
 
 
-    private final FederalTaxDetails federalTaxDetails;
+    private final BankAccounts bankAccounts;
+
+
+    private final CompanyForms companyForms;
 
 
     private final IndustrySelection industrySelection;
 
 
-    private final Signatories signatories;
-
-
-    private final Flows flows;
-
-
-    private final Locations locations;
-
-
-    private final BankAccounts bankAccounts;
-
-
-    private final ExternalPayrolls externalPayrolls;
+    private final Notifications notifications;
 
 
     private final PaymentConfigs paymentConfigs;
 
 
-    private final PaySchedules paySchedules;
+    private final TaxRequirements taxRequirements;
 
 
-    private final Employees employees;
-
-
-    private final HistoricalEmployees historicalEmployees;
-
-
-    private final Departments departments;
-
-
-    private final EmployeeEmployments employeeEmployments;
-
-
-    private final EmployeeAddresses employeeAddresses;
-
-
-    private final EmployeeTaxSetup employeeTaxSetup;
-
-
-    private final EmployeePaymentMethods employeePaymentMethods;
-
-
-    private final EmployeePaymentMethod employeePaymentMethod;
+    private final FederalTaxDetails federalTaxDetails;
 
 
     private final JobsAndCompensations jobsAndCompensations;
-
-
-    private final EarningTypes earningTypes;
-
-
-    private final Contractors contractors;
 
 
     private final ContractorPaymentMethod contractorPaymentMethod;
@@ -142,92 +109,137 @@ public class GustoEmbedded {
     private final ContractorPaymentMethods contractorPaymentMethods;
 
 
-    private final Webhooks webhooks;
-
-
     private final ContractorForms contractorForms;
 
 
-    private final ContractorDocuments contractorDocuments;
-
-
-    private final EmployeeForms employeeForms;
-
-
-    private final Payrolls payrolls;
-
-
-    private final TimeOffPolicies timeOffPolicies;
-
-
-    private final ContractorPayments contractorPayments;
+    private final Contractors contractors;
 
 
     private final ContractorPaymentGroups contractorPaymentGroups;
 
 
-    private final CompanyForms companyForms;
+    private final ContractorPayments contractorPayments;
 
 
-    private final GeneratedDocuments generatedDocuments;
+    private final Departments departments;
 
 
-    private final Reports reports;
+    private final ContractorDocuments contractorDocuments;
 
 
-    private final CompanyBenefits companyBenefits;
+    private final EarningTypes earningTypes;
+
+
+    private final EmployeePaymentMethods employeePaymentMethods;
+
+
+    private final EmployeePaymentMethod employeePaymentMethod;
 
 
     private final EmployeeBenefits employeeBenefits;
 
 
-    private final Garnishments garnishments;
+    private final Employees employees;
 
 
-    private final I9Verification i9Verification;
+    private final EmployeeTaxSetup employeeTaxSetup;
 
 
-    private final TaxRequirements taxRequirements;
+    private final EmployeeForms employeeForms;
 
 
-    private final HolidayPayPolicies holidayPayPolicies;
-
-
-    private final Notifications notifications;
+    private final EmployeeEmployments employeeEmployments;
 
 
     private final Events events;
 
 
+    private final ExternalPayrolls externalPayrolls;
+
+
+    private final Flows flows;
+
+
+    private final Garnishments garnishments;
+
+
+    private final Payrolls payrolls;
+
+
+    private final GeneratedDocuments generatedDocuments;
+
+
+    private final HistoricalEmployees historicalEmployees;
+
+
+    private final HolidayPayPolicies holidayPayPolicies;
+
+
+    private final EmployeeAddresses employeeAddresses;
+
+
+    private final I9Verification i9Verification;
+
+
     private final InformationRequests informationRequests;
 
 
-    private final RecoveryCases recoveryCases;
+    private final Invoices invoices;
 
 
-    private final AchTransactions achTransactions;
+    private final Locations locations;
 
 
-    private final WireInRequests wireInRequests;
+    private final MemberPortalInvitations memberPortalInvitations;
 
 
-    private final SalaryEstimates salaryEstimates;
+    private final PaySchedules paySchedules;
 
 
-    private final Reimbursements reimbursements;
-
-
-    private final PeopleBatches peopleBatches;
-
-
-    private final TimeOffRequests timeOffRequests;
+    private final PayrollCancellations payrollCancellations;
 
 
     private final PayrollDigests payrollDigests;
 
 
-    public Introspection introspection() {
-        return introspection;
+    private final TimeOffPolicies timeOffPolicies;
+
+
+    private final PeopleBatches peopleBatches;
+
+
+    private final RecoveryCases recoveryCases;
+
+
+    private final Reimbursements reimbursements;
+
+
+    private final ReverseWireTransactions reverseWireTransactions;
+
+
+    private final SalaryEstimates salaryEstimates;
+
+
+    private final Signatories signatories;
+
+
+    private final TaxPayments taxPayments;
+
+
+    private final TimeOffRequests timeOffRequests;
+
+
+    private final Introspection introspection;
+
+
+    private final Webhooks webhooks;
+
+
+    private final WireInRequests wireInRequests;
+
+
+    public AchTransactions achTransactions() {
+        return achTransactions;
     }
 
 
@@ -236,8 +248,13 @@ public class GustoEmbedded {
     }
 
 
-    public Invoices invoices() {
-        return invoices;
+    public CompanyBenefits companyBenefits() {
+        return companyBenefits;
+    }
+
+
+    public Reports reports() {
+        return reports;
     }
 
 
@@ -251,8 +268,13 @@ public class GustoEmbedded {
     }
 
 
-    public FederalTaxDetails federalTaxDetails() {
-        return federalTaxDetails;
+    public BankAccounts bankAccounts() {
+        return bankAccounts;
+    }
+
+
+    public CompanyForms companyForms() {
+        return companyForms;
     }
 
 
@@ -261,28 +283,8 @@ public class GustoEmbedded {
     }
 
 
-    public Signatories signatories() {
-        return signatories;
-    }
-
-
-    public Flows flows() {
-        return flows;
-    }
-
-
-    public Locations locations() {
-        return locations;
-    }
-
-
-    public BankAccounts bankAccounts() {
-        return bankAccounts;
-    }
-
-
-    public ExternalPayrolls externalPayrolls() {
-        return externalPayrolls;
+    public Notifications notifications() {
+        return notifications;
     }
 
 
@@ -291,63 +293,18 @@ public class GustoEmbedded {
     }
 
 
-    public PaySchedules paySchedules() {
-        return paySchedules;
+    public TaxRequirements taxRequirements() {
+        return taxRequirements;
     }
 
 
-    public Employees employees() {
-        return employees;
-    }
-
-
-    public HistoricalEmployees historicalEmployees() {
-        return historicalEmployees;
-    }
-
-
-    public Departments departments() {
-        return departments;
-    }
-
-
-    public EmployeeEmployments employeeEmployments() {
-        return employeeEmployments;
-    }
-
-
-    public EmployeeAddresses employeeAddresses() {
-        return employeeAddresses;
-    }
-
-
-    public EmployeeTaxSetup employeeTaxSetup() {
-        return employeeTaxSetup;
-    }
-
-
-    public EmployeePaymentMethods employeePaymentMethods() {
-        return employeePaymentMethods;
-    }
-
-
-    public EmployeePaymentMethod employeePaymentMethod() {
-        return employeePaymentMethod;
+    public FederalTaxDetails federalTaxDetails() {
+        return federalTaxDetails;
     }
 
 
     public JobsAndCompensations jobsAndCompensations() {
         return jobsAndCompensations;
-    }
-
-
-    public EarningTypes earningTypes() {
-        return earningTypes;
-    }
-
-
-    public Contractors contractors() {
-        return contractors;
     }
 
 
@@ -361,38 +318,13 @@ public class GustoEmbedded {
     }
 
 
-    public Webhooks webhooks() {
-        return webhooks;
-    }
-
-
     public ContractorForms contractorForms() {
         return contractorForms;
     }
 
 
-    public ContractorDocuments contractorDocuments() {
-        return contractorDocuments;
-    }
-
-
-    public EmployeeForms employeeForms() {
-        return employeeForms;
-    }
-
-
-    public Payrolls payrolls() {
-        return payrolls;
-    }
-
-
-    public TimeOffPolicies timeOffPolicies() {
-        return timeOffPolicies;
-    }
-
-
-    public ContractorPayments contractorPayments() {
-        return contractorPayments;
+    public Contractors contractors() {
+        return contractors;
     }
 
 
@@ -401,23 +333,33 @@ public class GustoEmbedded {
     }
 
 
-    public CompanyForms companyForms() {
-        return companyForms;
+    public ContractorPayments contractorPayments() {
+        return contractorPayments;
     }
 
 
-    public GeneratedDocuments generatedDocuments() {
-        return generatedDocuments;
+    public Departments departments() {
+        return departments;
     }
 
 
-    public Reports reports() {
-        return reports;
+    public ContractorDocuments contractorDocuments() {
+        return contractorDocuments;
     }
 
 
-    public CompanyBenefits companyBenefits() {
-        return companyBenefits;
+    public EarningTypes earningTypes() {
+        return earningTypes;
+    }
+
+
+    public EmployeePaymentMethods employeePaymentMethods() {
+        return employeePaymentMethods;
+    }
+
+
+    public EmployeePaymentMethod employeePaymentMethod() {
+        return employeePaymentMethod;
     }
 
 
@@ -426,28 +368,23 @@ public class GustoEmbedded {
     }
 
 
-    public Garnishments garnishments() {
-        return garnishments;
+    public Employees employees() {
+        return employees;
     }
 
 
-    public I9Verification i9Verification() {
-        return i9Verification;
+    public EmployeeTaxSetup employeeTaxSetup() {
+        return employeeTaxSetup;
     }
 
 
-    public TaxRequirements taxRequirements() {
-        return taxRequirements;
+    public EmployeeForms employeeForms() {
+        return employeeForms;
     }
 
 
-    public HolidayPayPolicies holidayPayPolicies() {
-        return holidayPayPolicies;
-    }
-
-
-    public Notifications notifications() {
-        return notifications;
+    public EmployeeEmployments employeeEmployments() {
+        return employeeEmployments;
     }
 
 
@@ -456,33 +393,88 @@ public class GustoEmbedded {
     }
 
 
+    public ExternalPayrolls externalPayrolls() {
+        return externalPayrolls;
+    }
+
+
+    public Flows flows() {
+        return flows;
+    }
+
+
+    public Garnishments garnishments() {
+        return garnishments;
+    }
+
+
+    public Payrolls payrolls() {
+        return payrolls;
+    }
+
+
+    public GeneratedDocuments generatedDocuments() {
+        return generatedDocuments;
+    }
+
+
+    public HistoricalEmployees historicalEmployees() {
+        return historicalEmployees;
+    }
+
+
+    public HolidayPayPolicies holidayPayPolicies() {
+        return holidayPayPolicies;
+    }
+
+
+    public EmployeeAddresses employeeAddresses() {
+        return employeeAddresses;
+    }
+
+
+    public I9Verification i9Verification() {
+        return i9Verification;
+    }
+
+
     public InformationRequests informationRequests() {
         return informationRequests;
     }
 
 
-    public RecoveryCases recoveryCases() {
-        return recoveryCases;
+    public Invoices invoices() {
+        return invoices;
     }
 
 
-    public AchTransactions achTransactions() {
-        return achTransactions;
+    public Locations locations() {
+        return locations;
     }
 
 
-    public WireInRequests wireInRequests() {
-        return wireInRequests;
+    public MemberPortalInvitations memberPortalInvitations() {
+        return memberPortalInvitations;
     }
 
 
-    public SalaryEstimates salaryEstimates() {
-        return salaryEstimates;
+    public PaySchedules paySchedules() {
+        return paySchedules;
     }
 
 
-    public Reimbursements reimbursements() {
-        return reimbursements;
+    public PayrollCancellations payrollCancellations() {
+        return payrollCancellations;
+    }
+
+
+    public PayrollDigests payrollDigests() {
+        return payrollDigests;
+    }
+
+
+    public TimeOffPolicies timeOffPolicies() {
+        return timeOffPolicies;
     }
 
 
@@ -491,13 +483,53 @@ public class GustoEmbedded {
     }
 
 
+    public RecoveryCases recoveryCases() {
+        return recoveryCases;
+    }
+
+
+    public Reimbursements reimbursements() {
+        return reimbursements;
+    }
+
+
+    public ReverseWireTransactions reverseWireTransactions() {
+        return reverseWireTransactions;
+    }
+
+
+    public SalaryEstimates salaryEstimates() {
+        return salaryEstimates;
+    }
+
+
+    public Signatories signatories() {
+        return signatories;
+    }
+
+
+    public TaxPayments taxPayments() {
+        return taxPayments;
+    }
+
+
     public TimeOffRequests timeOffRequests() {
         return timeOffRequests;
     }
 
 
-    public PayrollDigests payrollDigests() {
-        return payrollDigests;
+    public Introspection introspection() {
+        return introspection;
+    }
+
+
+    public Webhooks webhooks() {
+        return webhooks;
+    }
+
+
+    public WireInRequests wireInRequests() {
+        return wireInRequests;
     }
     private final AsyncGustoEmbedded asyncSDK;
 
@@ -650,63 +682,67 @@ public class GustoEmbedded {
         return new Builder();
     }
 
-    public GustoEmbedded(SDKConfiguration sdkConfiguration) {
+    private GustoEmbedded(SDKConfiguration sdkConfiguration) {
         sdkConfiguration.initialize();
-        this.introspection = new Introspection(sdkConfiguration);
+        this.achTransactions = new AchTransactions(sdkConfiguration);
         this.companies = new Companies(sdkConfiguration);
-        this.invoices = new Invoices(sdkConfiguration);
+        this.companyBenefits = new CompanyBenefits(sdkConfiguration);
+        this.reports = new Reports(sdkConfiguration);
         this.companyAttachments = new CompanyAttachments(sdkConfiguration);
         this.companyAttachment = new CompanyAttachment(sdkConfiguration);
-        this.federalTaxDetails = new FederalTaxDetails(sdkConfiguration);
-        this.industrySelection = new IndustrySelection(sdkConfiguration);
-        this.signatories = new Signatories(sdkConfiguration);
-        this.flows = new Flows(sdkConfiguration);
-        this.locations = new Locations(sdkConfiguration);
         this.bankAccounts = new BankAccounts(sdkConfiguration);
-        this.externalPayrolls = new ExternalPayrolls(sdkConfiguration);
+        this.companyForms = new CompanyForms(sdkConfiguration);
+        this.industrySelection = new IndustrySelection(sdkConfiguration);
+        this.notifications = new Notifications(sdkConfiguration);
         this.paymentConfigs = new PaymentConfigs(sdkConfiguration);
-        this.paySchedules = new PaySchedules(sdkConfiguration);
-        this.employees = new Employees(sdkConfiguration);
-        this.historicalEmployees = new HistoricalEmployees(sdkConfiguration);
-        this.departments = new Departments(sdkConfiguration);
-        this.employeeEmployments = new EmployeeEmployments(sdkConfiguration);
-        this.employeeAddresses = new EmployeeAddresses(sdkConfiguration);
-        this.employeeTaxSetup = new EmployeeTaxSetup(sdkConfiguration);
-        this.employeePaymentMethods = new EmployeePaymentMethods(sdkConfiguration);
-        this.employeePaymentMethod = new EmployeePaymentMethod(sdkConfiguration);
+        this.taxRequirements = new TaxRequirements(sdkConfiguration);
+        this.federalTaxDetails = new FederalTaxDetails(sdkConfiguration);
         this.jobsAndCompensations = new JobsAndCompensations(sdkConfiguration);
-        this.earningTypes = new EarningTypes(sdkConfiguration);
-        this.contractors = new Contractors(sdkConfiguration);
         this.contractorPaymentMethod = new ContractorPaymentMethod(sdkConfiguration);
         this.contractorPaymentMethods = new ContractorPaymentMethods(sdkConfiguration);
-        this.webhooks = new Webhooks(sdkConfiguration);
         this.contractorForms = new ContractorForms(sdkConfiguration);
-        this.contractorDocuments = new ContractorDocuments(sdkConfiguration);
-        this.employeeForms = new EmployeeForms(sdkConfiguration);
-        this.payrolls = new Payrolls(sdkConfiguration);
-        this.timeOffPolicies = new TimeOffPolicies(sdkConfiguration);
-        this.contractorPayments = new ContractorPayments(sdkConfiguration);
+        this.contractors = new Contractors(sdkConfiguration);
         this.contractorPaymentGroups = new ContractorPaymentGroups(sdkConfiguration);
-        this.companyForms = new CompanyForms(sdkConfiguration);
-        this.generatedDocuments = new GeneratedDocuments(sdkConfiguration);
-        this.reports = new Reports(sdkConfiguration);
-        this.companyBenefits = new CompanyBenefits(sdkConfiguration);
+        this.contractorPayments = new ContractorPayments(sdkConfiguration);
+        this.departments = new Departments(sdkConfiguration);
+        this.contractorDocuments = new ContractorDocuments(sdkConfiguration);
+        this.earningTypes = new EarningTypes(sdkConfiguration);
+        this.employeePaymentMethods = new EmployeePaymentMethods(sdkConfiguration);
+        this.employeePaymentMethod = new EmployeePaymentMethod(sdkConfiguration);
         this.employeeBenefits = new EmployeeBenefits(sdkConfiguration);
-        this.garnishments = new Garnishments(sdkConfiguration);
-        this.i9Verification = new I9Verification(sdkConfiguration);
-        this.taxRequirements = new TaxRequirements(sdkConfiguration);
-        this.holidayPayPolicies = new HolidayPayPolicies(sdkConfiguration);
-        this.notifications = new Notifications(sdkConfiguration);
+        this.employees = new Employees(sdkConfiguration);
+        this.employeeTaxSetup = new EmployeeTaxSetup(sdkConfiguration);
+        this.employeeForms = new EmployeeForms(sdkConfiguration);
+        this.employeeEmployments = new EmployeeEmployments(sdkConfiguration);
         this.events = new Events(sdkConfiguration);
+        this.externalPayrolls = new ExternalPayrolls(sdkConfiguration);
+        this.flows = new Flows(sdkConfiguration);
+        this.garnishments = new Garnishments(sdkConfiguration);
+        this.payrolls = new Payrolls(sdkConfiguration);
+        this.generatedDocuments = new GeneratedDocuments(sdkConfiguration);
+        this.historicalEmployees = new HistoricalEmployees(sdkConfiguration);
+        this.holidayPayPolicies = new HolidayPayPolicies(sdkConfiguration);
+        this.employeeAddresses = new EmployeeAddresses(sdkConfiguration);
+        this.i9Verification = new I9Verification(sdkConfiguration);
         this.informationRequests = new InformationRequests(sdkConfiguration);
-        this.recoveryCases = new RecoveryCases(sdkConfiguration);
-        this.achTransactions = new AchTransactions(sdkConfiguration);
-        this.wireInRequests = new WireInRequests(sdkConfiguration);
-        this.salaryEstimates = new SalaryEstimates(sdkConfiguration);
-        this.reimbursements = new Reimbursements(sdkConfiguration);
-        this.peopleBatches = new PeopleBatches(sdkConfiguration);
-        this.timeOffRequests = new TimeOffRequests(sdkConfiguration);
+        this.invoices = new Invoices(sdkConfiguration);
+        this.locations = new Locations(sdkConfiguration);
+        this.memberPortalInvitations = new MemberPortalInvitations(sdkConfiguration);
+        this.paySchedules = new PaySchedules(sdkConfiguration);
+        this.payrollCancellations = new PayrollCancellations(sdkConfiguration);
         this.payrollDigests = new PayrollDigests(sdkConfiguration);
+        this.timeOffPolicies = new TimeOffPolicies(sdkConfiguration);
+        this.peopleBatches = new PeopleBatches(sdkConfiguration);
+        this.recoveryCases = new RecoveryCases(sdkConfiguration);
+        this.reimbursements = new Reimbursements(sdkConfiguration);
+        this.reverseWireTransactions = new ReverseWireTransactions(sdkConfiguration);
+        this.salaryEstimates = new SalaryEstimates(sdkConfiguration);
+        this.signatories = new Signatories(sdkConfiguration);
+        this.taxPayments = new TaxPayments(sdkConfiguration);
+        this.timeOffRequests = new TimeOffRequests(sdkConfiguration);
+        this.introspection = new Introspection(sdkConfiguration);
+        this.webhooks = new Webhooks(sdkConfiguration);
+        this.wireInRequests = new WireInRequests(sdkConfiguration);
         SdkInitData data = sdkConfiguration.hooks().sdkInit(
                 new SdkInitData(
                         sdkConfiguration.resolvedServerUrl(), 

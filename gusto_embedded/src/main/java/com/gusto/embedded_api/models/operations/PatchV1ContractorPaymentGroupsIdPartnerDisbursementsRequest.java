@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest {
     /**
-     * The UUID of the contractor payment group
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=id")
-    private String id;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,34 +24,32 @@ public class PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the contractor payment group
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=id")
+    private String id;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBody> requestBody;
 
     @JsonCreator
     public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest(
-            String id,
             Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String id,
             Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBody> requestBody) {
-        Utils.checkNotNull(id, "id");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(id, "id");
         Utils.checkNotNull(requestBody, "requestBody");
-        this.id = id;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.id = id;
         this.requestBody = requestBody;
     }
     
     public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest(
             String id) {
-        this(id, Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * The UUID of the contractor payment group
-     */
-    @JsonIgnore
-    public String id() {
-        return id;
+        this(Optional.empty(), id, Optional.empty());
     }
 
     /**
@@ -71,6 +63,14 @@ public class PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest {
         return (Optional<PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the contractor payment group
+     */
+    @JsonIgnore
+    public String id() {
+        return id;
+    }
+
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBody> requestBody() {
@@ -81,15 +81,6 @@ public class PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the contractor payment group
-     */
-    public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest withId(String id) {
-        Utils.checkNotNull(id, "id");
-        this.id = id;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -111,6 +102,15 @@ public class PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest {
     public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest withXGustoAPIVersion(Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * The UUID of the contractor payment group
+     */
+    public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest withId(String id) {
+        Utils.checkNotNull(id, "id");
+        this.id = id;
         return this;
     }
 
@@ -137,46 +137,36 @@ public class PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest {
         }
         PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest other = (PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.id, other.id) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.id, other.id) &&
             Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            id, xGustoAPIVersion, requestBody);
+            xGustoAPIVersion, id, requestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest.class,
-                "id", id,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "id", id,
                 "requestBody", requestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String id;
-
         private Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String id;
 
         private Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBody> requestBody = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the contractor payment group
-         */
-        public Builder id(String id) {
-            Utils.checkNotNull(id, "id");
-            this.id = id;
-            return this;
         }
 
 
@@ -203,6 +193,16 @@ public class PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest {
         }
 
 
+        /**
+         * The UUID of the contractor payment group
+         */
+        public Builder id(String id) {
+            Utils.checkNotNull(id, "id");
+            this.id = id;
+            return this;
+        }
+
+
         public Builder requestBody(PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBody requestBody) {
             Utils.checkNotNull(requestBody, "requestBody");
             this.requestBody = Optional.ofNullable(requestBody);
@@ -221,7 +221,7 @@ public class PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest {
             }
 
             return new PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest(
-                id, xGustoAPIVersion, requestBody);
+                xGustoAPIVersion, id, requestBody);
         }
 
 
