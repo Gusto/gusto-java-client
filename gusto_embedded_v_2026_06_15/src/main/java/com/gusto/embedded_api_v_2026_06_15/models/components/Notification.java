@@ -50,7 +50,7 @@ public class Notification {
      * system. This field is read-only and cannot be modified via the API.
      */
     @JsonProperty("status")
-    private Status status;
+    private NotificationStatus status;
 
     /**
      * The notification's category.
@@ -109,7 +109,7 @@ public class Notification {
             @JsonProperty("company_uuid") String companyUuid,
             @JsonProperty("title") String title,
             @JsonProperty("message") String message,
-            @JsonProperty("status") Status status,
+            @JsonProperty("status") NotificationStatus status,
             @JsonProperty("category") String category,
             @JsonProperty("actionable") boolean actionable,
             @JsonProperty("can_block_payroll") boolean canBlockPayroll,
@@ -148,7 +148,7 @@ public class Notification {
             String companyUuid,
             String title,
             String message,
-            Status status,
+            NotificationStatus status,
             String category,
             boolean actionable,
             boolean canBlockPayroll,
@@ -199,7 +199,7 @@ public class Notification {
      * system. This field is read-only and cannot be modified via the API.
      */
     @JsonIgnore
-    public Status status() {
+    public NotificationStatus status() {
         return status;
     }
 
@@ -314,7 +314,7 @@ public class Notification {
      * system events and internal business logic, and does not reflect resolution steps taken outside our
      * system. This field is read-only and cannot be modified via the API.
      */
-    public Notification withStatus(Status status) {
+    public Notification withStatus(NotificationStatus status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -476,7 +476,7 @@ public class Notification {
 
         private String message;
 
-        private Status status;
+        private NotificationStatus status;
 
         private String category;
 
@@ -543,7 +543,7 @@ public class Notification {
          * system events and internal business logic, and does not reflect resolution steps taken outside our
          * system. This field is read-only and cannot be modified via the API.
          */
-        public Builder status(Status status) {
+        public Builder status(NotificationStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;

@@ -16,17 +16,29 @@ import java.util.Optional;
 
 public class GetV1CompanyOnboardingStatusRequestBuilder {
 
-    private String companyUuid;
-    private Optional<String> additionalSteps = Optional.empty();
     private Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private Optional<String> additionalSteps = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompanyOnboardingStatusRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public GetV1CompanyOnboardingStatusRequestBuilder xGustoAPIVersion(GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public GetV1CompanyOnboardingStatusRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public GetV1CompanyOnboardingStatusRequestBuilder companyUuid(String companyUuid) {
@@ -46,18 +58,6 @@ public class GetV1CompanyOnboardingStatusRequestBuilder {
         this.additionalSteps = additionalSteps;
         return this;
     }
-                
-    public GetV1CompanyOnboardingStatusRequestBuilder xGustoAPIVersion(GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
-
-    public GetV1CompanyOnboardingStatusRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
 
 
     private GetV1CompanyOnboardingStatusRequest buildRequest() {
@@ -65,9 +65,9 @@ public class GetV1CompanyOnboardingStatusRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompanyOnboardingStatusRequest request = new GetV1CompanyOnboardingStatusRequest(companyUuid,
-            additionalSteps,
-            xGustoAPIVersion);
+        GetV1CompanyOnboardingStatusRequest request = new GetV1CompanyOnboardingStatusRequest(xGustoAPIVersion,
+            companyUuid,
+            additionalSteps);
 
         return request;
     }

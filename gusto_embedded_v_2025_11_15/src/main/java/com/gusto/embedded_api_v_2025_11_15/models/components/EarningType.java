@@ -12,6 +12,7 @@ import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 /**
@@ -40,22 +41,45 @@ public class EarningType {
     @JsonProperty("active")
     private Optional<Boolean> active;
 
+    /**
+     * The earning type category. Only present when the company has access to
+     * categorized custom bonus earning types.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("category")
+    private Optional<? extends EarningTypeCategory> category;
+
+    /**
+     * Whether earnings of this type are included when calculating an employee's
+     * regular rate of pay for overtime purposes. Only settable when `category` is `Other`.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("included_in_overtime_pay")
+    private Optional<Boolean> includedInOvertimePay;
+
     @JsonCreator
     public EarningType(
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("uuid") String uuid,
-            @JsonProperty("active") Optional<Boolean> active) {
+            @JsonProperty("active") Optional<Boolean> active,
+            @JsonProperty("category") Optional<? extends EarningTypeCategory> category,
+            @JsonProperty("included_in_overtime_pay") Optional<Boolean> includedInOvertimePay) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(active, "active");
+        Utils.checkNotNull(category, "category");
+        Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
         this.name = name;
         this.uuid = uuid;
         this.active = active;
+        this.category = category;
+        this.includedInOvertimePay = includedInOvertimePay;
     }
     
     public EarningType(
             String uuid) {
-        this(Optional.empty(), uuid, Optional.empty());
+        this(Optional.empty(), uuid, Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -80,6 +104,25 @@ public class EarningType {
     @JsonIgnore
     public Optional<Boolean> active() {
         return active;
+    }
+
+    /**
+     * The earning type category. Only present when the company has access to
+     * categorized custom bonus earning types.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<EarningTypeCategory> category() {
+        return (Optional<EarningTypeCategory>) category;
+    }
+
+    /**
+     * Whether earnings of this type are included when calculating an employee's
+     * regular rate of pay for overtime purposes. Only settable when `category` is `Other`.
+     */
+    @JsonIgnore
+    public Optional<Boolean> includedInOvertimePay() {
+        return includedInOvertimePay;
     }
 
     public static Builder builder() {
@@ -134,6 +177,48 @@ public class EarningType {
         return this;
     }
 
+    /**
+     * The earning type category. Only present when the company has access to
+     * categorized custom bonus earning types.
+     */
+    public EarningType withCategory(EarningTypeCategory category) {
+        Utils.checkNotNull(category, "category");
+        this.category = Optional.ofNullable(category);
+        return this;
+    }
+
+
+    /**
+     * The earning type category. Only present when the company has access to
+     * categorized custom bonus earning types.
+     */
+    public EarningType withCategory(Optional<? extends EarningTypeCategory> category) {
+        Utils.checkNotNull(category, "category");
+        this.category = category;
+        return this;
+    }
+
+    /**
+     * Whether earnings of this type are included when calculating an employee's
+     * regular rate of pay for overtime purposes. Only settable when `category` is `Other`.
+     */
+    public EarningType withIncludedInOvertimePay(boolean includedInOvertimePay) {
+        Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
+        this.includedInOvertimePay = Optional.ofNullable(includedInOvertimePay);
+        return this;
+    }
+
+
+    /**
+     * Whether earnings of this type are included when calculating an employee's
+     * regular rate of pay for overtime purposes. Only settable when `category` is `Other`.
+     */
+    public EarningType withIncludedInOvertimePay(Optional<Boolean> includedInOvertimePay) {
+        Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
+        this.includedInOvertimePay = includedInOvertimePay;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -146,13 +231,16 @@ public class EarningType {
         return 
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
-            Utils.enhancedDeepEquals(this.active, other.active);
+            Utils.enhancedDeepEquals(this.active, other.active) &&
+            Utils.enhancedDeepEquals(this.category, other.category) &&
+            Utils.enhancedDeepEquals(this.includedInOvertimePay, other.includedInOvertimePay);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name, uuid, active);
+            name, uuid, active,
+            category, includedInOvertimePay);
     }
     
     @Override
@@ -160,7 +248,9 @@ public class EarningType {
         return Utils.toString(EarningType.class,
                 "name", name,
                 "uuid", uuid,
-                "active", active);
+                "active", active,
+                "category", category,
+                "includedInOvertimePay", includedInOvertimePay);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -171,6 +261,10 @@ public class EarningType {
         private String uuid;
 
         private Optional<Boolean> active = Optional.empty();
+
+        private Optional<? extends EarningTypeCategory> category = Optional.empty();
+
+        private Optional<Boolean> includedInOvertimePay = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -224,10 +318,53 @@ public class EarningType {
             return this;
         }
 
+
+        /**
+         * The earning type category. Only present when the company has access to
+         * categorized custom bonus earning types.
+         */
+        public Builder category(EarningTypeCategory category) {
+            Utils.checkNotNull(category, "category");
+            this.category = Optional.ofNullable(category);
+            return this;
+        }
+
+        /**
+         * The earning type category. Only present when the company has access to
+         * categorized custom bonus earning types.
+         */
+        public Builder category(Optional<? extends EarningTypeCategory> category) {
+            Utils.checkNotNull(category, "category");
+            this.category = category;
+            return this;
+        }
+
+
+        /**
+         * Whether earnings of this type are included when calculating an employee's
+         * regular rate of pay for overtime purposes. Only settable when `category` is `Other`.
+         */
+        public Builder includedInOvertimePay(boolean includedInOvertimePay) {
+            Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
+            this.includedInOvertimePay = Optional.ofNullable(includedInOvertimePay);
+            return this;
+        }
+
+        /**
+         * Whether earnings of this type are included when calculating an employee's
+         * regular rate of pay for overtime purposes. Only settable when `category` is `Other`.
+         */
+        public Builder includedInOvertimePay(Optional<Boolean> includedInOvertimePay) {
+            Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
+            this.includedInOvertimePay = includedInOvertimePay;
+            return this;
+        }
+
         public EarningType build() {
 
             return new EarningType(
-                name, uuid, active);
+                name, uuid, active,
+                category, includedInOvertimePay);
         }
 
     }

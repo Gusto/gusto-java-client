@@ -42,7 +42,7 @@ public class Contractor {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("wage_type")
-    private Optional<? extends WageType> wageType;
+    private Optional<? extends ContractorWageType> wageType;
 
     /**
      * The status of the contractor with the company.
@@ -123,6 +123,16 @@ public class Contractor {
     private JsonNullable<String> email;
 
     /**
+     * The work email address of the contractor. This is provided to support syncing users between our
+     * system and yours. You may not use this email address for any other purpose (e.g.
+     * 
+     * <p>marketing).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("work_email")
+    private JsonNullable<String> workEmail;
+
+    /**
      * The contractor's start date.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -134,7 +144,7 @@ public class Contractor {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
-    private JsonNullable<? extends Address> address;
+    private JsonNullable<? extends ContractorAddress1> address;
 
     /**
      * The contractor’s hourly rate. This attribute is required if the wage_type is “Hourly”.
@@ -219,7 +229,7 @@ public class Contractor {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("upcoming_employment")
-    private JsonNullable<? extends UpcomingEmployment> upcomingEmployment;
+    private JsonNullable<? extends ContractorUpcomingEmployment> upcomingEmployment;
 
     /**
      * Whether the contractor's pending dismissal can be cancelled.
@@ -255,7 +265,7 @@ public class Contractor {
     public Contractor(
             @JsonProperty("uuid") String uuid,
             @JsonProperty("company_uuid") Optional<String> companyUuid,
-            @JsonProperty("wage_type") Optional<? extends WageType> wageType,
+            @JsonProperty("wage_type") Optional<? extends ContractorWageType> wageType,
             @JsonProperty("is_active") Optional<Boolean> isActive,
             @JsonProperty("version") Optional<String> version,
             @JsonProperty("type") Optional<? extends ContractorType> type,
@@ -266,8 +276,9 @@ public class Contractor {
             @JsonProperty("ein") JsonNullable<String> ein,
             @JsonProperty("has_ein") JsonNullable<Boolean> hasEin,
             @JsonProperty("email") JsonNullable<String> email,
+            @JsonProperty("work_email") JsonNullable<String> workEmail,
             @JsonProperty("start_date") Optional<String> startDate,
-            @JsonProperty("address") JsonNullable<? extends Address> address,
+            @JsonProperty("address") JsonNullable<? extends ContractorAddress1> address,
             @JsonProperty("hourly_rate") Optional<String> hourlyRate,
             @JsonProperty("file_new_hire_report") JsonNullable<Boolean> fileNewHireReport,
             @JsonProperty("work_state") JsonNullable<String> workState,
@@ -279,7 +290,7 @@ public class Contractor {
             @JsonProperty("department") JsonNullable<String> department,
             @JsonProperty("department_title") JsonNullable<String> departmentTitle,
             @JsonProperty("dismissal_date") JsonNullable<String> dismissalDate,
-            @JsonProperty("upcoming_employment") JsonNullable<? extends UpcomingEmployment> upcomingEmployment,
+            @JsonProperty("upcoming_employment") JsonNullable<? extends ContractorUpcomingEmployment> upcomingEmployment,
             @JsonProperty("dismissal_cancellation_eligible") Optional<Boolean> dismissalCancellationEligible,
             @JsonProperty("rehire_cancellation_eligible") Optional<Boolean> rehireCancellationEligible,
             @JsonProperty("member_portal_invitation_status") JsonNullable<? extends ContractorMemberPortalInvitationStatus> memberPortalInvitationStatus,
@@ -297,6 +308,7 @@ public class Contractor {
         Utils.checkNotNull(ein, "ein");
         Utils.checkNotNull(hasEin, "hasEin");
         Utils.checkNotNull(email, "email");
+        Utils.checkNotNull(workEmail, "workEmail");
         Utils.checkNotNull(startDate, "startDate");
         Utils.checkNotNull(address, "address");
         Utils.checkNotNull(hourlyRate, "hourlyRate");
@@ -328,6 +340,7 @@ public class Contractor {
         this.ein = ein;
         this.hasEin = hasEin;
         this.email = email;
+        this.workEmail = workEmail;
         this.startDate = startDate;
         this.address = address;
         this.hourlyRate = hourlyRate;
@@ -354,13 +367,13 @@ public class Contractor {
             Optional.empty(), Optional.empty(), Optional.empty(),
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
+            JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
             JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(),
-            Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
-            Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
+            JsonNullable.undefined(), Optional.empty(), Optional.empty(),
+            JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(),
             JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
-            Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            JsonNullable.undefined());
+            JsonNullable.undefined(), Optional.empty(), Optional.empty(),
+            JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
@@ -384,8 +397,8 @@ public class Contractor {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<WageType> wageType() {
-        return (Optional<WageType>) wageType;
+    public Optional<ContractorWageType> wageType() {
+        return (Optional<ContractorWageType>) wageType;
     }
 
     /**
@@ -478,6 +491,17 @@ public class Contractor {
     }
 
     /**
+     * The work email address of the contractor. This is provided to support syncing users between our
+     * system and yours. You may not use this email address for any other purpose (e.g.
+     * 
+     * <p>marketing).
+     */
+    @JsonIgnore
+    public JsonNullable<String> workEmail() {
+        return workEmail;
+    }
+
+    /**
      * The contractor's start date.
      */
     @JsonIgnore
@@ -490,8 +514,8 @@ public class Contractor {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<Address> address() {
-        return (JsonNullable<Address>) address;
+    public JsonNullable<ContractorAddress1> address() {
+        return (JsonNullable<ContractorAddress1>) address;
     }
 
     /**
@@ -590,8 +614,8 @@ public class Contractor {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<UpcomingEmployment> upcomingEmployment() {
-        return (JsonNullable<UpcomingEmployment>) upcomingEmployment;
+    public JsonNullable<ContractorUpcomingEmployment> upcomingEmployment() {
+        return (JsonNullable<ContractorUpcomingEmployment>) upcomingEmployment;
     }
 
     /**
@@ -665,7 +689,7 @@ public class Contractor {
     /**
      * The contractor's wage type, either "Fixed" or "Hourly".
      */
-    public Contractor withWageType(WageType wageType) {
+    public Contractor withWageType(ContractorWageType wageType) {
         Utils.checkNotNull(wageType, "wageType");
         this.wageType = Optional.ofNullable(wageType);
         return this;
@@ -675,7 +699,7 @@ public class Contractor {
     /**
      * The contractor's wage type, either "Fixed" or "Hourly".
      */
-    public Contractor withWageType(Optional<? extends WageType> wageType) {
+    public Contractor withWageType(Optional<? extends ContractorWageType> wageType) {
         Utils.checkNotNull(wageType, "wageType");
         this.wageType = wageType;
         return this;
@@ -881,6 +905,30 @@ public class Contractor {
     }
 
     /**
+     * The work email address of the contractor. This is provided to support syncing users between our
+     * system and yours. You may not use this email address for any other purpose (e.g.
+     * 
+     * <p>marketing).
+     */
+    public Contractor withWorkEmail(String workEmail) {
+        Utils.checkNotNull(workEmail, "workEmail");
+        this.workEmail = JsonNullable.of(workEmail);
+        return this;
+    }
+
+    /**
+     * The work email address of the contractor. This is provided to support syncing users between our
+     * system and yours. You may not use this email address for any other purpose (e.g.
+     * 
+     * <p>marketing).
+     */
+    public Contractor withWorkEmail(JsonNullable<String> workEmail) {
+        Utils.checkNotNull(workEmail, "workEmail");
+        this.workEmail = workEmail;
+        return this;
+    }
+
+    /**
      * The contractor's start date.
      */
     public Contractor withStartDate(String startDate) {
@@ -902,7 +950,7 @@ public class Contractor {
     /**
      * The contractor’s home address.
      */
-    public Contractor withAddress(Address address) {
+    public Contractor withAddress(ContractorAddress1 address) {
         Utils.checkNotNull(address, "address");
         this.address = JsonNullable.of(address);
         return this;
@@ -911,7 +959,7 @@ public class Contractor {
     /**
      * The contractor’s home address.
      */
-    public Contractor withAddress(JsonNullable<? extends Address> address) {
+    public Contractor withAddress(JsonNullable<? extends ContractorAddress1> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
         return this;
@@ -1124,7 +1172,7 @@ public class Contractor {
     /**
      * The contractor's upcoming employment details, if a rehire is scheduled.
      */
-    public Contractor withUpcomingEmployment(UpcomingEmployment upcomingEmployment) {
+    public Contractor withUpcomingEmployment(ContractorUpcomingEmployment upcomingEmployment) {
         Utils.checkNotNull(upcomingEmployment, "upcomingEmployment");
         this.upcomingEmployment = JsonNullable.of(upcomingEmployment);
         return this;
@@ -1133,7 +1181,7 @@ public class Contractor {
     /**
      * The contractor's upcoming employment details, if a rehire is scheduled.
      */
-    public Contractor withUpcomingEmployment(JsonNullable<? extends UpcomingEmployment> upcomingEmployment) {
+    public Contractor withUpcomingEmployment(JsonNullable<? extends ContractorUpcomingEmployment> upcomingEmployment) {
         Utils.checkNotNull(upcomingEmployment, "upcomingEmployment");
         this.upcomingEmployment = upcomingEmployment;
         return this;
@@ -1240,6 +1288,7 @@ public class Contractor {
             Utils.enhancedDeepEquals(this.ein, other.ein) &&
             Utils.enhancedDeepEquals(this.hasEin, other.hasEin) &&
             Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.workEmail, other.workEmail) &&
             Utils.enhancedDeepEquals(this.startDate, other.startDate) &&
             Utils.enhancedDeepEquals(this.address, other.address) &&
             Utils.enhancedDeepEquals(this.hourlyRate, other.hourlyRate) &&
@@ -1267,13 +1316,13 @@ public class Contractor {
             isActive, version, type,
             firstName, lastName, middleInitial,
             businessName, ein, hasEin,
-            email, startDate, address,
-            hourlyRate, fileNewHireReport, workState,
-            onboarded, onboardingStatus, paymentMethod,
-            hasSsn, departmentUuid, department,
-            departmentTitle, dismissalDate, upcomingEmployment,
-            dismissalCancellationEligible, rehireCancellationEligible, memberPortalInvitationStatus,
-            partnerPortalInvitationSent);
+            email, workEmail, startDate,
+            address, hourlyRate, fileNewHireReport,
+            workState, onboarded, onboardingStatus,
+            paymentMethod, hasSsn, departmentUuid,
+            department, departmentTitle, dismissalDate,
+            upcomingEmployment, dismissalCancellationEligible, rehireCancellationEligible,
+            memberPortalInvitationStatus, partnerPortalInvitationSent);
     }
     
     @Override
@@ -1292,6 +1341,7 @@ public class Contractor {
                 "ein", ein,
                 "hasEin", hasEin,
                 "email", email,
+                "workEmail", workEmail,
                 "startDate", startDate,
                 "address", address,
                 "hourlyRate", hourlyRate,
@@ -1319,7 +1369,7 @@ public class Contractor {
 
         private Optional<String> companyUuid = Optional.empty();
 
-        private Optional<? extends WageType> wageType = Optional.empty();
+        private Optional<? extends ContractorWageType> wageType = Optional.empty();
 
         private Optional<Boolean> isActive;
 
@@ -1341,9 +1391,11 @@ public class Contractor {
 
         private JsonNullable<String> email = JsonNullable.undefined();
 
+        private JsonNullable<String> workEmail = JsonNullable.undefined();
+
         private Optional<String> startDate = Optional.empty();
 
-        private JsonNullable<? extends Address> address = JsonNullable.undefined();
+        private JsonNullable<? extends ContractorAddress1> address = JsonNullable.undefined();
 
         private Optional<String> hourlyRate = Optional.empty();
 
@@ -1367,7 +1419,7 @@ public class Contractor {
 
         private JsonNullable<String> dismissalDate = JsonNullable.undefined();
 
-        private JsonNullable<? extends UpcomingEmployment> upcomingEmployment = JsonNullable.undefined();
+        private JsonNullable<? extends ContractorUpcomingEmployment> upcomingEmployment = JsonNullable.undefined();
 
         private Optional<Boolean> dismissalCancellationEligible = Optional.empty();
 
@@ -1414,7 +1466,7 @@ public class Contractor {
         /**
          * The contractor's wage type, either "Fixed" or "Hourly".
          */
-        public Builder wageType(WageType wageType) {
+        public Builder wageType(ContractorWageType wageType) {
             Utils.checkNotNull(wageType, "wageType");
             this.wageType = Optional.ofNullable(wageType);
             return this;
@@ -1423,7 +1475,7 @@ public class Contractor {
         /**
          * The contractor's wage type, either "Fixed" or "Hourly".
          */
-        public Builder wageType(Optional<? extends WageType> wageType) {
+        public Builder wageType(Optional<? extends ContractorWageType> wageType) {
             Utils.checkNotNull(wageType, "wageType");
             this.wageType = wageType;
             return this;
@@ -1637,6 +1689,31 @@ public class Contractor {
 
 
         /**
+         * The work email address of the contractor. This is provided to support syncing users between our
+         * system and yours. You may not use this email address for any other purpose (e.g.
+         * 
+         * <p>marketing).
+         */
+        public Builder workEmail(String workEmail) {
+            Utils.checkNotNull(workEmail, "workEmail");
+            this.workEmail = JsonNullable.of(workEmail);
+            return this;
+        }
+
+        /**
+         * The work email address of the contractor. This is provided to support syncing users between our
+         * system and yours. You may not use this email address for any other purpose (e.g.
+         * 
+         * <p>marketing).
+         */
+        public Builder workEmail(JsonNullable<String> workEmail) {
+            Utils.checkNotNull(workEmail, "workEmail");
+            this.workEmail = workEmail;
+            return this;
+        }
+
+
+        /**
          * The contractor's start date.
          */
         public Builder startDate(String startDate) {
@@ -1658,7 +1735,7 @@ public class Contractor {
         /**
          * The contractor’s home address.
          */
-        public Builder address(Address address) {
+        public Builder address(ContractorAddress1 address) {
             Utils.checkNotNull(address, "address");
             this.address = JsonNullable.of(address);
             return this;
@@ -1667,7 +1744,7 @@ public class Contractor {
         /**
          * The contractor’s home address.
          */
-        public Builder address(JsonNullable<? extends Address> address) {
+        public Builder address(JsonNullable<? extends ContractorAddress1> address) {
             Utils.checkNotNull(address, "address");
             this.address = address;
             return this;
@@ -1888,7 +1965,7 @@ public class Contractor {
         /**
          * The contractor's upcoming employment details, if a rehire is scheduled.
          */
-        public Builder upcomingEmployment(UpcomingEmployment upcomingEmployment) {
+        public Builder upcomingEmployment(ContractorUpcomingEmployment upcomingEmployment) {
             Utils.checkNotNull(upcomingEmployment, "upcomingEmployment");
             this.upcomingEmployment = JsonNullable.of(upcomingEmployment);
             return this;
@@ -1897,7 +1974,7 @@ public class Contractor {
         /**
          * The contractor's upcoming employment details, if a rehire is scheduled.
          */
-        public Builder upcomingEmployment(JsonNullable<? extends UpcomingEmployment> upcomingEmployment) {
+        public Builder upcomingEmployment(JsonNullable<? extends ContractorUpcomingEmployment> upcomingEmployment) {
             Utils.checkNotNull(upcomingEmployment, "upcomingEmployment");
             this.upcomingEmployment = upcomingEmployment;
             return this;
@@ -1993,13 +2070,13 @@ public class Contractor {
                 isActive, version, type,
                 firstName, lastName, middleInitial,
                 businessName, ein, hasEin,
-                email, startDate, address,
-                hourlyRate, fileNewHireReport, workState,
-                onboarded, onboardingStatus, paymentMethod,
-                hasSsn, departmentUuid, department,
-                departmentTitle, dismissalDate, upcomingEmployment,
-                dismissalCancellationEligible, rehireCancellationEligible, memberPortalInvitationStatus,
-                partnerPortalInvitationSent);
+                email, workEmail, startDate,
+                address, hourlyRate, fileNewHireReport,
+                workState, onboarded, onboardingStatus,
+                paymentMethod, hasSsn, departmentUuid,
+                department, departmentTitle, dismissalDate,
+                upcomingEmployment, dismissalCancellationEligible, rehireCancellationEligible,
+                memberPortalInvitationStatus, partnerPortalInvitationSent);
         }
 
 

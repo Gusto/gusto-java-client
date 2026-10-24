@@ -131,6 +131,10 @@ public class BankAccounts {
      * &gt;
      * &gt; If a default bank account exists, it will be disabled and the new bank account will replace it
      * as the company's default funding method.
+     * &gt;
+     * &gt; A new bank account cannot replace the default if the current default has unprocessed payments.
+     * In that case, a 422 `invalid_operation` error is returned. To resolve, fund or cancel the pending
+     * payments first.
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
@@ -158,6 +162,10 @@ public class BankAccounts {
      * &gt;
      * &gt; If a default bank account exists, it will be disabled and the new bank account will replace it
      * as the company's default funding method.
+     * &gt;
+     * &gt; A new bank account cannot replace the default if the current default has unprocessed payments.
+     * In that case, a 422 `invalid_operation` error is returned. To resolve, fund or cancel the pending
+     * payments first.
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
@@ -188,6 +196,10 @@ public class BankAccounts {
      * &gt;
      * &gt; If a default bank account exists, it will be disabled and the new bank account will replace it
      * as the company's default funding method.
+     * &gt;
+     * &gt; A new bank account cannot replace the default if the current default has unprocessed payments.
+     * In that case, a 422 `invalid_operation` error is returned. To resolve, fund or cancel the pending
+     * payments first.
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
