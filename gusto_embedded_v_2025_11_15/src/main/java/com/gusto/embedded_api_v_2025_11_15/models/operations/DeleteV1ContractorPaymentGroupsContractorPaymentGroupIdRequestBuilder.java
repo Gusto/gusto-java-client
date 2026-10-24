@@ -16,22 +16,16 @@ import java.util.Optional;
 
 public class DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder {
 
-    private String contractorPaymentGroupUuid;
     private Optional<? extends DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion>>() {});
+    private String contractorPaymentGroupUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
-        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
-        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
-        return this;
     }
                 
     public DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder xGustoAPIVersion(DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,14 +40,20 @@ public class DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuild
         return this;
     }
 
+    public DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
+        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
+        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
+        return this;
+    }
+
 
     private DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest request = new DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest(contractorPaymentGroupUuid,
-            xGustoAPIVersion);
+        DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest request = new DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest(xGustoAPIVersion,
+            contractorPaymentGroupUuid);
 
         return request;
     }

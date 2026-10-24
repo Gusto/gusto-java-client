@@ -72,7 +72,7 @@ public class AsyncFederalTaxDetails {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdFederalTaxDetailsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdFederalTaxDetailsResponse> get(String companyId) {
-        return get(companyId, Optional.empty());
+        return get(Optional.empty(), companyId);
     }
 
     /**
@@ -85,16 +85,16 @@ public class AsyncFederalTaxDetails {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyId The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdFederalTaxDetailsResponse>} - The async response
      */
-    public CompletableFuture<GetV1CompaniesCompanyIdFederalTaxDetailsResponse> get(String companyId, Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1CompaniesCompanyIdFederalTaxDetailsResponse> get(Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
         GetV1CompaniesCompanyIdFederalTaxDetailsRequest request =
             GetV1CompaniesCompanyIdFederalTaxDetailsRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .build();
         AsyncRequestOperation<GetV1CompaniesCompanyIdFederalTaxDetailsRequest, GetV1CompaniesCompanyIdFederalTaxDetailsResponse> operation
               = new GetV1CompaniesCompanyIdFederalTaxDetails.Async(sdkConfiguration, _headers);
@@ -158,7 +158,7 @@ public class AsyncFederalTaxDetails {
      * @return {@code CompletableFuture<PutV1CompaniesCompanyIdFederalTaxDetailsResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesCompanyIdFederalTaxDetailsResponse> update(String companyId, FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
-        return update(companyId, Optional.empty(), federalTaxDetailsUpdate);
+        return update(Optional.empty(), companyId, federalTaxDetailsUpdate);
     }
 
     /**
@@ -183,19 +183,19 @@ public class AsyncFederalTaxDetails {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyId The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @param federalTaxDetailsUpdate 
      * @return {@code CompletableFuture<PutV1CompaniesCompanyIdFederalTaxDetailsResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesCompanyIdFederalTaxDetailsResponse> update(
-            String companyId, Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
         PutV1CompaniesCompanyIdFederalTaxDetailsRequest request =
             PutV1CompaniesCompanyIdFederalTaxDetailsRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .federalTaxDetailsUpdate(federalTaxDetailsUpdate)
                 .build();
         AsyncRequestOperation<PutV1CompaniesCompanyIdFederalTaxDetailsRequest, PutV1CompaniesCompanyIdFederalTaxDetailsResponse> operation

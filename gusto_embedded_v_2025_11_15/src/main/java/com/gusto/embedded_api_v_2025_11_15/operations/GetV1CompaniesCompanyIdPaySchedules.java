@@ -10,7 +10,7 @@ import static com.gusto.embedded_api_v_2025_11_15.operations.Operations.AsyncReq
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.SecuritySource;
-import com.gusto.embedded_api_v_2025_11_15.models.components.PayScheduleShow;
+import com.gusto.embedded_api_v_2025_11_15.models.components.PayScheduleListItem;
 import com.gusto.embedded_api_v_2025_11_15.models.errors.APIException;
 import com.gusto.embedded_api_v_2025_11_15.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1CompaniesCompanyIdPaySchedulesRequest;
@@ -162,7 +162,7 @@ public class GetV1CompaniesCompanyIdPaySchedules {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withPayScheduleShowResponse(Utils.unmarshal(response, new TypeReference<List<PayScheduleShow>>() {}));
+                    return res.withPayScheduleShowResponse(Utils.unmarshal(response, new TypeReference<List<PayScheduleListItem>>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
@@ -239,7 +239,7 @@ public class GetV1CompaniesCompanyIdPaySchedules {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return Utils.unmarshalAsync(response, new TypeReference<List<PayScheduleShow>>() {})
+                    return Utils.unmarshalAsync(response, new TypeReference<List<PayScheduleListItem>>() {})
                             .thenApply(res::withPayScheduleShowResponse);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);

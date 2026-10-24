@@ -19,29 +19,17 @@ import java.util.concurrent.CompletableFuture;
 
 public class DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder {
 
-    private String companyUuid;
-    private String signatoryUuid;
     private Optional<? extends DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private String signatoryUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
-
-    public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder signatoryUuid(String signatoryUuid) {
-        Utils.checkNotNull(signatoryUuid, "signatoryUuid");
-        this.signatoryUuid = signatoryUuid;
-        return this;
     }
                 
     public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder xGustoAPIVersion(DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -56,15 +44,27 @@ public class DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder 
         return this;
     }
 
+    public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
+    public DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder signatoryUuid(String signatoryUuid) {
+        Utils.checkNotNull(signatoryUuid, "signatoryUuid");
+        this.signatoryUuid = signatoryUuid;
+        return this;
+    }
+
 
     private DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request = new DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(companyUuid,
-            signatoryUuid,
-            xGustoAPIVersion);
+        DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request = new DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(xGustoAPIVersion,
+            companyUuid,
+            signatoryUuid);
 
         return request;
     }

@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder xGustoAPIVersion(GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder
         return this;
     }
 
+    public GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
 
     private GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest request = new GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest(companyUuid,
-            xGustoAPIVersion);
+        GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest request = new GetV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest(xGustoAPIVersion,
+            companyUuid);
 
         return request;
     }
