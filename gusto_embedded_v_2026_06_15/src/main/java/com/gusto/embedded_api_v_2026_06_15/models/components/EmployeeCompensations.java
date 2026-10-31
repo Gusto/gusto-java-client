@@ -3,24 +3,16 @@
  */
 package com.gusto.embedded_api_v_2026_06_15.models.components;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
-import java.lang.Boolean;
-import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class EmployeeCompensations {
@@ -32,212 +24,95 @@ public class EmployeeCompensations {
     private Optional<String> employeeUuid;
 
     /**
-     * This employee will be excluded (skipped) from payroll calculation and will not be paid for the
-     * payroll. Cancelling a payroll would reset all employees' excluded back to false.
+     * The first name of the employee.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("excluded")
-    private Optional<Boolean> excluded;
+    @JsonProperty("employee_first_name")
+    private Optional<String> employeeFirstName;
 
     /**
-     * The first name of the employee. Requires `employees:read` scope.
+     * The last name of the employee.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("first_name")
-    private JsonNullable<String> firstName;
+    @JsonProperty("employee_last_name")
+    private Optional<String> employeeLastName;
 
     /**
-     * The preferred first name of the employee. Requires `employees:read` scope.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("preferred_first_name")
-    private JsonNullable<String> preferredFirstName;
-
-    /**
-     * The last name of the employee. Requires `employees:read` scope.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("last_name")
-    private JsonNullable<String> lastName;
-
-    /**
-     * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages +
-     * cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is
-     * only available for processed payrolls.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("gross_pay")
-    private JsonNullable<String> grossPay;
-
-    /**
-     * The employee's net pay (as a string-formatted decimal, e.g. "1234.56"), equal to gross_pay -
-     * employee taxes - employee deductions or garnishments - cash tips. This value is only available for
-     * processed payrolls.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("net_pay")
-    private JsonNullable<String> netPay;
-
-    /**
-     * The employee's check amount (as a string-formatted decimal, e.g. "1234.56"), equal to net_pay +
-     * reimbursements. This value is only available for processed payrolls.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("check_amount")
-    private JsonNullable<String> checkAmount;
-
-    /**
-     * The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls
-     * initially run outside of Gusto, then put into Gusto.
+     * The employee's compensation payment method.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payment_method")
-    private JsonNullable<? extends PayrollShowPaymentMethod> paymentMethod;
+    private Optional<? extends PayrollReceiptPaymentMethod> paymentMethod;
 
     /**
-     * Custom text that will be printed as a personal note to the employee on a paystub.
+     * The employee's net pay. Net pay paid by check is available for reference but is not included in the
+     * `["totals"]["net_pay_debit"]` amount.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("memo")
-    private JsonNullable<String> memo;
+    @JsonProperty("net_pay")
+    private Optional<String> netPay;
 
     /**
-     * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-     * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-     * greater than 0.00 are returned.
-     * 
-     * <p>For an unprocessed payroll, all active fixed compensations are returned.
+     * The total of employer and employee taxes for the pay period.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("fixed_compensations")
-    private Optional<? extends List<PayrollShowFixedCompensations>> fixedCompensations;
+    @JsonProperty("total_tax")
+    private Optional<String> totalTax;
 
     /**
-     * An array of hourly compensations for the employee. Hourly compensations include regular, overtime,
-     * and double overtime hours. If this payroll has been processed, only hourly compensations with a
-     * value greater than 0.00 are returned.
-     * 
-     * <p>For an unprocessed payroll, all active hourly compensations are returned.
+     * The total garnishments for the pay period.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("hourly_compensations")
-    private Optional<? extends List<PayrollShowHourlyCompensations>> hourlyCompensations;
+    @JsonProperty("total_garnishments")
+    private Optional<String> totalGarnishments;
 
     /**
-     * An array of all paid time off the employee is eligible for this pay period.
+     * The total child support garnishment for the pay period.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("paid_time_off")
-    private Optional<? extends List<PayrollShowPaidTimeOff>> paidTimeOff;
+    @JsonProperty("child_support_garnishment")
+    private Optional<String> childSupportGarnishment;
 
     /**
-     * An array of reimbursements for the employee.
+     * The total reimbursement for the pay period.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("reimbursements")
-    private Optional<? extends List<PayrollShowReimbursements>> reimbursements;
-
-    /**
-     * The current version of this employee compensation. This field is only available for prepared
-     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-     * information on how to use this field.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("version")
-    private Optional<? extends Object> version;
-
-    /**
-     * An array of employee deductions for the pay period. Only included when `deductions` is present in
-     * the `include` parameter.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("deductions")
-    private Optional<? extends List<PayrollShowDeductions>> deductions;
-
-    /**
-     * An array of employer and employee taxes for the pay period. Only included for processed or
-     * calculated payrolls when `taxes` is present in the `include` parameter.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("taxes")
-    private Optional<? extends List<PayrollShowTaxes>> taxes;
-
-    /**
-     * An array of employee benefits for the pay period. Benefits are only included for processed payroll
-     * when the include parameter is present.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("benefits")
-    private Optional<? extends List<PayrollShowBenefits>> benefits;
-
-
-    @JsonIgnore
-    private Map<String, Object> additionalProperties;
+    @JsonProperty("total_reimbursement")
+    private Optional<String> totalReimbursement;
 
     @JsonCreator
     public EmployeeCompensations(
             @JsonProperty("employee_uuid") Optional<String> employeeUuid,
-            @JsonProperty("excluded") Optional<Boolean> excluded,
-            @JsonProperty("first_name") JsonNullable<String> firstName,
-            @JsonProperty("preferred_first_name") JsonNullable<String> preferredFirstName,
-            @JsonProperty("last_name") JsonNullable<String> lastName,
-            @JsonProperty("gross_pay") JsonNullable<String> grossPay,
-            @JsonProperty("net_pay") JsonNullable<String> netPay,
-            @JsonProperty("check_amount") JsonNullable<String> checkAmount,
-            @JsonProperty("payment_method") JsonNullable<? extends PayrollShowPaymentMethod> paymentMethod,
-            @JsonProperty("memo") JsonNullable<String> memo,
-            @JsonProperty("fixed_compensations") Optional<? extends List<PayrollShowFixedCompensations>> fixedCompensations,
-            @JsonProperty("hourly_compensations") Optional<? extends List<PayrollShowHourlyCompensations>> hourlyCompensations,
-            @JsonProperty("paid_time_off") Optional<? extends List<PayrollShowPaidTimeOff>> paidTimeOff,
-            @JsonProperty("reimbursements") Optional<? extends List<PayrollShowReimbursements>> reimbursements,
-            @JsonProperty("version") Optional<? extends Object> version,
-            @JsonProperty("deductions") Optional<? extends List<PayrollShowDeductions>> deductions,
-            @JsonProperty("taxes") Optional<? extends List<PayrollShowTaxes>> taxes,
-            @JsonProperty("benefits") Optional<? extends List<PayrollShowBenefits>> benefits) {
+            @JsonProperty("employee_first_name") Optional<String> employeeFirstName,
+            @JsonProperty("employee_last_name") Optional<String> employeeLastName,
+            @JsonProperty("payment_method") Optional<? extends PayrollReceiptPaymentMethod> paymentMethod,
+            @JsonProperty("net_pay") Optional<String> netPay,
+            @JsonProperty("total_tax") Optional<String> totalTax,
+            @JsonProperty("total_garnishments") Optional<String> totalGarnishments,
+            @JsonProperty("child_support_garnishment") Optional<String> childSupportGarnishment,
+            @JsonProperty("total_reimbursement") Optional<String> totalReimbursement) {
         Utils.checkNotNull(employeeUuid, "employeeUuid");
-        Utils.checkNotNull(excluded, "excluded");
-        Utils.checkNotNull(firstName, "firstName");
-        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-        Utils.checkNotNull(lastName, "lastName");
-        Utils.checkNotNull(grossPay, "grossPay");
-        Utils.checkNotNull(netPay, "netPay");
-        Utils.checkNotNull(checkAmount, "checkAmount");
+        Utils.checkNotNull(employeeFirstName, "employeeFirstName");
+        Utils.checkNotNull(employeeLastName, "employeeLastName");
         Utils.checkNotNull(paymentMethod, "paymentMethod");
-        Utils.checkNotNull(memo, "memo");
-        Utils.checkNotNull(fixedCompensations, "fixedCompensations");
-        Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
-        Utils.checkNotNull(paidTimeOff, "paidTimeOff");
-        Utils.checkNotNull(reimbursements, "reimbursements");
-        Utils.checkNotNull(version, "version");
-        Utils.checkNotNull(deductions, "deductions");
-        Utils.checkNotNull(taxes, "taxes");
-        Utils.checkNotNull(benefits, "benefits");
+        Utils.checkNotNull(netPay, "netPay");
+        Utils.checkNotNull(totalTax, "totalTax");
+        Utils.checkNotNull(totalGarnishments, "totalGarnishments");
+        Utils.checkNotNull(childSupportGarnishment, "childSupportGarnishment");
+        Utils.checkNotNull(totalReimbursement, "totalReimbursement");
         this.employeeUuid = employeeUuid;
-        this.excluded = excluded;
-        this.firstName = firstName;
-        this.preferredFirstName = preferredFirstName;
-        this.lastName = lastName;
-        this.grossPay = grossPay;
-        this.netPay = netPay;
-        this.checkAmount = checkAmount;
+        this.employeeFirstName = employeeFirstName;
+        this.employeeLastName = employeeLastName;
         this.paymentMethod = paymentMethod;
-        this.memo = memo;
-        this.fixedCompensations = fixedCompensations;
-        this.hourlyCompensations = hourlyCompensations;
-        this.paidTimeOff = paidTimeOff;
-        this.reimbursements = reimbursements;
-        this.version = version;
-        this.deductions = deductions;
-        this.taxes = taxes;
-        this.benefits = benefits;
-        this.additionalProperties = new HashMap<>();
+        this.netPay = netPay;
+        this.totalTax = totalTax;
+        this.totalGarnishments = totalGarnishments;
+        this.childSupportGarnishment = childSupportGarnishment;
+        this.totalReimbursement = totalReimbursement;
     }
     
     public EmployeeCompensations() {
-        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
-            JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
-            JsonNullable.undefined(), Optional.empty(), Optional.empty(),
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty());
     }
@@ -251,173 +126,69 @@ public class EmployeeCompensations {
     }
 
     /**
-     * This employee will be excluded (skipped) from payroll calculation and will not be paid for the
-     * payroll. Cancelling a payroll would reset all employees' excluded back to false.
+     * The first name of the employee.
      */
     @JsonIgnore
-    public Optional<Boolean> excluded() {
-        return excluded;
+    public Optional<String> employeeFirstName() {
+        return employeeFirstName;
     }
 
     /**
-     * The first name of the employee. Requires `employees:read` scope.
+     * The last name of the employee.
      */
     @JsonIgnore
-    public JsonNullable<String> firstName() {
-        return firstName;
+    public Optional<String> employeeLastName() {
+        return employeeLastName;
     }
 
     /**
-     * The preferred first name of the employee. Requires `employees:read` scope.
+     * The employee's compensation payment method.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<String> preferredFirstName() {
-        return preferredFirstName;
+    public Optional<PayrollReceiptPaymentMethod> paymentMethod() {
+        return (Optional<PayrollReceiptPaymentMethod>) paymentMethod;
     }
 
     /**
-     * The last name of the employee. Requires `employees:read` scope.
+     * The employee's net pay. Net pay paid by check is available for reference but is not included in the
+     * `["totals"]["net_pay_debit"]` amount.
      */
     @JsonIgnore
-    public JsonNullable<String> lastName() {
-        return lastName;
-    }
-
-    /**
-     * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages +
-     * cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is
-     * only available for processed payrolls.
-     */
-    @JsonIgnore
-    public JsonNullable<String> grossPay() {
-        return grossPay;
-    }
-
-    /**
-     * The employee's net pay (as a string-formatted decimal, e.g. "1234.56"), equal to gross_pay -
-     * employee taxes - employee deductions or garnishments - cash tips. This value is only available for
-     * processed payrolls.
-     */
-    @JsonIgnore
-    public JsonNullable<String> netPay() {
+    public Optional<String> netPay() {
         return netPay;
     }
 
     /**
-     * The employee's check amount (as a string-formatted decimal, e.g. "1234.56"), equal to net_pay +
-     * reimbursements. This value is only available for processed payrolls.
+     * The total of employer and employee taxes for the pay period.
      */
     @JsonIgnore
-    public JsonNullable<String> checkAmount() {
-        return checkAmount;
+    public Optional<String> totalTax() {
+        return totalTax;
     }
 
     /**
-     * The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls
-     * initially run outside of Gusto, then put into Gusto.
+     * The total garnishments for the pay period.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<PayrollShowPaymentMethod> paymentMethod() {
-        return (JsonNullable<PayrollShowPaymentMethod>) paymentMethod;
+    public Optional<String> totalGarnishments() {
+        return totalGarnishments;
     }
 
     /**
-     * Custom text that will be printed as a personal note to the employee on a paystub.
+     * The total child support garnishment for the pay period.
      */
     @JsonIgnore
-    public JsonNullable<String> memo() {
-        return memo;
+    public Optional<String> childSupportGarnishment() {
+        return childSupportGarnishment;
     }
 
     /**
-     * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-     * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-     * greater than 0.00 are returned.
-     * 
-     * <p>For an unprocessed payroll, all active fixed compensations are returned.
+     * The total reimbursement for the pay period.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PayrollShowFixedCompensations>> fixedCompensations() {
-        return (Optional<List<PayrollShowFixedCompensations>>) fixedCompensations;
-    }
-
-    /**
-     * An array of hourly compensations for the employee. Hourly compensations include regular, overtime,
-     * and double overtime hours. If this payroll has been processed, only hourly compensations with a
-     * value greater than 0.00 are returned.
-     * 
-     * <p>For an unprocessed payroll, all active hourly compensations are returned.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<PayrollShowHourlyCompensations>> hourlyCompensations() {
-        return (Optional<List<PayrollShowHourlyCompensations>>) hourlyCompensations;
-    }
-
-    /**
-     * An array of all paid time off the employee is eligible for this pay period.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<PayrollShowPaidTimeOff>> paidTimeOff() {
-        return (Optional<List<PayrollShowPaidTimeOff>>) paidTimeOff;
-    }
-
-    /**
-     * An array of reimbursements for the employee.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<PayrollShowReimbursements>> reimbursements() {
-        return (Optional<List<PayrollShowReimbursements>>) reimbursements;
-    }
-
-    /**
-     * The current version of this employee compensation. This field is only available for prepared
-     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-     * information on how to use this field.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Object> version() {
-        return (Optional<Object>) version;
-    }
-
-    /**
-     * An array of employee deductions for the pay period. Only included when `deductions` is present in
-     * the `include` parameter.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<PayrollShowDeductions>> deductions() {
-        return (Optional<List<PayrollShowDeductions>>) deductions;
-    }
-
-    /**
-     * An array of employer and employee taxes for the pay period. Only included for processed or
-     * calculated payrolls when `taxes` is present in the `include` parameter.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<PayrollShowTaxes>> taxes() {
-        return (Optional<List<PayrollShowTaxes>>) taxes;
-    }
-
-    /**
-     * An array of employee benefits for the pay period. Benefits are only included for processed payroll
-     * when the include parameter is present.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<PayrollShowBenefits>> benefits() {
-        return (Optional<List<PayrollShowBenefits>>) benefits;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> additionalProperties() {
-        return additionalProperties;
+    public Optional<String> totalReimbursement() {
+        return totalReimbursement;
     }
 
     public static Builder builder() {
@@ -445,370 +216,156 @@ public class EmployeeCompensations {
     }
 
     /**
-     * This employee will be excluded (skipped) from payroll calculation and will not be paid for the
-     * payroll. Cancelling a payroll would reset all employees' excluded back to false.
+     * The first name of the employee.
      */
-    public EmployeeCompensations withExcluded(boolean excluded) {
-        Utils.checkNotNull(excluded, "excluded");
-        this.excluded = Optional.ofNullable(excluded);
+    public EmployeeCompensations withEmployeeFirstName(String employeeFirstName) {
+        Utils.checkNotNull(employeeFirstName, "employeeFirstName");
+        this.employeeFirstName = Optional.ofNullable(employeeFirstName);
         return this;
     }
 
 
     /**
-     * This employee will be excluded (skipped) from payroll calculation and will not be paid for the
-     * payroll. Cancelling a payroll would reset all employees' excluded back to false.
+     * The first name of the employee.
      */
-    public EmployeeCompensations withExcluded(Optional<Boolean> excluded) {
-        Utils.checkNotNull(excluded, "excluded");
-        this.excluded = excluded;
+    public EmployeeCompensations withEmployeeFirstName(Optional<String> employeeFirstName) {
+        Utils.checkNotNull(employeeFirstName, "employeeFirstName");
+        this.employeeFirstName = employeeFirstName;
         return this;
     }
 
     /**
-     * The first name of the employee. Requires `employees:read` scope.
+     * The last name of the employee.
      */
-    public EmployeeCompensations withFirstName(String firstName) {
-        Utils.checkNotNull(firstName, "firstName");
-        this.firstName = JsonNullable.of(firstName);
+    public EmployeeCompensations withEmployeeLastName(String employeeLastName) {
+        Utils.checkNotNull(employeeLastName, "employeeLastName");
+        this.employeeLastName = Optional.ofNullable(employeeLastName);
+        return this;
+    }
+
+
+    /**
+     * The last name of the employee.
+     */
+    public EmployeeCompensations withEmployeeLastName(Optional<String> employeeLastName) {
+        Utils.checkNotNull(employeeLastName, "employeeLastName");
+        this.employeeLastName = employeeLastName;
         return this;
     }
 
     /**
-     * The first name of the employee. Requires `employees:read` scope.
+     * The employee's compensation payment method.
      */
-    public EmployeeCompensations withFirstName(JsonNullable<String> firstName) {
-        Utils.checkNotNull(firstName, "firstName");
-        this.firstName = firstName;
-        return this;
-    }
-
-    /**
-     * The preferred first name of the employee. Requires `employees:read` scope.
-     */
-    public EmployeeCompensations withPreferredFirstName(String preferredFirstName) {
-        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-        this.preferredFirstName = JsonNullable.of(preferredFirstName);
-        return this;
-    }
-
-    /**
-     * The preferred first name of the employee. Requires `employees:read` scope.
-     */
-    public EmployeeCompensations withPreferredFirstName(JsonNullable<String> preferredFirstName) {
-        Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-        this.preferredFirstName = preferredFirstName;
-        return this;
-    }
-
-    /**
-     * The last name of the employee. Requires `employees:read` scope.
-     */
-    public EmployeeCompensations withLastName(String lastName) {
-        Utils.checkNotNull(lastName, "lastName");
-        this.lastName = JsonNullable.of(lastName);
-        return this;
-    }
-
-    /**
-     * The last name of the employee. Requires `employees:read` scope.
-     */
-    public EmployeeCompensations withLastName(JsonNullable<String> lastName) {
-        Utils.checkNotNull(lastName, "lastName");
-        this.lastName = lastName;
-        return this;
-    }
-
-    /**
-     * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages +
-     * cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is
-     * only available for processed payrolls.
-     */
-    public EmployeeCompensations withGrossPay(String grossPay) {
-        Utils.checkNotNull(grossPay, "grossPay");
-        this.grossPay = JsonNullable.of(grossPay);
-        return this;
-    }
-
-    /**
-     * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages +
-     * cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is
-     * only available for processed payrolls.
-     */
-    public EmployeeCompensations withGrossPay(JsonNullable<String> grossPay) {
-        Utils.checkNotNull(grossPay, "grossPay");
-        this.grossPay = grossPay;
-        return this;
-    }
-
-    /**
-     * The employee's net pay (as a string-formatted decimal, e.g. "1234.56"), equal to gross_pay -
-     * employee taxes - employee deductions or garnishments - cash tips. This value is only available for
-     * processed payrolls.
-     */
-    public EmployeeCompensations withNetPay(String netPay) {
-        Utils.checkNotNull(netPay, "netPay");
-        this.netPay = JsonNullable.of(netPay);
-        return this;
-    }
-
-    /**
-     * The employee's net pay (as a string-formatted decimal, e.g. "1234.56"), equal to gross_pay -
-     * employee taxes - employee deductions or garnishments - cash tips. This value is only available for
-     * processed payrolls.
-     */
-    public EmployeeCompensations withNetPay(JsonNullable<String> netPay) {
-        Utils.checkNotNull(netPay, "netPay");
-        this.netPay = netPay;
-        return this;
-    }
-
-    /**
-     * The employee's check amount (as a string-formatted decimal, e.g. "1234.56"), equal to net_pay +
-     * reimbursements. This value is only available for processed payrolls.
-     */
-    public EmployeeCompensations withCheckAmount(String checkAmount) {
-        Utils.checkNotNull(checkAmount, "checkAmount");
-        this.checkAmount = JsonNullable.of(checkAmount);
-        return this;
-    }
-
-    /**
-     * The employee's check amount (as a string-formatted decimal, e.g. "1234.56"), equal to net_pay +
-     * reimbursements. This value is only available for processed payrolls.
-     */
-    public EmployeeCompensations withCheckAmount(JsonNullable<String> checkAmount) {
-        Utils.checkNotNull(checkAmount, "checkAmount");
-        this.checkAmount = checkAmount;
-        return this;
-    }
-
-    /**
-     * The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls
-     * initially run outside of Gusto, then put into Gusto.
-     */
-    public EmployeeCompensations withPaymentMethod(PayrollShowPaymentMethod paymentMethod) {
+    public EmployeeCompensations withPaymentMethod(PayrollReceiptPaymentMethod paymentMethod) {
         Utils.checkNotNull(paymentMethod, "paymentMethod");
-        this.paymentMethod = JsonNullable.of(paymentMethod);
+        this.paymentMethod = Optional.ofNullable(paymentMethod);
         return this;
     }
 
+
     /**
-     * The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls
-     * initially run outside of Gusto, then put into Gusto.
+     * The employee's compensation payment method.
      */
-    public EmployeeCompensations withPaymentMethod(JsonNullable<? extends PayrollShowPaymentMethod> paymentMethod) {
+    public EmployeeCompensations withPaymentMethod(Optional<? extends PayrollReceiptPaymentMethod> paymentMethod) {
         Utils.checkNotNull(paymentMethod, "paymentMethod");
         this.paymentMethod = paymentMethod;
         return this;
     }
 
     /**
-     * Custom text that will be printed as a personal note to the employee on a paystub.
+     * The employee's net pay. Net pay paid by check is available for reference but is not included in the
+     * `["totals"]["net_pay_debit"]` amount.
      */
-    public EmployeeCompensations withMemo(String memo) {
-        Utils.checkNotNull(memo, "memo");
-        this.memo = JsonNullable.of(memo);
-        return this;
-    }
-
-    /**
-     * Custom text that will be printed as a personal note to the employee on a paystub.
-     */
-    public EmployeeCompensations withMemo(JsonNullable<String> memo) {
-        Utils.checkNotNull(memo, "memo");
-        this.memo = memo;
-        return this;
-    }
-
-    /**
-     * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-     * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-     * greater than 0.00 are returned.
-     * 
-     * <p>For an unprocessed payroll, all active fixed compensations are returned.
-     */
-    public EmployeeCompensations withFixedCompensations(List<PayrollShowFixedCompensations> fixedCompensations) {
-        Utils.checkNotNull(fixedCompensations, "fixedCompensations");
-        this.fixedCompensations = Optional.ofNullable(fixedCompensations);
+    public EmployeeCompensations withNetPay(String netPay) {
+        Utils.checkNotNull(netPay, "netPay");
+        this.netPay = Optional.ofNullable(netPay);
         return this;
     }
 
 
     /**
-     * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-     * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-     * greater than 0.00 are returned.
-     * 
-     * <p>For an unprocessed payroll, all active fixed compensations are returned.
+     * The employee's net pay. Net pay paid by check is available for reference but is not included in the
+     * `["totals"]["net_pay_debit"]` amount.
      */
-    public EmployeeCompensations withFixedCompensations(Optional<? extends List<PayrollShowFixedCompensations>> fixedCompensations) {
-        Utils.checkNotNull(fixedCompensations, "fixedCompensations");
-        this.fixedCompensations = fixedCompensations;
+    public EmployeeCompensations withNetPay(Optional<String> netPay) {
+        Utils.checkNotNull(netPay, "netPay");
+        this.netPay = netPay;
         return this;
     }
 
     /**
-     * An array of hourly compensations for the employee. Hourly compensations include regular, overtime,
-     * and double overtime hours. If this payroll has been processed, only hourly compensations with a
-     * value greater than 0.00 are returned.
-     * 
-     * <p>For an unprocessed payroll, all active hourly compensations are returned.
+     * The total of employer and employee taxes for the pay period.
      */
-    public EmployeeCompensations withHourlyCompensations(List<PayrollShowHourlyCompensations> hourlyCompensations) {
-        Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
-        this.hourlyCompensations = Optional.ofNullable(hourlyCompensations);
+    public EmployeeCompensations withTotalTax(String totalTax) {
+        Utils.checkNotNull(totalTax, "totalTax");
+        this.totalTax = Optional.ofNullable(totalTax);
         return this;
     }
 
 
     /**
-     * An array of hourly compensations for the employee. Hourly compensations include regular, overtime,
-     * and double overtime hours. If this payroll has been processed, only hourly compensations with a
-     * value greater than 0.00 are returned.
-     * 
-     * <p>For an unprocessed payroll, all active hourly compensations are returned.
+     * The total of employer and employee taxes for the pay period.
      */
-    public EmployeeCompensations withHourlyCompensations(Optional<? extends List<PayrollShowHourlyCompensations>> hourlyCompensations) {
-        Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
-        this.hourlyCompensations = hourlyCompensations;
+    public EmployeeCompensations withTotalTax(Optional<String> totalTax) {
+        Utils.checkNotNull(totalTax, "totalTax");
+        this.totalTax = totalTax;
         return this;
     }
 
     /**
-     * An array of all paid time off the employee is eligible for this pay period.
+     * The total garnishments for the pay period.
      */
-    public EmployeeCompensations withPaidTimeOff(List<PayrollShowPaidTimeOff> paidTimeOff) {
-        Utils.checkNotNull(paidTimeOff, "paidTimeOff");
-        this.paidTimeOff = Optional.ofNullable(paidTimeOff);
+    public EmployeeCompensations withTotalGarnishments(String totalGarnishments) {
+        Utils.checkNotNull(totalGarnishments, "totalGarnishments");
+        this.totalGarnishments = Optional.ofNullable(totalGarnishments);
         return this;
     }
 
 
     /**
-     * An array of all paid time off the employee is eligible for this pay period.
+     * The total garnishments for the pay period.
      */
-    public EmployeeCompensations withPaidTimeOff(Optional<? extends List<PayrollShowPaidTimeOff>> paidTimeOff) {
-        Utils.checkNotNull(paidTimeOff, "paidTimeOff");
-        this.paidTimeOff = paidTimeOff;
+    public EmployeeCompensations withTotalGarnishments(Optional<String> totalGarnishments) {
+        Utils.checkNotNull(totalGarnishments, "totalGarnishments");
+        this.totalGarnishments = totalGarnishments;
         return this;
     }
 
     /**
-     * An array of reimbursements for the employee.
+     * The total child support garnishment for the pay period.
      */
-    public EmployeeCompensations withReimbursements(List<PayrollShowReimbursements> reimbursements) {
-        Utils.checkNotNull(reimbursements, "reimbursements");
-        this.reimbursements = Optional.ofNullable(reimbursements);
-        return this;
-    }
-
-
-    /**
-     * An array of reimbursements for the employee.
-     */
-    public EmployeeCompensations withReimbursements(Optional<? extends List<PayrollShowReimbursements>> reimbursements) {
-        Utils.checkNotNull(reimbursements, "reimbursements");
-        this.reimbursements = reimbursements;
-        return this;
-    }
-
-    /**
-     * The current version of this employee compensation. This field is only available for prepared
-     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-     * information on how to use this field.
-     */
-    public EmployeeCompensations withVersion(Object version) {
-        Utils.checkNotNull(version, "version");
-        this.version = Optional.ofNullable(version);
+    public EmployeeCompensations withChildSupportGarnishment(String childSupportGarnishment) {
+        Utils.checkNotNull(childSupportGarnishment, "childSupportGarnishment");
+        this.childSupportGarnishment = Optional.ofNullable(childSupportGarnishment);
         return this;
     }
 
 
     /**
-     * The current version of this employee compensation. This field is only available for prepared
-     * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-     * information on how to use this field.
+     * The total child support garnishment for the pay period.
      */
-    public EmployeeCompensations withVersion(Optional<? extends Object> version) {
-        Utils.checkNotNull(version, "version");
-        this.version = version;
+    public EmployeeCompensations withChildSupportGarnishment(Optional<String> childSupportGarnishment) {
+        Utils.checkNotNull(childSupportGarnishment, "childSupportGarnishment");
+        this.childSupportGarnishment = childSupportGarnishment;
         return this;
     }
 
     /**
-     * An array of employee deductions for the pay period. Only included when `deductions` is present in
-     * the `include` parameter.
+     * The total reimbursement for the pay period.
      */
-    public EmployeeCompensations withDeductions(List<PayrollShowDeductions> deductions) {
-        Utils.checkNotNull(deductions, "deductions");
-        this.deductions = Optional.ofNullable(deductions);
+    public EmployeeCompensations withTotalReimbursement(String totalReimbursement) {
+        Utils.checkNotNull(totalReimbursement, "totalReimbursement");
+        this.totalReimbursement = Optional.ofNullable(totalReimbursement);
         return this;
     }
 
 
     /**
-     * An array of employee deductions for the pay period. Only included when `deductions` is present in
-     * the `include` parameter.
+     * The total reimbursement for the pay period.
      */
-    public EmployeeCompensations withDeductions(Optional<? extends List<PayrollShowDeductions>> deductions) {
-        Utils.checkNotNull(deductions, "deductions");
-        this.deductions = deductions;
-        return this;
-    }
-
-    /**
-     * An array of employer and employee taxes for the pay period. Only included for processed or
-     * calculated payrolls when `taxes` is present in the `include` parameter.
-     */
-    public EmployeeCompensations withTaxes(List<PayrollShowTaxes> taxes) {
-        Utils.checkNotNull(taxes, "taxes");
-        this.taxes = Optional.ofNullable(taxes);
-        return this;
-    }
-
-
-    /**
-     * An array of employer and employee taxes for the pay period. Only included for processed or
-     * calculated payrolls when `taxes` is present in the `include` parameter.
-     */
-    public EmployeeCompensations withTaxes(Optional<? extends List<PayrollShowTaxes>> taxes) {
-        Utils.checkNotNull(taxes, "taxes");
-        this.taxes = taxes;
-        return this;
-    }
-
-    /**
-     * An array of employee benefits for the pay period. Benefits are only included for processed payroll
-     * when the include parameter is present.
-     */
-    public EmployeeCompensations withBenefits(List<PayrollShowBenefits> benefits) {
-        Utils.checkNotNull(benefits, "benefits");
-        this.benefits = Optional.ofNullable(benefits);
-        return this;
-    }
-
-
-    /**
-     * An array of employee benefits for the pay period. Benefits are only included for processed payroll
-     * when the include parameter is present.
-     */
-    public EmployeeCompensations withBenefits(Optional<? extends List<PayrollShowBenefits>> benefits) {
-        Utils.checkNotNull(benefits, "benefits");
-        this.benefits = benefits;
-        return this;
-    }
-
-    @JsonAnySetter
-    public EmployeeCompensations withAdditionalProperty(String key, Object value) {
-        // note that value can be null because of the way JsonAnySetter works
-        Utils.checkNotNull(key, "key");
-        additionalProperties.put(key, value); 
-        return this;
-    }
-    public EmployeeCompensations withAdditionalProperties(Map<String, Object> additionalProperties) {
-        Utils.checkNotNull(additionalProperties, "additionalProperties");
-        this.additionalProperties = additionalProperties;
+    public EmployeeCompensations withTotalReimbursement(Optional<String> totalReimbursement) {
+        Utils.checkNotNull(totalReimbursement, "totalReimbursement");
+        this.totalReimbursement = totalReimbursement;
         return this;
     }
 
@@ -823,60 +380,36 @@ public class EmployeeCompensations {
         EmployeeCompensations other = (EmployeeCompensations) o;
         return 
             Utils.enhancedDeepEquals(this.employeeUuid, other.employeeUuid) &&
-            Utils.enhancedDeepEquals(this.excluded, other.excluded) &&
-            Utils.enhancedDeepEquals(this.firstName, other.firstName) &&
-            Utils.enhancedDeepEquals(this.preferredFirstName, other.preferredFirstName) &&
-            Utils.enhancedDeepEquals(this.lastName, other.lastName) &&
-            Utils.enhancedDeepEquals(this.grossPay, other.grossPay) &&
-            Utils.enhancedDeepEquals(this.netPay, other.netPay) &&
-            Utils.enhancedDeepEquals(this.checkAmount, other.checkAmount) &&
+            Utils.enhancedDeepEquals(this.employeeFirstName, other.employeeFirstName) &&
+            Utils.enhancedDeepEquals(this.employeeLastName, other.employeeLastName) &&
             Utils.enhancedDeepEquals(this.paymentMethod, other.paymentMethod) &&
-            Utils.enhancedDeepEquals(this.memo, other.memo) &&
-            Utils.enhancedDeepEquals(this.fixedCompensations, other.fixedCompensations) &&
-            Utils.enhancedDeepEquals(this.hourlyCompensations, other.hourlyCompensations) &&
-            Utils.enhancedDeepEquals(this.paidTimeOff, other.paidTimeOff) &&
-            Utils.enhancedDeepEquals(this.reimbursements, other.reimbursements) &&
-            Utils.enhancedDeepEquals(this.version, other.version) &&
-            Utils.enhancedDeepEquals(this.deductions, other.deductions) &&
-            Utils.enhancedDeepEquals(this.taxes, other.taxes) &&
-            Utils.enhancedDeepEquals(this.benefits, other.benefits) &&
-            Utils.enhancedDeepEquals(this.additionalProperties, other.additionalProperties);
+            Utils.enhancedDeepEquals(this.netPay, other.netPay) &&
+            Utils.enhancedDeepEquals(this.totalTax, other.totalTax) &&
+            Utils.enhancedDeepEquals(this.totalGarnishments, other.totalGarnishments) &&
+            Utils.enhancedDeepEquals(this.childSupportGarnishment, other.childSupportGarnishment) &&
+            Utils.enhancedDeepEquals(this.totalReimbursement, other.totalReimbursement);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            employeeUuid, excluded, firstName,
-            preferredFirstName, lastName, grossPay,
-            netPay, checkAmount, paymentMethod,
-            memo, fixedCompensations, hourlyCompensations,
-            paidTimeOff, reimbursements, version,
-            deductions, taxes, benefits,
-            additionalProperties);
+            employeeUuid, employeeFirstName, employeeLastName,
+            paymentMethod, netPay, totalTax,
+            totalGarnishments, childSupportGarnishment, totalReimbursement);
     }
     
     @Override
     public String toString() {
         return Utils.toString(EmployeeCompensations.class,
                 "employeeUuid", employeeUuid,
-                "excluded", excluded,
-                "firstName", firstName,
-                "preferredFirstName", preferredFirstName,
-                "lastName", lastName,
-                "grossPay", grossPay,
-                "netPay", netPay,
-                "checkAmount", checkAmount,
+                "employeeFirstName", employeeFirstName,
+                "employeeLastName", employeeLastName,
                 "paymentMethod", paymentMethod,
-                "memo", memo,
-                "fixedCompensations", fixedCompensations,
-                "hourlyCompensations", hourlyCompensations,
-                "paidTimeOff", paidTimeOff,
-                "reimbursements", reimbursements,
-                "version", version,
-                "deductions", deductions,
-                "taxes", taxes,
-                "benefits", benefits,
-                "additionalProperties", additionalProperties);
+                "netPay", netPay,
+                "totalTax", totalTax,
+                "totalGarnishments", totalGarnishments,
+                "childSupportGarnishment", childSupportGarnishment,
+                "totalReimbursement", totalReimbursement);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -884,41 +417,21 @@ public class EmployeeCompensations {
 
         private Optional<String> employeeUuid = Optional.empty();
 
-        private Optional<Boolean> excluded = Optional.empty();
+        private Optional<String> employeeFirstName = Optional.empty();
 
-        private JsonNullable<String> firstName = JsonNullable.undefined();
+        private Optional<String> employeeLastName = Optional.empty();
 
-        private JsonNullable<String> preferredFirstName = JsonNullable.undefined();
+        private Optional<? extends PayrollReceiptPaymentMethod> paymentMethod = Optional.empty();
 
-        private JsonNullable<String> lastName = JsonNullable.undefined();
+        private Optional<String> netPay = Optional.empty();
 
-        private JsonNullable<String> grossPay = JsonNullable.undefined();
+        private Optional<String> totalTax = Optional.empty();
 
-        private JsonNullable<String> netPay = JsonNullable.undefined();
+        private Optional<String> totalGarnishments = Optional.empty();
 
-        private JsonNullable<String> checkAmount = JsonNullable.undefined();
+        private Optional<String> childSupportGarnishment = Optional.empty();
 
-        private JsonNullable<? extends PayrollShowPaymentMethod> paymentMethod = JsonNullable.undefined();
-
-        private JsonNullable<String> memo = JsonNullable.undefined();
-
-        private Optional<? extends List<PayrollShowFixedCompensations>> fixedCompensations = Optional.empty();
-
-        private Optional<? extends List<PayrollShowHourlyCompensations>> hourlyCompensations = Optional.empty();
-
-        private Optional<? extends List<PayrollShowPaidTimeOff>> paidTimeOff = Optional.empty();
-
-        private Optional<? extends List<PayrollShowReimbursements>> reimbursements = Optional.empty();
-
-        private Optional<? extends Object> version = Optional.empty();
-
-        private Optional<? extends List<PayrollShowDeductions>> deductions = Optional.empty();
-
-        private Optional<? extends List<PayrollShowTaxes>> taxes = Optional.empty();
-
-        private Optional<? extends List<PayrollShowBenefits>> benefits = Optional.empty();
-
-        private Map<String, Object> additionalProperties = new HashMap<>();
+        private Optional<String> totalReimbursement = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -945,165 +458,56 @@ public class EmployeeCompensations {
 
 
         /**
-         * This employee will be excluded (skipped) from payroll calculation and will not be paid for the
-         * payroll. Cancelling a payroll would reset all employees' excluded back to false.
+         * The first name of the employee.
          */
-        public Builder excluded(boolean excluded) {
-            Utils.checkNotNull(excluded, "excluded");
-            this.excluded = Optional.ofNullable(excluded);
+        public Builder employeeFirstName(String employeeFirstName) {
+            Utils.checkNotNull(employeeFirstName, "employeeFirstName");
+            this.employeeFirstName = Optional.ofNullable(employeeFirstName);
             return this;
         }
 
         /**
-         * This employee will be excluded (skipped) from payroll calculation and will not be paid for the
-         * payroll. Cancelling a payroll would reset all employees' excluded back to false.
+         * The first name of the employee.
          */
-        public Builder excluded(Optional<Boolean> excluded) {
-            Utils.checkNotNull(excluded, "excluded");
-            this.excluded = excluded;
-            return this;
-        }
-
-
-        /**
-         * The first name of the employee. Requires `employees:read` scope.
-         */
-        public Builder firstName(String firstName) {
-            Utils.checkNotNull(firstName, "firstName");
-            this.firstName = JsonNullable.of(firstName);
-            return this;
-        }
-
-        /**
-         * The first name of the employee. Requires `employees:read` scope.
-         */
-        public Builder firstName(JsonNullable<String> firstName) {
-            Utils.checkNotNull(firstName, "firstName");
-            this.firstName = firstName;
+        public Builder employeeFirstName(Optional<String> employeeFirstName) {
+            Utils.checkNotNull(employeeFirstName, "employeeFirstName");
+            this.employeeFirstName = employeeFirstName;
             return this;
         }
 
 
         /**
-         * The preferred first name of the employee. Requires `employees:read` scope.
+         * The last name of the employee.
          */
-        public Builder preferredFirstName(String preferredFirstName) {
-            Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-            this.preferredFirstName = JsonNullable.of(preferredFirstName);
+        public Builder employeeLastName(String employeeLastName) {
+            Utils.checkNotNull(employeeLastName, "employeeLastName");
+            this.employeeLastName = Optional.ofNullable(employeeLastName);
             return this;
         }
 
         /**
-         * The preferred first name of the employee. Requires `employees:read` scope.
+         * The last name of the employee.
          */
-        public Builder preferredFirstName(JsonNullable<String> preferredFirstName) {
-            Utils.checkNotNull(preferredFirstName, "preferredFirstName");
-            this.preferredFirstName = preferredFirstName;
-            return this;
-        }
-
-
-        /**
-         * The last name of the employee. Requires `employees:read` scope.
-         */
-        public Builder lastName(String lastName) {
-            Utils.checkNotNull(lastName, "lastName");
-            this.lastName = JsonNullable.of(lastName);
-            return this;
-        }
-
-        /**
-         * The last name of the employee. Requires `employees:read` scope.
-         */
-        public Builder lastName(JsonNullable<String> lastName) {
-            Utils.checkNotNull(lastName, "lastName");
-            this.lastName = lastName;
+        public Builder employeeLastName(Optional<String> employeeLastName) {
+            Utils.checkNotNull(employeeLastName, "employeeLastName");
+            this.employeeLastName = employeeLastName;
             return this;
         }
 
 
         /**
-         * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages +
-         * cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is
-         * only available for processed payrolls.
+         * The employee's compensation payment method.
          */
-        public Builder grossPay(String grossPay) {
-            Utils.checkNotNull(grossPay, "grossPay");
-            this.grossPay = JsonNullable.of(grossPay);
-            return this;
-        }
-
-        /**
-         * The employee's gross pay (as a string-formatted decimal, e.g. "1234.56"), equal to regular wages +
-         * cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is
-         * only available for processed payrolls.
-         */
-        public Builder grossPay(JsonNullable<String> grossPay) {
-            Utils.checkNotNull(grossPay, "grossPay");
-            this.grossPay = grossPay;
-            return this;
-        }
-
-
-        /**
-         * The employee's net pay (as a string-formatted decimal, e.g. "1234.56"), equal to gross_pay -
-         * employee taxes - employee deductions or garnishments - cash tips. This value is only available for
-         * processed payrolls.
-         */
-        public Builder netPay(String netPay) {
-            Utils.checkNotNull(netPay, "netPay");
-            this.netPay = JsonNullable.of(netPay);
-            return this;
-        }
-
-        /**
-         * The employee's net pay (as a string-formatted decimal, e.g. "1234.56"), equal to gross_pay -
-         * employee taxes - employee deductions or garnishments - cash tips. This value is only available for
-         * processed payrolls.
-         */
-        public Builder netPay(JsonNullable<String> netPay) {
-            Utils.checkNotNull(netPay, "netPay");
-            this.netPay = netPay;
-            return this;
-        }
-
-
-        /**
-         * The employee's check amount (as a string-formatted decimal, e.g. "1234.56"), equal to net_pay +
-         * reimbursements. This value is only available for processed payrolls.
-         */
-        public Builder checkAmount(String checkAmount) {
-            Utils.checkNotNull(checkAmount, "checkAmount");
-            this.checkAmount = JsonNullable.of(checkAmount);
-            return this;
-        }
-
-        /**
-         * The employee's check amount (as a string-formatted decimal, e.g. "1234.56"), equal to net_pay +
-         * reimbursements. This value is only available for processed payrolls.
-         */
-        public Builder checkAmount(JsonNullable<String> checkAmount) {
-            Utils.checkNotNull(checkAmount, "checkAmount");
-            this.checkAmount = checkAmount;
-            return this;
-        }
-
-
-        /**
-         * The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls
-         * initially run outside of Gusto, then put into Gusto.
-         */
-        public Builder paymentMethod(PayrollShowPaymentMethod paymentMethod) {
+        public Builder paymentMethod(PayrollReceiptPaymentMethod paymentMethod) {
             Utils.checkNotNull(paymentMethod, "paymentMethod");
-            this.paymentMethod = JsonNullable.of(paymentMethod);
+            this.paymentMethod = Optional.ofNullable(paymentMethod);
             return this;
         }
 
         /**
-         * The employee's compensation payment method. Is *only* `Historical` when retrieving external payrolls
-         * initially run outside of Gusto, then put into Gusto.
+         * The employee's compensation payment method.
          */
-        public Builder paymentMethod(JsonNullable<? extends PayrollShowPaymentMethod> paymentMethod) {
+        public Builder paymentMethod(Optional<? extends PayrollReceiptPaymentMethod> paymentMethod) {
             Utils.checkNotNull(paymentMethod, "paymentMethod");
             this.paymentMethod = paymentMethod;
             return this;
@@ -1111,227 +515,107 @@ public class EmployeeCompensations {
 
 
         /**
-         * Custom text that will be printed as a personal note to the employee on a paystub.
+         * The employee's net pay. Net pay paid by check is available for reference but is not included in the
+         * `["totals"]["net_pay_debit"]` amount.
          */
-        public Builder memo(String memo) {
-            Utils.checkNotNull(memo, "memo");
-            this.memo = JsonNullable.of(memo);
+        public Builder netPay(String netPay) {
+            Utils.checkNotNull(netPay, "netPay");
+            this.netPay = Optional.ofNullable(netPay);
             return this;
         }
 
         /**
-         * Custom text that will be printed as a personal note to the employee on a paystub.
+         * The employee's net pay. Net pay paid by check is available for reference but is not included in the
+         * `["totals"]["net_pay_debit"]` amount.
          */
-        public Builder memo(JsonNullable<String> memo) {
-            Utils.checkNotNull(memo, "memo");
-            this.memo = memo;
-            return this;
-        }
-
-
-        /**
-         * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-         * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-         * greater than 0.00 are returned.
-         * 
-         * <p>For an unprocessed payroll, all active fixed compensations are returned.
-         */
-        public Builder fixedCompensations(List<PayrollShowFixedCompensations> fixedCompensations) {
-            Utils.checkNotNull(fixedCompensations, "fixedCompensations");
-            this.fixedCompensations = Optional.ofNullable(fixedCompensations);
-            return this;
-        }
-
-        /**
-         * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one
-         * time reimbursements. If this payroll has been processed, only fixed compensations with a value
-         * greater than 0.00 are returned.
-         * 
-         * <p>For an unprocessed payroll, all active fixed compensations are returned.
-         */
-        public Builder fixedCompensations(Optional<? extends List<PayrollShowFixedCompensations>> fixedCompensations) {
-            Utils.checkNotNull(fixedCompensations, "fixedCompensations");
-            this.fixedCompensations = fixedCompensations;
+        public Builder netPay(Optional<String> netPay) {
+            Utils.checkNotNull(netPay, "netPay");
+            this.netPay = netPay;
             return this;
         }
 
 
         /**
-         * An array of hourly compensations for the employee. Hourly compensations include regular, overtime,
-         * and double overtime hours. If this payroll has been processed, only hourly compensations with a
-         * value greater than 0.00 are returned.
-         * 
-         * <p>For an unprocessed payroll, all active hourly compensations are returned.
+         * The total of employer and employee taxes for the pay period.
          */
-        public Builder hourlyCompensations(List<PayrollShowHourlyCompensations> hourlyCompensations) {
-            Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
-            this.hourlyCompensations = Optional.ofNullable(hourlyCompensations);
+        public Builder totalTax(String totalTax) {
+            Utils.checkNotNull(totalTax, "totalTax");
+            this.totalTax = Optional.ofNullable(totalTax);
             return this;
         }
 
         /**
-         * An array of hourly compensations for the employee. Hourly compensations include regular, overtime,
-         * and double overtime hours. If this payroll has been processed, only hourly compensations with a
-         * value greater than 0.00 are returned.
-         * 
-         * <p>For an unprocessed payroll, all active hourly compensations are returned.
+         * The total of employer and employee taxes for the pay period.
          */
-        public Builder hourlyCompensations(Optional<? extends List<PayrollShowHourlyCompensations>> hourlyCompensations) {
-            Utils.checkNotNull(hourlyCompensations, "hourlyCompensations");
-            this.hourlyCompensations = hourlyCompensations;
+        public Builder totalTax(Optional<String> totalTax) {
+            Utils.checkNotNull(totalTax, "totalTax");
+            this.totalTax = totalTax;
             return this;
         }
 
 
         /**
-         * An array of all paid time off the employee is eligible for this pay period.
+         * The total garnishments for the pay period.
          */
-        public Builder paidTimeOff(List<PayrollShowPaidTimeOff> paidTimeOff) {
-            Utils.checkNotNull(paidTimeOff, "paidTimeOff");
-            this.paidTimeOff = Optional.ofNullable(paidTimeOff);
+        public Builder totalGarnishments(String totalGarnishments) {
+            Utils.checkNotNull(totalGarnishments, "totalGarnishments");
+            this.totalGarnishments = Optional.ofNullable(totalGarnishments);
             return this;
         }
 
         /**
-         * An array of all paid time off the employee is eligible for this pay period.
+         * The total garnishments for the pay period.
          */
-        public Builder paidTimeOff(Optional<? extends List<PayrollShowPaidTimeOff>> paidTimeOff) {
-            Utils.checkNotNull(paidTimeOff, "paidTimeOff");
-            this.paidTimeOff = paidTimeOff;
-            return this;
-        }
-
-
-        /**
-         * An array of reimbursements for the employee.
-         */
-        public Builder reimbursements(List<PayrollShowReimbursements> reimbursements) {
-            Utils.checkNotNull(reimbursements, "reimbursements");
-            this.reimbursements = Optional.ofNullable(reimbursements);
-            return this;
-        }
-
-        /**
-         * An array of reimbursements for the employee.
-         */
-        public Builder reimbursements(Optional<? extends List<PayrollShowReimbursements>> reimbursements) {
-            Utils.checkNotNull(reimbursements, "reimbursements");
-            this.reimbursements = reimbursements;
+        public Builder totalGarnishments(Optional<String> totalGarnishments) {
+            Utils.checkNotNull(totalGarnishments, "totalGarnishments");
+            this.totalGarnishments = totalGarnishments;
             return this;
         }
 
 
         /**
-         * The current version of this employee compensation. This field is only available for prepared
-         * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-         * information on how to use this field.
+         * The total child support garnishment for the pay period.
          */
-        public Builder version(Object version) {
-            Utils.checkNotNull(version, "version");
-            this.version = Optional.ofNullable(version);
+        public Builder childSupportGarnishment(String childSupportGarnishment) {
+            Utils.checkNotNull(childSupportGarnishment, "childSupportGarnishment");
+            this.childSupportGarnishment = Optional.ofNullable(childSupportGarnishment);
             return this;
         }
 
         /**
-         * The current version of this employee compensation. This field is only available for prepared
-         * payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for
-         * information on how to use this field.
+         * The total child support garnishment for the pay period.
          */
-        public Builder version(Optional<? extends Object> version) {
-            Utils.checkNotNull(version, "version");
-            this.version = version;
+        public Builder childSupportGarnishment(Optional<String> childSupportGarnishment) {
+            Utils.checkNotNull(childSupportGarnishment, "childSupportGarnishment");
+            this.childSupportGarnishment = childSupportGarnishment;
             return this;
         }
 
 
         /**
-         * An array of employee deductions for the pay period. Only included when `deductions` is present in
-         * the `include` parameter.
+         * The total reimbursement for the pay period.
          */
-        public Builder deductions(List<PayrollShowDeductions> deductions) {
-            Utils.checkNotNull(deductions, "deductions");
-            this.deductions = Optional.ofNullable(deductions);
+        public Builder totalReimbursement(String totalReimbursement) {
+            Utils.checkNotNull(totalReimbursement, "totalReimbursement");
+            this.totalReimbursement = Optional.ofNullable(totalReimbursement);
             return this;
         }
 
         /**
-         * An array of employee deductions for the pay period. Only included when `deductions` is present in
-         * the `include` parameter.
+         * The total reimbursement for the pay period.
          */
-        public Builder deductions(Optional<? extends List<PayrollShowDeductions>> deductions) {
-            Utils.checkNotNull(deductions, "deductions");
-            this.deductions = deductions;
-            return this;
-        }
-
-
-        /**
-         * An array of employer and employee taxes for the pay period. Only included for processed or
-         * calculated payrolls when `taxes` is present in the `include` parameter.
-         */
-        public Builder taxes(List<PayrollShowTaxes> taxes) {
-            Utils.checkNotNull(taxes, "taxes");
-            this.taxes = Optional.ofNullable(taxes);
-            return this;
-        }
-
-        /**
-         * An array of employer and employee taxes for the pay period. Only included for processed or
-         * calculated payrolls when `taxes` is present in the `include` parameter.
-         */
-        public Builder taxes(Optional<? extends List<PayrollShowTaxes>> taxes) {
-            Utils.checkNotNull(taxes, "taxes");
-            this.taxes = taxes;
-            return this;
-        }
-
-
-        /**
-         * An array of employee benefits for the pay period. Benefits are only included for processed payroll
-         * when the include parameter is present.
-         */
-        public Builder benefits(List<PayrollShowBenefits> benefits) {
-            Utils.checkNotNull(benefits, "benefits");
-            this.benefits = Optional.ofNullable(benefits);
-            return this;
-        }
-
-        /**
-         * An array of employee benefits for the pay period. Benefits are only included for processed payroll
-         * when the include parameter is present.
-         */
-        public Builder benefits(Optional<? extends List<PayrollShowBenefits>> benefits) {
-            Utils.checkNotNull(benefits, "benefits");
-            this.benefits = benefits;
-            return this;
-        }
-
-        public Builder additionalProperty(String key, Object value) {
-            Utils.checkNotNull(key, "key");
-            // we could be strict about null values (force the user
-            // to pass `JsonNullable.of(null)`) but likely to be a bit 
-            // annoying for additional properties building so we'll 
-            // relax preconditions.
-            this.additionalProperties.put(key, value);
-            return this;
-        }
-
-        public Builder additionalProperties(Map<String, Object> additionalProperties) {
-            Utils.checkNotNull(additionalProperties, "additionalProperties");
-            this.additionalProperties = additionalProperties;
+        public Builder totalReimbursement(Optional<String> totalReimbursement) {
+            Utils.checkNotNull(totalReimbursement, "totalReimbursement");
+            this.totalReimbursement = totalReimbursement;
             return this;
         }
 
         public EmployeeCompensations build() {
 
             return new EmployeeCompensations(
-                employeeUuid, excluded, firstName,
-                preferredFirstName, lastName, grossPay,
-                netPay, checkAmount, paymentMethod,
-                memo, fixedCompensations, hourlyCompensations,
-                paidTimeOff, reimbursements, version,
-                deductions, taxes, benefits)
-                .withAdditionalProperties(additionalProperties);
+                employeeUuid, employeeFirstName, employeeLastName,
+                paymentMethod, netPay, totalTax,
+                totalGarnishments, childSupportGarnishment, totalReimbursement);
         }
 
     }

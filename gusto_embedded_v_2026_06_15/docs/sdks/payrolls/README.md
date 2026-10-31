@@ -10,11 +10,6 @@
 * [getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements](#getv1companiescompanyidpayrollsidpartnerdisbursements) - Get partner disbursements for a payroll
 * [patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements](#patchv1companiescompanyidpayrollsidpartnerdisbursements) - Update partner disbursements for a payroll
 * [getApprovedReversals](#getapprovedreversals) - Get approved payroll reversals
-* [get](#get) - Get a single payroll
-* [update](#update) - Update a payroll by ID
-* [delete](#delete) - Delete a payroll
-* [list](#list) - Get all payrolls for a company
-* [createOffCycle](#createoffcycle) - Create an off-cycle payroll
 * [getReceipt](#getreceipt) - Get a single payroll receipt
 * [cancel](#cancel) - Cancel a payroll
 * [prepare](#prepare) - Prepare a payroll for update
@@ -23,6 +18,11 @@
 * [skip](#skip) - Skip a payroll
 * [submit](#submit) - Submit payroll
 * [calculateGrossUp](#calculategrossup) - Calculate gross up for a payroll
+* [get](#get) - Get a single payroll
+* [update](#update) - Update a payroll by ID
+* [delete](#delete) - Delete a payroll
+* [list](#list) - Get all payrolls for a company
+* [createOffCycle](#createoffcycle) - Create an off-cycle payroll
 
 ## generatePrintableChecks
 
@@ -233,9 +233,9 @@ public class Application {
             .build();
 
         GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse res = sdk.payrolls().getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements()
+                .xGustoAPIVersion(GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
                 .companyId("<id>")
                 .id("<id>")
-                .xGustoAPIVersion(GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
                 .call();
 
         if (res.payrollPartnerDisbursements().isPresent()) {
@@ -249,9 +249,9 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion>](../../models/operations/GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion.md)                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `id`                                                                                                                                                                                                                         | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the payroll                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion>](../../models/operations/GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion.md)                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -292,9 +292,9 @@ public class Application {
             .build();
 
         PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse res = sdk.payrolls().patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements()
+                .xGustoAPIVersion(PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
                 .companyId("<id>")
                 .id("<id>")
-                .xGustoAPIVersion(PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
                 .requestBody(PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody.builder()
                     .disbursements(List.of(
                         PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements.builder()
@@ -314,9 +314,9 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion>](../../models/operations/PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion.md)                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `id`                                                                                                                                                                                                                         | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the payroll                                                                                                                                                                                                      |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion>](../../models/operations/PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion.md)                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `requestBody`                                                                                                                                                                                                                | [Optional\<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody>](../../models/operations/PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody.md)                                               | :heavy_minus_sign:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -344,8 +344,8 @@ scope: `payrolls:read`
 package hello.world;
 
 import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2026_06_15.models.components.VersionHeader;
 import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollReversalsResponse;
 import java.lang.Exception;
 
@@ -358,8 +358,8 @@ public class Application {
             .build();
 
         GetV1CompaniesCompanyIdPayrollReversalsResponse res = sdk.payrolls().getApprovedReversals()
+                .xGustoAPIVersion(GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
                 .companyId("<id>")
-                .xGustoAPIVersion(VersionHeader.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
                 .call();
 
         if (res.payrollReversalList().isPresent()) {
@@ -373,10 +373,10 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion>](../../models/operations/GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion.md)                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
 | `page`                                                                                                                                                                                                                       | *Optional\<Long>*                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                           | The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.                                                                                                                       |
 | `per`                                                                                                                                                                                                                        | *Optional\<Long>*                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                           | Number of objects per page. For majority of endpoints will default to 25                                                                                                                                                     |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<VersionHeader>](../../models/components/VersionHeader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 
 ### Response
 
@@ -389,341 +389,6 @@ public class Application {
 | models/errors/NotFoundErrorObject | 404                               | application/json                  |
 | models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
-## get
-
-Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
-
-Results are paginated, with a maximum page size of 100 employee_compensations.
-
-Notes:
-* Hour and dollar amounts are returned as string representations of numeric decimals.
-* Hours are represented to the thousands place; dollar amounts are represented to the cent.
-* Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
-* When include parameter with benefits value is passed, employee_benefits:read scope is required to return benefits
-  * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
-
-scope: `payrolls:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-payrolls-payroll_id" method="get" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollsPayrollIdRequest;
-import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollsPayrollIdResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        GetV1CompaniesCompanyIdPayrollsPayrollIdRequest req = GetV1CompaniesCompanyIdPayrollsPayrollIdRequest.builder()
-                .companyId("<id>")
-                .payrollId("<id>")
-                .sortBy("first_name:asc")
-                .build();
-
-        GetV1CompaniesCompanyIdPayrollsPayrollIdResponse res = sdk.payrolls().get()
-                .request(req)
-                .call();
-
-        if (res.payrollShow().isPresent()) {
-            System.out.println(res.payrollShow().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                     | Type                                                                                                                          | Required                                                                                                                      | Description                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                                     | [GetV1CompaniesCompanyIdPayrollsPayrollIdRequest](../../models/operations/GetV1CompaniesCompanyIdPayrollsPayrollIdRequest.md) | :heavy_check_mark:                                                                                                            | The request object to use for the request.                                                                                    |
-
-### Response
-
-**[GetV1CompaniesCompanyIdPayrollsPayrollIdResponse](../../models/operations/GetV1CompaniesCompanyIdPayrollsPayrollIdResponse.md)**
-
-### Errors
-
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| models/errors/NotFoundErrorObject | 404                               | application/json                  |
-| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
-
-## update
-
-This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
-payroll object as a template of fields that you can update.  You cannot modify the structure of the payroll object through this endpoint, only values
-of the fields included in the payroll.  If you do not include specific employee compensations, fixed/hourly compensations, or deductions in your request body, they
-will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a time. Only the employee compensation objects that were
-inputted will be returned.
-
-scope: `payrolls:write`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="put-v1-companies-company_id-payrolls" method="put" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2026_06_15.models.components.PayrollUpdate;
-import com.gusto.embedded_api_v_2026_06_15.models.components.PayrollUpdateEmployeeCompensations;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.UnprocessableEntityError;
-import com.gusto.embedded_api_v_2026_06_15.models.operations.PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion;
-import com.gusto.embedded_api_v_2026_06_15.models.operations.PutV1CompaniesCompanyIdPayrollsResponse;
-import java.lang.Exception;
-import java.util.List;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PutV1CompaniesCompanyIdPayrollsResponse res = sdk.payrolls().update()
-                .xGustoAPIVersion(PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
-                .companyId("<id>")
-                .payrollId("<id>")
-                .payrollUpdate(PayrollUpdate.builder()
-                    .employeeCompensations(List.of(
-                        PayrollUpdateEmployeeCompensations.builder()
-                            .build()))
-                    .build())
-                .call();
-
-        if (res.payrollPrepared().isPresent()) {
-            System.out.println(res.payrollPrepared().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion>](../../models/operations/PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion.md)                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `payrollId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the payroll                                                                                                                                                                                                      |
-| `payrollUpdate`                                                                                                                                                                                                              | [PayrollUpdate](../../models/components/PayrollUpdate.md)                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
-
-### Response
-
-**[PutV1CompaniesCompanyIdPayrollsResponse](../../models/operations/PutV1CompaniesCompanyIdPayrollsResponse.md)**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
-| models/errors/UnprocessableEntityError | 409, 422                               | application/json                       |
-| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
-
-## delete
-
-This endpoint allows you to delete an **unprocessed** payroll.
-
-By default the payroll and associated data is deleted synchronously. To request an asynchronous delete, use the `async=true` query parameter. In both cases validation of ability to delete will be performed and an Unprocessable Entity error will be returned if the payroll is not able to be deleted. A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for asynchronous deletion, `202/Accepted` will be returned.
-
-scope: `payrolls:run`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="delete-v1-companies-company_id-payrolls" method="delete" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion;
-import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1CompaniesCompanyIdPayrollsResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        DeleteV1CompaniesCompanyIdPayrollsResponse res = sdk.payrolls().delete()
-                .companyId("<id>")
-                .payrollId("<id>")
-                .xGustoAPIVersion(DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
-                .call();
-
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `payrollId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the payroll                                                                                                                                                                                                      |
-| `async`                                                                                                                                                                                                                      | *Optional\<Boolean>*                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | When true, request an asynchronous delete of the payroll.                                                                                                                                                                    |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion>](../../models/operations/DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion.md)                                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-
-### Response
-
-**[DeleteV1CompaniesCompanyIdPayrollsResponse](../../models/operations/DeleteV1CompaniesCompanyIdPayrollsResponse.md)**
-
-### Errors
-
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| models/errors/NotFoundErrorObject | 404                               | application/json                  |
-| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
-
-## list
-
-Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, & end_date params.
-
-By default, will return processed, regular payrolls for the past 6 months.
-
-Notes:
-* Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
-* end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
-* Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
-
-scope: `payrolls:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-payrolls" method="get" path="/v1/companies/{company_id}/payrolls" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2026_06_15.models.operations.*;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        GetV1CompaniesCompanyIdPayrollsRequest req = GetV1CompaniesCompanyIdPayrollsRequest.builder()
-                .companyId("<id>")
-                .startDate("2020-01-31")
-                .endDate("2020-01-31")
-                .dateFilterBy(DateFilterBy.CHECK_DATE)
-                .sortOrder(QueryParamSortOrder.ASC)
-                .build();
-
-        GetV1CompaniesCompanyIdPayrollsResponse res = sdk.payrolls().list()
-                .request(req)
-                .call();
-
-        if (res.payrollList().isPresent()) {
-            System.out.println(res.payrollList().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                   | [GetV1CompaniesCompanyIdPayrollsRequest](../../models/operations/GetV1CompaniesCompanyIdPayrollsRequest.md) | :heavy_check_mark:                                                                                          | The request object to use for the request.                                                                  |
-
-### Response
-
-**[GetV1CompaniesCompanyIdPayrollsResponse](../../models/operations/GetV1CompaniesCompanyIdPayrollsResponse.md)**
-
-### Errors
-
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| models/errors/NotFoundErrorObject | 404                               | application/json                  |
-| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
-
-## createOffCycle
-
-Creates a new, unprocessed, off-cycle payroll.
-
-## `off_cycle_reason`
-By default:
-- External benefits and deductions will be included when the `off_cycle_reason` is set to `Correction`.
-- All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
-
-These elections can be overridden with the `skip_regular_deductions` boolean.
-
-scope: `payrolls:run`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-payrolls" method="post" path="/v1/companies/{company_id}/payrolls" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.UnprocessableEntityError;
-import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion;
-import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1CompaniesCompanyIdPayrollsResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PostV1CompaniesCompanyIdPayrollsResponse res = sdk.payrolls().createOffCycle()
-                .xGustoAPIVersion(PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
-                .companyId("<id>")
-                .call();
-
-        if (res.payrollUnprocessed().isPresent()) {
-            System.out.println(res.payrollUnprocessed().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion>](../../models/operations/PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion.md)                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
-| `requestBody`                                                                                                                                                                                                                | [Optional\<PostV1CompaniesCompanyIdPayrollsRequestBody>](../../models/operations/PostV1CompaniesCompanyIdPayrollsRequestBody.md)                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
-
-### Response
-
-**[PostV1CompaniesCompanyIdPayrollsResponse](../../models/operations/PostV1CompaniesCompanyIdPayrollsResponse.md)**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
-| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
-| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
-
 ## getReceipt
 
 Returns a payroll receipt.
@@ -732,6 +397,8 @@ Notes:
 * Hour and dollar amounts are returned as string representations of numeric decimals.
 * Dollar amounts are represented to the cent.
 * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+* Employee compensations are always paginated. Maximum page size is 100 employee compensations per request.
+* Responses include the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` pagination headers.
 
 scope: `payrolls:read`
 
@@ -756,8 +423,8 @@ public class Application {
             .build();
 
         GetV1PaymentReceiptsPayrollsPayrollUuidResponse res = sdk.payrolls().getReceipt()
-                .payrollUuid("<id>")
                 .xGustoAPIVersion(GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
+                .payrollUuid("<id>")
                 .call();
 
         if (res.payrollReceipt().isPresent()) {
@@ -771,8 +438,10 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `payrollUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the payroll                                                                                                                                                                                                      |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion>](../../models/operations/GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion.md)                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `payrollUuid`                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the payroll                                                                                                                                                                                                      |
+| `page`                                                                                                                                                                                                                       | *Optional\<Long>*                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                           | The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.                                                                                                                       |
+| `per`                                                                                                                                                                                                                        | *Optional\<Long>*                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                           | Number of objects per page. For majority of endpoints will default to 25                                                                                                                                                     |
 
 ### Response
 
@@ -850,7 +519,7 @@ public class Application {
 
 ## prepare
 
-Prepares an unprocessed payroll for update, including: adding or removing eligible employees from the payroll,
+Prepares an unprocessed payroll for update, including: adding eligible employees to off-cycle payrolls that support multiple employees (`Bonus`, `Correction`, and `Adhoc`),
 and updating `check_date`, `payroll_deadline`, and `payroll_status_meta` dates and times.
 
 Use this endpoint before calling [PUT /v1/companies/{company_id}/payrolls/{payroll_id}](ref:put-v1-companies-company_id-payrolls).
@@ -1053,14 +722,13 @@ scope: `payrolls:run`
 package hello.world;
 
 import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.PayrollBlockersError;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.*;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws NotFoundErrorObject, PayrollBlockersError, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, ConflictErrorObject, PayrollBlockersError, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -1096,6 +764,7 @@ public class Application {
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
 | models/errors/NotFoundErrorObject  | 404                                | application/json                   |
+| models/errors/ConflictErrorObject  | 409                                | application/json                   |
 | models/errors/PayrollBlockersError | 422                                | application/json                   |
 | models/errors/APIException         | 4XX, 5XX                           | \*/\*                              |
 
@@ -1219,6 +888,341 @@ public class Application {
 ### Response
 
 **[PostPayrollsGrossUpPayrollUuidResponse](../../models/operations/PostPayrollsGrossUpPayrollUuidResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+
+## get
+
+Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
+
+Results are paginated, with a maximum page size of 100 employee_compensations.
+
+Notes:
+* Hour and dollar amounts are returned as string representations of numeric decimals.
+* Hours are represented to the thousands place; dollar amounts are represented to the cent.
+* Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
+* When include parameter with benefits value is passed, employee_benefits:read scope is required to return benefits
+  * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
+
+scope: `payrolls:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-payrolls-payroll_id" method="get" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollsPayrollIdRequest;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollsPayrollIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1CompaniesCompanyIdPayrollsPayrollIdRequest req = GetV1CompaniesCompanyIdPayrollsPayrollIdRequest.builder()
+                .companyId("<id>")
+                .payrollId("<id>")
+                .sortBy("first_name:asc")
+                .build();
+
+        GetV1CompaniesCompanyIdPayrollsPayrollIdResponse res = sdk.payrolls().get()
+                .request(req)
+                .call();
+
+        if (res.payrollShow().isPresent()) {
+            System.out.println(res.payrollShow().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                     | Type                                                                                                                          | Required                                                                                                                      | Description                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                     | [GetV1CompaniesCompanyIdPayrollsPayrollIdRequest](../../models/operations/GetV1CompaniesCompanyIdPayrollsPayrollIdRequest.md) | :heavy_check_mark:                                                                                                            | The request object to use for the request.                                                                                    |
+
+### Response
+
+**[GetV1CompaniesCompanyIdPayrollsPayrollIdResponse](../../models/operations/GetV1CompaniesCompanyIdPayrollsPayrollIdResponse.md)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
+
+## update
+
+This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
+payroll object as a template of fields that you can update.  You cannot modify the structure of the payroll object through this endpoint, only values
+of the fields included in the payroll.  If you do not include specific employee compensations, fixed/hourly compensations, or deductions in your request body, they
+will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a time. Only the employee compensation objects that were
+inputted will be returned.
+
+scope: `payrolls:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="put-v1-companies-company_id-payrolls" method="put" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2026_06_15.models.components.PayrollUpdate;
+import com.gusto.embedded_api_v_2026_06_15.models.components.PayrollUpdateEmployeeCompensations;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.*;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.PutV1CompaniesCompanyIdPayrollsResponse;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, ConflictErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1CompaniesCompanyIdPayrollsResponse res = sdk.payrolls().update()
+                .xGustoAPIVersion(PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
+                .companyId("<id>")
+                .payrollId("<id>")
+                .payrollUpdate(PayrollUpdate.builder()
+                    .employeeCompensations(List.of(
+                        PayrollUpdateEmployeeCompensations.builder()
+                            .build()))
+                    .build())
+                .call();
+
+        if (res.payrollPrepared().isPresent()) {
+            System.out.println(res.payrollPrepared().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion>](../../models/operations/PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion.md)                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `payrollId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the payroll                                                                                                                                                                                                      |
+| `payrollUpdate`                                                                                                                                                                                                              | [PayrollUpdate](../../models/components/PayrollUpdate.md)                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PutV1CompaniesCompanyIdPayrollsResponse](../../models/operations/PutV1CompaniesCompanyIdPayrollsResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/ConflictErrorObject      | 409                                    | application/json                       |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+
+## delete
+
+This endpoint allows you to delete an **unprocessed** payroll.
+
+By default the payroll and associated data is deleted synchronously. To request an asynchronous delete, use the `async=true` query parameter. In both cases validation of ability to delete will be performed and an Unprocessable Entity error will be returned if the payroll is not able to be deleted. A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for asynchronous deletion, `202/Accepted` will be returned.
+
+scope: `payrolls:run`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="delete-v1-companies-company_id-payrolls" method="delete" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1CompaniesCompanyIdPayrollsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        DeleteV1CompaniesCompanyIdPayrollsResponse res = sdk.payrolls().delete()
+                .xGustoAPIVersion(DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
+                .companyId("<id>")
+                .payrollId("<id>")
+                .call();
+
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion>](../../models/operations/DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion.md)                                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `payrollId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the payroll                                                                                                                                                                                                      |
+| `async`                                                                                                                                                                                                                      | *Optional\<Boolean>*                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | When true, request an asynchronous delete of the payroll.                                                                                                                                                                    |
+
+### Response
+
+**[DeleteV1CompaniesCompanyIdPayrollsResponse](../../models/operations/DeleteV1CompaniesCompanyIdPayrollsResponse.md)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
+
+## list
+
+Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, & end_date params.
+
+By default, will return processed, regular payrolls for the past 6 months.
+
+Notes:
+* Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
+* end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
+* Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
+
+scope: `payrolls:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-companies-company_id-payrolls" method="get" path="/v1/companies/{company_id}/payrolls" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1CompaniesCompanyIdPayrollsRequest req = GetV1CompaniesCompanyIdPayrollsRequest.builder()
+                .companyId("<id>")
+                .startDate("2020-01-31")
+                .endDate("2020-01-31")
+                .dateFilterBy(DateFilterBy.CHECK_DATE)
+                .sortOrder(QueryParamSortOrder.ASC)
+                .build();
+
+        GetV1CompaniesCompanyIdPayrollsResponse res = sdk.payrolls().list()
+                .request(req)
+                .call();
+
+        if (res.payrollList().isPresent()) {
+            System.out.println(res.payrollList().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                   | [GetV1CompaniesCompanyIdPayrollsRequest](../../models/operations/GetV1CompaniesCompanyIdPayrollsRequest.md) | :heavy_check_mark:                                                                                          | The request object to use for the request.                                                                  |
+
+### Response
+
+**[GetV1CompaniesCompanyIdPayrollsResponse](../../models/operations/GetV1CompaniesCompanyIdPayrollsResponse.md)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
+
+## createOffCycle
+
+Creates a new, unprocessed, off-cycle payroll.
+
+## `off_cycle_reason`
+By default:
+- External benefits and deductions will be included when the `off_cycle_reason` is set to `Correction`.
+- All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+
+These elections can be overridden with the `skip_regular_deductions` boolean.
+
+scope: `payrolls:run`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="post-v1-companies-company_id-payrolls" method="post" path="/v1/companies/{company_id}/payrolls" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1CompaniesCompanyIdPayrollsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1CompaniesCompanyIdPayrollsResponse res = sdk.payrolls().createOffCycle()
+                .xGustoAPIVersion(PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_SIX_MINUS06_MINUS15)
+                .companyId("<id>")
+                .call();
+
+        if (res.payrollUnprocessed().isPresent()) {
+            System.out.println(res.payrollUnprocessed().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion>](../../models/operations/PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion.md)                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `requestBody`                                                                                                                                                                                                                | [Optional\<PostV1CompaniesCompanyIdPayrollsRequestBody>](../../models/operations/PostV1CompaniesCompanyIdPayrollsRequestBody.md)                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PostV1CompaniesCompanyIdPayrollsResponse](../../models/operations/PostV1CompaniesCompanyIdPayrollsResponse.md)**
 
 ### Errors
 

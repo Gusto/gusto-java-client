@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class DeleteDepartmentRequestBuilder {
 
-    private String departmentUuid;
     private Optional<? extends DeleteDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends DeleteDepartmentHeaderXGustoAPIVersion>>() {});
+    private String departmentUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteDepartmentRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public DeleteDepartmentRequestBuilder departmentUuid(String departmentUuid) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
-        this.departmentUuid = departmentUuid;
-        return this;
     }
                 
     public DeleteDepartmentRequestBuilder xGustoAPIVersion(DeleteDepartmentHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class DeleteDepartmentRequestBuilder {
         return this;
     }
 
+    public DeleteDepartmentRequestBuilder departmentUuid(String departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = departmentUuid;
+        return this;
+    }
+
 
     private DeleteDepartmentRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteDepartmentRequest request = new DeleteDepartmentRequest(departmentUuid,
-            xGustoAPIVersion);
+        DeleteDepartmentRequest request = new DeleteDepartmentRequest(xGustoAPIVersion,
+            departmentUuid);
 
         return request;
     }

@@ -10,7 +10,7 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.SecuritySource;
-import com.gusto.embedded_api.models.components.Contractor;
+import com.gusto.embedded_api.models.components.ContractorShow;
 import com.gusto.embedded_api.models.errors.APIException;
 import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api.models.operations.GetV1ContractorsContractorUuidRequest;
@@ -161,7 +161,7 @@ public class GetV1ContractorsContractorUuid {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withContractor(Utils.unmarshal(response, new TypeReference<Contractor>() {}));
+                    return res.withContractorShow(Utils.unmarshal(response, new TypeReference<ContractorShow>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
@@ -238,8 +238,8 @@ public class GetV1ContractorsContractorUuid {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return Utils.unmarshalAsync(response, new TypeReference<Contractor>() {})
-                            .thenApply(res::withContractor);
+                    return Utils.unmarshalAsync(response, new TypeReference<ContractorShow>() {})
+                            .thenApply(res::withContractorShow);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }

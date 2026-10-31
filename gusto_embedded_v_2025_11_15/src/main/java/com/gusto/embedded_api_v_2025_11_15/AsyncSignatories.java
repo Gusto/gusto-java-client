@@ -93,7 +93,7 @@ public class AsyncSignatories {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyUuidSignatoriesResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyUuidSignatoriesResponse> list(String companyUuid) {
-        return list(companyUuid, Optional.empty());
+        return list(Optional.empty(), companyUuid);
     }
 
     /**
@@ -108,16 +108,16 @@ public class AsyncSignatories {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @return {@code CompletableFuture<GetV1CompaniesCompanyUuidSignatoriesResponse>} - The async response
      */
-    public CompletableFuture<GetV1CompaniesCompanyUuidSignatoriesResponse> list(String companyUuid, Optional<? extends GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1CompaniesCompanyUuidSignatoriesResponse> list(Optional<? extends GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
         GetV1CompaniesCompanyUuidSignatoriesRequest request =
             GetV1CompaniesCompanyUuidSignatoriesRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .build();
         AsyncRequestOperation<GetV1CompaniesCompanyUuidSignatoriesRequest, GetV1CompaniesCompanyUuidSignatoriesResponse> operation
               = new GetV1CompaniesCompanyUuidSignatories.Async(sdkConfiguration, _headers);
@@ -183,7 +183,7 @@ public class AsyncSignatories {
      * @return {@code CompletableFuture<PostV1CompanySignatoriesResponse>} - The async response
      */
     public CompletableFuture<PostV1CompanySignatoriesResponse> create(String companyUuid, SignatoryCreateRequest signatoryCreateRequest) {
-        return create(companyUuid, Optional.empty(), signatoryCreateRequest);
+        return create(Optional.empty(), companyUuid, signatoryCreateRequest);
     }
 
     /**
@@ -209,19 +209,19 @@ public class AsyncSignatories {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @param signatoryCreateRequest Request body for creating a signatory with complete information. All listed required fields must be provided.
      * @return {@code CompletableFuture<PostV1CompanySignatoriesResponse>} - The async response
      */
     public CompletableFuture<PostV1CompanySignatoriesResponse> create(
-            String companyUuid, Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             SignatoryCreateRequest signatoryCreateRequest) {
         PostV1CompanySignatoriesRequest request =
             PostV1CompanySignatoriesRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .signatoryCreateRequest(signatoryCreateRequest)
                 .build();
         AsyncRequestOperation<PostV1CompanySignatoriesRequest, PostV1CompanySignatoriesResponse> operation
@@ -272,7 +272,7 @@ public class AsyncSignatories {
      * @return {@code CompletableFuture<PostV1CompaniesCompanyUuidSignatoriesInviteResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyUuidSignatoriesInviteResponse> invite(String companyUuid, SignatoryInviteRequest signatoryInviteRequest) {
-        return invite(companyUuid, Optional.empty(), signatoryInviteRequest);
+        return invite(Optional.empty(), companyUuid, signatoryInviteRequest);
     }
 
     /**
@@ -290,19 +290,19 @@ public class AsyncSignatories {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @param signatoryInviteRequest Request body for inviting a signatory.
      * @return {@code CompletableFuture<PostV1CompaniesCompanyUuidSignatoriesInviteResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyUuidSignatoriesInviteResponse> invite(
-            String companyUuid, Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             SignatoryInviteRequest signatoryInviteRequest) {
         PostV1CompaniesCompanyUuidSignatoriesInviteRequest request =
             PostV1CompaniesCompanyUuidSignatoriesInviteRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .signatoryInviteRequest(signatoryInviteRequest)
                 .build();
         AsyncRequestOperation<PostV1CompaniesCompanyUuidSignatoriesInviteRequest, PostV1CompaniesCompanyUuidSignatoriesInviteResponse> operation
@@ -359,7 +359,7 @@ public class AsyncSignatories {
             String companyUuid, String signatoryUuid,
             SignatoryUpdateRequest signatoryUpdateRequest) {
         return update(
-                companyUuid, signatoryUuid, Optional.empty(),
+                Optional.empty(), companyUuid, signatoryUuid,
                 signatoryUpdateRequest);
     }
 
@@ -379,21 +379,21 @@ public class AsyncSignatories {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
      * @param signatoryUuid The UUID of the signatory
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param signatoryUpdateRequest Request body for updating a signatory. Email cannot be updated.
      * @return {@code CompletableFuture<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse> update(
-            String companyUuid, String signatoryUuid,
-            Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion, SignatoryUpdateRequest signatoryUpdateRequest) {
+            Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            String signatoryUuid, SignatoryUpdateRequest signatoryUpdateRequest) {
         PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request =
             PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyUuid(companyUuid)
                 .signatoryUuid(signatoryUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .signatoryUpdateRequest(signatoryUpdateRequest)
                 .build();
         AsyncRequestOperation<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest, PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse> operation
@@ -438,7 +438,7 @@ public class AsyncSignatories {
      * @return {@code CompletableFuture<DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse>} - The async response
      */
     public CompletableFuture<DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse> delete(String companyUuid, String signatoryUuid) {
-        return delete(companyUuid, signatoryUuid, Optional.empty());
+        return delete(Optional.empty(), companyUuid, signatoryUuid);
     }
 
     /**
@@ -453,20 +453,20 @@ public class AsyncSignatories {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
      * @param signatoryUuid The UUID of the signatory
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return {@code CompletableFuture<DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse>} - The async response
      */
     public CompletableFuture<DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse> delete(
-            String companyUuid, String signatoryUuid,
-            Optional<? extends DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<? extends DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            String signatoryUuid) {
         DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request =
             DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyUuid(companyUuid)
                 .signatoryUuid(signatoryUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         AsyncRequestOperation<DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest, DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse> operation
               = new DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuid.Async(sdkConfiguration, _headers);

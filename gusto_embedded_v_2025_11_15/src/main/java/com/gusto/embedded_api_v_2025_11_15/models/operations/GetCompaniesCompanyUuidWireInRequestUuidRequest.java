@@ -18,18 +18,18 @@ import java.util.Optional;
 
 public class GetCompaniesCompanyUuidWireInRequestUuidRequest {
     /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
-    private String companyUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
+    private String companyUuid;
 
     /**
      * The page that is requested. When unspecified, will load all objects unless endpoint forces
@@ -46,32 +46,24 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequest {
 
     @JsonCreator
     public GetCompaniesCompanyUuidWireInRequestUuidRequest(
-            String companyUuid,
             Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyUuid,
             Optional<Long> page,
             Optional<Long> per) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(page, "page");
         Utils.checkNotNull(per, "per");
-        this.companyUuid = companyUuid;
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyUuid = companyUuid;
         this.page = page;
         this.per = per;
     }
     
     public GetCompaniesCompanyUuidWireInRequestUuidRequest(
             String companyUuid) {
-        this(companyUuid, Optional.empty(), Optional.empty(),
+        this(Optional.empty(), companyUuid, Optional.empty(),
             Optional.empty());
-    }
-
-    /**
-     * The UUID of the company
-     */
-    @JsonIgnore
-    public String companyUuid() {
-        return companyUuid;
     }
 
     /**
@@ -83,6 +75,14 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequest {
     @JsonIgnore
     public Optional<GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion() {
         return (Optional<GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
+    }
+
+    /**
+     * The UUID of the company
+     */
+    @JsonIgnore
+    public String companyUuid() {
+        return companyUuid;
     }
 
     /**
@@ -108,15 +108,6 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequest {
 
 
     /**
-     * The UUID of the company
-     */
-    public GetCompaniesCompanyUuidWireInRequestUuidRequest withCompanyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -136,6 +127,15 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequest {
     public GetCompaniesCompanyUuidWireInRequestUuidRequest withXGustoAPIVersion(Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * The UUID of the company
+     */
+    public GetCompaniesCompanyUuidWireInRequestUuidRequest withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
         return this;
     }
 
@@ -189,8 +189,8 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequest {
         }
         GetCompaniesCompanyUuidWireInRequestUuidRequest other = (GetCompaniesCompanyUuidWireInRequestUuidRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.page, other.page) &&
             Utils.enhancedDeepEquals(this.per, other.per);
     }
@@ -198,15 +198,15 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, xGustoAPIVersion, page,
+            xGustoAPIVersion, companyUuid, page,
             per);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetCompaniesCompanyUuidWireInRequestUuidRequest.class,
-                "companyUuid", companyUuid,
                 "xGustoAPIVersion", xGustoAPIVersion,
+                "companyUuid", companyUuid,
                 "page", page,
                 "per", per);
     }
@@ -214,9 +214,9 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequest {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String companyUuid;
-
         private Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String companyUuid;
 
         private Optional<Long> page = Optional.empty();
 
@@ -224,16 +224,6 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequest {
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyUuid(String companyUuid) {
-            Utils.checkNotNull(companyUuid, "companyUuid");
-            this.companyUuid = companyUuid;
-            return this;
         }
 
 
@@ -256,6 +246,16 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequest {
         public Builder xGustoAPIVersion(Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
+        }
+
+
+        /**
+         * The UUID of the company
+         */
+        public Builder companyUuid(String companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = companyUuid;
             return this;
         }
 
@@ -305,7 +305,7 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequest {
             }
 
             return new GetCompaniesCompanyUuidWireInRequestUuidRequest(
-                companyUuid, xGustoAPIVersion, page,
+                xGustoAPIVersion, companyUuid, page,
                 per);
         }
 

@@ -19,6 +19,14 @@ import java.util.Optional;
 
 public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
@@ -29,14 +37,6 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=payroll_id")
     private String payrollId;
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion> xGustoAPIVersion;
 
     /**
      * Include the requested attribute in the response, for multiple attributes comma separate the values,
@@ -69,23 +69,23 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
 
     @JsonCreator
     public GetV1CompaniesCompanyIdPayrollsPayrollIdRequest(
+            Optional<? extends GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyId,
             String payrollId,
-            Optional<? extends GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion> xGustoAPIVersion,
             Optional<? extends List<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>> include,
             Optional<Long> page,
             Optional<Long> per,
             Optional<String> sortBy) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyId, "companyId");
         Utils.checkNotNull(payrollId, "payrollId");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(include, "include");
         Utils.checkNotNull(page, "page");
         Utils.checkNotNull(per, "per");
         Utils.checkNotNull(sortBy, "sortBy");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyId = companyId;
         this.payrollId = payrollId;
-        this.xGustoAPIVersion = xGustoAPIVersion;
         this.include = include;
         this.page = page;
         this.per = per;
@@ -95,9 +95,20 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
     public GetV1CompaniesCompanyIdPayrollsPayrollIdRequest(
             String companyId,
             String payrollId) {
-        this(companyId, payrollId, Optional.empty(),
+        this(Optional.empty(), companyId, payrollId,
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -114,17 +125,6 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
     @JsonIgnore
     public String payrollId() {
         return payrollId;
-    }
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -171,24 +171,6 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
 
 
     /**
-     * The UUID of the company
-     */
-    public GetV1CompaniesCompanyIdPayrollsPayrollIdRequest withCompanyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
-
-    /**
-     * The UUID of the payroll
-     */
-    public GetV1CompaniesCompanyIdPayrollsPayrollIdRequest withPayrollId(String payrollId) {
-        Utils.checkNotNull(payrollId, "payrollId");
-        this.payrollId = payrollId;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -208,6 +190,24 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
     public GetV1CompaniesCompanyIdPayrollsPayrollIdRequest withXGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * The UUID of the company
+     */
+    public GetV1CompaniesCompanyIdPayrollsPayrollIdRequest withCompanyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
+    /**
+     * The UUID of the payroll
+     */
+    public GetV1CompaniesCompanyIdPayrollsPayrollIdRequest withPayrollId(String payrollId) {
+        Utils.checkNotNull(payrollId, "payrollId");
+        this.payrollId = payrollId;
         return this;
     }
 
@@ -307,9 +307,9 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
         }
         GetV1CompaniesCompanyIdPayrollsPayrollIdRequest other = (GetV1CompaniesCompanyIdPayrollsPayrollIdRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
             Utils.enhancedDeepEquals(this.payrollId, other.payrollId) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.include, other.include) &&
             Utils.enhancedDeepEquals(this.page, other.page) &&
             Utils.enhancedDeepEquals(this.per, other.per) &&
@@ -319,7 +319,7 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, payrollId, xGustoAPIVersion,
+            xGustoAPIVersion, companyId, payrollId,
             include, page, per,
             sortBy);
     }
@@ -327,9 +327,9 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
     @Override
     public String toString() {
         return Utils.toString(GetV1CompaniesCompanyIdPayrollsPayrollIdRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyId", companyId,
                 "payrollId", payrollId,
-                "xGustoAPIVersion", xGustoAPIVersion,
                 "include", include,
                 "page", page,
                 "per", per,
@@ -339,11 +339,11 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String companyId;
 
         private String payrollId;
-
-        private Optional<? extends GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private Optional<? extends List<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>> include = Optional.empty();
 
@@ -355,26 +355,6 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyId(String companyId) {
-            Utils.checkNotNull(companyId, "companyId");
-            this.companyId = companyId;
-            return this;
-        }
-
-
-        /**
-         * The UUID of the payroll
-         */
-        public Builder payrollId(String payrollId) {
-            Utils.checkNotNull(payrollId, "payrollId");
-            this.payrollId = payrollId;
-            return this;
         }
 
 
@@ -397,6 +377,26 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
         public Builder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
+        }
+
+
+        /**
+         * The UUID of the company
+         */
+        public Builder companyId(String companyId) {
+            Utils.checkNotNull(companyId, "companyId");
+            this.companyId = companyId;
+            return this;
+        }
+
+
+        /**
+         * The UUID of the payroll
+         */
+        public Builder payrollId(String payrollId) {
+            Utils.checkNotNull(payrollId, "payrollId");
+            this.payrollId = payrollId;
             return this;
         }
 
@@ -492,7 +492,7 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequest {
             }
 
             return new GetV1CompaniesCompanyIdPayrollsPayrollIdRequest(
-                companyId, payrollId, xGustoAPIVersion,
+                xGustoAPIVersion, companyId, payrollId,
                 include, page, per,
                 sortBy);
         }

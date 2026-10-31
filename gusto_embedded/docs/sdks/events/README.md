@@ -35,7 +35,7 @@ public class Application {
             .build();
 
         GetEventsRequest req = GetEventsRequest.builder()
-                .sortOrder(QueryParamSortOrder.ASC)
+                .sortOrder(SortOrder.ASC)
                 .build();
 
         GetEventsResponse res = sdk.events().get()

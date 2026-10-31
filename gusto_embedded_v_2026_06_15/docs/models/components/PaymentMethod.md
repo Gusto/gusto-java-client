@@ -1,11 +1,13 @@
 # PaymentMethod
 
+Payment method to filter by.
+
 ## Example Usage
 
 ```java
 import com.gusto.embedded_api_v_2026_06_15.models.components.PaymentMethod;
 
-PaymentMethod value = PaymentMethod.DIRECT_DEPOSIT;
+PaymentMethod value = PaymentMethod.CHECK;
 ```
 
 
@@ -13,5 +15,5 @@ PaymentMethod value = PaymentMethod.DIRECT_DEPOSIT;
 
 | Name             | Value            |
 | ---------------- | ---------------- |
-| `DIRECT_DEPOSIT` | Direct Deposit   |
-| `CHECK`          | Check            |
+| `CHECK`          | check            |
+| `DIRECT_DEPOSIT` | direct_deposit   |

@@ -8,11 +8,11 @@ import static com.gusto.embedded_api_v_2026_06_15.operations.Operations.RequestO
 import com.gusto.embedded_api_v_2026_06_15.models.components.PayrollGrossUpRequest;
 import com.gusto.embedded_api_v_2026_06_15.models.components.PayrollUpdate;
 import com.gusto.embedded_api_v_2026_06_15.models.components.PrintablePayrollChecksBody;
-import com.gusto.embedded_api_v_2026_06_15.models.components.VersionHeader;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1CompaniesCompanyIdPayrollsRequest;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1CompaniesCompanyIdPayrollsRequestBuilder;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1CompaniesCompanyIdPayrollsResponse;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollReversalsRequest;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompanyIdPayrollReversalsResponse;
@@ -369,7 +369,7 @@ public class Payrolls {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(String companyId, String id) {
-        return getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(companyId, id, Optional.empty());
+        return getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(Optional.empty(), companyId, id);
     }
 
     /**
@@ -381,21 +381,21 @@ public class Payrolls {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param id The UUID of the payroll
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-            String companyId, String id,
-            Optional<? extends GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<? extends GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String id) {
         GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request =
             GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .id(id)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest, GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> operation
               = new GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.Sync(sdkConfiguration, _headers);
@@ -432,7 +432,7 @@ public class Payrolls {
      * @throws RuntimeException subclass if the API call fails
      */
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(String companyId, String id) {
-        return patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(companyId, id, Optional.empty(),
+        return patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(Optional.empty(), companyId, id,
             Optional.empty());
     }
 
@@ -445,22 +445,22 @@ public class Payrolls {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param id The UUID of the payroll
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-            String companyId, String id,
-            Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody> requestBody) {
+            Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String id, Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody> requestBody) {
         PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request =
             PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .id(id)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest, PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> operation
@@ -497,7 +497,7 @@ public class Payrolls {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdPayrollReversalsResponse getApprovedReversals(String companyId) {
-        return getApprovedReversals(companyId, Optional.empty(), Optional.empty(),
+        return getApprovedReversals(Optional.empty(), companyId, Optional.empty(),
             Optional.empty());
     }
 
@@ -510,407 +510,26 @@ public class Payrolls {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdPayrollReversalsResponse getApprovedReversals(
-            String companyId, Optional<Long> page,
-            Optional<Long> per, Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<Long> page, Optional<Long> per) {
         GetV1CompaniesCompanyIdPayrollReversalsRequest request =
             GetV1CompaniesCompanyIdPayrollReversalsRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .page(page)
                 .per(per)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<GetV1CompaniesCompanyIdPayrollReversalsRequest, GetV1CompaniesCompanyIdPayrollReversalsResponse> operation
               = new GetV1CompaniesCompanyIdPayrollReversals.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get a single payroll
-     * 
-     * <p>Returns a payroll. If payroll is calculated or processed, will return employee_compensations and
-     * totals.
-     * 
-     * <p>Results are paginated, with a maximum page size of 100 employee_compensations.
-     * 
-     * <p>Notes:
-     * * Hour and dollar amounts are returned as string representations of numeric decimals.
-     * * Hours are represented to the thousands place; dollar amounts are represented to the cent.
-     * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a
-     * given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
-     * * When include parameter with benefits value is passed, employee_benefits:read scope is required to
-     * return benefits
-     * * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1CompaniesCompanyIdPayrollsPayrollIdRequestBuilder get() {
-        return new GetV1CompaniesCompanyIdPayrollsPayrollIdRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get a single payroll
-     * 
-     * <p>Returns a payroll. If payroll is calculated or processed, will return employee_compensations and
-     * totals.
-     * 
-     * <p>Results are paginated, with a maximum page size of 100 employee_compensations.
-     * 
-     * <p>Notes:
-     * * Hour and dollar amounts are returned as string representations of numeric decimals.
-     * * Hours are represented to the thousands place; dollar amounts are represented to the cent.
-     * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a
-     * given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
-     * * When include parameter with benefits value is passed, employee_benefits:read scope is required to
-     * return benefits
-     * * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param request The request object containing all the parameters for the API call.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesCompanyIdPayrollsPayrollIdResponse get(GetV1CompaniesCompanyIdPayrollsPayrollIdRequest request) {
-        RequestOperation<GetV1CompaniesCompanyIdPayrollsPayrollIdRequest, GetV1CompaniesCompanyIdPayrollsPayrollIdResponse> operation
-              = new GetV1CompaniesCompanyIdPayrollsPayrollId.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Update a payroll by ID
-     * 
-     * <p>This endpoint allows you to update information for one or more employees for a specific
-     * **unprocessed** payroll. You can think of the **unprocessed**
-     * payroll object as a template of fields that you can update. You cannot modify the structure of the
-     * payroll object through this endpoint, only values
-     * of the fields included in the payroll. If you do not include specific employee compensations,
-     * fixed/hourly compensations, or deductions in your request body, they
-     * will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a
-     * time. Only the employee compensation objects that were
-     * inputted will be returned.
-     * 
-     * <p>scope: `payrolls:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public PutV1CompaniesCompanyIdPayrollsRequestBuilder update() {
-        return new PutV1CompaniesCompanyIdPayrollsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Update a payroll by ID
-     * 
-     * <p>This endpoint allows you to update information for one or more employees for a specific
-     * **unprocessed** payroll. You can think of the **unprocessed**
-     * payroll object as a template of fields that you can update. You cannot modify the structure of the
-     * payroll object through this endpoint, only values
-     * of the fields included in the payroll. If you do not include specific employee compensations,
-     * fixed/hourly compensations, or deductions in your request body, they
-     * will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a
-     * time. Only the employee compensation objects that were
-     * inputted will be returned.
-     * 
-     * <p>scope: `payrolls:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param payrollId The UUID of the payroll
-     * @param payrollUpdate 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PutV1CompaniesCompanyIdPayrollsResponse update(
-            String companyId, String payrollId,
-            PayrollUpdate payrollUpdate) {
-        return update(Optional.empty(), companyId, payrollId,
-            payrollUpdate);
-    }
-
-    /**
-     * Update a payroll by ID
-     * 
-     * <p>This endpoint allows you to update information for one or more employees for a specific
-     * **unprocessed** payroll. You can think of the **unprocessed**
-     * payroll object as a template of fields that you can update. You cannot modify the structure of the
-     * payroll object through this endpoint, only values
-     * of the fields included in the payroll. If you do not include specific employee compensations,
-     * fixed/hourly compensations, or deductions in your request body, they
-     * will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a
-     * time. Only the employee compensation objects that were
-     * inputted will be returned.
-     * 
-     * <p>scope: `payrolls:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyId The UUID of the company
-     * @param payrollId The UUID of the payroll
-     * @param payrollUpdate 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PutV1CompaniesCompanyIdPayrollsResponse update(
-            Optional<? extends PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
-            String payrollId, PayrollUpdate payrollUpdate) {
-        PutV1CompaniesCompanyIdPayrollsRequest request =
-            PutV1CompaniesCompanyIdPayrollsRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .companyId(companyId)
-                .payrollId(payrollId)
-                .payrollUpdate(payrollUpdate)
-                .build();
-        RequestOperation<PutV1CompaniesCompanyIdPayrollsRequest, PutV1CompaniesCompanyIdPayrollsResponse> operation
-              = new PutV1CompaniesCompanyIdPayrolls.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Delete a payroll
-     * 
-     * <p>This endpoint allows you to delete an **unprocessed** payroll.
-     * 
-     * <p>By default the payroll and associated data is deleted synchronously. To request an asynchronous
-     * delete, use the `async=true` query parameter. In both cases validation of ability to delete will be
-     * performed and an Unprocessable Entity error will be returned if the payroll is not able to be
-     * deleted.
-     * 
-     * <p>A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for
-     * asynchronous deletion, `202/Accepted` will be returned.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder delete() {
-        return new DeleteV1CompaniesCompanyIdPayrollsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Delete a payroll
-     * 
-     * <p>This endpoint allows you to delete an **unprocessed** payroll.
-     * 
-     * <p>By default the payroll and associated data is deleted synchronously. To request an asynchronous
-     * delete, use the `async=true` query parameter. In both cases validation of ability to delete will be
-     * performed and an Unprocessable Entity error will be returned if the payroll is not able to be
-     * deleted.
-     * 
-     * <p>A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for
-     * asynchronous deletion, `202/Accepted` will be returned.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param payrollId The UUID of the payroll
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public DeleteV1CompaniesCompanyIdPayrollsResponse delete(String companyId, String payrollId) {
-        return delete(companyId, payrollId, Optional.empty(),
-            Optional.empty());
-    }
-
-    /**
-     * Delete a payroll
-     * 
-     * <p>This endpoint allows you to delete an **unprocessed** payroll.
-     * 
-     * <p>By default the payroll and associated data is deleted synchronously. To request an asynchronous
-     * delete, use the `async=true` query parameter. In both cases validation of ability to delete will be
-     * performed and an Unprocessable Entity error will be returned if the payroll is not able to be
-     * deleted.
-     * 
-     * <p>A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for
-     * asynchronous deletion, `202/Accepted` will be returned.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param payrollId The UUID of the payroll
-     * @param async When true, request an asynchronous delete of the payroll.
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public DeleteV1CompaniesCompanyIdPayrollsResponse delete(
-            String companyId, String payrollId,
-            Optional<Boolean> async, Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        DeleteV1CompaniesCompanyIdPayrollsRequest request =
-            DeleteV1CompaniesCompanyIdPayrollsRequest
-                .builder()
-                .companyId(companyId)
-                .payrollId(payrollId)
-                .async(async)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .build();
-        RequestOperation<DeleteV1CompaniesCompanyIdPayrollsRequest, DeleteV1CompaniesCompanyIdPayrollsResponse> operation
-              = new DeleteV1CompaniesCompanyIdPayrolls.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get all payrolls for a company
-     * 
-     * <p>Returns a list of payrolls for a company. You can change the payrolls returned by updating the
-     * processing_status, payroll_types, start_date, &amp; end_date params.
-     * 
-     * <p>By default, will return processed, regular payrolls for the past 6 months.
-     * 
-     * <p>Notes:
-     * * Dollar amounts are returned as string representations of numeric decimals, are represented to the
-     * cent.
-     * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1
-     * year apart.
-     * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1CompaniesCompanyIdPayrollsRequestBuilder list() {
-        return new GetV1CompaniesCompanyIdPayrollsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get all payrolls for a company
-     * 
-     * <p>Returns a list of payrolls for a company. You can change the payrolls returned by updating the
-     * processing_status, payroll_types, start_date, &amp; end_date params.
-     * 
-     * <p>By default, will return processed, regular payrolls for the past 6 months.
-     * 
-     * <p>Notes:
-     * * Dollar amounts are returned as string representations of numeric decimals, are represented to the
-     * cent.
-     * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1
-     * year apart.
-     * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param request The request object containing all the parameters for the API call.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesCompanyIdPayrollsResponse list(GetV1CompaniesCompanyIdPayrollsRequest request) {
-        RequestOperation<GetV1CompaniesCompanyIdPayrollsRequest, GetV1CompaniesCompanyIdPayrollsResponse> operation
-              = new GetV1CompaniesCompanyIdPayrolls.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Create an off-cycle payroll
-     * 
-     * <p>Creates a new, unprocessed, off-cycle payroll.
-     * 
-     * <p>## `off_cycle_reason`
-     * By default:
-     * - External benefits and deductions will be included when the `off_cycle_reason` is set to
-     * `Correction`.
-     * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
-     * 
-     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public PostV1CompaniesCompanyIdPayrollsRequestBuilder createOffCycle() {
-        return new PostV1CompaniesCompanyIdPayrollsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Create an off-cycle payroll
-     * 
-     * <p>Creates a new, unprocessed, off-cycle payroll.
-     * 
-     * <p>## `off_cycle_reason`
-     * By default:
-     * - External benefits and deductions will be included when the `off_cycle_reason` is set to
-     * `Correction`.
-     * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
-     * 
-     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PostV1CompaniesCompanyIdPayrollsResponse createOffCycle(String companyId) {
-        return createOffCycle(Optional.empty(), companyId, Optional.empty());
-    }
-
-    /**
-     * Create an off-cycle payroll
-     * 
-     * <p>Creates a new, unprocessed, off-cycle payroll.
-     * 
-     * <p>## `off_cycle_reason`
-     * By default:
-     * - External benefits and deductions will be included when the `off_cycle_reason` is set to
-     * `Correction`.
-     * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
-     * 
-     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyId The UUID of the company
-     * @param requestBody 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PostV1CompaniesCompanyIdPayrollsResponse createOffCycle(
-            Optional<? extends PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
-            Optional<? extends PostV1CompaniesCompanyIdPayrollsRequestBody> requestBody) {
-        PostV1CompaniesCompanyIdPayrollsRequest request =
-            PostV1CompaniesCompanyIdPayrollsRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .companyId(companyId)
-                .requestBody(requestBody)
-                .build();
-        RequestOperation<PostV1CompaniesCompanyIdPayrollsRequest, PostV1CompaniesCompanyIdPayrollsResponse> operation
-              = new PostV1CompaniesCompanyIdPayrolls.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -923,6 +542,10 @@ public class Payrolls {
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Dollar amounts are represented to the cent.
      * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+     * * Employee compensations are always paginated. Maximum page size is 100 employee compensations per
+     * request.
+     * * Responses include the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` pagination
+     * headers.
      * 
      * <p>scope: `payrolls:read`
      * 
@@ -943,6 +566,10 @@ public class Payrolls {
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Dollar amounts are represented to the cent.
      * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+     * * Employee compensations are always paginated. Maximum page size is 100 employee compensations per
+     * request.
+     * * Responses include the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` pagination
+     * headers.
      * 
      * <p>scope: `payrolls:read`
      * 
@@ -953,7 +580,8 @@ public class Payrolls {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1PaymentReceiptsPayrollsPayrollUuidResponse getReceipt(String payrollUuid) {
-        return getReceipt(payrollUuid, Optional.empty());
+        return getReceipt(Optional.empty(), payrollUuid, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -965,22 +593,32 @@ public class Payrolls {
      * * Hour and dollar amounts are returned as string representations of numeric decimals.
      * * Dollar amounts are represented to the cent.
      * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+     * * Employee compensations are always paginated. Maximum page size is 100 employee compensations per
+     * request.
+     * * Responses include the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` pagination
+     * headers.
      * 
      * <p>scope: `payrolls:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param payrollUuid The UUID of the payroll
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollUuid The UUID of the payroll
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1PaymentReceiptsPayrollsPayrollUuidResponse getReceipt(String payrollUuid, Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1PaymentReceiptsPayrollsPayrollUuidResponse getReceipt(
+            Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
+            Optional<Long> page, Optional<Long> per) {
         GetV1PaymentReceiptsPayrollsPayrollUuidRequest request =
             GetV1PaymentReceiptsPayrollsPayrollUuidRequest
                 .builder()
-                .payrollUuid(payrollUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .payrollUuid(payrollUuid)
+                .page(page)
+                .per(per)
                 .build();
         RequestOperation<GetV1PaymentReceiptsPayrollsPayrollUuidRequest, GetV1PaymentReceiptsPayrollsPayrollUuidResponse> operation
               = new GetV1PaymentReceiptsPayrollsPayrollUuid.Sync(sdkConfiguration, _headers);
@@ -1065,8 +703,8 @@ public class Payrolls {
     /**
      * Prepare a payroll for update
      * 
-     * <p>Prepares an unprocessed payroll for update, including: adding or removing eligible employees from
-     * the payroll,
+     * <p>Prepares an unprocessed payroll for update, including: adding eligible employees to off-cycle
+     * payrolls that support multiple employees (`Bonus`, `Correction`, and `Adhoc`),
      * and updating `check_date`, `payroll_deadline`, and `payroll_status_meta` dates and times.
      * 
      * <p>Use this endpoint before calling [PUT
@@ -1093,8 +731,8 @@ public class Payrolls {
     /**
      * Prepare a payroll for update
      * 
-     * <p>Prepares an unprocessed payroll for update, including: adding or removing eligible employees from
-     * the payroll,
+     * <p>Prepares an unprocessed payroll for update, including: adding eligible employees to off-cycle
+     * payrolls that support multiple employees (`Bonus`, `Correction`, and `Adhoc`),
      * and updating `check_date`, `payroll_deadline`, and `payroll_status_meta` dates and times.
      * 
      * <p>Use this endpoint before calling [PUT
@@ -1525,6 +1163,387 @@ public class Payrolls {
                 .build();
         RequestOperation<PostPayrollsGrossUpPayrollUuidRequest, PostPayrollsGrossUpPayrollUuidResponse> operation
               = new PostPayrollsGrossUpPayrollUuid.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a single payroll
+     * 
+     * <p>Returns a payroll. If payroll is calculated or processed, will return employee_compensations and
+     * totals.
+     * 
+     * <p>Results are paginated, with a maximum page size of 100 employee_compensations.
+     * 
+     * <p>Notes:
+     * * Hour and dollar amounts are returned as string representations of numeric decimals.
+     * * Hours are represented to the thousands place; dollar amounts are represented to the cent.
+     * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a
+     * given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
+     * * When include parameter with benefits value is passed, employee_benefits:read scope is required to
+     * return benefits
+     * * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1CompaniesCompanyIdPayrollsPayrollIdRequestBuilder get() {
+        return new GetV1CompaniesCompanyIdPayrollsPayrollIdRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a single payroll
+     * 
+     * <p>Returns a payroll. If payroll is calculated or processed, will return employee_compensations and
+     * totals.
+     * 
+     * <p>Results are paginated, with a maximum page size of 100 employee_compensations.
+     * 
+     * <p>Notes:
+     * * Hour and dollar amounts are returned as string representations of numeric decimals.
+     * * Hours are represented to the thousands place; dollar amounts are represented to the cent.
+     * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a
+     * given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
+     * * When include parameter with benefits value is passed, employee_benefits:read scope is required to
+     * return benefits
+     * * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyIdPayrollsPayrollIdResponse get(GetV1CompaniesCompanyIdPayrollsPayrollIdRequest request) {
+        RequestOperation<GetV1CompaniesCompanyIdPayrollsPayrollIdRequest, GetV1CompaniesCompanyIdPayrollsPayrollIdResponse> operation
+              = new GetV1CompaniesCompanyIdPayrollsPayrollId.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Update a payroll by ID
+     * 
+     * <p>This endpoint allows you to update information for one or more employees for a specific
+     * **unprocessed** payroll. You can think of the **unprocessed**
+     * payroll object as a template of fields that you can update. You cannot modify the structure of the
+     * payroll object through this endpoint, only values
+     * of the fields included in the payroll. If you do not include specific employee compensations,
+     * fixed/hourly compensations, or deductions in your request body, they
+     * will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a
+     * time. Only the employee compensation objects that were
+     * inputted will be returned.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public PutV1CompaniesCompanyIdPayrollsRequestBuilder update() {
+        return new PutV1CompaniesCompanyIdPayrollsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Update a payroll by ID
+     * 
+     * <p>This endpoint allows you to update information for one or more employees for a specific
+     * **unprocessed** payroll. You can think of the **unprocessed**
+     * payroll object as a template of fields that you can update. You cannot modify the structure of the
+     * payroll object through this endpoint, only values
+     * of the fields included in the payroll. If you do not include specific employee compensations,
+     * fixed/hourly compensations, or deductions in your request body, they
+     * will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a
+     * time. Only the employee compensation objects that were
+     * inputted will be returned.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @param payrollId The UUID of the payroll
+     * @param payrollUpdate 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1CompaniesCompanyIdPayrollsResponse update(
+            String companyId, String payrollId,
+            PayrollUpdate payrollUpdate) {
+        return update(Optional.empty(), companyId, payrollId,
+            payrollUpdate);
+    }
+
+    /**
+     * Update a payroll by ID
+     * 
+     * <p>This endpoint allows you to update information for one or more employees for a specific
+     * **unprocessed** payroll. You can think of the **unprocessed**
+     * payroll object as a template of fields that you can update. You cannot modify the structure of the
+     * payroll object through this endpoint, only values
+     * of the fields included in the payroll. If you do not include specific employee compensations,
+     * fixed/hourly compensations, or deductions in your request body, they
+     * will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a
+     * time. Only the employee compensation objects that were
+     * inputted will be returned.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param payrollId The UUID of the payroll
+     * @param payrollUpdate 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1CompaniesCompanyIdPayrollsResponse update(
+            Optional<? extends PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String payrollId, PayrollUpdate payrollUpdate) {
+        PutV1CompaniesCompanyIdPayrollsRequest request =
+            PutV1CompaniesCompanyIdPayrollsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .payrollId(payrollId)
+                .payrollUpdate(payrollUpdate)
+                .build();
+        RequestOperation<PutV1CompaniesCompanyIdPayrollsRequest, PutV1CompaniesCompanyIdPayrollsResponse> operation
+              = new PutV1CompaniesCompanyIdPayrolls.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Delete a payroll
+     * 
+     * <p>This endpoint allows you to delete an **unprocessed** payroll.
+     * 
+     * <p>By default the payroll and associated data is deleted synchronously. To request an asynchronous
+     * delete, use the `async=true` query parameter. In both cases validation of ability to delete will be
+     * performed and an Unprocessable Entity error will be returned if the payroll is not able to be
+     * deleted.
+     * 
+     * <p>A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for
+     * asynchronous deletion, `202/Accepted` will be returned.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder delete() {
+        return new DeleteV1CompaniesCompanyIdPayrollsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete a payroll
+     * 
+     * <p>This endpoint allows you to delete an **unprocessed** payroll.
+     * 
+     * <p>By default the payroll and associated data is deleted synchronously. To request an asynchronous
+     * delete, use the `async=true` query parameter. In both cases validation of ability to delete will be
+     * performed and an Unprocessable Entity error will be returned if the payroll is not able to be
+     * deleted.
+     * 
+     * <p>A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for
+     * asynchronous deletion, `202/Accepted` will be returned.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @param payrollId The UUID of the payroll
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DeleteV1CompaniesCompanyIdPayrollsResponse delete(String companyId, String payrollId) {
+        return delete(Optional.empty(), companyId, payrollId,
+            Optional.empty());
+    }
+
+    /**
+     * Delete a payroll
+     * 
+     * <p>This endpoint allows you to delete an **unprocessed** payroll.
+     * 
+     * <p>By default the payroll and associated data is deleted synchronously. To request an asynchronous
+     * delete, use the `async=true` query parameter. In both cases validation of ability to delete will be
+     * performed and an Unprocessable Entity error will be returned if the payroll is not able to be
+     * deleted.
+     * 
+     * <p>A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for
+     * asynchronous deletion, `202/Accepted` will be returned.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param payrollId The UUID of the payroll
+     * @param async When true, request an asynchronous delete of the payroll.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DeleteV1CompaniesCompanyIdPayrollsResponse delete(
+            Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String payrollId, Optional<Boolean> async) {
+        DeleteV1CompaniesCompanyIdPayrollsRequest request =
+            DeleteV1CompaniesCompanyIdPayrollsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .payrollId(payrollId)
+                .async(async)
+                .build();
+        RequestOperation<DeleteV1CompaniesCompanyIdPayrollsRequest, DeleteV1CompaniesCompanyIdPayrollsResponse> operation
+              = new DeleteV1CompaniesCompanyIdPayrolls.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get all payrolls for a company
+     * 
+     * <p>Returns a list of payrolls for a company. You can change the payrolls returned by updating the
+     * processing_status, payroll_types, start_date, &amp; end_date params.
+     * 
+     * <p>By default, will return processed, regular payrolls for the past 6 months.
+     * 
+     * <p>Notes:
+     * * Dollar amounts are returned as string representations of numeric decimals, are represented to the
+     * cent.
+     * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1
+     * year apart.
+     * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1CompaniesCompanyIdPayrollsRequestBuilder list() {
+        return new GetV1CompaniesCompanyIdPayrollsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get all payrolls for a company
+     * 
+     * <p>Returns a list of payrolls for a company. You can change the payrolls returned by updating the
+     * processing_status, payroll_types, start_date, &amp; end_date params.
+     * 
+     * <p>By default, will return processed, regular payrolls for the past 6 months.
+     * 
+     * <p>Notes:
+     * * Dollar amounts are returned as string representations of numeric decimals, are represented to the
+     * cent.
+     * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1
+     * year apart.
+     * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyIdPayrollsResponse list(GetV1CompaniesCompanyIdPayrollsRequest request) {
+        RequestOperation<GetV1CompaniesCompanyIdPayrollsRequest, GetV1CompaniesCompanyIdPayrollsResponse> operation
+              = new GetV1CompaniesCompanyIdPayrolls.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Create an off-cycle payroll
+     * 
+     * <p>Creates a new, unprocessed, off-cycle payroll.
+     * 
+     * <p>## `off_cycle_reason`
+     * By default:
+     * - External benefits and deductions will be included when the `off_cycle_reason` is set to
+     * `Correction`.
+     * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+     * 
+     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public PostV1CompaniesCompanyIdPayrollsRequestBuilder createOffCycle() {
+        return new PostV1CompaniesCompanyIdPayrollsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create an off-cycle payroll
+     * 
+     * <p>Creates a new, unprocessed, off-cycle payroll.
+     * 
+     * <p>## `off_cycle_reason`
+     * By default:
+     * - External benefits and deductions will be included when the `off_cycle_reason` is set to
+     * `Correction`.
+     * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+     * 
+     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1CompaniesCompanyIdPayrollsResponse createOffCycle(String companyId) {
+        return createOffCycle(Optional.empty(), companyId, Optional.empty());
+    }
+
+    /**
+     * Create an off-cycle payroll
+     * 
+     * <p>Creates a new, unprocessed, off-cycle payroll.
+     * 
+     * <p>## `off_cycle_reason`
+     * By default:
+     * - External benefits and deductions will be included when the `off_cycle_reason` is set to
+     * `Correction`.
+     * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+     * 
+     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param requestBody 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1CompaniesCompanyIdPayrollsResponse createOffCycle(
+            Optional<? extends PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<? extends PostV1CompaniesCompanyIdPayrollsRequestBody> requestBody) {
+        PostV1CompaniesCompanyIdPayrollsRequest request =
+            PostV1CompaniesCompanyIdPayrollsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .requestBody(requestBody)
+                .build();
+        RequestOperation<PostV1CompaniesCompanyIdPayrollsRequest, PostV1CompaniesCompanyIdPayrollsResponse> operation
+              = new PostV1CompaniesCompanyIdPayrolls.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
