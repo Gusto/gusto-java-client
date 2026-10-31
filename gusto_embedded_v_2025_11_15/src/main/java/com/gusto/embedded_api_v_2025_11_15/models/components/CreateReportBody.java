@@ -30,13 +30,15 @@ public class CreateReportBody {
      * Columns to include in the report
      */
     @JsonProperty("columns")
-    private List<Columns> columns;
+    private List<CreateReportBodyColumns> columns;
 
     /**
-     * How to group the report
+     * Optional. How to group the report. If omitted, sensible defaults are derived from the `columns`
+     * requested.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("groupings")
-    private List<Groupings> groupings;
+    private Optional<? extends List<CreateReportBodyGroupings>> groupings;
 
     /**
      * The title of the report
@@ -49,7 +51,7 @@ public class CreateReportBody {
      * The type of file to generate
      */
     @JsonProperty("file_type")
-    private FileType fileType;
+    private CreateReportBodyFileType fileType;
 
     /**
      * Whether to include subtotals and grand totals in the report
@@ -57,6 +59,13 @@ public class CreateReportBody {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("with_totals")
     private Optional<Boolean> withTotals;
+
+    /**
+     * Which payroll date `start_date` and `end_date` filter against.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("date_filter_type")
+    private Optional<? extends CreateReportBodyDateFilterType> dateFilterType;
 
     /**
      * Start date of data to filter by
@@ -98,7 +107,7 @@ public class CreateReportBody {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("employment_type")
-    private Optional<? extends EmploymentType> employmentType;
+    private Optional<? extends CreateReportBodyEmploymentType> employmentType;
 
     /**
      * Employee employment status to filter by
@@ -130,17 +139,18 @@ public class CreateReportBody {
 
     @JsonCreator
     public CreateReportBody(
-            @JsonProperty("columns") List<Columns> columns,
-            @JsonProperty("groupings") List<Groupings> groupings,
+            @JsonProperty("columns") List<CreateReportBodyColumns> columns,
+            @JsonProperty("groupings") Optional<? extends List<CreateReportBodyGroupings>> groupings,
             @JsonProperty("custom_name") Optional<String> customName,
-            @JsonProperty("file_type") FileType fileType,
+            @JsonProperty("file_type") CreateReportBodyFileType fileType,
             @JsonProperty("with_totals") Optional<Boolean> withTotals,
+            @JsonProperty("date_filter_type") Optional<? extends CreateReportBodyDateFilterType> dateFilterType,
             @JsonProperty("start_date") Optional<LocalDate> startDate,
             @JsonProperty("end_date") Optional<LocalDate> endDate,
             @JsonProperty("dismissed_start_date") Optional<LocalDate> dismissedStartDate,
             @JsonProperty("dismissed_end_date") Optional<LocalDate> dismissedEndDate,
             @JsonProperty("payment_method") Optional<? extends CreateReportBodyPaymentMethod> paymentMethod,
-            @JsonProperty("employment_type") Optional<? extends EmploymentType> employmentType,
+            @JsonProperty("employment_type") Optional<? extends CreateReportBodyEmploymentType> employmentType,
             @JsonProperty("employment_status") Optional<? extends CreateReportBodyEmploymentStatus> employmentStatus,
             @JsonProperty("employee_uuids") JsonNullable<? extends List<String>> employeeUuids,
             @JsonProperty("department_uuids") Optional<? extends List<String>> departmentUuids,
@@ -150,6 +160,7 @@ public class CreateReportBody {
         Utils.checkNotNull(customName, "customName");
         Utils.checkNotNull(fileType, "fileType");
         Utils.checkNotNull(withTotals, "withTotals");
+        Utils.checkNotNull(dateFilterType, "dateFilterType");
         Utils.checkNotNull(startDate, "startDate");
         Utils.checkNotNull(endDate, "endDate");
         Utils.checkNotNull(dismissedStartDate, "dismissedStartDate");
@@ -165,6 +176,7 @@ public class CreateReportBody {
         this.customName = customName;
         this.fileType = fileType;
         this.withTotals = withTotals;
+        this.dateFilterType = dateFilterType;
         this.startDate = startDate;
         this.endDate = endDate;
         this.dismissedStartDate = dismissedStartDate;
@@ -178,30 +190,32 @@ public class CreateReportBody {
     }
     
     public CreateReportBody(
-            List<Columns> columns,
-            List<Groupings> groupings,
-            FileType fileType) {
-        this(columns, groupings, Optional.empty(),
+            List<CreateReportBodyColumns> columns,
+            CreateReportBodyFileType fileType) {
+        this(columns, Optional.empty(), Optional.empty(),
             fileType, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            JsonNullable.undefined(), Optional.empty(), Optional.empty());
+            Optional.empty(), JsonNullable.undefined(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
      * Columns to include in the report
      */
     @JsonIgnore
-    public List<Columns> columns() {
+    public List<CreateReportBodyColumns> columns() {
         return columns;
     }
 
     /**
-     * How to group the report
+     * Optional. How to group the report. If omitted, sensible defaults are derived from the `columns`
+     * requested.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public List<Groupings> groupings() {
-        return groupings;
+    public Optional<List<CreateReportBodyGroupings>> groupings() {
+        return (Optional<List<CreateReportBodyGroupings>>) groupings;
     }
 
     /**
@@ -216,7 +230,7 @@ public class CreateReportBody {
      * The type of file to generate
      */
     @JsonIgnore
-    public FileType fileType() {
+    public CreateReportBodyFileType fileType() {
         return fileType;
     }
 
@@ -226,6 +240,15 @@ public class CreateReportBody {
     @JsonIgnore
     public Optional<Boolean> withTotals() {
         return withTotals;
+    }
+
+    /**
+     * Which payroll date `start_date` and `end_date` filter against.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<CreateReportBodyDateFilterType> dateFilterType() {
+        return (Optional<CreateReportBodyDateFilterType>) dateFilterType;
     }
 
     /**
@@ -274,8 +297,8 @@ public class CreateReportBody {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<EmploymentType> employmentType() {
-        return (Optional<EmploymentType>) employmentType;
+    public Optional<CreateReportBodyEmploymentType> employmentType() {
+        return (Optional<CreateReportBodyEmploymentType>) employmentType;
     }
 
     /**
@@ -322,16 +345,28 @@ public class CreateReportBody {
     /**
      * Columns to include in the report
      */
-    public CreateReportBody withColumns(List<Columns> columns) {
+    public CreateReportBody withColumns(List<CreateReportBodyColumns> columns) {
         Utils.checkNotNull(columns, "columns");
         this.columns = columns;
         return this;
     }
 
     /**
-     * How to group the report
+     * Optional. How to group the report. If omitted, sensible defaults are derived from the `columns`
+     * requested.
      */
-    public CreateReportBody withGroupings(List<Groupings> groupings) {
+    public CreateReportBody withGroupings(List<CreateReportBodyGroupings> groupings) {
+        Utils.checkNotNull(groupings, "groupings");
+        this.groupings = Optional.ofNullable(groupings);
+        return this;
+    }
+
+
+    /**
+     * Optional. How to group the report. If omitted, sensible defaults are derived from the `columns`
+     * requested.
+     */
+    public CreateReportBody withGroupings(Optional<? extends List<CreateReportBodyGroupings>> groupings) {
         Utils.checkNotNull(groupings, "groupings");
         this.groupings = groupings;
         return this;
@@ -359,7 +394,7 @@ public class CreateReportBody {
     /**
      * The type of file to generate
      */
-    public CreateReportBody withFileType(FileType fileType) {
+    public CreateReportBody withFileType(CreateReportBodyFileType fileType) {
         Utils.checkNotNull(fileType, "fileType");
         this.fileType = fileType;
         return this;
@@ -381,6 +416,25 @@ public class CreateReportBody {
     public CreateReportBody withWithTotals(Optional<Boolean> withTotals) {
         Utils.checkNotNull(withTotals, "withTotals");
         this.withTotals = withTotals;
+        return this;
+    }
+
+    /**
+     * Which payroll date `start_date` and `end_date` filter against.
+     */
+    public CreateReportBody withDateFilterType(CreateReportBodyDateFilterType dateFilterType) {
+        Utils.checkNotNull(dateFilterType, "dateFilterType");
+        this.dateFilterType = Optional.ofNullable(dateFilterType);
+        return this;
+    }
+
+
+    /**
+     * Which payroll date `start_date` and `end_date` filter against.
+     */
+    public CreateReportBody withDateFilterType(Optional<? extends CreateReportBodyDateFilterType> dateFilterType) {
+        Utils.checkNotNull(dateFilterType, "dateFilterType");
+        this.dateFilterType = dateFilterType;
         return this;
     }
 
@@ -482,7 +536,7 @@ public class CreateReportBody {
     /**
      * Employee employment type to filter by
      */
-    public CreateReportBody withEmploymentType(EmploymentType employmentType) {
+    public CreateReportBody withEmploymentType(CreateReportBodyEmploymentType employmentType) {
         Utils.checkNotNull(employmentType, "employmentType");
         this.employmentType = Optional.ofNullable(employmentType);
         return this;
@@ -492,7 +546,7 @@ public class CreateReportBody {
     /**
      * Employee employment type to filter by
      */
-    public CreateReportBody withEmploymentType(Optional<? extends EmploymentType> employmentType) {
+    public CreateReportBody withEmploymentType(Optional<? extends CreateReportBodyEmploymentType> employmentType) {
         Utils.checkNotNull(employmentType, "employmentType");
         this.employmentType = employmentType;
         return this;
@@ -588,6 +642,7 @@ public class CreateReportBody {
             Utils.enhancedDeepEquals(this.customName, other.customName) &&
             Utils.enhancedDeepEquals(this.fileType, other.fileType) &&
             Utils.enhancedDeepEquals(this.withTotals, other.withTotals) &&
+            Utils.enhancedDeepEquals(this.dateFilterType, other.dateFilterType) &&
             Utils.enhancedDeepEquals(this.startDate, other.startDate) &&
             Utils.enhancedDeepEquals(this.endDate, other.endDate) &&
             Utils.enhancedDeepEquals(this.dismissedStartDate, other.dismissedStartDate) &&
@@ -604,10 +659,11 @@ public class CreateReportBody {
     public int hashCode() {
         return Utils.enhancedHash(
             columns, groupings, customName,
-            fileType, withTotals, startDate,
-            endDate, dismissedStartDate, dismissedEndDate,
-            paymentMethod, employmentType, employmentStatus,
-            employeeUuids, departmentUuids, workAddressUuids);
+            fileType, withTotals, dateFilterType,
+            startDate, endDate, dismissedStartDate,
+            dismissedEndDate, paymentMethod, employmentType,
+            employmentStatus, employeeUuids, departmentUuids,
+            workAddressUuids);
     }
     
     @Override
@@ -618,6 +674,7 @@ public class CreateReportBody {
                 "customName", customName,
                 "fileType", fileType,
                 "withTotals", withTotals,
+                "dateFilterType", dateFilterType,
                 "startDate", startDate,
                 "endDate", endDate,
                 "dismissedStartDate", dismissedStartDate,
@@ -633,15 +690,17 @@ public class CreateReportBody {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private List<Columns> columns;
+        private List<CreateReportBodyColumns> columns;
 
-        private List<Groupings> groupings;
+        private Optional<? extends List<CreateReportBodyGroupings>> groupings = Optional.empty();
 
         private Optional<String> customName = Optional.empty();
 
-        private FileType fileType;
+        private CreateReportBodyFileType fileType;
 
         private Optional<Boolean> withTotals;
+
+        private Optional<? extends CreateReportBodyDateFilterType> dateFilterType;
 
         private Optional<LocalDate> startDate = Optional.empty();
 
@@ -653,7 +712,7 @@ public class CreateReportBody {
 
         private Optional<? extends CreateReportBodyPaymentMethod> paymentMethod = Optional.empty();
 
-        private Optional<? extends EmploymentType> employmentType = Optional.empty();
+        private Optional<? extends CreateReportBodyEmploymentType> employmentType = Optional.empty();
 
         private Optional<? extends CreateReportBodyEmploymentStatus> employmentStatus = Optional.empty();
 
@@ -671,7 +730,7 @@ public class CreateReportBody {
         /**
          * Columns to include in the report
          */
-        public Builder columns(List<Columns> columns) {
+        public Builder columns(List<CreateReportBodyColumns> columns) {
             Utils.checkNotNull(columns, "columns");
             this.columns = columns;
             return this;
@@ -679,9 +738,20 @@ public class CreateReportBody {
 
 
         /**
-         * How to group the report
+         * Optional. How to group the report. If omitted, sensible defaults are derived from the `columns`
+         * requested.
          */
-        public Builder groupings(List<Groupings> groupings) {
+        public Builder groupings(List<CreateReportBodyGroupings> groupings) {
+            Utils.checkNotNull(groupings, "groupings");
+            this.groupings = Optional.ofNullable(groupings);
+            return this;
+        }
+
+        /**
+         * Optional. How to group the report. If omitted, sensible defaults are derived from the `columns`
+         * requested.
+         */
+        public Builder groupings(Optional<? extends List<CreateReportBodyGroupings>> groupings) {
             Utils.checkNotNull(groupings, "groupings");
             this.groupings = groupings;
             return this;
@@ -710,7 +780,7 @@ public class CreateReportBody {
         /**
          * The type of file to generate
          */
-        public Builder fileType(FileType fileType) {
+        public Builder fileType(CreateReportBodyFileType fileType) {
             Utils.checkNotNull(fileType, "fileType");
             this.fileType = fileType;
             return this;
@@ -732,6 +802,25 @@ public class CreateReportBody {
         public Builder withTotals(Optional<Boolean> withTotals) {
             Utils.checkNotNull(withTotals, "withTotals");
             this.withTotals = withTotals;
+            return this;
+        }
+
+
+        /**
+         * Which payroll date `start_date` and `end_date` filter against.
+         */
+        public Builder dateFilterType(CreateReportBodyDateFilterType dateFilterType) {
+            Utils.checkNotNull(dateFilterType, "dateFilterType");
+            this.dateFilterType = Optional.ofNullable(dateFilterType);
+            return this;
+        }
+
+        /**
+         * Which payroll date `start_date` and `end_date` filter against.
+         */
+        public Builder dateFilterType(Optional<? extends CreateReportBodyDateFilterType> dateFilterType) {
+            Utils.checkNotNull(dateFilterType, "dateFilterType");
+            this.dateFilterType = dateFilterType;
             return this;
         }
 
@@ -834,7 +923,7 @@ public class CreateReportBody {
         /**
          * Employee employment type to filter by
          */
-        public Builder employmentType(EmploymentType employmentType) {
+        public Builder employmentType(CreateReportBodyEmploymentType employmentType) {
             Utils.checkNotNull(employmentType, "employmentType");
             this.employmentType = Optional.ofNullable(employmentType);
             return this;
@@ -843,7 +932,7 @@ public class CreateReportBody {
         /**
          * Employee employment type to filter by
          */
-        public Builder employmentType(Optional<? extends EmploymentType> employmentType) {
+        public Builder employmentType(Optional<? extends CreateReportBodyEmploymentType> employmentType) {
             Utils.checkNotNull(employmentType, "employmentType");
             this.employmentType = employmentType;
             return this;
@@ -929,13 +1018,17 @@ public class CreateReportBody {
             if (withTotals == null) {
                 withTotals = _SINGLETON_VALUE_WithTotals.value();
             }
+            if (dateFilterType == null) {
+                dateFilterType = _SINGLETON_VALUE_DateFilterType.value();
+            }
 
             return new CreateReportBody(
                 columns, groupings, customName,
-                fileType, withTotals, startDate,
-                endDate, dismissedStartDate, dismissedEndDate,
-                paymentMethod, employmentType, employmentStatus,
-                employeeUuids, departmentUuids, workAddressUuids);
+                fileType, withTotals, dateFilterType,
+                startDate, endDate, dismissedStartDate,
+                dismissedEndDate, paymentMethod, employmentType,
+                employmentStatus, employeeUuids, departmentUuids,
+                workAddressUuids);
         }
 
 
@@ -944,5 +1037,11 @@ public class CreateReportBody {
                         "with_totals",
                         "false",
                         new TypeReference<Optional<Boolean>>() {});
+
+        private static final LazySingletonValue<Optional<? extends CreateReportBodyDateFilterType>> _SINGLETON_VALUE_DateFilterType =
+                new LazySingletonValue<>(
+                        "date_filter_type",
+                        "\"period_end_date\"",
+                        new TypeReference<Optional<? extends CreateReportBodyDateFilterType>>() {});
     }
 }

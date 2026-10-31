@@ -219,6 +219,61 @@ public class AsyncGarnishments {
 
 
     /**
+     * Get child support garnishment data
+     * 
+     * <p>Agency data and requirements to be used for creating child support garnishments
+     * 
+     * <p>scope: `garnishments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetV1GarnishmentsChildSupportRequestBuilder getChildSupportData() {
+        return new GetV1GarnishmentsChildSupportRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get child support garnishment data
+     * 
+     * <p>Agency data and requirements to be used for creating child support garnishments
+     * 
+     * <p>scope: `garnishments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return {@code CompletableFuture<GetV1GarnishmentsChildSupportResponse>} - The async response
+     */
+    public CompletableFuture<GetV1GarnishmentsChildSupportResponse> getChildSupportDataDirect() {
+        return getChildSupportData(Optional.empty());
+    }
+
+    /**
+     * Get child support garnishment data
+     * 
+     * <p>Agency data and requirements to be used for creating child support garnishments
+     * 
+     * <p>scope: `garnishments:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @return {@code CompletableFuture<GetV1GarnishmentsChildSupportResponse>} - The async response
+     */
+    public CompletableFuture<GetV1GarnishmentsChildSupportResponse> getChildSupportData(Optional<? extends GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        GetV1GarnishmentsChildSupportRequest request =
+            GetV1GarnishmentsChildSupportRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .build();
+        AsyncRequestOperation<GetV1GarnishmentsChildSupportRequest, GetV1GarnishmentsChildSupportResponse> operation
+              = new GetV1GarnishmentsChildSupport.Async(sdkConfiguration, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
      * Get a garnishment
      * 
      * <p>Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s
@@ -364,61 +419,6 @@ public class AsyncGarnishments {
                 .build();
         AsyncRequestOperation<PutV1GarnishmentsGarnishmentIdRequest, PutV1GarnishmentsGarnishmentIdResponse> operation
               = new PutV1GarnishmentsGarnishmentId.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get child support garnishment data
-     * 
-     * <p>Agency data and requirements to be used for creating child support garnishments
-     * 
-     * <p>scope: `garnishments:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public GetV1GarnishmentsChildSupportRequestBuilder getChildSupportData() {
-        return new GetV1GarnishmentsChildSupportRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get child support garnishment data
-     * 
-     * <p>Agency data and requirements to be used for creating child support garnishments
-     * 
-     * <p>scope: `garnishments:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return {@code CompletableFuture<GetV1GarnishmentsChildSupportResponse>} - The async response
-     */
-    public CompletableFuture<GetV1GarnishmentsChildSupportResponse> getChildSupportDataDirect() {
-        return getChildSupportData(Optional.empty());
-    }
-
-    /**
-     * Get child support garnishment data
-     * 
-     * <p>Agency data and requirements to be used for creating child support garnishments
-     * 
-     * <p>scope: `garnishments:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @return {@code CompletableFuture<GetV1GarnishmentsChildSupportResponse>} - The async response
-     */
-    public CompletableFuture<GetV1GarnishmentsChildSupportResponse> getChildSupportData(Optional<? extends GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        GetV1GarnishmentsChildSupportRequest request =
-            GetV1GarnishmentsChildSupportRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .build();
-        AsyncRequestOperation<GetV1GarnishmentsChildSupportRequest, GetV1GarnishmentsChildSupportResponse> operation
-              = new GetV1GarnishmentsChildSupport.Async(sdkConfiguration, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

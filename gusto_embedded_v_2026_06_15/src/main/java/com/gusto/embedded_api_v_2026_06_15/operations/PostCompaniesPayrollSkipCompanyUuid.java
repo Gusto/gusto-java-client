@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.SecuritySource;
 import com.gusto.embedded_api_v_2026_06_15.models.errors.APIException;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.ConflictErrorObject;
 import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api_v_2026_06_15.models.errors.PayrollBlockersError;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.PostCompaniesPayrollSkipCompanyUuidRequest;
@@ -182,6 +183,13 @@ public class PostCompaniesPayrollSkipCompanyUuid {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
+            if (Utils.statusCodeMatches(response.statusCode(), "409")) {
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    throw ConflictErrorObject.from(response);
+                } else {
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                }
+            }
             if (Utils.statusCodeMatches(response.statusCode(), "422")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     throw PayrollBlockersError.from(response);
@@ -259,6 +267,14 @@ public class PostCompaniesPayrollSkipCompanyUuid {
             if (Utils.statusCodeMatches(response.statusCode(), "404")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     return NotFoundErrorObject.fromAsync(response)
+                            .thenCompose(CompletableFuture::failedFuture);
+                } else {
+                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
+                }
+            }
+            if (Utils.statusCodeMatches(response.statusCode(), "409")) {
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    return ConflictErrorObject.fromAsync(response)
                             .thenCompose(CompletableFuture::failedFuture);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);

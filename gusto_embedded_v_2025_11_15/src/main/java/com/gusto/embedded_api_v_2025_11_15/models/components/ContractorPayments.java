@@ -9,9 +9,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
+import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -21,176 +23,81 @@ public class ContractorPayments {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contractor_uuid")
-    private Optional<String> contractorUuid;
+    private Optional<Double> contractorUuid;
 
     /**
-     * The first name of the contractor. Applies when `contractor_type` is `Individual`.
+     * The total reimbursements for the contractor within a given time period.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("contractor_first_name")
-    private Optional<String> contractorFirstName;
+    @JsonProperty("reimbursement_total")
+    private Optional<String> reimbursementTotal;
 
     /**
-     * The last name of the contractor. Applies when `contractor_type` is `Individual`.
+     * The total wages for the contractor within a given time period.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("contractor_last_name")
-    private Optional<String> contractorLastName;
+    @JsonProperty("wage_total")
+    private Optional<String> wageTotal;
 
     /**
-     * The business name of the contractor. Applies when `contractor_type` is `Business`.
+     * The contractor's payments within a given time period.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("contractor_business_name")
-    private Optional<String> contractorBusinessName;
-
-    /**
-     * The type of contractor.
-     * 
-     * <p>`Individual` `Business`
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("contractor_type")
-    private Optional<String> contractorType;
-
-    /**
-     * The payment method.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("payment_method")
-    private Optional<? extends ContractorPaymentReceiptPaymentMethod> paymentMethod;
-
-    /**
-     * The fixed wage of the payment, regardless of hours worked.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("wage")
-    private Optional<String> wage;
-
-    /**
-     * The bonus amount in the payment.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("bonus")
-    private Optional<String> bonus;
-
-    /**
-     * The reimbursement amount in the payment.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("reimbursement")
-    private Optional<String> reimbursement;
+    @JsonProperty("payments")
+    private Optional<? extends List<ContractorPayment>> payments;
 
     @JsonCreator
     public ContractorPayments(
-            @JsonProperty("contractor_uuid") Optional<String> contractorUuid,
-            @JsonProperty("contractor_first_name") Optional<String> contractorFirstName,
-            @JsonProperty("contractor_last_name") Optional<String> contractorLastName,
-            @JsonProperty("contractor_business_name") Optional<String> contractorBusinessName,
-            @JsonProperty("contractor_type") Optional<String> contractorType,
-            @JsonProperty("payment_method") Optional<? extends ContractorPaymentReceiptPaymentMethod> paymentMethod,
-            @JsonProperty("wage") Optional<String> wage,
-            @JsonProperty("bonus") Optional<String> bonus,
-            @JsonProperty("reimbursement") Optional<String> reimbursement) {
+            @JsonProperty("contractor_uuid") Optional<Double> contractorUuid,
+            @JsonProperty("reimbursement_total") Optional<String> reimbursementTotal,
+            @JsonProperty("wage_total") Optional<String> wageTotal,
+            @JsonProperty("payments") Optional<? extends List<ContractorPayment>> payments) {
         Utils.checkNotNull(contractorUuid, "contractorUuid");
-        Utils.checkNotNull(contractorFirstName, "contractorFirstName");
-        Utils.checkNotNull(contractorLastName, "contractorLastName");
-        Utils.checkNotNull(contractorBusinessName, "contractorBusinessName");
-        Utils.checkNotNull(contractorType, "contractorType");
-        Utils.checkNotNull(paymentMethod, "paymentMethod");
-        Utils.checkNotNull(wage, "wage");
-        Utils.checkNotNull(bonus, "bonus");
-        Utils.checkNotNull(reimbursement, "reimbursement");
+        Utils.checkNotNull(reimbursementTotal, "reimbursementTotal");
+        Utils.checkNotNull(wageTotal, "wageTotal");
+        Utils.checkNotNull(payments, "payments");
         this.contractorUuid = contractorUuid;
-        this.contractorFirstName = contractorFirstName;
-        this.contractorLastName = contractorLastName;
-        this.contractorBusinessName = contractorBusinessName;
-        this.contractorType = contractorType;
-        this.paymentMethod = paymentMethod;
-        this.wage = wage;
-        this.bonus = bonus;
-        this.reimbursement = reimbursement;
+        this.reimbursementTotal = reimbursementTotal;
+        this.wageTotal = wageTotal;
+        this.payments = payments;
     }
     
     public ContractorPayments() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty());
     }
 
     /**
      * The UUID of the contractor.
      */
     @JsonIgnore
-    public Optional<String> contractorUuid() {
+    public Optional<Double> contractorUuid() {
         return contractorUuid;
     }
 
     /**
-     * The first name of the contractor. Applies when `contractor_type` is `Individual`.
+     * The total reimbursements for the contractor within a given time period.
      */
     @JsonIgnore
-    public Optional<String> contractorFirstName() {
-        return contractorFirstName;
+    public Optional<String> reimbursementTotal() {
+        return reimbursementTotal;
     }
 
     /**
-     * The last name of the contractor. Applies when `contractor_type` is `Individual`.
+     * The total wages for the contractor within a given time period.
      */
     @JsonIgnore
-    public Optional<String> contractorLastName() {
-        return contractorLastName;
+    public Optional<String> wageTotal() {
+        return wageTotal;
     }
 
     /**
-     * The business name of the contractor. Applies when `contractor_type` is `Business`.
-     */
-    @JsonIgnore
-    public Optional<String> contractorBusinessName() {
-        return contractorBusinessName;
-    }
-
-    /**
-     * The type of contractor.
-     * 
-     * <p>`Individual` `Business`
-     */
-    @JsonIgnore
-    public Optional<String> contractorType() {
-        return contractorType;
-    }
-
-    /**
-     * The payment method.
+     * The contractor's payments within a given time period.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<ContractorPaymentReceiptPaymentMethod> paymentMethod() {
-        return (Optional<ContractorPaymentReceiptPaymentMethod>) paymentMethod;
-    }
-
-    /**
-     * The fixed wage of the payment, regardless of hours worked.
-     */
-    @JsonIgnore
-    public Optional<String> wage() {
-        return wage;
-    }
-
-    /**
-     * The bonus amount in the payment.
-     */
-    @JsonIgnore
-    public Optional<String> bonus() {
-        return bonus;
-    }
-
-    /**
-     * The reimbursement amount in the payment.
-     */
-    @JsonIgnore
-    public Optional<String> reimbursement() {
-        return reimbursement;
+    public Optional<List<ContractorPayment>> payments() {
+        return (Optional<List<ContractorPayment>>) payments;
     }
 
     public static Builder builder() {
@@ -201,7 +108,7 @@ public class ContractorPayments {
     /**
      * The UUID of the contractor.
      */
-    public ContractorPayments withContractorUuid(String contractorUuid) {
+    public ContractorPayments withContractorUuid(double contractorUuid) {
         Utils.checkNotNull(contractorUuid, "contractorUuid");
         this.contractorUuid = Optional.ofNullable(contractorUuid);
         return this;
@@ -211,165 +118,66 @@ public class ContractorPayments {
     /**
      * The UUID of the contractor.
      */
-    public ContractorPayments withContractorUuid(Optional<String> contractorUuid) {
+    public ContractorPayments withContractorUuid(Optional<Double> contractorUuid) {
         Utils.checkNotNull(contractorUuid, "contractorUuid");
         this.contractorUuid = contractorUuid;
         return this;
     }
 
     /**
-     * The first name of the contractor. Applies when `contractor_type` is `Individual`.
+     * The total reimbursements for the contractor within a given time period.
      */
-    public ContractorPayments withContractorFirstName(String contractorFirstName) {
-        Utils.checkNotNull(contractorFirstName, "contractorFirstName");
-        this.contractorFirstName = Optional.ofNullable(contractorFirstName);
+    public ContractorPayments withReimbursementTotal(String reimbursementTotal) {
+        Utils.checkNotNull(reimbursementTotal, "reimbursementTotal");
+        this.reimbursementTotal = Optional.ofNullable(reimbursementTotal);
         return this;
     }
 
 
     /**
-     * The first name of the contractor. Applies when `contractor_type` is `Individual`.
+     * The total reimbursements for the contractor within a given time period.
      */
-    public ContractorPayments withContractorFirstName(Optional<String> contractorFirstName) {
-        Utils.checkNotNull(contractorFirstName, "contractorFirstName");
-        this.contractorFirstName = contractorFirstName;
+    public ContractorPayments withReimbursementTotal(Optional<String> reimbursementTotal) {
+        Utils.checkNotNull(reimbursementTotal, "reimbursementTotal");
+        this.reimbursementTotal = reimbursementTotal;
         return this;
     }
 
     /**
-     * The last name of the contractor. Applies when `contractor_type` is `Individual`.
+     * The total wages for the contractor within a given time period.
      */
-    public ContractorPayments withContractorLastName(String contractorLastName) {
-        Utils.checkNotNull(contractorLastName, "contractorLastName");
-        this.contractorLastName = Optional.ofNullable(contractorLastName);
-        return this;
-    }
-
-
-    /**
-     * The last name of the contractor. Applies when `contractor_type` is `Individual`.
-     */
-    public ContractorPayments withContractorLastName(Optional<String> contractorLastName) {
-        Utils.checkNotNull(contractorLastName, "contractorLastName");
-        this.contractorLastName = contractorLastName;
-        return this;
-    }
-
-    /**
-     * The business name of the contractor. Applies when `contractor_type` is `Business`.
-     */
-    public ContractorPayments withContractorBusinessName(String contractorBusinessName) {
-        Utils.checkNotNull(contractorBusinessName, "contractorBusinessName");
-        this.contractorBusinessName = Optional.ofNullable(contractorBusinessName);
+    public ContractorPayments withWageTotal(String wageTotal) {
+        Utils.checkNotNull(wageTotal, "wageTotal");
+        this.wageTotal = Optional.ofNullable(wageTotal);
         return this;
     }
 
 
     /**
-     * The business name of the contractor. Applies when `contractor_type` is `Business`.
+     * The total wages for the contractor within a given time period.
      */
-    public ContractorPayments withContractorBusinessName(Optional<String> contractorBusinessName) {
-        Utils.checkNotNull(contractorBusinessName, "contractorBusinessName");
-        this.contractorBusinessName = contractorBusinessName;
+    public ContractorPayments withWageTotal(Optional<String> wageTotal) {
+        Utils.checkNotNull(wageTotal, "wageTotal");
+        this.wageTotal = wageTotal;
         return this;
     }
 
     /**
-     * The type of contractor.
-     * 
-     * <p>`Individual` `Business`
+     * The contractor's payments within a given time period.
      */
-    public ContractorPayments withContractorType(String contractorType) {
-        Utils.checkNotNull(contractorType, "contractorType");
-        this.contractorType = Optional.ofNullable(contractorType);
-        return this;
-    }
-
-
-    /**
-     * The type of contractor.
-     * 
-     * <p>`Individual` `Business`
-     */
-    public ContractorPayments withContractorType(Optional<String> contractorType) {
-        Utils.checkNotNull(contractorType, "contractorType");
-        this.contractorType = contractorType;
-        return this;
-    }
-
-    /**
-     * The payment method.
-     */
-    public ContractorPayments withPaymentMethod(ContractorPaymentReceiptPaymentMethod paymentMethod) {
-        Utils.checkNotNull(paymentMethod, "paymentMethod");
-        this.paymentMethod = Optional.ofNullable(paymentMethod);
+    public ContractorPayments withPayments(List<ContractorPayment> payments) {
+        Utils.checkNotNull(payments, "payments");
+        this.payments = Optional.ofNullable(payments);
         return this;
     }
 
 
     /**
-     * The payment method.
+     * The contractor's payments within a given time period.
      */
-    public ContractorPayments withPaymentMethod(Optional<? extends ContractorPaymentReceiptPaymentMethod> paymentMethod) {
-        Utils.checkNotNull(paymentMethod, "paymentMethod");
-        this.paymentMethod = paymentMethod;
-        return this;
-    }
-
-    /**
-     * The fixed wage of the payment, regardless of hours worked.
-     */
-    public ContractorPayments withWage(String wage) {
-        Utils.checkNotNull(wage, "wage");
-        this.wage = Optional.ofNullable(wage);
-        return this;
-    }
-
-
-    /**
-     * The fixed wage of the payment, regardless of hours worked.
-     */
-    public ContractorPayments withWage(Optional<String> wage) {
-        Utils.checkNotNull(wage, "wage");
-        this.wage = wage;
-        return this;
-    }
-
-    /**
-     * The bonus amount in the payment.
-     */
-    public ContractorPayments withBonus(String bonus) {
-        Utils.checkNotNull(bonus, "bonus");
-        this.bonus = Optional.ofNullable(bonus);
-        return this;
-    }
-
-
-    /**
-     * The bonus amount in the payment.
-     */
-    public ContractorPayments withBonus(Optional<String> bonus) {
-        Utils.checkNotNull(bonus, "bonus");
-        this.bonus = bonus;
-        return this;
-    }
-
-    /**
-     * The reimbursement amount in the payment.
-     */
-    public ContractorPayments withReimbursement(String reimbursement) {
-        Utils.checkNotNull(reimbursement, "reimbursement");
-        this.reimbursement = Optional.ofNullable(reimbursement);
-        return this;
-    }
-
-
-    /**
-     * The reimbursement amount in the payment.
-     */
-    public ContractorPayments withReimbursement(Optional<String> reimbursement) {
-        Utils.checkNotNull(reimbursement, "reimbursement");
-        this.reimbursement = reimbursement;
+    public ContractorPayments withPayments(Optional<? extends List<ContractorPayment>> payments) {
+        Utils.checkNotNull(payments, "payments");
+        this.payments = payments;
         return this;
     }
 
@@ -384,58 +192,37 @@ public class ContractorPayments {
         ContractorPayments other = (ContractorPayments) o;
         return 
             Utils.enhancedDeepEquals(this.contractorUuid, other.contractorUuid) &&
-            Utils.enhancedDeepEquals(this.contractorFirstName, other.contractorFirstName) &&
-            Utils.enhancedDeepEquals(this.contractorLastName, other.contractorLastName) &&
-            Utils.enhancedDeepEquals(this.contractorBusinessName, other.contractorBusinessName) &&
-            Utils.enhancedDeepEquals(this.contractorType, other.contractorType) &&
-            Utils.enhancedDeepEquals(this.paymentMethod, other.paymentMethod) &&
-            Utils.enhancedDeepEquals(this.wage, other.wage) &&
-            Utils.enhancedDeepEquals(this.bonus, other.bonus) &&
-            Utils.enhancedDeepEquals(this.reimbursement, other.reimbursement);
+            Utils.enhancedDeepEquals(this.reimbursementTotal, other.reimbursementTotal) &&
+            Utils.enhancedDeepEquals(this.wageTotal, other.wageTotal) &&
+            Utils.enhancedDeepEquals(this.payments, other.payments);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            contractorUuid, contractorFirstName, contractorLastName,
-            contractorBusinessName, contractorType, paymentMethod,
-            wage, bonus, reimbursement);
+            contractorUuid, reimbursementTotal, wageTotal,
+            payments);
     }
     
     @Override
     public String toString() {
         return Utils.toString(ContractorPayments.class,
                 "contractorUuid", contractorUuid,
-                "contractorFirstName", contractorFirstName,
-                "contractorLastName", contractorLastName,
-                "contractorBusinessName", contractorBusinessName,
-                "contractorType", contractorType,
-                "paymentMethod", paymentMethod,
-                "wage", wage,
-                "bonus", bonus,
-                "reimbursement", reimbursement);
+                "reimbursementTotal", reimbursementTotal,
+                "wageTotal", wageTotal,
+                "payments", payments);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> contractorUuid = Optional.empty();
+        private Optional<Double> contractorUuid = Optional.empty();
 
-        private Optional<String> contractorFirstName = Optional.empty();
+        private Optional<String> reimbursementTotal = Optional.empty();
 
-        private Optional<String> contractorLastName = Optional.empty();
+        private Optional<String> wageTotal = Optional.empty();
 
-        private Optional<String> contractorBusinessName = Optional.empty();
-
-        private Optional<String> contractorType = Optional.empty();
-
-        private Optional<? extends ContractorPaymentReceiptPaymentMethod> paymentMethod = Optional.empty();
-
-        private Optional<String> wage = Optional.empty();
-
-        private Optional<String> bonus = Optional.empty();
-
-        private Optional<String> reimbursement = Optional.empty();
+        private Optional<? extends List<ContractorPayment>> payments = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -445,7 +232,7 @@ public class ContractorPayments {
         /**
          * The UUID of the contractor.
          */
-        public Builder contractorUuid(String contractorUuid) {
+        public Builder contractorUuid(double contractorUuid) {
             Utils.checkNotNull(contractorUuid, "contractorUuid");
             this.contractorUuid = Optional.ofNullable(contractorUuid);
             return this;
@@ -454,7 +241,7 @@ public class ContractorPayments {
         /**
          * The UUID of the contractor.
          */
-        public Builder contractorUuid(Optional<String> contractorUuid) {
+        public Builder contractorUuid(Optional<Double> contractorUuid) {
             Utils.checkNotNull(contractorUuid, "contractorUuid");
             this.contractorUuid = contractorUuid;
             return this;
@@ -462,166 +249,66 @@ public class ContractorPayments {
 
 
         /**
-         * The first name of the contractor. Applies when `contractor_type` is `Individual`.
+         * The total reimbursements for the contractor within a given time period.
          */
-        public Builder contractorFirstName(String contractorFirstName) {
-            Utils.checkNotNull(contractorFirstName, "contractorFirstName");
-            this.contractorFirstName = Optional.ofNullable(contractorFirstName);
+        public Builder reimbursementTotal(String reimbursementTotal) {
+            Utils.checkNotNull(reimbursementTotal, "reimbursementTotal");
+            this.reimbursementTotal = Optional.ofNullable(reimbursementTotal);
             return this;
         }
 
         /**
-         * The first name of the contractor. Applies when `contractor_type` is `Individual`.
+         * The total reimbursements for the contractor within a given time period.
          */
-        public Builder contractorFirstName(Optional<String> contractorFirstName) {
-            Utils.checkNotNull(contractorFirstName, "contractorFirstName");
-            this.contractorFirstName = contractorFirstName;
-            return this;
-        }
-
-
-        /**
-         * The last name of the contractor. Applies when `contractor_type` is `Individual`.
-         */
-        public Builder contractorLastName(String contractorLastName) {
-            Utils.checkNotNull(contractorLastName, "contractorLastName");
-            this.contractorLastName = Optional.ofNullable(contractorLastName);
-            return this;
-        }
-
-        /**
-         * The last name of the contractor. Applies when `contractor_type` is `Individual`.
-         */
-        public Builder contractorLastName(Optional<String> contractorLastName) {
-            Utils.checkNotNull(contractorLastName, "contractorLastName");
-            this.contractorLastName = contractorLastName;
+        public Builder reimbursementTotal(Optional<String> reimbursementTotal) {
+            Utils.checkNotNull(reimbursementTotal, "reimbursementTotal");
+            this.reimbursementTotal = reimbursementTotal;
             return this;
         }
 
 
         /**
-         * The business name of the contractor. Applies when `contractor_type` is `Business`.
+         * The total wages for the contractor within a given time period.
          */
-        public Builder contractorBusinessName(String contractorBusinessName) {
-            Utils.checkNotNull(contractorBusinessName, "contractorBusinessName");
-            this.contractorBusinessName = Optional.ofNullable(contractorBusinessName);
+        public Builder wageTotal(String wageTotal) {
+            Utils.checkNotNull(wageTotal, "wageTotal");
+            this.wageTotal = Optional.ofNullable(wageTotal);
             return this;
         }
 
         /**
-         * The business name of the contractor. Applies when `contractor_type` is `Business`.
+         * The total wages for the contractor within a given time period.
          */
-        public Builder contractorBusinessName(Optional<String> contractorBusinessName) {
-            Utils.checkNotNull(contractorBusinessName, "contractorBusinessName");
-            this.contractorBusinessName = contractorBusinessName;
-            return this;
-        }
-
-
-        /**
-         * The type of contractor.
-         * 
-         * <p>`Individual` `Business`
-         */
-        public Builder contractorType(String contractorType) {
-            Utils.checkNotNull(contractorType, "contractorType");
-            this.contractorType = Optional.ofNullable(contractorType);
-            return this;
-        }
-
-        /**
-         * The type of contractor.
-         * 
-         * <p>`Individual` `Business`
-         */
-        public Builder contractorType(Optional<String> contractorType) {
-            Utils.checkNotNull(contractorType, "contractorType");
-            this.contractorType = contractorType;
+        public Builder wageTotal(Optional<String> wageTotal) {
+            Utils.checkNotNull(wageTotal, "wageTotal");
+            this.wageTotal = wageTotal;
             return this;
         }
 
 
         /**
-         * The payment method.
+         * The contractor's payments within a given time period.
          */
-        public Builder paymentMethod(ContractorPaymentReceiptPaymentMethod paymentMethod) {
-            Utils.checkNotNull(paymentMethod, "paymentMethod");
-            this.paymentMethod = Optional.ofNullable(paymentMethod);
+        public Builder payments(List<ContractorPayment> payments) {
+            Utils.checkNotNull(payments, "payments");
+            this.payments = Optional.ofNullable(payments);
             return this;
         }
 
         /**
-         * The payment method.
+         * The contractor's payments within a given time period.
          */
-        public Builder paymentMethod(Optional<? extends ContractorPaymentReceiptPaymentMethod> paymentMethod) {
-            Utils.checkNotNull(paymentMethod, "paymentMethod");
-            this.paymentMethod = paymentMethod;
-            return this;
-        }
-
-
-        /**
-         * The fixed wage of the payment, regardless of hours worked.
-         */
-        public Builder wage(String wage) {
-            Utils.checkNotNull(wage, "wage");
-            this.wage = Optional.ofNullable(wage);
-            return this;
-        }
-
-        /**
-         * The fixed wage of the payment, regardless of hours worked.
-         */
-        public Builder wage(Optional<String> wage) {
-            Utils.checkNotNull(wage, "wage");
-            this.wage = wage;
-            return this;
-        }
-
-
-        /**
-         * The bonus amount in the payment.
-         */
-        public Builder bonus(String bonus) {
-            Utils.checkNotNull(bonus, "bonus");
-            this.bonus = Optional.ofNullable(bonus);
-            return this;
-        }
-
-        /**
-         * The bonus amount in the payment.
-         */
-        public Builder bonus(Optional<String> bonus) {
-            Utils.checkNotNull(bonus, "bonus");
-            this.bonus = bonus;
-            return this;
-        }
-
-
-        /**
-         * The reimbursement amount in the payment.
-         */
-        public Builder reimbursement(String reimbursement) {
-            Utils.checkNotNull(reimbursement, "reimbursement");
-            this.reimbursement = Optional.ofNullable(reimbursement);
-            return this;
-        }
-
-        /**
-         * The reimbursement amount in the payment.
-         */
-        public Builder reimbursement(Optional<String> reimbursement) {
-            Utils.checkNotNull(reimbursement, "reimbursement");
-            this.reimbursement = reimbursement;
+        public Builder payments(Optional<? extends List<ContractorPayment>> payments) {
+            Utils.checkNotNull(payments, "payments");
+            this.payments = payments;
             return this;
         }
 
         public ContractorPayments build() {
 
             return new ContractorPayments(
-                contractorUuid, contractorFirstName, contractorLastName,
-                contractorBusinessName, contractorType, paymentMethod,
-                wage, bonus, reimbursement);
+                contractorUuid, reimbursementTotal, wageTotal,
+                payments);
         }
 
     }

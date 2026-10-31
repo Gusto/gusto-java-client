@@ -153,6 +153,15 @@ public class PayScheduleShow {
     @JsonProperty("auto_payroll_enablement_blockers")
     private JsonNullable<? extends List<PayScheduleAutoPayrollEnablementBlocker>> autoPayrollEnablementBlockers;
 
+    /**
+     * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay
+     * overtime calculations. Null when no workweek start day has been configured (e.g. legacy pay
+     * schedules).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("workweek_start_day")
+    private JsonNullable<? extends PayScheduleWorkweekStartDay> workweekStartDay;
+
     @JsonCreator
     public PayScheduleShow(
             @JsonProperty("uuid") String uuid,
@@ -167,7 +176,8 @@ public class PayScheduleShow {
             @JsonProperty("auto_pilot") Optional<Boolean> autoPilot,
             @JsonProperty("auto_payroll") Optional<Boolean> autoPayroll,
             @JsonProperty("active") Optional<Boolean> active,
-            @JsonProperty("auto_payroll_enablement_blockers") JsonNullable<? extends List<PayScheduleAutoPayrollEnablementBlocker>> autoPayrollEnablementBlockers) {
+            @JsonProperty("auto_payroll_enablement_blockers") JsonNullable<? extends List<PayScheduleAutoPayrollEnablementBlocker>> autoPayrollEnablementBlockers,
+            @JsonProperty("workweek_start_day") JsonNullable<? extends PayScheduleWorkweekStartDay> workweekStartDay) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(frequency, "frequency");
@@ -181,6 +191,7 @@ public class PayScheduleShow {
         Utils.checkNotNull(autoPayroll, "autoPayroll");
         Utils.checkNotNull(active, "active");
         Utils.checkNotNull(autoPayrollEnablementBlockers, "autoPayrollEnablementBlockers");
+        Utils.checkNotNull(workweekStartDay, "workweekStartDay");
         this.uuid = uuid;
         this.version = version;
         this.frequency = frequency;
@@ -194,6 +205,7 @@ public class PayScheduleShow {
         this.autoPayroll = autoPayroll;
         this.active = active;
         this.autoPayrollEnablementBlockers = autoPayrollEnablementBlockers;
+        this.workweekStartDay = workweekStartDay;
     }
     
     public PayScheduleShow(
@@ -203,7 +215,7 @@ public class PayScheduleShow {
             Optional.empty(), Optional.empty(), JsonNullable.undefined(),
             JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            JsonNullable.undefined());
+            JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
@@ -344,6 +356,17 @@ public class PayScheduleShow {
     @JsonIgnore
     public JsonNullable<List<PayScheduleAutoPayrollEnablementBlocker>> autoPayrollEnablementBlockers() {
         return (JsonNullable<List<PayScheduleAutoPayrollEnablementBlocker>>) autoPayrollEnablementBlockers;
+    }
+
+    /**
+     * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay
+     * overtime calculations. Null when no workweek start day has been configured (e.g. legacy pay
+     * schedules).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public JsonNullable<PayScheduleWorkweekStartDay> workweekStartDay() {
+        return (JsonNullable<PayScheduleWorkweekStartDay>) workweekStartDay;
     }
 
     public static Builder builder() {
@@ -640,6 +663,28 @@ public class PayScheduleShow {
         return this;
     }
 
+    /**
+     * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay
+     * overtime calculations. Null when no workweek start day has been configured (e.g. legacy pay
+     * schedules).
+     */
+    public PayScheduleShow withWorkweekStartDay(PayScheduleWorkweekStartDay workweekStartDay) {
+        Utils.checkNotNull(workweekStartDay, "workweekStartDay");
+        this.workweekStartDay = JsonNullable.of(workweekStartDay);
+        return this;
+    }
+
+    /**
+     * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay
+     * overtime calculations. Null when no workweek start day has been configured (e.g. legacy pay
+     * schedules).
+     */
+    public PayScheduleShow withWorkweekStartDay(JsonNullable<? extends PayScheduleWorkweekStartDay> workweekStartDay) {
+        Utils.checkNotNull(workweekStartDay, "workweekStartDay");
+        this.workweekStartDay = workweekStartDay;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -662,7 +707,8 @@ public class PayScheduleShow {
             Utils.enhancedDeepEquals(this.autoPilot, other.autoPilot) &&
             Utils.enhancedDeepEquals(this.autoPayroll, other.autoPayroll) &&
             Utils.enhancedDeepEquals(this.active, other.active) &&
-            Utils.enhancedDeepEquals(this.autoPayrollEnablementBlockers, other.autoPayrollEnablementBlockers);
+            Utils.enhancedDeepEquals(this.autoPayrollEnablementBlockers, other.autoPayrollEnablementBlockers) &&
+            Utils.enhancedDeepEquals(this.workweekStartDay, other.workweekStartDay);
     }
     
     @Override
@@ -672,7 +718,7 @@ public class PayScheduleShow {
             anchorPayDate, anchorEndOfPayPeriod, day1,
             day2, name, customName,
             autoPilot, autoPayroll, active,
-            autoPayrollEnablementBlockers);
+            autoPayrollEnablementBlockers, workweekStartDay);
     }
     
     @Override
@@ -690,7 +736,8 @@ public class PayScheduleShow {
                 "autoPilot", autoPilot,
                 "autoPayroll", autoPayroll,
                 "active", active,
-                "autoPayrollEnablementBlockers", autoPayrollEnablementBlockers);
+                "autoPayrollEnablementBlockers", autoPayrollEnablementBlockers,
+                "workweekStartDay", workweekStartDay);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -721,6 +768,8 @@ public class PayScheduleShow {
         private Optional<Boolean> active = Optional.empty();
 
         private JsonNullable<? extends List<PayScheduleAutoPayrollEnablementBlocker>> autoPayrollEnablementBlockers = JsonNullable.undefined();
+
+        private JsonNullable<? extends PayScheduleWorkweekStartDay> workweekStartDay = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -1021,6 +1070,29 @@ public class PayScheduleShow {
             return this;
         }
 
+
+        /**
+         * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay
+         * overtime calculations. Null when no workweek start day has been configured (e.g. legacy pay
+         * schedules).
+         */
+        public Builder workweekStartDay(PayScheduleWorkweekStartDay workweekStartDay) {
+            Utils.checkNotNull(workweekStartDay, "workweekStartDay");
+            this.workweekStartDay = JsonNullable.of(workweekStartDay);
+            return this;
+        }
+
+        /**
+         * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay
+         * overtime calculations. Null when no workweek start day has been configured (e.g. legacy pay
+         * schedules).
+         */
+        public Builder workweekStartDay(JsonNullable<? extends PayScheduleWorkweekStartDay> workweekStartDay) {
+            Utils.checkNotNull(workweekStartDay, "workweekStartDay");
+            this.workweekStartDay = workweekStartDay;
+            return this;
+        }
+
         public PayScheduleShow build() {
 
             return new PayScheduleShow(
@@ -1028,7 +1100,7 @@ public class PayScheduleShow {
                 anchorPayDate, anchorEndOfPayPeriod, day1,
                 day2, name, customName,
                 autoPilot, autoPayroll, active,
-                autoPayrollEnablementBlockers);
+                autoPayrollEnablementBlockers, workweekStartDay);
         }
 
     }

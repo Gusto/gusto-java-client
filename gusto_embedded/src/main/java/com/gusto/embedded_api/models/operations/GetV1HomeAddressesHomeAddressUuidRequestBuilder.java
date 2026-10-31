@@ -16,22 +16,16 @@ import java.util.Optional;
 
 public class GetV1HomeAddressesHomeAddressUuidRequestBuilder {
 
-    private String homeAddressUuid;
     private Optional<? extends GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion>>() {});
+    private String homeAddressUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1HomeAddressesHomeAddressUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1HomeAddressesHomeAddressUuidRequestBuilder homeAddressUuid(String homeAddressUuid) {
-        Utils.checkNotNull(homeAddressUuid, "homeAddressUuid");
-        this.homeAddressUuid = homeAddressUuid;
-        return this;
     }
                 
     public GetV1HomeAddressesHomeAddressUuidRequestBuilder xGustoAPIVersion(GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,14 +40,20 @@ public class GetV1HomeAddressesHomeAddressUuidRequestBuilder {
         return this;
     }
 
+    public GetV1HomeAddressesHomeAddressUuidRequestBuilder homeAddressUuid(String homeAddressUuid) {
+        Utils.checkNotNull(homeAddressUuid, "homeAddressUuid");
+        this.homeAddressUuid = homeAddressUuid;
+        return this;
+    }
+
 
     private GetV1HomeAddressesHomeAddressUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1HomeAddressesHomeAddressUuidRequest request = new GetV1HomeAddressesHomeAddressUuidRequest(homeAddressUuid,
-            xGustoAPIVersion);
+        GetV1HomeAddressesHomeAddressUuidRequest request = new GetV1HomeAddressesHomeAddressUuidRequest(xGustoAPIVersion,
+            homeAddressUuid);
 
         return request;
     }

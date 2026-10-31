@@ -72,7 +72,7 @@ public class AsyncIndustrySelection {
      * @return {@code CompletableFuture<GetV1CompanyIndustryResponse>} - The async response
      */
     public CompletableFuture<GetV1CompanyIndustryResponse> get(String companyId) {
-        return get(companyId, Optional.empty());
+        return get(Optional.empty(), companyId);
     }
 
     /**
@@ -85,16 +85,16 @@ public class AsyncIndustrySelection {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyId The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @return {@code CompletableFuture<GetV1CompanyIndustryResponse>} - The async response
      */
-    public CompletableFuture<GetV1CompanyIndustryResponse> get(String companyId, Optional<? extends GetV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1CompanyIndustryResponse> get(Optional<? extends GetV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
         GetV1CompanyIndustryRequest request =
             GetV1CompanyIndustryRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .build();
         AsyncRequestOperation<GetV1CompanyIndustryRequest, GetV1CompanyIndustryResponse> operation
               = new GetV1CompanyIndustry.Async(sdkConfiguration, _headers);
@@ -150,7 +150,7 @@ public class AsyncIndustrySelection {
      * @return {@code CompletableFuture<PutV1CompanyIndustryResponse>} - The async response
      */
     public CompletableFuture<PutV1CompanyIndustryResponse> update(String companyId, CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody) {
-        return update(companyId, Optional.empty(), companyIndustrySelectionRequiredBody);
+        return update(Optional.empty(), companyId, companyIndustrySelectionRequiredBody);
     }
 
     /**
@@ -171,19 +171,19 @@ public class AsyncIndustrySelection {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyId The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @param companyIndustrySelectionRequiredBody 
      * @return {@code CompletableFuture<PutV1CompanyIndustryResponse>} - The async response
      */
     public CompletableFuture<PutV1CompanyIndustryResponse> update(
-            String companyId, Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody) {
         PutV1CompanyIndustryRequest request =
             PutV1CompanyIndustryRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .companyIndustrySelectionRequiredBody(companyIndustrySelectionRequiredBody)
                 .build();
         AsyncRequestOperation<PutV1CompanyIndustryRequest, PutV1CompanyIndustryResponse> operation
