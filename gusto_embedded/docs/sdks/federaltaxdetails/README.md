@@ -34,8 +34,8 @@ public class Application {
             .build();
 
         GetV1CompaniesCompanyIdFederalTaxDetailsResponse res = sdk.federalTaxDetails().get()
-                .companyId("<id>")
                 .xGustoAPIVersion(GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .call();
 
         if (res.federalTaxDetails().isPresent()) {
@@ -49,8 +49,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  | Example                                                                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      | 7b1d0df1-6403-4a06-8768-c1dd7d24d27a                                                                                                                                                                                         |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>](../../models/operations/GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion.md)                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |                                                                                                                                                                                                                              |
+| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      | 7b1d0df1-6403-4a06-8768-c1dd7d24d27a                                                                                                                                                                                         |
 
 ### Response
 
@@ -86,23 +86,22 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.FederalTaxDetailsUpdate;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api.models.errors.*;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+    public static void main(String[] args) throws ForbiddenErrorObject, NotFoundErrorObject, UnprocessableEntityError, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompaniesCompanyIdFederalTaxDetailsResponse res = sdk.federalTaxDetails().update()
-                .companyId("<id>")
                 .xGustoAPIVersion(PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .federalTaxDetailsUpdate(FederalTaxDetailsUpdate.builder()
                     .version("<value>")
                     .build())
@@ -122,23 +121,22 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.*;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api.models.errors.*;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+    public static void main(String[] args) throws ForbiddenErrorObject, NotFoundErrorObject, UnprocessableEntityError, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompaniesCompanyIdFederalTaxDetailsResponse res = sdk.federalTaxDetails().update()
-                .companyId("<id>")
                 .xGustoAPIVersion(PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .federalTaxDetailsUpdate(FederalTaxDetailsUpdate.builder()
                     .version("6cb95e00540706ca48d4577b3c839fbe")
                     .legalName("Acme Corp.")
@@ -162,23 +160,22 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.FederalTaxDetailsUpdate;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api.models.errors.*;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+    public static void main(String[] args) throws ForbiddenErrorObject, NotFoundErrorObject, UnprocessableEntityError, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompaniesCompanyIdFederalTaxDetailsResponse res = sdk.federalTaxDetails().update()
-                .companyId("<id>")
                 .xGustoAPIVersion(PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .federalTaxDetailsUpdate(FederalTaxDetailsUpdate.builder()
                     .version("<value>")
                     .build())
@@ -198,23 +195,22 @@ package hello.world;
 
 import com.gusto.embedded_api.GustoEmbedded;
 import com.gusto.embedded_api.models.components.FederalTaxDetailsUpdate;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api.models.errors.*;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdFederalTaxDetailsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+    public static void main(String[] args) throws ForbiddenErrorObject, NotFoundErrorObject, UnprocessableEntityError, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
         PutV1CompaniesCompanyIdFederalTaxDetailsResponse res = sdk.federalTaxDetails().update()
-                .companyId("<id>")
                 .xGustoAPIVersion(PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .companyId("<id>")
                 .federalTaxDetailsUpdate(FederalTaxDetailsUpdate.builder()
                     .version("<value>")
                     .build())
@@ -231,8 +227,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  | Example                                                                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      | 7b1d0df1-6403-4a06-8768-c1dd7d24d27a                                                                                                                                                                                         |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>](../../models/operations/PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion.md)                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |                                                                                                                                                                                                                              |
+| `companyId`                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      | 7b1d0df1-6403-4a06-8768-c1dd7d24d27a                                                                                                                                                                                         |
 | `federalTaxDetailsUpdate`                                                                                                                                                                                                    | [FederalTaxDetailsUpdate](../../models/components/FederalTaxDetailsUpdate.md)                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |                                                                                                                                                                                                                              |
 
 ### Response
@@ -243,6 +239,7 @@ public class Application {
 
 | Error Type                             | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/ForbiddenErrorObject     | 403                                    | application/json                       |
 | models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
 | models/errors/UnprocessableEntityError | 409, 422                               | application/json                       |
 | models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |

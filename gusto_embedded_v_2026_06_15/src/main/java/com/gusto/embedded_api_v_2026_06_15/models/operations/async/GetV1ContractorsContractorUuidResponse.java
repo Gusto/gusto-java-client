@@ -5,7 +5,7 @@ package com.gusto.embedded_api_v_2026_06_15.models.operations.async;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api_v_2026_06_15.models.components.Contractor;
+import com.gusto.embedded_api_v_2026_06_15.models.components.ContractorShow;
 import com.gusto.embedded_api_v_2026_06_15.utils.AsyncResponse;
 import com.gusto.embedded_api_v_2026_06_15.utils.Blob;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
@@ -36,22 +36,22 @@ public class GetV1ContractorsContractorUuidResponse implements AsyncResponse {
     /**
      * Successful
      */
-    private Optional<? extends Contractor> contractor;
+    private Optional<? extends ContractorShow> contractorShow;
 
     @JsonCreator
     public GetV1ContractorsContractorUuidResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends Contractor> contractor) {
+            Optional<? extends ContractorShow> contractorShow) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(contractor, "contractor");
+        Utils.checkNotNull(contractorShow, "contractorShow");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.contractor = contractor;
+        this.contractorShow = contractorShow;
     }
     
     public GetV1ContractorsContractorUuidResponse(
@@ -91,8 +91,8 @@ public class GetV1ContractorsContractorUuidResponse implements AsyncResponse {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Contractor> contractor() {
-        return (Optional<Contractor>) contractor;
+    public Optional<ContractorShow> contractorShow() {
+        return (Optional<ContractorShow>) contractorShow;
     }
 
     public static Builder builder() {
@@ -130,9 +130,9 @@ public class GetV1ContractorsContractorUuidResponse implements AsyncResponse {
     /**
      * Successful
      */
-    public GetV1ContractorsContractorUuidResponse withContractor(Contractor contractor) {
-        Utils.checkNotNull(contractor, "contractor");
-        this.contractor = Optional.ofNullable(contractor);
+    public GetV1ContractorsContractorUuidResponse withContractorShow(ContractorShow contractorShow) {
+        Utils.checkNotNull(contractorShow, "contractorShow");
+        this.contractorShow = Optional.ofNullable(contractorShow);
         return this;
     }
 
@@ -140,9 +140,9 @@ public class GetV1ContractorsContractorUuidResponse implements AsyncResponse {
     /**
      * Successful
      */
-    public GetV1ContractorsContractorUuidResponse withContractor(Optional<? extends Contractor> contractor) {
-        Utils.checkNotNull(contractor, "contractor");
-        this.contractor = contractor;
+    public GetV1ContractorsContractorUuidResponse withContractorShow(Optional<? extends ContractorShow> contractorShow) {
+        Utils.checkNotNull(contractorShow, "contractorShow");
+        this.contractorShow = contractorShow;
         return this;
     }
 
@@ -159,14 +159,14 @@ public class GetV1ContractorsContractorUuidResponse implements AsyncResponse {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.contractor, other.contractor);
+            Utils.enhancedDeepEquals(this.contractorShow, other.contractorShow);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            contractor);
+            contractorShow);
     }
     
     @Override
@@ -175,7 +175,7 @@ public class GetV1ContractorsContractorUuidResponse implements AsyncResponse {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "contractor", contractor);
+                "contractorShow", contractorShow);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -187,7 +187,7 @@ public class GetV1ContractorsContractorUuidResponse implements AsyncResponse {
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends Contractor> contractor = Optional.empty();
+        private Optional<? extends ContractorShow> contractorShow = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -227,18 +227,18 @@ public class GetV1ContractorsContractorUuidResponse implements AsyncResponse {
         /**
          * Successful
          */
-        public Builder contractor(Contractor contractor) {
-            Utils.checkNotNull(contractor, "contractor");
-            this.contractor = Optional.ofNullable(contractor);
+        public Builder contractorShow(ContractorShow contractorShow) {
+            Utils.checkNotNull(contractorShow, "contractorShow");
+            this.contractorShow = Optional.ofNullable(contractorShow);
             return this;
         }
 
         /**
          * Successful
          */
-        public Builder contractor(Optional<? extends Contractor> contractor) {
-            Utils.checkNotNull(contractor, "contractor");
-            this.contractor = contractor;
+        public Builder contractorShow(Optional<? extends ContractorShow> contractorShow) {
+            Utils.checkNotNull(contractorShow, "contractorShow");
+            this.contractorShow = contractorShow;
             return this;
         }
 
@@ -246,7 +246,7 @@ public class GetV1ContractorsContractorUuidResponse implements AsyncResponse {
 
             return new GetV1ContractorsContractorUuidResponse(
                 contentType, statusCode, rawResponse,
-                contractor);
+                contractorShow);
         }
 
     }

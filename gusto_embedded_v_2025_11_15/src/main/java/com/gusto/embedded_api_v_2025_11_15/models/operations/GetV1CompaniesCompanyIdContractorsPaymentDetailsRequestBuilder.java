@@ -16,18 +16,30 @@ import java.util.Optional;
 
 public class GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder {
 
-    private String companyId;
-    private Optional<String> contractorUuid = Optional.empty();
-    private Optional<String> contractorPaymentGroupUuid = Optional.empty();
     private Optional<? extends GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private Optional<String> contractorUuid = Optional.empty();
+    private Optional<String> contractorPaymentGroupUuid = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder companyId(String companyId) {
@@ -59,18 +71,6 @@ public class GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder {
         this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
         return this;
     }
-                
-    public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
-
-    public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
 
 
     private GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest buildRequest() {
@@ -78,10 +78,10 @@ public class GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest request = new GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest(companyId,
+        GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest request = new GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest(xGustoAPIVersion,
+            companyId,
             contractorUuid,
-            contractorPaymentGroupUuid,
-            xGustoAPIVersion);
+            contractorPaymentGroupUuid);
 
         return request;
     }

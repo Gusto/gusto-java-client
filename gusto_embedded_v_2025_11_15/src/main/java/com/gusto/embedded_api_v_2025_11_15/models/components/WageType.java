@@ -11,11 +11,11 @@ import java.util.Optional;
 /**
  * WageType
  * 
- * <p>The contractor's wage type, either "Fixed" or "Hourly".
+ * <p>The wage type for the payment.
  */
 public enum WageType {
-    FIXED("Fixed"),
-    HOURLY("Hourly");
+    HOURLY("Hourly"),
+    FIXED("Fixed");
 
     @JsonValue
     private final String value;

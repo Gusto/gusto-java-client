@@ -17,30 +17,18 @@ import java.util.Optional;
 
 public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder {
 
-    private String companyUuid;
-    private String signatoryUuid;
     private Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private String signatoryUuid;
     private SignatoryUpdateRequest signatoryUpdateRequest;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
-
-    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder signatoryUuid(String signatoryUuid) {
-        Utils.checkNotNull(signatoryUuid, "signatoryUuid");
-        this.signatoryUuid = signatoryUuid;
-        return this;
     }
                 
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder xGustoAPIVersion(PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -52,6 +40,18 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder {
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder xGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder signatoryUuid(String signatoryUuid) {
+        Utils.checkNotNull(signatoryUuid, "signatoryUuid");
+        this.signatoryUuid = signatoryUuid;
         return this;
     }
 
@@ -67,9 +67,9 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request = new PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(companyUuid,
+        PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request = new PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(xGustoAPIVersion,
+            companyUuid,
             signatoryUuid,
-            xGustoAPIVersion,
             signatoryUpdateRequest);
 
         return request;

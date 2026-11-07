@@ -28,7 +28,7 @@ public class BenefitTypeRequirements {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contribution")
-    private Optional<? extends BenefitTypeRequirementsContribution> contribution;
+    private Optional<? extends Contribution> contribution;
 
     /**
      * Whether the employee deduction amount should be treated as a percentage to be deducted from each
@@ -82,7 +82,7 @@ public class BenefitTypeRequirements {
     @JsonCreator
     public BenefitTypeRequirements(
             @JsonProperty("employee_deduction") Optional<? extends EmployeeDeduction> employeeDeduction,
-            @JsonProperty("contribution") Optional<? extends BenefitTypeRequirementsContribution> contribution,
+            @JsonProperty("contribution") Optional<? extends Contribution> contribution,
             @JsonProperty("deduct_as_percentage") Optional<? extends DeductAsPercentage> deductAsPercentage,
             @JsonProperty("catch_up") Optional<? extends CatchUp> catchUp,
             @JsonProperty("limit_option") Optional<? extends LimitOption> limitOption,
@@ -127,8 +127,8 @@ public class BenefitTypeRequirements {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<BenefitTypeRequirementsContribution> contribution() {
-        return (Optional<BenefitTypeRequirementsContribution>) contribution;
+    public Optional<Contribution> contribution() {
+        return (Optional<Contribution>) contribution;
     }
 
     /**
@@ -219,7 +219,7 @@ public class BenefitTypeRequirements {
     /**
      * An object representing the type and value of the company contribution.
      */
-    public BenefitTypeRequirements withContribution(BenefitTypeRequirementsContribution contribution) {
+    public BenefitTypeRequirements withContribution(Contribution contribution) {
         Utils.checkNotNull(contribution, "contribution");
         this.contribution = Optional.ofNullable(contribution);
         return this;
@@ -229,7 +229,7 @@ public class BenefitTypeRequirements {
     /**
      * An object representing the type and value of the company contribution.
      */
-    public BenefitTypeRequirements withContribution(Optional<? extends BenefitTypeRequirementsContribution> contribution) {
+    public BenefitTypeRequirements withContribution(Optional<? extends Contribution> contribution) {
         Utils.checkNotNull(contribution, "contribution");
         this.contribution = contribution;
         return this;
@@ -409,7 +409,7 @@ public class BenefitTypeRequirements {
 
         private Optional<? extends EmployeeDeduction> employeeDeduction = Optional.empty();
 
-        private Optional<? extends BenefitTypeRequirementsContribution> contribution = Optional.empty();
+        private Optional<? extends Contribution> contribution = Optional.empty();
 
         private Optional<? extends DeductAsPercentage> deductAsPercentage = Optional.empty();
 
@@ -450,7 +450,7 @@ public class BenefitTypeRequirements {
         /**
          * An object representing the type and value of the company contribution.
          */
-        public Builder contribution(BenefitTypeRequirementsContribution contribution) {
+        public Builder contribution(Contribution contribution) {
             Utils.checkNotNull(contribution, "contribution");
             this.contribution = Optional.ofNullable(contribution);
             return this;
@@ -459,7 +459,7 @@ public class BenefitTypeRequirements {
         /**
          * An object representing the type and value of the company contribution.
          */
-        public Builder contribution(Optional<? extends BenefitTypeRequirementsContribution> contribution) {
+        public Builder contribution(Optional<? extends Contribution> contribution) {
             Utils.checkNotNull(contribution, "contribution");
             this.contribution = contribution;
             return this;

@@ -17,11 +17,11 @@ import java.util.Optional;
 
 public class GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private Optional<Long> page = Optional.empty();
     private Optional<Long> per = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
@@ -29,12 +29,6 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder {
 
     public GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder xGustoAPIVersion(GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,6 +40,12 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder {
     public GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder xGustoAPIVersion(Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
         return this;
     }
                 
@@ -79,8 +79,8 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetCompaniesCompanyUuidWireInRequestUuidRequest request = new GetCompaniesCompanyUuidWireInRequestUuidRequest(companyUuid,
-            xGustoAPIVersion,
+        GetCompaniesCompanyUuidWireInRequestUuidRequest request = new GetCompaniesCompanyUuidWireInRequestUuidRequest(xGustoAPIVersion,
+            companyUuid,
             page,
             per);
 

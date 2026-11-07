@@ -16,30 +16,18 @@ import java.util.Optional;
 
 public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder {
 
-    private String companyUuid;
-    private String state;
     private Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private String state;
     private PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
-
-    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder state(String state) {
-        Utils.checkNotNull(state, "state");
-        this.state = state;
-        return this;
     }
                 
     public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder xGustoAPIVersion(PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -51,6 +39,18 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder {
     public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder xGustoAPIVersion(Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
+    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder state(String state) {
+        Utils.checkNotNull(state, "state");
+        this.state = state;
         return this;
     }
 
@@ -66,9 +66,9 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompaniesCompanyUuidTaxRequirementsStateRequest request = new PutV1CompaniesCompanyUuidTaxRequirementsStateRequest(companyUuid,
+        PutV1CompaniesCompanyUuidTaxRequirementsStateRequest request = new PutV1CompaniesCompanyUuidTaxRequirementsStateRequest(xGustoAPIVersion,
+            companyUuid,
             state,
-            xGustoAPIVersion,
             requestBody);
 
         return request;

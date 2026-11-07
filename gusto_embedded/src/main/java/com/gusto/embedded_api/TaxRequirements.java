@@ -47,6 +47,73 @@ public class TaxRequirements {
     }
 
     /**
+     * Get all tax requirements for a company
+     * 
+     * <p>Retrieves all states for which a company has tax requirements, along with a boolean indicating
+     * whether tax setup
+     * is complete for each state. Use this to determine which states still need tax setup during company
+     * onboarding.
+     * 
+     * <p>scope: `company_tax_requirements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder getAll() {
+        return new GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get all tax requirements for a company
+     * 
+     * <p>Retrieves all states for which a company has tax requirements, along with a boolean indicating
+     * whether tax setup
+     * is complete for each state. Use this to determine which states still need tax setup during company
+     * onboarding.
+     * 
+     * <p>scope: `company_tax_requirements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyUuid The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyUuidTaxRequirementsResponse getAll(String companyUuid) {
+        return getAll(Optional.empty(), companyUuid);
+    }
+
+    /**
+     * Get all tax requirements for a company
+     * 
+     * <p>Retrieves all states for which a company has tax requirements, along with a boolean indicating
+     * whether tax setup
+     * is complete for each state. Use this to determine which states still need tax setup during company
+     * onboarding.
+     * 
+     * <p>scope: `company_tax_requirements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyUuidTaxRequirementsResponse getAll(Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
+        GetV1CompaniesCompanyUuidTaxRequirementsRequest request =
+            GetV1CompaniesCompanyUuidTaxRequirementsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
+                .build();
+        RequestOperation<GetV1CompaniesCompanyUuidTaxRequirementsRequest, GetV1CompaniesCompanyUuidTaxRequirementsResponse> operation
+              = new GetV1CompaniesCompanyUuidTaxRequirements.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
      * Get tax requirements for a state
      * 
      * <p>Retrieves the detailed tax requirements for a specific state. The response includes requirement sets
@@ -88,7 +155,7 @@ public class TaxRequirements {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyUuidTaxRequirementsStateResponse get(String companyUuid, String state) {
-        return get(companyUuid, state, Optional.empty(),
+        return get(Optional.empty(), companyUuid, state,
             Optional.empty());
     }
 
@@ -107,22 +174,22 @@ public class TaxRequirements {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
      * @param state The two-letter state abbreviation
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param scheduling When true, return "new" requirement sets with valid `effective_from` dates that are available to save new effective-dated values.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyUuidTaxRequirementsStateResponse get(
-            String companyUuid, String state,
-            Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion, Optional<Boolean> scheduling) {
+            Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            String state, Optional<Boolean> scheduling) {
         GetV1CompaniesCompanyUuidTaxRequirementsStateRequest request =
             GetV1CompaniesCompanyUuidTaxRequirementsStateRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyUuid(companyUuid)
                 .state(state)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .scheduling(scheduling)
                 .build();
         RequestOperation<GetV1CompaniesCompanyUuidTaxRequirementsStateRequest, GetV1CompaniesCompanyUuidTaxRequirementsStateResponse> operation
@@ -183,7 +250,7 @@ public class TaxRequirements {
     public PutV1CompaniesCompanyUuidTaxRequirementsStateResponse updateState(
             String companyUuid, String state,
             PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody) {
-        return updateState(companyUuid, state, Optional.empty(),
+        return updateState(Optional.empty(), companyUuid, state,
             requestBody);
     }
 
@@ -206,93 +273,26 @@ public class TaxRequirements {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyUuid The UUID of the company
      * @param state The two-letter state abbreviation
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param requestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1CompaniesCompanyUuidTaxRequirementsStateResponse updateState(
-            String companyUuid, String state,
-            Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion, PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody) {
+            Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            String state, PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody) {
         PutV1CompaniesCompanyUuidTaxRequirementsStateRequest request =
             PutV1CompaniesCompanyUuidTaxRequirementsStateRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyUuid(companyUuid)
                 .state(state)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PutV1CompaniesCompanyUuidTaxRequirementsStateRequest, PutV1CompaniesCompanyUuidTaxRequirementsStateResponse> operation
               = new PutV1CompaniesCompanyUuidTaxRequirementsState.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get all tax requirements for a company
-     * 
-     * <p>Retrieves all states for which a company has tax requirements, along with a boolean indicating
-     * whether tax setup
-     * is complete for each state. Use this to determine which states still need tax setup during company
-     * onboarding.
-     * 
-     * <p>scope: `company_tax_requirements:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder getAll() {
-        return new GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get all tax requirements for a company
-     * 
-     * <p>Retrieves all states for which a company has tax requirements, along with a boolean indicating
-     * whether tax setup
-     * is complete for each state. Use this to determine which states still need tax setup during company
-     * onboarding.
-     * 
-     * <p>scope: `company_tax_requirements:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyUuid The UUID of the company
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesCompanyUuidTaxRequirementsResponse getAll(String companyUuid) {
-        return getAll(companyUuid, Optional.empty());
-    }
-
-    /**
-     * Get all tax requirements for a company
-     * 
-     * <p>Retrieves all states for which a company has tax requirements, along with a boolean indicating
-     * whether tax setup
-     * is complete for each state. Use this to determine which states still need tax setup during company
-     * onboarding.
-     * 
-     * <p>scope: `company_tax_requirements:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyUuid The UUID of the company
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1CompaniesCompanyUuidTaxRequirementsResponse getAll(String companyUuid, Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        GetV1CompaniesCompanyUuidTaxRequirementsRequest request =
-            GetV1CompaniesCompanyUuidTaxRequirementsRequest
-                .builder()
-                .companyUuid(companyUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .build();
-        RequestOperation<GetV1CompaniesCompanyUuidTaxRequirementsRequest, GetV1CompaniesCompanyUuidTaxRequirementsResponse> operation
-              = new GetV1CompaniesCompanyUuidTaxRequirements.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -24,7 +24,7 @@ afterEvaluate {
                     description = config.description
                     url = 'https://github.com/Gusto/gusto-java-client'
                     scm {
-                        url = 'github.com/Gusto/gusto-java-client'
+                        url = 'https://github.com/Gusto/gusto-java-client'
                         connection = 'scm:git:ssh://git@github.com/Gusto/gusto-java-client.git'
                     }
                     licenses {

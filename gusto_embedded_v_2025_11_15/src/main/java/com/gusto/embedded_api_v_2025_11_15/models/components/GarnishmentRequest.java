@@ -36,7 +36,8 @@ public class GarnishmentRequest {
      * The amount of the garnishment. Either a percentage or a fixed dollar amount. Represented as a float,
      * e.g.
      * 
-     * <p>"8.00".
+     * <p>"8.00". Child-support percentages cannot exceed 65; applicable federal or state rules may require a
+     * lower limit.
      */
     @JsonProperty("amount")
     private String amount;
@@ -49,7 +50,8 @@ public class GarnishmentRequest {
     private Optional<String> description;
 
     /**
-     * Whether the garnishment is court ordered.
+     * Whether the garnishment is court ordered. Must remain true for specific garnishment types other than
+     * other_garnishment.
      */
     @JsonProperty("court_ordered")
     private boolean courtOrdered;
@@ -62,7 +64,10 @@ public class GarnishmentRequest {
     private JsonNullable<? extends GarnishmentRequestGarnishmentType> garnishmentType;
 
     /**
-     * The number of times to apply the garnishment. Ignored if recurring is true.
+     * The number of times to apply the garnishment. Must be a positive integer when creating or changing a
+     * non-recurring count. Updates may echo an unchanged legacy zero.
+     * 
+     * <p>Ignored if recurring is true; use recurring rather than a negative count for indefinite deductions.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("times")
@@ -176,7 +181,8 @@ public class GarnishmentRequest {
      * The amount of the garnishment. Either a percentage or a fixed dollar amount. Represented as a float,
      * e.g.
      * 
-     * <p>"8.00".
+     * <p>"8.00". Child-support percentages cannot exceed 65; applicable federal or state rules may require a
+     * lower limit.
      */
     @JsonIgnore
     public String amount() {
@@ -192,7 +198,8 @@ public class GarnishmentRequest {
     }
 
     /**
-     * Whether the garnishment is court ordered.
+     * Whether the garnishment is court ordered. Must remain true for specific garnishment types other than
+     * other_garnishment.
      */
     @JsonIgnore
     public boolean courtOrdered() {
@@ -209,7 +216,10 @@ public class GarnishmentRequest {
     }
 
     /**
-     * The number of times to apply the garnishment. Ignored if recurring is true.
+     * The number of times to apply the garnishment. Must be a positive integer when creating or changing a
+     * non-recurring count. Updates may echo an unchanged legacy zero.
+     * 
+     * <p>Ignored if recurring is true; use recurring rather than a negative count for indefinite deductions.
      */
     @JsonIgnore
     public JsonNullable<Long> times() {
@@ -298,7 +308,8 @@ public class GarnishmentRequest {
      * The amount of the garnishment. Either a percentage or a fixed dollar amount. Represented as a float,
      * e.g.
      * 
-     * <p>"8.00".
+     * <p>"8.00". Child-support percentages cannot exceed 65; applicable federal or state rules may require a
+     * lower limit.
      */
     public GarnishmentRequest withAmount(String amount) {
         Utils.checkNotNull(amount, "amount");
@@ -326,7 +337,8 @@ public class GarnishmentRequest {
     }
 
     /**
-     * Whether the garnishment is court ordered.
+     * Whether the garnishment is court ordered. Must remain true for specific garnishment types other than
+     * other_garnishment.
      */
     public GarnishmentRequest withCourtOrdered(boolean courtOrdered) {
         Utils.checkNotNull(courtOrdered, "courtOrdered");
@@ -353,7 +365,10 @@ public class GarnishmentRequest {
     }
 
     /**
-     * The number of times to apply the garnishment. Ignored if recurring is true.
+     * The number of times to apply the garnishment. Must be a positive integer when creating or changing a
+     * non-recurring count. Updates may echo an unchanged legacy zero.
+     * 
+     * <p>Ignored if recurring is true; use recurring rather than a negative count for indefinite deductions.
      */
     public GarnishmentRequest withTimes(long times) {
         Utils.checkNotNull(times, "times");
@@ -362,7 +377,10 @@ public class GarnishmentRequest {
     }
 
     /**
-     * The number of times to apply the garnishment. Ignored if recurring is true.
+     * The number of times to apply the garnishment. Must be a positive integer when creating or changing a
+     * non-recurring count. Updates may echo an unchanged legacy zero.
+     * 
+     * <p>Ignored if recurring is true; use recurring rather than a negative count for indefinite deductions.
      */
     public GarnishmentRequest withTimes(JsonNullable<Long> times) {
         Utils.checkNotNull(times, "times");
@@ -595,7 +613,8 @@ public class GarnishmentRequest {
          * The amount of the garnishment. Either a percentage or a fixed dollar amount. Represented as a float,
          * e.g.
          * 
-         * <p>"8.00".
+         * <p>"8.00". Child-support percentages cannot exceed 65; applicable federal or state rules may require a
+         * lower limit.
          */
         public Builder amount(String amount) {
             Utils.checkNotNull(amount, "amount");
@@ -624,7 +643,8 @@ public class GarnishmentRequest {
 
 
         /**
-         * Whether the garnishment is court ordered.
+         * Whether the garnishment is court ordered. Must remain true for specific garnishment types other than
+         * other_garnishment.
          */
         public Builder courtOrdered(boolean courtOrdered) {
             Utils.checkNotNull(courtOrdered, "courtOrdered");
@@ -653,7 +673,10 @@ public class GarnishmentRequest {
 
 
         /**
-         * The number of times to apply the garnishment. Ignored if recurring is true.
+         * The number of times to apply the garnishment. Must be a positive integer when creating or changing a
+         * non-recurring count. Updates may echo an unchanged legacy zero.
+         * 
+         * <p>Ignored if recurring is true; use recurring rather than a negative count for indefinite deductions.
          */
         public Builder times(long times) {
             Utils.checkNotNull(times, "times");
@@ -662,7 +685,10 @@ public class GarnishmentRequest {
         }
 
         /**
-         * The number of times to apply the garnishment. Ignored if recurring is true.
+         * The number of times to apply the garnishment. Must be a positive integer when creating or changing a
+         * non-recurring count. Updates may echo an unchanged legacy zero.
+         * 
+         * <p>Ignored if recurring is true; use recurring rather than a negative count for indefinite deductions.
          */
         public Builder times(JsonNullable<Long> times) {
             Utils.checkNotNull(times, "times");

@@ -22,11 +22,11 @@ import java.util.concurrent.CompletableFuture;
 public class PutV1VerifyWebhookSubscriptionUuidRequestBuilder {
 
     private PutV1VerifyWebhookSubscriptionUuidSecurity security;
-    private String webhookSubscriptionUuid;
     private Optional<? extends PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion>>() {});
+    private String webhookSubscriptionUuid;
     private PutV1VerifyWebhookSubscriptionUuidRequestBody requestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
@@ -38,12 +38,6 @@ public class PutV1VerifyWebhookSubscriptionUuidRequestBuilder {
     public PutV1VerifyWebhookSubscriptionUuidRequestBuilder security(PutV1VerifyWebhookSubscriptionUuidSecurity security) {
         Utils.checkNotNull(security, "security");
         this.security = security;
-        return this;
-    }
-
-    public PutV1VerifyWebhookSubscriptionUuidRequestBuilder webhookSubscriptionUuid(String webhookSubscriptionUuid) {
-        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
-        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
         return this;
     }
                 
@@ -59,6 +53,12 @@ public class PutV1VerifyWebhookSubscriptionUuidRequestBuilder {
         return this;
     }
 
+    public PutV1VerifyWebhookSubscriptionUuidRequestBuilder webhookSubscriptionUuid(String webhookSubscriptionUuid) {
+        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
+        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
+        return this;
+    }
+
     public PutV1VerifyWebhookSubscriptionUuidRequestBuilder requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
@@ -71,8 +71,8 @@ public class PutV1VerifyWebhookSubscriptionUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1VerifyWebhookSubscriptionUuidRequest request = new PutV1VerifyWebhookSubscriptionUuidRequest(webhookSubscriptionUuid,
-            xGustoAPIVersion,
+        PutV1VerifyWebhookSubscriptionUuidRequest request = new PutV1VerifyWebhookSubscriptionUuidRequest(xGustoAPIVersion,
+            webhookSubscriptionUuid,
             requestBody);
 
         return request;

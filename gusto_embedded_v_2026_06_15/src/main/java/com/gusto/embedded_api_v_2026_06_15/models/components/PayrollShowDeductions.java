@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -30,7 +29,7 @@ public class PayrollShowDeductions {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
-    private Optional<Double> amount;
+    private Optional<String> amount;
 
     /**
      * The amount type of the deduction for the pay period. Only present for unprocessed payrolls.
@@ -57,7 +56,7 @@ public class PayrollShowDeductions {
     @JsonCreator
     public PayrollShowDeductions(
             @JsonProperty("name") Optional<String> name,
-            @JsonProperty("amount") Optional<Double> amount,
+            @JsonProperty("amount") Optional<String> amount,
             @JsonProperty("amount_type") Optional<? extends PayrollShowAmountType> amountType,
             @JsonProperty("uuid") Optional<String> uuid,
             @JsonProperty("updatable_via_payroll") Optional<Boolean> updatableViaPayroll) {
@@ -90,7 +89,7 @@ public class PayrollShowDeductions {
      * The amount of the deduction for the pay period.
      */
     @JsonIgnore
-    public Optional<Double> amount() {
+    public Optional<String> amount() {
         return amount;
     }
 
@@ -147,7 +146,7 @@ public class PayrollShowDeductions {
     /**
      * The amount of the deduction for the pay period.
      */
-    public PayrollShowDeductions withAmount(double amount) {
+    public PayrollShowDeductions withAmount(String amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = Optional.ofNullable(amount);
         return this;
@@ -157,7 +156,7 @@ public class PayrollShowDeductions {
     /**
      * The amount of the deduction for the pay period.
      */
-    public PayrollShowDeductions withAmount(Optional<Double> amount) {
+    public PayrollShowDeductions withAmount(Optional<String> amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
         return this;
@@ -261,7 +260,7 @@ public class PayrollShowDeductions {
 
         private Optional<String> name = Optional.empty();
 
-        private Optional<Double> amount = Optional.empty();
+        private Optional<String> amount = Optional.empty();
 
         private Optional<? extends PayrollShowAmountType> amountType = Optional.empty();
 
@@ -296,7 +295,7 @@ public class PayrollShowDeductions {
         /**
          * The amount of the deduction for the pay period.
          */
-        public Builder amount(double amount) {
+        public Builder amount(String amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
             return this;
@@ -305,7 +304,7 @@ public class PayrollShowDeductions {
         /**
          * The amount of the deduction for the pay period.
          */
-        public Builder amount(Optional<Double> amount) {
+        public Builder amount(Optional<String> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;

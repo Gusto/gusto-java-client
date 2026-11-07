@@ -10,7 +10,7 @@ import static com.gusto.embedded_api_v_2025_11_15.operations.Operations.AsyncReq
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.SecuritySource;
-import com.gusto.embedded_api_v_2025_11_15.models.components.Employee;
+import com.gusto.embedded_api_v_2025_11_15.models.components.EmployeeShow;
 import com.gusto.embedded_api_v_2025_11_15.models.errors.APIException;
 import com.gusto.embedded_api_v_2025_11_15.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeesRequest;
@@ -161,7 +161,7 @@ public class GetV1Employees {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withEmployee(Utils.unmarshal(response, new TypeReference<Employee>() {}));
+                    return res.withEmployeeShow(Utils.unmarshal(response, new TypeReference<EmployeeShow>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
@@ -238,8 +238,8 @@ public class GetV1Employees {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return Utils.unmarshalAsync(response, new TypeReference<Employee>() {})
-                            .thenApply(res::withEmployee);
+                    return Utils.unmarshalAsync(response, new TypeReference<EmployeeShow>() {})
+                            .thenApply(res::withEmployeeShow);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }

@@ -17,23 +17,17 @@ import java.util.Optional;
 
 public class PutWireInRequestsWireInRequestUuidRequestBuilder {
 
-    private String wireInRequestUuid;
     private Optional<? extends PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion>>() {});
+    private String wireInRequestUuid;
     private WireInRequestUpdateRequestBody wireInRequestUpdateRequestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutWireInRequestsWireInRequestUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutWireInRequestsWireInRequestUuidRequestBuilder wireInRequestUuid(String wireInRequestUuid) {
-        Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
-        this.wireInRequestUuid = wireInRequestUuid;
-        return this;
     }
                 
     public PutWireInRequestsWireInRequestUuidRequestBuilder xGustoAPIVersion(PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -45,6 +39,12 @@ public class PutWireInRequestsWireInRequestUuidRequestBuilder {
     public PutWireInRequestsWireInRequestUuidRequestBuilder xGustoAPIVersion(Optional<? extends PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutWireInRequestsWireInRequestUuidRequestBuilder wireInRequestUuid(String wireInRequestUuid) {
+        Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
+        this.wireInRequestUuid = wireInRequestUuid;
         return this;
     }
 
@@ -60,8 +60,8 @@ public class PutWireInRequestsWireInRequestUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutWireInRequestsWireInRequestUuidRequest request = new PutWireInRequestsWireInRequestUuidRequest(wireInRequestUuid,
-            xGustoAPIVersion,
+        PutWireInRequestsWireInRequestUuidRequest request = new PutWireInRequestsWireInRequestUuidRequest(xGustoAPIVersion,
+            wireInRequestUuid,
             wireInRequestUpdateRequestBody);
 
         return request;
