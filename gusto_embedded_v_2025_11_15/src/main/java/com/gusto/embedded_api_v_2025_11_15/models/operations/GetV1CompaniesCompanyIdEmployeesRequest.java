@@ -64,7 +64,7 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
      * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=include")
-    private Optional<? extends List<Include>> include;
+    private Optional<? extends List<GetV1CompaniesCompanyIdEmployeesQueryParamInclude>> include;
 
     /**
      * Filters employees by those who have completed onboarding
@@ -118,7 +118,7 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
             Optional<String> payrollUuid,
             Optional<String> searchTerm,
             Optional<String> sortBy,
-            Optional<? extends List<Include>> include,
+            Optional<? extends List<GetV1CompaniesCompanyIdEmployeesQueryParamInclude>> include,
             Optional<Boolean> onboarded,
             Optional<Boolean> onboardedActive,
             Optional<Boolean> terminated,
@@ -224,8 +224,8 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Include>> include() {
-        return (Optional<List<Include>>) include;
+    public Optional<List<GetV1CompaniesCompanyIdEmployeesQueryParamInclude>> include() {
+        return (Optional<List<GetV1CompaniesCompanyIdEmployeesQueryParamInclude>>) include;
     }
 
     /**
@@ -409,7 +409,7 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
     /**
      * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
      */
-    public GetV1CompaniesCompanyIdEmployeesRequest withInclude(List<Include> include) {
+    public GetV1CompaniesCompanyIdEmployeesRequest withInclude(List<GetV1CompaniesCompanyIdEmployeesQueryParamInclude> include) {
         Utils.checkNotNull(include, "include");
         this.include = Optional.ofNullable(include);
         return this;
@@ -419,7 +419,7 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
     /**
      * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
      */
-    public GetV1CompaniesCompanyIdEmployeesRequest withInclude(Optional<? extends List<Include>> include) {
+    public GetV1CompaniesCompanyIdEmployeesRequest withInclude(Optional<? extends List<GetV1CompaniesCompanyIdEmployeesQueryParamInclude>> include) {
         Utils.checkNotNull(include, "include");
         this.include = include;
         return this;
@@ -632,7 +632,7 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
 
         private Optional<String> sortBy = Optional.empty();
 
-        private Optional<? extends List<Include>> include = Optional.empty();
+        private Optional<? extends List<GetV1CompaniesCompanyIdEmployeesQueryParamInclude>> include = Optional.empty();
 
         private Optional<Boolean> onboarded = Optional.empty();
 
@@ -771,7 +771,7 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
         /**
          * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
          */
-        public Builder include(List<Include> include) {
+        public Builder include(List<GetV1CompaniesCompanyIdEmployeesQueryParamInclude> include) {
             Utils.checkNotNull(include, "include");
             this.include = Optional.ofNullable(include);
             return this;
@@ -780,7 +780,7 @@ public class GetV1CompaniesCompanyIdEmployeesRequest {
         /**
          * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
          */
-        public Builder include(Optional<? extends List<Include>> include) {
+        public Builder include(Optional<? extends List<GetV1CompaniesCompanyIdEmployeesQueryParamInclude>> include) {
             Utils.checkNotNull(include, "include");
             this.include = include;
             return this;

@@ -11,8 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 
@@ -24,15 +26,37 @@ public class PostV1CompaniesCompanyIdEarningTypesRequestBody {
     @JsonProperty("name")
     private Optional<String> name;
 
+    /**
+     * The earning type category. Only settable when the company has access to categorized custom bonus
+     * earning types.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("category")
+    private Optional<? extends Category> category;
+
+    /**
+     * Whether earnings of this type are included when calculating an employee's regular rate of pay for
+     * overtime purposes. Only settable when `category` is `Other`.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("included_in_overtime_pay")
+    private Optional<Boolean> includedInOvertimePay;
+
     @JsonCreator
     public PostV1CompaniesCompanyIdEarningTypesRequestBody(
-            @JsonProperty("name") Optional<String> name) {
+            @JsonProperty("name") Optional<String> name,
+            @JsonProperty("category") Optional<? extends Category> category,
+            @JsonProperty("included_in_overtime_pay") Optional<Boolean> includedInOvertimePay) {
         Utils.checkNotNull(name, "name");
+        Utils.checkNotNull(category, "category");
+        Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
         this.name = name;
+        this.category = category;
+        this.includedInOvertimePay = includedInOvertimePay;
     }
     
     public PostV1CompaniesCompanyIdEarningTypesRequestBody() {
-        this(Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -41,6 +65,25 @@ public class PostV1CompaniesCompanyIdEarningTypesRequestBody {
     @JsonIgnore
     public Optional<String> name() {
         return name;
+    }
+
+    /**
+     * The earning type category. Only settable when the company has access to categorized custom bonus
+     * earning types.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Category> category() {
+        return (Optional<Category>) category;
+    }
+
+    /**
+     * Whether earnings of this type are included when calculating an employee's regular rate of pay for
+     * overtime purposes. Only settable when `category` is `Other`.
+     */
+    @JsonIgnore
+    public Optional<Boolean> includedInOvertimePay() {
+        return includedInOvertimePay;
     }
 
     public static Builder builder() {
@@ -67,6 +110,48 @@ public class PostV1CompaniesCompanyIdEarningTypesRequestBody {
         return this;
     }
 
+    /**
+     * The earning type category. Only settable when the company has access to categorized custom bonus
+     * earning types.
+     */
+    public PostV1CompaniesCompanyIdEarningTypesRequestBody withCategory(Category category) {
+        Utils.checkNotNull(category, "category");
+        this.category = Optional.ofNullable(category);
+        return this;
+    }
+
+
+    /**
+     * The earning type category. Only settable when the company has access to categorized custom bonus
+     * earning types.
+     */
+    public PostV1CompaniesCompanyIdEarningTypesRequestBody withCategory(Optional<? extends Category> category) {
+        Utils.checkNotNull(category, "category");
+        this.category = category;
+        return this;
+    }
+
+    /**
+     * Whether earnings of this type are included when calculating an employee's regular rate of pay for
+     * overtime purposes. Only settable when `category` is `Other`.
+     */
+    public PostV1CompaniesCompanyIdEarningTypesRequestBody withIncludedInOvertimePay(boolean includedInOvertimePay) {
+        Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
+        this.includedInOvertimePay = Optional.ofNullable(includedInOvertimePay);
+        return this;
+    }
+
+
+    /**
+     * Whether earnings of this type are included when calculating an employee's regular rate of pay for
+     * overtime purposes. Only settable when `category` is `Other`.
+     */
+    public PostV1CompaniesCompanyIdEarningTypesRequestBody withIncludedInOvertimePay(Optional<Boolean> includedInOvertimePay) {
+        Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
+        this.includedInOvertimePay = includedInOvertimePay;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -77,25 +162,33 @@ public class PostV1CompaniesCompanyIdEarningTypesRequestBody {
         }
         PostV1CompaniesCompanyIdEarningTypesRequestBody other = (PostV1CompaniesCompanyIdEarningTypesRequestBody) o;
         return 
-            Utils.enhancedDeepEquals(this.name, other.name);
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.category, other.category) &&
+            Utils.enhancedDeepEquals(this.includedInOvertimePay, other.includedInOvertimePay);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name);
+            name, category, includedInOvertimePay);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostV1CompaniesCompanyIdEarningTypesRequestBody.class,
-                "name", name);
+                "name", name,
+                "category", category,
+                "includedInOvertimePay", includedInOvertimePay);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private Optional<String> name;
+
+        private Optional<? extends Category> category = Optional.empty();
+
+        private Optional<Boolean> includedInOvertimePay = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -120,13 +213,55 @@ public class PostV1CompaniesCompanyIdEarningTypesRequestBody {
             return this;
         }
 
+
+        /**
+         * The earning type category. Only settable when the company has access to categorized custom bonus
+         * earning types.
+         */
+        public Builder category(Category category) {
+            Utils.checkNotNull(category, "category");
+            this.category = Optional.ofNullable(category);
+            return this;
+        }
+
+        /**
+         * The earning type category. Only settable when the company has access to categorized custom bonus
+         * earning types.
+         */
+        public Builder category(Optional<? extends Category> category) {
+            Utils.checkNotNull(category, "category");
+            this.category = category;
+            return this;
+        }
+
+
+        /**
+         * Whether earnings of this type are included when calculating an employee's regular rate of pay for
+         * overtime purposes. Only settable when `category` is `Other`.
+         */
+        public Builder includedInOvertimePay(boolean includedInOvertimePay) {
+            Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
+            this.includedInOvertimePay = Optional.ofNullable(includedInOvertimePay);
+            return this;
+        }
+
+        /**
+         * Whether earnings of this type are included when calculating an employee's regular rate of pay for
+         * overtime purposes. Only settable when `category` is `Other`.
+         */
+        public Builder includedInOvertimePay(Optional<Boolean> includedInOvertimePay) {
+            Utils.checkNotNull(includedInOvertimePay, "includedInOvertimePay");
+            this.includedInOvertimePay = includedInOvertimePay;
+            return this;
+        }
+
         public PostV1CompaniesCompanyIdEarningTypesRequestBody build() {
             if (name == null) {
                 name = _SINGLETON_VALUE_Name.value();
             }
 
             return new PostV1CompaniesCompanyIdEarningTypesRequestBody(
-                name);
+                name, category, includedInOvertimePay);
         }
 
 

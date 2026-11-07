@@ -6,9 +6,9 @@
 
 * [list](#list) - Get garnishments for an employee
 * [create](#create) - Create a garnishment
+* [getChildSupportData](#getchildsupportdata) - Get child support garnishment data
 * [get](#get) - Get a garnishment
 * [update](#update) - Update a garnishment
-* [getChildSupportData](#getchildsupportdata) - Get child support garnishment data
 
 ## list
 
@@ -291,6 +291,58 @@ public class Application {
 | models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
 | models/errors/UnprocessableEntityError | 422                                    | application/json                       |
 | models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+
+## getChildSupportData
+
+Agency data and requirements to be used for creating child support garnishments
+
+scope: `garnishments:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-garnishments-child_support" method="get" path="/v1/garnishments/child_support" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.operations.GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.GetV1GarnishmentsChildSupportResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1GarnishmentsChildSupportResponse res = sdk.garnishments().getChildSupportData()
+                .xGustoAPIVersion(GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .call();
+
+        if (res.childSupportData().isPresent()) {
+            System.out.println(res.childSupportData().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion>](../../models/operations/GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion.md)                                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+
+### Response
+
+**[GetV1GarnishmentsChildSupportResponse](../../models/operations/GetV1GarnishmentsChildSupportResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
 ## get
 
@@ -586,55 +638,3 @@ public class Application {
 | models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
 | models/errors/UnprocessableEntityError | 422                                    | application/json                       |
 | models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
-
-## getChildSupportData
-
-Agency data and requirements to be used for creating child support garnishments
-
-scope: `garnishments:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="get-v1-garnishments-child_support" method="get" path="/v1/garnishments/child_support" example="Example" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.operations.GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.GetV1GarnishmentsChildSupportResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        GetV1GarnishmentsChildSupportResponse res = sdk.garnishments().getChildSupportData()
-                .xGustoAPIVersion(GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .call();
-
-        if (res.childSupportData().isPresent()) {
-            System.out.println(res.childSupportData().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion>](../../models/operations/GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion.md)                                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-
-### Response
-
-**[GetV1GarnishmentsChildSupportResponse](../../models/operations/GetV1GarnishmentsChildSupportResponse.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |

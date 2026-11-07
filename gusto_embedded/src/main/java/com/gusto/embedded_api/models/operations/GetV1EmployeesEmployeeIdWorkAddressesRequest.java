@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetV1EmployeesEmployeeIdWorkAddressesRequest {
     /**
-     * The UUID of the employee
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_id")
-    private String employeeId;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class GetV1EmployeesEmployeeIdWorkAddressesRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the employee
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=employee_id")
+    private String employeeId;
+
     @JsonCreator
     public GetV1EmployeesEmployeeIdWorkAddressesRequest(
-            String employeeId,
-            Optional<? extends GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(employeeId, "employeeId");
+            Optional<? extends GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String employeeId) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.employeeId = employeeId;
+        Utils.checkNotNull(employeeId, "employeeId");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.employeeId = employeeId;
     }
     
     public GetV1EmployeesEmployeeIdWorkAddressesRequest(
             String employeeId) {
-        this(employeeId, Optional.empty());
-    }
-
-    /**
-     * The UUID of the employee
-     */
-    @JsonIgnore
-    public String employeeId() {
-        return employeeId;
+        this(Optional.empty(), employeeId);
     }
 
     /**
@@ -64,19 +56,18 @@ public class GetV1EmployeesEmployeeIdWorkAddressesRequest {
         return (Optional<GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the employee
+     */
+    @JsonIgnore
+    public String employeeId() {
+        return employeeId;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the employee
-     */
-    public GetV1EmployeesEmployeeIdWorkAddressesRequest withEmployeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class GetV1EmployeesEmployeeIdWorkAddressesRequest {
         return this;
     }
 
+    /**
+     * The UUID of the employee
+     */
+    public GetV1EmployeesEmployeeIdWorkAddressesRequest withEmployeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class GetV1EmployeesEmployeeIdWorkAddressesRequest {
         }
         GetV1EmployeesEmployeeIdWorkAddressesRequest other = (GetV1EmployeesEmployeeIdWorkAddressesRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.employeeId, other.employeeId) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.employeeId, other.employeeId);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            employeeId, xGustoAPIVersion);
+            xGustoAPIVersion, employeeId);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1EmployeesEmployeeIdWorkAddressesRequest.class,
-                "employeeId", employeeId,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "employeeId", employeeId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String employeeId;
-
         private Optional<? extends GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String employeeId;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the employee
-         */
-        public Builder employeeId(String employeeId) {
-            Utils.checkNotNull(employeeId, "employeeId");
-            this.employeeId = employeeId;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class GetV1EmployeesEmployeeIdWorkAddressesRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the employee
+         */
+        public Builder employeeId(String employeeId) {
+            Utils.checkNotNull(employeeId, "employeeId");
+            this.employeeId = employeeId;
+            return this;
+        }
+
         public GetV1EmployeesEmployeeIdWorkAddressesRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1EmployeesEmployeeIdWorkAddressesRequest(
-                employeeId, xGustoAPIVersion);
+                xGustoAPIVersion, employeeId);
         }
 
 

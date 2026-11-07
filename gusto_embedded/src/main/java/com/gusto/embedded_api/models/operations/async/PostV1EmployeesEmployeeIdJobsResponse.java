@@ -34,7 +34,7 @@ public class PostV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * created
+     * created a primary job with a null title
      */
     private Optional<? extends Job> job;
 
@@ -87,7 +87,7 @@ public class PostV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
     }
 
     /**
-     * created
+     * created a primary job with a null title
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class PostV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
     }
 
     /**
-     * created
+     * created a primary job with a null title
      */
     public PostV1EmployeesEmployeeIdJobsResponse withJob(Job job) {
         Utils.checkNotNull(job, "job");
@@ -138,7 +138,7 @@ public class PostV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
 
 
     /**
-     * created
+     * created a primary job with a null title
      */
     public PostV1EmployeesEmployeeIdJobsResponse withJob(Optional<? extends Job> job) {
         Utils.checkNotNull(job, "job");
@@ -225,7 +225,7 @@ public class PostV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
 
 
         /**
-         * created
+         * created a primary job with a null title
          */
         public Builder job(Job job) {
             Utils.checkNotNull(job, "job");
@@ -234,7 +234,7 @@ public class PostV1EmployeesEmployeeIdJobsResponse implements AsyncResponse {
         }
 
         /**
-         * created
+         * created a primary job with a null title
          */
         public Builder job(Optional<? extends Job> job) {
             Utils.checkNotNull(job, "job");

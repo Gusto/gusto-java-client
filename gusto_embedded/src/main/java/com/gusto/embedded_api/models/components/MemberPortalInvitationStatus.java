@@ -29,7 +29,7 @@ public class MemberPortalInvitationStatus {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
-    private Optional<? extends ShowEmployeesStatus> status;
+    private Optional<? extends ContractorShowStatus> status;
 
     /**
      * Whether the invitation token has expired.
@@ -54,7 +54,7 @@ public class MemberPortalInvitationStatus {
 
     @JsonCreator
     public MemberPortalInvitationStatus(
-            @JsonProperty("status") Optional<? extends ShowEmployeesStatus> status,
+            @JsonProperty("status") Optional<? extends ContractorShowStatus> status,
             @JsonProperty("token_expired") JsonNullable<Boolean> tokenExpired,
             @JsonProperty("welcome_email_sent_at") JsonNullable<OffsetDateTime> welcomeEmailSentAt,
             @JsonProperty("last_password_resent_at") JsonNullable<OffsetDateTime> lastPasswordResentAt) {
@@ -78,8 +78,8 @@ public class MemberPortalInvitationStatus {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<ShowEmployeesStatus> status() {
-        return (Optional<ShowEmployeesStatus>) status;
+    public Optional<ContractorShowStatus> status() {
+        return (Optional<ContractorShowStatus>) status;
     }
 
     /**
@@ -114,7 +114,7 @@ public class MemberPortalInvitationStatus {
     /**
      * The current status of the member portal invitation.
      */
-    public MemberPortalInvitationStatus withStatus(ShowEmployeesStatus status) {
+    public MemberPortalInvitationStatus withStatus(ContractorShowStatus status) {
         Utils.checkNotNull(status, "status");
         this.status = Optional.ofNullable(status);
         return this;
@@ -124,7 +124,7 @@ public class MemberPortalInvitationStatus {
     /**
      * The current status of the member portal invitation.
      */
-    public MemberPortalInvitationStatus withStatus(Optional<? extends ShowEmployeesStatus> status) {
+    public MemberPortalInvitationStatus withStatus(Optional<? extends ContractorShowStatus> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -219,7 +219,7 @@ public class MemberPortalInvitationStatus {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends ShowEmployeesStatus> status = Optional.empty();
+        private Optional<? extends ContractorShowStatus> status = Optional.empty();
 
         private JsonNullable<Boolean> tokenExpired = JsonNullable.undefined();
 
@@ -235,7 +235,7 @@ public class MemberPortalInvitationStatus {
         /**
          * The current status of the member portal invitation.
          */
-        public Builder status(ShowEmployeesStatus status) {
+        public Builder status(ContractorShowStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = Optional.ofNullable(status);
             return this;
@@ -244,7 +244,7 @@ public class MemberPortalInvitationStatus {
         /**
          * The current status of the member portal invitation.
          */
-        public Builder status(Optional<? extends ShowEmployeesStatus> status) {
+        public Builder status(Optional<? extends ContractorShowStatus> status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;

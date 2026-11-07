@@ -22,11 +22,11 @@ import java.util.concurrent.CompletableFuture;
 public class PutV1WebhookSubscriptionUuidRequestBuilder {
 
     private PutV1WebhookSubscriptionUuidSecurity security;
-    private String webhookSubscriptionUuid;
     private Optional<? extends PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion>>() {});
+    private String webhookSubscriptionUuid;
     private PutV1WebhookSubscriptionUuidRequestBody requestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
@@ -38,12 +38,6 @@ public class PutV1WebhookSubscriptionUuidRequestBuilder {
     public PutV1WebhookSubscriptionUuidRequestBuilder security(PutV1WebhookSubscriptionUuidSecurity security) {
         Utils.checkNotNull(security, "security");
         this.security = security;
-        return this;
-    }
-
-    public PutV1WebhookSubscriptionUuidRequestBuilder webhookSubscriptionUuid(String webhookSubscriptionUuid) {
-        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
-        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
         return this;
     }
                 
@@ -59,6 +53,12 @@ public class PutV1WebhookSubscriptionUuidRequestBuilder {
         return this;
     }
 
+    public PutV1WebhookSubscriptionUuidRequestBuilder webhookSubscriptionUuid(String webhookSubscriptionUuid) {
+        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
+        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
+        return this;
+    }
+
     public PutV1WebhookSubscriptionUuidRequestBuilder requestBody(PutV1WebhookSubscriptionUuidRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
@@ -71,8 +71,8 @@ public class PutV1WebhookSubscriptionUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1WebhookSubscriptionUuidRequest request = new PutV1WebhookSubscriptionUuidRequest(webhookSubscriptionUuid,
-            xGustoAPIVersion,
+        PutV1WebhookSubscriptionUuidRequest request = new PutV1WebhookSubscriptionUuidRequest(xGustoAPIVersion,
+            webhookSubscriptionUuid,
             requestBody);
 
         return request;

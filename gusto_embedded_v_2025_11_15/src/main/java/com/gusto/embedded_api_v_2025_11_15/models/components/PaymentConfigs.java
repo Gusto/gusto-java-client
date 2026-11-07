@@ -34,7 +34,8 @@ public class PaymentConfigs {
     private Optional<String> partnerUuid;
 
     /**
-     * Payment limit for 1-day or 2-day payroll (string representation of decimal).
+     * Payment limit for 1-day or 2-day payroll (string representation of decimal). Applies to the 24-hour
+     * aggregate of all payments; a payment that exceeds it moves to 4-day.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fast_payment_limit")
@@ -108,7 +109,8 @@ public class PaymentConfigs {
     }
 
     /**
-     * Payment limit for 1-day or 2-day payroll (string representation of decimal).
+     * Payment limit for 1-day or 2-day payroll (string representation of decimal). Applies to the 24-hour
+     * aggregate of all payments; a payment that exceeds it moves to 4-day.
      */
     @JsonIgnore
     public JsonNullable<String> fastPaymentLimit() {
@@ -188,7 +190,8 @@ public class PaymentConfigs {
     }
 
     /**
-     * Payment limit for 1-day or 2-day payroll (string representation of decimal).
+     * Payment limit for 1-day or 2-day payroll (string representation of decimal). Applies to the 24-hour
+     * aggregate of all payments; a payment that exceeds it moves to 4-day.
      */
     public PaymentConfigs withFastPaymentLimit(String fastPaymentLimit) {
         Utils.checkNotNull(fastPaymentLimit, "fastPaymentLimit");
@@ -197,7 +200,8 @@ public class PaymentConfigs {
     }
 
     /**
-     * Payment limit for 1-day or 2-day payroll (string representation of decimal).
+     * Payment limit for 1-day or 2-day payroll (string representation of decimal). Applies to the 24-hour
+     * aggregate of all payments; a payment that exceeds it moves to 4-day.
      */
     public PaymentConfigs withFastPaymentLimit(JsonNullable<String> fastPaymentLimit) {
         Utils.checkNotNull(fastPaymentLimit, "fastPaymentLimit");
@@ -363,7 +367,8 @@ public class PaymentConfigs {
 
 
         /**
-         * Payment limit for 1-day or 2-day payroll (string representation of decimal).
+         * Payment limit for 1-day or 2-day payroll (string representation of decimal). Applies to the 24-hour
+         * aggregate of all payments; a payment that exceeds it moves to 4-day.
          */
         public Builder fastPaymentLimit(String fastPaymentLimit) {
             Utils.checkNotNull(fastPaymentLimit, "fastPaymentLimit");
@@ -372,7 +377,8 @@ public class PaymentConfigs {
         }
 
         /**
-         * Payment limit for 1-day or 2-day payroll (string representation of decimal).
+         * Payment limit for 1-day or 2-day payroll (string representation of decimal). Applies to the 24-hour
+         * aggregate of all payments; a payment that exceeds it moves to 4-day.
          */
         public Builder fastPaymentLimit(JsonNullable<String> fastPaymentLimit) {
             Utils.checkNotNull(fastPaymentLimit, "fastPaymentLimit");

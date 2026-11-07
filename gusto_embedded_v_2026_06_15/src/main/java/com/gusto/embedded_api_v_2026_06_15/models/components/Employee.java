@@ -130,7 +130,7 @@ public class Employee {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("onboarding_documents_config")
-    private Optional<? extends OnboardingDocumentsConfig> onboardingDocumentsConfig;
+    private Optional<? extends EmployeeOnboardingDocumentsConfig> onboardingDocumentsConfig;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -206,7 +206,7 @@ public class Employee {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("current_employment_status")
-    private JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus;
+    private JsonNullable<? extends EmployeeCurrentEmploymentStatus> currentEmploymentStatus;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -297,7 +297,7 @@ public class Employee {
             @JsonProperty("work_email") JsonNullable<String> workEmail,
             @JsonProperty("onboarded") Optional<Boolean> onboarded,
             @JsonProperty("onboarding_status") JsonNullable<? extends EmployeeOnboardingStatus1> onboardingStatus,
-            @JsonProperty("onboarding_documents_config") Optional<? extends OnboardingDocumentsConfig> onboardingDocumentsConfig,
+            @JsonProperty("onboarding_documents_config") Optional<? extends EmployeeOnboardingDocumentsConfig> onboardingDocumentsConfig,
             @JsonProperty("jobs") Optional<? extends List<Job>> jobs,
             @JsonProperty("eligible_paid_time_off") Optional<? extends List<PaidTimeOff>> eligiblePaidTimeOff,
             @JsonProperty("terminations") Optional<? extends List<Termination>> terminations,
@@ -309,7 +309,7 @@ public class Employee {
             @JsonProperty("phone") JsonNullable<String> phone,
             @JsonProperty("preferred_first_name") JsonNullable<String> preferredFirstName,
             @JsonProperty("payment_method") Optional<? extends EmployeePaymentMethod1> paymentMethod,
-            @JsonProperty("current_employment_status") JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus,
+            @JsonProperty("current_employment_status") JsonNullable<? extends EmployeeCurrentEmploymentStatus> currentEmploymentStatus,
             @JsonProperty("historical") Optional<Boolean> historical,
             @JsonProperty("employee_code") Optional<String> employeeCode,
             @JsonProperty("department_uuid") JsonNullable<String> departmentUuid,
@@ -533,8 +533,8 @@ public class Employee {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<OnboardingDocumentsConfig> onboardingDocumentsConfig() {
-        return (Optional<OnboardingDocumentsConfig>) onboardingDocumentsConfig;
+    public Optional<EmployeeOnboardingDocumentsConfig> onboardingDocumentsConfig() {
+        return (Optional<EmployeeOnboardingDocumentsConfig>) onboardingDocumentsConfig;
     }
 
     @SuppressWarnings("unchecked")
@@ -621,8 +621,8 @@ public class Employee {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<CurrentEmploymentStatus> currentEmploymentStatus() {
-        return (JsonNullable<CurrentEmploymentStatus>) currentEmploymentStatus;
+    public JsonNullable<EmployeeCurrentEmploymentStatus> currentEmploymentStatus() {
+        return (JsonNullable<EmployeeCurrentEmploymentStatus>) currentEmploymentStatus;
     }
 
     @JsonIgnore
@@ -950,7 +950,7 @@ public class Employee {
     /**
      * Configuration for an employee onboarding documents during onboarding
      */
-    public Employee withOnboardingDocumentsConfig(OnboardingDocumentsConfig onboardingDocumentsConfig) {
+    public Employee withOnboardingDocumentsConfig(EmployeeOnboardingDocumentsConfig onboardingDocumentsConfig) {
         Utils.checkNotNull(onboardingDocumentsConfig, "onboardingDocumentsConfig");
         this.onboardingDocumentsConfig = Optional.ofNullable(onboardingDocumentsConfig);
         return this;
@@ -960,7 +960,7 @@ public class Employee {
     /**
      * Configuration for an employee onboarding documents during onboarding
      */
-    public Employee withOnboardingDocumentsConfig(Optional<? extends OnboardingDocumentsConfig> onboardingDocumentsConfig) {
+    public Employee withOnboardingDocumentsConfig(Optional<? extends EmployeeOnboardingDocumentsConfig> onboardingDocumentsConfig) {
         Utils.checkNotNull(onboardingDocumentsConfig, "onboardingDocumentsConfig");
         this.onboardingDocumentsConfig = onboardingDocumentsConfig;
         return this;
@@ -1140,7 +1140,7 @@ public class Employee {
      * <p>Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the
      * year or less.
      */
-    public Employee withCurrentEmploymentStatus(CurrentEmploymentStatus currentEmploymentStatus) {
+    public Employee withCurrentEmploymentStatus(EmployeeCurrentEmploymentStatus currentEmploymentStatus) {
         Utils.checkNotNull(currentEmploymentStatus, "currentEmploymentStatus");
         this.currentEmploymentStatus = JsonNullable.of(currentEmploymentStatus);
         return this;
@@ -1154,7 +1154,7 @@ public class Employee {
      * <p>Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the
      * year or less.
      */
-    public Employee withCurrentEmploymentStatus(JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus) {
+    public Employee withCurrentEmploymentStatus(JsonNullable<? extends EmployeeCurrentEmploymentStatus> currentEmploymentStatus) {
         Utils.checkNotNull(currentEmploymentStatus, "currentEmploymentStatus");
         this.currentEmploymentStatus = currentEmploymentStatus;
         return this;
@@ -1485,7 +1485,7 @@ public class Employee {
 
         private JsonNullable<? extends EmployeeOnboardingStatus1> onboardingStatus = JsonNullable.undefined();
 
-        private Optional<? extends OnboardingDocumentsConfig> onboardingDocumentsConfig = Optional.empty();
+        private Optional<? extends EmployeeOnboardingDocumentsConfig> onboardingDocumentsConfig = Optional.empty();
 
         private Optional<? extends List<Job>> jobs = Optional.empty();
 
@@ -1509,7 +1509,7 @@ public class Employee {
 
         private Optional<? extends EmployeePaymentMethod1> paymentMethod;
 
-        private JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus = JsonNullable.undefined();
+        private JsonNullable<? extends EmployeeCurrentEmploymentStatus> currentEmploymentStatus = JsonNullable.undefined();
 
         private Optional<Boolean> historical = Optional.empty();
 
@@ -1784,7 +1784,7 @@ public class Employee {
         /**
          * Configuration for an employee onboarding documents during onboarding
          */
-        public Builder onboardingDocumentsConfig(OnboardingDocumentsConfig onboardingDocumentsConfig) {
+        public Builder onboardingDocumentsConfig(EmployeeOnboardingDocumentsConfig onboardingDocumentsConfig) {
             Utils.checkNotNull(onboardingDocumentsConfig, "onboardingDocumentsConfig");
             this.onboardingDocumentsConfig = Optional.ofNullable(onboardingDocumentsConfig);
             return this;
@@ -1793,7 +1793,7 @@ public class Employee {
         /**
          * Configuration for an employee onboarding documents during onboarding
          */
-        public Builder onboardingDocumentsConfig(Optional<? extends OnboardingDocumentsConfig> onboardingDocumentsConfig) {
+        public Builder onboardingDocumentsConfig(Optional<? extends EmployeeOnboardingDocumentsConfig> onboardingDocumentsConfig) {
             Utils.checkNotNull(onboardingDocumentsConfig, "onboardingDocumentsConfig");
             this.onboardingDocumentsConfig = onboardingDocumentsConfig;
             return this;
@@ -1977,7 +1977,7 @@ public class Employee {
          * <p>Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the
          * year or less.
          */
-        public Builder currentEmploymentStatus(CurrentEmploymentStatus currentEmploymentStatus) {
+        public Builder currentEmploymentStatus(EmployeeCurrentEmploymentStatus currentEmploymentStatus) {
             Utils.checkNotNull(currentEmploymentStatus, "currentEmploymentStatus");
             this.currentEmploymentStatus = JsonNullable.of(currentEmploymentStatus);
             return this;
@@ -1991,7 +1991,7 @@ public class Employee {
          * <p>Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the
          * year or less.
          */
-        public Builder currentEmploymentStatus(JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus) {
+        public Builder currentEmploymentStatus(JsonNullable<? extends EmployeeCurrentEmploymentStatus> currentEmploymentStatus) {
             Utils.checkNotNull(currentEmploymentStatus, "currentEmploymentStatus");
             this.currentEmploymentStatus = currentEmploymentStatus;
             return this;

@@ -4,74 +4,11 @@
 
 ### Available Operations
 
-* [generateW2](#generatew2) - Generate a W2 form [DEMO]
 * [list](#list) - Get all employee forms
 * [get](#get) - Get an employee form
 * [getPdf](#getpdf) - Get the employee form pdf
 * [sign](#sign) - Sign an employee form
-
-## generateW2
-
-> 🚧 Demo action
->
-> This action is only available in the Demo environment
-
-Generates a W2 document for testing purposes.
-
-scope: `employees:write`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_w2" method="post" path="/v1/sandbox/generate_w2" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api_v_2025_11_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2025_11_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2025_11_15.models.errors.UnprocessableEntityError;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.*;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PostV1SandboxGenerateW2Response res = sdk.employeeForms().generateW2()
-                .xGustoAPIVersion(PostV1SandboxGenerateW2HeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
-                .requestBody(PostV1SandboxGenerateW2RequestBody.builder()
-                    .employeeId("<id>")
-                    .build())
-                .call();
-
-        if (res.form().isPresent()) {
-            System.out.println(res.form().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1SandboxGenerateW2HeaderXGustoAPIVersion>](../../models/operations/PostV1SandboxGenerateW2HeaderXGustoAPIVersion.md)                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [PostV1SandboxGenerateW2RequestBody](../../models/operations/PostV1SandboxGenerateW2RequestBody.md)                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
-
-### Response
-
-**[PostV1SandboxGenerateW2Response](../../models/operations/PostV1SandboxGenerateW2Response.md)**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
-| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
-| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+* [generateW2](#generatew2) - Generate a W2 form [DEMO]
 
 ## list
 
@@ -303,6 +240,69 @@ public class Application {
 ### Response
 
 **[PutV1EmployeeFormSignResponse](../../models/operations/PutV1EmployeeFormSignResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+
+## generateW2
+
+> 🚧 Demo action
+>
+> This action is only available in the Demo environment
+
+Generates a W2 document for testing purposes.
+
+scope: `employees:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="post-v1-sandbox-generate_w2" method="post" path="/v1/sandbox/generate_w2" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api_v_2025_11_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2025_11_15.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api_v_2025_11_15.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1SandboxGenerateW2Response res = sdk.employeeForms().generateW2()
+                .xGustoAPIVersion(PostV1SandboxGenerateW2HeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
+                .requestBody(PostV1SandboxGenerateW2RequestBody.builder()
+                    .employeeId("<id>")
+                    .build())
+                .call();
+
+        if (res.form().isPresent()) {
+            System.out.println(res.form().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1SandboxGenerateW2HeaderXGustoAPIVersion>](../../models/operations/PostV1SandboxGenerateW2HeaderXGustoAPIVersion.md)                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `requestBody`                                                                                                                                                                                                                | [PostV1SandboxGenerateW2RequestBody](../../models/operations/PostV1SandboxGenerateW2RequestBody.md)                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PostV1SandboxGenerateW2Response](../../models/operations/PostV1SandboxGenerateW2Response.md)**
 
 ### Errors
 

@@ -394,15 +394,14 @@ scope: `time_off_policies:write`
 package hello.world;
 
 import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.*;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, ConflictErrorObject, UnprocessableEntityError, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -440,6 +439,7 @@ public class Application {
 | Error Type                             | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/ConflictErrorObject      | 409                                    | application/json                       |
 | models/errors/UnprocessableEntityError | 422                                    | application/json                       |
 | models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
 
@@ -456,15 +456,14 @@ scope: `time_off_policies:write`
 package hello.world;
 
 import com.gusto.embedded_api_v_2026_06_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2026_06_15.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.*;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, ConflictErrorObject, UnprocessableEntityError, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
@@ -502,6 +501,7 @@ public class Application {
 | Error Type                             | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/ConflictErrorObject      | 409                                    | application/json                       |
 | models/errors/UnprocessableEntityError | 422                                    | application/json                       |
 | models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
 
