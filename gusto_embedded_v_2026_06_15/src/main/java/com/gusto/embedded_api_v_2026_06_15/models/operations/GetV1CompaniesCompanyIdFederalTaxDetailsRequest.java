@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class GetV1CompaniesCompanyIdFederalTaxDetailsRequest {
     /**
-     * The UUID of the company
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
-    private String companyId;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class GetV1CompaniesCompanyIdFederalTaxDetailsRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the company
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_id")
+    private String companyId;
+
     @JsonCreator
     public GetV1CompaniesCompanyIdFederalTaxDetailsRequest(
-            String companyId,
-            Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(companyId, "companyId");
+            Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String companyId) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.companyId = companyId;
+        Utils.checkNotNull(companyId, "companyId");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.companyId = companyId;
     }
     
     public GetV1CompaniesCompanyIdFederalTaxDetailsRequest(
             String companyId) {
-        this(companyId, Optional.empty());
-    }
-
-    /**
-     * The UUID of the company
-     */
-    @JsonIgnore
-    public String companyId() {
-        return companyId;
+        this(Optional.empty(), companyId);
     }
 
     /**
@@ -64,19 +56,18 @@ public class GetV1CompaniesCompanyIdFederalTaxDetailsRequest {
         return (Optional<GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the company
+     */
+    @JsonIgnore
+    public String companyId() {
+        return companyId;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public GetV1CompaniesCompanyIdFederalTaxDetailsRequest withCompanyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class GetV1CompaniesCompanyIdFederalTaxDetailsRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public GetV1CompaniesCompanyIdFederalTaxDetailsRequest withCompanyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class GetV1CompaniesCompanyIdFederalTaxDetailsRequest {
         }
         GetV1CompaniesCompanyIdFederalTaxDetailsRequest other = (GetV1CompaniesCompanyIdFederalTaxDetailsRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.companyId, other.companyId) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.companyId, other.companyId);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyId, xGustoAPIVersion);
+            xGustoAPIVersion, companyId);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1CompaniesCompanyIdFederalTaxDetailsRequest.class,
-                "companyId", companyId,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "companyId", companyId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String companyId;
-
         private Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String companyId;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyId(String companyId) {
-            Utils.checkNotNull(companyId, "companyId");
-            this.companyId = companyId;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class GetV1CompaniesCompanyIdFederalTaxDetailsRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the company
+         */
+        public Builder companyId(String companyId) {
+            Utils.checkNotNull(companyId, "companyId");
+            this.companyId = companyId;
+            return this;
+        }
+
         public GetV1CompaniesCompanyIdFederalTaxDetailsRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1CompaniesCompanyIdFederalTaxDetailsRequest(
-                companyId, xGustoAPIVersion);
+                xGustoAPIVersion, companyId);
         }
 
 

@@ -20,23 +20,17 @@ import java.util.concurrent.CompletableFuture;
 
 public class PutV1JobsJobIdRequestBuilder {
 
-    private String jobId;
     private Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion>>() {});
+    private String jobId;
     private JobsUpdateRequestBody jobsUpdateRequestBody;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1JobsJobIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1JobsJobIdRequestBuilder jobId(String jobId) {
-        Utils.checkNotNull(jobId, "jobId");
-        this.jobId = jobId;
-        return this;
     }
                 
     public PutV1JobsJobIdRequestBuilder xGustoAPIVersion(PutV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,6 +42,12 @@ public class PutV1JobsJobIdRequestBuilder {
     public PutV1JobsJobIdRequestBuilder xGustoAPIVersion(Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PutV1JobsJobIdRequestBuilder jobId(String jobId) {
+        Utils.checkNotNull(jobId, "jobId");
+        this.jobId = jobId;
         return this;
     }
 
@@ -63,8 +63,8 @@ public class PutV1JobsJobIdRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1JobsJobIdRequest request = new PutV1JobsJobIdRequest(jobId,
-            xGustoAPIVersion,
+        PutV1JobsJobIdRequest request = new PutV1JobsJobIdRequest(xGustoAPIVersion,
+            jobId,
             jobsUpdateRequestBody);
 
         return request;

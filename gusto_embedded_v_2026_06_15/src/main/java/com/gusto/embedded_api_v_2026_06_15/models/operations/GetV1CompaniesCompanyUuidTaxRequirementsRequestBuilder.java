@@ -16,22 +16,16 @@ import java.util.Optional;
 
 public class GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,14 +40,20 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder {
         return this;
     }
 
+    public GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
 
     private GetV1CompaniesCompanyUuidTaxRequirementsRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompaniesCompanyUuidTaxRequirementsRequest request = new GetV1CompaniesCompanyUuidTaxRequirementsRequest(companyUuid,
-            xGustoAPIVersion);
+        GetV1CompaniesCompanyUuidTaxRequirementsRequest request = new GetV1CompaniesCompanyUuidTaxRequirementsRequest(xGustoAPIVersion,
+            companyUuid);
 
         return request;
     }

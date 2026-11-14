@@ -27,7 +27,8 @@ public class PaymentConfigsUpdateRequestPaymentConfigs {
     private Optional<? extends PaymentConfigsUpdateRequestPaymentSpeed> paymentSpeed;
 
     /**
-     * Payment limit for 1-day or 2-day payroll (in dollars).
+     * Payment limit for 1-day or 2-day payroll (in dollars). Applies to the 24-hour aggregate of all
+     * payments; a payment that exceeds it moves to 4-day.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fast_payment_limit")
@@ -67,7 +68,8 @@ public class PaymentConfigsUpdateRequestPaymentConfigs {
     }
 
     /**
-     * Payment limit for 1-day or 2-day payroll (in dollars).
+     * Payment limit for 1-day or 2-day payroll (in dollars). Applies to the 24-hour aggregate of all
+     * payments; a payment that exceeds it moves to 4-day.
      */
     @JsonIgnore
     public JsonNullable<Double> fastPaymentLimit() {
@@ -107,7 +109,8 @@ public class PaymentConfigsUpdateRequestPaymentConfigs {
     }
 
     /**
-     * Payment limit for 1-day or 2-day payroll (in dollars).
+     * Payment limit for 1-day or 2-day payroll (in dollars). Applies to the 24-hour aggregate of all
+     * payments; a payment that exceeds it moves to 4-day.
      */
     public PaymentConfigsUpdateRequestPaymentConfigs withFastPaymentLimit(double fastPaymentLimit) {
         Utils.checkNotNull(fastPaymentLimit, "fastPaymentLimit");
@@ -116,7 +119,8 @@ public class PaymentConfigsUpdateRequestPaymentConfigs {
     }
 
     /**
-     * Payment limit for 1-day or 2-day payroll (in dollars).
+     * Payment limit for 1-day or 2-day payroll (in dollars). Applies to the 24-hour aggregate of all
+     * payments; a payment that exceeds it moves to 4-day.
      */
     public PaymentConfigsUpdateRequestPaymentConfigs withFastPaymentLimit(JsonNullable<Double> fastPaymentLimit) {
         Utils.checkNotNull(fastPaymentLimit, "fastPaymentLimit");
@@ -206,7 +210,8 @@ public class PaymentConfigsUpdateRequestPaymentConfigs {
 
 
         /**
-         * Payment limit for 1-day or 2-day payroll (in dollars).
+         * Payment limit for 1-day or 2-day payroll (in dollars). Applies to the 24-hour aggregate of all
+         * payments; a payment that exceeds it moves to 4-day.
          */
         public Builder fastPaymentLimit(double fastPaymentLimit) {
             Utils.checkNotNull(fastPaymentLimit, "fastPaymentLimit");
@@ -215,7 +220,8 @@ public class PaymentConfigsUpdateRequestPaymentConfigs {
         }
 
         /**
-         * Payment limit for 1-day or 2-day payroll (in dollars).
+         * Payment limit for 1-day or 2-day payroll (in dollars). Applies to the 24-hour aggregate of all
+         * payments; a payment that exceeds it moves to 4-day.
          */
         public Builder fastPaymentLimit(JsonNullable<Double> fastPaymentLimit) {
             Utils.checkNotNull(fastPaymentLimit, "fastPaymentLimit");

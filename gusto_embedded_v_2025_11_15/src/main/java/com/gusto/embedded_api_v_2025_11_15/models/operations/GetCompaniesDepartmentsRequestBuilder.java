@@ -16,22 +16,16 @@ import java.util.Optional;
 
 public class GetCompaniesDepartmentsRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends GetCompaniesDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetCompaniesDepartmentsHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetCompaniesDepartmentsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetCompaniesDepartmentsRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public GetCompaniesDepartmentsRequestBuilder xGustoAPIVersion(GetCompaniesDepartmentsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,14 +40,20 @@ public class GetCompaniesDepartmentsRequestBuilder {
         return this;
     }
 
+    public GetCompaniesDepartmentsRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
 
     private GetCompaniesDepartmentsRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetCompaniesDepartmentsRequest request = new GetCompaniesDepartmentsRequest(companyUuid,
-            xGustoAPIVersion);
+        GetCompaniesDepartmentsRequest request = new GetCompaniesDepartmentsRequest(xGustoAPIVersion,
+            companyUuid);
 
         return request;
     }

@@ -224,7 +224,7 @@ public class PayrollShow {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("employee_compensations")
-    private Optional<? extends List<EmployeeCompensations>> employeeCompensations;
+    private Optional<? extends List<PayrollShowEmployeeCompensations>> employeeCompensations;
 
     @JsonCreator
     public PayrollShow(
@@ -255,7 +255,7 @@ public class PayrollShow {
             @JsonProperty("credit_blockers") Optional<? extends List<PayrollCreditBlockerType>> creditBlockers,
             @JsonProperty("processing_request") JsonNullable<? extends PayrollProcessingRequest> processingRequest,
             @JsonProperty("partner_owned_disbursement") JsonNullable<Boolean> partnerOwnedDisbursement,
-            @JsonProperty("employee_compensations") Optional<? extends List<EmployeeCompensations>> employeeCompensations) {
+            @JsonProperty("employee_compensations") Optional<? extends List<PayrollShowEmployeeCompensations>> employeeCompensations) {
         Utils.checkNotNull(payrollDeadline, "payrollDeadline");
         Utils.checkNotNull(checkDate, "checkDate");
         Utils.checkNotNull(processed, "processed");
@@ -566,8 +566,8 @@ public class PayrollShow {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<EmployeeCompensations>> employeeCompensations() {
-        return (Optional<List<EmployeeCompensations>>) employeeCompensations;
+    public Optional<List<PayrollShowEmployeeCompensations>> employeeCompensations() {
+        return (Optional<List<PayrollShowEmployeeCompensations>>) employeeCompensations;
     }
 
     public static Builder builder() {
@@ -1100,14 +1100,14 @@ public class PayrollShow {
         return this;
     }
 
-    public PayrollShow withEmployeeCompensations(List<EmployeeCompensations> employeeCompensations) {
+    public PayrollShow withEmployeeCompensations(List<PayrollShowEmployeeCompensations> employeeCompensations) {
         Utils.checkNotNull(employeeCompensations, "employeeCompensations");
         this.employeeCompensations = Optional.ofNullable(employeeCompensations);
         return this;
     }
 
 
-    public PayrollShow withEmployeeCompensations(Optional<? extends List<EmployeeCompensations>> employeeCompensations) {
+    public PayrollShow withEmployeeCompensations(Optional<? extends List<PayrollShowEmployeeCompensations>> employeeCompensations) {
         Utils.checkNotNull(employeeCompensations, "employeeCompensations");
         this.employeeCompensations = employeeCompensations;
         return this;
@@ -1258,7 +1258,7 @@ public class PayrollShow {
 
         private JsonNullable<Boolean> partnerOwnedDisbursement = JsonNullable.undefined();
 
-        private Optional<? extends List<EmployeeCompensations>> employeeCompensations = Optional.empty();
+        private Optional<? extends List<PayrollShowEmployeeCompensations>> employeeCompensations = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -1798,13 +1798,13 @@ public class PayrollShow {
         }
 
 
-        public Builder employeeCompensations(List<EmployeeCompensations> employeeCompensations) {
+        public Builder employeeCompensations(List<PayrollShowEmployeeCompensations> employeeCompensations) {
             Utils.checkNotNull(employeeCompensations, "employeeCompensations");
             this.employeeCompensations = Optional.ofNullable(employeeCompensations);
             return this;
         }
 
-        public Builder employeeCompensations(Optional<? extends List<EmployeeCompensations>> employeeCompensations) {
+        public Builder employeeCompensations(Optional<? extends List<PayrollShowEmployeeCompensations>> employeeCompensations) {
             Utils.checkNotNull(employeeCompensations, "employeeCompensations");
             this.employeeCompensations = employeeCompensations;
             return this;

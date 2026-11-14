@@ -4,431 +4,16 @@
 
 ### Available Operations
 
-* [getJobs](#getjobs) - Get jobs for an employee
-* [createJob](#createjob) - Create a job
-* [getJob](#getjob) - Get a job
-* [update](#update) - Update a job
-* [delete](#delete) - Delete an individual job
 * [getCompensations](#getcompensations) - Get compensations for a job
 * [createCompensation](#createcompensation) - Create a compensation
 * [getCompensation](#getcompensation) - Get a compensation
 * [updateCompensation](#updatecompensation) - Update a compensation
 * [deleteCompensation](#deletecompensation) - Delete a compensation
-
-## getJobs
-
-Get all of the jobs that an employee holds.
-Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
-
-Compensation data in the response requires the `compensations:read` scope.
-
-scope: `jobs:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-jobs" method="get" path="/v1/employees/{employee_id}/jobs" example="Example" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdJobsRequest;
-import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdJobsResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        GetV1EmployeesEmployeeIdJobsRequest req = GetV1EmployeesEmployeeIdJobsRequest.builder()
-                .employeeId("<id>")
-                .build();
-
-        GetV1EmployeesEmployeeIdJobsResponse res = sdk.jobsAndCompensations().getJobs()
-                .request(req)
-                .call();
-
-        if (res.jobs().isPresent()) {
-            System.out.println(res.jobs().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `request`                                                                                             | [GetV1EmployeesEmployeeIdJobsRequest](../../models/operations/GetV1EmployeesEmployeeIdJobsRequest.md) | :heavy_check_mark:                                                                                    | The request object to use for the request.                                                            |
-
-### Response
-
-**[GetV1EmployeesEmployeeIdJobsResponse](../../models/operations/GetV1EmployeesEmployeeIdJobsResponse.md)**
-
-### Errors
-
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| models/errors/NotFoundErrorObject | 404                               | application/json                  |
-| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
-
-## createJob
-
-Create a job.
-
-scope: `jobs:write`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-jobs" method="post" path="/v1/employees/{employee_id}/jobs" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.JobsCreateRequestBody;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
-import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdJobsResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PostV1EmployeesEmployeeIdJobsResponse res = sdk.jobsAndCompensations().createJob()
-                .employeeId("<id>")
-                .xGustoAPIVersion(PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .jobsCreateRequestBody(JobsCreateRequestBody.builder()
-                    .title("Regional Manager")
-                    .hireDate("2020-12-21")
-                    .build())
-                .call();
-
-        if (res.job().isPresent()) {
-            System.out.println(res.job().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `employeeId`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion>](../../models/operations/PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion.md)                                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `jobsCreateRequestBody`                                                                                                                                                                                                      | [JobsCreateRequestBody](../../models/components/JobsCreateRequestBody.md)                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
-
-### Response
-
-**[PostV1EmployeesEmployeeIdJobsResponse](../../models/operations/PostV1EmployeesEmployeeIdJobsResponse.md)**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
-| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
-| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
-
-## getJob
-
-Get a job.
-
-Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
-
-Compensation data in the response requires the `compensations:read` scope.
-
-scope: `jobs:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="get-v1-jobs-job_id" method="get" path="/v1/jobs/{job_id}" example="Example" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.operations.GetV1JobsJobIdHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.GetV1JobsJobIdResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        GetV1JobsJobIdResponse res = sdk.jobsAndCompensations().getJob()
-                .jobId("<id>")
-                .xGustoAPIVersion(GetV1JobsJobIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .call();
-
-        if (res.job().isPresent()) {
-            System.out.println(res.job().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `jobId`                                                                                                                                                                                                                      | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the job                                                                                                                                                                                                          |
-| `include`                                                                                                                                                                                                                    | [Optional\<GetV1JobsJobIdQueryParamInclude>](../../models/operations/GetV1JobsJobIdQueryParamInclude.md)                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Available options:<br/>- all_compensations: Include all effective dated compensations for each job instead of only the current compensation<br/>                                                                             |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1JobsJobIdHeaderXGustoAPIVersion>](../../models/operations/GetV1JobsJobIdHeaderXGustoAPIVersion.md)                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-
-### Response
-
-**[GetV1JobsJobIdResponse](../../models/operations/GetV1JobsJobIdResponse.md)**
-
-### Errors
-
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| models/errors/NotFoundErrorObject | 404                               | application/json                  |
-| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
-
-## update
-
-Update a job.
-
-scope: `jobs:write`
-
-### Example Usage: Basic
-
-<!-- UsageSnippet language="java" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" example="Basic" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.JobsUpdateRequestBody;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
-import com.gusto.embedded_api.models.operations.PutV1JobsJobIdHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.PutV1JobsJobIdResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PutV1JobsJobIdResponse res = sdk.jobsAndCompensations().update()
-                .jobId("<id>")
-                .xGustoAPIVersion(PutV1JobsJobIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .jobsUpdateRequestBody(JobsUpdateRequestBody.builder()
-                    .version("<value>")
-                    .build())
-                .call();
-
-        if (res.job().isPresent()) {
-            System.out.println(res.job().get());
-        }
-    }
-}
-```
-### Example Usage: Example
-
-<!-- UsageSnippet language="java" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" example="Example" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.JobsUpdateRequestBody;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
-import com.gusto.embedded_api.models.operations.PutV1JobsJobIdHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.PutV1JobsJobIdResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PutV1JobsJobIdResponse res = sdk.jobsAndCompensations().update()
-                .jobId("<id>")
-                .xGustoAPIVersion(PutV1JobsJobIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .jobsUpdateRequestBody(JobsUpdateRequestBody.builder()
-                    .version("gr78930htutrz444kuytr3s5hgxykuveb523fwl8sir")
-                    .title("Regional Manager")
-                    .hireDate("2020-12-21")
-                    .build())
-                .call();
-
-        if (res.job().isPresent()) {
-            System.out.println(res.job().get());
-        }
-    }
-}
-```
-### Example Usage: Nested
-
-<!-- UsageSnippet language="java" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" example="Nested" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.JobsUpdateRequestBody;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
-import com.gusto.embedded_api.models.operations.PutV1JobsJobIdHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.PutV1JobsJobIdResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PutV1JobsJobIdResponse res = sdk.jobsAndCompensations().update()
-                .jobId("<id>")
-                .xGustoAPIVersion(PutV1JobsJobIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .jobsUpdateRequestBody(JobsUpdateRequestBody.builder()
-                    .version("<value>")
-                    .build())
-                .call();
-
-        if (res.job().isPresent()) {
-            System.out.println(res.job().get());
-        }
-    }
-}
-```
-### Example Usage: Resource
-
-<!-- UsageSnippet language="java" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" example="Resource" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.components.JobsUpdateRequestBody;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
-import com.gusto.embedded_api.models.operations.PutV1JobsJobIdHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.PutV1JobsJobIdResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PutV1JobsJobIdResponse res = sdk.jobsAndCompensations().update()
-                .jobId("<id>")
-                .xGustoAPIVersion(PutV1JobsJobIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .jobsUpdateRequestBody(JobsUpdateRequestBody.builder()
-                    .version("<value>")
-                    .build())
-                .call();
-
-        if (res.job().isPresent()) {
-            System.out.println(res.job().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `jobId`                                                                                                                                                                                                                      | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the job                                                                                                                                                                                                          |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1JobsJobIdHeaderXGustoAPIVersion>](../../models/operations/PutV1JobsJobIdHeaderXGustoAPIVersion.md)                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `jobsUpdateRequestBody`                                                                                                                                                                                                      | [JobsUpdateRequestBody](../../models/components/JobsUpdateRequestBody.md)                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
-
-### Response
-
-**[PutV1JobsJobIdResponse](../../models/operations/PutV1JobsJobIdResponse.md)**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
-| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
-| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
-
-## delete
-
-Deletes a specific job that an employee holds.
-
-scope: `jobs:write`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="delete-v1-jobs-job_id" method="delete" path="/v1/jobs/{job_id}" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
-import com.gusto.embedded_api.models.operations.DeleteV1JobsJobIdHeaderXGustoAPIVersion;
-import com.gusto.embedded_api.models.operations.DeleteV1JobsJobIdResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        DeleteV1JobsJobIdResponse res = sdk.jobsAndCompensations().delete()
-                .jobId("<id>")
-                .xGustoAPIVersion(DeleteV1JobsJobIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .call();
-
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `jobId`                                                                                                                                                                                                                      | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the job                                                                                                                                                                                                          |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<DeleteV1JobsJobIdHeaderXGustoAPIVersion>](../../models/operations/DeleteV1JobsJobIdHeaderXGustoAPIVersion.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-
-### Response
-
-**[DeleteV1JobsJobIdResponse](../../models/operations/DeleteV1JobsJobIdResponse.md)**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
-| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
-| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+* [getJob](#getjob) - Get a job
+* [update](#update) - Update a job
+* [delete](#delete) - Delete an individual job
+* [getJobs](#getjobs) - Get jobs for an employee
+* [createJob](#createjob) - Create a job
 
 ## getCompensations
 
@@ -1083,6 +668,421 @@ public class Application {
 ### Response
 
 **[DeleteV1CompensationsCompensationIdResponse](../../models/operations/DeleteV1CompensationsCompensationIdResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+
+## getJob
+
+Get a job.
+
+Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+
+Compensation data in the response requires the `compensations:read` scope.
+
+scope: `jobs:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-jobs-job_id" method="get" path="/v1/jobs/{job_id}" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.GetV1JobsJobIdHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.GetV1JobsJobIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1JobsJobIdResponse res = sdk.jobsAndCompensations().getJob()
+                .xGustoAPIVersion(GetV1JobsJobIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .jobId("<id>")
+                .call();
+
+        if (res.job().isPresent()) {
+            System.out.println(res.job().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1JobsJobIdHeaderXGustoAPIVersion>](../../models/operations/GetV1JobsJobIdHeaderXGustoAPIVersion.md)                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `jobId`                                                                                                                                                                                                                      | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the job                                                                                                                                                                                                          |
+| `include`                                                                                                                                                                                                                    | [Optional\<GetV1JobsJobIdQueryParamInclude>](../../models/operations/GetV1JobsJobIdQueryParamInclude.md)                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Available options:<br/>- all_compensations: Include all effective dated compensations for each job instead of only the current compensation<br/>                                                                             |
+
+### Response
+
+**[GetV1JobsJobIdResponse](../../models/operations/GetV1JobsJobIdResponse.md)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
+
+## update
+
+Update a job.
+
+scope: `jobs:write`
+
+### Example Usage: Basic
+
+<!-- UsageSnippet language="java" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" example="Basic" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.JobsUpdateRequestBody;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api.models.operations.PutV1JobsJobIdHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PutV1JobsJobIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1JobsJobIdResponse res = sdk.jobsAndCompensations().update()
+                .xGustoAPIVersion(PutV1JobsJobIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .jobId("<id>")
+                .jobsUpdateRequestBody(JobsUpdateRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.job().isPresent()) {
+            System.out.println(res.job().get());
+        }
+    }
+}
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="java" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.JobsUpdateRequestBody;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api.models.operations.PutV1JobsJobIdHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PutV1JobsJobIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1JobsJobIdResponse res = sdk.jobsAndCompensations().update()
+                .xGustoAPIVersion(PutV1JobsJobIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .jobId("<id>")
+                .jobsUpdateRequestBody(JobsUpdateRequestBody.builder()
+                    .version("gr78930htutrz444kuytr3s5hgxykuveb523fwl8sir")
+                    .title("Regional Manager")
+                    .hireDate("2020-12-21")
+                    .build())
+                .call();
+
+        if (res.job().isPresent()) {
+            System.out.println(res.job().get());
+        }
+    }
+}
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="java" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" example="Nested" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.JobsUpdateRequestBody;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api.models.operations.PutV1JobsJobIdHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PutV1JobsJobIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1JobsJobIdResponse res = sdk.jobsAndCompensations().update()
+                .xGustoAPIVersion(PutV1JobsJobIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .jobId("<id>")
+                .jobsUpdateRequestBody(JobsUpdateRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.job().isPresent()) {
+            System.out.println(res.job().get());
+        }
+    }
+}
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="java" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" example="Resource" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.JobsUpdateRequestBody;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api.models.operations.PutV1JobsJobIdHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PutV1JobsJobIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1JobsJobIdResponse res = sdk.jobsAndCompensations().update()
+                .xGustoAPIVersion(PutV1JobsJobIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .jobId("<id>")
+                .jobsUpdateRequestBody(JobsUpdateRequestBody.builder()
+                    .version("<value>")
+                    .build())
+                .call();
+
+        if (res.job().isPresent()) {
+            System.out.println(res.job().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1JobsJobIdHeaderXGustoAPIVersion>](../../models/operations/PutV1JobsJobIdHeaderXGustoAPIVersion.md)                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `jobId`                                                                                                                                                                                                                      | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the job                                                                                                                                                                                                          |
+| `jobsUpdateRequestBody`                                                                                                                                                                                                      | [JobsUpdateRequestBody](../../models/components/JobsUpdateRequestBody.md)                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PutV1JobsJobIdResponse](../../models/operations/PutV1JobsJobIdResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+
+## delete
+
+Deletes a specific job that an employee holds.
+
+scope: `jobs:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="delete-v1-jobs-job_id" method="delete" path="/v1/jobs/{job_id}" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api.models.operations.DeleteV1JobsJobIdHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.DeleteV1JobsJobIdResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        DeleteV1JobsJobIdResponse res = sdk.jobsAndCompensations().delete()
+                .xGustoAPIVersion(DeleteV1JobsJobIdHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .jobId("<id>")
+                .call();
+
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<DeleteV1JobsJobIdHeaderXGustoAPIVersion>](../../models/operations/DeleteV1JobsJobIdHeaderXGustoAPIVersion.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `jobId`                                                                                                                                                                                                                      | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the job                                                                                                                                                                                                          |
+
+### Response
+
+**[DeleteV1JobsJobIdResponse](../../models/operations/DeleteV1JobsJobIdResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+
+## getJobs
+
+Get all of the jobs that an employee holds.
+Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+
+Compensation data in the response requires the `compensations:read` scope.
+
+scope: `jobs:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-employees-employee_id-jobs" method="get" path="/v1/employees/{employee_id}/jobs" example="Example" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdJobsRequest;
+import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdJobsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        GetV1EmployeesEmployeeIdJobsRequest req = GetV1EmployeesEmployeeIdJobsRequest.builder()
+                .employeeId("<id>")
+                .build();
+
+        GetV1EmployeesEmployeeIdJobsResponse res = sdk.jobsAndCompensations().getJobs()
+                .request(req)
+                .call();
+
+        if (res.jobs().isPresent()) {
+            System.out.println(res.jobs().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `request`                                                                                             | [GetV1EmployeesEmployeeIdJobsRequest](../../models/operations/GetV1EmployeesEmployeeIdJobsRequest.md) | :heavy_check_mark:                                                                                    | The request object to use for the request.                                                            |
+
+### Response
+
+**[GetV1EmployeesEmployeeIdJobsResponse](../../models/operations/GetV1EmployeesEmployeeIdJobsResponse.md)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
+
+## createJob
+
+Create a job.
+
+scope: `jobs:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="post-v1-employees-employee_id-jobs" method="post" path="/v1/employees/{employee_id}/jobs" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.components.JobsCreateRequestBody;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion;
+import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdJobsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PostV1EmployeesEmployeeIdJobsResponse res = sdk.jobsAndCompensations().createJob()
+                .xGustoAPIVersion(PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .employeeId("<id>")
+                .jobsCreateRequestBody(JobsCreateRequestBody.builder()
+                    .title("Regional Manager")
+                    .hireDate("2020-12-21")
+                    .build())
+                .call();
+
+        if (res.job().isPresent()) {
+            System.out.println(res.job().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion>](../../models/operations/PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion.md)                                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `employeeId`                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
+| `jobsCreateRequestBody`                                                                                                                                                                                                      | [JobsCreateRequestBody](../../models/components/JobsCreateRequestBody.md)                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PostV1EmployeesEmployeeIdJobsResponse](../../models/operations/PostV1EmployeesEmployeeIdJobsResponse.md)**
 
 ### Errors
 

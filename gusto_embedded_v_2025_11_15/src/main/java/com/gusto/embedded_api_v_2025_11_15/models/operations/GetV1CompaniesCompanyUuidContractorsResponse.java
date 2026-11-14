@@ -5,7 +5,7 @@ package com.gusto.embedded_api_v_2025_11_15.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api_v_2025_11_15.models.components.Contractor;
+import com.gusto.embedded_api_v_2025_11_15.models.components.ContractorShow;
 import com.gusto.embedded_api_v_2025_11_15.utils.Response;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.io.InputStream;
@@ -37,22 +37,22 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements Response {
     /**
      * Successful
      */
-    private Optional<? extends List<Contractor>> contractors;
+    private Optional<? extends List<ContractorShow>> showContractors;
 
     @JsonCreator
     public GetV1CompaniesCompanyUuidContractorsResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<Contractor>> contractors) {
+            Optional<? extends List<ContractorShow>> showContractors) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(contractors, "contractors");
+        Utils.checkNotNull(showContractors, "showContractors");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.contractors = contractors;
+        this.showContractors = showContractors;
     }
     
     public GetV1CompaniesCompanyUuidContractorsResponse(
@@ -92,8 +92,8 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Contractor>> contractors() {
-        return (Optional<List<Contractor>>) contractors;
+    public Optional<List<ContractorShow>> showContractors() {
+        return (Optional<List<ContractorShow>>) showContractors;
     }
 
     public static Builder builder() {
@@ -131,9 +131,9 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements Response {
     /**
      * Successful
      */
-    public GetV1CompaniesCompanyUuidContractorsResponse withContractors(List<Contractor> contractors) {
-        Utils.checkNotNull(contractors, "contractors");
-        this.contractors = Optional.ofNullable(contractors);
+    public GetV1CompaniesCompanyUuidContractorsResponse withShowContractors(List<ContractorShow> showContractors) {
+        Utils.checkNotNull(showContractors, "showContractors");
+        this.showContractors = Optional.ofNullable(showContractors);
         return this;
     }
 
@@ -141,9 +141,9 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements Response {
     /**
      * Successful
      */
-    public GetV1CompaniesCompanyUuidContractorsResponse withContractors(Optional<? extends List<Contractor>> contractors) {
-        Utils.checkNotNull(contractors, "contractors");
-        this.contractors = contractors;
+    public GetV1CompaniesCompanyUuidContractorsResponse withShowContractors(Optional<? extends List<ContractorShow>> showContractors) {
+        Utils.checkNotNull(showContractors, "showContractors");
+        this.showContractors = showContractors;
         return this;
     }
 
@@ -160,14 +160,14 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.contractors, other.contractors);
+            Utils.enhancedDeepEquals(this.showContractors, other.showContractors);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            contractors);
+            showContractors);
     }
     
     @Override
@@ -176,7 +176,7 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "contractors", contractors);
+                "showContractors", showContractors);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -188,7 +188,7 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends List<Contractor>> contractors = Optional.empty();
+        private Optional<? extends List<ContractorShow>> showContractors = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -228,18 +228,18 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements Response {
         /**
          * Successful
          */
-        public Builder contractors(List<Contractor> contractors) {
-            Utils.checkNotNull(contractors, "contractors");
-            this.contractors = Optional.ofNullable(contractors);
+        public Builder showContractors(List<ContractorShow> showContractors) {
+            Utils.checkNotNull(showContractors, "showContractors");
+            this.showContractors = Optional.ofNullable(showContractors);
             return this;
         }
 
         /**
          * Successful
          */
-        public Builder contractors(Optional<? extends List<Contractor>> contractors) {
-            Utils.checkNotNull(contractors, "contractors");
-            this.contractors = contractors;
+        public Builder showContractors(Optional<? extends List<ContractorShow>> showContractors) {
+            Utils.checkNotNull(showContractors, "showContractors");
+            this.showContractors = showContractors;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class GetV1CompaniesCompanyUuidContractorsResponse implements Response {
 
             return new GetV1CompaniesCompanyUuidContractorsResponse(
                 contentType, statusCode, rawResponse,
-                contractors);
+                showContractors);
         }
 
     }

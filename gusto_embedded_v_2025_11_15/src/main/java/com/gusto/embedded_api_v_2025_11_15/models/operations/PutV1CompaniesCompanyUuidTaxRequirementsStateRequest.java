@@ -17,6 +17,14 @@ import java.util.Optional;
 
 public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
@@ -28,31 +36,23 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=state")
     private String state;
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion;
-
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody;
 
     @JsonCreator
     public PutV1CompaniesCompanyUuidTaxRequirementsStateRequest(
+            Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyUuid,
             String state,
-            Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion,
             PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(state, "state");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(requestBody, "requestBody");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyUuid = companyUuid;
         this.state = state;
-        this.xGustoAPIVersion = xGustoAPIVersion;
         this.requestBody = requestBody;
     }
     
@@ -60,8 +60,19 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
             String companyUuid,
             String state,
             PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody) {
-        this(companyUuid, state, Optional.empty(),
+        this(Optional.empty(), companyUuid, state,
             requestBody);
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -80,17 +91,6 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
         return state;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion>) xGustoAPIVersion;
-    }
-
     @JsonIgnore
     public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody() {
         return requestBody;
@@ -100,24 +100,6 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequest withCompanyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
-
-    /**
-     * The two-letter state abbreviation
-     */
-    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequest withState(String state) {
-        Utils.checkNotNull(state, "state");
-        this.state = state;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -142,6 +124,24 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequest withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
+    /**
+     * The two-letter state abbreviation
+     */
+    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequest withState(String state) {
+        Utils.checkNotNull(state, "state");
+        this.state = state;
+        return this;
+    }
+
     public PutV1CompaniesCompanyUuidTaxRequirementsStateRequest withRequestBody(PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
@@ -158,61 +158,41 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
         }
         PutV1CompaniesCompanyUuidTaxRequirementsStateRequest other = (PutV1CompaniesCompanyUuidTaxRequirementsStateRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.state, other.state) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, state, xGustoAPIVersion,
+            xGustoAPIVersion, companyUuid, state,
             requestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1CompaniesCompanyUuidTaxRequirementsStateRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyUuid", companyUuid,
                 "state", state,
-                "xGustoAPIVersion", xGustoAPIVersion,
                 "requestBody", requestBody);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String companyUuid;
 
         private String state;
-
-        private Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyUuid(String companyUuid) {
-            Utils.checkNotNull(companyUuid, "companyUuid");
-            this.companyUuid = companyUuid;
-            return this;
-        }
-
-
-        /**
-         * The two-letter state abbreviation
-         */
-        public Builder state(String state) {
-            Utils.checkNotNull(state, "state");
-            this.state = state;
-            return this;
         }
 
 
@@ -239,6 +219,26 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
         }
 
 
+        /**
+         * The UUID of the company
+         */
+        public Builder companyUuid(String companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = companyUuid;
+            return this;
+        }
+
+
+        /**
+         * The two-letter state abbreviation
+         */
+        public Builder state(String state) {
+            Utils.checkNotNull(state, "state");
+            this.state = state;
+            return this;
+        }
+
+
         public Builder requestBody(PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody) {
             Utils.checkNotNull(requestBody, "requestBody");
             this.requestBody = requestBody;
@@ -251,7 +251,7 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequest {
             }
 
             return new PutV1CompaniesCompanyUuidTaxRequirementsStateRequest(
-                companyUuid, state, xGustoAPIVersion,
+                xGustoAPIVersion, companyUuid, state,
                 requestBody);
         }
 

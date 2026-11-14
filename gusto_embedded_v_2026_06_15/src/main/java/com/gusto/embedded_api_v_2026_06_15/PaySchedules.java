@@ -575,6 +575,9 @@ public class PaySchedules {
      * @param companyId The UUID of the company
      * @param payScheduleId The UUID of the pay schedule
      * @param payScheduleUpdateRequest Request body for updating a pay schedule. Sent in the pay_schedule_update root key. Version is required for optimistic concurrency. Pay schedules may be automatically adjusted if an onboarded company misses their first pay date; see [Create a pay schedule](https://docs.gusto.com/embedded-payroll/docs/create-a-pay-schedule).
+     *         
+     *         When changing a flexible Twice per month schedule to Monthly, the first pay day is retained unless replaced; the second pay day and both explicit period-end days become null. Changing to Every week or Every other week clears all day fields.
+     *         
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
@@ -614,6 +617,9 @@ public class PaySchedules {
      * @param companyId The UUID of the company
      * @param payScheduleId The UUID of the pay schedule
      * @param payScheduleUpdateRequest Request body for updating a pay schedule. Sent in the pay_schedule_update root key. Version is required for optimistic concurrency. Pay schedules may be automatically adjusted if an onboarded company misses their first pay date; see [Create a pay schedule](https://docs.gusto.com/embedded-payroll/docs/create-a-pay-schedule).
+     *         
+     *         When changing a flexible Twice per month schedule to Monthly, the first pay day is retained unless replaced; the second pay day and both explicit period-end days become null. Changing to Every week or Every other week clears all day fields.
+     *         
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */

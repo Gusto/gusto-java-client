@@ -19,22 +19,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompanyIndustryRequestBuilder {
 
-    private String companyId;
     private Optional<? extends GetV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetV1CompanyIndustryHeaderXGustoAPIVersion>>() {});
+    private String companyId;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompanyIndustryRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1CompanyIndustryRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public GetV1CompanyIndustryRequestBuilder xGustoAPIVersion(GetV1CompanyIndustryHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +43,20 @@ public class GetV1CompanyIndustryRequestBuilder {
         return this;
     }
 
+    public GetV1CompanyIndustryRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
 
     private GetV1CompanyIndustryRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompanyIndustryRequest request = new GetV1CompanyIndustryRequest(companyId,
-            xGustoAPIVersion);
+        GetV1CompanyIndustryRequest request = new GetV1CompanyIndustryRequest(xGustoAPIVersion,
+            companyId);
 
         return request;
     }
