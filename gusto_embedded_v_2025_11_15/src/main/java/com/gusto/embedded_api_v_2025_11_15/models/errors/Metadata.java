@@ -16,17 +16,17 @@ import java.util.Optional;
 
 public class Metadata {
     /**
-     * A categorization of the payroll blocker, e.g. "geocode_error"
+     * The UUID of the existing payroll cancellation batch that already used this idempotency key.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("key")
-    private Optional<String> key;
+    @JsonProperty("request_uuid")
+    private Optional<String> requestUuid;
 
     @JsonCreator
     public Metadata(
-            @JsonProperty("key") Optional<String> key) {
-        Utils.checkNotNull(key, "key");
-        this.key = key;
+            @JsonProperty("request_uuid") Optional<String> requestUuid) {
+        Utils.checkNotNull(requestUuid, "requestUuid");
+        this.requestUuid = requestUuid;
     }
     
     public Metadata() {
@@ -34,11 +34,11 @@ public class Metadata {
     }
 
     /**
-     * A categorization of the payroll blocker, e.g. "geocode_error"
+     * The UUID of the existing payroll cancellation batch that already used this idempotency key.
      */
     @JsonIgnore
-    public Optional<String> key() {
-        return key;
+    public Optional<String> requestUuid() {
+        return requestUuid;
     }
 
     public static Builder builder() {
@@ -47,21 +47,21 @@ public class Metadata {
 
 
     /**
-     * A categorization of the payroll blocker, e.g. "geocode_error"
+     * The UUID of the existing payroll cancellation batch that already used this idempotency key.
      */
-    public Metadata withKey(String key) {
-        Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
+    public Metadata withRequestUuid(String requestUuid) {
+        Utils.checkNotNull(requestUuid, "requestUuid");
+        this.requestUuid = Optional.ofNullable(requestUuid);
         return this;
     }
 
 
     /**
-     * A categorization of the payroll blocker, e.g. "geocode_error"
+     * The UUID of the existing payroll cancellation batch that already used this idempotency key.
      */
-    public Metadata withKey(Optional<String> key) {
-        Utils.checkNotNull(key, "key");
-        this.key = key;
+    public Metadata withRequestUuid(Optional<String> requestUuid) {
+        Utils.checkNotNull(requestUuid, "requestUuid");
+        this.requestUuid = requestUuid;
         return this;
     }
 
@@ -75,25 +75,25 @@ public class Metadata {
         }
         Metadata other = (Metadata) o;
         return 
-            Utils.enhancedDeepEquals(this.key, other.key);
+            Utils.enhancedDeepEquals(this.requestUuid, other.requestUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            key);
+            requestUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Metadata.class,
-                "key", key);
+                "requestUuid", requestUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> key = Optional.empty();
+        private Optional<String> requestUuid = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -101,27 +101,27 @@ public class Metadata {
 
 
         /**
-         * A categorization of the payroll blocker, e.g. "geocode_error"
+         * The UUID of the existing payroll cancellation batch that already used this idempotency key.
          */
-        public Builder key(String key) {
-            Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
+        public Builder requestUuid(String requestUuid) {
+            Utils.checkNotNull(requestUuid, "requestUuid");
+            this.requestUuid = Optional.ofNullable(requestUuid);
             return this;
         }
 
         /**
-         * A categorization of the payroll blocker, e.g. "geocode_error"
+         * The UUID of the existing payroll cancellation batch that already used this idempotency key.
          */
-        public Builder key(Optional<String> key) {
-            Utils.checkNotNull(key, "key");
-            this.key = key;
+        public Builder requestUuid(Optional<String> requestUuid) {
+            Utils.checkNotNull(requestUuid, "requestUuid");
+            this.requestUuid = requestUuid;
             return this;
         }
 
         public Metadata build() {
 
             return new Metadata(
-                key);
+                requestUuid);
         }
 
     }

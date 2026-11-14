@@ -534,7 +534,7 @@ public class Application {
                 .employeeId("<id>")
                 .requestBody(PutV1EmployeesEmployeeIdPaymentMethodRequestBody.builder()
                     .version("<value>")
-                    .type(Type.DIRECT_DEPOSIT)
+                    .type(PutV1EmployeesEmployeeIdPaymentMethodType.DIRECT_DEPOSIT)
                     .build())
                 .call();
 
@@ -569,7 +569,7 @@ public class Application {
                 .employeeId("<id>")
                 .requestBody(PutV1EmployeesEmployeeIdPaymentMethodRequestBody.builder()
                     .version("<value>")
-                    .type(Type.DIRECT_DEPOSIT)
+                    .type(PutV1EmployeesEmployeeIdPaymentMethodType.DIRECT_DEPOSIT)
                     .build())
                 .call();
 
@@ -604,7 +604,7 @@ public class Application {
                 .employeeId("<id>")
                 .requestBody(PutV1EmployeesEmployeeIdPaymentMethodRequestBody.builder()
                     .version("<value>")
-                    .type(Type.DIRECT_DEPOSIT)
+                    .type(PutV1EmployeesEmployeeIdPaymentMethodType.DIRECT_DEPOSIT)
                     .build())
                 .call();
 
@@ -639,7 +639,7 @@ public class Application {
                 .employeeId("<id>")
                 .requestBody(PutV1EmployeesEmployeeIdPaymentMethodRequestBody.builder()
                     .version("<value>")
-                    .type(Type.DIRECT_DEPOSIT)
+                    .type(PutV1EmployeesEmployeeIdPaymentMethodType.DIRECT_DEPOSIT)
                     .build())
                 .call();
 
@@ -676,7 +676,7 @@ public class Application {
                 .employeeId("<id>")
                 .requestBody(PutV1EmployeesEmployeeIdPaymentMethodRequestBody.builder()
                     .version("63859768485e218ccf8a449bb60f14ed")
-                    .type(Type.DIRECT_DEPOSIT)
+                    .type(PutV1EmployeesEmployeeIdPaymentMethodType.DIRECT_DEPOSIT)
                     .splitBy(SplitBy.AMOUNT)
                     .splits(List.of(
                         Splits.builder()
@@ -732,7 +732,7 @@ public class Application {
                 .employeeId("<id>")
                 .requestBody(PutV1EmployeesEmployeeIdPaymentMethodRequestBody.builder()
                     .version("63859768485e218ccf8a449bb60f14ed")
-                    .type(Type.DIRECT_DEPOSIT)
+                    .type(PutV1EmployeesEmployeeIdPaymentMethodType.DIRECT_DEPOSIT)
                     .splitBy(SplitBy.PERCENTAGE)
                     .splits(List.of(
                         Splits.builder()
@@ -781,7 +781,7 @@ public class Application {
                 .employeeId("<id>")
                 .requestBody(PutV1EmployeesEmployeeIdPaymentMethodRequestBody.builder()
                     .version("63859768485e218ccf8a449bb60f14ed")
-                    .type(Type.CHECK)
+                    .type(PutV1EmployeesEmployeeIdPaymentMethodType.CHECK)
                     .build())
                 .call();
 

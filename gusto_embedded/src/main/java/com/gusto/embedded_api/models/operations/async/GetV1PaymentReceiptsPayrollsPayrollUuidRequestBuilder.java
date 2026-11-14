@@ -13,28 +13,25 @@ import com.gusto.embedded_api.operations.GetV1PaymentReceiptsPayrollsPayrollUuid
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
 import com.gusto.embedded_api.utils.Utils;
+import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder {
 
-    private String payrollUuid;
     private Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion>>() {});
+    private String payrollUuid;
+    private Optional<Long> page = Optional.empty();
+    private Optional<Long> per = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder payrollUuid(String payrollUuid) {
-        Utils.checkNotNull(payrollUuid, "payrollUuid");
-        this.payrollUuid = payrollUuid;
-        return this;
     }
                 
     public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder xGustoAPIVersion(GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,14 +46,46 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder {
         return this;
     }
 
+    public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder payrollUuid(String payrollUuid) {
+        Utils.checkNotNull(payrollUuid, "payrollUuid");
+        this.payrollUuid = payrollUuid;
+        return this;
+    }
+                
+    public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder page(long page) {
+        Utils.checkNotNull(page, "page");
+        this.page = Optional.of(page);
+        return this;
+    }
+
+    public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder page(Optional<Long> page) {
+        Utils.checkNotNull(page, "page");
+        this.page = page;
+        return this;
+    }
+                
+    public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder per(long per) {
+        Utils.checkNotNull(per, "per");
+        this.per = Optional.of(per);
+        return this;
+    }
+
+    public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder per(Optional<Long> per) {
+        Utils.checkNotNull(per, "per");
+        this.per = per;
+        return this;
+    }
+
 
     private GetV1PaymentReceiptsPayrollsPayrollUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1PaymentReceiptsPayrollsPayrollUuidRequest request = new GetV1PaymentReceiptsPayrollsPayrollUuidRequest(payrollUuid,
-            xGustoAPIVersion);
+        GetV1PaymentReceiptsPayrollsPayrollUuidRequest request = new GetV1PaymentReceiptsPayrollsPayrollUuidRequest(xGustoAPIVersion,
+            payrollUuid,
+            page,
+            per);
 
         return request;
     }

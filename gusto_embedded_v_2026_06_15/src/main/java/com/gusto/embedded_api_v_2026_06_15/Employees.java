@@ -124,7 +124,7 @@ public class Employees {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1EmployeesEmployeeIdCustomFieldsResponse getCustomFields(String employeeId) {
-        return getCustomFields(employeeId, Optional.empty(), Optional.empty(),
+        return getCustomFields(Optional.empty(), employeeId, Optional.empty(),
             Optional.empty());
     }
 
@@ -137,23 +137,23 @@ public class Employees {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1EmployeesEmployeeIdCustomFieldsResponse getCustomFields(
-            String employeeId, Optional<Long> page,
-            Optional<Long> per, Optional<? extends GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<? extends GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<Long> page, Optional<Long> per) {
         GetV1EmployeesEmployeeIdCustomFieldsRequest request =
             GetV1EmployeesEmployeeIdCustomFieldsRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .employeeId(employeeId)
                 .page(page)
                 .per(per)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<GetV1EmployeesEmployeeIdCustomFieldsRequest, GetV1EmployeesEmployeeIdCustomFieldsResponse> operation
               = new GetV1EmployeesEmployeeIdCustomFields.Sync(sdkConfiguration, _headers);

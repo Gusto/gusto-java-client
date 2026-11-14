@@ -18,6 +18,14 @@ import java.util.Optional;
 
 public class GetCompanyNotificationsRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends GetCompanyNotificationsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company for which you would like to return notifications
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
@@ -26,14 +34,6 @@ public class GetCompanyNotificationsRequest {
 
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")
     private Optional<? extends Status> status;
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends GetCompanyNotificationsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
     /**
      * The page that is requested. When unspecified, will load all objects unless endpoint forces
@@ -50,27 +50,38 @@ public class GetCompanyNotificationsRequest {
 
     @JsonCreator
     public GetCompanyNotificationsRequest(
+            Optional<? extends GetCompanyNotificationsHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyUuid,
             Optional<? extends Status> status,
-            Optional<? extends GetCompanyNotificationsHeaderXGustoAPIVersion> xGustoAPIVersion,
             Optional<Long> page,
             Optional<Long> per) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(status, "status");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(page, "page");
         Utils.checkNotNull(per, "per");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyUuid = companyUuid;
         this.status = status;
-        this.xGustoAPIVersion = xGustoAPIVersion;
         this.page = page;
         this.per = per;
     }
     
     public GetCompanyNotificationsRequest(
             String companyUuid) {
-        this(companyUuid, Optional.empty(), Optional.empty(),
+        this(Optional.empty(), companyUuid, Optional.empty(),
             Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetCompanyNotificationsHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<GetCompanyNotificationsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -85,17 +96,6 @@ public class GetCompanyNotificationsRequest {
     @JsonIgnore
     public Optional<Status> status() {
         return (Optional<Status>) status;
-    }
-
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<GetCompanyNotificationsHeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<GetCompanyNotificationsHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -121,28 +121,6 @@ public class GetCompanyNotificationsRequest {
 
 
     /**
-     * The UUID of the company for which you would like to return notifications
-     */
-    public GetCompanyNotificationsRequest withCompanyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
-
-    public GetCompanyNotificationsRequest withStatus(Status status) {
-        Utils.checkNotNull(status, "status");
-        this.status = Optional.ofNullable(status);
-        return this;
-    }
-
-
-    public GetCompanyNotificationsRequest withStatus(Optional<? extends Status> status) {
-        Utils.checkNotNull(status, "status");
-        this.status = status;
-        return this;
-    }
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -162,6 +140,28 @@ public class GetCompanyNotificationsRequest {
     public GetCompanyNotificationsRequest withXGustoAPIVersion(Optional<? extends GetCompanyNotificationsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    /**
+     * The UUID of the company for which you would like to return notifications
+     */
+    public GetCompanyNotificationsRequest withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
+    public GetCompanyNotificationsRequest withStatus(Status status) {
+        Utils.checkNotNull(status, "status");
+        this.status = Optional.ofNullable(status);
+        return this;
+    }
+
+
+    public GetCompanyNotificationsRequest withStatus(Optional<? extends Status> status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
         return this;
     }
 
@@ -215,9 +215,9 @@ public class GetCompanyNotificationsRequest {
         }
         GetCompanyNotificationsRequest other = (GetCompanyNotificationsRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.status, other.status) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.page, other.page) &&
             Utils.enhancedDeepEquals(this.per, other.per);
     }
@@ -225,16 +225,16 @@ public class GetCompanyNotificationsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, status, xGustoAPIVersion,
+            xGustoAPIVersion, companyUuid, status,
             page, per);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetCompanyNotificationsRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyUuid", companyUuid,
                 "status", status,
-                "xGustoAPIVersion", xGustoAPIVersion,
                 "page", page,
                 "per", per);
     }
@@ -242,11 +242,11 @@ public class GetCompanyNotificationsRequest {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends GetCompanyNotificationsHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String companyUuid;
 
         private Optional<? extends Status> status = Optional.empty();
-
-        private Optional<? extends GetCompanyNotificationsHeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private Optional<Long> page = Optional.empty();
 
@@ -254,29 +254,6 @@ public class GetCompanyNotificationsRequest {
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company for which you would like to return notifications
-         */
-        public Builder companyUuid(String companyUuid) {
-            Utils.checkNotNull(companyUuid, "companyUuid");
-            this.companyUuid = companyUuid;
-            return this;
-        }
-
-
-        public Builder status(Status status) {
-            Utils.checkNotNull(status, "status");
-            this.status = Optional.ofNullable(status);
-            return this;
-        }
-
-        public Builder status(Optional<? extends Status> status) {
-            Utils.checkNotNull(status, "status");
-            this.status = status;
-            return this;
         }
 
 
@@ -299,6 +276,29 @@ public class GetCompanyNotificationsRequest {
         public Builder xGustoAPIVersion(Optional<? extends GetCompanyNotificationsHeaderXGustoAPIVersion> xGustoAPIVersion) {
             Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
             this.xGustoAPIVersion = xGustoAPIVersion;
+            return this;
+        }
+
+
+        /**
+         * The UUID of the company for which you would like to return notifications
+         */
+        public Builder companyUuid(String companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = companyUuid;
+            return this;
+        }
+
+
+        public Builder status(Status status) {
+            Utils.checkNotNull(status, "status");
+            this.status = Optional.ofNullable(status);
+            return this;
+        }
+
+        public Builder status(Optional<? extends Status> status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
             return this;
         }
 
@@ -348,7 +348,7 @@ public class GetCompanyNotificationsRequest {
             }
 
             return new GetCompanyNotificationsRequest(
-                companyUuid, status, xGustoAPIVersion,
+                xGustoAPIVersion, companyUuid, status,
                 page, per);
         }
 

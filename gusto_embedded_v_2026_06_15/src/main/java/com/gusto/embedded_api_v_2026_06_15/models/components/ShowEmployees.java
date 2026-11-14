@@ -29,7 +29,8 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /**
  * ShowEmployees
  * 
- * <p>The representation of an employee in Gusto.
+ * <p>An employee, with additional fields that are only ever returned on GET requests gated behind the
+ * `include` query parameter.
  */
 public class ShowEmployees {
     /**
@@ -286,12 +287,23 @@ public class ShowEmployees {
     @JsonProperty("partner_portal_invitation_sent")
     private JsonNullable<Boolean> partnerPortalInvitationSent;
 
+    /**
+     * The name of the company the employee is associated with. Only included when the include param has
+     * the company_name value set.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("company_name")
+    private Optional<String> companyName;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("current_home_address")
     private Optional<? extends EmployeeHomeAddress> currentHomeAddress;
 
-
+    /**
+     * All of the employee's home addresses, past and present. Only included when the include param has the
+     * all_home_addresses value set.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("all_home_addresses")
     private Optional<? extends List<EmployeeHomeAddressHistoryEntry>> allHomeAddresses;
@@ -339,6 +351,7 @@ public class ShowEmployees {
             @JsonProperty("applicable_tax_ids") Optional<? extends List<Double>> applicableTaxIds,
             @JsonProperty("member_portal_invitation_status") JsonNullable<? extends ShowEmployeesMemberPortalInvitationStatus> memberPortalInvitationStatus,
             @JsonProperty("partner_portal_invitation_sent") JsonNullable<Boolean> partnerPortalInvitationSent,
+            @JsonProperty("company_name") Optional<String> companyName,
             @JsonProperty("current_home_address") Optional<? extends EmployeeHomeAddress> currentHomeAddress,
             @JsonProperty("all_home_addresses") Optional<? extends List<EmployeeHomeAddressHistoryEntry>> allHomeAddresses) {
         Utils.checkNotNull(uuid, "uuid");
@@ -378,6 +391,7 @@ public class ShowEmployees {
         Utils.checkNotNull(applicableTaxIds, "applicableTaxIds");
         Utils.checkNotNull(memberPortalInvitationStatus, "memberPortalInvitationStatus");
         Utils.checkNotNull(partnerPortalInvitationSent, "partnerPortalInvitationSent");
+        Utils.checkNotNull(companyName, "companyName");
         Utils.checkNotNull(currentHomeAddress, "currentHomeAddress");
         Utils.checkNotNull(allHomeAddresses, "allHomeAddresses");
         this.uuid = uuid;
@@ -417,6 +431,7 @@ public class ShowEmployees {
         this.applicableTaxIds = applicableTaxIds;
         this.memberPortalInvitationStatus = memberPortalInvitationStatus;
         this.partnerPortalInvitationSent = partnerPortalInvitationSent;
+        this.companyName = companyName;
         this.currentHomeAddress = currentHomeAddress;
         this.allHomeAddresses = allHomeAddresses;
         this.additionalProperties = new HashMap<>();
@@ -438,7 +453,8 @@ public class ShowEmployees {
             Optional.empty(), Optional.empty(), JsonNullable.undefined(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            JsonNullable.undefined(), Optional.empty(), Optional.empty());
+            JsonNullable.undefined(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -733,12 +749,25 @@ public class ShowEmployees {
         return partnerPortalInvitationSent;
     }
 
+    /**
+     * The name of the company the employee is associated with. Only included when the include param has
+     * the company_name value set.
+     */
+    @JsonIgnore
+    public Optional<String> companyName() {
+        return companyName;
+    }
+
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<EmployeeHomeAddress> currentHomeAddress() {
         return (Optional<EmployeeHomeAddress>) currentHomeAddress;
     }
 
+    /**
+     * All of the employee's home addresses, past and present. Only included when the include param has the
+     * all_home_addresses value set.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<EmployeeHomeAddressHistoryEntry>> allHomeAddresses() {
@@ -1388,6 +1417,27 @@ public class ShowEmployees {
         return this;
     }
 
+    /**
+     * The name of the company the employee is associated with. Only included when the include param has
+     * the company_name value set.
+     */
+    public ShowEmployees withCompanyName(String companyName) {
+        Utils.checkNotNull(companyName, "companyName");
+        this.companyName = Optional.ofNullable(companyName);
+        return this;
+    }
+
+
+    /**
+     * The name of the company the employee is associated with. Only included when the include param has
+     * the company_name value set.
+     */
+    public ShowEmployees withCompanyName(Optional<String> companyName) {
+        Utils.checkNotNull(companyName, "companyName");
+        this.companyName = companyName;
+        return this;
+    }
+
     public ShowEmployees withCurrentHomeAddress(EmployeeHomeAddress currentHomeAddress) {
         Utils.checkNotNull(currentHomeAddress, "currentHomeAddress");
         this.currentHomeAddress = Optional.ofNullable(currentHomeAddress);
@@ -1401,6 +1451,10 @@ public class ShowEmployees {
         return this;
     }
 
+    /**
+     * All of the employee's home addresses, past and present. Only included when the include param has the
+     * all_home_addresses value set.
+     */
     public ShowEmployees withAllHomeAddresses(List<EmployeeHomeAddressHistoryEntry> allHomeAddresses) {
         Utils.checkNotNull(allHomeAddresses, "allHomeAddresses");
         this.allHomeAddresses = Optional.ofNullable(allHomeAddresses);
@@ -1408,6 +1462,10 @@ public class ShowEmployees {
     }
 
 
+    /**
+     * All of the employee's home addresses, past and present. Only included when the include param has the
+     * all_home_addresses value set.
+     */
     public ShowEmployees withAllHomeAddresses(Optional<? extends List<EmployeeHomeAddressHistoryEntry>> allHomeAddresses) {
         Utils.checkNotNull(allHomeAddresses, "allHomeAddresses");
         this.allHomeAddresses = allHomeAddresses;
@@ -1474,6 +1532,7 @@ public class ShowEmployees {
             Utils.enhancedDeepEquals(this.applicableTaxIds, other.applicableTaxIds) &&
             Utils.enhancedDeepEquals(this.memberPortalInvitationStatus, other.memberPortalInvitationStatus) &&
             Utils.enhancedDeepEquals(this.partnerPortalInvitationSent, other.partnerPortalInvitationSent) &&
+            Utils.enhancedDeepEquals(this.companyName, other.companyName) &&
             Utils.enhancedDeepEquals(this.currentHomeAddress, other.currentHomeAddress) &&
             Utils.enhancedDeepEquals(this.allHomeAddresses, other.allHomeAddresses) &&
             Utils.enhancedDeepEquals(this.additionalProperties, other.additionalProperties);
@@ -1494,8 +1553,8 @@ public class ShowEmployees {
             historical, employeeCode, departmentUuid,
             title, hiredAt, hiddenSsn,
             flsaStatus, applicableTaxIds, memberPortalInvitationStatus,
-            partnerPortalInvitationSent, currentHomeAddress, allHomeAddresses,
-            additionalProperties);
+            partnerPortalInvitationSent, companyName, currentHomeAddress,
+            allHomeAddresses, additionalProperties);
     }
     
     @Override
@@ -1538,6 +1597,7 @@ public class ShowEmployees {
                 "applicableTaxIds", applicableTaxIds,
                 "memberPortalInvitationStatus", memberPortalInvitationStatus,
                 "partnerPortalInvitationSent", partnerPortalInvitationSent,
+                "companyName", companyName,
                 "currentHomeAddress", currentHomeAddress,
                 "allHomeAddresses", allHomeAddresses,
                 "additionalProperties", additionalProperties);
@@ -1619,6 +1679,8 @@ public class ShowEmployees {
         private JsonNullable<? extends ShowEmployeesMemberPortalInvitationStatus> memberPortalInvitationStatus = JsonNullable.undefined();
 
         private JsonNullable<Boolean> partnerPortalInvitationSent = JsonNullable.undefined();
+
+        private Optional<String> companyName = Optional.empty();
 
         private Optional<? extends EmployeeHomeAddress> currentHomeAddress = Optional.empty();
 
@@ -2281,6 +2343,27 @@ public class ShowEmployees {
         }
 
 
+        /**
+         * The name of the company the employee is associated with. Only included when the include param has
+         * the company_name value set.
+         */
+        public Builder companyName(String companyName) {
+            Utils.checkNotNull(companyName, "companyName");
+            this.companyName = Optional.ofNullable(companyName);
+            return this;
+        }
+
+        /**
+         * The name of the company the employee is associated with. Only included when the include param has
+         * the company_name value set.
+         */
+        public Builder companyName(Optional<String> companyName) {
+            Utils.checkNotNull(companyName, "companyName");
+            this.companyName = companyName;
+            return this;
+        }
+
+
         public Builder currentHomeAddress(EmployeeHomeAddress currentHomeAddress) {
             Utils.checkNotNull(currentHomeAddress, "currentHomeAddress");
             this.currentHomeAddress = Optional.ofNullable(currentHomeAddress);
@@ -2294,12 +2377,20 @@ public class ShowEmployees {
         }
 
 
+        /**
+         * All of the employee's home addresses, past and present. Only included when the include param has the
+         * all_home_addresses value set.
+         */
         public Builder allHomeAddresses(List<EmployeeHomeAddressHistoryEntry> allHomeAddresses) {
             Utils.checkNotNull(allHomeAddresses, "allHomeAddresses");
             this.allHomeAddresses = Optional.ofNullable(allHomeAddresses);
             return this;
         }
 
+        /**
+         * All of the employee's home addresses, past and present. Only included when the include param has the
+         * all_home_addresses value set.
+         */
         public Builder allHomeAddresses(Optional<? extends List<EmployeeHomeAddressHistoryEntry>> allHomeAddresses) {
             Utils.checkNotNull(allHomeAddresses, "allHomeAddresses");
             this.allHomeAddresses = allHomeAddresses;
@@ -2340,7 +2431,8 @@ public class ShowEmployees {
                 historical, employeeCode, departmentUuid,
                 title, hiredAt, hiddenSsn,
                 flsaStatus, applicableTaxIds, memberPortalInvitationStatus,
-                partnerPortalInvitationSent, currentHomeAddress, allHomeAddresses)
+                partnerPortalInvitationSent, companyName, currentHomeAddress,
+                allHomeAddresses)
                 .withAdditionalProperties(additionalProperties);
         }
 

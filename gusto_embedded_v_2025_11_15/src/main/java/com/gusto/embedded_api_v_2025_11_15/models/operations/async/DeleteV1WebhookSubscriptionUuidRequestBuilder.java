@@ -21,11 +21,11 @@ import java.util.concurrent.CompletableFuture;
 public class DeleteV1WebhookSubscriptionUuidRequestBuilder {
 
     private DeleteV1WebhookSubscriptionUuidSecurity security;
-    private String webhookSubscriptionUuid;
     private Optional<? extends DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion>>() {});
+    private String webhookSubscriptionUuid;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -36,12 +36,6 @@ public class DeleteV1WebhookSubscriptionUuidRequestBuilder {
     public DeleteV1WebhookSubscriptionUuidRequestBuilder security(DeleteV1WebhookSubscriptionUuidSecurity security) {
         Utils.checkNotNull(security, "security");
         this.security = security;
-        return this;
-    }
-
-    public DeleteV1WebhookSubscriptionUuidRequestBuilder webhookSubscriptionUuid(String webhookSubscriptionUuid) {
-        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
-        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
         return this;
     }
                 
@@ -57,14 +51,20 @@ public class DeleteV1WebhookSubscriptionUuidRequestBuilder {
         return this;
     }
 
+    public DeleteV1WebhookSubscriptionUuidRequestBuilder webhookSubscriptionUuid(String webhookSubscriptionUuid) {
+        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
+        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
+        return this;
+    }
+
 
     private DeleteV1WebhookSubscriptionUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1WebhookSubscriptionUuidRequest request = new DeleteV1WebhookSubscriptionUuidRequest(webhookSubscriptionUuid,
-            xGustoAPIVersion);
+        DeleteV1WebhookSubscriptionUuidRequest request = new DeleteV1WebhookSubscriptionUuidRequest(xGustoAPIVersion,
+            webhookSubscriptionUuid);
 
         return request;
     }

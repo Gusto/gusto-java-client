@@ -3,24 +3,29 @@
 package hello.world;
 
 import com.gusto.embedded_api_v_2025_11_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1TokenInfoResponse;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.XGustoAPIVersion;
+import com.gusto.embedded_api_v_2025_11_15.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.GetAchTransactionsRequest;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.GetAchTransactionsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
-        GetV1TokenInfoResponse res = sdk.introspection().getInfo()
-                .xGustoAPIVersion(XGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
+        GetAchTransactionsRequest req = GetAchTransactionsRequest.builder()
+                .companyUuid("<id>")
+                .build();
+
+        GetAchTransactionsResponse res = sdk.achTransactions().getAll()
+                .request(req)
                 .call();
 
-        if (res.tokenInfo().isPresent()) {
-            System.out.println(res.tokenInfo().get());
+        if (res.achTransactionList().isPresent()) {
+            System.out.println(res.achTransactionList().get());
         }
     }
 }

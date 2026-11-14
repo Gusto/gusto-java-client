@@ -32,7 +32,7 @@ public class PayrollDigest {
      * The action being performed on the batch.
      */
     @JsonProperty("batch_action")
-    private BatchAction batchAction;
+    private PayrollDigestBatchAction batchAction;
 
     /**
      * The lifecycle status of the batch request itself. Terminal values are `completed` (processing
@@ -47,7 +47,7 @@ public class PayrollDigest {
     public PayrollDigest(
             @JsonProperty("uuid") String uuid,
             @JsonProperty("idempotency_key") String idempotencyKey,
-            @JsonProperty("batch_action") BatchAction batchAction,
+            @JsonProperty("batch_action") PayrollDigestBatchAction batchAction,
             @JsonProperty("status") PayrollDigestStatus status) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(idempotencyKey, "idempotencyKey");
@@ -79,7 +79,7 @@ public class PayrollDigest {
      * The action being performed on the batch.
      */
     @JsonIgnore
-    public BatchAction batchAction() {
+    public PayrollDigestBatchAction batchAction() {
         return batchAction;
     }
 
@@ -120,7 +120,7 @@ public class PayrollDigest {
     /**
      * The action being performed on the batch.
      */
-    public PayrollDigest withBatchAction(BatchAction batchAction) {
+    public PayrollDigest withBatchAction(PayrollDigestBatchAction batchAction) {
         Utils.checkNotNull(batchAction, "batchAction");
         this.batchAction = batchAction;
         return this;
@@ -177,7 +177,7 @@ public class PayrollDigest {
 
         private String idempotencyKey;
 
-        private BatchAction batchAction;
+        private PayrollDigestBatchAction batchAction;
 
         private PayrollDigestStatus status;
 
@@ -209,7 +209,7 @@ public class PayrollDigest {
         /**
          * The action being performed on the batch.
          */
-        public Builder batchAction(BatchAction batchAction) {
+        public Builder batchAction(PayrollDigestBatchAction batchAction) {
             Utils.checkNotNull(batchAction, "batchAction");
             this.batchAction = batchAction;
             return this;
