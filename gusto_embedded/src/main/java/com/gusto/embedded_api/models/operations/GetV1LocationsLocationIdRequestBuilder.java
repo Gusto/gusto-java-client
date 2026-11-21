@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1LocationsLocationId;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1LocationsLocationIdRequestBuilder {
@@ -21,6 +23,7 @@ public class GetV1LocationsLocationIdRequestBuilder {
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1LocationsLocationIdHeaderXGustoAPIVersion>>() {});
     private String locationId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -45,6 +48,18 @@ public class GetV1LocationsLocationIdRequestBuilder {
         this.locationId = locationId;
         return this;
     }
+                
+    public GetV1LocationsLocationIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1LocationsLocationIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1LocationsLocationIdRequest buildRequest() {
@@ -59,9 +74,12 @@ public class GetV1LocationsLocationIdRequestBuilder {
     }
 
     public GetV1LocationsLocationIdResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1LocationsLocationIdRequest, GetV1LocationsLocationIdResponse> operation
-              = new GetV1LocationsLocationId.Sync(sdkConfiguration, _headers);
+              = new GetV1LocationsLocationId.Sync(sdkConfiguration, options, _headers);
         GetV1LocationsLocationIdRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

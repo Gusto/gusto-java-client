@@ -12,8 +12,10 @@ import com.gusto.embedded_api.models.operations.GetV1TimeOffPoliciesTimeOffPolic
 import com.gusto.embedded_api.operations.GetV1TimeOffPoliciesTimeOffPolicyUuid;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -24,6 +26,7 @@ public class GetV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder {
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion>>() {});
     private String timeOffPolicyUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class GetV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder {
         this.timeOffPolicyUuid = timeOffPolicyUuid;
         return this;
     }
+                
+    public GetV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1TimeOffPoliciesTimeOffPolicyUuidRequest buildRequest() {
@@ -62,9 +77,12 @@ public class GetV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder {
     }
 
     public CompletableFuture<GetV1TimeOffPoliciesTimeOffPolicyUuidResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1TimeOffPoliciesTimeOffPolicyUuidRequest, GetV1TimeOffPoliciesTimeOffPolicyUuidResponse> operation
-              = new GetV1TimeOffPoliciesTimeOffPolicyUuid.Async(sdkConfiguration, _headers);
+              = new GetV1TimeOffPoliciesTimeOffPolicyUuid.Async(sdkConfiguration, options, _headers);
         GetV1TimeOffPoliciesTimeOffPolicyUuidRequest request = buildRequest();
 
         return operation.doRequest(request)

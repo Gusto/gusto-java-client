@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1ContractorsContractorUuid;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +25,7 @@ public class GetV1ContractorsContractorUuidRequestBuilder {
                             new TypeReference<Optional<? extends GetV1ContractorsContractorUuidHeaderXGustoAPIVersion>>() {});
     private String contractorUuid;
     private Optional<? extends List<GetV1ContractorsContractorUuidQueryParamInclude>> include = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -59,6 +62,18 @@ public class GetV1ContractorsContractorUuidRequestBuilder {
         this.include = include;
         return this;
     }
+                
+    public GetV1ContractorsContractorUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1ContractorsContractorUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1ContractorsContractorUuidRequest buildRequest() {
@@ -74,9 +89,12 @@ public class GetV1ContractorsContractorUuidRequestBuilder {
     }
 
     public GetV1ContractorsContractorUuidResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1ContractorsContractorUuidRequest, GetV1ContractorsContractorUuidResponse> operation
-              = new GetV1ContractorsContractorUuid.Sync(sdkConfiguration, _headers);
+              = new GetV1ContractorsContractorUuid.Sync(sdkConfiguration, options, _headers);
         GetV1ContractorsContractorUuidRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

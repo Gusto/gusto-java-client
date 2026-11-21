@@ -12,8 +12,10 @@ import com.gusto.embedded_api.models.operations.GetV1ContractorDocumentsRequest;
 import com.gusto.embedded_api.operations.GetV1ContractorDocuments;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -24,6 +26,7 @@ public class GetV1ContractorDocumentsRequestBuilder {
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1ContractorDocumentsHeaderXGustoAPIVersion>>() {});
     private String contractorUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class GetV1ContractorDocumentsRequestBuilder {
         this.contractorUuid = contractorUuid;
         return this;
     }
+                
+    public GetV1ContractorDocumentsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1ContractorDocumentsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1ContractorDocumentsRequest buildRequest() {
@@ -62,9 +77,12 @@ public class GetV1ContractorDocumentsRequestBuilder {
     }
 
     public CompletableFuture<GetV1ContractorDocumentsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1ContractorDocumentsRequest, GetV1ContractorDocumentsResponse> operation
-              = new GetV1ContractorDocuments.Async(sdkConfiguration, _headers);
+              = new GetV1ContractorDocuments.Async(sdkConfiguration, options, _headers);
         GetV1ContractorDocumentsRequest request = buildRequest();
 
         return operation.doRequest(request)

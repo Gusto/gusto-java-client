@@ -17,6 +17,7 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.OauthAccessTokenRes
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1TokenInfo;
 import com.gusto.embedded_api_v_2026_06_15.operations.OauthAccessToken;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import java.util.Optional;
 
 
@@ -60,7 +61,7 @@ public class Introspection {
      * @throws RuntimeException subclass if the API call fails
      */
     public OauthAccessTokenResponse oauthAccessToken(OauthAccessTokenRequestBody requestBody) {
-        return oauthAccessToken(Optional.empty(), requestBody);
+        return oauthAccessToken(Optional.empty(), requestBody, Optional.empty());
     }
 
     /**
@@ -74,6 +75,23 @@ public class Introspection {
      * @throws RuntimeException subclass if the API call fails
      */
     public OauthAccessTokenResponse oauthAccessToken(Optional<? extends OauthAccessTokenHeaderXGustoAPIVersion> xGustoAPIVersion, OauthAccessTokenRequestBody requestBody) {
+        return oauthAccessToken(xGustoAPIVersion, requestBody, Optional.empty());
+    }
+
+    /**
+     * Create a System Access Token or Refresh an Access Token
+     * 
+     * <p>Creates a system access token or refreshes an oauth access token
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public OauthAccessTokenResponse oauthAccessToken(
+            Optional<? extends OauthAccessTokenHeaderXGustoAPIVersion> xGustoAPIVersion, OauthAccessTokenRequestBody requestBody,
+            Optional<Options> options) {
         OauthAccessTokenRequest request =
             OauthAccessTokenRequest
                 .builder()
@@ -81,7 +99,7 @@ public class Introspection {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<OauthAccessTokenRequest, OauthAccessTokenResponse> operation
-              = new OauthAccessToken.Sync(sdkConfiguration, _headers);
+              = new OauthAccessToken.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -115,7 +133,7 @@ public class Introspection {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1TokenInfoResponse getInfoDirect() {
-        return getInfo(Optional.empty());
+        return getInfo(Optional.empty(), Optional.empty());
     }
 
     /**
@@ -133,13 +151,32 @@ public class Introspection {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1TokenInfoResponse getInfo(Optional<? extends GetV1TokenInfoHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        return getInfo(xGustoAPIVersion, Optional.empty());
+    }
+
+    /**
+     * Get info about the current access token
+     * 
+     * <p>Returns scope and resource information associated with the current access token. Use this endpoint
+     * to verify the following for the current access token:
+     * * Resource (company, employee, contractor, or application) and resource owner
+     * * Access level
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1TokenInfoResponse getInfo(Optional<? extends GetV1TokenInfoHeaderXGustoAPIVersion> xGustoAPIVersion, Optional<Options> options) {
         GetV1TokenInfoRequest request =
             GetV1TokenInfoRequest
                 .builder()
                 .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<GetV1TokenInfoRequest, GetV1TokenInfoResponse> operation
-              = new GetV1TokenInfo.Sync(sdkConfiguration, _headers);
+              = new GetV1TokenInfo.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

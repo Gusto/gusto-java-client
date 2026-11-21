@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1TimeOffPoliciesTimeOffPolicyUuidBalance;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBuilder {
@@ -22,6 +24,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBuilder {
                             new TypeReference<Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceHeaderXGustoAPIVersion>>() {});
     private String timeOffPolicyUuid;
     private PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequest buildRequest() {
@@ -67,9 +82,12 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBuilder {
     }
 
     public PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse> operation
-              = new PutV1TimeOffPoliciesTimeOffPolicyUuidBalance.Sync(sdkConfiguration, _headers);
+              = new PutV1TimeOffPoliciesTimeOffPolicyUuidBalance.Sync(sdkConfiguration, options, _headers);
         PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

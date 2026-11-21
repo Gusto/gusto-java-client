@@ -13,8 +13,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.PostEmployeeYtdBene
 import com.gusto.embedded_api_v_2026_06_15.operations.PostEmployeeYtdBenefitAmountsFromDifferentCompany;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequestBuilder {
                             new TypeReference<Optional<? extends PostEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private YtdBenefitAmountsFromDifferentCompanyBody ytdBenefitAmountsFromDifferentCompanyBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequestBuilder {
         this.ytdBenefitAmountsFromDifferentCompanyBody = ytdBenefitAmountsFromDifferentCompanyBody;
         return this;
     }
+                
+    public PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequestBuilder {
     }
 
     public CompletableFuture<PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest, PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse> operation
-              = new PostEmployeeYtdBenefitAmountsFromDifferentCompany.Async(sdkConfiguration, _headers);
+              = new PostEmployeeYtdBenefitAmountsFromDifferentCompany.Async(sdkConfiguration, options, _headers);
         PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest request = buildRequest();
 
         return operation.doRequest(request)

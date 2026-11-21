@@ -12,8 +12,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompensationsC
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1CompensationsCompensationId;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -24,6 +26,7 @@ public class GetV1CompensationsCompensationIdRequestBuilder {
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetV1CompensationsCompensationIdHeaderXGustoAPIVersion>>() {});
     private String compensationId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class GetV1CompensationsCompensationIdRequestBuilder {
         this.compensationId = compensationId;
         return this;
     }
+                
+    public GetV1CompensationsCompensationIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompensationsCompensationIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1CompensationsCompensationIdRequest buildRequest() {
@@ -62,9 +77,12 @@ public class GetV1CompensationsCompensationIdRequestBuilder {
     }
 
     public CompletableFuture<GetV1CompensationsCompensationIdResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1CompensationsCompensationIdRequest, GetV1CompensationsCompensationIdResponse> operation
-              = new GetV1CompensationsCompensationId.Async(sdkConfiguration, _headers);
+              = new GetV1CompensationsCompensationId.Async(sdkConfiguration, options, _headers);
         GetV1CompensationsCompensationIdRequest request = buildRequest();
 
         return operation.doRequest(request)

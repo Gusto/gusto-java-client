@@ -11,8 +11,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.CreateReportBody;
 import com.gusto.embedded_api_v_2026_06_15.operations.PostCompaniesCompanyUuidReports;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostCompaniesCompanyUuidReportsRequestBuilder {
@@ -23,6 +25,7 @@ public class PostCompaniesCompanyUuidReportsRequestBuilder {
                             new TypeReference<Optional<? extends PostCompaniesCompanyUuidReportsHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
     private CreateReportBody createReportBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PostCompaniesCompanyUuidReportsRequestBuilder {
         this.createReportBody = createReportBody;
         return this;
     }
+                
+    public PostCompaniesCompanyUuidReportsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostCompaniesCompanyUuidReportsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostCompaniesCompanyUuidReportsRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PostCompaniesCompanyUuidReportsRequestBuilder {
     }
 
     public PostCompaniesCompanyUuidReportsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostCompaniesCompanyUuidReportsRequest, PostCompaniesCompanyUuidReportsResponse> operation
-              = new PostCompaniesCompanyUuidReports.Sync(sdkConfiguration, _headers);
+              = new PostCompaniesCompanyUuidReports.Sync(sdkConfiguration, options, _headers);
         PostCompaniesCompanyUuidReportsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -17,6 +17,7 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.async.PostV1Compani
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1PeopleBatchesPeopleBatchUuid;
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1CompaniesCompanyIdPeopleBatches;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -75,7 +76,9 @@ public class AsyncPeopleBatches {
      * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPeopleBatchesResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyIdPeopleBatchesResponse> postV1CompaniesCompanyIdPeopleBatches(String companyId, PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody) {
-        return postV1CompaniesCompanyIdPeopleBatches(companyId, Optional.empty(), requestBody);
+        return postV1CompaniesCompanyIdPeopleBatches(
+                Optional.empty(), companyId, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -89,23 +92,48 @@ public class AsyncPeopleBatches {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyId The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @param requestBody 
      * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPeopleBatchesResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyIdPeopleBatchesResponse> postV1CompaniesCompanyIdPeopleBatches(
-            String companyId, Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody) {
+        return postV1CompaniesCompanyIdPeopleBatches(
+                xGustoAPIVersion, companyId, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Create a people batch
+     * 
+     * <p>Creates a batch for bulk employee creation.
+     * 
+     * <p>The batch is processed asynchronously. Use the returned batch UUID to poll for status and results.
+     * 
+     * <p>scope: `people_batches:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPeopleBatchesResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyIdPeopleBatchesResponse> postV1CompaniesCompanyIdPeopleBatches(
+            Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody, Optional<Options> options) {
         PostV1CompaniesCompanyIdPeopleBatchesRequest request =
             PostV1CompaniesCompanyIdPeopleBatchesRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PostV1CompaniesCompanyIdPeopleBatchesRequest, PostV1CompaniesCompanyIdPeopleBatchesResponse> operation
-              = new PostV1CompaniesCompanyIdPeopleBatches.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdPeopleBatches.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -143,7 +171,7 @@ public class AsyncPeopleBatches {
      * @return {@code CompletableFuture<GetV1PeopleBatchesPeopleBatchUuidResponse>} - The async response
      */
     public CompletableFuture<GetV1PeopleBatchesPeopleBatchUuidResponse> getV1PeopleBatchesPeopleBatchUuid(String peopleBatchUuid) {
-        return getV1PeopleBatchesPeopleBatchUuid(peopleBatchUuid, Optional.empty());
+        return getV1PeopleBatchesPeopleBatchUuid(Optional.empty(), peopleBatchUuid, Optional.empty());
     }
 
     /**
@@ -157,19 +185,41 @@ public class AsyncPeopleBatches {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param peopleBatchUuid The UUID of the people batch
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param peopleBatchUuid The UUID of the people batch
      * @return {@code CompletableFuture<GetV1PeopleBatchesPeopleBatchUuidResponse>} - The async response
      */
-    public CompletableFuture<GetV1PeopleBatchesPeopleBatchUuidResponse> getV1PeopleBatchesPeopleBatchUuid(String peopleBatchUuid, Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public CompletableFuture<GetV1PeopleBatchesPeopleBatchUuidResponse> getV1PeopleBatchesPeopleBatchUuid(Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String peopleBatchUuid) {
+        return getV1PeopleBatchesPeopleBatchUuid(xGustoAPIVersion, peopleBatchUuid, Optional.empty());
+    }
+
+    /**
+     * Get a people batch
+     * 
+     * <p>Returns the status and results of a people batch.
+     * 
+     * <p>Poll this endpoint to check the batch processing status and retrieve results.
+     * 
+     * <p>scope: `people_batches:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param peopleBatchUuid The UUID of the people batch
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1PeopleBatchesPeopleBatchUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetV1PeopleBatchesPeopleBatchUuidResponse> getV1PeopleBatchesPeopleBatchUuid(
+            Optional<? extends GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String peopleBatchUuid,
+            Optional<Options> options) {
         GetV1PeopleBatchesPeopleBatchUuidRequest request =
             GetV1PeopleBatchesPeopleBatchUuidRequest
                 .builder()
-                .peopleBatchUuid(peopleBatchUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .peopleBatchUuid(peopleBatchUuid)
                 .build();
         AsyncRequestOperation<GetV1PeopleBatchesPeopleBatchUuidRequest, GetV1PeopleBatchesPeopleBatchUuidResponse> operation
-              = new GetV1PeopleBatchesPeopleBatchUuid.Async(sdkConfiguration, _headers);
+              = new GetV1PeopleBatchesPeopleBatchUuid.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

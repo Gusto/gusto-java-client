@@ -11,8 +11,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.UpdateGarnishmentRe
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1GarnishmentsGarnishmentId;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1GarnishmentsGarnishmentIdRequestBuilder {
@@ -23,6 +25,7 @@ public class PutV1GarnishmentsGarnishmentIdRequestBuilder {
                             new TypeReference<Optional<? extends PutV1GarnishmentsGarnishmentIdHeaderXGustoAPIVersion>>() {});
     private String garnishmentId;
     private UpdateGarnishmentRequest updateGarnishmentRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PutV1GarnishmentsGarnishmentIdRequestBuilder {
         this.updateGarnishmentRequest = updateGarnishmentRequest;
         return this;
     }
+                
+    public PutV1GarnishmentsGarnishmentIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1GarnishmentsGarnishmentIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1GarnishmentsGarnishmentIdRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PutV1GarnishmentsGarnishmentIdRequestBuilder {
     }
 
     public PutV1GarnishmentsGarnishmentIdResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1GarnishmentsGarnishmentIdRequest, PutV1GarnishmentsGarnishmentIdResponse> operation
-              = new PutV1GarnishmentsGarnishmentId.Sync(sdkConfiguration, _headers);
+              = new PutV1GarnishmentsGarnishmentId.Sync(sdkConfiguration, options, _headers);
         PutV1GarnishmentsGarnishmentIdRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

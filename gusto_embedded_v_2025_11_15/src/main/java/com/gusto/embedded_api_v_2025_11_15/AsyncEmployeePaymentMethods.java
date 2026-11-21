@@ -11,6 +11,7 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1Employee
 import com.gusto.embedded_api_v_2025_11_15.models.operations.async.GetV1EmployeesEmployeeIdBankAccountsResponse;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1EmployeesEmployeeIdBankAccounts;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -67,7 +68,7 @@ public class AsyncEmployeePaymentMethods {
     public CompletableFuture<GetV1EmployeesEmployeeIdBankAccountsResponse> getBankAccounts(String employeeId) {
         return getBankAccounts(
                 Optional.empty(), employeeId, Optional.empty(),
-                Optional.empty());
+                Optional.empty(), Optional.empty());
     }
 
     /**
@@ -88,6 +89,31 @@ public class AsyncEmployeePaymentMethods {
     public CompletableFuture<GetV1EmployeesEmployeeIdBankAccountsResponse> getBankAccounts(
             Optional<? extends GetV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             Optional<Long> page, Optional<Long> per) {
+        return getBankAccounts(
+                xGustoAPIVersion, employeeId, page,
+                per, Optional.empty());
+    }
+
+    /**
+     * List employee bank accounts
+     * 
+     * <p>Returns all employee bank accounts.
+     * 
+     * <p>scope: `employee_payment_methods:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdBankAccountsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1EmployeesEmployeeIdBankAccountsResponse> getBankAccounts(
+            Optional<? extends GetV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<Long> page, Optional<Long> per,
+            Optional<Options> options) {
         GetV1EmployeesEmployeeIdBankAccountsRequest request =
             GetV1EmployeesEmployeeIdBankAccountsRequest
                 .builder()
@@ -97,7 +123,7 @@ public class AsyncEmployeePaymentMethods {
                 .per(per)
                 .build();
         AsyncRequestOperation<GetV1EmployeesEmployeeIdBankAccountsRequest, GetV1EmployeesEmployeeIdBankAccountsResponse> operation
-              = new GetV1EmployeesEmployeeIdBankAccounts.Async(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeIdBankAccounts.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

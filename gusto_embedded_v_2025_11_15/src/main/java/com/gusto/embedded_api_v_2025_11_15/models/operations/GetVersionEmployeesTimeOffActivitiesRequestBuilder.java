@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetVersionEmployeesTimeOffActivities;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetVersionEmployeesTimeOffActivitiesRequestBuilder {
@@ -22,6 +24,7 @@ public class GetVersionEmployeesTimeOffActivitiesRequestBuilder {
                             new TypeReference<Optional<? extends GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion>>() {});
     private String employeeUuid;
     private String timeOffType;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class GetVersionEmployeesTimeOffActivitiesRequestBuilder {
         this.timeOffType = timeOffType;
         return this;
     }
+                
+    public GetVersionEmployeesTimeOffActivitiesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetVersionEmployeesTimeOffActivitiesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetVersionEmployeesTimeOffActivitiesRequest buildRequest() {
@@ -67,9 +82,12 @@ public class GetVersionEmployeesTimeOffActivitiesRequestBuilder {
     }
 
     public GetVersionEmployeesTimeOffActivitiesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetVersionEmployeesTimeOffActivitiesRequest, GetVersionEmployeesTimeOffActivitiesResponse> operation
-              = new GetVersionEmployeesTimeOffActivities.Sync(sdkConfiguration, _headers);
+              = new GetVersionEmployeesTimeOffActivities.Sync(sdkConfiguration, options, _headers);
         GetVersionEmployeesTimeOffActivitiesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

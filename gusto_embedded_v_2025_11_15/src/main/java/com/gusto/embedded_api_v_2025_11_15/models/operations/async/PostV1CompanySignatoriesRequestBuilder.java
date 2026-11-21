@@ -13,30 +13,27 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.PostV1CompanySignat
 import com.gusto.embedded_api_v_2025_11_15.operations.PostV1CompanySignatories;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PostV1CompanySignatoriesRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PostV1CompanySignatoriesHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private SignatoryCreateRequest signatoryCreateRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1CompanySignatoriesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1CompanySignatoriesRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public PostV1CompanySignatoriesRequestBuilder xGustoAPIVersion(PostV1CompanySignatoriesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -51,9 +48,27 @@ public class PostV1CompanySignatoriesRequestBuilder {
         return this;
     }
 
+    public PostV1CompanySignatoriesRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
     public PostV1CompanySignatoriesRequestBuilder signatoryCreateRequest(SignatoryCreateRequest signatoryCreateRequest) {
         Utils.checkNotNull(signatoryCreateRequest, "signatoryCreateRequest");
         this.signatoryCreateRequest = signatoryCreateRequest;
+        return this;
+    }
+                
+    public PostV1CompanySignatoriesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompanySignatoriesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -63,17 +78,20 @@ public class PostV1CompanySignatoriesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1CompanySignatoriesRequest request = new PostV1CompanySignatoriesRequest(companyUuid,
-            xGustoAPIVersion,
+        PostV1CompanySignatoriesRequest request = new PostV1CompanySignatoriesRequest(xGustoAPIVersion,
+            companyUuid,
             signatoryCreateRequest);
 
         return request;
     }
 
     public CompletableFuture<PostV1CompanySignatoriesResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1CompanySignatoriesRequest, PostV1CompanySignatoriesResponse> operation
-              = new PostV1CompanySignatories.Async(sdkConfiguration, _headers);
+              = new PostV1CompanySignatories.Async(sdkConfiguration, options, _headers);
         PostV1CompanySignatoriesRequest request = buildRequest();
 
         return operation.doRequest(request)

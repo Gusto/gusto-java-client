@@ -10,29 +10,26 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1CompaniesCompanyIdPeopleBatches;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder {
 
-    private String companyId;
     private Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion>>() {});
+    private String companyId;
     private PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder xGustoAPIVersion(PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -47,9 +44,27 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder {
         return this;
     }
 
+    public PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
     public PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder requestBody(PostV1CompaniesCompanyIdPeopleBatchesRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
+        return this;
+    }
+                
+    public PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -59,17 +74,20 @@ public class PostV1CompaniesCompanyIdPeopleBatchesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1CompaniesCompanyIdPeopleBatchesRequest request = new PostV1CompaniesCompanyIdPeopleBatchesRequest(companyId,
-            xGustoAPIVersion,
+        PostV1CompaniesCompanyIdPeopleBatchesRequest request = new PostV1CompaniesCompanyIdPeopleBatchesRequest(xGustoAPIVersion,
+            companyId,
             requestBody);
 
         return request;
     }
 
     public PostV1CompaniesCompanyIdPeopleBatchesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostV1CompaniesCompanyIdPeopleBatchesRequest, PostV1CompaniesCompanyIdPeopleBatchesResponse> operation
-              = new PostV1CompaniesCompanyIdPeopleBatches.Sync(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdPeopleBatches.Sync(sdkConfiguration, options, _headers);
         PostV1CompaniesCompanyIdPeopleBatchesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

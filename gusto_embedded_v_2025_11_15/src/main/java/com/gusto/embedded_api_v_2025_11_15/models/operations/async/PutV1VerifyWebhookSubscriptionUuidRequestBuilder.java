@@ -14,20 +14,23 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.PutV1VerifyWebhookS
 import com.gusto.embedded_api_v_2025_11_15.operations.PutV1VerifyWebhookSubscriptionUuid;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PutV1VerifyWebhookSubscriptionUuidRequestBuilder {
 
     private PutV1VerifyWebhookSubscriptionUuidSecurity security;
-    private String webhookSubscriptionUuid;
     private Optional<? extends PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion>>() {});
+    private String webhookSubscriptionUuid;
     private PutV1VerifyWebhookSubscriptionUuidRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -38,12 +41,6 @@ public class PutV1VerifyWebhookSubscriptionUuidRequestBuilder {
     public PutV1VerifyWebhookSubscriptionUuidRequestBuilder security(PutV1VerifyWebhookSubscriptionUuidSecurity security) {
         Utils.checkNotNull(security, "security");
         this.security = security;
-        return this;
-    }
-
-    public PutV1VerifyWebhookSubscriptionUuidRequestBuilder webhookSubscriptionUuid(String webhookSubscriptionUuid) {
-        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
-        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
         return this;
     }
                 
@@ -59,9 +56,27 @@ public class PutV1VerifyWebhookSubscriptionUuidRequestBuilder {
         return this;
     }
 
+    public PutV1VerifyWebhookSubscriptionUuidRequestBuilder webhookSubscriptionUuid(String webhookSubscriptionUuid) {
+        Utils.checkNotNull(webhookSubscriptionUuid, "webhookSubscriptionUuid");
+        this.webhookSubscriptionUuid = webhookSubscriptionUuid;
+        return this;
+    }
+
     public PutV1VerifyWebhookSubscriptionUuidRequestBuilder requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
+        return this;
+    }
+                
+    public PutV1VerifyWebhookSubscriptionUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1VerifyWebhookSubscriptionUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -71,17 +86,22 @@ public class PutV1VerifyWebhookSubscriptionUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1VerifyWebhookSubscriptionUuidRequest request = new PutV1VerifyWebhookSubscriptionUuidRequest(webhookSubscriptionUuid,
-            xGustoAPIVersion,
+        PutV1VerifyWebhookSubscriptionUuidRequest request = new PutV1VerifyWebhookSubscriptionUuidRequest(xGustoAPIVersion,
+            webhookSubscriptionUuid,
             requestBody);
 
         return request;
     }
 
     public CompletableFuture<PutV1VerifyWebhookSubscriptionUuidResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PutV1VerifyWebhookSubscriptionUuidRequest, PutV1VerifyWebhookSubscriptionUuidResponse> operation
-              = new PutV1VerifyWebhookSubscriptionUuid.Async(sdkConfiguration, security, _headers);
+              = new PutV1VerifyWebhookSubscriptionUuid.Async(
+                                    sdkConfiguration, security, options,
+                                    _headers);
         PutV1VerifyWebhookSubscriptionUuidRequest request = buildRequest();
 
         return operation.doRequest(request)

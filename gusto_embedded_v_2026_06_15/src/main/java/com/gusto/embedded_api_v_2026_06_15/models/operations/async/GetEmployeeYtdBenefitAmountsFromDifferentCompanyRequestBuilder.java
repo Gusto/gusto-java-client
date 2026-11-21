@@ -12,9 +12,11 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.GetEmployeeYtdBenef
 import com.gusto.embedded_api_v_2026_06_15.operations.GetEmployeeYtdBenefitAmountsFromDifferentCompany;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequestBuilder {
                             new TypeReference<Optional<? extends GetEmployeeYtdBenefitAmountsFromDifferentCompanyHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private Optional<Long> taxYear = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -62,6 +65,18 @@ public class GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequestBuilder {
         this.taxYear = taxYear;
         return this;
     }
+                
+    public GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest buildRequest() {
@@ -77,9 +92,12 @@ public class GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequestBuilder {
     }
 
     public CompletableFuture<GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest, GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse> operation
-              = new GetEmployeeYtdBenefitAmountsFromDifferentCompany.Async(sdkConfiguration, _headers);
+              = new GetEmployeeYtdBenefitAmountsFromDifferentCompany.Async(sdkConfiguration, options, _headers);
         GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest request = buildRequest();
 
         return operation.doRequest(request)

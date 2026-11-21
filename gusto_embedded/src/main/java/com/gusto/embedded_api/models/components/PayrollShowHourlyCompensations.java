@@ -12,6 +12,8 @@ import com.gusto.embedded_api.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -60,6 +62,14 @@ public class PayrollShowHourlyCompensations {
     @JsonProperty("flsa_status")
     private Optional<String> flsaStatus;
 
+    /**
+     * Per-workweek hours for this compensation, one entry per workweek
+     * overlapping the pay period.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("breakdowns")
+    private Optional<? extends List<PayrollShowBreakdowns>> breakdowns;
+
     @JsonCreator
     public PayrollShowHourlyCompensations(
             @JsonProperty("name") Optional<String> name,
@@ -67,24 +77,28 @@ public class PayrollShowHourlyCompensations {
             @JsonProperty("amount") Optional<String> amount,
             @JsonProperty("job_uuid") Optional<String> jobUuid,
             @JsonProperty("compensation_multiplier") Optional<Double> compensationMultiplier,
-            @JsonProperty("flsa_status") Optional<String> flsaStatus) {
+            @JsonProperty("flsa_status") Optional<String> flsaStatus,
+            @JsonProperty("breakdowns") Optional<? extends List<PayrollShowBreakdowns>> breakdowns) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(hours, "hours");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(jobUuid, "jobUuid");
         Utils.checkNotNull(compensationMultiplier, "compensationMultiplier");
         Utils.checkNotNull(flsaStatus, "flsaStatus");
+        Utils.checkNotNull(breakdowns, "breakdowns");
         this.name = name;
         this.hours = hours;
         this.amount = amount;
         this.jobUuid = jobUuid;
         this.compensationMultiplier = compensationMultiplier;
         this.flsaStatus = flsaStatus;
+        this.breakdowns = breakdowns;
     }
     
     public PayrollShowHourlyCompensations() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -135,6 +149,16 @@ public class PayrollShowHourlyCompensations {
     @JsonIgnore
     public Optional<String> flsaStatus() {
         return flsaStatus;
+    }
+
+    /**
+     * Per-workweek hours for this compensation, one entry per workweek
+     * overlapping the pay period.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<PayrollShowBreakdowns>> breakdowns() {
+        return (Optional<List<PayrollShowBreakdowns>>) breakdowns;
     }
 
     public static Builder builder() {
@@ -260,6 +284,27 @@ public class PayrollShowHourlyCompensations {
         return this;
     }
 
+    /**
+     * Per-workweek hours for this compensation, one entry per workweek
+     * overlapping the pay period.
+     */
+    public PayrollShowHourlyCompensations withBreakdowns(List<PayrollShowBreakdowns> breakdowns) {
+        Utils.checkNotNull(breakdowns, "breakdowns");
+        this.breakdowns = Optional.ofNullable(breakdowns);
+        return this;
+    }
+
+
+    /**
+     * Per-workweek hours for this compensation, one entry per workweek
+     * overlapping the pay period.
+     */
+    public PayrollShowHourlyCompensations withBreakdowns(Optional<? extends List<PayrollShowBreakdowns>> breakdowns) {
+        Utils.checkNotNull(breakdowns, "breakdowns");
+        this.breakdowns = breakdowns;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -275,14 +320,16 @@ public class PayrollShowHourlyCompensations {
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
             Utils.enhancedDeepEquals(this.jobUuid, other.jobUuid) &&
             Utils.enhancedDeepEquals(this.compensationMultiplier, other.compensationMultiplier) &&
-            Utils.enhancedDeepEquals(this.flsaStatus, other.flsaStatus);
+            Utils.enhancedDeepEquals(this.flsaStatus, other.flsaStatus) &&
+            Utils.enhancedDeepEquals(this.breakdowns, other.breakdowns);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             name, hours, amount,
-            jobUuid, compensationMultiplier, flsaStatus);
+            jobUuid, compensationMultiplier, flsaStatus,
+            breakdowns);
     }
     
     @Override
@@ -293,7 +340,8 @@ public class PayrollShowHourlyCompensations {
                 "amount", amount,
                 "jobUuid", jobUuid,
                 "compensationMultiplier", compensationMultiplier,
-                "flsaStatus", flsaStatus);
+                "flsaStatus", flsaStatus,
+                "breakdowns", breakdowns);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -310,6 +358,8 @@ public class PayrollShowHourlyCompensations {
         private Optional<Double> compensationMultiplier = Optional.empty();
 
         private Optional<String> flsaStatus = Optional.empty();
+
+        private Optional<? extends List<PayrollShowBreakdowns>> breakdowns = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -433,11 +483,33 @@ public class PayrollShowHourlyCompensations {
             return this;
         }
 
+
+        /**
+         * Per-workweek hours for this compensation, one entry per workweek
+         * overlapping the pay period.
+         */
+        public Builder breakdowns(List<PayrollShowBreakdowns> breakdowns) {
+            Utils.checkNotNull(breakdowns, "breakdowns");
+            this.breakdowns = Optional.ofNullable(breakdowns);
+            return this;
+        }
+
+        /**
+         * Per-workweek hours for this compensation, one entry per workweek
+         * overlapping the pay period.
+         */
+        public Builder breakdowns(Optional<? extends List<PayrollShowBreakdowns>> breakdowns) {
+            Utils.checkNotNull(breakdowns, "breakdowns");
+            this.breakdowns = breakdowns;
+            return this;
+        }
+
         public PayrollShowHourlyCompensations build() {
 
             return new PayrollShowHourlyCompensations(
                 name, hours, amount,
-                jobUuid, compensationMultiplier, flsaStatus);
+                jobUuid, compensationMultiplier, flsaStatus,
+                breakdowns);
         }
 
     }

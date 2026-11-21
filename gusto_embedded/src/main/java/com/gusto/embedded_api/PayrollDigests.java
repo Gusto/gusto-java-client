@@ -19,6 +19,7 @@ import com.gusto.embedded_api.models.operations.PostV1PayrollDigestsSecurity;
 import com.gusto.embedded_api.operations.GetV1PayrollDigestsPayrollDigestUuid;
 import com.gusto.embedded_api.operations.PostV1PayrollDigests;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -94,7 +95,8 @@ public class PayrollDigests {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1PayrollDigestsResponse postV1PayrollDigests(PostV1PayrollDigestsSecurity security, PostV1PayrollDigestsRequestBody requestBody) {
-        return postV1PayrollDigests(security, Optional.empty(), requestBody);
+        return postV1PayrollDigests(security, Optional.empty(), requestBody,
+            Optional.empty());
     }
 
     /**
@@ -126,6 +128,40 @@ public class PayrollDigests {
     public PostV1PayrollDigestsResponse postV1PayrollDigests(
             PostV1PayrollDigestsSecurity security, Optional<? extends PostV1PayrollDigestsHeaderXGustoAPIVersion> xGustoAPIVersion,
             PostV1PayrollDigestsRequestBody requestBody) {
+        return postV1PayrollDigests(security, xGustoAPIVersion, requestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Create a payroll digest batch
+     * 
+     * <p>Triggers an asynchronous computation of payroll digest data (statuses, blockers, pay periods,
+     * totals) across up to 25 companies that the partner is mapped to.
+     * 
+     * <p>The batch is processed asynchronously. Use the returned batch UUID to poll `GET
+     * /v1/payroll_digests/{payroll_digest_uuid}` for status and results.
+     * 
+     * <p>Idempotency is scoped per `(partner, idempotency_key)`. A duplicate POST with the same
+     * `idempotency_key` returns a 409 Conflict referencing the existing batch UUID — no duplicate
+     * computation occurs.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `payroll_digests:write`
+     * 
+     * @param security The security details to use for authentication.
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1PayrollDigestsResponse postV1PayrollDigests(
+            PostV1PayrollDigestsSecurity security, Optional<? extends PostV1PayrollDigestsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            PostV1PayrollDigestsRequestBody requestBody, Optional<Options> options) {
         PostV1PayrollDigestsRequest request =
             PostV1PayrollDigestsRequest
                 .builder()
@@ -133,7 +169,9 @@ public class PayrollDigests {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1PayrollDigestsRequest, PostV1PayrollDigestsResponse> operation
-              = new PostV1PayrollDigests.Sync(sdkConfiguration, security, _headers);
+              = new PostV1PayrollDigests.Sync(
+                                    sdkConfiguration, security, options,
+                                    _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -199,7 +237,8 @@ public class PayrollDigests {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1PayrollDigestsPayrollDigestUuidResponse getV1PayrollDigestsPayrollDigestUuid(GetV1PayrollDigestsPayrollDigestUuidSecurity security, String payrollDigestUuid) {
-        return getV1PayrollDigestsPayrollDigestUuid(security, payrollDigestUuid, Optional.empty());
+        return getV1PayrollDigestsPayrollDigestUuid(security, Optional.empty(), payrollDigestUuid,
+            Optional.empty());
     }
 
     /**
@@ -228,22 +267,63 @@ public class PayrollDigests {
      * <p>scope: `payroll_digests:read`
      * 
      * @param security The security details to use for authentication.
-     * @param payrollDigestUuid The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollDigestUuid The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1PayrollDigestsPayrollDigestUuidResponse getV1PayrollDigestsPayrollDigestUuid(
-            GetV1PayrollDigestsPayrollDigestUuidSecurity security, String payrollDigestUuid,
-            Optional<? extends GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            GetV1PayrollDigestsPayrollDigestUuidSecurity security, Optional<? extends GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String payrollDigestUuid) {
+        return getV1PayrollDigestsPayrollDigestUuid(security, xGustoAPIVersion, payrollDigestUuid,
+            Optional.empty());
+    }
+
+    /**
+     * Get a payroll digest batch
+     * 
+     * <p>Returns the status and results of a payroll digest batch.
+     * 
+     * <p>Poll this endpoint until the batch `status` reaches a terminal value (`completed` or `failed`). Once
+     * terminal, the response includes the full `results` array (one entry per attempted company, each with
+     * its own per-company `status` — `success`, `partial_success`, or `failed`) and the `exclusions` array
+     * (one entry per company that could not be looked up or processed).
+     * 
+     * <p>Note that the top-level batch `status` (`pending` / `processing` / `completed` / `failed`) is
+     * distinct from the per-company `status` returned inside `results[]` and `exclusions[]`. A `completed`
+     * batch does not imply every company succeeded — inspect the arrays for per-company outcomes.
+     * 
+     * <p>Results are stored in Redis with a short TTL after completion. If the partner polls after results
+     * have expired, this endpoint returns 410 Gone — partners should re-submit a new batch to fetch fresh
+     * data.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `payroll_digests:read`
+     * 
+     * @param security The security details to use for authentication.
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollDigestUuid The UUID of the payroll digest batch returned by `POST /v1/payroll_digests`.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1PayrollDigestsPayrollDigestUuidResponse getV1PayrollDigestsPayrollDigestUuid(
+            GetV1PayrollDigestsPayrollDigestUuidSecurity security, Optional<? extends GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String payrollDigestUuid, Optional<Options> options) {
         GetV1PayrollDigestsPayrollDigestUuidRequest request =
             GetV1PayrollDigestsPayrollDigestUuidRequest
                 .builder()
-                .payrollDigestUuid(payrollDigestUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .payrollDigestUuid(payrollDigestUuid)
                 .build();
         RequestOperation<GetV1PayrollDigestsPayrollDigestUuidRequest, GetV1PayrollDigestsPayrollDigestUuidResponse> operation
-              = new GetV1PayrollDigestsPayrollDigestUuid.Sync(sdkConfiguration, security, _headers);
+              = new GetV1PayrollDigestsPayrollDigestUuid.Sync(
+                                    sdkConfiguration, security, options,
+                                    _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

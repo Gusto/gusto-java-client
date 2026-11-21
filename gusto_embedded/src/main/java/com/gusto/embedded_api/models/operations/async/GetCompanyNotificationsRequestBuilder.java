@@ -9,12 +9,16 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.models.operations.GetCompanyNotificationsRequest;
 import com.gusto.embedded_api.operations.GetCompanyNotifications;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetCompanyNotificationsRequestBuilder {
 
     private GetCompanyNotificationsRequest request;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -27,11 +31,26 @@ public class GetCompanyNotificationsRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public GetCompanyNotificationsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetCompanyNotificationsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public CompletableFuture<GetCompanyNotificationsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetCompanyNotificationsRequest, GetCompanyNotificationsResponse> operation
-              = new GetCompanyNotifications.Async(sdkConfiguration, _headers);
+              = new GetCompanyNotifications.Async(sdkConfiguration, options, _headers);
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);

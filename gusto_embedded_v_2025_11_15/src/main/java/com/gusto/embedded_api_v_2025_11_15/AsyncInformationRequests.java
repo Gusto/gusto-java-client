@@ -16,6 +16,7 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.async.SubmitInforma
 import com.gusto.embedded_api_v_2025_11_15.operations.GetInformationRequests;
 import com.gusto.embedded_api_v_2025_11_15.operations.SubmitInformationRequest;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -69,7 +70,9 @@ public class AsyncInformationRequests {
      * @return {@code CompletableFuture<GetInformationRequestsResponse>} - The async response
      */
     public CompletableFuture<GetInformationRequestsResponse> getInformationRequests(String companyUuid) {
-        return getInformationRequests(Optional.empty(), companyUuid, Optional.empty());
+        return getInformationRequests(
+                Optional.empty(), companyUuid, Optional.empty(),
+                Optional.empty());
     }
 
     /**
@@ -89,6 +92,29 @@ public class AsyncInformationRequests {
     public CompletableFuture<GetInformationRequestsResponse> getInformationRequests(
             Optional<? extends GetInformationRequestsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             Optional<String> sortBy) {
+        return getInformationRequests(
+                xGustoAPIVersion, companyUuid, sortBy,
+                Optional.empty());
+    }
+
+    /**
+     * Get all information requests for a company
+     * 
+     * <p>Fetch all information requests for a company.
+     * 
+     * <p>scope: `information_requests:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param sortBy Sort by one or more fields. Options: payroll_blocker, status, type. Append `:asc` or `:desc` to specify direction (e.g., `payroll_blocker:asc`). Defaults to ascending.
+     * @param options additional options
+     * @return {@code CompletableFuture<GetInformationRequestsResponse>} - The async response
+     */
+    public CompletableFuture<GetInformationRequestsResponse> getInformationRequests(
+            Optional<? extends GetInformationRequestsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            Optional<String> sortBy, Optional<Options> options) {
         GetInformationRequestsRequest request =
             GetInformationRequestsRequest
                 .builder()
@@ -97,7 +123,7 @@ public class AsyncInformationRequests {
                 .sortBy(sortBy)
                 .build();
         AsyncRequestOperation<GetInformationRequestsRequest, GetInformationRequestsResponse> operation
-              = new GetInformationRequests.Async(sdkConfiguration, _headers);
+              = new GetInformationRequests.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -132,6 +158,26 @@ public class AsyncInformationRequests {
      * @return {@code CompletableFuture<SubmitInformationRequestResponse>} - The async response
      */
     public CompletableFuture<SubmitInformationRequestResponse> submit(String informationRequestUuid, SubmitInformationRequestRequestBody requestBody) {
+        return submit(informationRequestUuid, requestBody, Optional.empty());
+    }
+
+    /**
+     * Submit information request responses
+     * 
+     * <p>Submit responses to an information request.
+     * Supports both text responses and file uploads (multipart/form-data).
+     * Maximum file size: 120MB.
+     * 
+     * <p>scope: `information_requests:write`
+     * 
+     * @param informationRequestUuid The UUID of the information request
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<SubmitInformationRequestResponse>} - The async response
+     */
+    public CompletableFuture<SubmitInformationRequestResponse> submit(
+            String informationRequestUuid, SubmitInformationRequestRequestBody requestBody,
+            Optional<Options> options) {
         SubmitInformationRequestRequest request =
             SubmitInformationRequestRequest
                 .builder()
@@ -139,7 +185,7 @@ public class AsyncInformationRequests {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<SubmitInformationRequestRequest, SubmitInformationRequestResponse> operation
-              = new SubmitInformationRequest.Async(sdkConfiguration, _headers);
+              = new SubmitInformationRequest.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

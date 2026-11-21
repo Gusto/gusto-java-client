@@ -10,28 +10,25 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupId;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder {
 
-    private String contractorPaymentGroupUuid;
     private Optional<? extends DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion>>() {});
+    private String contractorPaymentGroupUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
-        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
-        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
-        return this;
     }
                 
     public DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder xGustoAPIVersion(DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,22 +43,43 @@ public class DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuild
         return this;
     }
 
+    public DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
+        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
+        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
+        return this;
+    }
+                
+    public DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest request = new DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest(contractorPaymentGroupUuid,
-            xGustoAPIVersion);
+        DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest request = new DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest(xGustoAPIVersion,
+            contractorPaymentGroupUuid);
 
         return request;
     }
 
     public DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest, DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse> operation
-              = new DeleteV1ContractorPaymentGroupsContractorPaymentGroupId.Sync(sdkConfiguration, _headers);
+              = new DeleteV1ContractorPaymentGroupsContractorPaymentGroupId.Sync(sdkConfiguration, options, _headers);
         DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1EmployeeBenefitsEmployeeBenefitId;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder {
@@ -21,6 +23,7 @@ public class GetV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder {
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetV1EmployeeBenefitsEmployeeBenefitIdHeaderXGustoAPIVersion>>() {});
     private String employeeBenefitId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -45,6 +48,18 @@ public class GetV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder {
         this.employeeBenefitId = employeeBenefitId;
         return this;
     }
+                
+    public GetV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1EmployeeBenefitsEmployeeBenefitIdRequest buildRequest() {
@@ -59,9 +74,12 @@ public class GetV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder {
     }
 
     public GetV1EmployeeBenefitsEmployeeBenefitIdResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1EmployeeBenefitsEmployeeBenefitIdRequest, GetV1EmployeeBenefitsEmployeeBenefitIdResponse> operation
-              = new GetV1EmployeeBenefitsEmployeeBenefitId.Sync(sdkConfiguration, _headers);
+              = new GetV1EmployeeBenefitsEmployeeBenefitId.Sync(sdkConfiguration, options, _headers);
         GetV1EmployeeBenefitsEmployeeBenefitIdRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

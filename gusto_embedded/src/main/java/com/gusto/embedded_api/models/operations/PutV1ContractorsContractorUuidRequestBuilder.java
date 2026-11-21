@@ -11,8 +11,10 @@ import com.gusto.embedded_api.models.components.ContractorUpdateRequestBody;
 import com.gusto.embedded_api.operations.PutV1ContractorsContractorUuid;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1ContractorsContractorUuidRequestBuilder {
@@ -23,6 +25,7 @@ public class PutV1ContractorsContractorUuidRequestBuilder {
                             new TypeReference<Optional<? extends PutV1ContractorsContractorUuidHeaderXGustoAPIVersion>>() {});
     private String contractorUuid;
     private ContractorUpdateRequestBody contractorUpdateRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PutV1ContractorsContractorUuidRequestBuilder {
         this.contractorUpdateRequestBody = contractorUpdateRequestBody;
         return this;
     }
+                
+    public PutV1ContractorsContractorUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1ContractorsContractorUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1ContractorsContractorUuidRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PutV1ContractorsContractorUuidRequestBuilder {
     }
 
     public PutV1ContractorsContractorUuidResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1ContractorsContractorUuidRequest, PutV1ContractorsContractorUuidResponse> operation
-              = new PutV1ContractorsContractorUuid.Sync(sdkConfiguration, _headers);
+              = new PutV1ContractorsContractorUuid.Sync(sdkConfiguration, options, _headers);
         PutV1ContractorsContractorUuidRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

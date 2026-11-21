@@ -12,29 +12,26 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.GetNotificationsNot
 import com.gusto.embedded_api_v_2026_06_15.operations.GetNotificationsNotificationUuid;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetNotificationsNotificationUuidRequestBuilder {
 
-    private String notificationUuid;
     private Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion>>() {});
+    private String notificationUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetNotificationsNotificationUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetNotificationsNotificationUuidRequestBuilder notificationUuid(String notificationUuid) {
-        Utils.checkNotNull(notificationUuid, "notificationUuid");
-        this.notificationUuid = notificationUuid;
-        return this;
     }
                 
     public GetNotificationsNotificationUuidRequestBuilder xGustoAPIVersion(GetNotificationsNotificationUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,22 +46,43 @@ public class GetNotificationsNotificationUuidRequestBuilder {
         return this;
     }
 
+    public GetNotificationsNotificationUuidRequestBuilder notificationUuid(String notificationUuid) {
+        Utils.checkNotNull(notificationUuid, "notificationUuid");
+        this.notificationUuid = notificationUuid;
+        return this;
+    }
+                
+    public GetNotificationsNotificationUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetNotificationsNotificationUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetNotificationsNotificationUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetNotificationsNotificationUuidRequest request = new GetNotificationsNotificationUuidRequest(notificationUuid,
-            xGustoAPIVersion);
+        GetNotificationsNotificationUuidRequest request = new GetNotificationsNotificationUuidRequest(xGustoAPIVersion,
+            notificationUuid);
 
         return request;
     }
 
     public CompletableFuture<GetNotificationsNotificationUuidResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetNotificationsNotificationUuidRequest, GetNotificationsNotificationUuidResponse> operation
-              = new GetNotificationsNotificationUuid.Async(sdkConfiguration, _headers);
+              = new GetNotificationsNotificationUuid.Async(sdkConfiguration, options, _headers);
         GetNotificationsNotificationUuidRequest request = buildRequest();
 
         return operation.doRequest(request)

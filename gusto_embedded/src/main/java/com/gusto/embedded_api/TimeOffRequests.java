@@ -54,6 +54,7 @@ import com.gusto.embedded_api.operations.PostV1CompaniesCompanyUuidTimeOffReques
 import com.gusto.embedded_api.operations.PutV1TimeOffRequestsTimeOffRequestUuidApprove;
 import com.gusto.embedded_api.operations.PutV1TimeOffRequestsTimeOffRequestUuidDecline;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -109,7 +110,8 @@ public class TimeOffRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsResponse postV1CompaniesCompanyUuidTimeOffAdminApprovedRequests(String companyUuid, PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequestBody requestBody) {
-        return postV1CompaniesCompanyUuidTimeOffAdminApprovedRequests(Optional.empty(), companyUuid, requestBody);
+        return postV1CompaniesCompanyUuidTimeOffAdminApprovedRequests(Optional.empty(), companyUuid, requestBody,
+            Optional.empty());
     }
 
     /**
@@ -131,6 +133,30 @@ public class TimeOffRequests {
     public PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsResponse postV1CompaniesCompanyUuidTimeOffAdminApprovedRequests(
             Optional<? extends PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequestBody requestBody) {
+        return postV1CompaniesCompanyUuidTimeOffAdminApprovedRequests(xGustoAPIVersion, companyUuid, requestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Create an admin-approved time off request
+     * 
+     * <p>Create a pre-approved time off request on behalf of an employee (admin or system initiated).
+     * The request is always created with approved status.
+     * 
+     * <p>scope: `time_off_requests:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsResponse postV1CompaniesCompanyUuidTimeOffAdminApprovedRequests(
+            Optional<? extends PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequestBody requestBody, Optional<Options> options) {
         PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequest request =
             PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequest
                 .builder()
@@ -139,7 +165,7 @@ public class TimeOffRequests {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequest, PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsResponse> operation
-              = new PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequests.Sync(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequests.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -172,8 +198,26 @@ public class TimeOffRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyUuidTimeOffBalancesResponse getV1CompaniesCompanyUuidTimeOffBalances(GetV1CompaniesCompanyUuidTimeOffBalancesRequest request) {
+        return getV1CompaniesCompanyUuidTimeOffBalances(request, Optional.empty());
+    }
+
+    /**
+     * Get time off balances for a company
+     * 
+     * <p>Get time off balances for all employees in a company
+     * 
+     * <p>scope: `time_off_requests:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyUuidTimeOffBalancesResponse getV1CompaniesCompanyUuidTimeOffBalances(GetV1CompaniesCompanyUuidTimeOffBalancesRequest request, Optional<Options> options) {
         RequestOperation<GetV1CompaniesCompanyUuidTimeOffBalancesRequest, GetV1CompaniesCompanyUuidTimeOffBalancesResponse> operation
-              = new GetV1CompaniesCompanyUuidTimeOffBalances.Sync(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyUuidTimeOffBalances.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -222,8 +266,34 @@ public class TimeOffRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyUuidTimeOffRequestsResponse getV1CompaniesCompanyUuidTimeOffRequests(GetV1CompaniesCompanyUuidTimeOffRequestsRequest request) {
+        return getV1CompaniesCompanyUuidTimeOffRequests(request, Optional.empty());
+    }
+
+    /**
+     * List time off requests for a company
+     * 
+     * <p>Get all time off requests for a company. Supports filtering by status, employee, and date ranges.
+     * 
+     * <p>Possible statuses:
+     * - `pending` — awaiting approval
+     * - `approved` — approved by an admin but not yet processed in a payroll
+     * - `declined` — declined by an admin
+     * - `consumed` — processed in a completed payroll
+     * 
+     * <p>Allowed values for `status`: pending, approved, declined, consumed.
+     * 
+     * <p>scope: `time_off_requests:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyUuidTimeOffRequestsResponse getV1CompaniesCompanyUuidTimeOffRequests(GetV1CompaniesCompanyUuidTimeOffRequestsRequest request, Optional<Options> options) {
         RequestOperation<GetV1CompaniesCompanyUuidTimeOffRequestsRequest, GetV1CompaniesCompanyUuidTimeOffRequestsResponse> operation
-              = new GetV1CompaniesCompanyUuidTimeOffRequests.Sync(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyUuidTimeOffRequests.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -257,7 +327,8 @@ public class TimeOffRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompaniesCompanyUuidTimeOffRequestsResponse postV1CompaniesCompanyUuidTimeOffRequests(String companyUuid, PostV1CompaniesCompanyUuidTimeOffRequestsRequestBody requestBody) {
-        return postV1CompaniesCompanyUuidTimeOffRequests(Optional.empty(), companyUuid, requestBody);
+        return postV1CompaniesCompanyUuidTimeOffRequests(Optional.empty(), companyUuid, requestBody,
+            Optional.empty());
     }
 
     /**
@@ -278,6 +349,29 @@ public class TimeOffRequests {
     public PostV1CompaniesCompanyUuidTimeOffRequestsResponse postV1CompaniesCompanyUuidTimeOffRequests(
             Optional<? extends PostV1CompaniesCompanyUuidTimeOffRequestsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PostV1CompaniesCompanyUuidTimeOffRequestsRequestBody requestBody) {
+        return postV1CompaniesCompanyUuidTimeOffRequests(xGustoAPIVersion, companyUuid, requestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Create a time off request
+     * 
+     * <p>Create a time off request for an employee
+     * 
+     * <p>scope: `time_off_requests:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1CompaniesCompanyUuidTimeOffRequestsResponse postV1CompaniesCompanyUuidTimeOffRequests(
+            Optional<? extends PostV1CompaniesCompanyUuidTimeOffRequestsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            PostV1CompaniesCompanyUuidTimeOffRequestsRequestBody requestBody, Optional<Options> options) {
         PostV1CompaniesCompanyUuidTimeOffRequestsRequest request =
             PostV1CompaniesCompanyUuidTimeOffRequestsRequest
                 .builder()
@@ -286,7 +380,7 @@ public class TimeOffRequests {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1CompaniesCompanyUuidTimeOffRequestsRequest, PostV1CompaniesCompanyUuidTimeOffRequestsResponse> operation
-              = new PostV1CompaniesCompanyUuidTimeOffRequests.Sync(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyUuidTimeOffRequests.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -320,7 +414,8 @@ public class TimeOffRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompaniesCompanyUuidTimeOffRequestsPreviewResponse postV1CompaniesCompanyUuidTimeOffRequestsPreview(String companyUuid, PostV1CompaniesCompanyUuidTimeOffRequestsPreviewRequestBody requestBody) {
-        return postV1CompaniesCompanyUuidTimeOffRequestsPreview(Optional.empty(), companyUuid, requestBody);
+        return postV1CompaniesCompanyUuidTimeOffRequestsPreview(Optional.empty(), companyUuid, requestBody,
+            Optional.empty());
     }
 
     /**
@@ -341,6 +436,29 @@ public class TimeOffRequests {
     public PostV1CompaniesCompanyUuidTimeOffRequestsPreviewResponse postV1CompaniesCompanyUuidTimeOffRequestsPreview(
             Optional<? extends PostV1CompaniesCompanyUuidTimeOffRequestsPreviewHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PostV1CompaniesCompanyUuidTimeOffRequestsPreviewRequestBody requestBody) {
+        return postV1CompaniesCompanyUuidTimeOffRequestsPreview(xGustoAPIVersion, companyUuid, requestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Preview a time off request
+     * 
+     * <p>Preview a time off request to see balance impact before creating
+     * 
+     * <p>scope: `time_off_requests:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1CompaniesCompanyUuidTimeOffRequestsPreviewResponse postV1CompaniesCompanyUuidTimeOffRequestsPreview(
+            Optional<? extends PostV1CompaniesCompanyUuidTimeOffRequestsPreviewHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            PostV1CompaniesCompanyUuidTimeOffRequestsPreviewRequestBody requestBody, Optional<Options> options) {
         PostV1CompaniesCompanyUuidTimeOffRequestsPreviewRequest request =
             PostV1CompaniesCompanyUuidTimeOffRequestsPreviewRequest
                 .builder()
@@ -349,7 +467,7 @@ public class TimeOffRequests {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1CompaniesCompanyUuidTimeOffRequestsPreviewRequest, PostV1CompaniesCompanyUuidTimeOffRequestsPreviewResponse> operation
-              = new PostV1CompaniesCompanyUuidTimeOffRequestsPreview.Sync(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyUuidTimeOffRequestsPreview.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -382,7 +500,7 @@ public class TimeOffRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1TimeOffRequestsTimeOffRequestUuidResponse getV1TimeOffRequestsTimeOffRequestUuid(String timeOffRequestUuid) {
-        return getV1TimeOffRequestsTimeOffRequestUuid(Optional.empty(), timeOffRequestUuid);
+        return getV1TimeOffRequestsTimeOffRequestUuid(Optional.empty(), timeOffRequestUuid, Optional.empty());
     }
 
     /**
@@ -400,6 +518,27 @@ public class TimeOffRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1TimeOffRequestsTimeOffRequestUuidResponse getV1TimeOffRequestsTimeOffRequestUuid(Optional<? extends GetV1TimeOffRequestsTimeOffRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffRequestUuid) {
+        return getV1TimeOffRequestsTimeOffRequestUuid(xGustoAPIVersion, timeOffRequestUuid, Optional.empty());
+    }
+
+    /**
+     * Get a time off request
+     * 
+     * <p>Get a single time off request by UUID
+     * 
+     * <p>scope: `time_off_requests:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param timeOffRequestUuid The UUID of the time off request
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1TimeOffRequestsTimeOffRequestUuidResponse getV1TimeOffRequestsTimeOffRequestUuid(
+            Optional<? extends GetV1TimeOffRequestsTimeOffRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffRequestUuid,
+            Optional<Options> options) {
         GetV1TimeOffRequestsTimeOffRequestUuidRequest request =
             GetV1TimeOffRequestsTimeOffRequestUuidRequest
                 .builder()
@@ -407,7 +546,7 @@ public class TimeOffRequests {
                 .timeOffRequestUuid(timeOffRequestUuid)
                 .build();
         RequestOperation<GetV1TimeOffRequestsTimeOffRequestUuidRequest, GetV1TimeOffRequestsTimeOffRequestUuidResponse> operation
-              = new GetV1TimeOffRequestsTimeOffRequestUuid.Sync(sdkConfiguration, _headers);
+              = new GetV1TimeOffRequestsTimeOffRequestUuid.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -440,7 +579,7 @@ public class TimeOffRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1TimeOffRequestsTimeOffRequestUuidResponse deleteV1TimeOffRequestsTimeOffRequestUuid(String timeOffRequestUuid) {
-        return deleteV1TimeOffRequestsTimeOffRequestUuid(Optional.empty(), timeOffRequestUuid);
+        return deleteV1TimeOffRequestsTimeOffRequestUuid(Optional.empty(), timeOffRequestUuid, Optional.empty());
     }
 
     /**
@@ -458,6 +597,27 @@ public class TimeOffRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1TimeOffRequestsTimeOffRequestUuidResponse deleteV1TimeOffRequestsTimeOffRequestUuid(Optional<? extends DeleteV1TimeOffRequestsTimeOffRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffRequestUuid) {
+        return deleteV1TimeOffRequestsTimeOffRequestUuid(xGustoAPIVersion, timeOffRequestUuid, Optional.empty());
+    }
+
+    /**
+     * Delete a time off request
+     * 
+     * <p>Delete a time off request
+     * 
+     * <p>scope: `time_off_requests:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param timeOffRequestUuid The UUID of the time off request
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DeleteV1TimeOffRequestsTimeOffRequestUuidResponse deleteV1TimeOffRequestsTimeOffRequestUuid(
+            Optional<? extends DeleteV1TimeOffRequestsTimeOffRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffRequestUuid,
+            Optional<Options> options) {
         DeleteV1TimeOffRequestsTimeOffRequestUuidRequest request =
             DeleteV1TimeOffRequestsTimeOffRequestUuidRequest
                 .builder()
@@ -465,7 +625,7 @@ public class TimeOffRequests {
                 .timeOffRequestUuid(timeOffRequestUuid)
                 .build();
         RequestOperation<DeleteV1TimeOffRequestsTimeOffRequestUuidRequest, DeleteV1TimeOffRequestsTimeOffRequestUuidResponse> operation
-              = new DeleteV1TimeOffRequestsTimeOffRequestUuid.Sync(sdkConfiguration, _headers);
+              = new DeleteV1TimeOffRequestsTimeOffRequestUuid.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -504,7 +664,8 @@ public class TimeOffRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1TimeOffRequestsTimeOffRequestUuidApproveResponse putV1TimeOffRequestsTimeOffRequestUuidApprove(String timeOffRequestUuid) {
-        return putV1TimeOffRequestsTimeOffRequestUuidApprove(Optional.empty(), timeOffRequestUuid, Optional.empty());
+        return putV1TimeOffRequestsTimeOffRequestUuidApprove(Optional.empty(), timeOffRequestUuid, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -528,6 +689,32 @@ public class TimeOffRequests {
     public PutV1TimeOffRequestsTimeOffRequestUuidApproveResponse putV1TimeOffRequestsTimeOffRequestUuidApprove(
             Optional<? extends PutV1TimeOffRequestsTimeOffRequestUuidApproveHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffRequestUuid,
             Optional<? extends PutV1TimeOffRequestsTimeOffRequestUuidApproveRequestBody> requestBody) {
+        return putV1TimeOffRequestsTimeOffRequestUuidApprove(xGustoAPIVersion, timeOffRequestUuid, requestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Approve a time off request
+     * 
+     * <p>Approve a pending time off request. Optionally override the dates and hours.
+     * 
+     * <p>Only requests with a `pending` status can be approved. Attempting to approve a request that has
+     * already been `declined` or `consumed` will fail with a 422 error.
+     * 
+     * <p>scope: `time_off_requests:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param timeOffRequestUuid The UUID of the time off request
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1TimeOffRequestsTimeOffRequestUuidApproveResponse putV1TimeOffRequestsTimeOffRequestUuidApprove(
+            Optional<? extends PutV1TimeOffRequestsTimeOffRequestUuidApproveHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffRequestUuid,
+            Optional<? extends PutV1TimeOffRequestsTimeOffRequestUuidApproveRequestBody> requestBody, Optional<Options> options) {
         PutV1TimeOffRequestsTimeOffRequestUuidApproveRequest request =
             PutV1TimeOffRequestsTimeOffRequestUuidApproveRequest
                 .builder()
@@ -536,7 +723,7 @@ public class TimeOffRequests {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PutV1TimeOffRequestsTimeOffRequestUuidApproveRequest, PutV1TimeOffRequestsTimeOffRequestUuidApproveResponse> operation
-              = new PutV1TimeOffRequestsTimeOffRequestUuidApprove.Sync(sdkConfiguration, _headers);
+              = new PutV1TimeOffRequestsTimeOffRequestUuidApprove.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -570,7 +757,8 @@ public class TimeOffRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1TimeOffRequestsTimeOffRequestUuidDeclineResponse putV1TimeOffRequestsTimeOffRequestUuidDecline(String timeOffRequestUuid, PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequestBody requestBody) {
-        return putV1TimeOffRequestsTimeOffRequestUuidDecline(Optional.empty(), timeOffRequestUuid, requestBody);
+        return putV1TimeOffRequestsTimeOffRequestUuidDecline(Optional.empty(), timeOffRequestUuid, requestBody,
+            Optional.empty());
     }
 
     /**
@@ -591,6 +779,29 @@ public class TimeOffRequests {
     public PutV1TimeOffRequestsTimeOffRequestUuidDeclineResponse putV1TimeOffRequestsTimeOffRequestUuidDecline(
             Optional<? extends PutV1TimeOffRequestsTimeOffRequestUuidDeclineHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffRequestUuid,
             PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequestBody requestBody) {
+        return putV1TimeOffRequestsTimeOffRequestUuidDecline(xGustoAPIVersion, timeOffRequestUuid, requestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Decline a time off request
+     * 
+     * <p>Decline a pending or approved time off request. Requires an employer_note.
+     * 
+     * <p>scope: `time_off_requests:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param timeOffRequestUuid The UUID of the time off request
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1TimeOffRequestsTimeOffRequestUuidDeclineResponse putV1TimeOffRequestsTimeOffRequestUuidDecline(
+            Optional<? extends PutV1TimeOffRequestsTimeOffRequestUuidDeclineHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffRequestUuid,
+            PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequestBody requestBody, Optional<Options> options) {
         PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequest request =
             PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequest
                 .builder()
@@ -599,7 +810,7 @@ public class TimeOffRequests {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequest, PutV1TimeOffRequestsTimeOffRequestUuidDeclineResponse> operation
-              = new PutV1TimeOffRequestsTimeOffRequestUuidDecline.Sync(sdkConfiguration, _headers);
+              = new PutV1TimeOffRequestsTimeOffRequestUuidDecline.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

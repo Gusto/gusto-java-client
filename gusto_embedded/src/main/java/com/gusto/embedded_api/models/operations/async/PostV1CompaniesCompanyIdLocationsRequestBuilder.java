@@ -13,8 +13,10 @@ import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdLocation
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyIdLocations;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PostV1CompaniesCompanyIdLocationsRequestBuilder {
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private CompanyLocationRequest companyLocationRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PostV1CompaniesCompanyIdLocationsRequestBuilder {
         this.companyLocationRequest = companyLocationRequest;
         return this;
     }
+                
+    public PostV1CompaniesCompanyIdLocationsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyIdLocationsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1CompaniesCompanyIdLocationsRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PostV1CompaniesCompanyIdLocationsRequestBuilder {
     }
 
     public CompletableFuture<PostV1CompaniesCompanyIdLocationsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1CompaniesCompanyIdLocationsRequest, PostV1CompaniesCompanyIdLocationsResponse> operation
-              = new PostV1CompaniesCompanyIdLocations.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdLocations.Async(sdkConfiguration, options, _headers);
         PostV1CompaniesCompanyIdLocationsRequest request = buildRequest();
 
         return operation.doRequest(request)

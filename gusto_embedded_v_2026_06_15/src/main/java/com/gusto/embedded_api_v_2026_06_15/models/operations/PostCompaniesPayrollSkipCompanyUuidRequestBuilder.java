@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.PostCompaniesPayrollSkipCompanyUuid;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostCompaniesPayrollSkipCompanyUuidRequestBuilder {
@@ -22,6 +24,7 @@ public class PostCompaniesPayrollSkipCompanyUuidRequestBuilder {
                             new TypeReference<Optional<? extends PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
     private PostCompaniesPayrollSkipCompanyUuidRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class PostCompaniesPayrollSkipCompanyUuidRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PostCompaniesPayrollSkipCompanyUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostCompaniesPayrollSkipCompanyUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostCompaniesPayrollSkipCompanyUuidRequest buildRequest() {
@@ -67,9 +82,12 @@ public class PostCompaniesPayrollSkipCompanyUuidRequestBuilder {
     }
 
     public PostCompaniesPayrollSkipCompanyUuidResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostCompaniesPayrollSkipCompanyUuidRequest, PostCompaniesPayrollSkipCompanyUuidResponse> operation
-              = new PostCompaniesPayrollSkipCompanyUuid.Sync(sdkConfiguration, _headers);
+              = new PostCompaniesPayrollSkipCompanyUuid.Sync(sdkConfiguration, options, _headers);
         PostCompaniesPayrollSkipCompanyUuidRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

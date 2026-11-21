@@ -11,8 +11,10 @@ import com.gusto.embedded_api_v_2025_11_15.models.components.RehireUpdateRequest
 import com.gusto.embedded_api_v_2025_11_15.operations.PutV1EmployeesEmployeeIdRehire;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1EmployeesEmployeeIdRehireRequestBuilder {
@@ -23,6 +25,7 @@ public class PutV1EmployeesEmployeeIdRehireRequestBuilder {
                             new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private RehireUpdateRequestBody rehireUpdateRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PutV1EmployeesEmployeeIdRehireRequestBuilder {
         this.rehireUpdateRequestBody = rehireUpdateRequestBody;
         return this;
     }
+                
+    public PutV1EmployeesEmployeeIdRehireRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1EmployeesEmployeeIdRehireRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1EmployeesEmployeeIdRehireRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PutV1EmployeesEmployeeIdRehireRequestBuilder {
     }
 
     public PutV1EmployeesEmployeeIdRehireResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1EmployeesEmployeeIdRehireRequest, PutV1EmployeesEmployeeIdRehireResponse> operation
-              = new PutV1EmployeesEmployeeIdRehire.Sync(sdkConfiguration, _headers);
+              = new PutV1EmployeesEmployeeIdRehire.Sync(sdkConfiguration, options, _headers);
         PutV1EmployeesEmployeeIdRehireRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

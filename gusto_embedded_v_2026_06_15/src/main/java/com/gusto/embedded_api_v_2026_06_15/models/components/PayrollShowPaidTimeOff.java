@@ -45,25 +45,36 @@ public class PayrollShowPaidTimeOff {
     @JsonProperty("final_payout_unused_hours_input")
     private JsonNullable<String> finalPayoutUnusedHoursInput;
 
+    /**
+     * Total hours of approved time off requests overlapping this pay period for this time-off policy. Only
+     * populated on unprocessed (draft) payrolls; absent on processed payrolls. Read-only.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("approved_request_hours")
+    private JsonNullable<String> approvedRequestHours;
+
     @JsonCreator
     public PayrollShowPaidTimeOff(
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("hours") Optional<String> hours,
             @JsonProperty("amount") JsonNullable<String> amount,
-            @JsonProperty("final_payout_unused_hours_input") JsonNullable<String> finalPayoutUnusedHoursInput) {
+            @JsonProperty("final_payout_unused_hours_input") JsonNullable<String> finalPayoutUnusedHoursInput,
+            @JsonProperty("approved_request_hours") JsonNullable<String> approvedRequestHours) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(hours, "hours");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(finalPayoutUnusedHoursInput, "finalPayoutUnusedHoursInput");
+        Utils.checkNotNull(approvedRequestHours, "approvedRequestHours");
         this.name = name;
         this.hours = hours;
         this.amount = amount;
         this.finalPayoutUnusedHoursInput = finalPayoutUnusedHoursInput;
+        this.approvedRequestHours = approvedRequestHours;
     }
     
     public PayrollShowPaidTimeOff() {
         this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            JsonNullable.undefined());
+            JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
@@ -97,6 +108,15 @@ public class PayrollShowPaidTimeOff {
     @JsonIgnore
     public JsonNullable<String> finalPayoutUnusedHoursInput() {
         return finalPayoutUnusedHoursInput;
+    }
+
+    /**
+     * Total hours of approved time off requests overlapping this pay period for this time-off policy. Only
+     * populated on unprocessed (draft) payrolls; absent on processed payrolls. Read-only.
+     */
+    @JsonIgnore
+    public JsonNullable<String> approvedRequestHours() {
+        return approvedRequestHours;
     }
 
     public static Builder builder() {
@@ -180,6 +200,26 @@ public class PayrollShowPaidTimeOff {
         return this;
     }
 
+    /**
+     * Total hours of approved time off requests overlapping this pay period for this time-off policy. Only
+     * populated on unprocessed (draft) payrolls; absent on processed payrolls. Read-only.
+     */
+    public PayrollShowPaidTimeOff withApprovedRequestHours(String approvedRequestHours) {
+        Utils.checkNotNull(approvedRequestHours, "approvedRequestHours");
+        this.approvedRequestHours = JsonNullable.of(approvedRequestHours);
+        return this;
+    }
+
+    /**
+     * Total hours of approved time off requests overlapping this pay period for this time-off policy. Only
+     * populated on unprocessed (draft) payrolls; absent on processed payrolls. Read-only.
+     */
+    public PayrollShowPaidTimeOff withApprovedRequestHours(JsonNullable<String> approvedRequestHours) {
+        Utils.checkNotNull(approvedRequestHours, "approvedRequestHours");
+        this.approvedRequestHours = approvedRequestHours;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -193,14 +233,15 @@ public class PayrollShowPaidTimeOff {
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.hours, other.hours) &&
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
-            Utils.enhancedDeepEquals(this.finalPayoutUnusedHoursInput, other.finalPayoutUnusedHoursInput);
+            Utils.enhancedDeepEquals(this.finalPayoutUnusedHoursInput, other.finalPayoutUnusedHoursInput) &&
+            Utils.enhancedDeepEquals(this.approvedRequestHours, other.approvedRequestHours);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             name, hours, amount,
-            finalPayoutUnusedHoursInput);
+            finalPayoutUnusedHoursInput, approvedRequestHours);
     }
     
     @Override
@@ -209,7 +250,8 @@ public class PayrollShowPaidTimeOff {
                 "name", name,
                 "hours", hours,
                 "amount", amount,
-                "finalPayoutUnusedHoursInput", finalPayoutUnusedHoursInput);
+                "finalPayoutUnusedHoursInput", finalPayoutUnusedHoursInput,
+                "approvedRequestHours", approvedRequestHours);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -222,6 +264,8 @@ public class PayrollShowPaidTimeOff {
         private JsonNullable<String> amount = JsonNullable.undefined();
 
         private JsonNullable<String> finalPayoutUnusedHoursInput = JsonNullable.undefined();
+
+        private JsonNullable<String> approvedRequestHours = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -305,11 +349,32 @@ public class PayrollShowPaidTimeOff {
             return this;
         }
 
+
+        /**
+         * Total hours of approved time off requests overlapping this pay period for this time-off policy. Only
+         * populated on unprocessed (draft) payrolls; absent on processed payrolls. Read-only.
+         */
+        public Builder approvedRequestHours(String approvedRequestHours) {
+            Utils.checkNotNull(approvedRequestHours, "approvedRequestHours");
+            this.approvedRequestHours = JsonNullable.of(approvedRequestHours);
+            return this;
+        }
+
+        /**
+         * Total hours of approved time off requests overlapping this pay period for this time-off policy. Only
+         * populated on unprocessed (draft) payrolls; absent on processed payrolls. Read-only.
+         */
+        public Builder approvedRequestHours(JsonNullable<String> approvedRequestHours) {
+            Utils.checkNotNull(approvedRequestHours, "approvedRequestHours");
+            this.approvedRequestHours = approvedRequestHours;
+            return this;
+        }
+
         public PayrollShowPaidTimeOff build() {
 
             return new PayrollShowPaidTimeOff(
                 name, hours, amount,
-                finalPayoutUnusedHoursInput);
+                finalPayoutUnusedHoursInput, approvedRequestHours);
         }
 
     }

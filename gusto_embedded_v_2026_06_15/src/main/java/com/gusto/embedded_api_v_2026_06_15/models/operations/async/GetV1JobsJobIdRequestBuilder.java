@@ -13,24 +13,39 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1JobsJobIdReque
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1JobsJobId;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetV1JobsJobIdRequestBuilder {
 
-    private String jobId;
-    private Optional<? extends GetV1JobsJobIdQueryParamInclude> include = Optional.empty();
     private Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion>>() {});
+    private String jobId;
+    private Optional<? extends GetV1JobsJobIdQueryParamInclude> include = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1JobsJobIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public GetV1JobsJobIdRequestBuilder xGustoAPIVersion(GetV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public GetV1JobsJobIdRequestBuilder xGustoAPIVersion(Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public GetV1JobsJobIdRequestBuilder jobId(String jobId) {
@@ -51,15 +66,15 @@ public class GetV1JobsJobIdRequestBuilder {
         return this;
     }
                 
-    public GetV1JobsJobIdRequestBuilder xGustoAPIVersion(GetV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+    public GetV1JobsJobIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
         return this;
     }
 
-    public GetV1JobsJobIdRequestBuilder xGustoAPIVersion(Optional<? extends GetV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
+    public GetV1JobsJobIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -69,17 +84,20 @@ public class GetV1JobsJobIdRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1JobsJobIdRequest request = new GetV1JobsJobIdRequest(jobId,
-            include,
-            xGustoAPIVersion);
+        GetV1JobsJobIdRequest request = new GetV1JobsJobIdRequest(xGustoAPIVersion,
+            jobId,
+            include);
 
         return request;
     }
 
     public CompletableFuture<GetV1JobsJobIdResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1JobsJobIdRequest, GetV1JobsJobIdResponse> operation
-              = new GetV1JobsJobId.Async(sdkConfiguration, _headers);
+              = new GetV1JobsJobId.Async(sdkConfiguration, options, _headers);
         GetV1JobsJobIdRequest request = buildRequest();
 
         return operation.doRequest(request)

@@ -13,30 +13,27 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.PostV1EmployeesEmpl
 import com.gusto.embedded_api_v_2025_11_15.operations.PostV1EmployeesEmployeeIdHomeAddresses;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder {
 
-    private String employeeId;
     private Optional<? extends PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
     private PostV1EmployeesEmployeeIdHomeAddressesRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder employeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
     }
                 
     public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder xGustoAPIVersion(PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -51,9 +48,27 @@ public class PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder {
         return this;
     }
 
+    public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder employeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
+        return this;
+    }
+
     public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder requestBody(PostV1EmployeesEmployeeIdHomeAddressesRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
+        return this;
+    }
+                
+    public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -63,17 +78,20 @@ public class PostV1EmployeesEmployeeIdHomeAddressesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1EmployeesEmployeeIdHomeAddressesRequest request = new PostV1EmployeesEmployeeIdHomeAddressesRequest(employeeId,
-            xGustoAPIVersion,
+        PostV1EmployeesEmployeeIdHomeAddressesRequest request = new PostV1EmployeesEmployeeIdHomeAddressesRequest(xGustoAPIVersion,
+            employeeId,
             requestBody);
 
         return request;
     }
 
     public CompletableFuture<PostV1EmployeesEmployeeIdHomeAddressesResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1EmployeesEmployeeIdHomeAddressesRequest, PostV1EmployeesEmployeeIdHomeAddressesResponse> operation
-              = new PostV1EmployeesEmployeeIdHomeAddresses.Async(sdkConfiguration, _headers);
+              = new PostV1EmployeesEmployeeIdHomeAddresses.Async(sdkConfiguration, options, _headers);
         PostV1EmployeesEmployeeIdHomeAddressesRequest request = buildRequest();
 
         return operation.doRequest(request)

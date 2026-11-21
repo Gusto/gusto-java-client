@@ -13,8 +13,10 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.PutV1EmployeesEmplo
 import com.gusto.embedded_api_v_2025_11_15.operations.PutV1EmployeesEmployeeIdI9Authorization;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder {
                             new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private I9AuthorizationRequestBody i9AuthorizationRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder {
         this.i9AuthorizationRequestBody = i9AuthorizationRequestBody;
         return this;
     }
+                
+    public PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1EmployeesEmployeeIdI9AuthorizationRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationRequestBuilder {
     }
 
     public CompletableFuture<PutV1EmployeesEmployeeIdI9AuthorizationResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PutV1EmployeesEmployeeIdI9AuthorizationRequest, PutV1EmployeesEmployeeIdI9AuthorizationResponse> operation
-              = new PutV1EmployeesEmployeeIdI9Authorization.Async(sdkConfiguration, _headers);
+              = new PutV1EmployeesEmployeeIdI9Authorization.Async(sdkConfiguration, options, _headers);
         PutV1EmployeesEmployeeIdI9AuthorizationRequest request = buildRequest();
 
         return operation.doRequest(request)

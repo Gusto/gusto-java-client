@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -37,21 +39,33 @@ public class FixedCompensations {
     @JsonProperty("job_uuid")
     private Optional<String> jobUuid;
 
+    /**
+     * Per-workweek amounts for this compensation, one entry per workweek
+     * overlapping the pay period.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("breakdowns")
+    private Optional<? extends List<Breakdowns>> breakdowns;
+
     @JsonCreator
     public FixedCompensations(
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("amount") Optional<String> amount,
-            @JsonProperty("job_uuid") Optional<String> jobUuid) {
+            @JsonProperty("job_uuid") Optional<String> jobUuid,
+            @JsonProperty("breakdowns") Optional<? extends List<Breakdowns>> breakdowns) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(jobUuid, "jobUuid");
+        Utils.checkNotNull(breakdowns, "breakdowns");
         this.name = name;
         this.amount = amount;
         this.jobUuid = jobUuid;
+        this.breakdowns = breakdowns;
     }
     
     public FixedCompensations() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -77,6 +91,16 @@ public class FixedCompensations {
     @JsonIgnore
     public Optional<String> jobUuid() {
         return jobUuid;
+    }
+
+    /**
+     * Per-workweek amounts for this compensation, one entry per workweek
+     * overlapping the pay period.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Breakdowns>> breakdowns() {
+        return (Optional<List<Breakdowns>>) breakdowns;
     }
 
     public static Builder builder() {
@@ -143,6 +167,27 @@ public class FixedCompensations {
         return this;
     }
 
+    /**
+     * Per-workweek amounts for this compensation, one entry per workweek
+     * overlapping the pay period.
+     */
+    public FixedCompensations withBreakdowns(List<Breakdowns> breakdowns) {
+        Utils.checkNotNull(breakdowns, "breakdowns");
+        this.breakdowns = Optional.ofNullable(breakdowns);
+        return this;
+    }
+
+
+    /**
+     * Per-workweek amounts for this compensation, one entry per workweek
+     * overlapping the pay period.
+     */
+    public FixedCompensations withBreakdowns(Optional<? extends List<Breakdowns>> breakdowns) {
+        Utils.checkNotNull(breakdowns, "breakdowns");
+        this.breakdowns = breakdowns;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -155,13 +200,15 @@ public class FixedCompensations {
         return 
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
-            Utils.enhancedDeepEquals(this.jobUuid, other.jobUuid);
+            Utils.enhancedDeepEquals(this.jobUuid, other.jobUuid) &&
+            Utils.enhancedDeepEquals(this.breakdowns, other.breakdowns);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name, amount, jobUuid);
+            name, amount, jobUuid,
+            breakdowns);
     }
     
     @Override
@@ -169,7 +216,8 @@ public class FixedCompensations {
         return Utils.toString(FixedCompensations.class,
                 "name", name,
                 "amount", amount,
-                "jobUuid", jobUuid);
+                "jobUuid", jobUuid,
+                "breakdowns", breakdowns);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -180,6 +228,8 @@ public class FixedCompensations {
         private Optional<String> amount = Optional.empty();
 
         private Optional<String> jobUuid = Optional.empty();
+
+        private Optional<? extends List<Breakdowns>> breakdowns = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -244,10 +294,32 @@ public class FixedCompensations {
             return this;
         }
 
+
+        /**
+         * Per-workweek amounts for this compensation, one entry per workweek
+         * overlapping the pay period.
+         */
+        public Builder breakdowns(List<Breakdowns> breakdowns) {
+            Utils.checkNotNull(breakdowns, "breakdowns");
+            this.breakdowns = Optional.ofNullable(breakdowns);
+            return this;
+        }
+
+        /**
+         * Per-workweek amounts for this compensation, one entry per workweek
+         * overlapping the pay period.
+         */
+        public Builder breakdowns(Optional<? extends List<Breakdowns>> breakdowns) {
+            Utils.checkNotNull(breakdowns, "breakdowns");
+            this.breakdowns = breakdowns;
+            return this;
+        }
+
         public FixedCompensations build() {
 
             return new FixedCompensations(
-                name, amount, jobUuid);
+                name, amount, jobUuid,
+                breakdowns);
         }
 
     }

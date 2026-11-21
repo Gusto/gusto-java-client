@@ -13,30 +13,27 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.PostV1ContractorsCo
 import com.gusto.embedded_api_v_2025_11_15.operations.PostV1ContractorsContractorUuidRehire;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PostV1ContractorsContractorUuidRehireRequestBuilder {
 
-    private String contractorUuid;
     private Optional<? extends PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion>>() {});
+    private String contractorUuid;
     private Optional<? extends PostV1ContractorsContractorUuidRehireRequestBody> requestBody = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1ContractorsContractorUuidRehireRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1ContractorsContractorUuidRehireRequestBuilder contractorUuid(String contractorUuid) {
-        Utils.checkNotNull(contractorUuid, "contractorUuid");
-        this.contractorUuid = contractorUuid;
-        return this;
     }
                 
     public PostV1ContractorsContractorUuidRehireRequestBuilder xGustoAPIVersion(PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,6 +45,12 @@ public class PostV1ContractorsContractorUuidRehireRequestBuilder {
     public PostV1ContractorsContractorUuidRehireRequestBuilder xGustoAPIVersion(Optional<? extends PostV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PostV1ContractorsContractorUuidRehireRequestBuilder contractorUuid(String contractorUuid) {
+        Utils.checkNotNull(contractorUuid, "contractorUuid");
+        this.contractorUuid = contractorUuid;
         return this;
     }
                 
@@ -62,6 +65,18 @@ public class PostV1ContractorsContractorUuidRehireRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PostV1ContractorsContractorUuidRehireRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1ContractorsContractorUuidRehireRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1ContractorsContractorUuidRehireRequest buildRequest() {
@@ -69,17 +84,20 @@ public class PostV1ContractorsContractorUuidRehireRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1ContractorsContractorUuidRehireRequest request = new PostV1ContractorsContractorUuidRehireRequest(contractorUuid,
-            xGustoAPIVersion,
+        PostV1ContractorsContractorUuidRehireRequest request = new PostV1ContractorsContractorUuidRehireRequest(xGustoAPIVersion,
+            contractorUuid,
             requestBody);
 
         return request;
     }
 
     public CompletableFuture<PostV1ContractorsContractorUuidRehireResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1ContractorsContractorUuidRehireRequest, PostV1ContractorsContractorUuidRehireResponse> operation
-              = new PostV1ContractorsContractorUuidRehire.Async(sdkConfiguration, _headers);
+              = new PostV1ContractorsContractorUuidRehire.Async(sdkConfiguration, options, _headers);
         PostV1ContractorsContractorUuidRehireRequest request = buildRequest();
 
         return operation.doRequest(request)

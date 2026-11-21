@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentId;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequestBuilder {
@@ -22,6 +24,7 @@ public class DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdReques
                             new TypeReference<Optional<? extends DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private String documentId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdReques
         this.documentId = documentId;
         return this;
     }
+                
+    public DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest buildRequest() {
@@ -67,9 +82,12 @@ public class DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdReques
     }
 
     public DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest, DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse> operation
-              = new DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentId.Sync(sdkConfiguration, _headers);
+              = new DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentId.Sync(sdkConfiguration, options, _headers);
         DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

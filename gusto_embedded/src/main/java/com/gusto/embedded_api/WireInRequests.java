@@ -22,6 +22,7 @@ import com.gusto.embedded_api.operations.GetCompaniesCompanyUuidWireInRequestUui
 import com.gusto.embedded_api.operations.GetWireInRequestsWireInRequestUuid;
 import com.gusto.embedded_api.operations.PutWireInRequestsWireInRequestUuid;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -75,7 +76,7 @@ public class WireInRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetWireInRequestsWireInRequestUuidResponse get(String wireInRequestUuid) {
-        return get(wireInRequestUuid, Optional.empty());
+        return get(Optional.empty(), wireInRequestUuid, Optional.empty());
     }
 
     /**
@@ -87,20 +88,41 @@ public class WireInRequests {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param wireInRequestUuid The UUID of the Wire In Request
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param wireInRequestUuid The UUID of the Wire In Request
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetWireInRequestsWireInRequestUuidResponse get(String wireInRequestUuid, Optional<? extends GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetWireInRequestsWireInRequestUuidResponse get(Optional<? extends GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String wireInRequestUuid) {
+        return get(xGustoAPIVersion, wireInRequestUuid, Optional.empty());
+    }
+
+    /**
+     * Get a single Wire In Request
+     * 
+     * <p>Fetch a Wire In Request.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param wireInRequestUuid The UUID of the Wire In Request
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetWireInRequestsWireInRequestUuidResponse get(
+            Optional<? extends GetWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String wireInRequestUuid,
+            Optional<Options> options) {
         GetWireInRequestsWireInRequestUuidRequest request =
             GetWireInRequestsWireInRequestUuidRequest
                 .builder()
-                .wireInRequestUuid(wireInRequestUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .wireInRequestUuid(wireInRequestUuid)
                 .build();
         RequestOperation<GetWireInRequestsWireInRequestUuidRequest, GetWireInRequestsWireInRequestUuidResponse> operation
-              = new GetWireInRequestsWireInRequestUuid.Sync(sdkConfiguration, _headers);
+              = new GetWireInRequestsWireInRequestUuid.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -134,7 +156,8 @@ public class WireInRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public PutWireInRequestsWireInRequestUuidResponse submit(String wireInRequestUuid, WireInRequestUpdateRequestBody wireInRequestUpdateRequestBody) {
-        return submit(wireInRequestUuid, Optional.empty(), wireInRequestUpdateRequestBody);
+        return submit(Optional.empty(), wireInRequestUuid, wireInRequestUpdateRequestBody,
+            Optional.empty());
     }
 
     /**
@@ -146,24 +169,47 @@ public class WireInRequests {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param wireInRequestUuid The UUID of the Wire In Request
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param wireInRequestUuid The UUID of the Wire In Request
      * @param wireInRequestUpdateRequestBody 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutWireInRequestsWireInRequestUuidResponse submit(
-            String wireInRequestUuid, Optional<? extends PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String wireInRequestUuid,
             WireInRequestUpdateRequestBody wireInRequestUpdateRequestBody) {
+        return submit(xGustoAPIVersion, wireInRequestUuid, wireInRequestUpdateRequestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Submit a wire in request
+     * 
+     * <p>Submit a wire in request for a payment
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param wireInRequestUuid The UUID of the Wire In Request
+     * @param wireInRequestUpdateRequestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutWireInRequestsWireInRequestUuidResponse submit(
+            Optional<? extends PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String wireInRequestUuid,
+            WireInRequestUpdateRequestBody wireInRequestUpdateRequestBody, Optional<Options> options) {
         PutWireInRequestsWireInRequestUuidRequest request =
             PutWireInRequestsWireInRequestUuidRequest
                 .builder()
-                .wireInRequestUuid(wireInRequestUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .wireInRequestUuid(wireInRequestUuid)
                 .wireInRequestUpdateRequestBody(wireInRequestUpdateRequestBody)
                 .build();
         RequestOperation<PutWireInRequestsWireInRequestUuidRequest, PutWireInRequestsWireInRequestUuidResponse> operation
-              = new PutWireInRequestsWireInRequestUuid.Sync(sdkConfiguration, _headers);
+              = new PutWireInRequestsWireInRequestUuid.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -196,8 +242,8 @@ public class WireInRequests {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetCompaniesCompanyUuidWireInRequestUuidResponse list(String companyUuid) {
-        return list(companyUuid, Optional.empty(), Optional.empty(),
-            Optional.empty());
+        return list(Optional.empty(), companyUuid, Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -209,26 +255,51 @@ public class WireInRequests {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyUuid The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetCompaniesCompanyUuidWireInRequestUuidResponse list(
-            String companyUuid, Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             Optional<Long> page, Optional<Long> per) {
+        return list(xGustoAPIVersion, companyUuid, page,
+            per, Optional.empty());
+    }
+
+    /**
+     * Get all Wire In Requests for a company
+     * 
+     * <p>Fetches all Wire In Requests for a company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetCompaniesCompanyUuidWireInRequestUuidResponse list(
+            Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            Optional<Long> page, Optional<Long> per,
+            Optional<Options> options) {
         GetCompaniesCompanyUuidWireInRequestUuidRequest request =
             GetCompaniesCompanyUuidWireInRequestUuidRequest
                 .builder()
-                .companyUuid(companyUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyUuid(companyUuid)
                 .page(page)
                 .per(per)
                 .build();
         RequestOperation<GetCompaniesCompanyUuidWireInRequestUuidRequest, GetCompaniesCompanyUuidWireInRequestUuidResponse> operation
-              = new GetCompaniesCompanyUuidWireInRequestUuid.Sync(sdkConfiguration, _headers);
+              = new GetCompaniesCompanyUuidWireInRequestUuid.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

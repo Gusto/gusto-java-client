@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -42,21 +44,35 @@ public class PayrollUpdateFixedCompensations {
     @JsonProperty("job_uuid")
     private Optional<String> jobUuid;
 
+    /**
+     * Per-workweek amounts to record for this compensation. Not
+     * applicable to reimbursements. Submitted breakdowns must tile the
+     * pay period's workweeks exactly (no gaps or overlaps), and their
+     * amounts must sum to the compensation's total `amount`.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("breakdowns")
+    private Optional<? extends List<PayrollUpdateBreakdowns>> breakdowns;
+
     @JsonCreator
     public PayrollUpdateFixedCompensations(
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("amount") Optional<String> amount,
-            @JsonProperty("job_uuid") Optional<String> jobUuid) {
+            @JsonProperty("job_uuid") Optional<String> jobUuid,
+            @JsonProperty("breakdowns") Optional<? extends List<PayrollUpdateBreakdowns>> breakdowns) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(jobUuid, "jobUuid");
+        Utils.checkNotNull(breakdowns, "breakdowns");
         this.name = name;
         this.amount = amount;
         this.jobUuid = jobUuid;
+        this.breakdowns = breakdowns;
     }
     
     public PayrollUpdateFixedCompensations() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -82,6 +98,18 @@ public class PayrollUpdateFixedCompensations {
     @JsonIgnore
     public Optional<String> jobUuid() {
         return jobUuid;
+    }
+
+    /**
+     * Per-workweek amounts to record for this compensation. Not
+     * applicable to reimbursements. Submitted breakdowns must tile the
+     * pay period's workweeks exactly (no gaps or overlaps), and their
+     * amounts must sum to the compensation's total `amount`.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<PayrollUpdateBreakdowns>> breakdowns() {
+        return (Optional<List<PayrollUpdateBreakdowns>>) breakdowns;
     }
 
     public static Builder builder() {
@@ -148,6 +176,31 @@ public class PayrollUpdateFixedCompensations {
         return this;
     }
 
+    /**
+     * Per-workweek amounts to record for this compensation. Not
+     * applicable to reimbursements. Submitted breakdowns must tile the
+     * pay period's workweeks exactly (no gaps or overlaps), and their
+     * amounts must sum to the compensation's total `amount`.
+     */
+    public PayrollUpdateFixedCompensations withBreakdowns(List<PayrollUpdateBreakdowns> breakdowns) {
+        Utils.checkNotNull(breakdowns, "breakdowns");
+        this.breakdowns = Optional.ofNullable(breakdowns);
+        return this;
+    }
+
+
+    /**
+     * Per-workweek amounts to record for this compensation. Not
+     * applicable to reimbursements. Submitted breakdowns must tile the
+     * pay period's workweeks exactly (no gaps or overlaps), and their
+     * amounts must sum to the compensation's total `amount`.
+     */
+    public PayrollUpdateFixedCompensations withBreakdowns(Optional<? extends List<PayrollUpdateBreakdowns>> breakdowns) {
+        Utils.checkNotNull(breakdowns, "breakdowns");
+        this.breakdowns = breakdowns;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -160,13 +213,15 @@ public class PayrollUpdateFixedCompensations {
         return 
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
-            Utils.enhancedDeepEquals(this.jobUuid, other.jobUuid);
+            Utils.enhancedDeepEquals(this.jobUuid, other.jobUuid) &&
+            Utils.enhancedDeepEquals(this.breakdowns, other.breakdowns);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name, amount, jobUuid);
+            name, amount, jobUuid,
+            breakdowns);
     }
     
     @Override
@@ -174,7 +229,8 @@ public class PayrollUpdateFixedCompensations {
         return Utils.toString(PayrollUpdateFixedCompensations.class,
                 "name", name,
                 "amount", amount,
-                "jobUuid", jobUuid);
+                "jobUuid", jobUuid,
+                "breakdowns", breakdowns);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -185,6 +241,8 @@ public class PayrollUpdateFixedCompensations {
         private Optional<String> amount = Optional.empty();
 
         private Optional<String> jobUuid = Optional.empty();
+
+        private Optional<? extends List<PayrollUpdateBreakdowns>> breakdowns = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -249,10 +307,36 @@ public class PayrollUpdateFixedCompensations {
             return this;
         }
 
+
+        /**
+         * Per-workweek amounts to record for this compensation. Not
+         * applicable to reimbursements. Submitted breakdowns must tile the
+         * pay period's workweeks exactly (no gaps or overlaps), and their
+         * amounts must sum to the compensation's total `amount`.
+         */
+        public Builder breakdowns(List<PayrollUpdateBreakdowns> breakdowns) {
+            Utils.checkNotNull(breakdowns, "breakdowns");
+            this.breakdowns = Optional.ofNullable(breakdowns);
+            return this;
+        }
+
+        /**
+         * Per-workweek amounts to record for this compensation. Not
+         * applicable to reimbursements. Submitted breakdowns must tile the
+         * pay period's workweeks exactly (no gaps or overlaps), and their
+         * amounts must sum to the compensation's total `amount`.
+         */
+        public Builder breakdowns(Optional<? extends List<PayrollUpdateBreakdowns>> breakdowns) {
+            Utils.checkNotNull(breakdowns, "breakdowns");
+            this.breakdowns = breakdowns;
+            return this;
+        }
+
         public PayrollUpdateFixedCompensations build() {
 
             return new PayrollUpdateFixedCompensations(
-                name, amount, jobUuid);
+                name, amount, jobUuid,
+                breakdowns);
         }
 
     }

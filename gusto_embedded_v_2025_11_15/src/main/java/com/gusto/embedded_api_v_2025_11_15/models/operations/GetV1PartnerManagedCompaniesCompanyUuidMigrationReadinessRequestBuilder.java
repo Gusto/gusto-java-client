@@ -10,28 +10,25 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBuilder xGustoAPIVersion(GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,22 +43,43 @@ public class GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBui
         return this;
     }
 
+    public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+                
+    public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest request = new GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest(companyUuid,
-            xGustoAPIVersion);
+        GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest request = new GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest(xGustoAPIVersion,
+            companyUuid);
 
         return request;
     }
 
     public GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest, GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse> operation
-              = new GetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness.Sync(sdkConfiguration, _headers);
+              = new GetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness.Sync(sdkConfiguration, options, _headers);
         GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

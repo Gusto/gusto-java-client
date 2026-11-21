@@ -153,7 +153,7 @@ public class Application {
                 .contractorUuid("<id>")
                 .requestBody(PutV1ContractorsContractorIdPaymentMethodRequestBody.builder()
                     .version("63859768485e218ccf8a449bb60f14ed")
-                    .type(PutV1ContractorsContractorIdPaymentMethodType.DIRECT_DEPOSIT)
+                    .type(Type.DIRECT_DEPOSIT)
                     .build())
                 .call();
 

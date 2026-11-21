@@ -13,30 +13,27 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.PostV1EmployeesEmpl
 import com.gusto.embedded_api_v_2025_11_15.operations.PostV1EmployeesEmployeeUuidSection603HighEarnerStatuses;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder {
 
-    private String employeeUuid;
     private Optional<? extends PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion>>() {});
+    private String employeeUuid;
     private EmployeeSection603HighEarnerStatusCreateRequest employeeSection603HighEarnerStatusCreateRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder employeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
-        return this;
     }
                 
     public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder xGustoAPIVersion(PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -51,9 +48,27 @@ public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuild
         return this;
     }
 
+    public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder employeeUuid(String employeeUuid) {
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
+        this.employeeUuid = employeeUuid;
+        return this;
+    }
+
     public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder employeeSection603HighEarnerStatusCreateRequest(EmployeeSection603HighEarnerStatusCreateRequest employeeSection603HighEarnerStatusCreateRequest) {
         Utils.checkNotNull(employeeSection603HighEarnerStatusCreateRequest, "employeeSection603HighEarnerStatusCreateRequest");
         this.employeeSection603HighEarnerStatusCreateRequest = employeeSection603HighEarnerStatusCreateRequest;
+        return this;
+    }
+                
+    public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -63,17 +78,20 @@ public class PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuild
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest request = new PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(employeeUuid,
-            xGustoAPIVersion,
+        PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest request = new PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(xGustoAPIVersion,
+            employeeUuid,
             employeeSection603HighEarnerStatusCreateRequest);
 
         return request;
     }
 
     public CompletableFuture<PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest, PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse> operation
-              = new PostV1EmployeesEmployeeUuidSection603HighEarnerStatuses.Async(sdkConfiguration, _headers);
+              = new PostV1EmployeesEmployeeUuidSection603HighEarnerStatuses.Async(sdkConfiguration, options, _headers);
         PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest request = buildRequest();
 
         return operation.doRequest(request)

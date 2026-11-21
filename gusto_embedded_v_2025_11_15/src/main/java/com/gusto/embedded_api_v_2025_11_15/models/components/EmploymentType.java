@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * EmploymentType
  * 
- * <p>Employee employment type to filter by
+ * <p>Employee employment type to filter by.
  */
 public enum EmploymentType {
     EXEMPT("exempt"),

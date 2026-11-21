@@ -12,8 +12,10 @@ import com.gusto.embedded_api.models.operations.GetV1BenefitsBenefitsIdRequireme
 import com.gusto.embedded_api.operations.GetV1BenefitsBenefitsIdRequirements;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -24,6 +26,7 @@ public class GetV1BenefitsBenefitsIdRequirementsRequestBuilder {
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1BenefitsBenefitsIdRequirementsHeaderXGustoAPIVersion>>() {});
     private String benefitId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class GetV1BenefitsBenefitsIdRequirementsRequestBuilder {
         this.benefitId = benefitId;
         return this;
     }
+                
+    public GetV1BenefitsBenefitsIdRequirementsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1BenefitsBenefitsIdRequirementsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1BenefitsBenefitsIdRequirementsRequest buildRequest() {
@@ -62,9 +77,12 @@ public class GetV1BenefitsBenefitsIdRequirementsRequestBuilder {
     }
 
     public CompletableFuture<GetV1BenefitsBenefitsIdRequirementsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1BenefitsBenefitsIdRequirementsRequest, GetV1BenefitsBenefitsIdRequirementsResponse> operation
-              = new GetV1BenefitsBenefitsIdRequirements.Async(sdkConfiguration, _headers);
+              = new GetV1BenefitsBenefitsIdRequirements.Async(sdkConfiguration, options, _headers);
         GetV1BenefitsBenefitsIdRequirementsRequest request = buildRequest();
 
         return operation.doRequest(request)

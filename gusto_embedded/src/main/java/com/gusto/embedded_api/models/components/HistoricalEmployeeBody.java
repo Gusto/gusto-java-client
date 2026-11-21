@@ -74,7 +74,7 @@ public class HistoricalEmployeeBody {
      * Residential address on file for tax withholding and compliance mail.
      */
     @JsonProperty("home_address")
-    private HistoricalEmployeeBodyHomeAddress homeAddress;
+    private HomeAddress homeAddress;
 
     /**
      * End of the historical employment period.
@@ -112,7 +112,7 @@ public class HistoricalEmployeeBody {
             @JsonProperty("date_of_birth") LocalDate dateOfBirth,
             @JsonProperty("ssn") String ssn,
             @JsonProperty("work_address") WorkAddress workAddress,
-            @JsonProperty("home_address") HistoricalEmployeeBodyHomeAddress homeAddress,
+            @JsonProperty("home_address") HomeAddress homeAddress,
             @JsonProperty("termination") HistoricalEmployeeBodyTermination termination,
             @JsonProperty("email") Optional<String> email,
             @JsonProperty("job") HistoricalEmployeeBodyJob job,
@@ -149,7 +149,7 @@ public class HistoricalEmployeeBody {
             LocalDate dateOfBirth,
             String ssn,
             WorkAddress workAddress,
-            HistoricalEmployeeBodyHomeAddress homeAddress,
+            HomeAddress homeAddress,
             HistoricalEmployeeBodyTermination termination,
             HistoricalEmployeeBodyJob job) {
         this(firstName, Optional.empty(), lastName,
@@ -219,7 +219,7 @@ public class HistoricalEmployeeBody {
      * Residential address on file for tax withholding and compliance mail.
      */
     @JsonIgnore
-    public HistoricalEmployeeBodyHomeAddress homeAddress() {
+    public HomeAddress homeAddress() {
         return homeAddress;
     }
 
@@ -349,7 +349,7 @@ public class HistoricalEmployeeBody {
     /**
      * Residential address on file for tax withholding and compliance mail.
      */
-    public HistoricalEmployeeBody withHomeAddress(HistoricalEmployeeBodyHomeAddress homeAddress) {
+    public HistoricalEmployeeBody withHomeAddress(HomeAddress homeAddress) {
         Utils.checkNotNull(homeAddress, "homeAddress");
         this.homeAddress = homeAddress;
         return this;
@@ -480,7 +480,7 @@ public class HistoricalEmployeeBody {
 
         private WorkAddress workAddress;
 
-        private HistoricalEmployeeBodyHomeAddress homeAddress;
+        private HomeAddress homeAddress;
 
         private HistoricalEmployeeBodyTermination termination;
 
@@ -587,7 +587,7 @@ public class HistoricalEmployeeBody {
         /**
          * Residential address on file for tax withholding and compliance mail.
          */
-        public Builder homeAddress(HistoricalEmployeeBodyHomeAddress homeAddress) {
+        public Builder homeAddress(HomeAddress homeAddress) {
             Utils.checkNotNull(homeAddress, "homeAddress");
             this.homeAddress = homeAddress;
             return this;

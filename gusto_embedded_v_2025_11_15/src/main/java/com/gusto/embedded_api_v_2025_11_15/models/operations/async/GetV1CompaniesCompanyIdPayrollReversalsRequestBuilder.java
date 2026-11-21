@@ -7,31 +7,46 @@ import static com.gusto.embedded_api_v_2025_11_15.operations.Operations.AsyncReq
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
-import com.gusto.embedded_api_v_2025_11_15.models.components.VersionHeader;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1CompaniesCompanyIdPayrollReversalsRequest;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1CompaniesCompanyIdPayrollReversals;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder {
 
+    private Optional<? extends GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+                            "xGustoAPIVersion",
+                            "\"2025-11-15\"",
+                            new TypeReference<Optional<? extends GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private Optional<Long> page = Optional.empty();
     private Optional<Long> per = Optional.empty();
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
-                            "xGustoAPIVersion",
-                            "\"2025-11-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder companyId(String companyId) {
@@ -64,15 +79,15 @@ public class GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder {
         return this;
     }
                 
-    public GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+    public GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
         return this;
     }
 
-    public GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
+    public GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -82,27 +97,30 @@ public class GetV1CompaniesCompanyIdPayrollReversalsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompaniesCompanyIdPayrollReversalsRequest request = new GetV1CompaniesCompanyIdPayrollReversalsRequest(companyId,
+        GetV1CompaniesCompanyIdPayrollReversalsRequest request = new GetV1CompaniesCompanyIdPayrollReversalsRequest(xGustoAPIVersion,
+            companyId,
             page,
-            per,
-            xGustoAPIVersion);
+            per);
 
         return request;
     }
 
     public CompletableFuture<GetV1CompaniesCompanyIdPayrollReversalsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1CompaniesCompanyIdPayrollReversalsRequest, GetV1CompaniesCompanyIdPayrollReversalsResponse> operation
-              = new GetV1CompaniesCompanyIdPayrollReversals.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdPayrollReversals.Async(sdkConfiguration, options, _headers);
         GetV1CompaniesCompanyIdPayrollReversalsRequest request = buildRequest();
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-11-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion>>() {});
 }

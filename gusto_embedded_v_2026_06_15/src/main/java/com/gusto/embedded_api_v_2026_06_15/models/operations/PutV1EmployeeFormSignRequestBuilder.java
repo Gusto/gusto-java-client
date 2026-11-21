@@ -8,11 +8,15 @@ import static com.gusto.embedded_api_v_2026_06_15.operations.Operations.RequestO
 import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1EmployeeFormSign;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 
 public class PutV1EmployeeFormSignRequestBuilder {
 
     private PutV1EmployeeFormSignRequest request;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -25,11 +29,26 @@ public class PutV1EmployeeFormSignRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public PutV1EmployeeFormSignRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1EmployeeFormSignRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public PutV1EmployeeFormSignResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1EmployeeFormSignRequest, PutV1EmployeeFormSignResponse> operation
-              = new PutV1EmployeeFormSign.Sync(sdkConfiguration, _headers);
+              = new PutV1EmployeeFormSign.Sync(sdkConfiguration, options, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

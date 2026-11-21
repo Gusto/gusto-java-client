@@ -13,37 +13,28 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.PutV1CompaniesCompa
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuid;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder {
 
-    private String companyUuid;
-    private String signatoryUuid;
     private Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private String signatoryUuid;
     private SignatoryUpdateRequest signatoryUpdateRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
-
-    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder signatoryUuid(String signatoryUuid) {
-        Utils.checkNotNull(signatoryUuid, "signatoryUuid");
-        this.signatoryUuid = signatoryUuid;
-        return this;
     }
                 
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder xGustoAPIVersion(PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -58,9 +49,33 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder {
         return this;
     }
 
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder signatoryUuid(String signatoryUuid) {
+        Utils.checkNotNull(signatoryUuid, "signatoryUuid");
+        this.signatoryUuid = signatoryUuid;
+        return this;
+    }
+
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder signatoryUpdateRequest(SignatoryUpdateRequest signatoryUpdateRequest) {
         Utils.checkNotNull(signatoryUpdateRequest, "signatoryUpdateRequest");
         this.signatoryUpdateRequest = signatoryUpdateRequest;
+        return this;
+    }
+                
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -70,18 +85,21 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request = new PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(companyUuid,
+        PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request = new PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(xGustoAPIVersion,
+            companyUuid,
             signatoryUuid,
-            xGustoAPIVersion,
             signatoryUpdateRequest);
 
         return request;
     }
 
     public CompletableFuture<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest, PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse> operation
-              = new PutV1CompaniesCompanyUuidSignatoriesSignatoryUuid.Async(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyUuidSignatoriesSignatoryUuid.Async(sdkConfiguration, options, _headers);
         PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest request = buildRequest();
 
         return operation.doRequest(request)

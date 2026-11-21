@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.PutV1HomeAddressesHomeAddressUuid;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1HomeAddressesHomeAddressUuidRequestBuilder {
@@ -22,6 +24,7 @@ public class PutV1HomeAddressesHomeAddressUuidRequestBuilder {
                             new TypeReference<Optional<? extends PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion>>() {});
     private String homeAddressUuid;
     private PutV1HomeAddressesHomeAddressUuidRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class PutV1HomeAddressesHomeAddressUuidRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PutV1HomeAddressesHomeAddressUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1HomeAddressesHomeAddressUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1HomeAddressesHomeAddressUuidRequest buildRequest() {
@@ -67,9 +82,12 @@ public class PutV1HomeAddressesHomeAddressUuidRequestBuilder {
     }
 
     public PutV1HomeAddressesHomeAddressUuidResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1HomeAddressesHomeAddressUuidRequest, PutV1HomeAddressesHomeAddressUuidResponse> operation
-              = new PutV1HomeAddressesHomeAddressUuid.Sync(sdkConfiguration, _headers);
+              = new PutV1HomeAddressesHomeAddressUuid.Sync(sdkConfiguration, options, _headers);
         PutV1HomeAddressesHomeAddressUuidRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
