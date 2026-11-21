@@ -13,8 +13,10 @@ import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyUuidTimeOf
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyUuidTimeOffPolicies;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PostV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder {
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
     private TimeOffPolicyRequest timeOffPolicyRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PostV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder {
         this.timeOffPolicyRequest = timeOffPolicyRequest;
         return this;
     }
+                
+    public PostV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1CompaniesCompanyUuidTimeOffPoliciesRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PostV1CompaniesCompanyUuidTimeOffPoliciesRequestBuilder {
     }
 
     public CompletableFuture<PostV1CompaniesCompanyUuidTimeOffPoliciesResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1CompaniesCompanyUuidTimeOffPoliciesRequest, PostV1CompaniesCompanyUuidTimeOffPoliciesResponse> operation
-              = new PostV1CompaniesCompanyUuidTimeOffPolicies.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyUuidTimeOffPolicies.Async(sdkConfiguration, options, _headers);
         PostV1CompaniesCompanyUuidTimeOffPoliciesRequest request = buildRequest();
 
         return operation.doRequest(request)

@@ -10,28 +10,25 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1HomeAddressesHomeAddressUuid;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1HomeAddressesHomeAddressUuidRequestBuilder {
 
-    private String homeAddressUuid;
     private Optional<? extends GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion>>() {});
+    private String homeAddressUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1HomeAddressesHomeAddressUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1HomeAddressesHomeAddressUuidRequestBuilder homeAddressUuid(String homeAddressUuid) {
-        Utils.checkNotNull(homeAddressUuid, "homeAddressUuid");
-        this.homeAddressUuid = homeAddressUuid;
-        return this;
     }
                 
     public GetV1HomeAddressesHomeAddressUuidRequestBuilder xGustoAPIVersion(GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,22 +43,43 @@ public class GetV1HomeAddressesHomeAddressUuidRequestBuilder {
         return this;
     }
 
+    public GetV1HomeAddressesHomeAddressUuidRequestBuilder homeAddressUuid(String homeAddressUuid) {
+        Utils.checkNotNull(homeAddressUuid, "homeAddressUuid");
+        this.homeAddressUuid = homeAddressUuid;
+        return this;
+    }
+                
+    public GetV1HomeAddressesHomeAddressUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1HomeAddressesHomeAddressUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1HomeAddressesHomeAddressUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1HomeAddressesHomeAddressUuidRequest request = new GetV1HomeAddressesHomeAddressUuidRequest(homeAddressUuid,
-            xGustoAPIVersion);
+        GetV1HomeAddressesHomeAddressUuidRequest request = new GetV1HomeAddressesHomeAddressUuidRequest(xGustoAPIVersion,
+            homeAddressUuid);
 
         return request;
     }
 
     public GetV1HomeAddressesHomeAddressUuidResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1HomeAddressesHomeAddressUuidRequest, GetV1HomeAddressesHomeAddressUuidResponse> operation
-              = new GetV1HomeAddressesHomeAddressUuid.Sync(sdkConfiguration, _headers);
+              = new GetV1HomeAddressesHomeAddressUuid.Sync(sdkConfiguration, options, _headers);
         GetV1HomeAddressesHomeAddressUuidRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

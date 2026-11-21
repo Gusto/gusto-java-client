@@ -26,6 +26,7 @@ import com.gusto.embedded_api.operations.GetV1CompanyFormPdf;
 import com.gusto.embedded_api.operations.GetV1CompanyForms;
 import com.gusto.embedded_api.operations.PutV1CompanyFormSign;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -85,8 +86,28 @@ public class AsyncCompanyForms {
      * @return {@code CompletableFuture<GetV1CompanyFormsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompanyFormsResponse> getAll(GetV1CompanyFormsRequest request) {
+        return getAll(request, Optional.empty());
+    }
+
+    /**
+     * Get all company forms
+     * 
+     * <p>Get a list of all company's forms
+     * 
+     * <p>### Related guides
+     * - [Company Forms](doc:company-form)
+     * 
+     * <p>scope: `company_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompanyFormsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompanyFormsResponse> getAll(GetV1CompanyFormsRequest request, Optional<Options> options) {
         AsyncRequestOperation<GetV1CompanyFormsRequest, GetV1CompanyFormsResponse> operation
-              = new GetV1CompanyForms.Async(sdkConfiguration, _headers);
+              = new GetV1CompanyForms.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -120,7 +141,7 @@ public class AsyncCompanyForms {
      * @return {@code CompletableFuture<GetV1CompanyFormResponse>} - The async response
      */
     public CompletableFuture<GetV1CompanyFormResponse> get(String formId) {
-        return get(Optional.empty(), formId);
+        return get(Optional.empty(), formId, Optional.empty());
     }
 
     /**
@@ -137,6 +158,26 @@ public class AsyncCompanyForms {
      * @return {@code CompletableFuture<GetV1CompanyFormResponse>} - The async response
      */
     public CompletableFuture<GetV1CompanyFormResponse> get(Optional<? extends GetV1CompanyFormHeaderXGustoAPIVersion> xGustoAPIVersion, String formId) {
+        return get(xGustoAPIVersion, formId, Optional.empty());
+    }
+
+    /**
+     * Get a company form
+     * 
+     * <p>Get a company form
+     * 
+     * <p>scope: `company_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param formId The UUID of the form
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompanyFormResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompanyFormResponse> get(
+            Optional<? extends GetV1CompanyFormHeaderXGustoAPIVersion> xGustoAPIVersion, String formId,
+            Optional<Options> options) {
         GetV1CompanyFormRequest request =
             GetV1CompanyFormRequest
                 .builder()
@@ -144,7 +185,7 @@ public class AsyncCompanyForms {
                 .formId(formId)
                 .build();
         AsyncRequestOperation<GetV1CompanyFormRequest, GetV1CompanyFormResponse> operation
-              = new GetV1CompanyForm.Async(sdkConfiguration, _headers);
+              = new GetV1CompanyForm.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -178,7 +219,7 @@ public class AsyncCompanyForms {
      * @return {@code CompletableFuture<GetV1CompanyFormPdfResponse>} - The async response
      */
     public CompletableFuture<GetV1CompanyFormPdfResponse> getPdf(String formId) {
-        return getPdf(Optional.empty(), formId);
+        return getPdf(Optional.empty(), formId, Optional.empty());
     }
 
     /**
@@ -195,6 +236,26 @@ public class AsyncCompanyForms {
      * @return {@code CompletableFuture<GetV1CompanyFormPdfResponse>} - The async response
      */
     public CompletableFuture<GetV1CompanyFormPdfResponse> getPdf(Optional<? extends GetV1CompanyFormPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String formId) {
+        return getPdf(xGustoAPIVersion, formId, Optional.empty());
+    }
+
+    /**
+     * Get a company form pdf
+     * 
+     * <p>Get the link to the form PDF
+     * 
+     * <p>scope: `company_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param formId The UUID of the form
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompanyFormPdfResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompanyFormPdfResponse> getPdf(
+            Optional<? extends GetV1CompanyFormPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String formId,
+            Optional<Options> options) {
         GetV1CompanyFormPdfRequest request =
             GetV1CompanyFormPdfRequest
                 .builder()
@@ -202,7 +263,7 @@ public class AsyncCompanyForms {
                 .formId(formId)
                 .build();
         AsyncRequestOperation<GetV1CompanyFormPdfRequest, GetV1CompanyFormPdfResponse> operation
-              = new GetV1CompanyFormPdf.Async(sdkConfiguration, _headers);
+              = new GetV1CompanyFormPdf.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -239,7 +300,7 @@ public class AsyncCompanyForms {
     public CompletableFuture<PutV1CompanyFormSignResponse> sign(String formId, PutV1CompanyFormSignRequestBody requestBody) {
         return sign(
                 Optional.empty(), formId, Optional.empty(),
-                requestBody);
+                requestBody, Optional.empty());
     }
 
     /**
@@ -260,6 +321,31 @@ public class AsyncCompanyForms {
     public CompletableFuture<PutV1CompanyFormSignResponse> sign(
             Optional<? extends PutV1CompanyFormSignHeaderXGustoAPIVersion> xGustoAPIVersion, String formId,
             Optional<String> xGustoClientIp, PutV1CompanyFormSignRequestBody requestBody) {
+        return sign(
+                xGustoAPIVersion, formId, xGustoClientIp,
+                requestBody, Optional.empty());
+    }
+
+    /**
+     * Sign a company form
+     * 
+     * <p>Sign a company form. Company forms must be signed by the company signatory.
+     * 
+     * <p>scope: `company_forms:sign`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param formId The UUID of the form
+     * @param xGustoClientIp Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1CompanyFormSignResponse>} - The async response
+     */
+    public CompletableFuture<PutV1CompanyFormSignResponse> sign(
+            Optional<? extends PutV1CompanyFormSignHeaderXGustoAPIVersion> xGustoAPIVersion, String formId,
+            Optional<String> xGustoClientIp, PutV1CompanyFormSignRequestBody requestBody,
+            Optional<Options> options) {
         PutV1CompanyFormSignRequest request =
             PutV1CompanyFormSignRequest
                 .builder()
@@ -269,7 +355,7 @@ public class AsyncCompanyForms {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1CompanyFormSignRequest, PutV1CompanyFormSignResponse> operation
-              = new PutV1CompanyFormSign.Async(sdkConfiguration, _headers);
+              = new PutV1CompanyFormSign.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

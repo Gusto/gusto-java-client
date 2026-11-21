@@ -12,8 +12,10 @@ import com.gusto.embedded_api.models.operations.PutV1CompaniesCompanyIdPayrollsP
 import com.gusto.embedded_api.operations.PutV1CompaniesCompanyIdPayrollsPayrollIdCalculate;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -25,6 +27,7 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequestBuilder {
                             new TypeReference<Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private String payrollId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -55,6 +58,18 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequestBuilder {
         this.payrollId = payrollId;
         return this;
     }
+                
+    public PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest buildRequest() {
@@ -70,9 +85,12 @@ public class PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequestBuilder {
     }
 
     public CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest, PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse> operation
-              = new PutV1CompaniesCompanyIdPayrollsPayrollIdCalculate.Async(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyIdPayrollsPayrollIdCalculate.Async(sdkConfiguration, options, _headers);
         PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest request = buildRequest();
 
         return operation.doRequest(request)

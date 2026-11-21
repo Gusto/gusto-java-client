@@ -13,30 +13,27 @@ import com.gusto.embedded_api.models.operations.PostDepartmentsRequest;
 import com.gusto.embedded_api.operations.PostDepartments;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PostDepartmentsRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends PostDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PostDepartmentsHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private DepartmentCreateRequestBody departmentCreateRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostDepartmentsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostDepartmentsRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public PostDepartmentsRequestBuilder xGustoAPIVersion(PostDepartmentsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -51,9 +48,27 @@ public class PostDepartmentsRequestBuilder {
         return this;
     }
 
+    public PostDepartmentsRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
     public PostDepartmentsRequestBuilder departmentCreateRequestBody(DepartmentCreateRequestBody departmentCreateRequestBody) {
         Utils.checkNotNull(departmentCreateRequestBody, "departmentCreateRequestBody");
         this.departmentCreateRequestBody = departmentCreateRequestBody;
+        return this;
+    }
+                
+    public PostDepartmentsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostDepartmentsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -63,17 +78,20 @@ public class PostDepartmentsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostDepartmentsRequest request = new PostDepartmentsRequest(companyUuid,
-            xGustoAPIVersion,
+        PostDepartmentsRequest request = new PostDepartmentsRequest(xGustoAPIVersion,
+            companyUuid,
             departmentCreateRequestBody);
 
         return request;
     }
 
     public CompletableFuture<PostDepartmentsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostDepartmentsRequest, PostDepartmentsResponse> operation
-              = new PostDepartments.Async(sdkConfiguration, _headers);
+              = new PostDepartments.Async(sdkConfiguration, options, _headers);
         PostDepartmentsRequest request = buildRequest();
 
         return operation.doRequest(request)

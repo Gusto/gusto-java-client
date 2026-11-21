@@ -11,8 +11,10 @@ import com.gusto.embedded_api.models.components.PayScheduleAssignmentBody;
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyIdPaySchedulesAssignmentPreview;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequestBuilder {
@@ -23,6 +25,7 @@ public class PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequestBuilder
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private PayScheduleAssignmentBody payScheduleAssignmentBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequestBuilder
         this.payScheduleAssignmentBody = payScheduleAssignmentBody;
         return this;
     }
+                
+    public PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequestBuilder
     }
 
     public PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest, PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse> operation
-              = new PostV1CompaniesCompanyIdPaySchedulesAssignmentPreview.Sync(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdPaySchedulesAssignmentPreview.Sync(sdkConfiguration, options, _headers);
         PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

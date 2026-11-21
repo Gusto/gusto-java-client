@@ -12,6 +12,7 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.async.PostV1Company
 import com.gusto.embedded_api_v_2026_06_15.models.operations.async.PostV1CompanyFlowsResponse;
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1CompanyFlows;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -110,7 +111,9 @@ public class AsyncFlows {
      * @return {@code CompletableFuture<PostV1CompanyFlowsResponse>} - The async response
      */
     public CompletableFuture<PostV1CompanyFlowsResponse> create(String companyUuid, CreateFlowRequest createFlowRequest) {
-        return create(Optional.empty(), companyUuid, createFlowRequest);
+        return create(
+                Optional.empty(), companyUuid, createFlowRequest,
+                Optional.empty());
     }
 
     /**
@@ -152,6 +155,51 @@ public class AsyncFlows {
     public CompletableFuture<PostV1CompanyFlowsResponse> create(
             Optional<? extends PostV1CompanyFlowsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             CreateFlowRequest createFlowRequest) {
+        return create(
+                xGustoAPIVersion, companyUuid, createFlowRequest,
+                Optional.empty());
+    }
+
+    /**
+     * Create a flow
+     * 
+     * <p>Generate a link to access a pre-built workflow in Gusto white-label UI. For security, all generated
+     * flows will expire within 1 hour of inactivity or 24 hours from creation time, whichever comes first.
+     * 
+     * <p>You can see a list of all possible flow types in our [Flow
+     * Types](https://docs.gusto.com/embedded-payroll/docs/flow-types) guide.
+     * 
+     * <p>You can also mix and match flow_types in the same category to create custom flows suitable for your
+     * needs.
+     * 
+     * <p>For instance, to create a custom onboarding flow that only includes `add_addresses`,
+     * `add_employees`, and `sign_all_forms` steps, simply stitch those flow_types together into a comma
+     * delimited string:
+     * 
+     * <p>```json
+     * {
+     * "flow_type": "add_addresses,add_employees,sign_all_forms"
+     * }
+     * ```
+     * 
+     * <p>Please be mindful of data dependencies in each step to achieve the best user experience.
+     * 
+     * <p>For more information and in-depth guides review the [Getting
+     * Started](https://docs.gusto.com/embedded-payroll/docs/flows-getting-started) guide for flows.
+     * 
+     * <p>scope: `flows:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param createFlowRequest Request body for creating a flow.
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1CompanyFlowsResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompanyFlowsResponse> create(
+            Optional<? extends PostV1CompanyFlowsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            CreateFlowRequest createFlowRequest, Optional<Options> options) {
         PostV1CompanyFlowsRequest request =
             PostV1CompanyFlowsRequest
                 .builder()
@@ -160,7 +208,7 @@ public class AsyncFlows {
                 .createFlowRequest(createFlowRequest)
                 .build();
         AsyncRequestOperation<PostV1CompanyFlowsRequest, PostV1CompanyFlowsResponse> operation
-              = new PostV1CompanyFlows.Async(sdkConfiguration, _headers);
+              = new PostV1CompanyFlows.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

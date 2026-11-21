@@ -24,6 +24,7 @@ import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.Hook.AfterErrorContextImpl;
 import com.gusto.embedded_api.utils.Hook.AfterSuccessContextImpl;
 import com.gusto.embedded_api.utils.Hook.BeforeRequestContextImpl;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.SerializedBody;
 import com.gusto.embedded_api.utils.Utils.JsonShape;
 import com.gusto.embedded_api.utils.Utils;
@@ -35,6 +36,8 @@ import java.lang.String;
 import java.lang.Throwable;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
@@ -47,18 +50,22 @@ public class PutV1VerifyWebhookSubscriptionUuid {
         final String baseUrl;
         final PutV1VerifyWebhookSubscriptionUuidSecurity security;
         final SecuritySource securitySource;
+        final Optional<Duration> timeout;
         final HTTPClient client;
         final Headers _headers;
 
         public Base(
                 SDKConfiguration sdkConfiguration, PutV1VerifyWebhookSubscriptionUuidSecurity security,
-                Headers _headers) {
+                Optional<Options> options, Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
             this._headers =_headers;
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.security = security;
             // hooks will be passed method level security only
             this.securitySource = SecuritySource.of(security);
+            options
+                    .ifPresent(o -> o.validate(List.of(Options.Option.TIMEOUT)));
+            this.timeout = options.flatMap(Options::timeout).or(sdkConfiguration::timeout);
             this.client = this.sdkConfiguration.client();
         }
 
@@ -98,7 +105,8 @@ public class PutV1VerifyWebhookSubscriptionUuid {
                     this.baseUrl,
                     "/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify",
                     request, null);
-            HTTPRequest req = new HTTPRequest(url, "PUT");
+            HTTPRequest req = new HTTPRequest(url, "PUT")
+                    .timeout(this.timeout);
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
@@ -127,9 +135,16 @@ public class PutV1VerifyWebhookSubscriptionUuid {
         public Sync(
                 SDKConfiguration sdkConfiguration, PutV1VerifyWebhookSubscriptionUuidSecurity security,
                 Headers _headers) {
+            this(sdkConfiguration, security,
+                    Optional.empty(), _headers);
+        }
+
+        public Sync(
+                SDKConfiguration sdkConfiguration, PutV1VerifyWebhookSubscriptionUuidSecurity security,
+                Optional<Options> options, Headers _headers) {
             super(
                   sdkConfiguration, security,
-                  _headers);
+                  options, _headers);
         }
 
         private HttpRequest onBuildRequest(PutV1VerifyWebhookSubscriptionUuidRequest request) throws Exception {
@@ -216,13 +231,19 @@ public class PutV1VerifyWebhookSubscriptionUuid {
     }
     public static class Async extends Base
             implements AsyncRequestOperation<PutV1VerifyWebhookSubscriptionUuidRequest, com.gusto.embedded_api.models.operations.async.PutV1VerifyWebhookSubscriptionUuidResponse> {
-
         public Async(
                 SDKConfiguration sdkConfiguration, PutV1VerifyWebhookSubscriptionUuidSecurity security,
                 Headers _headers) {
+            this(sdkConfiguration, security,
+                    Optional.empty(), _headers);
+        }
+
+        public Async(
+                SDKConfiguration sdkConfiguration, PutV1VerifyWebhookSubscriptionUuidSecurity security,
+                Optional<Options> options, Headers _headers) {
             super(
                   sdkConfiguration, security,
-                  _headers);
+                  options, _headers);
         }
 
         private CompletableFuture<HttpRequest> onBuildRequest(PutV1VerifyWebhookSubscriptionUuidRequest request) throws Exception {

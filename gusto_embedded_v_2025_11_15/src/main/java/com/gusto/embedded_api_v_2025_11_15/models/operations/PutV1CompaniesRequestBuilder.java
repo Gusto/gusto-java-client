@@ -10,29 +10,26 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.PutV1Companies;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1CompaniesRequestBuilder {
 
-    private String companyId;
     private Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PutV1CompaniesHeaderXGustoAPIVersion>>() {});
+    private String companyId;
     private PutV1CompaniesRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompaniesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1CompaniesRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public PutV1CompaniesRequestBuilder xGustoAPIVersion(PutV1CompaniesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -47,9 +44,27 @@ public class PutV1CompaniesRequestBuilder {
         return this;
     }
 
+    public PutV1CompaniesRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
     public PutV1CompaniesRequestBuilder requestBody(PutV1CompaniesRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
+        return this;
+    }
+                
+    public PutV1CompaniesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1CompaniesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -59,17 +74,20 @@ public class PutV1CompaniesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompaniesRequest request = new PutV1CompaniesRequest(companyId,
-            xGustoAPIVersion,
+        PutV1CompaniesRequest request = new PutV1CompaniesRequest(xGustoAPIVersion,
+            companyId,
             requestBody);
 
         return request;
     }
 
     public PutV1CompaniesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1CompaniesRequest, PutV1CompaniesResponse> operation
-              = new PutV1Companies.Sync(sdkConfiguration, _headers);
+              = new PutV1Companies.Sync(sdkConfiguration, options, _headers);
         PutV1CompaniesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

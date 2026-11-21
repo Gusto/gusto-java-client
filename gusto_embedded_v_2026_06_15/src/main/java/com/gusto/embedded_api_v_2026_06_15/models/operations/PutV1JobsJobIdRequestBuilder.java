@@ -11,29 +11,26 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.JobsUpdateRequestBo
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1JobsJobId;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1JobsJobIdRequestBuilder {
 
-    private String jobId;
     private Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutV1JobsJobIdHeaderXGustoAPIVersion>>() {});
+    private String jobId;
     private JobsUpdateRequestBody jobsUpdateRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1JobsJobIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1JobsJobIdRequestBuilder jobId(String jobId) {
-        Utils.checkNotNull(jobId, "jobId");
-        this.jobId = jobId;
-        return this;
     }
                 
     public PutV1JobsJobIdRequestBuilder xGustoAPIVersion(PutV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,9 +45,27 @@ public class PutV1JobsJobIdRequestBuilder {
         return this;
     }
 
+    public PutV1JobsJobIdRequestBuilder jobId(String jobId) {
+        Utils.checkNotNull(jobId, "jobId");
+        this.jobId = jobId;
+        return this;
+    }
+
     public PutV1JobsJobIdRequestBuilder jobsUpdateRequestBody(JobsUpdateRequestBody jobsUpdateRequestBody) {
         Utils.checkNotNull(jobsUpdateRequestBody, "jobsUpdateRequestBody");
         this.jobsUpdateRequestBody = jobsUpdateRequestBody;
+        return this;
+    }
+                
+    public PutV1JobsJobIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1JobsJobIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -60,17 +75,20 @@ public class PutV1JobsJobIdRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1JobsJobIdRequest request = new PutV1JobsJobIdRequest(jobId,
-            xGustoAPIVersion,
+        PutV1JobsJobIdRequest request = new PutV1JobsJobIdRequest(xGustoAPIVersion,
+            jobId,
             jobsUpdateRequestBody);
 
         return request;
     }
 
     public PutV1JobsJobIdResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1JobsJobIdRequest, PutV1JobsJobIdResponse> operation
-              = new PutV1JobsJobId.Sync(sdkConfiguration, _headers);
+              = new PutV1JobsJobId.Sync(sdkConfiguration, options, _headers);
         PutV1JobsJobIdRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

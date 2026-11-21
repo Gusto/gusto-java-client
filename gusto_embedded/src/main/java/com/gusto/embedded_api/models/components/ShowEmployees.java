@@ -29,7 +29,8 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /**
  * ShowEmployees
  * 
- * <p>The representation of an employee in Gusto.
+ * <p>An employee, with additional fields that are only ever returned on GET requests gated behind the
+ * `include` query parameter.
  */
 public class ShowEmployees {
     /**
@@ -128,14 +129,14 @@ public class ShowEmployees {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("onboarding_status")
-    private JsonNullable<? extends OnboardingStatus> onboardingStatus;
+    private JsonNullable<? extends ShowEmployeesOnboardingStatus> onboardingStatus;
 
     /**
      * Configuration for an employee onboarding documents during onboarding
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("onboarding_documents_config")
-    private Optional<? extends OnboardingDocumentsConfig> onboardingDocumentsConfig;
+    private Optional<? extends ShowEmployeesOnboardingDocumentsConfig> onboardingDocumentsConfig;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -199,7 +200,7 @@ public class ShowEmployees {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payment_method")
-    private Optional<? extends PaymentMethod> paymentMethod;
+    private Optional<? extends ShowEmployeesPaymentMethod> paymentMethod;
 
     /**
      * The current employment status of the employee. Full-time employees work 30+ hours per week.
@@ -211,7 +212,7 @@ public class ShowEmployees {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("current_employment_status")
-    private JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus;
+    private JsonNullable<? extends ShowEmployeesCurrentEmploymentStatus> currentEmploymentStatus;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -276,7 +277,7 @@ public class ShowEmployees {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("member_portal_invitation_status")
-    private JsonNullable<? extends MemberPortalInvitationStatus> memberPortalInvitationStatus;
+    private JsonNullable<? extends ShowEmployeesMemberPortalInvitationStatus> memberPortalInvitationStatus;
 
     /**
      * Whether an external partner portal invitation webhook has been sent for this employee. Only included
@@ -286,12 +287,23 @@ public class ShowEmployees {
     @JsonProperty("partner_portal_invitation_sent")
     private JsonNullable<Boolean> partnerPortalInvitationSent;
 
+    /**
+     * The name of the company the employee is associated with. Only included when the include param has
+     * the company_name value set.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("company_name")
+    private Optional<String> companyName;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("current_home_address")
     private Optional<? extends EmployeeHomeAddress> currentHomeAddress;
 
-
+    /**
+     * All of the employee's home addresses, past and present. Only included when the include param has the
+     * all_home_addresses value set.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("all_home_addresses")
     private Optional<? extends List<EmployeeHomeAddress>> allHomeAddresses;
@@ -315,8 +327,8 @@ public class ShowEmployees {
             @JsonProperty("two_percent_shareholder") JsonNullable<Boolean> twoPercentShareholder,
             @JsonProperty("work_email") JsonNullable<String> workEmail,
             @JsonProperty("onboarded") Optional<Boolean> onboarded,
-            @JsonProperty("onboarding_status") JsonNullable<? extends OnboardingStatus> onboardingStatus,
-            @JsonProperty("onboarding_documents_config") Optional<? extends OnboardingDocumentsConfig> onboardingDocumentsConfig,
+            @JsonProperty("onboarding_status") JsonNullable<? extends ShowEmployeesOnboardingStatus> onboardingStatus,
+            @JsonProperty("onboarding_documents_config") Optional<? extends ShowEmployeesOnboardingDocumentsConfig> onboardingDocumentsConfig,
             @JsonProperty("jobs") Optional<? extends List<Job>> jobs,
             @JsonProperty("eligible_paid_time_off") Optional<? extends List<PaidTimeOff>> eligiblePaidTimeOff,
             @JsonProperty("terminations") Optional<? extends List<Termination>> terminations,
@@ -327,8 +339,8 @@ public class ShowEmployees {
             @JsonProperty("ssn") Optional<String> ssn,
             @JsonProperty("phone") JsonNullable<String> phone,
             @JsonProperty("preferred_first_name") JsonNullable<String> preferredFirstName,
-            @JsonProperty("payment_method") Optional<? extends PaymentMethod> paymentMethod,
-            @JsonProperty("current_employment_status") JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus,
+            @JsonProperty("payment_method") Optional<? extends ShowEmployeesPaymentMethod> paymentMethod,
+            @JsonProperty("current_employment_status") JsonNullable<? extends ShowEmployeesCurrentEmploymentStatus> currentEmploymentStatus,
             @JsonProperty("historical") Optional<Boolean> historical,
             @JsonProperty("employee_code") Optional<String> employeeCode,
             @JsonProperty("department_uuid") JsonNullable<String> departmentUuid,
@@ -337,8 +349,9 @@ public class ShowEmployees {
             @JsonProperty("hidden_ssn") Optional<String> hiddenSsn,
             @JsonProperty("flsa_status") Optional<? extends FlsaStatusType> flsaStatus,
             @JsonProperty("applicable_tax_ids") Optional<? extends List<Double>> applicableTaxIds,
-            @JsonProperty("member_portal_invitation_status") JsonNullable<? extends MemberPortalInvitationStatus> memberPortalInvitationStatus,
+            @JsonProperty("member_portal_invitation_status") JsonNullable<? extends ShowEmployeesMemberPortalInvitationStatus> memberPortalInvitationStatus,
             @JsonProperty("partner_portal_invitation_sent") JsonNullable<Boolean> partnerPortalInvitationSent,
+            @JsonProperty("company_name") Optional<String> companyName,
             @JsonProperty("current_home_address") Optional<? extends EmployeeHomeAddress> currentHomeAddress,
             @JsonProperty("all_home_addresses") Optional<? extends List<EmployeeHomeAddress>> allHomeAddresses) {
         Utils.checkNotNull(uuid, "uuid");
@@ -378,6 +391,7 @@ public class ShowEmployees {
         Utils.checkNotNull(applicableTaxIds, "applicableTaxIds");
         Utils.checkNotNull(memberPortalInvitationStatus, "memberPortalInvitationStatus");
         Utils.checkNotNull(partnerPortalInvitationSent, "partnerPortalInvitationSent");
+        Utils.checkNotNull(companyName, "companyName");
         Utils.checkNotNull(currentHomeAddress, "currentHomeAddress");
         Utils.checkNotNull(allHomeAddresses, "allHomeAddresses");
         this.uuid = uuid;
@@ -417,6 +431,7 @@ public class ShowEmployees {
         this.applicableTaxIds = applicableTaxIds;
         this.memberPortalInvitationStatus = memberPortalInvitationStatus;
         this.partnerPortalInvitationSent = partnerPortalInvitationSent;
+        this.companyName = companyName;
         this.currentHomeAddress = currentHomeAddress;
         this.allHomeAddresses = allHomeAddresses;
         this.additionalProperties = new HashMap<>();
@@ -438,7 +453,8 @@ public class ShowEmployees {
             Optional.empty(), Optional.empty(), JsonNullable.undefined(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            JsonNullable.undefined(), Optional.empty(), Optional.empty());
+            JsonNullable.undefined(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -550,8 +566,8 @@ public class ShowEmployees {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<OnboardingStatus> onboardingStatus() {
-        return (JsonNullable<OnboardingStatus>) onboardingStatus;
+    public JsonNullable<ShowEmployeesOnboardingStatus> onboardingStatus() {
+        return (JsonNullable<ShowEmployeesOnboardingStatus>) onboardingStatus;
     }
 
     /**
@@ -559,8 +575,8 @@ public class ShowEmployees {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<OnboardingDocumentsConfig> onboardingDocumentsConfig() {
-        return (Optional<OnboardingDocumentsConfig>) onboardingDocumentsConfig;
+    public Optional<ShowEmployeesOnboardingDocumentsConfig> onboardingDocumentsConfig() {
+        return (Optional<ShowEmployeesOnboardingDocumentsConfig>) onboardingDocumentsConfig;
     }
 
     @SuppressWarnings("unchecked")
@@ -633,8 +649,8 @@ public class ShowEmployees {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PaymentMethod> paymentMethod() {
-        return (Optional<PaymentMethod>) paymentMethod;
+    public Optional<ShowEmployeesPaymentMethod> paymentMethod() {
+        return (Optional<ShowEmployeesPaymentMethod>) paymentMethod;
     }
 
     /**
@@ -647,8 +663,8 @@ public class ShowEmployees {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<CurrentEmploymentStatus> currentEmploymentStatus() {
-        return (JsonNullable<CurrentEmploymentStatus>) currentEmploymentStatus;
+    public JsonNullable<ShowEmployeesCurrentEmploymentStatus> currentEmploymentStatus() {
+        return (JsonNullable<ShowEmployeesCurrentEmploymentStatus>) currentEmploymentStatus;
     }
 
     @JsonIgnore
@@ -720,8 +736,8 @@ public class ShowEmployees {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<MemberPortalInvitationStatus> memberPortalInvitationStatus() {
-        return (JsonNullable<MemberPortalInvitationStatus>) memberPortalInvitationStatus;
+    public JsonNullable<ShowEmployeesMemberPortalInvitationStatus> memberPortalInvitationStatus() {
+        return (JsonNullable<ShowEmployeesMemberPortalInvitationStatus>) memberPortalInvitationStatus;
     }
 
     /**
@@ -733,12 +749,25 @@ public class ShowEmployees {
         return partnerPortalInvitationSent;
     }
 
+    /**
+     * The name of the company the employee is associated with. Only included when the include param has
+     * the company_name value set.
+     */
+    @JsonIgnore
+    public Optional<String> companyName() {
+        return companyName;
+    }
+
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<EmployeeHomeAddress> currentHomeAddress() {
         return (Optional<EmployeeHomeAddress>) currentHomeAddress;
     }
 
+    /**
+     * All of the employee's home addresses, past and present. Only included when the include param has the
+     * all_home_addresses value set.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<EmployeeHomeAddress>> allHomeAddresses() {
@@ -975,7 +1004,7 @@ public class ShowEmployees {
     /**
      * The current onboarding status of the employee
      */
-    public ShowEmployees withOnboardingStatus(OnboardingStatus onboardingStatus) {
+    public ShowEmployees withOnboardingStatus(ShowEmployeesOnboardingStatus onboardingStatus) {
         Utils.checkNotNull(onboardingStatus, "onboardingStatus");
         this.onboardingStatus = JsonNullable.of(onboardingStatus);
         return this;
@@ -984,7 +1013,7 @@ public class ShowEmployees {
     /**
      * The current onboarding status of the employee
      */
-    public ShowEmployees withOnboardingStatus(JsonNullable<? extends OnboardingStatus> onboardingStatus) {
+    public ShowEmployees withOnboardingStatus(JsonNullable<? extends ShowEmployeesOnboardingStatus> onboardingStatus) {
         Utils.checkNotNull(onboardingStatus, "onboardingStatus");
         this.onboardingStatus = onboardingStatus;
         return this;
@@ -993,7 +1022,7 @@ public class ShowEmployees {
     /**
      * Configuration for an employee onboarding documents during onboarding
      */
-    public ShowEmployees withOnboardingDocumentsConfig(OnboardingDocumentsConfig onboardingDocumentsConfig) {
+    public ShowEmployees withOnboardingDocumentsConfig(ShowEmployeesOnboardingDocumentsConfig onboardingDocumentsConfig) {
         Utils.checkNotNull(onboardingDocumentsConfig, "onboardingDocumentsConfig");
         this.onboardingDocumentsConfig = Optional.ofNullable(onboardingDocumentsConfig);
         return this;
@@ -1003,7 +1032,7 @@ public class ShowEmployees {
     /**
      * Configuration for an employee onboarding documents during onboarding
      */
-    public ShowEmployees withOnboardingDocumentsConfig(Optional<? extends OnboardingDocumentsConfig> onboardingDocumentsConfig) {
+    public ShowEmployees withOnboardingDocumentsConfig(Optional<? extends ShowEmployeesOnboardingDocumentsConfig> onboardingDocumentsConfig) {
         Utils.checkNotNull(onboardingDocumentsConfig, "onboardingDocumentsConfig");
         this.onboardingDocumentsConfig = onboardingDocumentsConfig;
         return this;
@@ -1159,7 +1188,7 @@ public class ShowEmployees {
     /**
      * The employee's payment method
      */
-    public ShowEmployees withPaymentMethod(PaymentMethod paymentMethod) {
+    public ShowEmployees withPaymentMethod(ShowEmployeesPaymentMethod paymentMethod) {
         Utils.checkNotNull(paymentMethod, "paymentMethod");
         this.paymentMethod = Optional.ofNullable(paymentMethod);
         return this;
@@ -1169,7 +1198,7 @@ public class ShowEmployees {
     /**
      * The employee's payment method
      */
-    public ShowEmployees withPaymentMethod(Optional<? extends PaymentMethod> paymentMethod) {
+    public ShowEmployees withPaymentMethod(Optional<? extends ShowEmployeesPaymentMethod> paymentMethod) {
         Utils.checkNotNull(paymentMethod, "paymentMethod");
         this.paymentMethod = paymentMethod;
         return this;
@@ -1183,7 +1212,7 @@ public class ShowEmployees {
      * <p>Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the
      * year or less.
      */
-    public ShowEmployees withCurrentEmploymentStatus(CurrentEmploymentStatus currentEmploymentStatus) {
+    public ShowEmployees withCurrentEmploymentStatus(ShowEmployeesCurrentEmploymentStatus currentEmploymentStatus) {
         Utils.checkNotNull(currentEmploymentStatus, "currentEmploymentStatus");
         this.currentEmploymentStatus = JsonNullable.of(currentEmploymentStatus);
         return this;
@@ -1197,7 +1226,7 @@ public class ShowEmployees {
      * <p>Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the
      * year or less.
      */
-    public ShowEmployees withCurrentEmploymentStatus(JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus) {
+    public ShowEmployees withCurrentEmploymentStatus(JsonNullable<? extends ShowEmployeesCurrentEmploymentStatus> currentEmploymentStatus) {
         Utils.checkNotNull(currentEmploymentStatus, "currentEmploymentStatus");
         this.currentEmploymentStatus = currentEmploymentStatus;
         return this;
@@ -1352,7 +1381,7 @@ public class ShowEmployees {
      * Member portal invitation status information. Only included when the include param has the
      * portal_invitations value set.
      */
-    public ShowEmployees withMemberPortalInvitationStatus(MemberPortalInvitationStatus memberPortalInvitationStatus) {
+    public ShowEmployees withMemberPortalInvitationStatus(ShowEmployeesMemberPortalInvitationStatus memberPortalInvitationStatus) {
         Utils.checkNotNull(memberPortalInvitationStatus, "memberPortalInvitationStatus");
         this.memberPortalInvitationStatus = JsonNullable.of(memberPortalInvitationStatus);
         return this;
@@ -1362,7 +1391,7 @@ public class ShowEmployees {
      * Member portal invitation status information. Only included when the include param has the
      * portal_invitations value set.
      */
-    public ShowEmployees withMemberPortalInvitationStatus(JsonNullable<? extends MemberPortalInvitationStatus> memberPortalInvitationStatus) {
+    public ShowEmployees withMemberPortalInvitationStatus(JsonNullable<? extends ShowEmployeesMemberPortalInvitationStatus> memberPortalInvitationStatus) {
         Utils.checkNotNull(memberPortalInvitationStatus, "memberPortalInvitationStatus");
         this.memberPortalInvitationStatus = memberPortalInvitationStatus;
         return this;
@@ -1388,6 +1417,27 @@ public class ShowEmployees {
         return this;
     }
 
+    /**
+     * The name of the company the employee is associated with. Only included when the include param has
+     * the company_name value set.
+     */
+    public ShowEmployees withCompanyName(String companyName) {
+        Utils.checkNotNull(companyName, "companyName");
+        this.companyName = Optional.ofNullable(companyName);
+        return this;
+    }
+
+
+    /**
+     * The name of the company the employee is associated with. Only included when the include param has
+     * the company_name value set.
+     */
+    public ShowEmployees withCompanyName(Optional<String> companyName) {
+        Utils.checkNotNull(companyName, "companyName");
+        this.companyName = companyName;
+        return this;
+    }
+
     public ShowEmployees withCurrentHomeAddress(EmployeeHomeAddress currentHomeAddress) {
         Utils.checkNotNull(currentHomeAddress, "currentHomeAddress");
         this.currentHomeAddress = Optional.ofNullable(currentHomeAddress);
@@ -1401,6 +1451,10 @@ public class ShowEmployees {
         return this;
     }
 
+    /**
+     * All of the employee's home addresses, past and present. Only included when the include param has the
+     * all_home_addresses value set.
+     */
     public ShowEmployees withAllHomeAddresses(List<EmployeeHomeAddress> allHomeAddresses) {
         Utils.checkNotNull(allHomeAddresses, "allHomeAddresses");
         this.allHomeAddresses = Optional.ofNullable(allHomeAddresses);
@@ -1408,6 +1462,10 @@ public class ShowEmployees {
     }
 
 
+    /**
+     * All of the employee's home addresses, past and present. Only included when the include param has the
+     * all_home_addresses value set.
+     */
     public ShowEmployees withAllHomeAddresses(Optional<? extends List<EmployeeHomeAddress>> allHomeAddresses) {
         Utils.checkNotNull(allHomeAddresses, "allHomeAddresses");
         this.allHomeAddresses = allHomeAddresses;
@@ -1474,6 +1532,7 @@ public class ShowEmployees {
             Utils.enhancedDeepEquals(this.applicableTaxIds, other.applicableTaxIds) &&
             Utils.enhancedDeepEquals(this.memberPortalInvitationStatus, other.memberPortalInvitationStatus) &&
             Utils.enhancedDeepEquals(this.partnerPortalInvitationSent, other.partnerPortalInvitationSent) &&
+            Utils.enhancedDeepEquals(this.companyName, other.companyName) &&
             Utils.enhancedDeepEquals(this.currentHomeAddress, other.currentHomeAddress) &&
             Utils.enhancedDeepEquals(this.allHomeAddresses, other.allHomeAddresses) &&
             Utils.enhancedDeepEquals(this.additionalProperties, other.additionalProperties);
@@ -1494,8 +1553,8 @@ public class ShowEmployees {
             historical, employeeCode, departmentUuid,
             title, hiredAt, hiddenSsn,
             flsaStatus, applicableTaxIds, memberPortalInvitationStatus,
-            partnerPortalInvitationSent, currentHomeAddress, allHomeAddresses,
-            additionalProperties);
+            partnerPortalInvitationSent, companyName, currentHomeAddress,
+            allHomeAddresses, additionalProperties);
     }
     
     @Override
@@ -1538,6 +1597,7 @@ public class ShowEmployees {
                 "applicableTaxIds", applicableTaxIds,
                 "memberPortalInvitationStatus", memberPortalInvitationStatus,
                 "partnerPortalInvitationSent", partnerPortalInvitationSent,
+                "companyName", companyName,
                 "currentHomeAddress", currentHomeAddress,
                 "allHomeAddresses", allHomeAddresses,
                 "additionalProperties", additionalProperties);
@@ -1572,9 +1632,9 @@ public class ShowEmployees {
 
         private Optional<Boolean> onboarded = Optional.empty();
 
-        private JsonNullable<? extends OnboardingStatus> onboardingStatus = JsonNullable.undefined();
+        private JsonNullable<? extends ShowEmployeesOnboardingStatus> onboardingStatus = JsonNullable.undefined();
 
-        private Optional<? extends OnboardingDocumentsConfig> onboardingDocumentsConfig = Optional.empty();
+        private Optional<? extends ShowEmployeesOnboardingDocumentsConfig> onboardingDocumentsConfig = Optional.empty();
 
         private Optional<? extends List<Job>> jobs = Optional.empty();
 
@@ -1596,9 +1656,9 @@ public class ShowEmployees {
 
         private JsonNullable<String> preferredFirstName = JsonNullable.undefined();
 
-        private Optional<? extends PaymentMethod> paymentMethod;
+        private Optional<? extends ShowEmployeesPaymentMethod> paymentMethod;
 
-        private JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus = JsonNullable.undefined();
+        private JsonNullable<? extends ShowEmployeesCurrentEmploymentStatus> currentEmploymentStatus = JsonNullable.undefined();
 
         private Optional<Boolean> historical = Optional.empty();
 
@@ -1616,9 +1676,11 @@ public class ShowEmployees {
 
         private Optional<? extends List<Double>> applicableTaxIds = Optional.empty();
 
-        private JsonNullable<? extends MemberPortalInvitationStatus> memberPortalInvitationStatus = JsonNullable.undefined();
+        private JsonNullable<? extends ShowEmployeesMemberPortalInvitationStatus> memberPortalInvitationStatus = JsonNullable.undefined();
 
         private JsonNullable<Boolean> partnerPortalInvitationSent = JsonNullable.undefined();
+
+        private Optional<String> companyName = Optional.empty();
 
         private Optional<? extends EmployeeHomeAddress> currentHomeAddress = Optional.empty();
 
@@ -1860,7 +1922,7 @@ public class ShowEmployees {
         /**
          * The current onboarding status of the employee
          */
-        public Builder onboardingStatus(OnboardingStatus onboardingStatus) {
+        public Builder onboardingStatus(ShowEmployeesOnboardingStatus onboardingStatus) {
             Utils.checkNotNull(onboardingStatus, "onboardingStatus");
             this.onboardingStatus = JsonNullable.of(onboardingStatus);
             return this;
@@ -1869,7 +1931,7 @@ public class ShowEmployees {
         /**
          * The current onboarding status of the employee
          */
-        public Builder onboardingStatus(JsonNullable<? extends OnboardingStatus> onboardingStatus) {
+        public Builder onboardingStatus(JsonNullable<? extends ShowEmployeesOnboardingStatus> onboardingStatus) {
             Utils.checkNotNull(onboardingStatus, "onboardingStatus");
             this.onboardingStatus = onboardingStatus;
             return this;
@@ -1879,7 +1941,7 @@ public class ShowEmployees {
         /**
          * Configuration for an employee onboarding documents during onboarding
          */
-        public Builder onboardingDocumentsConfig(OnboardingDocumentsConfig onboardingDocumentsConfig) {
+        public Builder onboardingDocumentsConfig(ShowEmployeesOnboardingDocumentsConfig onboardingDocumentsConfig) {
             Utils.checkNotNull(onboardingDocumentsConfig, "onboardingDocumentsConfig");
             this.onboardingDocumentsConfig = Optional.ofNullable(onboardingDocumentsConfig);
             return this;
@@ -1888,7 +1950,7 @@ public class ShowEmployees {
         /**
          * Configuration for an employee onboarding documents during onboarding
          */
-        public Builder onboardingDocumentsConfig(Optional<? extends OnboardingDocumentsConfig> onboardingDocumentsConfig) {
+        public Builder onboardingDocumentsConfig(Optional<? extends ShowEmployeesOnboardingDocumentsConfig> onboardingDocumentsConfig) {
             Utils.checkNotNull(onboardingDocumentsConfig, "onboardingDocumentsConfig");
             this.onboardingDocumentsConfig = onboardingDocumentsConfig;
             return this;
@@ -2048,7 +2110,7 @@ public class ShowEmployees {
         /**
          * The employee's payment method
          */
-        public Builder paymentMethod(PaymentMethod paymentMethod) {
+        public Builder paymentMethod(ShowEmployeesPaymentMethod paymentMethod) {
             Utils.checkNotNull(paymentMethod, "paymentMethod");
             this.paymentMethod = Optional.ofNullable(paymentMethod);
             return this;
@@ -2057,7 +2119,7 @@ public class ShowEmployees {
         /**
          * The employee's payment method
          */
-        public Builder paymentMethod(Optional<? extends PaymentMethod> paymentMethod) {
+        public Builder paymentMethod(Optional<? extends ShowEmployeesPaymentMethod> paymentMethod) {
             Utils.checkNotNull(paymentMethod, "paymentMethod");
             this.paymentMethod = paymentMethod;
             return this;
@@ -2072,7 +2134,7 @@ public class ShowEmployees {
          * <p>Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the
          * year or less.
          */
-        public Builder currentEmploymentStatus(CurrentEmploymentStatus currentEmploymentStatus) {
+        public Builder currentEmploymentStatus(ShowEmployeesCurrentEmploymentStatus currentEmploymentStatus) {
             Utils.checkNotNull(currentEmploymentStatus, "currentEmploymentStatus");
             this.currentEmploymentStatus = JsonNullable.of(currentEmploymentStatus);
             return this;
@@ -2086,7 +2148,7 @@ public class ShowEmployees {
          * <p>Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the
          * year or less.
          */
-        public Builder currentEmploymentStatus(JsonNullable<? extends CurrentEmploymentStatus> currentEmploymentStatus) {
+        public Builder currentEmploymentStatus(JsonNullable<? extends ShowEmployeesCurrentEmploymentStatus> currentEmploymentStatus) {
             Utils.checkNotNull(currentEmploymentStatus, "currentEmploymentStatus");
             this.currentEmploymentStatus = currentEmploymentStatus;
             return this;
@@ -2243,7 +2305,7 @@ public class ShowEmployees {
          * Member portal invitation status information. Only included when the include param has the
          * portal_invitations value set.
          */
-        public Builder memberPortalInvitationStatus(MemberPortalInvitationStatus memberPortalInvitationStatus) {
+        public Builder memberPortalInvitationStatus(ShowEmployeesMemberPortalInvitationStatus memberPortalInvitationStatus) {
             Utils.checkNotNull(memberPortalInvitationStatus, "memberPortalInvitationStatus");
             this.memberPortalInvitationStatus = JsonNullable.of(memberPortalInvitationStatus);
             return this;
@@ -2253,7 +2315,7 @@ public class ShowEmployees {
          * Member portal invitation status information. Only included when the include param has the
          * portal_invitations value set.
          */
-        public Builder memberPortalInvitationStatus(JsonNullable<? extends MemberPortalInvitationStatus> memberPortalInvitationStatus) {
+        public Builder memberPortalInvitationStatus(JsonNullable<? extends ShowEmployeesMemberPortalInvitationStatus> memberPortalInvitationStatus) {
             Utils.checkNotNull(memberPortalInvitationStatus, "memberPortalInvitationStatus");
             this.memberPortalInvitationStatus = memberPortalInvitationStatus;
             return this;
@@ -2281,6 +2343,27 @@ public class ShowEmployees {
         }
 
 
+        /**
+         * The name of the company the employee is associated with. Only included when the include param has
+         * the company_name value set.
+         */
+        public Builder companyName(String companyName) {
+            Utils.checkNotNull(companyName, "companyName");
+            this.companyName = Optional.ofNullable(companyName);
+            return this;
+        }
+
+        /**
+         * The name of the company the employee is associated with. Only included when the include param has
+         * the company_name value set.
+         */
+        public Builder companyName(Optional<String> companyName) {
+            Utils.checkNotNull(companyName, "companyName");
+            this.companyName = companyName;
+            return this;
+        }
+
+
         public Builder currentHomeAddress(EmployeeHomeAddress currentHomeAddress) {
             Utils.checkNotNull(currentHomeAddress, "currentHomeAddress");
             this.currentHomeAddress = Optional.ofNullable(currentHomeAddress);
@@ -2294,12 +2377,20 @@ public class ShowEmployees {
         }
 
 
+        /**
+         * All of the employee's home addresses, past and present. Only included when the include param has the
+         * all_home_addresses value set.
+         */
         public Builder allHomeAddresses(List<EmployeeHomeAddress> allHomeAddresses) {
             Utils.checkNotNull(allHomeAddresses, "allHomeAddresses");
             this.allHomeAddresses = Optional.ofNullable(allHomeAddresses);
             return this;
         }
 
+        /**
+         * All of the employee's home addresses, past and present. Only included when the include param has the
+         * all_home_addresses value set.
+         */
         public Builder allHomeAddresses(Optional<? extends List<EmployeeHomeAddress>> allHomeAddresses) {
             Utils.checkNotNull(allHomeAddresses, "allHomeAddresses");
             this.allHomeAddresses = allHomeAddresses;
@@ -2340,15 +2431,16 @@ public class ShowEmployees {
                 historical, employeeCode, departmentUuid,
                 title, hiredAt, hiddenSsn,
                 flsaStatus, applicableTaxIds, memberPortalInvitationStatus,
-                partnerPortalInvitationSent, currentHomeAddress, allHomeAddresses)
+                partnerPortalInvitationSent, companyName, currentHomeAddress,
+                allHomeAddresses)
                 .withAdditionalProperties(additionalProperties);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends PaymentMethod>> _SINGLETON_VALUE_PaymentMethod =
+        private static final LazySingletonValue<Optional<? extends ShowEmployeesPaymentMethod>> _SINGLETON_VALUE_PaymentMethod =
                 new LazySingletonValue<>(
                         "payment_method",
                         "\"Check\"",
-                        new TypeReference<Optional<? extends PaymentMethod>>() {});
+                        new TypeReference<Optional<? extends ShowEmployeesPaymentMethod>>() {});
     }
 }

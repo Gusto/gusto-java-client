@@ -9,8 +9,8 @@
 * [getSubscription](#getsubscription) - Get a webhook subscription
 * [updateSubscription](#updatesubscription) - Update a webhook subscription
 * [deleteSubscription](#deletesubscription) - Delete a webhook subscription
-* [verify](#verify) - Verify a webhook subscription
 * [requestVerificationToken](#requestverificationtoken) - Request a verification token for a webhook subscription
+* [verify](#verify) - Verify a webhook subscription
 * [getV1WebhooksHealthCheck](#getv1webhookshealthcheck) - Get the webhooks health status
 
 ## listSubscriptions
@@ -282,8 +282,8 @@ public class Application {
                 .security(GetV1WebhookSubscriptionUuidSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(GetV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .webhookSubscriptionUuid("<id>")
                 .call();
 
         if (res.webhookSubscription().isPresent()) {
@@ -298,8 +298,8 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.GetV1WebhookSubscriptionUuidSecurity](../../models/operations/GetV1WebhookSubscriptionUuidSecurity.md)                                                                             | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
-| `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1WebhookSubscriptionUuidHeaderXGustoAPIVersion>](../../models/operations/GetV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.md)                                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
 
 ### Response
 
@@ -346,8 +346,8 @@ public class Application {
                 .security(PutV1WebhookSubscriptionUuidSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .webhookSubscriptionUuid("<id>")
                 .requestBody(PutV1WebhookSubscriptionUuidRequestBody.builder()
                     .subscriptionTypes(List.of(
                         PutV1WebhookSubscriptionUuidSubscriptionTypes.PAYROLL))
@@ -384,8 +384,8 @@ public class Application {
                 .security(PutV1WebhookSubscriptionUuidSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .webhookSubscriptionUuid("<id>")
                 .requestBody(PutV1WebhookSubscriptionUuidRequestBody.builder()
                     .subscriptionTypes(List.of(
                         PutV1WebhookSubscriptionUuidSubscriptionTypes.COMPANY,
@@ -423,8 +423,8 @@ public class Application {
                 .security(PutV1WebhookSubscriptionUuidSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .webhookSubscriptionUuid("<id>")
                 .requestBody(PutV1WebhookSubscriptionUuidRequestBody.builder()
                     .subscriptionTypes(List.of(
                         PutV1WebhookSubscriptionUuidSubscriptionTypes.PAYROLL))
@@ -461,8 +461,8 @@ public class Application {
                 .security(PutV1WebhookSubscriptionUuidSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .webhookSubscriptionUuid("<id>")
                 .requestBody(PutV1WebhookSubscriptionUuidRequestBody.builder()
                     .subscriptionTypes(List.of(
                         PutV1WebhookSubscriptionUuidSubscriptionTypes.PAYROLL))
@@ -481,8 +481,8 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.PutV1WebhookSubscriptionUuidSecurity](../../models/operations/PutV1WebhookSubscriptionUuidSecurity.md)                                                                             | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
-| `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion>](../../models/operations/PutV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.md)                                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
 | `requestBody`                                                                                                                                                                                                                | [PutV1WebhookSubscriptionUuidRequestBody](../../models/operations/PutV1WebhookSubscriptionUuidRequestBody.md)                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -529,8 +529,8 @@ public class Application {
                 .security(DeleteV1WebhookSubscriptionUuidSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .webhookSubscriptionUuid("<id>")
                 .call();
 
         // handle response
@@ -543,12 +543,74 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.DeleteV1WebhookSubscriptionUuidSecurity](../../models/operations/DeleteV1WebhookSubscriptionUuidSecurity.md)                                                                       | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
-| `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion>](../../models/operations/DeleteV1WebhookSubscriptionUuidHeaderXGustoAPIVersion.md)                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
 
 ### Response
 
 **[DeleteV1WebhookSubscriptionUuidResponse](../../models/operations/DeleteV1WebhookSubscriptionUuidResponse.md)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
+
+## requestVerificationToken
+
+Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
+
+📘 System Access Authentication
+
+This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+
+scope: `webhook_subscriptions:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="get-v1-webhook-subscription-verification-token-uuid" method="get" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api.GustoEmbedded;
+import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api.models.operations.*;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+            .build();
+
+        GetV1WebhookSubscriptionVerificationTokenUuidResponse res = sdk.webhooks().requestVerificationToken()
+                .security(GetV1WebhookSubscriptionVerificationTokenUuidSecurity.builder()
+                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
+                    .build())
+                .xGustoAPIVersion(GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .webhookSubscriptionUuid("<id>")
+                .call();
+
+        if (res.webhookVerificationTokenResponse().isPresent()) {
+            System.out.println(res.webhookVerificationTokenResponse().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.GetV1WebhookSubscriptionVerificationTokenUuidSecurity](../../models/operations/GetV1WebhookSubscriptionVerificationTokenUuidSecurity.md)                                           | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion>](../../models/operations/GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion.md)                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
+
+### Response
+
+**[GetV1WebhookSubscriptionVerificationTokenUuidResponse](../../models/operations/GetV1WebhookSubscriptionVerificationTokenUuidResponse.md)**
 
 ### Errors
 
@@ -592,8 +654,8 @@ public class Application {
                 .security(PutV1VerifyWebhookSubscriptionUuidSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .webhookSubscriptionUuid("<id>")
                 .requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody.builder()
                     .verificationToken("<value>")
                     .build())
@@ -628,8 +690,8 @@ public class Application {
                 .security(PutV1VerifyWebhookSubscriptionUuidSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .webhookSubscriptionUuid("<id>")
                 .requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody.builder()
                     .verificationToken("asefasedfe23e234easd")
                     .build())
@@ -664,8 +726,8 @@ public class Application {
                 .security(PutV1VerifyWebhookSubscriptionUuidSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .webhookSubscriptionUuid("<id>")
                 .requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody.builder()
                     .verificationToken("<value>")
                     .build())
@@ -700,8 +762,8 @@ public class Application {
                 .security(PutV1VerifyWebhookSubscriptionUuidSecurity.builder()
                     .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
                     .build())
-                .webhookSubscriptionUuid("<id>")
                 .xGustoAPIVersion(PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
+                .webhookSubscriptionUuid("<id>")
                 .requestBody(PutV1VerifyWebhookSubscriptionUuidRequestBody.builder()
                     .verificationToken("<value>")
                     .build())
@@ -719,8 +781,8 @@ public class Application {
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.PutV1VerifyWebhookSubscriptionUuidSecurity](../../models/operations/PutV1VerifyWebhookSubscriptionUuidSecurity.md)                                                                 | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
-| `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion>](../../models/operations/PutV1VerifyWebhookSubscriptionUuidHeaderXGustoAPIVersion.md)                                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
 | `requestBody`                                                                                                                                                                                                                | [PutV1VerifyWebhookSubscriptionUuidRequestBody](../../models/operations/PutV1VerifyWebhookSubscriptionUuidRequestBody.md)                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
@@ -734,68 +796,6 @@ public class Application {
 | models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
 | models/errors/UnprocessableEntityError | 422                                    | application/json                       |
 | models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
-
-## requestVerificationToken
-
-Request that the webhook subscription `verification_token` be POSTed to the Subscription URL.
-
-📘 System Access Authentication
-
-This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
-
-scope: `webhook_subscriptions:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="get-v1-webhook-subscription-verification-token-uuid" method="get" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api.GustoEmbedded;
-import com.gusto.embedded_api.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api.models.operations.*;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-            .build();
-
-        GetV1WebhookSubscriptionVerificationTokenUuidResponse res = sdk.webhooks().requestVerificationToken()
-                .security(GetV1WebhookSubscriptionVerificationTokenUuidSecurity.builder()
-                    .systemAccessAuth(System.getenv().getOrDefault("SYSTEM_ACCESS_AUTH", ""))
-                    .build())
-                .webhookSubscriptionUuid("<id>")
-                .xGustoAPIVersion(GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS06_MINUS15)
-                .call();
-
-        if (res.webhookVerificationTokenResponse().isPresent()) {
-            System.out.println(res.webhookVerificationTokenResponse().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                                   | [com.gusto.embedded_api.models.operations.GetV1WebhookSubscriptionVerificationTokenUuidSecurity](../../models/operations/GetV1WebhookSubscriptionVerificationTokenUuidSecurity.md)                                           | :heavy_check_mark:                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                            |
-| `webhookSubscriptionUuid`                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The webhook subscription UUID.                                                                                                                                                                                               |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion>](../../models/operations/GetV1WebhookSubscriptionVerificationTokenUuidHeaderXGustoAPIVersion.md)                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-
-### Response
-
-**[GetV1WebhookSubscriptionVerificationTokenUuidResponse](../../models/operations/GetV1WebhookSubscriptionVerificationTokenUuidResponse.md)**
-
-### Errors
-
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| models/errors/NotFoundErrorObject | 404                               | application/json                  |
-| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
 ## getV1WebhooksHealthCheck
 

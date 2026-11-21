@@ -11,8 +11,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.EmployeeOnboardingD
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfig;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder {
@@ -23,6 +25,7 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder {
                             new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private Optional<? extends EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -59,6 +62,18 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder {
         this.employeeOnboardingDocumentsConfigRequest = employeeOnboardingDocumentsConfigRequest;
         return this;
     }
+                
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest buildRequest() {
@@ -74,9 +89,12 @@ public class PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBuilder {
     }
 
     public PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest, PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse> operation
-              = new PutV1EmployeesEmployeeIdOnboardingDocumentsConfig.Sync(sdkConfiguration, _headers);
+              = new PutV1EmployeesEmployeeIdOnboardingDocumentsConfig.Sync(sdkConfiguration, options, _headers);
         PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -13,8 +13,10 @@ import com.gusto.embedded_api.models.operations.PostV1ContractorsContractorUuidB
 import com.gusto.embedded_api.operations.PostV1ContractorsContractorUuidBankAccounts;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PostV1ContractorsContractorUuidBankAccountsRequestBuilder {
                             new TypeReference<Optional<? extends PostV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion>>() {});
     private String contractorUuid;
     private ContractorBankAccountCreateRequestBody contractorBankAccountCreateRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PostV1ContractorsContractorUuidBankAccountsRequestBuilder {
         this.contractorBankAccountCreateRequestBody = contractorBankAccountCreateRequestBody;
         return this;
     }
+                
+    public PostV1ContractorsContractorUuidBankAccountsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1ContractorsContractorUuidBankAccountsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1ContractorsContractorUuidBankAccountsRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PostV1ContractorsContractorUuidBankAccountsRequestBuilder {
     }
 
     public CompletableFuture<PostV1ContractorsContractorUuidBankAccountsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1ContractorsContractorUuidBankAccountsRequest, PostV1ContractorsContractorUuidBankAccountsResponse> operation
-              = new PostV1ContractorsContractorUuidBankAccounts.Async(sdkConfiguration, _headers);
+              = new PostV1ContractorsContractorUuidBankAccounts.Async(sdkConfiguration, options, _headers);
         PostV1ContractorsContractorUuidBankAccountsRequest request = buildRequest();
 
         return operation.doRequest(request)

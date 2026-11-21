@@ -13,8 +13,10 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.PostV1EmployeesEmpl
 import com.gusto.embedded_api_v_2025_11_15.operations.PostV1EmployeesEmployeeIdRehire;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PostV1EmployeesEmployeeIdRehireRequestBuilder {
                             new TypeReference<Optional<? extends PostV1EmployeesEmployeeIdRehireHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private RehireBody rehireBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PostV1EmployeesEmployeeIdRehireRequestBuilder {
         this.rehireBody = rehireBody;
         return this;
     }
+                
+    public PostV1EmployeesEmployeeIdRehireRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1EmployeesEmployeeIdRehireRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1EmployeesEmployeeIdRehireRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PostV1EmployeesEmployeeIdRehireRequestBuilder {
     }
 
     public CompletableFuture<PostV1EmployeesEmployeeIdRehireResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1EmployeesEmployeeIdRehireRequest, PostV1EmployeesEmployeeIdRehireResponse> operation
-              = new PostV1EmployeesEmployeeIdRehire.Async(sdkConfiguration, _headers);
+              = new PostV1EmployeesEmployeeIdRehire.Async(sdkConfiguration, options, _headers);
         PostV1EmployeesEmployeeIdRehireRequest request = buildRequest();
 
         return operation.doRequest(request)

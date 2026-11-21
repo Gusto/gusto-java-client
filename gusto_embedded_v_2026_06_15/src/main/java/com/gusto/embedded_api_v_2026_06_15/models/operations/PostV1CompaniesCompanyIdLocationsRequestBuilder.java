@@ -11,8 +11,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.CompanyLocationRequ
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1CompaniesCompanyIdLocations;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostV1CompaniesCompanyIdLocationsRequestBuilder {
@@ -23,6 +25,7 @@ public class PostV1CompaniesCompanyIdLocationsRequestBuilder {
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private CompanyLocationRequest companyLocationRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PostV1CompaniesCompanyIdLocationsRequestBuilder {
         this.companyLocationRequest = companyLocationRequest;
         return this;
     }
+                
+    public PostV1CompaniesCompanyIdLocationsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyIdLocationsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1CompaniesCompanyIdLocationsRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PostV1CompaniesCompanyIdLocationsRequestBuilder {
     }
 
     public PostV1CompaniesCompanyIdLocationsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostV1CompaniesCompanyIdLocationsRequest, PostV1CompaniesCompanyIdLocationsResponse> operation
-              = new PostV1CompaniesCompanyIdLocations.Sync(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdLocations.Sync(sdkConfiguration, options, _headers);
         PostV1CompaniesCompanyIdLocationsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

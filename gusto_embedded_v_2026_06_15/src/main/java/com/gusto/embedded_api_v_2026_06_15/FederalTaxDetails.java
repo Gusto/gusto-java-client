@@ -17,6 +17,7 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.PutV1CompaniesCompa
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1CompaniesCompanyIdFederalTaxDetails;
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1CompaniesCompanyIdFederalTaxDetails;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -71,7 +72,7 @@ public class FederalTaxDetails {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdFederalTaxDetailsResponse get(String companyId) {
-        return get(companyId, Optional.empty());
+        return get(Optional.empty(), companyId, Optional.empty());
     }
 
     /**
@@ -84,20 +85,42 @@ public class FederalTaxDetails {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyId The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetV1CompaniesCompanyIdFederalTaxDetailsResponse get(String companyId, Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1CompaniesCompanyIdFederalTaxDetailsResponse get(Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
+        return get(xGustoAPIVersion, companyId, Optional.empty());
+    }
+
+    /**
+     * Get a company's federal tax details
+     * 
+     * <p>Retrieves a company's federal tax details including EIN verification status, tax payer type, filing
+     * form, and other federal tax configuration.
+     * 
+     * <p>scope: `company_federal_taxes:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyIdFederalTaxDetailsResponse get(
+            Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<Options> options) {
         GetV1CompaniesCompanyIdFederalTaxDetailsRequest request =
             GetV1CompaniesCompanyIdFederalTaxDetailsRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .build();
         RequestOperation<GetV1CompaniesCompanyIdFederalTaxDetailsRequest, GetV1CompaniesCompanyIdFederalTaxDetailsResponse> operation
-              = new GetV1CompaniesCompanyIdFederalTaxDetails.Sync(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdFederalTaxDetails.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -157,7 +180,8 @@ public class FederalTaxDetails {
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1CompaniesCompanyIdFederalTaxDetailsResponse update(String companyId, FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
-        return update(companyId, Optional.empty(), federalTaxDetailsUpdate);
+        return update(Optional.empty(), companyId, federalTaxDetailsUpdate,
+            Optional.empty());
     }
 
     /**
@@ -182,24 +206,60 @@ public class FederalTaxDetails {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyId The UUID of the company
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
      * @param federalTaxDetailsUpdate 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1CompaniesCompanyIdFederalTaxDetailsResponse update(
-            String companyId, Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
+        return update(xGustoAPIVersion, companyId, federalTaxDetailsUpdate,
+            Optional.empty());
+    }
+
+    /**
+     * Update a company's federal tax details
+     * 
+     * <p>Updates a company's federal tax details including EIN, legal name, tax payer type, filing form, and
+     * S-Corp
+     * taxation status. This information is required to onboard a company for use with Gusto Embedded
+     * Payroll.
+     * 
+     * <p>### Prerequisites
+     * Before calling this endpoint, retrieve the current federal tax details and `version` via [GET
+     * /v1/companies/{company_id}/federal_tax_details](ref:get-v1-companies-company_id-federal_tax_details)
+     * 
+     * <p>### Webhooks
+     * - `company.updated`: Fires when federal tax details for a company are successfully updated
+     * 
+     * <p>**Setup:** [POST /v1/webhook_subscriptions](ref:post-v1-webhook-subscription) with
+     * `subscription_types`: `["Company"]`
+     * 
+     * <p>scope: `company_federal_taxes:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param federalTaxDetailsUpdate 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1CompaniesCompanyIdFederalTaxDetailsResponse update(
+            Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            FederalTaxDetailsUpdate federalTaxDetailsUpdate, Optional<Options> options) {
         PutV1CompaniesCompanyIdFederalTaxDetailsRequest request =
             PutV1CompaniesCompanyIdFederalTaxDetailsRequest
                 .builder()
-                .companyId(companyId)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
                 .federalTaxDetailsUpdate(federalTaxDetailsUpdate)
                 .build();
         RequestOperation<PutV1CompaniesCompanyIdFederalTaxDetailsRequest, PutV1CompaniesCompanyIdFederalTaxDetailsResponse> operation
-              = new PutV1CompaniesCompanyIdFederalTaxDetails.Sync(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyIdFederalTaxDetails.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

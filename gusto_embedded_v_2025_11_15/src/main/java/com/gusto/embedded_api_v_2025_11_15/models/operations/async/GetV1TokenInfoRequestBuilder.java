@@ -7,21 +7,24 @@ import static com.gusto.embedded_api_v_2025_11_15.operations.Operations.AsyncReq
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1TokenInfoHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1TokenInfoRequest;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.XGustoAPIVersion;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1TokenInfo;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetV1TokenInfoRequestBuilder {
 
-    private Optional<? extends XGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends GetV1TokenInfoHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
-                            new TypeReference<Optional<? extends XGustoAPIVersion>>() {});
+                            new TypeReference<Optional<? extends GetV1TokenInfoHeaderXGustoAPIVersion>>() {});
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -29,15 +32,27 @@ public class GetV1TokenInfoRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
                 
-    public GetV1TokenInfoRequestBuilder xGustoAPIVersion(XGustoAPIVersion xGustoAPIVersion) {
+    public GetV1TokenInfoRequestBuilder xGustoAPIVersion(GetV1TokenInfoHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public GetV1TokenInfoRequestBuilder xGustoAPIVersion(Optional<? extends XGustoAPIVersion> xGustoAPIVersion) {
+    public GetV1TokenInfoRequestBuilder xGustoAPIVersion(Optional<? extends GetV1TokenInfoHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+                
+    public GetV1TokenInfoRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1TokenInfoRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -53,18 +68,21 @@ public class GetV1TokenInfoRequestBuilder {
     }
 
     public CompletableFuture<GetV1TokenInfoResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1TokenInfoRequest, GetV1TokenInfoResponse> operation
-              = new GetV1TokenInfo.Async(sdkConfiguration, _headers);
+              = new GetV1TokenInfo.Async(sdkConfiguration, options, _headers);
         GetV1TokenInfoRequest request = buildRequest();
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends XGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends GetV1TokenInfoHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-11-15\"",
-                    new TypeReference<Optional<? extends XGustoAPIVersion>>() {});
+                    new TypeReference<Optional<? extends GetV1TokenInfoHeaderXGustoAPIVersion>>() {});
 }

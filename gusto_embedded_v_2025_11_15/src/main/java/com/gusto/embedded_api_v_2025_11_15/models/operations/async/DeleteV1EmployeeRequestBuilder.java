@@ -12,8 +12,10 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.DeleteV1EmployeeReq
 import com.gusto.embedded_api_v_2025_11_15.operations.DeleteV1Employee;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -24,6 +26,7 @@ public class DeleteV1EmployeeRequestBuilder {
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends DeleteV1EmployeeHeaderXGustoAPIVersion>>() {});
     private String employeeId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class DeleteV1EmployeeRequestBuilder {
         this.employeeId = employeeId;
         return this;
     }
+                
+    public DeleteV1EmployeeRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1EmployeeRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteV1EmployeeRequest buildRequest() {
@@ -62,9 +77,12 @@ public class DeleteV1EmployeeRequestBuilder {
     }
 
     public CompletableFuture<DeleteV1EmployeeResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<DeleteV1EmployeeRequest, DeleteV1EmployeeResponse> operation
-              = new DeleteV1Employee.Async(sdkConfiguration, _headers);
+              = new DeleteV1Employee.Async(sdkConfiguration, options, _headers);
         DeleteV1EmployeeRequest request = buildRequest();
 
         return operation.doRequest(request)

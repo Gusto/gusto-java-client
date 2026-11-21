@@ -10,28 +10,25 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1EmployeesEmployeeUuidSection603HighEarnerStatuses;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder {
 
-    private String employeeUuid;
     private Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion>>() {});
+    private String employeeUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder employeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
-        return this;
     }
                 
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder xGustoAPIVersion(GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,22 +43,43 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilde
         return this;
     }
 
+    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder employeeUuid(String employeeUuid) {
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
+        this.employeeUuid = employeeUuid;
+        return this;
+    }
+                
+    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest request = new GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(employeeUuid,
-            xGustoAPIVersion);
+        GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest request = new GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest(xGustoAPIVersion,
+            employeeUuid);
 
         return request;
     }
 
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest, GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse> operation
-              = new GetV1EmployeesEmployeeUuidSection603HighEarnerStatuses.Sync(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeUuidSection603HighEarnerStatuses.Sync(sdkConfiguration, options, _headers);
         GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

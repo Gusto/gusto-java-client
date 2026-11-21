@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.SecuritySource;
 import com.gusto.embedded_api_v_2025_11_15.models.errors.APIException;
+import com.gusto.embedded_api_v_2025_11_15.models.errors.UnprocessableEntityError;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.PostV1ContractorsContractorUuidRehireRequest;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.PostV1ContractorsContractorUuidRehireResponse;
 import com.gusto.embedded_api_v_2025_11_15.utils.Blob;
@@ -20,6 +21,7 @@ import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.Hook.AfterErrorContextImpl;
 import com.gusto.embedded_api_v_2025_11_15.utils.Hook.AfterSuccessContextImpl;
 import com.gusto.embedded_api_v_2025_11_15.utils.Hook.BeforeRequestContextImpl;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.SerializedBody;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils.JsonShape;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
@@ -30,6 +32,8 @@ import java.lang.String;
 import java.lang.Throwable;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
@@ -41,14 +45,20 @@ public class PostV1ContractorsContractorUuidRehire {
         final SDKConfiguration sdkConfiguration;
         final String baseUrl;
         final SecuritySource securitySource;
+        final Optional<Duration> timeout;
         final HTTPClient client;
         final Headers _headers;
 
-        public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
+        public Base(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
             this._headers =_headers;
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
+            options
+                    .ifPresent(o -> o.validate(List.of(Options.Option.TIMEOUT)));
+            this.timeout = options.flatMap(Options::timeout).or(sdkConfiguration::timeout);
             this.client = this.sdkConfiguration.client();
         }
 
@@ -88,7 +98,8 @@ public class PostV1ContractorsContractorUuidRehire {
                     this.baseUrl,
                     "/v1/contractors/{contractor_uuid}/rehire",
                     request, null);
-            HTTPRequest req = new HTTPRequest(url, "POST");
+            HTTPRequest req = new HTTPRequest(url, "POST")
+                    .timeout(this.timeout);
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
@@ -99,7 +110,7 @@ public class PostV1ContractorsContractorUuidRehire {
                     "json",
                     false);
             req.setBody(Optional.ofNullable(serializedRequestBody));
-            req.addHeader("Accept", "*/*")
+            req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
             req.addHeaders(Utils.getHeadersFromMetadata(request, null));
@@ -112,7 +123,16 @@ public class PostV1ContractorsContractorUuidRehire {
     public static class Sync extends Base
             implements RequestOperation<PostV1ContractorsContractorUuidRehireRequest, PostV1ContractorsContractorUuidRehireResponse> {
         public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
-            super(sdkConfiguration, _headers);
+            this(sdkConfiguration, Optional.empty(),
+                    _headers);
+        }
+
+        public Sync(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
+            super(
+                  sdkConfiguration, options,
+                  _headers);
         }
 
         private HttpRequest onBuildRequest(PostV1ContractorsContractorUuidRehireRequest request) throws Exception {
@@ -169,7 +189,14 @@ public class PostV1ContractorsContractorUuidRehire {
                 // no content
                 return res;
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "422", "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "422")) {
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    throw UnprocessableEntityError.from(response);
+                } else {
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                }
+            }
+            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
                 // no content
                 throw APIException.from("API error occurred", response);
             }
@@ -182,9 +209,17 @@ public class PostV1ContractorsContractorUuidRehire {
     }
     public static class Async extends Base
             implements AsyncRequestOperation<PostV1ContractorsContractorUuidRehireRequest, com.gusto.embedded_api_v_2025_11_15.models.operations.async.PostV1ContractorsContractorUuidRehireResponse> {
-
         public Async(SDKConfiguration sdkConfiguration, Headers _headers) {
-            super(sdkConfiguration, _headers);
+            this(sdkConfiguration, Optional.empty(),
+                    _headers);
+        }
+
+        public Async(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
+            super(
+                  sdkConfiguration, options,
+                  _headers);
         }
 
         private CompletableFuture<HttpRequest> onBuildRequest(PostV1ContractorsContractorUuidRehireRequest request) throws Exception {
@@ -236,7 +271,15 @@ public class PostV1ContractorsContractorUuidRehire {
                 // no content
                 return CompletableFuture.completedFuture(res);
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "422", "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "422")) {
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    return UnprocessableEntityError.fromAsync(response)
+                            .thenCompose(CompletableFuture::failedFuture);
+                } else {
+                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
+                }
+            }
+            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
                 // no content
                 return Utils.createAsyncApiError(response, "API error occurred");
             }

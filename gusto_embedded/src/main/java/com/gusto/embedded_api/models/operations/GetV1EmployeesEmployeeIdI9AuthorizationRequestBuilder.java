@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1EmployeesEmployeeIdI9Authorization;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1EmployeesEmployeeIdI9AuthorizationRequestBuilder {
@@ -21,6 +23,7 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationRequestBuilder {
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1EmployeesEmployeeIdI9AuthorizationHeaderXGustoAPIVersion>>() {});
     private String employeeId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -45,6 +48,18 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationRequestBuilder {
         this.employeeId = employeeId;
         return this;
     }
+                
+    public GetV1EmployeesEmployeeIdI9AuthorizationRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1EmployeesEmployeeIdI9AuthorizationRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1EmployeesEmployeeIdI9AuthorizationRequest buildRequest() {
@@ -59,9 +74,12 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationRequestBuilder {
     }
 
     public GetV1EmployeesEmployeeIdI9AuthorizationResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1EmployeesEmployeeIdI9AuthorizationRequest, GetV1EmployeesEmployeeIdI9AuthorizationResponse> operation
-              = new GetV1EmployeesEmployeeIdI9Authorization.Sync(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeIdI9Authorization.Sync(sdkConfiguration, options, _headers);
         GetV1EmployeesEmployeeIdI9AuthorizationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

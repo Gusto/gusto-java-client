@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1TaxLiabilities;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1TaxLiabilitiesRequestBuilder {
@@ -21,6 +23,7 @@ public class GetV1TaxLiabilitiesRequestBuilder {
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1TaxLiabilitiesHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -45,6 +48,18 @@ public class GetV1TaxLiabilitiesRequestBuilder {
         this.companyUuid = companyUuid;
         return this;
     }
+                
+    public GetV1TaxLiabilitiesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1TaxLiabilitiesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1TaxLiabilitiesRequest buildRequest() {
@@ -59,9 +74,12 @@ public class GetV1TaxLiabilitiesRequestBuilder {
     }
 
     public GetV1TaxLiabilitiesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1TaxLiabilitiesRequest, GetV1TaxLiabilitiesResponse> operation
-              = new GetV1TaxLiabilities.Sync(sdkConfiguration, _headers);
+              = new GetV1TaxLiabilities.Sync(sdkConfiguration, options, _headers);
         GetV1TaxLiabilitiesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

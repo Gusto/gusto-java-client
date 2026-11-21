@@ -10,23 +10,38 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1CompanyOnboardingStatus;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1CompanyOnboardingStatusRequestBuilder {
 
-    private String companyUuid;
-    private Optional<String> additionalSteps = Optional.empty();
     private Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private Optional<String> additionalSteps = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompanyOnboardingStatusRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public GetV1CompanyOnboardingStatusRequestBuilder xGustoAPIVersion(GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public GetV1CompanyOnboardingStatusRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public GetV1CompanyOnboardingStatusRequestBuilder companyUuid(String companyUuid) {
@@ -47,15 +62,15 @@ public class GetV1CompanyOnboardingStatusRequestBuilder {
         return this;
     }
                 
-    public GetV1CompanyOnboardingStatusRequestBuilder xGustoAPIVersion(GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+    public GetV1CompanyOnboardingStatusRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
         return this;
     }
 
-    public GetV1CompanyOnboardingStatusRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
+    public GetV1CompanyOnboardingStatusRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -65,17 +80,20 @@ public class GetV1CompanyOnboardingStatusRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompanyOnboardingStatusRequest request = new GetV1CompanyOnboardingStatusRequest(companyUuid,
-            additionalSteps,
-            xGustoAPIVersion);
+        GetV1CompanyOnboardingStatusRequest request = new GetV1CompanyOnboardingStatusRequest(xGustoAPIVersion,
+            companyUuid,
+            additionalSteps);
 
         return request;
     }
 
     public GetV1CompanyOnboardingStatusResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1CompanyOnboardingStatusRequest, GetV1CompanyOnboardingStatusResponse> operation
-              = new GetV1CompanyOnboardingStatus.Sync(sdkConfiguration, _headers);
+              = new GetV1CompanyOnboardingStatus.Sync(sdkConfiguration, options, _headers);
         GetV1CompanyOnboardingStatusRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

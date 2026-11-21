@@ -10,28 +10,25 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.DeleteV1JobsJobId;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class DeleteV1JobsJobIdRequestBuilder {
 
-    private String jobId;
     private Optional<? extends DeleteV1JobsJobIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1JobsJobIdHeaderXGustoAPIVersion>>() {});
+    private String jobId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1JobsJobIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public DeleteV1JobsJobIdRequestBuilder jobId(String jobId) {
-        Utils.checkNotNull(jobId, "jobId");
-        this.jobId = jobId;
-        return this;
     }
                 
     public DeleteV1JobsJobIdRequestBuilder xGustoAPIVersion(DeleteV1JobsJobIdHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,22 +43,43 @@ public class DeleteV1JobsJobIdRequestBuilder {
         return this;
     }
 
+    public DeleteV1JobsJobIdRequestBuilder jobId(String jobId) {
+        Utils.checkNotNull(jobId, "jobId");
+        this.jobId = jobId;
+        return this;
+    }
+                
+    public DeleteV1JobsJobIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1JobsJobIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private DeleteV1JobsJobIdRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1JobsJobIdRequest request = new DeleteV1JobsJobIdRequest(jobId,
-            xGustoAPIVersion);
+        DeleteV1JobsJobIdRequest request = new DeleteV1JobsJobIdRequest(xGustoAPIVersion,
+            jobId);
 
         return request;
     }
 
     public DeleteV1JobsJobIdResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DeleteV1JobsJobIdRequest, DeleteV1JobsJobIdResponse> operation
-              = new DeleteV1JobsJobId.Sync(sdkConfiguration, _headers);
+              = new DeleteV1JobsJobId.Sync(sdkConfiguration, options, _headers);
         DeleteV1JobsJobIdRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

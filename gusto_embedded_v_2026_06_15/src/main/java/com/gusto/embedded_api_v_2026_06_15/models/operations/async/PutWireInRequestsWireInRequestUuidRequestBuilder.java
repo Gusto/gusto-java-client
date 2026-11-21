@@ -13,30 +13,27 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.PutWireInRequestsWi
 import com.gusto.embedded_api_v_2026_06_15.operations.PutWireInRequestsWireInRequestUuid;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PutWireInRequestsWireInRequestUuidRequestBuilder {
 
-    private String wireInRequestUuid;
     private Optional<? extends PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion>>() {});
+    private String wireInRequestUuid;
     private WireInRequestUpdateRequestBody wireInRequestUpdateRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutWireInRequestsWireInRequestUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutWireInRequestsWireInRequestUuidRequestBuilder wireInRequestUuid(String wireInRequestUuid) {
-        Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
-        this.wireInRequestUuid = wireInRequestUuid;
-        return this;
     }
                 
     public PutWireInRequestsWireInRequestUuidRequestBuilder xGustoAPIVersion(PutWireInRequestsWireInRequestUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -51,9 +48,27 @@ public class PutWireInRequestsWireInRequestUuidRequestBuilder {
         return this;
     }
 
+    public PutWireInRequestsWireInRequestUuidRequestBuilder wireInRequestUuid(String wireInRequestUuid) {
+        Utils.checkNotNull(wireInRequestUuid, "wireInRequestUuid");
+        this.wireInRequestUuid = wireInRequestUuid;
+        return this;
+    }
+
     public PutWireInRequestsWireInRequestUuidRequestBuilder wireInRequestUpdateRequestBody(WireInRequestUpdateRequestBody wireInRequestUpdateRequestBody) {
         Utils.checkNotNull(wireInRequestUpdateRequestBody, "wireInRequestUpdateRequestBody");
         this.wireInRequestUpdateRequestBody = wireInRequestUpdateRequestBody;
+        return this;
+    }
+                
+    public PutWireInRequestsWireInRequestUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutWireInRequestsWireInRequestUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -63,17 +78,20 @@ public class PutWireInRequestsWireInRequestUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutWireInRequestsWireInRequestUuidRequest request = new PutWireInRequestsWireInRequestUuidRequest(wireInRequestUuid,
-            xGustoAPIVersion,
+        PutWireInRequestsWireInRequestUuidRequest request = new PutWireInRequestsWireInRequestUuidRequest(xGustoAPIVersion,
+            wireInRequestUuid,
             wireInRequestUpdateRequestBody);
 
         return request;
     }
 
     public CompletableFuture<PutWireInRequestsWireInRequestUuidResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PutWireInRequestsWireInRequestUuidRequest, PutWireInRequestsWireInRequestUuidResponse> operation
-              = new PutWireInRequestsWireInRequestUuid.Async(sdkConfiguration, _headers);
+              = new PutWireInRequestsWireInRequestUuid.Async(sdkConfiguration, options, _headers);
         PutWireInRequestsWireInRequestUuidRequest request = buildRequest();
 
         return operation.doRequest(request)

@@ -5,7 +5,7 @@ package com.gusto.embedded_api.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gusto.embedded_api.models.components.Employee;
+import com.gusto.embedded_api.models.components.EmployeeShow;
 import com.gusto.embedded_api.utils.Response;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
@@ -36,22 +36,22 @@ public class GetV1EmployeesResponse implements Response {
     /**
      * successful
      */
-    private Optional<? extends Employee> employee;
+    private Optional<? extends EmployeeShow> employeeShow;
 
     @JsonCreator
     public GetV1EmployeesResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends Employee> employee) {
+            Optional<? extends EmployeeShow> employeeShow) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(employee, "employee");
+        Utils.checkNotNull(employeeShow, "employeeShow");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.employee = employee;
+        this.employeeShow = employeeShow;
     }
     
     public GetV1EmployeesResponse(
@@ -91,8 +91,8 @@ public class GetV1EmployeesResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Employee> employee() {
-        return (Optional<Employee>) employee;
+    public Optional<EmployeeShow> employeeShow() {
+        return (Optional<EmployeeShow>) employeeShow;
     }
 
     public static Builder builder() {
@@ -130,9 +130,9 @@ public class GetV1EmployeesResponse implements Response {
     /**
      * successful
      */
-    public GetV1EmployeesResponse withEmployee(Employee employee) {
-        Utils.checkNotNull(employee, "employee");
-        this.employee = Optional.ofNullable(employee);
+    public GetV1EmployeesResponse withEmployeeShow(EmployeeShow employeeShow) {
+        Utils.checkNotNull(employeeShow, "employeeShow");
+        this.employeeShow = Optional.ofNullable(employeeShow);
         return this;
     }
 
@@ -140,9 +140,9 @@ public class GetV1EmployeesResponse implements Response {
     /**
      * successful
      */
-    public GetV1EmployeesResponse withEmployee(Optional<? extends Employee> employee) {
-        Utils.checkNotNull(employee, "employee");
-        this.employee = employee;
+    public GetV1EmployeesResponse withEmployeeShow(Optional<? extends EmployeeShow> employeeShow) {
+        Utils.checkNotNull(employeeShow, "employeeShow");
+        this.employeeShow = employeeShow;
         return this;
     }
 
@@ -159,14 +159,14 @@ public class GetV1EmployeesResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.employee, other.employee);
+            Utils.enhancedDeepEquals(this.employeeShow, other.employeeShow);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            employee);
+            employeeShow);
     }
     
     @Override
@@ -175,7 +175,7 @@ public class GetV1EmployeesResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "employee", employee);
+                "employeeShow", employeeShow);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -187,7 +187,7 @@ public class GetV1EmployeesResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends Employee> employee = Optional.empty();
+        private Optional<? extends EmployeeShow> employeeShow = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -227,18 +227,18 @@ public class GetV1EmployeesResponse implements Response {
         /**
          * successful
          */
-        public Builder employee(Employee employee) {
-            Utils.checkNotNull(employee, "employee");
-            this.employee = Optional.ofNullable(employee);
+        public Builder employeeShow(EmployeeShow employeeShow) {
+            Utils.checkNotNull(employeeShow, "employeeShow");
+            this.employeeShow = Optional.ofNullable(employeeShow);
             return this;
         }
 
         /**
          * successful
          */
-        public Builder employee(Optional<? extends Employee> employee) {
-            Utils.checkNotNull(employee, "employee");
-            this.employee = employee;
+        public Builder employeeShow(Optional<? extends EmployeeShow> employeeShow) {
+            Utils.checkNotNull(employeeShow, "employeeShow");
+            this.employeeShow = employeeShow;
             return this;
         }
 
@@ -246,7 +246,7 @@ public class GetV1EmployeesResponse implements Response {
 
             return new GetV1EmployeesResponse(
                 contentType, statusCode, rawResponse,
-                employee);
+                employeeShow);
         }
 
     }

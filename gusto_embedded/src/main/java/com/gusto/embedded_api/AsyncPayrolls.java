@@ -8,9 +8,9 @@ import static com.gusto.embedded_api.operations.Operations.AsyncRequestOperation
 import com.gusto.embedded_api.models.components.PayrollGrossUpRequest;
 import com.gusto.embedded_api.models.components.PayrollUpdate;
 import com.gusto.embedded_api.models.components.PrintablePayrollChecksBody;
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.DeleteV1CompaniesCompanyIdPayrollsRequest;
+import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdPayrollReversalsRequest;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest;
@@ -105,6 +105,7 @@ import com.gusto.embedded_api.operations.PutV1CompaniesCompanyIdPayrollsPayrollI
 import com.gusto.embedded_api.operations.PutV1CompaniesCompanyIdPayrollsPayrollIdPrepare;
 import com.gusto.embedded_api.operations.PutV1CompaniesCompanyIdPayrollsPayrollIdSubmit;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.Boolean;
 import java.lang.Long;
 import java.lang.String;
@@ -133,141 +134,471 @@ public class AsyncPayrolls {
 
 
     /**
-     * Get all payrolls for a company
+     * Generate printable payroll checks (pdf)
      * 
-     * <p>Returns a list of payrolls for a company. You can change the payrolls returned by updating the
-     * processing_status, payroll_types, start_date, &amp; end_date params.
+     * <p>This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid.
+     * A generation status and corresponding request_uuid will be returned. Use the generated document GET
+     * endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check
+     * generation process and retrieve the generated check URL upon completion.
      * 
-     * <p>By default, will return processed, regular payrolls for the past 6 months.
-     * 
-     * <p>Notes:
-     * * Dollar amounts are returned as string representations of numeric decimals, are represented to the
-     * cent.
-     * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1
-     * year apart.
-     * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
-     * 
-     * <p>scope: `payrolls:read`
+     * <p>scope: `generated_documents:write`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
-    public GetV1CompaniesCompanyIdPayrollsRequestBuilder list() {
-        return new GetV1CompaniesCompanyIdPayrollsRequestBuilder(sdkConfiguration);
+    public PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBuilder generatePrintableChecks() {
+        return new PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get all payrolls for a company
+     * Generate printable payroll checks (pdf)
      * 
-     * <p>Returns a list of payrolls for a company. You can change the payrolls returned by updating the
-     * processing_status, payroll_types, start_date, &amp; end_date params.
+     * <p>This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid.
+     * A generation status and corresponding request_uuid will be returned. Use the generated document GET
+     * endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check
+     * generation process and retrieve the generated check URL upon completion.
      * 
-     * <p>By default, will return processed, regular payrolls for the past 6 months.
-     * 
-     * <p>Notes:
-     * * Dollar amounts are returned as string representations of numeric decimals, are represented to the
-     * cent.
-     * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1
-     * year apart.
-     * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
-     * 
-     * <p>scope: `payrolls:read`
+     * <p>scope: `generated_documents:write`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param request The request object containing all the parameters for the API call.
-     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayrollsResponse>} - The async response
+     * @param payrollUuid The UUID of the payroll
+     * @param printablePayrollChecksBody Request body for generating printable payroll checks.
+     * @return {@code CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse>} - The async response
      */
-    public CompletableFuture<GetV1CompaniesCompanyIdPayrollsResponse> list(GetV1CompaniesCompanyIdPayrollsRequest request) {
-        AsyncRequestOperation<GetV1CompaniesCompanyIdPayrollsRequest, GetV1CompaniesCompanyIdPayrollsResponse> operation
-              = new GetV1CompaniesCompanyIdPayrolls.Async(sdkConfiguration, _headers);
+    public CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse> generatePrintableChecks(String payrollUuid, PrintablePayrollChecksBody printablePayrollChecksBody) {
+        return generatePrintableChecks(
+                Optional.empty(), payrollUuid, printablePayrollChecksBody,
+                Optional.empty());
+    }
+
+    /**
+     * Generate printable payroll checks (pdf)
+     * 
+     * <p>This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid.
+     * A generation status and corresponding request_uuid will be returned. Use the generated document GET
+     * endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check
+     * generation process and retrieve the generated check URL upon completion.
+     * 
+     * <p>scope: `generated_documents:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollUuid The UUID of the payroll
+     * @param printablePayrollChecksBody Request body for generating printable payroll checks.
+     * @return {@code CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse>} - The async response
+     */
+    public CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse> generatePrintableChecks(
+            Optional<? extends PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
+            PrintablePayrollChecksBody printablePayrollChecksBody) {
+        return generatePrintableChecks(
+                xGustoAPIVersion, payrollUuid, printablePayrollChecksBody,
+                Optional.empty());
+    }
+
+    /**
+     * Generate printable payroll checks (pdf)
+     * 
+     * <p>This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid.
+     * A generation status and corresponding request_uuid will be returned. Use the generated document GET
+     * endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check
+     * generation process and retrieve the generated check URL upon completion.
+     * 
+     * <p>scope: `generated_documents:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollUuid The UUID of the payroll
+     * @param printablePayrollChecksBody Request body for generating printable payroll checks.
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse>} - The async response
+     */
+    public CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse> generatePrintableChecks(
+            Optional<? extends PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
+            PrintablePayrollChecksBody printablePayrollChecksBody, Optional<Options> options) {
+        PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest request =
+            PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .payrollUuid(payrollUuid)
+                .printablePayrollChecksBody(printablePayrollChecksBody)
+                .build();
+        AsyncRequestOperation<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest, PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse> operation
+              = new PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecks.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
 
     /**
-     * Create an off-cycle payroll
+     * Get an employee's pay stubs
      * 
-     * <p>Creates a new, unprocessed, off-cycle payroll.
+     * <p>Get an employee's pay stubs.
      * 
-     * <p>## `off_cycle_reason`
-     * By default:
-     * - External benefits and deductions will be included when the `off_cycle_reason` is set to
-     * `Correction`.
-     * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+     * <p>Results are returned in reverse chronological order (newest first).
      * 
-     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
-     * 
-     * <p>scope: `payrolls:run`
+     * <p>scope: `pay_stubs:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
-    public PostV1CompaniesCompanyIdPayrollsRequestBuilder createOffCycle() {
-        return new PostV1CompaniesCompanyIdPayrollsRequestBuilder(sdkConfiguration);
+    public GetV1EmployeesEmployeeUuidPayStubsRequestBuilder getPayStubs() {
+        return new GetV1EmployeesEmployeeUuidPayStubsRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Create an off-cycle payroll
+     * Get an employee's pay stubs
      * 
-     * <p>Creates a new, unprocessed, off-cycle payroll.
+     * <p>Get an employee's pay stubs.
      * 
-     * <p>## `off_cycle_reason`
-     * By default:
-     * - External benefits and deductions will be included when the `off_cycle_reason` is set to
-     * `Correction`.
-     * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+     * <p>Results are returned in reverse chronological order (newest first).
      * 
-     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
+     * <p>scope: `pay_stubs:read`
      * 
-     * <p>scope: `payrolls:run`
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param employeeId The UUID of the employee
+     * @return {@code CompletableFuture<GetV1EmployeesEmployeeUuidPayStubsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1EmployeesEmployeeUuidPayStubsResponse> getPayStubs(String employeeId) {
+        return getPayStubs(
+                Optional.empty(), employeeId, Optional.empty(),
+                Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Get an employee's pay stubs
+     * 
+     * <p>Get an employee's pay stubs.
+     * 
+     * <p>Results are returned in reverse chronological order (newest first).
+     * 
+     * <p>scope: `pay_stubs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @return {@code CompletableFuture<GetV1EmployeesEmployeeUuidPayStubsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1EmployeesEmployeeUuidPayStubsResponse> getPayStubs(
+            Optional<? extends GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<Long> page, Optional<Long> per) {
+        return getPayStubs(
+                xGustoAPIVersion, employeeId, page,
+                per, Optional.empty());
+    }
+
+    /**
+     * Get an employee's pay stubs
+     * 
+     * <p>Get an employee's pay stubs.
+     * 
+     * <p>Results are returned in reverse chronological order (newest first).
+     * 
+     * <p>scope: `pay_stubs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1EmployeesEmployeeUuidPayStubsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1EmployeesEmployeeUuidPayStubsResponse> getPayStubs(
+            Optional<? extends GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<Long> page, Optional<Long> per,
+            Optional<Options> options) {
+        GetV1EmployeesEmployeeUuidPayStubsRequest request =
+            GetV1EmployeesEmployeeUuidPayStubsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
+                .page(page)
+                .per(per)
+                .build();
+        AsyncRequestOperation<GetV1EmployeesEmployeeUuidPayStubsRequest, GetV1EmployeesEmployeeUuidPayStubsResponse> operation
+              = new GetV1EmployeesEmployeeUuidPayStubs.Async(sdkConfiguration, options, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get an employee pay stub (pdf)
+     * 
+     * <p>Get an employee's pay stub for the specified payroll. By default, an application/pdf response will
+     * be returned. No other content types are currently supported, but may be supported in the future.
+     * 
+     * <p>scope: `pay_stubs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder getPayStub() {
+        return new GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get an employee pay stub (pdf)
+     * 
+     * <p>Get an employee's pay stub for the specified payroll. By default, an application/pdf response will
+     * be returned. No other content types are currently supported, but may be supported in the future.
+     * 
+     * <p>scope: `pay_stubs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param payrollId The UUID of the payroll
+     * @param employeeId The UUID of the employee
+     * @return {@code CompletableFuture<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse>} - The async response
+     */
+    public CompletableFuture<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse> getPayStub(String payrollId, String employeeId) {
+        return getPayStub(
+                Optional.empty(), payrollId, employeeId,
+                Optional.empty());
+    }
+
+    /**
+     * Get an employee pay stub (pdf)
+     * 
+     * <p>Get an employee's pay stub for the specified payroll. By default, an application/pdf response will
+     * be returned. No other content types are currently supported, but may be supported in the future.
+     * 
+     * <p>scope: `pay_stubs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollId The UUID of the payroll
+     * @param employeeId The UUID of the employee
+     * @return {@code CompletableFuture<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse>} - The async response
+     */
+    public CompletableFuture<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse> getPayStub(
+            Optional<? extends GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollId,
+            String employeeId) {
+        return getPayStub(
+                xGustoAPIVersion, payrollId, employeeId,
+                Optional.empty());
+    }
+
+    /**
+     * Get an employee pay stub (pdf)
+     * 
+     * <p>Get an employee's pay stub for the specified payroll. By default, an application/pdf response will
+     * be returned. No other content types are currently supported, but may be supported in the future.
+     * 
+     * <p>scope: `pay_stubs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollId The UUID of the payroll
+     * @param employeeId The UUID of the employee
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse>} - The async response
+     */
+    public CompletableFuture<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse> getPayStub(
+            Optional<? extends GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollId,
+            String employeeId, Optional<Options> options) {
+        GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest request =
+            GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .payrollId(payrollId)
+                .employeeId(employeeId)
+                .build();
+        AsyncRequestOperation<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest, GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse> operation
+              = new GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStub.Async(sdkConfiguration, options, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get partner disbursements for a payroll
+     * 
+     * <p>Get partner disbursements for a specific payroll.
+     * 
+     * <p>scope: `partner_disbursements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements() {
+        return new GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get partner disbursements for a payroll
+     * 
+     * <p>Get partner disbursements for a specific payroll.
+     * 
+     * <p>scope: `partner_disbursements:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param companyId The UUID of the company
-     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPayrollsResponse>} - The async response
+     * @param id The UUID of the payroll
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse>} - The async response
      */
-    public CompletableFuture<PostV1CompaniesCompanyIdPayrollsResponse> createOffCycle(String companyId) {
-        return createOffCycle(Optional.empty(), companyId, Optional.empty());
+    public CompletableFuture<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(String companyId, String id) {
+        return getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+                Optional.empty(), companyId, id,
+                Optional.empty());
     }
 
     /**
-     * Create an off-cycle payroll
+     * Get partner disbursements for a payroll
      * 
-     * <p>Creates a new, unprocessed, off-cycle payroll.
+     * <p>Get partner disbursements for a specific payroll.
      * 
-     * <p>## `off_cycle_reason`
-     * By default:
-     * - External benefits and deductions will be included when the `off_cycle_reason` is set to
-     * `Correction`.
-     * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
-     * 
-     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
-     * 
-     * <p>scope: `payrolls:run`
+     * <p>scope: `partner_disbursements:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
-     * @param requestBody 
-     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPayrollsResponse>} - The async response
+     * @param id The UUID of the payroll
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse>} - The async response
      */
-    public CompletableFuture<PostV1CompaniesCompanyIdPayrollsResponse> createOffCycle(
-            Optional<? extends PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
-            Optional<? extends PostV1CompaniesCompanyIdPayrollsRequestBody> requestBody) {
-        PostV1CompaniesCompanyIdPayrollsRequest request =
-            PostV1CompaniesCompanyIdPayrollsRequest
+    public CompletableFuture<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+            Optional<? extends GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String id) {
+        return getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+                xGustoAPIVersion, companyId, id,
+                Optional.empty());
+    }
+
+    /**
+     * Get partner disbursements for a payroll
+     * 
+     * <p>Get partner disbursements for a specific payroll.
+     * 
+     * <p>scope: `partner_disbursements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param id The UUID of the payroll
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+            Optional<? extends GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String id, Optional<Options> options) {
+        GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request =
+            GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest
                 .builder()
                 .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
+                .id(id)
+                .build();
+        AsyncRequestOperation<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest, GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> operation
+              = new GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.Async(sdkConfiguration, options, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Update partner disbursements for a payroll
+     * 
+     * <p>Update partner disbursements for a specific payroll.
+     * 
+     * <p>scope: `partner_disbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements() {
+        return new PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Update partner disbursements for a payroll
+     * 
+     * <p>Update partner disbursements for a specific payroll.
+     * 
+     * <p>scope: `partner_disbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @param id The UUID of the payroll
+     * @return {@code CompletableFuture<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse>} - The async response
+     */
+    public CompletableFuture<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(String companyId, String id) {
+        return patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+                Optional.empty(), companyId, id,
+                Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Update partner disbursements for a payroll
+     * 
+     * <p>Update partner disbursements for a specific payroll.
+     * 
+     * <p>scope: `partner_disbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param id The UUID of the payroll
+     * @param requestBody 
+     * @return {@code CompletableFuture<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse>} - The async response
+     */
+    public CompletableFuture<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+            Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String id, Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody> requestBody) {
+        return patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+                xGustoAPIVersion, companyId, id,
+                requestBody, Optional.empty());
+    }
+
+    /**
+     * Update partner disbursements for a payroll
+     * 
+     * <p>Update partner disbursements for a specific payroll.
+     * 
+     * <p>scope: `partner_disbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param id The UUID of the payroll
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse>} - The async response
+     */
+    public CompletableFuture<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+            Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String id, Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody> requestBody,
+            Optional<Options> options) {
+        PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request =
+            PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .id(id)
                 .requestBody(requestBody)
                 .build();
-        AsyncRequestOperation<PostV1CompaniesCompanyIdPayrollsRequest, PostV1CompaniesCompanyIdPayrollsResponse> operation
-              = new PostV1CompaniesCompanyIdPayrolls.Async(sdkConfiguration, _headers);
+        AsyncRequestOperation<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest, PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> operation
+              = new PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -302,8 +633,8 @@ public class AsyncPayrolls {
      */
     public CompletableFuture<GetV1CompaniesCompanyIdPayrollReversalsResponse> getApprovedReversals(String companyId) {
         return getApprovedReversals(
-                companyId, Optional.empty(), Optional.empty(),
-                Optional.empty());
+                Optional.empty(), companyId, Optional.empty(),
+                Optional.empty(), Optional.empty());
     }
 
     /**
@@ -315,25 +646,50 @@ public class AsyncPayrolls {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion 
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayrollReversalsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdPayrollReversalsResponse> getApprovedReversals(
-            String companyId, Optional<Long> page,
-            Optional<Long> per, Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<Long> page, Optional<Long> per) {
+        return getApprovedReversals(
+                xGustoAPIVersion, companyId, page,
+                per, Optional.empty());
+    }
+
+    /**
+     * Get approved payroll reversals
+     * 
+     * <p>Returns all approved Payroll Reversals for a Company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayrollReversalsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdPayrollReversalsResponse> getApprovedReversals(
+            Optional<? extends GetV1CompaniesCompanyIdPayrollReversalsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<Long> page, Optional<Long> per,
+            Optional<Options> options) {
         GetV1CompaniesCompanyIdPayrollReversalsRequest request =
             GetV1CompaniesCompanyIdPayrollReversalsRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .page(page)
                 .per(per)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         AsyncRequestOperation<GetV1CompaniesCompanyIdPayrollReversalsRequest, GetV1CompaniesCompanyIdPayrollReversalsResponse> operation
-              = new GetV1CompaniesCompanyIdPayrollReversals.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdPayrollReversals.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -391,8 +747,37 @@ public class AsyncPayrolls {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayrollsPayrollIdResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdPayrollsPayrollIdResponse> get(GetV1CompaniesCompanyIdPayrollsPayrollIdRequest request) {
+        return get(request, Optional.empty());
+    }
+
+    /**
+     * Get a single payroll
+     * 
+     * <p>Returns a payroll. If payroll is calculated or processed, will return employee_compensations and
+     * totals.
+     * 
+     * <p>Results are paginated, with a maximum page size of 100 employee_compensations.
+     * 
+     * <p>Notes:
+     * * Hour and dollar amounts are returned as string representations of numeric decimals.
+     * * Hours are represented to the thousands place; dollar amounts are represented to the cent.
+     * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a
+     * given field, it defaults to "0.00" (for fixed amounts) or "0.000" (for hours ).
+     * * When include parameter with benefits value is passed, employee_benefits:read scope is required to
+     * return benefits
+     * * Benefits containing PHI are only visible with the `employee_benefits:read:phi` scope
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayrollsPayrollIdResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdPayrollsPayrollIdResponse> get(GetV1CompaniesCompanyIdPayrollsPayrollIdRequest request, Optional<Options> options) {
         AsyncRequestOperation<GetV1CompaniesCompanyIdPayrollsPayrollIdRequest, GetV1CompaniesCompanyIdPayrollsPayrollIdResponse> operation
-              = new GetV1CompaniesCompanyIdPayrollsPayrollId.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdPayrollsPayrollId.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -448,7 +833,7 @@ public class AsyncPayrolls {
             PayrollUpdate payrollUpdate) {
         return update(
                 Optional.empty(), companyId, payrollId,
-                payrollUpdate);
+                payrollUpdate, Optional.empty());
     }
 
     /**
@@ -477,6 +862,39 @@ public class AsyncPayrolls {
     public CompletableFuture<PutV1CompaniesCompanyIdPayrollsResponse> update(
             Optional<? extends PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             String payrollId, PayrollUpdate payrollUpdate) {
+        return update(
+                xGustoAPIVersion, companyId, payrollId,
+                payrollUpdate, Optional.empty());
+    }
+
+    /**
+     * Update a payroll by ID
+     * 
+     * <p>This endpoint allows you to update information for one or more employees for a specific
+     * **unprocessed** payroll. You can think of the **unprocessed**
+     * payroll object as a template of fields that you can update. You cannot modify the structure of the
+     * payroll object through this endpoint, only values
+     * of the fields included in the payroll. If you do not include specific employee compensations,
+     * fixed/hourly compensations, or deductions in your request body, they
+     * will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a
+     * time. Only the employee compensation objects that were
+     * inputted will be returned.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param payrollId The UUID of the payroll
+     * @param payrollUpdate 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1CompaniesCompanyIdPayrollsResponse>} - The async response
+     */
+    public CompletableFuture<PutV1CompaniesCompanyIdPayrollsResponse> update(
+            Optional<? extends PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String payrollId, PayrollUpdate payrollUpdate,
+            Optional<Options> options) {
         PutV1CompaniesCompanyIdPayrollsRequest request =
             PutV1CompaniesCompanyIdPayrollsRequest
                 .builder()
@@ -486,7 +904,7 @@ public class AsyncPayrolls {
                 .payrollUpdate(payrollUpdate)
                 .build();
         AsyncRequestOperation<PutV1CompaniesCompanyIdPayrollsRequest, PutV1CompaniesCompanyIdPayrollsResponse> operation
-              = new PutV1CompaniesCompanyIdPayrolls.Async(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyIdPayrolls.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -538,8 +956,8 @@ public class AsyncPayrolls {
      */
     public CompletableFuture<DeleteV1CompaniesCompanyIdPayrollsResponse> delete(String companyId, String payrollId) {
         return delete(
-                companyId, payrollId, Optional.empty(),
-                Optional.empty());
+                Optional.empty(), companyId, payrollId,
+                Optional.empty(), Optional.empty());
     }
 
     /**
@@ -559,25 +977,494 @@ public class AsyncPayrolls {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param companyId The UUID of the company
      * @param payrollId The UUID of the payroll
      * @param async When true, request an asynchronous delete of the payroll.
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return {@code CompletableFuture<DeleteV1CompaniesCompanyIdPayrollsResponse>} - The async response
      */
     public CompletableFuture<DeleteV1CompaniesCompanyIdPayrollsResponse> delete(
-            String companyId, String payrollId,
-            Optional<Boolean> async, Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String payrollId, Optional<Boolean> async) {
+        return delete(
+                xGustoAPIVersion, companyId, payrollId,
+                async, Optional.empty());
+    }
+
+    /**
+     * Delete a payroll
+     * 
+     * <p>This endpoint allows you to delete an **unprocessed** payroll.
+     * 
+     * <p>By default the payroll and associated data is deleted synchronously. To request an asynchronous
+     * delete, use the `async=true` query parameter. In both cases validation of ability to delete will be
+     * performed and an Unprocessable Entity error will be returned if the payroll is not able to be
+     * deleted.
+     * 
+     * <p>A successful synchronous delete will return `204/No Content`. When a payroll has been enqueued for
+     * asynchronous deletion, `202/Accepted` will be returned.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param payrollId The UUID of the payroll
+     * @param async When true, request an asynchronous delete of the payroll.
+     * @param options additional options
+     * @return {@code CompletableFuture<DeleteV1CompaniesCompanyIdPayrollsResponse>} - The async response
+     */
+    public CompletableFuture<DeleteV1CompaniesCompanyIdPayrollsResponse> delete(
+            Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String payrollId, Optional<Boolean> async,
+            Optional<Options> options) {
         DeleteV1CompaniesCompanyIdPayrollsRequest request =
             DeleteV1CompaniesCompanyIdPayrollsRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .companyId(companyId)
                 .payrollId(payrollId)
                 .async(async)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         AsyncRequestOperation<DeleteV1CompaniesCompanyIdPayrollsRequest, DeleteV1CompaniesCompanyIdPayrollsResponse> operation
-              = new DeleteV1CompaniesCompanyIdPayrolls.Async(sdkConfiguration, _headers);
+              = new DeleteV1CompaniesCompanyIdPayrolls.Async(sdkConfiguration, options, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get all payrolls for a company
+     * 
+     * <p>Returns a list of payrolls for a company. You can change the payrolls returned by updating the
+     * processing_status, payroll_types, start_date, &amp; end_date params.
+     * 
+     * <p>By default, will return processed, regular payrolls for the past 6 months.
+     * 
+     * <p>Notes:
+     * * Dollar amounts are returned as string representations of numeric decimals, are represented to the
+     * cent.
+     * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1
+     * year apart.
+     * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetV1CompaniesCompanyIdPayrollsRequestBuilder list() {
+        return new GetV1CompaniesCompanyIdPayrollsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get all payrolls for a company
+     * 
+     * <p>Returns a list of payrolls for a company. You can change the payrolls returned by updating the
+     * processing_status, payroll_types, start_date, &amp; end_date params.
+     * 
+     * <p>By default, will return processed, regular payrolls for the past 6 months.
+     * 
+     * <p>Notes:
+     * * Dollar amounts are returned as string representations of numeric decimals, are represented to the
+     * cent.
+     * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1
+     * year apart.
+     * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayrollsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdPayrollsResponse> list(GetV1CompaniesCompanyIdPayrollsRequest request) {
+        return list(request, Optional.empty());
+    }
+
+    /**
+     * Get all payrolls for a company
+     * 
+     * <p>Returns a list of payrolls for a company. You can change the payrolls returned by updating the
+     * processing_status, payroll_types, start_date, &amp; end_date params.
+     * 
+     * <p>By default, will return processed, regular payrolls for the past 6 months.
+     * 
+     * <p>Notes:
+     * * Dollar amounts are returned as string representations of numeric decimals, are represented to the
+     * cent.
+     * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1
+     * year apart.
+     * * Results are paginated. Maximum page size is 100 payrolls per request; the default page size is 25.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayrollsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdPayrollsResponse> list(GetV1CompaniesCompanyIdPayrollsRequest request, Optional<Options> options) {
+        AsyncRequestOperation<GetV1CompaniesCompanyIdPayrollsRequest, GetV1CompaniesCompanyIdPayrollsResponse> operation
+              = new GetV1CompaniesCompanyIdPayrolls.Async(sdkConfiguration, options, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Create an off-cycle payroll
+     * 
+     * <p>Creates a new, unprocessed, off-cycle payroll.
+     * 
+     * <p>## `off_cycle_reason`
+     * By default:
+     * - External benefits and deductions will be included when the `off_cycle_reason` is set to
+     * `Correction`.
+     * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+     * 
+     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public PostV1CompaniesCompanyIdPayrollsRequestBuilder createOffCycle() {
+        return new PostV1CompaniesCompanyIdPayrollsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create an off-cycle payroll
+     * 
+     * <p>Creates a new, unprocessed, off-cycle payroll.
+     * 
+     * <p>## `off_cycle_reason`
+     * By default:
+     * - External benefits and deductions will be included when the `off_cycle_reason` is set to
+     * `Correction`.
+     * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+     * 
+     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPayrollsResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyIdPayrollsResponse> createOffCycle(String companyId) {
+        return createOffCycle(
+                Optional.empty(), companyId, Optional.empty(),
+                Optional.empty());
+    }
+
+    /**
+     * Create an off-cycle payroll
+     * 
+     * <p>Creates a new, unprocessed, off-cycle payroll.
+     * 
+     * <p>## `off_cycle_reason`
+     * By default:
+     * - External benefits and deductions will be included when the `off_cycle_reason` is set to
+     * `Correction`.
+     * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+     * 
+     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param requestBody 
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPayrollsResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyIdPayrollsResponse> createOffCycle(
+            Optional<? extends PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<? extends PostV1CompaniesCompanyIdPayrollsRequestBody> requestBody) {
+        return createOffCycle(
+                xGustoAPIVersion, companyId, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Create an off-cycle payroll
+     * 
+     * <p>Creates a new, unprocessed, off-cycle payroll.
+     * 
+     * <p>## `off_cycle_reason`
+     * By default:
+     * - External benefits and deductions will be included when the `off_cycle_reason` is set to
+     * `Correction`.
+     * - All benefits and deductions are blocked when the `off_cycle_reason` is set to `Bonus`.
+     * 
+     * <p>These elections can be overridden with the `skip_regular_deductions` boolean.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPayrollsResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyIdPayrollsResponse> createOffCycle(
+            Optional<? extends PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<? extends PostV1CompaniesCompanyIdPayrollsRequestBody> requestBody, Optional<Options> options) {
+        PostV1CompaniesCompanyIdPayrollsRequest request =
+            PostV1CompaniesCompanyIdPayrollsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .requestBody(requestBody)
+                .build();
+        AsyncRequestOperation<PostV1CompaniesCompanyIdPayrollsRequest, PostV1CompaniesCompanyIdPayrollsResponse> operation
+              = new PostV1CompaniesCompanyIdPayrolls.Async(sdkConfiguration, options, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get a single payroll receipt
+     * 
+     * <p>Returns a payroll receipt.
+     * 
+     * <p>Notes:
+     * * Hour and dollar amounts are returned as string representations of numeric decimals.
+     * * Dollar amounts are represented to the cent.
+     * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+     * * Pagination is optional. Supplying `page` and/or `per` returns only the requested page of employee
+     * compensations and includes the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` response
+     * headers. Without either parameter, all employee compensations are returned without pagination
+     * headers.
+     * * Maximum page size is 100 employee compensations per request.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder getReceipt() {
+        return new GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a single payroll receipt
+     * 
+     * <p>Returns a payroll receipt.
+     * 
+     * <p>Notes:
+     * * Hour and dollar amounts are returned as string representations of numeric decimals.
+     * * Dollar amounts are represented to the cent.
+     * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+     * * Pagination is optional. Supplying `page` and/or `per` returns only the requested page of employee
+     * compensations and includes the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` response
+     * headers. Without either parameter, all employee compensations are returned without pagination
+     * headers.
+     * * Maximum page size is 100 employee compensations per request.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param payrollUuid The UUID of the payroll
+     * @return {@code CompletableFuture<GetV1PaymentReceiptsPayrollsPayrollUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetV1PaymentReceiptsPayrollsPayrollUuidResponse> getReceipt(String payrollUuid) {
+        return getReceipt(
+                Optional.empty(), payrollUuid, Optional.empty(),
+                Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Get a single payroll receipt
+     * 
+     * <p>Returns a payroll receipt.
+     * 
+     * <p>Notes:
+     * * Hour and dollar amounts are returned as string representations of numeric decimals.
+     * * Dollar amounts are represented to the cent.
+     * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+     * * Pagination is optional. Supplying `page` and/or `per` returns only the requested page of employee
+     * compensations and includes the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` response
+     * headers. Without either parameter, all employee compensations are returned without pagination
+     * headers.
+     * * Maximum page size is 100 employee compensations per request.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollUuid The UUID of the payroll
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @return {@code CompletableFuture<GetV1PaymentReceiptsPayrollsPayrollUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetV1PaymentReceiptsPayrollsPayrollUuidResponse> getReceipt(
+            Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
+            Optional<Long> page, Optional<Long> per) {
+        return getReceipt(
+                xGustoAPIVersion, payrollUuid, page,
+                per, Optional.empty());
+    }
+
+    /**
+     * Get a single payroll receipt
+     * 
+     * <p>Returns a payroll receipt.
+     * 
+     * <p>Notes:
+     * * Hour and dollar amounts are returned as string representations of numeric decimals.
+     * * Dollar amounts are represented to the cent.
+     * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+     * * Pagination is optional. Supplying `page` and/or `per` returns only the requested page of employee
+     * compensations and includes the `X-Page`, `X-Total-Count`, `X-Total-Pages`, and `X-Per-Page` response
+     * headers. Without either parameter, all employee compensations are returned without pagination
+     * headers.
+     * * Maximum page size is 100 employee compensations per request.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollUuid The UUID of the payroll
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1PaymentReceiptsPayrollsPayrollUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetV1PaymentReceiptsPayrollsPayrollUuidResponse> getReceipt(
+            Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
+            Optional<Long> page, Optional<Long> per,
+            Optional<Options> options) {
+        GetV1PaymentReceiptsPayrollsPayrollUuidRequest request =
+            GetV1PaymentReceiptsPayrollsPayrollUuidRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .payrollUuid(payrollUuid)
+                .page(page)
+                .per(per)
+                .build();
+        AsyncRequestOperation<GetV1PaymentReceiptsPayrollsPayrollUuidRequest, GetV1PaymentReceiptsPayrollsPayrollUuidResponse> operation
+              = new GetV1PaymentReceiptsPayrollsPayrollUuid.Async(sdkConfiguration, options, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Cancel a payroll
+     * 
+     * <p>Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it
+     * meets both criteria:
+     * 
+     * <p>- `processed` is `true`
+     * - Current time is earlier than 4pm PT on the `payroll_deadline`
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder cancel() {
+        return new PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Cancel a payroll
+     * 
+     * <p>Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it
+     * meets both criteria:
+     * 
+     * <p>- `processed` is `true`
+     * - Current time is earlier than 4pm PT on the `payroll_deadline`
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param companyId The UUID of the company
+     * @param payrollId The UUID of the payroll
+     * @return {@code CompletableFuture<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse>} - The async response
+     */
+    public CompletableFuture<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse> cancel(String companyId, String payrollId) {
+        return cancel(
+                Optional.empty(), companyId, payrollId,
+                Optional.empty());
+    }
+
+    /**
+     * Cancel a payroll
+     * 
+     * <p>Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it
+     * meets both criteria:
+     * 
+     * <p>- `processed` is `true`
+     * - Current time is earlier than 4pm PT on the `payroll_deadline`
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param payrollId The UUID of the payroll
+     * @return {@code CompletableFuture<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse>} - The async response
+     */
+    public CompletableFuture<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse> cancel(
+            Optional<? extends PutAPIV1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String payrollId) {
+        return cancel(
+                xGustoAPIVersion, companyId, payrollId,
+                Optional.empty());
+    }
+
+    /**
+     * Cancel a payroll
+     * 
+     * <p>Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it
+     * meets both criteria:
+     * 
+     * <p>- `processed` is `true`
+     * - Current time is earlier than 4pm PT on the `payroll_deadline`
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param payrollId The UUID of the payroll
+     * @param options additional options
+     * @return {@code CompletableFuture<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse>} - The async response
+     */
+    public CompletableFuture<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse> cancel(
+            Optional<? extends PutAPIV1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String payrollId, Optional<Options> options) {
+        PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest request =
+            PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .payrollId(payrollId)
+                .build();
+        AsyncRequestOperation<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest, PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse> operation
+              = new PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancel.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -586,8 +1473,8 @@ public class AsyncPayrolls {
     /**
      * Prepare a payroll for update
      * 
-     * <p>Prepares an unprocessed payroll for update, including: adding or removing eligible employees from
-     * the payroll,
+     * <p>Prepares an unprocessed payroll for update, including: adding eligible employees to off-cycle
+     * payrolls that support multiple employees (`Bonus`, `Correction`, and `Adhoc`),
      * and updating `check_date`, `payroll_deadline`, and `payroll_status_meta` dates and times.
      * 
      * <p>Use this endpoint before calling [PUT
@@ -614,8 +1501,8 @@ public class AsyncPayrolls {
     /**
      * Prepare a payroll for update
      * 
-     * <p>Prepares an unprocessed payroll for update, including: adding or removing eligible employees from
-     * the payroll,
+     * <p>Prepares an unprocessed payroll for update, including: adding eligible employees to off-cycle
+     * payrolls that support multiple employees (`Bonus`, `Correction`, and `Adhoc`),
      * and updating `check_date`, `payroll_deadline`, and `payroll_status_meta` dates and times.
      * 
      * <p>Use this endpoint before calling [PUT
@@ -637,81 +1524,162 @@ public class AsyncPayrolls {
      * @return {@code CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse> prepare(PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest request) {
+        return prepare(request, Optional.empty());
+    }
+
+    /**
+     * Prepare a payroll for update
+     * 
+     * <p>Prepares an unprocessed payroll for update, including: adding eligible employees to off-cycle
+     * payrolls that support multiple employees (`Bonus`, `Correction`, and `Adhoc`),
+     * and updating `check_date`, `payroll_deadline`, and `payroll_status_meta` dates and times.
+     * 
+     * <p>Use this endpoint before calling [PUT
+     * /v1/companies/{company_id}/payrolls/{payroll_id}](ref:put-v1-companies-company_id-payrolls).
+     * 
+     * <p>### Notes
+     * 
+     * <p>* Nullifies `calculated_at` and `totals` if the payroll was previously calculated
+     * * Returns the `version` parameter required for [updating the
+     * payroll](ref:put-v1-companies-company_id-payrolls)
+     * * `employees:read` scope is required to include employee compensations data in the response.
+     * * Results are paginated, with a maximum page size of 100 employee compensations.
+     * 
+     * <p>scope: `payrolls:write employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse>} - The async response
+     */
+    public CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse> prepare(PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest request, Optional<Options> options) {
         AsyncRequestOperation<PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest, PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse> operation
-              = new PutV1CompaniesCompanyIdPayrollsPayrollIdPrepare.Async(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyIdPayrollsPayrollIdPrepare.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
 
     /**
-     * Get a single payroll receipt
+     * Calculate a payroll
      * 
-     * <p>Returns a payroll receipt.
+     * <p>Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated
+     * payroll details provide a preview of the actual values that will be used when the payroll is run.
      * 
-     * <p>Notes:
-     * * Hour and dollar amounts are returned as string representations of numeric decimals.
-     * * Dollar amounts are represented to the cent.
-     * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+     * <p>This calculation is asynchronous and a successful request responds with a 202 HTTP status. To view
+     * the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id}
+     * endpoint with *include=taxes,benefits,deductions* params.
      * 
-     * <p>scope: `payrolls:read`
+     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
+     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
+     * categorization of the blockers as described in the error responses.
+     * 
+     * <p>scope: `payrolls:write`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @return The async call builder
      */
-    public GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder getReceipt() {
-        return new GetV1PaymentReceiptsPayrollsPayrollUuidRequestBuilder(sdkConfiguration);
+    public PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequestBuilder calculate() {
+        return new PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get a single payroll receipt
+     * Calculate a payroll
      * 
-     * <p>Returns a payroll receipt.
+     * <p>Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated
+     * payroll details provide a preview of the actual values that will be used when the payroll is run.
      * 
-     * <p>Notes:
-     * * Hour and dollar amounts are returned as string representations of numeric decimals.
-     * * Dollar amounts are represented to the cent.
-     * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+     * <p>This calculation is asynchronous and a successful request responds with a 202 HTTP status. To view
+     * the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id}
+     * endpoint with *include=taxes,benefits,deductions* params.
      * 
-     * <p>scope: `payrolls:read`
+     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
+     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
+     * categorization of the blockers as described in the error responses.
+     * 
+     * <p>scope: `payrolls:write`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param payrollUuid The UUID of the payroll
-     * @return {@code CompletableFuture<GetV1PaymentReceiptsPayrollsPayrollUuidResponse>} - The async response
+     * @param companyId The UUID of the company
+     * @param payrollId The UUID of the payroll
+     * @return {@code CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse>} - The async response
      */
-    public CompletableFuture<GetV1PaymentReceiptsPayrollsPayrollUuidResponse> getReceipt(String payrollUuid) {
-        return getReceipt(payrollUuid, Optional.empty());
+    public CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse> calculate(String companyId, String payrollId) {
+        return calculate(
+                Optional.empty(), companyId, payrollId,
+                Optional.empty());
     }
 
     /**
-     * Get a single payroll receipt
+     * Calculate a payroll
      * 
-     * <p>Returns a payroll receipt.
+     * <p>Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated
+     * payroll details provide a preview of the actual values that will be used when the payroll is run.
      * 
-     * <p>Notes:
-     * * Hour and dollar amounts are returned as string representations of numeric decimals.
-     * * Dollar amounts are represented to the cent.
-     * * If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
+     * <p>This calculation is asynchronous and a successful request responds with a 202 HTTP status. To view
+     * the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id}
+     * endpoint with *include=taxes,benefits,deductions* params.
      * 
-     * <p>scope: `payrolls:read`
+     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
+     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
+     * categorization of the blockers as described in the error responses.
+     * 
+     * <p>scope: `payrolls:write`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param payrollUuid The UUID of the payroll
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @return {@code CompletableFuture<GetV1PaymentReceiptsPayrollsPayrollUuidResponse>} - The async response
+     * @param companyId The UUID of the company
+     * @param payrollId The UUID of the payroll
+     * @return {@code CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse>} - The async response
      */
-    public CompletableFuture<GetV1PaymentReceiptsPayrollsPayrollUuidResponse> getReceipt(String payrollUuid, Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        GetV1PaymentReceiptsPayrollsPayrollUuidRequest request =
-            GetV1PaymentReceiptsPayrollsPayrollUuidRequest
+    public CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse> calculate(
+            Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String payrollId) {
+        return calculate(
+                xGustoAPIVersion, companyId, payrollId,
+                Optional.empty());
+    }
+
+    /**
+     * Calculate a payroll
+     * 
+     * <p>Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated
+     * payroll details provide a preview of the actual values that will be used when the payroll is run.
+     * 
+     * <p>This calculation is asynchronous and a successful request responds with a 202 HTTP status. To view
+     * the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id}
+     * endpoint with *include=taxes,benefits,deductions* params.
+     * 
+     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
+     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
+     * categorization of the blockers as described in the error responses.
+     * 
+     * <p>scope: `payrolls:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param payrollId The UUID of the payroll
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse>} - The async response
+     */
+    public CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse> calculate(
+            Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String payrollId, Optional<Options> options) {
+        PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest request =
+            PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest
                 .builder()
-                .payrollUuid(payrollUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .companyId(companyId)
+                .payrollId(payrollId)
                 .build();
-        AsyncRequestOperation<GetV1PaymentReceiptsPayrollsPayrollUuidRequest, GetV1PaymentReceiptsPayrollsPayrollUuidResponse> operation
-              = new GetV1PaymentReceiptsPayrollsPayrollUuid.Async(sdkConfiguration, _headers);
+        AsyncRequestOperation<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest, PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse> operation
+              = new PutV1CompaniesCompanyIdPayrollsPayrollIdCalculate.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -721,10 +1689,10 @@ public class AsyncPayrolls {
      * Get all payroll blockers for a company
      * 
      * <p>Returns a list of reasons that prevent the company from running payrolls. See the [Payroll Blockers
-     * guide](doc:payroll-blockers) for a complete list of reasons. The list is empty if there are no
-     * payroll blockers.
+     * guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) for a complete list of
+     * reasons. The list is empty if there are no payroll blockers.
      * 
-     * <p>scope: `payrolls:run`
+     * <p>scope: `payrolls:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
@@ -738,10 +1706,10 @@ public class AsyncPayrolls {
      * Get all payroll blockers for a company
      * 
      * <p>Returns a list of reasons that prevent the company from running payrolls. See the [Payroll Blockers
-     * guide](doc:payroll-blockers) for a complete list of reasons. The list is empty if there are no
-     * payroll blockers.
+     * guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) for a complete list of
+     * reasons. The list is empty if there are no payroll blockers.
      * 
-     * <p>scope: `payrolls:run`
+     * <p>scope: `payrolls:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
@@ -749,17 +1717,17 @@ public class AsyncPayrolls {
      * @return {@code CompletableFuture<GetV1CompaniesPayrollBlockersCompanyUuidResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesPayrollBlockersCompanyUuidResponse> getBlockers(String companyUuid) {
-        return getBlockers(Optional.empty(), companyUuid);
+        return getBlockers(Optional.empty(), companyUuid, Optional.empty());
     }
 
     /**
      * Get all payroll blockers for a company
      * 
      * <p>Returns a list of reasons that prevent the company from running payrolls. See the [Payroll Blockers
-     * guide](doc:payroll-blockers) for a complete list of reasons. The list is empty if there are no
-     * payroll blockers.
+     * guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) for a complete list of
+     * reasons. The list is empty if there are no payroll blockers.
      * 
-     * <p>scope: `payrolls:run`
+     * <p>scope: `payrolls:read`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
@@ -768,6 +1736,28 @@ public class AsyncPayrolls {
      * @return {@code CompletableFuture<GetV1CompaniesPayrollBlockersCompanyUuidResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesPayrollBlockersCompanyUuidResponse> getBlockers(Optional<? extends GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
+        return getBlockers(xGustoAPIVersion, companyUuid, Optional.empty());
+    }
+
+    /**
+     * Get all payroll blockers for a company
+     * 
+     * <p>Returns a list of reasons that prevent the company from running payrolls. See the [Payroll Blockers
+     * guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers) for a complete list of
+     * reasons. The list is empty if there are no payroll blockers.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesPayrollBlockersCompanyUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesPayrollBlockersCompanyUuidResponse> getBlockers(
+            Optional<? extends GetV1CompaniesPayrollBlockersCompanyUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            Optional<Options> options) {
         GetV1CompaniesPayrollBlockersCompanyUuidRequest request =
             GetV1CompaniesPayrollBlockersCompanyUuidRequest
                 .builder()
@@ -775,7 +1765,7 @@ public class AsyncPayrolls {
                 .companyUuid(companyUuid)
                 .build();
         AsyncRequestOperation<GetV1CompaniesPayrollBlockersCompanyUuidRequest, GetV1CompaniesPayrollBlockersCompanyUuidResponse> operation
-              = new GetV1CompaniesPayrollBlockersCompanyUuid.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesPayrollBlockersCompanyUuid.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -822,7 +1812,9 @@ public class AsyncPayrolls {
      * @return {@code CompletableFuture<PostCompaniesPayrollSkipCompanyUuidResponse>} - The async response
      */
     public CompletableFuture<PostCompaniesPayrollSkipCompanyUuidResponse> skip(String companyUuid, PostCompaniesPayrollSkipCompanyUuidRequestBody requestBody) {
-        return skip(Optional.empty(), companyUuid, requestBody);
+        return skip(
+                Optional.empty(), companyUuid, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -848,6 +1840,35 @@ public class AsyncPayrolls {
     public CompletableFuture<PostCompaniesPayrollSkipCompanyUuidResponse> skip(
             Optional<? extends PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PostCompaniesPayrollSkipCompanyUuidRequestBody requestBody) {
+        return skip(
+                xGustoAPIVersion, companyUuid, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Skip a payroll
+     * 
+     * <p>Submits a $0 payroll for employees associated with the pay schedule to skip payroll. This submission
+     * is asynchronous and a successful request responds with a 202 HTTP status. Upon success, the payroll
+     * is transitioned to the `processed` state.
+     * 
+     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
+     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
+     * categorization of the blockers as described in the error responses.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PostCompaniesPayrollSkipCompanyUuidResponse>} - The async response
+     */
+    public CompletableFuture<PostCompaniesPayrollSkipCompanyUuidResponse> skip(
+            Optional<? extends PostCompaniesPayrollSkipCompanyUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            PostCompaniesPayrollSkipCompanyUuidRequestBody requestBody, Optional<Options> options) {
         PostCompaniesPayrollSkipCompanyUuidRequest request =
             PostCompaniesPayrollSkipCompanyUuidRequest
                 .builder()
@@ -856,175 +1877,7 @@ public class AsyncPayrolls {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PostCompaniesPayrollSkipCompanyUuidRequest, PostCompaniesPayrollSkipCompanyUuidResponse> operation
-              = new PostCompaniesPayrollSkipCompanyUuid.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Calculate gross up for a payroll
-     * 
-     * <p>Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only
-     * applicable to off-cycle unprocessed payrolls.
-     * 
-     * <p>The gross up amount must then be mapped to the corresponding fixed compensation earning type to get
-     * the correct payroll amount. For example, for bonus off-cycles, the gross up amount should be set
-     * with the Bonus earning type in the payroll `fixed_compensations` field.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public PostPayrollsGrossUpPayrollUuidRequestBuilder calculateGrossUp() {
-        return new PostPayrollsGrossUpPayrollUuidRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Calculate gross up for a payroll
-     * 
-     * <p>Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only
-     * applicable to off-cycle unprocessed payrolls.
-     * 
-     * <p>The gross up amount must then be mapped to the corresponding fixed compensation earning type to get
-     * the correct payroll amount. For example, for bonus off-cycles, the gross up amount should be set
-     * with the Bonus earning type in the payroll `fixed_compensations` field.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param payrollUuid The UUID of the payroll
-     * @param payrollGrossUpRequest Request body for calculating gross up amount
-     * @return {@code CompletableFuture<PostPayrollsGrossUpPayrollUuidResponse>} - The async response
-     */
-    public CompletableFuture<PostPayrollsGrossUpPayrollUuidResponse> calculateGrossUp(String payrollUuid, PayrollGrossUpRequest payrollGrossUpRequest) {
-        return calculateGrossUp(Optional.empty(), payrollUuid, payrollGrossUpRequest);
-    }
-
-    /**
-     * Calculate gross up for a payroll
-     * 
-     * <p>Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only
-     * applicable to off-cycle unprocessed payrolls.
-     * 
-     * <p>The gross up amount must then be mapped to the corresponding fixed compensation earning type to get
-     * the correct payroll amount. For example, for bonus off-cycles, the gross up amount should be set
-     * with the Bonus earning type in the payroll `fixed_compensations` field.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param payrollUuid The UUID of the payroll
-     * @param payrollGrossUpRequest Request body for calculating gross up amount
-     * @return {@code CompletableFuture<PostPayrollsGrossUpPayrollUuidResponse>} - The async response
-     */
-    public CompletableFuture<PostPayrollsGrossUpPayrollUuidResponse> calculateGrossUp(
-            Optional<? extends PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
-            PayrollGrossUpRequest payrollGrossUpRequest) {
-        PostPayrollsGrossUpPayrollUuidRequest request =
-            PostPayrollsGrossUpPayrollUuidRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .payrollUuid(payrollUuid)
-                .payrollGrossUpRequest(payrollGrossUpRequest)
-                .build();
-        AsyncRequestOperation<PostPayrollsGrossUpPayrollUuidRequest, PostPayrollsGrossUpPayrollUuidResponse> operation
-              = new PostPayrollsGrossUpPayrollUuid.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Calculate a payroll
-     * 
-     * <p>Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated
-     * payroll details provide a preview of the actual values that will be used when the payroll is run.
-     * 
-     * <p>This calculation is asynchronous and a successful request responds with a 202 HTTP status. To view
-     * the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id}
-     * endpoint with *include=taxes,benefits,deductions* params.
-     * 
-     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
-     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
-     * categorization of the blockers as described in the error responses.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequestBuilder calculate() {
-        return new PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Calculate a payroll
-     * 
-     * <p>Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated
-     * payroll details provide a preview of the actual values that will be used when the payroll is run.
-     * 
-     * <p>This calculation is asynchronous and a successful request responds with a 202 HTTP status. To view
-     * the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id}
-     * endpoint with *include=taxes,benefits,deductions* params.
-     * 
-     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
-     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
-     * categorization of the blockers as described in the error responses.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param payrollId The UUID of the payroll
-     * @return {@code CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse>} - The async response
-     */
-    public CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse> calculate(String companyId, String payrollId) {
-        return calculate(Optional.empty(), companyId, payrollId);
-    }
-
-    /**
-     * Calculate a payroll
-     * 
-     * <p>Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated
-     * payroll details provide a preview of the actual values that will be used when the payroll is run.
-     * 
-     * <p>This calculation is asynchronous and a successful request responds with a 202 HTTP status. To view
-     * the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id}
-     * endpoint with *include=taxes,benefits,deductions* params.
-     * 
-     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
-     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
-     * categorization of the blockers as described in the error responses.
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyId The UUID of the company
-     * @param payrollId The UUID of the payroll
-     * @return {@code CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse>} - The async response
-     */
-    public CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse> calculate(
-            Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
-            String payrollId) {
-        PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest request =
-            PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .companyId(companyId)
-                .payrollId(payrollId)
-                .build();
-        AsyncRequestOperation<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest, PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse> operation
-              = new PutV1CompaniesCompanyIdPayrollsPayrollIdCalculate.Async(sdkConfiguration, _headers);
+              = new PostCompaniesPayrollSkipCompanyUuid.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -1079,7 +1932,7 @@ public class AsyncPayrolls {
     public CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse> submit(String companyId, String payrollId) {
         return submit(
                 Optional.empty(), companyId, payrollId,
-                Optional.empty());
+                Optional.empty(), Optional.empty());
     }
 
     /**
@@ -1109,6 +1962,40 @@ public class AsyncPayrolls {
     public CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse> submit(
             Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             String payrollId, Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody> requestBody) {
+        return submit(
+                xGustoAPIVersion, companyId, payrollId,
+                requestBody, Optional.empty());
+    }
+
+    /**
+     * Submit payroll
+     * 
+     * <p>Submits an unprocessed payroll to be calculated and run. This submission is asynchronous and a
+     * successful request responds with a 202 HTTP status. Upon success, transitions the payroll to the
+     * `processed` state.
+     * 
+     * <p>You should poll to ensure that payroll is processed successfully, as async errors only occur after
+     * async processing is complete.
+     * 
+     * <p>If the company is blocked from running payroll due to issues like incomplete setup, missing
+     * information or other compliance issues, the response will be 422 Unprocessable Entity with a
+     * categorization of the blockers as described in the error responses.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param payrollId The UUID of the payroll
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse>} - The async response
+     */
+    public CompletableFuture<PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse> submit(
+            Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String payrollId, Optional<? extends PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody> requestBody,
+            Optional<Options> options) {
         PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest request =
             PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest
                 .builder()
@@ -1118,20 +2005,21 @@ public class AsyncPayrolls {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest, PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse> operation
-              = new PutV1CompaniesCompanyIdPayrollsPayrollIdSubmit.Async(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyIdPayrollsPayrollIdSubmit.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
 
     /**
-     * Cancel a payroll
+     * Calculate gross up for a payroll
      * 
-     * <p>Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it
-     * meets both criteria:
+     * <p>Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only
+     * applicable to off-cycle unprocessed payrolls.
      * 
-     * <p>- `processed` is `true`
-     * - Current time is earlier than 4pm PT on the `payroll_deadline`
+     * <p>The gross up amount must then be mapped to the corresponding fixed compensation earning type to get
+     * the correct payroll amount. For example, for bonus off-cycles, the gross up amount should be set
+     * with the Bonus earning type in the payroll `fixed_compensations` field.
      * 
      * <p>scope: `payrolls:run`
      * 
@@ -1139,401 +2027,93 @@ public class AsyncPayrolls {
      * 
      * @return The async call builder
      */
-    public PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder cancel() {
-        return new PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestBuilder(sdkConfiguration);
+    public PostPayrollsGrossUpPayrollUuidRequestBuilder calculateGrossUp() {
+        return new PostPayrollsGrossUpPayrollUuidRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Cancel a payroll
+     * Calculate gross up for a payroll
      * 
-     * <p>Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it
-     * meets both criteria:
+     * <p>Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only
+     * applicable to off-cycle unprocessed payrolls.
      * 
-     * <p>- `processed` is `true`
-     * - Current time is earlier than 4pm PT on the `payroll_deadline`
+     * <p>The gross up amount must then be mapped to the corresponding fixed compensation earning type to get
+     * the correct payroll amount. For example, for bonus off-cycles, the gross up amount should be set
+     * with the Bonus earning type in the payroll `fixed_compensations` field.
      * 
      * <p>scope: `payrolls:run`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param companyId The UUID of the company
-     * @param payrollId The UUID of the payroll
-     * @return {@code CompletableFuture<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse>} - The async response
+     * @param payrollUuid The UUID of the payroll
+     * @param payrollGrossUpRequest Request body for calculating gross up amount
+     * @return {@code CompletableFuture<PostPayrollsGrossUpPayrollUuidResponse>} - The async response
      */
-    public CompletableFuture<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse> cancel(String companyId, String payrollId) {
-        return cancel(Optional.empty(), companyId, payrollId);
-    }
-
-    /**
-     * Cancel a payroll
-     * 
-     * <p>Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it
-     * meets both criteria:
-     * 
-     * <p>- `processed` is `true`
-     * - Current time is earlier than 4pm PT on the `payroll_deadline`
-     * 
-     * <p>scope: `payrolls:run`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param companyId The UUID of the company
-     * @param payrollId The UUID of the payroll
-     * @return {@code CompletableFuture<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse>} - The async response
-     */
-    public CompletableFuture<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse> cancel(
-            Optional<? extends PutAPIV1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
-            String payrollId) {
-        PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest request =
-            PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .companyId(companyId)
-                .payrollId(payrollId)
-                .build();
-        AsyncRequestOperation<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest, PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse> operation
-              = new PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancel.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get an employee pay stub (pdf)
-     * 
-     * <p>Get an employee's pay stub for the specified payroll. By default, an application/pdf response will
-     * be returned. No other content types are currently supported, but may be supported in the future.
-     * 
-     * <p>scope: `pay_stubs:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder getPayStub() {
-        return new GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get an employee pay stub (pdf)
-     * 
-     * <p>Get an employee's pay stub for the specified payroll. By default, an application/pdf response will
-     * be returned. No other content types are currently supported, but may be supported in the future.
-     * 
-     * <p>scope: `pay_stubs:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param payrollId The UUID of the payroll
-     * @param employeeId The UUID of the employee
-     * @return {@code CompletableFuture<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse>} - The async response
-     */
-    public CompletableFuture<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse> getPayStub(String payrollId, String employeeId) {
-        return getPayStub(Optional.empty(), payrollId, employeeId);
-    }
-
-    /**
-     * Get an employee pay stub (pdf)
-     * 
-     * <p>Get an employee's pay stub for the specified payroll. By default, an application/pdf response will
-     * be returned. No other content types are currently supported, but may be supported in the future.
-     * 
-     * <p>scope: `pay_stubs:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param payrollId The UUID of the payroll
-     * @param employeeId The UUID of the employee
-     * @return {@code CompletableFuture<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse>} - The async response
-     */
-    public CompletableFuture<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse> getPayStub(
-            Optional<? extends GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollId,
-            String employeeId) {
-        GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest request =
-            GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .payrollId(payrollId)
-                .employeeId(employeeId)
-                .build();
-        AsyncRequestOperation<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest, GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse> operation
-              = new GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStub.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get an employee's pay stubs
-     * 
-     * <p>Get an employee's pay stubs.
-     * 
-     * <p>Results are returned in reverse chronological order (newest first).
-     * 
-     * <p>scope: `pay_stubs:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public GetV1EmployeesEmployeeUuidPayStubsRequestBuilder getPayStubs() {
-        return new GetV1EmployeesEmployeeUuidPayStubsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get an employee's pay stubs
-     * 
-     * <p>Get an employee's pay stubs.
-     * 
-     * <p>Results are returned in reverse chronological order (newest first).
-     * 
-     * <p>scope: `pay_stubs:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param employeeId The UUID of the employee
-     * @return {@code CompletableFuture<GetV1EmployeesEmployeeUuidPayStubsResponse>} - The async response
-     */
-    public CompletableFuture<GetV1EmployeesEmployeeUuidPayStubsResponse> getPayStubs(String employeeId) {
-        return getPayStubs(
-                Optional.empty(), employeeId, Optional.empty(),
+    public CompletableFuture<PostPayrollsGrossUpPayrollUuidResponse> calculateGrossUp(String payrollUuid, PayrollGrossUpRequest payrollGrossUpRequest) {
+        return calculateGrossUp(
+                Optional.empty(), payrollUuid, payrollGrossUpRequest,
                 Optional.empty());
     }
 
     /**
-     * Get an employee's pay stubs
+     * Calculate gross up for a payroll
      * 
-     * <p>Get an employee's pay stubs.
+     * <p>Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only
+     * applicable to off-cycle unprocessed payrolls.
      * 
-     * <p>Results are returned in reverse chronological order (newest first).
+     * <p>The gross up amount must then be mapped to the corresponding fixed compensation earning type to get
+     * the correct payroll amount. For example, for bonus off-cycles, the gross up amount should be set
+     * with the Bonus earning type in the payroll `fixed_compensations` field.
      * 
-     * <p>scope: `pay_stubs:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param employeeId The UUID of the employee
-     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
-     * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @return {@code CompletableFuture<GetV1EmployeesEmployeeUuidPayStubsResponse>} - The async response
-     */
-    public CompletableFuture<GetV1EmployeesEmployeeUuidPayStubsResponse> getPayStubs(
-            Optional<? extends GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
-            Optional<Long> page, Optional<Long> per) {
-        GetV1EmployeesEmployeeUuidPayStubsRequest request =
-            GetV1EmployeesEmployeeUuidPayStubsRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .employeeId(employeeId)
-                .page(page)
-                .per(per)
-                .build();
-        AsyncRequestOperation<GetV1EmployeesEmployeeUuidPayStubsRequest, GetV1EmployeesEmployeeUuidPayStubsResponse> operation
-              = new GetV1EmployeesEmployeeUuidPayStubs.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Generate printable payroll checks (pdf)
-     * 
-     * <p>This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid.
-     * A generation status and corresponding request_uuid will be returned. Use the generated document GET
-     * endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check
-     * generation process and retrieve the generated check URL upon completion.
-     * 
-     * <p>scope: `generated_documents:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBuilder generatePrintableChecks() {
-        return new PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Generate printable payroll checks (pdf)
-     * 
-     * <p>This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid.
-     * A generation status and corresponding request_uuid will be returned. Use the generated document GET
-     * endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check
-     * generation process and retrieve the generated check URL upon completion.
-     * 
-     * <p>scope: `generated_documents:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param payrollUuid The UUID of the payroll
-     * @param printablePayrollChecksBody Request body for generating printable payroll checks.
-     * @return {@code CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse>} - The async response
-     */
-    public CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse> generatePrintableChecks(String payrollUuid, PrintablePayrollChecksBody printablePayrollChecksBody) {
-        return generatePrintableChecks(Optional.empty(), payrollUuid, printablePayrollChecksBody);
-    }
-
-    /**
-     * Generate printable payroll checks (pdf)
-     * 
-     * <p>This endpoint initiates the generation of employee checks for the payroll specified by payroll_uuid.
-     * A generation status and corresponding request_uuid will be returned. Use the generated document GET
-     * endpoint with document_type: `printable_payroll_checks` and request_uuid to poll the check
-     * generation process and retrieve the generated check URL upon completion.
-     * 
-     * <p>scope: `generated_documents:write`
+     * <p>scope: `payrolls:run`
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param payrollUuid The UUID of the payroll
-     * @param printablePayrollChecksBody Request body for generating printable payroll checks.
-     * @return {@code CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse>} - The async response
+     * @param payrollGrossUpRequest Request body for calculating gross up amount
+     * @return {@code CompletableFuture<PostPayrollsGrossUpPayrollUuidResponse>} - The async response
      */
-    public CompletableFuture<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse> generatePrintableChecks(
-            Optional<? extends PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
-            PrintablePayrollChecksBody printablePayrollChecksBody) {
-        PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest request =
-            PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest
+    public CompletableFuture<PostPayrollsGrossUpPayrollUuidResponse> calculateGrossUp(
+            Optional<? extends PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
+            PayrollGrossUpRequest payrollGrossUpRequest) {
+        return calculateGrossUp(
+                xGustoAPIVersion, payrollUuid, payrollGrossUpRequest,
+                Optional.empty());
+    }
+
+    /**
+     * Calculate gross up for a payroll
+     * 
+     * <p>Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only
+     * applicable to off-cycle unprocessed payrolls.
+     * 
+     * <p>The gross up amount must then be mapped to the corresponding fixed compensation earning type to get
+     * the correct payroll amount. For example, for bonus off-cycles, the gross up amount should be set
+     * with the Bonus earning type in the payroll `fixed_compensations` field.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollUuid The UUID of the payroll
+     * @param payrollGrossUpRequest Request body for calculating gross up amount
+     * @param options additional options
+     * @return {@code CompletableFuture<PostPayrollsGrossUpPayrollUuidResponse>} - The async response
+     */
+    public CompletableFuture<PostPayrollsGrossUpPayrollUuidResponse> calculateGrossUp(
+            Optional<? extends PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
+            PayrollGrossUpRequest payrollGrossUpRequest, Optional<Options> options) {
+        PostPayrollsGrossUpPayrollUuidRequest request =
+            PostPayrollsGrossUpPayrollUuidRequest
                 .builder()
                 .xGustoAPIVersion(xGustoAPIVersion)
                 .payrollUuid(payrollUuid)
-                .printablePayrollChecksBody(printablePayrollChecksBody)
+                .payrollGrossUpRequest(payrollGrossUpRequest)
                 .build();
-        AsyncRequestOperation<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest, PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse> operation
-              = new PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecks.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get partner disbursements for a payroll
-     * 
-     * <p>Get partner disbursements for a specific payroll.
-     * 
-     * <p>scope: `partner_disbursements:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements() {
-        return new GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get partner disbursements for a payroll
-     * 
-     * <p>Get partner disbursements for a specific payroll.
-     * 
-     * <p>scope: `partner_disbursements:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param id The UUID of the payroll
-     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse>} - The async response
-     */
-    public CompletableFuture<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(String companyId, String id) {
-        return getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(companyId, id, Optional.empty());
-    }
-
-    /**
-     * Get partner disbursements for a payroll
-     * 
-     * <p>Get partner disbursements for a specific payroll.
-     * 
-     * <p>scope: `partner_disbursements:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param id The UUID of the payroll
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse>} - The async response
-     */
-    public CompletableFuture<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-            String companyId, String id,
-            Optional<? extends GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request =
-            GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest
-                .builder()
-                .companyId(companyId)
-                .id(id)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .build();
-        AsyncRequestOperation<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest, GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> operation
-              = new GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Update partner disbursements for a payroll
-     * 
-     * <p>Update partner disbursements for a specific payroll.
-     * 
-     * <p>scope: `partner_disbursements:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements() {
-        return new PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Update partner disbursements for a payroll
-     * 
-     * <p>Update partner disbursements for a specific payroll.
-     * 
-     * <p>scope: `partner_disbursements:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param id The UUID of the payroll
-     * @return {@code CompletableFuture<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse>} - The async response
-     */
-    public CompletableFuture<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(String companyId, String id) {
-        return patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-                companyId, id, Optional.empty(),
-                Optional.empty());
-    }
-
-    /**
-     * Update partner disbursements for a payroll
-     * 
-     * <p>Update partner disbursements for a specific payroll.
-     * 
-     * <p>scope: `partner_disbursements:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param companyId The UUID of the company
-     * @param id The UUID of the payroll
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param requestBody 
-     * @return {@code CompletableFuture<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse>} - The async response
-     */
-    public CompletableFuture<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-            String companyId, String id,
-            Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody> requestBody) {
-        PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request =
-            PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest
-                .builder()
-                .companyId(companyId)
-                .id(id)
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .requestBody(requestBody)
-                .build();
-        AsyncRequestOperation<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest, PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> operation
-              = new PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.Async(sdkConfiguration, _headers);
+        AsyncRequestOperation<PostPayrollsGrossUpPayrollUuidRequest, PostPayrollsGrossUpPayrollUuidResponse> operation
+              = new PostPayrollsGrossUpPayrollUuid.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

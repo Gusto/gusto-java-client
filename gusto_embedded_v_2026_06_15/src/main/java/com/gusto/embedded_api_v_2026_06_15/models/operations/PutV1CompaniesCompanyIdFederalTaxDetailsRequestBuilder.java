@@ -11,29 +11,26 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.FederalTaxDetailsUp
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1CompaniesCompanyIdFederalTaxDetails;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
 
-    private String companyId;
     private Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
     private FederalTaxDetailsUpdate federalTaxDetailsUpdate;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder xGustoAPIVersion(PutV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,9 +45,27 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
         return this;
     }
 
+    public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
     public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder federalTaxDetailsUpdate(FederalTaxDetailsUpdate federalTaxDetailsUpdate) {
         Utils.checkNotNull(federalTaxDetailsUpdate, "federalTaxDetailsUpdate");
         this.federalTaxDetailsUpdate = federalTaxDetailsUpdate;
+        return this;
+    }
+                
+    public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -60,17 +75,20 @@ public class PutV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompaniesCompanyIdFederalTaxDetailsRequest request = new PutV1CompaniesCompanyIdFederalTaxDetailsRequest(companyId,
-            xGustoAPIVersion,
+        PutV1CompaniesCompanyIdFederalTaxDetailsRequest request = new PutV1CompaniesCompanyIdFederalTaxDetailsRequest(xGustoAPIVersion,
+            companyId,
             federalTaxDetailsUpdate);
 
         return request;
     }
 
     public PutV1CompaniesCompanyIdFederalTaxDetailsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1CompaniesCompanyIdFederalTaxDetailsRequest, PutV1CompaniesCompanyIdFederalTaxDetailsResponse> operation
-              = new PutV1CompaniesCompanyIdFederalTaxDetails.Sync(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyIdFederalTaxDetails.Sync(sdkConfiguration, options, _headers);
         PutV1CompaniesCompanyIdFederalTaxDetailsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

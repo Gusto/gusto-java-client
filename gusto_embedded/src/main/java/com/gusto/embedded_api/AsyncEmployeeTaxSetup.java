@@ -28,6 +28,7 @@ import com.gusto.embedded_api.operations.GetV1EmployeesEmployeeIdStateTaxes;
 import com.gusto.embedded_api.operations.PutV1EmployeesEmployeeIdFederalTaxes;
 import com.gusto.embedded_api.operations.PutV1EmployeesEmployeeIdStateTaxes;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -83,7 +84,7 @@ public class AsyncEmployeeTaxSetup {
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdFederalTaxesResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdFederalTaxesResponse> getFederalTaxes(String employeeUuid) {
-        return getFederalTaxes(Optional.empty(), employeeUuid);
+        return getFederalTaxes(Optional.empty(), employeeUuid, Optional.empty());
     }
 
     /**
@@ -101,6 +102,27 @@ public class AsyncEmployeeTaxSetup {
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdFederalTaxesResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdFederalTaxesResponse> getFederalTaxes(Optional<? extends GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid) {
+        return getFederalTaxes(xGustoAPIVersion, employeeUuid, Optional.empty());
+    }
+
+    /**
+     * Get federal taxes for an employee
+     * 
+     * <p>Returns federal tax information for an employee. The response structure varies based on the
+     * w4_data_type (pre_2020_w4 or rev_2020_w4).
+     * 
+     * <p>scope: `employee_federal_taxes:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeUuid The UUID of the employee
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdFederalTaxesResponse>} - The async response
+     */
+    public CompletableFuture<GetV1EmployeesEmployeeIdFederalTaxesResponse> getFederalTaxes(
+            Optional<? extends GetV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
+            Optional<Options> options) {
         GetV1EmployeesEmployeeIdFederalTaxesRequest request =
             GetV1EmployeesEmployeeIdFederalTaxesRequest
                 .builder()
@@ -108,7 +130,7 @@ public class AsyncEmployeeTaxSetup {
                 .employeeUuid(employeeUuid)
                 .build();
         AsyncRequestOperation<GetV1EmployeesEmployeeIdFederalTaxesRequest, GetV1EmployeesEmployeeIdFederalTaxesResponse> operation
-              = new GetV1EmployeesEmployeeIdFederalTaxes.Async(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeIdFederalTaxes.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -145,7 +167,9 @@ public class AsyncEmployeeTaxSetup {
      * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdFederalTaxesResponse>} - The async response
      */
     public CompletableFuture<PutV1EmployeesEmployeeIdFederalTaxesResponse> updateFederalTaxes(String employeeUuid, PutV1EmployeesEmployeeIdFederalTaxesRequestBody requestBody) {
-        return updateFederalTaxes(Optional.empty(), employeeUuid, requestBody);
+        return updateFederalTaxes(
+                Optional.empty(), employeeUuid, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -166,6 +190,30 @@ public class AsyncEmployeeTaxSetup {
     public CompletableFuture<PutV1EmployeesEmployeeIdFederalTaxesResponse> updateFederalTaxes(
             Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
             PutV1EmployeesEmployeeIdFederalTaxesRequestBody requestBody) {
+        return updateFederalTaxes(
+                xGustoAPIVersion, employeeUuid, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Update federal taxes for an employee
+     * 
+     * <p>Updates federal tax (W4) information for an employee. Only rev_2020_w4 format is accepted for
+     * updates.
+     * 
+     * <p>scope: `employee_federal_taxes:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeUuid The UUID of the employee
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdFederalTaxesResponse>} - The async response
+     */
+    public CompletableFuture<PutV1EmployeesEmployeeIdFederalTaxesResponse> updateFederalTaxes(
+            Optional<? extends PutV1EmployeesEmployeeIdFederalTaxesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
+            PutV1EmployeesEmployeeIdFederalTaxesRequestBody requestBody, Optional<Options> options) {
         PutV1EmployeesEmployeeIdFederalTaxesRequest request =
             PutV1EmployeesEmployeeIdFederalTaxesRequest
                 .builder()
@@ -174,7 +222,7 @@ public class AsyncEmployeeTaxSetup {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1EmployeesEmployeeIdFederalTaxesRequest, PutV1EmployeesEmployeeIdFederalTaxesResponse> operation
-              = new PutV1EmployeesEmployeeIdFederalTaxes.Async(sdkConfiguration, _headers);
+              = new PutV1EmployeesEmployeeIdFederalTaxes.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -248,7 +296,7 @@ public class AsyncEmployeeTaxSetup {
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdStateTaxesResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdStateTaxesResponse> getStateTaxes(String employeeUuid) {
-        return getStateTaxes(Optional.empty(), employeeUuid);
+        return getStateTaxes(Optional.empty(), employeeUuid, Optional.empty());
     }
 
     /**
@@ -285,6 +333,46 @@ public class AsyncEmployeeTaxSetup {
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdStateTaxesResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdStateTaxesResponse> getStateTaxes(Optional<? extends GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid) {
+        return getStateTaxes(xGustoAPIVersion, employeeUuid, Optional.empty());
+    }
+
+    /**
+     * Get an employee's state taxes
+     * 
+     * <p>Get attributes relevant for an employee's state taxes.
+     * 
+     * <p>The data required to correctly calculate an employee's state taxes varies by both home and work
+     * location. This API returns information about each question that must be answered grouped by state.
+     * Mostly commonly, an employee lives and works in the same state and will only have questions for a
+     * single state.
+     * 
+     * <p>The response contains metadata about each question, the type of answer expected, and the current
+     * answer stored in Gusto for that question.
+     * 
+     * <p>Answers are represented by an array. Today, this array can only be empty or contain exactly one
+     * element, but is designed to allow for forward compatibility with effective-dated fields. The
+     * `valid_from` and `valid_up_to` fields are optional and currently ignored.
+     * 
+     * <p>## About filing new hire reports
+     * Payroll Admins are responsible for filing a new hire report for each Employee. The
+     * `file_new_hire_report` question will only be listed if:
+     * - the `employee.onboarding_status` is one of the following:
+     * - `admin_onboarding_incomplete`
+     * - `self_onboarding_awaiting_admin_review`
+     * - that employee's work state requires filing a new hire report
+     * 
+     * <p>scope: `employee_state_taxes:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeUuid The UUID of the employee
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdStateTaxesResponse>} - The async response
+     */
+    public CompletableFuture<GetV1EmployeesEmployeeIdStateTaxesResponse> getStateTaxes(
+            Optional<? extends GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
+            Optional<Options> options) {
         GetV1EmployeesEmployeeIdStateTaxesRequest request =
             GetV1EmployeesEmployeeIdStateTaxesRequest
                 .builder()
@@ -292,7 +380,7 @@ public class AsyncEmployeeTaxSetup {
                 .employeeUuid(employeeUuid)
                 .build();
         AsyncRequestOperation<GetV1EmployeesEmployeeIdStateTaxesRequest, GetV1EmployeesEmployeeIdStateTaxesResponse> operation
-              = new GetV1EmployeesEmployeeIdStateTaxes.Async(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeIdStateTaxes.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -335,7 +423,9 @@ public class AsyncEmployeeTaxSetup {
      * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdStateTaxesResponse>} - The async response
      */
     public CompletableFuture<PutV1EmployeesEmployeeIdStateTaxesResponse> updateStateTaxes(String employeeUuid, EmployeeStateTaxesRequest employeeStateTaxesRequest) {
-        return updateStateTaxes(Optional.empty(), employeeUuid, employeeStateTaxesRequest);
+        return updateStateTaxes(
+                Optional.empty(), employeeUuid, employeeStateTaxesRequest,
+                Optional.empty());
     }
 
     /**
@@ -359,6 +449,33 @@ public class AsyncEmployeeTaxSetup {
     public CompletableFuture<PutV1EmployeesEmployeeIdStateTaxesResponse> updateStateTaxes(
             Optional<? extends PutV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
             EmployeeStateTaxesRequest employeeStateTaxesRequest) {
+        return updateStateTaxes(
+                xGustoAPIVersion, employeeUuid, employeeStateTaxesRequest,
+                Optional.empty());
+    }
+
+    /**
+     * Update an employee's state taxes
+     * 
+     * <p>Update attributes relevant for an employee's state taxes.
+     * 
+     * <p>As described for the GET endpoint, the answers must be supplied in the effective-dated format, but
+     * currently only a single answer will be accepted. The `valid_from` and `valid_up_to` fields are
+     * optional and currently ignored.
+     * 
+     * <p>scope: `employee_state_taxes:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeUuid The UUID of the employee
+     * @param employeeStateTaxesRequest 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdStateTaxesResponse>} - The async response
+     */
+    public CompletableFuture<PutV1EmployeesEmployeeIdStateTaxesResponse> updateStateTaxes(
+            Optional<? extends PutV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
+            EmployeeStateTaxesRequest employeeStateTaxesRequest, Optional<Options> options) {
         PutV1EmployeesEmployeeIdStateTaxesRequest request =
             PutV1EmployeesEmployeeIdStateTaxesRequest
                 .builder()
@@ -367,7 +484,7 @@ public class AsyncEmployeeTaxSetup {
                 .employeeStateTaxesRequest(employeeStateTaxesRequest)
                 .build();
         AsyncRequestOperation<PutV1EmployeesEmployeeIdStateTaxesRequest, PutV1EmployeesEmployeeIdStateTaxesResponse> operation
-              = new PutV1EmployeesEmployeeIdStateTaxes.Async(sdkConfiguration, _headers);
+              = new PutV1EmployeesEmployeeIdStateTaxes.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

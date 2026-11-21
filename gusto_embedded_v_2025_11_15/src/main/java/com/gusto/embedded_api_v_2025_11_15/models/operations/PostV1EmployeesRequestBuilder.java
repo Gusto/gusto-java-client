@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.PostV1Employees;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostV1EmployeesRequestBuilder {
@@ -22,6 +24,7 @@ public class PostV1EmployeesRequestBuilder {
                             new TypeReference<Optional<? extends PostV1EmployeesHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private Optional<? extends PostV1EmployeesRequestBody> requestBody = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -58,6 +61,18 @@ public class PostV1EmployeesRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PostV1EmployeesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1EmployeesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1EmployeesRequest buildRequest() {
@@ -73,9 +88,12 @@ public class PostV1EmployeesRequestBuilder {
     }
 
     public PostV1EmployeesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostV1EmployeesRequest, PostV1EmployeesResponse> operation
-              = new PostV1Employees.Sync(sdkConfiguration, _headers);
+              = new PostV1Employees.Sync(sdkConfiguration, options, _headers);
         PostV1EmployeesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

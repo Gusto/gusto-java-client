@@ -12,29 +12,26 @@ import com.gusto.embedded_api.models.operations.GetDepartmentRequest;
 import com.gusto.embedded_api.operations.GetDepartment;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetDepartmentRequestBuilder {
 
-    private String departmentUuid;
     private Optional<? extends GetDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetDepartmentHeaderXGustoAPIVersion>>() {});
+    private String departmentUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetDepartmentRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetDepartmentRequestBuilder departmentUuid(String departmentUuid) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
-        this.departmentUuid = departmentUuid;
-        return this;
     }
                 
     public GetDepartmentRequestBuilder xGustoAPIVersion(GetDepartmentHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,22 +46,43 @@ public class GetDepartmentRequestBuilder {
         return this;
     }
 
+    public GetDepartmentRequestBuilder departmentUuid(String departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = departmentUuid;
+        return this;
+    }
+                
+    public GetDepartmentRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetDepartmentRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetDepartmentRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetDepartmentRequest request = new GetDepartmentRequest(departmentUuid,
-            xGustoAPIVersion);
+        GetDepartmentRequest request = new GetDepartmentRequest(xGustoAPIVersion,
+            departmentUuid);
 
         return request;
     }
 
     public CompletableFuture<GetDepartmentResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetDepartmentRequest, GetDepartmentResponse> operation
-              = new GetDepartment.Async(sdkConfiguration, _headers);
+              = new GetDepartment.Async(sdkConfiguration, options, _headers);
         GetDepartmentRequest request = buildRequest();
 
         return operation.doRequest(request)

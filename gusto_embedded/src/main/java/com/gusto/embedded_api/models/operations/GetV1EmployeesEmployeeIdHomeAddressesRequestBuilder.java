@@ -10,28 +10,25 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1EmployeesEmployeeIdHomeAddresses;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder {
 
-    private String employeeId;
     private Optional<? extends GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder employeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
     }
                 
     public GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder xGustoAPIVersion(GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,22 +43,43 @@ public class GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder {
         return this;
     }
 
+    public GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder employeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
+        return this;
+    }
+                
+    public GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1EmployeesEmployeeIdHomeAddressesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1EmployeesEmployeeIdHomeAddressesRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1EmployeesEmployeeIdHomeAddressesRequest request = new GetV1EmployeesEmployeeIdHomeAddressesRequest(employeeId,
-            xGustoAPIVersion);
+        GetV1EmployeesEmployeeIdHomeAddressesRequest request = new GetV1EmployeesEmployeeIdHomeAddressesRequest(xGustoAPIVersion,
+            employeeId);
 
         return request;
     }
 
     public GetV1EmployeesEmployeeIdHomeAddressesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1EmployeesEmployeeIdHomeAddressesRequest, GetV1EmployeesEmployeeIdHomeAddressesResponse> operation
-              = new GetV1EmployeesEmployeeIdHomeAddresses.Sync(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeIdHomeAddresses.Sync(sdkConfiguration, options, _headers);
         GetV1EmployeesEmployeeIdHomeAddressesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

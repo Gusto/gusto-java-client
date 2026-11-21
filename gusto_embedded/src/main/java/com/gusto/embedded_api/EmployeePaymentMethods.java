@@ -11,6 +11,7 @@ import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdBankAcco
 import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdBankAccountsResponse;
 import com.gusto.embedded_api.operations.GetV1EmployeesEmployeeIdBankAccounts;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -65,7 +66,7 @@ public class EmployeePaymentMethods {
      */
     public GetV1EmployeesEmployeeIdBankAccountsResponse getBankAccounts(String employeeId) {
         return getBankAccounts(Optional.empty(), employeeId, Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -87,6 +88,31 @@ public class EmployeePaymentMethods {
     public GetV1EmployeesEmployeeIdBankAccountsResponse getBankAccounts(
             Optional<? extends GetV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             Optional<Long> page, Optional<Long> per) {
+        return getBankAccounts(xGustoAPIVersion, employeeId, page,
+            per, Optional.empty());
+    }
+
+    /**
+     * List employee bank accounts
+     * 
+     * <p>Returns all employee bank accounts.
+     * 
+     * <p>scope: `employee_payment_methods:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1EmployeesEmployeeIdBankAccountsResponse getBankAccounts(
+            Optional<? extends GetV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<Long> page, Optional<Long> per,
+            Optional<Options> options) {
         GetV1EmployeesEmployeeIdBankAccountsRequest request =
             GetV1EmployeesEmployeeIdBankAccountsRequest
                 .builder()
@@ -96,7 +122,7 @@ public class EmployeePaymentMethods {
                 .per(per)
                 .build();
         RequestOperation<GetV1EmployeesEmployeeIdBankAccountsRequest, GetV1EmployeesEmployeeIdBankAccountsResponse> operation
-              = new GetV1EmployeesEmployeeIdBankAccounts.Sync(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeIdBankAccounts.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

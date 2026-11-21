@@ -7,4 +7,4 @@
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `name`             | *String*           | :heavy_check_mark: | N/A                |
 | `employer`         | *boolean*          | :heavy_check_mark: | N/A                |
-| `amount`           | *double*           | :heavy_check_mark: | N/A                |
+| `amount`           | *String*           | :heavy_check_mark: | N/A                |

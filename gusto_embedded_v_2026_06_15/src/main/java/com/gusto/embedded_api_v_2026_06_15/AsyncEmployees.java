@@ -70,6 +70,7 @@ import com.gusto.embedded_api_v_2026_06_15.operations.PutV1Employees;
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfig;
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1EmployeesEmployeeIdOnboardingStatus;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import java.lang.Long;
 import java.lang.String;
 import java.util.List;
@@ -126,8 +127,8 @@ public class AsyncEmployees {
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdCustomFieldsResponse> getCustomFields(String employeeId) {
         return getCustomFields(
-                employeeId, Optional.empty(), Optional.empty(),
-                Optional.empty());
+                Optional.empty(), employeeId, Optional.empty(),
+                Optional.empty(), Optional.empty());
     }
 
     /**
@@ -139,25 +140,50 @@ public class AsyncEmployees {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param employeeId The UUID of the employee
      * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
      * @param per Number of objects per page. For majority of endpoints will default to 25
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdCustomFieldsResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdCustomFieldsResponse> getCustomFields(
-            String employeeId, Optional<Long> page,
-            Optional<Long> per, Optional<? extends GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+            Optional<? extends GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<Long> page, Optional<Long> per) {
+        return getCustomFields(
+                xGustoAPIVersion, employeeId, page,
+                per, Optional.empty());
+    }
+
+    /**
+     * Get an employee's custom fields
+     * 
+     * <p>Returns a list of the employee's custom fields.
+     * 
+     * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdCustomFieldsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1EmployeesEmployeeIdCustomFieldsResponse> getCustomFields(
+            Optional<? extends GetV1EmployeesEmployeeIdCustomFieldsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<Long> page, Optional<Long> per,
+            Optional<Options> options) {
         GetV1EmployeesEmployeeIdCustomFieldsRequest request =
             GetV1EmployeesEmployeeIdCustomFieldsRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .employeeId(employeeId)
                 .page(page)
                 .per(per)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         AsyncRequestOperation<GetV1EmployeesEmployeeIdCustomFieldsRequest, GetV1EmployeesEmployeeIdCustomFieldsResponse> operation
-              = new GetV1EmployeesEmployeeIdCustomFields.Async(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeIdCustomFields.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -209,8 +235,34 @@ public class AsyncEmployees {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdEmployeesPaymentDetailsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdEmployeesPaymentDetailsResponse> getV1CompaniesCompanyIdEmployeesPaymentDetails(GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest request) {
+        return getV1CompaniesCompanyIdEmployeesPaymentDetails(request, Optional.empty());
+    }
+
+    /**
+     * Get employee payment details for a company
+     * 
+     * <p>Fetches payment details for employees in a given company. Results are paginated.
+     * 
+     * <p>Use the `employee_uuid` query parameter to filter for a single employee.
+     * Use the `payroll_uuid` query parameter to filter for employees on a specific payroll.
+     * Providing both `employee_uuid` and `payroll_uuid` will result in a 422 error.
+     * An empty array is returned if the company has no employees or if no employees match the filter
+     * criteria.
+     * 
+     * <p>The `encrypted_account_number` in the `splits` array is only visible if the
+     * `employee_payment_methods:read:account_number` scope is present.
+     * 
+     * <p>scope: `employee_payment_methods:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdEmployeesPaymentDetailsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdEmployeesPaymentDetailsResponse> getV1CompaniesCompanyIdEmployeesPaymentDetails(GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest request, Optional<Options> options) {
         AsyncRequestOperation<GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest, GetV1CompaniesCompanyIdEmployeesPaymentDetailsResponse> operation
-              = new GetV1CompaniesCompanyIdEmployeesPaymentDetails.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdEmployeesPaymentDetails.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -245,7 +297,9 @@ public class AsyncEmployees {
      * @return {@code CompletableFuture<GetVersionEmployeesTimeOffActivitiesResponse>} - The async response
      */
     public CompletableFuture<GetVersionEmployeesTimeOffActivitiesResponse> getTimeOffActivities(String employeeUuid, String timeOffType) {
-        return getTimeOffActivities(Optional.empty(), employeeUuid, timeOffType);
+        return getTimeOffActivities(
+                Optional.empty(), employeeUuid, timeOffType,
+                Optional.empty());
     }
 
     /**
@@ -265,6 +319,29 @@ public class AsyncEmployees {
     public CompletableFuture<GetVersionEmployeesTimeOffActivitiesResponse> getTimeOffActivities(
             Optional<? extends GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
             String timeOffType) {
+        return getTimeOffActivities(
+                xGustoAPIVersion, employeeUuid, timeOffType,
+                Optional.empty());
+    }
+
+    /**
+     * Get employee time off activities
+     * 
+     * <p>Get employee time off activities.
+     * 
+     * <p>scope: `employee_time_off_activities:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeUuid The UUID of the employee
+     * @param timeOffType The time off type name you want to query data for. ex: 'sick' or 'vacation'
+     * @param options additional options
+     * @return {@code CompletableFuture<GetVersionEmployeesTimeOffActivitiesResponse>} - The async response
+     */
+    public CompletableFuture<GetVersionEmployeesTimeOffActivitiesResponse> getTimeOffActivities(
+            Optional<? extends GetVersionEmployeesTimeOffActivitiesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeUuid,
+            String timeOffType, Optional<Options> options) {
         GetVersionEmployeesTimeOffActivitiesRequest request =
             GetVersionEmployeesTimeOffActivitiesRequest
                 .builder()
@@ -273,7 +350,7 @@ public class AsyncEmployees {
                 .timeOffType(timeOffType)
                 .build();
         AsyncRequestOperation<GetVersionEmployeesTimeOffActivitiesRequest, GetVersionEmployeesTimeOffActivitiesResponse> operation
-              = new GetVersionEmployeesTimeOffActivities.Async(sdkConfiguration, _headers);
+              = new GetVersionEmployeesTimeOffActivities.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -317,7 +394,9 @@ public class AsyncEmployees {
      * @return {@code CompletableFuture<GetV1EmployeesResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesResponse> get(String employeeId) {
-        return get(Optional.empty(), employeeId, Optional.empty());
+        return get(
+                Optional.empty(), employeeId, Optional.empty(),
+                Optional.empty());
     }
 
     /**
@@ -342,6 +421,34 @@ public class AsyncEmployees {
     public CompletableFuture<GetV1EmployeesResponse> get(
             Optional<? extends GetV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             Optional<? extends List<GetV1EmployeesQueryParamInclude>> include) {
+        return get(
+                xGustoAPIVersion, employeeId, include,
+                Optional.empty());
+    }
+
+    /**
+     * Get an employee
+     * 
+     * <p>Get an employee.
+     * 
+     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * 
+     * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param include Include the requested attribute(s) in each employee response. Multiple options are comma separated.
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1EmployeesResponse>} - The async response
+     */
+    public CompletableFuture<GetV1EmployeesResponse> get(
+            Optional<? extends GetV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<? extends List<GetV1EmployeesQueryParamInclude>> include, Optional<Options> options) {
         GetV1EmployeesRequest request =
             GetV1EmployeesRequest
                 .builder()
@@ -350,7 +457,7 @@ public class AsyncEmployees {
                 .include(include)
                 .build();
         AsyncRequestOperation<GetV1EmployeesRequest, GetV1EmployeesResponse> operation
-              = new GetV1Employees.Async(sdkConfiguration, _headers);
+              = new GetV1Employees.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -385,7 +492,9 @@ public class AsyncEmployees {
      * @return {@code CompletableFuture<PutV1EmployeesResponse>} - The async response
      */
     public CompletableFuture<PutV1EmployeesResponse> update(String employeeId, PutV1EmployeesRequestBody requestBody) {
-        return update(Optional.empty(), employeeId, requestBody);
+        return update(
+                Optional.empty(), employeeId, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -405,6 +514,29 @@ public class AsyncEmployees {
     public CompletableFuture<PutV1EmployeesResponse> update(
             Optional<? extends PutV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             PutV1EmployeesRequestBody requestBody) {
+        return update(
+                xGustoAPIVersion, employeeId, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Update an employee.
+     * 
+     * <p>Update an employee.
+     * 
+     * <p>scope: `employees:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1EmployeesResponse>} - The async response
+     */
+    public CompletableFuture<PutV1EmployeesResponse> update(
+            Optional<? extends PutV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            PutV1EmployeesRequestBody requestBody, Optional<Options> options) {
         PutV1EmployeesRequest request =
             PutV1EmployeesRequest
                 .builder()
@@ -413,7 +545,7 @@ public class AsyncEmployees {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1EmployeesRequest, PutV1EmployeesResponse> operation
-              = new PutV1Employees.Async(sdkConfiguration, _headers);
+              = new PutV1Employees.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -453,7 +585,7 @@ public class AsyncEmployees {
      * @return {@code CompletableFuture<DeleteV1EmployeeResponse>} - The async response
      */
     public CompletableFuture<DeleteV1EmployeeResponse> delete(String employeeId) {
-        return delete(Optional.empty(), employeeId);
+        return delete(Optional.empty(), employeeId, Optional.empty());
     }
 
     /**
@@ -473,6 +605,29 @@ public class AsyncEmployees {
      * @return {@code CompletableFuture<DeleteV1EmployeeResponse>} - The async response
      */
     public CompletableFuture<DeleteV1EmployeeResponse> delete(Optional<? extends DeleteV1EmployeeHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
+        return delete(xGustoAPIVersion, employeeId, Optional.empty());
+    }
+
+    /**
+     * Delete an onboarding employee
+     * 
+     * <p>Use this endpoint to delete an employee who is in onboarding. Deleting
+     * an onboarded employee is not allowed and will return a 422 response. Please check out the
+     * Terminations api
+     * if you need to terminate an onboarded employee.
+     * 
+     * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param options additional options
+     * @return {@code CompletableFuture<DeleteV1EmployeeResponse>} - The async response
+     */
+    public CompletableFuture<DeleteV1EmployeeResponse> delete(
+            Optional<? extends DeleteV1EmployeeHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<Options> options) {
         DeleteV1EmployeeRequest request =
             DeleteV1EmployeeRequest
                 .builder()
@@ -480,7 +635,7 @@ public class AsyncEmployees {
                 .employeeId(employeeId)
                 .build();
         AsyncRequestOperation<DeleteV1EmployeeRequest, DeleteV1EmployeeResponse> operation
-              = new DeleteV1Employee.Async(sdkConfiguration, _headers);
+              = new DeleteV1Employee.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -524,8 +679,30 @@ public class AsyncEmployees {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdEmployeesResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdEmployeesResponse> list(GetV1CompaniesCompanyIdEmployeesRequest request) {
+        return list(request, Optional.empty());
+    }
+
+    /**
+     * Get employees of a company
+     * 
+     * <p>Get all of the employees, onboarding, active and terminated, for a given company.
+     * 
+     * <p>Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee
+     * pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`,
+     * `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope
+     * is included. This allows you to access employee and job metadata without exposing pay rates.
+     * 
+     * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdEmployeesResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdEmployeesResponse> list(GetV1CompaniesCompanyIdEmployeesRequest request, Optional<Options> options) {
         AsyncRequestOperation<GetV1CompaniesCompanyIdEmployeesRequest, GetV1CompaniesCompanyIdEmployeesResponse> operation
-              = new GetV1CompaniesCompanyIdEmployees.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdEmployees.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -559,7 +736,9 @@ public class AsyncEmployees {
      * @return {@code CompletableFuture<PostV1EmployeesResponse>} - The async response
      */
     public CompletableFuture<PostV1EmployeesResponse> create(String companyId) {
-        return create(Optional.empty(), companyId, Optional.empty());
+        return create(
+                Optional.empty(), companyId, Optional.empty(),
+                Optional.empty());
     }
 
     /**
@@ -579,6 +758,29 @@ public class AsyncEmployees {
     public CompletableFuture<PostV1EmployeesResponse> create(
             Optional<? extends PostV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             Optional<? extends PostV1EmployeesRequestBody> requestBody) {
+        return create(
+                xGustoAPIVersion, companyId, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Create an employee
+     * 
+     * <p>Create an employee.
+     * 
+     * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId Company ID
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1EmployeesResponse>} - The async response
+     */
+    public CompletableFuture<PostV1EmployeesResponse> create(
+            Optional<? extends PostV1EmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<? extends PostV1EmployeesRequestBody> requestBody, Optional<Options> options) {
         PostV1EmployeesRequest request =
             PostV1EmployeesRequest
                 .builder()
@@ -587,7 +789,7 @@ public class AsyncEmployees {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PostV1EmployeesRequest, PostV1EmployeesResponse> operation
-              = new PostV1Employees.Async(sdkConfiguration, _headers);
+              = new PostV1Employees.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -711,7 +913,7 @@ public class AsyncEmployees {
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdOnboardingStatusResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdOnboardingStatusResponse> getOnboardingStatus(String employeeId) {
-        return getOnboardingStatus(Optional.empty(), employeeId);
+        return getOnboardingStatus(Optional.empty(), employeeId, Optional.empty());
     }
 
     /**
@@ -773,6 +975,71 @@ public class AsyncEmployees {
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdOnboardingStatusResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdOnboardingStatusResponse> getOnboardingStatus(Optional<? extends GetV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
+        return getOnboardingStatus(xGustoAPIVersion, employeeId, Optional.empty());
+    }
+
+    /**
+     * Get the employee's onboarding status
+     * 
+     * <p># Description
+     * Retrieves an employee's onboarding status. The data returned helps inform the required onboarding
+     * steps and respective completion status.
+     * 
+     * <p>## onboarding_status
+     * 
+     * <p>### Admin-facilitated onboarding
+     * | onboarding_status | Description |
+     * |:------------------|------------:|
+     * | `admin_onboarding_incomplete` | Admin needs to complete the full employee-onboarding. |
+     * | `onboarding_completed` | Employee has been fully onboarded and verified. |
+     * 
+     * <p>### Employee self-onboarding
+     * | onboarding_status | Description |
+     * |:------------------|------------:|
+     * | `admin_onboarding_incomplete` | Admin needs to enter basic information about the employee. |
+     * | `self_onboarding_pending_invite` | Admin has the intention to invite the employee to self-onboard
+     * (e.g., marking a checkbox), but the system has not yet sent the invitation. |
+     * | `self_onboarding_invited` | Employee has been sent an invitation to self-onboard. |
+     * | `self_onboarding_invited_started` | Employee has started the self-onboarding process. |
+     * | `self_onboarding_invited_overdue` | Employee's start date has passed, and employee has still not
+     * completed self-onboarding. |
+     * | `self_onboarding_completed_by_employee` | Employee has completed entering in their information.
+     * The status should be updated via API to "self_onboarding_awaiting_admin_review" from here, once the
+     * Admin has started reviewing. |
+     * | `self_onboarding_awaiting_admin_review` | Admin has started to verify the employee's information.
+     * |
+     * | `onboarding_completed` | Employee has been fully onboarded and verified. |
+     * 
+     * <p>## onboarding_steps
+     * 
+     * <p>| onboarding_steps | Requirement(s) to be completed |
+     * |:-----------------|-------------------------------:|
+     * | `personal_details` | Add employee's first name, last name, email, date of birth, social security
+     * number |
+     * | `compensation_details` | Associate employee to a job &amp; compensation. |
+     * | `add_work_address` | Add employee work address. |
+     * | `add_home_address` | Add employee home address. |
+     * | `federal_tax_setup` | Set up federal tax withholdings. |
+     * | `state_tax_setup` | Set up state tax withholdings. |
+     * | `direct_deposit_setup` | (optional) Set up employee's direct deposit. |
+     * | `employee_form_signing` | Employee forms (e.g., W4, direct deposit authorization) are generated
+     * &amp; signed. |
+     * | `file_new_hire_report` | File a new hire report for this employee. |
+     * | `admin_review` | Admin reviews &amp; confirms employee details (only required for Employee
+     * self-onboarding) |
+     * 
+     * <p>scope: `employees:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdOnboardingStatusResponse>} - The async response
+     */
+    public CompletableFuture<GetV1EmployeesEmployeeIdOnboardingStatusResponse> getOnboardingStatus(
+            Optional<? extends GetV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<Options> options) {
         GetV1EmployeesEmployeeIdOnboardingStatusRequest request =
             GetV1EmployeesEmployeeIdOnboardingStatusRequest
                 .builder()
@@ -780,7 +1047,7 @@ public class AsyncEmployees {
                 .employeeId(employeeId)
                 .build();
         AsyncRequestOperation<GetV1EmployeesEmployeeIdOnboardingStatusRequest, GetV1EmployeesEmployeeIdOnboardingStatusResponse> operation
-              = new GetV1EmployeesEmployeeIdOnboardingStatus.Async(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeIdOnboardingStatus.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -845,7 +1112,9 @@ public class AsyncEmployees {
      * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdOnboardingStatusResponse>} - The async response
      */
     public CompletableFuture<PutV1EmployeesEmployeeIdOnboardingStatusResponse> updateOnboardingStatus(String employeeId, PutV1EmployeesEmployeeIdOnboardingStatusRequestBody requestBody) {
-        return updateOnboardingStatus(Optional.empty(), employeeId, requestBody);
+        return updateOnboardingStatus(
+                Optional.empty(), employeeId, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -880,6 +1149,44 @@ public class AsyncEmployees {
     public CompletableFuture<PutV1EmployeesEmployeeIdOnboardingStatusResponse> updateOnboardingStatus(
             Optional<? extends PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             PutV1EmployeesEmployeeIdOnboardingStatusRequestBody requestBody) {
+        return updateOnboardingStatus(
+                xGustoAPIVersion, employeeId, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Update the employee's onboarding status
+     * 
+     * <p>Updates an employee's onboarding status.
+     * Below is a list of valid onboarding status changes depending on the intended action to be performed
+     * on behalf of the employee.
+     * 
+     * <p>| Action | current onboarding_status | new onboarding_status |
+     * |:------------------|:------------:|----------:|
+     * | Mark an employee as self-onboarding | `admin_onboarding_incomplete` |
+     * `self_onboarding_pending_invite` |
+     * | Invite an employee to self-onboard | `admin_onboarding_incomplete` or
+     * `self_onboarding_pending_invite` | `self_onboarding_invited` |
+     * | Cancel an employee's self-onboarding | `self_onboarding_invited` or
+     * `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
+     * | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` |
+     * `self_onboarding_awaiting_admin_review` |
+     * | Finish an employee's onboarding | `admin_onboarding_incomplete` or
+     * `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+     * 
+     * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdOnboardingStatusResponse>} - The async response
+     */
+    public CompletableFuture<PutV1EmployeesEmployeeIdOnboardingStatusResponse> updateOnboardingStatus(
+            Optional<? extends PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            PutV1EmployeesEmployeeIdOnboardingStatusRequestBody requestBody, Optional<Options> options) {
         PutV1EmployeesEmployeeIdOnboardingStatusRequest request =
             PutV1EmployeesEmployeeIdOnboardingStatusRequest
                 .builder()
@@ -888,7 +1195,7 @@ public class AsyncEmployees {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1EmployeesEmployeeIdOnboardingStatusRequest, PutV1EmployeesEmployeeIdOnboardingStatusResponse> operation
-              = new PutV1EmployeesEmployeeIdOnboardingStatus.Async(sdkConfiguration, _headers);
+              = new PutV1EmployeesEmployeeIdOnboardingStatus.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -930,7 +1237,9 @@ public class AsyncEmployees {
      * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse>} - The async response
      */
     public CompletableFuture<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse> updateOnboardingDocumentsConfig(String employeeId) {
-        return updateOnboardingDocumentsConfig(Optional.empty(), employeeId, Optional.empty());
+        return updateOnboardingDocumentsConfig(
+                Optional.empty(), employeeId, Optional.empty(),
+                Optional.empty());
     }
 
     /**
@@ -954,6 +1263,33 @@ public class AsyncEmployees {
     public CompletableFuture<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse> updateOnboardingDocumentsConfig(
             Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             Optional<? extends EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest) {
+        return updateOnboardingDocumentsConfig(
+                xGustoAPIVersion, employeeId, employeeOnboardingDocumentsConfigRequest,
+                Optional.empty());
+    }
+
+    /**
+     * Update employee onboarding documents config
+     * 
+     * <p>Indicate whether to include the Form I-9 for an employee during the onboarding process.
+     * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
+     * 
+     * <p>## Related guides
+     * - [Employee onboarding](doc:employee-onboarding)
+     * 
+     * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param employeeOnboardingDocumentsConfigRequest Request body for updating an employee's onboarding documents configuration.
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse>} - The async response
+     */
+    public CompletableFuture<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse> updateOnboardingDocumentsConfig(
+            Optional<? extends PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<? extends EmployeeOnboardingDocumentsConfigRequest> employeeOnboardingDocumentsConfigRequest, Optional<Options> options) {
         PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest request =
             PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest
                 .builder()
@@ -962,7 +1298,7 @@ public class AsyncEmployees {
                 .employeeOnboardingDocumentsConfigRequest(employeeOnboardingDocumentsConfigRequest)
                 .build();
         AsyncRequestOperation<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest, PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse> operation
-              = new PutV1EmployeesEmployeeIdOnboardingDocumentsConfig.Async(sdkConfiguration, _headers);
+              = new PutV1EmployeesEmployeeIdOnboardingDocumentsConfig.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -1002,7 +1338,9 @@ public class AsyncEmployees {
      * @return {@code CompletableFuture<PostV1HistoricalEmployeesResponse>} - The async response
      */
     public CompletableFuture<PostV1HistoricalEmployeesResponse> createHistorical(String companyUuid, HistoricalEmployeeBody historicalEmployeeBody) {
-        return createHistorical(Optional.empty(), companyUuid, historicalEmployeeBody);
+        return createHistorical(
+                Optional.empty(), companyUuid, historicalEmployeeBody,
+                Optional.empty());
     }
 
     /**
@@ -1026,6 +1364,33 @@ public class AsyncEmployees {
     public CompletableFuture<PostV1HistoricalEmployeesResponse> createHistorical(
             Optional<? extends PostV1HistoricalEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             HistoricalEmployeeBody historicalEmployeeBody) {
+        return createHistorical(
+                xGustoAPIVersion, companyUuid, historicalEmployeeBody,
+                Optional.empty());
+    }
+
+    /**
+     * Create a historical employee
+     * 
+     * <p>Create a historical employee, an employee that was previously dismissed from the company in the
+     * current year.
+     * 
+     * <p>scope: `employees:manage`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company that will employ this historical record.
+     * @param historicalEmployeeBody Request body for creating or updating a **historical employee**—someone who already separated from the company and must appear on year-to-date or tax filings without receiving ongoing payroll.
+     *         
+     *         Send this object under the JSON root key `employee`. All dates are ISO 8601 (`YYYY-MM-DD`). Use a `work_address.location_uuid` returned from your company locations API for an active work site.
+     *         
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1HistoricalEmployeesResponse>} - The async response
+     */
+    public CompletableFuture<PostV1HistoricalEmployeesResponse> createHistorical(
+            Optional<? extends PostV1HistoricalEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            HistoricalEmployeeBody historicalEmployeeBody, Optional<Options> options) {
         PostV1HistoricalEmployeesRequest request =
             PostV1HistoricalEmployeesRequest
                 .builder()
@@ -1034,7 +1399,7 @@ public class AsyncEmployees {
                 .historicalEmployeeBody(historicalEmployeeBody)
                 .build();
         AsyncRequestOperation<PostV1HistoricalEmployeesRequest, PostV1HistoricalEmployeesResponse> operation
-              = new PostV1HistoricalEmployees.Async(sdkConfiguration, _headers);
+              = new PostV1HistoricalEmployees.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

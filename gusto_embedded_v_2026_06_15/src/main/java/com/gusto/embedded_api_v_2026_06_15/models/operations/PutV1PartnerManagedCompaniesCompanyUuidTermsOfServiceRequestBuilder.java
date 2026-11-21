@@ -11,29 +11,26 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.PartnerManagedCompa
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1PartnerManagedCompaniesCompanyUuidTermsOfService;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder xGustoAPIVersion(PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,9 +45,27 @@ public class PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder
         return this;
     }
 
+    public PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
     public PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder partnerManagedCompanyRetrieveTermsOfServiceRequest(PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest) {
         Utils.checkNotNull(partnerManagedCompanyRetrieveTermsOfServiceRequest, "partnerManagedCompanyRetrieveTermsOfServiceRequest");
         this.partnerManagedCompanyRetrieveTermsOfServiceRequest = partnerManagedCompanyRetrieveTermsOfServiceRequest;
+        return this;
+    }
+                
+    public PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -60,17 +75,20 @@ public class PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequestBuilder
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest request = new PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest(companyUuid,
-            xGustoAPIVersion,
+        PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest request = new PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest(xGustoAPIVersion,
+            companyUuid,
             partnerManagedCompanyRetrieveTermsOfServiceRequest);
 
         return request;
     }
 
     public PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest, PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceResponse> operation
-              = new PutV1PartnerManagedCompaniesCompanyUuidTermsOfService.Sync(sdkConfiguration, _headers);
+              = new PutV1PartnerManagedCompaniesCompanyUuidTermsOfService.Sync(sdkConfiguration, options, _headers);
         PutV1PartnerManagedCompaniesCompanyUuidTermsOfServiceRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

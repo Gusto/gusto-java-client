@@ -11,8 +11,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.ContractorAddressUp
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1ContractorsContractorUuidAddress;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1ContractorsContractorUuidAddressRequestBuilder {
@@ -23,6 +25,7 @@ public class PutV1ContractorsContractorUuidAddressRequestBuilder {
                             new TypeReference<Optional<? extends PutV1ContractorsContractorUuidAddressHeaderXGustoAPIVersion>>() {});
     private String contractorUuid;
     private ContractorAddressUpdateBody contractorAddressUpdateBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PutV1ContractorsContractorUuidAddressRequestBuilder {
         this.contractorAddressUpdateBody = contractorAddressUpdateBody;
         return this;
     }
+                
+    public PutV1ContractorsContractorUuidAddressRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1ContractorsContractorUuidAddressRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1ContractorsContractorUuidAddressRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PutV1ContractorsContractorUuidAddressRequestBuilder {
     }
 
     public PutV1ContractorsContractorUuidAddressResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1ContractorsContractorUuidAddressRequest, PutV1ContractorsContractorUuidAddressResponse> operation
-              = new PutV1ContractorsContractorUuidAddress.Sync(sdkConfiguration, _headers);
+              = new PutV1ContractorsContractorUuidAddress.Sync(sdkConfiguration, options, _headers);
         PutV1ContractorsContractorUuidAddressRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

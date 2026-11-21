@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.SecuritySource;
 import com.gusto.embedded_api_v_2026_06_15.models.errors.APIException;
+import com.gusto.embedded_api_v_2026_06_15.models.errors.ConflictErrorObject;
 import com.gusto.embedded_api_v_2026_06_15.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api_v_2026_06_15.models.errors.PayrollBlockersError;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.PostCompaniesPayrollSkipCompanyUuidRequest;
@@ -22,6 +23,7 @@ import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.Hook.AfterErrorContextImpl;
 import com.gusto.embedded_api_v_2026_06_15.utils.Hook.AfterSuccessContextImpl;
 import com.gusto.embedded_api_v_2026_06_15.utils.Hook.BeforeRequestContextImpl;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.SerializedBody;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils.JsonShape;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
@@ -33,6 +35,8 @@ import java.lang.String;
 import java.lang.Throwable;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
@@ -44,14 +48,20 @@ public class PostCompaniesPayrollSkipCompanyUuid {
         final SDKConfiguration sdkConfiguration;
         final String baseUrl;
         final SecuritySource securitySource;
+        final Optional<Duration> timeout;
         final HTTPClient client;
         final Headers _headers;
 
-        public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
+        public Base(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
             this._headers =_headers;
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
+            options
+                    .ifPresent(o -> o.validate(List.of(Options.Option.TIMEOUT)));
+            this.timeout = options.flatMap(Options::timeout).or(sdkConfiguration::timeout);
             this.client = this.sdkConfiguration.client();
         }
 
@@ -91,7 +101,8 @@ public class PostCompaniesPayrollSkipCompanyUuid {
                     this.baseUrl,
                     "/v1/companies/{company_uuid}/payrolls/skip",
                     request, null);
-            HTTPRequest req = new HTTPRequest(url, "POST");
+            HTTPRequest req = new HTTPRequest(url, "POST")
+                    .timeout(this.timeout);
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
@@ -118,7 +129,16 @@ public class PostCompaniesPayrollSkipCompanyUuid {
     public static class Sync extends Base
             implements RequestOperation<PostCompaniesPayrollSkipCompanyUuidRequest, PostCompaniesPayrollSkipCompanyUuidResponse> {
         public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
-            super(sdkConfiguration, _headers);
+            this(sdkConfiguration, Optional.empty(),
+                    _headers);
+        }
+
+        public Sync(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
+            super(
+                  sdkConfiguration, options,
+                  _headers);
         }
 
         private HttpRequest onBuildRequest(PostCompaniesPayrollSkipCompanyUuidRequest request) throws Exception {
@@ -182,6 +202,13 @@ public class PostCompaniesPayrollSkipCompanyUuid {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
+            if (Utils.statusCodeMatches(response.statusCode(), "409")) {
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    throw ConflictErrorObject.from(response);
+                } else {
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                }
+            }
             if (Utils.statusCodeMatches(response.statusCode(), "422")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     throw PayrollBlockersError.from(response);
@@ -202,9 +229,17 @@ public class PostCompaniesPayrollSkipCompanyUuid {
     }
     public static class Async extends Base
             implements AsyncRequestOperation<PostCompaniesPayrollSkipCompanyUuidRequest, com.gusto.embedded_api_v_2026_06_15.models.operations.async.PostCompaniesPayrollSkipCompanyUuidResponse> {
-
         public Async(SDKConfiguration sdkConfiguration, Headers _headers) {
-            super(sdkConfiguration, _headers);
+            this(sdkConfiguration, Optional.empty(),
+                    _headers);
+        }
+
+        public Async(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
+            super(
+                  sdkConfiguration, options,
+                  _headers);
         }
 
         private CompletableFuture<HttpRequest> onBuildRequest(PostCompaniesPayrollSkipCompanyUuidRequest request) throws Exception {
@@ -259,6 +294,14 @@ public class PostCompaniesPayrollSkipCompanyUuid {
             if (Utils.statusCodeMatches(response.statusCode(), "404")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     return NotFoundErrorObject.fromAsync(response)
+                            .thenCompose(CompletableFuture::failedFuture);
+                } else {
+                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
+                }
+            }
+            if (Utils.statusCodeMatches(response.statusCode(), "409")) {
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    return ConflictErrorObject.fromAsync(response)
                             .thenCompose(CompletableFuture::failedFuture);
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);

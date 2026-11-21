@@ -10,28 +10,25 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.DeleteV1WorkAddressesWorkAddressUuid;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class DeleteV1WorkAddressesWorkAddressUuidRequestBuilder {
 
-    private String workAddressUuid;
     private Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>>() {});
+    private String workAddressUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1WorkAddressesWorkAddressUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public DeleteV1WorkAddressesWorkAddressUuidRequestBuilder workAddressUuid(String workAddressUuid) {
-        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
-        this.workAddressUuid = workAddressUuid;
-        return this;
     }
                 
     public DeleteV1WorkAddressesWorkAddressUuidRequestBuilder xGustoAPIVersion(DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,22 +43,43 @@ public class DeleteV1WorkAddressesWorkAddressUuidRequestBuilder {
         return this;
     }
 
+    public DeleteV1WorkAddressesWorkAddressUuidRequestBuilder workAddressUuid(String workAddressUuid) {
+        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
+        this.workAddressUuid = workAddressUuid;
+        return this;
+    }
+                
+    public DeleteV1WorkAddressesWorkAddressUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1WorkAddressesWorkAddressUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private DeleteV1WorkAddressesWorkAddressUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1WorkAddressesWorkAddressUuidRequest request = new DeleteV1WorkAddressesWorkAddressUuidRequest(workAddressUuid,
-            xGustoAPIVersion);
+        DeleteV1WorkAddressesWorkAddressUuidRequest request = new DeleteV1WorkAddressesWorkAddressUuidRequest(xGustoAPIVersion,
+            workAddressUuid);
 
         return request;
     }
 
     public DeleteV1WorkAddressesWorkAddressUuidResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DeleteV1WorkAddressesWorkAddressUuidRequest, DeleteV1WorkAddressesWorkAddressUuidResponse> operation
-              = new DeleteV1WorkAddressesWorkAddressUuid.Sync(sdkConfiguration, _headers);
+              = new DeleteV1WorkAddressesWorkAddressUuid.Sync(sdkConfiguration, options, _headers);
         DeleteV1WorkAddressesWorkAddressUuidRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

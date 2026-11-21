@@ -11,8 +11,10 @@ import com.gusto.embedded_api.models.components.CompensationsUpdateRequestBody;
 import com.gusto.embedded_api.operations.PutV1CompensationsCompensationId;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1CompensationsCompensationIdRequestBuilder {
@@ -23,6 +25,7 @@ public class PutV1CompensationsCompensationIdRequestBuilder {
                             new TypeReference<Optional<? extends PutV1CompensationsCompensationIdHeaderXGustoAPIVersion>>() {});
     private String compensationId;
     private CompensationsUpdateRequestBody compensationsUpdateRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PutV1CompensationsCompensationIdRequestBuilder {
         this.compensationsUpdateRequestBody = compensationsUpdateRequestBody;
         return this;
     }
+                
+    public PutV1CompensationsCompensationIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1CompensationsCompensationIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1CompensationsCompensationIdRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PutV1CompensationsCompensationIdRequestBuilder {
     }
 
     public PutV1CompensationsCompensationIdResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1CompensationsCompensationIdRequest, PutV1CompensationsCompensationIdResponse> operation
-              = new PutV1CompensationsCompensationId.Sync(sdkConfiguration, _headers);
+              = new PutV1CompensationsCompensationId.Sync(sdkConfiguration, options, _headers);
         PutV1CompensationsCompensationIdRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -12,8 +12,10 @@ import com.gusto.embedded_api.models.operations.GetV1EmployeesEmployeeIdI9Author
 import com.gusto.embedded_api.operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptions;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -24,6 +26,7 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequestBuilde
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsHeaderXGustoAPIVersion>>() {});
     private String employeeId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequestBuilde
         this.employeeId = employeeId;
         return this;
     }
+                
+    public GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest buildRequest() {
@@ -62,9 +77,12 @@ public class GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequestBuilde
     }
 
     public CompletableFuture<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest, GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse> operation
-              = new GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptions.Async(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptions.Async(sdkConfiguration, options, _headers);
         GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest request = buildRequest();
 
         return operation.doRequest(request)

@@ -13,8 +13,10 @@ import com.gusto.embedded_api.models.operations.PutV1CompanyBenefitsCompanyBenef
 import com.gusto.embedded_api.operations.PutV1CompanyBenefitsCompanyBenefitIdContributionExclusions;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBu
                             new TypeReference<Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsHeaderXGustoAPIVersion>>() {});
     private String companyBenefitId;
     private ContributionExclusionUpdateRequest contributionExclusionUpdateRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBu
         this.contributionExclusionUpdateRequest = contributionExclusionUpdateRequest;
         return this;
     }
+                
+    public PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBu
     }
 
     public CompletableFuture<PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest, PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse> operation
-              = new PutV1CompanyBenefitsCompanyBenefitIdContributionExclusions.Async(sdkConfiguration, _headers);
+              = new PutV1CompanyBenefitsCompanyBenefitIdContributionExclusions.Async(sdkConfiguration, options, _headers);
         PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest request = buildRequest();
 
         return operation.doRequest(request)

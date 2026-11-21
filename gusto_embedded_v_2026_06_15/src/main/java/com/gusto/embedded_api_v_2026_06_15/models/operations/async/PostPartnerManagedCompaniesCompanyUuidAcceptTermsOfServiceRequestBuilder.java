@@ -13,30 +13,27 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.PostPartnerManagedC
 import com.gusto.embedded_api_v_2026_06_15.operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfService;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder xGustoAPIVersion(PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -51,9 +48,27 @@ public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBu
         return this;
     }
 
+    public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
     public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder partnerManagedCompanyAcceptTermsOfServiceRequest(PartnerManagedCompanyAcceptTermsOfServiceRequest partnerManagedCompanyAcceptTermsOfServiceRequest) {
         Utils.checkNotNull(partnerManagedCompanyAcceptTermsOfServiceRequest, "partnerManagedCompanyAcceptTermsOfServiceRequest");
         this.partnerManagedCompanyAcceptTermsOfServiceRequest = partnerManagedCompanyAcceptTermsOfServiceRequest;
+        return this;
+    }
+                
+    public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -63,17 +78,20 @@ public class PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBu
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest request = new PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest(companyUuid,
-            xGustoAPIVersion,
+        PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest request = new PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest(xGustoAPIVersion,
+            companyUuid,
             partnerManagedCompanyAcceptTermsOfServiceRequest);
 
         return request;
     }
 
     public CompletableFuture<PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest, PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse> operation
-              = new PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfService.Async(sdkConfiguration, _headers);
+              = new PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfService.Async(sdkConfiguration, options, _headers);
         PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest request = buildRequest();
 
         return operation.doRequest(request)

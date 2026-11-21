@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.DeleteV1CompaniesCompanyIdContractorPaymentContractorPayment;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder {
@@ -22,6 +24,7 @@ public class DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest
                             new TypeReference<Optional<? extends DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private String contractorPaymentId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest
         this.contractorPaymentId = contractorPaymentId;
         return this;
     }
+                
+    public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest buildRequest() {
@@ -67,9 +82,12 @@ public class DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest
     }
 
     public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest, DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse> operation
-              = new DeleteV1CompaniesCompanyIdContractorPaymentContractorPayment.Sync(sdkConfiguration, _headers);
+              = new DeleteV1CompaniesCompanyIdContractorPaymentContractorPayment.Sync(sdkConfiguration, options, _headers);
         DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

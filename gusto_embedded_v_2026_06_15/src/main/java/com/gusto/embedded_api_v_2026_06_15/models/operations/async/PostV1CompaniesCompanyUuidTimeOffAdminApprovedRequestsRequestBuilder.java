@@ -13,8 +13,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1CompaniesComp
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequests;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequestBuilde
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
     private PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequestBuilde
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequestBuilde
     }
 
     public CompletableFuture<PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequest, PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsResponse> operation
-              = new PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequests.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequests.Async(sdkConfiguration, options, _headers);
         PostV1CompaniesCompanyUuidTimeOffAdminApprovedRequestsRequest request = buildRequest();
 
         return operation.doRequest(request)

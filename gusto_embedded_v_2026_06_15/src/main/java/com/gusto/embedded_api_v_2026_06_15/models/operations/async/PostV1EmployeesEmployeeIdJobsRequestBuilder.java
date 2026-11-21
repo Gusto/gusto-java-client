@@ -13,30 +13,27 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1EmployeesEmpl
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1EmployeesEmployeeIdJobs;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PostV1EmployeesEmployeeIdJobsRequestBuilder {
 
-    private String employeeId;
     private Optional<? extends PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
     private JobsCreateRequestBody jobsCreateRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1EmployeesEmployeeIdJobsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1EmployeesEmployeeIdJobsRequestBuilder employeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
     }
                 
     public PostV1EmployeesEmployeeIdJobsRequestBuilder xGustoAPIVersion(PostV1EmployeesEmployeeIdJobsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -51,9 +48,27 @@ public class PostV1EmployeesEmployeeIdJobsRequestBuilder {
         return this;
     }
 
+    public PostV1EmployeesEmployeeIdJobsRequestBuilder employeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
+        return this;
+    }
+
     public PostV1EmployeesEmployeeIdJobsRequestBuilder jobsCreateRequestBody(JobsCreateRequestBody jobsCreateRequestBody) {
         Utils.checkNotNull(jobsCreateRequestBody, "jobsCreateRequestBody");
         this.jobsCreateRequestBody = jobsCreateRequestBody;
+        return this;
+    }
+                
+    public PostV1EmployeesEmployeeIdJobsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1EmployeesEmployeeIdJobsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -63,17 +78,20 @@ public class PostV1EmployeesEmployeeIdJobsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1EmployeesEmployeeIdJobsRequest request = new PostV1EmployeesEmployeeIdJobsRequest(employeeId,
-            xGustoAPIVersion,
+        PostV1EmployeesEmployeeIdJobsRequest request = new PostV1EmployeesEmployeeIdJobsRequest(xGustoAPIVersion,
+            employeeId,
             jobsCreateRequestBody);
 
         return request;
     }
 
     public CompletableFuture<PostV1EmployeesEmployeeIdJobsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1EmployeesEmployeeIdJobsRequest, PostV1EmployeesEmployeeIdJobsResponse> operation
-              = new PostV1EmployeesEmployeeIdJobs.Async(sdkConfiguration, _headers);
+              = new PostV1EmployeesEmployeeIdJobs.Async(sdkConfiguration, options, _headers);
         PostV1EmployeesEmployeeIdJobsRequest request = buildRequest();
 
         return operation.doRequest(request)

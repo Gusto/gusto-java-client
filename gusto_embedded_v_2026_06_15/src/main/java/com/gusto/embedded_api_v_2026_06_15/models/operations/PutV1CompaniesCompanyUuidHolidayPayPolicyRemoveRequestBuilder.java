@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1CompaniesCompanyUuidHolidayPayPolicyRemove;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBuilder {
@@ -22,6 +24,7 @@ public class PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBuilder {
                             new TypeReference<Optional<? extends PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
     private PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest buildRequest() {
@@ -67,9 +82,12 @@ public class PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBuilder {
     }
 
     public PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest, PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse> operation
-              = new PutV1CompaniesCompanyUuidHolidayPayPolicyRemove.Sync(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyUuidHolidayPayPolicyRemove.Sync(sdkConfiguration, options, _headers);
         PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

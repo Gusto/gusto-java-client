@@ -13,7 +13,9 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.OauthAccessTokenReq
 import com.gusto.embedded_api_v_2026_06_15.operations.OauthAccessToken;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -24,6 +26,7 @@ public class OauthAccessTokenRequestBuilder {
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends OauthAccessTokenHeaderXGustoAPIVersion>>() {});
     private OauthAccessTokenRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class OauthAccessTokenRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public OauthAccessTokenRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public OauthAccessTokenRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private OauthAccessTokenRequest buildRequest() {
@@ -62,9 +77,12 @@ public class OauthAccessTokenRequestBuilder {
     }
 
     public CompletableFuture<OauthAccessTokenResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<OauthAccessTokenRequest, OauthAccessTokenResponse> operation
-              = new OauthAccessToken.Async(sdkConfiguration, _headers);
+              = new OauthAccessToken.Async(sdkConfiguration, options, _headers);
         OauthAccessTokenRequest request = buildRequest();
 
         return operation.doRequest(request)

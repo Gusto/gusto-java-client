@@ -8,13 +8,17 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.SubmitInformationRequest;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class SubmitInformationRequestRequestBuilder {
 
     private String informationRequestUuid;
     private SubmitInformationRequestRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class SubmitInformationRequestRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public SubmitInformationRequestRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public SubmitInformationRequestRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private SubmitInformationRequestRequest buildRequest() {
@@ -44,9 +60,12 @@ public class SubmitInformationRequestRequestBuilder {
     }
 
     public SubmitInformationRequestResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<SubmitInformationRequestRequest, SubmitInformationRequestResponse> operation
-              = new SubmitInformationRequest.Sync(sdkConfiguration, _headers);
+              = new SubmitInformationRequest.Sync(sdkConfiguration, options, _headers);
         SubmitInformationRequestRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.DeleteV1CompaniesCompanyUuidHolidayPayPolicy;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequestBuilder {
@@ -21,6 +23,7 @@ public class DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequestBuilder {
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -45,6 +48,18 @@ public class DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequestBuilder {
         this.companyUuid = companyUuid;
         return this;
     }
+                
+    public DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest buildRequest() {
@@ -59,9 +74,12 @@ public class DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequestBuilder {
     }
 
     public DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest, DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse> operation
-              = new DeleteV1CompaniesCompanyUuidHolidayPayPolicy.Sync(sdkConfiguration, _headers);
+              = new DeleteV1CompaniesCompanyUuidHolidayPayPolicy.Sync(sdkConfiguration, options, _headers);
         DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

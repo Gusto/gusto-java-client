@@ -13,8 +13,10 @@ import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdEmploye
 import com.gusto.embedded_api.operations.PostV1EmployeesEmployeeIdEmployeeBenefits;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder {
                             new TypeReference<Optional<? extends PostV1EmployeesEmployeeIdEmployeeBenefitsHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private EmployeeBenefitCreateRequest employeeBenefitCreateRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder {
         this.employeeBenefitCreateRequest = employeeBenefitCreateRequest;
         return this;
     }
+                
+    public PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1EmployeesEmployeeIdEmployeeBenefitsRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBuilder {
     }
 
     public CompletableFuture<PostV1EmployeesEmployeeIdEmployeeBenefitsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1EmployeesEmployeeIdEmployeeBenefitsRequest, PostV1EmployeesEmployeeIdEmployeeBenefitsResponse> operation
-              = new PostV1EmployeesEmployeeIdEmployeeBenefits.Async(sdkConfiguration, _headers);
+              = new PostV1EmployeesEmployeeIdEmployeeBenefits.Async(sdkConfiguration, options, _headers);
         PostV1EmployeesEmployeeIdEmployeeBenefitsRequest request = buildRequest();
 
         return operation.doRequest(request)

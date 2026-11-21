@@ -14,7 +14,9 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1WebhookSubscr
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1WebhookSubscription;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PostV1WebhookSubscriptionRequestBuilder {
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PostV1WebhookSubscriptionHeaderXGustoAPIVersion>>() {});
     private PostV1WebhookSubscriptionRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PostV1WebhookSubscriptionRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PostV1WebhookSubscriptionRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1WebhookSubscriptionRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1WebhookSubscriptionRequest buildRequest() {
@@ -70,9 +85,14 @@ public class PostV1WebhookSubscriptionRequestBuilder {
     }
 
     public CompletableFuture<PostV1WebhookSubscriptionResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1WebhookSubscriptionRequest, PostV1WebhookSubscriptionResponse> operation
-              = new PostV1WebhookSubscription.Async(sdkConfiguration, security, _headers);
+              = new PostV1WebhookSubscription.Async(
+                                    sdkConfiguration, security, options,
+                                    _headers);
         PostV1WebhookSubscriptionRequest request = buildRequest();
 
         return operation.doRequest(request)

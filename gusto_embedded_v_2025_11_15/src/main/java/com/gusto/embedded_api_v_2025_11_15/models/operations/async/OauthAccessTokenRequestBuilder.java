@@ -7,23 +7,26 @@ import static com.gusto.embedded_api_v_2025_11_15.operations.Operations.AsyncReq
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.HeaderXGustoAPIVersion;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.OauthAccessTokenHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.OauthAccessTokenRequest;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.OauthAccessTokenRequestBody;
 import com.gusto.embedded_api_v_2025_11_15.operations.OauthAccessToken;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class OauthAccessTokenRequestBuilder {
 
-    private Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends OauthAccessTokenHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
-                            new TypeReference<Optional<? extends HeaderXGustoAPIVersion>>() {});
+                            new TypeReference<Optional<? extends OauthAccessTokenHeaderXGustoAPIVersion>>() {});
     private OauthAccessTokenRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -31,13 +34,13 @@ public class OauthAccessTokenRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
                 
-    public OauthAccessTokenRequestBuilder xGustoAPIVersion(HeaderXGustoAPIVersion xGustoAPIVersion) {
+    public OauthAccessTokenRequestBuilder xGustoAPIVersion(OauthAccessTokenHeaderXGustoAPIVersion xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
         return this;
     }
 
-    public OauthAccessTokenRequestBuilder xGustoAPIVersion(Optional<? extends HeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public OauthAccessTokenRequestBuilder xGustoAPIVersion(Optional<? extends OauthAccessTokenHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
@@ -46,6 +49,18 @@ public class OauthAccessTokenRequestBuilder {
     public OauthAccessTokenRequestBuilder requestBody(OauthAccessTokenRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
+        return this;
+    }
+                
+    public OauthAccessTokenRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public OauthAccessTokenRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -62,18 +77,21 @@ public class OauthAccessTokenRequestBuilder {
     }
 
     public CompletableFuture<OauthAccessTokenResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<OauthAccessTokenRequest, OauthAccessTokenResponse> operation
-              = new OauthAccessToken.Async(sdkConfiguration, _headers);
+              = new OauthAccessToken.Async(sdkConfiguration, options, _headers);
         OauthAccessTokenRequest request = buildRequest();
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends HeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends OauthAccessTokenHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2025-11-15\"",
-                    new TypeReference<Optional<? extends HeaderXGustoAPIVersion>>() {});
+                    new TypeReference<Optional<? extends OauthAccessTokenHeaderXGustoAPIVersion>>() {});
 }

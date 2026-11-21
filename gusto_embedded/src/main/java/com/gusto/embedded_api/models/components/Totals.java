@@ -13,64 +13,60 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-/**
- * Totals
- * 
- * <p>The subtotals for the payroll.
- */
+
 public class Totals {
     /**
-     * The total company debit for the payroll.
+     * The total amount for the group of contractor payments.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("company_debit")
-    private Optional<String> companyDebit;
+    @JsonProperty("amount")
+    private Optional<String> amount;
 
     /**
-     * The total company net pay for the payroll.
+     * The total debit amount for the group of contractor payments. Sum of wage &amp; reimbursement amount.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("net_pay_debit")
-    private Optional<String> netPayDebit;
+    @JsonProperty("debit_amount")
+    private Optional<String> debitAmount;
 
     /**
-     * The total child support debit for the payroll.
+     * The total wage amount for the group of contractor payments.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("child_support_debit")
-    private Optional<String> childSupportDebit;
+    @JsonProperty("wage_amount")
+    private Optional<String> wageAmount;
 
     /**
-     * The total reimbursements for the payroll.
+     * The total reimbursement amount for the group of contractor payments.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("reimbursement_debit")
-    private Optional<String> reimbursementDebit;
+    @JsonProperty("reimbursement_amount")
+    private Optional<String> reimbursementAmount;
 
     /**
-     * The total tax debit for the payroll.
+     * The total check amount for the group of contractor payments.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("tax_debit")
-    private Optional<String> taxDebit;
+    @JsonProperty("check_amount")
+    private Optional<String> checkAmount;
 
     @JsonCreator
     public Totals(
-            @JsonProperty("company_debit") Optional<String> companyDebit,
-            @JsonProperty("net_pay_debit") Optional<String> netPayDebit,
-            @JsonProperty("child_support_debit") Optional<String> childSupportDebit,
-            @JsonProperty("reimbursement_debit") Optional<String> reimbursementDebit,
-            @JsonProperty("tax_debit") Optional<String> taxDebit) {
-        Utils.checkNotNull(companyDebit, "companyDebit");
-        Utils.checkNotNull(netPayDebit, "netPayDebit");
-        Utils.checkNotNull(childSupportDebit, "childSupportDebit");
-        Utils.checkNotNull(reimbursementDebit, "reimbursementDebit");
-        Utils.checkNotNull(taxDebit, "taxDebit");
-        this.companyDebit = companyDebit;
-        this.netPayDebit = netPayDebit;
-        this.childSupportDebit = childSupportDebit;
-        this.reimbursementDebit = reimbursementDebit;
-        this.taxDebit = taxDebit;
+            @JsonProperty("amount") Optional<String> amount,
+            @JsonProperty("debit_amount") Optional<String> debitAmount,
+            @JsonProperty("wage_amount") Optional<String> wageAmount,
+            @JsonProperty("reimbursement_amount") Optional<String> reimbursementAmount,
+            @JsonProperty("check_amount") Optional<String> checkAmount) {
+        Utils.checkNotNull(amount, "amount");
+        Utils.checkNotNull(debitAmount, "debitAmount");
+        Utils.checkNotNull(wageAmount, "wageAmount");
+        Utils.checkNotNull(reimbursementAmount, "reimbursementAmount");
+        Utils.checkNotNull(checkAmount, "checkAmount");
+        this.amount = amount;
+        this.debitAmount = debitAmount;
+        this.wageAmount = wageAmount;
+        this.reimbursementAmount = reimbursementAmount;
+        this.checkAmount = checkAmount;
     }
     
     public Totals() {
@@ -79,43 +75,43 @@ public class Totals {
     }
 
     /**
-     * The total company debit for the payroll.
+     * The total amount for the group of contractor payments.
      */
     @JsonIgnore
-    public Optional<String> companyDebit() {
-        return companyDebit;
+    public Optional<String> amount() {
+        return amount;
     }
 
     /**
-     * The total company net pay for the payroll.
+     * The total debit amount for the group of contractor payments. Sum of wage &amp; reimbursement amount.
      */
     @JsonIgnore
-    public Optional<String> netPayDebit() {
-        return netPayDebit;
+    public Optional<String> debitAmount() {
+        return debitAmount;
     }
 
     /**
-     * The total child support debit for the payroll.
+     * The total wage amount for the group of contractor payments.
      */
     @JsonIgnore
-    public Optional<String> childSupportDebit() {
-        return childSupportDebit;
+    public Optional<String> wageAmount() {
+        return wageAmount;
     }
 
     /**
-     * The total reimbursements for the payroll.
+     * The total reimbursement amount for the group of contractor payments.
      */
     @JsonIgnore
-    public Optional<String> reimbursementDebit() {
-        return reimbursementDebit;
+    public Optional<String> reimbursementAmount() {
+        return reimbursementAmount;
     }
 
     /**
-     * The total tax debit for the payroll.
+     * The total check amount for the group of contractor payments.
      */
     @JsonIgnore
-    public Optional<String> taxDebit() {
-        return taxDebit;
+    public Optional<String> checkAmount() {
+        return checkAmount;
     }
 
     public static Builder builder() {
@@ -124,97 +120,97 @@ public class Totals {
 
 
     /**
-     * The total company debit for the payroll.
+     * The total amount for the group of contractor payments.
      */
-    public Totals withCompanyDebit(String companyDebit) {
-        Utils.checkNotNull(companyDebit, "companyDebit");
-        this.companyDebit = Optional.ofNullable(companyDebit);
+    public Totals withAmount(String amount) {
+        Utils.checkNotNull(amount, "amount");
+        this.amount = Optional.ofNullable(amount);
         return this;
     }
 
 
     /**
-     * The total company debit for the payroll.
+     * The total amount for the group of contractor payments.
      */
-    public Totals withCompanyDebit(Optional<String> companyDebit) {
-        Utils.checkNotNull(companyDebit, "companyDebit");
-        this.companyDebit = companyDebit;
+    public Totals withAmount(Optional<String> amount) {
+        Utils.checkNotNull(amount, "amount");
+        this.amount = amount;
         return this;
     }
 
     /**
-     * The total company net pay for the payroll.
+     * The total debit amount for the group of contractor payments. Sum of wage &amp; reimbursement amount.
      */
-    public Totals withNetPayDebit(String netPayDebit) {
-        Utils.checkNotNull(netPayDebit, "netPayDebit");
-        this.netPayDebit = Optional.ofNullable(netPayDebit);
-        return this;
-    }
-
-
-    /**
-     * The total company net pay for the payroll.
-     */
-    public Totals withNetPayDebit(Optional<String> netPayDebit) {
-        Utils.checkNotNull(netPayDebit, "netPayDebit");
-        this.netPayDebit = netPayDebit;
-        return this;
-    }
-
-    /**
-     * The total child support debit for the payroll.
-     */
-    public Totals withChildSupportDebit(String childSupportDebit) {
-        Utils.checkNotNull(childSupportDebit, "childSupportDebit");
-        this.childSupportDebit = Optional.ofNullable(childSupportDebit);
+    public Totals withDebitAmount(String debitAmount) {
+        Utils.checkNotNull(debitAmount, "debitAmount");
+        this.debitAmount = Optional.ofNullable(debitAmount);
         return this;
     }
 
 
     /**
-     * The total child support debit for the payroll.
+     * The total debit amount for the group of contractor payments. Sum of wage &amp; reimbursement amount.
      */
-    public Totals withChildSupportDebit(Optional<String> childSupportDebit) {
-        Utils.checkNotNull(childSupportDebit, "childSupportDebit");
-        this.childSupportDebit = childSupportDebit;
+    public Totals withDebitAmount(Optional<String> debitAmount) {
+        Utils.checkNotNull(debitAmount, "debitAmount");
+        this.debitAmount = debitAmount;
         return this;
     }
 
     /**
-     * The total reimbursements for the payroll.
+     * The total wage amount for the group of contractor payments.
      */
-    public Totals withReimbursementDebit(String reimbursementDebit) {
-        Utils.checkNotNull(reimbursementDebit, "reimbursementDebit");
-        this.reimbursementDebit = Optional.ofNullable(reimbursementDebit);
-        return this;
-    }
-
-
-    /**
-     * The total reimbursements for the payroll.
-     */
-    public Totals withReimbursementDebit(Optional<String> reimbursementDebit) {
-        Utils.checkNotNull(reimbursementDebit, "reimbursementDebit");
-        this.reimbursementDebit = reimbursementDebit;
-        return this;
-    }
-
-    /**
-     * The total tax debit for the payroll.
-     */
-    public Totals withTaxDebit(String taxDebit) {
-        Utils.checkNotNull(taxDebit, "taxDebit");
-        this.taxDebit = Optional.ofNullable(taxDebit);
+    public Totals withWageAmount(String wageAmount) {
+        Utils.checkNotNull(wageAmount, "wageAmount");
+        this.wageAmount = Optional.ofNullable(wageAmount);
         return this;
     }
 
 
     /**
-     * The total tax debit for the payroll.
+     * The total wage amount for the group of contractor payments.
      */
-    public Totals withTaxDebit(Optional<String> taxDebit) {
-        Utils.checkNotNull(taxDebit, "taxDebit");
-        this.taxDebit = taxDebit;
+    public Totals withWageAmount(Optional<String> wageAmount) {
+        Utils.checkNotNull(wageAmount, "wageAmount");
+        this.wageAmount = wageAmount;
+        return this;
+    }
+
+    /**
+     * The total reimbursement amount for the group of contractor payments.
+     */
+    public Totals withReimbursementAmount(String reimbursementAmount) {
+        Utils.checkNotNull(reimbursementAmount, "reimbursementAmount");
+        this.reimbursementAmount = Optional.ofNullable(reimbursementAmount);
+        return this;
+    }
+
+
+    /**
+     * The total reimbursement amount for the group of contractor payments.
+     */
+    public Totals withReimbursementAmount(Optional<String> reimbursementAmount) {
+        Utils.checkNotNull(reimbursementAmount, "reimbursementAmount");
+        this.reimbursementAmount = reimbursementAmount;
+        return this;
+    }
+
+    /**
+     * The total check amount for the group of contractor payments.
+     */
+    public Totals withCheckAmount(String checkAmount) {
+        Utils.checkNotNull(checkAmount, "checkAmount");
+        this.checkAmount = Optional.ofNullable(checkAmount);
+        return this;
+    }
+
+
+    /**
+     * The total check amount for the group of contractor payments.
+     */
+    public Totals withCheckAmount(Optional<String> checkAmount) {
+        Utils.checkNotNull(checkAmount, "checkAmount");
+        this.checkAmount = checkAmount;
         return this;
     }
 
@@ -228,42 +224,42 @@ public class Totals {
         }
         Totals other = (Totals) o;
         return 
-            Utils.enhancedDeepEquals(this.companyDebit, other.companyDebit) &&
-            Utils.enhancedDeepEquals(this.netPayDebit, other.netPayDebit) &&
-            Utils.enhancedDeepEquals(this.childSupportDebit, other.childSupportDebit) &&
-            Utils.enhancedDeepEquals(this.reimbursementDebit, other.reimbursementDebit) &&
-            Utils.enhancedDeepEquals(this.taxDebit, other.taxDebit);
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.debitAmount, other.debitAmount) &&
+            Utils.enhancedDeepEquals(this.wageAmount, other.wageAmount) &&
+            Utils.enhancedDeepEquals(this.reimbursementAmount, other.reimbursementAmount) &&
+            Utils.enhancedDeepEquals(this.checkAmount, other.checkAmount);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyDebit, netPayDebit, childSupportDebit,
-            reimbursementDebit, taxDebit);
+            amount, debitAmount, wageAmount,
+            reimbursementAmount, checkAmount);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Totals.class,
-                "companyDebit", companyDebit,
-                "netPayDebit", netPayDebit,
-                "childSupportDebit", childSupportDebit,
-                "reimbursementDebit", reimbursementDebit,
-                "taxDebit", taxDebit);
+                "amount", amount,
+                "debitAmount", debitAmount,
+                "wageAmount", wageAmount,
+                "reimbursementAmount", reimbursementAmount,
+                "checkAmount", checkAmount);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> companyDebit = Optional.empty();
+        private Optional<String> amount = Optional.empty();
 
-        private Optional<String> netPayDebit = Optional.empty();
+        private Optional<String> debitAmount = Optional.empty();
 
-        private Optional<String> childSupportDebit = Optional.empty();
+        private Optional<String> wageAmount = Optional.empty();
 
-        private Optional<String> reimbursementDebit = Optional.empty();
+        private Optional<String> reimbursementAmount = Optional.empty();
 
-        private Optional<String> taxDebit = Optional.empty();
+        private Optional<String> checkAmount = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -271,104 +267,104 @@ public class Totals {
 
 
         /**
-         * The total company debit for the payroll.
+         * The total amount for the group of contractor payments.
          */
-        public Builder companyDebit(String companyDebit) {
-            Utils.checkNotNull(companyDebit, "companyDebit");
-            this.companyDebit = Optional.ofNullable(companyDebit);
+        public Builder amount(String amount) {
+            Utils.checkNotNull(amount, "amount");
+            this.amount = Optional.ofNullable(amount);
             return this;
         }
 
         /**
-         * The total company debit for the payroll.
+         * The total amount for the group of contractor payments.
          */
-        public Builder companyDebit(Optional<String> companyDebit) {
-            Utils.checkNotNull(companyDebit, "companyDebit");
-            this.companyDebit = companyDebit;
-            return this;
-        }
-
-
-        /**
-         * The total company net pay for the payroll.
-         */
-        public Builder netPayDebit(String netPayDebit) {
-            Utils.checkNotNull(netPayDebit, "netPayDebit");
-            this.netPayDebit = Optional.ofNullable(netPayDebit);
-            return this;
-        }
-
-        /**
-         * The total company net pay for the payroll.
-         */
-        public Builder netPayDebit(Optional<String> netPayDebit) {
-            Utils.checkNotNull(netPayDebit, "netPayDebit");
-            this.netPayDebit = netPayDebit;
+        public Builder amount(Optional<String> amount) {
+            Utils.checkNotNull(amount, "amount");
+            this.amount = amount;
             return this;
         }
 
 
         /**
-         * The total child support debit for the payroll.
+         * The total debit amount for the group of contractor payments. Sum of wage &amp; reimbursement amount.
          */
-        public Builder childSupportDebit(String childSupportDebit) {
-            Utils.checkNotNull(childSupportDebit, "childSupportDebit");
-            this.childSupportDebit = Optional.ofNullable(childSupportDebit);
+        public Builder debitAmount(String debitAmount) {
+            Utils.checkNotNull(debitAmount, "debitAmount");
+            this.debitAmount = Optional.ofNullable(debitAmount);
             return this;
         }
 
         /**
-         * The total child support debit for the payroll.
+         * The total debit amount for the group of contractor payments. Sum of wage &amp; reimbursement amount.
          */
-        public Builder childSupportDebit(Optional<String> childSupportDebit) {
-            Utils.checkNotNull(childSupportDebit, "childSupportDebit");
-            this.childSupportDebit = childSupportDebit;
-            return this;
-        }
-
-
-        /**
-         * The total reimbursements for the payroll.
-         */
-        public Builder reimbursementDebit(String reimbursementDebit) {
-            Utils.checkNotNull(reimbursementDebit, "reimbursementDebit");
-            this.reimbursementDebit = Optional.ofNullable(reimbursementDebit);
-            return this;
-        }
-
-        /**
-         * The total reimbursements for the payroll.
-         */
-        public Builder reimbursementDebit(Optional<String> reimbursementDebit) {
-            Utils.checkNotNull(reimbursementDebit, "reimbursementDebit");
-            this.reimbursementDebit = reimbursementDebit;
+        public Builder debitAmount(Optional<String> debitAmount) {
+            Utils.checkNotNull(debitAmount, "debitAmount");
+            this.debitAmount = debitAmount;
             return this;
         }
 
 
         /**
-         * The total tax debit for the payroll.
+         * The total wage amount for the group of contractor payments.
          */
-        public Builder taxDebit(String taxDebit) {
-            Utils.checkNotNull(taxDebit, "taxDebit");
-            this.taxDebit = Optional.ofNullable(taxDebit);
+        public Builder wageAmount(String wageAmount) {
+            Utils.checkNotNull(wageAmount, "wageAmount");
+            this.wageAmount = Optional.ofNullable(wageAmount);
             return this;
         }
 
         /**
-         * The total tax debit for the payroll.
+         * The total wage amount for the group of contractor payments.
          */
-        public Builder taxDebit(Optional<String> taxDebit) {
-            Utils.checkNotNull(taxDebit, "taxDebit");
-            this.taxDebit = taxDebit;
+        public Builder wageAmount(Optional<String> wageAmount) {
+            Utils.checkNotNull(wageAmount, "wageAmount");
+            this.wageAmount = wageAmount;
+            return this;
+        }
+
+
+        /**
+         * The total reimbursement amount for the group of contractor payments.
+         */
+        public Builder reimbursementAmount(String reimbursementAmount) {
+            Utils.checkNotNull(reimbursementAmount, "reimbursementAmount");
+            this.reimbursementAmount = Optional.ofNullable(reimbursementAmount);
+            return this;
+        }
+
+        /**
+         * The total reimbursement amount for the group of contractor payments.
+         */
+        public Builder reimbursementAmount(Optional<String> reimbursementAmount) {
+            Utils.checkNotNull(reimbursementAmount, "reimbursementAmount");
+            this.reimbursementAmount = reimbursementAmount;
+            return this;
+        }
+
+
+        /**
+         * The total check amount for the group of contractor payments.
+         */
+        public Builder checkAmount(String checkAmount) {
+            Utils.checkNotNull(checkAmount, "checkAmount");
+            this.checkAmount = Optional.ofNullable(checkAmount);
+            return this;
+        }
+
+        /**
+         * The total check amount for the group of contractor payments.
+         */
+        public Builder checkAmount(Optional<String> checkAmount) {
+            Utils.checkNotNull(checkAmount, "checkAmount");
+            this.checkAmount = checkAmount;
             return this;
         }
 
         public Totals build() {
 
             return new Totals(
-                companyDebit, netPayDebit, childSupportDebit,
-                reimbursementDebit, taxDebit);
+                amount, debitAmount, wageAmount,
+                reimbursementAmount, checkAmount);
         }
 
     }

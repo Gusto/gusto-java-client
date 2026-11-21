@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1Employees;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +25,7 @@ public class GetV1EmployeesRequestBuilder {
                             new TypeReference<Optional<? extends GetV1EmployeesHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private Optional<? extends List<GetV1EmployeesQueryParamInclude>> include = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -59,6 +62,18 @@ public class GetV1EmployeesRequestBuilder {
         this.include = include;
         return this;
     }
+                
+    public GetV1EmployeesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1EmployeesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1EmployeesRequest buildRequest() {
@@ -74,9 +89,12 @@ public class GetV1EmployeesRequestBuilder {
     }
 
     public GetV1EmployeesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1EmployeesRequest, GetV1EmployeesResponse> operation
-              = new GetV1Employees.Sync(sdkConfiguration, _headers);
+              = new GetV1Employees.Sync(sdkConfiguration, options, _headers);
         GetV1EmployeesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

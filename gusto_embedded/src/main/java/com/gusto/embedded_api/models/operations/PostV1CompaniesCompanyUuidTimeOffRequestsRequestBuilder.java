@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyUuidTimeOffRequests;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostV1CompaniesCompanyUuidTimeOffRequestsRequestBuilder {
@@ -22,6 +24,7 @@ public class PostV1CompaniesCompanyUuidTimeOffRequestsRequestBuilder {
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyUuidTimeOffRequestsHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
     private PostV1CompaniesCompanyUuidTimeOffRequestsRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class PostV1CompaniesCompanyUuidTimeOffRequestsRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PostV1CompaniesCompanyUuidTimeOffRequestsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyUuidTimeOffRequestsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1CompaniesCompanyUuidTimeOffRequestsRequest buildRequest() {
@@ -67,9 +82,12 @@ public class PostV1CompaniesCompanyUuidTimeOffRequestsRequestBuilder {
     }
 
     public PostV1CompaniesCompanyUuidTimeOffRequestsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostV1CompaniesCompanyUuidTimeOffRequestsRequest, PostV1CompaniesCompanyUuidTimeOffRequestsResponse> operation
-              = new PostV1CompaniesCompanyUuidTimeOffRequests.Sync(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyUuidTimeOffRequests.Sync(sdkConfiguration, options, _headers);
         PostV1CompaniesCompanyUuidTimeOffRequestsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

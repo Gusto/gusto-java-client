@@ -10,7 +10,9 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1SandboxGenerate1099;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostV1SandboxGenerate1099RequestBuilder {
@@ -20,6 +22,7 @@ public class PostV1SandboxGenerate1099RequestBuilder {
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PostV1SandboxGenerate1099HeaderXGustoAPIVersion>>() {});
     private PostV1SandboxGenerate1099RequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -44,6 +47,18 @@ public class PostV1SandboxGenerate1099RequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PostV1SandboxGenerate1099RequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1SandboxGenerate1099RequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1SandboxGenerate1099Request buildRequest() {
@@ -58,9 +73,12 @@ public class PostV1SandboxGenerate1099RequestBuilder {
     }
 
     public PostV1SandboxGenerate1099Response call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostV1SandboxGenerate1099Request, PostV1SandboxGenerate1099Response> operation
-              = new PostV1SandboxGenerate1099.Sync(sdkConfiguration, _headers);
+              = new PostV1SandboxGenerate1099.Sync(sdkConfiguration, options, _headers);
         PostV1SandboxGenerate1099Request request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
