@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
 import com.gusto.embedded_api_v_2025_11_15.utils.SpeakeasyMetadata;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -17,12 +18,6 @@ import java.util.Optional;
 
 public class GetV1PaymentReceiptsPayrollsPayrollUuidRequest {
     /**
-     * The UUID of the payroll
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=payroll_uuid")
-    private String payrollUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +25,45 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the payroll
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=payroll_uuid")
+    private String payrollUuid;
+
+    /**
+     * The page that is requested. When unspecified, will load all objects unless endpoint forces
+     * pagination.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=page")
+    private Optional<Long> page;
+
+    /**
+     * Number of objects per page. For majority of endpoints will default to 25
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=per")
+    private Optional<Long> per;
+
     @JsonCreator
     public GetV1PaymentReceiptsPayrollsPayrollUuidRequest(
+            Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
             String payrollUuid,
-            Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(payrollUuid, "payrollUuid");
+            Optional<Long> page,
+            Optional<Long> per) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.payrollUuid = payrollUuid;
+        Utils.checkNotNull(payrollUuid, "payrollUuid");
+        Utils.checkNotNull(page, "page");
+        Utils.checkNotNull(per, "per");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.payrollUuid = payrollUuid;
+        this.page = page;
+        this.per = per;
     }
     
     public GetV1PaymentReceiptsPayrollsPayrollUuidRequest(
             String payrollUuid) {
-        this(payrollUuid, Optional.empty());
-    }
-
-    /**
-     * The UUID of the payroll
-     */
-    @JsonIgnore
-    public String payrollUuid() {
-        return payrollUuid;
+        this(Optional.empty(), payrollUuid, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -64,19 +77,35 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidRequest {
         return (Optional<GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the payroll
+     */
+    @JsonIgnore
+    public String payrollUuid() {
+        return payrollUuid;
+    }
+
+    /**
+     * The page that is requested. When unspecified, will load all objects unless endpoint forces
+     * pagination.
+     */
+    @JsonIgnore
+    public Optional<Long> page() {
+        return page;
+    }
+
+    /**
+     * Number of objects per page. For majority of endpoints will default to 25
+     */
+    @JsonIgnore
+    public Optional<Long> per() {
+        return per;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the payroll
-     */
-    public GetV1PaymentReceiptsPayrollsPayrollUuidRequest withPayrollUuid(String payrollUuid) {
-        Utils.checkNotNull(payrollUuid, "payrollUuid");
-        this.payrollUuid = payrollUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +130,55 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidRequest {
         return this;
     }
 
+    /**
+     * The UUID of the payroll
+     */
+    public GetV1PaymentReceiptsPayrollsPayrollUuidRequest withPayrollUuid(String payrollUuid) {
+        Utils.checkNotNull(payrollUuid, "payrollUuid");
+        this.payrollUuid = payrollUuid;
+        return this;
+    }
+
+    /**
+     * The page that is requested. When unspecified, will load all objects unless endpoint forces
+     * pagination.
+     */
+    public GetV1PaymentReceiptsPayrollsPayrollUuidRequest withPage(long page) {
+        Utils.checkNotNull(page, "page");
+        this.page = Optional.ofNullable(page);
+        return this;
+    }
+
+
+    /**
+     * The page that is requested. When unspecified, will load all objects unless endpoint forces
+     * pagination.
+     */
+    public GetV1PaymentReceiptsPayrollsPayrollUuidRequest withPage(Optional<Long> page) {
+        Utils.checkNotNull(page, "page");
+        this.page = page;
+        return this;
+    }
+
+    /**
+     * Number of objects per page. For majority of endpoints will default to 25
+     */
+    public GetV1PaymentReceiptsPayrollsPayrollUuidRequest withPer(long per) {
+        Utils.checkNotNull(per, "per");
+        this.per = Optional.ofNullable(per);
+        return this;
+    }
+
+
+    /**
+     * Number of objects per page. For majority of endpoints will default to 25
+     */
+    public GetV1PaymentReceiptsPayrollsPayrollUuidRequest withPer(Optional<Long> per) {
+        Utils.checkNotNull(per, "per");
+        this.per = per;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +189,41 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidRequest {
         }
         GetV1PaymentReceiptsPayrollsPayrollUuidRequest other = (GetV1PaymentReceiptsPayrollsPayrollUuidRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.payrollUuid, other.payrollUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.page, other.page) &&
+            Utils.enhancedDeepEquals(this.per, other.per);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            payrollUuid, xGustoAPIVersion);
+            xGustoAPIVersion, payrollUuid, page,
+            per);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetV1PaymentReceiptsPayrollsPayrollUuidRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "payrollUuid", payrollUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "page", page,
+                "per", per);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String payrollUuid;
 
-        private Optional<? extends GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+        private Optional<Long> page = Optional.empty();
+
+        private Optional<Long> per = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the payroll
-         */
-        public Builder payrollUuid(String payrollUuid) {
-            Utils.checkNotNull(payrollUuid, "payrollUuid");
-            this.payrollUuid = payrollUuid;
-            return this;
         }
 
 
@@ -172,13 +249,64 @@ public class GetV1PaymentReceiptsPayrollsPayrollUuidRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the payroll
+         */
+        public Builder payrollUuid(String payrollUuid) {
+            Utils.checkNotNull(payrollUuid, "payrollUuid");
+            this.payrollUuid = payrollUuid;
+            return this;
+        }
+
+
+        /**
+         * The page that is requested. When unspecified, will load all objects unless endpoint forces
+         * pagination.
+         */
+        public Builder page(long page) {
+            Utils.checkNotNull(page, "page");
+            this.page = Optional.ofNullable(page);
+            return this;
+        }
+
+        /**
+         * The page that is requested. When unspecified, will load all objects unless endpoint forces
+         * pagination.
+         */
+        public Builder page(Optional<Long> page) {
+            Utils.checkNotNull(page, "page");
+            this.page = page;
+            return this;
+        }
+
+
+        /**
+         * Number of objects per page. For majority of endpoints will default to 25
+         */
+        public Builder per(long per) {
+            Utils.checkNotNull(per, "per");
+            this.per = Optional.ofNullable(per);
+            return this;
+        }
+
+        /**
+         * Number of objects per page. For majority of endpoints will default to 25
+         */
+        public Builder per(Optional<Long> per) {
+            Utils.checkNotNull(per, "per");
+            this.per = per;
+            return this;
+        }
+
         public GetV1PaymentReceiptsPayrollsPayrollUuidRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new GetV1PaymentReceiptsPayrollsPayrollUuidRequest(
-                payrollUuid, xGustoAPIVersion);
+                xGustoAPIVersion, payrollUuid, page,
+                per);
         }
 
 

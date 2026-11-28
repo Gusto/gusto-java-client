@@ -16,6 +16,7 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.RedebitRecoveryCase
 import com.gusto.embedded_api_v_2026_06_15.operations.GetRecoveryCases;
 import com.gusto.embedded_api_v_2026_06_15.operations.RedebitRecoveryCase;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -70,7 +71,7 @@ public class RecoveryCases {
      */
     public GetRecoveryCasesResponse get(String companyUuid) {
         return get(Optional.empty(), companyUuid, Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -92,6 +93,31 @@ public class RecoveryCases {
     public GetRecoveryCasesResponse get(
             Optional<? extends GetRecoveryCasesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             Optional<Long> page, Optional<Long> per) {
+        return get(xGustoAPIVersion, companyUuid, page,
+            per, Optional.empty());
+    }
+
+    /**
+     * Get all recovery cases for a company
+     * 
+     * <p>Fetch all recovery cases for a company.
+     * 
+     * <p>scope: `recovery_cases:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetRecoveryCasesResponse get(
+            Optional<? extends GetRecoveryCasesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            Optional<Long> page, Optional<Long> per,
+            Optional<Options> options) {
         GetRecoveryCasesRequest request =
             GetRecoveryCasesRequest
                 .builder()
@@ -101,7 +127,7 @@ public class RecoveryCases {
                 .per(per)
                 .build();
         RequestOperation<GetRecoveryCasesRequest, GetRecoveryCasesResponse> operation
-              = new GetRecoveryCases.Sync(sdkConfiguration, _headers);
+              = new GetRecoveryCases.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -150,7 +176,7 @@ public class RecoveryCases {
      * @throws RuntimeException subclass if the API call fails
      */
     public RedebitRecoveryCaseResponse redebit(String recoveryCaseUuid) {
-        return redebit(Optional.empty(), recoveryCaseUuid);
+        return redebit(Optional.empty(), recoveryCaseUuid, Optional.empty());
     }
 
     /**
@@ -176,6 +202,35 @@ public class RecoveryCases {
      * @throws RuntimeException subclass if the API call fails
      */
     public RedebitRecoveryCaseResponse redebit(Optional<? extends RedebitRecoveryCaseHeaderXGustoAPIVersion> xGustoAPIVersion, String recoveryCaseUuid) {
+        return redebit(xGustoAPIVersion, recoveryCaseUuid, Optional.empty());
+    }
+
+    /**
+     * Initiate a redebit for a recovery case
+     * 
+     * <p>After resolving the underlying bank error, initiate a redebit for an open recovery case. This
+     * submission is asynchronous and a successful request responds with a 202 HTTP status.
+     * 
+     * <p>It may take up to four business days for the ACH debit to process; in the meantime, the status of
+     * the recovery case will be in the `initiated_redebit` state. When funds are successfully redebited,
+     * the recovery case is transitioned to the `recovered` state.
+     * 
+     * <p>If the company has exceeded maximum redebit attempts, or if the recovery case is not in a
+     * redebitable state, the response will be 422 Unprocessable Entity.
+     * 
+     * <p>scope: `recovery_cases:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param recoveryCaseUuid The UUID of the recovery case
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public RedebitRecoveryCaseResponse redebit(
+            Optional<? extends RedebitRecoveryCaseHeaderXGustoAPIVersion> xGustoAPIVersion, String recoveryCaseUuid,
+            Optional<Options> options) {
         RedebitRecoveryCaseRequest request =
             RedebitRecoveryCaseRequest
                 .builder()
@@ -183,7 +238,7 @@ public class RecoveryCases {
                 .recoveryCaseUuid(recoveryCaseUuid)
                 .build();
         RequestOperation<RedebitRecoveryCaseRequest, RedebitRecoveryCaseResponse> operation
-              = new RedebitRecoveryCase.Sync(sdkConfiguration, _headers);
+              = new RedebitRecoveryCase.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

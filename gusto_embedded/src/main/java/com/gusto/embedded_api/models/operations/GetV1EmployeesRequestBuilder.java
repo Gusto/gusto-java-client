@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1Employees;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +24,8 @@ public class GetV1EmployeesRequestBuilder {
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1EmployeesHeaderXGustoAPIVersion>>() {});
     private String employeeId;
-    private Optional<? extends List<QueryParamInclude>> include = Optional.empty();
+    private Optional<? extends List<GetV1EmployeesQueryParamInclude>> include = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,15 +51,27 @@ public class GetV1EmployeesRequestBuilder {
         return this;
     }
                 
-    public GetV1EmployeesRequestBuilder include(List<QueryParamInclude> include) {
+    public GetV1EmployeesRequestBuilder include(List<GetV1EmployeesQueryParamInclude> include) {
         Utils.checkNotNull(include, "include");
         this.include = Optional.of(include);
         return this;
     }
 
-    public GetV1EmployeesRequestBuilder include(Optional<? extends List<QueryParamInclude>> include) {
+    public GetV1EmployeesRequestBuilder include(Optional<? extends List<GetV1EmployeesQueryParamInclude>> include) {
         Utils.checkNotNull(include, "include");
         this.include = include;
+        return this;
+    }
+                
+    public GetV1EmployeesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1EmployeesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -74,9 +89,12 @@ public class GetV1EmployeesRequestBuilder {
     }
 
     public GetV1EmployeesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1EmployeesRequest, GetV1EmployeesResponse> operation
-              = new GetV1Employees.Sync(sdkConfiguration, _headers);
+              = new GetV1Employees.Sync(sdkConfiguration, options, _headers);
         GetV1EmployeesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

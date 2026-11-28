@@ -12,8 +12,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1EmployeeBen
 import com.gusto.embedded_api_v_2026_06_15.operations.DeleteV1EmployeeBenefitsEmployeeBenefitId;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -24,6 +26,7 @@ public class DeleteV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder {
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1EmployeeBenefitsEmployeeBenefitIdHeaderXGustoAPIVersion>>() {});
     private String employeeBenefitId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class DeleteV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder {
         this.employeeBenefitId = employeeBenefitId;
         return this;
     }
+                
+    public DeleteV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest buildRequest() {
@@ -62,9 +77,12 @@ public class DeleteV1EmployeeBenefitsEmployeeBenefitIdRequestBuilder {
     }
 
     public CompletableFuture<DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest, DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse> operation
-              = new DeleteV1EmployeeBenefitsEmployeeBenefitId.Async(sdkConfiguration, _headers);
+              = new DeleteV1EmployeeBenefitsEmployeeBenefitId.Async(sdkConfiguration, options, _headers);
         DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest request = buildRequest();
 
         return operation.doRequest(request)

@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1ContractorFormPdf;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1ContractorFormPdfRequestBuilder {
@@ -22,6 +24,7 @@ public class GetV1ContractorFormPdfRequestBuilder {
                             new TypeReference<Optional<? extends GetV1ContractorFormPdfHeaderXGustoAPIVersion>>() {});
     private String contractorUuid;
     private String formId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class GetV1ContractorFormPdfRequestBuilder {
         this.formId = formId;
         return this;
     }
+                
+    public GetV1ContractorFormPdfRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1ContractorFormPdfRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1ContractorFormPdfRequest buildRequest() {
@@ -67,9 +82,12 @@ public class GetV1ContractorFormPdfRequestBuilder {
     }
 
     public GetV1ContractorFormPdfResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1ContractorFormPdfRequest, GetV1ContractorFormPdfResponse> operation
-              = new GetV1ContractorFormPdf.Sync(sdkConfiguration, _headers);
+              = new GetV1ContractorFormPdf.Sync(sdkConfiguration, options, _headers);
         GetV1ContractorFormPdfRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

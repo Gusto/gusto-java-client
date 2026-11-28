@@ -11,8 +11,10 @@ import com.gusto.embedded_api_v_2025_11_15.models.components.CompensationsReques
 import com.gusto.embedded_api_v_2025_11_15.operations.PostV1CompensationsCompensationId;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostV1CompensationsCompensationIdRequestBuilder {
@@ -23,6 +25,7 @@ public class PostV1CompensationsCompensationIdRequestBuilder {
                             new TypeReference<Optional<? extends PostV1CompensationsCompensationIdHeaderXGustoAPIVersion>>() {});
     private String jobId;
     private CompensationsRequestBody compensationsRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PostV1CompensationsCompensationIdRequestBuilder {
         this.compensationsRequestBody = compensationsRequestBody;
         return this;
     }
+                
+    public PostV1CompensationsCompensationIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompensationsCompensationIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1CompensationsCompensationIdRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PostV1CompensationsCompensationIdRequestBuilder {
     }
 
     public PostV1CompensationsCompensationIdResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostV1CompensationsCompensationIdRequest, PostV1CompensationsCompensationIdResponse> operation
-              = new PostV1CompensationsCompensationId.Sync(sdkConfiguration, _headers);
+              = new PostV1CompensationsCompensationId.Sync(sdkConfiguration, options, _headers);
         PostV1CompensationsCompensationIdRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

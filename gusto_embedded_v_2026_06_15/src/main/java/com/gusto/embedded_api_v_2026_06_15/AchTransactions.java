@@ -10,6 +10,8 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.GetAchTransactionsR
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetAchTransactionsResponse;
 import com.gusto.embedded_api_v_2026_06_15.operations.GetAchTransactions;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
+import java.util.Optional;
 
 
 public class AchTransactions {
@@ -60,8 +62,26 @@ public class AchTransactions {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetAchTransactionsResponse getAll(GetAchTransactionsRequest request) {
+        return getAll(request, Optional.empty());
+    }
+
+    /**
+     * Get all ACH transactions for a company
+     * 
+     * <p>Fetches all ACH transactions for a company.
+     * 
+     * <p>scope: `ach_transactions:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetAchTransactionsResponse getAll(GetAchTransactionsRequest request, Optional<Options> options) {
         RequestOperation<GetAchTransactionsRequest, GetAchTransactionsResponse> operation
-              = new GetAchTransactions.Sync(sdkConfiguration, _headers);
+              = new GetAchTransactions.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

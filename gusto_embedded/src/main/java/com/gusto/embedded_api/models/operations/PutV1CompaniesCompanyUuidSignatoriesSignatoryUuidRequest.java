@@ -18,6 +18,14 @@ import java.util.Optional;
 
 public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
     /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
+    private Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+    /**
      * The UUID of the company
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=company_uuid")
@@ -29,31 +37,23 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=signatory_uuid")
     private String signatoryUuid;
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
-    private Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
-
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private SignatoryUpdateRequest signatoryUpdateRequest;
 
     @JsonCreator
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(
+            Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
             String companyUuid,
             String signatoryUuid,
-            Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
             SignatoryUpdateRequest signatoryUpdateRequest) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(companyUuid, "companyUuid");
         Utils.checkNotNull(signatoryUuid, "signatoryUuid");
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         Utils.checkNotNull(signatoryUpdateRequest, "signatoryUpdateRequest");
+        this.xGustoAPIVersion = xGustoAPIVersion;
         this.companyUuid = companyUuid;
         this.signatoryUuid = signatoryUuid;
-        this.xGustoAPIVersion = xGustoAPIVersion;
         this.signatoryUpdateRequest = signatoryUpdateRequest;
     }
     
@@ -61,8 +61,19 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
             String companyUuid,
             String signatoryUuid,
             SignatoryUpdateRequest signatoryUpdateRequest) {
-        this(companyUuid, signatoryUuid, Optional.empty(),
+        this(Optional.empty(), companyUuid, signatoryUuid,
             signatoryUpdateRequest);
+    }
+
+    /**
+     * Determines the date-based API version associated with your API call. If none is provided, your
+     * application's [minimum API
+     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion() {
+        return (Optional<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
     /**
@@ -81,17 +92,6 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
         return signatoryUuid;
     }
 
-    /**
-     * Determines the date-based API version associated with your API call. If none is provided, your
-     * application's [minimum API
-     * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion() {
-        return (Optional<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion>) xGustoAPIVersion;
-    }
-
     @JsonIgnore
     public SignatoryUpdateRequest signatoryUpdateRequest() {
         return signatoryUpdateRequest;
@@ -101,24 +101,6 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the company
-     */
-    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withCompanyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
-
-    /**
-     * The UUID of the signatory
-     */
-    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withSignatoryUuid(String signatoryUuid) {
-        Utils.checkNotNull(signatoryUuid, "signatoryUuid");
-        this.signatoryUuid = signatoryUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -143,6 +125,24 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
         return this;
     }
 
+    /**
+     * The UUID of the company
+     */
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withCompanyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
+    /**
+     * The UUID of the signatory
+     */
+    public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withSignatoryUuid(String signatoryUuid) {
+        Utils.checkNotNull(signatoryUuid, "signatoryUuid");
+        this.signatoryUuid = signatoryUuid;
+        return this;
+    }
+
     public PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest withSignatoryUpdateRequest(SignatoryUpdateRequest signatoryUpdateRequest) {
         Utils.checkNotNull(signatoryUpdateRequest, "signatoryUpdateRequest");
         this.signatoryUpdateRequest = signatoryUpdateRequest;
@@ -159,61 +159,41 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
         }
         PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest other = (PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.companyUuid, other.companyUuid) &&
             Utils.enhancedDeepEquals(this.signatoryUuid, other.signatoryUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
             Utils.enhancedDeepEquals(this.signatoryUpdateRequest, other.signatoryUpdateRequest);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyUuid, signatoryUuid, xGustoAPIVersion,
+            xGustoAPIVersion, companyUuid, signatoryUuid,
             signatoryUpdateRequest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest.class,
+                "xGustoAPIVersion", xGustoAPIVersion,
                 "companyUuid", companyUuid,
                 "signatoryUuid", signatoryUuid,
-                "xGustoAPIVersion", xGustoAPIVersion,
                 "signatoryUpdateRequest", signatoryUpdateRequest);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
+
         private String companyUuid;
 
         private String signatoryUuid;
-
-        private Optional<? extends PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHeaderXGustoAPIVersion> xGustoAPIVersion;
 
         private SignatoryUpdateRequest signatoryUpdateRequest;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the company
-         */
-        public Builder companyUuid(String companyUuid) {
-            Utils.checkNotNull(companyUuid, "companyUuid");
-            this.companyUuid = companyUuid;
-            return this;
-        }
-
-
-        /**
-         * The UUID of the signatory
-         */
-        public Builder signatoryUuid(String signatoryUuid) {
-            Utils.checkNotNull(signatoryUuid, "signatoryUuid");
-            this.signatoryUuid = signatoryUuid;
-            return this;
         }
 
 
@@ -240,6 +220,26 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
         }
 
 
+        /**
+         * The UUID of the company
+         */
+        public Builder companyUuid(String companyUuid) {
+            Utils.checkNotNull(companyUuid, "companyUuid");
+            this.companyUuid = companyUuid;
+            return this;
+        }
+
+
+        /**
+         * The UUID of the signatory
+         */
+        public Builder signatoryUuid(String signatoryUuid) {
+            Utils.checkNotNull(signatoryUuid, "signatoryUuid");
+            this.signatoryUuid = signatoryUuid;
+            return this;
+        }
+
+
         public Builder signatoryUpdateRequest(SignatoryUpdateRequest signatoryUpdateRequest) {
             Utils.checkNotNull(signatoryUpdateRequest, "signatoryUpdateRequest");
             this.signatoryUpdateRequest = signatoryUpdateRequest;
@@ -252,7 +252,7 @@ public class PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest {
             }
 
             return new PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest(
-                companyUuid, signatoryUuid, xGustoAPIVersion,
+                xGustoAPIVersion, companyUuid, signatoryUuid,
                 signatoryUpdateRequest);
         }
 

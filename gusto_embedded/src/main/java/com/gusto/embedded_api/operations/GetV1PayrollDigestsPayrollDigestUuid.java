@@ -23,6 +23,7 @@ import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.Hook.AfterErrorContextImpl;
 import com.gusto.embedded_api.utils.Hook.AfterSuccessContextImpl;
 import com.gusto.embedded_api.utils.Hook.BeforeRequestContextImpl;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.io.InputStream;
 import java.lang.Exception;
@@ -30,6 +31,8 @@ import java.lang.String;
 import java.lang.Throwable;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
@@ -42,18 +45,22 @@ public class GetV1PayrollDigestsPayrollDigestUuid {
         final String baseUrl;
         final GetV1PayrollDigestsPayrollDigestUuidSecurity security;
         final SecuritySource securitySource;
+        final Optional<Duration> timeout;
         final HTTPClient client;
         final Headers _headers;
 
         public Base(
                 SDKConfiguration sdkConfiguration, GetV1PayrollDigestsPayrollDigestUuidSecurity security,
-                Headers _headers) {
+                Optional<Options> options, Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
             this._headers =_headers;
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.security = security;
             // hooks will be passed method level security only
             this.securitySource = SecuritySource.of(security);
+            options
+                    .ifPresent(o -> o.validate(List.of(Options.Option.TIMEOUT)));
+            this.timeout = options.flatMap(Options::timeout).or(sdkConfiguration::timeout);
             this.client = this.sdkConfiguration.client();
         }
 
@@ -93,7 +100,8 @@ public class GetV1PayrollDigestsPayrollDigestUuid {
                     this.baseUrl,
                     "/v1/payroll_digests/{payroll_digest_uuid}",
                     request, null);
-            HTTPRequest req = new HTTPRequest(url, "GET");
+            HTTPRequest req = new HTTPRequest(url, "GET")
+                    .timeout(this.timeout);
             req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
@@ -109,9 +117,16 @@ public class GetV1PayrollDigestsPayrollDigestUuid {
         public Sync(
                 SDKConfiguration sdkConfiguration, GetV1PayrollDigestsPayrollDigestUuidSecurity security,
                 Headers _headers) {
+            this(sdkConfiguration, security,
+                    Optional.empty(), _headers);
+        }
+
+        public Sync(
+                SDKConfiguration sdkConfiguration, GetV1PayrollDigestsPayrollDigestUuidSecurity security,
+                Optional<Options> options, Headers _headers) {
             super(
                   sdkConfiguration, security,
-                  _headers);
+                  options, _headers);
         }
 
         private HttpRequest onBuildRequest(GetV1PayrollDigestsPayrollDigestUuidRequest request) throws Exception {
@@ -191,13 +206,19 @@ public class GetV1PayrollDigestsPayrollDigestUuid {
     }
     public static class Async extends Base
             implements AsyncRequestOperation<GetV1PayrollDigestsPayrollDigestUuidRequest, com.gusto.embedded_api.models.operations.async.GetV1PayrollDigestsPayrollDigestUuidResponse> {
-
         public Async(
                 SDKConfiguration sdkConfiguration, GetV1PayrollDigestsPayrollDigestUuidSecurity security,
                 Headers _headers) {
+            this(sdkConfiguration, security,
+                    Optional.empty(), _headers);
+        }
+
+        public Async(
+                SDKConfiguration sdkConfiguration, GetV1PayrollDigestsPayrollDigestUuidSecurity security,
+                Optional<Options> options, Headers _headers) {
             super(
                   sdkConfiguration, security,
-                  _headers);
+                  options, _headers);
         }
 
         private CompletableFuture<HttpRequest> onBuildRequest(GetV1PayrollDigestsPayrollDigestUuidRequest request) throws Exception {

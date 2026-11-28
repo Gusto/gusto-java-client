@@ -12,29 +12,26 @@ import com.gusto.embedded_api.models.operations.GetV1ContractorPaymentGroupsCont
 import com.gusto.embedded_api.operations.GetV1ContractorPaymentGroupsContractorPaymentGroupId;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder {
 
-    private String contractorPaymentGroupUuid;
     private Optional<? extends GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion>>() {});
+    private String contractorPaymentGroupUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
-        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
-        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
-        return this;
     }
                 
     public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder xGustoAPIVersion(GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,22 +46,43 @@ public class GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder 
         return this;
     }
 
+    public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
+        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
+        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
+        return this;
+    }
+                
+    public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest request = new GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest(contractorPaymentGroupUuid,
-            xGustoAPIVersion);
+        GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest request = new GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest(xGustoAPIVersion,
+            contractorPaymentGroupUuid);
 
         return request;
     }
 
     public CompletableFuture<GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest, GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse> operation
-              = new GetV1ContractorPaymentGroupsContractorPaymentGroupId.Async(sdkConfiguration, _headers);
+              = new GetV1ContractorPaymentGroupsContractorPaymentGroupId.Async(sdkConfiguration, options, _headers);
         GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest request = buildRequest();
 
         return operation.doRequest(request)

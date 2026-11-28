@@ -34,6 +34,9 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorPaym
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequestBuilder;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorsContractorUuidPaymentsRequest;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorsContractorUuidPaymentsRequestBuilder;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1ContractorsContractorUuidPaymentsResponse;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1CompaniesCompanyIdContractorPaymentsRequest;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder;
@@ -45,8 +48,10 @@ import com.gusto.embedded_api_v_2026_06_15.operations.GetV1CompaniesCompanyIdCon
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1ContractorPaymentsContractorPaymentIdPdf;
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1ContractorPaymentsContractorPaymentUuidFund;
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1ContractorPaymentsContractorPaymentUuidReceipt;
+import com.gusto.embedded_api_v_2026_06_15.operations.GetV1ContractorsContractorUuidPayments;
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1CompaniesCompanyIdContractorPayments;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -68,6 +73,146 @@ public class ContractorPayments {
      */
     public AsyncContractorPayments async() {
         return asyncSDK;
+    }
+
+    /**
+     * Get contractor payments
+     * 
+     * <p>Returns a paginated list of payments for a single contractor.
+     * 
+     * <p>Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction
+     * (e.g., `check_date:desc`).
+     * 
+     * <p>scope: `contractor_pay_stubs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1ContractorsContractorUuidPaymentsRequestBuilder getV1ContractorsContractorUuidPayments() {
+        return new GetV1ContractorsContractorUuidPaymentsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get contractor payments
+     * 
+     * <p>Returns a paginated list of payments for a single contractor.
+     * 
+     * <p>Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction
+     * (e.g., `check_date:desc`).
+     * 
+     * <p>scope: `contractor_pay_stubs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1ContractorsContractorUuidPaymentsResponse getV1ContractorsContractorUuidPayments(GetV1ContractorsContractorUuidPaymentsRequest request) {
+        return getV1ContractorsContractorUuidPayments(request, Optional.empty());
+    }
+
+    /**
+     * Get contractor payments
+     * 
+     * <p>Returns a paginated list of payments for a single contractor.
+     * 
+     * <p>Results are sortable by `check_date` or `created_at`. Append `:asc` or `:desc` to control direction
+     * (e.g., `check_date:desc`).
+     * 
+     * <p>scope: `contractor_pay_stubs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1ContractorsContractorUuidPaymentsResponse getV1ContractorsContractorUuidPayments(GetV1ContractorsContractorUuidPaymentsRequest request, Optional<Options> options) {
+        RequestOperation<GetV1ContractorsContractorUuidPaymentsRequest, GetV1ContractorsContractorUuidPaymentsResponse> operation
+              = new GetV1ContractorsContractorUuidPayments.Sync(sdkConfiguration, options, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a contractor payment PDF
+     * 
+     * <p>Get a PDF document for a single contractor payment.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1ContractorPaymentsContractorPaymentIdPdfRequestBuilder getV1ContractorPaymentsContractorPaymentIdPdf() {
+        return new GetV1ContractorPaymentsContractorPaymentIdPdfRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a contractor payment PDF
+     * 
+     * <p>Get a PDF document for a single contractor payment.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param contractorPaymentId The UUID of the contractor payment
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1ContractorPaymentsContractorPaymentIdPdfResponse getV1ContractorPaymentsContractorPaymentIdPdf(String contractorPaymentId) {
+        return getV1ContractorPaymentsContractorPaymentIdPdf(Optional.empty(), contractorPaymentId, Optional.empty());
+    }
+
+    /**
+     * Get a contractor payment PDF
+     * 
+     * <p>Get a PDF document for a single contractor payment.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorPaymentId The UUID of the contractor payment
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1ContractorPaymentsContractorPaymentIdPdfResponse getV1ContractorPaymentsContractorPaymentIdPdf(Optional<? extends GetV1ContractorPaymentsContractorPaymentIdPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentId) {
+        return getV1ContractorPaymentsContractorPaymentIdPdf(xGustoAPIVersion, contractorPaymentId, Optional.empty());
+    }
+
+    /**
+     * Get a contractor payment PDF
+     * 
+     * <p>Get a PDF document for a single contractor payment.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorPaymentId The UUID of the contractor payment
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1ContractorPaymentsContractorPaymentIdPdfResponse getV1ContractorPaymentsContractorPaymentIdPdf(
+            Optional<? extends GetV1ContractorPaymentsContractorPaymentIdPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentId,
+            Optional<Options> options) {
+        GetV1ContractorPaymentsContractorPaymentIdPdfRequest request =
+            GetV1ContractorPaymentsContractorPaymentIdPdfRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .contractorPaymentId(contractorPaymentId)
+                .build();
+        RequestOperation<GetV1ContractorPaymentsContractorPaymentIdPdfRequest, GetV1ContractorPaymentsContractorPaymentIdPdfResponse> operation
+              = new GetV1ContractorPaymentsContractorPaymentIdPdf.Sync(sdkConfiguration, options, _headers);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
@@ -105,8 +250,29 @@ public class ContractorPayments {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdContractorPaymentsResponse list(GetV1CompaniesCompanyIdContractorPaymentsRequest request) {
+        return list(request, Optional.empty());
+    }
+
+    /**
+     * Get contractor payments for a company
+     * 
+     * <p>Returns an object containing individual contractor payments, within a given time period, including
+     * totals.
+     * 
+     * <p>Results are returned in reverse chronological order (newest first).
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyIdContractorPaymentsResponse list(GetV1CompaniesCompanyIdContractorPaymentsRequest request, Optional<Options> options) {
         RequestOperation<GetV1CompaniesCompanyIdContractorPaymentsRequest, GetV1CompaniesCompanyIdContractorPaymentsResponse> operation
-              = new GetV1CompaniesCompanyIdContractorPayments.Sync(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdContractorPayments.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -140,7 +306,8 @@ public class ContractorPayments {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompaniesCompanyIdContractorPaymentsResponse create(String companyId, ContractorPaymentBody contractorPaymentBody) {
-        return create(Optional.empty(), companyId, contractorPaymentBody);
+        return create(Optional.empty(), companyId, contractorPaymentBody,
+            Optional.empty());
     }
 
     /**
@@ -161,6 +328,29 @@ public class ContractorPayments {
     public PostV1CompaniesCompanyIdContractorPaymentsResponse create(
             Optional<? extends PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             ContractorPaymentBody contractorPaymentBody) {
+        return create(xGustoAPIVersion, companyId, contractorPaymentBody,
+            Optional.empty());
+    }
+
+    /**
+     * Create a contractor payment
+     * 
+     * <p>Pay a contractor. Information needed depends on the contractor's wage type (hourly vs fixed)
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param contractorPaymentBody Request body for creating a contractor payment.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1CompaniesCompanyIdContractorPaymentsResponse create(
+            Optional<? extends PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            ContractorPaymentBody contractorPaymentBody, Optional<Options> options) {
         PostV1CompaniesCompanyIdContractorPaymentsRequest request =
             PostV1CompaniesCompanyIdContractorPaymentsRequest
                 .builder()
@@ -169,7 +359,7 @@ public class ContractorPayments {
                 .contractorPaymentBody(contractorPaymentBody)
                 .build();
         RequestOperation<PostV1CompaniesCompanyIdContractorPaymentsRequest, PostV1CompaniesCompanyIdContractorPaymentsResponse> operation
-              = new PostV1CompaniesCompanyIdContractorPayments.Sync(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdContractorPayments.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -203,7 +393,8 @@ public class ContractorPayments {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse get(String companyId, String contractorPaymentId) {
-        return get(Optional.empty(), companyId, contractorPaymentId);
+        return get(Optional.empty(), companyId, contractorPaymentId,
+            Optional.empty());
     }
 
     /**
@@ -224,6 +415,29 @@ public class ContractorPayments {
     public GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse get(
             Optional<? extends GetV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             String contractorPaymentId) {
+        return get(xGustoAPIVersion, companyId, contractorPaymentId,
+            Optional.empty());
+    }
+
+    /**
+     * Get a single contractor payment
+     * 
+     * <p>Returns a single contractor payment.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param contractorPaymentId The UUID of the contractor payment
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse get(
+            Optional<? extends GetV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String contractorPaymentId, Optional<Options> options) {
         GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest request =
             GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest
                 .builder()
@@ -232,7 +446,7 @@ public class ContractorPayments {
                 .contractorPaymentId(contractorPaymentId)
                 .build();
         RequestOperation<GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest, GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse> operation
-              = new GetV1CompaniesCompanyIdContractorPaymentContractorPayment.Sync(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdContractorPaymentContractorPayment.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -268,7 +482,8 @@ public class ContractorPayments {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse delete(String companyId, String contractorPaymentId) {
-        return delete(Optional.empty(), companyId, contractorPaymentId);
+        return delete(Optional.empty(), companyId, contractorPaymentId,
+            Optional.empty());
     }
 
     /**
@@ -290,6 +505,30 @@ public class ContractorPayments {
     public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse delete(
             Optional<? extends DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             String contractorPaymentId) {
+        return delete(xGustoAPIVersion, companyId, contractorPaymentId,
+            Optional.empty());
+    }
+
+    /**
+     * Cancel a contractor payment
+     * 
+     * <p>Cancels and deletes a contractor payment. If the contractor payment has already started processing
+     * ("may_cancel": true), the payment cannot be cancelled.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param contractorPaymentId The UUID of the contractor payment
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse delete(
+            Optional<? extends DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String contractorPaymentId, Optional<Options> options) {
         DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest request =
             DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest
                 .builder()
@@ -298,7 +537,7 @@ public class ContractorPayments {
                 .contractorPaymentId(contractorPaymentId)
                 .build();
         RequestOperation<DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest, DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse> operation
-              = new DeleteV1CompaniesCompanyIdContractorPaymentContractorPayment.Sync(sdkConfiguration, _headers);
+              = new DeleteV1CompaniesCompanyIdContractorPaymentContractorPayment.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -338,7 +577,8 @@ public class ContractorPayments {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetCompaniesCompanyUuidContractorPaymentsPreviewResponse preview(String companyUuid, ContractorPaymentsPreviewBody contractorPaymentsPreviewBody) {
-        return preview(Optional.empty(), companyUuid, contractorPaymentsPreviewBody);
+        return preview(Optional.empty(), companyUuid, contractorPaymentsPreviewBody,
+            Optional.empty());
     }
 
     /**
@@ -362,6 +602,32 @@ public class ContractorPayments {
     public GetCompaniesCompanyUuidContractorPaymentsPreviewResponse preview(
             Optional<? extends GetCompaniesCompanyUuidContractorPaymentsPreviewHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             ContractorPaymentsPreviewBody contractorPaymentsPreviewBody) {
+        return preview(xGustoAPIVersion, companyUuid, contractorPaymentsPreviewBody,
+            Optional.empty());
+    }
+
+    /**
+     * Preview contractor payment debit date
+     * 
+     * <p>Returns a debit_date dependent on the ACH payment speed of the company.
+     * 
+     * <p>If the payment method is Check or Historical payment, the debit_date will be the same as the
+     * check_date.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param contractorPaymentsPreviewBody Request body for previewing contractor payments. The expected debit date for the payments is calculated from the provided check date and the company's ACH speed.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetCompaniesCompanyUuidContractorPaymentsPreviewResponse preview(
+            Optional<? extends GetCompaniesCompanyUuidContractorPaymentsPreviewHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            ContractorPaymentsPreviewBody contractorPaymentsPreviewBody, Optional<Options> options) {
         GetCompaniesCompanyUuidContractorPaymentsPreviewRequest request =
             GetCompaniesCompanyUuidContractorPaymentsPreviewRequest
                 .builder()
@@ -370,7 +636,7 @@ public class ContractorPayments {
                 .contractorPaymentsPreviewBody(contractorPaymentsPreviewBody)
                 .build();
         RequestOperation<GetCompaniesCompanyUuidContractorPaymentsPreviewRequest, GetCompaniesCompanyUuidContractorPaymentsPreviewResponse> operation
-              = new GetCompaniesCompanyUuidContractorPaymentsPreview.Sync(sdkConfiguration, _headers);
+              = new GetCompaniesCompanyUuidContractorPaymentsPreview.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -421,7 +687,7 @@ public class ContractorPayments {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse getReceipt(String contractorPaymentUuid) {
-        return getReceipt(Optional.empty(), contractorPaymentUuid);
+        return getReceipt(Optional.empty(), contractorPaymentUuid, Optional.empty());
     }
 
     /**
@@ -448,6 +714,36 @@ public class ContractorPayments {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse getReceipt(Optional<? extends GetV1ContractorPaymentsContractorPaymentUuidReceiptHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentUuid) {
+        return getReceipt(xGustoAPIVersion, contractorPaymentUuid, Optional.empty());
+    }
+
+    /**
+     * Get a single contractor payment receipt
+     * 
+     * <p>Returns a contractor payment receipt.
+     * 
+     * <p>Notes:
+     * * Receipts are only available for direct deposit payments and are only available once those payments
+     * have been funded.
+     * * Payroll Receipt requests for payrolls which do not have receipts available (e.g. payment by check)
+     * will return a 404 status.
+     * * Hour and dollar amounts are returned as string representations of numeric decimals.
+     * * Dollar amounts are represented to the cent.
+     * * If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorPaymentUuid The UUID of the contractor payment
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse getReceipt(
+            Optional<? extends GetV1ContractorPaymentsContractorPaymentUuidReceiptHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentUuid,
+            Optional<Options> options) {
         GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest request =
             GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest
                 .builder()
@@ -455,7 +751,7 @@ public class ContractorPayments {
                 .contractorPaymentUuid(contractorPaymentUuid)
                 .build();
         RequestOperation<GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest, GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse> operation
-              = new GetV1ContractorPaymentsContractorPaymentUuidReceipt.Sync(sdkConfiguration, _headers);
+              = new GetV1ContractorPaymentsContractorPaymentUuidReceipt.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -504,7 +800,7 @@ public class ContractorPayments {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1ContractorPaymentsContractorPaymentUuidFundResponse fund(String contractorPaymentUuid) {
-        return fund(Optional.empty(), contractorPaymentUuid);
+        return fund(Optional.empty(), contractorPaymentUuid, Optional.empty());
     }
 
     /**
@@ -530,6 +826,35 @@ public class ContractorPayments {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1ContractorPaymentsContractorPaymentUuidFundResponse fund(Optional<? extends GetV1ContractorPaymentsContractorPaymentUuidFundHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentUuid) {
+        return fund(xGustoAPIVersion, contractorPaymentUuid, Optional.empty());
+    }
+
+    /**
+     * Fund a contractor payment [DEMO]
+     * 
+     * <p>&gt; 🚧 Demo action
+     * &gt;
+     * &gt; This action is only available in the Demo environment
+     * 
+     * <p>Simulate funding a contractor payment. Funding only occurs automatically in the production
+     * environment when bank transactions are generated. Use this action in the demo environment to
+     * transition a contractor payment's `status` from `Unfunded` to `Funded`.
+     * 
+     * <p>A `Funded` status is required for generating a contractor payment receipt.
+     * 
+     * <p>scope: `payrolls:run`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorPaymentUuid The UUID of the contractor payment
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1ContractorPaymentsContractorPaymentUuidFundResponse fund(
+            Optional<? extends GetV1ContractorPaymentsContractorPaymentUuidFundHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentUuid,
+            Optional<Options> options) {
         GetV1ContractorPaymentsContractorPaymentUuidFundRequest request =
             GetV1ContractorPaymentsContractorPaymentUuidFundRequest
                 .builder()
@@ -537,65 +862,7 @@ public class ContractorPayments {
                 .contractorPaymentUuid(contractorPaymentUuid)
                 .build();
         RequestOperation<GetV1ContractorPaymentsContractorPaymentUuidFundRequest, GetV1ContractorPaymentsContractorPaymentUuidFundResponse> operation
-              = new GetV1ContractorPaymentsContractorPaymentUuidFund.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get a contractor payment PDF
-     * 
-     * <p>Get a PDF document for a single contractor payment.
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1ContractorPaymentsContractorPaymentIdPdfRequestBuilder getV1ContractorPaymentsContractorPaymentIdPdf() {
-        return new GetV1ContractorPaymentsContractorPaymentIdPdfRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get a contractor payment PDF
-     * 
-     * <p>Get a PDF document for a single contractor payment.
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param contractorPaymentId The UUID of the contractor payment
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1ContractorPaymentsContractorPaymentIdPdfResponse getV1ContractorPaymentsContractorPaymentIdPdf(String contractorPaymentId) {
-        return getV1ContractorPaymentsContractorPaymentIdPdf(Optional.empty(), contractorPaymentId);
-    }
-
-    /**
-     * Get a contractor payment PDF
-     * 
-     * <p>Get a PDF document for a single contractor payment.
-     * 
-     * <p>scope: `payrolls:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param contractorPaymentId The UUID of the contractor payment
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1ContractorPaymentsContractorPaymentIdPdfResponse getV1ContractorPaymentsContractorPaymentIdPdf(Optional<? extends GetV1ContractorPaymentsContractorPaymentIdPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorPaymentId) {
-        GetV1ContractorPaymentsContractorPaymentIdPdfRequest request =
-            GetV1ContractorPaymentsContractorPaymentIdPdfRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .contractorPaymentId(contractorPaymentId)
-                .build();
-        RequestOperation<GetV1ContractorPaymentsContractorPaymentIdPdfRequest, GetV1ContractorPaymentsContractorPaymentIdPdfResponse> operation
-              = new GetV1ContractorPaymentsContractorPaymentIdPdf.Sync(sdkConfiguration, _headers);
+              = new GetV1ContractorPaymentsContractorPaymentUuidFund.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

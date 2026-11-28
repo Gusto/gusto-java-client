@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.DeleteV1CompensationsCompensationId;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class DeleteV1CompensationsCompensationIdRequestBuilder {
@@ -21,6 +23,7 @@ public class DeleteV1CompensationsCompensationIdRequestBuilder {
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion>>() {});
     private String compensationId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -45,6 +48,18 @@ public class DeleteV1CompensationsCompensationIdRequestBuilder {
         this.compensationId = compensationId;
         return this;
     }
+                
+    public DeleteV1CompensationsCompensationIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1CompensationsCompensationIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteV1CompensationsCompensationIdRequest buildRequest() {
@@ -59,9 +74,12 @@ public class DeleteV1CompensationsCompensationIdRequestBuilder {
     }
 
     public DeleteV1CompensationsCompensationIdResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DeleteV1CompensationsCompensationIdRequest, DeleteV1CompensationsCompensationIdResponse> operation
-              = new DeleteV1CompensationsCompensationId.Sync(sdkConfiguration, _headers);
+              = new DeleteV1CompensationsCompensationId.Sync(sdkConfiguration, options, _headers);
         DeleteV1CompensationsCompensationIdRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

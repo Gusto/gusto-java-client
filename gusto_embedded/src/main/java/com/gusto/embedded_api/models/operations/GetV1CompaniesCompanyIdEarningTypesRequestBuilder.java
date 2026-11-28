@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1CompaniesCompanyIdEarningTypes;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1CompaniesCompanyIdEarningTypesRequestBuilder {
@@ -21,6 +23,7 @@ public class GetV1CompaniesCompanyIdEarningTypesRequestBuilder {
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1CompaniesCompanyIdEarningTypesHeaderXGustoAPIVersion>>() {});
     private String companyId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -45,6 +48,18 @@ public class GetV1CompaniesCompanyIdEarningTypesRequestBuilder {
         this.companyId = companyId;
         return this;
     }
+                
+    public GetV1CompaniesCompanyIdEarningTypesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompaniesCompanyIdEarningTypesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1CompaniesCompanyIdEarningTypesRequest buildRequest() {
@@ -59,9 +74,12 @@ public class GetV1CompaniesCompanyIdEarningTypesRequestBuilder {
     }
 
     public GetV1CompaniesCompanyIdEarningTypesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1CompaniesCompanyIdEarningTypesRequest, GetV1CompaniesCompanyIdEarningTypesResponse> operation
-              = new GetV1CompaniesCompanyIdEarningTypes.Sync(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdEarningTypes.Sync(sdkConfiguration, options, _headers);
         GetV1CompaniesCompanyIdEarningTypesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

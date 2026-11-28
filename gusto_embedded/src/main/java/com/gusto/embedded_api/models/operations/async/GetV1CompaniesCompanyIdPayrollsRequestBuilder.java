@@ -9,12 +9,16 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyIdPayrollsRequest;
 import com.gusto.embedded_api.operations.GetV1CompaniesCompanyIdPayrolls;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompaniesCompanyIdPayrollsRequestBuilder {
 
     private GetV1CompaniesCompanyIdPayrollsRequest request;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -27,11 +31,26 @@ public class GetV1CompaniesCompanyIdPayrollsRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public GetV1CompaniesCompanyIdPayrollsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompaniesCompanyIdPayrollsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public CompletableFuture<GetV1CompaniesCompanyIdPayrollsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1CompaniesCompanyIdPayrollsRequest, GetV1CompaniesCompanyIdPayrollsResponse> operation
-              = new GetV1CompaniesCompanyIdPayrolls.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdPayrolls.Async(sdkConfiguration, options, _headers);
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);

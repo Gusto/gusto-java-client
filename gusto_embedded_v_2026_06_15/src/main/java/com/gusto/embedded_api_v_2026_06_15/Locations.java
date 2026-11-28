@@ -33,6 +33,7 @@ import com.gusto.embedded_api_v_2026_06_15.operations.GetV1LocationsLocationUuid
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1CompaniesCompanyIdLocations;
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1LocationsLocationId;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -86,7 +87,8 @@ public class Locations {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1LocationsLocationUuidMinimumWagesResponse getMinimumWages(String locationUuid) {
-        return getMinimumWages(locationUuid, Optional.empty(), Optional.empty());
+        return getMinimumWages(Optional.empty(), locationUuid, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -98,24 +100,47 @@ public class Locations {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param locationUuid The UUID of the location
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param locationUuid The UUID of the location
      * @param effectiveDate 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1LocationsLocationUuidMinimumWagesResponse getMinimumWages(
-            String locationUuid, Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion,
+            Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion, String locationUuid,
             Optional<String> effectiveDate) {
+        return getMinimumWages(xGustoAPIVersion, locationUuid, effectiveDate,
+            Optional.empty());
+    }
+
+    /**
+     * Get minimum wages for a location
+     * 
+     * <p>Get minimum wages for a location
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param locationUuid The UUID of the location
+     * @param effectiveDate 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1LocationsLocationUuidMinimumWagesResponse getMinimumWages(
+            Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion, String locationUuid,
+            Optional<String> effectiveDate, Optional<Options> options) {
         GetV1LocationsLocationUuidMinimumWagesRequest request =
             GetV1LocationsLocationUuidMinimumWagesRequest
                 .builder()
-                .locationUuid(locationUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .locationUuid(locationUuid)
                 .effectiveDate(effectiveDate)
                 .build();
         RequestOperation<GetV1LocationsLocationUuidMinimumWagesRequest, GetV1LocationsLocationUuidMinimumWagesResponse> operation
-              = new GetV1LocationsLocationUuidMinimumWages.Sync(sdkConfiguration, _headers);
+              = new GetV1LocationsLocationUuidMinimumWages.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -148,7 +173,7 @@ public class Locations {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1LocationsLocationIdResponse retrieve(String locationId) {
-        return retrieve(Optional.empty(), locationId);
+        return retrieve(Optional.empty(), locationId, Optional.empty());
     }
 
     /**
@@ -166,6 +191,27 @@ public class Locations {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1LocationsLocationIdResponse retrieve(Optional<? extends GetV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion, String locationId) {
+        return retrieve(xGustoAPIVersion, locationId, Optional.empty());
+    }
+
+    /**
+     * Get a location
+     * 
+     * <p>Get a location.
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param locationId The UUID of the location
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1LocationsLocationIdResponse retrieve(
+            Optional<? extends GetV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion, String locationId,
+            Optional<Options> options) {
         GetV1LocationsLocationIdRequest request =
             GetV1LocationsLocationIdRequest
                 .builder()
@@ -173,7 +219,7 @@ public class Locations {
                 .locationId(locationId)
                 .build();
         RequestOperation<GetV1LocationsLocationIdRequest, GetV1LocationsLocationIdResponse> operation
-              = new GetV1LocationsLocationId.Sync(sdkConfiguration, _headers);
+              = new GetV1LocationsLocationId.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -207,7 +253,8 @@ public class Locations {
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1LocationsLocationIdResponse update(String locationId, PutV1LocationsLocationIdRequestBody requestBody) {
-        return update(Optional.empty(), locationId, requestBody);
+        return update(Optional.empty(), locationId, requestBody,
+            Optional.empty());
     }
 
     /**
@@ -228,6 +275,29 @@ public class Locations {
     public PutV1LocationsLocationIdResponse update(
             Optional<? extends PutV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion, String locationId,
             PutV1LocationsLocationIdRequestBody requestBody) {
+        return update(xGustoAPIVersion, locationId, requestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Update a location
+     * 
+     * <p>Update a location.
+     * 
+     * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param locationId The UUID of the location
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1LocationsLocationIdResponse update(
+            Optional<? extends PutV1LocationsLocationIdHeaderXGustoAPIVersion> xGustoAPIVersion, String locationId,
+            PutV1LocationsLocationIdRequestBody requestBody, Optional<Options> options) {
         PutV1LocationsLocationIdRequest request =
             PutV1LocationsLocationIdRequest
                 .builder()
@@ -236,7 +306,7 @@ public class Locations {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PutV1LocationsLocationIdRequest, PutV1LocationsLocationIdResponse> operation
-              = new PutV1LocationsLocationId.Sync(sdkConfiguration, _headers);
+              = new PutV1LocationsLocationId.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -280,7 +350,7 @@ public class Locations {
      */
     public GetV1CompaniesCompanyIdLocationsResponse get(String companyId) {
         return get(Optional.empty(), companyId, Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -307,6 +377,36 @@ public class Locations {
     public GetV1CompaniesCompanyIdLocationsResponse get(
             Optional<? extends GetV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             Optional<Long> page, Optional<Long> per) {
+        return get(xGustoAPIVersion, companyId, page,
+            per, Optional.empty());
+    }
+
+    /**
+     * Get all company locations
+     * 
+     * <p>Retrieves all company locations (addresses) associated with a company: mailing addresses, filing
+     * addresses, or work locations. A single address may serve multiple, or all, purposes.
+     * 
+     * <p>Since all company locations are subsets of locations, use the Locations endpoints to
+     * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual
+     * record.
+     * 
+     * <p>scope: `companies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1CompaniesCompanyIdLocationsResponse get(
+            Optional<? extends GetV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<Long> page, Optional<Long> per,
+            Optional<Options> options) {
         GetV1CompaniesCompanyIdLocationsRequest request =
             GetV1CompaniesCompanyIdLocationsRequest
                 .builder()
@@ -316,7 +416,7 @@ public class Locations {
                 .per(per)
                 .build();
         RequestOperation<GetV1CompaniesCompanyIdLocationsRequest, GetV1CompaniesCompanyIdLocationsResponse> operation
-              = new GetV1CompaniesCompanyIdLocations.Sync(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdLocations.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -362,7 +462,8 @@ public class Locations {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1CompaniesCompanyIdLocationsResponse create(String companyId, CompanyLocationRequest companyLocationRequest) {
-        return create(Optional.empty(), companyId, companyLocationRequest);
+        return create(Optional.empty(), companyId, companyLocationRequest,
+            Optional.empty());
     }
 
     /**
@@ -389,6 +490,35 @@ public class Locations {
     public PostV1CompaniesCompanyIdLocationsResponse create(
             Optional<? extends PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             CompanyLocationRequest companyLocationRequest) {
+        return create(xGustoAPIVersion, companyId, companyLocationRequest,
+            Optional.empty());
+    }
+
+    /**
+     * Create a company location
+     * 
+     * <p>Create a company location, which represents any address associated with a company: mailing
+     * addresses, filing addresses, or work locations. A single address may serve multiple, or all,
+     * purposes.
+     * 
+     * <p>Since all company locations are subsets of locations, use the Locations endpoints to
+     * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual
+     * record.
+     * 
+     * <p>scope: `companies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param companyLocationRequest Request body for creating a company location (company address).
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1CompaniesCompanyIdLocationsResponse create(
+            Optional<? extends PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            CompanyLocationRequest companyLocationRequest, Optional<Options> options) {
         PostV1CompaniesCompanyIdLocationsRequest request =
             PostV1CompaniesCompanyIdLocationsRequest
                 .builder()
@@ -397,7 +527,7 @@ public class Locations {
                 .companyLocationRequest(companyLocationRequest)
                 .build();
         RequestOperation<PostV1CompaniesCompanyIdLocationsRequest, PostV1CompaniesCompanyIdLocationsResponse> operation
-              = new PostV1CompaniesCompanyIdLocations.Sync(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdLocations.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -10,18 +10,21 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1PayrollDigestsPayrollDigestUuid;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1PayrollDigestsPayrollDigestUuidRequestBuilder {
 
     private GetV1PayrollDigestsPayrollDigestUuidSecurity security;
-    private String payrollDigestUuid;
     private Optional<? extends GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1PayrollDigestsPayrollDigestUuidHeaderXGustoAPIVersion>>() {});
+    private String payrollDigestUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -32,12 +35,6 @@ public class GetV1PayrollDigestsPayrollDigestUuidRequestBuilder {
     public GetV1PayrollDigestsPayrollDigestUuidRequestBuilder security(GetV1PayrollDigestsPayrollDigestUuidSecurity security) {
         Utils.checkNotNull(security, "security");
         this.security = security;
-        return this;
-    }
-
-    public GetV1PayrollDigestsPayrollDigestUuidRequestBuilder payrollDigestUuid(String payrollDigestUuid) {
-        Utils.checkNotNull(payrollDigestUuid, "payrollDigestUuid");
-        this.payrollDigestUuid = payrollDigestUuid;
         return this;
     }
                 
@@ -53,22 +50,45 @@ public class GetV1PayrollDigestsPayrollDigestUuidRequestBuilder {
         return this;
     }
 
+    public GetV1PayrollDigestsPayrollDigestUuidRequestBuilder payrollDigestUuid(String payrollDigestUuid) {
+        Utils.checkNotNull(payrollDigestUuid, "payrollDigestUuid");
+        this.payrollDigestUuid = payrollDigestUuid;
+        return this;
+    }
+                
+    public GetV1PayrollDigestsPayrollDigestUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1PayrollDigestsPayrollDigestUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1PayrollDigestsPayrollDigestUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1PayrollDigestsPayrollDigestUuidRequest request = new GetV1PayrollDigestsPayrollDigestUuidRequest(payrollDigestUuid,
-            xGustoAPIVersion);
+        GetV1PayrollDigestsPayrollDigestUuidRequest request = new GetV1PayrollDigestsPayrollDigestUuidRequest(xGustoAPIVersion,
+            payrollDigestUuid);
 
         return request;
     }
 
     public GetV1PayrollDigestsPayrollDigestUuidResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1PayrollDigestsPayrollDigestUuidRequest, GetV1PayrollDigestsPayrollDigestUuidResponse> operation
-              = new GetV1PayrollDigestsPayrollDigestUuid.Sync(sdkConfiguration, security, _headers);
+              = new GetV1PayrollDigestsPayrollDigestUuid.Sync(
+                                    sdkConfiguration, security, options,
+                                    _headers);
         GetV1PayrollDigestsPayrollDigestUuidRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

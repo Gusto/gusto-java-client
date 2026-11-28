@@ -11,8 +11,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.ContractorOnboardin
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1ContractorsContractorUuidOnboardingStatus;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1ContractorsContractorUuidOnboardingStatusRequestBuilder {
@@ -23,6 +25,7 @@ public class PutV1ContractorsContractorUuidOnboardingStatusRequestBuilder {
                             new TypeReference<Optional<? extends PutV1ContractorsContractorUuidOnboardingStatusHeaderXGustoAPIVersion>>() {});
     private String contractorUuid;
     private ContractorOnboardingStatusUpdateRequestBody contractorOnboardingStatusUpdateRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PutV1ContractorsContractorUuidOnboardingStatusRequestBuilder {
         this.contractorOnboardingStatusUpdateRequestBody = contractorOnboardingStatusUpdateRequestBody;
         return this;
     }
+                
+    public PutV1ContractorsContractorUuidOnboardingStatusRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1ContractorsContractorUuidOnboardingStatusRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1ContractorsContractorUuidOnboardingStatusRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PutV1ContractorsContractorUuidOnboardingStatusRequestBuilder {
     }
 
     public PutV1ContractorsContractorUuidOnboardingStatusResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1ContractorsContractorUuidOnboardingStatusRequest, PutV1ContractorsContractorUuidOnboardingStatusResponse> operation
-              = new PutV1ContractorsContractorUuidOnboardingStatus.Sync(sdkConfiguration, _headers);
+              = new PutV1ContractorsContractorUuidOnboardingStatus.Sync(sdkConfiguration, options, _headers);
         PutV1ContractorsContractorUuidOnboardingStatusRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

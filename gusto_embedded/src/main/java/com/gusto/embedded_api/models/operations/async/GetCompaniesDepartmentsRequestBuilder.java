@@ -12,29 +12,26 @@ import com.gusto.embedded_api.models.operations.GetCompaniesDepartmentsRequest;
 import com.gusto.embedded_api.operations.GetCompaniesDepartments;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetCompaniesDepartmentsRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends GetCompaniesDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetCompaniesDepartmentsHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetCompaniesDepartmentsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetCompaniesDepartmentsRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public GetCompaniesDepartmentsRequestBuilder xGustoAPIVersion(GetCompaniesDepartmentsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,22 +46,43 @@ public class GetCompaniesDepartmentsRequestBuilder {
         return this;
     }
 
+    public GetCompaniesDepartmentsRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+                
+    public GetCompaniesDepartmentsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetCompaniesDepartmentsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetCompaniesDepartmentsRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetCompaniesDepartmentsRequest request = new GetCompaniesDepartmentsRequest(companyUuid,
-            xGustoAPIVersion);
+        GetCompaniesDepartmentsRequest request = new GetCompaniesDepartmentsRequest(xGustoAPIVersion,
+            companyUuid);
 
         return request;
     }
 
     public CompletableFuture<GetCompaniesDepartmentsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetCompaniesDepartmentsRequest, GetCompaniesDepartmentsResponse> operation
-              = new GetCompaniesDepartments.Async(sdkConfiguration, _headers);
+              = new GetCompaniesDepartments.Async(sdkConfiguration, options, _headers);
         GetCompaniesDepartmentsRequest request = buildRequest();
 
         return operation.doRequest(request)

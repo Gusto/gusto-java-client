@@ -13,30 +13,27 @@ import com.gusto.embedded_api.models.operations.PutAddPeopleToDepartmentRequest;
 import com.gusto.embedded_api.operations.PutAddPeopleToDepartment;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PutAddPeopleToDepartmentRequestBuilder {
 
-    private String departmentUuid;
     private Optional<? extends PutAddPeopleToDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PutAddPeopleToDepartmentHeaderXGustoAPIVersion>>() {});
+    private String departmentUuid;
     private DepartmentPeopleRequestBody departmentPeopleRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutAddPeopleToDepartmentRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutAddPeopleToDepartmentRequestBuilder departmentUuid(String departmentUuid) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
-        this.departmentUuid = departmentUuid;
-        return this;
     }
                 
     public PutAddPeopleToDepartmentRequestBuilder xGustoAPIVersion(PutAddPeopleToDepartmentHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -51,9 +48,27 @@ public class PutAddPeopleToDepartmentRequestBuilder {
         return this;
     }
 
+    public PutAddPeopleToDepartmentRequestBuilder departmentUuid(String departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = departmentUuid;
+        return this;
+    }
+
     public PutAddPeopleToDepartmentRequestBuilder departmentPeopleRequestBody(DepartmentPeopleRequestBody departmentPeopleRequestBody) {
         Utils.checkNotNull(departmentPeopleRequestBody, "departmentPeopleRequestBody");
         this.departmentPeopleRequestBody = departmentPeopleRequestBody;
+        return this;
+    }
+                
+    public PutAddPeopleToDepartmentRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutAddPeopleToDepartmentRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -63,17 +78,20 @@ public class PutAddPeopleToDepartmentRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutAddPeopleToDepartmentRequest request = new PutAddPeopleToDepartmentRequest(departmentUuid,
-            xGustoAPIVersion,
+        PutAddPeopleToDepartmentRequest request = new PutAddPeopleToDepartmentRequest(xGustoAPIVersion,
+            departmentUuid,
             departmentPeopleRequestBody);
 
         return request;
     }
 
     public CompletableFuture<PutAddPeopleToDepartmentResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PutAddPeopleToDepartmentRequest, PutAddPeopleToDepartmentResponse> operation
-              = new PutAddPeopleToDepartment.Async(sdkConfiguration, _headers);
+              = new PutAddPeopleToDepartment.Async(sdkConfiguration, options, _headers);
         PutAddPeopleToDepartmentRequest request = buildRequest();
 
         return operation.doRequest(request)

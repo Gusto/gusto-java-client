@@ -13,7 +13,9 @@ import com.gusto.embedded_api.models.operations.PostV1PlaidProcessorTokenRequest
 import com.gusto.embedded_api.operations.PostV1PlaidProcessorToken;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -24,6 +26,7 @@ public class PostV1PlaidProcessorTokenRequestBuilder {
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PostV1PlaidProcessorTokenHeaderXGustoAPIVersion>>() {});
     private PlaidProcessorTokenRequest plaidProcessorTokenRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class PostV1PlaidProcessorTokenRequestBuilder {
         this.plaidProcessorTokenRequest = plaidProcessorTokenRequest;
         return this;
     }
+                
+    public PostV1PlaidProcessorTokenRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1PlaidProcessorTokenRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1PlaidProcessorTokenRequest buildRequest() {
@@ -62,9 +77,12 @@ public class PostV1PlaidProcessorTokenRequestBuilder {
     }
 
     public CompletableFuture<PostV1PlaidProcessorTokenResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1PlaidProcessorTokenRequest, PostV1PlaidProcessorTokenResponse> operation
-              = new PostV1PlaidProcessorToken.Async(sdkConfiguration, _headers);
+              = new PostV1PlaidProcessorToken.Async(sdkConfiguration, options, _headers);
         PostV1PlaidProcessorTokenRequest request = buildRequest();
 
         return operation.doRequest(request)

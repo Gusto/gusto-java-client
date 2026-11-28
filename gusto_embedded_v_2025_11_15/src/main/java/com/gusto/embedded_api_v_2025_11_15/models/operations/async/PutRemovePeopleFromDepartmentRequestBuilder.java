@@ -13,30 +13,27 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.PutRemovePeopleFrom
 import com.gusto.embedded_api_v_2025_11_15.operations.PutRemovePeopleFromDepartment;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PutRemovePeopleFromDepartmentRequestBuilder {
 
-    private String departmentUuid;
     private Optional<? extends PutRemovePeopleFromDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PutRemovePeopleFromDepartmentHeaderXGustoAPIVersion>>() {});
+    private String departmentUuid;
     private DepartmentPeopleRequestBody departmentPeopleRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutRemovePeopleFromDepartmentRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutRemovePeopleFromDepartmentRequestBuilder departmentUuid(String departmentUuid) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
-        this.departmentUuid = departmentUuid;
-        return this;
     }
                 
     public PutRemovePeopleFromDepartmentRequestBuilder xGustoAPIVersion(PutRemovePeopleFromDepartmentHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -51,9 +48,27 @@ public class PutRemovePeopleFromDepartmentRequestBuilder {
         return this;
     }
 
+    public PutRemovePeopleFromDepartmentRequestBuilder departmentUuid(String departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = departmentUuid;
+        return this;
+    }
+
     public PutRemovePeopleFromDepartmentRequestBuilder departmentPeopleRequestBody(DepartmentPeopleRequestBody departmentPeopleRequestBody) {
         Utils.checkNotNull(departmentPeopleRequestBody, "departmentPeopleRequestBody");
         this.departmentPeopleRequestBody = departmentPeopleRequestBody;
+        return this;
+    }
+                
+    public PutRemovePeopleFromDepartmentRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutRemovePeopleFromDepartmentRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -63,17 +78,20 @@ public class PutRemovePeopleFromDepartmentRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutRemovePeopleFromDepartmentRequest request = new PutRemovePeopleFromDepartmentRequest(departmentUuid,
-            xGustoAPIVersion,
+        PutRemovePeopleFromDepartmentRequest request = new PutRemovePeopleFromDepartmentRequest(xGustoAPIVersion,
+            departmentUuid,
             departmentPeopleRequestBody);
 
         return request;
     }
 
     public CompletableFuture<PutRemovePeopleFromDepartmentResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PutRemovePeopleFromDepartmentRequest, PutRemovePeopleFromDepartmentResponse> operation
-              = new PutRemovePeopleFromDepartment.Async(sdkConfiguration, _headers);
+              = new PutRemovePeopleFromDepartment.Async(sdkConfiguration, options, _headers);
         PutRemovePeopleFromDepartmentRequest request = buildRequest();
 
         return operation.doRequest(request)

@@ -33,6 +33,7 @@ import com.gusto.embedded_api.operations.GetV1RecurringReimbursements;
 import com.gusto.embedded_api.operations.PostV1EmployeesEmployeeIdRecurringReimbursements;
 import com.gusto.embedded_api.operations.PutV1RecurringReimbursements;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -87,7 +88,7 @@ public class Reimbursements {
      */
     public GetV1EmployeesEmployeeIdRecurringReimbursementsResponse getV1EmployeesEmployeeIdRecurringReimbursements(String employeeId) {
         return getV1EmployeesEmployeeIdRecurringReimbursements(Optional.empty(), employeeId, Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -109,6 +110,31 @@ public class Reimbursements {
     public GetV1EmployeesEmployeeIdRecurringReimbursementsResponse getV1EmployeesEmployeeIdRecurringReimbursements(
             Optional<? extends GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             Optional<Long> page, Optional<Long> per) {
+        return getV1EmployeesEmployeeIdRecurringReimbursements(xGustoAPIVersion, employeeId, page,
+            per, Optional.empty());
+    }
+
+    /**
+     * Get recurring reimbursements for an employee
+     * 
+     * <p>Get all active recurring reimbursements for an employee.
+     * 
+     * <p>scope: `reimbursements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1EmployeesEmployeeIdRecurringReimbursementsResponse getV1EmployeesEmployeeIdRecurringReimbursements(
+            Optional<? extends GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<Long> page, Optional<Long> per,
+            Optional<Options> options) {
         GetV1EmployeesEmployeeIdRecurringReimbursementsRequest request =
             GetV1EmployeesEmployeeIdRecurringReimbursementsRequest
                 .builder()
@@ -118,7 +144,7 @@ public class Reimbursements {
                 .per(per)
                 .build();
         RequestOperation<GetV1EmployeesEmployeeIdRecurringReimbursementsRequest, GetV1EmployeesEmployeeIdRecurringReimbursementsResponse> operation
-              = new GetV1EmployeesEmployeeIdRecurringReimbursements.Sync(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeIdRecurringReimbursements.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -152,7 +178,8 @@ public class Reimbursements {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1EmployeesEmployeeIdRecurringReimbursementsResponse postV1EmployeesEmployeeIdRecurringReimbursements(String employeeId, PostV1EmployeesEmployeeIdRecurringReimbursementsRequestBody requestBody) {
-        return postV1EmployeesEmployeeIdRecurringReimbursements(Optional.empty(), employeeId, requestBody);
+        return postV1EmployeesEmployeeIdRecurringReimbursements(Optional.empty(), employeeId, requestBody,
+            Optional.empty());
     }
 
     /**
@@ -173,6 +200,29 @@ public class Reimbursements {
     public PostV1EmployeesEmployeeIdRecurringReimbursementsResponse postV1EmployeesEmployeeIdRecurringReimbursements(
             Optional<? extends PostV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             PostV1EmployeesEmployeeIdRecurringReimbursementsRequestBody requestBody) {
+        return postV1EmployeesEmployeeIdRecurringReimbursements(xGustoAPIVersion, employeeId, requestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Create a recurring reimbursement
+     * 
+     * <p>Create a recurring reimbursement for an employee.
+     * 
+     * <p>scope: `reimbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1EmployeesEmployeeIdRecurringReimbursementsResponse postV1EmployeesEmployeeIdRecurringReimbursements(
+            Optional<? extends PostV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            PostV1EmployeesEmployeeIdRecurringReimbursementsRequestBody requestBody, Optional<Options> options) {
         PostV1EmployeesEmployeeIdRecurringReimbursementsRequest request =
             PostV1EmployeesEmployeeIdRecurringReimbursementsRequest
                 .builder()
@@ -181,7 +231,7 @@ public class Reimbursements {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1EmployeesEmployeeIdRecurringReimbursementsRequest, PostV1EmployeesEmployeeIdRecurringReimbursementsResponse> operation
-              = new PostV1EmployeesEmployeeIdRecurringReimbursements.Sync(sdkConfiguration, _headers);
+              = new PostV1EmployeesEmployeeIdRecurringReimbursements.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -214,7 +264,7 @@ public class Reimbursements {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1RecurringReimbursementsResponse getV1RecurringReimbursements(String id) {
-        return getV1RecurringReimbursements(Optional.empty(), id);
+        return getV1RecurringReimbursements(Optional.empty(), id, Optional.empty());
     }
 
     /**
@@ -232,6 +282,27 @@ public class Reimbursements {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1RecurringReimbursementsResponse getV1RecurringReimbursements(Optional<? extends GetV1RecurringReimbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String id) {
+        return getV1RecurringReimbursements(xGustoAPIVersion, id, Optional.empty());
+    }
+
+    /**
+     * Get a recurring reimbursement
+     * 
+     * <p>Get a specific recurring reimbursement.
+     * 
+     * <p>scope: `reimbursements:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param id The UUID of the reimbursement
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1RecurringReimbursementsResponse getV1RecurringReimbursements(
+            Optional<? extends GetV1RecurringReimbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String id,
+            Optional<Options> options) {
         GetV1RecurringReimbursementsRequest request =
             GetV1RecurringReimbursementsRequest
                 .builder()
@@ -239,7 +310,7 @@ public class Reimbursements {
                 .id(id)
                 .build();
         RequestOperation<GetV1RecurringReimbursementsRequest, GetV1RecurringReimbursementsResponse> operation
-              = new GetV1RecurringReimbursements.Sync(sdkConfiguration, _headers);
+              = new GetV1RecurringReimbursements.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -273,7 +344,8 @@ public class Reimbursements {
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1RecurringReimbursementsResponse putV1RecurringReimbursements(String id, PutV1RecurringReimbursementsRequestBody requestBody) {
-        return putV1RecurringReimbursements(Optional.empty(), id, requestBody);
+        return putV1RecurringReimbursements(Optional.empty(), id, requestBody,
+            Optional.empty());
     }
 
     /**
@@ -294,6 +366,29 @@ public class Reimbursements {
     public PutV1RecurringReimbursementsResponse putV1RecurringReimbursements(
             Optional<? extends PutV1RecurringReimbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String id,
             PutV1RecurringReimbursementsRequestBody requestBody) {
+        return putV1RecurringReimbursements(xGustoAPIVersion, id, requestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Update a recurring reimbursement
+     * 
+     * <p>Update a recurring reimbursement.
+     * 
+     * <p>scope: `reimbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param id The UUID of the reimbursement
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1RecurringReimbursementsResponse putV1RecurringReimbursements(
+            Optional<? extends PutV1RecurringReimbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String id,
+            PutV1RecurringReimbursementsRequestBody requestBody, Optional<Options> options) {
         PutV1RecurringReimbursementsRequest request =
             PutV1RecurringReimbursementsRequest
                 .builder()
@@ -302,7 +397,7 @@ public class Reimbursements {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PutV1RecurringReimbursementsRequest, PutV1RecurringReimbursementsResponse> operation
-              = new PutV1RecurringReimbursements.Sync(sdkConfiguration, _headers);
+              = new PutV1RecurringReimbursements.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -335,7 +430,7 @@ public class Reimbursements {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1RecurringReimbursementsResponse deleteV1RecurringReimbursements(String id) {
-        return deleteV1RecurringReimbursements(Optional.empty(), id);
+        return deleteV1RecurringReimbursements(Optional.empty(), id, Optional.empty());
     }
 
     /**
@@ -353,6 +448,27 @@ public class Reimbursements {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteV1RecurringReimbursementsResponse deleteV1RecurringReimbursements(Optional<? extends DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String id) {
+        return deleteV1RecurringReimbursements(xGustoAPIVersion, id, Optional.empty());
+    }
+
+    /**
+     * Delete a recurring reimbursement
+     * 
+     * <p>Delete (soft delete) a recurring reimbursement for an employee.
+     * 
+     * <p>scope: `reimbursements:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param id The UUID of the reimbursement
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DeleteV1RecurringReimbursementsResponse deleteV1RecurringReimbursements(
+            Optional<? extends DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion> xGustoAPIVersion, String id,
+            Optional<Options> options) {
         DeleteV1RecurringReimbursementsRequest request =
             DeleteV1RecurringReimbursementsRequest
                 .builder()
@@ -360,7 +476,7 @@ public class Reimbursements {
                 .id(id)
                 .build();
         RequestOperation<DeleteV1RecurringReimbursementsRequest, DeleteV1RecurringReimbursementsResponse> operation
-              = new DeleteV1RecurringReimbursements.Sync(sdkConfiguration, _headers);
+              = new DeleteV1RecurringReimbursements.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

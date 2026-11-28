@@ -7,30 +7,45 @@ import static com.gusto.embedded_api_v_2026_06_15.operations.Operations.AsyncReq
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
-import com.gusto.embedded_api_v_2026_06_15.models.components.VersionHeader;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.DocumentType;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest;
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1GeneratedDocumentsDocumentTypeRequestUuid;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetV1GeneratedDocumentsDocumentTypeRequestUuidRequestBuilder {
 
-    private DocumentType documentType;
-    private String requestUuid;
-    private Optional<? extends VersionHeader> xGustoAPIVersion = Utils.readDefaultOrConstValue(
+    private Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
-                            new TypeReference<Optional<? extends VersionHeader>>() {});
+                            new TypeReference<Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion>>() {});
+    private DocumentType documentType;
+    private String requestUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequestBuilder xGustoAPIVersion(GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequestBuilder xGustoAPIVersion(Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequestBuilder documentType(DocumentType documentType) {
@@ -45,15 +60,15 @@ public class GetV1GeneratedDocumentsDocumentTypeRequestUuidRequestBuilder {
         return this;
     }
                 
-    public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequestBuilder xGustoAPIVersion(VersionHeader xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+    public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
         return this;
     }
 
-    public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequestBuilder xGustoAPIVersion(Optional<? extends VersionHeader> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
+    public GetV1GeneratedDocumentsDocumentTypeRequestUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -63,26 +78,29 @@ public class GetV1GeneratedDocumentsDocumentTypeRequestUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest request = new GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest(documentType,
-            requestUuid,
-            xGustoAPIVersion);
+        GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest request = new GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest(xGustoAPIVersion,
+            documentType,
+            requestUuid);
 
         return request;
     }
 
     public CompletableFuture<GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest, GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse> operation
-              = new GetV1GeneratedDocumentsDocumentTypeRequestUuid.Async(sdkConfiguration, _headers);
+              = new GetV1GeneratedDocumentsDocumentTypeRequestUuid.Async(sdkConfiguration, options, _headers);
         GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest request = buildRequest();
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
-    private static final LazySingletonValue<Optional<? extends VersionHeader>> _SINGLETON_VALUE_XGustoAPIVersion =
+    private static final LazySingletonValue<Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion>> _SINGLETON_VALUE_XGustoAPIVersion =
             new LazySingletonValue<>(
                     "xGustoAPIVersion",
                     "\"2026-06-15\"",
-                    new TypeReference<Optional<? extends VersionHeader>>() {});
+                    new TypeReference<Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion>>() {});
 }

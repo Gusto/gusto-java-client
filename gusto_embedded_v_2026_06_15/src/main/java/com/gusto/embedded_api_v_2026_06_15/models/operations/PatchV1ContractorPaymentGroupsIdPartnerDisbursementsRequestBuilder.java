@@ -10,29 +10,26 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.PatchV1ContractorPaymentGroupsIdPartnerDisbursements;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder {
 
-    private String id;
     private Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion>>() {});
+    private String id;
     private Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBody> requestBody = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder id(String id) {
-        Utils.checkNotNull(id, "id");
-        this.id = id;
-        return this;
     }
                 
     public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder xGustoAPIVersion(PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -44,6 +41,12 @@ public class PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder 
     public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder xGustoAPIVersion(Optional<? extends PatchV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder id(String id) {
+        Utils.checkNotNull(id, "id");
+        this.id = id;
         return this;
     }
                 
@@ -58,6 +61,18 @@ public class PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder 
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest buildRequest() {
@@ -65,17 +80,20 @@ public class PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequestBuilder 
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest request = new PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest(id,
-            xGustoAPIVersion,
+        PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest request = new PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest(xGustoAPIVersion,
+            id,
             requestBody);
 
         return request;
     }
 
     public PatchV1ContractorPaymentGroupsIdPartnerDisbursementsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest, PatchV1ContractorPaymentGroupsIdPartnerDisbursementsResponse> operation
-              = new PatchV1ContractorPaymentGroupsIdPartnerDisbursements.Sync(sdkConfiguration, _headers);
+              = new PatchV1ContractorPaymentGroupsIdPartnerDisbursements.Sync(sdkConfiguration, options, _headers);
         PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

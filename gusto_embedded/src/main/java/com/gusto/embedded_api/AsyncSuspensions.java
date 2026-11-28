@@ -17,6 +17,7 @@ import com.gusto.embedded_api.models.operations.async.PostCompaniesCompanyUuidSu
 import com.gusto.embedded_api.operations.GetCompaniesCompanyUuidSuspensions;
 import com.gusto.embedded_api.operations.PostCompaniesCompanyUuidSuspensions;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -84,7 +85,7 @@ public class AsyncSuspensions {
      * @return {@code CompletableFuture<GetCompaniesCompanyUuidSuspensionsResponse>} - The async response
      */
     public CompletableFuture<GetCompaniesCompanyUuidSuspensionsResponse> get(String companyUuid) {
-        return get(Optional.empty(), companyUuid);
+        return get(Optional.empty(), companyUuid, Optional.empty());
     }
 
     /**
@@ -108,6 +109,33 @@ public class AsyncSuspensions {
      * @return {@code CompletableFuture<GetCompaniesCompanyUuidSuspensionsResponse>} - The async response
      */
     public CompletableFuture<GetCompaniesCompanyUuidSuspensionsResponse> get(Optional<? extends GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
+        return get(xGustoAPIVersion, companyUuid, Optional.empty());
+    }
+
+    /**
+     * Get suspensions for this company
+     * 
+     * <p>Get existing suspension records for this company. A company may have multiple suspension records if
+     * they have suspended their Gusto account more than once.
+     * 
+     * <p>&gt;📘 To check if company is already suspended
+     * &gt;
+     * &gt; To determine if a company is _currently_ suspended, use the `is_suspended` and `company_status`
+     * fields in the [Get a company](https://docs.gusto.com/embedded-payroll/reference/get-v1-companies)
+     * endpoint.
+     * 
+     * <p>scope: `company_suspensions:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param options additional options
+     * @return {@code CompletableFuture<GetCompaniesCompanyUuidSuspensionsResponse>} - The async response
+     */
+    public CompletableFuture<GetCompaniesCompanyUuidSuspensionsResponse> get(
+            Optional<? extends GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            Optional<Options> options) {
         GetCompaniesCompanyUuidSuspensionsRequest request =
             GetCompaniesCompanyUuidSuspensionsRequest
                 .builder()
@@ -115,7 +143,7 @@ public class AsyncSuspensions {
                 .companyUuid(companyUuid)
                 .build();
         AsyncRequestOperation<GetCompaniesCompanyUuidSuspensionsRequest, GetCompaniesCompanyUuidSuspensionsResponse> operation
-              = new GetCompaniesCompanyUuidSuspensions.Async(sdkConfiguration, _headers);
+              = new GetCompaniesCompanyUuidSuspensions.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -154,7 +182,9 @@ public class AsyncSuspensions {
      * @return {@code CompletableFuture<PostCompaniesCompanyUuidSuspensionsResponse>} - The async response
      */
     public CompletableFuture<PostCompaniesCompanyUuidSuspensionsResponse> suspend(String companyUuid, PostCompaniesCompanyUuidSuspensionsRequestBody requestBody) {
-        return suspend(Optional.empty(), companyUuid, requestBody);
+        return suspend(
+                Optional.empty(), companyUuid, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -176,6 +206,31 @@ public class AsyncSuspensions {
     public CompletableFuture<PostCompaniesCompanyUuidSuspensionsResponse> suspend(
             Optional<? extends PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PostCompaniesCompanyUuidSuspensionsRequestBody requestBody) {
+        return suspend(
+                xGustoAPIVersion, companyUuid, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Suspend a company's account
+     * 
+     * <p>Use this endpoint to suspend a company. After suspension, company will no longer be able to run
+     * payroll but will retain access to their information, such as retrieving employee info or retrieving
+     * past payrolls.
+     * 
+     * <p>scope: `company_suspensions:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PostCompaniesCompanyUuidSuspensionsResponse>} - The async response
+     */
+    public CompletableFuture<PostCompaniesCompanyUuidSuspensionsResponse> suspend(
+            Optional<? extends PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            PostCompaniesCompanyUuidSuspensionsRequestBody requestBody, Optional<Options> options) {
         PostCompaniesCompanyUuidSuspensionsRequest request =
             PostCompaniesCompanyUuidSuspensionsRequest
                 .builder()
@@ -184,7 +239,7 @@ public class AsyncSuspensions {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PostCompaniesCompanyUuidSuspensionsRequest, PostCompaniesCompanyUuidSuspensionsResponse> operation
-              = new PostCompaniesCompanyUuidSuspensions.Async(sdkConfiguration, _headers);
+              = new PostCompaniesCompanyUuidSuspensions.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

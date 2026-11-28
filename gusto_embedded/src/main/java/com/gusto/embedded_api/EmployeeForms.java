@@ -31,6 +31,7 @@ import com.gusto.embedded_api.operations.GetV1EmployeeForms;
 import com.gusto.embedded_api.operations.PostV1SandboxGenerateW2;
 import com.gusto.embedded_api.operations.PutV1EmployeeFormSign;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -52,6 +53,320 @@ public class EmployeeForms {
      */
     public AsyncEmployeeForms async() {
         return asyncSDK;
+    }
+
+    /**
+     * Get all employee forms
+     * 
+     * <p>Get a list of all employee's forms
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1EmployeeFormsRequestBuilder list() {
+        return new GetV1EmployeeFormsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get all employee forms
+     * 
+     * <p>Get a list of all employee's forms
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param employeeId The UUID of the employee
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1EmployeeFormsResponse list(String employeeId) {
+        return list(Optional.empty(), employeeId, Optional.empty());
+    }
+
+    /**
+     * Get all employee forms
+     * 
+     * <p>Get a list of all employee's forms
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1EmployeeFormsResponse list(Optional<? extends GetV1EmployeeFormsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
+        return list(xGustoAPIVersion, employeeId, Optional.empty());
+    }
+
+    /**
+     * Get all employee forms
+     * 
+     * <p>Get a list of all employee's forms
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1EmployeeFormsResponse list(
+            Optional<? extends GetV1EmployeeFormsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<Options> options) {
+        GetV1EmployeeFormsRequest request =
+            GetV1EmployeeFormsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
+                .build();
+        RequestOperation<GetV1EmployeeFormsRequest, GetV1EmployeeFormsResponse> operation
+              = new GetV1EmployeeForms.Sync(sdkConfiguration, options, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get an employee form
+     * 
+     * <p>Get an employee form
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1EmployeeFormRequestBuilder get() {
+        return new GetV1EmployeeFormRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get an employee form
+     * 
+     * <p>Get an employee form
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param employeeId The UUID of the employee
+     * @param formId The UUID of the form
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1EmployeeFormResponse get(String employeeId, String formId) {
+        return get(Optional.empty(), employeeId, formId,
+            Optional.empty());
+    }
+
+    /**
+     * Get an employee form
+     * 
+     * <p>Get an employee form
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param formId The UUID of the form
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1EmployeeFormResponse get(
+            Optional<? extends GetV1EmployeeFormHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            String formId) {
+        return get(xGustoAPIVersion, employeeId, formId,
+            Optional.empty());
+    }
+
+    /**
+     * Get an employee form
+     * 
+     * <p>Get an employee form
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param formId The UUID of the form
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1EmployeeFormResponse get(
+            Optional<? extends GetV1EmployeeFormHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            String formId, Optional<Options> options) {
+        GetV1EmployeeFormRequest request =
+            GetV1EmployeeFormRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
+                .formId(formId)
+                .build();
+        RequestOperation<GetV1EmployeeFormRequest, GetV1EmployeeFormResponse> operation
+              = new GetV1EmployeeForm.Sync(sdkConfiguration, options, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get the employee form pdf
+     * 
+     * <p>Get the link to the employee form PDF
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetV1EmployeeFormPdfRequestBuilder getPdf() {
+        return new GetV1EmployeeFormPdfRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get the employee form pdf
+     * 
+     * <p>Get the link to the employee form PDF
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param employeeId The UUID of the employee
+     * @param formId The UUID of the form
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1EmployeeFormPdfResponse getPdf(String employeeId, String formId) {
+        return getPdf(Optional.empty(), employeeId, formId,
+            Optional.empty());
+    }
+
+    /**
+     * Get the employee form pdf
+     * 
+     * <p>Get the link to the employee form PDF
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param formId The UUID of the form
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1EmployeeFormPdfResponse getPdf(
+            Optional<? extends GetV1EmployeeFormPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            String formId) {
+        return getPdf(xGustoAPIVersion, employeeId, formId,
+            Optional.empty());
+    }
+
+    /**
+     * Get the employee form pdf
+     * 
+     * <p>Get the link to the employee form PDF
+     * 
+     * <p>scope: `employee_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param formId The UUID of the form
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1EmployeeFormPdfResponse getPdf(
+            Optional<? extends GetV1EmployeeFormPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            String formId, Optional<Options> options) {
+        GetV1EmployeeFormPdfRequest request =
+            GetV1EmployeeFormPdfRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .employeeId(employeeId)
+                .formId(formId)
+                .build();
+        RequestOperation<GetV1EmployeeFormPdfRequest, GetV1EmployeeFormPdfResponse> operation
+              = new GetV1EmployeeFormPdf.Sync(sdkConfiguration, options, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Sign an employee form
+     * 
+     * <p>Sign an employee form.
+     * 
+     * <p>The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
+     * first name, last name, street address, city, state, and zip for that preparer are all required.
+     * 
+     * <p>scope: `employee_forms:sign`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public PutV1EmployeeFormSignRequestBuilder sign() {
+        return new PutV1EmployeeFormSignRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Sign an employee form
+     * 
+     * <p>Sign an employee form.
+     * 
+     * <p>The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
+     * first name, last name, street address, city, state, and zip for that preparer are all required.
+     * 
+     * <p>scope: `employee_forms:sign`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1EmployeeFormSignResponse sign(PutV1EmployeeFormSignRequest request) {
+        return sign(request, Optional.empty());
+    }
+
+    /**
+     * Sign an employee form
+     * 
+     * <p>Sign an employee form.
+     * 
+     * <p>The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
+     * first name, last name, street address, city, state, and zip for that preparer are all required.
+     * 
+     * <p>scope: `employee_forms:sign`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1EmployeeFormSignResponse sign(PutV1EmployeeFormSignRequest request, Optional<Options> options) {
+        RequestOperation<PutV1EmployeeFormSignRequest, PutV1EmployeeFormSignResponse> operation
+              = new PutV1EmployeeFormSign.Sync(sdkConfiguration, options, _headers);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
@@ -91,7 +406,7 @@ public class EmployeeForms {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1SandboxGenerateW2Response generateW2(PostV1SandboxGenerateW2RequestBody requestBody) {
-        return generateW2(Optional.empty(), requestBody);
+        return generateW2(Optional.empty(), requestBody, Optional.empty());
     }
 
     /**
@@ -113,6 +428,31 @@ public class EmployeeForms {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1SandboxGenerateW2Response generateW2(Optional<? extends PostV1SandboxGenerateW2HeaderXGustoAPIVersion> xGustoAPIVersion, PostV1SandboxGenerateW2RequestBody requestBody) {
+        return generateW2(xGustoAPIVersion, requestBody, Optional.empty());
+    }
+
+    /**
+     * Generate a W2 form [DEMO]
+     * 
+     * <p>&gt; 🚧 Demo action
+     * &gt;
+     * &gt; This action is only available in the Demo environment
+     * 
+     * <p>Generates a W2 document for testing purposes.
+     * 
+     * <p>scope: `employees:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1SandboxGenerateW2Response generateW2(
+            Optional<? extends PostV1SandboxGenerateW2HeaderXGustoAPIVersion> xGustoAPIVersion, PostV1SandboxGenerateW2RequestBody requestBody,
+            Optional<Options> options) {
         PostV1SandboxGenerateW2Request request =
             PostV1SandboxGenerateW2Request
                 .builder()
@@ -120,231 +460,7 @@ public class EmployeeForms {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1SandboxGenerateW2Request, PostV1SandboxGenerateW2Response> operation
-              = new PostV1SandboxGenerateW2.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get all employee forms
-     * 
-     * <p>Get a list of all employee's forms
-     * 
-     * <p>scope: `employee_forms:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1EmployeeFormsRequestBuilder list() {
-        return new GetV1EmployeeFormsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get all employee forms
-     * 
-     * <p>Get a list of all employee's forms
-     * 
-     * <p>scope: `employee_forms:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param employeeId The UUID of the employee
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1EmployeeFormsResponse list(String employeeId) {
-        return list(Optional.empty(), employeeId);
-    }
-
-    /**
-     * Get all employee forms
-     * 
-     * <p>Get a list of all employee's forms
-     * 
-     * <p>scope: `employee_forms:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param employeeId The UUID of the employee
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1EmployeeFormsResponse list(Optional<? extends GetV1EmployeeFormsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
-        GetV1EmployeeFormsRequest request =
-            GetV1EmployeeFormsRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .employeeId(employeeId)
-                .build();
-        RequestOperation<GetV1EmployeeFormsRequest, GetV1EmployeeFormsResponse> operation
-              = new GetV1EmployeeForms.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get an employee form
-     * 
-     * <p>Get an employee form
-     * 
-     * <p>scope: `employee_forms:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1EmployeeFormRequestBuilder get() {
-        return new GetV1EmployeeFormRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get an employee form
-     * 
-     * <p>Get an employee form
-     * 
-     * <p>scope: `employee_forms:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param employeeId The UUID of the employee
-     * @param formId The UUID of the form
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1EmployeeFormResponse get(String employeeId, String formId) {
-        return get(Optional.empty(), employeeId, formId);
-    }
-
-    /**
-     * Get an employee form
-     * 
-     * <p>Get an employee form
-     * 
-     * <p>scope: `employee_forms:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param employeeId The UUID of the employee
-     * @param formId The UUID of the form
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1EmployeeFormResponse get(
-            Optional<? extends GetV1EmployeeFormHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
-            String formId) {
-        GetV1EmployeeFormRequest request =
-            GetV1EmployeeFormRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .employeeId(employeeId)
-                .formId(formId)
-                .build();
-        RequestOperation<GetV1EmployeeFormRequest, GetV1EmployeeFormResponse> operation
-              = new GetV1EmployeeForm.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get the employee form pdf
-     * 
-     * <p>Get the link to the employee form PDF
-     * 
-     * <p>scope: `employee_forms:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetV1EmployeeFormPdfRequestBuilder getPdf() {
-        return new GetV1EmployeeFormPdfRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get the employee form pdf
-     * 
-     * <p>Get the link to the employee form PDF
-     * 
-     * <p>scope: `employee_forms:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param employeeId The UUID of the employee
-     * @param formId The UUID of the form
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1EmployeeFormPdfResponse getPdf(String employeeId, String formId) {
-        return getPdf(Optional.empty(), employeeId, formId);
-    }
-
-    /**
-     * Get the employee form pdf
-     * 
-     * <p>Get the link to the employee form PDF
-     * 
-     * <p>scope: `employee_forms:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param employeeId The UUID of the employee
-     * @param formId The UUID of the form
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetV1EmployeeFormPdfResponse getPdf(
-            Optional<? extends GetV1EmployeeFormPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
-            String formId) {
-        GetV1EmployeeFormPdfRequest request =
-            GetV1EmployeeFormPdfRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .employeeId(employeeId)
-                .formId(formId)
-                .build();
-        RequestOperation<GetV1EmployeeFormPdfRequest, GetV1EmployeeFormPdfResponse> operation
-              = new GetV1EmployeeFormPdf.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Sign an employee form
-     * 
-     * <p>Sign an employee form.
-     * 
-     * <p>The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
-     * first name, last name, street address, city, state, and zip for that preparer are all required.
-     * 
-     * <p>scope: `employee_forms:sign`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public PutV1EmployeeFormSignRequestBuilder sign() {
-        return new PutV1EmployeeFormSignRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Sign an employee form
-     * 
-     * <p>Sign an employee form.
-     * 
-     * <p>The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
-     * first name, last name, street address, city, state, and zip for that preparer are all required.
-     * 
-     * <p>scope: `employee_forms:sign`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param request The request object containing all the parameters for the API call.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public PutV1EmployeeFormSignResponse sign(PutV1EmployeeFormSignRequest request) {
-        RequestOperation<PutV1EmployeeFormSignRequest, PutV1EmployeeFormSignResponse> operation
-              = new PutV1EmployeeFormSign.Sync(sdkConfiguration, _headers);
+              = new PostV1SandboxGenerateW2.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

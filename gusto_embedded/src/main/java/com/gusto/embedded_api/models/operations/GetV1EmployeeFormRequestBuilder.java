@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1EmployeeForm;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1EmployeeFormRequestBuilder {
@@ -22,6 +24,7 @@ public class GetV1EmployeeFormRequestBuilder {
                             new TypeReference<Optional<? extends GetV1EmployeeFormHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private String formId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class GetV1EmployeeFormRequestBuilder {
         this.formId = formId;
         return this;
     }
+                
+    public GetV1EmployeeFormRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1EmployeeFormRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1EmployeeFormRequest buildRequest() {
@@ -67,9 +82,12 @@ public class GetV1EmployeeFormRequestBuilder {
     }
 
     public GetV1EmployeeFormResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1EmployeeFormRequest, GetV1EmployeeFormResponse> operation
-              = new GetV1EmployeeForm.Sync(sdkConfiguration, _headers);
+              = new GetV1EmployeeForm.Sync(sdkConfiguration, options, _headers);
         GetV1EmployeeFormRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

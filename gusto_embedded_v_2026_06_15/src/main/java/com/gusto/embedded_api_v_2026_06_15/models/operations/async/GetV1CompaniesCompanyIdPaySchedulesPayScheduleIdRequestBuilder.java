@@ -12,8 +12,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompaniesCompa
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleId;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -25,6 +27,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder {
                             new TypeReference<Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private String payScheduleId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -55,6 +58,18 @@ public class GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder {
         this.payScheduleId = payScheduleId;
         return this;
     }
+                
+    public GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest buildRequest() {
@@ -70,9 +85,12 @@ public class GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBuilder {
     }
 
     public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest, GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse> operation
-              = new GetV1CompaniesCompanyIdPaySchedulesPayScheduleId.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdPaySchedulesPayScheduleId.Async(sdkConfiguration, options, _headers);
         GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest request = buildRequest();
 
         return operation.doRequest(request)

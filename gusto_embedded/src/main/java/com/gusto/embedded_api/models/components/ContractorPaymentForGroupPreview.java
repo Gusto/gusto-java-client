@@ -100,7 +100,7 @@ public class ContractorPaymentForGroupPreview {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("wage_type")
-    private Optional<? extends ContractorPaymentForGroupPreviewWageType> wageType;
+    private Optional<? extends WageType> wageType;
 
     /**
      * (hours * hourly_rate) + wage + bonus
@@ -121,7 +121,7 @@ public class ContractorPaymentForGroupPreview {
             @JsonProperty("hourly_rate") Optional<String> hourlyRate,
             @JsonProperty("may_cancel") Optional<Boolean> mayCancel,
             @JsonProperty("wage") Optional<String> wage,
-            @JsonProperty("wage_type") Optional<? extends ContractorPaymentForGroupPreviewWageType> wageType,
+            @JsonProperty("wage_type") Optional<? extends WageType> wageType,
             @JsonProperty("wage_total") Optional<String> wageTotal) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(contractorUuid, "contractorUuid");
@@ -246,8 +246,8 @@ public class ContractorPaymentForGroupPreview {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<ContractorPaymentForGroupPreviewWageType> wageType() {
-        return (Optional<ContractorPaymentForGroupPreviewWageType>) wageType;
+    public Optional<WageType> wageType() {
+        return (Optional<WageType>) wageType;
     }
 
     /**
@@ -461,7 +461,7 @@ public class ContractorPaymentForGroupPreview {
     /**
      * The wage type for the payment.
      */
-    public ContractorPaymentForGroupPreview withWageType(ContractorPaymentForGroupPreviewWageType wageType) {
+    public ContractorPaymentForGroupPreview withWageType(WageType wageType) {
         Utils.checkNotNull(wageType, "wageType");
         this.wageType = Optional.ofNullable(wageType);
         return this;
@@ -471,7 +471,7 @@ public class ContractorPaymentForGroupPreview {
     /**
      * The wage type for the payment.
      */
-    public ContractorPaymentForGroupPreview withWageType(Optional<? extends ContractorPaymentForGroupPreviewWageType> wageType) {
+    public ContractorPaymentForGroupPreview withWageType(Optional<? extends WageType> wageType) {
         Utils.checkNotNull(wageType, "wageType");
         this.wageType = wageType;
         return this;
@@ -569,7 +569,7 @@ public class ContractorPaymentForGroupPreview {
 
         private Optional<String> wage = Optional.empty();
 
-        private Optional<? extends ContractorPaymentForGroupPreviewWageType> wageType = Optional.empty();
+        private Optional<? extends WageType> wageType = Optional.empty();
 
         private Optional<String> wageTotal = Optional.empty();
 
@@ -777,7 +777,7 @@ public class ContractorPaymentForGroupPreview {
         /**
          * The wage type for the payment.
          */
-        public Builder wageType(ContractorPaymentForGroupPreviewWageType wageType) {
+        public Builder wageType(WageType wageType) {
             Utils.checkNotNull(wageType, "wageType");
             this.wageType = Optional.ofNullable(wageType);
             return this;
@@ -786,7 +786,7 @@ public class ContractorPaymentForGroupPreview {
         /**
          * The wage type for the payment.
          */
-        public Builder wageType(Optional<? extends ContractorPaymentForGroupPreviewWageType> wageType) {
+        public Builder wageType(Optional<? extends WageType> wageType) {
             Utils.checkNotNull(wageType, "wageType");
             this.wageType = wageType;
             return this;

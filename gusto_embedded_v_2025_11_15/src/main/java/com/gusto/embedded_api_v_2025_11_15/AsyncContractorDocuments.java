@@ -27,6 +27,7 @@ import com.gusto.embedded_api_v_2025_11_15.operations.GetV1ContractorDocumentPdf
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1ContractorDocuments;
 import com.gusto.embedded_api_v_2025_11_15.operations.PutV1ContractorDocumentSign;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -80,7 +81,7 @@ public class AsyncContractorDocuments {
      * @return {@code CompletableFuture<GetV1ContractorDocumentsResponse>} - The async response
      */
     public CompletableFuture<GetV1ContractorDocumentsResponse> getAll(String contractorUuid) {
-        return getAll(Optional.empty(), contractorUuid);
+        return getAll(Optional.empty(), contractorUuid, Optional.empty());
     }
 
     /**
@@ -97,6 +98,26 @@ public class AsyncContractorDocuments {
      * @return {@code CompletableFuture<GetV1ContractorDocumentsResponse>} - The async response
      */
     public CompletableFuture<GetV1ContractorDocumentsResponse> getAll(Optional<? extends GetV1ContractorDocumentsHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid) {
+        return getAll(xGustoAPIVersion, contractorUuid, Optional.empty());
+    }
+
+    /**
+     * Get all contractor documents
+     * 
+     * <p>Get a list of all contractor's documents
+     * 
+     * <p>scope: `contractor_documents:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorUuid The UUID of the contractor
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1ContractorDocumentsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1ContractorDocumentsResponse> getAll(
+            Optional<? extends GetV1ContractorDocumentsHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
+            Optional<Options> options) {
         GetV1ContractorDocumentsRequest request =
             GetV1ContractorDocumentsRequest
                 .builder()
@@ -104,7 +125,7 @@ public class AsyncContractorDocuments {
                 .contractorUuid(contractorUuid)
                 .build();
         AsyncRequestOperation<GetV1ContractorDocumentsRequest, GetV1ContractorDocumentsResponse> operation
-              = new GetV1ContractorDocuments.Async(sdkConfiguration, _headers);
+              = new GetV1ContractorDocuments.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -138,7 +159,7 @@ public class AsyncContractorDocuments {
      * @return {@code CompletableFuture<GetV1ContractorDocumentResponse>} - The async response
      */
     public CompletableFuture<GetV1ContractorDocumentResponse> get(String documentUuid) {
-        return get(Optional.empty(), documentUuid);
+        return get(Optional.empty(), documentUuid, Optional.empty());
     }
 
     /**
@@ -155,6 +176,26 @@ public class AsyncContractorDocuments {
      * @return {@code CompletableFuture<GetV1ContractorDocumentResponse>} - The async response
      */
     public CompletableFuture<GetV1ContractorDocumentResponse> get(Optional<? extends GetV1ContractorDocumentHeaderXGustoAPIVersion> xGustoAPIVersion, String documentUuid) {
+        return get(xGustoAPIVersion, documentUuid, Optional.empty());
+    }
+
+    /**
+     * Get a contractor document
+     * 
+     * <p>Get a contractor document.
+     * 
+     * <p>scope: `contractor_documents:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param documentUuid The UUID of the document
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1ContractorDocumentResponse>} - The async response
+     */
+    public CompletableFuture<GetV1ContractorDocumentResponse> get(
+            Optional<? extends GetV1ContractorDocumentHeaderXGustoAPIVersion> xGustoAPIVersion, String documentUuid,
+            Optional<Options> options) {
         GetV1ContractorDocumentRequest request =
             GetV1ContractorDocumentRequest
                 .builder()
@@ -162,7 +203,7 @@ public class AsyncContractorDocuments {
                 .documentUuid(documentUuid)
                 .build();
         AsyncRequestOperation<GetV1ContractorDocumentRequest, GetV1ContractorDocumentResponse> operation
-              = new GetV1ContractorDocument.Async(sdkConfiguration, _headers);
+              = new GetV1ContractorDocument.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -196,7 +237,7 @@ public class AsyncContractorDocuments {
      * @return {@code CompletableFuture<GetV1ContractorDocumentPdfResponse>} - The async response
      */
     public CompletableFuture<GetV1ContractorDocumentPdfResponse> getPdf(String documentUuid) {
-        return getPdf(Optional.empty(), documentUuid);
+        return getPdf(Optional.empty(), documentUuid, Optional.empty());
     }
 
     /**
@@ -213,6 +254,26 @@ public class AsyncContractorDocuments {
      * @return {@code CompletableFuture<GetV1ContractorDocumentPdfResponse>} - The async response
      */
     public CompletableFuture<GetV1ContractorDocumentPdfResponse> getPdf(Optional<? extends GetV1ContractorDocumentPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String documentUuid) {
+        return getPdf(xGustoAPIVersion, documentUuid, Optional.empty());
+    }
+
+    /**
+     * Get the contractor document pdf
+     * 
+     * <p>Get the contractor document pdf.
+     * 
+     * <p>scope: `contractor_documents:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param documentUuid The UUID of the document
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1ContractorDocumentPdfResponse>} - The async response
+     */
+    public CompletableFuture<GetV1ContractorDocumentPdfResponse> getPdf(
+            Optional<? extends GetV1ContractorDocumentPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String documentUuid,
+            Optional<Options> options) {
         GetV1ContractorDocumentPdfRequest request =
             GetV1ContractorDocumentPdfRequest
                 .builder()
@@ -220,7 +281,7 @@ public class AsyncContractorDocuments {
                 .documentUuid(documentUuid)
                 .build();
         AsyncRequestOperation<GetV1ContractorDocumentPdfRequest, GetV1ContractorDocumentPdfResponse> operation
-              = new GetV1ContractorDocumentPdf.Async(sdkConfiguration, _headers);
+              = new GetV1ContractorDocumentPdf.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -257,7 +318,7 @@ public class AsyncContractorDocuments {
     public CompletableFuture<PutV1ContractorDocumentSignResponse> sign(String documentUuid, PutV1ContractorDocumentSignRequestBody requestBody) {
         return sign(
                 Optional.empty(), documentUuid, Optional.empty(),
-                requestBody);
+                requestBody, Optional.empty());
     }
 
     /**
@@ -278,6 +339,31 @@ public class AsyncContractorDocuments {
     public CompletableFuture<PutV1ContractorDocumentSignResponse> sign(
             Optional<? extends PutV1ContractorDocumentSignHeaderXGustoAPIVersion> xGustoAPIVersion, String documentUuid,
             Optional<String> xGustoClientIp, PutV1ContractorDocumentSignRequestBody requestBody) {
+        return sign(
+                xGustoAPIVersion, documentUuid, xGustoClientIp,
+                requestBody, Optional.empty());
+    }
+
+    /**
+     * Sign a contractor document
+     * 
+     * <p>Sign a contractor document.
+     * 
+     * <p>scope: `contractor_documents:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param documentUuid The UUID of the document
+     * @param xGustoClientIp Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1ContractorDocumentSignResponse>} - The async response
+     */
+    public CompletableFuture<PutV1ContractorDocumentSignResponse> sign(
+            Optional<? extends PutV1ContractorDocumentSignHeaderXGustoAPIVersion> xGustoAPIVersion, String documentUuid,
+            Optional<String> xGustoClientIp, PutV1ContractorDocumentSignRequestBody requestBody,
+            Optional<Options> options) {
         PutV1ContractorDocumentSignRequest request =
             PutV1ContractorDocumentSignRequest
                 .builder()
@@ -287,7 +373,7 @@ public class AsyncContractorDocuments {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1ContractorDocumentSignRequest, PutV1ContractorDocumentSignResponse> operation
-              = new PutV1ContractorDocumentSign.Async(sdkConfiguration, _headers);
+              = new PutV1ContractorDocumentSign.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

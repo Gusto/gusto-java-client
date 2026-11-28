@@ -10,14 +10,18 @@ import com.gusto.embedded_api.models.operations.SubmitInformationRequestRequest;
 import com.gusto.embedded_api.models.operations.SubmitInformationRequestRequestBody;
 import com.gusto.embedded_api.operations.SubmitInformationRequest;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class SubmitInformationRequestRequestBuilder {
 
     private String informationRequestUuid;
     private SubmitInformationRequestRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -36,6 +40,18 @@ public class SubmitInformationRequestRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public SubmitInformationRequestRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public SubmitInformationRequestRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private SubmitInformationRequestRequest buildRequest() {
@@ -47,9 +63,12 @@ public class SubmitInformationRequestRequestBuilder {
     }
 
     public CompletableFuture<SubmitInformationRequestResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<SubmitInformationRequestRequest, SubmitInformationRequestResponse> operation
-              = new SubmitInformationRequest.Async(sdkConfiguration, _headers);
+              = new SubmitInformationRequest.Async(sdkConfiguration, options, _headers);
         SubmitInformationRequestRequest request = buildRequest();
 
         return operation.doRequest(request)

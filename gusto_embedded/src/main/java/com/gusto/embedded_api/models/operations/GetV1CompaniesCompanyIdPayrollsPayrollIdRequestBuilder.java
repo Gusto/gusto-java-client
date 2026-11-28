@@ -8,11 +8,15 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1CompaniesCompanyIdPayrollsPayrollId;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequestBuilder {
 
     private GetV1CompaniesCompanyIdPayrollsPayrollIdRequest request;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -25,11 +29,26 @@ public class GetV1CompaniesCompanyIdPayrollsPayrollIdRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public GetV1CompaniesCompanyIdPayrollsPayrollIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompaniesCompanyIdPayrollsPayrollIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public GetV1CompaniesCompanyIdPayrollsPayrollIdResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1CompaniesCompanyIdPayrollsPayrollIdRequest, GetV1CompaniesCompanyIdPayrollsPayrollIdResponse> operation
-              = new GetV1CompaniesCompanyIdPayrollsPayrollId.Sync(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdPayrollsPayrollId.Sync(sdkConfiguration, options, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

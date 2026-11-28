@@ -12,8 +12,10 @@ import com.gusto.embedded_api.models.operations.DeleteV1RecurringReimbursementsR
 import com.gusto.embedded_api.operations.DeleteV1RecurringReimbursements;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -24,6 +26,7 @@ public class DeleteV1RecurringReimbursementsRequestBuilder {
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion>>() {});
     private String id;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class DeleteV1RecurringReimbursementsRequestBuilder {
         this.id = id;
         return this;
     }
+                
+    public DeleteV1RecurringReimbursementsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1RecurringReimbursementsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteV1RecurringReimbursementsRequest buildRequest() {
@@ -62,9 +77,12 @@ public class DeleteV1RecurringReimbursementsRequestBuilder {
     }
 
     public CompletableFuture<DeleteV1RecurringReimbursementsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<DeleteV1RecurringReimbursementsRequest, DeleteV1RecurringReimbursementsResponse> operation
-              = new DeleteV1RecurringReimbursements.Async(sdkConfiguration, _headers);
+              = new DeleteV1RecurringReimbursements.Async(sdkConfiguration, options, _headers);
         DeleteV1RecurringReimbursementsRequest request = buildRequest();
 
         return operation.doRequest(request)

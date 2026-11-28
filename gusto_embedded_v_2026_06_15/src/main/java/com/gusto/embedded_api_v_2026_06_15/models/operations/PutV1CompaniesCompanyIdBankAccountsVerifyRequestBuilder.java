@@ -11,8 +11,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.CompanyBankAccountV
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1CompaniesCompanyIdBankAccountsVerify;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder {
@@ -24,6 +26,7 @@ public class PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder {
     private String companyId;
     private String bankAccountUuid;
     private CompanyBankAccountVerifyRequest companyBankAccountVerifyRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -60,6 +63,18 @@ public class PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder {
         this.companyBankAccountVerifyRequest = companyBankAccountVerifyRequest;
         return this;
     }
+                
+    public PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1CompaniesCompanyIdBankAccountsVerifyRequest buildRequest() {
@@ -76,9 +91,12 @@ public class PutV1CompaniesCompanyIdBankAccountsVerifyRequestBuilder {
     }
 
     public PutV1CompaniesCompanyIdBankAccountsVerifyResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1CompaniesCompanyIdBankAccountsVerifyRequest, PutV1CompaniesCompanyIdBankAccountsVerifyResponse> operation
-              = new PutV1CompaniesCompanyIdBankAccountsVerify.Sync(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyIdBankAccountsVerify.Sync(sdkConfiguration, options, _headers);
         PutV1CompaniesCompanyIdBankAccountsVerifyRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

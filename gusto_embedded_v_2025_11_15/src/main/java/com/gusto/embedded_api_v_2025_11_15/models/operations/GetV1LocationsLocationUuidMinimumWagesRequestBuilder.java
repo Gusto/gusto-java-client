@@ -10,29 +10,26 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1LocationsLocationUuidMinimumWages;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1LocationsLocationUuidMinimumWagesRequestBuilder {
 
-    private String locationUuid;
     private Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion>>() {});
+    private String locationUuid;
     private Optional<String> effectiveDate = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1LocationsLocationUuidMinimumWagesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1LocationsLocationUuidMinimumWagesRequestBuilder locationUuid(String locationUuid) {
-        Utils.checkNotNull(locationUuid, "locationUuid");
-        this.locationUuid = locationUuid;
-        return this;
     }
                 
     public GetV1LocationsLocationUuidMinimumWagesRequestBuilder xGustoAPIVersion(GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -44,6 +41,12 @@ public class GetV1LocationsLocationUuidMinimumWagesRequestBuilder {
     public GetV1LocationsLocationUuidMinimumWagesRequestBuilder xGustoAPIVersion(Optional<? extends GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public GetV1LocationsLocationUuidMinimumWagesRequestBuilder locationUuid(String locationUuid) {
+        Utils.checkNotNull(locationUuid, "locationUuid");
+        this.locationUuid = locationUuid;
         return this;
     }
                 
@@ -58,6 +61,18 @@ public class GetV1LocationsLocationUuidMinimumWagesRequestBuilder {
         this.effectiveDate = effectiveDate;
         return this;
     }
+                
+    public GetV1LocationsLocationUuidMinimumWagesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1LocationsLocationUuidMinimumWagesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1LocationsLocationUuidMinimumWagesRequest buildRequest() {
@@ -65,17 +80,20 @@ public class GetV1LocationsLocationUuidMinimumWagesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1LocationsLocationUuidMinimumWagesRequest request = new GetV1LocationsLocationUuidMinimumWagesRequest(locationUuid,
-            xGustoAPIVersion,
+        GetV1LocationsLocationUuidMinimumWagesRequest request = new GetV1LocationsLocationUuidMinimumWagesRequest(xGustoAPIVersion,
+            locationUuid,
             effectiveDate);
 
         return request;
     }
 
     public GetV1LocationsLocationUuidMinimumWagesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1LocationsLocationUuidMinimumWagesRequest, GetV1LocationsLocationUuidMinimumWagesResponse> operation
-              = new GetV1LocationsLocationUuidMinimumWages.Sync(sdkConfiguration, _headers);
+              = new GetV1LocationsLocationUuidMinimumWages.Sync(sdkConfiguration, options, _headers);
         GetV1LocationsLocationUuidMinimumWagesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

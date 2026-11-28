@@ -10,25 +10,40 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.DeleteV1CompaniesCompanyIdPayrolls;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.Boolean;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class DeleteV1CompaniesCompanyIdPayrollsRequestBuilder {
 
-    private String companyId;
-    private String payrollId;
-    private Optional<Boolean> async = Optional.empty();
     private Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private String payrollId;
+    private Optional<Boolean> async = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder xGustoAPIVersion(DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder xGustoAPIVersion(Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder companyId(String companyId) {
@@ -55,15 +70,15 @@ public class DeleteV1CompaniesCompanyIdPayrollsRequestBuilder {
         return this;
     }
                 
-    public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder xGustoAPIVersion(DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+    public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
         return this;
     }
 
-    public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder xGustoAPIVersion(Optional<? extends DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
+    public DeleteV1CompaniesCompanyIdPayrollsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -73,18 +88,21 @@ public class DeleteV1CompaniesCompanyIdPayrollsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1CompaniesCompanyIdPayrollsRequest request = new DeleteV1CompaniesCompanyIdPayrollsRequest(companyId,
+        DeleteV1CompaniesCompanyIdPayrollsRequest request = new DeleteV1CompaniesCompanyIdPayrollsRequest(xGustoAPIVersion,
+            companyId,
             payrollId,
-            async,
-            xGustoAPIVersion);
+            async);
 
         return request;
     }
 
     public DeleteV1CompaniesCompanyIdPayrollsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DeleteV1CompaniesCompanyIdPayrollsRequest, DeleteV1CompaniesCompanyIdPayrollsResponse> operation
-              = new DeleteV1CompaniesCompanyIdPayrolls.Sync(sdkConfiguration, _headers);
+              = new DeleteV1CompaniesCompanyIdPayrolls.Sync(sdkConfiguration, options, _headers);
         DeleteV1CompaniesCompanyIdPayrollsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

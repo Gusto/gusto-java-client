@@ -17,6 +17,7 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.async.PutV1CompanyP
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1CompanyPaymentConfigs;
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1CompanyPaymentConfigs;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -80,7 +81,7 @@ public class AsyncPaymentConfigs {
      * @return {@code CompletableFuture<GetV1CompanyPaymentConfigsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompanyPaymentConfigsResponse> get(String companyUuid) {
-        return get(Optional.empty(), companyUuid);
+        return get(Optional.empty(), companyUuid, Optional.empty());
     }
 
     /**
@@ -102,6 +103,31 @@ public class AsyncPaymentConfigs {
      * @return {@code CompletableFuture<GetV1CompanyPaymentConfigsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompanyPaymentConfigsResponse> get(Optional<? extends GetV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
+        return get(xGustoAPIVersion, companyUuid, Optional.empty());
+    }
+
+    /**
+     * Get a company's payment configs
+     * 
+     * <p>Get payment speed configurations for the company: payment speed (1-day, 2-day, or 4-day ACH), fast
+     * payment limit, partner-owned disbursement setting, and earned fast ACH blockers when applicable.
+     * 1-day is only available to partners that opt in.
+     * 
+     * <p>### Related guides
+     * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
+     * 
+     * <p>scope: `company_payment_configs:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompanyPaymentConfigsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompanyPaymentConfigsResponse> get(
+            Optional<? extends GetV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            Optional<Options> options) {
         GetV1CompanyPaymentConfigsRequest request =
             GetV1CompanyPaymentConfigsRequest
                 .builder()
@@ -109,7 +135,7 @@ public class AsyncPaymentConfigs {
                 .companyUuid(companyUuid)
                 .build();
         AsyncRequestOperation<GetV1CompanyPaymentConfigsRequest, GetV1CompanyPaymentConfigsResponse> operation
-              = new GetV1CompanyPaymentConfigs.Async(sdkConfiguration, _headers);
+              = new GetV1CompanyPaymentConfigs.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -158,7 +184,9 @@ public class AsyncPaymentConfigs {
      * @return {@code CompletableFuture<PutV1CompanyPaymentConfigsResponse>} - The async response
      */
     public CompletableFuture<PutV1CompanyPaymentConfigsResponse> update(String companyUuid, PaymentConfigsUpdateRequest paymentConfigsUpdateRequest) {
-        return update(Optional.empty(), companyUuid, paymentConfigsUpdateRequest);
+        return update(
+                Optional.empty(), companyUuid, paymentConfigsUpdateRequest,
+                Optional.empty());
     }
 
     /**
@@ -185,6 +213,36 @@ public class AsyncPaymentConfigs {
     public CompletableFuture<PutV1CompanyPaymentConfigsResponse> update(
             Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PaymentConfigsUpdateRequest paymentConfigsUpdateRequest) {
+        return update(
+                xGustoAPIVersion, companyUuid, paymentConfigsUpdateRequest,
+                Optional.empty());
+    }
+
+    /**
+     * Update a company's payment configs
+     * 
+     * <p>Update payment speed, fast payment limit, and/or partner-owned disbursement for a company.
+     * 
+     * <p>At least one of `payment_speed`, `fast_payment_limit`, or `partner_owned_disbursement` is required.
+     * 1-day payment speed is only applicable to partners that opt in. 1-day is not allowed when AutoPilot
+     * is enabled.
+     * 
+     * <p>### Related guides
+     * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
+     * 
+     * <p>scope: `company_payment_configs:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param paymentConfigsUpdateRequest Request body for updating company payment configs. At least one of payment_speed, fast_payment_limit, or partner_owned_disbursement is required.
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1CompanyPaymentConfigsResponse>} - The async response
+     */
+    public CompletableFuture<PutV1CompanyPaymentConfigsResponse> update(
+            Optional<? extends PutV1CompanyPaymentConfigsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            PaymentConfigsUpdateRequest paymentConfigsUpdateRequest, Optional<Options> options) {
         PutV1CompanyPaymentConfigsRequest request =
             PutV1CompanyPaymentConfigsRequest
                 .builder()
@@ -193,7 +251,7 @@ public class AsyncPaymentConfigs {
                 .paymentConfigsUpdateRequest(paymentConfigsUpdateRequest)
                 .build();
         AsyncRequestOperation<PutV1CompanyPaymentConfigsRequest, PutV1CompanyPaymentConfigsResponse> operation
-              = new PutV1CompanyPaymentConfigs.Async(sdkConfiguration, _headers);
+              = new PutV1CompanyPaymentConfigs.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

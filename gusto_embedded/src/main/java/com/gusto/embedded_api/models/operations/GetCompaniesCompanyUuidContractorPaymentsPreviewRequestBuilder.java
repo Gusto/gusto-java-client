@@ -11,8 +11,10 @@ import com.gusto.embedded_api.models.components.ContractorPaymentsPreviewBody;
 import com.gusto.embedded_api.operations.GetCompaniesCompanyUuidContractorPaymentsPreview;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBuilder {
@@ -23,6 +25,7 @@ public class GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBuilder {
                             new TypeReference<Optional<? extends GetCompaniesCompanyUuidContractorPaymentsPreviewHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
     private ContractorPaymentsPreviewBody contractorPaymentsPreviewBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBuilder {
         this.contractorPaymentsPreviewBody = contractorPaymentsPreviewBody;
         return this;
     }
+                
+    public GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetCompaniesCompanyUuidContractorPaymentsPreviewRequest buildRequest() {
@@ -68,9 +83,12 @@ public class GetCompaniesCompanyUuidContractorPaymentsPreviewRequestBuilder {
     }
 
     public GetCompaniesCompanyUuidContractorPaymentsPreviewResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetCompaniesCompanyUuidContractorPaymentsPreviewRequest, GetCompaniesCompanyUuidContractorPaymentsPreviewResponse> operation
-              = new GetCompaniesCompanyUuidContractorPaymentsPreview.Sync(sdkConfiguration, _headers);
+              = new GetCompaniesCompanyUuidContractorPaymentsPreview.Sync(sdkConfiguration, options, _headers);
         GetCompaniesCompanyUuidContractorPaymentsPreviewRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

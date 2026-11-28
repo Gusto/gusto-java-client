@@ -13,30 +13,27 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1ContractorsCo
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1ContractorsContractorUuidTermination;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PostV1ContractorsContractorUuidTerminationRequestBuilder {
 
-    private String contractorUuid;
     private Optional<? extends PostV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PostV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion>>() {});
+    private String contractorUuid;
     private Optional<? extends PostV1ContractorsContractorUuidTerminationRequestBody> requestBody = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1ContractorsContractorUuidTerminationRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1ContractorsContractorUuidTerminationRequestBuilder contractorUuid(String contractorUuid) {
-        Utils.checkNotNull(contractorUuid, "contractorUuid");
-        this.contractorUuid = contractorUuid;
-        return this;
     }
                 
     public PostV1ContractorsContractorUuidTerminationRequestBuilder xGustoAPIVersion(PostV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,6 +45,12 @@ public class PostV1ContractorsContractorUuidTerminationRequestBuilder {
     public PostV1ContractorsContractorUuidTerminationRequestBuilder xGustoAPIVersion(Optional<? extends PostV1ContractorsContractorUuidTerminationHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public PostV1ContractorsContractorUuidTerminationRequestBuilder contractorUuid(String contractorUuid) {
+        Utils.checkNotNull(contractorUuid, "contractorUuid");
+        this.contractorUuid = contractorUuid;
         return this;
     }
                 
@@ -62,6 +65,18 @@ public class PostV1ContractorsContractorUuidTerminationRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PostV1ContractorsContractorUuidTerminationRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1ContractorsContractorUuidTerminationRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1ContractorsContractorUuidTerminationRequest buildRequest() {
@@ -69,17 +84,20 @@ public class PostV1ContractorsContractorUuidTerminationRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1ContractorsContractorUuidTerminationRequest request = new PostV1ContractorsContractorUuidTerminationRequest(contractorUuid,
-            xGustoAPIVersion,
+        PostV1ContractorsContractorUuidTerminationRequest request = new PostV1ContractorsContractorUuidTerminationRequest(xGustoAPIVersion,
+            contractorUuid,
             requestBody);
 
         return request;
     }
 
     public CompletableFuture<PostV1ContractorsContractorUuidTerminationResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1ContractorsContractorUuidTerminationRequest, PostV1ContractorsContractorUuidTerminationResponse> operation
-              = new PostV1ContractorsContractorUuidTermination.Async(sdkConfiguration, _headers);
+              = new PostV1ContractorsContractorUuidTermination.Async(sdkConfiguration, options, _headers);
         PostV1ContractorsContractorUuidTerminationRequest request = buildRequest();
 
         return operation.doRequest(request)

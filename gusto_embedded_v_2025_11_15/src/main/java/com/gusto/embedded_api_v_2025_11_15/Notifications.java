@@ -15,6 +15,7 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.GetNotificationsNot
 import com.gusto.embedded_api_v_2025_11_15.operations.GetCompanyNotifications;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetNotificationsNotificationUuid;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -36,6 +37,58 @@ public class Notifications {
      */
     public AsyncNotifications async() {
         return asyncSDK;
+    }
+
+    /**
+     * Get notifications for company
+     * 
+     * <p>Returns all notifications relevant for the given company.
+     * 
+     * <p>scope: `notifications:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The call builder
+     */
+    public GetCompanyNotificationsRequestBuilder getCompanyNotifications() {
+        return new GetCompanyNotificationsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get notifications for company
+     * 
+     * <p>Returns all notifications relevant for the given company.
+     * 
+     * <p>scope: `notifications:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetCompanyNotificationsResponse getCompanyNotifications(GetCompanyNotificationsRequest request) {
+        return getCompanyNotifications(request, Optional.empty());
+    }
+
+    /**
+     * Get notifications for company
+     * 
+     * <p>Returns all notifications relevant for the given company.
+     * 
+     * <p>scope: `notifications:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetCompanyNotificationsResponse getCompanyNotifications(GetCompanyNotificationsRequest request, Optional<Options> options) {
+        RequestOperation<GetCompanyNotificationsRequest, GetCompanyNotificationsResponse> operation
+              = new GetCompanyNotifications.Sync(sdkConfiguration, options, _headers);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
@@ -85,7 +138,7 @@ public class Notifications {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetNotificationsNotificationUuidResponse getDetails(String notificationUuid) {
-        return getDetails(notificationUuid, Optional.empty());
+        return getDetails(Optional.empty(), notificationUuid, Optional.empty());
     }
 
     /**
@@ -106,54 +159,50 @@ public class Notifications {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
-     * @param notificationUuid The notification entity_uuid
      * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param notificationUuid The notification entity_uuid
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public GetNotificationsNotificationUuidResponse getDetails(String notificationUuid, Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
+    public GetNotificationsNotificationUuidResponse getDetails(Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String notificationUuid) {
+        return getDetails(xGustoAPIVersion, notificationUuid, Optional.empty());
+    }
+
+    /**
+     * Get a notification's details
+     * 
+     * <p>Upon receiving a notification webhook event, use this endpoint to fetch the notification's details.
+     * The notification details include basic suggested content that can help you build notifications in
+     * your platform.
+     * 
+     * <p>Note: partners are responsible for the delivery and any custom state management of notifications in
+     * their application. Refer to our [partner notification
+     * guide](https://docs.gusto.com/embedded-payroll/docs/partner-notifications) for more details.
+     * 
+     * <p>If the notification UUID is not found, the response will be 404 Not Found. If the notification's
+     * supporting data is no longer valid, the response will be 422 Unprocessable Entity.
+     * 
+     * <p>scope: `notifications:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param notificationUuid The notification entity_uuid
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetNotificationsNotificationUuidResponse getDetails(
+            Optional<? extends GetNotificationsNotificationUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String notificationUuid,
+            Optional<Options> options) {
         GetNotificationsNotificationUuidRequest request =
             GetNotificationsNotificationUuidRequest
                 .builder()
-                .notificationUuid(notificationUuid)
                 .xGustoAPIVersion(xGustoAPIVersion)
+                .notificationUuid(notificationUuid)
                 .build();
         RequestOperation<GetNotificationsNotificationUuidRequest, GetNotificationsNotificationUuidResponse> operation
-              = new GetNotificationsNotificationUuid.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get notifications for company
-     * 
-     * <p>Returns all notifications relevant for the given company.
-     * 
-     * <p>scope: `notifications:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The call builder
-     */
-    public GetCompanyNotificationsRequestBuilder getCompanyNotifications() {
-        return new GetCompanyNotificationsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get notifications for company
-     * 
-     * <p>Returns all notifications relevant for the given company.
-     * 
-     * <p>scope: `notifications:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param request The request object containing all the parameters for the API call.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public GetCompanyNotificationsResponse getCompanyNotifications(GetCompanyNotificationsRequest request) {
-        RequestOperation<GetCompanyNotificationsRequest, GetCompanyNotificationsResponse> operation
-              = new GetCompanyNotifications.Sync(sdkConfiguration, _headers);
+              = new GetNotificationsNotificationUuid.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

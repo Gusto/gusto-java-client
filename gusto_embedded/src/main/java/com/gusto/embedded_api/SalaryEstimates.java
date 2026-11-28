@@ -35,6 +35,7 @@ import com.gusto.embedded_api.operations.PostV1EmployeesEmployeeIdSalaryEstimate
 import com.gusto.embedded_api.operations.PostV1SalaryEstimatesUuidAccept;
 import com.gusto.embedded_api.operations.PutV1SalaryEstimatesId;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -106,7 +107,8 @@ public class SalaryEstimates {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1EmployeesEmployeeIdSalaryEstimatesResponse postV1EmployeesEmployeeIdSalaryEstimates(String employeeId, PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody requestBody) {
-        return postV1EmployeesEmployeeIdSalaryEstimates(Optional.empty(), employeeId, requestBody);
+        return postV1EmployeesEmployeeIdSalaryEstimates(Optional.empty(), employeeId, requestBody,
+            Optional.empty());
     }
 
     /**
@@ -136,6 +138,38 @@ public class SalaryEstimates {
     public PostV1EmployeesEmployeeIdSalaryEstimatesResponse postV1EmployeesEmployeeIdSalaryEstimates(
             Optional<? extends PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody requestBody) {
+        return postV1EmployeesEmployeeIdSalaryEstimates(xGustoAPIVersion, employeeId, requestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Create a salary estimate for an employee
+     * 
+     * <p>Create a salary estimate for an employee. This endpoint helps calculate a reasonable salary for S
+     * Corp owners based on their occupation, experience level, location, and business revenue.
+     * 
+     * <p>A salary estimate must include:
+     * - Annual net revenue of the business
+     * - ZIP code for location-based salary data
+     * - One or more occupations with experience levels and time percentages (must sum to 100%)
+     * 
+     * <p>Only one in-progress salary estimate can exist per employee at a time. If an in-progress estimate
+     * already exists, you must either accept it or use the update endpoint.
+     * 
+     * <p>scope: `salary_estimates:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1EmployeesEmployeeIdSalaryEstimatesResponse postV1EmployeesEmployeeIdSalaryEstimates(
+            Optional<? extends PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody requestBody, Optional<Options> options) {
         PostV1EmployeesEmployeeIdSalaryEstimatesRequest request =
             PostV1EmployeesEmployeeIdSalaryEstimatesRequest
                 .builder()
@@ -144,7 +178,7 @@ public class SalaryEstimates {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1EmployeesEmployeeIdSalaryEstimatesRequest, PostV1EmployeesEmployeeIdSalaryEstimatesResponse> operation
-              = new PostV1EmployeesEmployeeIdSalaryEstimates.Sync(sdkConfiguration, _headers);
+              = new PostV1EmployeesEmployeeIdSalaryEstimates.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -179,7 +213,7 @@ public class SalaryEstimates {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1SalaryEstimatesIdResponse getV1SalaryEstimatesId(String uuid) {
-        return getV1SalaryEstimatesId(Optional.empty(), uuid);
+        return getV1SalaryEstimatesId(Optional.empty(), uuid, Optional.empty());
     }
 
     /**
@@ -198,6 +232,28 @@ public class SalaryEstimates {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1SalaryEstimatesIdResponse getV1SalaryEstimatesId(Optional<? extends GetV1SalaryEstimatesIdHeaderXGustoAPIVersion> xGustoAPIVersion, String uuid) {
+        return getV1SalaryEstimatesId(xGustoAPIVersion, uuid, Optional.empty());
+    }
+
+    /**
+     * Get a salary estimate
+     * 
+     * <p>Retrieve a salary estimate by its UUID. Returns the estimated salary calculation along with all
+     * occupation details, revenue, and location information.
+     * 
+     * <p>scope: `salary_estimates:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param uuid The UUID of the salary estimate
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1SalaryEstimatesIdResponse getV1SalaryEstimatesId(
+            Optional<? extends GetV1SalaryEstimatesIdHeaderXGustoAPIVersion> xGustoAPIVersion, String uuid,
+            Optional<Options> options) {
         GetV1SalaryEstimatesIdRequest request =
             GetV1SalaryEstimatesIdRequest
                 .builder()
@@ -205,7 +261,7 @@ public class SalaryEstimates {
                 .uuid(uuid)
                 .build();
         RequestOperation<GetV1SalaryEstimatesIdRequest, GetV1SalaryEstimatesIdResponse> operation
-              = new GetV1SalaryEstimatesId.Sync(sdkConfiguration, _headers);
+              = new GetV1SalaryEstimatesId.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -247,7 +303,8 @@ public class SalaryEstimates {
      * @throws RuntimeException subclass if the API call fails
      */
     public PutV1SalaryEstimatesIdResponse putV1SalaryEstimatesId(String uuid, PutV1SalaryEstimatesIdRequestBody requestBody) {
-        return putV1SalaryEstimatesId(Optional.empty(), uuid, requestBody);
+        return putV1SalaryEstimatesId(Optional.empty(), uuid, requestBody,
+            Optional.empty());
     }
 
     /**
@@ -272,6 +329,33 @@ public class SalaryEstimates {
     public PutV1SalaryEstimatesIdResponse putV1SalaryEstimatesId(
             Optional<? extends PutV1SalaryEstimatesIdHeaderXGustoAPIVersion> xGustoAPIVersion, String uuid,
             PutV1SalaryEstimatesIdRequestBody requestBody) {
+        return putV1SalaryEstimatesId(xGustoAPIVersion, uuid, requestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Update a salary estimate
+     * 
+     * <p>Update an existing salary estimate. You can modify the annual net revenue, ZIP code, and
+     * occupations.
+     * 
+     * <p>The salary estimate must not be finalized (accepted). Once accepted, salary estimates become
+     * read-only for record-keeping purposes.
+     * 
+     * <p>scope: `salary_estimates:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param uuid The UUID of the salary estimate
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PutV1SalaryEstimatesIdResponse putV1SalaryEstimatesId(
+            Optional<? extends PutV1SalaryEstimatesIdHeaderXGustoAPIVersion> xGustoAPIVersion, String uuid,
+            PutV1SalaryEstimatesIdRequestBody requestBody, Optional<Options> options) {
         PutV1SalaryEstimatesIdRequest request =
             PutV1SalaryEstimatesIdRequest
                 .builder()
@@ -280,7 +364,7 @@ public class SalaryEstimates {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PutV1SalaryEstimatesIdRequest, PutV1SalaryEstimatesIdResponse> operation
-              = new PutV1SalaryEstimatesId.Sync(sdkConfiguration, _headers);
+              = new PutV1SalaryEstimatesId.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -322,7 +406,8 @@ public class SalaryEstimates {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1SalaryEstimatesUuidAcceptResponse postV1SalaryEstimatesUuidAccept(String uuid, PostV1SalaryEstimatesUuidAcceptRequestBody requestBody) {
-        return postV1SalaryEstimatesUuidAccept(Optional.empty(), uuid, requestBody);
+        return postV1SalaryEstimatesUuidAccept(Optional.empty(), uuid, requestBody,
+            Optional.empty());
     }
 
     /**
@@ -347,6 +432,33 @@ public class SalaryEstimates {
     public PostV1SalaryEstimatesUuidAcceptResponse postV1SalaryEstimatesUuidAccept(
             Optional<? extends PostV1SalaryEstimatesUuidAcceptHeaderXGustoAPIVersion> xGustoAPIVersion, String uuid,
             PostV1SalaryEstimatesUuidAcceptRequestBody requestBody) {
+        return postV1SalaryEstimatesUuidAccept(xGustoAPIVersion, uuid, requestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Accept a salary estimate
+     * 
+     * <p>Accept and finalize a salary estimate. This associates the estimate with an employee job and marks
+     * it as accepted.
+     * 
+     * <p>Once accepted, the salary estimate becomes read-only for record-keeping purposes. The accepted
+     * salary can then be used to set up compensation for the employee.
+     * 
+     * <p>scope: `salary_estimates:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param uuid The UUID of the salary estimate
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1SalaryEstimatesUuidAcceptResponse postV1SalaryEstimatesUuidAccept(
+            Optional<? extends PostV1SalaryEstimatesUuidAcceptHeaderXGustoAPIVersion> xGustoAPIVersion, String uuid,
+            PostV1SalaryEstimatesUuidAcceptRequestBody requestBody, Optional<Options> options) {
         PostV1SalaryEstimatesUuidAcceptRequest request =
             PostV1SalaryEstimatesUuidAcceptRequest
                 .builder()
@@ -355,7 +467,7 @@ public class SalaryEstimates {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1SalaryEstimatesUuidAcceptRequest, PostV1SalaryEstimatesUuidAcceptResponse> operation
-              = new PostV1SalaryEstimatesUuidAccept.Sync(sdkConfiguration, _headers);
+              = new PostV1SalaryEstimatesUuidAccept.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -401,7 +513,8 @@ public class SalaryEstimates {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1SalaryEstimatesOccupationsResponse getV1SalaryEstimatesOccupations(GetV1SalaryEstimatesOccupationsSecurity security, String search) {
-        return getV1SalaryEstimatesOccupations(security, Optional.empty(), search);
+        return getV1SalaryEstimatesOccupations(security, Optional.empty(), search,
+            Optional.empty());
     }
 
     /**
@@ -428,6 +541,35 @@ public class SalaryEstimates {
     public GetV1SalaryEstimatesOccupationsResponse getV1SalaryEstimatesOccupations(
             GetV1SalaryEstimatesOccupationsSecurity security, Optional<? extends GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion> xGustoAPIVersion,
             String search) {
+        return getV1SalaryEstimatesOccupations(security, xGustoAPIVersion, search,
+            Optional.empty());
+    }
+
+    /**
+     * Search for BLS occupations
+     * 
+     * <p>Search for Bureau of Labor Statistics (BLS) occupations by name or keyword. This endpoint helps
+     * users find the appropriate occupation codes to use when creating or updating salary estimates.
+     * 
+     * <p>Returns a list of matching occupations with their codes, titles, and descriptions.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `salary_estimates:read`
+     * 
+     * @param security The security details to use for authentication.
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param search Search term for occupation (minimum 3 characters)
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1SalaryEstimatesOccupationsResponse getV1SalaryEstimatesOccupations(
+            GetV1SalaryEstimatesOccupationsSecurity security, Optional<? extends GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String search, Optional<Options> options) {
         GetV1SalaryEstimatesOccupationsRequest request =
             GetV1SalaryEstimatesOccupationsRequest
                 .builder()
@@ -435,7 +577,9 @@ public class SalaryEstimates {
                 .search(search)
                 .build();
         RequestOperation<GetV1SalaryEstimatesOccupationsRequest, GetV1SalaryEstimatesOccupationsResponse> operation
-              = new GetV1SalaryEstimatesOccupations.Sync(sdkConfiguration, security, _headers);
+              = new GetV1SalaryEstimatesOccupations.Sync(
+                                    sdkConfiguration, security, options,
+                                    _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

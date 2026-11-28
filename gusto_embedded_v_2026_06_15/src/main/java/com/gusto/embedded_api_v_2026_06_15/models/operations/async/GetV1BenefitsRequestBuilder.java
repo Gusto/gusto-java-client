@@ -12,7 +12,9 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1BenefitsReques
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1Benefits;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -22,6 +24,7 @@ public class GetV1BenefitsRequestBuilder {
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetV1BenefitsHeaderXGustoAPIVersion>>() {});
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -40,6 +43,18 @@ public class GetV1BenefitsRequestBuilder {
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
+                
+    public GetV1BenefitsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1BenefitsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1BenefitsRequest buildRequest() {
@@ -53,9 +68,12 @@ public class GetV1BenefitsRequestBuilder {
     }
 
     public CompletableFuture<GetV1BenefitsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1BenefitsRequest, GetV1BenefitsResponse> operation
-              = new GetV1Benefits.Async(sdkConfiguration, _headers);
+              = new GetV1Benefits.Async(sdkConfiguration, options, _headers);
         GetV1BenefitsRequest request = buildRequest();
 
         return operation.doRequest(request)

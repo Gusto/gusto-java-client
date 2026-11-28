@@ -34,6 +34,7 @@ import com.gusto.embedded_api_v_2025_11_15.operations.PostV1CompaniesCompanyIdBa
 import com.gusto.embedded_api_v_2025_11_15.operations.PostV1PlaidProcessorToken;
 import com.gusto.embedded_api_v_2025_11_15.operations.PutV1CompaniesCompanyIdBankAccountsVerify;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -87,7 +88,7 @@ public class AsyncBankAccounts {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdBankAccountsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdBankAccountsResponse> get(String companyId) {
-        return get(Optional.empty(), companyId);
+        return get(Optional.empty(), companyId, Optional.empty());
     }
 
     /**
@@ -104,6 +105,26 @@ public class AsyncBankAccounts {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdBankAccountsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdBankAccountsResponse> get(Optional<? extends GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
+        return get(xGustoAPIVersion, companyId, Optional.empty());
+    }
+
+    /**
+     * Get all company bank accounts
+     * 
+     * <p>Returns company bank accounts. Currently, we only support a single default bank account per company.
+     * 
+     * <p>scope: `company_bank_accounts:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdBankAccountsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdBankAccountsResponse> get(
+            Optional<? extends GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<Options> options) {
         GetV1CompaniesCompanyIdBankAccountsRequest request =
             GetV1CompaniesCompanyIdBankAccountsRequest
                 .builder()
@@ -111,7 +132,7 @@ public class AsyncBankAccounts {
                 .companyId(companyId)
                 .build();
         AsyncRequestOperation<GetV1CompaniesCompanyIdBankAccountsRequest, GetV1CompaniesCompanyIdBankAccountsResponse> operation
-              = new GetV1CompaniesCompanyIdBankAccounts.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdBankAccounts.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -133,6 +154,10 @@ public class AsyncBankAccounts {
      * &gt;
      * &gt; If a default bank account exists, it will be disabled and the new bank account will replace it
      * as the company's default funding method.
+     * &gt;
+     * &gt; A new bank account cannot replace the default if the current default has unprocessed payments.
+     * In that case, a 422 `invalid_operation` error is returned. To resolve, fund or cancel the pending
+     * payments first.
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
@@ -160,6 +185,10 @@ public class AsyncBankAccounts {
      * &gt;
      * &gt; If a default bank account exists, it will be disabled and the new bank account will replace it
      * as the company's default funding method.
+     * &gt;
+     * &gt; A new bank account cannot replace the default if the current default has unprocessed payments.
+     * In that case, a 422 `invalid_operation` error is returned. To resolve, fund or cancel the pending
+     * payments first.
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
@@ -170,7 +199,9 @@ public class AsyncBankAccounts {
      * @return {@code CompletableFuture<PostV1CompaniesCompanyIdBankAccountsResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyIdBankAccountsResponse> create(String companyId, CompanyBankAccountRequest companyBankAccountRequest) {
-        return create(Optional.empty(), companyId, companyBankAccountRequest);
+        return create(
+                Optional.empty(), companyId, companyBankAccountRequest,
+                Optional.empty());
     }
 
     /**
@@ -189,6 +220,10 @@ public class AsyncBankAccounts {
      * &gt;
      * &gt; If a default bank account exists, it will be disabled and the new bank account will replace it
      * as the company's default funding method.
+     * &gt;
+     * &gt; A new bank account cannot replace the default if the current default has unprocessed payments.
+     * In that case, a 422 `invalid_operation` error is returned. To resolve, fund or cancel the pending
+     * payments first.
      * 
      * <p>scope: `company_bank_accounts:write`
      * 
@@ -202,6 +237,45 @@ public class AsyncBankAccounts {
     public CompletableFuture<PostV1CompaniesCompanyIdBankAccountsResponse> create(
             Optional<? extends PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             CompanyBankAccountRequest companyBankAccountRequest) {
+        return create(
+                xGustoAPIVersion, companyId, companyBankAccountRequest,
+                Optional.empty());
+    }
+
+    /**
+     * Create a company bank account
+     * 
+     * <p>This endpoint creates a new company bank account.
+     * 
+     * <p>Upon being created, two verification deposits are automatically sent to the bank account, and the
+     * bank account's verification_status is 'awaiting_deposits'.
+     * 
+     * <p>When the deposits are successfully transferred, the verification_status changes to
+     * 'ready_for_verification', at which point the verify endpoint can be used to verify the bank account.
+     * After successful verification, the bank account's verification_status is 'verified'.
+     * 
+     * <p>&gt;🚧 Warning
+     * &gt;
+     * &gt; If a default bank account exists, it will be disabled and the new bank account will replace it
+     * as the company's default funding method.
+     * &gt;
+     * &gt; A new bank account cannot replace the default if the current default has unprocessed payments.
+     * In that case, a 422 `invalid_operation` error is returned. To resolve, fund or cancel the pending
+     * payments first.
+     * 
+     * <p>scope: `company_bank_accounts:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param companyBankAccountRequest 
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdBankAccountsResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyIdBankAccountsResponse> create(
+            Optional<? extends PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            CompanyBankAccountRequest companyBankAccountRequest, Optional<Options> options) {
         PostV1CompaniesCompanyIdBankAccountsRequest request =
             PostV1CompaniesCompanyIdBankAccountsRequest
                 .builder()
@@ -210,7 +284,7 @@ public class AsyncBankAccounts {
                 .companyBankAccountRequest(companyBankAccountRequest)
                 .build();
         AsyncRequestOperation<PostV1CompaniesCompanyIdBankAccountsRequest, PostV1CompaniesCompanyIdBankAccountsResponse> operation
-              = new PostV1CompaniesCompanyIdBankAccounts.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdBankAccounts.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -284,7 +358,7 @@ public class AsyncBankAccounts {
             CompanyBankAccountVerifyRequest companyBankAccountVerifyRequest) {
         return verify(
                 Optional.empty(), companyId, bankAccountUuid,
-                companyBankAccountVerifyRequest);
+                companyBankAccountVerifyRequest, Optional.empty());
     }
 
     /**
@@ -322,6 +396,48 @@ public class AsyncBankAccounts {
     public CompletableFuture<PutV1CompaniesCompanyIdBankAccountsVerifyResponse> verify(
             Optional<? extends PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             String bankAccountUuid, CompanyBankAccountVerifyRequest companyBankAccountVerifyRequest) {
+        return verify(
+                xGustoAPIVersion, companyId, bankAccountUuid,
+                companyBankAccountVerifyRequest, Optional.empty());
+    }
+
+    /**
+     * Verify a company bank account
+     * 
+     * <p>Verify a company bank account by confirming the two micro-deposits sent to the bank account.
+     * 
+     * <p>Note that the order of the two deposits specified in request parameters does not matter.
+     * There's a maximum of 5 verification attempts, after which we will automatically initiate a new set
+     * of micro-deposits and require the bank account to be verified with the new micro-deposits.
+     * 
+     * <p>### Bank account verification in demo
+     * In the demo environment, use the `POST
+     * /v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/send_test_deposits` endpoint to
+     * simulate the micro-deposits transfer and return the two amounts in the response. You can call this
+     * endpoint as many times as you wish to retrieve the values of the two micro-deposits.
+     * 
+     * <p>### Webhooks
+     * - `company.bank_account.verified`: Fires when the company bank account is successfully verified.
+     * 
+     * <p>### Related guides
+     * - [Manage company bank accounts](doc:manage-company-bank-accounts)
+     * - [Bank Account Events](doc:bank-account-events)
+     * 
+     * <p>scope: `company_bank_accounts:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param bankAccountUuid The UUID of the company bank account
+     * @param companyBankAccountVerifyRequest Request body for verifying a company bank account with the two micro-deposit amounts.
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1CompaniesCompanyIdBankAccountsVerifyResponse>} - The async response
+     */
+    public CompletableFuture<PutV1CompaniesCompanyIdBankAccountsVerifyResponse> verify(
+            Optional<? extends PutV1CompaniesCompanyIdBankAccountsVerifyHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String bankAccountUuid, CompanyBankAccountVerifyRequest companyBankAccountVerifyRequest,
+            Optional<Options> options) {
         PutV1CompaniesCompanyIdBankAccountsVerifyRequest request =
             PutV1CompaniesCompanyIdBankAccountsVerifyRequest
                 .builder()
@@ -331,7 +447,7 @@ public class AsyncBankAccounts {
                 .companyBankAccountVerifyRequest(companyBankAccountVerifyRequest)
                 .build();
         AsyncRequestOperation<PutV1CompaniesCompanyIdBankAccountsVerifyRequest, PutV1CompaniesCompanyIdBankAccountsVerifyResponse> operation
-              = new PutV1CompaniesCompanyIdBankAccountsVerify.Async(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyIdBankAccountsVerify.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -385,7 +501,7 @@ public class AsyncBankAccounts {
      * @return {@code CompletableFuture<PostV1PlaidProcessorTokenResponse>} - The async response
      */
     public CompletableFuture<PostV1PlaidProcessorTokenResponse> createFromPlaidToken(PlaidProcessorTokenRequest plaidProcessorTokenRequest) {
-        return createFromPlaidToken(Optional.empty(), plaidProcessorTokenRequest);
+        return createFromPlaidToken(Optional.empty(), plaidProcessorTokenRequest, Optional.empty());
     }
 
     /**
@@ -412,6 +528,36 @@ public class AsyncBankAccounts {
      * @return {@code CompletableFuture<PostV1PlaidProcessorTokenResponse>} - The async response
      */
     public CompletableFuture<PostV1PlaidProcessorTokenResponse> createFromPlaidToken(Optional<? extends PostV1PlaidProcessorTokenHeaderXGustoAPIVersion> xGustoAPIVersion, PlaidProcessorTokenRequest plaidProcessorTokenRequest) {
+        return createFromPlaidToken(xGustoAPIVersion, plaidProcessorTokenRequest, Optional.empty());
+    }
+
+    /**
+     * Create a bank account from a plaid processor token
+     * 
+     * <p>This endpoint creates a new **verified** bank account by using a plaid processor token to retrieve
+     * its information.
+     * 
+     * <p>&gt; 📘
+     * &gt; To create a token please use the [plaid
+     * api](https://plaid.com/docs/api/processors/#processortokencreate) and select "gusto" as processor.
+     * 
+     * <p>&gt; 🚧 Warning - Company Bank Accounts
+     * &gt;
+     * &gt; If a default company bank account exists, it will be disabled and the new bank account will
+     * replace it as the company's default funding method.
+     * 
+     * <p>scope: `plaid_processor:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param plaidProcessorTokenRequest Request body for creating a verified company bank account from a Plaid processor token.
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1PlaidProcessorTokenResponse>} - The async response
+     */
+    public CompletableFuture<PostV1PlaidProcessorTokenResponse> createFromPlaidToken(
+            Optional<? extends PostV1PlaidProcessorTokenHeaderXGustoAPIVersion> xGustoAPIVersion, PlaidProcessorTokenRequest plaidProcessorTokenRequest,
+            Optional<Options> options) {
         PostV1PlaidProcessorTokenRequest request =
             PostV1PlaidProcessorTokenRequest
                 .builder()
@@ -419,7 +565,7 @@ public class AsyncBankAccounts {
                 .plaidProcessorTokenRequest(plaidProcessorTokenRequest)
                 .build();
         AsyncRequestOperation<PostV1PlaidProcessorTokenRequest, PostV1PlaidProcessorTokenResponse> operation
-              = new PostV1PlaidProcessorToken.Async(sdkConfiguration, _headers);
+              = new PostV1PlaidProcessorToken.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -458,7 +604,9 @@ public class AsyncBankAccounts {
      * @return {@code CompletableFuture<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse>} - The async response
      */
     public CompletableFuture<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse> deleteV1CompaniesCompanyIdBankAccountsBankAccountId(String companyId, String bankAccountId) {
-        return deleteV1CompaniesCompanyIdBankAccountsBankAccountId(Optional.empty(), companyId, bankAccountId);
+        return deleteV1CompaniesCompanyIdBankAccountsBankAccountId(
+                Optional.empty(), companyId, bankAccountId,
+                Optional.empty());
     }
 
     /**
@@ -480,6 +628,31 @@ public class AsyncBankAccounts {
     public CompletableFuture<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse> deleteV1CompaniesCompanyIdBankAccountsBankAccountId(
             Optional<? extends DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             String bankAccountId) {
+        return deleteV1CompaniesCompanyIdBankAccountsBankAccountId(
+                xGustoAPIVersion, companyId, bankAccountId,
+                Optional.empty());
+    }
+
+    /**
+     * Delete a company bank account
+     * 
+     * <p>This endpoint disables a company bank account.
+     * 
+     * <p>A bank account cannot be disabled if it is used for any unprocessed payments.
+     * 
+     * <p>scope: `company_bank_accounts:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param bankAccountId The UUID of the company bank account
+     * @param options additional options
+     * @return {@code CompletableFuture<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse>} - The async response
+     */
+    public CompletableFuture<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse> deleteV1CompaniesCompanyIdBankAccountsBankAccountId(
+            Optional<? extends DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String bankAccountId, Optional<Options> options) {
         DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest request =
             DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest
                 .builder()
@@ -488,7 +661,7 @@ public class AsyncBankAccounts {
                 .bankAccountId(bankAccountId)
                 .build();
         AsyncRequestOperation<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest, DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse> operation
-              = new DeleteV1CompaniesCompanyIdBankAccountsBankAccountId.Async(sdkConfiguration, _headers);
+              = new DeleteV1CompaniesCompanyIdBankAccountsBankAccountId.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

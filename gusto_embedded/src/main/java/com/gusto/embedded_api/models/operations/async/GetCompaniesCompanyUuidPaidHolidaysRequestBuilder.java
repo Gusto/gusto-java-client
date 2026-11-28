@@ -12,8 +12,10 @@ import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidPaidHolid
 import com.gusto.embedded_api.operations.GetCompaniesCompanyUuidPaidHolidays;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -25,6 +27,7 @@ public class GetCompaniesCompanyUuidPaidHolidaysRequestBuilder {
                             new TypeReference<Optional<? extends GetCompaniesCompanyUuidPaidHolidaysHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
     private Optional<String> year = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -61,6 +64,18 @@ public class GetCompaniesCompanyUuidPaidHolidaysRequestBuilder {
         this.year = year;
         return this;
     }
+                
+    public GetCompaniesCompanyUuidPaidHolidaysRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetCompaniesCompanyUuidPaidHolidaysRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetCompaniesCompanyUuidPaidHolidaysRequest buildRequest() {
@@ -76,9 +91,12 @@ public class GetCompaniesCompanyUuidPaidHolidaysRequestBuilder {
     }
 
     public CompletableFuture<GetCompaniesCompanyUuidPaidHolidaysResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetCompaniesCompanyUuidPaidHolidaysRequest, GetCompaniesCompanyUuidPaidHolidaysResponse> operation
-              = new GetCompaniesCompanyUuidPaidHolidays.Async(sdkConfiguration, _headers);
+              = new GetCompaniesCompanyUuidPaidHolidays.Async(sdkConfiguration, options, _headers);
         GetCompaniesCompanyUuidPaidHolidaysRequest request = buildRequest();
 
         return operation.doRequest(request)

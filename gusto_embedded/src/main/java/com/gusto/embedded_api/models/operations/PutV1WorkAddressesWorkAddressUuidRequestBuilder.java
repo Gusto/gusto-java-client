@@ -10,29 +10,26 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.PutV1WorkAddressesWorkAddressUuid;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1WorkAddressesWorkAddressUuidRequestBuilder {
 
-    private String workAddressUuid;
     private Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>>() {});
+    private String workAddressUuid;
     private PutV1WorkAddressesWorkAddressUuidRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1WorkAddressesWorkAddressUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1WorkAddressesWorkAddressUuidRequestBuilder workAddressUuid(String workAddressUuid) {
-        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
-        this.workAddressUuid = workAddressUuid;
-        return this;
     }
                 
     public PutV1WorkAddressesWorkAddressUuidRequestBuilder xGustoAPIVersion(PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -47,9 +44,27 @@ public class PutV1WorkAddressesWorkAddressUuidRequestBuilder {
         return this;
     }
 
+    public PutV1WorkAddressesWorkAddressUuidRequestBuilder workAddressUuid(String workAddressUuid) {
+        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
+        this.workAddressUuid = workAddressUuid;
+        return this;
+    }
+
     public PutV1WorkAddressesWorkAddressUuidRequestBuilder requestBody(PutV1WorkAddressesWorkAddressUuidRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
+        return this;
+    }
+                
+    public PutV1WorkAddressesWorkAddressUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1WorkAddressesWorkAddressUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -59,17 +74,20 @@ public class PutV1WorkAddressesWorkAddressUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1WorkAddressesWorkAddressUuidRequest request = new PutV1WorkAddressesWorkAddressUuidRequest(workAddressUuid,
-            xGustoAPIVersion,
+        PutV1WorkAddressesWorkAddressUuidRequest request = new PutV1WorkAddressesWorkAddressUuidRequest(xGustoAPIVersion,
+            workAddressUuid,
             requestBody);
 
         return request;
     }
 
     public PutV1WorkAddressesWorkAddressUuidResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1WorkAddressesWorkAddressUuidRequest, PutV1WorkAddressesWorkAddressUuidResponse> operation
-              = new PutV1WorkAddressesWorkAddressUuid.Sync(sdkConfiguration, _headers);
+              = new PutV1WorkAddressesWorkAddressUuid.Sync(sdkConfiguration, options, _headers);
         PutV1WorkAddressesWorkAddressUuidRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -45,6 +45,7 @@ import com.gusto.embedded_api.operations.PutV1CompaniesCompanyUuidHolidayPayPoli
 import com.gusto.embedded_api.operations.PutV1CompaniesCompanyUuidHolidayPayPolicyAdd;
 import com.gusto.embedded_api.operations.PutV1CompaniesCompanyUuidHolidayPayPolicyRemove;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -98,7 +99,7 @@ public class AsyncHolidayPayPolicies {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyUuidHolidayPayPolicyResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyUuidHolidayPayPolicyResponse> get(String companyUuid) {
-        return get(Optional.empty(), companyUuid);
+        return get(Optional.empty(), companyUuid, Optional.empty());
     }
 
     /**
@@ -115,6 +116,26 @@ public class AsyncHolidayPayPolicies {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyUuidHolidayPayPolicyResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyUuidHolidayPayPolicyResponse> get(Optional<? extends GetV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
+        return get(xGustoAPIVersion, companyUuid, Optional.empty());
+    }
+
+    /**
+     * Get a company's holiday pay policy
+     * 
+     * <p>Get a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyUuidHolidayPayPolicyResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyUuidHolidayPayPolicyResponse> get(
+            Optional<? extends GetV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            Optional<Options> options) {
         GetV1CompaniesCompanyUuidHolidayPayPolicyRequest request =
             GetV1CompaniesCompanyUuidHolidayPayPolicyRequest
                 .builder()
@@ -122,7 +143,7 @@ public class AsyncHolidayPayPolicies {
                 .companyUuid(companyUuid)
                 .build();
         AsyncRequestOperation<GetV1CompaniesCompanyUuidHolidayPayPolicyRequest, GetV1CompaniesCompanyUuidHolidayPayPolicyResponse> operation
-              = new GetV1CompaniesCompanyUuidHolidayPayPolicy.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyUuidHolidayPayPolicy.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -156,7 +177,9 @@ public class AsyncHolidayPayPolicies {
      * @return {@code CompletableFuture<PostV1CompaniesCompanyUuidHolidayPayPolicyResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyUuidHolidayPayPolicyResponse> create(String companyUuid) {
-        return create(Optional.empty(), companyUuid, Optional.empty());
+        return create(
+                Optional.empty(), companyUuid, Optional.empty(),
+                Optional.empty());
     }
 
     /**
@@ -176,6 +199,29 @@ public class AsyncHolidayPayPolicies {
     public CompletableFuture<PostV1CompaniesCompanyUuidHolidayPayPolicyResponse> create(
             Optional<? extends PostV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             Optional<? extends HolidayPayPolicyRequest> holidayPayPolicyRequest) {
+        return create(
+                xGustoAPIVersion, companyUuid, holidayPayPolicyRequest,
+                Optional.empty());
+    }
+
+    /**
+     * Create a holiday pay policy for a company
+     * 
+     * <p>Create a holiday pay policy for a company
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param holidayPayPolicyRequest Request body for creating or updating a holiday pay policy
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyUuidHolidayPayPolicyResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyUuidHolidayPayPolicyResponse> create(
+            Optional<? extends PostV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            Optional<? extends HolidayPayPolicyRequest> holidayPayPolicyRequest, Optional<Options> options) {
         PostV1CompaniesCompanyUuidHolidayPayPolicyRequest request =
             PostV1CompaniesCompanyUuidHolidayPayPolicyRequest
                 .builder()
@@ -184,7 +230,7 @@ public class AsyncHolidayPayPolicies {
                 .holidayPayPolicyRequest(holidayPayPolicyRequest)
                 .build();
         AsyncRequestOperation<PostV1CompaniesCompanyUuidHolidayPayPolicyRequest, PostV1CompaniesCompanyUuidHolidayPayPolicyResponse> operation
-              = new PostV1CompaniesCompanyUuidHolidayPayPolicy.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyUuidHolidayPayPolicy.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -219,7 +265,9 @@ public class AsyncHolidayPayPolicies {
      * @return {@code CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyResponse> update(String companyUuid, PutV1CompaniesCompanyUuidHolidayPayPolicyRequestBody requestBody) {
-        return update(Optional.empty(), companyUuid, requestBody);
+        return update(
+                Optional.empty(), companyUuid, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -239,6 +287,29 @@ public class AsyncHolidayPayPolicies {
     public CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyResponse> update(
             Optional<? extends PutV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PutV1CompaniesCompanyUuidHolidayPayPolicyRequestBody requestBody) {
+        return update(
+                xGustoAPIVersion, companyUuid, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Update a company's holiday pay policy
+     * 
+     * <p>Update a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param requestBody Request body for creating or updating a holiday pay policy
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyResponse>} - The async response
+     */
+    public CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyResponse> update(
+            Optional<? extends PutV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            PutV1CompaniesCompanyUuidHolidayPayPolicyRequestBody requestBody, Optional<Options> options) {
         PutV1CompaniesCompanyUuidHolidayPayPolicyRequest request =
             PutV1CompaniesCompanyUuidHolidayPayPolicyRequest
                 .builder()
@@ -247,7 +318,7 @@ public class AsyncHolidayPayPolicies {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1CompaniesCompanyUuidHolidayPayPolicyRequest, PutV1CompaniesCompanyUuidHolidayPayPolicyResponse> operation
-              = new PutV1CompaniesCompanyUuidHolidayPayPolicy.Async(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyUuidHolidayPayPolicy.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -281,7 +352,7 @@ public class AsyncHolidayPayPolicies {
      * @return {@code CompletableFuture<DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse>} - The async response
      */
     public CompletableFuture<DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse> delete(String companyUuid) {
-        return delete(Optional.empty(), companyUuid);
+        return delete(Optional.empty(), companyUuid, Optional.empty());
     }
 
     /**
@@ -298,6 +369,26 @@ public class AsyncHolidayPayPolicies {
      * @return {@code CompletableFuture<DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse>} - The async response
      */
     public CompletableFuture<DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse> delete(Optional<? extends DeleteV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
+        return delete(xGustoAPIVersion, companyUuid, Optional.empty());
+    }
+
+    /**
+     * Delete a company's holiday pay policy
+     * 
+     * <p>Delete a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param options additional options
+     * @return {@code CompletableFuture<DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse>} - The async response
+     */
+    public CompletableFuture<DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse> delete(
+            Optional<? extends DeleteV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            Optional<Options> options) {
         DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest request =
             DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest
                 .builder()
@@ -305,7 +396,7 @@ public class AsyncHolidayPayPolicies {
                 .companyUuid(companyUuid)
                 .build();
         AsyncRequestOperation<DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest, DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse> operation
-              = new DeleteV1CompaniesCompanyUuidHolidayPayPolicy.Async(sdkConfiguration, _headers);
+              = new DeleteV1CompaniesCompanyUuidHolidayPayPolicy.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -340,7 +431,9 @@ public class AsyncHolidayPayPolicies {
      * @return {@code CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyAddResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyAddResponse> addEmployees(String companyUuid, PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody requestBody) {
-        return addEmployees(Optional.empty(), companyUuid, requestBody);
+        return addEmployees(
+                Optional.empty(), companyUuid, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -360,6 +453,29 @@ public class AsyncHolidayPayPolicies {
     public CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyAddResponse> addEmployees(
             Optional<? extends PutV1CompaniesCompanyUuidHolidayPayPolicyAddHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody requestBody) {
+        return addEmployees(
+                xGustoAPIVersion, companyUuid, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Add employees to a company's holiday pay policy
+     * 
+     * <p>Add employees to a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyAddResponse>} - The async response
+     */
+    public CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyAddResponse> addEmployees(
+            Optional<? extends PutV1CompaniesCompanyUuidHolidayPayPolicyAddHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody requestBody, Optional<Options> options) {
         PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequest request =
             PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequest
                 .builder()
@@ -368,7 +484,7 @@ public class AsyncHolidayPayPolicies {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequest, PutV1CompaniesCompanyUuidHolidayPayPolicyAddResponse> operation
-              = new PutV1CompaniesCompanyUuidHolidayPayPolicyAdd.Async(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyUuidHolidayPayPolicyAdd.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -403,7 +519,9 @@ public class AsyncHolidayPayPolicies {
      * @return {@code CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse> removeEmployees(String companyUuid, PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody requestBody) {
-        return removeEmployees(Optional.empty(), companyUuid, requestBody);
+        return removeEmployees(
+                Optional.empty(), companyUuid, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -423,6 +541,29 @@ public class AsyncHolidayPayPolicies {
     public CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse> removeEmployees(
             Optional<? extends PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody requestBody) {
+        return removeEmployees(
+                xGustoAPIVersion, companyUuid, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Remove employees from a company's holiday pay policy
+     * 
+     * <p>Remove employees from a company's holiday pay policy
+     * 
+     * <p>scope: `holiday_pay_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse>} - The async response
+     */
+    public CompletableFuture<PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse> removeEmployees(
+            Optional<? extends PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody requestBody, Optional<Options> options) {
         PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest request =
             PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest
                 .builder()
@@ -431,7 +572,7 @@ public class AsyncHolidayPayPolicies {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest, PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse> operation
-              = new PutV1CompaniesCompanyUuidHolidayPayPolicyRemove.Async(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyUuidHolidayPayPolicyRemove.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -471,7 +612,9 @@ public class AsyncHolidayPayPolicies {
      * @return {@code CompletableFuture<GetCompaniesCompanyUuidPaidHolidaysResponse>} - The async response
      */
     public CompletableFuture<GetCompaniesCompanyUuidPaidHolidaysResponse> previewPaidHolidays(String companyUuid) {
-        return previewPaidHolidays(Optional.empty(), companyUuid, Optional.empty());
+        return previewPaidHolidays(
+                Optional.empty(), companyUuid, Optional.empty(),
+                Optional.empty());
     }
 
     /**
@@ -494,6 +637,32 @@ public class AsyncHolidayPayPolicies {
     public CompletableFuture<GetCompaniesCompanyUuidPaidHolidaysResponse> previewPaidHolidays(
             Optional<? extends GetCompaniesCompanyUuidPaidHolidaysHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             Optional<String> year) {
+        return previewPaidHolidays(
+                xGustoAPIVersion, companyUuid, year,
+                Optional.empty());
+    }
+
+    /**
+     * Preview a company's paid holidays
+     * 
+     * <p>Preview a company's paid holidays
+     * 
+     * <p>If a year is passed, paid holidays for that year will be returned. Otherwise, paid holidays for the
+     * next three years will be returned.
+     * 
+     * <p>scope: `holiday_pay_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param year If a year is passed, paid holidays for that year will be returned. Otherwise, paid holidays for the next three years will be returned.
+     * @param options additional options
+     * @return {@code CompletableFuture<GetCompaniesCompanyUuidPaidHolidaysResponse>} - The async response
+     */
+    public CompletableFuture<GetCompaniesCompanyUuidPaidHolidaysResponse> previewPaidHolidays(
+            Optional<? extends GetCompaniesCompanyUuidPaidHolidaysHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            Optional<String> year, Optional<Options> options) {
         GetCompaniesCompanyUuidPaidHolidaysRequest request =
             GetCompaniesCompanyUuidPaidHolidaysRequest
                 .builder()
@@ -502,7 +671,7 @@ public class AsyncHolidayPayPolicies {
                 .year(year)
                 .build();
         AsyncRequestOperation<GetCompaniesCompanyUuidPaidHolidaysRequest, GetCompaniesCompanyUuidPaidHolidaysResponse> operation
-              = new GetCompaniesCompanyUuidPaidHolidays.Async(sdkConfiguration, _headers);
+              = new GetCompaniesCompanyUuidPaidHolidays.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

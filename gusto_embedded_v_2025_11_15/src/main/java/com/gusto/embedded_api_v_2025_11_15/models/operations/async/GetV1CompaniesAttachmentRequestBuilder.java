@@ -12,8 +12,10 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1CompaniesAttac
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1CompaniesAttachment;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -25,6 +27,7 @@ public class GetV1CompaniesAttachmentRequestBuilder {
                             new TypeReference<Optional<? extends GetV1CompaniesAttachmentHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private String companyAttachmentUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -55,6 +58,18 @@ public class GetV1CompaniesAttachmentRequestBuilder {
         this.companyAttachmentUuid = companyAttachmentUuid;
         return this;
     }
+                
+    public GetV1CompaniesAttachmentRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompaniesAttachmentRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1CompaniesAttachmentRequest buildRequest() {
@@ -70,9 +85,12 @@ public class GetV1CompaniesAttachmentRequestBuilder {
     }
 
     public CompletableFuture<GetV1CompaniesAttachmentResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1CompaniesAttachmentRequest, GetV1CompaniesAttachmentResponse> operation
-              = new GetV1CompaniesAttachment.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesAttachment.Async(sdkConfiguration, options, _headers);
         GetV1CompaniesAttachmentRequest request = buildRequest();
 
         return operation.doRequest(request)

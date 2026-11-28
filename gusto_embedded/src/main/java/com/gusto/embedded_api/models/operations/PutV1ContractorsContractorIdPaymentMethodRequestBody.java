@@ -25,12 +25,12 @@ public class PutV1ContractorsContractorIdPaymentMethodRequestBody {
      * account. See [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts).
      */
     @JsonProperty("type")
-    private PutV1ContractorsContractorIdPaymentMethodType type;
+    private Type type;
 
     @JsonCreator
     public PutV1ContractorsContractorIdPaymentMethodRequestBody(
             @JsonProperty("version") String version,
-            @JsonProperty("type") PutV1ContractorsContractorIdPaymentMethodType type) {
+            @JsonProperty("type") Type type) {
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(type, "type");
         this.version = version;
@@ -52,7 +52,7 @@ public class PutV1ContractorsContractorIdPaymentMethodRequestBody {
      * account. See [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts).
      */
     @JsonIgnore
-    public PutV1ContractorsContractorIdPaymentMethodType type() {
+    public Type type() {
         return type;
     }
 
@@ -76,7 +76,7 @@ public class PutV1ContractorsContractorIdPaymentMethodRequestBody {
      * The payment method type. If type is Direct Deposit, the contractor is required to have a bank
      * account. See [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts).
      */
-    public PutV1ContractorsContractorIdPaymentMethodRequestBody withType(PutV1ContractorsContractorIdPaymentMethodType type) {
+    public PutV1ContractorsContractorIdPaymentMethodRequestBody withType(Type type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -114,7 +114,7 @@ public class PutV1ContractorsContractorIdPaymentMethodRequestBody {
 
         private String version;
 
-        private PutV1ContractorsContractorIdPaymentMethodType type;
+        private Type type;
 
         private Builder() {
           // force use of static builder() method
@@ -137,7 +137,7 @@ public class PutV1ContractorsContractorIdPaymentMethodRequestBody {
          * The payment method type. If type is Direct Deposit, the contractor is required to have a bank
          * account. See [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts).
          */
-        public Builder type(PutV1ContractorsContractorIdPaymentMethodType type) {
+        public Builder type(Type type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;

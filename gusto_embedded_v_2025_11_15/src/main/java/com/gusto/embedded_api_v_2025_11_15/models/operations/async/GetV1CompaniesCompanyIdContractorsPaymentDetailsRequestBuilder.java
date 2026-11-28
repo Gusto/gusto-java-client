@@ -12,25 +12,40 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1CompaniesCompa
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1CompaniesCompanyIdContractorsPaymentDetails;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder {
 
-    private String companyId;
-    private Optional<String> contractorUuid = Optional.empty();
-    private Optional<String> contractorPaymentGroupUuid = Optional.empty();
     private Optional<? extends GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private Optional<String> contractorUuid = Optional.empty();
+    private Optional<String> contractorPaymentGroupUuid = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder companyId(String companyId) {
@@ -63,15 +78,15 @@ public class GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder {
         return this;
     }
                 
-    public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+    public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
         return this;
     }
 
-    public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder xGustoAPIVersion(Optional<? extends GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
+    public GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -81,18 +96,21 @@ public class GetV1CompaniesCompanyIdContractorsPaymentDetailsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest request = new GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest(companyId,
+        GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest request = new GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest(xGustoAPIVersion,
+            companyId,
             contractorUuid,
-            contractorPaymentGroupUuid,
-            xGustoAPIVersion);
+            contractorPaymentGroupUuid);
 
         return request;
     }
 
     public CompletableFuture<GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest, GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse> operation
-              = new GetV1CompaniesCompanyIdContractorsPaymentDetails.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdContractorsPaymentDetails.Async(sdkConfiguration, options, _headers);
         GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest request = buildRequest();
 
         return operation.doRequest(request)

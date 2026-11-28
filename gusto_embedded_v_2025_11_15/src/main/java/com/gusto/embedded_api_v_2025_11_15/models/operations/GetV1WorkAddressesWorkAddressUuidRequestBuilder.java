@@ -10,28 +10,25 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1WorkAddressesWorkAddressUuid;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1WorkAddressesWorkAddressUuidRequestBuilder {
 
-    private String workAddressUuid;
     private Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>>() {});
+    private String workAddressUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1WorkAddressesWorkAddressUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1WorkAddressesWorkAddressUuidRequestBuilder workAddressUuid(String workAddressUuid) {
-        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
-        this.workAddressUuid = workAddressUuid;
-        return this;
     }
                 
     public GetV1WorkAddressesWorkAddressUuidRequestBuilder xGustoAPIVersion(GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,22 +43,43 @@ public class GetV1WorkAddressesWorkAddressUuidRequestBuilder {
         return this;
     }
 
+    public GetV1WorkAddressesWorkAddressUuidRequestBuilder workAddressUuid(String workAddressUuid) {
+        Utils.checkNotNull(workAddressUuid, "workAddressUuid");
+        this.workAddressUuid = workAddressUuid;
+        return this;
+    }
+                
+    public GetV1WorkAddressesWorkAddressUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1WorkAddressesWorkAddressUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1WorkAddressesWorkAddressUuidRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1WorkAddressesWorkAddressUuidRequest request = new GetV1WorkAddressesWorkAddressUuidRequest(workAddressUuid,
-            xGustoAPIVersion);
+        GetV1WorkAddressesWorkAddressUuidRequest request = new GetV1WorkAddressesWorkAddressUuidRequest(xGustoAPIVersion,
+            workAddressUuid);
 
         return request;
     }
 
     public GetV1WorkAddressesWorkAddressUuidResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1WorkAddressesWorkAddressUuidRequest, GetV1WorkAddressesWorkAddressUuidResponse> operation
-              = new GetV1WorkAddressesWorkAddressUuid.Sync(sdkConfiguration, _headers);
+              = new GetV1WorkAddressesWorkAddressUuid.Sync(sdkConfiguration, options, _headers);
         GetV1WorkAddressesWorkAddressUuidRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

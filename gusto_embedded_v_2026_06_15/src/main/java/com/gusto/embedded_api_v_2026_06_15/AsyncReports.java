@@ -5,16 +5,23 @@ package com.gusto.embedded_api_v_2026_06_15;
 
 import static com.gusto.embedded_api_v_2026_06_15.operations.Operations.AsyncRequestOperation;
 
+import com.gusto.embedded_api_v_2026_06_15.models.components.BulkReportBody;
 import com.gusto.embedded_api_v_2026_06_15.models.components.CreateReportBody;
 import com.gusto.embedded_api_v_2026_06_15.models.components.GeneralLedgerReportBody;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetCompaniesCompanyUuidReportTemplatesReportTypeHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetCompaniesCompanyUuidReportTemplatesReportTypeRequest;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetReportsRequestUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetReportsRequestUuidRequest;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1BulkReportsRequestUuidHeaderXGustoAPIVersion;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1BulkReportsRequestUuidRequest;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1BulkReportsRequestUuidSecurity;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.PostCompaniesCompanyUuidReportsHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.PostCompaniesCompanyUuidReportsRequest;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.PostPayrollsPayrollUuidReportsGeneralLedgerHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.PostPayrollsPayrollUuidReportsGeneralLedgerRequest;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1BulkReportsHeaderXGustoAPIVersion;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1BulkReportsRequest;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1BulkReportsSecurity;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody;
@@ -22,18 +29,25 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.async.GetCompaniesC
 import com.gusto.embedded_api_v_2026_06_15.models.operations.async.GetCompaniesCompanyUuidReportTemplatesReportTypeResponse;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.async.GetReportsRequestUuidRequestBuilder;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.async.GetReportsRequestUuidResponse;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.async.GetV1BulkReportsRequestUuidRequestBuilder;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.async.GetV1BulkReportsRequestUuidResponse;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.async.PostCompaniesCompanyUuidReportsRequestBuilder;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.async.PostCompaniesCompanyUuidReportsResponse;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.async.PostPayrollsPayrollUuidReportsGeneralLedgerRequestBuilder;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.async.PostPayrollsPayrollUuidReportsGeneralLedgerResponse;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.async.PostV1BulkReportsRequestBuilder;
+import com.gusto.embedded_api_v_2026_06_15.models.operations.async.PostV1BulkReportsResponse;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.async.PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBuilder;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.async.PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse;
 import com.gusto.embedded_api_v_2026_06_15.operations.GetCompaniesCompanyUuidReportTemplatesReportType;
 import com.gusto.embedded_api_v_2026_06_15.operations.GetReportsRequestUuid;
+import com.gusto.embedded_api_v_2026_06_15.operations.GetV1BulkReportsRequestUuid;
 import com.gusto.embedded_api_v_2026_06_15.operations.PostCompaniesCompanyUuidReports;
 import com.gusto.embedded_api_v_2026_06_15.operations.PostPayrollsPayrollUuidReportsGeneralLedger;
+import com.gusto.embedded_api_v_2026_06_15.operations.PostV1BulkReports;
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -56,6 +70,264 @@ public class AsyncReports {
      */
     public Reports sync() {
         return syncSDK;
+    }
+
+
+    /**
+     * Create a bulk report batch
+     * 
+     * <p>Triggers asynchronous generation of up to 25 reports across companies the partner is mapped to. Each
+     * `batch` item is a `custom_report` (same parameters as [create a custom
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-companies-company_uuid-reports)) or a
+     * `general_ledger` report (same parameters as [create a general ledger
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-payrolls-payroll_uuid-reports-general_ledger)),
+     * keyed by `company_uuid` and `report_type`. Items are validated synchronously; if any is invalid, the
+     * entire batch is rejected.
+     * 
+     * <p>Poll the [bulk report GET
+     * endpoint](https://docs.gusto.com/embedded-payroll/reference/get-v1-bulk_reports-request_uuid) with
+     * the returned `uuid` for status and the report URL, which is valid for 10 minutes.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * @return The async call builder
+     */
+    public PostV1BulkReportsRequestBuilder postV1BulkReports() {
+        return new PostV1BulkReportsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a bulk report batch
+     * 
+     * <p>Triggers asynchronous generation of up to 25 reports across companies the partner is mapped to. Each
+     * `batch` item is a `custom_report` (same parameters as [create a custom
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-companies-company_uuid-reports)) or a
+     * `general_ledger` report (same parameters as [create a general ledger
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-payrolls-payroll_uuid-reports-general_ledger)),
+     * keyed by `company_uuid` and `report_type`. Items are validated synchronously; if any is invalid, the
+     * entire batch is rejected.
+     * 
+     * <p>Poll the [bulk report GET
+     * endpoint](https://docs.gusto.com/embedded-payroll/reference/get-v1-bulk_reports-request_uuid) with
+     * the returned `uuid` for status and the report URL, which is valid for 10 minutes.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * @param security The security details to use for authentication.
+     * @param bulkReportBody Each `batch` item is a `custom_report` or a `general_ledger` report.
+     * @return {@code CompletableFuture<PostV1BulkReportsResponse>} - The async response
+     */
+    public CompletableFuture<PostV1BulkReportsResponse> postV1BulkReports(PostV1BulkReportsSecurity security, BulkReportBody bulkReportBody) {
+        return postV1BulkReports(
+                security, Optional.empty(), bulkReportBody,
+                Optional.empty());
+    }
+
+    /**
+     * Create a bulk report batch
+     * 
+     * <p>Triggers asynchronous generation of up to 25 reports across companies the partner is mapped to. Each
+     * `batch` item is a `custom_report` (same parameters as [create a custom
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-companies-company_uuid-reports)) or a
+     * `general_ledger` report (same parameters as [create a general ledger
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-payrolls-payroll_uuid-reports-general_ledger)),
+     * keyed by `company_uuid` and `report_type`. Items are validated synchronously; if any is invalid, the
+     * entire batch is rejected.
+     * 
+     * <p>Poll the [bulk report GET
+     * endpoint](https://docs.gusto.com/embedded-payroll/reference/get-v1-bulk_reports-request_uuid) with
+     * the returned `uuid` for status and the report URL, which is valid for 10 minutes.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * @param security The security details to use for authentication.
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param bulkReportBody Each `batch` item is a `custom_report` or a `general_ledger` report.
+     * @return {@code CompletableFuture<PostV1BulkReportsResponse>} - The async response
+     */
+    public CompletableFuture<PostV1BulkReportsResponse> postV1BulkReports(
+            PostV1BulkReportsSecurity security, Optional<? extends PostV1BulkReportsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            BulkReportBody bulkReportBody) {
+        return postV1BulkReports(
+                security, xGustoAPIVersion, bulkReportBody,
+                Optional.empty());
+    }
+
+    /**
+     * Create a bulk report batch
+     * 
+     * <p>Triggers asynchronous generation of up to 25 reports across companies the partner is mapped to. Each
+     * `batch` item is a `custom_report` (same parameters as [create a custom
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-companies-company_uuid-reports)) or a
+     * `general_ledger` report (same parameters as [create a general ledger
+     * report](https://docs.gusto.com/embedded-payroll/reference/post-payrolls-payroll_uuid-reports-general_ledger)),
+     * keyed by `company_uuid` and `report_type`. Items are validated synchronously; if any is invalid, the
+     * entire batch is rejected.
+     * 
+     * <p>Poll the [bulk report GET
+     * endpoint](https://docs.gusto.com/embedded-payroll/reference/get-v1-bulk_reports-request_uuid) with
+     * the returned `uuid` for status and the report URL, which is valid for 10 minutes.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * @param security The security details to use for authentication.
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param bulkReportBody Each `batch` item is a `custom_report` or a `general_ledger` report.
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1BulkReportsResponse>} - The async response
+     */
+    public CompletableFuture<PostV1BulkReportsResponse> postV1BulkReports(
+            PostV1BulkReportsSecurity security, Optional<? extends PostV1BulkReportsHeaderXGustoAPIVersion> xGustoAPIVersion,
+            BulkReportBody bulkReportBody, Optional<Options> options) {
+        PostV1BulkReportsRequest request =
+            PostV1BulkReportsRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .bulkReportBody(bulkReportBody)
+                .build();
+        AsyncRequestOperation<PostV1BulkReportsRequest, PostV1BulkReportsResponse> operation
+              = new PostV1BulkReports.Async(
+                                    sdkConfiguration, security, options,
+                                    _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get a bulk report batch
+     * 
+     * <p>Get a bulk report batch's status and results given the `request_uuid`. While in progress, only batch
+     * metadata is returned; once complete, it also includes a signed `report_url` (a zip of all generated
+     * reports, valid for 10 minutes) and a per-company breakdown.
+     * 
+     * <p>Reports containing PHI are inaccessible with `company_reports:read:tier_2_only` data scope.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:read`
+     * 
+     * @return The async call builder
+     */
+    public GetV1BulkReportsRequestUuidRequestBuilder getV1BulkReportsRequestUuid() {
+        return new GetV1BulkReportsRequestUuidRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a bulk report batch
+     * 
+     * <p>Get a bulk report batch's status and results given the `request_uuid`. While in progress, only batch
+     * metadata is returned; once complete, it also includes a signed `report_url` (a zip of all generated
+     * reports, valid for 10 minutes) and a per-company breakdown.
+     * 
+     * <p>Reports containing PHI are inaccessible with `company_reports:read:tier_2_only` data scope.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:read`
+     * 
+     * @param security The security details to use for authentication.
+     * @param requestUuid The UUID of the bulk report batch.
+     * @return {@code CompletableFuture<GetV1BulkReportsRequestUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetV1BulkReportsRequestUuidResponse> getV1BulkReportsRequestUuid(GetV1BulkReportsRequestUuidSecurity security, String requestUuid) {
+        return getV1BulkReportsRequestUuid(
+                security, Optional.empty(), requestUuid,
+                Optional.empty());
+    }
+
+    /**
+     * Get a bulk report batch
+     * 
+     * <p>Get a bulk report batch's status and results given the `request_uuid`. While in progress, only batch
+     * metadata is returned; once complete, it also includes a signed `report_url` (a zip of all generated
+     * reports, valid for 10 minutes) and a per-company breakdown.
+     * 
+     * <p>Reports containing PHI are inaccessible with `company_reports:read:tier_2_only` data scope.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:read`
+     * 
+     * @param security The security details to use for authentication.
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param requestUuid The UUID of the bulk report batch.
+     * @return {@code CompletableFuture<GetV1BulkReportsRequestUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetV1BulkReportsRequestUuidResponse> getV1BulkReportsRequestUuid(
+            GetV1BulkReportsRequestUuidSecurity security, Optional<? extends GetV1BulkReportsRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String requestUuid) {
+        return getV1BulkReportsRequestUuid(
+                security, xGustoAPIVersion, requestUuid,
+                Optional.empty());
+    }
+
+    /**
+     * Get a bulk report batch
+     * 
+     * <p>Get a bulk report batch's status and results given the `request_uuid`. While in progress, only batch
+     * metadata is returned; once complete, it also includes a signed `report_url` (a zip of all generated
+     * reports, valid for 10 minutes) and a per-company breakdown.
+     * 
+     * <p>Reports containing PHI are inaccessible with `company_reports:read:tier_2_only` data scope.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `company_reports:read`
+     * 
+     * @param security The security details to use for authentication.
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param requestUuid The UUID of the bulk report batch.
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1BulkReportsRequestUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetV1BulkReportsRequestUuidResponse> getV1BulkReportsRequestUuid(
+            GetV1BulkReportsRequestUuidSecurity security, Optional<? extends GetV1BulkReportsRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String requestUuid, Optional<Options> options) {
+        GetV1BulkReportsRequestUuidRequest request =
+            GetV1BulkReportsRequestUuidRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .requestUuid(requestUuid)
+                .build();
+        AsyncRequestOperation<GetV1BulkReportsRequestUuidRequest, GetV1BulkReportsRequestUuidResponse> operation
+              = new GetV1BulkReportsRequestUuid.Async(
+                                    sdkConfiguration, security, options,
+                                    _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
     }
 
 
@@ -106,7 +378,9 @@ public class AsyncReports {
      * @return {@code CompletableFuture<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse> postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(String companyId, PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody requestBody) {
-        return postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(Optional.empty(), companyId, requestBody);
+        return postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(
+                Optional.empty(), companyId, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -135,6 +409,38 @@ public class AsyncReports {
     public CompletableFuture<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse> postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(
             Optional<? extends PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody requestBody) {
+        return postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(
+                xGustoAPIVersion, companyId, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Create an employees annual FICA wage report
+     * 
+     * <p>Generates a report containing annual FICA (Federal Insurance Contributions Act) wage data for all
+     * employees in a company over a specified year range.
+     * 
+     * <p>This report provides detailed wage information subject to Social Security and Medicare taxes, useful
+     * for benefits integrations that need to verify employee earnings for compliance and benefit
+     * calculations.
+     * 
+     * <p>The report is generated asynchronously. After making this request, you will receive a `request_uuid`
+     * which can be used to poll the [Get a report](ref:get-v1-reports-request_uuid) endpoint to check the
+     * status and retrieve the report when complete.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse> postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(
+            Optional<? extends PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequestBody requestBody, Optional<Options> options) {
         PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest request =
             PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest
                 .builder()
@@ -143,7 +449,7 @@ public class AsyncReports {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest, PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse> operation
-              = new PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -188,7 +494,9 @@ public class AsyncReports {
      * @return {@code CompletableFuture<PostCompaniesCompanyUuidReportsResponse>} - The async response
      */
     public CompletableFuture<PostCompaniesCompanyUuidReportsResponse> createCustom(String companyUuid, CreateReportBody createReportBody) {
-        return createCustom(Optional.empty(), companyUuid, createReportBody);
+        return createCustom(
+                Optional.empty(), companyUuid, createReportBody,
+                Optional.empty());
     }
 
     /**
@@ -213,6 +521,34 @@ public class AsyncReports {
     public CompletableFuture<PostCompaniesCompanyUuidReportsResponse> createCustom(
             Optional<? extends PostCompaniesCompanyUuidReportsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             CreateReportBody createReportBody) {
+        return createCustom(
+                xGustoAPIVersion, companyUuid, createReportBody,
+                Optional.empty());
+    }
+
+    /**
+     * Create a custom report
+     * 
+     * <p>Create a custom report for a company. This endpoint initiates creating a custom report with custom
+     * columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the
+     * status and report URL upon completion using the [report GET
+     * endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid).
+     * 
+     * <p>This URL is valid for 10 minutes.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param createReportBody Request body for creating a custom report.
+     * @param options additional options
+     * @return {@code CompletableFuture<PostCompaniesCompanyUuidReportsResponse>} - The async response
+     */
+    public CompletableFuture<PostCompaniesCompanyUuidReportsResponse> createCustom(
+            Optional<? extends PostCompaniesCompanyUuidReportsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            CreateReportBody createReportBody, Optional<Options> options) {
         PostCompaniesCompanyUuidReportsRequest request =
             PostCompaniesCompanyUuidReportsRequest
                 .builder()
@@ -221,7 +557,7 @@ public class AsyncReports {
                 .createReportBody(createReportBody)
                 .build();
         AsyncRequestOperation<PostCompaniesCompanyUuidReportsRequest, PostCompaniesCompanyUuidReportsResponse> operation
-              = new PostCompaniesCompanyUuidReports.Async(sdkConfiguration, _headers);
+              = new PostCompaniesCompanyUuidReports.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -266,7 +602,9 @@ public class AsyncReports {
      * @return {@code CompletableFuture<PostPayrollsPayrollUuidReportsGeneralLedgerResponse>} - The async response
      */
     public CompletableFuture<PostPayrollsPayrollUuidReportsGeneralLedgerResponse> postPayrollsPayrollUuidReportsGeneralLedger(String payrollUuid, GeneralLedgerReportBody generalLedgerReportBody) {
-        return postPayrollsPayrollUuidReportsGeneralLedger(Optional.empty(), payrollUuid, generalLedgerReportBody);
+        return postPayrollsPayrollUuidReportsGeneralLedger(
+                Optional.empty(), payrollUuid, generalLedgerReportBody,
+                Optional.empty());
     }
 
     /**
@@ -291,6 +629,34 @@ public class AsyncReports {
     public CompletableFuture<PostPayrollsPayrollUuidReportsGeneralLedgerResponse> postPayrollsPayrollUuidReportsGeneralLedger(
             Optional<? extends PostPayrollsPayrollUuidReportsGeneralLedgerHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
             GeneralLedgerReportBody generalLedgerReportBody) {
+        return postPayrollsPayrollUuidReportsGeneralLedger(
+                xGustoAPIVersion, payrollUuid, generalLedgerReportBody,
+                Optional.empty());
+    }
+
+    /**
+     * Create a general ledger report
+     * 
+     * <p>Create a general ledger report for a payroll. The report can be aggregated by different dimensions
+     * such as job or department.
+     * 
+     * <p>Use the `request_uuid` in the response with the [report GET
+     * endpoint](../reference/get-reports-request_uuid) to poll for the status and report URL upon
+     * completion. The retrieved report will be generated in a JSON format.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollUuid The UUID of the payroll
+     * @param generalLedgerReportBody Request body for generating a general ledger report. The report can be aggregated by different dimensions such as job or department.
+     * @param options additional options
+     * @return {@code CompletableFuture<PostPayrollsPayrollUuidReportsGeneralLedgerResponse>} - The async response
+     */
+    public CompletableFuture<PostPayrollsPayrollUuidReportsGeneralLedgerResponse> postPayrollsPayrollUuidReportsGeneralLedger(
+            Optional<? extends PostPayrollsPayrollUuidReportsGeneralLedgerHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollUuid,
+            GeneralLedgerReportBody generalLedgerReportBody, Optional<Options> options) {
         PostPayrollsPayrollUuidReportsGeneralLedgerRequest request =
             PostPayrollsPayrollUuidReportsGeneralLedgerRequest
                 .builder()
@@ -299,7 +665,7 @@ public class AsyncReports {
                 .generalLedgerReportBody(generalLedgerReportBody)
                 .build();
         AsyncRequestOperation<PostPayrollsPayrollUuidReportsGeneralLedgerRequest, PostPayrollsPayrollUuidReportsGeneralLedgerResponse> operation
-              = new PostPayrollsPayrollUuidReportsGeneralLedger.Async(sdkConfiguration, _headers);
+              = new PostPayrollsPayrollUuidReportsGeneralLedger.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -339,7 +705,7 @@ public class AsyncReports {
      * @return {@code CompletableFuture<GetReportsRequestUuidResponse>} - The async response
      */
     public CompletableFuture<GetReportsRequestUuidResponse> getReportsRequestUuid(String requestUuid) {
-        return getReportsRequestUuid(Optional.empty(), requestUuid);
+        return getReportsRequestUuid(Optional.empty(), requestUuid, Optional.empty());
     }
 
     /**
@@ -359,6 +725,29 @@ public class AsyncReports {
      * @return {@code CompletableFuture<GetReportsRequestUuidResponse>} - The async response
      */
     public CompletableFuture<GetReportsRequestUuidResponse> getReportsRequestUuid(Optional<? extends GetReportsRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String requestUuid) {
+        return getReportsRequestUuid(xGustoAPIVersion, requestUuid, Optional.empty());
+    }
+
+    /**
+     * Get a report
+     * 
+     * <p>Get a company's report given the `request_uuid`. The response will include the report request's
+     * status and, if complete, the report URL.
+     * 
+     * <p>Reports containing PHI are inaccessible with `company_reports:read:tier_2_only` data scope
+     * 
+     * <p>scope: `company_reports:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param requestUuid The UUID of the request to generate a document. Generate document endpoints return request_uuids to be used with the GET generated document endpoint.
+     * @param options additional options
+     * @return {@code CompletableFuture<GetReportsRequestUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetReportsRequestUuidResponse> getReportsRequestUuid(
+            Optional<? extends GetReportsRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String requestUuid,
+            Optional<Options> options) {
         GetReportsRequestUuidRequest request =
             GetReportsRequestUuidRequest
                 .builder()
@@ -366,7 +755,7 @@ public class AsyncReports {
                 .requestUuid(requestUuid)
                 .build();
         AsyncRequestOperation<GetReportsRequestUuidRequest, GetReportsRequestUuidResponse> operation
-              = new GetReportsRequestUuid.Async(sdkConfiguration, _headers);
+              = new GetReportsRequestUuid.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -405,7 +794,9 @@ public class AsyncReports {
      * @return {@code CompletableFuture<GetCompaniesCompanyUuidReportTemplatesReportTypeResponse>} - The async response
      */
     public CompletableFuture<GetCompaniesCompanyUuidReportTemplatesReportTypeResponse> getTemplate(String companyUuid, String reportType) {
-        return getTemplate(Optional.empty(), companyUuid, reportType);
+        return getTemplate(
+                Optional.empty(), companyUuid, reportType,
+                Optional.empty());
     }
 
     /**
@@ -427,6 +818,31 @@ public class AsyncReports {
     public CompletableFuture<GetCompaniesCompanyUuidReportTemplatesReportTypeResponse> getTemplate(
             Optional<? extends GetCompaniesCompanyUuidReportTemplatesReportTypeHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             String reportType) {
+        return getTemplate(
+                xGustoAPIVersion, companyUuid, reportType,
+                Optional.empty());
+    }
+
+    /**
+     * Get a report template
+     * 
+     * <p>Get a company's report template. The only supported report type is `payroll_journal`. The resulting
+     * columns and groupings from this endpoint can be used as a guidance to create the report using the
+     * POST create report endpoint.
+     * 
+     * <p>scope: `company_reports:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param reportType The report type
+     * @param options additional options
+     * @return {@code CompletableFuture<GetCompaniesCompanyUuidReportTemplatesReportTypeResponse>} - The async response
+     */
+    public CompletableFuture<GetCompaniesCompanyUuidReportTemplatesReportTypeResponse> getTemplate(
+            Optional<? extends GetCompaniesCompanyUuidReportTemplatesReportTypeHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            String reportType, Optional<Options> options) {
         GetCompaniesCompanyUuidReportTemplatesReportTypeRequest request =
             GetCompaniesCompanyUuidReportTemplatesReportTypeRequest
                 .builder()
@@ -435,7 +851,7 @@ public class AsyncReports {
                 .reportType(reportType)
                 .build();
         AsyncRequestOperation<GetCompaniesCompanyUuidReportTemplatesReportTypeRequest, GetCompaniesCompanyUuidReportTemplatesReportTypeResponse> operation
-              = new GetCompaniesCompanyUuidReportTemplatesReportType.Async(sdkConfiguration, _headers);
+              = new GetCompaniesCompanyUuidReportTemplatesReportType.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

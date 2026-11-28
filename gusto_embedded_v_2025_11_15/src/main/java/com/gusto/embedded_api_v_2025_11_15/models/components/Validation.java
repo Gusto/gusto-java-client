@@ -25,7 +25,7 @@ public class Validation {
      * Describes the type of tax_rate validation rule
      */
     @JsonProperty("type")
-    private TaxRequirementMetadataValidationType type;
+    private TaxRequirementMetadataType type;
 
     /**
      * [for `min_max`] The inclusive lower bound of the tax rate
@@ -51,7 +51,7 @@ public class Validation {
 
     @JsonCreator
     public Validation(
-            @JsonProperty("type") TaxRequirementMetadataValidationType type,
+            @JsonProperty("type") TaxRequirementMetadataType type,
             @JsonProperty("min") Optional<String> min,
             @JsonProperty("max") Optional<String> max,
             @JsonProperty("rates") Optional<? extends List<String>> rates) {
@@ -66,7 +66,7 @@ public class Validation {
     }
     
     public Validation(
-            TaxRequirementMetadataValidationType type) {
+            TaxRequirementMetadataType type) {
         this(type, Optional.empty(), Optional.empty(),
             Optional.empty());
     }
@@ -75,7 +75,7 @@ public class Validation {
      * Describes the type of tax_rate validation rule
      */
     @JsonIgnore
-    public TaxRequirementMetadataValidationType type() {
+    public TaxRequirementMetadataType type() {
         return type;
     }
 
@@ -113,7 +113,7 @@ public class Validation {
     /**
      * Describes the type of tax_rate validation rule
      */
-    public Validation withType(TaxRequirementMetadataValidationType type) {
+    public Validation withType(TaxRequirementMetadataType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -213,7 +213,7 @@ public class Validation {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private TaxRequirementMetadataValidationType type;
+        private TaxRequirementMetadataType type;
 
         private Optional<String> min = Optional.empty();
 
@@ -229,7 +229,7 @@ public class Validation {
         /**
          * Describes the type of tax_rate validation rule
          */
-        public Builder type(TaxRequirementMetadataValidationType type) {
+        public Builder type(TaxRequirementMetadataType type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;

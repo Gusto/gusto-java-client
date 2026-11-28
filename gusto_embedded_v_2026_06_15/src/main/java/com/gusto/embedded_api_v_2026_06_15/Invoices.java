@@ -11,6 +11,8 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.GetInvoicesInvoiceP
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetInvoicesInvoicePeriodSecurity;
 import com.gusto.embedded_api_v_2026_06_15.operations.GetInvoicesInvoicePeriod;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
+import java.util.Optional;
 
 
 public class Invoices {
@@ -36,12 +38,13 @@ public class Invoices {
      * Retrieve invoicing data for companies
      * 
      * <p>Retrieve data for active companies used to calculate invoices for Gusto Embedded Payroll. A company
-     * is considered active for an invoice period if they are an active partner managed company, have run
-     * payroll or created contractor payments since becoming a partner managed company, and are not
-     * suspended at any point during the invoice period. This endpoint forces pagination, with 100 results
-     * returned at a time.
+     * is considered active for an invoice period if they are an active partner managed company and have
+     * run payroll or created contractor payments since becoming a partner managed company. Companies
+     * suspended before the invoice period begins are excluded.
      * 
-     * <p>You can learn more about our pagination here: [pagination
+     * <p>A company suspended during an invoice period is still included in that period's response, because it
+     * was active for part of the period. This endpoint forces pagination, with 100 results returned at a
+     * time. You can learn more about our pagination here: [pagination
      * guide](https://docs.gusto.com/embedded-payroll/docs/pagination)
      * 
      * <p>📘 System Access Authentication
@@ -61,12 +64,13 @@ public class Invoices {
      * Retrieve invoicing data for companies
      * 
      * <p>Retrieve data for active companies used to calculate invoices for Gusto Embedded Payroll. A company
-     * is considered active for an invoice period if they are an active partner managed company, have run
-     * payroll or created contractor payments since becoming a partner managed company, and are not
-     * suspended at any point during the invoice period. This endpoint forces pagination, with 100 results
-     * returned at a time.
+     * is considered active for an invoice period if they are an active partner managed company and have
+     * run payroll or created contractor payments since becoming a partner managed company. Companies
+     * suspended before the invoice period begins are excluded.
      * 
-     * <p>You can learn more about our pagination here: [pagination
+     * <p>A company suspended during an invoice period is still included in that period's response, because it
+     * was active for part of the period. This endpoint forces pagination, with 100 results returned at a
+     * time. You can learn more about our pagination here: [pagination
      * guide](https://docs.gusto.com/embedded-payroll/docs/pagination)
      * 
      * <p>📘 System Access Authentication
@@ -82,8 +86,42 @@ public class Invoices {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetInvoicesInvoicePeriodResponse get(GetInvoicesInvoicePeriodRequest request, GetInvoicesInvoicePeriodSecurity security) {
+        return get(request, security, Optional.empty());
+    }
+
+    /**
+     * Retrieve invoicing data for companies
+     * 
+     * <p>Retrieve data for active companies used to calculate invoices for Gusto Embedded Payroll. A company
+     * is considered active for an invoice period if they are an active partner managed company and have
+     * run payroll or created contractor payments since becoming a partner managed company. Companies
+     * suspended before the invoice period begins are excluded.
+     * 
+     * <p>A company suspended during an invoice period is still included in that period's response, because it
+     * was active for part of the period. This endpoint forces pagination, with 100 results returned at a
+     * time. You can learn more about our pagination here: [pagination
+     * guide](https://docs.gusto.com/embedded-payroll/docs/pagination)
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `invoices:read`
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param security The security details to use for authentication.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetInvoicesInvoicePeriodResponse get(
+            GetInvoicesInvoicePeriodRequest request, GetInvoicesInvoicePeriodSecurity security,
+            Optional<Options> options) {
         RequestOperation<GetInvoicesInvoicePeriodRequest, GetInvoicesInvoicePeriodResponse> operation
-              = new GetInvoicesInvoicePeriod.Sync(sdkConfiguration, security, _headers);
+              = new GetInvoicesInvoicePeriod.Sync(
+                                    sdkConfiguration, security, options,
+                                    _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.Boolean;
+import java.lang.Deprecated;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -51,8 +52,9 @@ public class PayScheduleShow {
      * 
      * <p>- `Every week`: Employees are paid weekly.
      * - `Every other week`: Employees are paid bi-weekly (every two weeks).
-     * - `Twice per month`: Employees are paid on two fixed days each month (e.g. 1st and 15th); use day_1
-     * and day_2.
+     * - `Twice per month`: Employees are paid twice per month. The explicit pay-day fields always
+     * represent pay days; explicit period-end fields are populated only for flexible schedules. Legacy
+     * day_1/day_2 retain their historical values.
      * - `Monthly`: Employees are paid once per month; use day_1 for the pay day.
      * - `Quarterly`: Employees are paid every three months.
      * - `Annually`: Employees are paid once per year.
@@ -77,25 +79,66 @@ public class PayScheduleShow {
     private Optional<LocalDate> anchorEndOfPayPeriod;
 
     /**
-     * An integer between 1 and 31 indicating the first day of the month that employees are paid. This
-     * field is only relevant for pay schedules with the "Twice per month" and "Monthly" frequencies. It
-     * will be null for pay schedules with other frequencies.
+     * Legacy field, retained unchanged for compatibility. The first pay day for Monthly and regular Twice
+     * per month schedules, or the first pay-period end day for flexible Twice per month schedules. Prefer
+     * the explicit pay-period fields.
+     * 
+     * <p>Do not combine day_1/day_2 with explicit fields in a request.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("day_1")
+    @Deprecated
     private JsonNullable<Long> day1;
 
     /**
-     * An integer between 1 and 31 indicating the second day of the month that employees are paid. This
-     * field is the second pay date for pay schedules with the "Twice per month" frequency. For
-     * semi-monthly pay schedules, this field should be set to 31.
+     * Legacy field, retained unchanged for compatibility. The second pay day for regular Twice per month
+     * schedules, or the second pay-period end day for flexible Twice per month schedules. A value of 31
+     * means the last day of the month.
      * 
-     * <p>For months shorter than 31 days, the second pay date is set to the last day of the month. It will be
-     * null for pay schedules with other frequencies.
+     * <p>Prefer the explicit pay-period fields. Do not combine day_1/day_2 with explicit fields in a request.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("day_2")
+    @Deprecated
     private JsonNullable<Long> day2;
+
+    /**
+     * The first pay day of the month (1-31) for Monthly and Twice per month schedules; null for other
+     * frequencies. For flexible schedules, this is independent of first_pay_period_end_day. A pay day may
+     * fall in the following month.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("first_pay_period_pay_day")
+    private JsonNullable<Long> firstPayPeriodPayDay;
+
+    /**
+     * The second pay day of the month (1-31) for Twice per month schedules; null for other frequencies.
+     * For flexible schedules, this is independent of second_pay_period_end_day. A value of 31 means the
+     * last day of the month; a pay day may fall in the following month.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("second_pay_period_pay_day")
+    private JsonNullable<Long> secondPayPeriodPayDay;
+
+    /**
+     * The last day (1-31) of the first pay period for a flexible Twice per month schedule; null for
+     * regular schedules and other frequencies.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("first_pay_period_end_day")
+    private JsonNullable<Long> firstPayPeriodEndDay;
+
+    /**
+     * The last day (1-31) of the second pay period for a flexible Twice per month schedule; null for
+     * regular schedules and other frequencies. A value of 31 means the last day of the month.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("second_pay_period_end_day")
+    private JsonNullable<Long> secondPayPeriodEndDay;
 
     /**
      * This field will be hourly when the pay schedule is for hourly employees, salaried when the pay
@@ -144,6 +187,15 @@ public class PayScheduleShow {
     @JsonProperty("auto_payroll_enablement_blockers")
     private JsonNullable<? extends List<PayScheduleAutoPayrollEnablementBlocker>> autoPayrollEnablementBlockers;
 
+    /**
+     * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay
+     * overtime calculations. Null when no workweek start day has been configured (e.g. legacy pay
+     * schedules).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("workweek_start_day")
+    private JsonNullable<? extends PayScheduleWorkweekStartDay> workweekStartDay;
+
     @JsonCreator
     public PayScheduleShow(
             @JsonProperty("uuid") String uuid,
@@ -153,11 +205,16 @@ public class PayScheduleShow {
             @JsonProperty("anchor_end_of_pay_period") Optional<LocalDate> anchorEndOfPayPeriod,
             @JsonProperty("day_1") JsonNullable<Long> day1,
             @JsonProperty("day_2") JsonNullable<Long> day2,
+            @JsonProperty("first_pay_period_pay_day") JsonNullable<Long> firstPayPeriodPayDay,
+            @JsonProperty("second_pay_period_pay_day") JsonNullable<Long> secondPayPeriodPayDay,
+            @JsonProperty("first_pay_period_end_day") JsonNullable<Long> firstPayPeriodEndDay,
+            @JsonProperty("second_pay_period_end_day") JsonNullable<Long> secondPayPeriodEndDay,
             @JsonProperty("name") JsonNullable<String> name,
             @JsonProperty("custom_name") Optional<String> customName,
             @JsonProperty("auto_payroll") Optional<Boolean> autoPayroll,
             @JsonProperty("active") Optional<Boolean> active,
-            @JsonProperty("auto_payroll_enablement_blockers") JsonNullable<? extends List<PayScheduleAutoPayrollEnablementBlocker>> autoPayrollEnablementBlockers) {
+            @JsonProperty("auto_payroll_enablement_blockers") JsonNullable<? extends List<PayScheduleAutoPayrollEnablementBlocker>> autoPayrollEnablementBlockers,
+            @JsonProperty("workweek_start_day") JsonNullable<? extends PayScheduleWorkweekStartDay> workweekStartDay) {
         Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(frequency, "frequency");
@@ -165,11 +222,16 @@ public class PayScheduleShow {
         Utils.checkNotNull(anchorEndOfPayPeriod, "anchorEndOfPayPeriod");
         Utils.checkNotNull(day1, "day1");
         Utils.checkNotNull(day2, "day2");
+        Utils.checkNotNull(firstPayPeriodPayDay, "firstPayPeriodPayDay");
+        Utils.checkNotNull(secondPayPeriodPayDay, "secondPayPeriodPayDay");
+        Utils.checkNotNull(firstPayPeriodEndDay, "firstPayPeriodEndDay");
+        Utils.checkNotNull(secondPayPeriodEndDay, "secondPayPeriodEndDay");
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(customName, "customName");
         Utils.checkNotNull(autoPayroll, "autoPayroll");
         Utils.checkNotNull(active, "active");
         Utils.checkNotNull(autoPayrollEnablementBlockers, "autoPayrollEnablementBlockers");
+        Utils.checkNotNull(workweekStartDay, "workweekStartDay");
         this.uuid = uuid;
         this.version = version;
         this.frequency = frequency;
@@ -177,11 +239,16 @@ public class PayScheduleShow {
         this.anchorEndOfPayPeriod = anchorEndOfPayPeriod;
         this.day1 = day1;
         this.day2 = day2;
+        this.firstPayPeriodPayDay = firstPayPeriodPayDay;
+        this.secondPayPeriodPayDay = secondPayPeriodPayDay;
+        this.firstPayPeriodEndDay = firstPayPeriodEndDay;
+        this.secondPayPeriodEndDay = secondPayPeriodEndDay;
         this.name = name;
         this.customName = customName;
         this.autoPayroll = autoPayroll;
         this.active = active;
         this.autoPayrollEnablementBlockers = autoPayrollEnablementBlockers;
+        this.workweekStartDay = workweekStartDay;
     }
     
     public PayScheduleShow(
@@ -189,8 +256,10 @@ public class PayScheduleShow {
             String version) {
         this(uuid, version, Optional.empty(),
             Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
-            Optional.empty(), Optional.empty(), JsonNullable.undefined());
+            JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
+            JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
@@ -218,8 +287,9 @@ public class PayScheduleShow {
      * 
      * <p>- `Every week`: Employees are paid weekly.
      * - `Every other week`: Employees are paid bi-weekly (every two weeks).
-     * - `Twice per month`: Employees are paid on two fixed days each month (e.g. 1st and 15th); use day_1
-     * and day_2.
+     * - `Twice per month`: Employees are paid twice per month. The explicit pay-day fields always
+     * represent pay days; explicit period-end fields are populated only for flexible schedules. Legacy
+     * day_1/day_2 retain their historical values.
      * - `Monthly`: Employees are paid once per month; use day_1 for the pay day.
      * - `Quarterly`: Employees are paid every three months.
      * - `Annually`: Employees are paid once per year.
@@ -248,26 +318,71 @@ public class PayScheduleShow {
     }
 
     /**
-     * An integer between 1 and 31 indicating the first day of the month that employees are paid. This
-     * field is only relevant for pay schedules with the "Twice per month" and "Monthly" frequencies. It
-     * will be null for pay schedules with other frequencies.
+     * Legacy field, retained unchanged for compatibility. The first pay day for Monthly and regular Twice
+     * per month schedules, or the first pay-period end day for flexible Twice per month schedules. Prefer
+     * the explicit pay-period fields.
+     * 
+     * <p>Do not combine day_1/day_2 with explicit fields in a request.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     @JsonIgnore
     public JsonNullable<Long> day1() {
         return day1;
     }
 
     /**
-     * An integer between 1 and 31 indicating the second day of the month that employees are paid. This
-     * field is the second pay date for pay schedules with the "Twice per month" frequency. For
-     * semi-monthly pay schedules, this field should be set to 31.
+     * Legacy field, retained unchanged for compatibility. The second pay day for regular Twice per month
+     * schedules, or the second pay-period end day for flexible Twice per month schedules. A value of 31
+     * means the last day of the month.
      * 
-     * <p>For months shorter than 31 days, the second pay date is set to the last day of the month. It will be
-     * null for pay schedules with other frequencies.
+     * <p>Prefer the explicit pay-period fields. Do not combine day_1/day_2 with explicit fields in a request.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     @JsonIgnore
     public JsonNullable<Long> day2() {
         return day2;
+    }
+
+    /**
+     * The first pay day of the month (1-31) for Monthly and Twice per month schedules; null for other
+     * frequencies. For flexible schedules, this is independent of first_pay_period_end_day. A pay day may
+     * fall in the following month.
+     */
+    @JsonIgnore
+    public JsonNullable<Long> firstPayPeriodPayDay() {
+        return firstPayPeriodPayDay;
+    }
+
+    /**
+     * The second pay day of the month (1-31) for Twice per month schedules; null for other frequencies.
+     * For flexible schedules, this is independent of second_pay_period_end_day. A value of 31 means the
+     * last day of the month; a pay day may fall in the following month.
+     */
+    @JsonIgnore
+    public JsonNullable<Long> secondPayPeriodPayDay() {
+        return secondPayPeriodPayDay;
+    }
+
+    /**
+     * The last day (1-31) of the first pay period for a flexible Twice per month schedule; null for
+     * regular schedules and other frequencies.
+     */
+    @JsonIgnore
+    public JsonNullable<Long> firstPayPeriodEndDay() {
+        return firstPayPeriodEndDay;
+    }
+
+    /**
+     * The last day (1-31) of the second pay period for a flexible Twice per month schedule; null for
+     * regular schedules and other frequencies. A value of 31 means the last day of the month.
+     */
+    @JsonIgnore
+    public JsonNullable<Long> secondPayPeriodEndDay() {
+        return secondPayPeriodEndDay;
     }
 
     /**
@@ -323,6 +438,17 @@ public class PayScheduleShow {
         return (JsonNullable<List<PayScheduleAutoPayrollEnablementBlocker>>) autoPayrollEnablementBlockers;
     }
 
+    /**
+     * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay
+     * overtime calculations. Null when no workweek start day has been configured (e.g. legacy pay
+     * schedules).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public JsonNullable<PayScheduleWorkweekStartDay> workweekStartDay() {
+        return (JsonNullable<PayScheduleWorkweekStartDay>) workweekStartDay;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -355,8 +481,9 @@ public class PayScheduleShow {
      * 
      * <p>- `Every week`: Employees are paid weekly.
      * - `Every other week`: Employees are paid bi-weekly (every two weeks).
-     * - `Twice per month`: Employees are paid on two fixed days each month (e.g. 1st and 15th); use day_1
-     * and day_2.
+     * - `Twice per month`: Employees are paid twice per month. The explicit pay-day fields always
+     * represent pay days; explicit period-end fields are populated only for flexible schedules. Legacy
+     * day_1/day_2 retain their historical values.
      * - `Monthly`: Employees are paid once per month; use day_1 for the pay day.
      * - `Quarterly`: Employees are paid every three months.
      * - `Annually`: Employees are paid once per year.
@@ -375,8 +502,9 @@ public class PayScheduleShow {
      * 
      * <p>- `Every week`: Employees are paid weekly.
      * - `Every other week`: Employees are paid bi-weekly (every two weeks).
-     * - `Twice per month`: Employees are paid on two fixed days each month (e.g. 1st and 15th); use day_1
-     * and day_2.
+     * - `Twice per month`: Employees are paid twice per month. The explicit pay-day fields always
+     * represent pay days; explicit period-end fields are populated only for flexible schedules. Legacy
+     * day_1/day_2 retain their historical values.
      * - `Monthly`: Employees are paid once per month; use day_1 for the pay day.
      * - `Quarterly`: Employees are paid every three months.
      * - `Annually`: Employees are paid once per year.
@@ -428,10 +556,15 @@ public class PayScheduleShow {
     }
 
     /**
-     * An integer between 1 and 31 indicating the first day of the month that employees are paid. This
-     * field is only relevant for pay schedules with the "Twice per month" and "Monthly" frequencies. It
-     * will be null for pay schedules with other frequencies.
+     * Legacy field, retained unchanged for compatibility. The first pay day for Monthly and regular Twice
+     * per month schedules, or the first pay-period end day for flexible Twice per month schedules. Prefer
+     * the explicit pay-period fields.
+     * 
+     * <p>Do not combine day_1/day_2 with explicit fields in a request.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     public PayScheduleShow withDay1(long day1) {
         Utils.checkNotNull(day1, "day1");
         this.day1 = JsonNullable.of(day1);
@@ -439,10 +572,15 @@ public class PayScheduleShow {
     }
 
     /**
-     * An integer between 1 and 31 indicating the first day of the month that employees are paid. This
-     * field is only relevant for pay schedules with the "Twice per month" and "Monthly" frequencies. It
-     * will be null for pay schedules with other frequencies.
+     * Legacy field, retained unchanged for compatibility. The first pay day for Monthly and regular Twice
+     * per month schedules, or the first pay-period end day for flexible Twice per month schedules. Prefer
+     * the explicit pay-period fields.
+     * 
+     * <p>Do not combine day_1/day_2 with explicit fields in a request.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     public PayScheduleShow withDay1(JsonNullable<Long> day1) {
         Utils.checkNotNull(day1, "day1");
         this.day1 = day1;
@@ -450,13 +588,15 @@ public class PayScheduleShow {
     }
 
     /**
-     * An integer between 1 and 31 indicating the second day of the month that employees are paid. This
-     * field is the second pay date for pay schedules with the "Twice per month" frequency. For
-     * semi-monthly pay schedules, this field should be set to 31.
+     * Legacy field, retained unchanged for compatibility. The second pay day for regular Twice per month
+     * schedules, or the second pay-period end day for flexible Twice per month schedules. A value of 31
+     * means the last day of the month.
      * 
-     * <p>For months shorter than 31 days, the second pay date is set to the last day of the month. It will be
-     * null for pay schedules with other frequencies.
+     * <p>Prefer the explicit pay-period fields. Do not combine day_1/day_2 with explicit fields in a request.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     public PayScheduleShow withDay2(long day2) {
         Utils.checkNotNull(day2, "day2");
         this.day2 = JsonNullable.of(day2);
@@ -464,16 +604,102 @@ public class PayScheduleShow {
     }
 
     /**
-     * An integer between 1 and 31 indicating the second day of the month that employees are paid. This
-     * field is the second pay date for pay schedules with the "Twice per month" frequency. For
-     * semi-monthly pay schedules, this field should be set to 31.
+     * Legacy field, retained unchanged for compatibility. The second pay day for regular Twice per month
+     * schedules, or the second pay-period end day for flexible Twice per month schedules. A value of 31
+     * means the last day of the month.
      * 
-     * <p>For months shorter than 31 days, the second pay date is set to the last day of the month. It will be
-     * null for pay schedules with other frequencies.
+     * <p>Prefer the explicit pay-period fields. Do not combine day_1/day_2 with explicit fields in a request.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     public PayScheduleShow withDay2(JsonNullable<Long> day2) {
         Utils.checkNotNull(day2, "day2");
         this.day2 = day2;
+        return this;
+    }
+
+    /**
+     * The first pay day of the month (1-31) for Monthly and Twice per month schedules; null for other
+     * frequencies. For flexible schedules, this is independent of first_pay_period_end_day. A pay day may
+     * fall in the following month.
+     */
+    public PayScheduleShow withFirstPayPeriodPayDay(long firstPayPeriodPayDay) {
+        Utils.checkNotNull(firstPayPeriodPayDay, "firstPayPeriodPayDay");
+        this.firstPayPeriodPayDay = JsonNullable.of(firstPayPeriodPayDay);
+        return this;
+    }
+
+    /**
+     * The first pay day of the month (1-31) for Monthly and Twice per month schedules; null for other
+     * frequencies. For flexible schedules, this is independent of first_pay_period_end_day. A pay day may
+     * fall in the following month.
+     */
+    public PayScheduleShow withFirstPayPeriodPayDay(JsonNullable<Long> firstPayPeriodPayDay) {
+        Utils.checkNotNull(firstPayPeriodPayDay, "firstPayPeriodPayDay");
+        this.firstPayPeriodPayDay = firstPayPeriodPayDay;
+        return this;
+    }
+
+    /**
+     * The second pay day of the month (1-31) for Twice per month schedules; null for other frequencies.
+     * For flexible schedules, this is independent of second_pay_period_end_day. A value of 31 means the
+     * last day of the month; a pay day may fall in the following month.
+     */
+    public PayScheduleShow withSecondPayPeriodPayDay(long secondPayPeriodPayDay) {
+        Utils.checkNotNull(secondPayPeriodPayDay, "secondPayPeriodPayDay");
+        this.secondPayPeriodPayDay = JsonNullable.of(secondPayPeriodPayDay);
+        return this;
+    }
+
+    /**
+     * The second pay day of the month (1-31) for Twice per month schedules; null for other frequencies.
+     * For flexible schedules, this is independent of second_pay_period_end_day. A value of 31 means the
+     * last day of the month; a pay day may fall in the following month.
+     */
+    public PayScheduleShow withSecondPayPeriodPayDay(JsonNullable<Long> secondPayPeriodPayDay) {
+        Utils.checkNotNull(secondPayPeriodPayDay, "secondPayPeriodPayDay");
+        this.secondPayPeriodPayDay = secondPayPeriodPayDay;
+        return this;
+    }
+
+    /**
+     * The last day (1-31) of the first pay period for a flexible Twice per month schedule; null for
+     * regular schedules and other frequencies.
+     */
+    public PayScheduleShow withFirstPayPeriodEndDay(long firstPayPeriodEndDay) {
+        Utils.checkNotNull(firstPayPeriodEndDay, "firstPayPeriodEndDay");
+        this.firstPayPeriodEndDay = JsonNullable.of(firstPayPeriodEndDay);
+        return this;
+    }
+
+    /**
+     * The last day (1-31) of the first pay period for a flexible Twice per month schedule; null for
+     * regular schedules and other frequencies.
+     */
+    public PayScheduleShow withFirstPayPeriodEndDay(JsonNullable<Long> firstPayPeriodEndDay) {
+        Utils.checkNotNull(firstPayPeriodEndDay, "firstPayPeriodEndDay");
+        this.firstPayPeriodEndDay = firstPayPeriodEndDay;
+        return this;
+    }
+
+    /**
+     * The last day (1-31) of the second pay period for a flexible Twice per month schedule; null for
+     * regular schedules and other frequencies. A value of 31 means the last day of the month.
+     */
+    public PayScheduleShow withSecondPayPeriodEndDay(long secondPayPeriodEndDay) {
+        Utils.checkNotNull(secondPayPeriodEndDay, "secondPayPeriodEndDay");
+        this.secondPayPeriodEndDay = JsonNullable.of(secondPayPeriodEndDay);
+        return this;
+    }
+
+    /**
+     * The last day (1-31) of the second pay period for a flexible Twice per month schedule; null for
+     * regular schedules and other frequencies. A value of 31 means the last day of the month.
+     */
+    public PayScheduleShow withSecondPayPeriodEndDay(JsonNullable<Long> secondPayPeriodEndDay) {
+        Utils.checkNotNull(secondPayPeriodEndDay, "secondPayPeriodEndDay");
+        this.secondPayPeriodEndDay = secondPayPeriodEndDay;
         return this;
     }
 
@@ -594,6 +820,28 @@ public class PayScheduleShow {
         return this;
     }
 
+    /**
+     * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay
+     * overtime calculations. Null when no workweek start day has been configured (e.g. legacy pay
+     * schedules).
+     */
+    public PayScheduleShow withWorkweekStartDay(PayScheduleWorkweekStartDay workweekStartDay) {
+        Utils.checkNotNull(workweekStartDay, "workweekStartDay");
+        this.workweekStartDay = JsonNullable.of(workweekStartDay);
+        return this;
+    }
+
+    /**
+     * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay
+     * overtime calculations. Null when no workweek start day has been configured (e.g. legacy pay
+     * schedules).
+     */
+    public PayScheduleShow withWorkweekStartDay(JsonNullable<? extends PayScheduleWorkweekStartDay> workweekStartDay) {
+        Utils.checkNotNull(workweekStartDay, "workweekStartDay");
+        this.workweekStartDay = workweekStartDay;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -611,11 +859,16 @@ public class PayScheduleShow {
             Utils.enhancedDeepEquals(this.anchorEndOfPayPeriod, other.anchorEndOfPayPeriod) &&
             Utils.enhancedDeepEquals(this.day1, other.day1) &&
             Utils.enhancedDeepEquals(this.day2, other.day2) &&
+            Utils.enhancedDeepEquals(this.firstPayPeriodPayDay, other.firstPayPeriodPayDay) &&
+            Utils.enhancedDeepEquals(this.secondPayPeriodPayDay, other.secondPayPeriodPayDay) &&
+            Utils.enhancedDeepEquals(this.firstPayPeriodEndDay, other.firstPayPeriodEndDay) &&
+            Utils.enhancedDeepEquals(this.secondPayPeriodEndDay, other.secondPayPeriodEndDay) &&
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.customName, other.customName) &&
             Utils.enhancedDeepEquals(this.autoPayroll, other.autoPayroll) &&
             Utils.enhancedDeepEquals(this.active, other.active) &&
-            Utils.enhancedDeepEquals(this.autoPayrollEnablementBlockers, other.autoPayrollEnablementBlockers);
+            Utils.enhancedDeepEquals(this.autoPayrollEnablementBlockers, other.autoPayrollEnablementBlockers) &&
+            Utils.enhancedDeepEquals(this.workweekStartDay, other.workweekStartDay);
     }
     
     @Override
@@ -623,8 +876,10 @@ public class PayScheduleShow {
         return Utils.enhancedHash(
             uuid, version, frequency,
             anchorPayDate, anchorEndOfPayPeriod, day1,
-            day2, name, customName,
-            autoPayroll, active, autoPayrollEnablementBlockers);
+            day2, firstPayPeriodPayDay, secondPayPeriodPayDay,
+            firstPayPeriodEndDay, secondPayPeriodEndDay, name,
+            customName, autoPayroll, active,
+            autoPayrollEnablementBlockers, workweekStartDay);
     }
     
     @Override
@@ -637,11 +892,16 @@ public class PayScheduleShow {
                 "anchorEndOfPayPeriod", anchorEndOfPayPeriod,
                 "day1", day1,
                 "day2", day2,
+                "firstPayPeriodPayDay", firstPayPeriodPayDay,
+                "secondPayPeriodPayDay", secondPayPeriodPayDay,
+                "firstPayPeriodEndDay", firstPayPeriodEndDay,
+                "secondPayPeriodEndDay", secondPayPeriodEndDay,
                 "name", name,
                 "customName", customName,
                 "autoPayroll", autoPayroll,
                 "active", active,
-                "autoPayrollEnablementBlockers", autoPayrollEnablementBlockers);
+                "autoPayrollEnablementBlockers", autoPayrollEnablementBlockers,
+                "workweekStartDay", workweekStartDay);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -657,9 +917,19 @@ public class PayScheduleShow {
 
         private Optional<LocalDate> anchorEndOfPayPeriod = Optional.empty();
 
+        @Deprecated
         private JsonNullable<Long> day1 = JsonNullable.undefined();
 
+        @Deprecated
         private JsonNullable<Long> day2 = JsonNullable.undefined();
+
+        private JsonNullable<Long> firstPayPeriodPayDay = JsonNullable.undefined();
+
+        private JsonNullable<Long> secondPayPeriodPayDay = JsonNullable.undefined();
+
+        private JsonNullable<Long> firstPayPeriodEndDay = JsonNullable.undefined();
+
+        private JsonNullable<Long> secondPayPeriodEndDay = JsonNullable.undefined();
 
         private JsonNullable<String> name = JsonNullable.undefined();
 
@@ -670,6 +940,8 @@ public class PayScheduleShow {
         private Optional<Boolean> active = Optional.empty();
 
         private JsonNullable<? extends List<PayScheduleAutoPayrollEnablementBlocker>> autoPayrollEnablementBlockers = JsonNullable.undefined();
+
+        private JsonNullable<? extends PayScheduleWorkweekStartDay> workweekStartDay = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -705,8 +977,9 @@ public class PayScheduleShow {
          * 
          * <p>- `Every week`: Employees are paid weekly.
          * - `Every other week`: Employees are paid bi-weekly (every two weeks).
-         * - `Twice per month`: Employees are paid on two fixed days each month (e.g. 1st and 15th); use day_1
-         * and day_2.
+         * - `Twice per month`: Employees are paid twice per month. The explicit pay-day fields always
+         * represent pay days; explicit period-end fields are populated only for flexible schedules. Legacy
+         * day_1/day_2 retain their historical values.
          * - `Monthly`: Employees are paid once per month; use day_1 for the pay day.
          * - `Quarterly`: Employees are paid every three months.
          * - `Annually`: Employees are paid once per year.
@@ -724,8 +997,9 @@ public class PayScheduleShow {
          * 
          * <p>- `Every week`: Employees are paid weekly.
          * - `Every other week`: Employees are paid bi-weekly (every two weeks).
-         * - `Twice per month`: Employees are paid on two fixed days each month (e.g. 1st and 15th); use day_1
-         * and day_2.
+         * - `Twice per month`: Employees are paid twice per month. The explicit pay-day fields always
+         * represent pay days; explicit period-end fields are populated only for flexible schedules. Legacy
+         * day_1/day_2 retain their historical values.
          * - `Monthly`: Employees are paid once per month; use day_1 for the pay day.
          * - `Quarterly`: Employees are paid every three months.
          * - `Annually`: Employees are paid once per year.
@@ -778,10 +1052,15 @@ public class PayScheduleShow {
 
 
         /**
-         * An integer between 1 and 31 indicating the first day of the month that employees are paid. This
-         * field is only relevant for pay schedules with the "Twice per month" and "Monthly" frequencies. It
-         * will be null for pay schedules with other frequencies.
+         * Legacy field, retained unchanged for compatibility. The first pay day for Monthly and regular Twice
+         * per month schedules, or the first pay-period end day for flexible Twice per month schedules. Prefer
+         * the explicit pay-period fields.
+         * 
+         * <p>Do not combine day_1/day_2 with explicit fields in a request.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
+        @Deprecated
         public Builder day1(long day1) {
             Utils.checkNotNull(day1, "day1");
             this.day1 = JsonNullable.of(day1);
@@ -789,10 +1068,15 @@ public class PayScheduleShow {
         }
 
         /**
-         * An integer between 1 and 31 indicating the first day of the month that employees are paid. This
-         * field is only relevant for pay schedules with the "Twice per month" and "Monthly" frequencies. It
-         * will be null for pay schedules with other frequencies.
+         * Legacy field, retained unchanged for compatibility. The first pay day for Monthly and regular Twice
+         * per month schedules, or the first pay-period end day for flexible Twice per month schedules. Prefer
+         * the explicit pay-period fields.
+         * 
+         * <p>Do not combine day_1/day_2 with explicit fields in a request.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
+        @Deprecated
         public Builder day1(JsonNullable<Long> day1) {
             Utils.checkNotNull(day1, "day1");
             this.day1 = day1;
@@ -801,13 +1085,15 @@ public class PayScheduleShow {
 
 
         /**
-         * An integer between 1 and 31 indicating the second day of the month that employees are paid. This
-         * field is the second pay date for pay schedules with the "Twice per month" frequency. For
-         * semi-monthly pay schedules, this field should be set to 31.
+         * Legacy field, retained unchanged for compatibility. The second pay day for regular Twice per month
+         * schedules, or the second pay-period end day for flexible Twice per month schedules. A value of 31
+         * means the last day of the month.
          * 
-         * <p>For months shorter than 31 days, the second pay date is set to the last day of the month. It will be
-         * null for pay schedules with other frequencies.
+         * <p>Prefer the explicit pay-period fields. Do not combine day_1/day_2 with explicit fields in a request.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
+        @Deprecated
         public Builder day2(long day2) {
             Utils.checkNotNull(day2, "day2");
             this.day2 = JsonNullable.of(day2);
@@ -815,16 +1101,106 @@ public class PayScheduleShow {
         }
 
         /**
-         * An integer between 1 and 31 indicating the second day of the month that employees are paid. This
-         * field is the second pay date for pay schedules with the "Twice per month" frequency. For
-         * semi-monthly pay schedules, this field should be set to 31.
+         * Legacy field, retained unchanged for compatibility. The second pay day for regular Twice per month
+         * schedules, or the second pay-period end day for flexible Twice per month schedules. A value of 31
+         * means the last day of the month.
          * 
-         * <p>For months shorter than 31 days, the second pay date is set to the last day of the month. It will be
-         * null for pay schedules with other frequencies.
+         * <p>Prefer the explicit pay-period fields. Do not combine day_1/day_2 with explicit fields in a request.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
+        @Deprecated
         public Builder day2(JsonNullable<Long> day2) {
             Utils.checkNotNull(day2, "day2");
             this.day2 = day2;
+            return this;
+        }
+
+
+        /**
+         * The first pay day of the month (1-31) for Monthly and Twice per month schedules; null for other
+         * frequencies. For flexible schedules, this is independent of first_pay_period_end_day. A pay day may
+         * fall in the following month.
+         */
+        public Builder firstPayPeriodPayDay(long firstPayPeriodPayDay) {
+            Utils.checkNotNull(firstPayPeriodPayDay, "firstPayPeriodPayDay");
+            this.firstPayPeriodPayDay = JsonNullable.of(firstPayPeriodPayDay);
+            return this;
+        }
+
+        /**
+         * The first pay day of the month (1-31) for Monthly and Twice per month schedules; null for other
+         * frequencies. For flexible schedules, this is independent of first_pay_period_end_day. A pay day may
+         * fall in the following month.
+         */
+        public Builder firstPayPeriodPayDay(JsonNullable<Long> firstPayPeriodPayDay) {
+            Utils.checkNotNull(firstPayPeriodPayDay, "firstPayPeriodPayDay");
+            this.firstPayPeriodPayDay = firstPayPeriodPayDay;
+            return this;
+        }
+
+
+        /**
+         * The second pay day of the month (1-31) for Twice per month schedules; null for other frequencies.
+         * For flexible schedules, this is independent of second_pay_period_end_day. A value of 31 means the
+         * last day of the month; a pay day may fall in the following month.
+         */
+        public Builder secondPayPeriodPayDay(long secondPayPeriodPayDay) {
+            Utils.checkNotNull(secondPayPeriodPayDay, "secondPayPeriodPayDay");
+            this.secondPayPeriodPayDay = JsonNullable.of(secondPayPeriodPayDay);
+            return this;
+        }
+
+        /**
+         * The second pay day of the month (1-31) for Twice per month schedules; null for other frequencies.
+         * For flexible schedules, this is independent of second_pay_period_end_day. A value of 31 means the
+         * last day of the month; a pay day may fall in the following month.
+         */
+        public Builder secondPayPeriodPayDay(JsonNullable<Long> secondPayPeriodPayDay) {
+            Utils.checkNotNull(secondPayPeriodPayDay, "secondPayPeriodPayDay");
+            this.secondPayPeriodPayDay = secondPayPeriodPayDay;
+            return this;
+        }
+
+
+        /**
+         * The last day (1-31) of the first pay period for a flexible Twice per month schedule; null for
+         * regular schedules and other frequencies.
+         */
+        public Builder firstPayPeriodEndDay(long firstPayPeriodEndDay) {
+            Utils.checkNotNull(firstPayPeriodEndDay, "firstPayPeriodEndDay");
+            this.firstPayPeriodEndDay = JsonNullable.of(firstPayPeriodEndDay);
+            return this;
+        }
+
+        /**
+         * The last day (1-31) of the first pay period for a flexible Twice per month schedule; null for
+         * regular schedules and other frequencies.
+         */
+        public Builder firstPayPeriodEndDay(JsonNullable<Long> firstPayPeriodEndDay) {
+            Utils.checkNotNull(firstPayPeriodEndDay, "firstPayPeriodEndDay");
+            this.firstPayPeriodEndDay = firstPayPeriodEndDay;
+            return this;
+        }
+
+
+        /**
+         * The last day (1-31) of the second pay period for a flexible Twice per month schedule; null for
+         * regular schedules and other frequencies. A value of 31 means the last day of the month.
+         */
+        public Builder secondPayPeriodEndDay(long secondPayPeriodEndDay) {
+            Utils.checkNotNull(secondPayPeriodEndDay, "secondPayPeriodEndDay");
+            this.secondPayPeriodEndDay = JsonNullable.of(secondPayPeriodEndDay);
+            return this;
+        }
+
+        /**
+         * The last day (1-31) of the second pay period for a flexible Twice per month schedule; null for
+         * regular schedules and other frequencies. A value of 31 means the last day of the month.
+         */
+        public Builder secondPayPeriodEndDay(JsonNullable<Long> secondPayPeriodEndDay) {
+            Utils.checkNotNull(secondPayPeriodEndDay, "secondPayPeriodEndDay");
+            this.secondPayPeriodEndDay = secondPayPeriodEndDay;
             return this;
         }
 
@@ -947,13 +1323,38 @@ public class PayScheduleShow {
             return this;
         }
 
+
+        /**
+         * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay
+         * overtime calculations. Null when no workweek start day has been configured (e.g. legacy pay
+         * schedules).
+         */
+        public Builder workweekStartDay(PayScheduleWorkweekStartDay workweekStartDay) {
+            Utils.checkNotNull(workweekStartDay, "workweekStartDay");
+            this.workweekStartDay = JsonNullable.of(workweekStartDay);
+            return this;
+        }
+
+        /**
+         * The day of the week that this pay schedule's workweeks start on, used for regular rate of pay
+         * overtime calculations. Null when no workweek start day has been configured (e.g. legacy pay
+         * schedules).
+         */
+        public Builder workweekStartDay(JsonNullable<? extends PayScheduleWorkweekStartDay> workweekStartDay) {
+            Utils.checkNotNull(workweekStartDay, "workweekStartDay");
+            this.workweekStartDay = workweekStartDay;
+            return this;
+        }
+
         public PayScheduleShow build() {
 
             return new PayScheduleShow(
                 uuid, version, frequency,
                 anchorPayDate, anchorEndOfPayPeriod, day1,
-                day2, name, customName,
-                autoPayroll, active, autoPayrollEnablementBlockers);
+                day2, firstPayPeriodPayDay, secondPayPeriodPayDay,
+                firstPayPeriodEndDay, secondPayPeriodEndDay, name,
+                customName, autoPayroll, active,
+                autoPayrollEnablementBlockers, workweekStartDay);
         }
 
     }

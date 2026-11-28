@@ -12,29 +12,26 @@ import com.gusto.embedded_api.models.operations.DeleteV1ContractorsContractorUui
 import com.gusto.embedded_api.operations.DeleteV1ContractorsContractorUuidRehire;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class DeleteV1ContractorsContractorUuidRehireRequestBuilder {
 
-    private String contractorUuid;
     private Optional<? extends DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion>>() {});
+    private String contractorUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public DeleteV1ContractorsContractorUuidRehireRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public DeleteV1ContractorsContractorUuidRehireRequestBuilder contractorUuid(String contractorUuid) {
-        Utils.checkNotNull(contractorUuid, "contractorUuid");
-        this.contractorUuid = contractorUuid;
-        return this;
     }
                 
     public DeleteV1ContractorsContractorUuidRehireRequestBuilder xGustoAPIVersion(DeleteV1ContractorsContractorUuidRehireHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,22 +46,43 @@ public class DeleteV1ContractorsContractorUuidRehireRequestBuilder {
         return this;
     }
 
+    public DeleteV1ContractorsContractorUuidRehireRequestBuilder contractorUuid(String contractorUuid) {
+        Utils.checkNotNull(contractorUuid, "contractorUuid");
+        this.contractorUuid = contractorUuid;
+        return this;
+    }
+                
+    public DeleteV1ContractorsContractorUuidRehireRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1ContractorsContractorUuidRehireRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private DeleteV1ContractorsContractorUuidRehireRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        DeleteV1ContractorsContractorUuidRehireRequest request = new DeleteV1ContractorsContractorUuidRehireRequest(contractorUuid,
-            xGustoAPIVersion);
+        DeleteV1ContractorsContractorUuidRehireRequest request = new DeleteV1ContractorsContractorUuidRehireRequest(xGustoAPIVersion,
+            contractorUuid);
 
         return request;
     }
 
     public CompletableFuture<DeleteV1ContractorsContractorUuidRehireResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<DeleteV1ContractorsContractorUuidRehireRequest, DeleteV1ContractorsContractorUuidRehireResponse> operation
-              = new DeleteV1ContractorsContractorUuidRehire.Async(sdkConfiguration, _headers);
+              = new DeleteV1ContractorsContractorUuidRehire.Async(sdkConfiguration, options, _headers);
         DeleteV1ContractorsContractorUuidRehireRequest request = buildRequest();
 
         return operation.doRequest(request)

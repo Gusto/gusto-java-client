@@ -11,6 +11,8 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.GetEventsResponse;
 import com.gusto.embedded_api_v_2026_06_15.models.operations.GetEventsSecurity;
 import com.gusto.embedded_api_v_2026_06_15.operations.GetEvents;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
+import java.util.Optional;
 
 
 public class Events {
@@ -72,8 +74,36 @@ public class Events {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetEventsResponse get(GetEventsRequest request, GetEventsSecurity security) {
+        return get(request, security, Optional.empty());
+    }
+
+    /**
+     * Get all events
+     * 
+     * <p>Fetch all events, going back up to 30 days, that your partner application has the required scopes
+     * for. Note that a partner does NOT have to have verified webhook subscriptions in order to utilize
+     * this endpoint.
+     * 
+     * <p>📘 System Access Authentication
+     * 
+     * <p>This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP
+     * Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+     * 
+     * <p>scope: `events:read`
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param security The security details to use for authentication.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetEventsResponse get(
+            GetEventsRequest request, GetEventsSecurity security,
+            Optional<Options> options) {
         RequestOperation<GetEventsRequest, GetEventsResponse> operation
-              = new GetEvents.Sync(sdkConfiguration, security, _headers);
+              = new GetEvents.Sync(
+                                    sdkConfiguration, security, options,
+                                    _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

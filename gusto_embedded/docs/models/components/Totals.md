@@ -1,14 +1,12 @@
 # Totals
 
-The subtotals for the payroll.
-
 
 ## Fields
 
-| Field                                          | Type                                           | Required                                       | Description                                    |
-| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| `companyDebit`                                 | *Optional\<String>*                            | :heavy_minus_sign:                             | The total company debit for the payroll.       |
-| `netPayDebit`                                  | *Optional\<String>*                            | :heavy_minus_sign:                             | The total company net pay for the payroll.     |
-| `childSupportDebit`                            | *Optional\<String>*                            | :heavy_minus_sign:                             | The total child support debit for the payroll. |
-| `reimbursementDebit`                           | *Optional\<String>*                            | :heavy_minus_sign:                             | The total reimbursements for the payroll.      |
-| `taxDebit`                                     | *Optional\<String>*                            | :heavy_minus_sign:                             | The total tax debit for the payroll.           |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `amount`                                                                                         | *Optional\<String>*                                                                              | :heavy_minus_sign:                                                                               | The total amount for the group of contractor payments.                                           |
+| `debitAmount`                                                                                    | *Optional\<String>*                                                                              | :heavy_minus_sign:                                                                               | The total debit amount for the group of contractor payments. Sum of wage & reimbursement amount. |
+| `wageAmount`                                                                                     | *Optional\<String>*                                                                              | :heavy_minus_sign:                                                                               | The total wage amount for the group of contractor payments.                                      |
+| `reimbursementAmount`                                                                            | *Optional\<String>*                                                                              | :heavy_minus_sign:                                                                               | The total reimbursement amount for the group of contractor payments.                             |
+| `checkAmount`                                                                                    | *Optional\<String>*                                                                              | :heavy_minus_sign:                                                                               | The total check amount for the group of contractor payments.                                     |

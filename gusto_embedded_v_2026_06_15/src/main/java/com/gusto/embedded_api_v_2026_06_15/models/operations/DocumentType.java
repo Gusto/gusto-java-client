@@ -14,7 +14,8 @@ import java.util.Optional;
  * <p>The type of document being generated
  */
 public enum DocumentType {
-    PRINTABLE_PAYROLL_CHECKS("printable_payroll_checks");
+    PRINTABLE_PAYROLL_CHECKS("printable_payroll_checks"),
+    PRINTABLE_CONTRACTOR_PAYMENT_CHECKS("printable_contractor_payment_checks");
 
     @JsonValue
     private final String value;

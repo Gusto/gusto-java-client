@@ -12,8 +12,10 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.GetCompaniesCompany
 import com.gusto.embedded_api_v_2025_11_15.operations.GetCompaniesCompanyUuidReportTemplatesReportType;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -25,6 +27,7 @@ public class GetCompaniesCompanyUuidReportTemplatesReportTypeRequestBuilder {
                             new TypeReference<Optional<? extends GetCompaniesCompanyUuidReportTemplatesReportTypeHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
     private String reportType;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -55,6 +58,18 @@ public class GetCompaniesCompanyUuidReportTemplatesReportTypeRequestBuilder {
         this.reportType = reportType;
         return this;
     }
+                
+    public GetCompaniesCompanyUuidReportTemplatesReportTypeRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetCompaniesCompanyUuidReportTemplatesReportTypeRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetCompaniesCompanyUuidReportTemplatesReportTypeRequest buildRequest() {
@@ -70,9 +85,12 @@ public class GetCompaniesCompanyUuidReportTemplatesReportTypeRequestBuilder {
     }
 
     public CompletableFuture<GetCompaniesCompanyUuidReportTemplatesReportTypeResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetCompaniesCompanyUuidReportTemplatesReportTypeRequest, GetCompaniesCompanyUuidReportTemplatesReportTypeResponse> operation
-              = new GetCompaniesCompanyUuidReportTemplatesReportType.Async(sdkConfiguration, _headers);
+              = new GetCompaniesCompanyUuidReportTemplatesReportType.Async(sdkConfiguration, options, _headers);
         GetCompaniesCompanyUuidReportTemplatesReportTypeRequest request = buildRequest();
 
         return operation.doRequest(request)

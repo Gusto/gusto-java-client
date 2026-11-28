@@ -12,32 +12,29 @@ import com.gusto.embedded_api.models.operations.GetCompaniesCompanyUuidWireInReq
 import com.gusto.embedded_api.operations.GetCompaniesCompanyUuidWireInRequestUuid;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private Optional<Long> page = Optional.empty();
     private Optional<Long> per = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder xGustoAPIVersion(GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,6 +46,12 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder {
     public GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder xGustoAPIVersion(Optional<? extends GetCompaniesCompanyUuidWireInRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
+    }
+
+    public GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
         return this;
     }
                 
@@ -75,6 +78,18 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder {
         this.per = per;
         return this;
     }
+                
+    public GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetCompaniesCompanyUuidWireInRequestUuidRequest buildRequest() {
@@ -82,8 +97,8 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetCompaniesCompanyUuidWireInRequestUuidRequest request = new GetCompaniesCompanyUuidWireInRequestUuidRequest(companyUuid,
-            xGustoAPIVersion,
+        GetCompaniesCompanyUuidWireInRequestUuidRequest request = new GetCompaniesCompanyUuidWireInRequestUuidRequest(xGustoAPIVersion,
+            companyUuid,
             page,
             per);
 
@@ -91,9 +106,12 @@ public class GetCompaniesCompanyUuidWireInRequestUuidRequestBuilder {
     }
 
     public CompletableFuture<GetCompaniesCompanyUuidWireInRequestUuidResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetCompaniesCompanyUuidWireInRequestUuidRequest, GetCompaniesCompanyUuidWireInRequestUuidResponse> operation
-              = new GetCompaniesCompanyUuidWireInRequestUuid.Async(sdkConfiguration, _headers);
+              = new GetCompaniesCompanyUuidWireInRequestUuid.Async(sdkConfiguration, options, _headers);
         GetCompaniesCompanyUuidWireInRequestUuidRequest request = buildRequest();
 
         return operation.doRequest(request)

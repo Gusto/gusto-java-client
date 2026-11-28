@@ -12,8 +12,10 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.DeleteV1EmployeesEm
 import com.gusto.embedded_api_v_2025_11_15.operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountId;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -25,6 +27,7 @@ public class DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequestBuilder 
                             new TypeReference<Optional<? extends DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private String bankAccountUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -55,6 +58,18 @@ public class DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequestBuilder 
         this.bankAccountUuid = bankAccountUuid;
         return this;
     }
+                
+    public DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest buildRequest() {
@@ -70,9 +85,12 @@ public class DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequestBuilder 
     }
 
     public CompletableFuture<DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest, DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse> operation
-              = new DeleteV1EmployeesEmployeeIdBankAccountsBankAccountId.Async(sdkConfiguration, _headers);
+              = new DeleteV1EmployeesEmployeeIdBankAccountsBankAccountId.Async(sdkConfiguration, options, _headers);
         DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest request = buildRequest();
 
         return operation.doRequest(request)
