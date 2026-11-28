@@ -12,8 +12,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.DeleteV1EmployeesEm
 import com.gusto.embedded_api_v_2026_06_15.operations.DeleteV1EmployeesEmployeeIdTerminations;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -24,6 +26,7 @@ public class DeleteV1EmployeesEmployeeIdTerminationsRequestBuilder {
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion>>() {});
     private String employeeId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class DeleteV1EmployeesEmployeeIdTerminationsRequestBuilder {
         this.employeeId = employeeId;
         return this;
     }
+                
+    public DeleteV1EmployeesEmployeeIdTerminationsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1EmployeesEmployeeIdTerminationsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteV1EmployeesEmployeeIdTerminationsRequest buildRequest() {
@@ -62,9 +77,12 @@ public class DeleteV1EmployeesEmployeeIdTerminationsRequestBuilder {
     }
 
     public CompletableFuture<DeleteV1EmployeesEmployeeIdTerminationsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<DeleteV1EmployeesEmployeeIdTerminationsRequest, DeleteV1EmployeesEmployeeIdTerminationsResponse> operation
-              = new DeleteV1EmployeesEmployeeIdTerminations.Async(sdkConfiguration, _headers);
+              = new DeleteV1EmployeesEmployeeIdTerminations.Async(sdkConfiguration, options, _headers);
         DeleteV1EmployeesEmployeeIdTerminationsRequest request = buildRequest();
 
         return operation.doRequest(request)

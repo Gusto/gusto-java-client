@@ -5,14 +5,14 @@
 ### Available Operations
 
 * [calculateAccruingTimeOffHours](#calculateaccruingtimeoffhours) - Calculate accruing time off hours
-* [get](#get) - Get a time off policy
-* [update](#update) - Update a time off policy
 * [getAll](#getall) - Get all time off policies for a company
 * [create](#create) - Create a time off policy
+* [get](#get) - Get a time off policy
+* [update](#update) - Update a time off policy
+* [deactivate](#deactivate) - Deactivate a time off policy
 * [addEmployees](#addemployees) - Add employees to a time off policy
 * [removeEmployees](#removeemployees) - Remove employees from a time off policy
 * [updateBalance](#updatebalance) - Update employee time off balances
-* [deactivate](#deactivate) - Deactivate a time off policy
 
 ## calculateAccruingTimeOffHours
 
@@ -75,124 +75,6 @@ public class Application {
 ### Response
 
 **[PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse](../../models/operations/PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse.md)**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
-| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
-| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
-
-## get
-
-Get a time off policy
-
-scope: `time_off_policies:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="get-v1-time_off_policies-time_off_policy_uuid" method="get" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api_v_2025_11_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2025_11_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1TimeOffPoliciesTimeOffPolicyUuidResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        GetV1TimeOffPoliciesTimeOffPolicyUuidResponse res = sdk.timeOffPolicies().get()
-                .xGustoAPIVersion(GetV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
-                .timeOffPolicyUuid("<id>")
-                .call();
-
-        if (res.timeOffPolicy().isPresent()) {
-            System.out.println(res.timeOffPolicy().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion>](../../models/operations/GetV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion.md)                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `timeOffPolicyUuid`                                                                                                                                                                                                          | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the time off policy                                                                                                                                                                                              |
-
-### Response
-
-**[GetV1TimeOffPoliciesTimeOffPolicyUuidResponse](../../models/operations/GetV1TimeOffPoliciesTimeOffPolicyUuidResponse.md)**
-
-### Errors
-
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| models/errors/NotFoundErrorObject | 404                               | application/json                  |
-| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
-
-## update
-
-Update a time off policy
-
-scope: `time_off_policies:write`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="put-v1-time_off_policies-time_off_policy_uuid" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api_v_2025_11_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2025_11_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2025_11_15.models.errors.UnprocessableEntityError;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.*;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PutV1TimeOffPoliciesTimeOffPolicyUuidResponse res = sdk.timeOffPolicies().update()
-                .xGustoAPIVersion(PutV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
-                .timeOffPolicyUuid("<id>")
-                .requestBody(PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody.builder()
-                    .version("56d00c178bc7393b2a206ed6a86afcb4")
-                    .name("Vacation Policy")
-                    .build())
-                .call();
-
-        if (res.timeOffPolicy().isPresent()) {
-            System.out.println(res.timeOffPolicy().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion>](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion.md)                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `timeOffPolicyUuid`                                                                                                                                                                                                          | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the time off policy                                                                                                                                                                                              |
-| `requestBody`                                                                                                                                                                                                                | [PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody.md)                                                                                              | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
-
-### Response
-
-**[PutV1TimeOffPoliciesTimeOffPolicyUuidResponse](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidResponse.md)**
 
 ### Errors
 
@@ -323,39 +205,35 @@ public class Application {
 | models/errors/UnprocessableEntityError | 422                                    | application/json                       |
 | models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
 
-## addEmployees
+## get
 
-Add employees to a time off policy. Employees are required to have at least one job to be added to a time off policy. Accepts starting balances for non-unlimited policies
+Get a time off policy
 
-scope: `time_off_policies:write`
+scope: `time_off_policies:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="put-v1-time_off_policies-time_off_policy_uuid-add_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/add_employees" -->
+<!-- UsageSnippet language="java" operationID="get-v1-time_off_policies-time_off_policy_uuid" method="get" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
 ```java
 package hello.world;
 
 import com.gusto.embedded_api_v_2025_11_15.GustoEmbedded;
 import com.gusto.embedded_api_v_2025_11_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2025_11_15.models.errors.UnprocessableEntityError;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.*;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1TimeOffPoliciesTimeOffPolicyUuidResponse;
 import java.lang.Exception;
-import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+    public static void main(String[] args) throws NotFoundErrorObject, Exception {
 
         GustoEmbedded sdk = GustoEmbedded.builder()
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
-        PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse res = sdk.timeOffPolicies().addEmployees()
-                .xGustoAPIVersion(PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
+        GetV1TimeOffPoliciesTimeOffPolicyUuidResponse res = sdk.timeOffPolicies().get()
+                .xGustoAPIVersion(GetV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
                 .timeOffPolicyUuid("<id>")
-                .requestBody(PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody.builder()
-                    .employees(List.of())
-                    .build())
                 .call();
 
         if (res.timeOffPolicy().isPresent()) {
@@ -369,31 +247,29 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVersion>](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVersion.md)                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<GetV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion>](../../models/operations/GetV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion.md)                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `timeOffPolicyUuid`                                                                                                                                                                                                          | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the time off policy                                                                                                                                                                                              |
-| `requestBody`                                                                                                                                                                                                                | [PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody.md)                                                                      | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
-**[PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse.md)**
+**[GetV1TimeOffPoliciesTimeOffPolicyUuidResponse](../../models/operations/GetV1TimeOffPoliciesTimeOffPolicyUuidResponse.md)**
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
-| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
-| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models/errors/NotFoundErrorObject | 404                               | application/json                  |
+| models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
-## removeEmployees
+## update
 
-Remove employees from a time off policy
+Update a time off policy
 
 scope: `time_off_policies:write`
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="put-v1-time_off_policies-time_off_policy_uuid-remove_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/remove_employees" -->
+<!-- UsageSnippet language="java" operationID="put-v1-time_off_policies-time_off_policy_uuid" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
 ```java
 package hello.world;
 
@@ -402,7 +278,6 @@ import com.gusto.embedded_api_v_2025_11_15.models.errors.NotFoundErrorObject;
 import com.gusto.embedded_api_v_2025_11_15.models.errors.UnprocessableEntityError;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.*;
 import java.lang.Exception;
-import java.util.List;
 
 public class Application {
 
@@ -412,11 +287,12 @@ public class Application {
                 .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
             .build();
 
-        PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse res = sdk.timeOffPolicies().removeEmployees()
-                .xGustoAPIVersion(PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
+        PutV1TimeOffPoliciesTimeOffPolicyUuidResponse res = sdk.timeOffPolicies().update()
+                .xGustoAPIVersion(PutV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
                 .timeOffPolicyUuid("<id>")
-                .requestBody(PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody.builder()
-                    .employees(List.of())
+                .requestBody(PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody.builder()
+                    .version("56d00c178bc7393b2a206ed6a86afcb4")
+                    .name("Vacation Policy")
                     .build())
                 .call();
 
@@ -431,75 +307,13 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion>](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion.md)                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion>](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion.md)                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
 | `timeOffPolicyUuid`                                                                                                                                                                                                          | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the time off policy                                                                                                                                                                                              |
-| `requestBody`                                                                                                                                                                                                                | [PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody.md)                                                                | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `requestBody`                                                                                                                                                                                                                | [PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody.md)                                                                                              | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
 
 ### Response
 
-**[PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse.md)**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
-| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
-| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
-
-## updateBalance
-
-Updates time off hours balances for employees for a time off policy.
-
-scope: `time_off_policies:write`
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="put-v1-time_off_policies-time_off_policy_uuid-balance" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/balance" -->
-```java
-package hello.world;
-
-import com.gusto.embedded_api_v_2025_11_15.GustoEmbedded;
-import com.gusto.embedded_api_v_2025_11_15.models.errors.NotFoundErrorObject;
-import com.gusto.embedded_api_v_2025_11_15.models.errors.UnprocessableEntityError;
-import com.gusto.embedded_api_v_2025_11_15.models.operations.*;
-import java.lang.Exception;
-import java.util.List;
-
-public class Application {
-
-    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
-
-        GustoEmbedded sdk = GustoEmbedded.builder()
-                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
-            .build();
-
-        PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse res = sdk.timeOffPolicies().updateBalance()
-                .xGustoAPIVersion(PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
-                .timeOffPolicyUuid("<id>")
-                .requestBody(PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody.builder()
-                    .employees(List.of())
-                    .build())
-                .call();
-
-        if (res.timeOffPolicy().isPresent()) {
-            System.out.println(res.timeOffPolicy().get());
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceHeaderXGustoAPIVersion>](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceHeaderXGustoAPIVersion.md)                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `timeOffPolicyUuid`                                                                                                                                                                                                          | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the time off policy                                                                                                                                                                                              |
-| `requestBody`                                                                                                                                                                                                                | [PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody.md)                                                                                | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
-
-### Response
-
-**[PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse.md)**
+**[PutV1TimeOffPoliciesTimeOffPolicyUuidResponse](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidResponse.md)**
 
 ### Errors
 
@@ -558,6 +372,192 @@ public class Application {
 ### Response
 
 **[PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+
+## addEmployees
+
+Add employees to a time off policy. Employees are required to have at least one job to be added to a time off policy. Accepts starting balances for non-unlimited policies
+
+scope: `time_off_policies:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="put-v1-time_off_policies-time_off_policy_uuid-add_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/add_employees" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api_v_2025_11_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2025_11_15.models.errors.*;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.*;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, ConflictErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse res = sdk.timeOffPolicies().addEmployees()
+                .xGustoAPIVersion(PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
+                .timeOffPolicyUuid("<id>")
+                .requestBody(PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody.builder()
+                    .employees(List.of())
+                    .build())
+                .call();
+
+        if (res.timeOffPolicy().isPresent()) {
+            System.out.println(res.timeOffPolicy().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVersion>](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVersion.md)                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `timeOffPolicyUuid`                                                                                                                                                                                                          | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the time off policy                                                                                                                                                                                              |
+| `requestBody`                                                                                                                                                                                                                | [PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody.md)                                                                      | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/ConflictErrorObject      | 409                                    | application/json                       |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+
+## removeEmployees
+
+Remove employees from a time off policy
+
+scope: `time_off_policies:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="put-v1-time_off_policies-time_off_policy_uuid-remove_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/remove_employees" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api_v_2025_11_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2025_11_15.models.errors.*;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.*;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, ConflictErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse res = sdk.timeOffPolicies().removeEmployees()
+                .xGustoAPIVersion(PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
+                .timeOffPolicyUuid("<id>")
+                .requestBody(PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody.builder()
+                    .employees(List.of())
+                    .build())
+                .call();
+
+        if (res.timeOffPolicy().isPresent()) {
+            System.out.println(res.timeOffPolicy().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion>](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion.md)                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `timeOffPolicyUuid`                                                                                                                                                                                                          | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the time off policy                                                                                                                                                                                              |
+| `requestBody`                                                                                                                                                                                                                | [PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody.md)                                                                | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/NotFoundErrorObject      | 404                                    | application/json                       |
+| models/errors/ConflictErrorObject      | 409                                    | application/json                       |
+| models/errors/UnprocessableEntityError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+
+## updateBalance
+
+Updates time off hours balances for employees for a time off policy.
+
+scope: `time_off_policies:write`
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="put-v1-time_off_policies-time_off_policy_uuid-balance" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/balance" -->
+```java
+package hello.world;
+
+import com.gusto.embedded_api_v_2025_11_15.GustoEmbedded;
+import com.gusto.embedded_api_v_2025_11_15.models.errors.NotFoundErrorObject;
+import com.gusto.embedded_api_v_2025_11_15.models.errors.UnprocessableEntityError;
+import com.gusto.embedded_api_v_2025_11_15.models.operations.*;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws NotFoundErrorObject, UnprocessableEntityError, Exception {
+
+        GustoEmbedded sdk = GustoEmbedded.builder()
+                .companyAccessAuth(System.getenv().getOrDefault("COMPANY_ACCESS_AUTH", ""))
+            .build();
+
+        PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse res = sdk.timeOffPolicies().updateBalance()
+                .xGustoAPIVersion(PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceHeaderXGustoAPIVersion.TWO_THOUSAND_AND_TWENTY_FIVE_MINUS11_MINUS15)
+                .timeOffPolicyUuid("<id>")
+                .requestBody(PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody.builder()
+                    .employees(List.of())
+                    .build())
+                .call();
+
+        if (res.timeOffPolicy().isPresent()) {
+            System.out.println(res.timeOffPolicy().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [Optional\<PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceHeaderXGustoAPIVersion>](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceHeaderXGustoAPIVersion.md)                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `timeOffPolicyUuid`                                                                                                                                                                                                          | *String*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the time off policy                                                                                                                                                                                              |
+| `requestBody`                                                                                                                                                                                                                | [PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody.md)                                                                                | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+
+### Response
+
+**[PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse](../../models/operations/PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse.md)**
 
 ### Errors
 

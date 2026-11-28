@@ -23,6 +23,7 @@ import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.Hook.AfterErrorContextImpl;
 import com.gusto.embedded_api_v_2025_11_15.utils.Hook.AfterSuccessContextImpl;
 import com.gusto.embedded_api_v_2025_11_15.utils.Hook.BeforeRequestContextImpl;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.SerializedBody;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils.JsonShape;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
@@ -33,6 +34,8 @@ import java.lang.String;
 import java.lang.Throwable;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
@@ -44,14 +47,20 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements {
         final SDKConfiguration sdkConfiguration;
         final String baseUrl;
         final SecuritySource securitySource;
+        final Optional<Duration> timeout;
         final HTTPClient client;
         final Headers _headers;
 
-        public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
+        public Base(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
             this._headers =_headers;
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
+            options
+                    .ifPresent(o -> o.validate(List.of(Options.Option.TIMEOUT)));
+            this.timeout = options.flatMap(Options::timeout).or(sdkConfiguration::timeout);
             this.client = this.sdkConfiguration.client();
         }
 
@@ -91,7 +100,8 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements {
                     this.baseUrl,
                     "/v1/companies/{company_id}/payrolls/{id}/partner_disbursements",
                     request, null);
-            HTTPRequest req = new HTTPRequest(url, "PATCH");
+            HTTPRequest req = new HTTPRequest(url, "PATCH")
+                    .timeout(this.timeout);
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
@@ -115,7 +125,16 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements {
     public static class Sync extends Base
             implements RequestOperation<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest, PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> {
         public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
-            super(sdkConfiguration, _headers);
+            this(sdkConfiguration, Optional.empty(),
+                    _headers);
+        }
+
+        public Sync(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
+            super(
+                  sdkConfiguration, options,
+                  _headers);
         }
 
         private HttpRequest onBuildRequest(PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request) throws Exception {
@@ -202,9 +221,17 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements {
     }
     public static class Async extends Base
             implements AsyncRequestOperation<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest, com.gusto.embedded_api_v_2025_11_15.models.operations.async.PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> {
-
         public Async(SDKConfiguration sdkConfiguration, Headers _headers) {
-            super(sdkConfiguration, _headers);
+            this(sdkConfiguration, Optional.empty(),
+                    _headers);
+        }
+
+        public Async(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
+            super(
+                  sdkConfiguration, options,
+                  _headers);
         }
 
         private CompletableFuture<HttpRequest> onBuildRequest(PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request) throws Exception {

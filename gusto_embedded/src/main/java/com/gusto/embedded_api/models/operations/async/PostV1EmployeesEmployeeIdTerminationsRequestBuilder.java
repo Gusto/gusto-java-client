@@ -13,8 +13,10 @@ import com.gusto.embedded_api.models.operations.PostV1EmployeesEmployeeIdTermina
 import com.gusto.embedded_api.operations.PostV1EmployeesEmployeeIdTerminations;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PostV1EmployeesEmployeeIdTerminationsRequestBuilder {
                             new TypeReference<Optional<? extends PostV1EmployeesEmployeeIdTerminationsHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private PostV1EmployeesEmployeeIdTerminationsRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PostV1EmployeesEmployeeIdTerminationsRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PostV1EmployeesEmployeeIdTerminationsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1EmployeesEmployeeIdTerminationsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1EmployeesEmployeeIdTerminationsRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PostV1EmployeesEmployeeIdTerminationsRequestBuilder {
     }
 
     public CompletableFuture<PostV1EmployeesEmployeeIdTerminationsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1EmployeesEmployeeIdTerminationsRequest, PostV1EmployeesEmployeeIdTerminationsResponse> operation
-              = new PostV1EmployeesEmployeeIdTerminations.Async(sdkConfiguration, _headers);
+              = new PostV1EmployeesEmployeeIdTerminations.Async(sdkConfiguration, options, _headers);
         PostV1EmployeesEmployeeIdTerminationsRequest request = buildRequest();
 
         return operation.doRequest(request)

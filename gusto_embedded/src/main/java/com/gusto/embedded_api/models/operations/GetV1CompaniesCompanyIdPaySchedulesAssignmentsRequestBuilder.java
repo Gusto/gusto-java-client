@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1CompaniesCompanyIdPaySchedulesAssignments;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequestBuilder {
@@ -21,6 +23,7 @@ public class GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequestBuilder {
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1CompaniesCompanyIdPaySchedulesAssignmentsHeaderXGustoAPIVersion>>() {});
     private String companyId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -45,6 +48,18 @@ public class GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequestBuilder {
         this.companyId = companyId;
         return this;
     }
+                
+    public GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest buildRequest() {
@@ -59,9 +74,12 @@ public class GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequestBuilder {
     }
 
     public GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest, GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> operation
-              = new GetV1CompaniesCompanyIdPaySchedulesAssignments.Sync(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdPaySchedulesAssignments.Sync(sdkConfiguration, options, _headers);
         GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

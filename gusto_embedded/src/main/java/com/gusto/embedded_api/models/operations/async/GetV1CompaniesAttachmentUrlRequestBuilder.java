@@ -12,8 +12,10 @@ import com.gusto.embedded_api.models.operations.GetV1CompaniesAttachmentUrlReque
 import com.gusto.embedded_api.operations.GetV1CompaniesAttachmentUrl;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -25,6 +27,7 @@ public class GetV1CompaniesAttachmentUrlRequestBuilder {
                             new TypeReference<Optional<? extends GetV1CompaniesAttachmentUrlHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private String companyAttachmentUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -55,6 +58,18 @@ public class GetV1CompaniesAttachmentUrlRequestBuilder {
         this.companyAttachmentUuid = companyAttachmentUuid;
         return this;
     }
+                
+    public GetV1CompaniesAttachmentUrlRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompaniesAttachmentUrlRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1CompaniesAttachmentUrlRequest buildRequest() {
@@ -70,9 +85,12 @@ public class GetV1CompaniesAttachmentUrlRequestBuilder {
     }
 
     public CompletableFuture<GetV1CompaniesAttachmentUrlResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1CompaniesAttachmentUrlRequest, GetV1CompaniesAttachmentUrlResponse> operation
-              = new GetV1CompaniesAttachmentUrl.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesAttachmentUrl.Async(sdkConfiguration, options, _headers);
         GetV1CompaniesAttachmentUrlRequest request = buildRequest();
 
         return operation.doRequest(request)

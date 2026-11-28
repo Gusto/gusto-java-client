@@ -13,8 +13,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.PutV1TimeOffPolicie
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1TimeOffPoliciesTimeOffPolicyUuid;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder {
                             new TypeReference<Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion>>() {});
     private String timeOffPolicyUuid;
     private PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1TimeOffPoliciesTimeOffPolicyUuidRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder {
     }
 
     public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidResponse> operation
-              = new PutV1TimeOffPoliciesTimeOffPolicyUuid.Async(sdkConfiguration, _headers);
+              = new PutV1TimeOffPoliciesTimeOffPolicyUuid.Async(sdkConfiguration, options, _headers);
         PutV1TimeOffPoliciesTimeOffPolicyUuidRequest request = buildRequest();
 
         return operation.doRequest(request)

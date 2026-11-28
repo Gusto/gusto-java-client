@@ -12,8 +12,10 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeeFormPd
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1EmployeeFormPdf;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -25,6 +27,7 @@ public class GetV1EmployeeFormPdfRequestBuilder {
                             new TypeReference<Optional<? extends GetV1EmployeeFormPdfHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private String formId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -55,6 +58,18 @@ public class GetV1EmployeeFormPdfRequestBuilder {
         this.formId = formId;
         return this;
     }
+                
+    public GetV1EmployeeFormPdfRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1EmployeeFormPdfRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1EmployeeFormPdfRequest buildRequest() {
@@ -70,9 +85,12 @@ public class GetV1EmployeeFormPdfRequestBuilder {
     }
 
     public CompletableFuture<GetV1EmployeeFormPdfResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1EmployeeFormPdfRequest, GetV1EmployeeFormPdfResponse> operation
-              = new GetV1EmployeeFormPdf.Async(sdkConfiguration, _headers);
+              = new GetV1EmployeeFormPdf.Async(sdkConfiguration, options, _headers);
         GetV1EmployeeFormPdfRequest request = buildRequest();
 
         return operation.doRequest(request)

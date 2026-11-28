@@ -13,8 +13,10 @@ import com.gusto.embedded_api.models.operations.PostV1CompaniesCompanyIdContract
 import com.gusto.embedded_api.operations.PostV1CompaniesCompanyIdContractorPayments;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder {
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private ContractorPaymentBody contractorPaymentBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder {
         this.contractorPaymentBody = contractorPaymentBody;
         return this;
     }
+                
+    public PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1CompaniesCompanyIdContractorPaymentsRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PostV1CompaniesCompanyIdContractorPaymentsRequestBuilder {
     }
 
     public CompletableFuture<PostV1CompaniesCompanyIdContractorPaymentsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1CompaniesCompanyIdContractorPaymentsRequest, PostV1CompaniesCompanyIdContractorPaymentsResponse> operation
-              = new PostV1CompaniesCompanyIdContractorPayments.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdContractorPayments.Async(sdkConfiguration, options, _headers);
         PostV1CompaniesCompanyIdContractorPaymentsRequest request = buildRequest();
 
         return operation.doRequest(request)

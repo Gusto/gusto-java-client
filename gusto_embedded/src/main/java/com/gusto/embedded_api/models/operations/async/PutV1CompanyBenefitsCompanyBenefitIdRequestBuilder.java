@@ -13,8 +13,10 @@ import com.gusto.embedded_api.models.operations.PutV1CompanyBenefitsCompanyBenef
 import com.gusto.embedded_api.operations.PutV1CompanyBenefitsCompanyBenefitId;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequestBuilder {
                             new TypeReference<Optional<? extends PutV1CompanyBenefitsCompanyBenefitIdHeaderXGustoAPIVersion>>() {});
     private String companyBenefitId;
     private CompanyBenefitUpdateRequest companyBenefitUpdateRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequestBuilder {
         this.companyBenefitUpdateRequest = companyBenefitUpdateRequest;
         return this;
     }
+                
+    public PutV1CompanyBenefitsCompanyBenefitIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1CompanyBenefitsCompanyBenefitIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1CompanyBenefitsCompanyBenefitIdRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PutV1CompanyBenefitsCompanyBenefitIdRequestBuilder {
     }
 
     public CompletableFuture<PutV1CompanyBenefitsCompanyBenefitIdResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PutV1CompanyBenefitsCompanyBenefitIdRequest, PutV1CompanyBenefitsCompanyBenefitIdResponse> operation
-              = new PutV1CompanyBenefitsCompanyBenefitId.Async(sdkConfiguration, _headers);
+              = new PutV1CompanyBenefitsCompanyBenefitId.Async(sdkConfiguration, options, _headers);
         PutV1CompanyBenefitsCompanyBenefitIdRequest request = buildRequest();
 
         return operation.doRequest(request)

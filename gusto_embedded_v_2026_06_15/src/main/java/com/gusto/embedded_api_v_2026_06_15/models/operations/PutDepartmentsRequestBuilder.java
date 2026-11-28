@@ -11,29 +11,26 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.DepartmentUpdateReq
 import com.gusto.embedded_api_v_2026_06_15.operations.PutDepartments;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutDepartmentsRequestBuilder {
 
-    private String departmentUuid;
     private Optional<? extends PutDepartmentsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutDepartmentsHeaderXGustoAPIVersion>>() {});
+    private String departmentUuid;
     private DepartmentUpdateRequestBody departmentUpdateRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutDepartmentsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutDepartmentsRequestBuilder departmentUuid(String departmentUuid) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
-        this.departmentUuid = departmentUuid;
-        return this;
     }
                 
     public PutDepartmentsRequestBuilder xGustoAPIVersion(PutDepartmentsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,9 +45,27 @@ public class PutDepartmentsRequestBuilder {
         return this;
     }
 
+    public PutDepartmentsRequestBuilder departmentUuid(String departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = departmentUuid;
+        return this;
+    }
+
     public PutDepartmentsRequestBuilder departmentUpdateRequestBody(DepartmentUpdateRequestBody departmentUpdateRequestBody) {
         Utils.checkNotNull(departmentUpdateRequestBody, "departmentUpdateRequestBody");
         this.departmentUpdateRequestBody = departmentUpdateRequestBody;
+        return this;
+    }
+                
+    public PutDepartmentsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutDepartmentsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -60,17 +75,20 @@ public class PutDepartmentsRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutDepartmentsRequest request = new PutDepartmentsRequest(departmentUuid,
-            xGustoAPIVersion,
+        PutDepartmentsRequest request = new PutDepartmentsRequest(xGustoAPIVersion,
+            departmentUuid,
             departmentUpdateRequestBody);
 
         return request;
     }
 
     public PutDepartmentsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutDepartmentsRequest, PutDepartmentsResponse> operation
-              = new PutDepartments.Sync(sdkConfiguration, _headers);
+              = new PutDepartments.Sync(sdkConfiguration, options, _headers);
         PutDepartmentsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

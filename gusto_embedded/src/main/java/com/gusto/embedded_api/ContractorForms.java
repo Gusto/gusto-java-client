@@ -27,6 +27,7 @@ import com.gusto.embedded_api.operations.GetV1ContractorFormPdf;
 import com.gusto.embedded_api.operations.GetV1ContractorForms;
 import com.gusto.embedded_api.operations.PostV1SandboxGenerate1099;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -79,7 +80,7 @@ public class ContractorForms {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1ContractorFormsResponse list(String contractorUuid) {
-        return list(Optional.empty(), contractorUuid);
+        return list(Optional.empty(), contractorUuid, Optional.empty());
     }
 
     /**
@@ -97,6 +98,27 @@ public class ContractorForms {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1ContractorFormsResponse list(Optional<? extends GetV1ContractorFormsHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid) {
+        return list(xGustoAPIVersion, contractorUuid, Optional.empty());
+    }
+
+    /**
+     * Get all contractor forms
+     * 
+     * <p>Get a list of all contractor's forms
+     * 
+     * <p>scope: `contractor_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorUuid The UUID of the contractor
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1ContractorFormsResponse list(
+            Optional<? extends GetV1ContractorFormsHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
+            Optional<Options> options) {
         GetV1ContractorFormsRequest request =
             GetV1ContractorFormsRequest
                 .builder()
@@ -104,7 +126,7 @@ public class ContractorForms {
                 .contractorUuid(contractorUuid)
                 .build();
         RequestOperation<GetV1ContractorFormsRequest, GetV1ContractorFormsResponse> operation
-              = new GetV1ContractorForms.Sync(sdkConfiguration, _headers);
+              = new GetV1ContractorForms.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -138,7 +160,8 @@ public class ContractorForms {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1ContractorFormResponse get(String contractorUuid, String formId) {
-        return get(Optional.empty(), contractorUuid, formId);
+        return get(Optional.empty(), contractorUuid, formId,
+            Optional.empty());
     }
 
     /**
@@ -159,6 +182,29 @@ public class ContractorForms {
     public GetV1ContractorFormResponse get(
             Optional<? extends GetV1ContractorFormHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
             String formId) {
+        return get(xGustoAPIVersion, contractorUuid, formId,
+            Optional.empty());
+    }
+
+    /**
+     * Get a contractor form
+     * 
+     * <p>Get a contractor form
+     * 
+     * <p>scope: `contractor_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorUuid The UUID of the contractor
+     * @param formId The UUID of the form
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1ContractorFormResponse get(
+            Optional<? extends GetV1ContractorFormHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
+            String formId, Optional<Options> options) {
         GetV1ContractorFormRequest request =
             GetV1ContractorFormRequest
                 .builder()
@@ -167,7 +213,7 @@ public class ContractorForms {
                 .formId(formId)
                 .build();
         RequestOperation<GetV1ContractorFormRequest, GetV1ContractorFormResponse> operation
-              = new GetV1ContractorForm.Sync(sdkConfiguration, _headers);
+              = new GetV1ContractorForm.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -201,7 +247,8 @@ public class ContractorForms {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1ContractorFormPdfResponse getPdf(String contractorUuid, String formId) {
-        return getPdf(Optional.empty(), contractorUuid, formId);
+        return getPdf(Optional.empty(), contractorUuid, formId,
+            Optional.empty());
     }
 
     /**
@@ -222,6 +269,29 @@ public class ContractorForms {
     public GetV1ContractorFormPdfResponse getPdf(
             Optional<? extends GetV1ContractorFormPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
             String formId) {
+        return getPdf(xGustoAPIVersion, contractorUuid, formId,
+            Optional.empty());
+    }
+
+    /**
+     * Get the contractor form pdf
+     * 
+     * <p>Get the link to the form PDF
+     * 
+     * <p>scope: `contractor_forms:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorUuid The UUID of the contractor
+     * @param formId The UUID of the form
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1ContractorFormPdfResponse getPdf(
+            Optional<? extends GetV1ContractorFormPdfHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
+            String formId, Optional<Options> options) {
         GetV1ContractorFormPdfRequest request =
             GetV1ContractorFormPdfRequest
                 .builder()
@@ -230,7 +300,7 @@ public class ContractorForms {
                 .formId(formId)
                 .build();
         RequestOperation<GetV1ContractorFormPdfRequest, GetV1ContractorFormPdfResponse> operation
-              = new GetV1ContractorFormPdf.Sync(sdkConfiguration, _headers);
+              = new GetV1ContractorFormPdf.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -271,7 +341,7 @@ public class ContractorForms {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1SandboxGenerate1099Response generate1099(PostV1SandboxGenerate1099RequestBody requestBody) {
-        return generate1099(Optional.empty(), requestBody);
+        return generate1099(Optional.empty(), requestBody, Optional.empty());
     }
 
     /**
@@ -293,6 +363,31 @@ public class ContractorForms {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1SandboxGenerate1099Response generate1099(Optional<? extends PostV1SandboxGenerate1099HeaderXGustoAPIVersion> xGustoAPIVersion, PostV1SandboxGenerate1099RequestBody requestBody) {
+        return generate1099(xGustoAPIVersion, requestBody, Optional.empty());
+    }
+
+    /**
+     * Generate a 1099 form [DEMO]
+     * 
+     * <p>&gt; 🚧 Demo action
+     * &gt;
+     * &gt; This action is only available in the Demo environment
+     * 
+     * <p>Generates a 1099 document for testing purposes.
+     * 
+     * <p>scope: `contractors:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1SandboxGenerate1099Response generate1099(
+            Optional<? extends PostV1SandboxGenerate1099HeaderXGustoAPIVersion> xGustoAPIVersion, PostV1SandboxGenerate1099RequestBody requestBody,
+            Optional<Options> options) {
         PostV1SandboxGenerate1099Request request =
             PostV1SandboxGenerate1099Request
                 .builder()
@@ -300,7 +395,7 @@ public class ContractorForms {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<PostV1SandboxGenerate1099Request, PostV1SandboxGenerate1099Response> operation
-              = new PostV1SandboxGenerate1099.Sync(sdkConfiguration, _headers);
+              = new PostV1SandboxGenerate1099.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -12,8 +12,10 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1ExternalPayrol
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1ExternalPayrollCalculateTaxes;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -25,6 +27,7 @@ public class GetV1ExternalPayrollCalculateTaxesRequestBuilder {
                             new TypeReference<Optional<? extends GetV1ExternalPayrollCalculateTaxesHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
     private String externalPayrollId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -55,6 +58,18 @@ public class GetV1ExternalPayrollCalculateTaxesRequestBuilder {
         this.externalPayrollId = externalPayrollId;
         return this;
     }
+                
+    public GetV1ExternalPayrollCalculateTaxesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1ExternalPayrollCalculateTaxesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1ExternalPayrollCalculateTaxesRequest buildRequest() {
@@ -70,9 +85,12 @@ public class GetV1ExternalPayrollCalculateTaxesRequestBuilder {
     }
 
     public CompletableFuture<GetV1ExternalPayrollCalculateTaxesResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1ExternalPayrollCalculateTaxesRequest, GetV1ExternalPayrollCalculateTaxesResponse> operation
-              = new GetV1ExternalPayrollCalculateTaxes.Async(sdkConfiguration, _headers);
+              = new GetV1ExternalPayrollCalculateTaxes.Async(sdkConfiguration, options, _headers);
         GetV1ExternalPayrollCalculateTaxesRequest request = buildRequest();
 
         return operation.doRequest(request)

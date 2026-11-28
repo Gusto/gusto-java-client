@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1SalaryEstimatesOccupations;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1SalaryEstimatesOccupationsRequestBuilder {
@@ -22,6 +24,7 @@ public class GetV1SalaryEstimatesOccupationsRequestBuilder {
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion>>() {});
     private String search;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class GetV1SalaryEstimatesOccupationsRequestBuilder {
         this.search = search;
         return this;
     }
+                
+    public GetV1SalaryEstimatesOccupationsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1SalaryEstimatesOccupationsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1SalaryEstimatesOccupationsRequest buildRequest() {
@@ -66,9 +81,14 @@ public class GetV1SalaryEstimatesOccupationsRequestBuilder {
     }
 
     public GetV1SalaryEstimatesOccupationsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1SalaryEstimatesOccupationsRequest, GetV1SalaryEstimatesOccupationsResponse> operation
-              = new GetV1SalaryEstimatesOccupations.Sync(sdkConfiguration, security, _headers);
+              = new GetV1SalaryEstimatesOccupations.Sync(
+                                    sdkConfiguration, security, options,
+                                    _headers);
         GetV1SalaryEstimatesOccupationsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

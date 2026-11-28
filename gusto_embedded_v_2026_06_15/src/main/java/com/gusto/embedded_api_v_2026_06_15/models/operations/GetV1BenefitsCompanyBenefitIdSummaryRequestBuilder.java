@@ -8,11 +8,15 @@ import static com.gusto.embedded_api_v_2026_06_15.operations.Operations.RequestO
 import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1BenefitsCompanyBenefitIdSummary;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetV1BenefitsCompanyBenefitIdSummaryRequestBuilder {
 
     private GetV1BenefitsCompanyBenefitIdSummaryRequest request;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -25,11 +29,26 @@ public class GetV1BenefitsCompanyBenefitIdSummaryRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public GetV1BenefitsCompanyBenefitIdSummaryRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1BenefitsCompanyBenefitIdSummaryRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public GetV1BenefitsCompanyBenefitIdSummaryResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1BenefitsCompanyBenefitIdSummaryRequest, GetV1BenefitsCompanyBenefitIdSummaryResponse> operation
-              = new GetV1BenefitsCompanyBenefitIdSummary.Sync(sdkConfiguration, _headers);
+              = new GetV1BenefitsCompanyBenefitIdSummary.Sync(sdkConfiguration, options, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

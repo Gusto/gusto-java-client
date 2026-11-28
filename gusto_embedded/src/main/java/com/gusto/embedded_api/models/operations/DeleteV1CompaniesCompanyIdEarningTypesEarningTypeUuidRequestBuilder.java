@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuid;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder {
@@ -22,6 +24,7 @@ public class DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder
                             new TypeReference<Optional<? extends DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private String earningTypeUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder
         this.earningTypeUuid = earningTypeUuid;
         return this;
     }
+                
+    public DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest buildRequest() {
@@ -67,9 +82,12 @@ public class DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder
     }
 
     public DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest, DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse> operation
-              = new DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuid.Sync(sdkConfiguration, _headers);
+              = new DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuid.Sync(sdkConfiguration, options, _headers);
         DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

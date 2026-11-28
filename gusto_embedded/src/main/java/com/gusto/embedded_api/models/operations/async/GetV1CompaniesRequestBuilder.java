@@ -12,29 +12,26 @@ import com.gusto.embedded_api.models.operations.GetV1CompaniesRequest;
 import com.gusto.embedded_api.operations.GetV1Companies;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompaniesRequestBuilder {
 
-    private String companyId;
     private Optional<? extends GetV1CompaniesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1CompaniesHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompaniesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1CompaniesRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public GetV1CompaniesRequestBuilder xGustoAPIVersion(GetV1CompaniesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,22 +46,43 @@ public class GetV1CompaniesRequestBuilder {
         return this;
     }
 
+    public GetV1CompaniesRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+                
+    public GetV1CompaniesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompaniesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1CompaniesRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompaniesRequest request = new GetV1CompaniesRequest(companyId,
-            xGustoAPIVersion);
+        GetV1CompaniesRequest request = new GetV1CompaniesRequest(xGustoAPIVersion,
+            companyId);
 
         return request;
     }
 
     public CompletableFuture<GetV1CompaniesResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1CompaniesRequest, GetV1CompaniesResponse> operation
-              = new GetV1Companies.Async(sdkConfiguration, _headers);
+              = new GetV1Companies.Async(sdkConfiguration, options, _headers);
         GetV1CompaniesRequest request = buildRequest();
 
         return operation.doRequest(request)

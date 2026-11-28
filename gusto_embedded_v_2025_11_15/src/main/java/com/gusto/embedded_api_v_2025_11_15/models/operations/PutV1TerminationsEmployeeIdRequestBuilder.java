@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.PutV1TerminationsEmployeeId;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1TerminationsEmployeeIdRequestBuilder {
@@ -22,6 +24,7 @@ public class PutV1TerminationsEmployeeIdRequestBuilder {
                             new TypeReference<Optional<? extends PutV1TerminationsEmployeeIdHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private PutV1TerminationsEmployeeIdRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class PutV1TerminationsEmployeeIdRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PutV1TerminationsEmployeeIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1TerminationsEmployeeIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1TerminationsEmployeeIdRequest buildRequest() {
@@ -67,9 +82,12 @@ public class PutV1TerminationsEmployeeIdRequestBuilder {
     }
 
     public PutV1TerminationsEmployeeIdResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1TerminationsEmployeeIdRequest, PutV1TerminationsEmployeeIdResponse> operation
-              = new PutV1TerminationsEmployeeId.Sync(sdkConfiguration, _headers);
+              = new PutV1TerminationsEmployeeId.Sync(sdkConfiguration, options, _headers);
         PutV1TerminationsEmployeeIdRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

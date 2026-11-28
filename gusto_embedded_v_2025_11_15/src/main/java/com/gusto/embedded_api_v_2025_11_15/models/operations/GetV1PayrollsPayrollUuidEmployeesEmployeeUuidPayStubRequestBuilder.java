@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStub;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder {
@@ -22,6 +24,7 @@ public class GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder 
                             new TypeReference<Optional<? extends GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion>>() {});
     private String payrollId;
     private String employeeId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder 
         this.employeeId = employeeId;
         return this;
     }
+                
+    public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest buildRequest() {
@@ -67,9 +82,12 @@ public class GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestBuilder 
     }
 
     public GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest, GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse> operation
-              = new GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStub.Sync(sdkConfiguration, _headers);
+              = new GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStub.Sync(sdkConfiguration, options, _headers);
         GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

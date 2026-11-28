@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1EmployeeForms;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1EmployeeFormsRequestBuilder {
@@ -21,6 +23,7 @@ public class GetV1EmployeeFormsRequestBuilder {
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1EmployeeFormsHeaderXGustoAPIVersion>>() {});
     private String employeeId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -45,6 +48,18 @@ public class GetV1EmployeeFormsRequestBuilder {
         this.employeeId = employeeId;
         return this;
     }
+                
+    public GetV1EmployeeFormsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1EmployeeFormsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1EmployeeFormsRequest buildRequest() {
@@ -59,9 +74,12 @@ public class GetV1EmployeeFormsRequestBuilder {
     }
 
     public GetV1EmployeeFormsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1EmployeeFormsRequest, GetV1EmployeeFormsResponse> operation
-              = new GetV1EmployeeForms.Sync(sdkConfiguration, _headers);
+              = new GetV1EmployeeForms.Sync(sdkConfiguration, options, _headers);
         GetV1EmployeeFormsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

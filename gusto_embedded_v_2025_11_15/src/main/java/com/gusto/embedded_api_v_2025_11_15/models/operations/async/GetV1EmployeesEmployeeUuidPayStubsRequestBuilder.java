@@ -12,9 +12,11 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1EmployeesEmplo
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1EmployeesEmployeeUuidPayStubs;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -27,6 +29,7 @@ public class GetV1EmployeesEmployeeUuidPayStubsRequestBuilder {
     private String employeeId;
     private Optional<Long> page = Optional.empty();
     private Optional<Long> per = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -75,6 +78,18 @@ public class GetV1EmployeesEmployeeUuidPayStubsRequestBuilder {
         this.per = per;
         return this;
     }
+                
+    public GetV1EmployeesEmployeeUuidPayStubsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1EmployeesEmployeeUuidPayStubsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1EmployeesEmployeeUuidPayStubsRequest buildRequest() {
@@ -91,9 +106,12 @@ public class GetV1EmployeesEmployeeUuidPayStubsRequestBuilder {
     }
 
     public CompletableFuture<GetV1EmployeesEmployeeUuidPayStubsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1EmployeesEmployeeUuidPayStubsRequest, GetV1EmployeesEmployeeUuidPayStubsResponse> operation
-              = new GetV1EmployeesEmployeeUuidPayStubs.Async(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeUuidPayStubs.Async(sdkConfiguration, options, _headers);
         GetV1EmployeesEmployeeUuidPayStubsRequest request = buildRequest();
 
         return operation.doRequest(request)

@@ -11,8 +11,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.I9AuthorizationDocu
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1EmployeesEmployeeIdI9AuthorizationDocuments;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBuilder {
@@ -23,6 +25,7 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBuilder {
                             new TypeReference<Optional<? extends PutV1EmployeesEmployeeIdI9AuthorizationDocumentsHeaderXGustoAPIVersion>>() {});
     private String employeeId;
     private I9AuthorizationDocumentsRequestBody i9AuthorizationDocumentsRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBuilder {
         this.i9AuthorizationDocumentsRequestBody = i9AuthorizationDocumentsRequestBody;
         return this;
     }
+                
+    public PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBuilder {
     }
 
     public PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest, PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse> operation
-              = new PutV1EmployeesEmployeeIdI9AuthorizationDocuments.Sync(sdkConfiguration, _headers);
+              = new PutV1EmployeesEmployeeIdI9AuthorizationDocuments.Sync(sdkConfiguration, options, _headers);
         PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

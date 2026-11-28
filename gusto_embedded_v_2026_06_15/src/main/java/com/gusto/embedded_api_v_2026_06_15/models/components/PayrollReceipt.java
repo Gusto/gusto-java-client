@@ -106,7 +106,7 @@ public class PayrollReceipt {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("employee_compensations")
-    private Optional<? extends List<PayrollReceiptEmployeeCompensations>> employeeCompensations;
+    private Optional<? extends List<EmployeeCompensations>> employeeCompensations;
 
     /**
      * The licensed payroll processor
@@ -129,7 +129,7 @@ public class PayrollReceipt {
             @JsonProperty("liability_of_licensee") Optional<String> liabilityOfLicensee,
             @JsonProperty("totals") Optional<? extends PayrollReceiptTotals> totals,
             @JsonProperty("taxes") Optional<? extends List<Taxes>> taxes,
-            @JsonProperty("employee_compensations") Optional<? extends List<PayrollReceiptEmployeeCompensations>> employeeCompensations,
+            @JsonProperty("employee_compensations") Optional<? extends List<EmployeeCompensations>> employeeCompensations,
             @JsonProperty("licensee") Optional<? extends PayrollReceiptLicensee> licensee) {
         Utils.checkNotNull(payrollUuid, "payrollUuid");
         Utils.checkNotNull(companyUuid, "companyUuid");
@@ -270,8 +270,8 @@ public class PayrollReceipt {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PayrollReceiptEmployeeCompensations>> employeeCompensations() {
-        return (Optional<List<PayrollReceiptEmployeeCompensations>>) employeeCompensations;
+    public Optional<List<EmployeeCompensations>> employeeCompensations() {
+        return (Optional<List<EmployeeCompensations>>) employeeCompensations;
     }
 
     /**
@@ -515,7 +515,7 @@ public class PayrollReceipt {
     /**
      * An array of employee compensations and withholdings for this payroll
      */
-    public PayrollReceipt withEmployeeCompensations(List<PayrollReceiptEmployeeCompensations> employeeCompensations) {
+    public PayrollReceipt withEmployeeCompensations(List<EmployeeCompensations> employeeCompensations) {
         Utils.checkNotNull(employeeCompensations, "employeeCompensations");
         this.employeeCompensations = Optional.ofNullable(employeeCompensations);
         return this;
@@ -525,7 +525,7 @@ public class PayrollReceipt {
     /**
      * An array of employee compensations and withholdings for this payroll
      */
-    public PayrollReceipt withEmployeeCompensations(Optional<? extends List<PayrollReceiptEmployeeCompensations>> employeeCompensations) {
+    public PayrollReceipt withEmployeeCompensations(Optional<? extends List<EmployeeCompensations>> employeeCompensations) {
         Utils.checkNotNull(employeeCompensations, "employeeCompensations");
         this.employeeCompensations = employeeCompensations;
         return this;
@@ -632,7 +632,7 @@ public class PayrollReceipt {
 
         private Optional<? extends List<Taxes>> taxes = Optional.empty();
 
-        private Optional<? extends List<PayrollReceiptEmployeeCompensations>> employeeCompensations = Optional.empty();
+        private Optional<? extends List<EmployeeCompensations>> employeeCompensations = Optional.empty();
 
         private Optional<? extends PayrollReceiptLicensee> licensee = Optional.empty();
 
@@ -868,7 +868,7 @@ public class PayrollReceipt {
         /**
          * An array of employee compensations and withholdings for this payroll
          */
-        public Builder employeeCompensations(List<PayrollReceiptEmployeeCompensations> employeeCompensations) {
+        public Builder employeeCompensations(List<EmployeeCompensations> employeeCompensations) {
             Utils.checkNotNull(employeeCompensations, "employeeCompensations");
             this.employeeCompensations = Optional.ofNullable(employeeCompensations);
             return this;
@@ -877,7 +877,7 @@ public class PayrollReceipt {
         /**
          * An array of employee compensations and withholdings for this payroll
          */
-        public Builder employeeCompensations(Optional<? extends List<PayrollReceiptEmployeeCompensations>> employeeCompensations) {
+        public Builder employeeCompensations(Optional<? extends List<EmployeeCompensations>> employeeCompensations) {
             Utils.checkNotNull(employeeCompensations, "employeeCompensations");
             this.employeeCompensations = employeeCompensations;
             return this;

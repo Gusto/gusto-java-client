@@ -8,11 +8,15 @@ import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1CompanyForms;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetV1CompanyFormsRequestBuilder {
 
     private GetV1CompanyFormsRequest request;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -25,11 +29,26 @@ public class GetV1CompanyFormsRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public GetV1CompanyFormsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompanyFormsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public GetV1CompanyFormsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1CompanyFormsRequest, GetV1CompanyFormsResponse> operation
-              = new GetV1CompanyForms.Sync(sdkConfiguration, _headers);
+              = new GetV1CompanyForms.Sync(sdkConfiguration, options, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

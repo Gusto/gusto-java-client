@@ -11,8 +11,10 @@ import com.gusto.embedded_api.models.components.ExternalPayrollUpdateRequest;
 import com.gusto.embedded_api.operations.PutV1ExternalPayroll;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1ExternalPayrollRequestBuilder {
@@ -24,6 +26,7 @@ public class PutV1ExternalPayrollRequestBuilder {
     private String companyUuid;
     private String externalPayrollId;
     private ExternalPayrollUpdateRequest externalPayrollUpdateRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -60,6 +63,18 @@ public class PutV1ExternalPayrollRequestBuilder {
         this.externalPayrollUpdateRequest = externalPayrollUpdateRequest;
         return this;
     }
+                
+    public PutV1ExternalPayrollRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1ExternalPayrollRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1ExternalPayrollRequest buildRequest() {
@@ -76,9 +91,12 @@ public class PutV1ExternalPayrollRequestBuilder {
     }
 
     public PutV1ExternalPayrollResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1ExternalPayrollRequest, PutV1ExternalPayrollResponse> operation
-              = new PutV1ExternalPayroll.Sync(sdkConfiguration, _headers);
+              = new PutV1ExternalPayroll.Sync(sdkConfiguration, options, _headers);
         PutV1ExternalPayrollRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

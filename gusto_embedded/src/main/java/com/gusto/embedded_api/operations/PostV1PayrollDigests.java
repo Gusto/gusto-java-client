@@ -24,6 +24,7 @@ import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.Hook.AfterErrorContextImpl;
 import com.gusto.embedded_api.utils.Hook.AfterSuccessContextImpl;
 import com.gusto.embedded_api.utils.Hook.BeforeRequestContextImpl;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.SerializedBody;
 import com.gusto.embedded_api.utils.Utils.JsonShape;
 import com.gusto.embedded_api.utils.Utils;
@@ -35,6 +36,8 @@ import java.lang.String;
 import java.lang.Throwable;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
@@ -47,18 +50,22 @@ public class PostV1PayrollDigests {
         final String baseUrl;
         final PostV1PayrollDigestsSecurity security;
         final SecuritySource securitySource;
+        final Optional<Duration> timeout;
         final HTTPClient client;
         final Headers _headers;
 
         public Base(
                 SDKConfiguration sdkConfiguration, PostV1PayrollDigestsSecurity security,
-                Headers _headers) {
+                Optional<Options> options, Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
             this._headers =_headers;
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.security = security;
             // hooks will be passed method level security only
             this.securitySource = SecuritySource.of(security);
+            options
+                    .ifPresent(o -> o.validate(List.of(Options.Option.TIMEOUT)));
+            this.timeout = options.flatMap(Options::timeout).or(sdkConfiguration::timeout);
             this.client = this.sdkConfiguration.client();
         }
 
@@ -96,7 +103,8 @@ public class PostV1PayrollDigests {
             String url = Utils.generateURL(
                     this.baseUrl,
                     "/v1/payroll_digests");
-            HTTPRequest req = new HTTPRequest(url, "POST");
+            HTTPRequest req = new HTTPRequest(url, "POST")
+                    .timeout(this.timeout);
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
@@ -125,9 +133,16 @@ public class PostV1PayrollDigests {
         public Sync(
                 SDKConfiguration sdkConfiguration, PostV1PayrollDigestsSecurity security,
                 Headers _headers) {
+            this(sdkConfiguration, security,
+                    Optional.empty(), _headers);
+        }
+
+        public Sync(
+                SDKConfiguration sdkConfiguration, PostV1PayrollDigestsSecurity security,
+                Optional<Options> options, Headers _headers) {
             super(
                   sdkConfiguration, security,
-                  _headers);
+                  options, _headers);
         }
 
         private HttpRequest onBuildRequest(PostV1PayrollDigestsRequest request) throws Exception {
@@ -214,13 +229,19 @@ public class PostV1PayrollDigests {
     }
     public static class Async extends Base
             implements AsyncRequestOperation<PostV1PayrollDigestsRequest, com.gusto.embedded_api.models.operations.async.PostV1PayrollDigestsResponse> {
-
         public Async(
                 SDKConfiguration sdkConfiguration, PostV1PayrollDigestsSecurity security,
                 Headers _headers) {
+            this(sdkConfiguration, security,
+                    Optional.empty(), _headers);
+        }
+
+        public Async(
+                SDKConfiguration sdkConfiguration, PostV1PayrollDigestsSecurity security,
+                Optional<Options> options, Headers _headers) {
             super(
                   sdkConfiguration, security,
-                  _headers);
+                  options, _headers);
         }
 
         private CompletableFuture<HttpRequest> onBuildRequest(PostV1PayrollDigestsRequest request) throws Exception {

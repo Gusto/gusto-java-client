@@ -11,8 +11,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.CompanyAttachmentCr
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1CompaniesAttachment;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostV1CompaniesAttachmentRequestBuilder {
@@ -23,6 +25,7 @@ public class PostV1CompaniesAttachmentRequestBuilder {
                             new TypeReference<Optional<? extends PostV1CompaniesAttachmentHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private CompanyAttachmentCreateRequestBody companyAttachmentCreateRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PostV1CompaniesAttachmentRequestBuilder {
         this.companyAttachmentCreateRequestBody = companyAttachmentCreateRequestBody;
         return this;
     }
+                
+    public PostV1CompaniesAttachmentRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompaniesAttachmentRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1CompaniesAttachmentRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PostV1CompaniesAttachmentRequestBuilder {
     }
 
     public PostV1CompaniesAttachmentResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostV1CompaniesAttachmentRequest, PostV1CompaniesAttachmentResponse> operation
-              = new PostV1CompaniesAttachment.Sync(sdkConfiguration, _headers);
+              = new PostV1CompaniesAttachment.Sync(sdkConfiguration, options, _headers);
         PostV1CompaniesAttachmentRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

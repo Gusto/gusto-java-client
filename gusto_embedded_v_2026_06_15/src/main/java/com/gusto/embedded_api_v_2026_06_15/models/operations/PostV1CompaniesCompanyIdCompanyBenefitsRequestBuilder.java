@@ -11,8 +11,10 @@ import com.gusto.embedded_api_v_2026_06_15.models.components.CompanyBenefitCreat
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1CompaniesCompanyIdCompanyBenefits;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder {
@@ -23,6 +25,7 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder {
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyIdCompanyBenefitsHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private CompanyBenefitCreateRequest companyBenefitCreateRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder {
         this.companyBenefitCreateRequest = companyBenefitCreateRequest;
         return this;
     }
+                
+    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1CompaniesCompanyIdCompanyBenefitsRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PostV1CompaniesCompanyIdCompanyBenefitsRequestBuilder {
     }
 
     public PostV1CompaniesCompanyIdCompanyBenefitsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostV1CompaniesCompanyIdCompanyBenefitsRequest, PostV1CompaniesCompanyIdCompanyBenefitsResponse> operation
-              = new PostV1CompaniesCompanyIdCompanyBenefits.Sync(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdCompanyBenefits.Sync(sdkConfiguration, options, _headers);
         PostV1CompaniesCompanyIdCompanyBenefitsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

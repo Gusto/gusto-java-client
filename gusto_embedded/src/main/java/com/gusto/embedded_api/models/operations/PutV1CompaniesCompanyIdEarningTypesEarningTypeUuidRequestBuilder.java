@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.PutV1CompaniesCompanyIdEarningTypesEarningTypeUuid;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder {
@@ -23,6 +25,7 @@ public class PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder {
     private String companyId;
     private String earningTypeUuid;
     private PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -59,6 +62,18 @@ public class PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest buildRequest() {
@@ -75,9 +90,12 @@ public class PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBuilder {
     }
 
     public PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest, PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse> operation
-              = new PutV1CompaniesCompanyIdEarningTypesEarningTypeUuid.Sync(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyIdEarningTypesEarningTypeUuid.Sync(sdkConfiguration, options, _headers);
         PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

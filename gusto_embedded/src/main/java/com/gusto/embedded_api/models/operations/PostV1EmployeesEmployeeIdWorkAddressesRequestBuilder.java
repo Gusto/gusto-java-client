@@ -10,29 +10,26 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.PostV1EmployeesEmployeeIdWorkAddresses;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostV1EmployeesEmployeeIdWorkAddressesRequestBuilder {
 
-    private String employeeId;
     private Optional<? extends PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
     private PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1EmployeesEmployeeIdWorkAddressesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1EmployeesEmployeeIdWorkAddressesRequestBuilder employeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
     }
                 
     public PostV1EmployeesEmployeeIdWorkAddressesRequestBuilder xGustoAPIVersion(PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -47,9 +44,27 @@ public class PostV1EmployeesEmployeeIdWorkAddressesRequestBuilder {
         return this;
     }
 
+    public PostV1EmployeesEmployeeIdWorkAddressesRequestBuilder employeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
+        return this;
+    }
+
     public PostV1EmployeesEmployeeIdWorkAddressesRequestBuilder requestBody(PostV1EmployeesEmployeeIdWorkAddressesRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
+        return this;
+    }
+                
+    public PostV1EmployeesEmployeeIdWorkAddressesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1EmployeesEmployeeIdWorkAddressesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -59,17 +74,20 @@ public class PostV1EmployeesEmployeeIdWorkAddressesRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1EmployeesEmployeeIdWorkAddressesRequest request = new PostV1EmployeesEmployeeIdWorkAddressesRequest(employeeId,
-            xGustoAPIVersion,
+        PostV1EmployeesEmployeeIdWorkAddressesRequest request = new PostV1EmployeesEmployeeIdWorkAddressesRequest(xGustoAPIVersion,
+            employeeId,
             requestBody);
 
         return request;
     }
 
     public PostV1EmployeesEmployeeIdWorkAddressesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostV1EmployeesEmployeeIdWorkAddressesRequest, PostV1EmployeesEmployeeIdWorkAddressesResponse> operation
-              = new PostV1EmployeesEmployeeIdWorkAddresses.Sync(sdkConfiguration, _headers);
+              = new PostV1EmployeesEmployeeIdWorkAddresses.Sync(sdkConfiguration, options, _headers);
         PostV1EmployeesEmployeeIdWorkAddressesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

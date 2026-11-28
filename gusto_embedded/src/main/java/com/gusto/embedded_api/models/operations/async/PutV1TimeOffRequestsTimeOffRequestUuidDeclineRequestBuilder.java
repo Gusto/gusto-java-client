@@ -13,8 +13,10 @@ import com.gusto.embedded_api.models.operations.PutV1TimeOffRequestsTimeOffReque
 import com.gusto.embedded_api.operations.PutV1TimeOffRequestsTimeOffRequestUuidDecline;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequestBuilder {
                             new TypeReference<Optional<? extends PutV1TimeOffRequestsTimeOffRequestUuidDeclineHeaderXGustoAPIVersion>>() {});
     private String timeOffRequestUuid;
     private PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequestBuilder {
     }
 
     public CompletableFuture<PutV1TimeOffRequestsTimeOffRequestUuidDeclineResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequest, PutV1TimeOffRequestsTimeOffRequestUuidDeclineResponse> operation
-              = new PutV1TimeOffRequestsTimeOffRequestUuidDecline.Async(sdkConfiguration, _headers);
+              = new PutV1TimeOffRequestsTimeOffRequestUuidDecline.Async(sdkConfiguration, options, _headers);
         PutV1TimeOffRequestsTimeOffRequestUuidDeclineRequest request = buildRequest();
 
         return operation.doRequest(request)

@@ -11,8 +11,10 @@ import com.gusto.embedded_api.models.components.PayrollGrossUpRequest;
 import com.gusto.embedded_api.operations.PostPayrollsGrossUpPayrollUuid;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostPayrollsGrossUpPayrollUuidRequestBuilder {
@@ -23,6 +25,7 @@ public class PostPayrollsGrossUpPayrollUuidRequestBuilder {
                             new TypeReference<Optional<? extends PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion>>() {});
     private String payrollUuid;
     private PayrollGrossUpRequest payrollGrossUpRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PostPayrollsGrossUpPayrollUuidRequestBuilder {
         this.payrollGrossUpRequest = payrollGrossUpRequest;
         return this;
     }
+                
+    public PostPayrollsGrossUpPayrollUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostPayrollsGrossUpPayrollUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostPayrollsGrossUpPayrollUuidRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PostPayrollsGrossUpPayrollUuidRequestBuilder {
     }
 
     public PostPayrollsGrossUpPayrollUuidResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostPayrollsGrossUpPayrollUuidRequest, PostPayrollsGrossUpPayrollUuidResponse> operation
-              = new PostPayrollsGrossUpPayrollUuid.Sync(sdkConfiguration, _headers);
+              = new PostPayrollsGrossUpPayrollUuid.Sync(sdkConfiguration, options, _headers);
         PostPayrollsGrossUpPayrollUuidRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

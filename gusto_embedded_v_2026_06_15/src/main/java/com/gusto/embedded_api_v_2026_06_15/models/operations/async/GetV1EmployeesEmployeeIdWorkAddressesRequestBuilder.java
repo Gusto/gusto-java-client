@@ -12,29 +12,26 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1EmployeesEmplo
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1EmployeesEmployeeIdWorkAddresses;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetV1EmployeesEmployeeIdWorkAddressesRequestBuilder {
 
-    private String employeeId;
     private Optional<? extends GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion>>() {});
+    private String employeeId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1EmployeesEmployeeIdWorkAddressesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1EmployeesEmployeeIdWorkAddressesRequestBuilder employeeId(String employeeId) {
-        Utils.checkNotNull(employeeId, "employeeId");
-        this.employeeId = employeeId;
-        return this;
     }
                 
     public GetV1EmployeesEmployeeIdWorkAddressesRequestBuilder xGustoAPIVersion(GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,22 +46,43 @@ public class GetV1EmployeesEmployeeIdWorkAddressesRequestBuilder {
         return this;
     }
 
+    public GetV1EmployeesEmployeeIdWorkAddressesRequestBuilder employeeId(String employeeId) {
+        Utils.checkNotNull(employeeId, "employeeId");
+        this.employeeId = employeeId;
+        return this;
+    }
+                
+    public GetV1EmployeesEmployeeIdWorkAddressesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1EmployeesEmployeeIdWorkAddressesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1EmployeesEmployeeIdWorkAddressesRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1EmployeesEmployeeIdWorkAddressesRequest request = new GetV1EmployeesEmployeeIdWorkAddressesRequest(employeeId,
-            xGustoAPIVersion);
+        GetV1EmployeesEmployeeIdWorkAddressesRequest request = new GetV1EmployeesEmployeeIdWorkAddressesRequest(xGustoAPIVersion,
+            employeeId);
 
         return request;
     }
 
     public CompletableFuture<GetV1EmployeesEmployeeIdWorkAddressesResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1EmployeesEmployeeIdWorkAddressesRequest, GetV1EmployeesEmployeeIdWorkAddressesResponse> operation
-              = new GetV1EmployeesEmployeeIdWorkAddresses.Async(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeIdWorkAddresses.Async(sdkConfiguration, options, _headers);
         GetV1EmployeesEmployeeIdWorkAddressesRequest request = buildRequest();
 
         return operation.doRequest(request)

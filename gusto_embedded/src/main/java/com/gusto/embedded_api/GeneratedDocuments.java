@@ -5,13 +5,14 @@ package com.gusto.embedded_api;
 
 import static com.gusto.embedded_api.operations.Operations.RequestOperation;
 
-import com.gusto.embedded_api.models.components.VersionHeader;
 import com.gusto.embedded_api.models.operations.DocumentType;
+import com.gusto.embedded_api.models.operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion;
 import com.gusto.embedded_api.models.operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest;
 import com.gusto.embedded_api.models.operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidRequestBuilder;
 import com.gusto.embedded_api.models.operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse;
 import com.gusto.embedded_api.operations.GetV1GeneratedDocumentsDocumentTypeRequestUuid;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -67,7 +68,8 @@ public class GeneratedDocuments {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse get(DocumentType documentType, String requestUuid) {
-        return get(documentType, requestUuid, Optional.empty());
+        return get(Optional.empty(), documentType, requestUuid,
+            Optional.empty());
     }
 
     /**
@@ -80,24 +82,48 @@ public class GeneratedDocuments {
      * 
      * <p>If set, this operation will use Security#companyAccessAuth from the global security.
      * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      * @param documentType The type of document being generated
      * @param requestUuid The UUID of the request to generate a document. Generate document endpoints return request_uuids to be used with the GET generated document endpoint.
-     * @param xGustoAPIVersion 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse get(
-            DocumentType documentType, String requestUuid,
-            Optional<? extends VersionHeader> xGustoAPIVersion) {
+            Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, DocumentType documentType,
+            String requestUuid) {
+        return get(xGustoAPIVersion, documentType, requestUuid,
+            Optional.empty());
+    }
+
+    /**
+     * Get a generated document
+     * 
+     * <p>Get a document given the request_uuid. The response will include the generation request's status and
+     * urls to the document. A list of urls is returned as certain document types require several urls.
+     * 
+     * <p>scope: `generated_documents:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param documentType The type of document being generated
+     * @param requestUuid The UUID of the request to generate a document. Generate document endpoints return request_uuids to be used with the GET generated document endpoint.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse get(
+            Optional<? extends GetV1GeneratedDocumentsDocumentTypeRequestUuidHeaderXGustoAPIVersion> xGustoAPIVersion, DocumentType documentType,
+            String requestUuid, Optional<Options> options) {
         GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest request =
             GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest
                 .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
                 .documentType(documentType)
                 .requestUuid(requestUuid)
-                .xGustoAPIVersion(xGustoAPIVersion)
                 .build();
         RequestOperation<GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest, GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse> operation
-              = new GetV1GeneratedDocumentsDocumentTypeRequestUuid.Sync(sdkConfiguration, _headers);
+              = new GetV1GeneratedDocumentsDocumentTypeRequestUuid.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

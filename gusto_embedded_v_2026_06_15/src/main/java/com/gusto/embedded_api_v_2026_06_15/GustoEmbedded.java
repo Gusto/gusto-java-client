@@ -9,8 +9,10 @@ import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.RetryConfig;
 import com.gusto.embedded_api_v_2026_06_15.utils.SpeakeasyHTTPClient;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
+import java.lang.IllegalArgumentException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -67,6 +69,9 @@ public class GustoEmbedded {
 
 
     private final CompanyBenefits companyBenefits;
+
+
+    private final Reports reports;
 
 
     private final CompanyAttachments companyAttachments;
@@ -147,9 +152,6 @@ public class GustoEmbedded {
     private final EmployeeEmployments employeeEmployments;
 
 
-    private final Reports reports;
-
-
     private final Events events;
 
 
@@ -189,7 +191,16 @@ public class GustoEmbedded {
     private final Locations locations;
 
 
+    private final MemberPortalInvitations memberPortalInvitations;
+
+
     private final PaySchedules paySchedules;
+
+
+    private final PayrollCancellations payrollCancellations;
+
+
+    private final PayrollDigests payrollDigests;
 
 
     private final TimeOffPolicies timeOffPolicies;
@@ -204,10 +215,19 @@ public class GustoEmbedded {
     private final Reimbursements reimbursements;
 
 
+    private final ReverseWireTransactions reverseWireTransactions;
+
+
     private final SalaryEstimates salaryEstimates;
 
 
     private final Signatories signatories;
+
+
+    private final TaxFilings taxFilings;
+
+
+    private final TaxPayments taxPayments;
 
 
     private final TimeOffRequests timeOffRequests;
@@ -216,13 +236,13 @@ public class GustoEmbedded {
     private final Introspection introspection;
 
 
+    private final TreasuryTippedOccupationCodes treasuryTippedOccupationCodes;
+
+
     private final Webhooks webhooks;
 
 
     private final WireInRequests wireInRequests;
-
-
-    private final PayrollDigests payrollDigests;
 
 
     public AchTransactions achTransactions() {
@@ -237,6 +257,11 @@ public class GustoEmbedded {
 
     public CompanyBenefits companyBenefits() {
         return companyBenefits;
+    }
+
+
+    public Reports reports() {
+        return reports;
     }
 
 
@@ -370,11 +395,6 @@ public class GustoEmbedded {
     }
 
 
-    public Reports reports() {
-        return reports;
-    }
-
-
     public Events events() {
         return events;
     }
@@ -440,8 +460,23 @@ public class GustoEmbedded {
     }
 
 
+    public MemberPortalInvitations memberPortalInvitations() {
+        return memberPortalInvitations;
+    }
+
+
     public PaySchedules paySchedules() {
         return paySchedules;
+    }
+
+
+    public PayrollCancellations payrollCancellations() {
+        return payrollCancellations;
+    }
+
+
+    public PayrollDigests payrollDigests() {
+        return payrollDigests;
     }
 
 
@@ -465,6 +500,11 @@ public class GustoEmbedded {
     }
 
 
+    public ReverseWireTransactions reverseWireTransactions() {
+        return reverseWireTransactions;
+    }
+
+
     public SalaryEstimates salaryEstimates() {
         return salaryEstimates;
     }
@@ -472,6 +512,16 @@ public class GustoEmbedded {
 
     public Signatories signatories() {
         return signatories;
+    }
+
+
+    public TaxFilings taxFilings() {
+        return taxFilings;
+    }
+
+
+    public TaxPayments taxPayments() {
+        return taxPayments;
     }
 
 
@@ -485,6 +535,11 @@ public class GustoEmbedded {
     }
 
 
+    public TreasuryTippedOccupationCodes treasuryTippedOccupationCodes() {
+        return treasuryTippedOccupationCodes;
+    }
+
+
     public Webhooks webhooks() {
         return webhooks;
     }
@@ -492,11 +547,6 @@ public class GustoEmbedded {
 
     public WireInRequests wireInRequests() {
         return wireInRequests;
-    }
-
-
-    public PayrollDigests payrollDigests() {
-        return payrollDigests;
     }
     private final AsyncGustoEmbedded asyncSDK;
 
@@ -595,6 +645,23 @@ public class GustoEmbedded {
         }
 
         /**
+         * Sets the default timeout for each request attempt. A per-call {@code timeout}
+         * takes precedence; this takes precedence over {@code x-speakeasy-timeout}.
+         * It bounds the whole call, including reading the response body.
+         *
+         * @param timeout The timeout to apply to every request; must be positive.
+         * @return The builder instance.
+         */
+        public Builder timeout(Duration timeout) {
+            Utils.checkNotNull(timeout, "timeout");
+            if (timeout.isZero() || timeout.isNegative()) {
+                throw new IllegalArgumentException("timeout must be positive");
+            }
+            this.sdkConfiguration.setTimeout(Optional.of(timeout));
+            return this;
+        }
+
+        /**
          * Enables debug logging for HTTP requests and responses, including JSON body content.
          * <p>
          * Convenience method that calls {@link HTTPClient#enableDebugLogging(boolean)}.
@@ -649,11 +716,12 @@ public class GustoEmbedded {
         return new Builder();
     }
 
-    public GustoEmbedded(SDKConfiguration sdkConfiguration) {
+    private GustoEmbedded(SDKConfiguration sdkConfiguration) {
         sdkConfiguration.initialize();
         this.achTransactions = new AchTransactions(sdkConfiguration);
         this.companies = new Companies(sdkConfiguration);
         this.companyBenefits = new CompanyBenefits(sdkConfiguration);
+        this.reports = new Reports(sdkConfiguration);
         this.companyAttachments = new CompanyAttachments(sdkConfiguration);
         this.companyAttachment = new CompanyAttachment(sdkConfiguration);
         this.bankAccounts = new BankAccounts(sdkConfiguration);
@@ -680,7 +748,6 @@ public class GustoEmbedded {
         this.employeeTaxSetup = new EmployeeTaxSetup(sdkConfiguration);
         this.employeeForms = new EmployeeForms(sdkConfiguration);
         this.employeeEmployments = new EmployeeEmployments(sdkConfiguration);
-        this.reports = new Reports(sdkConfiguration);
         this.events = new Events(sdkConfiguration);
         this.externalPayrolls = new ExternalPayrolls(sdkConfiguration);
         this.flows = new Flows(sdkConfiguration);
@@ -694,18 +761,24 @@ public class GustoEmbedded {
         this.informationRequests = new InformationRequests(sdkConfiguration);
         this.invoices = new Invoices(sdkConfiguration);
         this.locations = new Locations(sdkConfiguration);
+        this.memberPortalInvitations = new MemberPortalInvitations(sdkConfiguration);
         this.paySchedules = new PaySchedules(sdkConfiguration);
+        this.payrollCancellations = new PayrollCancellations(sdkConfiguration);
+        this.payrollDigests = new PayrollDigests(sdkConfiguration);
         this.timeOffPolicies = new TimeOffPolicies(sdkConfiguration);
         this.peopleBatches = new PeopleBatches(sdkConfiguration);
         this.recoveryCases = new RecoveryCases(sdkConfiguration);
         this.reimbursements = new Reimbursements(sdkConfiguration);
+        this.reverseWireTransactions = new ReverseWireTransactions(sdkConfiguration);
         this.salaryEstimates = new SalaryEstimates(sdkConfiguration);
         this.signatories = new Signatories(sdkConfiguration);
+        this.taxFilings = new TaxFilings(sdkConfiguration);
+        this.taxPayments = new TaxPayments(sdkConfiguration);
         this.timeOffRequests = new TimeOffRequests(sdkConfiguration);
         this.introspection = new Introspection(sdkConfiguration);
+        this.treasuryTippedOccupationCodes = new TreasuryTippedOccupationCodes(sdkConfiguration);
         this.webhooks = new Webhooks(sdkConfiguration);
         this.wireInRequests = new WireInRequests(sdkConfiguration);
-        this.payrollDigests = new PayrollDigests(sdkConfiguration);
         sdkConfiguration = sdkConfiguration.hooks().sdkInit(sdkConfiguration);
         this.asyncSDK = new AsyncGustoEmbedded(this, sdkConfiguration);
     }

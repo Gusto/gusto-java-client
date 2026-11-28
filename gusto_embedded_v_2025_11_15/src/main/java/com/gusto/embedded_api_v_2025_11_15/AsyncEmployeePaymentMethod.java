@@ -33,6 +33,7 @@ import com.gusto.embedded_api_v_2025_11_15.operations.PostV1EmployeesEmployeeIdB
 import com.gusto.embedded_api_v_2025_11_15.operations.PutV1EmployeesEmployeeIdBankAccounts;
 import com.gusto.embedded_api_v_2025_11_15.operations.PutV1EmployeesEmployeeIdPaymentMethod;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -89,7 +90,9 @@ public class AsyncEmployeePaymentMethod {
      * @return {@code CompletableFuture<PostV1EmployeesEmployeeIdBankAccountsResponse>} - The async response
      */
     public CompletableFuture<PostV1EmployeesEmployeeIdBankAccountsResponse> create(String employeeId, EmployeeBankAccountRequest employeeBankAccountRequest) {
-        return create(Optional.empty(), employeeId, employeeBankAccountRequest);
+        return create(
+                Optional.empty(), employeeId, employeeBankAccountRequest,
+                Optional.empty());
     }
 
     /**
@@ -110,6 +113,30 @@ public class AsyncEmployeePaymentMethod {
     public CompletableFuture<PostV1EmployeesEmployeeIdBankAccountsResponse> create(
             Optional<? extends PostV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             EmployeeBankAccountRequest employeeBankAccountRequest) {
+        return create(
+                xGustoAPIVersion, employeeId, employeeBankAccountRequest,
+                Optional.empty());
+    }
+
+    /**
+     * Create an employee bank account
+     * 
+     * <p>Creates an employee bank account. An employee can have multiple bank accounts. Note that creating an
+     * employee bank account will also update the employee's payment method.
+     * 
+     * <p>scope: `employee_payment_methods:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param employeeBankAccountRequest Request body for creating or updating an employee bank account. Send these fields as top-level JSON keys (the API wraps them server-side).
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1EmployeesEmployeeIdBankAccountsResponse>} - The async response
+     */
+    public CompletableFuture<PostV1EmployeesEmployeeIdBankAccountsResponse> create(
+            Optional<? extends PostV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            EmployeeBankAccountRequest employeeBankAccountRequest, Optional<Options> options) {
         PostV1EmployeesEmployeeIdBankAccountsRequest request =
             PostV1EmployeesEmployeeIdBankAccountsRequest
                 .builder()
@@ -118,7 +145,7 @@ public class AsyncEmployeePaymentMethod {
                 .employeeBankAccountRequest(employeeBankAccountRequest)
                 .build();
         AsyncRequestOperation<PostV1EmployeesEmployeeIdBankAccountsRequest, PostV1EmployeesEmployeeIdBankAccountsResponse> operation
-              = new PostV1EmployeesEmployeeIdBankAccounts.Async(sdkConfiguration, _headers);
+              = new PostV1EmployeesEmployeeIdBankAccounts.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -158,7 +185,7 @@ public class AsyncEmployeePaymentMethod {
             EmployeeBankAccountRequest employeeBankAccountRequest) {
         return updateBankAccount(
                 Optional.empty(), employeeId, bankAccountUuid,
-                employeeBankAccountRequest);
+                employeeBankAccountRequest, Optional.empty());
     }
 
     /**
@@ -179,6 +206,31 @@ public class AsyncEmployeePaymentMethod {
     public CompletableFuture<PutV1EmployeesEmployeeIdBankAccountsResponse> updateBankAccount(
             Optional<? extends PutV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             String bankAccountUuid, EmployeeBankAccountRequest employeeBankAccountRequest) {
+        return updateBankAccount(
+                xGustoAPIVersion, employeeId, bankAccountUuid,
+                employeeBankAccountRequest, Optional.empty());
+    }
+
+    /**
+     * Update an employee bank account
+     * 
+     * <p>Updates an employee bank account.
+     * 
+     * <p>scope: `employee_payment_methods:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param bankAccountUuid The UUID of the bank account
+     * @param employeeBankAccountRequest Request body for creating or updating an employee bank account. Send these fields as top-level JSON keys (the API wraps them server-side).
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdBankAccountsResponse>} - The async response
+     */
+    public CompletableFuture<PutV1EmployeesEmployeeIdBankAccountsResponse> updateBankAccount(
+            Optional<? extends PutV1EmployeesEmployeeIdBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            String bankAccountUuid, EmployeeBankAccountRequest employeeBankAccountRequest,
+            Optional<Options> options) {
         PutV1EmployeesEmployeeIdBankAccountsRequest request =
             PutV1EmployeesEmployeeIdBankAccountsRequest
                 .builder()
@@ -188,7 +240,7 @@ public class AsyncEmployeePaymentMethod {
                 .employeeBankAccountRequest(employeeBankAccountRequest)
                 .build();
         AsyncRequestOperation<PutV1EmployeesEmployeeIdBankAccountsRequest, PutV1EmployeesEmployeeIdBankAccountsResponse> operation
-              = new PutV1EmployeesEmployeeIdBankAccounts.Async(sdkConfiguration, _headers);
+              = new PutV1EmployeesEmployeeIdBankAccounts.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -225,7 +277,9 @@ public class AsyncEmployeePaymentMethod {
      * @return {@code CompletableFuture<DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse>} - The async response
      */
     public CompletableFuture<DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse> deleteBankAccount(String employeeId, String bankAccountUuid) {
-        return deleteBankAccount(Optional.empty(), employeeId, bankAccountUuid);
+        return deleteBankAccount(
+                Optional.empty(), employeeId, bankAccountUuid,
+                Optional.empty());
     }
 
     /**
@@ -246,6 +300,30 @@ public class AsyncEmployeePaymentMethod {
     public CompletableFuture<DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse> deleteBankAccount(
             Optional<? extends DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             String bankAccountUuid) {
+        return deleteBankAccount(
+                xGustoAPIVersion, employeeId, bankAccountUuid,
+                Optional.empty());
+    }
+
+    /**
+     * Delete an employee bank account
+     * 
+     * <p>Deletes an employee bank account. To update an employee's bank account details, delete the bank
+     * account first and create a new one.
+     * 
+     * <p>scope: `employee_payment_methods:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param bankAccountUuid The UUID of the bank account
+     * @param options additional options
+     * @return {@code CompletableFuture<DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse>} - The async response
+     */
+    public CompletableFuture<DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse> deleteBankAccount(
+            Optional<? extends DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            String bankAccountUuid, Optional<Options> options) {
         DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest request =
             DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest
                 .builder()
@@ -254,7 +332,7 @@ public class AsyncEmployeePaymentMethod {
                 .bankAccountUuid(bankAccountUuid)
                 .build();
         AsyncRequestOperation<DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest, DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse> operation
-              = new DeleteV1EmployeesEmployeeIdBankAccountsBankAccountId.Async(sdkConfiguration, _headers);
+              = new DeleteV1EmployeesEmployeeIdBankAccountsBankAccountId.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -288,7 +366,7 @@ public class AsyncEmployeePaymentMethod {
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdPaymentMethodResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdPaymentMethodResponse> get(String employeeId) {
-        return get(Optional.empty(), employeeId);
+        return get(Optional.empty(), employeeId, Optional.empty());
     }
 
     /**
@@ -305,6 +383,26 @@ public class AsyncEmployeePaymentMethod {
      * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdPaymentMethodResponse>} - The async response
      */
     public CompletableFuture<GetV1EmployeesEmployeeIdPaymentMethodResponse> get(Optional<? extends GetV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId) {
+        return get(xGustoAPIVersion, employeeId, Optional.empty());
+    }
+
+    /**
+     * Get payment method for an employee
+     * 
+     * <p>Returns the payment method for an employee (e.g. Check or Direct Deposit with split configuration).
+     * 
+     * <p>scope: `employee_payment_methods:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1EmployeesEmployeeIdPaymentMethodResponse>} - The async response
+     */
+    public CompletableFuture<GetV1EmployeesEmployeeIdPaymentMethodResponse> get(
+            Optional<? extends GetV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            Optional<Options> options) {
         GetV1EmployeesEmployeeIdPaymentMethodRequest request =
             GetV1EmployeesEmployeeIdPaymentMethodRequest
                 .builder()
@@ -312,7 +410,7 @@ public class AsyncEmployeePaymentMethod {
                 .employeeId(employeeId)
                 .build();
         AsyncRequestOperation<GetV1EmployeesEmployeeIdPaymentMethodRequest, GetV1EmployeesEmployeeIdPaymentMethodResponse> operation
-              = new GetV1EmployeesEmployeeIdPaymentMethod.Async(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeIdPaymentMethod.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -349,7 +447,9 @@ public class AsyncEmployeePaymentMethod {
      * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdPaymentMethodResponse>} - The async response
      */
     public CompletableFuture<PutV1EmployeesEmployeeIdPaymentMethodResponse> update(String employeeId, PutV1EmployeesEmployeeIdPaymentMethodRequestBody requestBody) {
-        return update(Optional.empty(), employeeId, requestBody);
+        return update(
+                Optional.empty(), employeeId, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -370,6 +470,30 @@ public class AsyncEmployeePaymentMethod {
     public CompletableFuture<PutV1EmployeesEmployeeIdPaymentMethodResponse> update(
             Optional<? extends PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
             PutV1EmployeesEmployeeIdPaymentMethodRequestBody requestBody) {
+        return update(
+                xGustoAPIVersion, employeeId, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Update payment method for an employee
+     * 
+     * <p>Updates the payment method for an employee. Can set to Check or Direct Deposit with split
+     * configuration.
+     * 
+     * <p>scope: `employee_payment_methods:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param employeeId The UUID of the employee
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1EmployeesEmployeeIdPaymentMethodResponse>} - The async response
+     */
+    public CompletableFuture<PutV1EmployeesEmployeeIdPaymentMethodResponse> update(
+            Optional<? extends PutV1EmployeesEmployeeIdPaymentMethodHeaderXGustoAPIVersion> xGustoAPIVersion, String employeeId,
+            PutV1EmployeesEmployeeIdPaymentMethodRequestBody requestBody, Optional<Options> options) {
         PutV1EmployeesEmployeeIdPaymentMethodRequest request =
             PutV1EmployeesEmployeeIdPaymentMethodRequest
                 .builder()
@@ -378,7 +502,7 @@ public class AsyncEmployeePaymentMethod {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1EmployeesEmployeeIdPaymentMethodRequest, PutV1EmployeesEmployeeIdPaymentMethodResponse> operation
-              = new PutV1EmployeesEmployeeIdPaymentMethod.Async(sdkConfiguration, _headers);
+              = new PutV1EmployeesEmployeeIdPaymentMethod.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

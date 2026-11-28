@@ -10,8 +10,10 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1ContractorForm;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1ContractorFormRequestBuilder {
@@ -22,6 +24,7 @@ public class GetV1ContractorFormRequestBuilder {
                             new TypeReference<Optional<? extends GetV1ContractorFormHeaderXGustoAPIVersion>>() {});
     private String contractorUuid;
     private String formId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class GetV1ContractorFormRequestBuilder {
         this.formId = formId;
         return this;
     }
+                
+    public GetV1ContractorFormRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1ContractorFormRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1ContractorFormRequest buildRequest() {
@@ -67,9 +82,12 @@ public class GetV1ContractorFormRequestBuilder {
     }
 
     public GetV1ContractorFormResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1ContractorFormRequest, GetV1ContractorFormResponse> operation
-              = new GetV1ContractorForm.Sync(sdkConfiguration, _headers);
+              = new GetV1ContractorForm.Sync(sdkConfiguration, options, _headers);
         GetV1ContractorFormRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

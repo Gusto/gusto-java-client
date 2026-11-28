@@ -11,29 +11,26 @@ import com.gusto.embedded_api_v_2025_11_15.models.components.PartnerManagedCompa
 import com.gusto.embedded_api_v_2025_11_15.operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfService;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder xGustoAPIVersion(PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,9 +45,27 @@ public class PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest
         return this;
     }
 
+    public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
     public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder partnerManagedCompanyRetrieveTermsOfServiceRequest(PartnerManagedCompanyRetrieveTermsOfServiceRequest partnerManagedCompanyRetrieveTermsOfServiceRequest) {
         Utils.checkNotNull(partnerManagedCompanyRetrieveTermsOfServiceRequest, "partnerManagedCompanyRetrieveTermsOfServiceRequest");
         this.partnerManagedCompanyRetrieveTermsOfServiceRequest = partnerManagedCompanyRetrieveTermsOfServiceRequest;
+        return this;
+    }
+                
+    public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -60,17 +75,20 @@ public class PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest request = new PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest(companyUuid,
-            xGustoAPIVersion,
+        PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest request = new PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest(xGustoAPIVersion,
+            companyUuid,
             partnerManagedCompanyRetrieveTermsOfServiceRequest);
 
         return request;
     }
 
     public PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest, PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse> operation
-              = new PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfService.Sync(sdkConfiguration, _headers);
+              = new PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfService.Sync(sdkConfiguration, options, _headers);
         PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

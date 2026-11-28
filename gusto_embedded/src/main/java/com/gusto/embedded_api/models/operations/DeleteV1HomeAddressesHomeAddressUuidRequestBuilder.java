@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.DeleteV1HomeAddressesHomeAddressUuid;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class DeleteV1HomeAddressesHomeAddressUuidRequestBuilder {
@@ -21,6 +23,7 @@ public class DeleteV1HomeAddressesHomeAddressUuidRequestBuilder {
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion>>() {});
     private String homeAddressUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -45,6 +48,18 @@ public class DeleteV1HomeAddressesHomeAddressUuidRequestBuilder {
         this.homeAddressUuid = homeAddressUuid;
         return this;
     }
+                
+    public DeleteV1HomeAddressesHomeAddressUuidRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteV1HomeAddressesHomeAddressUuidRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteV1HomeAddressesHomeAddressUuidRequest buildRequest() {
@@ -59,9 +74,12 @@ public class DeleteV1HomeAddressesHomeAddressUuidRequestBuilder {
     }
 
     public DeleteV1HomeAddressesHomeAddressUuidResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DeleteV1HomeAddressesHomeAddressUuidRequest, DeleteV1HomeAddressesHomeAddressUuidResponse> operation
-              = new DeleteV1HomeAddressesHomeAddressUuid.Sync(sdkConfiguration, _headers);
+              = new DeleteV1HomeAddressesHomeAddressUuid.Sync(sdkConfiguration, options, _headers);
         DeleteV1HomeAddressesHomeAddressUuidRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

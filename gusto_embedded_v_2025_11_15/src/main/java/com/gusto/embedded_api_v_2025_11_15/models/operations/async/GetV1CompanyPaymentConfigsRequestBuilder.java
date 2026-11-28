@@ -12,8 +12,10 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1CompanyPayment
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1CompanyPaymentConfigs;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -24,6 +26,7 @@ public class GetV1CompanyPaymentConfigsRequestBuilder {
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1CompanyPaymentConfigsHeaderXGustoAPIVersion>>() {});
     private String companyUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class GetV1CompanyPaymentConfigsRequestBuilder {
         this.companyUuid = companyUuid;
         return this;
     }
+                
+    public GetV1CompanyPaymentConfigsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompanyPaymentConfigsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1CompanyPaymentConfigsRequest buildRequest() {
@@ -62,9 +77,12 @@ public class GetV1CompanyPaymentConfigsRequestBuilder {
     }
 
     public CompletableFuture<GetV1CompanyPaymentConfigsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1CompanyPaymentConfigsRequest, GetV1CompanyPaymentConfigsResponse> operation
-              = new GetV1CompanyPaymentConfigs.Async(sdkConfiguration, _headers);
+              = new GetV1CompanyPaymentConfigs.Async(sdkConfiguration, options, _headers);
         GetV1CompanyPaymentConfigsRequest request = buildRequest();
 
         return operation.doRequest(request)

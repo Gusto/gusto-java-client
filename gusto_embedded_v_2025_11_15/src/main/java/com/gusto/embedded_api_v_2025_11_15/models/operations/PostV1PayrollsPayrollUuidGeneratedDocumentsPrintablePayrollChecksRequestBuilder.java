@@ -11,8 +11,10 @@ import com.gusto.embedded_api_v_2025_11_15.models.components.PrintablePayrollChe
 import com.gusto.embedded_api_v_2025_11_15.operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecks;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBuilder {
@@ -23,6 +25,7 @@ public class PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
                             new TypeReference<Optional<? extends PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksHeaderXGustoAPIVersion>>() {});
     private String payrollUuid;
     private PrintablePayrollChecksBody printablePayrollChecksBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -53,6 +56,18 @@ public class PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
         this.printablePayrollChecksBody = printablePayrollChecksBody;
         return this;
     }
+                
+    public PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest buildRequest() {
@@ -68,9 +83,12 @@ public class PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
     }
 
     public PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest, PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse> operation
-              = new PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecks.Sync(sdkConfiguration, _headers);
+              = new PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecks.Sync(sdkConfiguration, options, _headers);
         PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -10,28 +10,25 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFund;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder {
 
-    private String contractorPaymentGroupUuid;
     private Optional<? extends PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGustoAPIVersion>>() {});
+    private String contractorPaymentGroupUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
-        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
-        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
-        return this;
     }
                 
     public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder xGustoAPIVersion(PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,22 +43,43 @@ public class PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuil
         return this;
     }
 
+    public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder contractorPaymentGroupUuid(String contractorPaymentGroupUuid) {
+        Utils.checkNotNull(contractorPaymentGroupUuid, "contractorPaymentGroupUuid");
+        this.contractorPaymentGroupUuid = contractorPaymentGroupUuid;
+        return this;
+    }
+                
+    public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest request = new PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest(contractorPaymentGroupUuid,
-            xGustoAPIVersion);
+        PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest request = new PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest(xGustoAPIVersion,
+            contractorPaymentGroupUuid);
 
         return request;
     }
 
     public PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest, PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse> operation
-              = new PutV1ContractorPaymentGroupsContractorPaymentGroupIdFund.Sync(sdkConfiguration, _headers);
+              = new PutV1ContractorPaymentGroupsContractorPaymentGroupIdFund.Sync(sdkConfiguration, options, _headers);
         PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

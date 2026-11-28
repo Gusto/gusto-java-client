@@ -57,6 +57,7 @@ import com.gusto.embedded_api.operations.PutV1TimeOffPoliciesTimeOffPolicyUuidBa
 import com.gusto.embedded_api.operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate;
 import com.gusto.embedded_api.operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployees;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -133,7 +134,7 @@ public class AsyncTimeOffPolicies {
     public CompletableFuture<PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse> calculateAccruingTimeOffHours(String payrollId, String employeeId) {
         return calculateAccruingTimeOffHours(
                 Optional.empty(), payrollId, employeeId,
-                Optional.empty());
+                Optional.empty(), Optional.empty());
     }
 
     /**
@@ -164,6 +165,41 @@ public class AsyncTimeOffPolicies {
     public CompletableFuture<PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse> calculateAccruingTimeOffHours(
             Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollId,
             String employeeId, Optional<? extends PayrollCalculateAccruingTimeOffHoursRequest> payrollCalculateAccruingTimeOffHoursRequest) {
+        return calculateAccruingTimeOffHours(
+                xGustoAPIVersion, payrollId, employeeId,
+                payrollCalculateAccruingTimeOffHoursRequest, Optional.empty());
+    }
+
+    /**
+     * Calculate accruing time off hours
+     * 
+     * <p>Returns a list of accruing time off for each time off policy associated with the employee.
+     * 
+     * <p>Factors affecting the accrued hours:
+     * 
+     * <p>- the time off policy accrual method (whether they get pay per hour worked, per hour paid, with /
+     * without overtime, accumulate time off based on pay period / calendar year / anniversary)
+     * - how many hours of work during this pay period
+     * - how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
+     * - company pay schedule frequency (for per pay period)
+     * 
+     * <p>If none of the parameters is passed in, the accrued time off hour will be 0.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param payrollId The UUID of the payroll
+     * @param employeeId The UUID of the employee
+     * @param payrollCalculateAccruingTimeOffHoursRequest Request body for calculating accruing time off hours
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse>} - The async response
+     */
+    public CompletableFuture<PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse> calculateAccruingTimeOffHours(
+            Optional<? extends PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion> xGustoAPIVersion, String payrollId,
+            String employeeId, Optional<? extends PayrollCalculateAccruingTimeOffHoursRequest> payrollCalculateAccruingTimeOffHoursRequest,
+            Optional<Options> options) {
         PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest request =
             PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest
                 .builder()
@@ -173,128 +209,7 @@ public class AsyncTimeOffPolicies {
                 .payrollCalculateAccruingTimeOffHoursRequest(payrollCalculateAccruingTimeOffHoursRequest)
                 .build();
         AsyncRequestOperation<PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest, PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse> operation
-              = new PostV1PayrollsPayrollIdCalculateAccruingTimeOffHours.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get a time off policy
-     * 
-     * <p>Get a time off policy
-     * 
-     * <p>scope: `time_off_policies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public GetV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder get() {
-        return new GetV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get a time off policy
-     * 
-     * <p>Get a time off policy
-     * 
-     * <p>scope: `time_off_policies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param timeOffPolicyUuid The UUID of the time off policy
-     * @return {@code CompletableFuture<GetV1TimeOffPoliciesTimeOffPolicyUuidResponse>} - The async response
-     */
-    public CompletableFuture<GetV1TimeOffPoliciesTimeOffPolicyUuidResponse> get(String timeOffPolicyUuid) {
-        return get(Optional.empty(), timeOffPolicyUuid);
-    }
-
-    /**
-     * Get a time off policy
-     * 
-     * <p>Get a time off policy
-     * 
-     * <p>scope: `time_off_policies:read`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param timeOffPolicyUuid The UUID of the time off policy
-     * @return {@code CompletableFuture<GetV1TimeOffPoliciesTimeOffPolicyUuidResponse>} - The async response
-     */
-    public CompletableFuture<GetV1TimeOffPoliciesTimeOffPolicyUuidResponse> get(Optional<? extends GetV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid) {
-        GetV1TimeOffPoliciesTimeOffPolicyUuidRequest request =
-            GetV1TimeOffPoliciesTimeOffPolicyUuidRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .timeOffPolicyUuid(timeOffPolicyUuid)
-                .build();
-        AsyncRequestOperation<GetV1TimeOffPoliciesTimeOffPolicyUuidRequest, GetV1TimeOffPoliciesTimeOffPolicyUuidResponse> operation
-              = new GetV1TimeOffPoliciesTimeOffPolicyUuid.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Update a time off policy
-     * 
-     * <p>Update a time off policy
-     * 
-     * <p>scope: `time_off_policies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder update() {
-        return new PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Update a time off policy
-     * 
-     * <p>Update a time off policy
-     * 
-     * <p>scope: `time_off_policies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param timeOffPolicyUuid The UUID of the time off policy
-     * @param requestBody Request body for updating a time off policy
-     * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse>} - The async response
-     */
-    public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse> update(String timeOffPolicyUuid, PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody requestBody) {
-        return update(Optional.empty(), timeOffPolicyUuid, requestBody);
-    }
-
-    /**
-     * Update a time off policy
-     * 
-     * <p>Update a time off policy
-     * 
-     * <p>scope: `time_off_policies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param timeOffPolicyUuid The UUID of the time off policy
-     * @param requestBody Request body for updating a time off policy
-     * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse>} - The async response
-     */
-    public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse> update(
-            Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid,
-            PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody requestBody) {
-        PutV1TimeOffPoliciesTimeOffPolicyUuidRequest request =
-            PutV1TimeOffPoliciesTimeOffPolicyUuidRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .timeOffPolicyUuid(timeOffPolicyUuid)
-                .requestBody(requestBody)
-                .build();
-        AsyncRequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidResponse> operation
-              = new PutV1TimeOffPoliciesTimeOffPolicyUuid.Async(sdkConfiguration, _headers);
+              = new PostV1PayrollsPayrollIdCalculateAccruingTimeOffHours.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -328,7 +243,7 @@ public class AsyncTimeOffPolicies {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyUuidTimeOffPoliciesResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyUuidTimeOffPoliciesResponse> getAll(String companyUuid) {
-        return getAll(Optional.empty(), companyUuid);
+        return getAll(Optional.empty(), companyUuid, Optional.empty());
     }
 
     /**
@@ -345,6 +260,26 @@ public class AsyncTimeOffPolicies {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyUuidTimeOffPoliciesResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyUuidTimeOffPoliciesResponse> getAll(Optional<? extends GetV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid) {
+        return getAll(xGustoAPIVersion, companyUuid, Optional.empty());
+    }
+
+    /**
+     * Get all time off policies for a company
+     * 
+     * <p>Get all time off policies for a company
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyUuidTimeOffPoliciesResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyUuidTimeOffPoliciesResponse> getAll(
+            Optional<? extends GetV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            Optional<Options> options) {
         GetV1CompaniesCompanyUuidTimeOffPoliciesRequest request =
             GetV1CompaniesCompanyUuidTimeOffPoliciesRequest
                 .builder()
@@ -352,7 +287,7 @@ public class AsyncTimeOffPolicies {
                 .companyUuid(companyUuid)
                 .build();
         AsyncRequestOperation<GetV1CompaniesCompanyUuidTimeOffPoliciesRequest, GetV1CompaniesCompanyUuidTimeOffPoliciesResponse> operation
-              = new GetV1CompaniesCompanyUuidTimeOffPolicies.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyUuidTimeOffPolicies.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -387,7 +322,9 @@ public class AsyncTimeOffPolicies {
      * @return {@code CompletableFuture<PostV1CompaniesCompanyUuidTimeOffPoliciesResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyUuidTimeOffPoliciesResponse> create(String companyUuid, TimeOffPolicyRequest timeOffPolicyRequest) {
-        return create(Optional.empty(), companyUuid, timeOffPolicyRequest);
+        return create(
+                Optional.empty(), companyUuid, timeOffPolicyRequest,
+                Optional.empty());
     }
 
     /**
@@ -407,6 +344,29 @@ public class AsyncTimeOffPolicies {
     public CompletableFuture<PostV1CompaniesCompanyUuidTimeOffPoliciesResponse> create(
             Optional<? extends PostV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
             TimeOffPolicyRequest timeOffPolicyRequest) {
+        return create(
+                xGustoAPIVersion, companyUuid, timeOffPolicyRequest,
+                Optional.empty());
+    }
+
+    /**
+     * Create a time off policy
+     * 
+     * <p>Create a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyUuid The UUID of the company
+     * @param timeOffPolicyRequest Request body for creating a time off policy
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyUuidTimeOffPoliciesResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyUuidTimeOffPoliciesResponse> create(
+            Optional<? extends PostV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyUuid,
+            TimeOffPolicyRequest timeOffPolicyRequest, Optional<Options> options) {
         PostV1CompaniesCompanyUuidTimeOffPoliciesRequest request =
             PostV1CompaniesCompanyUuidTimeOffPoliciesRequest
                 .builder()
@@ -415,7 +375,251 @@ public class AsyncTimeOffPolicies {
                 .timeOffPolicyRequest(timeOffPolicyRequest)
                 .build();
         AsyncRequestOperation<PostV1CompaniesCompanyUuidTimeOffPoliciesRequest, PostV1CompaniesCompanyUuidTimeOffPoliciesResponse> operation
-              = new PostV1CompaniesCompanyUuidTimeOffPolicies.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyUuidTimeOffPolicies.Async(sdkConfiguration, options, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get a time off policy
+     * 
+     * <p>Get a time off policy
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public GetV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder get() {
+        return new GetV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a time off policy
+     * 
+     * <p>Get a time off policy
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param timeOffPolicyUuid The UUID of the time off policy
+     * @return {@code CompletableFuture<GetV1TimeOffPoliciesTimeOffPolicyUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetV1TimeOffPoliciesTimeOffPolicyUuidResponse> get(String timeOffPolicyUuid) {
+        return get(Optional.empty(), timeOffPolicyUuid, Optional.empty());
+    }
+
+    /**
+     * Get a time off policy
+     * 
+     * <p>Get a time off policy
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param timeOffPolicyUuid The UUID of the time off policy
+     * @return {@code CompletableFuture<GetV1TimeOffPoliciesTimeOffPolicyUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetV1TimeOffPoliciesTimeOffPolicyUuidResponse> get(Optional<? extends GetV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid) {
+        return get(xGustoAPIVersion, timeOffPolicyUuid, Optional.empty());
+    }
+
+    /**
+     * Get a time off policy
+     * 
+     * <p>Get a time off policy
+     * 
+     * <p>scope: `time_off_policies:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param timeOffPolicyUuid The UUID of the time off policy
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1TimeOffPoliciesTimeOffPolicyUuidResponse>} - The async response
+     */
+    public CompletableFuture<GetV1TimeOffPoliciesTimeOffPolicyUuidResponse> get(
+            Optional<? extends GetV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid,
+            Optional<Options> options) {
+        GetV1TimeOffPoliciesTimeOffPolicyUuidRequest request =
+            GetV1TimeOffPoliciesTimeOffPolicyUuidRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .timeOffPolicyUuid(timeOffPolicyUuid)
+                .build();
+        AsyncRequestOperation<GetV1TimeOffPoliciesTimeOffPolicyUuidRequest, GetV1TimeOffPoliciesTimeOffPolicyUuidResponse> operation
+              = new GetV1TimeOffPoliciesTimeOffPolicyUuid.Async(sdkConfiguration, options, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Update a time off policy
+     * 
+     * <p>Update a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder update() {
+        return new PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Update a time off policy
+     * 
+     * <p>Update a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param timeOffPolicyUuid The UUID of the time off policy
+     * @param requestBody Request body for updating a time off policy
+     * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse>} - The async response
+     */
+    public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse> update(String timeOffPolicyUuid, PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody requestBody) {
+        return update(
+                Optional.empty(), timeOffPolicyUuid, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Update a time off policy
+     * 
+     * <p>Update a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param timeOffPolicyUuid The UUID of the time off policy
+     * @param requestBody Request body for updating a time off policy
+     * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse>} - The async response
+     */
+    public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse> update(
+            Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid,
+            PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody requestBody) {
+        return update(
+                xGustoAPIVersion, timeOffPolicyUuid, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Update a time off policy
+     * 
+     * <p>Update a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param timeOffPolicyUuid The UUID of the time off policy
+     * @param requestBody Request body for updating a time off policy
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse>} - The async response
+     */
+    public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidResponse> update(
+            Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid,
+            PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody requestBody, Optional<Options> options) {
+        PutV1TimeOffPoliciesTimeOffPolicyUuidRequest request =
+            PutV1TimeOffPoliciesTimeOffPolicyUuidRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .timeOffPolicyUuid(timeOffPolicyUuid)
+                .requestBody(requestBody)
+                .build();
+        AsyncRequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidResponse> operation
+              = new PutV1TimeOffPoliciesTimeOffPolicyUuid.Async(sdkConfiguration, options, _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Deactivate a time off policy
+     * 
+     * <p>Deactivate a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @return The async call builder
+     */
+    public PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequestBuilder deactivate() {
+        return new PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Deactivate a time off policy
+     * 
+     * <p>Deactivate a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param timeOffPolicyUuid The UUID of the time off policy
+     * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse>} - The async response
+     */
+    public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> deactivate(String timeOffPolicyUuid) {
+        return deactivate(Optional.empty(), timeOffPolicyUuid, Optional.empty());
+    }
+
+    /**
+     * Deactivate a time off policy
+     * 
+     * <p>Deactivate a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param timeOffPolicyUuid The UUID of the time off policy
+     * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse>} - The async response
+     */
+    public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> deactivate(Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid) {
+        return deactivate(xGustoAPIVersion, timeOffPolicyUuid, Optional.empty());
+    }
+
+    /**
+     * Deactivate a time off policy
+     * 
+     * <p>Deactivate a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param timeOffPolicyUuid The UUID of the time off policy
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse>} - The async response
+     */
+    public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> deactivate(
+            Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid,
+            Optional<Options> options) {
+        PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest request =
+            PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest
+                .builder()
+                .xGustoAPIVersion(xGustoAPIVersion)
+                .timeOffPolicyUuid(timeOffPolicyUuid)
+                .build();
+        AsyncRequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> operation
+              = new PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -452,7 +656,9 @@ public class AsyncTimeOffPolicies {
      * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse>} - The async response
      */
     public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse> addEmployees(String timeOffPolicyUuid, PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody requestBody) {
-        return addEmployees(Optional.empty(), timeOffPolicyUuid, requestBody);
+        return addEmployees(
+                Optional.empty(), timeOffPolicyUuid, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -473,6 +679,30 @@ public class AsyncTimeOffPolicies {
     public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse> addEmployees(
             Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid,
             PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody requestBody) {
+        return addEmployees(
+                xGustoAPIVersion, timeOffPolicyUuid, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Add employees to a time off policy
+     * 
+     * <p>Add employees to a time off policy. Employees are required to have at least one job to be added to a
+     * time off policy. Accepts starting balances for non-unlimited policies
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param timeOffPolicyUuid The UUID of the time off policy
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse>} - The async response
+     */
+    public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse> addEmployees(
+            Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid,
+            PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody requestBody, Optional<Options> options) {
         PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest request =
             PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest
                 .builder()
@@ -481,7 +711,7 @@ public class AsyncTimeOffPolicies {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse> operation
-              = new PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployees.Async(sdkConfiguration, _headers);
+              = new PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployees.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -516,7 +746,9 @@ public class AsyncTimeOffPolicies {
      * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse>} - The async response
      */
     public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse> removeEmployees(String timeOffPolicyUuid, PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody requestBody) {
-        return removeEmployees(Optional.empty(), timeOffPolicyUuid, requestBody);
+        return removeEmployees(
+                Optional.empty(), timeOffPolicyUuid, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -536,6 +768,29 @@ public class AsyncTimeOffPolicies {
     public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse> removeEmployees(
             Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid,
             PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody requestBody) {
+        return removeEmployees(
+                xGustoAPIVersion, timeOffPolicyUuid, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Remove employees from a time off policy
+     * 
+     * <p>Remove employees from a time off policy
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param timeOffPolicyUuid The UUID of the time off policy
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse>} - The async response
+     */
+    public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse> removeEmployees(
+            Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid,
+            PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody requestBody, Optional<Options> options) {
         PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest request =
             PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest
                 .builder()
@@ -544,7 +799,7 @@ public class AsyncTimeOffPolicies {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse> operation
-              = new PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployees.Async(sdkConfiguration, _headers);
+              = new PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployees.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -579,7 +834,9 @@ public class AsyncTimeOffPolicies {
      * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse>} - The async response
      */
     public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse> updateBalance(String timeOffPolicyUuid, PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody requestBody) {
-        return updateBalance(Optional.empty(), timeOffPolicyUuid, requestBody);
+        return updateBalance(
+                Optional.empty(), timeOffPolicyUuid, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -599,6 +856,29 @@ public class AsyncTimeOffPolicies {
     public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse> updateBalance(
             Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid,
             PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody requestBody) {
+        return updateBalance(
+                xGustoAPIVersion, timeOffPolicyUuid, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Update employee time off balances
+     * 
+     * <p>Updates time off hours balances for employees for a time off policy.
+     * 
+     * <p>scope: `time_off_policies:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param timeOffPolicyUuid The UUID of the time off policy
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse>} - The async response
+     */
+    public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse> updateBalance(
+            Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid,
+            PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody requestBody, Optional<Options> options) {
         PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequest request =
             PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequest
                 .builder()
@@ -607,65 +887,7 @@ public class AsyncTimeOffPolicies {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse> operation
-              = new PutV1TimeOffPoliciesTimeOffPolicyUuidBalance.Async(sdkConfiguration, _headers);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Deactivate a time off policy
-     * 
-     * <p>Deactivate a time off policy
-     * 
-     * <p>scope: `time_off_policies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @return The async call builder
-     */
-    public PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequestBuilder deactivate() {
-        return new PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Deactivate a time off policy
-     * 
-     * <p>Deactivate a time off policy
-     * 
-     * <p>scope: `time_off_policies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param timeOffPolicyUuid The UUID of the time off policy
-     * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse>} - The async response
-     */
-    public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> deactivate(String timeOffPolicyUuid) {
-        return deactivate(Optional.empty(), timeOffPolicyUuid);
-    }
-
-    /**
-     * Deactivate a time off policy
-     * 
-     * <p>Deactivate a time off policy
-     * 
-     * <p>scope: `time_off_policies:write`
-     * 
-     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
-     * 
-     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-     * @param timeOffPolicyUuid The UUID of the time off policy
-     * @return {@code CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse>} - The async response
-     */
-    public CompletableFuture<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> deactivate(Optional<? extends PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion> xGustoAPIVersion, String timeOffPolicyUuid) {
-        PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest request =
-            PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest
-                .builder()
-                .xGustoAPIVersion(xGustoAPIVersion)
-                .timeOffPolicyUuid(timeOffPolicyUuid)
-                .build();
-        AsyncRequestOperation<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest, PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> operation
-              = new PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivate.Async(sdkConfiguration, _headers);
+              = new PutV1TimeOffPoliciesTimeOffPolicyUuidBalance.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

@@ -13,30 +13,27 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.PostV1CompaniesComp
 import com.gusto.embedded_api_v_2025_11_15.operations.PostV1CompaniesCompanyUuidSignatoriesInvite;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
     private SignatoryInviteRequest signatoryInviteRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder xGustoAPIVersion(PostV1CompaniesCompanyUuidSignatoriesInviteHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -51,9 +48,27 @@ public class PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder {
         return this;
     }
 
+    public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
     public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder signatoryInviteRequest(SignatoryInviteRequest signatoryInviteRequest) {
         Utils.checkNotNull(signatoryInviteRequest, "signatoryInviteRequest");
         this.signatoryInviteRequest = signatoryInviteRequest;
+        return this;
+    }
+                
+    public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -63,17 +78,20 @@ public class PostV1CompaniesCompanyUuidSignatoriesInviteRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PostV1CompaniesCompanyUuidSignatoriesInviteRequest request = new PostV1CompaniesCompanyUuidSignatoriesInviteRequest(companyUuid,
-            xGustoAPIVersion,
+        PostV1CompaniesCompanyUuidSignatoriesInviteRequest request = new PostV1CompaniesCompanyUuidSignatoriesInviteRequest(xGustoAPIVersion,
+            companyUuid,
             signatoryInviteRequest);
 
         return request;
     }
 
     public CompletableFuture<PostV1CompaniesCompanyUuidSignatoriesInviteResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1CompaniesCompanyUuidSignatoriesInviteRequest, PostV1CompaniesCompanyUuidSignatoriesInviteResponse> operation
-              = new PostV1CompaniesCompanyUuidSignatoriesInvite.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyUuidSignatoriesInvite.Async(sdkConfiguration, options, _headers);
         PostV1CompaniesCompanyUuidSignatoriesInviteRequest request = buildRequest();
 
         return operation.doRequest(request)

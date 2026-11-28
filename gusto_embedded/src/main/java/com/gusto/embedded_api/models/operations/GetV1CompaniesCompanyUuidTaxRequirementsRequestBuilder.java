@@ -10,28 +10,25 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1CompaniesCompanyUuidTaxRequirements;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyUuidTaxRequirementsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,22 +43,43 @@ public class GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder {
         return this;
     }
 
+    public GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+                
+    public GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompaniesCompanyUuidTaxRequirementsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1CompaniesCompanyUuidTaxRequirementsRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompaniesCompanyUuidTaxRequirementsRequest request = new GetV1CompaniesCompanyUuidTaxRequirementsRequest(companyUuid,
-            xGustoAPIVersion);
+        GetV1CompaniesCompanyUuidTaxRequirementsRequest request = new GetV1CompaniesCompanyUuidTaxRequirementsRequest(xGustoAPIVersion,
+            companyUuid);
 
         return request;
     }
 
     public GetV1CompaniesCompanyUuidTaxRequirementsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1CompaniesCompanyUuidTaxRequirementsRequest, GetV1CompaniesCompanyUuidTaxRequirementsResponse> operation
-              = new GetV1CompaniesCompanyUuidTaxRequirements.Sync(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyUuidTaxRequirements.Sync(sdkConfiguration, options, _headers);
         GetV1CompaniesCompanyUuidTaxRequirementsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

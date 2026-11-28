@@ -10,24 +10,39 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder {
 
-    private String companyId;
-    private String id;
     private Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private String id;
     private Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody> requestBody = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder xGustoAPIVersion(PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
+        return this;
+    }
+
+    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder xGustoAPIVersion(Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion) {
+        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
+        this.xGustoAPIVersion = xGustoAPIVersion;
+        return this;
     }
 
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder companyId(String companyId) {
@@ -42,18 +57,6 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuild
         return this;
     }
                 
-    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder xGustoAPIVersion(PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = Optional.of(xGustoAPIVersion);
-        return this;
-    }
-
-    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder xGustoAPIVersion(Optional<? extends PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.xGustoAPIVersion = xGustoAPIVersion;
-        return this;
-    }
-                
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder requestBody(PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = Optional.of(requestBody);
@@ -65,6 +68,18 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuild
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest buildRequest() {
@@ -72,18 +87,21 @@ public class PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBuild
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request = new PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest(companyId,
+        PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request = new PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest(xGustoAPIVersion,
+            companyId,
             id,
-            xGustoAPIVersion,
             requestBody);
 
         return request;
     }
 
     public PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest, PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> operation
-              = new PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.Sync(sdkConfiguration, _headers);
+              = new PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.Sync(sdkConfiguration, options, _headers);
         PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

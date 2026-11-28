@@ -12,9 +12,11 @@ import com.gusto.embedded_api_v_2025_11_15.models.operations.GetV1CompanyExterna
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1CompanyExternalPayrolls;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -27,6 +29,7 @@ public class GetV1CompanyExternalPayrollsRequestBuilder {
     private String companyUuid;
     private Optional<Long> page = Optional.empty();
     private Optional<Long> per = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -75,6 +78,18 @@ public class GetV1CompanyExternalPayrollsRequestBuilder {
         this.per = per;
         return this;
     }
+                
+    public GetV1CompanyExternalPayrollsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompanyExternalPayrollsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1CompanyExternalPayrollsRequest buildRequest() {
@@ -91,9 +106,12 @@ public class GetV1CompanyExternalPayrollsRequestBuilder {
     }
 
     public CompletableFuture<GetV1CompanyExternalPayrollsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1CompanyExternalPayrollsRequest, GetV1CompanyExternalPayrollsResponse> operation
-              = new GetV1CompanyExternalPayrolls.Async(sdkConfiguration, _headers);
+              = new GetV1CompanyExternalPayrolls.Async(sdkConfiguration, options, _headers);
         GetV1CompanyExternalPayrollsRequest request = buildRequest();
 
         return operation.doRequest(request)

@@ -13,8 +13,10 @@ import com.gusto.embedded_api.models.operations.PostV1CompaniesAttachmentRequest
 import com.gusto.embedded_api.operations.PostV1CompaniesAttachment;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class PostV1CompaniesAttachmentRequestBuilder {
                             new TypeReference<Optional<? extends PostV1CompaniesAttachmentHeaderXGustoAPIVersion>>() {});
     private String companyId;
     private CompanyAttachmentCreateRequestBody companyAttachmentCreateRequestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -56,6 +59,18 @@ public class PostV1CompaniesAttachmentRequestBuilder {
         this.companyAttachmentCreateRequestBody = companyAttachmentCreateRequestBody;
         return this;
     }
+                
+    public PostV1CompaniesAttachmentRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PostV1CompaniesAttachmentRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PostV1CompaniesAttachmentRequest buildRequest() {
@@ -71,9 +86,12 @@ public class PostV1CompaniesAttachmentRequestBuilder {
     }
 
     public CompletableFuture<PostV1CompaniesAttachmentResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<PostV1CompaniesAttachmentRequest, PostV1CompaniesAttachmentResponse> operation
-              = new PostV1CompaniesAttachment.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesAttachment.Async(sdkConfiguration, options, _headers);
         PostV1CompaniesAttachmentRequest request = buildRequest();
 
         return operation.doRequest(request)

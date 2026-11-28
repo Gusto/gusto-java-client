@@ -10,28 +10,25 @@ import com.gusto.embedded_api_v_2026_06_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1CompaniesCompanyUuidSignatories;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1CompaniesCompanyUuidSignatoriesRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompaniesCompanyUuidSignatoriesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1CompaniesCompanyUuidSignatoriesRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public GetV1CompaniesCompanyUuidSignatoriesRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,22 +43,43 @@ public class GetV1CompaniesCompanyUuidSignatoriesRequestBuilder {
         return this;
     }
 
+    public GetV1CompaniesCompanyUuidSignatoriesRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+                
+    public GetV1CompaniesCompanyUuidSignatoriesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompaniesCompanyUuidSignatoriesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1CompaniesCompanyUuidSignatoriesRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompaniesCompanyUuidSignatoriesRequest request = new GetV1CompaniesCompanyUuidSignatoriesRequest(companyUuid,
-            xGustoAPIVersion);
+        GetV1CompaniesCompanyUuidSignatoriesRequest request = new GetV1CompaniesCompanyUuidSignatoriesRequest(xGustoAPIVersion,
+            companyUuid);
 
         return request;
     }
 
     public GetV1CompaniesCompanyUuidSignatoriesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1CompaniesCompanyUuidSignatoriesRequest, GetV1CompaniesCompanyUuidSignatoriesResponse> operation
-              = new GetV1CompaniesCompanyUuidSignatories.Sync(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyUuidSignatories.Sync(sdkConfiguration, options, _headers);
         GetV1CompaniesCompanyUuidSignatoriesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

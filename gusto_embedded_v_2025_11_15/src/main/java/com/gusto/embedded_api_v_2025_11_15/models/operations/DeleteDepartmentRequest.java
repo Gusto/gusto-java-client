@@ -17,12 +17,6 @@ import java.util.Optional;
 
 public class DeleteDepartmentRequest {
     /**
-     * The UUID of the department
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=department_uuid")
-    private String departmentUuid;
-
-    /**
      * Determines the date-based API version associated with your API call. If none is provided, your
      * application's [minimum API
      * version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -30,27 +24,25 @@ public class DeleteDepartmentRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Gusto-API-Version")
     private Optional<? extends DeleteDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion;
 
+    /**
+     * The UUID of the department
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=department_uuid")
+    private String departmentUuid;
+
     @JsonCreator
     public DeleteDepartmentRequest(
-            String departmentUuid,
-            Optional<? extends DeleteDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
+            Optional<? extends DeleteDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion,
+            String departmentUuid) {
         Utils.checkNotNull(xGustoAPIVersion, "xGustoAPIVersion");
-        this.departmentUuid = departmentUuid;
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
         this.xGustoAPIVersion = xGustoAPIVersion;
+        this.departmentUuid = departmentUuid;
     }
     
     public DeleteDepartmentRequest(
             String departmentUuid) {
-        this(departmentUuid, Optional.empty());
-    }
-
-    /**
-     * The UUID of the department
-     */
-    @JsonIgnore
-    public String departmentUuid() {
-        return departmentUuid;
+        this(Optional.empty(), departmentUuid);
     }
 
     /**
@@ -64,19 +56,18 @@ public class DeleteDepartmentRequest {
         return (Optional<DeleteDepartmentHeaderXGustoAPIVersion>) xGustoAPIVersion;
     }
 
+    /**
+     * The UUID of the department
+     */
+    @JsonIgnore
+    public String departmentUuid() {
+        return departmentUuid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The UUID of the department
-     */
-    public DeleteDepartmentRequest withDepartmentUuid(String departmentUuid) {
-        Utils.checkNotNull(departmentUuid, "departmentUuid");
-        this.departmentUuid = departmentUuid;
-        return this;
-    }
 
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your
@@ -101,6 +92,15 @@ public class DeleteDepartmentRequest {
         return this;
     }
 
+    /**
+     * The UUID of the department
+     */
+    public DeleteDepartmentRequest withDepartmentUuid(String departmentUuid) {
+        Utils.checkNotNull(departmentUuid, "departmentUuid");
+        this.departmentUuid = departmentUuid;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,42 +111,32 @@ public class DeleteDepartmentRequest {
         }
         DeleteDepartmentRequest other = (DeleteDepartmentRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.departmentUuid, other.departmentUuid) &&
-            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion);
+            Utils.enhancedDeepEquals(this.xGustoAPIVersion, other.xGustoAPIVersion) &&
+            Utils.enhancedDeepEquals(this.departmentUuid, other.departmentUuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            departmentUuid, xGustoAPIVersion);
+            xGustoAPIVersion, departmentUuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(DeleteDepartmentRequest.class,
-                "departmentUuid", departmentUuid,
-                "xGustoAPIVersion", xGustoAPIVersion);
+                "xGustoAPIVersion", xGustoAPIVersion,
+                "departmentUuid", departmentUuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String departmentUuid;
-
         private Optional<? extends DeleteDepartmentHeaderXGustoAPIVersion> xGustoAPIVersion;
+
+        private String departmentUuid;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The UUID of the department
-         */
-        public Builder departmentUuid(String departmentUuid) {
-            Utils.checkNotNull(departmentUuid, "departmentUuid");
-            this.departmentUuid = departmentUuid;
-            return this;
         }
 
 
@@ -172,13 +162,23 @@ public class DeleteDepartmentRequest {
             return this;
         }
 
+
+        /**
+         * The UUID of the department
+         */
+        public Builder departmentUuid(String departmentUuid) {
+            Utils.checkNotNull(departmentUuid, "departmentUuid");
+            this.departmentUuid = departmentUuid;
+            return this;
+        }
+
         public DeleteDepartmentRequest build() {
             if (xGustoAPIVersion == null) {
                 xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
             }
 
             return new DeleteDepartmentRequest(
-                departmentUuid, xGustoAPIVersion);
+                xGustoAPIVersion, departmentUuid);
         }
 
 

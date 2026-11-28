@@ -10,28 +10,25 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.GetV1CompaniesCompanyIdFederalTaxDetails;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
 
-    private String companyId;
     private Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion>>() {});
+    private String companyId;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder xGustoAPIVersion(GetV1CompaniesCompanyIdFederalTaxDetailsHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -46,22 +43,43 @@ public class GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder {
         return this;
     }
 
+    public GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+                
+    public GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompaniesCompanyIdFederalTaxDetailsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1CompaniesCompanyIdFederalTaxDetailsRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompaniesCompanyIdFederalTaxDetailsRequest request = new GetV1CompaniesCompanyIdFederalTaxDetailsRequest(companyId,
-            xGustoAPIVersion);
+        GetV1CompaniesCompanyIdFederalTaxDetailsRequest request = new GetV1CompaniesCompanyIdFederalTaxDetailsRequest(xGustoAPIVersion,
+            companyId);
 
         return request;
     }
 
     public GetV1CompaniesCompanyIdFederalTaxDetailsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1CompaniesCompanyIdFederalTaxDetailsRequest, GetV1CompaniesCompanyIdFederalTaxDetailsResponse> operation
-              = new GetV1CompaniesCompanyIdFederalTaxDetails.Sync(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdFederalTaxDetails.Sync(sdkConfiguration, options, _headers);
         GetV1CompaniesCompanyIdFederalTaxDetailsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

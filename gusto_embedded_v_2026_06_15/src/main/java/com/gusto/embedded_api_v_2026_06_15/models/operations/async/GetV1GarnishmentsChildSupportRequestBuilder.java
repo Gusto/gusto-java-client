@@ -12,7 +12,9 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1GarnishmentsCh
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1GarnishmentsChildSupport;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -22,6 +24,7 @@ public class GetV1GarnishmentsChildSupportRequestBuilder {
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetV1GarnishmentsChildSupportHeaderXGustoAPIVersion>>() {});
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -40,6 +43,18 @@ public class GetV1GarnishmentsChildSupportRequestBuilder {
         this.xGustoAPIVersion = xGustoAPIVersion;
         return this;
     }
+                
+    public GetV1GarnishmentsChildSupportRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1GarnishmentsChildSupportRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetV1GarnishmentsChildSupportRequest buildRequest() {
@@ -53,9 +68,12 @@ public class GetV1GarnishmentsChildSupportRequestBuilder {
     }
 
     public CompletableFuture<GetV1GarnishmentsChildSupportResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1GarnishmentsChildSupportRequest, GetV1GarnishmentsChildSupportResponse> operation
-              = new GetV1GarnishmentsChildSupport.Async(sdkConfiguration, _headers);
+              = new GetV1GarnishmentsChildSupport.Async(sdkConfiguration, options, _headers);
         GetV1GarnishmentsChildSupportRequest request = buildRequest();
 
         return operation.doRequest(request)

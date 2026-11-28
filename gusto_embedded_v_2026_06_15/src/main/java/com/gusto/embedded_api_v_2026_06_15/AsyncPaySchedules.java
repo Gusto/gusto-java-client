@@ -57,6 +57,7 @@ import com.gusto.embedded_api_v_2026_06_15.operations.PostV1CompaniesCompanyIdPa
 import com.gusto.embedded_api_v_2026_06_15.operations.PostV1CompaniesCompanyIdPaySchedulesAssignmentPreview;
 import com.gusto.embedded_api_v_2026_06_15.operations.PutV1CompaniesCompanyIdPaySchedulesPayScheduleId;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -137,8 +138,38 @@ public class AsyncPaySchedules {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayPeriodsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdPayPeriodsResponse> getPayPeriods(GetV1CompaniesCompanyIdPayPeriodsRequest request) {
+        return getPayPeriods(request, Optional.empty());
+    }
+
+    /**
+     * Get pay periods for a company
+     * 
+     * <p>Pay periods are the foundation of payroll. Compensation, time &amp; attendance, taxes, and expense
+     * reports all rely on when they happened.
+     * 
+     * <p>To begin submitting information for a given payroll, we need to agree on the time period.
+     * 
+     * <p>By default, this endpoint returns pay periods starting from 6 months ago to the date today. Use the
+     * `start_date` and `end_date` parameters to change the scope of the response. End dates can be up to 3
+     * months in the future and there is no limit on start dates.
+     * 
+     * <p>Starting in version 2023-04-01, the `eligible_employees` attribute was removed from the response.
+     * The eligible employees for a payroll are determined by the employee_compensations returned from the
+     * [PUT
+     * /v1/companies/{company_id}/payrolls/{payroll_id}/prepare](ref:put-v1-companies-company_id-payrolls-payroll_id-prepare)
+     * endpoint.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPayPeriodsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdPayPeriodsResponse> getPayPeriods(GetV1CompaniesCompanyIdPayPeriodsRequest request, Optional<Options> options) {
         AsyncRequestOperation<GetV1CompaniesCompanyIdPayPeriodsRequest, GetV1CompaniesCompanyIdPayPeriodsResponse> operation
-              = new GetV1CompaniesCompanyIdPayPeriods.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdPayPeriods.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -180,7 +211,7 @@ public class AsyncPaySchedules {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse> getUnprocessedTerminationPeriods(String companyId) {
-        return getUnprocessedTerminationPeriods(Optional.empty(), companyId);
+        return getUnprocessedTerminationPeriods(Optional.empty(), companyId, Optional.empty());
     }
 
     /**
@@ -201,6 +232,30 @@ public class AsyncPaySchedules {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse> getUnprocessedTerminationPeriods(Optional<? extends GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
+        return getUnprocessedTerminationPeriods(xGustoAPIVersion, companyId, Optional.empty());
+    }
+
+    /**
+     * Get termination pay periods for a company
+     * 
+     * <p>When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final
+     * payroll, their last pay period will appear on the list.
+     * 
+     * <p>This endpoint returns the unprocessed pay periods for past and future terminated employees in a
+     * given company.
+     * 
+     * <p>scope: `payrolls:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse> getUnprocessedTerminationPeriods(
+            Optional<? extends GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<Options> options) {
         GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest request =
             GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest
                 .builder()
@@ -208,7 +263,7 @@ public class AsyncPaySchedules {
                 .companyId(companyId)
                 .build();
         AsyncRequestOperation<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest, GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse> operation
-              = new GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriods.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriods.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -246,7 +301,7 @@ public class AsyncPaySchedules {
     public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesResponse> getAll(String companyId) {
         return getAll(
                 Optional.empty(), companyId, Optional.empty(),
-                Optional.empty());
+                Optional.empty(), Optional.empty());
     }
 
     /**
@@ -268,6 +323,32 @@ public class AsyncPaySchedules {
     public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesResponse> getAll(
             Optional<? extends GetV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             Optional<Long> page, Optional<Long> per) {
+        return getAll(
+                xGustoAPIVersion, companyId, page,
+                per, Optional.empty());
+    }
+
+    /**
+     * Get the pay schedules for a company
+     * 
+     * <p>Returns all pay schedules for a company. The pay schedule object captures the details of when
+     * employees work and when they should be paid. A company can have multiple pay schedules.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param page The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+     * @param per Number of objects per page. For majority of endpoints will default to 25
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesResponse> getAll(
+            Optional<? extends GetV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<Long> page, Optional<Long> per,
+            Optional<Options> options) {
         GetV1CompaniesCompanyIdPaySchedulesRequest request =
             GetV1CompaniesCompanyIdPaySchedulesRequest
                 .builder()
@@ -277,7 +358,7 @@ public class AsyncPaySchedules {
                 .per(per)
                 .build();
         AsyncRequestOperation<GetV1CompaniesCompanyIdPaySchedulesRequest, GetV1CompaniesCompanyIdPaySchedulesResponse> operation
-              = new GetV1CompaniesCompanyIdPaySchedules.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdPaySchedules.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -352,7 +433,9 @@ public class AsyncPaySchedules {
      * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesResponse> create(String companyId, PayScheduleCreateRequest payScheduleCreateRequest) {
-        return create(Optional.empty(), companyId, payScheduleCreateRequest);
+        return create(
+                Optional.empty(), companyId, payScheduleCreateRequest,
+                Optional.empty());
     }
 
     /**
@@ -394,6 +477,51 @@ public class AsyncPaySchedules {
     public CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesResponse> create(
             Optional<? extends PostV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             PayScheduleCreateRequest payScheduleCreateRequest) {
+        return create(
+                xGustoAPIVersion, companyId, payScheduleCreateRequest,
+                Optional.empty());
+    }
+
+    /**
+     * Create a new pay schedule
+     * 
+     * <p>If a company does not have any pay schedules, this endpoint will create a single pay schedule and
+     * assign it to all employees. This is a common use case during company onboarding.
+     * 
+     * <p>If a company has an existing active pay schedule and want to support multiple pay schedules, this
+     * endpoint will create a pay schedule that is not assigned to any employee.
+     * 
+     * <p>Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)** to know what
+     * schedule is right for your customers.
+     * 
+     * <p>&gt; If an onboarded company misses their first pay date, Gusto will automatically adjust the pay
+     * schedule to the next available pay date.
+     * 
+     * <p>### Webhooks
+     * - `pay_schedule.created`: Fires when a pay schedule is successfully created.
+     * 
+     * <p>### Related guides
+     * - [Create a pay schedule](doc:create-a-pay-schedule)
+     * - [Pay Schedules](doc:pay-schedule-info)
+     * - [Manage Pay Schedules via API](doc:manage-pay-schedules-api)
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param payScheduleCreateRequest Request body for creating a pay schedule. Required when a company has no pay schedules (onboarding) or when adding an additional schedule. Be sure to [check state laws](https://www.dol.gov/agencies/whd/state/payday) to know what schedule is right for your customers.
+     *         
+     *         - **anchor_pay_date**: The first date that employees on this pay schedule will be paid (first company payday).
+     *         - **anchor_end_of_pay_period**: The last date of the first pay period; can be the same as anchor_pay_date.
+     *         
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesResponse> create(
+            Optional<? extends PostV1CompaniesCompanyIdPaySchedulesHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            PayScheduleCreateRequest payScheduleCreateRequest, Optional<Options> options) {
         PostV1CompaniesCompanyIdPaySchedulesRequest request =
             PostV1CompaniesCompanyIdPaySchedulesRequest
                 .builder()
@@ -402,7 +530,7 @@ public class AsyncPaySchedules {
                 .payScheduleCreateRequest(payScheduleCreateRequest)
                 .build();
         AsyncRequestOperation<PostV1CompaniesCompanyIdPaySchedulesRequest, PostV1CompaniesCompanyIdPaySchedulesResponse> operation
-              = new PostV1CompaniesCompanyIdPaySchedules.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdPaySchedules.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -448,8 +576,31 @@ public class AsyncPaySchedules {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesPreviewResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesPreviewResponse> getPreview(GetV1CompaniesCompanyIdPaySchedulesPreviewRequest request) {
+        return getPreview(request, Optional.empty());
+    }
+
+    /**
+     * Preview pay schedule dates
+     * 
+     * <p>Provides a preview of a pay schedule with the specified parameters for the next 18 months. Use this
+     * before creating or updating a pay schedule to show expected check dates, pay period boundaries, and
+     * payroll deadlines.
+     * 
+     * <p>### Related guides
+     * - [Create a pay schedule](doc:create-a-pay-schedule)
+     * - [Manage Pay Schedules via API](doc:manage-pay-schedules-api)
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesPreviewResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesPreviewResponse> getPreview(GetV1CompaniesCompanyIdPaySchedulesPreviewRequest request, Optional<Options> options) {
         AsyncRequestOperation<GetV1CompaniesCompanyIdPaySchedulesPreviewRequest, GetV1CompaniesCompanyIdPaySchedulesPreviewResponse> operation
-              = new GetV1CompaniesCompanyIdPaySchedulesPreview.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdPaySchedulesPreview.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -486,7 +637,9 @@ public class AsyncPaySchedules {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse> get(String companyId, String payScheduleId) {
-        return get(Optional.empty(), companyId, payScheduleId);
+        return get(
+                Optional.empty(), companyId, payScheduleId,
+                Optional.empty());
     }
 
     /**
@@ -507,6 +660,30 @@ public class AsyncPaySchedules {
     public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse> get(
             Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             String payScheduleId) {
+        return get(
+                xGustoAPIVersion, companyId, payScheduleId,
+                Optional.empty());
+    }
+
+    /**
+     * Get a pay schedule
+     * 
+     * <p>Returns a single pay schedule by UUID. The pay schedule object in Gusto captures the details of when
+     * employees work and when they should be paid. A company can have multiple pay schedules.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param payScheduleId The UUID of the pay schedule
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse> get(
+            Optional<? extends GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String payScheduleId, Optional<Options> options) {
         GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest request =
             GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest
                 .builder()
@@ -515,7 +692,7 @@ public class AsyncPaySchedules {
                 .payScheduleId(payScheduleId)
                 .build();
         AsyncRequestOperation<GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest, GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse> operation
-              = new GetV1CompaniesCompanyIdPaySchedulesPayScheduleId.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdPaySchedulesPayScheduleId.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -580,6 +757,9 @@ public class AsyncPaySchedules {
      * @param companyId The UUID of the company
      * @param payScheduleId The UUID of the pay schedule
      * @param payScheduleUpdateRequest Request body for updating a pay schedule. Sent in the pay_schedule_update root key. Version is required for optimistic concurrency. Pay schedules may be automatically adjusted if an onboarded company misses their first pay date; see [Create a pay schedule](https://docs.gusto.com/embedded-payroll/docs/create-a-pay-schedule).
+     *         
+     *         When changing a flexible Twice per month schedule to Monthly, the first pay day is retained unless replaced; the second pay day and both explicit period-end days become null. Changing to Every week or Every other week clears all day fields.
+     *         
      * @return {@code CompletableFuture<PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse> update(
@@ -587,7 +767,7 @@ public class AsyncPaySchedules {
             PayScheduleUpdateRequest payScheduleUpdateRequest) {
         return update(
                 Optional.empty(), companyId, payScheduleId,
-                payScheduleUpdateRequest);
+                payScheduleUpdateRequest, Optional.empty());
     }
 
     /**
@@ -619,11 +799,58 @@ public class AsyncPaySchedules {
      * @param companyId The UUID of the company
      * @param payScheduleId The UUID of the pay schedule
      * @param payScheduleUpdateRequest Request body for updating a pay schedule. Sent in the pay_schedule_update root key. Version is required for optimistic concurrency. Pay schedules may be automatically adjusted if an onboarded company misses their first pay date; see [Create a pay schedule](https://docs.gusto.com/embedded-payroll/docs/create-a-pay-schedule).
+     *         
+     *         When changing a flexible Twice per month schedule to Monthly, the first pay day is retained unless replaced; the second pay day and both explicit period-end days become null. Changing to Every week or Every other week clears all day fields.
+     *         
      * @return {@code CompletableFuture<PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse>} - The async response
      */
     public CompletableFuture<PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse> update(
             Optional<? extends PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             String payScheduleId, PayScheduleUpdateRequest payScheduleUpdateRequest) {
+        return update(
+                xGustoAPIVersion, companyId, payScheduleId,
+                payScheduleUpdateRequest, Optional.empty());
+    }
+
+    /**
+     * Update a pay schedule
+     * 
+     * <p>Updates a pay schedule. The `version` parameter from the GET response is required for [optimistic
+     * concurrency](doc:api-fundamentals); a mismatch returns 409 Conflict.
+     * 
+     * <p>### Effect on payrolls
+     * Updating a pay schedule will delete any unprocessed regular payrolls whose pay period end date is
+     * today or in the future. Already-processed payrolls are not affected.
+     * 
+     * <p>### Pay schedules may be automatically adjusted
+     * If an onboarded company misses their first pay date, Gusto will automatically adjust the pay
+     * schedule to the next available pay date.
+     * 
+     * <p>### Webhooks
+     * - `pay_schedule.updated`: Fires when a pay schedule is successfully updated.
+     * 
+     * <p>### Related guides
+     * - [Create a pay schedule](doc:create-a-pay-schedule)
+     * - [Manage Pay Schedules via API](doc:manage-pay-schedules-api)
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param payScheduleId The UUID of the pay schedule
+     * @param payScheduleUpdateRequest Request body for updating a pay schedule. Sent in the pay_schedule_update root key. Version is required for optimistic concurrency. Pay schedules may be automatically adjusted if an onboarded company misses their first pay date; see [Create a pay schedule](https://docs.gusto.com/embedded-payroll/docs/create-a-pay-schedule).
+     *         
+     *         When changing a flexible Twice per month schedule to Monthly, the first pay day is retained unless replaced; the second pay day and both explicit period-end days become null. Changing to Every week or Every other week clears all day fields.
+     *         
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse>} - The async response
+     */
+    public CompletableFuture<PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse> update(
+            Optional<? extends PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            String payScheduleId, PayScheduleUpdateRequest payScheduleUpdateRequest,
+            Optional<Options> options) {
         PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest request =
             PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest
                 .builder()
@@ -633,7 +860,7 @@ public class AsyncPaySchedules {
                 .payScheduleUpdateRequest(payScheduleUpdateRequest)
                 .build();
         AsyncRequestOperation<PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest, PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse> operation
-              = new PutV1CompaniesCompanyIdPaySchedulesPayScheduleId.Async(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyIdPaySchedulesPayScheduleId.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -670,7 +897,9 @@ public class AsyncPaySchedules {
      * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse> previewAssignment(String companyId, PayScheduleAssignmentBody payScheduleAssignmentBody) {
-        return previewAssignment(Optional.empty(), companyId, payScheduleAssignmentBody);
+        return previewAssignment(
+                Optional.empty(), companyId, payScheduleAssignmentBody,
+                Optional.empty());
     }
 
     /**
@@ -691,6 +920,30 @@ public class AsyncPaySchedules {
     public CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse> previewAssignment(
             Optional<? extends PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             PayScheduleAssignmentBody payScheduleAssignmentBody) {
+        return previewAssignment(
+                xGustoAPIVersion, companyId, payScheduleAssignmentBody,
+                Optional.empty());
+    }
+
+    /**
+     * Preview pay schedule assignments for a company
+     * 
+     * <p>This endpoint returns the employee changes, including pay period and transition pay periods, for
+     * changing the pay schedule.
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param payScheduleAssignmentBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse> previewAssignment(
+            Optional<? extends PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            PayScheduleAssignmentBody payScheduleAssignmentBody, Optional<Options> options) {
         PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest request =
             PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest
                 .builder()
@@ -699,7 +952,7 @@ public class AsyncPaySchedules {
                 .payScheduleAssignmentBody(payScheduleAssignmentBody)
                 .build();
         AsyncRequestOperation<PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest, PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse> operation
-              = new PostV1CompaniesCompanyIdPaySchedulesAssignmentPreview.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdPaySchedulesAssignmentPreview.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -740,7 +993,9 @@ public class AsyncPaySchedules {
      * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesAssignResponse>} - The async response
      */
     public CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesAssignResponse> assign(String companyId, PayScheduleAssignmentBody payScheduleAssignmentBody) {
-        return assign(Optional.empty(), companyId, payScheduleAssignmentBody);
+        return assign(
+                Optional.empty(), companyId, payScheduleAssignmentBody,
+                Optional.empty());
     }
 
     /**
@@ -763,6 +1018,32 @@ public class AsyncPaySchedules {
     public CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesAssignResponse> assign(
             Optional<? extends PostV1CompaniesCompanyIdPaySchedulesAssignHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
             PayScheduleAssignmentBody payScheduleAssignmentBody) {
+        return assign(
+                xGustoAPIVersion, companyId, payScheduleAssignmentBody,
+                Optional.empty());
+    }
+
+    /**
+     * Assign pay schedules for a company
+     * 
+     * <p>This endpoint assigns employees to pay schedules based on the schedule type.
+     * For `by_employee` and `by_department` schedules, use the `partial_assignment` parameter to control
+     * the assignment scope. Set it to `true` for partial assignments (only some employees or departments
+     * at a time) and `false` for full assignments (all employees or departments at once).
+     * 
+     * <p>scope: `pay_schedules:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param payScheduleAssignmentBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesAssignResponse>} - The async response
+     */
+    public CompletableFuture<PostV1CompaniesCompanyIdPaySchedulesAssignResponse> assign(
+            Optional<? extends PostV1CompaniesCompanyIdPaySchedulesAssignHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            PayScheduleAssignmentBody payScheduleAssignmentBody, Optional<Options> options) {
         PostV1CompaniesCompanyIdPaySchedulesAssignRequest request =
             PostV1CompaniesCompanyIdPaySchedulesAssignRequest
                 .builder()
@@ -771,7 +1052,7 @@ public class AsyncPaySchedules {
                 .payScheduleAssignmentBody(payScheduleAssignmentBody)
                 .build();
         AsyncRequestOperation<PostV1CompaniesCompanyIdPaySchedulesAssignRequest, PostV1CompaniesCompanyIdPaySchedulesAssignResponse> operation
-              = new PostV1CompaniesCompanyIdPaySchedulesAssign.Async(sdkConfiguration, _headers);
+              = new PostV1CompaniesCompanyIdPaySchedulesAssign.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -807,7 +1088,7 @@ public class AsyncPaySchedules {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> getAssignments(String companyId) {
-        return getAssignments(Optional.empty(), companyId);
+        return getAssignments(Optional.empty(), companyId, Optional.empty());
     }
 
     /**
@@ -825,6 +1106,27 @@ public class AsyncPaySchedules {
      * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse>} - The async response
      */
     public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> getAssignments(Optional<? extends GetV1CompaniesCompanyIdPaySchedulesAssignmentsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId) {
+        return getAssignments(xGustoAPIVersion, companyId, Optional.empty());
+    }
+
+    /**
+     * Get pay schedule assignments for a company
+     * 
+     * <p>This endpoint returns the current pay schedule assignment for a company, with pay schedule and
+     * employee/department mappings depending on the pay schedule type.
+     * 
+     * <p>scope: `pay_schedules:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param companyId The UUID of the company
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> getAssignments(
+            Optional<? extends GetV1CompaniesCompanyIdPaySchedulesAssignmentsHeaderXGustoAPIVersion> xGustoAPIVersion, String companyId,
+            Optional<Options> options) {
         GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest request =
             GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest
                 .builder()
@@ -832,7 +1134,7 @@ public class AsyncPaySchedules {
                 .companyId(companyId)
                 .build();
         AsyncRequestOperation<GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest, GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> operation
-              = new GetV1CompaniesCompanyIdPaySchedulesAssignments.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyIdPaySchedulesAssignments.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

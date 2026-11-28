@@ -10,6 +10,7 @@ import static com.gusto.embedded_api_v_2025_11_15.operations.Operations.AsyncReq
 import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.SecuritySource;
 import com.gusto.embedded_api_v_2025_11_15.models.errors.APIException;
+import com.gusto.embedded_api_v_2025_11_15.models.errors.UnprocessableEntityError;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.DeleteV1ContractorsContractorUuidTerminationRequest;
 import com.gusto.embedded_api_v_2025_11_15.models.operations.DeleteV1ContractorsContractorUuidTerminationResponse;
 import com.gusto.embedded_api_v_2025_11_15.utils.Blob;
@@ -19,6 +20,7 @@ import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.Hook.AfterErrorContextImpl;
 import com.gusto.embedded_api_v_2025_11_15.utils.Hook.AfterSuccessContextImpl;
 import com.gusto.embedded_api_v_2025_11_15.utils.Hook.BeforeRequestContextImpl;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.io.InputStream;
 import java.lang.Exception;
@@ -26,6 +28,8 @@ import java.lang.String;
 import java.lang.Throwable;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
@@ -37,14 +41,20 @@ public class DeleteV1ContractorsContractorUuidTermination {
         final SDKConfiguration sdkConfiguration;
         final String baseUrl;
         final SecuritySource securitySource;
+        final Optional<Duration> timeout;
         final HTTPClient client;
         final Headers _headers;
 
-        public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
+        public Base(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
             this._headers =_headers;
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
+            options
+                    .ifPresent(o -> o.validate(List.of(Options.Option.TIMEOUT)));
+            this.timeout = options.flatMap(Options::timeout).or(sdkConfiguration::timeout);
             this.client = this.sdkConfiguration.client();
         }
 
@@ -84,8 +94,9 @@ public class DeleteV1ContractorsContractorUuidTermination {
                     this.baseUrl,
                     "/v1/contractors/{contractor_uuid}/termination",
                     request, null);
-            HTTPRequest req = new HTTPRequest(url, "DELETE");
-            req.addHeader("Accept", "*/*")
+            HTTPRequest req = new HTTPRequest(url, "DELETE")
+                    .timeout(this.timeout);
+            req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
             req.addHeaders(Utils.getHeadersFromMetadata(request, null));
@@ -98,7 +109,16 @@ public class DeleteV1ContractorsContractorUuidTermination {
     public static class Sync extends Base
             implements RequestOperation<DeleteV1ContractorsContractorUuidTerminationRequest, DeleteV1ContractorsContractorUuidTerminationResponse> {
         public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
-            super(sdkConfiguration, _headers);
+            this(sdkConfiguration, Optional.empty(),
+                    _headers);
+        }
+
+        public Sync(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
+            super(
+                  sdkConfiguration, options,
+                  _headers);
         }
 
         private HttpRequest onBuildRequest(DeleteV1ContractorsContractorUuidTerminationRequest request) throws Exception {
@@ -155,7 +175,14 @@ public class DeleteV1ContractorsContractorUuidTermination {
                 // no content
                 return res;
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "422", "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "422")) {
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    throw UnprocessableEntityError.from(response);
+                } else {
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                }
+            }
+            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
                 // no content
                 throw APIException.from("API error occurred", response);
             }
@@ -168,9 +195,17 @@ public class DeleteV1ContractorsContractorUuidTermination {
     }
     public static class Async extends Base
             implements AsyncRequestOperation<DeleteV1ContractorsContractorUuidTerminationRequest, com.gusto.embedded_api_v_2025_11_15.models.operations.async.DeleteV1ContractorsContractorUuidTerminationResponse> {
-
         public Async(SDKConfiguration sdkConfiguration, Headers _headers) {
-            super(sdkConfiguration, _headers);
+            this(sdkConfiguration, Optional.empty(),
+                    _headers);
+        }
+
+        public Async(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
+            super(
+                  sdkConfiguration, options,
+                  _headers);
         }
 
         private CompletableFuture<HttpRequest> onBuildRequest(DeleteV1ContractorsContractorUuidTerminationRequest request) throws Exception {
@@ -222,7 +257,15 @@ public class DeleteV1ContractorsContractorUuidTermination {
                 // no content
                 return CompletableFuture.completedFuture(res);
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "422", "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "422")) {
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    return UnprocessableEntityError.fromAsync(response)
+                            .thenCompose(CompletableFuture::failedFuture);
+                } else {
+                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
+                }
+            }
+            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
                 // no content
                 return Utils.createAsyncApiError(response, "API error occurred");
             }

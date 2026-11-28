@@ -10,36 +10,27 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.PutV1CompaniesCompanyUuidTaxRequirementsState;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder {
 
-    private String companyUuid;
-    private String state;
     private Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private String state;
     private PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
-    }
-
-    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder state(String state) {
-        Utils.checkNotNull(state, "state");
-        this.state = state;
-        return this;
     }
                 
     public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder xGustoAPIVersion(PutV1CompaniesCompanyUuidTaxRequirementsStateHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -54,9 +45,33 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder {
         return this;
     }
 
+    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+
+    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder state(String state) {
+        Utils.checkNotNull(state, "state");
+        this.state = state;
+        return this;
+    }
+
     public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder requestBody(PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
+        return this;
+    }
+                
+    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -66,18 +81,21 @@ public class PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompaniesCompanyUuidTaxRequirementsStateRequest request = new PutV1CompaniesCompanyUuidTaxRequirementsStateRequest(companyUuid,
+        PutV1CompaniesCompanyUuidTaxRequirementsStateRequest request = new PutV1CompaniesCompanyUuidTaxRequirementsStateRequest(xGustoAPIVersion,
+            companyUuid,
             state,
-            xGustoAPIVersion,
             requestBody);
 
         return request;
     }
 
     public PutV1CompaniesCompanyUuidTaxRequirementsStateResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1CompaniesCompanyUuidTaxRequirementsStateRequest, PutV1CompaniesCompanyUuidTaxRequirementsStateResponse> operation
-              = new PutV1CompaniesCompanyUuidTaxRequirementsState.Sync(sdkConfiguration, _headers);
+              = new PutV1CompaniesCompanyUuidTaxRequirementsState.Sync(sdkConfiguration, options, _headers);
         PutV1CompaniesCompanyUuidTaxRequirementsStateRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

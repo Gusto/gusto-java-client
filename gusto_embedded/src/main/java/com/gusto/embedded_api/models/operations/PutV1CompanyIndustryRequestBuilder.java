@@ -11,29 +11,26 @@ import com.gusto.embedded_api.models.components.CompanyIndustrySelectionRequired
 import com.gusto.embedded_api.operations.PutV1CompanyIndustry;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1CompanyIndustryRequestBuilder {
 
-    private String companyId;
     private Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-06-15\"",
                             new TypeReference<Optional<? extends PutV1CompanyIndustryHeaderXGustoAPIVersion>>() {});
+    private String companyId;
     private CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public PutV1CompanyIndustryRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public PutV1CompanyIndustryRequestBuilder companyId(String companyId) {
-        Utils.checkNotNull(companyId, "companyId");
-        this.companyId = companyId;
-        return this;
     }
                 
     public PutV1CompanyIndustryRequestBuilder xGustoAPIVersion(PutV1CompanyIndustryHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -48,9 +45,27 @@ public class PutV1CompanyIndustryRequestBuilder {
         return this;
     }
 
+    public PutV1CompanyIndustryRequestBuilder companyId(String companyId) {
+        Utils.checkNotNull(companyId, "companyId");
+        this.companyId = companyId;
+        return this;
+    }
+
     public PutV1CompanyIndustryRequestBuilder companyIndustrySelectionRequiredBody(CompanyIndustrySelectionRequiredBody companyIndustrySelectionRequiredBody) {
         Utils.checkNotNull(companyIndustrySelectionRequiredBody, "companyIndustrySelectionRequiredBody");
         this.companyIndustrySelectionRequiredBody = companyIndustrySelectionRequiredBody;
+        return this;
+    }
+                
+    public PutV1CompanyIndustryRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1CompanyIndustryRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
         return this;
     }
 
@@ -60,17 +75,20 @@ public class PutV1CompanyIndustryRequestBuilder {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        PutV1CompanyIndustryRequest request = new PutV1CompanyIndustryRequest(companyId,
-            xGustoAPIVersion,
+        PutV1CompanyIndustryRequest request = new PutV1CompanyIndustryRequest(xGustoAPIVersion,
+            companyId,
             companyIndustrySelectionRequiredBody);
 
         return request;
     }
 
     public PutV1CompanyIndustryResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1CompanyIndustryRequest, PutV1CompanyIndustryResponse> operation
-              = new PutV1CompanyIndustry.Sync(sdkConfiguration, _headers);
+              = new PutV1CompanyIndustry.Sync(sdkConfiguration, options, _headers);
         PutV1CompanyIndustryRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

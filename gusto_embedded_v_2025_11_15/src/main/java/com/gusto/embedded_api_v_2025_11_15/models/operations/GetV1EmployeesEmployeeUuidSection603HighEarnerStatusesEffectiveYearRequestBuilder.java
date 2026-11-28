@@ -10,36 +10,27 @@ import com.gusto.embedded_api_v_2025_11_15.SDKConfiguration;
 import com.gusto.embedded_api_v_2025_11_15.operations.GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear;
 import com.gusto.embedded_api_v_2025_11_15.utils.Headers;
 import com.gusto.embedded_api_v_2025_11_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2025_11_15.utils.Options;
 import com.gusto.embedded_api_v_2025_11_15.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder {
 
-    private String employeeUuid;
-    private Long effectiveYear;
     private Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2025-11-15\"",
                             new TypeReference<Optional<? extends GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion>>() {});
+    private String employeeUuid;
+    private Long effectiveYear;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder employeeUuid(String employeeUuid) {
-        Utils.checkNotNull(employeeUuid, "employeeUuid");
-        this.employeeUuid = employeeUuid;
-        return this;
-    }
-
-    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder effectiveYear(long effectiveYear) {
-        Utils.checkNotNull(effectiveYear, "effectiveYear");
-        this.effectiveYear = effectiveYear;
-        return this;
     }
                 
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder xGustoAPIVersion(GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -54,23 +45,50 @@ public class GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear
         return this;
     }
 
+    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder employeeUuid(String employeeUuid) {
+        Utils.checkNotNull(employeeUuid, "employeeUuid");
+        this.employeeUuid = employeeUuid;
+        return this;
+    }
+
+    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder effectiveYear(long effectiveYear) {
+        Utils.checkNotNull(effectiveYear, "effectiveYear");
+        this.effectiveYear = effectiveYear;
+        return this;
+    }
+                
+    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest request = new GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest(employeeUuid,
-            effectiveYear,
-            xGustoAPIVersion);
+        GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest request = new GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest(xGustoAPIVersion,
+            employeeUuid,
+            effectiveYear);
 
         return request;
     }
 
     public GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest, GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse> operation
-              = new GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear.Sync(sdkConfiguration, _headers);
+              = new GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear.Sync(sdkConfiguration, options, _headers);
         GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

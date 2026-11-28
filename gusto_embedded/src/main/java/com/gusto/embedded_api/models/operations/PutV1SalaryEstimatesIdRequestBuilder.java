@@ -10,8 +10,10 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.operations.PutV1SalaryEstimatesId;
 import com.gusto.embedded_api.utils.Headers;
 import com.gusto.embedded_api.utils.LazySingletonValue;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class PutV1SalaryEstimatesIdRequestBuilder {
@@ -22,6 +24,7 @@ public class PutV1SalaryEstimatesIdRequestBuilder {
                             new TypeReference<Optional<? extends PutV1SalaryEstimatesIdHeaderXGustoAPIVersion>>() {});
     private String uuid;
     private PutV1SalaryEstimatesIdRequestBody requestBody;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -52,6 +55,18 @@ public class PutV1SalaryEstimatesIdRequestBuilder {
         this.requestBody = requestBody;
         return this;
     }
+                
+    public PutV1SalaryEstimatesIdRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public PutV1SalaryEstimatesIdRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private PutV1SalaryEstimatesIdRequest buildRequest() {
@@ -67,9 +82,12 @@ public class PutV1SalaryEstimatesIdRequestBuilder {
     }
 
     public PutV1SalaryEstimatesIdResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<PutV1SalaryEstimatesIdRequest, PutV1SalaryEstimatesIdResponse> operation
-              = new PutV1SalaryEstimatesId.Sync(sdkConfiguration, _headers);
+              = new PutV1SalaryEstimatesId.Sync(sdkConfiguration, options, _headers);
         PutV1SalaryEstimatesIdRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -35,14 +35,14 @@ public class TaxRequirementMetadata {
      * `risk_class_description`, and `rate_type`
      */
     @JsonProperty("type")
-    private TaxRequirementMetadataType type;
+    private Type type;
 
     /**
      * [for `select` or `radio`] An array of objects describing the possible values.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("options")
-    private Optional<? extends List<TaxRequirementMetadataOptions>> options;
+    private Optional<? extends List<Options>> options;
 
     /**
      * [for `workers_compensation_rate`] The industry risk class code for the rate being requested
@@ -107,8 +107,8 @@ public class TaxRequirementMetadata {
 
     @JsonCreator
     public TaxRequirementMetadata(
-            @JsonProperty("type") TaxRequirementMetadataType type,
-            @JsonProperty("options") Optional<? extends List<TaxRequirementMetadataOptions>> options,
+            @JsonProperty("type") Type type,
+            @JsonProperty("options") Optional<? extends List<Options>> options,
             @JsonProperty("risk_class_code") Optional<String> riskClassCode,
             @JsonProperty("risk_class_description") Optional<String> riskClassDescription,
             @JsonProperty("rate_type") Optional<? extends RateType> rateType,
@@ -134,7 +134,7 @@ public class TaxRequirementMetadata {
     }
     
     public TaxRequirementMetadata(
-            TaxRequirementMetadataType type) {
+            Type type) {
         this(type, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), JsonNullable.undefined(),
             JsonNullable.undefined(), Optional.empty());
@@ -157,7 +157,7 @@ public class TaxRequirementMetadata {
      * `risk_class_description`, and `rate_type`
      */
     @JsonIgnore
-    public TaxRequirementMetadataType type() {
+    public Type type() {
         return type;
     }
 
@@ -166,8 +166,8 @@ public class TaxRequirementMetadata {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<TaxRequirementMetadataOptions>> options() {
-        return (Optional<List<TaxRequirementMetadataOptions>>) options;
+    public Optional<List<Options>> options() {
+        return (Optional<List<Options>>) options;
     }
 
     /**
@@ -260,7 +260,7 @@ public class TaxRequirementMetadata {
      * - `workers_compensation_rate`: A decimal value representing a percentage, see `risk_class_code`,
      * `risk_class_description`, and `rate_type`
      */
-    public TaxRequirementMetadata withType(TaxRequirementMetadataType type) {
+    public TaxRequirementMetadata withType(Type type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -269,7 +269,7 @@ public class TaxRequirementMetadata {
     /**
      * [for `select` or `radio`] An array of objects describing the possible values.
      */
-    public TaxRequirementMetadata withOptions(List<TaxRequirementMetadataOptions> options) {
+    public TaxRequirementMetadata withOptions(List<Options> options) {
         Utils.checkNotNull(options, "options");
         this.options = Optional.ofNullable(options);
         return this;
@@ -279,7 +279,7 @@ public class TaxRequirementMetadata {
     /**
      * [for `select` or `radio`] An array of objects describing the possible values.
      */
-    public TaxRequirementMetadata withOptions(Optional<? extends List<TaxRequirementMetadataOptions>> options) {
+    public TaxRequirementMetadata withOptions(Optional<? extends List<Options>> options) {
         Utils.checkNotNull(options, "options");
         this.options = options;
         return this;
@@ -479,9 +479,9 @@ public class TaxRequirementMetadata {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private TaxRequirementMetadataType type;
+        private Type type;
 
-        private Optional<? extends List<TaxRequirementMetadataOptions>> options = Optional.empty();
+        private Optional<? extends List<Options>> options = Optional.empty();
 
         private Optional<String> riskClassCode = Optional.empty();
 
@@ -516,7 +516,7 @@ public class TaxRequirementMetadata {
          * - `workers_compensation_rate`: A decimal value representing a percentage, see `risk_class_code`,
          * `risk_class_description`, and `rate_type`
          */
-        public Builder type(TaxRequirementMetadataType type) {
+        public Builder type(Type type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
@@ -526,7 +526,7 @@ public class TaxRequirementMetadata {
         /**
          * [for `select` or `radio`] An array of objects describing the possible values.
          */
-        public Builder options(List<TaxRequirementMetadataOptions> options) {
+        public Builder options(List<Options> options) {
             Utils.checkNotNull(options, "options");
             this.options = Optional.ofNullable(options);
             return this;
@@ -535,7 +535,7 @@ public class TaxRequirementMetadata {
         /**
          * [for `select` or `radio`] An array of objects describing the possible values.
          */
-        public Builder options(Optional<? extends List<TaxRequirementMetadataOptions>> options) {
+        public Builder options(Optional<? extends List<Options>> options) {
             Utils.checkNotNull(options, "options");
             this.options = options;
             return this;

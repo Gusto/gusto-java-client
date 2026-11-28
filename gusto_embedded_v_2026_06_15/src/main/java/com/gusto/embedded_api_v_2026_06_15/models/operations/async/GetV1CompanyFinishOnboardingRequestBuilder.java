@@ -12,29 +12,26 @@ import com.gusto.embedded_api_v_2026_06_15.models.operations.GetV1CompanyFinishO
 import com.gusto.embedded_api_v_2026_06_15.operations.GetV1CompanyFinishOnboarding;
 import com.gusto.embedded_api_v_2026_06_15.utils.Headers;
 import com.gusto.embedded_api_v_2026_06_15.utils.LazySingletonValue;
+import com.gusto.embedded_api_v_2026_06_15.utils.Options;
 import com.gusto.embedded_api_v_2026_06_15.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompanyFinishOnboardingRequestBuilder {
 
-    private String companyUuid;
     private Optional<? extends GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion> xGustoAPIVersion = Utils.readDefaultOrConstValue(
                             "xGustoAPIVersion",
                             "\"2026-06-15\"",
                             new TypeReference<Optional<? extends GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion>>() {});
+    private String companyUuid;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GetV1CompanyFinishOnboardingRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-
-    public GetV1CompanyFinishOnboardingRequestBuilder companyUuid(String companyUuid) {
-        Utils.checkNotNull(companyUuid, "companyUuid");
-        this.companyUuid = companyUuid;
-        return this;
     }
                 
     public GetV1CompanyFinishOnboardingRequestBuilder xGustoAPIVersion(GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion xGustoAPIVersion) {
@@ -49,22 +46,43 @@ public class GetV1CompanyFinishOnboardingRequestBuilder {
         return this;
     }
 
+    public GetV1CompanyFinishOnboardingRequestBuilder companyUuid(String companyUuid) {
+        Utils.checkNotNull(companyUuid, "companyUuid");
+        this.companyUuid = companyUuid;
+        return this;
+    }
+                
+    public GetV1CompanyFinishOnboardingRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompanyFinishOnboardingRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
+
 
     private GetV1CompanyFinishOnboardingRequest buildRequest() {
         if (xGustoAPIVersion == null) {
             xGustoAPIVersion = _SINGLETON_VALUE_XGustoAPIVersion.value();
         }
 
-        GetV1CompanyFinishOnboardingRequest request = new GetV1CompanyFinishOnboardingRequest(companyUuid,
-            xGustoAPIVersion);
+        GetV1CompanyFinishOnboardingRequest request = new GetV1CompanyFinishOnboardingRequest(xGustoAPIVersion,
+            companyUuid);
 
         return request;
     }
 
     public CompletableFuture<GetV1CompanyFinishOnboardingResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1CompanyFinishOnboardingRequest, GetV1CompanyFinishOnboardingResponse> operation
-              = new GetV1CompanyFinishOnboarding.Async(sdkConfiguration, _headers);
+              = new GetV1CompanyFinishOnboarding.Async(sdkConfiguration, options, _headers);
         GetV1CompanyFinishOnboardingRequest request = buildRequest();
 
         return operation.doRequest(request)

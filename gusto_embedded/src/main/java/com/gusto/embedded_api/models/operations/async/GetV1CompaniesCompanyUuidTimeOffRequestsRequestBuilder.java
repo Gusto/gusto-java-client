@@ -9,12 +9,16 @@ import com.gusto.embedded_api.SDKConfiguration;
 import com.gusto.embedded_api.models.operations.GetV1CompaniesCompanyUuidTimeOffRequestsRequest;
 import com.gusto.embedded_api.operations.GetV1CompaniesCompanyUuidTimeOffRequests;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import com.gusto.embedded_api.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetV1CompaniesCompanyUuidTimeOffRequestsRequestBuilder {
 
     private GetV1CompaniesCompanyUuidTimeOffRequestsRequest request;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -27,11 +31,26 @@ public class GetV1CompaniesCompanyUuidTimeOffRequestsRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public GetV1CompaniesCompanyUuidTimeOffRequestsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetV1CompaniesCompanyUuidTimeOffRequestsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public CompletableFuture<GetV1CompaniesCompanyUuidTimeOffRequestsResponse> call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         AsyncRequestOperation<GetV1CompaniesCompanyUuidTimeOffRequestsRequest, GetV1CompaniesCompanyUuidTimeOffRequestsResponse> operation
-              = new GetV1CompaniesCompanyUuidTimeOffRequests.Async(sdkConfiguration, _headers);
+              = new GetV1CompaniesCompanyUuidTimeOffRequests.Async(sdkConfiguration, options, _headers);
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);

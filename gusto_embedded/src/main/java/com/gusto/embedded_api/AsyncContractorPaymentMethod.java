@@ -22,6 +22,7 @@ import com.gusto.embedded_api.operations.GetV1ContractorsContractorUuidBankAccou
 import com.gusto.embedded_api.operations.GetV1ContractorsContractorUuidPaymentMethod;
 import com.gusto.embedded_api.operations.PutV1ContractorsContractorIdPaymentMethod;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -75,7 +76,7 @@ public class AsyncContractorPaymentMethod {
      * @return {@code CompletableFuture<GetV1ContractorsContractorUuidBankAccountsResponse>} - The async response
      */
     public CompletableFuture<GetV1ContractorsContractorUuidBankAccountsResponse> getBankAccounts(String contractorUuid) {
-        return getBankAccounts(Optional.empty(), contractorUuid);
+        return getBankAccounts(Optional.empty(), contractorUuid, Optional.empty());
     }
 
     /**
@@ -92,6 +93,26 @@ public class AsyncContractorPaymentMethod {
      * @return {@code CompletableFuture<GetV1ContractorsContractorUuidBankAccountsResponse>} - The async response
      */
     public CompletableFuture<GetV1ContractorsContractorUuidBankAccountsResponse> getBankAccounts(Optional<? extends GetV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid) {
+        return getBankAccounts(xGustoAPIVersion, contractorUuid, Optional.empty());
+    }
+
+    /**
+     * Get all contractor bank accounts
+     * 
+     * <p>Returns all contractor bank accounts.
+     * 
+     * <p>scope: `contractor_payment_methods:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorUuid The UUID of the contractor
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1ContractorsContractorUuidBankAccountsResponse>} - The async response
+     */
+    public CompletableFuture<GetV1ContractorsContractorUuidBankAccountsResponse> getBankAccounts(
+            Optional<? extends GetV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
+            Optional<Options> options) {
         GetV1ContractorsContractorUuidBankAccountsRequest request =
             GetV1ContractorsContractorUuidBankAccountsRequest
                 .builder()
@@ -99,7 +120,7 @@ public class AsyncContractorPaymentMethod {
                 .contractorUuid(contractorUuid)
                 .build();
         AsyncRequestOperation<GetV1ContractorsContractorUuidBankAccountsRequest, GetV1ContractorsContractorUuidBankAccountsResponse> operation
-              = new GetV1ContractorsContractorUuidBankAccounts.Async(sdkConfiguration, _headers);
+              = new GetV1ContractorsContractorUuidBankAccounts.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -137,7 +158,7 @@ public class AsyncContractorPaymentMethod {
      * @return {@code CompletableFuture<GetV1ContractorsContractorUuidPaymentMethodResponse>} - The async response
      */
     public CompletableFuture<GetV1ContractorsContractorUuidPaymentMethodResponse> get(String contractorUuid) {
-        return get(Optional.empty(), contractorUuid);
+        return get(Optional.empty(), contractorUuid, Optional.empty());
     }
 
     /**
@@ -156,6 +177,28 @@ public class AsyncContractorPaymentMethod {
      * @return {@code CompletableFuture<GetV1ContractorsContractorUuidPaymentMethodResponse>} - The async response
      */
     public CompletableFuture<GetV1ContractorsContractorUuidPaymentMethodResponse> get(Optional<? extends GetV1ContractorsContractorUuidPaymentMethodHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid) {
+        return get(xGustoAPIVersion, contractorUuid, Optional.empty());
+    }
+
+    /**
+     * Get a contractor's payment method
+     * 
+     * <p>Fetches a contractor's payment method. A contractor payment method
+     * describes how the payment should be split across the contractor's associated
+     * bank accounts.
+     * 
+     * <p>scope: `contractor_payment_methods:read`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorUuid The UUID of the contractor
+     * @param options additional options
+     * @return {@code CompletableFuture<GetV1ContractorsContractorUuidPaymentMethodResponse>} - The async response
+     */
+    public CompletableFuture<GetV1ContractorsContractorUuidPaymentMethodResponse> get(
+            Optional<? extends GetV1ContractorsContractorUuidPaymentMethodHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
+            Optional<Options> options) {
         GetV1ContractorsContractorUuidPaymentMethodRequest request =
             GetV1ContractorsContractorUuidPaymentMethodRequest
                 .builder()
@@ -163,7 +206,7 @@ public class AsyncContractorPaymentMethod {
                 .contractorUuid(contractorUuid)
                 .build();
         AsyncRequestOperation<GetV1ContractorsContractorUuidPaymentMethodRequest, GetV1ContractorsContractorUuidPaymentMethodResponse> operation
-              = new GetV1ContractorsContractorUuidPaymentMethod.Async(sdkConfiguration, _headers);
+              = new GetV1ContractorsContractorUuidPaymentMethod.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
@@ -200,7 +243,9 @@ public class AsyncContractorPaymentMethod {
      * @return {@code CompletableFuture<PutV1ContractorsContractorIdPaymentMethodResponse>} - The async response
      */
     public CompletableFuture<PutV1ContractorsContractorIdPaymentMethodResponse> update(String contractorUuid, PutV1ContractorsContractorIdPaymentMethodRequestBody requestBody) {
-        return update(Optional.empty(), contractorUuid, requestBody);
+        return update(
+                Optional.empty(), contractorUuid, requestBody,
+                Optional.empty());
     }
 
     /**
@@ -221,6 +266,30 @@ public class AsyncContractorPaymentMethod {
     public CompletableFuture<PutV1ContractorsContractorIdPaymentMethodResponse> update(
             Optional<? extends PutV1ContractorsContractorIdPaymentMethodHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
             PutV1ContractorsContractorIdPaymentMethodRequestBody requestBody) {
+        return update(
+                xGustoAPIVersion, contractorUuid, requestBody,
+                Optional.empty());
+    }
+
+    /**
+     * Update a contractor's payment method
+     * 
+     * <p>Updates a contractor's payment method. Note that creating a contractor
+     * bank account will also update the contractor's payment method.
+     * 
+     * <p>scope: `contractor_payment_methods:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorUuid The UUID of the contractor
+     * @param requestBody 
+     * @param options additional options
+     * @return {@code CompletableFuture<PutV1ContractorsContractorIdPaymentMethodResponse>} - The async response
+     */
+    public CompletableFuture<PutV1ContractorsContractorIdPaymentMethodResponse> update(
+            Optional<? extends PutV1ContractorsContractorIdPaymentMethodHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
+            PutV1ContractorsContractorIdPaymentMethodRequestBody requestBody, Optional<Options> options) {
         PutV1ContractorsContractorIdPaymentMethodRequest request =
             PutV1ContractorsContractorIdPaymentMethodRequest
                 .builder()
@@ -229,7 +298,7 @@ public class AsyncContractorPaymentMethod {
                 .requestBody(requestBody)
                 .build();
         AsyncRequestOperation<PutV1ContractorsContractorIdPaymentMethodRequest, PutV1ContractorsContractorIdPaymentMethodResponse> operation
-              = new PutV1ContractorsContractorIdPaymentMethod.Async(sdkConfiguration, _headers);
+              = new PutV1ContractorsContractorIdPaymentMethod.Async(sdkConfiguration, options, _headers);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

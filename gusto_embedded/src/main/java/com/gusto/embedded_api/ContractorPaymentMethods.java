@@ -12,6 +12,7 @@ import com.gusto.embedded_api.models.operations.PostV1ContractorsContractorUuidB
 import com.gusto.embedded_api.models.operations.PostV1ContractorsContractorUuidBankAccountsResponse;
 import com.gusto.embedded_api.operations.PostV1ContractorsContractorUuidBankAccounts;
 import com.gusto.embedded_api.utils.Headers;
+import com.gusto.embedded_api.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -71,7 +72,8 @@ public class ContractorPaymentMethods {
      * @throws RuntimeException subclass if the API call fails
      */
     public PostV1ContractorsContractorUuidBankAccountsResponse createBankAccount(String contractorUuid, ContractorBankAccountCreateRequestBody contractorBankAccountCreateRequestBody) {
-        return createBankAccount(Optional.empty(), contractorUuid, contractorBankAccountCreateRequestBody);
+        return createBankAccount(Optional.empty(), contractorUuid, contractorBankAccountCreateRequestBody,
+            Optional.empty());
     }
 
     /**
@@ -95,6 +97,32 @@ public class ContractorPaymentMethods {
     public PostV1ContractorsContractorUuidBankAccountsResponse createBankAccount(
             Optional<? extends PostV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
             ContractorBankAccountCreateRequestBody contractorBankAccountCreateRequestBody) {
+        return createBankAccount(xGustoAPIVersion, contractorUuid, contractorBankAccountCreateRequestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Create a contractor bank account
+     * 
+     * <p>Creates a contractor bank account.
+     * 
+     * <p>Note: We currently only support one bank account per contractor. Using this endpoint on a contractor
+     * who already has a bank account will just replace it.
+     * 
+     * <p>scope: `contractor_payment_methods:write`
+     * 
+     * <p>If set, this operation will use Security#companyAccessAuth from the global security.
+     * 
+     * @param xGustoAPIVersion Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+     * @param contractorUuid The UUID of the contractor
+     * @param contractorBankAccountCreateRequestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PostV1ContractorsContractorUuidBankAccountsResponse createBankAccount(
+            Optional<? extends PostV1ContractorsContractorUuidBankAccountsHeaderXGustoAPIVersion> xGustoAPIVersion, String contractorUuid,
+            ContractorBankAccountCreateRequestBody contractorBankAccountCreateRequestBody, Optional<Options> options) {
         PostV1ContractorsContractorUuidBankAccountsRequest request =
             PostV1ContractorsContractorUuidBankAccountsRequest
                 .builder()
@@ -103,7 +131,7 @@ public class ContractorPaymentMethods {
                 .contractorBankAccountCreateRequestBody(contractorBankAccountCreateRequestBody)
                 .build();
         RequestOperation<PostV1ContractorsContractorUuidBankAccountsRequest, PostV1ContractorsContractorUuidBankAccountsResponse> operation
-              = new PostV1ContractorsContractorUuidBankAccounts.Sync(sdkConfiguration, _headers);
+              = new PostV1ContractorsContractorUuidBankAccounts.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
